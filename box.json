@@ -6,13 +6,13 @@
   ],
   "files": [
     "LICENSE.txt",
-    "vendor/herrera-io/phar-update/res/schema.json"
+    "vendor/autoload.php"
   ],
   "finder": [
     {
       "name": "*.php",
-      "exclude": ["Tests"],
-      "in": "vendor"
+      "in": "vendor",
+      "exclude": ["*/Test*", "*/test*"]
     }
   ],
   "git-version": "package_version",
