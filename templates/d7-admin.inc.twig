@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Admin page callbacks for the {{ name }} module.
+ */
+
+/**
+ * Form constructor for the main {{ name }} administration form.
+ */
+function {{ machine_name }}_settings_form($form, &$form_state) {
+
+  $form['{{ machine_name }}_setting_1'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Setting 1'),
+    '#default_value' => variable_get('{{ machine_name }}_setting_1'),
+  );
+  $form['{{ machine_name }}_setting_2'] = array(
+    '#type' => 'select',
+    '#title' => t('Setting 1'),
+    '#options' => array(t('Option 1'), t('Option 2'), t('Option 3')),
+    '#default_value' => variable_get('{{ machine_name }}_setting_2'),
+  );
+  $form['{{ machine_name }}_setting_3'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Setting 3'),
+    '#default_value' => variable_get('{{ machine_name }}_setting_3'),
+  );
+
+  return system_settings_form($form);
+}

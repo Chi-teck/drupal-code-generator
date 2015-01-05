@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+const DCG_ROOT_DIR = __DIR__;
+
+use DrupalCodeGenerator\Command;
+use Symfony\Component\Console\Application;
+
+$application = new Application('Drupal Code Generator', '0.0.1');
+$application->add(new Command\Generate());
+$application->add(new Command\Drupal_7\Module());
+$application->add(new Command\Drupal_7\Component\Info());
+$application->add(new Command\Drupal_8\Module());
+$application->run();

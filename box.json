@@ -1,0 +1,22 @@
+{
+  "chmod": "0755",
+  "directories": [
+    "src",
+    "templates"
+  ],
+  "files": [
+    "LICENSE.txt",
+    "vendor/herrera-io/phar-update/res/schema.json"
+  ],
+  "finder": [
+    {
+      "name": "*.php",
+      "exclude": ["Tests"],
+      "in": "vendor"
+    }
+  ],
+  "git-version": "package_version",
+  "main": "bin/dcg",
+  "output": "dcg.phar",
+  "stub": true
+}

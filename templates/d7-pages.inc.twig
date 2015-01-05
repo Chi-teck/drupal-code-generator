@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Page callbacks for {{ name }} module.
+ */
+
+/**
+ * Menu callback; presents main {{ name }} page.
+ */
+function {{ machine_name }}_main_page() {
+
+  $build['content']['#markup'] = 'It works!';
+  $build['#attached']['js'][] = drupal_get_path('module', '{{ machine_name }}') . '/{{ machine_name }}.js';
+
+  return $build;
+}
