@@ -74,7 +74,15 @@ class Generate extends Command {
 
     /** @var \DrupalCodeGenerator\Command\BaseGenerator $generator */
     $generator =  $this->selectGenerator($input, $output);
-    $command = $this->getApplication()->find($generator);
+
+    try {
+      $command = $this->getApplication()->find($generator);
+    }
+    catch(\InvalidArgumentException $e) {
+      $output->writeLn("<error>Sorry generator $generator is not implemented yet.</error>");
+      exit(1);
+    }
+
     $output->writeln(sprintf('<info>Command:</info> <comment>%s</comment>', $command->getName()));
     $output->writeLn(str_repeat('<comment>-</comment>', 35));
 
