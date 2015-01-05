@@ -28,10 +28,13 @@ class Generate extends Command {
         'Component' => [
           'Plugin' => [
             'Filter' => NULL,
-
+            'FieldType' => NULL,
+            'Block' => NULL,
           ],
           'YML file' => [
-
+            'libraries.yml',
+            'routing.yml',
+            'services.yml'
           ]
         ],
       ],
@@ -73,7 +76,7 @@ class Generate extends Command {
     $output->getFormatter()->setStyle('title', $style);
 
     /** @var \DrupalCodeGenerator\Command\BaseGenerator $generator */
-    $generator =  $this->selectGenerator($input, $output);
+    $generator = $this->selectGenerator($input, $output);
 
     try {
       $command = $this->getApplication()->find($generator);
