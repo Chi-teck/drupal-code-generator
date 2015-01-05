@@ -11,8 +11,5 @@
       "DrupalCodeGenerator\\": "src"
     }
   },
-  "license": "GPL2",
-  "require-dev": {
-    "kherge/box": "~2.4"
-  }
+  "license": "GPL2"
 }
