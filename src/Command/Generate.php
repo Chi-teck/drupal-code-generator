@@ -21,12 +21,26 @@ class Generate extends Command {
       ->setDescription('Generate code');
 
     $this->menuTree = [
-      'Drupal 7' => [
+      'Drupal 6' => [
         'Module' => NULL,
         'Theme' => NULL,
         'Installation profile' => NULL,
         'Component' => [
           'Info file' => NULL,
+          'Module file' => NULL,
+          'Javascript' => NULL,
+          'Ctools plugin' => [],
+        ],
+      ],
+      'Drupal 7' => [
+        'Module' => NULL,
+        'Theme' => NULL,
+        'Installation profile' => NULL,
+        'Component' => [
+          'settings.php file' => NULL,
+          'Info file' => NULL,
+          'Module file' => NULL,
+          'Javascript' => NULL,
         ],
       ],
       'Drupal 8' => [
@@ -35,6 +49,7 @@ class Generate extends Command {
         'Installation profile' => NULL,
         'Component' => [
           'Plugin' => [
+            'Filter' => NULL,
 
           ],
           'YML file' => [

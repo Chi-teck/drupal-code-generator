@@ -74,7 +74,7 @@ class BaseGenerator extends Command {
     if (in_array('version', $keys)) {
       switch ($this->core) {
         case 6:
-          $default_value = '7.x-1.0-dev';
+          $default_value = '6.x-1.0-dev';
           break;
 
         case 7:
@@ -82,7 +82,7 @@ class BaseGenerator extends Command {
           break;
 
         case 8:
-          $default_value = '7.x-1.0-dev';
+          $default_value = '8.x-1.0-dev';
           break;
 
         default:
