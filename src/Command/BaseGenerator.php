@@ -26,7 +26,9 @@ class BaseGenerator extends Command {
 
   }
 
-  protected function collectVars(InputInterface $input, OutputInterface $output, $keys, $context) {
+  protected function collectVars(InputInterface $input, OutputInterface $output, $keys, $question_prefix) {
+
+    $question_prefix = ucfirst($question_prefix);
 
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
     $helper = $this->getHelper('question');
@@ -35,7 +37,7 @@ class BaseGenerator extends Command {
 
     // Name question.
     if (in_array('name', $keys)) {
-      $question = new Question('<info>Module name</info>: ');
+      $question = new Question("<info>$question_prefix name</info>: ");
       while (!$vars['name'] = $helper->ask($input, $output, $question));
     }
 
@@ -43,7 +45,7 @@ class BaseGenerator extends Command {
     if (in_array('machine_name', $keys)) {
       $default_value =  $this->human2machine($vars['name']);
       $question = new Question(
-        "<info>Module machine name</info> [<comment>$default_value</comment>]: ",
+        "<info>$question_prefix machine name</info> [<comment>$default_value</comment>]: ",
         $default_value
       );
       while (!$vars['machine_name'] = $helper->ask($input, $output, $question));
@@ -54,7 +56,7 @@ class BaseGenerator extends Command {
     if (in_array('description', $keys)) {
       $default_value = 'Some description';
       $question = new Question(
-        "<info>Module description</info> [<comment>$default_value</comment>]: ",
+        "<info>$question_prefix description</info> [<comment>$default_value</comment>]: ",
         $default_value
       );
       $vars['description'] = $helper->ask($input, $output, $question);
@@ -64,7 +66,7 @@ class BaseGenerator extends Command {
     if (in_array('package', $keys)) {
       $default_value = 'custom';
       $question = new Question(
-        "<info>Module package</info> [<comment>$default_value</comment>]: ",
+        "<info>$question_prefix package</info> [<comment>$default_value</comment>]: ",
         $default_value
       );
       $vars['package'] = $helper->ask($input, $output, $question);
@@ -91,7 +93,7 @@ class BaseGenerator extends Command {
       }
 
       $question = new Question(
-        "<info>Module version</info> [<comment>$default_value</comment>]: ",
+        "<info>$question_prefix version</info> [<comment>$default_value</comment>]: ",
         $default_value
       );
       $vars['version'] = $helper->ask($input, $output, $question);

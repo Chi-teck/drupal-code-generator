@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Drush integration of {{ file_name }}.
+ */
+
+/**
+ * Implements hook_drush_help().
+ */
+function {{ file_name }}_drush_help($section) {
+  switch ($section) {
+    case 'drush:{{ file_name }}-{{ name }}':
+      $help = dt('Help text here');
+      return $help;
+  }
+}
+
+/**
+ * Implements hook_drush_command().
+ */
+function {{ file_name }}_drush_command() {
+
+  $items['{{ file_name }}-{{ name }}'] = array(
+    'description' => '{{ description }}',
+    'arguments' => array(
+      '{{ argument }}' => 'Argument description',
+    ),
+    'required-arguments' => TRUE,
+    'options' => array(
+      '{{ option }}' => 'Option description',
+    ),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
+    'aliases' => array('alalal'),
+    'examples' => array(
+      'drush alalal {{ argument }} --{{ option }}' => 'It does something with argument',
+    ),
+  );
+  return $items;
+}
+
+/**
+ * Callback function for {{ file_name }}_{{ name }} command.
+ */
+function drush_{{ file_name }}_{{ name }}($argument) {
+
+  $option = drush_get_option('{{ option }}', 'default');
+  drush_print(dt('Argument value is "@argument".', array('@argument' => $argument)));
+  drush_print(dt('Option value is "@option".', array('@option' => $option)));
+
+  drush_set_error(dt('Error text here.'));
+  drush_log(dt('Log text here'));
+
+}

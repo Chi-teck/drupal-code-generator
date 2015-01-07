@@ -133,7 +133,7 @@ class Generate extends Command {
       $generator = implode(':',$this->activeMenuItems);
       $generator = strtolower($generator);
       $generator = str_replace('drupal ', 'd', $generator);
-      $generator = str_replace(' ', '_', $generator);
+      $generator = str_replace(' ', '-', $generator);
       return 'generate:' . $generator;
     }
 

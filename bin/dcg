@@ -8,9 +8,22 @@ const DCG_ROOT_DIR = __DIR__;
 use DrupalCodeGenerator\Command;
 use Symfony\Component\Console\Application;
 
+$commands[] = new Command\Generate();
+
+// Drupal 6 commands.
+
+// Drupal 7 commands.
+$commands[] = new Command\Drupal_7\Module();
+$commands[] = new Command\Drupal_7\Component\Info();
+
+// Drupal 8 commands.
+$commands[] = new Command\Drupal_8\Module();
+
+// Other commands.
+$commands[] = new Command\Other\DrushCommand();
+
 $application = new Application('Drupal Code Generator', '0.0.1');
-$application->add(new Command\Generate());
-$application->add(new Command\Drupal_7\Module());
-$application->add(new Command\Drupal_7\Component\Info());
-$application->add(new Command\Drupal_8\Module());
+foreach ($commands as $command) {
+  $application->add($command);
+}
 $application->run();
