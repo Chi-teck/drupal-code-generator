@@ -9,12 +9,8 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 
 class DrushCommand extends BaseGenerator {
 
-  protected function configure() {
-    parent::configure();
-    $this
-      ->setName('generate:other:drush-command')
-      ->setDescription('Generate Drush command');
-  }
+  protected static  $name = 'generate:other:drush-command';
+  protected static $description = 'Generate Drush command';
 
   protected function execute(InputInterface $input, OutputInterface $output) {
 

@@ -19,6 +19,7 @@ class BaseGenerator extends Command {
 
   protected  $core;
 
+
   public function __construct() {
     parent::__construct();
 
@@ -29,12 +30,16 @@ class BaseGenerator extends Command {
   }
 
   protected function configure() {
-    $this->addOption(
-      'dir',
-      '-d',
-      InputOption::VALUE_OPTIONAL,
-      'Destination directory'
-    );
+    $this
+      ->setName(static::$name)
+
+      ->setDescription(static::$description)
+      ->addOption(
+        'dir',
+        '-d',
+        InputOption::VALUE_OPTIONAL,
+        'Destination directory'
+      );
   }
 
   protected function render($template, array $vars) {

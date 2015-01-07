@@ -9,14 +9,10 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 
 class Module extends BaseGenerator {
 
-  protected  $core = 7;
+  protected static  $name = 'generate:d7:module';
+  protected static $description = 'Generate Drupal 7 module';
 
-  protected function configure() {
-    parent::configure();
-    $this
-      ->setName('generate:d7:module')
-      ->setDescription('Generate Drupal 7 module');
-  }
+
 
   protected function execute(InputInterface $input, OutputInterface $output) {
 

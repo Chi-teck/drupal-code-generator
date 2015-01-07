@@ -8,14 +8,8 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 
 class Info extends BaseGenerator {
 
-  protected  $core = 7;
-
-  protected function configure() {
-    parent::configure();
-    $this
-      ->setName('generate:d7:component:info_file')
-      ->setDescription('Generate Drupal 7 .info file');
-  }
+  protected static  $name = 'generate:d7:component:info_file';
+  protected static $description = 'Generate Drupal 7 .info file';
 
   protected function execute(InputInterface $input, OutputInterface $output) {
 
