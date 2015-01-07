@@ -12,6 +12,7 @@ class Module extends BaseGenerator {
   protected  $core = 7;
 
   protected function configure() {
+    parent::configure();
     $this
       ->setName('generate:d7:module')
       ->setDescription('Generate Drupal 7 module');
@@ -19,14 +20,15 @@ class Module extends BaseGenerator {
 
   protected function execute(InputInterface $input, OutputInterface $output) {
 
-    $vars_names = [
-      'name',
-      'machine_name',
-      'description',
-      'package',
-      'version',
+    $questions = [
+      'name' => ['Module name', 'foo', TRUE],
+      'machine_name' => ['Module machine name', 'foo', TRUE],
+      'description' => ['Module description', 'TODO: Write description for the module'],
+      'package' => ['Package', 'custom'],
+      'version' => ['Version', '7.x-1.0-dev'],
     ];
-    $vars = $this->collectVars($input, $output, $vars_names, 'module');
+
+    $vars = $this->collectVars($input, $output, $questions);
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
     $files[$prefix . '.info'] = $this->twig->render('d7/info.twig', $vars);

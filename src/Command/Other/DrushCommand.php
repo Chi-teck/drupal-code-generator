@@ -5,7 +5,6 @@ namespace DrupalCodeGenerator\Command\Other;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Question;
 
 
 class DrushCommand extends BaseGenerator {
@@ -19,28 +18,24 @@ class DrushCommand extends BaseGenerator {
 
   protected function execute(InputInterface $input, OutputInterface $output) {
 
-    $vars_names = [
-      'name',
-      'description',
+    $questions = [
+      'name' => ['Command name', 'foo', TRUE],
+      'description' => ['Command description', 'TODO: Write description for the command'],
+      'argument' => ['Argument', 'foo'],
+      'option' => ['Option name', 'bar'],
+      'file_name' => ['File name', __CLASS__ . '::default_filename'],
     ];
-    $vars = $this->collectVars($input, $output, $vars_names, 'Command');
 
-    /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
-    $helper = $this->getHelper('question');
-
-    $question = new Question('Command argument', 'foo');
-    $vars['argument'] = $helper->ask($input, $output, $question);
-
-    $question = new Question('Command option', 'bar');
-    $vars['option'] = $helper->ask($input, $output, $question);
-
-    $question = new Question('File name', $vars['name']);
-    $vars['file_name'] = $helper->ask($input, $output, $question);
+    $vars = $this->collectVars($input, $output, $questions);
 
     $files[$vars['file_name'] . '.drush.inc'] = $this->render('other/drush-command.twig', $vars);
 
     $this->submitFiles($input, $output, $files);
 
+  }
+
+  protected static function default_filename($vars) {
+    return self::human2machine($vars['name']);
   }
 
 }

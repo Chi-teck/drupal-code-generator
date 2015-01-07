@@ -41,84 +41,33 @@ class BaseGenerator extends Command {
     return $this->twig->render($template, $vars);
   }
 
-  protected function collectVars(InputInterface $input, OutputInterface $output, $keys, $question_prefix) {
-
-    $question_prefix = ucfirst($question_prefix);
-
-    /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
-    $helper = $this->getHelper('question');
+  protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
 
     $vars = [];
 
-    // Name question.
-    if (in_array('name', $keys)) {
-      $question = new Question("<info>$question_prefix name</info>: ");
-      while (!$vars['name'] = $helper->ask($input, $output, $question));
-    }
-
-    // Machine name question.
-    if (in_array('machine_name', $keys)) {
-      $default_value =  $this->human2machine($vars['name']);
-      $question = new Question(
-        "<info>$question_prefix machine name</info> [<comment>$default_value</comment>]: ",
-        $default_value
-      );
-      while (!$vars['machine_name'] = $helper->ask($input, $output, $question));
-
-    }
-
-    // Description question.
-    if (in_array('description', $keys)) {
-      $default_value = 'Some description';
-      $question = new Question(
-        "<info>$question_prefix description</info> [<comment>$default_value</comment>]: ",
-        $default_value
-      );
-      $vars['description'] = $helper->ask($input, $output, $question);
-    }
-
-    // Package question.
-    if (in_array('package', $keys)) {
-      $default_value = 'custom';
-      $question = new Question(
-        "<info>$question_prefix package</info> [<comment>$default_value</comment>]: ",
-        $default_value
-      );
-      $vars['package'] = $helper->ask($input, $output, $question);
-    }
-
-    // Package question.
-    if (in_array('version', $keys)) {
-      switch ($this->core) {
-        case 6:
-          $default_value = '6.x-1.0-dev';
-          break;
-
-        case 7:
-          $default_value = '7.x-1.0-dev';
-          break;
-
-        case 8:
-          $default_value = '8.x-1.0-dev';
-          break;
-
-        default:
-          $default_value = '1.0-dev';
-
+    foreach ($questions as $name => $question) {
+      list($question_text, $default_value) = $question;
+      if ($default_value[0] == '_') {
+        $default_value = $vars[substr($default_value, 1)];
+      }
+      if (is_callable($default_value)) {
+        $default_value = call_user_func($default_value, $vars);
       }
 
-      $question = new Question(
-        "<info>$question_prefix version</info> [<comment>$default_value</comment>]: ",
-        $default_value
+      $vars[$name] = $this->ask(
+        $input,
+        $output,
+        $question_text,
+        $default_value,
+        empty($question[2])
       );
-      $vars['version'] = $helper->ask($input, $output, $question);
     }
 
     return $vars;
 
   }
 
-  protected  function human2machine($human_name) {
+  protected static function human2machine($human_name) {
     return preg_replace(
       ['/^[0-9]/', '/[^a-z0-9_]+/'],
       '_',
@@ -128,7 +77,6 @@ class BaseGenerator extends Command {
 
   protected function submitFiles(InputInterface $input, OutputInterface $output, $files) {
 
-    var_dump($input->getOption('dir'));
     $directory = $input->getOption('dir') ? $input->getOption('dir') . '/' : './';
 
     foreach($files as $name => $content) {
@@ -145,6 +93,24 @@ class BaseGenerator extends Command {
     foreach ($files as $name => $content) {
       $output->writeLn("[<info>*</info>] $name");
     }
+
+  }
+
+  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, $required = FALSE) {
+    /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
+    $helper = $this->getHelper('question');
+
+    $question_text = "<info>$question_text</info>";
+    if ($default_value) {
+      $question_text .= " [<comment>$default_value</comment>]";
+    }
+    $question_text .= ': ';
+
+    return $helper->ask(
+      $input,
+      $output,
+      new Question($question_text, $default_value)
+    );
 
   }
 
