@@ -12,6 +12,7 @@ use Twig_Loader_Filesystem;
 use Twig_Environment;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Console\Input\InputOption;
 
 class BaseGenerator extends Command {
 
@@ -25,6 +26,16 @@ class BaseGenerator extends Command {
     $this->fs = new Filesystem();
 
   }
+
+  protected function configure() {
+    $this->addOption(
+      'dir',
+      '-d',
+      InputOption::VALUE_OPTIONAL,
+      'Destination directory'
+    );
+  }
+
 
   protected function render($template, array $vars) {
     return $this->twig->render($template, $vars);
@@ -117,9 +128,12 @@ class BaseGenerator extends Command {
 
   protected function submitFiles(InputInterface $input, OutputInterface $output, $files) {
 
+    var_dump($input->getOption('dir'));
+    $directory = $input->getOption('dir') ? $input->getOption('dir') . '/' : './';
+
     foreach($files as $name => $content) {
       try {
-        $this->fs->dumpFile($name, $content);
+        $this->fs->dumpFile($directory . $name, $content);
       }
       catch (IOExceptionInterface $e) {
         $output->writeLn('<error>An error occurred while creating your directory at ' . $e->getPath() . '</error>');

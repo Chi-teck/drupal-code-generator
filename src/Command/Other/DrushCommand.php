@@ -11,6 +11,7 @@ use DrupalCodeGenerator\Question;
 class DrushCommand extends BaseGenerator {
 
   protected function configure() {
+    parent::configure();
     $this
       ->setName('generate:other:drush-command')
       ->setDescription('Generate Drush command');
