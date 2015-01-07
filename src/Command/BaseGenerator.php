@@ -20,10 +20,14 @@ class BaseGenerator extends Command {
   public function __construct() {
     parent::__construct();
 
-    $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT_DIR . '/../templates');
+    $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT_DIR . '/../src/Resources/templates');
     $this->twig = new Twig_Environment($twig_loader);
     $this->fs = new Filesystem();
 
+  }
+
+  protected function render($template, array $vars) {
+    return $this->twig->render($template, $vars);
   }
 
   protected function collectVars(InputInterface $input, OutputInterface $output, $keys, $question_prefix) {

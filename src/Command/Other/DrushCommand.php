@@ -36,9 +36,7 @@ class DrushCommand extends BaseGenerator {
     $question = new Question('File name', $vars['name']);
     $vars['file_name'] = $helper->ask($input, $output, $question);
 
-    $files[$vars['file_name'] . '.drush.inc'] = $this->twig->render('other-drush-command.twig', $vars);
-
-    var_dump($vars);
+    $files[$vars['file_name'] . '.drush.inc'] = $this->render('other/drush-command.twig', $vars);
 
     $this->submitFiles($input, $output, $files);
 

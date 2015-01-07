@@ -28,7 +28,7 @@ class Info extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $vars_names, 'module');
 
     $prefix = $vars['machine_name'];
-    $files[$prefix . '.info'] = $this->twig->render('d7-info.twig', $vars);
+    $files[$prefix . '.info'] = $this->twig->render('d7/info.twig', $vars);
 
     $this->submitFiles($input, $output, $files);
 

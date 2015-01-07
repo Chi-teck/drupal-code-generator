@@ -29,13 +29,13 @@ class Module extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $vars_names, 'module');
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $files[$prefix . '.info'] = $this->twig->render('d7-info.twig', $vars);
-    $files[$prefix . '.module'] = $this->twig->render('d7-module.twig', $vars);
-    $files[$prefix . '.install'] = $this->twig->render('d7-install.twig', $vars);
-    $files[$prefix . '.admin.inc'] = $this->twig->render('d7-admin.inc.twig', $vars);
-    $files[$prefix . '.pages.inc'] = $this->twig->render('d7-pages.inc.twig', $vars);
-    $files[$prefix . '.test'] = $this->twig->render('d7-test.twig', $vars);
-    $files[$prefix . '.js'] = $this->twig->render('d7-js.twig', $vars);
+    $files[$prefix . '.info'] = $this->twig->render('d7/info.twig', $vars);
+    $files[$prefix . '.module'] = $this->twig->render('d7/module.twig', $vars);
+    $files[$prefix . '.install'] = $this->twig->render('d7/install.twig', $vars);
+    $files[$prefix . '.admin.inc'] = $this->twig->render('d7/admin.inc.twig', $vars);
+    $files[$prefix . '.pages.inc'] = $this->twig->render('d7/pages.inc.twig', $vars);
+    $files[$prefix . '.test'] = $this->twig->render('d7/test.twig', $vars);
+    $files[$prefix . '.js'] = $this->twig->render('d7/js.twig', $vars);
 
     $this->submitFiles($input, $output, $files);
 
