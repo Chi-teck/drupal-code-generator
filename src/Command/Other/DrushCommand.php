@@ -15,23 +15,23 @@ class DrushCommand extends BaseGenerator {
   protected function execute(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Command name', 'foo', TRUE],
+      'name' => ['Command name', [$this, 'default_name'], TRUE],
       'description' => ['Command description', 'TODO: Write description for the command'],
       'argument' => ['Argument', 'foo'],
       'option' => ['Option name', 'bar'],
-      'file_name' => ['File name', __CLASS__ . '::default_filename'],
+      'file_name' => ['File name', [$this, 'default_filename']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $files[$vars['file_name'] . '.drush.inc'] = $this->render('other/drush-command.twig', $vars);
+    $files[$vars['file_name']] = $this->render('other/drush-command.twig', $vars);
 
     $this->submitFiles($input, $output, $files);
 
   }
 
-  protected static function default_filename($vars) {
-    return self::human2machine($vars['name']);
+  protected function default_filename($vars) {
+    return self::human2machine($vars['name']) . '.drush.inc';
   }
 
 }

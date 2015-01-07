@@ -12,12 +12,10 @@ class Module extends BaseGenerator {
   protected static  $name = 'generate:d7:module';
   protected static $description = 'Generate Drupal 7 module';
 
-
-
   protected function execute(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', 'foo', TRUE],
+      'name' => ['Module name', [$this, 'default_name'], TRUE],
       'machine_name' => ['Module machine name', 'foo', TRUE],
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],

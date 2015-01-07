@@ -17,8 +17,7 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class BaseGenerator extends Command {
 
-  protected  $core;
-
+  protected static $name, $description;
 
   public function __construct() {
     parent::__construct();
@@ -26,13 +25,13 @@ class BaseGenerator extends Command {
     $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT_DIR . '/../src/Resources/templates');
     $this->twig = new Twig_Environment($twig_loader);
     $this->fs = new Filesystem();
+    $this->directoryBaseName = basename(getcwd());
 
   }
 
   protected function configure() {
     $this
       ->setName(static::$name)
-
       ->setDescription(static::$description)
       ->addOption(
         'dir',
@@ -69,7 +68,10 @@ class BaseGenerator extends Command {
     }
 
     return $vars;
+  }
 
+  protected static function machine2human($machine_name) {
+    return ucfirst(str_replace('_', ' ', $machine_name));
   }
 
   protected static function human2machine($human_name) {
@@ -120,6 +122,10 @@ class BaseGenerator extends Command {
       new Question($question_text, $default_value)
     );
 
+  }
+
+  protected function default_name($vars) {
+    return $this->directoryBaseName;
   }
 
 }
