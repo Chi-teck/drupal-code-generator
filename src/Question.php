@@ -18,7 +18,7 @@ class Question extends BaseQuestion {
     }
     $question .= ': ';
 
-    return parent::__construct($question, $default = null);
+    return parent::__construct($question, $default);
 
   }
 
