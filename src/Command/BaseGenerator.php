@@ -13,6 +13,7 @@ use Twig_Environment;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class BaseGenerator extends Command {
 
@@ -35,7 +36,6 @@ class BaseGenerator extends Command {
       'Destination directory'
     );
   }
-
 
   protected function render($template, array $vars) {
     return $this->twig->render($template, $vars);
@@ -76,6 +76,9 @@ class BaseGenerator extends Command {
   }
 
   protected function submitFiles(InputInterface $input, OutputInterface $output, $files) {
+
+    $style = new OutputFormatterStyle('black', 'cyan', []);
+    $output->getFormatter()->setStyle('title', $style);
 
     $directory = $input->getOption('dir') ? $input->getOption('dir') . '/' : './';
 
