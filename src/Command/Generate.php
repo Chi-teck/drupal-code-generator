@@ -60,8 +60,9 @@ class Generate extends Command {
           'Ctools plugin' => [],
         ],
       ],
-      'Drush' => [
-        'Command' => NULL,
+      'Other' => [
+        'Drush command' => NULL,
+        'Apache virtual host' => NULL,
       ]
     ];
 
