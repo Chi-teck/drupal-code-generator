@@ -15,8 +15,8 @@ class Module extends BaseGenerator {
   protected function execute(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'default_name'], TRUE],
-      'machine_name' => ['Module machine name', 'foo', TRUE],
+      'name' => ['Module name', [$this, 'getDirectoryBaseName'], TRUE],
+      'machine_name' => ['Module machine name', [$this, 'default_machine_name'], TRUE],
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '7.x-1.0-dev'],

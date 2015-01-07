@@ -45,6 +45,7 @@ class Generate extends Command {
         'Component' => [
           'settings.php file' => NULL,
           'Info file' => NULL,
+          'Install file' => NULL,
           'Module file' => NULL,
           'Javascript' => NULL,
         ],

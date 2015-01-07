@@ -124,8 +124,13 @@ class BaseGenerator extends Command {
 
   }
 
-  protected function default_name($vars) {
+  protected function getDirectoryBaseName($vars) {
     return $this->directoryBaseName;
   }
+
+  protected function default_machine_name($vars) {
+    return self::human2machine($this->directoryBaseName);
+  }
+
 
 }

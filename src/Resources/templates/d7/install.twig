@@ -10,7 +10,7 @@
  */
 function {{ machine_name }}_schema() {
   $schema['{{ machine_name }}_tablename'] = array(
-    'description' => 'Table descriptions',
+    'description' => 'Table description',
     'fields' => array(
       'id' => array(
         'type' => 'serial',
@@ -28,7 +28,7 @@ function {{ machine_name }}_schema() {
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
-        'description' => 'Column description.',
+        'description' => 'Column description',
       ),
     ),
     'primary key' => array('id'),
