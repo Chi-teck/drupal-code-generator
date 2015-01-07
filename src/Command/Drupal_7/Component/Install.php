@@ -20,8 +20,7 @@ class Install extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $prefix = $vars['machine_name'];
-    $files[$prefix . '.install'] = $this->twig->render('d7/install.twig', $vars);
+    $files[$vars['machine_name'] . '.install'] = $this->render('d7/install.twig', $vars);
 
     $this->submitFiles($input, $output, $files);
 
