@@ -15,10 +15,19 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
+/**
+ * Class BaseGenerator
+ * @package DrupalCodeGenerator\Command
+ */
 class BaseGenerator extends Command {
+
 
   protected static $name, $description;
 
+
+  /**
+   *
+   */
   public function __construct() {
     parent::__construct();
 
@@ -29,6 +38,9 @@ class BaseGenerator extends Command {
 
   }
 
+  /**
+   *
+   */
   protected function configure() {
     $this
       ->setName(static::$name)
@@ -41,19 +53,28 @@ class BaseGenerator extends Command {
       );
   }
 
+  /**
+   * @param $template
+   * @param array $vars
+   * @return string
+   */
   protected function render($template, array $vars) {
     return $this->twig->render($template, $vars);
   }
 
+  /**
+   * @param InputInterface $input
+   * @param OutputInterface $output
+   * @param array $questions
+   * @return array
+   */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
 
     $vars = [];
 
     foreach ($questions as $name => $question) {
       list($question_text, $default_value) = $question;
-      if ($default_value[0] == '_') {
-        $default_value = $vars[substr($default_value, 1)];
-      }
+
       if (is_callable($default_value)) {
         $default_value = call_user_func($default_value, $vars);
       }
@@ -70,18 +91,11 @@ class BaseGenerator extends Command {
     return $vars;
   }
 
-  protected static function machine2human($machine_name) {
-    return ucfirst(str_replace('_', ' ', $machine_name));
-  }
-
-  protected static function human2machine($human_name) {
-    return preg_replace(
-      ['/^[0-9]/', '/[^a-z0-9_]+/'],
-      '_',
-      strtolower($human_name)
-    );
-  }
-
+  /**
+   * @param InputInterface $input
+   * @param OutputInterface $output
+   * @param $files
+   */
   protected function submitFiles(InputInterface $input, OutputInterface $output, $files) {
 
     $style = new OutputFormatterStyle('black', 'cyan', []);
@@ -106,6 +120,14 @@ class BaseGenerator extends Command {
 
   }
 
+  /**
+   * @param InputInterface $input
+   * @param OutputInterface $output
+   * @param $question_text
+   * @param $default_value
+   * @param bool $required
+   * @return bool|mixed|null|string|void
+   */
   protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, $required = FALSE) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
     $helper = $this->getHelper('question');
@@ -124,13 +146,40 @@ class BaseGenerator extends Command {
 
   }
 
+  /**
+   * @param $vars
+   * @return string
+   */
   protected function getDirectoryBaseName($vars) {
     return $this->directoryBaseName;
   }
 
+  /**
+   * @param $vars
+   * @return mixed
+   */
   protected function default_machine_name($vars) {
     return self::human2machine($this->directoryBaseName);
   }
 
+  /**
+   * @param $machine_name
+   * @return string
+   */
+  protected static function machine2human($machine_name) {
+    return ucfirst(str_replace('_', ' ', $machine_name));
+  }
+
+  /**
+   * @param $human_name
+   * @return mixed
+   */
+  protected static function human2machine($human_name) {
+    return preg_replace(
+      ['/^[0-9]/', '/[^a-z0-9_]+/'],
+      '_',
+      strtolower($human_name)
+    );
+  }
 
 }
