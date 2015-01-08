@@ -15,7 +15,7 @@ class DrushCommand extends BaseGenerator {
   protected function execute(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Command name', [$this, 'default_name'], TRUE],
+      'name' => ['Command name', [$this, 'getDirectoryBaseName'], TRUE],
       'description' => ['Command description', 'TODO: Write description for the command'],
       'argument' => ['Argument', 'foo'],
       'option' => ['Option name', 'bar'],
