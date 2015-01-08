@@ -24,7 +24,6 @@ $commands[] = new Command\Drupal_8\Module();
 $commands[] = new Command\Other\DrushCommand();
 
 $application = new Application('Drupal Code Generator', '0.0.1');
-foreach ($commands as $command) {
-  $application->add($command);
-}
+$application->addCommands($commands);
+
 $application->run();
