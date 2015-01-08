@@ -6,12 +6,25 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Command\BaseGenerator;
 
-
+/**
+ * Class DrushCommand
+ * @package DrupalCodeGenerator\Command\Other
+ */
 class DrushCommand extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static  $name = 'generate:other:drush-command';
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $description = 'Generate Drush command';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
@@ -28,6 +41,10 @@ class DrushCommand extends BaseGenerator {
 
   }
 
+  /**
+   * @param $vars
+   * @return string
+   */
   protected function default_filename($vars) {
     return self::human2machine($vars['name']) . '.drush.inc';
   }

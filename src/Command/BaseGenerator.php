@@ -21,10 +21,20 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  */
 class BaseGenerator extends Command {
 
+  /**
+   * @var
+   */
   protected static $name;
-  protected static $description;
-  protected $files = [];
 
+  /**
+   * @var
+   */
+  protected static $description;
+
+  /**
+   * @var array
+   */
+  protected $files = [];
 
   /**
    *
@@ -40,7 +50,7 @@ class BaseGenerator extends Command {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   protected function configure() {
     $this
@@ -92,6 +102,9 @@ class BaseGenerator extends Command {
     return $vars;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function execute(InputInterface $input, OutputInterface $output) {
 
     $style = new OutputFormatterStyle('black', 'cyan', []);

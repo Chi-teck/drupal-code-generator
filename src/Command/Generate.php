@@ -10,11 +10,24 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
+/**
+ * Class Generate
+ * @package DrupalCodeGenerator\Command
+ */
 class Generate extends Command {
 
+  /**
+   * @var array
+   */
   protected $menuTree = [];
+  /**
+   * @var array
+   */
   protected $activeMenuItems = [];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function configure() {
     $this
       ->setName('generate')
@@ -70,7 +83,7 @@ class Generate extends Command {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
 

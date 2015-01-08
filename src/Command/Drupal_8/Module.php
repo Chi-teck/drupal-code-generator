@@ -6,17 +6,30 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Command\BaseGenerator;
 
-
+/**
+ * Class Module
+ * @package DrupalCodeGenerator\Command\Drupal_8
+ */
 class Module extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static  $name = 'generate:d8:module';
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $description = 'Generate Drupal 8 module';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'getDirectoryBaseName'], TRUE],
-      'machine_name' => ['Module machine name', [$this, 'default_machine_name'], TRUE],
+      'name' => ['Module name', [$this, 'getDirectoryBaseName']],
+      'machine_name' => ['Module machine name', [$this, 'default_machine_name']],
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
