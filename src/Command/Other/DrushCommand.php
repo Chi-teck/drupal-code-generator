@@ -12,21 +12,19 @@ class DrushCommand extends BaseGenerator {
   protected static  $name = 'generate:other:drush-command';
   protected static $description = 'Generate Drush command';
 
-  protected function execute(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Command name', [$this, 'getDirectoryBaseName'], TRUE],
+      'name' => ['Command name', [$this, 'getDirectoryBaseName']],
       'description' => ['Command description', 'TODO: Write description for the command'],
-      'argument' => ['Argument', 'foo'],
+      'argument' => ['Argument name', 'foo'],
       'option' => ['Option name', 'bar'],
       'file_name' => ['File name', [$this, 'default_filename']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $files[$vars['file_name']] = $this->render('other/drush-command.twig', $vars);
-
-    $this->submitFiles($input, $output, $files);
+    $this->files[$vars['file_name']] = $this->render('other/drush-command.twig', $vars);
 
   }
 

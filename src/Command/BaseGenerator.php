@@ -21,8 +21,9 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  */
 class BaseGenerator extends Command {
 
-
-  protected static $name, $description;
+  protected static $name;
+  protected static $description;
+  protected $files = [];
 
 
   /**
@@ -91,19 +92,15 @@ class BaseGenerator extends Command {
     return $vars;
   }
 
-  /**
-   * @param InputInterface $input
-   * @param OutputInterface $output
-   * @param $files
-   */
-  protected function submitFiles(InputInterface $input, OutputInterface $output, $files) {
+  protected function execute(InputInterface $input, OutputInterface $output) {
 
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
     $directory = $input->getOption('dir') ? $input->getOption('dir') . '/' : './';
 
-    foreach($files as $name => $content) {
+    // Save files.
+    foreach($this->files as $name => $content) {
       try {
         $this->fs->dumpFile($directory . $name, $content);
       }
@@ -114,8 +111,8 @@ class BaseGenerator extends Command {
     }
 
     $output->writeLn('<title>The following files have been created:</title>');
-    foreach ($files as $name => $content) {
-      $output->writeLn("[<info>*</info>] $name");
+    foreach ($this->files as $name => $content) {
+      $output->writeLn("- $name");
     }
 
   }
@@ -159,7 +156,7 @@ class BaseGenerator extends Command {
    * @return mixed
    */
   protected function default_machine_name($vars) {
-    return self::human2machine($this->directoryBaseName);
+    return self::human2machine($vars['name']);
   }
 
   /**

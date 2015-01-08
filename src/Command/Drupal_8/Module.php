@@ -9,29 +9,25 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 
 class Module extends BaseGenerator {
 
-  protected  $core = 8;
+  protected static  $name = 'generate:d8:module';
+  protected static $description = 'Generate Drupal 8 module';
 
-  protected function configure() {
-    $this
-      ->setName('generate:d8:module')
-      ->setDescription('Generate Drupal 8 module');
-  }
+  protected function interact(InputInterface $input, OutputInterface $output) {
 
-  protected function execute(InputInterface $input, OutputInterface $output) {
-
-    $vars_names = [
-      'name',
-      'machine_name',
-      'description',
+    $questions = [
+      'name' => ['Module name', [$this, 'getDirectoryBaseName'], TRUE],
+      'machine_name' => ['Module machine name', [$this, 'default_machine_name'], TRUE],
+      'description' => ['Module description', 'TODO: Write description for the module'],
+      'package' => ['Package', 'custom'],
+      'version' => ['Version', '8.x-1.0-dev'],
     ];
-    $vars = $this->collectVars($input, $output, $vars_names, 'module');
+
+    $vars = $this->collectVars($input, $output, $questions);
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $files[$prefix . '.info.yml'] = $this->twig->render('d8-info.yml.twig', $vars);
-    $files[$prefix . '.module'] = $this->twig->render('d8-module.twig', $vars);
-    $files[$prefix . '.install'] = $this->twig->render('d8-install.twig', $vars);
-
-    $this->submitFiles($input, $output, $files);
+    $this->files[$prefix . '.info.yml'] = $this->render('d8/info.yml.twig', $vars);
+    $this->files[$prefix . '.module'] = $this->render('d8/module.twig', $vars);
+    $this->files[$prefix . '.install'] = $this->render('d8/install.twig', $vars);
 
   }
 

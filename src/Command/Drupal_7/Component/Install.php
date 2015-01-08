@@ -9,20 +9,17 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 class Install extends BaseGenerator {
 
   protected static  $name = 'generate:d7:component:install-file';
-  protected static $description = 'Generate Drupal 7 .intstall file';
+  protected static $description = 'Generate Drupal 7 .install file';
 
-  protected function execute(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'getDirectoryBaseName'], TRUE],
-      'machine_name' => ['Module machine name', [$this, 'default_machine_name'], TRUE],
+      'name' => ['Module name', [$this, 'getDirectoryBaseName']],
+      'machine_name' => ['Module machine name', [$this, 'default_machine_name']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-
-    $files[$vars['machine_name'] . '.install'] = $this->render('d7/install.twig', $vars);
-
-    $this->submitFiles($input, $output, $files);
+    $this->files[$vars['machine_name'] . '.install'] = $this->render('d7/install.twig', $vars);
 
   }
 
