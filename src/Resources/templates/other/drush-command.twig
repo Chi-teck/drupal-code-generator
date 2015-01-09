@@ -21,21 +21,21 @@ function {{ machine_name }}_drush_help($section) {
  */
 function {{ machine_name }}_drush_command() {
 
-  $items['{{ machine_name }}-{{ command_name }}'] = [
+  $items['{{ machine_name }}-{{ command_name }}'] = array(
     'description' => '{{ description }}',
-    'arguments' => [
+    'arguments' => array(
       '{{ argument }}' => 'Argument description',
-    ],
+    ),
     'required-arguments' => TRUE,
-    'options' => [
+    'options' => array(
       '{{ option }}' => 'Option description',
-    ],
+    ),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
-    'aliases' => ['{{ alias }}'],
-    'examples' => [
+    'aliases' => array('{{ alias }}'),
+    'examples' => array(
       'drush {{ alias }} {{ argument }} --{{ option }}' => 'It does something with argument',
-    ],
-  ];
+    ),
+  );
   return $items;
 }
 
@@ -45,8 +45,8 @@ function {{ machine_name }}_drush_command() {
 function drush_{{ machine_name }}_{{ command_name }}($argument) {
 
   $option = drush_get_option('{{ option }}', 'default');
-  drush_print(dt('Argument value is "@argument".', ['@argument' => $argument]));
-  drush_print(dt('Option value is "@option".', ['@option' => $option]));
+  drush_print(dt('Argument value is "@argument".', array('@argument' => $argument)));
+  drush_print(dt('Option value is "@option".', array('@option' => $option)));
 
   drush_set_error(dt('Error text here.'));
   drush_log(dt('Log text here'));

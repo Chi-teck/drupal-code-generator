@@ -1,4 +1,5 @@
 <?php
+
 namespace DrupalCodeGenerator\Tests\Other;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
@@ -12,8 +13,6 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class DrushCommandTest extends GeneratorTestCase {
 
-  protected $file = 'example.drush.inc';
-
   /**
    * {@inheritdoc}
    */
@@ -23,9 +22,10 @@ class DrushCommandTest extends GeneratorTestCase {
     $this->answers = [
       'Example',
       'example',
+      'test',
+      'ts',
       'foo',
       'bar',
-      $this->file,
     ];
 
     parent::setUp();
@@ -39,10 +39,9 @@ class DrushCommandTest extends GeneratorTestCase {
     $this->execute();
 
     $this->assertRegExp('/The following files have been created:/', $this->display);
-    $this->assertRegExp("/$this->file/", $this->display);
+    $this->assertRegExp("/example.drush.inc/", $this->display);
 
-    $this->checkFile($this->answers[4], $snippets);
-
+    $this->checkFile('example.drush.inc', __DIR__ . '/drush-command-fixture.php');
 
   }
 

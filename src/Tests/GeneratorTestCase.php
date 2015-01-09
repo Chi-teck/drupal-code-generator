@@ -62,10 +62,9 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $this->display = $this->commandTester->getDisplay();
   }
 
-  protected function checkFile($file) {
+  protected function checkFile($file, $fixture) {
     $this->assertFileExists("./sandbox/$file");
-
-
+   $this->assertFileEquals("./sandbox/$file", "$fixture");
   }
 
 }

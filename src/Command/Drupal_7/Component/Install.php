@@ -28,8 +28,8 @@ class Install extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'getDirectoryBaseName']],
-      'machine_name' => ['Module machine name', [$this, 'default_machine_name']],
+      'name' => ['Module name', [$this, 'defaultName']],
+      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
