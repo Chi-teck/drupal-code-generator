@@ -1,0 +1,9 @@
+name = Example
+description = Some description
+package = custom
+version = 7.x-1.0
+core = 7.x
+
+;configure = admin/config/system/example
+;dependencies[] = system (>7.34)
+;files[] = tests/example.test

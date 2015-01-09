@@ -63,4 +63,5 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertFileEquals("./sandbox/$file", "$fixture");
   }
 
+
 }

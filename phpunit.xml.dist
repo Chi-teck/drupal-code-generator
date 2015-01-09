@@ -8,7 +8,7 @@
 >
     <testsuites>
         <testsuite name="Drupal Code Generator Test Suite">
-            <directory>./src/Tests/</directory>
+            <directory suffix="Test.php">./src/Tests</directory>
         </testsuite>
     </testsuites>
 
