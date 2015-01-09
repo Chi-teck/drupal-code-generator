@@ -41,7 +41,7 @@ class DrushCommandTest extends GeneratorTestCase {
     $this->assertRegExp('/The following files have been created:/', $this->display);
     $this->assertRegExp("/example.drush.inc/", $this->display);
 
-    $this->checkFile('example.drush.inc', __DIR__ . '/drush-command-fixture.php');
+    $this->checkFile('example.drush.inc', __DIR__ . '/_example.drush.inc');
 
   }
 

@@ -9,11 +9,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
-  /** @var  \Symfony\Component\Filesystem\Filesystem $fs */
-  protected $fs;
-
   protected $application;
 
+  /** @var  \Symfony\Component\Console\Command\Command $command */
   protected $command;
 
   protected $commandName;
@@ -25,8 +23,6 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   protected $display;
 
   public function setUp() {
-
-    $this->fs = new Filesystem();
 
     $this->application = new Application();
     $this->application->add($this->command);
@@ -48,7 +44,7 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
         ->will($this->returnValue($answer));
     }
 
-    // We override the standard helper with our mock
+    // We override the question helper with our mock
     $this->command->getHelperSet()->set($questionHelper, 'question');
 
   }
@@ -64,7 +60,7 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected function checkFile($file, $fixture) {
     $this->assertFileExists("./sandbox/$file");
-   $this->assertFileEquals("./sandbox/$file", "$fixture");
+    $this->assertFileEquals("./sandbox/$file", "$fixture");
   }
 
 }
