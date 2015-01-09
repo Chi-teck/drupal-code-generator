@@ -160,17 +160,17 @@ class BaseGenerator extends Command {
 
   /**
    * @param $vars
-   * @return string
+   * @return mixed
    */
-  protected function getDirectoryBaseName($vars) {
-    return $this->directoryBaseName;
+  protected function defaultName($vars) {
+    return self::machine2human($this->directoryBaseName);
   }
 
   /**
    * @param $vars
    * @return mixed
    */
-  protected function default_machine_name($vars) {
+  protected function defaultMachineName($vars) {
     return self::human2machine($vars['name']);
   }
 

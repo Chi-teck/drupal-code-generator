@@ -28,9 +28,10 @@ class DrushCommand extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'getDirectoryBaseName']],
-      'machine_name' => ['Module machine name', [$this, 'default_machine_name']],
-      'command_name' => ['Command name', [$this, 'getDirectoryBaseName']],
+      'name' => ['Module name', [$this, 'defaultName']],
+      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'command_name' => ['Command name', [$this, 'defaultMachineName']],
+      'alias' => ['Command alias', [$this, 'defaultAlias']],
       'description' => ['Command description', 'TODO: Write description for the command'],
       'argument' => ['Argument name', 'foo'],
       'option' => ['Option name', 'bar'],
@@ -46,8 +47,8 @@ class DrushCommand extends BaseGenerator {
    * @param $vars
    * @return string
    */
-  protected function default_filename($vars) {
-    return self::human2machine($vars['name']);
+  protected function defaultAlias($vars) {
+    return substr($vars['command_name'], 0, 3);
   }
 
 }
