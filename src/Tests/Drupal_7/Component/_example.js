@@ -1,8 +1,8 @@
 /**
- * Core behavior for {{ name }} module.
+ * Core behavior for Example module.
  */
 (function ($) {
-  Drupal.behaviors.{{ machine_name }} = {
+  Drupal.behaviors.example = {
     attach: function (context, settings) {
 
       alert('It works!');

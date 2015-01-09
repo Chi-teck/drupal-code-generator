@@ -60,19 +60,13 @@ class Generate extends Command {
           'Info file' => NULL,
           'Install file' => NULL,
           'Module file' => NULL,
-          'Javascript' => NULL,
+          'Js file' => NULL,
         ],
       ],
       'Drupal 6' => [
         'Module' => NULL,
         'Theme' => NULL,
         'Installation profile' => NULL,
-        'Component' => [
-          'Info file' => NULL,
-          'Module file' => NULL,
-          'Javascript' => NULL,
-          'Ctools plugin' => [],
-        ],
       ],
       'Other' => [
         'Drush command' => NULL,
