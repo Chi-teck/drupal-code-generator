@@ -42,7 +42,7 @@ class BaseGenerator extends Command {
   public function __construct() {
     parent::__construct();
 
-    $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT_DIR . '/../src/Resources/templates');
+    $twig_loader = new Twig_Loader_Filesystem(__DIR__ . '/../Resources/templates');
     $this->twig = new Twig_Environment($twig_loader);
     $this->fs = new Filesystem();
     $this->directoryBaseName = basename(getcwd());
@@ -115,11 +115,12 @@ class BaseGenerator extends Command {
     // Save files.
     foreach($this->files as $name => $content) {
       try {
+
         $this->fs->dumpFile($directory . $name, $content);
       }
       catch (IOExceptionInterface $e) {
         $output->writeLn('<error>An error occurred while creating your directory at ' . $e->getPath() . '</error>');
-        exit(1);
+        return 1;
       }
     }
 
@@ -128,6 +129,7 @@ class BaseGenerator extends Command {
       $output->writeLn("- $name");
     }
 
+    return 0;
   }
 
   /**
