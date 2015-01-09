@@ -22,22 +22,9 @@ class InstallTest extends GeneratorTestCase {
       'Example',
       'example',
     ];
-
+    $this->target = 'example.install';
+    $this->fixture = __DIR__ . '/_' . $this->target;
     parent::setUp();
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testExecute() {
-
-    $this->execute();
-
-    $this->assertRegExp('/The following files have been created:/', $this->display);
-    $this->assertRegExp("/example.install/", $this->display);
-
-    $this->checkFile('example.install', __DIR__ . '/_example.install');
-
   }
 
 }

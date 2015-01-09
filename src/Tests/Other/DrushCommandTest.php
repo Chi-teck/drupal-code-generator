@@ -27,22 +27,9 @@ class DrushCommandTest extends GeneratorTestCase {
       'foo',
       'bar',
     ];
-
+    $this->target = 'example.drush.inc';
+    $this->fixture = __DIR__ . '/_' . $this->target;
     parent::setUp();
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testExecute() {
-
-    $this->execute();
-
-    $this->assertRegExp('/The following files have been created:/', $this->display);
-    $this->assertRegExp("/example.drush.inc/", $this->display);
-
-    $this->checkFile('example.drush.inc', __DIR__ . '/_example.drush.inc');
-
   }
 
 }

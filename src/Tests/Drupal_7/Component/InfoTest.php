@@ -24,22 +24,10 @@ class InfoTest extends GeneratorTestCase {
       'custom',
       '7.x-1.0',
     ];
+    $this->target = 'example.info';
+    $this->fixture = __DIR__ . '/_' . $this->target;
 
     parent::setUp();
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testExecute() {
-
-    $this->execute();
-
-    $this->assertRegExp('/The following files have been created:/', $this->display);
-    $this->assertRegExp("/example.info/", $this->display);
-
-    $this->checkFile('example.info', __DIR__ . '/_example.info');
-
   }
 
 }

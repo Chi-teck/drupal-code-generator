@@ -23,21 +23,10 @@ class JavascriptTest extends GeneratorTestCase {
       'example',
     ];
 
+    $this->target = 'example.js';
+    $this->fixture = __DIR__ . '/_' . $this->target;
+
     parent::setUp();
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testExecute() {
-
-    $this->execute();
-
-    $this->assertRegExp('/The following files have been created:/', $this->display);
-    $this->assertRegExp("/example.js/", $this->display);
-
-    $this->checkFile('example.js', __DIR__ . '/_example.js');
-
   }
 
 }

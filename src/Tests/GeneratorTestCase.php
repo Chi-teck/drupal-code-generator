@@ -22,6 +22,10 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected $display;
 
+  protected $target;
+
+  protected $fixture;
+
   public function setUp() {
 
     $this->application = new Application();
@@ -61,6 +65,20 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   protected function checkFile($file, $fixture) {
     $this->assertFileExists("./sandbox/$file");
     $this->assertFileEquals("./sandbox/$file", "$fixture");
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testExecute() {
+
+    $this->execute();
+
+    $this->assertRegExp('/The following files have been created:/', $this->display);
+    $this->assertRegExp("/$this->target/", $this->display);
+
+    $this->checkFile($this->target, $this->fixture);
+
   }
 
 
