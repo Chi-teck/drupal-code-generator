@@ -4,12 +4,7 @@ namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 use DrupalCodeGenerator\Command\Drupal_7\Component\Install;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
 
-/**
- * Class InstallTest
- */
 class InstallTest extends GeneratorTestCase {
 
   /**

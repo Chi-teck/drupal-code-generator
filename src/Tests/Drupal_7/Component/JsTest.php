@@ -4,13 +4,8 @@ namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Command\Drupal_7\Component\Js;
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Command\Drupal_7\Component\Info;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
-/**
- * Class InfoTest
- */
-class JavascriptTest extends GeneratorTestCase {
+
+class JsTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
