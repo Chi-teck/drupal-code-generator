@@ -61,6 +61,8 @@ class Generate extends Command {
           'Install file' => NULL,
           'Module file' => NULL,
           'Js file' => NULL,
+          'Views' => [],
+          'CTools plugins' => [],
         ],
       ],
       'Drupal 6' => [
@@ -108,11 +110,16 @@ class Generate extends Command {
 
     $tree = $this->menuTree;
     foreach ($this->activeMenuItems as $menuItem) {
-      $tree = $tree[$menuItem];
+      $tree = $tree[strip_tags($menuItem)];
     }
-    $menu = is_array($tree) ? array_keys($tree) : NULL;
 
-    if (is_array($menu)) {
+    if (is_array($tree)) {
+      foreach ($tree as $title => $subtree) {
+        $menu[] = !is_array($subtree) ? "<comment>$title</comment>" : $title;
+      }
+    }
+
+    if (isset($menu)) {
 
       array_unshift($menu, '..');
 
@@ -120,13 +127,13 @@ class Generate extends Command {
         unset($menu[0]);
       }
 
-      $helper = $this->getHelper('question');
+      $questionHelper = $this->getHelper('question');
       $question = new ChoiceQuestion(
         '<title>Select generator:</title>',
         $menu
       );
 
-      $answer = $helper->ask($input, $output, $question);
+      $answer = $questionHelper->ask($input, $output, $question);
 
       if ($answer == '..') {
         array_pop($this->activeMenuItems);
@@ -138,7 +145,7 @@ class Generate extends Command {
       return $this->selectGenerator($input, $output);
     }
     else {
-      $generator = implode(':',$this->activeMenuItems);
+      $generator = strip_tags(implode(':', $this->activeMenuItems));
       $generator = strtolower($generator);
       $generator = str_replace('drupal ', 'd', $generator);
       $generator = str_replace(' ', '-', $generator);
