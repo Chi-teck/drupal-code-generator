@@ -69,6 +69,9 @@ class Generate extends Command {
         'Module' => NULL,
         'Theme' => NULL,
         'Installation profile' => NULL,
+        'Component' => [
+          'Info file' => NULL,
+        ],
       ],
       'Other' => [
         'Drush command' => NULL,
