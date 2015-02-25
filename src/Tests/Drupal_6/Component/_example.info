@@ -1,0 +1,5 @@
+name = Example
+description = Some description
+package = custom
+version = 6.x-1.0
+core = 6.x
