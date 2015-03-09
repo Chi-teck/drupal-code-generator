@@ -62,7 +62,9 @@ class Generate extends Command {
           'Module file' => NULL,
           'Js file' => NULL,
           'Views' => [],
-          'CTools plugins' => [],
+          'CTools Plugin' => [
+            'Content type' => NULL,
+          ],
         ],
       ],
       'Drupal 6' => [
@@ -148,6 +150,7 @@ class Generate extends Command {
       return $this->selectGenerator($input, $output);
     }
     else {
+      var_dump($this->activeMenuItems);
       $generator = strip_tags(implode(':', $this->activeMenuItems));
       $generator = strtolower($generator);
       $generator = str_replace('drupal ', 'd', $generator);

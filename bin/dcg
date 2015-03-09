@@ -18,6 +18,7 @@ $commands[] = new Command\Drupal_7\Module();
 $commands[] = new Command\Drupal_7\Component\Info();
 $commands[] = new Command\Drupal_7\Component\Install();
 $commands[] = new Command\Drupal_7\Component\Js();
+$commands[] = new Command\Drupal_7\Component\CToolsPlugin\ContentType();
 
 // Drupal 8 commands.
 $commands[] = new Command\Drupal_8\Module();
