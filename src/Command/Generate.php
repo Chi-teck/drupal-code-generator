@@ -150,7 +150,6 @@ class Generate extends Command {
       return $this->selectGenerator($input, $output);
     }
     else {
-      var_dump($this->activeMenuItems);
       $generator = strip_tags(implode(':', $this->activeMenuItems));
       $generator = strtolower($generator);
       $generator = str_replace('drupal ', 'd', $generator);
