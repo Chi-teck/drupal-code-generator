@@ -1,8 +1,8 @@
 {
   "chmod": "0755",
   "directories": [
-    "src",
-    "templates"
+    "src/Command",
+    "src/Resources"
   ],
   "files": [
     "LICENSE.txt",
@@ -12,7 +12,7 @@
     {
       "name": "*.php",
       "in": "vendor",
-      "exclude": ["*/Test*", "*/test*"]
+      "exclude": ["Tests", "Test", "tests", "test"]
     }
   ],
   "git-version": "package_version",
