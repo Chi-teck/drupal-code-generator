@@ -98,7 +98,7 @@ class Generate extends Command {
       $command = $this->getApplication()->find($generator);
     }
     catch(\InvalidArgumentException $e) {
-      $output->writeLn("<error>Sorry generator $generator is not implemented yet.</error>");
+      $output->writeLn("<error>Sorry command $generator is not implemented yet.</error>");
       exit(1);
     }
 
@@ -125,7 +125,6 @@ class Generate extends Command {
     }
 
     if (isset($menu)) {
-
       array_unshift($menu, '..');
 
       if (!$this->activeMenuItems) {

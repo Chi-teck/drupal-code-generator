@@ -14,11 +14,12 @@ $commands[] = new Command\Generate();
 $commands[] = new Command\Drupal_6\Component\Info();
 
 // Drupal 7 commands.
-$commands[] = new Command\Drupal_7\Module();
+$commands[] = new Command\Drupal_7\Component\CToolsPlugin\ContentType();
 $commands[] = new Command\Drupal_7\Component\Info();
 $commands[] = new Command\Drupal_7\Component\Install();
 $commands[] = new Command\Drupal_7\Component\Js();
-$commands[] = new Command\Drupal_7\Component\CToolsPlugin\ContentType();
+$commands[] = new Command\Drupal_7\Component\Module();
+$commands[] = new Command\Drupal_7\Module();
 
 // Drupal 8 commands.
 $commands[] = new Command\Drupal_8\Module();
@@ -26,7 +27,7 @@ $commands[] = new Command\Drupal_8\Module();
 // Other commands.
 $commands[] = new Command\Other\DrushCommand();
 
-$application = new Application('Drupal Code Generator', '0.0.1');
+$application = new Application('Drupal Code Generator', '1.0.0');
 $application->addCommands($commands);
 
 $application->run();
