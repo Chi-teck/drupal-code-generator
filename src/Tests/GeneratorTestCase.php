@@ -30,9 +30,7 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
     $this->application = new Application();
     $this->application->add($this->command);
-
     $this->application->find($this->commandName);
-
     $this->mockQuestionHelper();
     $this->commandTester = new CommandTester($this->command);
 
