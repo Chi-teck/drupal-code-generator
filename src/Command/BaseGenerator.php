@@ -194,4 +194,16 @@ class BaseGenerator extends Command {
     );
   }
 
+  /**
+   * @param $human_name
+   * @return mixed
+   */
+  protected static function human2class($human_name) {
+    return preg_replace(
+      '/[^a-z0-9]/i',
+      '',
+      ucwords(str_replace('_', ' ', $human_name))
+    );
+  }
+
 }
