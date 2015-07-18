@@ -13,10 +13,56 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  */
 class Generate extends Command {
 
-  protected $menuTree = [];
-  protected $activeMenuItems = [];
   protected $name = 'generate';
   protected $description = 'Generate code';
+  protected $menuTree =  [
+    'Drupal 8' => [
+      'Module',
+      'Theme',
+      'Installation profile',
+      'Component' => [
+        'Plugin' => [
+          'Filter',
+          'FieldType',
+          'Block',
+        ],
+        'YML file' => [
+          'libraries.yml',
+          'routing.yml',
+          'services.yml'
+        ]
+      ],
+    ],
+    'Drupal 7' => [
+      'Module',
+      'Theme',
+      'Installation profile',
+      'Component' => [
+        'settings.php file',
+        'Info file',
+        'Install file',
+        'Module file',
+        'Js file',
+        'Views' => [],
+        'CTools Plugin' => [
+          'Content type',
+        ],
+      ],
+    ],
+    'Drupal 6' => [
+      'Module',
+      'Theme',
+      'Installation profile',
+      'Component' => [
+        'Info file',
+      ],
+    ],
+    'Other' => [
+      'Drush command',
+      'Apache virtual host',
+    ]
+  ];
+
 
   /**
    * {@inheritdoc}
@@ -25,55 +71,6 @@ class Generate extends Command {
     $this
       ->setName($this->name)
       ->setDescription($this->description);
-
-    $this->menuTree = [
-      'Drupal 8' => [
-        'Module' => NULL,
-        'Theme' => NULL,
-        'Installation profile' => NULL,
-        'Component' => [
-          'Plugin' => [
-            'Filter' => NULL,
-            'FieldType' => NULL,
-            'Block' => NULL,
-          ],
-          'YML file' => [
-            'libraries.yml',
-            'routing.yml',
-            'services.yml'
-          ]
-        ],
-      ],
-      'Drupal 7' => [
-        'Module' => NULL,
-        'Theme' => NULL,
-        'Installation profile' => NULL,
-        'Component' => [
-          'settings.php file' => NULL,
-          'Info file' => NULL,
-          'Install file' => NULL,
-          'Module file' => NULL,
-          'Js file' => NULL,
-          'Views' => [],
-          'CTools Plugin' => [
-            'Content type' => NULL,
-          ],
-        ],
-      ],
-      'Drupal 6' => [
-        'Module' => NULL,
-        'Theme' => NULL,
-        'Installation profile' => NULL,
-        'Component' => [
-          'Info file' => NULL,
-        ],
-      ],
-      'Other' => [
-        'Drush command' => NULL,
-        'Apache virtual host' => NULL,
-      ]
-    ];
-
   }
 
   /**
@@ -106,43 +103,45 @@ class Generate extends Command {
    */
   protected function selectGenerator(InputInterface $input, OutputInterface $output) {
 
-    $tree = $this->menuTree;
-    foreach ($this->activeMenuItems as $menuItem) {
-      $tree = $tree[strip_tags($menuItem)];
+    static $active_menu_items = [];
+
+    // Find active subtree;
+    $activeTree = $this->menuTree;
+    foreach ($active_menu_items as $menu_item) {
+      $menu_item = strip_tags($menu_item);
+      $activeTree = isset($activeTree[$menu_item]) ? $activeTree[$menu_item] : [];
     }
 
-    if (is_array($tree)) {
-      foreach ($tree as $title => $subtree) {
-        $menu[] = !is_array($subtree) ? "<comment>$title</comment>" : $title;
-      }
+    foreach ($activeTree as $index => $subtree) {
+      $menu[] = is_array($subtree) ? $index : "<comment>$subtree</comment>";
     }
 
     if (isset($menu)) {
-      array_unshift($menu, '..');
 
-      if (!$this->activeMenuItems) {
+      // Zero key is used to move back into the parent menu item.
+      array_unshift($menu, '..');
+      if (!$active_menu_items) {
         unset($menu[0]);
       }
 
-      $questionHelper = $this->getHelper('question');
       $question = new ChoiceQuestion(
         '<title>Select generator:</title>',
         $menu
       );
 
-      $answer = $questionHelper->ask($input, $output, $question);
+      $answer = $this->getHelper('question')->ask($input, $output, $question);
 
       if ($answer == '..') {
-        array_pop($this->activeMenuItems);
+        array_pop($active_menu_items);
       }
       else {
-        $this->activeMenuItems[] = $answer;
+        $active_menu_items[] = $answer;
       }
 
       return $this->selectGenerator($input, $output);
     }
     else {
-      $generator = strip_tags(implode(':', $this->activeMenuItems));
+      $generator = strip_tags(implode(':', $active_menu_items));
       $generator = strtolower($generator);
       $generator = str_replace('drupal ', 'd', $generator);
       $generator = str_replace(' ', '-', $generator);
