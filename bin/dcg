@@ -11,6 +11,7 @@ use Symfony\Component\Console\Application;
 $commands[] = new Command\Generate();
 
 // Drupal 6 commands.
+$commands[] = new Command\Drupal_6\Generate();
 $commands[] = new Command\Drupal_6\Component\Info();
 
 // Drupal 7 commands.
