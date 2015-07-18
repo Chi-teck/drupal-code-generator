@@ -15,6 +15,7 @@ class Generate extends Command {
 
   protected $name = 'generate';
   protected $description = 'Generate code';
+  protected $activeMenuItems = [];
   protected $menuTree =  [
     'Drupal 8' => [
       'Module',
@@ -103,11 +104,9 @@ class Generate extends Command {
    */
   protected function selectGenerator(InputInterface $input, OutputInterface $output) {
 
-    static $active_menu_items = [];
-
     // Find active subtree;
     $activeTree = $this->menuTree;
-    foreach ($active_menu_items as $menu_item) {
+    foreach ($this->activeMenuItems as $menu_item) {
       $menu_item = strip_tags($menu_item);
       $activeTree = isset($activeTree[$menu_item]) ? $activeTree[$menu_item] : [];
     }
@@ -120,7 +119,7 @@ class Generate extends Command {
 
       // Zero key is used to move back into the parent menu item.
       array_unshift($menu, '..');
-      if (!$active_menu_items) {
+      if (!$this->activeMenuItems) {
         unset($menu[0]);
       }
 
@@ -132,16 +131,16 @@ class Generate extends Command {
       $answer = $this->getHelper('question')->ask($input, $output, $question);
 
       if ($answer == '..') {
-        array_pop($active_menu_items);
+        array_pop($this->activeMenuItems);
       }
       else {
-        $active_menu_items[] = $answer;
+        $this->activeMenuItems[] = $answer;
       }
 
       return $this->selectGenerator($input, $output);
     }
     else {
-      $generator = strip_tags(implode(':', $active_menu_items));
+      $generator = strip_tags(implode(':', $this->activeMenuItems));
       $generator = strtolower($generator);
       $generator = str_replace('drupal ', 'd', $generator);
       $generator = str_replace(' ', '-', $generator);
