@@ -24,7 +24,7 @@ $commands[] = new Command\Drupal_7\Component\Module();
 $commands[] = new Command\Drupal_7\Module();
 
 // Drupal 8 commands.
-//$commands[] = new Command\Drupal_8\Module();
+$commands[] = new Command\Drupal_8\Generate();
 $commands[] = new Command\Drupal_8\Component\Plugin\Filter();
 
 // Other commands.
