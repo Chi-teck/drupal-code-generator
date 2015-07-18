@@ -39,8 +39,7 @@ class Filter extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = $this->human2class($vars['machine_name']);
 
-    $this->files[ucfirst($vars['machine_name']) . '.php'] = $this->render('d8/plugin-filter.twig', $vars);
-
+    $this->files[$vars['class'] . '.php'] = $this->render('d8/plugin-filter.twig', $vars);
   }
 
 }

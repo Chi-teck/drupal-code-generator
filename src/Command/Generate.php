@@ -5,8 +5,6 @@ namespace DrupalCodeGenerator\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
@@ -20,18 +18,29 @@ class Generate extends Command {
    * @var array
    */
   protected $menuTree = [];
+
   /**
    * @var array
    */
   protected $activeMenuItems = [];
 
   /**
+   * @var string
+   */
+  protected $name = 'generate';
+
+  /**
+   * @var string
+   */
+  protected $description = 'Generate code';
+
+  /**
    * {@inheritdoc}
    */
   protected function configure() {
     $this
-      ->setName('generate')
-      ->setDescription('Generate code');
+      ->setName($this->name)
+      ->setDescription($this->description);
 
     $this->menuTree = [
       'Drupal 8' => [

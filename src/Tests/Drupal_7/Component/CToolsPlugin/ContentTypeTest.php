@@ -1,5 +1,6 @@
 <?php
 
+// @TODO: Create CtoolsPlugin name space.
 namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
