@@ -22,6 +22,9 @@ sudo mv dcg.phar /usr/local/bin/dcg
 dcg generate
 ```
 
+## License
+[GNU General Public License, version 2](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+
 ## Other Drupal tools for code generation
 
 - [Module Builder](https://www.drupal.org/project/module_builder)
