@@ -9,29 +9,13 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 /**
- * Class Generate
- * @package DrupalCodeGenerator\Command
+ * Implementation of generate command.
  */
 class Generate extends Command {
 
-  /**
-   * @var array
-   */
   protected $menuTree = [];
-
-  /**
-   * @var array
-   */
   protected $activeMenuItems = [];
-
-  /**
-   * @var string
-   */
   protected $name = 'generate';
-
-  /**
-   * @var string
-   */
   protected $description = 'Generate code';
 
   /**
