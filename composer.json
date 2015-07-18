@@ -2,6 +2,7 @@
   "name": "drupal-code-generator",
   "description": "Drupal code generator",
   "require": {
+    "php": ">=5.4.5",
     "symfony/console": "~2.6",
     "twig/twig": "~1.16",
     "symfony/filesystem": "~2.6"
