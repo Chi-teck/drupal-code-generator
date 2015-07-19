@@ -105,13 +105,13 @@ class Generate extends Command {
   protected function selectGenerator(InputInterface $input, OutputInterface $output) {
 
     // Find active subtree;
-    $activeTree = $this->menuTree;
+    $active_tree = $this->menuTree;
     foreach ($this->activeMenuItems as $menu_item) {
       $menu_item = strip_tags($menu_item);
-      $activeTree = isset($activeTree[$menu_item]) ? $activeTree[$menu_item] : [];
+      $active_tree = isset($active_tree[$menu_item]) ? $active_tree[$menu_item] : [];
     }
 
-    foreach ($activeTree as $index => $subtree) {
+    foreach ($active_tree as $index => $subtree) {
       $menu[] = is_array($subtree) ? $index : "<comment>$subtree</comment>";
     }
 
@@ -127,6 +127,7 @@ class Generate extends Command {
         '<title>Select generator:</title>',
         $menu
       );
+      $question->setPrompt('  >>> ');
 
       $answer = $this->getHelper('question')->ask($input, $output, $question);
 
