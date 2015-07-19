@@ -34,7 +34,6 @@ class ApacheVirtualHost extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
 
     $this->files[$vars['hostname'] . '.conf'] = $this->render('other/apache-virtual-host.twig', $vars);
-
   }
 
   protected function defaultDocumentRoot($vars) {
