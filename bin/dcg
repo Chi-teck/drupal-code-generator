@@ -19,6 +19,7 @@ $commands[] = new Command\Drupal_7\Generate();
 $commands[] = new Command\Drupal_7\Component\CToolsPlugin\ContentType();
 $commands[] = new Command\Drupal_7\Component\Info();
 $commands[] = new Command\Drupal_7\Component\Install();
+$commands[] = new Command\Drupal_7\Component\Settings();
 $commands[] = new Command\Drupal_7\Component\Js();
 $commands[] = new Command\Drupal_7\Component\Module();
 $commands[] = new Command\Drupal_7\Module();

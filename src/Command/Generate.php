@@ -39,7 +39,7 @@ class Generate extends Command {
       'Theme',
       'Installation profile',
       'Component' => [
-        'settings.php file',
+        'settings.php',
         'Info file',
         'Install file',
         'Module file',

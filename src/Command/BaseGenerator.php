@@ -86,7 +86,8 @@ class BaseGenerator extends Command {
     foreach ($questions as $name => $question) {
       list($question_text, $default_value) = $question;
 
-      if (is_callable($default_value)) {
+      // Some default values match names of php functions.
+      if (is_array($default_value) && is_callable($default_value)) {
         $default_value = call_user_func($default_value, $vars);
       }
 
