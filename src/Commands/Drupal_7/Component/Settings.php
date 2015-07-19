@@ -7,18 +7,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implementation of generate:d7:component:settings.php command.
+ * Implements generate:d7:component:settings.php command.
  */
 class Settings extends BaseGenerator {
 
-  /**
-   * {@inheritdoc}
-   */
-  protected static  $name = 'generate:d7:component:settings.php';
-
-  /**
-   * {@inheritdoc}
-   */
+  protected static $name = 'generate:d7:component:settings.php';
   protected static $description = 'Generate Drupal 7 settings.php file';
 
   /**

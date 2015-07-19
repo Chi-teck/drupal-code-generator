@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Commands\Drupal_7\Component;
 use DrupalCodeGenerator\Commands\Generate as BaseGenerate;
 
 /**
- * Implementation of generate:d7 command.
+ * Implements generate:d7 command.
  */
 class Generate extends BaseGenerate {
 

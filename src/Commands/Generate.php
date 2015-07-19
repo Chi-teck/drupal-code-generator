@@ -9,7 +9,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 /**
- * Implementation of generate command.
+ * Implements generate command.
  */
 class Generate extends Command {
 

@@ -7,19 +7,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Class Info
- * @package DrupalCodeGenerator\Commands\Drupal_7\Component
+ * Implements generate:d7:component:ctools-plugin:content-type command.
  */
 class ContentType extends BaseGenerator {
 
-  /**
-   * {@inheritdoc}
-   */
   protected static $name = 'generate:d7:component:ctools-plugin:content-type';
-
-  /**
-   * {@inheritdoc}
-   */
   protected static $description = 'Generate CTools content type plugin';
 
   /**

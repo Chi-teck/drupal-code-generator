@@ -7,20 +7,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Class Install
- * @package DrupalCodeGenerator\Commands\Drupal_7\Component
+ * Implements generate:d7:component:module-file command.
  */
 class Module extends BaseGenerator {
 
-  /**
-   * {@inheritdoc}
-   */
-  protected static  $name = 'generate:d7:component:module-file';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $description = 'Generate Drupal 7 .module file';
+  protected static $name = 'generate:d7:component:module-file';
+  protected static $description = 'Generate Drupal 7 module file';
 
   /**
    * {@inheritdoc}

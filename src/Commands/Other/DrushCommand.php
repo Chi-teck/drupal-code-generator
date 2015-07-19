@@ -7,19 +7,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Class DrushCommand
- * @package DrupalCodeGenerator\Commands\Other
+ * Implements generate:other:drush-command command.
  */
 class DrushCommand extends BaseGenerator {
 
-  /**
-   * {@inheritdoc}
-   */
-  protected static  $name = 'generate:other:drush-command';
-
-  /**
-   * {@inheritdoc}
-   */
+  protected static $name = 'generate:other:drush-command';
   protected static $description = 'Generate Drush command';
 
   /**
