@@ -6,7 +6,7 @@ A command line code generator for Drupal.
 
 ## Installation
 
-```
+```shell
 # Download the latest stable release of the code generator.
 wget https://github.com/Chi-teck/drupal-code-generator/releases/download/1.0.0/dcg.phar
 
@@ -18,8 +18,15 @@ sudo mv dcg.phar /usr/local/bin/dcg
 ```
 
 ## Usage
-```
+```shell
+# Display menu.
 dcg generate
+
+# Display submenu.
+dct generate:d7
+
+# Call generator directly.
+generate:d7:component:ctools-plugin:content-type
 ```
 
 ## License
