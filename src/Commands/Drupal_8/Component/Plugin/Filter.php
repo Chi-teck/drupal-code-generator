@@ -1,26 +1,28 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_7\Component\CToolsPlugin;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Component\Plugin;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Class Info
- * @package DrupalCodeGenerator\Command\Drupal_7\Component
+ * @package DrupalCodeGenerator\Commands\Drupal_8\Component
+ *
+ * @TODO: write test.
  */
-class ContentType extends BaseGenerator {
+class Filter extends BaseGenerator {
 
   /**
    * {@inheritdoc}
    */
-  protected static $name = 'generate:d7:component:ctools-plugin:content-type';
+  protected static $name = 'generate:d8:component:plugin:filter';
 
   /**
    * {@inheritdoc}
    */
-  protected static $description = 'Generate CTools content type plugin';
+  protected static $description = 'Generates filter plugin';
 
   /**
    * {@inheritdoc}
@@ -31,13 +33,13 @@ class ContentType extends BaseGenerator {
       'name' => ['Plugin name', [$this, 'defaultName']],
       'machine_name' => ['Plugin machine name', [$this, 'defaultMachineName']],
       'description' => ['Plugin description', 'TODO: Write description for the plugin'],
-      'package' => ['Package', 'custom'],
+      'module_machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
+    $vars['class'] = $this->human2class($vars['machine_name']);
 
-    $this->files[$vars['machine_name'] . '.inc'] = $this->render('d7/ctools-content-type-plugin.twig', $vars);
-
+    $this->files[$vars['class'] . '.php'] = $this->render('d8/plugin-filter.twig', $vars);
   }
 
 }

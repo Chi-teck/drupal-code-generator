@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Command;
+namespace DrupalCodeGenerator\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 /**
  * Class BaseGenerator
- * @package DrupalCodeGenerator\Command
+ * @package DrupalCodeGenerator\Commands
  */
 class BaseGenerator extends Command {
 

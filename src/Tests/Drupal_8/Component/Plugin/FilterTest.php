@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Plugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Command\Drupal_8\Component\Plugin\Filter;
+use DrupalCodeGenerator\Commands\Drupal_8\Component\Plugin\Filter;
 
 class FilterTest extends GeneratorTestCase {
 

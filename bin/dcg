@@ -5,32 +5,32 @@ require __DIR__.'/../vendor/autoload.php';
 
 const DCG_ROOT_DIR = __DIR__;
 
-use DrupalCodeGenerator\Command;
+use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
 
-$commands[] = new Command\Generate();
+$commands[] = new Commands\Generate();
 
 // Drupal 6 commands.
-$commands[] = new Command\Drupal_6\Generate();
-$commands[] = new Command\Drupal_6\Component\Info();
+$commands[] = new Commands\Drupal_6\Generate();
+$commands[] = new Commands\Drupal_6\Component\Info();
 
 // Drupal 7 commands.
-$commands[] = new Command\Drupal_7\Generate();
-$commands[] = new Command\Drupal_7\Component\Generate();
-$commands[] = new Command\Drupal_7\Component\CToolsPlugin\ContentType();
-$commands[] = new Command\Drupal_7\Component\Info();
-$commands[] = new Command\Drupal_7\Component\Install();
-$commands[] = new Command\Drupal_7\Component\Settings();
-$commands[] = new Command\Drupal_7\Component\Js();
-$commands[] = new Command\Drupal_7\Component\Module();
-$commands[] = new Command\Drupal_7\Module();
+$commands[] = new Commands\Drupal_7\Generate();
+$commands[] = new Commands\Drupal_7\Component\Generate();
+$commands[] = new Commands\Drupal_7\Component\CToolsPlugin\ContentType();
+$commands[] = new Commands\Drupal_7\Component\Info();
+$commands[] = new Commands\Drupal_7\Component\Install();
+$commands[] = new Commands\Drupal_7\Component\Settings();
+$commands[] = new Commands\Drupal_7\Component\Js();
+$commands[] = new Commands\Drupal_7\Component\Module();
+$commands[] = new Commands\Drupal_7\Module();
 
 // Drupal 8 commands.
-$commands[] = new Command\Drupal_8\Generate();
-$commands[] = new Command\Drupal_8\Component\Plugin\Filter();
+$commands[] = new Commands\Drupal_8\Generate();
+$commands[] = new Commands\Drupal_8\Component\Plugin\Filter();
 
 // Other commands.
-$commands[] = new Command\Other\DrushCommand();
+$commands[] = new Commands\Other\DrushCommand();
 
 $application = new Application('Drupal Code Generator', '1.0.0');
 $application->addCommands($commands);

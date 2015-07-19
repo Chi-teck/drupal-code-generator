@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
-use DrupalCodeGenerator\Command\Drupal_7\Component\Js;
+use DrupalCodeGenerator\Commands\Drupal_7\Component\Js;
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 class JsTest extends GeneratorTestCase {

@@ -1,8 +1,8 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_6;
+namespace DrupalCodeGenerator\Commands\Drupal_6;
 
-use DrupalCodeGenerator\Command\Generate as BaseGenerate;
+use DrupalCodeGenerator\Commands\Generate as BaseGenerate;
 
 /**
  * Implementation of generate:d7 command.

@@ -1,10 +1,10 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_7\Component;
+namespace DrupalCodeGenerator\Commands\Drupal_7\Component;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implementation of generate:d7:component:settings.php command.

@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Command\Drupal_7\Component\Module;
+use DrupalCodeGenerator\Commands\Drupal_7\Component\Module;
 
 class ModuleTest extends GeneratorTestCase {
 

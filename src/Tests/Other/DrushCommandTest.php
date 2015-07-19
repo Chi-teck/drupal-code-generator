@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Other;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Command\Other\DrushCommand;
+use DrupalCodeGenerator\Commands\Other\DrushCommand;
 
 class DrushCommandTest extends GeneratorTestCase {
 

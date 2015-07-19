@@ -1,14 +1,14 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_6\Component;
+namespace DrupalCodeGenerator\Commands\Drupal_6\Component;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Class Info
- * @package DrupalCodeGenerator\Command\Drupal_7\Component
+ * @package DrupalCodeGenerator\Commands\Drupal_7\Component
  */
 class Info extends BaseGenerator {
 

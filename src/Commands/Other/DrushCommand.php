@@ -1,14 +1,14 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Other;
+namespace DrupalCodeGenerator\Commands\Other;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Class DrushCommand
- * @package DrupalCodeGenerator\Command\Other
+ * @package DrupalCodeGenerator\Commands\Other
  */
 class DrushCommand extends BaseGenerator {
 

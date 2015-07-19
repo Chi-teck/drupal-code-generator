@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Command;
+namespace DrupalCodeGenerator\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -82,7 +82,7 @@ class Generate extends Command {
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    /** @var \DrupalCodeGenerator\Command\BaseGenerator $generator */
+    /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator */
     $generator = $this->selectGenerator($input, $output);
 
     try {

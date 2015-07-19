@@ -1,26 +1,26 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_7\Component;
+namespace DrupalCodeGenerator\Commands\Drupal_7\Component;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Class Install
- * @package DrupalCodeGenerator\Command\Drupal_7\Component
+ * @package DrupalCodeGenerator\Commands\Drupal_7\Component
  */
-class Js extends BaseGenerator {
+class Install extends BaseGenerator {
 
   /**
    * {@inheritdoc}
    */
-  protected static  $name = 'generate:d7:component:js-file';
+  protected static  $name = 'generate:d7:component:install-file';
 
   /**
    * {@inheritdoc}
    */
-  protected static $description = 'Generate Drupal 7 javascript file';
+  protected static $description = 'Generate Drupal 7 .install file';
 
   /**
    * {@inheritdoc}
@@ -33,7 +33,7 @@ class Js extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $this->files[$vars['machine_name'] . '.js'] = $this->render('d7/js.twig', $vars);
+    $this->files[$vars['machine_name'] . '.install'] = $this->render('d7/install.twig', $vars);
 
   }
 

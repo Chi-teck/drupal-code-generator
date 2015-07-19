@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Command\Drupal_7\Component\Info;
+use DrupalCodeGenerator\Commands\Drupal_7\Component\Info;
 
 class InfoTest extends GeneratorTestCase {
 

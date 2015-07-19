@@ -1,14 +1,14 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_8;
+namespace DrupalCodeGenerator\Commands\Drupal_8;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Class Module
- * @package DrupalCodeGenerator\Command\Drupal_8
+ * @package DrupalCodeGenerator\Commands\Drupal_8
  */
 class Module extends BaseGenerator {
 
