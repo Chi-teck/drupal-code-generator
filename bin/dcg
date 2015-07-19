@@ -34,7 +34,7 @@ $commands[] = new Commands\Other\DrushCommand();
 $commands[] = new Commands\Other\ApacheVirtualHost();
 $commands[] = new Commands\Other\HtmlPage();
 
-$application = new Application('Drupal Code Generator', '1.0.0');
+$application = new Application('Drupal Code Generator', '1.0.3');
 $application->addCommands($commands);
 
 $application->run();
