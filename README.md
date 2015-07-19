@@ -17,6 +17,9 @@ chmod +x dcg.phar
 sudo mv dcg.phar /usr/local/bin/dcg
 ```
 
+## Upgrade
+Simply repeat installation commands.
+
 ## Usage
 ```shell
 # Display main menu.
