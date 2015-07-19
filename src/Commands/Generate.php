@@ -61,6 +61,7 @@ class Generate extends Command {
     'Other' => [
       'Drush command',
       'Apache virtual host',
+      'HTML page'
     ]
   ];
 

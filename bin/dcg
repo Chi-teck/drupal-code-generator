@@ -32,6 +32,7 @@ $commands[] = new Commands\Drupal_8\Component\Plugin\Filter();
 // Other commands.
 $commands[] = new Commands\Other\DrushCommand();
 $commands[] = new Commands\Other\ApacheVirtualHost();
+$commands[] = new Commands\Other\HtmlPage();
 
 $application = new Application('Drupal Code Generator', '1.0.0');
 $application->addCommands($commands);
