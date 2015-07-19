@@ -19,14 +19,14 @@ sudo mv dcg.phar /usr/local/bin/dcg
 
 ## Usage
 ```shell
-# Display menu.
+# Display main menu.
 dcg generate
 
 # Display submenu.
-dct generate:d7
+dcg generate:d7
 
 # Call generator directly.
-generate:d7:component:ctools-plugin:content-type
+dcg generate:d7:component:ctools-plugin:content-type
 ```
 
 ## License
