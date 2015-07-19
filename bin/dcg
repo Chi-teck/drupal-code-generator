@@ -16,6 +16,7 @@ $commands[] = new Command\Drupal_6\Component\Info();
 
 // Drupal 7 commands.
 $commands[] = new Command\Drupal_7\Generate();
+$commands[] = new Command\Drupal_7\Component\Generate();
 $commands[] = new Command\Drupal_7\Component\CToolsPlugin\ContentType();
 $commands[] = new Command\Drupal_7\Component\Info();
 $commands[] = new Command\Drupal_7\Component\Install();
