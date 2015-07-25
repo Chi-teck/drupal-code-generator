@@ -21,7 +21,7 @@ class CtoolsPluginAccessTest extends GeneratorTestCase {
       'User',
     ];
     $this->target = 'example.inc';
-    $this->fixture = __DIR__ . '/access/_' . $this->target;
+    $this->fixture = __DIR__ . '/_' . $this->target;
 
     parent::setUp();
   }
