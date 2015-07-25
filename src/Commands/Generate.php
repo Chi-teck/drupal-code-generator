@@ -48,6 +48,7 @@ class Generate extends Command {
         'CTools Plugin' => [
           'Content type',
           'Access',
+          'Relationship',
         ],
       ],
     ],

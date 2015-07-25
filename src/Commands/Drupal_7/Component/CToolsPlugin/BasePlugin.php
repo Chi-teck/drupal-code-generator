@@ -30,7 +30,7 @@ class BasePlugin extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
 
     $question = new ChoiceQuestion(
-      '<comment>Context:</comment>',
+      '<comment>Required context:</comment>',
       ['-', 'Node', 'User', 'Term']
     );
 
