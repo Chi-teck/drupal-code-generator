@@ -18,6 +18,7 @@ class CtoolsPluginContentTypeTest extends GeneratorTestCase {
       'example',
       'Some description',
       'custom',
+      'Node',
     ];
     $this->target = 'example.inc';
     $this->fixture = __DIR__ . '/_' . $this->target;

@@ -19,7 +19,7 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  * Class BaseGenerator
  * @package DrupalCodeGenerator\Commands
  */
-class BaseGenerator extends Command {
+abstract class BaseGenerator extends Command {
 
   /**
    * @var

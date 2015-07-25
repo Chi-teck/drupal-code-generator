@@ -12,7 +12,11 @@ $plugin = array(
   'single' => TRUE,
   'title' => t('{{ name }}'),
   'description' => t('{{ description }}'),
-  'required context' => new ctools_context_required(t('Node'), 'node'),
+{% if context == 'Node' or context == 'User' %}
+  'required context' => new ctools_context_required(t('{{ context }}'), '{{ context|lower }}'),
+{% elseif  context == 'Term' %}
+  'required context' => new ctools_context_required(t('{{ context }}'), array('term', 'taxonomy_term')),
+{% endif %}
   'category' => t('Custom'),
   'render callback' => '{{ machine_name }}_content_type_render',
 );
