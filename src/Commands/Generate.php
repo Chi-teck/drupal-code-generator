@@ -10,6 +10,8 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 /**
  * Implements generate command.
+ *
+ * @TODO: Create a test for this.
  */
 class Generate extends Command {
 
@@ -24,8 +26,6 @@ class Generate extends Command {
       'Component' => [
         'Plugin' => [
           'Filter',
-          'FieldType',
-          'Block',
         ],
         'YML file' => [
           'libraries.yml',
@@ -37,7 +37,6 @@ class Generate extends Command {
     'Drupal 7' => [
       'Module',
       'Theme',
-      'Installation profile',
       'Component' => [
         'settings.php',
         'Info file',
@@ -53,9 +52,6 @@ class Generate extends Command {
       ],
     ],
     'Drupal 6' => [
-      'Module',
-      'Theme',
-      'Installation profile',
       'Component' => [
         'Info file',
       ],
