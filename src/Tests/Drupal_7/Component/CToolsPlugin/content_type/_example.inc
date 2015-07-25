@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Node title content type plugin.
+ * Example content type plugin.
  */
 
 /**
@@ -10,17 +10,17 @@
  */
 $plugin = array(
   'single' => TRUE,
-  'title' => t('Node title'),
+  'title' => t('Example'),
   'description' => t('Some description'),
   'required context' => new ctools_context_required(t('Node'), 'node'),
   'category' => t('Custom'),
-  'render callback' => 'node_title_content_type_render',
+  'render callback' => 'example_content_type_render',
 );
 
 /**
  * Render callback.
  */
-function node_title_content_type_render($subtype, $conf, $panel_args, $context) {
+function example_content_type_render($subtype, $conf, $panel_args, $context) {
 
   if (empty($context->data)) {
     return;
