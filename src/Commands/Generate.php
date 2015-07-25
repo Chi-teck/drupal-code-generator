@@ -47,6 +47,7 @@ class Generate extends Command {
         'Views' => [],
         'CTools Plugin' => [
           'Content type',
+          'Access',
         ],
       ],
     ],

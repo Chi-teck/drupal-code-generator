@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * {{ name }} access plugin.
+ */
+
+/**
+ * Plugin definition.
+ */
+$plugin = array(
+  'single' => TRUE,
+  'title' => t('{{ name }}'),
+  'description' => t('{{ description }}'),
+{% if context == 'Node' or context == 'User' %}
+  'required context' => new ctools_context_required(t('{{ context }}'), '{{ context|lower }}'),
+{% elseif  context == 'Term' %}
+  'required context' => new ctools_context_required(t('{{ context }}'), array('term', 'taxonomy_term')),
+{% endif %}
+  'category' => t('Custom'),
+  'callback' => '{{ machine_name }}_access_check',
+  'summary' => '{{ machine_name }}_access_summary',
+);
+
+/**
+ * Render callback.
+ */
+function {{ machine_name }}_access_check($conf, $context) {
+
+  if (empty($context->data)) {
+    return;
+  }
+
+{% if context == 'Node' or context == 'Term' %}
+  ${{ context|lower }} = clone $context->data;
+
+{% elseif  context == 'User' %}
+{# Use $account variable avoid confusion with the global $user object #}
+  $account = clone $context->data;
+
+{% endif %}
+  // @TODO: Check access here.
+  return TRUE;
+}
+
+/**
+ * Provide a summary description based upon the checked conditions.
+ */
+function {{ machine_name }}_access_summary($conf, $context) {
+  return t('Summary placeholder');
+}
