@@ -30,16 +30,21 @@ function {{ machine_name }}_content_type_render($subtype, $conf, $panel_args, $c
     return;
   }
 
-  $node = clone $context->data;
+{% if context == 'Node' or context == 'Term' %}
+  ${{ context|lower }} = clone $context->data;
+{% elseif  context == 'User' %}
+{# Use $account variable avoid confusion with the global $user object #}
+  $account = clone $context->data;
+{% endif %}
 
   // Build pane content.
   $build = array(
-    '#markup' => check_plain($node->title),
+    '#markup' => 'Content placeholder.',
   );
 
   $block = new stdClass();
   $block->module = 'example';
-  $block->title = t('Pane title');
+  $block->title = t('Title placeholder');
   $block->content = $build;
   return $block;
 }

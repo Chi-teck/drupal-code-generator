@@ -30,12 +30,12 @@ function example_content_type_render($subtype, $conf, $panel_args, $context) {
 
   // Build pane content.
   $build = array(
-    '#markup' => check_plain($node->title),
+    '#markup' => 'Content placeholder.',
   );
 
   $block = new stdClass();
   $block->module = 'example';
-  $block->title = t('Pane title');
+  $block->title = t('Title placeholder');
   $block->content = $build;
   return $block;
 }
