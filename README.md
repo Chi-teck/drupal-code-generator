@@ -23,7 +23,7 @@ Simply repeat installation commands.
 ## Usage
 ```shell
 # Display main menu.
-dcg generate
+dcg
 
 # Display submenu.
 dcg generate:d7
