@@ -107,7 +107,7 @@ class Navigation extends Command {
 
   /**
    * Creates a human readable label for a given menu item.
-   * 
+   *
    * @param string $menu_item
    * @param bool $comment
    *
