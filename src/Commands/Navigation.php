@@ -13,13 +13,12 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  *
  * @TODO: Create a test for this.
  */
-class Generate extends Command {
+class Navigation extends Command {
 
   protected $name = 'generate';
   protected $description = 'Navigation';
   protected $activeMenuItems = [];
   protected $menuTree;
-//  protected $activeMenuItem = 'generate';
 
 
   /**
@@ -191,5 +190,3 @@ class Generate extends Command {
   }
 
 }
-
-
