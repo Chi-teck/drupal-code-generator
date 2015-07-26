@@ -10,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * @TODO: Create a test for this.
  */
-class CommandsDiscovery {
+class GeneratorsDiscovery {
 
   const COMMANDS_NAMESPACE = '\DrupalCodeGenerator\Commands\\';
 //  const COMMANDS_BASE_CLASS = '\Symfony\Component\Console\Command\Command';
@@ -28,7 +28,7 @@ class CommandsDiscovery {
   /**
    *
    */
-  public function getCommands() {
+  public function getGenerators() {
     $filesystem = new Filesystem();
 
     $commands = [];
