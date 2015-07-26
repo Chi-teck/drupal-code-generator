@@ -21,7 +21,7 @@ class Module extends BaseGenerator {
 
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'default_machine_name']],
+      'machine_name' => ['Module machine name', [$this, 'defaultName']],
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
