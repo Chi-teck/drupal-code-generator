@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Commands\Generate as BaseGenerate;
  */
 class Generate extends BaseGenerate {
 
-  protected $activeMenuItems = ['Drupal 8'];
+  protected $activeMenuItems = ['d8'];
   protected $name = 'generate:d8';
   protected $description = 'Generate Drupal 8 code';
 
