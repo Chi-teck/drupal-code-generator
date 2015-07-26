@@ -15,11 +15,10 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  */
 class Navigation extends Command {
 
-  protected $name = 'generate';
+  protected $name = 'navigation';
   protected $description = 'Navigation';
   protected $activeMenuItems = [];
   protected $menuTree;
-
 
   /**
    * {@inheritdoc}
@@ -41,40 +40,36 @@ class Navigation extends Command {
     $this->activeMenuItems = explode(':', $input->getFirstArgument());
     array_shift($this->activeMenuItems);
 
-    /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator */
-    $generator = $this->selectGenerator($input, $output);
+    /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator_name */
+    $generator_name = $this->selectGenerator($input, $output);
 
-    try {
-      $command = $this->getApplication()->find($generator);
-    }
-    catch(\InvalidArgumentException $e) {
-      $output->writeLn("<error>Sorry command $generator is not implemented yet.</error>");
-      exit(1);
-    }
+    $command = $this->getApplication()->find($generator_name);
 
-    $output->writeln(sprintf('<info>Command:</info> <comment>%s</comment>', $command->getName()));
-    $output->writeLn(str_repeat('<comment>-</comment>', 35));
+    $header = sprintf('<info>Command:</info> <comment>%s</comment>', $generator_name);
+    $output->writeln($header);
+    $output->writeLn(str_repeat('<comment>-</comment>', strlen(strip_tags($header))));
 
+    // Run generator.
     $command->run($input, $output);
   }
 
   /**
-   *
+   * Returns a generator selected by the user from a multilevel console menu.
    */
   protected function selectGenerator(InputInterface $input, OutputInterface $output) {
 
-    $tree = $this->menuTree;
+    $active_menu_tree = $this->menuTree;
     foreach ($this->activeMenuItems as $menuItem) {
-      $tree = $tree[strip_tags($menuItem)];
+      $active_menu_tree = $active_menu_tree[$menuItem];
     }
 
-    if (is_array($tree)) {
+    if (is_array($active_menu_tree)) {
 
-      // First menu item is used to move back into the parent menu item.
-      $tree = ['..' => NULL] + $tree;
+      // First menu item is used to return back into the parent menu item.
+      $active_menu_tree = ['..' => NULL] + $active_menu_tree;
 
       $choices = [];
-      foreach ($tree as $menu_item => $subtree) {
+      foreach ($active_menu_tree as $menu_item => $subtree) {
         // We build $choices as an associative array to be able to find
         // later menu items by respective labels.
         $choices[$menu_item] = $this->createMenuItemLabel($menu_item, is_array($subtree));
@@ -86,18 +81,19 @@ class Navigation extends Command {
       );
       $question->setPrompt('  >>> ');
       $answer_label = $this->getHelper('question')->ask($input, $output, $question);
-
       $answer = array_search($answer_label, $choices);
 
       if ($answer == '..') {
         // Exit the application if the user choices zero key
-        // on the top level menu.
+        // on the top menu level.
         if (count($this->activeMenuItems) == 0) {
           exit;
         }
+        // Set the menu one level higher.
         array_pop($this->activeMenuItems);
       }
       else {
+        // Set the menu one level deeper.
         $this->activeMenuItems[] = $answer;
       }
 
@@ -123,36 +119,47 @@ class Navigation extends Command {
 
   /**
    * Initialize generators navigation.
+   *
+   * @param Command[] $commands
    */
   public function init($commands) {
     $this->menuTree = [];
-    $aliases = [];
+    $aliases = ['generate'];
     foreach ($commands as $index => $command) {
       $command_name = $command->getName();
       $command_subnames = explode(':', $command_name);
-      if ($command_subnames[0] == 'generate') {
-        unset($command_subnames[0]);
-
-        $alias = 'generate';
-        foreach ($command_subnames as $key => $subname) {
-          // Last subname is actual command name.
-          if (isset($command_subnames[$key + 1])) {
-            $alias = $alias .  ':' . $subname;
-            $aliases[] = $alias;
-          }
-        }
-
-        $this->arraySetNestedValue($this->menuTree, $command_subnames, TRUE);
+      // Do not process commands outside of 'generate' namespace.
+      if ($command_subnames[0] != 'generate') {
+        continue;
       }
+
+      // Skip first namespace level.
+      unset($command_subnames[0]);
+
+      $alias = 'generate';
+      foreach ($command_subnames as $key => $subname) {
+        // Last subname is actual command name.
+        if (isset($command_subnames[$key + 1])) {
+          $alias = $alias .  ':' . $subname;
+          $aliases[] = $alias;
+        }
+      }
+
+      $this->arraySetNestedValue($this->menuTree, $command_subnames, TRUE);
     }
 
     $this->recursiveKsort($this->menuTree);
-
     $this->setAliases(array_unique($aliases));
   }
 
   /**
+   * Sort multi-dimensional array by keys.
    *
+   * @param array $array
+   *   An array being sorted.
+   *
+   * @return array
+   *   Sorted array.
    */
   protected function recursiveKsort(array &$array) {
     foreach ($array as &$value) {
@@ -162,7 +169,6 @@ class Navigation extends Command {
     }
     return ksort($array);
   }
-
 
   /**
    * Sets a value in a nested array with variable depth.
