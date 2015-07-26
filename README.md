@@ -33,7 +33,7 @@ dcg generate:d7:component:ctools-plugin:content-type
 ```
 
 ## License
-[GNU General Public License, version 2](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+GNU General Public License, version 2
 
 ## Other Drupal tools for code generation
 
