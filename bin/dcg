@@ -1,42 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-const DCG_ROOT_DIR = __DIR__;
-
+use DrupalCodeGenerator\CommandsDiscovery;
 use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
 
-$commands[] = new Commands\Generate();
-
-// Drupal 6 commands.
-$commands[] = new Commands\Drupal_6\Generate();
-$commands[] = new Commands\Drupal_6\Component\Info();
-
-// Drupal 7 commands.
-$commands[] = new Commands\Drupal_7\Generate();
-$commands[] = new Commands\Drupal_7\Component\Generate();
-$commands[] = new Commands\Drupal_7\Component\CToolsPlugin\ContentType();
-$commands[] = new Commands\Drupal_7\Component\CToolsPlugin\Access();
-$commands[] = new Commands\Drupal_7\Component\CToolsPlugin\Relationship();
-$commands[] = new Commands\Drupal_7\Component\Info();
-$commands[] = new Commands\Drupal_7\Component\Install();
-$commands[] = new Commands\Drupal_7\Component\Settings();
-$commands[] = new Commands\Drupal_7\Component\Js();
-$commands[] = new Commands\Drupal_7\Component\Module();
-$commands[] = new Commands\Drupal_7\Module();
-
-// Drupal 8 commands.
-$commands[] = new Commands\Drupal_8\Generate();
-$commands[] = new Commands\Drupal_8\Component\Plugin\Filter();
-
-// Other commands.
-$commands[] = new Commands\Other\DrushCommand();
-$commands[] = new Commands\Other\ApacheVirtualHost();
-$commands[] = new Commands\Other\HtmlPage();
+$commands_directories = [
+  // @TODO: Setup autoloader for other directories.
+  dirname(__DIR__) . '/src/Commands',
+];
+$discovery = new CommandsDiscovery($commands_directories);
 
 $application = new Application('Drupal Code Generator', '1.1.0');
-$application->addCommands($commands);
-
+$application->addCommands($discovery->getCommands());
 $application->run();

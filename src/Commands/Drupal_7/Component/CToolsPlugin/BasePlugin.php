@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 /**
  *
  */
-class BasePlugin extends BaseGenerator {
+abstract class BasePlugin extends BaseGenerator {
 
   protected $template;
 
