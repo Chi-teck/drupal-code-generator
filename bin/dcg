@@ -12,7 +12,13 @@ $commands_directories = [
   dirname(__DIR__) . '/src/Commands',
 ];
 $discovery = new CommandsDiscovery($commands_directories);
+$generators = $discovery->getCommands();
 
 $application = new Application('Drupal Code Generator', '1.1.0');
-$application->addCommands($discovery->getCommands());
+$application->addCommands($generators);
+
+$navigation = new Commands\Generate();
+$navigation->init($generators);
+$application->add($navigation);
+
 $application->run();
