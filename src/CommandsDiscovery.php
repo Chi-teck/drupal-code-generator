@@ -13,7 +13,8 @@ use Symfony\Component\Filesystem\Filesystem;
 class CommandsDiscovery {
 
   const COMMANDS_NAMESPACE = '\DrupalCodeGenerator\Commands\\';
-  const COMMANDS_BASE_CLASS = '\Symfony\Component\Console\Command\Command';
+//  const COMMANDS_BASE_CLASS = '\Symfony\Component\Console\Command\Command';
+  const COMMANDS_BASE_CLASS = '\DrupalCodeGenerator\Commands\BaseGenerator';
 
   protected $directories = [];
 

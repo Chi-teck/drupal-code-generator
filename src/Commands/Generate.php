@@ -16,10 +16,10 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 class Generate extends Command {
 
   protected $name = 'generate';
-  protected $description = 'Generate code';
+  protected $description = 'Navigation';
   protected $activeMenuItems = [];
   protected $menuTree;
-  protected $activeMenuItem = 'generate';
+//  protected $activeMenuItem = 'generate';
 
 
   /**
@@ -38,6 +38,9 @@ class Generate extends Command {
 
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
+
+    $this->activeMenuItems = explode(':', $input->getFirstArgument());
+    array_shift($this->activeMenuItems);
 
     /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator */
     $generator = $this->selectGenerator($input, $output);
@@ -60,11 +63,6 @@ class Generate extends Command {
    *
    */
   protected function selectGenerator(InputInterface $input, OutputInterface $output) {
-
-    // Build menu tree.
-    if (!$this->menuTree) {
-      $this->buildMenuTree();
-    }
 
     $tree = $this->menuTree;
     foreach ($this->activeMenuItems as $menuItem) {
@@ -112,6 +110,11 @@ class Generate extends Command {
 
   }
 
+  /**
+   * @param $menu_item
+   * @param $comment
+   * @return mixed|string
+   */
   protected function createMenuItemLabel($menu_item, $comment) {
     $label = preg_replace('#^d([6-8])$#', 'Drupal_$1', $menu_item);
     $label = ucfirst($label);
@@ -119,24 +122,34 @@ class Generate extends Command {
     return $comment ? "<comment>$label</comment>" : $label;
   }
 
-
   /**
-   *
+   * Initialize generators navigation.
    */
-  protected function buildMenuTree() {
+  public function init($commands) {
     $this->menuTree = [];
-    $commands = $this->getApplication()->all();
+    $aliases = [];
     foreach ($commands as $index => $command) {
       $command_name = $command->getName();
       $command_subnames = explode(':', $command_name);
       if ($command_subnames[0] == 'generate') {
         unset($command_subnames[0]);
+
+        $alias = 'generate';
+        foreach ($command_subnames as $key => $subname) {
+          // Last subname is actual command name.
+          if (isset($command_subnames[$key + 1])) {
+            $alias = $alias .  ':' . $subname;
+            $aliases[] = $alias;
+          }
+        }
+
         $this->arraySetNestedValue($this->menuTree, $command_subnames, TRUE);
       }
     }
 
     $this->recursiveKsort($this->menuTree);
 
+    $this->setAliases(array_unique($aliases));
   }
 
   /**
