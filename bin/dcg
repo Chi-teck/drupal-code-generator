@@ -7,14 +7,14 @@ use DrupalCodeGenerator\GeneratorsDiscovery;
 use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
 
+$application = new Application('Drupal Code Generator', '1.1.0');
+
 $commands_directories = [
   // @TODO: Setup autoloader for other directories.
   dirname(__DIR__) . '/src/Commands',
 ];
 $discovery = new GeneratorsDiscovery($commands_directories);
 $generators = $discovery->getGenerators();
-
-$application = new Application('Drupal Code Generator', '1.1.0');
 $application->addCommands($generators);
 
 $navigation = new Commands\Navigation();
