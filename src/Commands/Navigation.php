@@ -106,8 +106,11 @@ class Navigation extends Command {
   }
 
   /**
-   * @param $menu_item
-   * @param $comment
+   * Creates a human readable label for a given menu item.
+   * 
+   * @param string $menu_item
+   * @param bool $comment
+   *
    * @return mixed|string
    */
   protected function createMenuItemLabel($menu_item, $comment) {
