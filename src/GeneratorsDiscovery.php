@@ -13,7 +13,6 @@ use Symfony\Component\Filesystem\Filesystem;
 class GeneratorsDiscovery {
 
   const COMMANDS_NAMESPACE = '\DrupalCodeGenerator\Commands\\';
-//  const COMMANDS_BASE_CLASS = '\Symfony\Component\Console\Command\Command';
   const COMMANDS_BASE_CLASS = '\DrupalCodeGenerator\Commands\BaseGenerator';
 
   protected $directories = [];
@@ -26,7 +25,9 @@ class GeneratorsDiscovery {
   }
 
   /**
+   * Finds and instantiates generator commands.
    *
+   * @return \Symfony\Component\Console\Command\Command[] $commands
    */
   public function getGenerators() {
     $filesystem = new Filesystem();
