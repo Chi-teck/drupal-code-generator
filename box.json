@@ -6,7 +6,8 @@
   ],
   "files": [
     "LICENSE.txt",
-    "vendor/autoload.php"
+    "vendor/autoload.php",
+    "src/GeneratorsDiscovery.php"
   ],
   "finder": [
     {

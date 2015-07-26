@@ -7,7 +7,7 @@ use DrupalCodeGenerator\GeneratorsDiscovery;
 use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
 
-$application = new Application('Drupal Code Generator', '1.2.0');
+$application = new Application('Drupal Code Generator', '1.2.1');
 
 $commands_directories = [
   // @TODO: Setup autoloader for other directories.
