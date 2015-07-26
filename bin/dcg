@@ -17,7 +17,7 @@ $generators = $discovery->getCommands();
 $application = new Application('Drupal Code Generator', '1.1.0');
 $application->addCommands($generators);
 
-$navigation = new Commands\Generate();
+$navigation = new Commands\Navigation();
 $navigation->init($generators);
 $application->add($navigation);
 
