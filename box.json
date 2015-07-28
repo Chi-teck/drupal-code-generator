@@ -1,22 +1,29 @@
 {
   "chmod": "0755",
-  "directories": [
-    "src/Commands",
-    "src/Resources"
-  ],
   "files": [
-    "LICENSE.txt",
-    "vendor/autoload.php",
-    "src/GeneratorsDiscovery.php"
+    "vendor/autoload.php"
   ],
   "finder": [
     {
+      "name": "*",
+      "in": "src",
+      "exclude": ["Tests"]
+    },
+    {
       "name": "*.php",
-      "in": "vendor",
-      "exclude": ["Tests", "Test", "tests", "test"]
+      "in": [
+        "vendor/composer",
+        "vendor/symfony/console",
+        "vendor/symfony/filesystem",
+        "vendor/twig"
+        ],
+      "exclude": [
+        "Tests",
+        "test"
+      ]
     }
   ],
-  "git-version": "package_version",
+  "git-version": "git-version",
   "main": "bin/dcg",
   "output": "dcg.phar",
   "compactors": [
