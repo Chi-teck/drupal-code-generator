@@ -1,5 +1,5 @@
-vendor
-sandbox
-composer.lock
-.idea
-*phar
+/vendor/
+/sandbox/
+/composer.lock
+/.idea/
+*.phar
