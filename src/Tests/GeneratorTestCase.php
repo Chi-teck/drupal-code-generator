@@ -11,8 +11,6 @@ use Twig_Environment;
 // @TODO: Cleanup.
 class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
-  const DESTINATION = DCG_ROOT . '/sandbox/tests';
-
   protected $application;
 
   /** @var  \Symfony\Component\Console\Command\Command $command */
@@ -33,6 +31,8 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   protected $filesystem;
 
   protected $class;
+
+  protected $destination = DCG_SANDBOX . '/tests';
 
   public function setUp() {
 
@@ -55,7 +55,7 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   public function tearDown() {
     $this->filesystem = new Filesystem();
-    $this->filesystem->remove(self::DESTINATION);
+    $this->filesystem->remove($this->destination);
   }
 
   protected function mockQuestionHelper() {
@@ -76,15 +76,15 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   protected function execute() {
     $this->commandTester->execute([
       'command' => $this->command->getName(),
-      '--destination' => self::DESTINATION
+      '--destination' => $this->destination
     ]);
 
     $this->display = $this->commandTester->getDisplay();
   }
 
   protected function checkFile($file, $fixture) {
-    $this->assertFileExists(self::DESTINATION . '/'. $file);
-    $this->assertFileEquals(self::DESTINATION . '/'. $file, "$fixture");
+    $this->assertFileExists($this->destination . '/'. $file);
+    $this->assertFileEquals($this->destination. '/'. $file, "$fixture");
   }
 
   /**
