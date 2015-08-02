@@ -42,7 +42,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
   protected $filesystem;
 
-  protected $destination = DCG_SANDBOX . '/tests';
+  protected $destination;
 
   /**
    * {@inheritdoc}
@@ -75,6 +75,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     $this->commandTester = new CommandTester($this->command);
 
     $this->filesystem = new Filesystem();
+
+    $this->destination = DCG_SANDBOX . '/tests';
   }
 
   /**

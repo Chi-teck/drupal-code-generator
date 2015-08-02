@@ -32,7 +32,7 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected $class;
 
-  protected $destination = DCG_SANDBOX . '/tests';
+  protected $destination;
 
   public function setUp() {
 
@@ -50,6 +50,8 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
     $this->mockQuestionHelper();
     $this->commandTester = new CommandTester($this->command);
+
+    $this->destination = DCG_SANDBOX . '/tests';
 
   }
 
