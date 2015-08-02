@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Other;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Other\HtmlPage;
 
 class HtmlPageTest extends GeneratorTestCase {
 
@@ -11,8 +10,7 @@ class HtmlPageTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new HtmlPage();
-    $this->commandName = 'generate:other:html-page';
+    $this->class = 'Other\HtmlPage';
     $this->answers = [
       'example.html',
     ];

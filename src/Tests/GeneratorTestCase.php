@@ -5,6 +5,8 @@ use DrupalCodeGenerator\Commands\Other;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
+use Twig_Loader_Filesystem;
+use Twig_Environment;
 
 // @TODO: Cleanup.
 class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
@@ -30,18 +32,29 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected $filesystem;
 
+  protected $class;
+
   public function setUp() {
+
+    $this->filesystem = new Filesystem();
+    $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src//Resources/templates');
+    $twig = new Twig_Environment($twig_loader);
+
+
+    $command_class = 'DrupalCodeGenerator\Commands\\' . $this->class;
+    $this->command = new $command_class($this->filesystem, $twig);
+    $this->commandName = $this->command->getName();
 
     $this->application = new Application();
     $this->application->add($this->command);
-    $this->application->find($this->commandName);
+
     $this->mockQuestionHelper();
     $this->commandTester = new CommandTester($this->command);
 
-    $this->filesystem = new Filesystem();
   }
 
   public function tearDown() {
+    $this->filesystem = new Filesystem();
     $this->filesystem->remove(self::DESTINATION);
   }
 
@@ -62,7 +75,7 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected function execute() {
     $this->commandTester->execute([
-      'command' => $this->commandName,
+      'command' => $this->command->getName(),
       '--destination' => self::DESTINATION
     ]);
 

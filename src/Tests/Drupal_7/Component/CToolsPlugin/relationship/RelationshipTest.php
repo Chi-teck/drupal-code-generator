@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Drupal_7\Component\CToolsPlugin\Relationship;
 
 class CtoolsPluginRelationshipTest extends GeneratorTestCase {
 
@@ -11,8 +10,7 @@ class CtoolsPluginRelationshipTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new Relationship();
-    $this->commandName = 'generate:d7:component:ctools-plugin:relationship';
+    $this->class = 'Drupal_7\Component\CToolsPlugin\Relationship';
     $this->answers = [
       'Example',
       'example',

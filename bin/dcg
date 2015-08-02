@@ -1,20 +1,30 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+$autoloader = require __DIR__ . '/../vendor/autoload.php';
 
 use DrupalCodeGenerator\GeneratorsDiscovery;
 use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Filesystem\Filesystem;
+
+
+$commands_directories = [DCG_ROOT . '/src/Commands'];
+
+// Allow custom commands.
+if (file_exists(DCG_HOME . '/Commands')) {
+  $commands_directories[] = DCG_HOME . '/Commands';
+  $autoloader->addPsr4('DrupalCodeGenerator\\', DCG_HOME);
+}
+
+$filesystem = new Filesystem();
+$twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src/Resources/templates');
+$twig = new Twig_Environment($twig_loader);
+
+$discovery = new GeneratorsDiscovery($commands_directories, $filesystem, $twig);
+$generators = $discovery->getGenerators();
 
 $application = new Application('Drupal Code Generator', '@git-version@');
-
-$commands_directories = [
-  // @TODO: Setup autoloader for other directories.
-  dirname(__DIR__) . '/src/Commands',
-];
-$discovery = new GeneratorsDiscovery($commands_directories);
-$generators = $discovery->getGenerators();
 $application->addCommands($generators);
 
 $navigation = new Commands\Navigation();

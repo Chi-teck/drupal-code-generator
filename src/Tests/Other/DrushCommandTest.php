@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Other;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Other\DrushCommand;
 
 class DrushCommandTest extends GeneratorTestCase {
 
@@ -11,7 +10,7 @@ class DrushCommandTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new DrushCommand();
+    $this->class = 'Other\DrushCommand';
     $this->commandName = 'generate:other:drush-command';
     $this->answers = [
       'Example',

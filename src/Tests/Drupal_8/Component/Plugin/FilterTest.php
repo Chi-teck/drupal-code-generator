@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Plugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Drupal_8\Component\Plugin\Filter;
 
 class FilterTest extends GeneratorTestCase {
 
@@ -11,8 +10,7 @@ class FilterTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new Filter();
-    $this->commandName = 'generate:d8:component:plugin:filter';
+    $this->class = 'Drupal_8\Component\Plugin\Filter';
     $this->answers = [
       'Filter example',
       'filter_example',

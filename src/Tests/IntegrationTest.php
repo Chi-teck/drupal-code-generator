@@ -50,7 +50,13 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   public function setUp() {
 
     $this->application = new Application('Drupal Code Generator', '@git-version@');
-    $discovery = new GeneratorsDiscovery([dirname(__DIR__) . '/Commands']);
+
+
+    $filesystem = new Filesystem();
+    $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Resources/templates');
+    $twig = new \Twig_Environment($twig_loader);
+
+    $discovery = new GeneratorsDiscovery([dirname(__DIR__) . '/Commands'], $filesystem, $twig);
     $generators = $discovery->getGenerators();
     $this->application->addCommands($generators);
 

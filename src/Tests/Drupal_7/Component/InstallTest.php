@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Drupal_7\Component\Install;
 
 class InstallTest extends GeneratorTestCase {
 
@@ -11,8 +10,7 @@ class InstallTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new Install();
-    $this->commandName = 'generate:d7:component:install-file';
+    $this->class = 'Drupal_7\Component\Install';
     $this->answers = [
       'Example',
       'example',

@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Drupal_7\Component\Module;
 
 class ModuleTest extends GeneratorTestCase {
 
@@ -11,8 +10,7 @@ class ModuleTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new Module();
-    $this->commandName = 'generate:d7:component:module-file';
+    $this->class = 'Drupal_7\Component\Module';
     $this->answers = [
       'Example',
       'example',

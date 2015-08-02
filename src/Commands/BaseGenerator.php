@@ -8,8 +8,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Twig_Loader_Filesystem;
-use Twig_Environment;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -39,12 +37,11 @@ abstract class BaseGenerator extends Command {
   /**
    *
    */
-  public function __construct() {
+  public function __construct(Filesystem $filesystem, $twig) {
     parent::__construct();
 
-    $twig_loader = new Twig_Loader_Filesystem(__DIR__ . '/../Resources/templates');
-    $this->twig = new Twig_Environment($twig_loader);
-    $this->fs = new Filesystem();
+    $this->fs = $filesystem;
+    $this->twig = $twig;
     $this->directoryBaseName = basename(getcwd());
 
   }

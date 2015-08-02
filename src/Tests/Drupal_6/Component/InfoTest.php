@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Drupal_6\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Drupal_6\Component\Info;
 
 class InfoTest extends GeneratorTestCase {
 
@@ -11,8 +10,7 @@ class InfoTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new Info();
-    $this->commandName = 'generate:d6:component:info-file';
+    $this->class = 'Drupal_6\Component\Info';
     $this->answers = [
       'Example',
       'example',

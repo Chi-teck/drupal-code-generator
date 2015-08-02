@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Other;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Other\ApacheVirtualHost;
 
 class ApacheVirtualHostTest extends GeneratorTestCase {
 
@@ -11,8 +10,7 @@ class ApacheVirtualHostTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new ApacheVirtualHost();
-    $this->commandName = 'generate:other:apache-virtual-host';
+    $this->class = 'Other\ApacheVirtualHost';
     $this->answers = [
       'example.com',
       '/var/www/example.com/public',

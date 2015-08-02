@@ -6,6 +6,7 @@ use ReflectionClass;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
 use Symfony\Component\Filesystem\Filesystem;
+use Twig_Environment;
 
 /**
  * @TODO: Create a test for this.
@@ -20,8 +21,10 @@ class GeneratorsDiscovery {
   /**
    * Constructs discovery object.
    */
-  public function __construct(array $directories) {
+  public function __construct(array $directories, Filesystem $filesystem, Twig_Environment $twig) {
     $this->directories = $directories;
+    $this->filesystem = $filesystem;
+    $this->twig = $twig;
   }
 
   /**
@@ -30,7 +33,6 @@ class GeneratorsDiscovery {
    * @return \Symfony\Component\Console\Command\Command[] $commands
    */
   public function getGenerators() {
-    $filesystem = new Filesystem();
 
     $commands = [];
     foreach ($this->directories as $directory) {
@@ -40,7 +42,7 @@ class GeneratorsDiscovery {
 
       foreach ($iterator as $path => $file) {
         if ($file->getExtension() == 'php') {
-          $relative_path = $filesystem->makePathRelative($path, $directory);
+          $relative_path = $this->filesystem->makePathRelative($path, $directory);
           $class = self::COMMANDS_NAMESPACE . str_replace('/', '\\', preg_replace('#.php/$#', '', $relative_path));
           $reflected_class = new ReflectionClass($class);
 
@@ -48,7 +50,7 @@ class GeneratorsDiscovery {
             continue;
           }
 
-          $commands[] = new $class;
+          $commands[] = new $class($this->filesystem, $this->twig);
         }
       }
 

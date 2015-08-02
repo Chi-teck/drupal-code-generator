@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
-use DrupalCodeGenerator\Commands\Drupal_7\Component\CToolsPlugin\ContentType;
 
 class CtoolsPluginContentTypeTest extends GeneratorTestCase {
 
@@ -11,8 +10,7 @@ class CtoolsPluginContentTypeTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->command = new ContentType();
-    $this->commandName = 'generate:d7:component:ctools-plugin:content-type';
+    $this->class = 'Drupal_7\Component\CToolsPlugin\ContentType';
     $this->answers = [
       'Example',
       'example',
