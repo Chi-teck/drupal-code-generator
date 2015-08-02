@@ -8,28 +8,28 @@ use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 
-
 $commands_directories = [DCG_ROOT . '/src/Commands'];
 
-// Allow custom commands.
+// Allow custom generators.
 if (file_exists(DCG_HOME . '/Commands')) {
   $commands_directories[] = DCG_HOME . '/Commands';
   $autoloader->addPsr4('DrupalCodeGenerator\\', DCG_HOME);
 }
 
+// Discover generators.
 $filesystem = new Filesystem();
 $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src/Resources/templates');
 $twig = new Twig_Environment($twig_loader);
-
 $discovery = new GeneratorsDiscovery($commands_directories, $filesystem, $twig);
 $generators = $discovery->getGenerators();
 
-$application = new Application('Drupal Code Generator', '@git-version@');
-$application->addCommands($generators);
-
+// Create navigation command.
 $navigation = new Commands\Navigation();
 $navigation->init($generators);
-$application->add($navigation);
 
+// Build application.
+$application = new Application('Drupal Code Generator', '@git-version@');
+$application->addCommands($generators);
+$application->add($navigation);
 $application->setDefaultCommand('navigation');
 $application->run();

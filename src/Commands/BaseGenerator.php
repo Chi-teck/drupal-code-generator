@@ -7,43 +7,32 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Twig_Environment;
 
 /**
- * Class BaseGenerator
- * @package DrupalCodeGenerator\Commands
+ * Base class for all generators.
  */
 abstract class BaseGenerator extends Command {
 
-  /**
-   * @var
-   */
   protected static $name;
-
-  /**
-   * @var
-   */
   protected static $description;
-
-  /**
-   * @var array
-   */
   protected $files = [];
+  protected $filesystem;
+  protected $twig;
+  protected $directoryBaseName;
 
   /**
-   *
+   * Constructs generator command
    */
-  public function __construct(Filesystem $filesystem, $twig) {
+  public function __construct(Filesystem $filesystem, Twig_Environment $twig) {
     parent::__construct();
-
-    $this->fs = $filesystem;
+    $this->filesystem = $filesystem;
     $this->twig = $twig;
     $this->directoryBaseName = basename(getcwd());
-
   }
 
   /**
@@ -62,22 +51,32 @@ abstract class BaseGenerator extends Command {
   }
 
   /**
-   * @param $template
+   * Renders file.
+   *
+   * @param string $template
+   *   Twig template.
    * @param array $vars
+   *   Template variables.
+   *
    * @return string
+   *   The rendered file.
    */
   protected function render($template, array $vars) {
     return $this->twig->render($template, $vars);
   }
 
   /**
+   * Asks the user for template variables.
+   *
    * @param InputInterface $input
    * @param OutputInterface $output
    * @param array $questions
+   *   Questions that the user should answer.
+   *
    * @return array
+   *   Template variables
    */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
-
     $vars = [];
 
     foreach ($questions as $name => $question) {
@@ -113,7 +112,7 @@ abstract class BaseGenerator extends Command {
     // Save files.
     foreach($this->files as $name => $content) {
       $file_path = $directory . $name;
-      if ($this->fs->exists($file_path)) {
+      if ($this->filesystem->exists($file_path)) {
 
         $helper = $this->getHelper('question');
         $question = new ConfirmationQuestion(
@@ -128,8 +127,7 @@ abstract class BaseGenerator extends Command {
 
       }
       try {
-
-        $this->fs->dumpFile($file_path, $content);
+        $this->filesystem->dumpFile($file_path, $content);
       }
       catch (IOExceptionInterface $e) {
         $output->writeLn('<error>An error occurred while creating your file at ' . $e->getPath() . '</error>');

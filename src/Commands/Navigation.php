@@ -49,6 +49,9 @@ class Navigation extends Command {
 
     /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator_name */
     $generator_name = $this->selectGenerator($input, $output);
+    if (!$generator_name) {
+      return 0;
+    }
 
     $command = $this->getApplication()->find($generator_name);
 
@@ -57,7 +60,7 @@ class Navigation extends Command {
     $output->writeLn(str_repeat('<comment>-</comment>', strlen(strip_tags($header))));
 
     // Run generator.
-    $command->run($input, $output);
+    return $command->run($input, $output);
   }
 
   /**
@@ -94,7 +97,7 @@ class Navigation extends Command {
         // Exit the application if the user choices zero key
         // on the top menu level.
         if (count($this->activeMenuItems) == 0) {
-          exit;
+          return NULL;
         }
         // Set the menu one level higher.
         array_pop($this->activeMenuItems);
