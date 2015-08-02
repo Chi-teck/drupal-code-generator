@@ -114,9 +114,19 @@ class Navigation extends Command {
    * @return mixed|string
    */
   protected function createMenuItemLabel($menu_item, $comment) {
-    $label = preg_replace('#^d([6-8])$#', 'Drupal_$1', $menu_item);
-    $label = ucfirst($label);
-    $label = str_replace(['-', '_'], ' ', $label);
+    // Some labels require individual approach.
+    $labels = [
+      'settings.php' => 'settings.php',
+      'd6' => 'Drupal 6',
+      'd7' => 'Drupal 7',
+      'd8' => 'Drupal 8',
+      'js-file' => 'Javascript file',
+      'html-page' => 'HTML page',
+    ];
+
+    $label = isset($labels[$menu_item]) ?
+      $labels[$menu_item] : str_replace(['-', '_'], ' ',  ucfirst($menu_item));
+
     return $comment ? "<comment>$label</comment>" : $label;
   }
 

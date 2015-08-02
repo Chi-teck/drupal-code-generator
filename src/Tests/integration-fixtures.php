@@ -97,7 +97,7 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      'Js file',
+      'Javascript file',
       'Example',
       'example',
     ],
@@ -130,7 +130,7 @@ return [
       // Test jumping on upper menu level.
       '..',
       '<comment>Component</comment>',
-      'Settings.php',
+      'settings.php',
     ],
     'output' => [
       'Command: generate:d7:component:settings.php',
@@ -221,7 +221,7 @@ return [
   [
     'answers' => [
       '<comment>Other</comment>',
-      'Html page',
+      'HTML page',
       'index.html',
     ],
     'output' => [
