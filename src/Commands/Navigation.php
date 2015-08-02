@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Implements generate command.
@@ -26,7 +27,13 @@ class Navigation extends Command {
   protected function configure() {
     $this
       ->setName($this->name)
-      ->setDescription($this->description);
+      ->setDescription($this->description)
+      ->addOption(
+        'destination',
+        '-d',
+        InputOption::VALUE_OPTIONAL,
+        'Destination directory'
+      );
   }
 
   /**

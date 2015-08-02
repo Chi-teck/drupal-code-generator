@@ -6,8 +6,10 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
-
+// @TODO: Cleanup.
 class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
+
+  const DESTINATION = DCG_ROOT . '/sandbox/tests';
 
   protected $application;
 
@@ -26,6 +28,8 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected $fixture;
 
+  protected $filesystem;
+
   public function setUp() {
 
     $this->application = new Application();
@@ -34,6 +38,11 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $this->mockQuestionHelper();
     $this->commandTester = new CommandTester($this->command);
 
+    $this->filesystem = new Filesystem();
+  }
+
+  public function tearDown() {
+    $this->filesystem->remove(self::DESTINATION);
   }
 
   protected function mockQuestionHelper() {
@@ -54,15 +63,15 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   protected function execute() {
     $this->commandTester->execute([
       'command' => $this->commandName,
-      '--dir' => 'sandbox'
+      '--destination' => self::DESTINATION
     ]);
 
     $this->display = $this->commandTester->getDisplay();
   }
 
   protected function checkFile($file, $fixture) {
-    $this->assertFileExists("./sandbox/$file");
-    $this->assertFileEquals("./sandbox/$file", "$fixture");
+    $this->assertFileExists(self::DESTINATION . '/'. $file);
+    $this->assertFileEquals(self::DESTINATION . '/'. $file, "$fixture");
   }
 
   /**

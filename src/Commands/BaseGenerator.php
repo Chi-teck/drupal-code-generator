@@ -57,7 +57,7 @@ abstract class BaseGenerator extends Command {
       ->setName(static::$name)
       ->setDescription(static::$description)
       ->addOption(
-        'dir',
+        'destination',
         '-d',
         InputOption::VALUE_OPTIONAL,
         'Destination directory'
@@ -111,16 +111,31 @@ abstract class BaseGenerator extends Command {
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    $directory = $input->getOption('dir') ? $input->getOption('dir') . '/' : './';
+    $directory = $input->getOption('destination') ? $input->getOption('destination') . '/' : './';
 
     // Save files.
     foreach($this->files as $name => $content) {
+      $file_path = $directory . $name;
+      if ($this->fs->exists($file_path)) {
+
+        $helper = $this->getHelper('question');
+        $question = new ConfirmationQuestion(
+          sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $name),
+          TRUE
+        );
+
+        if (!$helper->ask($input, $output, $question)) {
+          $output->writeLn('Aborted.');
+          return 0;
+        }
+
+      }
       try {
 
-        $this->fs->dumpFile($directory . $name, $content);
+        $this->fs->dumpFile($file_path, $content);
       }
       catch (IOExceptionInterface $e) {
-        $output->writeLn('<error>An error occurred while creating your directory at ' . $e->getPath() . '</error>');
+        $output->writeLn('<error>An error occurred while creating your file at ' . $e->getPath() . '</error>');
         return 1;
       }
     }

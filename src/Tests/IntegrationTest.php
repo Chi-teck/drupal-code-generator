@@ -6,9 +6,11 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use DrupalCodeGenerator\GeneratorsDiscovery;
 use DrupalCodeGenerator\Commands;
-
+use Symfony\Component\Filesystem\Filesystem;
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase {
+
+  const DESTINATION = DCG_ROOT . '/sandbox/tests';
 
   /**
    * @var \Symfony\Component\Console\Application $application
@@ -40,6 +42,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
    */
   protected $commandTester;
 
+  protected $filesystem;
+
   /**
    * {@inheritdoc}
    */
@@ -63,6 +67,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     $this->helperSet = $this->command->getHelperSet();
 
     $this->commandTester = new CommandTester($this->command);
+
+    $this->filesystem = new Filesystem();
   }
 
   /**
@@ -71,8 +77,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   public function testExecute() {
     foreach ($this->fixtures as $fixture) {
       $this->mockQuestionHelper($fixture['answers']);
-      $this->commandTester->execute(['command' => 'navigation']);
+      $this->commandTester->execute(['command' => 'navigation', '--destination' => './sandbox/tests']);
       $this->assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
+
+      $this->filesystem->remove(self::DESTINATION);
     }
   }
 
