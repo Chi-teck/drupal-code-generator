@@ -7,7 +7,7 @@
     {
       "name": "*",
       "in": "src",
-      "exclude": ["Tests"]
+      "exclude": ["Tests", "Box"]
     },
     {
       "name": "*.php",
@@ -26,8 +26,9 @@
   "git-version": "git-version",
   "main": "bin/dcg",
   "output": "dcg.phar",
+  "bootstrap": "src/Box/PhpCompactor.php",
   "compactors": [
-    "Herrera\\Box\\Compactor\\Php"
+    "DrupalCodeGenerator\\Box\\PhpCompactor"
   ],
   "stub": true
 }
