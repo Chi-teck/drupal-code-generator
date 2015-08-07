@@ -25,11 +25,11 @@ Simply repeat installation commands.
 # Display main menu.
 dcg
 
-# Display submenu.
-dcg generate:d7
+# Display Drupal 7 submenu.
+dcg d7
 
 # Call generator directly.
-dcg generate:d7:component:ctools-plugin:content-type
+dcg d7:component:ctools-plugin:content-type
 ```
 
 ## License
