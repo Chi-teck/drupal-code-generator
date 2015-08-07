@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Settings extends BaseGenerator {
 
-  protected static $name = 'generate:d7:component:settings.php';
+  protected static $name = 'd7:component:settings.php';
   protected static $description = 'Generate Drupal 7 settings.php file';
 
   /**

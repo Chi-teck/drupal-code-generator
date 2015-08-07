@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Filter extends BaseGenerator {
 
-  protected static $name = 'generate:d8:component:plugin:filter';
+  protected static $name = 'd8:component:plugin:filter';
   protected static $description = 'Generates filter plugin';
 
   /**

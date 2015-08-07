@@ -44,12 +44,14 @@ class Navigation extends Command {
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    $this->activeMenuItems = explode(':', $input->getFirstArgument());
-    array_shift($this->activeMenuItems);
+    $first_argument = $input->getFirstArgument();
+
+    $this->activeMenuItems = $first_argument == $this->name ?
+      [] : explode(':', $first_argument);
 
     /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator_name */
     $generator_name = $this->selectGenerator($input, $output);
-    if (!$generator_name) {
+      if (!$generator_name) {
       return 0;
     }
 
@@ -110,7 +112,7 @@ class Navigation extends Command {
       return $this->selectGenerator($input, $output);
     }
     else {
-      return 'generate:' . implode(':', $this->activeMenuItems);
+      return implode(':', $this->activeMenuItems);
     }
 
   }
@@ -147,28 +149,23 @@ class Navigation extends Command {
    */
   public function init($commands) {
     $this->menuTree = [];
-    $aliases = ['generate'];
+    $aliases = [];
     foreach ($commands as $index => $command) {
       $command_name = $command->getName();
       $command_subnames = explode(':', $command_name);
-      // Do not process commands outside of 'generate' namespace.
-      if ($command_subnames[0] != 'generate') {
-        continue;
-      }
-
-      // Skip first namespace level.
-      unset($command_subnames[0]);
-
-      $alias = 'generate';
-      foreach ($command_subnames as $key => $subname) {
-        // Last subname is actual command name.
-        if (isset($command_subnames[$key + 1])) {
-          $alias = $alias .  ':' . $subname;
-          $aliases[] = $alias;
-        }
-      }
 
       $this->arraySetNestedValue($this->menuTree, $command_subnames, TRUE);
+
+      // Last subname is actual command name so it should not be used as
+      // an alias for navigation command.
+      array_pop($command_subnames);
+
+      $alias = '';
+      foreach ($command_subnames as $key => $subname) {
+        $alias = $alias .  ':' . $subname;
+        $aliases[] = ltrim($alias, ':');
+      }
+
     }
 
     $this->recursiveKsort($this->menuTree);

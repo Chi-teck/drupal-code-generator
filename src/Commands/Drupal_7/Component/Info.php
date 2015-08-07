@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Info extends BaseGenerator {
 
-  protected static $name = 'generate:d7:component:info-file';
+  protected static $name = 'd7:component:info-file';
   protected static $description = 'Generate Drupal 7 .info file';
 
   /**

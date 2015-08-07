@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Install extends BaseGenerator {
 
-  protected static $name = 'generate:d7:component:install-file';
+  protected static $name = 'd7:component:install-file';
   protected static $description = 'Generate Drupal 7 install file';
 
   /**

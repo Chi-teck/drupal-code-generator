@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class DrushCommand extends BaseGenerator {
 
-  protected static $name = 'generate:other:drush-command';
+  protected static $name = 'other:drush-command';
   protected static $description = 'Generate Drush command';
 
   /**
