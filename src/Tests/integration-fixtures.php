@@ -4,13 +4,13 @@ return [
     'answers' => [
       '<comment>Drupal 6</comment>',
       '<comment>Component</comment>',
-      'Info file',
+      '.info file (module)',
       'Example',
       'example',
     ],
     'output' => [
-      'Command: d6:component:info-file',
-      '-------------------------------',
+      'Command: d6:component:module-info-file',
+      '--------------------------------------',
       'The following files have been created:',
       '- example.info',
     ],
@@ -67,7 +67,7 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      'Module info file',
+      '.info file (module)',
       'Example',
       'example',
     ],
@@ -82,7 +82,7 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      'Theme info file',
+      '.info file (theme)',
       'Example',
       'example',
       'example',
@@ -99,7 +99,7 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      'Install file',
+      '.install file',
       'Example',
       'example',
     ],
@@ -129,7 +129,7 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      'Module file',
+      '.module file',
       'Example',
       'example',
     ],

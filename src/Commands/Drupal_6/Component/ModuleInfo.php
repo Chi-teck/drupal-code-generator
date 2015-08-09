@@ -7,12 +7,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:d6:component:info-file command.
+ * Implements d6:component:module-info-file command.
  */
-class Info extends BaseGenerator {
+class ModuleInfo extends BaseGenerator {
 
-  protected static $name = 'd6:component:info-file';
-  protected static $description = 'Generate Drupal 6 info file';
+  protected static $name = 'd6:component:module-info-file';
+  protected static $description = 'Generate Drupal 6 info file (module)';
 
   /**
    * {@inheritdoc}
@@ -28,7 +28,7 @@ class Info extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $this->files[$vars['machine_name'] . '.info'] = $this->render('d6/info.twig', $vars);
+    $this->files[$vars['machine_name'] . '.info'] = $this->render('d6/module-info.twig', $vars);
 
   }
 

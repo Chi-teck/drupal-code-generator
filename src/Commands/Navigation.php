@@ -71,8 +71,8 @@ class Navigation extends Command {
   protected function selectGenerator(InputInterface $input, OutputInterface $output) {
 
     $active_menu_tree = $this->menuTree;
-    foreach ($this->activeMenuItems as $menuItem) {
-      $active_menu_tree = $active_menu_tree[$menuItem];
+    foreach ($this->activeMenuItems as $active_menu_item) {
+      $active_menu_tree = $active_menu_tree[$active_menu_item];
     }
 
     if (is_array($active_menu_tree)) {
@@ -87,6 +87,8 @@ class Navigation extends Command {
         $choices[$menu_item] = $this->createMenuItemLabel($menu_item, is_array($subtree));
       }
 
+      // @TODO: Sorem choices.
+
       $question = new ChoiceQuestion(
         '<title>Select generator:</title>',
         array_values($choices)
@@ -94,6 +96,9 @@ class Navigation extends Command {
       $question->setPrompt('  >>> ');
       $answer_label = $this->getHelper('question')->ask($input, $output, $question);
       $answer = array_search($answer_label, $choices);
+      if (!$answer) {
+        throw new \UnexpectedValueException(sprintf('"%s" menu item was not found', $answer_label));
+      }
 
       if ($answer == '..') {
         // Exit the application if the user choices zero key
@@ -134,6 +139,10 @@ class Navigation extends Command {
       'd8' => 'Drupal 8',
       'js-file' => 'Javascript file',
       'html-page' => 'HTML page',
+      'install-file' => '.install file',
+      'module-file' => '.module file',
+      'module-info-file' => '.info file (module)',
+      'theme-info-file' => '.info file (theme)',
     ];
 
     $label = isset($labels[$menu_item]) ?
