@@ -116,13 +116,13 @@ abstract class BaseGenerator extends Command {
     $directory = $input->getOption('destination') ? $input->getOption('destination') . '/' : './';
 
     // Save files.
-    foreach($this->files as $name => $content) {
-      $file_path = $directory . $name;
+    foreach($this->files as $file_path => $content) {
+      $file_path = $directory . $file_path;
       if ($this->filesystem->exists($file_path)) {
 
         $helper = $this->getHelper('question');
         $question = new ConfirmationQuestion(
-          sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $name),
+          sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path),
           TRUE
         );
 
@@ -135,11 +135,13 @@ abstract class BaseGenerator extends Command {
       try {
         // NULL means it is a directory.
         if ($content === NULL) {
-          $this->filesystem->mkdir([$file_path]);
+          $this->filesystem->mkdir([$file_path], 0775);
           $directories_created = TRUE;
         }
         else {
-          $this->filesystem->dumpFile($file_path, $content);
+          // Default mode for all parent directories is 0777. It can be
+          // modified by the current umask, which you can change using umask().
+          $this->filesystem->dumpFile($file_path, $content, 0644);
         }
       }
       catch (IOExceptionInterface $e) {
