@@ -21,7 +21,6 @@ abstract class BaseGenerator extends Command {
   protected $name;
   protected $description;
   protected $files = [];
-  protected $directories = [];
   protected $filesystem;
   protected $twig;
   protected $directoryBaseName;
