@@ -24,6 +24,7 @@ abstract class BaseGenerator extends Command {
   protected $filesystem;
   protected $twig;
   protected $directoryBaseName;
+  protected $alias;
 
   /**
    * Constructs generator command
@@ -48,6 +49,10 @@ abstract class BaseGenerator extends Command {
         InputOption::VALUE_OPTIONAL,
         'Destination directory'
       );
+
+    if ($this->alias) {
+      $this->setAliases([$this->alias]);
+    }
   }
 
   /**
