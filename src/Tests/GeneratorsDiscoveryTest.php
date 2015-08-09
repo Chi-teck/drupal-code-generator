@@ -21,7 +21,7 @@ class GeneratorsDiscoveryTest extends \PHPUnit_Framework_TestCase {
     foreach ($generators as $generator) {
       $this->assertInstanceOf('DrupalCodeGenerator\Commands\BaseGenerator', $generator);
     }
-    $this->assertCount(16, $generators);
+    $this->assertCount(17, $generators);
   }
 
 }

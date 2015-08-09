@@ -82,6 +82,23 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
+      'Theme info file',
+      'Example',
+      'example',
+      'example',
+      'example',
+    ],
+    'output' => [
+      'Command: d7:component:theme-info-file',
+      '-------------------------------------',
+      'The following files have been created:',
+      '- example.info',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Drupal 7</comment>',
+      '<comment>Component</comment>',
       'Install file',
       'Example',
       'example',
