@@ -10,7 +10,7 @@
  *
  * @DCG: Optional.
  */
-function example_preprocess_html($vars) {
+function example_preprocess_html(&$vars) {
 
 }
 
@@ -19,7 +19,7 @@ function example_preprocess_html($vars) {
  *
  * @DCG: Optional.
  */
-function example_preprocess_page($vars) {
+function example_preprocess_page(&$vars) {
 
 }
 
@@ -28,6 +28,6 @@ function example_preprocess_page($vars) {
  *
  * @DCG: Optional.
  */
-function example_preprocess_node($vars) {
+function example_preprocess_node(&$vars) {
 
 }
