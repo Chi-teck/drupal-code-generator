@@ -8,12 +8,20 @@ use Symfony\Component\Filesystem\Filesystem;
 use Twig_Loader_Filesystem;
 use Twig_Environment;
 
-// @TODO: Cleanup.
-class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
+/**
+ * Base class for generators tests.
+ *
+ * @TODO: Cleanup.
+ */
+abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected $application;
 
-  /** @var  \Symfony\Component\Console\Command\Command $command */
+  /**
+   * Generator command to be tested.
+   *
+   * @var \Symfony\Component\Console\Command\Command
+   */
   protected $command;
 
   protected $commandName;
@@ -34,12 +42,14 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected $destination;
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
 
     $this->filesystem = new Filesystem();
     $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src//Resources/templates');
     $twig = new Twig_Environment($twig_loader);
-
 
     $command_class = 'DrupalCodeGenerator\Commands\\' . $this->class;
     $this->command = new $command_class($this->filesystem, $twig);
@@ -55,26 +65,35 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function tearDown() {
     $this->filesystem = new Filesystem();
     $this->filesystem->remove($this->destination);
   }
 
+  /**
+   * Mocks question helper.
+   */
   protected function mockQuestionHelper() {
 
-    $questionHelper = $this->getMock('Symfony\Component\Console\Helper\QuestionHelper', ['ask']);
+    $question_helper = $this->getMock('Symfony\Component\Console\Helper\QuestionHelper', ['ask']);
 
     foreach ($this->answers as $key => $answer) {
-      $questionHelper->expects($this->at($key))
+      $question_helper->expects($this->at($key))
         ->method('ask')
         ->will($this->returnValue($answer));
     }
 
-    // We override the question helper with our mock
-    $this->command->getHelperSet()->set($questionHelper, 'question');
+    // We override the question helper with our mock.
+    $this->command->getHelperSet()->set($question_helper, 'question');
 
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function execute() {
     $this->commandTester->execute([
       'command' => $this->command->getName(),
@@ -84,9 +103,12 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $this->display = $this->commandTester->getDisplay();
   }
 
+  /**
+   * Checks file.
+   */
   protected function checkFile($file, $fixture) {
-    $this->assertFileExists($this->destination . '/'. $file);
-    $this->assertFileEquals($this->destination. '/'. $file, "$fixture");
+    $this->assertFileExists($this->destination . '/' . $file);
+    $this->assertFileEquals($this->destination . '/' . $file, "$fixture");
   }
 
   /**
@@ -102,6 +124,5 @@ class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $this->checkFile($this->target, $this->fixture);
 
   }
-
 
 }
