@@ -159,6 +159,22 @@ return [
   [
     'answers' => [
       '<comment>Drupal 7</comment>',
+      '<comment>Component</comment>',
+      // Test jumping on upper menu level.
+      '..',
+      '<comment>Component</comment>',
+      'template.php',
+    ],
+    'output' => [
+      'Command: d7:component:template.php',
+      '----------------------------------',
+      'The following files have been created:',
+      '- template.php',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Drupal 7</comment>',
       'Module',
       'Example',
       'example',

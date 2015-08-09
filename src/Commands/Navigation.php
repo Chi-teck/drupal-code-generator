@@ -144,6 +144,7 @@ class Navigation extends Command {
     // Some labels require individual approach.
     $labels = [
       'settings.php' => 'settings.php',
+      'template.php' => 'template.php',
       'd6' => 'Drupal 6',
       'd7' => 'Drupal 7',
       'd8' => 'Drupal 8',

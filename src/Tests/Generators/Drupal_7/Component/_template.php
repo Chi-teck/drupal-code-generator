@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Template overrides and (pre-)process hooks for the {{ name }} theme.
+ * Template overrides and (pre-)process hooks for the Example theme.
  */
 
 /**
@@ -10,7 +10,7 @@
  *
  * @DCG: Optional.
  */
-function {{ machine_name }}_preprocess_html($vars) {
+function example_preprocess_html($vars) {
 
 }
 
@@ -19,7 +19,7 @@ function {{ machine_name }}_preprocess_html($vars) {
  *
  * @DCG: Optional.
  */
-function {{ machine_name }}_preprocess_page($vars) {
+function example_preprocess_page($vars) {
 
 }
 
@@ -28,6 +28,6 @@ function {{ machine_name }}_preprocess_page($vars) {
  *
  * @DCG: Optional.
  */
-function {{ machine_name }}_preprocess_node($vars) {
+function example_preprocess_node($vars) {
 
 }
