@@ -77,17 +77,27 @@ class Navigation extends Command {
 
     if (is_array($active_menu_tree)) {
 
-      // First menu item is used to return back into the parent menu item.
-      $active_menu_tree = ['..' => NULL] + $active_menu_tree;
-
-      $choices = [];
+      $subtrees = $command_names= [];
+      // We build $choices as an associative array to be able to find
+      // later menu items by respective labels.
       foreach ($active_menu_tree as $menu_item => $subtree) {
-        // We build $choices as an associative array to be able to find
-        // later menu items by respective labels.
-        $choices[$menu_item] = $this->createMenuItemLabel($menu_item, is_array($subtree));
-      }
+        $menu_item_label = $this->createMenuItemLabel($menu_item, is_array($subtree));
+        if (is_array($subtree)) {
+          $subtrees[$menu_item] = $menu_item_label;
+        }
+        else {
+          $command_names[$menu_item] = $menu_item_label;
+        }
 
-      // @TODO: Sorem choices.
+      }
+      asort($subtrees);
+      asort($command_names);
+
+      // Generally the choices array consists of the following parts:
+      //  - Reference to the parent menu level
+      //  - Sorted list of nested menu levels
+      //  - Sorted list of commands
+      $choices = ['..' => '..'] + $subtrees + $command_names;
 
       $question = new ChoiceQuestion(
         '<title>Select generator:</title>',
