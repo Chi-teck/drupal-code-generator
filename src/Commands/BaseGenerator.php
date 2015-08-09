@@ -21,6 +21,7 @@ abstract class BaseGenerator extends Command {
   protected $name;
   protected $description;
   protected $files = [];
+  protected $directories = [];
   protected $filesystem;
   protected $twig;
   protected $directoryBaseName;
@@ -132,7 +133,14 @@ abstract class BaseGenerator extends Command {
 
       }
       try {
-        $this->filesystem->dumpFile($file_path, $content);
+        // NULL means it is a directory.
+        if ($content === NULL) {
+          $this->filesystem->mkdir([$file_path]);
+          $directories_created = TRUE;
+        }
+        else {
+          $this->filesystem->dumpFile($file_path, $content);
+        }
       }
       catch (IOExceptionInterface $e) {
         $output->writeLn('<error>An error occurred while creating your file at ' . $e->getPath() . '</error>');
@@ -140,7 +148,10 @@ abstract class BaseGenerator extends Command {
       }
     }
 
-    $output->writeLn('<title>The following files have been created:</title>');
+    $result_message = empty($directories_created) ?
+      'The following files have been created:':
+      'The following files and directories have been created:';
+    $output->writeLn("<title>$result_message</title>");
     foreach ($this->files as $name => $content) {
       $output->writeLn("- $name");
     }
