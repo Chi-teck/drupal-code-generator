@@ -25,6 +25,8 @@ class Js extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
+    $vars['project_type'] = 'module';
+
     $this->files[$vars['machine_name'] . '.js'] = $this->render('d7/js.twig', $vars);
 
   }
