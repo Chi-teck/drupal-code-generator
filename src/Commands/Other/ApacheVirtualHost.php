@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class ApacheVirtualHost extends BaseGenerator {
 
-  protected static $name = 'other:apache-virtual-host';
-  protected static $description = 'Generate an Apache site configuration file.';
+  protected $name = 'other:apache-virtual-host';
+  protected $description = 'Generate an Apache site configuration file.';
   protected $alias = 'virtual-host';
 
   /**

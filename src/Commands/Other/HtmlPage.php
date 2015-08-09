@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class HtmlPage extends BaseGenerator {
 
-  protected static $name = 'other:html-page';
-  protected static $description = 'Generate a simple html page.';
+  protected $name = 'other:html-page';
+  protected $description = 'Generate a simple html page.';
   protected $alias = 'html-page';
 
   /**

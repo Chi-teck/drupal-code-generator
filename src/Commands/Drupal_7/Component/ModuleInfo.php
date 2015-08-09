@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class ModuleInfo extends BaseGenerator {
 
-  protected static $name = 'd7:component:module-info-file';
-  protected static $description = 'Generate Drupal 7 info file for a module.';
+  protected $name = 'd7:component:module-info-file';
+  protected $description = 'Generate Drupal 7 info file for a module.';
 
   /**
    * {@inheritdoc}

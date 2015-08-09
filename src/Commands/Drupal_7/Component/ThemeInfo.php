@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class ThemeInfo extends BaseGenerator {
 
-  protected static $name = 'd7:component:theme-info-file';
-  protected static $description = 'Generate Drupal 7 info file for a theme.';
+  protected $name = 'd7:component:theme-info-file';
+  protected $description = 'Generate Drupal 7 info file for a theme.';
 
   /**
    * {@inheritdoc}

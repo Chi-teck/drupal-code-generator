@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Js extends BaseGenerator {
 
-  protected static $name = 'd7:component:js-file';
-  protected static $description = 'Generate Drupal 7 javascript file';
+  protected $name = 'd7:component:js-file';
+  protected $description = 'Generate Drupal 7 javascript file';
 
   /**
    * {@inheritdoc}

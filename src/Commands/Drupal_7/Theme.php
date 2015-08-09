@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Theme extends BaseGenerator {
 
-  protected static $name = 'd7:theme';
-  protected static $description = 'Generate Drupal 7 theme';
+  protected $name = 'd7:theme';
+  protected $description = 'Generate Drupal 7 theme';
 
   /**
    * {@inheritdoc}

@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Module extends BaseGenerator {
 
-  protected static $name = 'd7:module';
-  protected static $description = 'Generate Drupal 7 module';
+  protected $name = 'd7:module';
+  protected $description = 'Generate Drupal 7 module';
 
   /**
    * {@inheritdoc}

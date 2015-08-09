@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Module extends BaseGenerator {
 
-  protected static $name = 'd8:module';
-  protected static $description = 'Generate Drupal 8 module';
+  protected $name = 'd8:module';
+  protected $description = 'Generate Drupal 8 module';
 
   /**
    * {@inheritdoc}

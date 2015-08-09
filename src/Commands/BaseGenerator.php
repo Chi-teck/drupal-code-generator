@@ -18,8 +18,8 @@ use Twig_Environment;
  */
 abstract class BaseGenerator extends Command {
 
-  protected static $name;
-  protected static $description;
+  protected $name;
+  protected $description;
   protected $files = [];
   protected $filesystem;
   protected $twig;
@@ -41,8 +41,8 @@ abstract class BaseGenerator extends Command {
    */
   protected function configure() {
     $this
-      ->setName(static::$name)
-      ->setDescription(static::$description)
+      ->setName($this->name)
+      ->setDescription($this->description)
       ->addOption(
         'destination',
         '-d',
