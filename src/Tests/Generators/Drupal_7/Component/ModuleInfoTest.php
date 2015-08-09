@@ -4,13 +4,13 @@ namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
-class InfoTest extends GeneratorTestCase {
+class ModuleInfoTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
    */
   public function setUp () {
-    $this->class = 'Drupal_7\Component\Info';
+    $this->class = 'Drupal_7\Component\ModuleInfo';
     $this->answers = [
       'Example',
       'example',

@@ -29,7 +29,7 @@ class Module extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
 
-    $this->files[$prefix . '.info'] = $this->render('d7/info.twig', $vars);
+    $this->files[$prefix . '.info'] = $this->render('d7/module-info.twig', $vars);
     $this->files[$prefix . '.module'] = $this->render('d7/module.twig', $vars);
     $this->files[$prefix . '.install'] = $this->render('d7/install.twig', $vars);
     $this->files[$prefix . '.admin.inc'] = $this->render('d7/admin.inc.twig', $vars);

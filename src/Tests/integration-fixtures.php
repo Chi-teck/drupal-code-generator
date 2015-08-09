@@ -67,13 +67,13 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      'Info file',
+      'Module info file',
       'Example',
       'example',
     ],
     'output' => [
-      'Command: d7:component:info-file',
-      '-------------------------------',
+      'Command: d7:component:module-info-file',
+      '--------------------------------------',
       'The following files have been created:',
       '- example.info',
     ],

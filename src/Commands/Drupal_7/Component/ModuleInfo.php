@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 /**
  * Implements generate:d7:component:info-file command.
  */
-class Info extends BaseGenerator {
+class ModuleInfo extends BaseGenerator {
 
-  protected static $name = 'd7:component:info-file';
-  protected static $description = 'Generate Drupal 7 .info file';
+  protected static $name = 'd7:component:module-info-file';
+  protected static $description = 'Generate Drupal 7 info file for a module.';
 
   /**
    * {@inheritdoc}
@@ -30,7 +30,7 @@ class Info extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
 
     $prefix = $vars['machine_name'];
-    $this->files[$prefix . '.info'] = $this->render('d7/info.twig', $vars);
+    $this->files[$prefix . '.info'] = $this->render('d7/module-info.twig', $vars);
 
   }
 
