@@ -4,12 +4,15 @@ namespace DrupalCodeGenerator\Tests\Other;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
+/**
+ * Test for other:drush-command command.
+ */
 class DrushCommandTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
    */
-  public function setUp () {
+  public function setUp() {
     $this->class = 'Other\DrushCommand';
     $this->commandName = 'generate:other:drush-command';
     $this->answers = [

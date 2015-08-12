@@ -4,12 +4,15 @@ namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Plugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
+/**
+ * Test for d8:component:plugin:filter command.
+ */
 class FilterTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
    */
-  public function setUp () {
+  public function setUp() {
     $this->class = 'Drupal_8\Component\Plugin\Filter';
     $this->answers = [
       'Filter example',

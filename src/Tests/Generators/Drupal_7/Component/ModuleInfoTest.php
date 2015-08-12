@@ -4,12 +4,15 @@ namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
+/**
+ * Test for d7:component:info-file command.
+ */
 class ModuleInfoTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
    */
-  public function setUp () {
+  public function setUp() {
     $this->class = 'Drupal_7\Component\ModuleInfo';
     $this->answers = [
       'Example',
