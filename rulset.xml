@@ -5,6 +5,6 @@
   <rule ref="Drupal">
     <exclude name="Drupal.Commenting.FileComment"/>
   </rule>
-  // Exclude fixtures.
+  <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*.php</exclude-pattern>
 </ruleset>
