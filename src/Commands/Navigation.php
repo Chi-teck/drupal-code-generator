@@ -44,10 +44,9 @@ class Navigation extends Command {
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    $first_argument = $input->getFirstArgument();
-
-    $this->activeMenuItems = $first_argument == $this->name ?
-      [] : explode(':', $first_argument);
+    $command_name = $input->getFirstArgument();
+    $this->activeMenuItems = $command_name == $this->name ?
+      [] : explode(':', $command_name);
 
     /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator_name */
     $generator_name = $this->selectGenerator($input, $output);
@@ -61,7 +60,7 @@ class Navigation extends Command {
     $output->writeln($header);
     $output->writeLn(str_repeat('<comment>-</comment>', strlen(strip_tags($header))));
 
-    // Run generator.
+    // Run the generator.
     return $command->run($input, $output);
   }
 
@@ -70,11 +69,15 @@ class Navigation extends Command {
    */
   protected function selectGenerator(InputInterface $input, OutputInterface $output) {
 
+    // Narrow menu tree according to the active menu items.
     $active_menu_tree = $this->menuTree;
     foreach ($this->activeMenuItems as $active_menu_item) {
       $active_menu_tree = $active_menu_tree[$active_menu_item];
     }
 
+    // The $active_menu_tree can be either an array of child menu items or
+    // the TRUE value indicating that the user reached the final menu point and
+    // active menu items contain the actual command name.
     if (is_array($active_menu_tree)) {
 
       $subtrees = $command_names = [];
@@ -151,7 +154,7 @@ class Navigation extends Command {
       'd6' => 'Drupal 6',
       'd7' => 'Drupal 7',
       'd8' => 'Drupal 8',
-      'js-file' => 'Javascript file',
+      'js-file' => '.js file',
       'html-page' => 'HTML page',
       'install-file' => '.install file',
       'module-file' => '.module file',
@@ -230,7 +233,7 @@ class Navigation extends Command {
     $ref = &$array;
     foreach ($parents as $parent) {
       if (isset($ref) && !is_array($ref)) {
-        $ref = array();
+        $ref = [];
       }
       $ref = &$ref[$parent];
     }

@@ -114,7 +114,7 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      'Javascript file',
+      '.js file',
       'Example',
       'example',
     ],
