@@ -2,11 +2,14 @@
 
 namespace DrupalCodeGenerator\Tests;
 
+use DrupalCodeGenerator\Commands;
 use DrupalCodeGenerator\Commands\Other;
 use DrupalCodeGenerator\GeneratorsDiscovery;
-use DrupalCodeGenerator\Commands;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * Test for GeneratorsDiscovery.
+ */
 class GeneratorsDiscoveryTest extends \PHPUnit_Framework_TestCase {
 
   /**
