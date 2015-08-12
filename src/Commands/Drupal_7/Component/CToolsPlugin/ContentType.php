@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Commands\Drupal_7\Component\CToolsPlugin;
 
 /**
- * Implements generate:d7:component:ctools-plugin:content-type command.
+ * Implements d7:component:ctools-plugin:content-type command.
  */
 class ContentType extends BasePlugin {
 

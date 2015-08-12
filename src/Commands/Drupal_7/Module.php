@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:d7:module command.
+ * Implements d7:module command.
  */
 class Module extends BaseGenerator {
 

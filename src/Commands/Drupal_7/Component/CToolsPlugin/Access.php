@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Commands\Drupal_7\Component\CToolsPlugin;
 
 /**
- * Implements generate:d7:component:ctools-plugin:access command.
+ * Implements d7:component:ctools-plugin:access command.
  */
 class Access extends BasePlugin {
 

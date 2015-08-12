@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:other:drush-command command.
+ * Implements other:drush-command command.
  */
 class DrushCommand extends BaseGenerator {
 

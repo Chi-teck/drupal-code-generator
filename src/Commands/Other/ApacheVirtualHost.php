@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:other:apache-virtual-host command.
+ * Implements other:apache-virtual-host command.
  */
 class ApacheVirtualHost extends BaseGenerator {
 

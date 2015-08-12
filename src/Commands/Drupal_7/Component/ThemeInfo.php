@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:d7:component:theme-info-file command.
+ * Implements d7:component:theme-info-file command.
  */
 class ThemeInfo extends BaseGenerator {
 

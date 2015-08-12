@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:d7:component:install-file command.
+ * Implements d7:component:install-file command.
  */
 class Install extends BaseGenerator {
 

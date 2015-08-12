@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Commands\Drupal_7\Component\CToolsPlugin;
 
 /**
- * Implements generate:d7:component:ctools-plugin:relationship command.
+ * Implements d7:component:ctools-plugin:relationship command.
  */
 class Relationship extends BasePlugin {
 

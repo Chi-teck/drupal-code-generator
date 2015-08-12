@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:other:html-page command.
+ * Implements other:html-page command.
  */
 class HtmlPage extends BaseGenerator {
 

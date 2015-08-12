@@ -14,7 +14,6 @@ class DrushCommandTest extends GeneratorTestCase {
    */
   public function setUp() {
     $this->class = 'Other\DrushCommand';
-    $this->commandName = 'generate:other:drush-command';
     $this->answers = [
       'Example',
       'example',

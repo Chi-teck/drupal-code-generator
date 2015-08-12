@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 
 /**
- * Base class for generate:d7:component:ctools-plugin commands.
+ * Base class for d7:component:ctools-plugin commands.
  */
 abstract class BasePlugin extends BaseGenerator {
 
