@@ -3,14 +3,14 @@
 namespace DrupalCodeGenerator\Commands;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Filesystem\Filesystem;
 use Twig_Environment;
 
 /**
@@ -18,16 +18,58 @@ use Twig_Environment;
  */
 abstract class BaseGenerator extends Command {
 
+  /**
+   * The command name.
+   *
+   * @var string
+   */
   protected $name;
+
+  /**
+   * The command description.
+   *
+   * @var string
+   */
   protected $description;
-  protected $files = [];
-  protected $filesystem;
-  protected $twig;
-  protected $directoryBaseName;
+
+  /**
+   * The command alias.
+   */
   protected $alias;
 
   /**
-   * Constructs generator command
+   * List of files to create.
+   *
+   * The key of the each item in the array is the path to the file and
+   * the value is the generated content of it.
+   *
+   * @var array
+   */
+  protected $files = [];
+
+  /**
+   * The file system utility.
+   *
+   * @var Filesystem
+   */
+  protected $filesystem;
+
+  /**
+   * The twig environment.
+   *
+   * @var Twig_Environment
+   */
+  protected $twig;
+
+  /**
+   * The base name of the current working directory.
+   *
+   * @var string
+   */
+  protected $directoryBaseName;
+
+  /**
+   * Constructs a generator command.
    */
   public function __construct(Filesystem $filesystem, Twig_Environment $twig) {
     parent::__construct();
@@ -74,9 +116,11 @@ abstract class BaseGenerator extends Command {
    * Asks the user for template variables.
    *
    * @param InputInterface $input
+   *   Input instance.
    * @param OutputInterface $output
+   *   Output instance.
    * @param array $questions
-   *   Questions that the user should answer.
+   *   List of questions that the user should answer.
    *
    * @return array
    *   Template variables
@@ -115,7 +159,7 @@ abstract class BaseGenerator extends Command {
     $directory = $input->getOption('destination') ? $input->getOption('destination') . '/' : './';
 
     // Save files.
-    foreach($this->files as $file_path => $content) {
+    foreach ($this->files as $file_path => $content) {
       $file_path = $directory . $file_path;
       if ($this->filesystem->exists($file_path)) {
 
@@ -150,7 +194,7 @@ abstract class BaseGenerator extends Command {
     }
 
     $result_message = empty($directories_created) ?
-      'The following files have been created:':
+      'The following files have been created:' :
       'The following files and directories have been created:';
     $output->writeLn("<title>$result_message</title>");
     foreach ($this->files as $name => $content) {
@@ -161,12 +205,21 @@ abstract class BaseGenerator extends Command {
   }
 
   /**
+   * Asks a question to the user.
+   *
    * @param InputInterface $input
+   *   Input instance.
    * @param OutputInterface $output
-   * @param $question_text
-   * @param $default_value
+   *   Output instance.
+   * @param string $question_text
+   *   The text of the question.
+   * @param string $default_value
+   *   Default value for the question.
    * @param bool $required
-   * @return bool|mixed|null|string|void
+   *   A boolean indicating whether the answer is required.
+   *
+   * @return string
+   *   The user anwser.
    */
   protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, $required = FALSE) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
@@ -187,32 +240,28 @@ abstract class BaseGenerator extends Command {
   }
 
   /**
-   * @param $vars
-   * @return mixed
+   * Returns default value for the name question.
    */
   protected function defaultName($vars) {
     return self::machine2human($this->directoryBaseName);
   }
 
   /**
-   * @param $vars
-   * @return mixed
+   * Returns default value for the machine name question.
    */
   protected function defaultMachineName($vars) {
     return self::human2machine($vars['name']);
   }
 
   /**
-   * @param $machine_name
-   * @return string
+   * Transforms a machine name to human name.
    */
   protected static function machine2human($machine_name) {
     return ucfirst(str_replace('_', ' ', $machine_name));
   }
 
   /**
-   * @param $human_name
-   * @return mixed
+   * Transforms a human name to machine name.
    */
   protected static function human2machine($human_name) {
     return preg_replace(
@@ -223,8 +272,7 @@ abstract class BaseGenerator extends Command {
   }
 
   /**
-   * @param $human_name
-   * @return mixed
+   * Transforms a human name to PHP class name.
    */
   protected static function human2class($human_name) {
     return preg_replace(

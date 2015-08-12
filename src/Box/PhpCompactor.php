@@ -10,12 +10,12 @@ use Herrera\Box\Compactor\Compactor;
 class PhpCompactor extends Compactor {
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   protected $extensions = ['php'];
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function compact($contents) {
     // php_strip_whitespace() takes file name as argument so we have

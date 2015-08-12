@@ -7,16 +7,36 @@ use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig_Environment;
+use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * @TODO: Create a test for this.
+ * Discovery of generators commands.
  */
 class GeneratorsDiscovery {
 
   const COMMANDS_NAMESPACE = '\DrupalCodeGenerator\Commands\\';
   const COMMANDS_BASE_CLASS = '\DrupalCodeGenerator\Commands\BaseGenerator';
 
+  /**
+   * List of directories to look up.
+   *
+   * @var array
+   */
   protected $directories = [];
+
+  /**
+   * The file system utility.
+   *
+   * @var Filesystem
+   */
+  protected $filesystem;
+
+  /**
+   * The twig environment.
+   *
+   * @var Twig_Environment
+   */
+  protected $twig;
 
   /**
    * Constructs discovery object.
@@ -30,7 +50,8 @@ class GeneratorsDiscovery {
   /**
    * Finds and instantiates generator commands.
    *
-   * @return \Symfony\Component\Console\Command\Command[] $commands
+   * @return BaseGenerator[]
+   *   Array of generators.
    */
   public function getGenerators() {
 

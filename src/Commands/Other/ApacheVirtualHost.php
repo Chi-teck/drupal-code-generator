@@ -19,7 +19,6 @@ class ApacheVirtualHost extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'hostname' => ['Host name', 'example.com'],
       'docroot' => ['Document root', [$this, 'defaultDocumentRoot']],
@@ -30,6 +29,9 @@ class ApacheVirtualHost extends BaseGenerator {
     $this->files[$vars['hostname'] . '.conf'] = $this->render('other/apache-virtual-host.twig', $vars);
   }
 
+  /**
+   * Returns default answer for docroot question.
+   */
   protected function defaultDocumentRoot($vars) {
     return '/var/www/' . $vars['hostname'] . '/public';
   }

@@ -19,7 +19,6 @@ class DrushCommand extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
@@ -33,12 +32,10 @@ class DrushCommand extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
 
     $this->files[$vars['machine_name'] . '.drush.inc'] = $this->render('other/drush-command.twig', $vars);
-
   }
 
   /**
-   * @param $vars
-   * @return string
+   * Returns default answer form alias question.
    */
   protected function defaultAlias($vars) {
     return substr($vars['command_name'], 0, 3);

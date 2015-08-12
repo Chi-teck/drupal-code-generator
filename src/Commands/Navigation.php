@@ -51,7 +51,7 @@ class Navigation extends Command {
 
     /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator_name */
     $generator_name = $this->selectGenerator($input, $output);
-      if (!$generator_name) {
+    if (!$generator_name) {
       return 0;
     }
 
@@ -77,7 +77,7 @@ class Navigation extends Command {
 
     if (is_array($active_menu_tree)) {
 
-      $subtrees = $command_names= [];
+      $subtrees = $command_names = [];
       // We build $choices as an associative array to be able to find
       // later menu items by respective labels.
       foreach ($active_menu_tree as $menu_item => $subtree) {
@@ -94,9 +94,9 @@ class Navigation extends Command {
       asort($command_names);
 
       // Generally the choices array consists of the following parts:
-      //  - Reference to the parent menu level
-      //  - Sorted list of nested menu levels
-      //  - Sorted list of commands
+      // - Reference to the parent menu level.
+      // - Sorted list of nested menu levels.
+      // - Sorted list of commands.
       $choices = ['..' => '..'] + $subtrees + $command_names;
 
       $question = new ChoiceQuestion(
@@ -136,9 +136,12 @@ class Navigation extends Command {
    * Creates a human readable label for a given menu item.
    *
    * @param string $menu_item
+   *   Machine name of the menu item.
    * @param bool $comment
+   *   A boolean indicating that the label should be wrapped with comment tag.
    *
    * @return mixed|string
+   *   The menu label.
    */
   protected function createMenuItemLabel($menu_item, $comment) {
     // Some labels require individual approach.
@@ -157,7 +160,7 @@ class Navigation extends Command {
     ];
 
     $label = isset($labels[$menu_item]) ?
-      $labels[$menu_item] : str_replace(['-', '_'], ' ',  ucfirst($menu_item));
+      $labels[$menu_item] : str_replace(['-', '_'], ' ', ucfirst($menu_item));
 
     return $comment ? "<comment>$label</comment>" : $label;
   }
@@ -166,8 +169,9 @@ class Navigation extends Command {
    * Initialize generators navigation.
    *
    * @param Command[] $commands
+   *   List of registered commands.
    */
-  public function init($commands) {
+  public function init(array $commands) {
     $this->menuTree = [];
     $aliases = [];
     foreach ($commands as $index => $command) {
@@ -182,7 +186,7 @@ class Navigation extends Command {
 
       $alias = '';
       foreach ($command_subnames as $key => $subname) {
-        $alias = $alias .  ':' . $subname;
+        $alias = $alias . ':' . $subname;
         $aliases[] = ltrim($alias, ':');
       }
 
