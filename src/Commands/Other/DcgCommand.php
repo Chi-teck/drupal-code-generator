@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements other:drush-command command.
+ * Implements other:dcg-command command.
  */
 class DcgCommand extends BaseGenerator {
 
@@ -37,6 +37,5 @@ class DcgCommand extends BaseGenerator {
 
     $this->files[$file_path] = $this->render('other/dcg-command.twig', $vars);
   }
-
 
 }
