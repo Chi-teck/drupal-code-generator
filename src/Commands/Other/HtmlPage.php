@@ -28,7 +28,7 @@ class HtmlPage extends BaseGenerator {
 
     $this->files[$vars['file_name']] = $this->render('other/html.twig', $vars);
     $this->files['css/main.css'] = 'body{background-color: #EEE}';
-    $this->files['js/main.js'] = 'console.log("It works!")';
+    $this->files['js/main.js'] = 'console.log("It works!");';
   }
 
 }

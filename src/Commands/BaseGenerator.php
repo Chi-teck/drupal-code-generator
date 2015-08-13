@@ -221,7 +221,7 @@ abstract class BaseGenerator extends Command {
    * @return string
    *   The user anwser.
    */
-  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, $required = FALSE) {
+  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
     $helper = $this->getHelper('question');
 
@@ -242,7 +242,7 @@ abstract class BaseGenerator extends Command {
   /**
    * Returns default value for the name question.
    */
-  protected function defaultName($vars) {
+  protected function defaultName() {
     return self::machine2human($this->directoryBaseName);
   }
 

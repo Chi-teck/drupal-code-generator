@@ -9,7 +9,7 @@
  * Implements hook_schema().
  */
 function example_schema() {
-  $schema['example_tablename'] = array(
+  $schema['example_table'] = array(
     'description' => 'Table description',
     'fields' => array(
       'id' => array(
