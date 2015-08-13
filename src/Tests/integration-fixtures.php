@@ -194,6 +194,25 @@ return [
   ],
   [
     'answers' => [
+      '<comment>Drupal 7</comment>',
+      'Theme',
+      'Example',
+      'example',
+    ],
+    'output' => [
+      'Command: d7:theme',
+      '-----------------',
+      'The following files and directories have been created:',
+      '- example/example.info',
+      '- example/template.php',
+      '- example/css/example.css',
+      '- example/js/example.js',
+      '- example/templates',
+      '- example/images',
+    ],
+  ],
+  [
+    'answers' => [
       '<comment>Drupal 8</comment>',
       '<comment>Component</comment>',
       '<comment>Plugin</comment>',
