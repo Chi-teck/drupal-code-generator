@@ -160,6 +160,7 @@ class Navigation extends Command {
       'module-file' => '.module file',
       'module-info-file' => '.info file (module)',
       'theme-info-file' => '.info file (theme)',
+      'dcg-command' => 'DCG command',
     ];
 
     $label = isset($labels[$menu_item]) ?

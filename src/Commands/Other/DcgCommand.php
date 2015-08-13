@@ -1,0 +1,42 @@
+<?php
+
+namespace DrupalCodeGenerator\Commands\Other;
+
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use DrupalCodeGenerator\Commands\BaseGenerator;
+
+/**
+ * Implements other:drush-command command.
+ */
+class DcgCommand extends BaseGenerator {
+
+  protected $name = 'other:dcg-command';
+  protected $description = 'Generate DCG command';
+  protected $alias = 'dcg-command';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function interact(InputInterface $input, OutputInterface $output) {
+    $questions = [
+      // Add validator.
+      'name' => ['Command name', 'custom:example'],
+      'description' => ['Command description', 'Some description'],
+      'alias' => ['Command alias', 'example'],
+    ];
+
+    $vars = $this->collectVars($input, $output, $questions);
+
+    $subnames = explode(':', $vars['name']);
+    $last_sub_name = array_pop($subnames);
+    $vars['namespace'] = 'DrupalCodeGenerator\Commands\\' . implode('\\', $subnames);
+    $vars['class'] = $this->human2class($last_sub_name);
+    $file_path = implode(DIRECTORY_SEPARATOR, $subnames) . '/' . $vars['class'] . '.php';
+    $vars['directory'] = dirname($file_path);
+
+    $this->files[$file_path] = $this->render('other/dcg-command.twig', $vars);
+  }
+
+
+}

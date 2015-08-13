@@ -240,6 +240,20 @@ return [
   [
     'answers' => [
       '<comment>Other</comment>',
+      'DCG command',
+      'custom:category:command',
+      'example',
+    ],
+    'output' => [
+      'Command: other:dcg-command',
+      '--------------------------',
+      'The following files have been created:',
+      '- custom/category/Command.php',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Other</comment>',
       'Drush command',
       'Example',
       'example',
