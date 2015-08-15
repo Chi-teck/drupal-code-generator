@@ -55,8 +55,13 @@ class Navigation extends Command {
     }
 
     $command = $this->getApplication()->find($generator_name);
+    $aliases = $command->getAliases();
 
-    $header = sprintf('<info>Command:</info> <comment>%s</comment>', $generator_name);
+    $header = sprintf(
+      '<info>Command:</info> <comment>%s</comment>',
+      // Display alias instead command name if possible.
+      isset($aliases[0]) ? $aliases[0] : $generator_name
+    );
     $output->writeln($header);
     $output->writeLn(str_repeat('<comment>-</comment>', strlen(strip_tags($header))));
 

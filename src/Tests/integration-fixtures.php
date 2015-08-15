@@ -250,8 +250,8 @@ return [
       'example.com',
     ],
     'output' => [
-      'Command: other:apache-virtual-host',
-      '----------------------------------',
+      'Command: apache-virtual-host',
+      '----------------------------',
       'The following files have been created:',
       '- example.com.conf',
     ],
@@ -264,8 +264,8 @@ return [
       'example',
     ],
     'output' => [
-      'Command: other:dcg-command',
-      '--------------------------',
+      'Command: dcg-command',
+      '--------------------',
       'The following files have been created:',
       '- custom/category/Command.php',
     ],
@@ -278,8 +278,8 @@ return [
       'example',
     ],
     'output' => [
-      'Command: other:drush-command',
-      '----------------------------',
+      'Command: drush-command',
+      '----------------------',
       'The following files have been created:',
       '- example.drush.inc',
     ],
@@ -291,8 +291,8 @@ return [
       'index.html',
     ],
     'output' => [
-      'Command: other:html-page',
-      '------------------------',
+      'Command: html-page',
+      '------------------',
       'The following files have been created:',
       '- index.html',
       '- css/main.css',
