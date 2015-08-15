@@ -1,17 +1,17 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_7\Component\Views;
+namespace DrupalCodeGenerator\Commands\Drupal_7\Component\ViewsPlugin;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d7:component:views:argument-default-plugin command.
+ * Implements d7:component:views-plugin:argument-default command.
  */
-class ArgumentDefaultPlugin extends BaseGenerator {
+class ArgumentDefault extends BaseGenerator {
 
-  protected $name = 'd7:component:views:argument-default-plugin';
+  protected $name = 'd7:component:views-plugin:argument-default';
   protected $description = 'Generate Drupal 7 argument default views plugin';
 
   /**

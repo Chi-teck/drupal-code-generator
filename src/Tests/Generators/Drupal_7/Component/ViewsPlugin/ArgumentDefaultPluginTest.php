@@ -5,15 +5,15 @@ namespace DrupalCodeGenerator\Tests\Drupal_7\Component;
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d7:component:views:argument-default-plugin command.
+ * Test for d7:component:views-plugin:argument-default command.
  */
-class ArgumentDefaultPluginTest extends GeneratorTestCase {
+class ArgumentDefaultTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_7\Component\Views\ArgumentDefaultPlugin';
+    $this->class = 'Drupal_7\Component\ViewsPlugin\ArgumentDefault';
     $this->answers = [
       'Example',
       'example',

@@ -82,15 +82,15 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      '<comment>Views</comment>',
-      'Argument default plugin',
+      '<comment>Views plugin</comment>',
+      'Argument default',
       'Example',
       'example',
       'Foo',
       'foo',
     ],
     'output' => [
-      'Command: d7:component:views:argument-default-plugin',
+      'Command: d7:component:views-plugin:argument-default',
       '---------------------------------------------------',
       'The following files have been created:',
       '- views_plugin_argument_foo.inc',
