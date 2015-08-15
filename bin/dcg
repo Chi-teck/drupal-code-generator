@@ -8,17 +8,20 @@ use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 
-$commands_directories = [DCG_ROOT . '/src/Commands'];
-
-// Allow custom generators.
+// Setup target directories.
 if (file_exists(DCG_HOME . '/Commands')) {
   $commands_directories[] = DCG_HOME . '/Commands';
   $autoloader->addPsr4('DrupalCodeGenerator\\', DCG_HOME);
 }
+if (file_exists(DCG_HOME . '/Templates')) {
+  $twig_directories[] = DCG_HOME . '/Ttemplates';
+}
+$commands_directories[] = DCG_ROOT . '/src/Commands';
+$twig_directories[] = DCG_ROOT . '/src/Templates';
 
 // Discover generators.
 $filesystem = new Filesystem();
-$twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src/Resources/templates');
+$twig_loader = new Twig_Loader_Filesystem($twig_directories);
 $twig = new Twig_Environment($twig_loader);
 $discovery = new GeneratorsDiscovery($commands_directories, $filesystem, $twig);
 $generators = $discovery->getGenerators();

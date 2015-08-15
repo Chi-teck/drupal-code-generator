@@ -1,47 +1,86 @@
 <?php
+
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Commands\Other;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
-use DrupalCodeGenerator\GeneratorsDiscovery;
 use DrupalCodeGenerator\Commands;
+use DrupalCodeGenerator\Commands\Other;
+use DrupalCodeGenerator\GeneratorsDiscovery;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Helper\HelperInterface;
+use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * A test for a whole application.
+ */
 class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
   /**
-   * @var \Symfony\Component\Console\Application $application
+   * Total count of genetators.
+   *
+   * @var integer
+   */
+  protected $totalGenerators;
+
+  /**
+   * The application.
+   *
+   * @var Application
    */
   protected $application;
 
   /**
-   * @var \Symfony\Component\Console\Command\Command $command
+   * The navigation command.
+   *
+   * @var Commands\Navigation
    */
   protected $command;
 
   /**
+   * Sample answers and output for testing.
+   *
    * @var array
+   *
+   * @see integration-fixtures.php
    */
   protected $fixtures;
 
   /**
-   * @var \Symfony\Component\Console\Helper\HelperInterface $questionHelper
+   * The question helper.
+   *
+   * @var HelperInterface
    */
   protected $questionHelper;
 
   /**
-   * @var \Symfony\Component\Console\Helper\HelperSet $helperSet
+   * The helper set.
+   *
+   * @var HelperSet
    */
   protected $helperSet;
 
   /**
-   * @var \Symfony\Component\Console\Tester\CommandTester commandTester
+   * The command tester.
+   *
+   * @var CommandTester
    */
   protected $commandTester;
 
+  /**
+   * The filesystem utility.
+   *
+   * @var Filesystem
+   */
   protected $filesystem;
 
+  /**
+   * The destination directory.
+   *
+   * @var string
+   *
+   * @see Navigation::configure()
+   */
   protected $destination;
 
   /**
@@ -51,13 +90,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
     $this->application = new Application('Drupal Code Generator', '@git-version@');
 
-
     $filesystem = new Filesystem();
-    $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Resources/templates');
+    $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
     $twig = new \Twig_Environment($twig_loader);
 
     $discovery = new GeneratorsDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
     $generators = $discovery->getGenerators();
+    $this->totalGenerators = count($generators);
+
     $this->application->addCommands($generators);
 
     $navigation = new Commands\Navigation();
@@ -87,16 +127,20 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
       $this->mockQuestionHelper($fixture['answers']);
       $this->commandTester->execute(['command' => 'navigation', '--destination' => './sandbox/tests']);
       $this->assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
-
       $this->filesystem->remove($this->destination);
     }
+
+    $this->assertEquals(
+      $this->totalGenerators,
+      count($this->fixtures),
+      'Some generators are not represented in the integration test.'
+    );
   }
 
   /**
-   * Mock question helper.
+   * Mocks question helper.
    */
   protected function mockQuestionHelper(array $answers) {
-
     foreach ($answers as $key => $answer) {
       $this->questionHelper->expects($this->at($key))
         ->method('ask')

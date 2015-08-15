@@ -25,11 +25,18 @@ Simply repeat installation commands.
 # Display main menu.
 dcg
 
-# Display submenu.
-dcg generate:d7
+# Display Drupal 7 submenu.
+dcg d7
 
 # Call generator directly.
-dcg generate:d7:component:ctools-plugin:content-type
+dcg d7:component:ctools-plugin:content-type
+```
+
+## Extending
+Coping DCG core templates into _$HOME/.dcg/Resources/templates_ directory  will automatically override them. All custom generators should be placed under _$HOME/.dcg/Commands_ directory.
+```bash
+# Create custom DCG command.
+dcg dcg-command -d~/.dcg/Commands
 ```
 
 ## Extending

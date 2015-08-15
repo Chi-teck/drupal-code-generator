@@ -7,18 +7,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:other:drush-command command.
+ * Implements other:drush-command command.
  */
 class DrushCommand extends BaseGenerator {
 
-  protected static $name = 'generate:other:drush-command';
-  protected static $description = 'Generate Drush command';
+  protected $name = 'other:drush-command';
+  protected $description = 'Generate Drush command';
+  protected $alias = 'drush-command';
 
   /**
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
@@ -32,12 +32,10 @@ class DrushCommand extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
 
     $this->files[$vars['machine_name'] . '.drush.inc'] = $this->render('other/drush-command.twig', $vars);
-
   }
 
   /**
-   * @param $vars
-   * @return string
+   * Returns default answer for alias question.
    */
   protected function defaultAlias($vars) {
     return substr($vars['command_name'], 0, 3);

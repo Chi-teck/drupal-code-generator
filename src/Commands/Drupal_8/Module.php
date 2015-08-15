@@ -7,12 +7,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:d8:module command.
+ * Implements d8:module command.
  */
 class Module extends BaseGenerator {
 
-  protected static $name = 'generate:d8:module';
-  protected static $description = 'Generate Drupal 8 module';
+  protected $name = 'd8:module';
+  protected $description = 'Generate Drupal 8 module';
 
   /**
    * {@inheritdoc}

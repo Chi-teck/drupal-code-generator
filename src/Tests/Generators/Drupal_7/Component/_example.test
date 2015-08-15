@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Tests for Example.module.
+ */
+
+/**
+ * Tests the functionality of the Example module.
+ */
+class ExampleTestCase extends DrupalWebTestCase {
+
+  /**
+   * A user with permission to administer example configuration.
+   *
+   * @var object
+   */
+  protected $admin_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Example',
+      'description' => 'Test description',
+      'group' => 'example',
+    );
+  }
+
+  function setUp() {
+    parent::setUp(array('example'));
+
+    // Create admin account.
+    $this->admin_user = $this->drupalCreateUser(array('administer example configuration'));
+
+    $this->drupalLogin($this->admin_user);
+  }
+
+  /**
+   * Tests configuration form.
+   */
+  function testAdminForm() {
+    $fields = array(
+      'example_setting_1' => 'test',
+      'example_setting_2' => 1,
+      'example_setting_3' => 1,
+    );
+    $this->drupalPost('admin/config/system/example', $fields, t('Save configuration'));
+
+    $this->assertFieldByName('example_setting_1', 'test');
+    $this->assertFieldByName('example_setting_2', 1);
+    $this->assertFieldByName('example_setting_3', 1);
+    $this->assertRaw(t('The configuration options have been saved.'));
+  }
+
+}

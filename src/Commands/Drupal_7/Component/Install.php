@@ -7,12 +7,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:d7:component:install-file command.
+ * Implements d7:component:install command.
  */
 class Install extends BaseGenerator {
 
-  protected static $name = 'generate:d7:component:install-file';
-  protected static $description = 'Generate Drupal 7 install file';
+  protected $name = 'd7:component:install';
+  protected $description = 'Generate Drupal 7 install file';
 
   /**
    * {@inheritdoc}

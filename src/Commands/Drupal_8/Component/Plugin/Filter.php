@@ -7,12 +7,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:d8:component:plugin:filter command.
+ * Implements d8:component:plugin:filter command.
  */
 class Filter extends BaseGenerator {
 
-  protected static $name = 'generate:d8:component:plugin:filter';
-  protected static $description = 'Generates filter plugin';
+  protected $name = 'd8:component:plugin:filter';
+  protected $description = 'Generates filter plugin';
 
   /**
    * {@inheritdoc}

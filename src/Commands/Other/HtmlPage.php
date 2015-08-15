@@ -7,12 +7,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements generate:other:html-page command.
+ * Implements other:html-page command.
  */
 class HtmlPage extends BaseGenerator {
 
-  protected static $name = 'generate:other:html-page';
-  protected static $description = 'Generate a simple html page.';
+  protected $name = 'other:html-page';
+  protected $description = 'Generate a simple html page.';
+  protected $alias = 'html-page';
 
   /**
    * {@inheritdoc}
@@ -27,7 +28,7 @@ class HtmlPage extends BaseGenerator {
 
     $this->files[$vars['file_name']] = $this->render('other/html.twig', $vars);
     $this->files['css/main.css'] = 'body{background-color: #EEE}';
-    $this->files['js/main.js'] = 'console.log("It works!")';
+    $this->files['js/main.js'] = 'console.log("It works!");';
   }
 
 }
