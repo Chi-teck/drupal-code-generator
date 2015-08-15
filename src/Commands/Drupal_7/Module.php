@@ -27,6 +27,7 @@ class Module extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
+    $vars['project_type'] = 'module';
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
 
     $this->files[$prefix . '.info'] = $this->render('d7/module-info.twig', $vars);
