@@ -188,7 +188,8 @@ class Navigation extends Command {
       // an alias for navigation command.
       array_pop($command_subnames);
 
-      // @TODO: Refactor with $application->getNamespaces().
+      // We cannot use $application->getNamespaces() here because
+      // the application is not ready at this point.
       $alias = '';
       foreach ($command_subnames as $key => $subname) {
         $alias = $alias . ':' . $subname;

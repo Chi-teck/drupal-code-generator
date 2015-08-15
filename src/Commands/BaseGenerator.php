@@ -215,8 +215,6 @@ abstract class BaseGenerator extends Command {
    *   The text of the question.
    * @param string $default_value
    *   Default value for the question.
-   * @param bool $required
-   *   A boolean indicating whether the answer is required.
    *
    * @return string
    *   The user anwser.
