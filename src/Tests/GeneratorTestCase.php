@@ -48,7 +48,7 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   public function setUp() {
 
     $this->filesystem = new Filesystem();
-    $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src//Resources/templates');
+    $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
     $twig = new Twig_Environment($twig_loader);
 
     $command_class = 'DrupalCodeGenerator\Commands\\' . $this->class;

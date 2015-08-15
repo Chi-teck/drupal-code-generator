@@ -19,7 +19,7 @@ class GeneratorsDiscoveryTest extends \PHPUnit_Framework_TestCase {
    */
   public function testExecute() {
     $filesystem = new Filesystem();
-    $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Resources/templates');
+    $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
     $twig = new \Twig_Environment($twig_loader);
     $discovery = new GeneratorsDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
     $generators = $discovery->getGenerators();

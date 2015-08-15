@@ -32,10 +32,10 @@ class Example extends BaseGenerator {
     // @DCG: {
     // Instead of rendering this core DCG template you most likely need
     // to define own one. All custom templates should be situated under
-    // the $HOME/.dcg/Resources/templates directory. Notice that those
-    // templates take precedence over the core DCG templates. So that
-    // it is not necessary to create custom command to override default
-    // DCG templates. However if you want to put some logic behind the
+    // the $HOME/.dcg/Templates directory. Notice that those templates
+    // take precedence over the core DCG templates. So that it is not
+    // necessary to create custom command to override default DCG
+    // templates. However if you want to put some logic behind the
     // questions creating custom generator command is needed.
     // @DCG: }
     $this->files[$vars['machine_name'] . '.module'] = $this->render('d7/module.twig', $vars);

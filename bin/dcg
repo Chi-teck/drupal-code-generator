@@ -13,11 +13,11 @@ if (file_exists(DCG_HOME . '/Commands')) {
   $commands_directories[] = DCG_HOME . '/Commands';
   $autoloader->addPsr4('DrupalCodeGenerator\\', DCG_HOME);
 }
-if (file_exists(DCG_HOME . '/Resources/templates')) {
-  $twig_directories[] = DCG_HOME . '/Resources/templates';
+if (file_exists(DCG_HOME . '/Templates')) {
+  $twig_directories[] = DCG_HOME . '/Ttemplates';
 }
 $commands_directories[] = DCG_ROOT . '/src/Commands';
-$twig_directories[] = DCG_ROOT . '/src/Resources/templates';
+$twig_directories[] = DCG_ROOT . '/src/Templates';
 
 // Discover generators.
 $filesystem = new Filesystem();
