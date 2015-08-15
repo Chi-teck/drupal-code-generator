@@ -34,7 +34,10 @@ dcg d7:component:ctools-plugin:content-type
 
 ## Extending
 Coping DCG core templates into _$HOME/.dcg/Resources/templates_ directory  will automatically override them. All custom generators should be placed under _$HOME/.dcg/Commands_ directory.
-The following command will help you to create own DCG generator: `dcg dcg-command -d~/.dcg/Commands`.
+```bash
+# Create custom DCG command.
+dcg dcg-command -d~/.dcg/Commands
+```
 
 ## License
 GNU General Public License, version 2
