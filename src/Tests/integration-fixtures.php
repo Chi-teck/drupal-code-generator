@@ -175,6 +175,22 @@ return [
   [
     'answers' => [
       '<comment>Drupal 7</comment>',
+      '<comment>Component</comment>',
+      '.test file',
+      'Example',
+      'example',
+      'ExampleTestCase',
+    ],
+    'output' => [
+      'Command: d7:component:test-file',
+      '-------------------------------',
+      'The following files have been created:',
+      '- example.test',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Drupal 7</comment>',
       'Module',
       'Example',
       'example',

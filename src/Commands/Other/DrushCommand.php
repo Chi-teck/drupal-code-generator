@@ -35,7 +35,7 @@ class DrushCommand extends BaseGenerator {
   }
 
   /**
-   * Returns default answer form alias question.
+   * Returns default answer for alias question.
    */
   protected function defaultAlias($vars) {
     return substr($vars['command_name'], 0, 3);
