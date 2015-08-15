@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class ModuleInfo extends BaseGenerator {
 
-  protected $name = 'd7:component:module-info-file';
+  protected $name = 'd7:component:module-info';
   protected $description = 'Generate Drupal 7 info file for a module.';
 
   /**

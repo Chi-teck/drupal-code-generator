@@ -7,11 +7,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d7:component:test-file command.
+ * Implements d7:component:test command.
  */
 class Test extends BaseGenerator {
 
-  protected $name = 'd7:component:test-file';
+  protected $name = 'd7:component:test';
   protected $description = 'Generate Drupal 7 test case';
 
   /**

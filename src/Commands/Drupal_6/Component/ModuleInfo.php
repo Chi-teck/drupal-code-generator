@@ -7,11 +7,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d6:component:module-info-file command.
+ * Implements d6:component:module-info command.
  */
 class ModuleInfo extends BaseGenerator {
 
-  protected $name = 'd6:component:module-info-file';
+  protected $name = 'd6:component:module-info';
   protected $description = 'Generate Drupal 6 info file (module)';
 
   /**

@@ -7,11 +7,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d7:component:js-file command.
+ * Implements d7:component:js command.
  */
 class Js extends BaseGenerator {
 
-  protected $name = 'd7:component:js-file';
+  protected $name = 'd7:component:js';
   protected $description = 'Generate Drupal 7 javascript file';
 
   /**
