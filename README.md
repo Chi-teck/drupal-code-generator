@@ -32,10 +32,15 @@ dcg generate:d7
 dcg generate:d7:component:ctools-plugin:content-type
 ```
 
+## Extending
+Coping DCG core templates into _$HOME/.dcg/Resources/templates_ directory  will automatically override them. All custom generators should be placed under _$HOME/.dcg/Commands_ directory. The following command will help you to create own DCG generator: `dcg dcg-command -d~/.dcg/Commands`.
+
+
 ## License
 GNU General Public License, version 2
 
-## Other Drupal tools for code generation
+## Other tools for Drupal code generation
 
 - [Module Builder](https://www.drupal.org/project/module_builder)
 - [Drupal Console](https://github.com/hechoendrupal/DrupalAppConsole)
+- [PhpStorm file templates for Drupal development](https://github.com/Chi-teck/PhpStorm-Drupal-Templates)
