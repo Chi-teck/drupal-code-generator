@@ -49,5 +49,7 @@ GNU General Public License, version 2
 ## Other tools for Drupal code generation
 
 - [Module Builder](https://www.drupal.org/project/module_builder)
+- [Module generator UI](https://www.drupal.org/project/generator_ui)
 - [Drupal Console](https://github.com/hechoendrupal/DrupalAppConsole)
 - [PhpStorm file templates for Drupal development](https://github.com/Chi-teck/PhpStorm-Drupal-Templates)
+
