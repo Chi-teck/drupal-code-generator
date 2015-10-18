@@ -281,6 +281,23 @@ return [
   [
     'answers' => [
       '<comment>Drupal 8</comment>',
+      '<comment>Component</comment>',
+      '<comment>Plugin</comment>',
+      'Field widget',
+      'Foo',
+      'foo',
+      'Some description',
+    ],
+    'output' => [
+      'Command: d8:component:plugin:field-widget',
+      '-----------------------------------------',
+      'The following files have been created:',
+      '- FooWidget.php',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Drupal 8</comment>',
       'Module',
       'Example',
       'example',
