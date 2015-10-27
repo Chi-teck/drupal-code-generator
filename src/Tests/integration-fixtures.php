@@ -298,6 +298,23 @@ return [
   [
     'answers' => [
       '<comment>Drupal 8</comment>',
+      '<comment>Component</comment>',
+      '<comment>Plugin</comment>',
+      'Field formatter',
+      'Foo',
+      'foo',
+      'Zoo',
+    ],
+    'output' => [
+      'Command: d8:component:plugin:field-formatter',
+      '--------------------------------------------',
+      'The following files have been created:',
+      '- ZooFormatter.php',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Drupal 8</comment>',
       'Module',
       'Example',
       'example',
