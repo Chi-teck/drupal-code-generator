@@ -160,7 +160,6 @@ class Navigation extends Command {
       'd7' => 'Drupal 7',
       'd8' => 'Drupal 8',
       'js' => 'MODULE.js',
-      'test' => 'MODULE.test',
       'html-page' => 'HTML page',
       'install' => 'MODULE.install',
       'module-file' => 'MODULE.module',

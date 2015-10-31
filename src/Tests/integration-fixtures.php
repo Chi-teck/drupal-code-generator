@@ -194,7 +194,7 @@ return [
     'answers' => [
       '<comment>Drupal 7</comment>',
       '<comment>Component</comment>',
-      'MODULE.test',
+      'Test',
       'Example',
       'example',
       'ExampleTestCase',
@@ -310,6 +310,22 @@ return [
       '--------------------------------------------',
       'The following files have been created:',
       '- ZooFormatter.php',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Drupal 8</comment>',
+      '<comment>Component</comment>',
+      'Test',
+      'Foo',
+      'foo',
+      'Example',
+    ],
+    'output' => [
+      'Command: d8:component:test',
+      '--------------------------',
+      'The following files have been created:',
+      '- ExampleTest.php',
     ],
   ],
   [
