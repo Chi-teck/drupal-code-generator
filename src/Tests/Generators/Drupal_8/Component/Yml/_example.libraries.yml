@@ -1,0 +1,23 @@
+# Third-party library.
+jquery-labelauty:
+  remote: https://github.com/fntneves/jquery-labelauty
+  version: 1.1.0
+  license:
+    name: MIT
+    url: https://github.com/fntneves/jquery-labelauty/blob/v1.1.0/LICENSE
+    gpl-compatible: true
+  js:
+    /libraries/jquery-labelauty/source/jquery-labelauty.js: {}
+  css:
+    component:
+      /libraries/jquery-labelauty/source/jquery-labelauty.css: {}
+  dependencies:
+    - core/jquery
+
+# Custom js for general purposes.
+example:
+  js:
+    js/example.js: {}
+  dependencies:
+    - core/drupalSettings
+    - example/jquery-labelauty

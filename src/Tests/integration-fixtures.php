@@ -331,6 +331,21 @@ return [
   [
     'answers' => [
       '<comment>Drupal 8</comment>',
+      '<comment>Component</comment>',
+      '<comment>Yml</comment>',
+      'Libraries',
+      'example',
+    ],
+    'output' => [
+      'Command: d8:component:yml:libraries',
+      '-----------------------------------',
+      'The following files have been created:',
+      '- example.libraries.yml',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Drupal 8</comment>',
       'Module',
       'Example',
       'example',

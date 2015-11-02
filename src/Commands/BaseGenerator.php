@@ -248,7 +248,7 @@ abstract class BaseGenerator extends Command {
    * Returns default value for the machine name question.
    */
   protected function defaultMachineName($vars) {
-    return self::human2machine($vars['name']);
+    return self::human2machine(isset($vars['name']) ? $vars['name'] : $this->directoryBaseName);
   }
 
   /**
