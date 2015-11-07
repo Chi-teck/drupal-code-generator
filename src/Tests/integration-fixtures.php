@@ -346,6 +346,22 @@ return [
   [
     'answers' => [
       '<comment>Drupal 8</comment>',
+      '<comment>Component</comment>',
+      '<comment>Yml</comment>',
+      'Routing',
+      'Example',
+      'example',
+    ],
+    'output' => [
+      'Command: d8:component:yml:routing',
+      '---------------------------------',
+      'The following files have been created:',
+      '- example.routing.yml',
+    ],
+  ],
+  [
+    'answers' => [
+      '<comment>Drupal 8</comment>',
       'Module',
       'Example',
       'example',
