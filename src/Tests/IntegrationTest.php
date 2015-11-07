@@ -96,7 +96,6 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
     $discovery = new GeneratorsDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
     $generators = $discovery->getGenerators();
-    $this->totalGenerators = count($generators);
 
     $this->application->addCommands($generators);
 
@@ -129,12 +128,6 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
       $this->assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
       $this->filesystem->remove($this->destination);
     }
-
-    $this->assertEquals(
-      $this->totalGenerators,
-      count($this->fixtures),
-      'Some generators are not represented in the integration test.'
-    );
   }
 
   /**
