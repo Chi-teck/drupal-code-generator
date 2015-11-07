@@ -22,4 +22,19 @@ class HtmlPageTest extends GeneratorTestCase {
     parent::setUp();
   }
 
+  /**
+   * Test callback.
+   */
+  public function testExecute() {
+
+    $this->execute();
+
+    $output = "The following files have been created:\n- $this->target\n";
+    $output .= "- css/main.css\n- js/main.js\n";
+
+    $this->assertEquals($output, $this->commandTester->getDisplay());
+
+    $this->checkFile($this->target, $this->fixture);
+  }
+
 }

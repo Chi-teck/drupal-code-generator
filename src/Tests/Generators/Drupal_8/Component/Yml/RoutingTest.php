@@ -18,6 +18,7 @@ class Routing extends GeneratorTestCase {
       'Example',
       'example',
     ];
+
     $this->target = 'example.routing.yml';
     $this->fixture = __DIR__ . '/_' . $this->target;
 
