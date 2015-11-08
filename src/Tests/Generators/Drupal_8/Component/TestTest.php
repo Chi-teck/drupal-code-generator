@@ -1,13 +1,13 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Plugin;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Component;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
  * Test for d8:component:test command.
  */
-class Test extends GeneratorTestCase {
+class TestTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
