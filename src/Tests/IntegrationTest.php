@@ -105,8 +105,6 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
     $this->command = $this->application->find('navigation');
 
-    $this->fixtures = require 'integration-fixtures.php';
-
     $this->questionHelper = $this->getMock('Symfony\Component\Console\Helper\QuestionHelper', ['ask']);
 
     $this->helperSet = $this->command->getHelperSet();
@@ -122,7 +120,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
    * Test callback.
    */
   public function testExecute() {
-    foreach ($this->fixtures as $fixture) {
+    foreach ($this->fixtures() as $fixture) {
       $this->mockQuestionHelper($fixture['answers']);
       $this->commandTester->execute(['command' => 'navigation', '--destination' => './sandbox/tests']);
       $this->assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
@@ -141,6 +139,79 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     }
 
     $this->helperSet->set($this->questionHelper, 'question');
+  }
+
+  /**
+   * Returns fixtures for testing navigation.
+   */
+  protected function fixtures() {
+    return [
+      [
+        'answers' => [
+          '<comment>Drupal 6</comment>',
+          '<comment>Component</comment>',
+          'MODULE.info',
+          'Example',
+          'example',
+        ],
+        'output' => [
+          'Command: d6:component:module-info',
+          '---------------------------------',
+          'The following files have been created:',
+          '- example.info',
+        ],
+      ],
+      [
+        'answers' => [
+          '<comment>Drupal 7</comment>',
+          '<comment>Component</comment>',
+          'MODULE.module',
+          'Example',
+          'example',
+        ],
+        'output' => [
+          'Command: d7:component:module-file',
+          '---------------------------------',
+          'The following files have been created:',
+          '- example.module',
+        ],
+      ],
+      [
+        'answers' => [
+          '<comment>Drupal 7</comment>',
+          '<comment>Component</comment>',
+          // Test jumping on upper menu level.
+          '..',
+          '<comment>Component</comment>',
+          'settings.php',
+        ],
+        'output' => [
+          'Command: d7:component:settings.php',
+          '----------------------------------',
+          'The following files have been created:',
+          '- settings.php',
+        ],
+      ],
+
+      [
+        'answers' => [
+          '<comment>Drupal 8</comment>',
+          '<comment>Component</comment>',
+          '<comment>Plugin</comment>',
+          'Field formatter',
+          'Foo',
+          'foo',
+          'Zoo',
+        ],
+        'output' => [
+          'Command: d8:component:plugin:field-formatter',
+          '--------------------------------------------',
+          'The following files have been created:',
+          '- ZooFormatter.php',
+        ],
+      ],
+    ];
+
   }
 
 }
