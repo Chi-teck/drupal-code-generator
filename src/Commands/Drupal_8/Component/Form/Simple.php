@@ -22,6 +22,7 @@ class Simple extends BaseGenerator {
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
       'class' => ['Class', [$this, 'defaultClass']],
+      'form_id' => ['Form ID', [$this, 'defaultFormId']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -34,6 +35,13 @@ class Simple extends BaseGenerator {
    */
   protected function defaultClass($vars) {
     return $this->human2class($vars['name'] . 'Form');
+  }
+
+  /**
+   * Returns default form ID.
+   */
+  protected function defaultFormId($vars) {
+    return $vars['machine_name'] . '_example';
   }
 
 }

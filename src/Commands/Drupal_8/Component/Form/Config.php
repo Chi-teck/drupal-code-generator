@@ -22,11 +22,19 @@ class Config extends BaseGenerator {
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
       'class' => ['Class', 'SettingsForm'],
+      'form_id' => ['Form ID', [$this, 'defaultFormId']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
 
     $this->files[$vars['class'] . '.php'] = $this->render('d8/form-config.twig', $vars);
+  }
+
+  /**
+   * Returns default form ID.
+   */
+  protected function defaultFormId($vars) {
+    return $vars['machine_name'] . '_settings';
   }
 
 }

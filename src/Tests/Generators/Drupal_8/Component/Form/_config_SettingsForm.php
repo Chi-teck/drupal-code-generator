@@ -2,16 +2,16 @@
 
 /**
  * @file
- * Contains \Drupal\example\Form\SettingsForm.
+ * Contains \Drupal\foo\Form\SettingsForm.
  */
 
-namespace Drupal\example\Form;
+namespace Drupal\foo\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfigFormBase;
 
 /**
- * Configure Example settings for this site.
+ * Configure Foo settings for this site.
  */
 class SettingsForm extends ConfigFormBase {
 
@@ -19,14 +19,14 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'example_settings';
+    return 'foo_settings';
   }
 
   /**
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return ['example.settings'];
+    return ['foo.settings'];
   }
 
   /**
@@ -37,7 +37,7 @@ class SettingsForm extends ConfigFormBase {
     $form['example'] = array(
       '#type' => 'textfield',
       '#title' => t('Example'),
-      '#default_value' => $this->config('example.settings')->get('example'),
+      '#default_value' => $this->config('foo.settings')->get('example'),
     );
 
     return parent::buildForm($form, $form_state);
@@ -60,7 +60,7 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->config('example.settings')
+    $this->config('foo.settings')
       ->set('example', $form_state->getValue('example'))
       ->save();
 

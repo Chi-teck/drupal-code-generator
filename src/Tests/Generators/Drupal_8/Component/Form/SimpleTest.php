@@ -15,9 +15,10 @@ class SimpeTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_8\Component\Form\Simple';
     $this->answers = [
-      'Example',
-      'example',
+      'Foo',
+      'foo',
       'ExampleForm',
+      'foo_example',
     ];
 
     $this->target = 'ExampleForm.php';

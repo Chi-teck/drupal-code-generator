@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\example\Form\ExampleForm.
+ * Contains \Drupal\foo\Form\ExampleForm.
  */
 
-namespace Drupal\example\Form;
+namespace Drupal\foo\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -14,7 +14,7 @@ use Drupal\Core\Logger\LoggerChannelFactory;
 use Drupal\Component\Utility\Unicode;
 
 /**
- * Provides a Example form.
+ * Provides a Foo form.
  */
 class ExampleForm extends FormBase {
 
@@ -48,7 +48,7 @@ class ExampleForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'example_example_form';
+    return 'foo_example';
   }
 
   /**
@@ -87,7 +87,7 @@ class ExampleForm extends FormBase {
    * Runs cron and reloads the page.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->loggerFactory->get('example')->debug(
+    $this->loggerFactory->get('foo')->debug(
       $form_state->getValue('message')
     );
     drupal_set_message($this->t('The message has been sent.'));

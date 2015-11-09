@@ -15,9 +15,10 @@ class ConfigTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_8\Component\Form\Config';
     $this->answers = [
-      'Example',
-      'example',
+      'Foo',
+      'foo',
       'SettingsForm',
+      'foo_settings'
     ];
 
     $this->target = 'SettingsForm.php';
