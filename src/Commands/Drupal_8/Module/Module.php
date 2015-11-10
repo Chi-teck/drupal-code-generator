@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Module;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,8 +11,8 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class Module extends BaseGenerator {
 
-  protected $name = 'd8:module';
-  protected $description = 'Generate Drupal 8 module';
+  protected $name = 'd8:module:standard';
+  protected $description = 'Generate standard Drupal 8 module';
 
   /**
    * {@inheritdoc}
