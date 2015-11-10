@@ -33,6 +33,15 @@ class Module extends BaseGenerator {
     $this->files[$prefix . '.info.yml'] = $this->render('d8/info.yml.twig', $vars);
     $this->files[$prefix . '.module'] = $this->render('d8/module.twig', $vars);
     $this->files[$prefix . '.install'] = $this->render('d8/install.twig', $vars);
+    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/libraries.yml.twig', $vars);
+
+    $controller_class = $this->human2class($vars['name'] . 'Controller');
+    $this->files[$prefix . '.routing.yml'] = $this->render('d8/routing.yml.twig', $vars + ['class' => $controller_class]);
+    $controller_path = $vars['machine_name'] . "/src/Controller/$controller_class.php";
+    $this->files[$controller_path] = $this->render('d8/controller.twig', $vars + ['class' => $controller_class]);
+
+    $form_path = $vars['machine_name'] . '/src/Form/SettingsForm.php';
+    $this->files[$form_path] = $this->render('d8/form-config.twig', $vars + ['class' => 'SettingsForm']);
 
   }
 
