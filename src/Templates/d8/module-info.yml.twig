@@ -1,0 +1,15 @@
+name: {{ name }}
+type: module
+description: {{ description }}
+package: {{ package }}
+version: {{ version }}
+core: 8.x
+{% if dependencies %}
+dependencies:
+{% for dependency in dependencies %}
+  - {{ dependency|trim|lower }}
+{% endfor %}
+{% endif %}
+{% if configure %}
+configure: {{ configure }}
+{% endif %}

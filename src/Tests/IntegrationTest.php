@@ -150,7 +150,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         'answers' => [
           '<comment>Drupal 6</comment>',
           '<comment>Component</comment>',
-          'MODULE.info',
+          'Info (module)',
           'Example',
           'example',
         ],
@@ -165,7 +165,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         'answers' => [
           '<comment>Drupal 7</comment>',
           '<comment>Component</comment>',
-          'MODULE.module',
+          'Module file',
           'Example',
           'example',
         ],

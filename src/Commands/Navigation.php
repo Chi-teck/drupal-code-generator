@@ -159,12 +159,10 @@ class Navigation extends Command {
       'd6' => 'Drupal 6',
       'd7' => 'Drupal 7',
       'd8' => 'Drupal 8',
-      'js' => 'MODULE.js',
       'html-page' => 'HTML page',
-      'install' => 'MODULE.install',
-      'module-file' => 'MODULE.module',
-      'module-info' => 'MODULE.info',
-      'theme-info' => 'THEME.info',
+      'install' => 'Install file',
+      'module-info' => 'Info (module)',
+      'theme-info' => 'Info (theme)',
       'dcg-command' => 'DCG command',
     ];
 

@@ -30,7 +30,7 @@ class Module extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $this->files[$prefix . '.info.yml'] = $this->render('d8/info.yml.twig', $vars);
+    $this->files[$prefix . '.info.yml'] = $this->render('d8/module-info.yml.twig', $vars);
     $this->files[$prefix . '.module'] = $this->render('d8/module.twig', $vars);
     $this->files[$prefix . '.install'] = $this->render('d8/install.twig', $vars);
     $this->files[$prefix . '.libraries.yml'] = $this->render('d8/libraries.yml.twig', $vars);
