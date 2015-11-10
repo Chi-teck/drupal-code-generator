@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Drupal_8\Component;
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:component:controller command.
+ * Test for d8:controller command.
  */
 class ControllerTest extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class ControllerTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Component\Controller';
+    $this->class = 'Drupal_8\Controller';
     $this->answers = [
       'Example',
       'example',

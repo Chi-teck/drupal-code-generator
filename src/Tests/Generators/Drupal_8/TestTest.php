@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8\Component;
+namespace DrupalCodeGenerator\Tests\Drupal_8;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:component:test command.
+ * Test for d8:test command.
  */
 class TestTest extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class TestTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Component\Test';
+    $this->class = 'Drupal_8\Test';
     $this->answers = [
       'Foo',
       'foo',

@@ -1,17 +1,17 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Component\Yml;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Yml;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:component:libraries-yml command.
+ * Implements d8:yml:libraries command.
  */
 class Libraries extends BaseGenerator {
 
-  protected $name = 'd8:component:yml:libraries';
+  protected $name = 'd8:yml:libraries';
   protected $description = 'Generates a libraries yml file';
 
   /**

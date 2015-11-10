@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Plugin;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Plugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:component:plugin:field-type command.
+ * Test for d8:plugin:field-type command.
  */
 class FieldType extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class FieldType extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Component\Plugin\FieldType';
+    $this->class = 'Drupal_8\Plugin\FieldType';
     $this->answers = [
       'Field type example',
       'field_type_example',

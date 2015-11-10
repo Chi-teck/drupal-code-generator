@@ -5,19 +5,21 @@ namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Yml;
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:component:yml:libraries command.
+ * Test for d8:yml:routing command.
  */
-class LIbraries extends GeneratorTestCase {
+class Routing extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Component\Yml\Libraries';
+    $this->class = 'Drupal_8\Yml\Routing';
     $this->answers = [
+      'Example',
       'example',
     ];
-    $this->target = 'example.libraries.yml';
+
+    $this->target = 'example.routing.yml';
     $this->fixture = __DIR__ . '/_' . $this->target;
 
     parent::setUp();

@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Form;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Form;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:component:form:simple command.
+ * Test for d8:form:simple command.
  */
 class SimpeTest extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class SimpeTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Component\Form\Simple';
+    $this->class = 'Drupal_8\Form\Simple';
     $this->answers = [
       'Foo',
       'foo',

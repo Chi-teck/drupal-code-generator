@@ -196,7 +196,6 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
       [
         'answers' => [
           '<comment>Drupal 8</comment>',
-          '<comment>Component</comment>',
           '<comment>Plugin</comment>',
           'Field formatter',
           'Foo',
@@ -204,8 +203,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
           'Zoo',
         ],
         'output' => [
-          'Command: d8:component:plugin:field-formatter',
-          '--------------------------------------------',
+          'Command: d8:plugin:field-formatter',
+          '----------------------------------',
           'The following files have been created:',
           '- ZooFormatter.php',
         ],

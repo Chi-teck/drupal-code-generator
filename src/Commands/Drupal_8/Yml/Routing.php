@@ -1,17 +1,17 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Component\Yml;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Yml;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:component:routing-yml command.
+ * Implements d8:yml:routing command.
  */
 class Routing extends BaseGenerator {
 
-  protected $name = 'd8:component:yml:routing';
+  protected $name = 'd8:yml:routing';
   protected $description = 'Generates a routing yml file';
 
   /**

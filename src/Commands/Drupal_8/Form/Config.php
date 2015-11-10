@@ -1,18 +1,18 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Component\Form;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Form;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:component:form:simple command.
+ * Implements d8:form:config command.
  */
-class Simple extends BaseGenerator {
+class Config extends BaseGenerator {
 
-  protected $name = 'd8:component:form:simple';
-  protected $description = 'Generates simple form';
+  protected $name = 'd8:form:config';
+  protected $description = 'Generates a configuration form';
 
   /**
    * {@inheritdoc}
@@ -21,27 +21,20 @@ class Simple extends BaseGenerator {
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
-      'class' => ['Class', [$this, 'defaultClass']],
+      'class' => ['Class', 'SettingsForm'],
       'form_id' => ['Form ID', [$this, 'defaultFormId']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->files[$vars['class'] . '.php'] = $this->render('d8/form-simple.twig', $vars);
-  }
-
-  /**
-   * Return default class name for the controller.
-   */
-  protected function defaultClass($vars) {
-    return $this->human2class($vars['name'] . 'Form');
+    $this->files[$vars['class'] . '.php'] = $this->render('d8/form-config.twig', $vars);
   }
 
   /**
    * Returns default form ID.
    */
   protected function defaultFormId($vars) {
-    return $vars['machine_name'] . '_example';
+    return $vars['machine_name'] . '_settings';
   }
 
 }

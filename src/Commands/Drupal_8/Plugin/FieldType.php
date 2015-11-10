@@ -1,17 +1,17 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Component\Plugin;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:component:plugin:field-type command.
+ * Implements d8:plugin:field-type command.
  */
 class FieldType extends BaseGenerator {
 
-  protected $name = 'd8:component:plugin:field-type';
+  protected $name = 'd8:plugin:field-type';
   protected $description = 'Generates field type plugin';
 
   /**

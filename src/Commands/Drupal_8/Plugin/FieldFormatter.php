@@ -1,17 +1,17 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Component\Plugin;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:component:plugin:field-formatter command.
+ * Implements d8:plugin:field-formatter command.
  */
 class FieldFormatter extends BaseGenerator {
 
-  protected $name = 'd8:component:plugin:field-formatter';
+  protected $name = 'd8:plugin:field-formatter';
   protected $description = 'Generates field type plugin';
 
   /**

@@ -1,17 +1,17 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Component;
+namespace DrupalCodeGenerator\Commands\Drupal_8;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:component:controller command.
+ * Implements d8:controller command.
  */
 class Controller extends BaseGenerator {
 
-  protected $name = 'd8:component:controller';
+  protected $name = 'd8:controller';
   protected $description = 'Generates a controller';
 
   /**

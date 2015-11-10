@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Form;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Form;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:component:form:config command.
+ * Test for d8:form:config command.
  */
 class ConfigTest extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class ConfigTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Component\Form\Config';
+    $this->class = 'Drupal_8\Form\Config';
     $this->answers = [
       'Foo',
       'foo',

@@ -1,18 +1,18 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Component\Form;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Form;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:component:form:confirm command.
+ * Implements d8:form:simple command.
  */
-class Confirm extends BaseGenerator {
+class Simple extends BaseGenerator {
 
-  protected $name = 'd8:component:form:confirm';
-  protected $description = 'Generates a confirmation form';
+  protected $name = 'd8:form:simple';
+  protected $description = 'Generates simple form';
 
   /**
    * {@inheritdoc}
@@ -21,20 +21,27 @@ class Confirm extends BaseGenerator {
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
-      'class' => ['Class', 'ExampleConfirmForm'],
+      'class' => ['Class', [$this, 'defaultClass']],
       'form_id' => ['Form ID', [$this, 'defaultFormId']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->files[$vars['class'] . '.php'] = $this->render('d8/form-confirm.twig', $vars);
+    $this->files[$vars['class'] . '.php'] = $this->render('d8/form-simple.twig', $vars);
+  }
+
+  /**
+   * Return default class name for the controller.
+   */
+  protected function defaultClass($vars) {
+    return $this->human2class($vars['name'] . 'Form');
   }
 
   /**
    * Returns default form ID.
    */
   protected function defaultFormId($vars) {
-    return $vars['machine_name'] . '_example_confirm';
+    return $vars['machine_name'] . '_example';
   }
 
 }

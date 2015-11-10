@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Plugin;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Plugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:component:plugin:field-formatter command.
+ * Test for d8:plugin:field-formatter command.
  */
 class FieldFormatter extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class FieldFormatter extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Component\Plugin\FieldFormatter';
+    $this->class = 'Drupal_8\Plugin\FieldFormatter';
     $this->answers = [
       'Foo',
       'foo',
