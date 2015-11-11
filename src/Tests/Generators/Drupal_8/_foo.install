@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install, update and uninstall functions for the {{ name }} module.
+ * Install, update and uninstall functions for the Foo module.
  */
 
 /**
@@ -10,8 +10,8 @@
  *
  * @DCG: Optional.
  */
-function {{ machine_name }}_install() {
-  drupal_set_message('{{ name }} module has been installed.');
+function foo_install() {
+  drupal_set_message('Foo module has been installed.');
 }
 
 /**
@@ -19,8 +19,8 @@ function {{ machine_name }}_install() {
  *
  * @DCG: Optional.
  */
-function {{ machine_name }}_uninstall() {
-  drupal_set_message('{{ name }} module has been uninstalled.');
+function foo_uninstall() {
+  drupal_set_message('Foo module has been uninstalled.');
 }
 
 /**
@@ -28,8 +28,8 @@ function {{ machine_name }}_uninstall() {
  *
  * @DCG: Optional.
  */
-function {{ machine_name }}_schema() {
-  $schema['{{ machine_name }}_example'] = [
+function foo_schema() {
+  $schema['foo_example'] = [
     'description' => 'Table description.',
     'fields' => [
       'id' => [
@@ -89,14 +89,14 @@ function {{ machine_name }}_schema() {
  *
  * @DCG: Optional.
  */
-function {{ machine_name }}_requirements($phase) {
+function foo_requirements($phase) {
   $requirements = [];
 
   if ($phase == 'runtime') {
     $value = mt_rand(0, 100);
-    $requirements['{{ machine_name }}_status'] = [
-      'title' => t('{{ name }} status'),
-      'value' => t('{{ name }} value: @value', ['@value' => $value]),
+    $requirements['foo_status'] = [
+      'title' => t('Foo status'),
+      'value' => t('Foo value: @value', ['@value' => $value]),
       'severity' => $value > 50 ? REQUIREMENT_INFO : REQUIREMENT_WARNING,
     ];
   }
