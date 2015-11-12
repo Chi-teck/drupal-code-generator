@@ -1,0 +1,36 @@
+<?php
+
+namespace DrupalCodeGenerator\Commands\Drupal_8;
+
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use DrupalCodeGenerator\Commands\BaseGenerator;
+
+/**
+ * Implements d8:settings-local command.
+ */
+class SettingsLocal extends BaseGenerator {
+
+  protected $name = 'd8:settings-local';
+  protected $description = 'Generates Drupal 8 settings.local.php file.';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function interact(InputInterface $input, OutputInterface $output) {
+
+    $questions = [
+      'database' => ['Database name', 'drupal_8'],
+      'username' => ['Database username', 'root'],
+      'password' => ['Database password', ''],
+      'host' => ['Database host', 'localhost'],
+      'driver' => ['Database type', 'mysql'],
+    ];
+
+    $vars = $this->collectVars($input, $output, $questions);
+
+    $this->files['settings.local.php'] = $this->render('d8/settings.local.twig', $vars);
+
+  }
+
+}
