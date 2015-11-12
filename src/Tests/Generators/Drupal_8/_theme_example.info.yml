@@ -6,7 +6,7 @@ package: custom
 version: 8.x-1.0-dev
 core: 8.x
 libraries:
-  - example/global-styling
+  - example/global
 regions:
   header: Header
   primary_menu: 'Primary menu'
