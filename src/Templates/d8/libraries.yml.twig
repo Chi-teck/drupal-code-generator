@@ -1,3 +1,30 @@
+{% if project_type == 'theme' %}
+# Global.
+global:
+  css:
+    base:
+      css/base/elements.css: {}
+    component:
+      css/components/block.css: {}
+      css/components/breadcrumb.css: {}
+      css/components/field.css: {}
+      css/components/form.css: {}
+      css/components/header.css: {}
+      css/components/menu.css: {}
+      css/components/messages.css: {}
+      css/components/node.css: {}
+      css/components/sidebar.css: {}
+      css/components/table.css: {}
+      css/components/tabs.css: {}
+      css/components/buttons.css: {}
+      css/components/image-button.css: {}
+    layout:
+      css/layout.css: {}
+    theme:
+      css/print.css: { media: print }
+  js:
+    js/{{ machine_name }}.js: {}
+{% endif %}
 # Third-party library.
 jquery-labelauty:
   remote: https://github.com/fntneves/jquery-labelauty
@@ -14,6 +41,7 @@ jquery-labelauty:
   dependencies:
     - core/jquery
 
+{% if project_type == 'module' %}
 # Custom js for general purposes.
 {{ machine_name }}:
   js:
@@ -21,3 +49,4 @@ jquery-labelauty:
   dependencies:
     - core/drupalSettings
     - {{ machine_name }}/jquery-labelauty
+{% endif %}

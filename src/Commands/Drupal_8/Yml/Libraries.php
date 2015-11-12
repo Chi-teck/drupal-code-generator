@@ -20,10 +20,11 @@ class Libraries extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
+      'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'project_type' => ['Project type (module/theme)', 'module'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-
     $this->files[$vars['machine_name'] . '.libraries.yml'] = $this->render('d8/libraries.yml.twig', $vars);
   }
 
