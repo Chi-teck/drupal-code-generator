@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Commands;
 use DrupalCodeGenerator\Commands\Other;
-use DrupalCodeGenerator\GeneratorsDiscovery;
+use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Helper\HelperInterface;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -94,7 +94,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
     $twig = new \Twig_Environment($twig_loader);
 
-    $discovery = new GeneratorsDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
+    $discovery = new GeneratorDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
     $generators = $discovery->getGenerators();
 
     $this->application->addCommands($generators);

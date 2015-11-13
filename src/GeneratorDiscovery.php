@@ -10,9 +10,9 @@ use Twig_Environment;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Discovery of generators commands.
+ * Discovery of generator commands.
  */
-class GeneratorsDiscovery {
+class GeneratorDiscovery {
 
   const COMMANDS_NAMESPACE = '\DrupalCodeGenerator\Commands\\';
   const COMMANDS_BASE_CLASS = '\DrupalCodeGenerator\Commands\BaseGenerator';
