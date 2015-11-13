@@ -1,0 +1,5 @@
+access example pages:
+  title: 'Access example pages.'
+administer example configuration:
+  title: 'Administer example configuration'
+  restrict access: true

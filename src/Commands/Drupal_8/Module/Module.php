@@ -34,6 +34,7 @@ class Module extends BaseGenerator {
     $this->files[$prefix . '.module'] = $this->render('d8/module.twig', $vars);
     $this->files[$prefix . '.install'] = $this->render('d8/install.twig', $vars);
     $this->files[$prefix . '.libraries.yml'] = $this->render('d8/libraries.yml.twig', $vars);
+    $this->files[$prefix . '.permissions.yml'] = $this->render('d8/permissions.yml.twig', $vars);
     $this->files[$vars['machine_name'] . '/js/' . $vars['machine_name'] . '.js'] = $this->render('d8/javascript.twig', $vars);
 
     $controller_class = $this->human2class($vars['name'] . 'Controller');
