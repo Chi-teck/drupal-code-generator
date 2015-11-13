@@ -2,21 +2,21 @@
 
 /**
  * @file
- * Contains \Drupal\example\Plugin\Field\FieldWidget\ExampleWidget.
+ * Contains \Drupal\foo\Plugin\Field\FieldWidget\ExampleWidget.
  */
 
-namespace Drupal\example\Plugin\Field\FieldWidget;
+namespace Drupal\foo\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Defines the 'foo' field widget.
+ * Defines the 'foo_example' field widget.
  *
  * @FieldWidget(
- *   id = "foo",
- *   label = @Translation("Foo"),
+ *   id = "foo_example",
+ *   label = @Translation("Example"),
  *   field_types = {"string"},
  * )
  */

@@ -32,11 +32,4 @@ class FieldType extends BaseGenerator {
     $this->files[$vars['class'] . '.php'] = $this->render('d8/plugin-field-type.twig', $vars);
   }
 
-  /**
-   * Creates default plugin ID.
-   */
-  protected function defaultPluginId($vars) {
-    return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
-  }
-
 }

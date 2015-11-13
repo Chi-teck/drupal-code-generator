@@ -15,12 +15,12 @@ class FilterTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_8\Plugin\Filter';
     $this->answers = [
-      'Filter example',
-      'filter_example',
-      'Example of filter plugin.',
+      'Foo',
+      'foo',
+      'Example',
       'filter_example',
     ];
-    $this->target = 'FilterExample.php';
+    $this->target = 'Example.php';
     $this->fixture = __DIR__ . '/_filter.php';
 
     parent::setUp();

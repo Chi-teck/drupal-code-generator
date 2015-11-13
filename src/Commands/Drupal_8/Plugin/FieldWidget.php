@@ -27,16 +27,9 @@ class FieldWidget extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['machine_name'] . 'Widget');
+    $vars['class'] = $this->human2class($vars['plugin_label'] . 'Widget');
 
     $this->files[$vars['class'] . '.php'] = $this->render('d8/plugin-field-widget.twig', $vars);
-  }
-
-  /**
-   * Creates default plugin ID.
-   */
-  protected function defaultPluginId($vars) {
-    return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
   }
 
 }

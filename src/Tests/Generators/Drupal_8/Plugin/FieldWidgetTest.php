@@ -15,10 +15,10 @@ class FieldWidget extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_8\Plugin\FieldWidget';
     $this->answers = [
-      'Example',
-      'example',
       'Foo',
       'foo',
+      'Example',
+      'foo_example',
     ];
     $this->target = 'ExampleWidget.php';
     $this->fixture = __DIR__ . '/_field_widget.php';

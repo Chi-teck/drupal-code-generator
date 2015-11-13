@@ -20,14 +20,14 @@ class Filter extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Plugin name', [$this, 'defaultName']],
-      'machine_name' => ['Plugin machine name', [$this, 'defaultMachineName']],
-      'description' => ['Plugin description', 'TODO: Write description for the plugin'],
-      'module_machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name', [$this, 'defaultName']],
+      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'plugin_label' => ['Filter name', 'Example'],
+      'plugin_id' => ['Filter machine name', [$this, 'defaultPluginId']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['machine_name']);
+    $vars['class'] = $this->human2class($vars['plugin_label']);
 
     $this->files[$vars['class'] . '.php'] = $this->render('d8/plugin-filter.twig', $vars);
   }

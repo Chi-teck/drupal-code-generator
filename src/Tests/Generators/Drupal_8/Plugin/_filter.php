@@ -2,29 +2,29 @@
 
 /**
  * @file
- * Contains \Drupal\filter_example\Plugin\Filter\FilterExample.
+ * Contains \Drupal\foo\Plugin\Filter\Example.
  */
 
-namespace Drupal\filter_example\Plugin\Filter;
+namespace Drupal\foo\Plugin\Filter;
 
 use Drupal\filter\Plugin\FilterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\filter\FilterProcessResult;
 
 /**
- * Example of filter plugin.
+ * Provides a 'Example' filter.
  *
  * @Filter(
  *   id = "filter_example",
- *   title = @Translation("Filter example"),
+ *   title = @Translation("Example"),
  *   type = Drupal\filter\Plugin\FilterInterface::TYPE_HTML_RESTRICTOR,
-  *   settings = {
+ *   settings = {
  *     "example_setting" = "foo",
  *   },
  *   weight = -10
  * )
  */
-class FilterExample extends FilterBase {
+class Example extends FilterBase {
 
   /**
    * {@inheritdoc}

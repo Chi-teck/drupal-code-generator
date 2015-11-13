@@ -252,6 +252,13 @@ abstract class BaseGenerator extends Command {
   }
 
   /**
+   * Creates default plugin ID.
+   */
+  protected function defaultPluginId($vars) {
+    return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
+  }
+
+  /**
    * Transforms a machine name to human name.
    */
   protected static function machine2human($machine_name) {
