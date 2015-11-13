@@ -15,13 +15,13 @@ class FieldType extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_8\Plugin\FieldType';
     $this->answers = [
-      'Field type example',
-      'field_type_example',
-      'Example of field type plugin.',
-      'field_type_example',
+      'Example',
+      'example',
+      'Foo',
+      'foo',
     ];
-    $this->target = 'FieldTypeExampleItem.php';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->target = 'FooItem.php';
+    $this->fixture = __DIR__ . '/_field-type_' . $this->target;
 
     parent::setUp();
   }

@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Yml;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Yml;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 

@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ class }}.
+ * Contains \Drupal\example\Plugin\Field\FieldType\FooItem.
  */
 
-namespace Drupal\{{ machine_name }}\Plugin\Field\FieldType;
+namespace Drupal\example\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldDefinitionInterface;
@@ -15,11 +15,11 @@ use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Component\Utility\Random;
 
 /**
- * Defines the '{{ plugin_id }}' field type.
+ * Defines the 'foo' field type.
  *
  * @FieldType(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
+ *   id = "foo",
+ *   label = @Translation("Foo"),
  *   category = @Translation("General"),
  *   default_widget = "string_textfield",
  *   default_formatter = "string"
@@ -34,7 +34,7 @@ use Drupal\Component\Utility\Random;
  *
  * @DCG: }
  */
-class {{ class }} extends FieldItemBase {
+class FooItem extends FieldItemBase {
 
   /**
    * {@inheritdoc}

@@ -2,25 +2,25 @@
 
 /**
  * @file
- * Contains \Drupal\{{ machine_name }}\Plugin\Field\FieldWidget\{{ class }}.
+ * Contains \Drupal\example\Plugin\Field\FieldWidget\ExampleWidget.
  */
 
-namespace Drupal\{{ machine_name }}\Plugin\Field\FieldWidget;
+namespace Drupal\example\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Defines the '{{ plugin_id }}' field widget.
+ * Defines the 'foo' field widget.
  *
  * @FieldWidget(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
+ *   id = "foo",
+ *   label = @Translation("Foo"),
  *   field_types = {"string"},
  * )
  */
-class {{ class }} extends WidgetBase {
+class ExampleWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}

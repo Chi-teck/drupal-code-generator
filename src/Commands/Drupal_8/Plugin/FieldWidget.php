@@ -20,16 +20,23 @@ class FieldWidget extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Plugin name', [$this, 'defaultName']],
-      'machine_name' => ['Plugin machine name', [$this, 'defaultMachineName']],
-      'description' => ['Plugin description', 'TODO: Write description for the plugin'],
-      'module_machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name', [$this, 'defaultName']],
+      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'plugin_label' => ['Widget name', 'Example'],
+      'plugin_id' => ['Widget machine name', [$this, 'defaultPluginId']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = $this->human2class($vars['machine_name'] . 'Widget');
 
     $this->files[$vars['class'] . '.php'] = $this->render('d8/plugin-field-widget.twig', $vars);
+  }
+
+  /**
+   * Creates default plugin ID.
+   */
+  protected function defaultPluginId($vars) {
+    return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
   }
 
 }

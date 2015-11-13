@@ -149,14 +149,13 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
       [
         'answers' => [
           '<comment>Drupal 6</comment>',
-          '<comment>Component</comment>',
           'Info (module)',
           'Example',
           'example',
         ],
         'output' => [
-          'Command: d6:component:module-info',
-          '---------------------------------',
+          'Command: d6:module-info',
+          '-----------------------',
           'The following files have been created:',
           '- example.info',
         ],
@@ -164,14 +163,13 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
       [
         'answers' => [
           '<comment>Drupal 7</comment>',
-          '<comment>Component</comment>',
           'Module file',
           'Example',
           'example',
         ],
         'output' => [
-          'Command: d7:component:module-file',
-          '---------------------------------',
+          'Command: d7:module-file',
+          '-----------------------',
           'The following files have been created:',
           '- example.module',
         ],
@@ -179,15 +177,11 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
       [
         'answers' => [
           '<comment>Drupal 7</comment>',
-          '<comment>Component</comment>',
-          // Test jumping on upper menu level.
-          '..',
-          '<comment>Component</comment>',
           'settings.php',
         ],
         'output' => [
-          'Command: d7:component:settings.php',
-          '----------------------------------',
+          'Command: d7:settings.php',
+          '------------------------',
           'The following files have been created:',
           '- settings.php',
         ],
@@ -196,6 +190,9 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
       [
         'answers' => [
           '<comment>Drupal 8</comment>',
+          '<comment>Plugin</comment>',
+          // Test jumping on upper menu level.
+          '..',
           '<comment>Plugin</comment>',
           'Field formatter',
           'Foo',

@@ -15,13 +15,13 @@ class FieldWidget extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_8\Plugin\FieldWidget';
     $this->answers = [
-      'Field widget example',
-      'field_widget_example',
-      'Example of field widget plugin.',
-      'field_widget_example',
+      'Example',
+      'example',
+      'Foo',
+      'foo',
     ];
-    $this->target = 'FieldWidgetExampleWidget.php';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->target = 'ExampleWidget.php';
+    $this->fixture = __DIR__ . '/_field_widget_' . $this->target;
 
     parent::setUp();
   }

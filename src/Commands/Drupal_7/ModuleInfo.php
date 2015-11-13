@@ -7,17 +7,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d7:module command.
+ * Implements d7:info-file command.
  */
-class Module extends BaseGenerator {
+class ModuleInfo extends BaseGenerator {
 
-  protected $name = 'd7:module';
-  protected $description = 'Generates Drupal 7 module';
+  protected $name = 'd7:module-info';
+  protected $description = 'Generates Drupal 7 info file for a module.';
 
   /**
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
+
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
@@ -27,16 +28,10 @@ class Module extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['project_type'] = 'module';
-    $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
 
+    $prefix = $vars['machine_name'];
     $this->files[$prefix . '.info'] = $this->render('d7/module-info.twig', $vars);
-    $this->files[$prefix . '.module'] = $this->render('d7/module.twig', $vars);
-    $this->files[$prefix . '.install'] = $this->render('d7/install.twig', $vars);
-    $this->files[$prefix . '.admin.inc'] = $this->render('d7/admin.inc.twig', $vars);
-    $this->files[$prefix . '.pages.inc'] = $this->render('d7/pages.inc.twig', $vars);
-    $this->files[$prefix . '.test'] = $this->render('d7/test.twig', $vars);
-    $this->files[$prefix . '.js'] = $this->render('d7/js.twig', $vars);
+
   }
 
 }

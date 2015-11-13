@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8\Component\Yml;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Yml;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  *
  * @TODO: Split it into two separate tests for module and theme.
  */
-class LIbraries extends GeneratorTestCase {
+class LIbrariesTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

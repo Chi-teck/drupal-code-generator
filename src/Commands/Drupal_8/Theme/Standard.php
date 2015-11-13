@@ -14,7 +14,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class Standard extends BaseGenerator {
 
   protected $name = 'd8:theme:standard';
-  protected $description = 'Generate standard Drupal 8 theme';
+  protected $description = 'Generates standard Drupal 8 theme';
 
   /**
    * {@inheritdoc}

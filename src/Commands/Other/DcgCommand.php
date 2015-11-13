@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class DcgCommand extends BaseGenerator {
 
   protected $name = 'other:dcg-command';
-  protected $description = 'Generate DCG command';
+  protected $description = 'Generates DCG command';
   protected $alias = 'dcg-command';
 
   /**

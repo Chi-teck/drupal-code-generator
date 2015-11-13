@@ -20,16 +20,23 @@ class FieldType extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Plugin name', [$this, 'defaultName']],
-      'machine_name' => ['Plugin machine name', [$this, 'defaultMachineName']],
-      'description' => ['Plugin description', 'TODO: Write description for the plugin'],
-      'module_machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name', [$this, 'defaultMachineName']],
+      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'plugin_label' => ['Field type name', 'Example'],
+      'plugin_id' => ['Field type machine name', [$this, 'defaultPluginId']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['machine_name'] . 'Item');
+    $vars['class'] = $this->human2class($vars['plugin_label'] . 'Item');
 
     $this->files[$vars['class'] . '.php'] = $this->render('d8/plugin-field-type.twig', $vars);
+  }
+
+  /**
+   * Creates default plugin ID.
+   */
+  protected function defaultPluginId($vars) {
+    return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
   }
 
 }

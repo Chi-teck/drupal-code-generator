@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class HtmlPage extends BaseGenerator {
 
   protected $name = 'other:html-page';
-  protected $description = 'Generate a simple html page.';
+  protected $description = 'Generates a simple html page.';
   protected $alias = 'html-page';
 
   /**

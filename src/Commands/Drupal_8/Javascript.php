@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class Javascript extends BaseGenerator {
 
   protected $name = 'd8:javascript';
-  protected $description = 'Generate Drupal 8 javascript file';
+  protected $description = 'Generates Drupal 8 javascript file';
 
   /**
    * {@inheritdoc}
