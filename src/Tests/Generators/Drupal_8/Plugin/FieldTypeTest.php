@@ -21,7 +21,7 @@ class FieldType extends GeneratorTestCase {
       'foo',
     ];
     $this->target = 'FooItem.php';
-    $this->fixture = __DIR__ . '/_field-type_' . $this->target;
+    $this->fixture = __DIR__ . '/_field_type.php';
 
     parent::setUp();
   }

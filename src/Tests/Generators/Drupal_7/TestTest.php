@@ -21,7 +21,7 @@ class TestTest extends GeneratorTestCase {
     ];
 
     $this->target = 'example.test';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_.test';
 
     parent::setUp();
   }

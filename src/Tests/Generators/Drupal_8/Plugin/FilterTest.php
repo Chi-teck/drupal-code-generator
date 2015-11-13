@@ -21,7 +21,7 @@ class FilterTest extends GeneratorTestCase {
       'filter_example',
     ];
     $this->target = 'FilterExample.php';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_filter.php';
 
     parent::setUp();
   }

@@ -19,7 +19,7 @@ class ThemeFileTest extends GeneratorTestCase {
       'foo',
     ];
     $this->target = 'foo.theme';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_theme_file.theme';
     parent::setUp();
   }
 

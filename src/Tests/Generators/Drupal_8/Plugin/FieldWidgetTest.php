@@ -21,7 +21,7 @@ class FieldWidget extends GeneratorTestCase {
       'foo',
     ];
     $this->target = 'ExampleWidget.php';
-    $this->fixture = __DIR__ . '/_field_widget_' . $this->target;
+    $this->fixture = __DIR__ . '/_field_widget.php';
 
     parent::setUp();
   }

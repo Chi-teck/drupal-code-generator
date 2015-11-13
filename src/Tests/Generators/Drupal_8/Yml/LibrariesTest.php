@@ -22,7 +22,7 @@ class LIbrariesTest extends GeneratorTestCase {
       'module',
     ];
     $this->target = 'example.libraries.yml';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_libraries.yml';
 
     parent::setUp();
   }

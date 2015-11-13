@@ -22,7 +22,7 @@ class ConfirmTest extends GeneratorTestCase {
     ];
 
     $this->target = 'ExampleConfirmForm.php';
-    $this->fixture = __DIR__ . '/_confirm_' . $this->target;
+    $this->fixture = __DIR__ . '/_confirm.php';
 
     parent::setUp();
   }

@@ -1,13 +1,13 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_7;
+namespace DrupalCodeGenerator\Tests\Drupal_7\CtoolsPlugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
  * Test for d7:ctools-plugin:access command.
  */
-class CtoolsPluginAccessTest extends GeneratorTestCase {
+class AccessTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
@@ -22,7 +22,7 @@ class CtoolsPluginAccessTest extends GeneratorTestCase {
       'User',
     ];
     $this->target = 'example.inc';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_access.inc';
 
     parent::setUp();
   }

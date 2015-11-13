@@ -1,13 +1,13 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_7;
+namespace DrupalCodeGenerator\Tests\Drupal_7\CtoolsPlugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
  * Test for d7:ctools-plugin:relationship command.
  */
-class CtoolsPluginRelationshipTest extends GeneratorTestCase {
+class RelationshipTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
@@ -22,7 +22,7 @@ class CtoolsPluginRelationshipTest extends GeneratorTestCase {
       'Term',
     ];
     $this->target = 'example.inc';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_relationship.inc';
 
     parent::setUp();
   }

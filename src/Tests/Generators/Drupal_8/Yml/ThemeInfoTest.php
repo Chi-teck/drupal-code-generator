@@ -23,7 +23,7 @@ class ThemeInfoTest extends GeneratorTestCase {
       '8.x-1.0-dev',
     ];
     $this->target = 'example.info.yml';
-    $this->fixture = __DIR__ . '/_theme_' . $this->target;
+    $this->fixture = __DIR__ . '/_theme_info.yml';
 
     parent::setUp();
   }

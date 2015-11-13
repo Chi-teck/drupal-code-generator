@@ -20,7 +20,7 @@ class RoutingTest extends GeneratorTestCase {
     ];
 
     $this->target = 'example.routing.yml';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_routing.yml';
 
     parent::setUp();
   }

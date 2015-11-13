@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d7:module-file command.
  */
-class ModuleTest extends GeneratorTestCase {
+class ModuleFileTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class ModuleTest extends GeneratorTestCase {
       'example',
     ];
     $this->target = 'example.module';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_module_file.module';
     parent::setUp();
   }
 

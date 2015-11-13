@@ -24,7 +24,7 @@ class ModuleInfoTest extends GeneratorTestCase {
       'views, node, fields',
     ];
     $this->target = 'example.info.yml';
-    $this->fixture = __DIR__ . '/_module_' . $this->target;
+    $this->fixture = __DIR__ . '/_module_info.yml';
 
     parent::setUp();
   }

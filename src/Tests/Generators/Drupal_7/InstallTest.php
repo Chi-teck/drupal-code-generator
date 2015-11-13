@@ -19,7 +19,7 @@ class InstallTest extends GeneratorTestCase {
       'example',
     ];
     $this->target = 'example.install';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_.install';
     parent::setUp();
   }
 

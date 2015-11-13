@@ -19,7 +19,7 @@ class ApacheVirtualHostTest extends GeneratorTestCase {
       '/var/www/example.com/public',
     ];
     $this->target = 'example.com.conf';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_apache_virtual_host.conf';
     parent::setUp();
   }
 

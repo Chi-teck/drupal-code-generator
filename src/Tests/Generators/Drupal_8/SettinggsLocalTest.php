@@ -22,7 +22,7 @@ class SettingsLocalTest extends GeneratorTestCase {
       'mysql',
     ];
     $this->target = 'settings.local.php';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_settings_local.php';
 
     parent::setUp();
   }

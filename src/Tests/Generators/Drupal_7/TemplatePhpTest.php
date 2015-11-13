@@ -20,7 +20,7 @@ class TemplatePhpTest extends GeneratorTestCase {
     ];
 
     $this->target = 'template.php';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_template.php';
 
     parent::setUp();
   }

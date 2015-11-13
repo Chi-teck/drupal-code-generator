@@ -7,11 +7,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d7:js command.
+ * Implements d7:javascript command.
  */
-class Js extends BaseGenerator {
+class Javascript extends BaseGenerator {
 
-  protected $name = 'd7:js';
+  protected $name = 'd7:javascript';
   protected $description = 'Generates Drupal 7 javascript file';
 
   /**
@@ -27,7 +27,7 @@ class Js extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $vars['project_type'] = 'module';
 
-    $this->files[$vars['machine_name'] . '.js'] = $this->render('d7/js.twig', $vars);
+    $this->files[$vars['machine_name'] . '.js'] = $this->render('d7/javascript.twig', $vars);
 
   }
 

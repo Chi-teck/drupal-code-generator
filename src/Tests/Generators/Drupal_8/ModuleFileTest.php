@@ -19,7 +19,7 @@ class ModuleFileTest extends GeneratorTestCase {
       'foo',
     ];
     $this->target = 'foo.module';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_module_file.module';
     parent::setUp();
   }
 

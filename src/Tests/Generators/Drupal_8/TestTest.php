@@ -20,10 +20,7 @@ class TestTest extends GeneratorTestCase {
       'Example',
     ];
     $this->target = 'ExampleTest.php';
-    $this->fixture = __DIR__ . '/_test_' . $this->target;
-
-    // Add suffix to prevent phpunit from loading this file.
-    $this->fixture .= '_';
+    $this->fixture = __DIR__ . '/_test.php';
 
     parent::setUp();
   }

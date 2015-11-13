@@ -22,7 +22,7 @@ class ThemeInfoTest extends GeneratorTestCase {
       '7.x-1.0',
     ];
     $this->target = 'bar.info';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_theme.info';
 
     parent::setUp();
   }

@@ -19,7 +19,7 @@ class JavascriptTest extends GeneratorTestCase {
       'foo',
     ];
     $this->target = 'foo.js';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_javascript.js';
     parent::setUp();
   }
 

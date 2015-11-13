@@ -22,7 +22,7 @@ class SimpeTest extends GeneratorTestCase {
     ];
 
     $this->target = 'ExampleForm.php';
-    $this->fixture = __DIR__ . '/_simple_' . $this->target;
+    $this->fixture = __DIR__ . '/_simple.php';
 
     parent::setUp();
   }

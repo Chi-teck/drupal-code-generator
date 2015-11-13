@@ -1,13 +1,13 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_7;
+namespace DrupalCodeGenerator\Tests\Drupal_7\CtoolsPlugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
  * Test for d7:ctools-plugin:content-type command.
  */
-class CtoolsPluginContentTypeTest extends GeneratorTestCase {
+class ContentTypeTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
@@ -22,7 +22,7 @@ class CtoolsPluginContentTypeTest extends GeneratorTestCase {
       'Node',
     ];
     $this->target = 'example.inc';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_content_type.inc';
 
     parent::setUp();
   }

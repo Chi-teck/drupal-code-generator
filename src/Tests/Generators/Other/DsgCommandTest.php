@@ -20,7 +20,7 @@ class DsgCommandTest extends GeneratorTestCase {
       'example',
     ];
     $this->target = 'custom/Example.php';
-    $this->fixture = __DIR__ . '/_Example.php';
+    $this->fixture = __DIR__ . '/_dcg_command.php';
     parent::setUp();
   }
 

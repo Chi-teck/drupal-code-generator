@@ -22,7 +22,7 @@ class ConfigTest extends GeneratorTestCase {
     ];
 
     $this->target = 'SettingsForm.php';
-    $this->fixture = __DIR__ . '/_config_' . $this->target;
+    $this->fixture = __DIR__ . '/_config.php';
 
     parent::setUp();
   }

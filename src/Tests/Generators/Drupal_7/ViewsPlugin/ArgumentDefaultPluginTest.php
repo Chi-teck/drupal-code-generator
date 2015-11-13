@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_7;
+namespace DrupalCodeGenerator\Tests\Drupal_7\ViewsPlugin;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
@@ -21,7 +21,7 @@ class ArgumentDefaultTest extends GeneratorTestCase {
       'foo',
     ];
     $this->target = 'views_plugin_argument_foo.inc';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_argument_default.inc';
     parent::setUp();
   }
 

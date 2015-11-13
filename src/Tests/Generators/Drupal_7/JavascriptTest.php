@@ -13,14 +13,14 @@ class JsTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_7\Js';
+    $this->class = 'Drupal_7\Javascript';
     $this->answers = [
       'Example',
       'example',
     ];
 
     $this->target = 'example.js';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_javascript.js';
 
     parent::setUp();
   }

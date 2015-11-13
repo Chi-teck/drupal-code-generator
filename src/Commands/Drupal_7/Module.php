@@ -36,7 +36,7 @@ class Module extends BaseGenerator {
     $this->files[$prefix . '.admin.inc'] = $this->render('d7/admin.inc.twig', $vars);
     $this->files[$prefix . '.pages.inc'] = $this->render('d7/pages.inc.twig', $vars);
     $this->files[$prefix . '.test'] = $this->render('d7/test.twig', $vars);
-    $this->files[$prefix . '.js'] = $this->render('d7/js.twig', $vars);
+    $this->files[$prefix . '.js'] = $this->render('d7/javascript.twig', $vars);
   }
 
 }

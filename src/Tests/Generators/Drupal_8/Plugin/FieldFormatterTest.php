@@ -21,7 +21,7 @@ class FieldFormatter extends GeneratorTestCase {
       'foo_zoo',
     ];
     $this->target = 'ZooFormatter.php';
-    $this->fixture = __DIR__ . '/_field-formatter_' . $this->target;
+    $this->fixture = __DIR__ . '/_field_formatter.php';
 
     parent::setUp();
   }
