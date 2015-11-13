@@ -16,7 +16,7 @@ use Twig_Environment;
 /**
  * Base class for all generators.
  */
-abstract class BaseGenerator extends Command {
+abstract class BaseGenerator extends Command implements GeneratorInterface {
 
   /**
    * The command name.

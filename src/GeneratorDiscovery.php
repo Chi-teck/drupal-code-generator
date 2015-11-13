@@ -7,7 +7,7 @@ use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig_Environment;
-use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\GeneratorInterface;
 
 /**
  * Discovery of generator commands.
@@ -15,7 +15,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class GeneratorDiscovery {
 
   const COMMANDS_NAMESPACE = '\DrupalCodeGenerator\Commands\\';
-  const COMMANDS_BASE_CLASS = '\DrupalCodeGenerator\Commands\BaseGenerator';
+  const COMMANDS_BASE_INTERFACE = '\DrupalCodeGenerator\Commands\GeneratorInterface';
 
   /**
    * List of directories to look up.
@@ -50,7 +50,7 @@ class GeneratorDiscovery {
   /**
    * Finds and instantiates generator commands.
    *
-   * @return BaseGenerator[]
+   * @return GeneratorInterface[]
    *   Array of generators.
    */
   public function getGenerators() {
@@ -67,11 +67,10 @@ class GeneratorDiscovery {
           $class = self::COMMANDS_NAMESPACE . str_replace('/', '\\', preg_replace('#.php/$#', '', $relative_path));
           $reflected_class = new ReflectionClass($class);
 
-          if ($reflected_class->isAbstract() || !$reflected_class->isSubclassOf(self::COMMANDS_BASE_CLASS)) {
-            continue;
+          if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMANDS_BASE_INTERFACE)) {
+            $commands[] = new $class($this->filesystem, $this->twig);
           }
 
-          $commands[] = new $class($this->filesystem, $this->twig);
         }
       }
 
