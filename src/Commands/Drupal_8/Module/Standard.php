@@ -25,9 +25,14 @@ class Standard extends BaseGenerator {
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
+      'dependencies' => ['Dependencies (comma separated)', ''],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
+
+    if ($vars['dependencies']) {
+      $vars['dependencies'] = explode(',', $vars['dependencies']);
+    }
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
     $this->files[$prefix . '.info.yml'] = $this->render('d8/module-info.yml.twig', $vars);
