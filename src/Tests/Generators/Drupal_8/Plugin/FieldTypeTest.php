@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:plugin:field-type command.
  */
-class FieldType extends GeneratorTestCase {
+class FieldTypeTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

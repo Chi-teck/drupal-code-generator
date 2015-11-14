@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:plugin:field-formatter command.
  */
-class FieldFormatter extends GeneratorTestCase {
+class FieldFormatterTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

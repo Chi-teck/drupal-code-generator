@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:plugin:field-widget command.
  */
-class FieldWidget extends GeneratorTestCase {
+class FieldWidgetTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
