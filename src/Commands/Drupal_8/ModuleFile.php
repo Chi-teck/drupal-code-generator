@@ -19,8 +19,8 @@ class ModuleFile extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = [
-      'name' => ['Theme name', [$this, 'defaultName']],
-      'machine_name' => ['Theme machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name', [$this, 'defaultName']],
+      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
