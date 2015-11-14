@@ -25,8 +25,9 @@ class Javascript extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
+    $path = $this->createPath('js/', $vars['machine_name'] . '.js', $vars['machine_name']);
 
-    $this->files[$vars['machine_name'] . '.js'] = $this->render('d8/javascript.twig', $vars);
+    $this->files[$path] = $this->render('d8/javascript.twig', $vars);
 
   }
 
