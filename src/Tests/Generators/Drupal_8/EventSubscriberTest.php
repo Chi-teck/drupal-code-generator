@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:event-subscriber command.
  */
-class EventSubscriber extends GeneratorTestCase {
+class EventSubscriberTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

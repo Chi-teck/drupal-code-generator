@@ -5,9 +5,9 @@ namespace DrupalCodeGenerator\Tests\Drupal_7;
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d7:js-file command.
+ * Test for d7:javascript-file command.
  */
-class JsTest extends GeneratorTestCase {
+class JavascriptTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

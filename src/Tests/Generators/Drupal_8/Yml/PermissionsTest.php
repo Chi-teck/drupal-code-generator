@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:yml:permissions command.
  */
-class Permissions extends GeneratorTestCase {
+class PermissionsTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

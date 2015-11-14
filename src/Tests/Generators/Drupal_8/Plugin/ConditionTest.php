@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:plugin:condition command.
  */
-class Condtion extends GeneratorTestCase {
+class CondtionTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

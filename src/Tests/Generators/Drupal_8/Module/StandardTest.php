@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:module:standard command.
  */
-class ModuleTest extends GeneratorTestCase {
+class StandardTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
