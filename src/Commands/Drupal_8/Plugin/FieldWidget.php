@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class FieldWidget extends BaseGenerator {
 
   protected $name = 'd8:plugin:field-widget';
-  protected $description = 'Generates field type plugin';
+  protected $description = 'Generates widget plugin';
 
   /**
    * {@inheritdoc}

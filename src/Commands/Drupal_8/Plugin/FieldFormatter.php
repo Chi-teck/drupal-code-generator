@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class FieldFormatter extends BaseGenerator {
 
   protected $name = 'd8:plugin:field-formatter';
-  protected $description = 'Generates field type plugin';
+  protected $description = 'Generates formatter plugin';
 
   /**
    * {@inheritdoc}
