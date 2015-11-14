@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Contains \Drupal\{{ machine_name }}\EventSubscriber\{{ class }}.
+ */
+
+namespace Drupal\{{ machine_name }}\EventSubscriber;
+
+use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+
+/**
+ * {{ name }} event subscriber.
+ */
+class {{ class }} implements EventSubscriberInterface {
+
+  /**
+   * Current logged in user.
+   *
+   * @var AccountInterface
+   */
+  protected  $currentUser;
+
+  /**
+   * Constructs event subscriber.
+   *
+   * @param AccountInterface $current_user
+   *   Current logged in user.
+   *
+   * @DSG: Optional.
+   */
+  public function __construct(AccountInterface $current_user) {
+    $this->currentUser = $current_user;
+  }
+
+  /**
+   * Kernel request event handler.
+   *
+   * @param GetResponseEvent $event
+   *   Response event.
+   */
+  public function onKernelRequest(GetResponseEvent $event) {
+    drupal_set_message(__FUNCTION__);
+  }
+
+  /**
+   * Kernel response event handler.
+   *
+   * @param FilterResponseEvent $event
+   *   Response event.
+   */
+  public function onKernelResponse(FilterResponseEvent $event) {
+    drupal_set_message(__FUNCTION__);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSubscribedEvents() {
+    return [
+      KernelEvents::REQUEST => ['onKernelRequest'],
+      KernelEvents::RESPONSE => ['onKernelResponse'],
+    ];
+  }
+
+}
