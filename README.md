@@ -25,11 +25,11 @@ Simply repeat installation commands.
 # Display main menu.
 dcg
 
-# Display Drupal 7 submenu.
-dcg d7
+# Display Drupal 8 submenu.
+dcg d8
 
 # Call generator directly.
-dcg d7:component:ctools-plugin:content-type
+dcg d8:plugin:field-widget
 ```
 
 ## Extending
