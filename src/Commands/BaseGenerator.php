@@ -76,6 +76,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $this->filesystem = $filesystem;
     $this->twig = $twig;
     $this->directoryBaseName = basename(getcwd());
+    $this->extensionRoot = self::getExtensionRoot();
   }
 
   /**
@@ -238,10 +239,34 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   }
 
   /**
-   * Returns default value for the name question.
+   * Returns extension root.
+   *
+   * @return string|bool
+   *   Extension root directory or false if it wasn't found.
+   */
+  protected static function getExtensionRoot() {
+    // Extension root is the same for all commands.
+    static $extension_root;
+    if ($extension_root === NULL) {
+      $extension_root = FALSE;
+      $directory = getcwd();
+      for ($i = 1; $i <= 5; $i++) {
+        $info_file = $directory . '/' . basename($directory) . '.info';
+        if (file_exists($info_file) || file_exists($info_file . '.yml')) {
+          $extension_root = $directory;
+          break;
+        }
+        $directory = dirname($directory);
+      }
+    }
+    return $extension_root;
+  }
+
+  /**
+   * Returns default value for the extension name question.
    */
   protected function defaultName() {
-    return self::machine2human($this->directoryBaseName);
+    return self::machine2human($this->extensionRoot ? basename($this->extensionRoot) : $this->directoryBaseName);
   }
 
   /**
