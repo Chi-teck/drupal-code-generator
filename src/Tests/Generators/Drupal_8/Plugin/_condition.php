@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\foo\Plugin\Condition\.
+ * Contains \Drupal\foo\Plugin\Condition\Example.
  */
 
 namespace Drupal\foo\Plugin\Condition;
