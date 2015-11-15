@@ -35,7 +35,7 @@ class {{ class }} implements HttpKernelInterface {
    */
   public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = TRUE) {
 
-    if ($request->getClientIp() != '127.0.0.10') {
+    if ($request->getClientIp() == '127.0.0.10') {
       return new Response(t('Bye!'), 403);
     }
 

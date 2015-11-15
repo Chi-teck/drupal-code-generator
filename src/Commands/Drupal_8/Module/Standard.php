@@ -61,6 +61,21 @@ class Standard extends BaseGenerator {
       $vars + ['class' => $subscriber_class]
     );
 
+    $this->files[$prefix . '.services.yml'] = $this->render(
+      'd8/services.yml.twig',
+      $vars + ['class' => $this->human2class($vars['name'])]
+    );
+
+    $block_vars['plugin_label'] = 'Example';
+    $block_vars['plugin_id'] = $vars['machine_name'] . '_' . $this->human2machine($block_vars['plugin_label']);
+    $block_vars['category'] = $vars['name'];
+    $block_vars['class'] = $this->human2class($block_vars['plugin_label'] . 'Block');
+
+    $this->files[$vars['machine_name'] . '/src/Plugin/Block/' . $block_vars['class'] . '.php'] = $this->render(
+      'd8/plugin-block.twig',
+      $vars + $block_vars
+    );
+
     $controller_class = $this->human2class($vars['name'] . 'Controller');
     $this->files[$prefix . '.routing.yml'] = $this->render('d8/routing.yml.twig', $vars + ['class' => $controller_class]);
     $controller_path = $vars['machine_name'] . "/src/Controller/$controller_class.php";
