@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains \Drupal\{{ machine_name }}\{{ class }}.
+ */
+
+namespace Drupal\{{ machine_name }};
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+
+class {{ class }} implements HttpKernelInterface {
+
+  /**
+   * The kernel.
+   *
+   * @var HttpKernelInterface
+   */
+  protected $httpKernel;
+
+  /**
+   * Constructs a {{ class }} object.
+   *
+   * @param HttpKernelInterface $http_kernel
+   *   The decorated kernel.
+   */
+  public function __construct(HttpKernelInterface $http_kernel) {
+    $this->httpKernel = $http_kernel;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = TRUE) {
+
+    if ($request->getClientIp() != '127.0.0.1') {
+      return new Response(t('Bye!'), 403);
+    }
+
+    return $this->httpKernel->handle($request, $type, $catch);
+  }
+
+}
