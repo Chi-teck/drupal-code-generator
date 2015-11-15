@@ -36,8 +36,12 @@ class StandardTest extends GeneratorTestCase {
     $lines[] = '- foo/foo.module';
     $lines[] = '- foo/foo.install';
     $lines[] = '- foo/foo.libraries.yml';
+    $lines[] = '- foo/foo.services.yml';
     $lines[] = '- foo/foo.permissions.yml';
     $lines[] = '- foo/js/foo.js';
+    $lines[] = '- foo/src/FooExample.php';
+    $lines[] = '- foo/src/FooMiddleware.php';
+    $lines[] = '- foo/src/EventSubscriber/FooSubscriber.php';
     $lines[] = '- foo/foo.routing.yml';
     $lines[] = '- foo/src/Controller/FooController.php';
     $lines[] = '- foo/src/Form/SettingsForm.php';

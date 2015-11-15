@@ -39,8 +39,27 @@ class Standard extends BaseGenerator {
     $this->files[$prefix . '.module'] = $this->render('d8/module.twig', $vars);
     $this->files[$prefix . '.install'] = $this->render('d8/install.twig', $vars);
     $this->files[$prefix . '.libraries.yml'] = $this->render('d8/libraries.yml.twig', $vars);
+    $this->files[$prefix . '.services.yml'] = $this->render('d8/services.yml.twig', $vars);
     $this->files[$prefix . '.permissions.yml'] = $this->render('d8/permissions.yml.twig', $vars);
     $this->files[$vars['machine_name'] . '/js/' . $vars['machine_name'] . '.js'] = $this->render('d8/javascript.twig', $vars);
+
+    $service_class = $this->human2class($vars['name'] . 'Example');
+    $this->files[$vars['machine_name'] . '/src/' . $service_class . '.php'] = $this->render(
+      'd8/service.twig',
+      $vars + ['class' => $service_class]
+    );
+
+    $middleware_class = $this->human2class($vars['name'] . 'Middleware');
+    $this->files[$vars['machine_name'] . '/src/' . $middleware_class . '.php'] = $this->render(
+      'd8/middleware.twig',
+      $vars + ['class' => $middleware_class]
+    );
+
+    $subscriber_class = $this->human2class($vars['name'] . 'Subscriber');
+    $this->files[$vars['machine_name'] . '/src/EventSubscriber/' . $subscriber_class . '.php'] = $this->render(
+      'd8/event-subscriber.twig',
+      $vars + ['class' => $subscriber_class]
+    );
 
     $controller_class = $this->human2class($vars['name'] . 'Controller');
     $this->files[$prefix . '.routing.yml'] = $this->render('d8/routing.yml.twig', $vars + ['class' => $controller_class]);
