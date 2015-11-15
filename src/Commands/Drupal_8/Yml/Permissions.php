@@ -13,6 +13,7 @@ class Permissions extends BaseGenerator {
 
   protected $name = 'd8:yml:permissions';
   protected $description = 'Generates a permissions yml file';
+  protected $alias = 'permissions.yml';
 
   /**
    * {@inheritdoc}

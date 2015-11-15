@@ -13,6 +13,7 @@ class Simple extends BaseGenerator {
 
   protected $name = 'd8:form:simple';
   protected $description = 'Generates simple form';
+  protected $alias = 'form';
 
   /**
    * {@inheritdoc}

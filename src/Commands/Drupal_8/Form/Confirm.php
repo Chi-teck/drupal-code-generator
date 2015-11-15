@@ -13,6 +13,7 @@ class Confirm extends BaseGenerator {
 
   protected $name = 'd8:form:confirm';
   protected $description = 'Generates a confirmation form';
+  protected $alias = 'confirm-form';
 
   /**
    * {@inheritdoc}

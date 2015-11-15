@@ -13,6 +13,7 @@ class Config extends BaseGenerator {
 
   protected $name = 'd8:form:config';
   protected $description = 'Generates a configuration form';
+  protected $alias = 'config-form';
 
   /**
    * {@inheritdoc}

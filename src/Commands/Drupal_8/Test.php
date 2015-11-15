@@ -13,6 +13,7 @@ class Test extends BaseGenerator {
 
   protected $name = 'd8:test';
   protected $description = 'Generates a test';
+  protected $alias = 'test';
 
   /**
    * {@inheritdoc}

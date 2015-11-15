@@ -13,6 +13,7 @@ class Libraries extends BaseGenerator {
 
   protected $name = 'd8:yml:libraries';
   protected $description = 'Generates a libraries yml file';
+  protected $alias = 'libraries.yml';
 
   /**
    * {@inheritdoc}

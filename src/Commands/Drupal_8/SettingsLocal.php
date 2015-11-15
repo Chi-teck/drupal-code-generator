@@ -13,6 +13,7 @@ class SettingsLocal extends BaseGenerator {
 
   protected $name = 'd8:settings-local';
   protected $description = 'Generates Drupal 8 settings.local.php file';
+  protected $alias = 'settings.local.php';
 
   /**
    * {@inheritdoc}

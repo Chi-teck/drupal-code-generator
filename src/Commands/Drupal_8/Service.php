@@ -13,6 +13,7 @@ class Service extends BaseGenerator {
 
   protected $name = 'd8:service';
   protected $description = 'Generates a PHP class';
+  protected $alias = 'php-class';
 
   /**
    * {@inheritdoc}

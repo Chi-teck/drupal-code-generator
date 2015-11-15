@@ -13,6 +13,7 @@ class EventSubscriber extends BaseGenerator {
 
   protected $name = 'd8:event-subscriber';
   protected $description = 'Generates an event subscriber';
+  protected $alias = 'event-subscriber';
 
   /**
    * {@inheritdoc}

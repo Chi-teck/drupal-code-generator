@@ -13,6 +13,7 @@ class Middleware extends BaseGenerator {
 
   protected $name = 'd8:middleware';
   protected $description = 'Generates a middleware';
+  protected $alias = 'middleware';
 
   /**
    * {@inheritdoc}

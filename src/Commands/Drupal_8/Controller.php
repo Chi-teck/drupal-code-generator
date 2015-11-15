@@ -13,6 +13,7 @@ class Controller extends BaseGenerator {
 
   protected $name = 'd8:controller';
   protected $description = 'Generates a controller';
+  protected $alias = 'controller';
 
   /**
    * {@inheritdoc}

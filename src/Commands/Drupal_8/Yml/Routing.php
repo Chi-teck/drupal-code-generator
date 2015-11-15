@@ -13,6 +13,7 @@ class Routing extends BaseGenerator {
 
   protected $name = 'd8:yml:routing';
   protected $description = 'Generates a routing yml file';
+  protected $alias = 'routing.yml';
 
   /**
    * {@inheritdoc}

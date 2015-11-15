@@ -13,6 +13,7 @@ class Javascript extends BaseGenerator {
 
   protected $name = 'd8:javascript';
   protected $description = 'Generates Drupal 8 javascript file';
+  protected $alias = 'javascript';
 
   /**
    * {@inheritdoc}
