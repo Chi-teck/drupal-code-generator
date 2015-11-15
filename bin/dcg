@@ -36,5 +36,3 @@ $application->addCommands($generators);
 $application->add($navigation);
 $application->setDefaultCommand('navigation');
 $application->run();
-
-new  \DrupalCodeGenerator\Commands\Generator;
