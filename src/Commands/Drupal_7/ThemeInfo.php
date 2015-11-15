@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class ThemeInfo extends BaseGenerator {
 
   protected $name = 'd7:theme-info';
-  protected $description = 'Generates Drupal 7 info file for a theme.';
+  protected $description = 'Generates Drupal 7 info file for a theme';
 
   /**
    * {@inheritdoc}
