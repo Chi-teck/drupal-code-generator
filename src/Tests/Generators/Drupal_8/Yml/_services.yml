@@ -1,6 +1,6 @@
 services:
   foo.example:
-    class: Drupal\foo\Example
+    class: Drupal\foo\FooExample
     arguments: ['@entity.query', '@entity.manager']
   foo.middleware:
     class: Drupal\foo\FooMiddleware
