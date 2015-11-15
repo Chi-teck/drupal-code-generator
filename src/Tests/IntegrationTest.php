@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Commands;
 use DrupalCodeGenerator\Commands\Other;
-use DrupalCodeGenerator\GeneratorsDiscovery;
+use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Helper\HelperInterface;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -94,9 +94,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
     $twig = new \Twig_Environment($twig_loader);
 
-    $discovery = new GeneratorsDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
+    $discovery = new GeneratorDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
     $generators = $discovery->getGenerators();
-    $this->totalGenerators = count($generators);
 
     $this->application->addCommands($generators);
 
@@ -105,8 +104,6 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     $this->application->add($navigation);
 
     $this->command = $this->application->find('navigation');
-
-    $this->fixtures = require 'integration-fixtures.php';
 
     $this->questionHelper = $this->getMock('Symfony\Component\Console\Helper\QuestionHelper', ['ask']);
 
@@ -123,18 +120,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
    * Test callback.
    */
   public function testExecute() {
-    foreach ($this->fixtures as $fixture) {
+    foreach ($this->fixtures() as $fixture) {
       $this->mockQuestionHelper($fixture['answers']);
       $this->commandTester->execute(['command' => 'navigation', '--destination' => './sandbox/tests']);
       $this->assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
       $this->filesystem->remove($this->destination);
     }
-
-    $this->assertEquals(
-      $this->totalGenerators,
-      count($this->fixtures),
-      'Some generators are not represented in the integration test.'
-    );
   }
 
   /**
@@ -148,6 +139,75 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     }
 
     $this->helperSet->set($this->questionHelper, 'question');
+  }
+
+  /**
+   * Returns fixtures for testing navigation.
+   */
+  protected function fixtures() {
+    return [
+      [
+        'answers' => [
+          '<comment>Drupal 6</comment>',
+          'Info (module)',
+          'Example',
+          'example',
+        ],
+        'output' => [
+          'Command: d6:module-info',
+          '-----------------------',
+          'The following files have been created:',
+          '- example.info',
+        ],
+      ],
+      [
+        'answers' => [
+          '<comment>Drupal 7</comment>',
+          'Module file',
+          'Example',
+          'example',
+        ],
+        'output' => [
+          'Command: d7:module-file',
+          '-----------------------',
+          'The following files have been created:',
+          '- example.module',
+        ],
+      ],
+      [
+        'answers' => [
+          '<comment>Drupal 7</comment>',
+          'settings.php',
+        ],
+        'output' => [
+          'Command: d7:settings.php',
+          '------------------------',
+          'The following files have been created:',
+          '- settings.php',
+        ],
+      ],
+
+      [
+        'answers' => [
+          '<comment>Drupal 8</comment>',
+          '<comment>Plugin</comment>',
+          // Test jumping on upper menu level.
+          '..',
+          '<comment>Plugin</comment>',
+          'Field formatter',
+          'Foo',
+          'foo',
+          'Zoo',
+        ],
+        'output' => [
+          'Command: d8:plugin:field-formatter',
+          '----------------------------------',
+          'The following files have been created:',
+          '- ZooFormatter.php',
+        ],
+      ],
+    ];
+
   }
 
 }

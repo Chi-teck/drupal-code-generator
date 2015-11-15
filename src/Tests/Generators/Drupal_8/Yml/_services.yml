@@ -1,0 +1,13 @@
+services:
+  foo.example:
+    class: Drupal\foo\FooExample
+    arguments: ['@entity.query', '@entity.manager']
+  foo.middleware:
+    class: Drupal\foo\FooMiddleware
+    tags:
+      - { name: http_middleware, priority: 10 }
+  foo.event_subscriber:
+      class: Drupal\foo\EventSubscriber\FooSubscriber
+      arguments: ['@current_user']
+      tags:
+        - { name: event_subscriber }

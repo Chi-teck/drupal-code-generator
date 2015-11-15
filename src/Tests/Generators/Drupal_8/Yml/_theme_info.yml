@@ -1,0 +1,21 @@
+name: Example
+type: theme
+base theme: garland
+description: Example description.
+package: custom
+version: 8.x-1.0-dev
+core: 8.x
+libraries:
+  - example/global
+regions:
+  header: Header
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  featured: Featured
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: Footer

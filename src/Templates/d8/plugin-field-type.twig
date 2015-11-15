@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\{{ module_machine_name }}\Plugin\Field\FieldType\{{ class }}.
+ * Contains \Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ class }}.
  */
 
-namespace Drupal\{{ module_machine_name }}\Plugin\Field\FieldType;
+namespace Drupal\{{ machine_name }}\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldDefinitionInterface;
@@ -15,12 +15,11 @@ use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Component\Utility\Random;
 
 /**
- * Defines the '{{ machine_name }}' field type.
+ * Defines the '{{ plugin_id }}' field type.
  *
  * @FieldType(
- *   id = "{{ machine_name }}",
- *   label = @Translation("{{ name }}"),
- *   description = @Translation("TODO: Create a description"),
+ *   id = "{{ plugin_id }}",
+ *   label = @Translation("{{ plugin_label }}"),
  *   category = @Translation("General"),
  *   default_widget = "string_textfield",
  *   default_formatter = "string"

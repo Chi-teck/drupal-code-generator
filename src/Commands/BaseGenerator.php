@@ -16,7 +16,7 @@ use Twig_Environment;
 /**
  * Base class for all generators.
  */
-abstract class BaseGenerator extends Command {
+abstract class BaseGenerator extends Command implements GeneratorInterface {
 
   /**
    * The command name.
@@ -156,11 +156,15 @@ abstract class BaseGenerator extends Command {
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    $directory = $input->getOption('destination') ? $input->getOption('destination') . '/' : './';
+    if (!$destination = $input->getOption('destination')) {
+      $destination = $this->getExtensionRoot() ? $this->getExtensionRoot() : '.';
+    }
+    $destination .= '/';
 
     // Save files.
     foreach ($this->files as $file_path => $content) {
-      $file_path = $directory . $file_path;
+
+      $file_path = $destination . $file_path;
       if ($this->filesystem->exists($file_path)) {
 
         $helper = $this->getHelper('question');
@@ -238,10 +242,45 @@ abstract class BaseGenerator extends Command {
   }
 
   /**
-   * Returns default value for the name question.
+   * Returns extension root.
+   *
+   * @return string|bool
+   *   Extension root directory or false if it wasn't found.
+   */
+  protected function getExtensionRoot() {
+    static $extension_root;
+    if ($extension_root === NULL) {
+      $extension_root = FALSE;
+      $directory = getcwd();
+      for ($i = 1; $i <= 5; $i++) {
+        $info_file = $directory . '/' . basename($directory) . '.info';
+        if (file_exists($info_file) || file_exists($info_file . '.yml')) {
+          $extension_root = $directory;
+          break;
+        }
+        $directory = dirname($directory);
+      }
+    }
+    return $extension_root;
+  }
+
+  /**
+   * Creates file path.
+   *
+   * @TODO: Create a test for this.
+   */
+  protected function createPath($prefix, $path, $extension_machine_name) {
+    if (basename($this->getExtensionRoot()) == $extension_machine_name) {
+      $path = $prefix . $path;
+    }
+    return $path;
+  }
+
+  /**
+   * Returns default value for the extension name question.
    */
   protected function defaultName() {
-    return self::machine2human($this->directoryBaseName);
+    return self::machine2human($this->getExtensionRoot() ? basename($this->getExtensionRoot()) : $this->directoryBaseName);
   }
 
   /**
@@ -249,6 +288,13 @@ abstract class BaseGenerator extends Command {
    */
   protected function defaultMachineName($vars) {
     return self::human2machine(isset($vars['name']) ? $vars['name'] : $this->directoryBaseName);
+  }
+
+  /**
+   * Creates default plugin ID.
+   */
+  protected function defaultPluginId($vars) {
+    return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
   }
 
   /**

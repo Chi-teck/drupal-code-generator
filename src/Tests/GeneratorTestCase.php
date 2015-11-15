@@ -118,11 +118,11 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
     $this->execute();
 
-    $this->assertRegExp('/The following files have been created:/', $this->display);
-    $this->assertRegExp('/' . preg_quote($this->target, '/') . '/', $this->display);
+    $output = "The following files have been created:\n- $this->target\n";
+
+    $this->assertEquals($output, $this->commandTester->getDisplay());
 
     $this->checkFile($this->target, $this->fixture);
-
   }
 
 }

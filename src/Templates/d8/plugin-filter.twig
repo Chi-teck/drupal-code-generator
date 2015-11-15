@@ -2,23 +2,23 @@
 
 /**
  * @file
- * Contains \Drupal\{{ module_machine_name }}\Plugin\Filter\{{ class }}.
+ * Contains \Drupal\{{ machine_name }}\Plugin\Filter\{{ class }}.
  */
 
-namespace Drupal\{{ module_machine_name }}\Plugin\Filter;
+namespace Drupal\{{ machine_name }}\Plugin\Filter;
 
 use Drupal\filter\Plugin\FilterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\filter\FilterProcessResult;
 
 /**
- * {{ description }}
+ * Provides a '{{ plugin_label }}' filter.
  *
  * @Filter(
- *   id = "{{ machine_name }}",
- *   title = @Translation("{{ name }}"),
+ *   id = "{{ plugin_id }}",
+ *   title = @Translation("{{ plugin_label }}"),
  *   type = Drupal\filter\Plugin\FilterInterface::TYPE_HTML_RESTRICTOR,
-  *   settings = {
+ *   settings = {
  *     "example_setting" = "foo",
  *   },
  *   weight = -10

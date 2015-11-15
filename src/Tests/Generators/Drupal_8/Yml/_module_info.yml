@@ -1,0 +1,11 @@
+name: Example
+type: module
+description: Example description.
+package: custom
+version: 8.x-1.0-dev
+core: 8.x
+dependencies:
+  - views
+  - node
+  - fields
+configure: example.settings

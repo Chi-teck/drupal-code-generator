@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
 class DrushCommand extends BaseGenerator {
 
   protected $name = 'other:drush-command';
-  protected $description = 'Generate Drush command';
+  protected $description = 'Generates Drush command';
   protected $alias = 'drush-command';
 
   /**

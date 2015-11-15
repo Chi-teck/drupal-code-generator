@@ -18,8 +18,22 @@ class HtmlPageTest extends GeneratorTestCase {
       'example.html',
     ];
     $this->target = 'example.html';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_html_page.html';
     parent::setUp();
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testExecute() {
+    $this->execute();
+
+    $output = "The following files have been created:\n- $this->target\n";
+    $output .= "- css/main.css\n- js/main.js\n";
+
+    $this->assertEquals($output, $this->commandTester->getDisplay());
+
+    $this->checkFile($this->target, $this->fixture);
   }
 
 }

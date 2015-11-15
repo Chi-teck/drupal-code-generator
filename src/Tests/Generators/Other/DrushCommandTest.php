@@ -23,7 +23,7 @@ class DrushCommandTest extends GeneratorTestCase {
       'bar',
     ];
     $this->target = 'example.drush.inc';
-    $this->fixture = __DIR__ . '/_' . $this->target;
+    $this->fixture = __DIR__ . '/_drush_command.inc';
     parent::setUp();
   }
 

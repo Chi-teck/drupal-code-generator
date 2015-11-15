@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Foo theme.
+ *
+ * @DCG: Optional.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ *
+ * @DCG: Optional.
+ */
+function foo_preprocess_html(&$variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.html.twig.
+ *
+ * @DCG: Optional.
+ */
+function foo_preprocess_page(&$variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ *
+ * @DCG: Optional.
+ */
+function foo_preprocess_node(&$variables) {
+
+}

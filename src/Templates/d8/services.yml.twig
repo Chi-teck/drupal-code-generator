@@ -1,0 +1,13 @@
+services:
+  {{ machine_name }}.example:
+    class: Drupal\{{ machine_name }}\{{ class }}Example
+    arguments: ['@entity.query', '@entity.manager']
+  {{ machine_name }}.middleware:
+    class: Drupal\{{ machine_name }}\{{ class }}Middleware
+    tags:
+      - { name: http_middleware, priority: 10 }
+  {{ machine_name }}.event_subscriber:
+      class: Drupal\{{ machine_name }}\EventSubscriber\{{ class }}Subscriber
+      arguments: ['@current_user']
+      tags:
+        - { name: event_subscriber }

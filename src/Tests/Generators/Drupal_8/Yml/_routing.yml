@@ -1,0 +1,14 @@
+example.reports:
+  path: '/admin/reports/example'
+  defaults:
+    _controller: '\Drupal\example\Controller\ExampleController::build'
+    _title: 'Example report'
+  requirements:
+    _permission: 'access site reports'
+example.settings:
+  path: '/admin/config/example/settings'
+  defaults:
+    _form: 'Drupal\example\Form\SettingsForm'
+    _title: 'Example settings'
+  requirements:
+    _permission: 'administer example configuration'
