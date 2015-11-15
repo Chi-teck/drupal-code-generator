@@ -18,5 +18,4 @@
     }
   };
 
-}(jQuery, Drupal));
-
+} (jQuery, Drupal));

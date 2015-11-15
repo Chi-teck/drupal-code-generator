@@ -35,11 +35,10 @@ class {{ class }} {
    *
    * @param QueryFactory $entity_query
    *   The entity query factory service.
-   *
    * @param EntityManagerInterface $entity_manager
-   * The entity manager.
+   *   The entity manager.
    */
-  public function __construct(QueryFactory $entity_query,  EntityManagerInterface $entity_manager) {
+  public function __construct(QueryFactory $entity_query, EntityManagerInterface $entity_manager) {
     $this->entityQuery = $entity_query;
     $this->nodeStorage = $entity_manager->getStorage('node');
   }
