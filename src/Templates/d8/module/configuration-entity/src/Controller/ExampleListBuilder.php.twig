@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Contains Drupal\{{ machine_name }}\Controller\{{ class_prefix }}ListBuilder.
+ */
+
+namespace Drupal\{{ machine_name }}\Controller;
+
+use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Provides a listing of {{ entity_label }}.
+ */
+class {{ class_prefix }}ListBuilder extends ConfigEntityListBuilder {
+  /**
+   * {@inheritdoc}
+   */
+  public function buildHeader() {
+    $header['label'] = $this->t('{{ entity_label }}');
+    $header['id'] = $this->t('Machine name');
+    $header['status'] = $this->t('Status');
+    return $header + parent::buildHeader();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildRow(EntityInterface $entity) {
+    $row['label'] = $this->getLabel($entity);
+    $row['id'] = $entity->id();
+    $row['status'] = $entity->getStatus() ? $this->t('Enabled') :  $this->t('Disabled');
+    return $row + parent::buildRow($entity);
+  }
+
+}

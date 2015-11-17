@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Contains Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form.
+ */
+
+namespace Drupal\{{ machine_name }}\Form;
+
+use Drupal\Core\Entity\EntityForm;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * {{ entity_label }} form.
+ */
+class {{ class_prefix }}Form extends EntityForm {
+  /**
+   * {@inheritdoc}
+   */
+  public function form(array $form, FormStateInterface $form_state) {
+
+    $form = parent::form($form, $form_state);
+
+    ${{ entity_id }} = $this->entity;
+    $form['label'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Label'),
+      '#maxlength' => 255,
+      '#default_value' => ${{ entity_id }}->label(),
+      '#description' => $this->t('Label for the {{ entity_label }}.'),
+      '#required' => TRUE,
+    );
+
+    $form['id'] = array(
+      '#type' => 'machine_name',
+      '#default_value' => ${{ entity_id }}->id(),
+      '#machine_name' => array(
+        'exists' => '\Drupal\{{ machine_name }}\Entity\{{ class_prefix }}::load',
+      ),
+      '#disabled' => !${{ entity_id }}->isNew(),
+    );
+
+    $form['status'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Enabled'),
+      '#default_value' => ${{ entity_id }}->getStatus(),
+    );
+
+    $form['description'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Description'),
+      '#default_value' => ${{ entity_id }}->getDescription(),
+      '#description' => t('Description of the {{ entity_id }}.')
+    );
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function save(array $form, FormStateInterface $form_state) {
+    ${{ entity_id }} = $this->entity;
+    $status = ${{ entity_id }}->save();
+
+    if ($status) {
+      drupal_set_message($this->t('Saved the %label {{ entity_label }}.', array(
+        '%label' => ${{ entity_id }}->label(),
+      )));
+    }
+    else {
+      drupal_set_message($this->t('The %label {{ entity_label }} was not saved.', array(
+        '%label' => ${{ entity_id }}->label(),
+      )));
+    }
+    $form_state->setRedirectUrl(${{ entity_id }}->urlInfo('collection'));
+  }
+
+}

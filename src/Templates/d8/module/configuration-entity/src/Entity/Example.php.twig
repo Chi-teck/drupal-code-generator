@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Contains Drupal\{{ machine_name }}\Entity\{{ class_prefix }}.
+ */
+
+namespace Drupal\{{ machine_name }}\Entity;
+
+use Drupal\Core\Config\Entity\ConfigEntityBase;
+use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
+
+/**
+ * Defines the {{ entity_label }} entity.
+ *
+ * @ConfigEntityType(
+ *   id = "{{ entity_id }}",
+ *   label = @Translation("{{ entity_label }}"),
+ *   handlers = {
+ *     "list_builder" = "Drupal\{{ machine_name }}\Controller\{{ class_prefix }}ListBuilder",
+ *     "form" = {
+ *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
+ *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
+ *       "delete" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}DeleteForm"
+ *     }
+ *   },
+ *   config_prefix = "{{ entity_id }}",
+ *   admin_permission = "administer site configuration",
+ *   links = {
+ *     "collection" = "/admin/structure/{{ entity_id }}",
+ *     "add-form" = "/admin/structure/{{ entity_id }}/add",
+ *     "edit-form" = "/admin/structure/{{ entity_id }}/{{ '{' }}{{ entity_id }}{{ '}' }}",
+ *     "delete-form" = "/admin/structure/{{ entity_id }}/{{ '{' }}{{ entity_id }}{{ '}' }}/delete"
+ *   },
+ *   entity_keys = {
+ *     "id" = "id",
+ *     "label" = "label",
+ *     "uuid" = "uuid"
+ *   }
+ * )
+ */
+class {{ class_prefix }} extends ConfigEntityBase implements {{ class_prefix }}Interface {
+  /**
+   * The {{ entity_label }} ID.
+   *
+   * @var string
+   */
+  protected $id;
+
+  /**
+   * The {{ entity_label }} label.
+   *
+   * @var string
+   */
+  protected $label;
+
+  /**
+   * The {{ entity_label }} status.
+   *
+   * @var boolean
+   */
+  protected $status;
+
+  /**
+   * The {{ entity_id }} description.
+   *
+   * @var string
+   */
+  protected $description;
+
+  /**
+   * Status getter.
+   */
+  public function getStatus() {
+    return $this->status;
+  }
+
+  /**
+   * Description getter.
+   */
+  public function getDescription() {
+    return $this->description;
+  }
+
+}
