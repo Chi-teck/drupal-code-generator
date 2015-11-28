@@ -59,9 +59,7 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
-    $values += [
-      'uid' => \Drupal::currentUser()->id(),
-    ];
+    $values += ['uid' => \Drupal::currentUser()->id()];
   }
 
   /**
@@ -115,17 +113,17 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
 
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the {{ entity_type_label }} entity.'))
+      ->setDescription(t('The ID of the {{ entity_type_label|lower }} entity.'))
       ->setReadOnly(TRUE);
 
     $fields['uuid'] = BaseFieldDefinition::create('uuid')
       ->setLabel(t('UUID'))
-      ->setDescription(t('The UUID of the {{ entity_type_label }} entity.'))
+      ->setDescription(t('The UUID of the {{ entity_type_label|lower }} entity.'))
       ->setReadOnly(TRUE);
 
     $fields['title'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Title'))
-      ->setDescription(t('The title of the {{ entity_type_label }} entity.'))
+      ->setDescription(t('The title of the {{ entity_type_label|lower }} entity.'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [

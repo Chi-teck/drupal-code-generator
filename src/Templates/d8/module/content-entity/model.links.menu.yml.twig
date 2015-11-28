@@ -1,10 +1,10 @@
 entity.{{ entity_type_id }}.collection:
   title: {{ entity_type_label }} listing
-  description: List of {{ entity_type_label|lower }}
+  description: List of {{ entity_type_label|plural|lower }}
   route_name: entity.{{ entity_type_id }}.collection
   parent: system.admin_content
 entity.{{ entity_type_id }}.settings:
   title: {{ entity_type_label }} settings
-  description: Configure {{ entity_type_label }} entity
+  description: Configure {{ entity_type_label|article }} entity type
   route_name:  entity.{{ entity_type_id }}.settings
   parent: system.admin_structure

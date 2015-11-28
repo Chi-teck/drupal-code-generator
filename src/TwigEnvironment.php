@@ -33,7 +33,7 @@ class TwigEnvironment extends Twig_Environment {
     }));
 
     $this->addFilter(new Twig_SimpleFilter('article', function ($string) {
-      $article = in_array($string[0], ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
+      $article = in_array(strtolower($string[0]), ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
       return $article . ' ' . $string;
     }));
 

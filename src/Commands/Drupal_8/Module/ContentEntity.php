@@ -25,10 +25,6 @@ class ContentEntity extends BaseGenerator {
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
-      'description' => [
-        'Module description',
-        'TODO: Write description for the module'
-      ],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
       'dependencies' => ['Dependencies (comma separated)', ''],
@@ -40,6 +36,10 @@ class ContentEntity extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     if ($vars['dependencies']) {
       $vars['dependencies'] = explode(',', $vars['dependencies']);
+    }
+
+    if ($vars['entity_base_path'][0] != '/') {
+      $vars['entity_base_path'] = '/' . $vars['entity_base_path'];
     }
 
     $vars['class_prefix'] = $this->human2class($vars['entity_type_label']);
@@ -96,7 +96,7 @@ class ContentEntity extends BaseGenerator {
    * Returns default entity base path.
    */
   protected function defaultEntityBasePath($vars) {
-    return '/' . $vars['entity_type_id'];
+    return '/' . str_replace('_', '-', $vars['entity_type_id']);
   }
 
 }

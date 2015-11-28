@@ -1,5 +1,15 @@
 name: {{ name }}
 type: module
-description: 'Provides an {{ entity_type_label|lower }} entity.'
-package: Other
+description: 'Provides {{ entity_type_label|article|lower }} entity.'
+package: {{ package }}
+version: {{ version }}
 core: 8.x
+{% if dependencies %}
+dependencies:
+{% for dependency in dependencies %}
+  - {{ dependency|trim|lower }}
+{% endfor %}
+{% endif %}
+{% if configure %}
+configure: {{ configure }}
+{% endif %}
