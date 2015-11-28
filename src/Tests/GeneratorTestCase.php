@@ -1,12 +1,13 @@
 <?php
+
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Commands\Other;
+use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig_Loader_Filesystem;
-use Twig_Environment;
 
 /**
  * Base class for generators tests.
@@ -49,7 +50,7 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
     $this->filesystem = new Filesystem();
     $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
-    $twig = new Twig_Environment($twig_loader);
+    $twig = new TwigEnvironment($twig_loader);
 
     $command_class = 'DrupalCodeGenerator\Commands\\' . $this->class;
     $this->command = new $command_class($this->filesystem, $twig);

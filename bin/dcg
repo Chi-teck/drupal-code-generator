@@ -4,6 +4,7 @@
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
 use DrupalCodeGenerator\GeneratorDiscovery;
+use DrupalCodeGenerator\TwigEnvironment;
 use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
@@ -20,10 +21,9 @@ $commands_directories[] = DCG_ROOT . '/src/Commands';
 $twig_directories[] = DCG_ROOT . '/src/Templates';
 
 // Discover generators.
-$filesystem = new Filesystem();
 $twig_loader = new Twig_Loader_Filesystem($twig_directories);
-$twig = new Twig_Environment($twig_loader);
-$discovery = new GeneratorDiscovery($commands_directories, $filesystem, $twig);
+$twig = new TwigEnvironment($twig_loader);
+$discovery = new GeneratorDiscovery($commands_directories, new Filesystem(), $twig);
 $generators = $discovery->getGenerators();
 
 // Create navigation command.
