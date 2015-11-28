@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Provides {{ entity_type_label|lower }} entity type.
+ */
+
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_theme().
+ */
+function {{ machine_name }}_theme() {
+  return [
+    '{{ entity_type_id }}' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for {{ entity_type_label|lower }} templates.
+ *
+ * Default template: {{ template_name }}.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the {{ entity_type_label|lower }} information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_{{ entity_type_id }}(array &$variables) {
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}

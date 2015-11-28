@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Contains Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form.
+ */
+
+namespace Drupal\{{ machine_name }}\Form;
+
+use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Form controller for the {{ entity_type_label|lower }} entity edit forms.
+ */
+class {{ class_prefix }}Form extends ContentEntityForm {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function save(array $form, FormStateInterface $form_state) {
+
+    $entity = $this->getEntity();
+    $result = $entity->save();
+    $link = $entity->toLink($this->t('View'))->toRenderable();
+
+    $message_arguments = ['%label' => $this->entity->label()];
+    $logger_aruments = $message_arguments + ['link' => render($link)];
+
+    if ($result == SAVED_NEW) {
+      drupal_set_message($this->t('Created new {{ entity_type_label|lower }} %label.', $message_arguments));
+      $this->logger('{{ machine_name }}')->notice('Creaqted new {{ entity_type_label|lower }} %label', $logger_aruments);
+    }
+    else {
+      drupal_set_message($this->t('Updated {{ entity_type_label|lower }} %label.', $message_arguments));
+      $this->logger('{{ machine_name }}')->notice('Creaqted new {{ entity_type_label|lower }} %label.', $logger_aruments);
+    }
+
+    $form_state->setRedirect('entity.{{ entity_type_id }}.canonical', ['{{ entity_type_id }}' => $entity->id()]);
+  }
+
+}

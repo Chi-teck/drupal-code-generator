@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Contains \Drupal\{{ machine_name }}\{{ class_prefix }}Interface.
+ */
+
+namespace Drupal\{{ machine_name }};
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\user\EntityOwnerInterface;
+use Drupal\Core\Entity\EntityChangedInterface;
+
+/**
+ * Provides an interface defining a {{ entity_type_label }} entity.
+ */
+interface {{ class_prefix }}Interface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface {
+
+}
