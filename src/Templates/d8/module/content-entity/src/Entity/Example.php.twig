@@ -65,8 +65,46 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
   /**
    * {@inheritdoc}
    */
+  public function getTitle() {
+    return $this->get('title')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setTitle($title) {
+    $this->set('title', $title);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isEnabled() {
+    return (bool) $this->get('status')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setStatus($status) {
+    $this->set('promote', $status);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCreatedTime() {
     return $this->get('created')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setCreatedTime($timestamp) {
+    $this->set('created', $timestamp);
+    return $this;
   }
 
   /**
@@ -133,7 +171,7 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
         'label' => 'hidden',
-        'type' => 'string',
+        'type' => 'string_textfield',
         'weight' => -5,
       ])
       ->setDisplayConfigurable('view', TRUE);
@@ -192,7 +230,7 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
-        'type' => 'entity_reference',
+        'type' => 'author',
         'weight' => 15,
       ])
       ->setDisplayConfigurable('view', TRUE);

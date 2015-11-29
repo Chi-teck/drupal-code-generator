@@ -1,10 +1,10 @@
-entity.{{ entity_type_id }}.canonical:
-  path: '{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
+entity.{{ entity_type_id }}.settings:
+  path: 'admin/structure/{{ entity_type_id}}_settings'
   defaults:
-    _entity_view: '{{ entity_type_id }}'
-    _title: '{{ entity_type_label }} Content'
+    _form: '\Drupal\{{ machine_name }}\Form\{{ class_prefix }}SettingsForm'
+    _title: '{{ entity_type_label }} Settings'
   requirements:
-    _entity_access: '{{ entity_type_id }}.view'
+    _permission: 'administer {{ entity_type_label|lower }} entity'
 
 entity.{{ entity_type_id }}.collection:
   path: '/admin/content/{{ entity_type_id }}'
@@ -13,6 +13,14 @@ entity.{{ entity_type_id }}.collection:
     _title: '{{ entity_type_label }} List'
   requirements:
     _permission: 'view {{ entity_type_label|lower }} entity'
+
+entity.{{ entity_type_id }}.canonical:
+  path: '{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
+  defaults:
+    _entity_view: '{{ entity_type_id }}'
+    _title: '{{ entity_type_label }} content'
+  requirements:
+    _entity_access: '{{ entity_type_id }}.view'
 
 entity.{{ entity_type_id }}.add_form:
   path: '{{ entity_base_path }}/add'
@@ -38,10 +46,3 @@ entity.{{ entity_type_id }}.delete_form:
   requirements:
     _entity_access: {{ entity_type_id }}.delete
 
-entity.{{ entity_type_id }}.settings:
-  path: 'admin/structure/{{ entity_type_id}}_settings'
-  defaults:
-    _form: '\Drupal\{{ machine_name }}\Form\{{ class_prefix }}SettingsForm'
-    _title: '{{ entity_type_label }} Settings'
-  requirements:
-    _permission: 'administer {{ entity_type_label|lower }} entity'

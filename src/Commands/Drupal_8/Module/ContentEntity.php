@@ -42,6 +42,8 @@ class ContentEntity extends BaseGenerator {
       $vars['entity_base_path'] = '/' . $vars['entity_base_path'];
     }
 
+    $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '.collection';
+
     $vars['class_prefix'] = $this->human2class($vars['entity_type_label']);
 
     $templates = [
@@ -96,7 +98,7 @@ class ContentEntity extends BaseGenerator {
    * Returns default entity base path.
    */
   protected function defaultEntityBasePath($vars) {
-    return '/' . str_replace('_', '-', $vars['entity_type_id']);
+    return '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']);
   }
 
 }

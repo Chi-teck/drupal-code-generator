@@ -16,4 +16,61 @@ use Drupal\Core\Entity\EntityChangedInterface;
  */
 interface {{ class_prefix }}Interface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface {
 
+  /**
+   * Gets the {{ entity_type_label|lower }} title.
+   *
+   * @return string
+   *   Title of the {{ entity_type_label|lower }}.
+   */
+  public function getTitle();
+
+  /**
+   * Sets the {{ entity_type_label|lower }} title.
+   *
+   * @param string $title
+   *   The {{ entity_type_label|lower }} title.
+   *
+   * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
+   *   The called {{ entity_type_label|lower }} entity.
+   */
+  public function setTitle($title);
+
+  /**
+   * Gets the {{ entity_type_label|lower }} creation timestamp.
+   *
+   * @return int
+   *   Creation timestamp of the {{ entity_type_label|lower }}.
+   */
+  public function getCreatedTime();
+
+  /**
+   * Sets the {{ entity_type_label|lower }} creation timestamp.
+   *
+   * @param int $timestamp
+   *   The {{ entity_type_label|lower }} creation timestamp.
+   *
+   * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
+   *   The called {{ entity_type_label|lower }} entity.
+   */
+  public function setCreatedTime($timestamp);
+
+  /**
+   * Returns the {{ entity_type_label|lower }} status.
+   *
+   * @return bool
+   *   TRUE if the {{ entity_type_label|lower }} is enabled, FALSE othervise.
+   */
+  public function isEnabled();
+
+  /**
+   * Sets the {{ entity_type_label|lower }} status.
+   *
+   * @param bool $status
+   *   TRUE to enable this {{ entity_type_label|lower }}, FALSE to disable.
+   *
+   * @return \Drupal\{{ machine_name }}\{{ class_prefix }}
+   *   The called {{ entity_type_label|lower }} entity.
+   */
+  public function setStatus($status);
+
 }
