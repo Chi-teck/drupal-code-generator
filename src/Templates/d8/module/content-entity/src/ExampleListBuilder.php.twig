@@ -35,7 +35,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
   protected $redirectDestination;
 
   /**
-   * Constructs a new NodeListBuilder object.
+   * Constructs a new {{ class_prefix }}ListBuilder object.
    *
    * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
    *   The entity type definition.
@@ -86,11 +86,21 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    */
   public function buildHeader() {
     $header['id'] = $this->t('ID');
+{% if title_base_field %}
     $header['title'] = $this->t('Title');
+{% endif %}
+{% if status_base_field %}
     $header['status'] = $this->t('Status');
+{% endif %}
+{% if author_base_field %}
     $header['uid'] = $this->t('Author');
+{% endif %}
+{% if created_base_field %}
     $header['created'] = $this->t('Created');
+{% endif %}
+{% if changed_base_field %}
     $header['changed'] = $this->t('Updated');
+{% endif %}
     return $header + parent::buildHeader();
   }
 
@@ -98,16 +108,26 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\zellon\Entity\Zellon */
-    $row['id'] = $entity->id();
+    /* @var $entity \Drupal\{{ machine_name }}\Entity\{{ class_prefix }} */
+    $row['id'] = $entity->{{ title_base_field ? 'id' : 'link' }}();
+{% if title_base_field %}
     $row['title'] = $entity->link();
-    $row['status'] = 1 ? $this->t('Enabled') : $this->t('Disabled');
-    $row['uid']['data'] = array(
+{% endif %}
+{% if status_base_field %}
+    $row['status'] = $entity->isEnabled() ? $this->t('Enabled') : $this->t('Disabled');
+{% endif %}
+{% if author_base_field %}
+    $row['uid']['data'] = [
       '#theme' => 'username',
       '#account' => $entity->getOwner(),
-    );
+    ];
+{% endif %}
+{% if created_base_field %}
     $row['created'] = $this->dateFormatter->format($entity->getChangedTime());
+{% endif %}
+{% if changed_base_field %}
     $row['changed'] = $this->dateFormatter->format($entity->getChangedTime());
+{% endif %}
     return $row + parent::buildRow($entity);
   }
 

@@ -1,7 +1,9 @@
+{% if fieldable %}
 entity.{{ entity_type_id }}.settings_tab:
   title: Settings
   route_name: entity.{{ entity_type_id }}.settings
   base_route: entity.{{ entity_type_id }}.settings
+{% endif %}
 entity.{{ entity_type_id }}.view:
   title: View
   route_name: entity.{{ entity_type_id }}.canonical

@@ -8,14 +8,19 @@
 namespace Drupal\{{ machine_name }};
 
 use Drupal\Core\Entity\ContentEntityInterface;
+{% if author_base_field %}
 use Drupal\user\EntityOwnerInterface;
+{% endif %}
+{% if changed_base_field %}
 use Drupal\Core\Entity\EntityChangedInterface;
+{% endif %}
 
 /**
  * Provides an interface defining {{ entity_type_label|article|lower }} entity type.
  */
-interface {{ class_prefix }}Interface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface {
+interface {{ class_prefix }}Interface extends ContentEntityInterface{% if author_base_field %}, EntityOwnerInterface{% endif %}{% if changed_base_field %}, EntityChangedInterface{% endif %} {
 
+{% if title_base_field %}
   /**
    * Gets the {{ entity_type_label|lower }} title.
    *
@@ -35,6 +40,8 @@ interface {{ class_prefix }}Interface extends ContentEntityInterface, EntityOwne
    */
   public function setTitle($title);
 
+{% endif %}
+{% if created_base_field %}
   /**
    * Gets the {{ entity_type_label|lower }} creation timestamp.
    *
@@ -54,6 +61,8 @@ interface {{ class_prefix }}Interface extends ContentEntityInterface, EntityOwne
    */
   public function setCreatedTime($timestamp);
 
+{% endif %}
+{% if status_base_field %}
   /**
    * Returns the {{ entity_type_label|lower }} status.
    *
@@ -68,9 +77,10 @@ interface {{ class_prefix }}Interface extends ContentEntityInterface, EntityOwne
    * @param bool $status
    *   TRUE to enable this {{ entity_type_label|lower }}, FALSE to disable.
    *
-   * @return \Drupal\{{ machine_name }}\{{ class_prefix }}
+   * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
    *   The called {{ entity_type_label|lower }} entity.
    */
   public function setStatus($status);
 
+{% endif %}
 }

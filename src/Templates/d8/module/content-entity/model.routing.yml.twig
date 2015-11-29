@@ -1,3 +1,4 @@
+{% if fieldable %}
 entity.{{ entity_type_id }}.settings:
   path: 'admin/structure/{{ entity_type_id}}_settings'
   defaults:
@@ -5,12 +6,12 @@ entity.{{ entity_type_id }}.settings:
     _title: '{{ entity_type_label }} Settings'
   requirements:
     _permission: 'administer {{ entity_type_label|lower }} entity'
-
+{% endif %}
 entity.{{ entity_type_id }}.collection:
   path: '/admin/content/{{ entity_type_id }}'
   defaults:
     _entity_list: '{{ entity_type_id }}'
-    _title: '{{ entity_type_label }} List'
+    _title: '{{ entity_type_label }} list'
   requirements:
     _permission: 'view {{ entity_type_label|lower }} entity'
 
@@ -18,7 +19,7 @@ entity.{{ entity_type_id }}.canonical:
   path: '{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
   defaults:
     _entity_view: '{{ entity_type_id }}'
-    _title: '{{ entity_type_label }} content'
+    _title: '{{ entity_type_label }}'
   requirements:
     _entity_access: '{{ entity_type_id }}.view'
 

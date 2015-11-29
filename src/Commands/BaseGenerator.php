@@ -233,10 +233,17 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
     $question_text .= ': ';
 
+    if ($default_value == 'yes' || $default_value == 'no') {
+      $question = new ConfirmationQuestion($question_text, $default_value == 'yes');
+    }
+    else {
+      $question = new Question($question_text, $default_value);
+    }
+
     return $helper->ask(
       $input,
       $output,
-      new Question($question_text, $default_value)
+      $question
     );
 
   }

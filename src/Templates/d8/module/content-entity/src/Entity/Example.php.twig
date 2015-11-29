@@ -12,8 +12,12 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
+{% if author_base_field %}
 use Drupal\user\UserInterface;
+{% endif %}
+{% if changed_base_field %}
 use Drupal\Core\Entity\EntityChangedTrait;
+{% endif %}
 
 /**
  * Defines the {{ entity_type_label }} entity class.
@@ -35,7 +39,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   admin_permission = "administer {{ entity_type_id }} entity",
  *   entity_keys = {
  *     "id" = "id",
- *     "label" = "title",
+ *     "label" = "{{ title_base_field ? 'title' : 'id' }}",
  *     "uuid" = "uuid"
  *   },
  *   links = {
@@ -44,13 +48,15 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
  *     "collection" = "/admin/content/{{ entity_type_id }}"
  *   },
- *   field_ui_base_route = "entity.{{ entity_type_id }}.settings",
+ {% if fieldable %}*   field_ui_base_route = "entity.{{ entity_type_id }}.settings",{% endif %}
  * )
  */
 class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}Interface {
 
+{% if changed_base_field %}
   use EntityChangedTrait;
 
+{% endif %}
   /**
    * {@inheritdoc}
    *
@@ -62,6 +68,7 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
     $values += ['uid' => \Drupal::currentUser()->id()];
   }
 
+{% if title_base_field %}
   /**
    * {@inheritdoc}
    */
@@ -77,6 +84,8 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
     return $this;
   }
 
+{% endif %}
+{% if status_base_field %}
   /**
    * {@inheritdoc}
    */
@@ -92,6 +101,8 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
     return $this;
   }
 
+{% endif %}
+{% if created_base_field %}
   /**
    * {@inheritdoc}
    */
@@ -107,13 +118,8 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
     return $this;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
-
+{% endif %}
+{% if author_base_field %}
   /**
    * {@inheritdoc}
    */
@@ -144,6 +150,7 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
     return $this;
   }
 
+{% endif %}
   /**
    * {@inheritdoc}
    */
@@ -159,6 +166,7 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ->setDescription(t('The UUID of the {{ entity_type_label|lower }} entity.'))
       ->setReadOnly(TRUE);
 
+{% if title_base_field %}
     $fields['title'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Title'))
       ->setDescription(t('The title of the {{ entity_type_label|lower }} entity.'))
@@ -176,6 +184,8 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ])
       ->setDisplayConfigurable('view', TRUE);
 
+{% endif %}
+{% if status_base_field %}
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Status'))
       ->setDescription(t('A boolean indicating whether the {{ entity_type_label|lower }} is enabled.'))
@@ -199,6 +209,8 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ])
       ->setDisplayConfigurable('view', TRUE);
 
+{% endif %}
+{% if description_base_field %}
     $fields['description'] = BaseFieldDefinition::create('text_long')
       ->setLabel(t('Description'))
       ->setDescription(t('A description of the {{ entity_type_label|lower }}.'))
@@ -214,6 +226,8 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ])
       ->setDisplayConfigurable('view', TRUE);
 
+{% endif %}
+{% if author_base_field %}
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Author'))
       ->setDescription(t('The user ID of the {{ entity_type_label|lower }} author.'))
@@ -235,6 +249,8 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ])
       ->setDisplayConfigurable('view', TRUE);
 
+{% endif %}
+{% if created_base_field %}
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
       ->setDescription(t('The time that the {{ entity_type_label|lower }} was created.'))
@@ -250,10 +266,13 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ])
       ->setDisplayConfigurable('view', TRUE);
 
+{% endif %}
+{% if changed_base_field %}
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the {{ entity_type_label|lower }} was last edited.'));
 
+{% endif %}
     return $fields;
   }
 

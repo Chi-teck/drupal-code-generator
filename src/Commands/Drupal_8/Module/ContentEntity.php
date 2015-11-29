@@ -31,9 +31,17 @@ class ContentEntity extends BaseGenerator {
       'entity_type_label' => ['Entity type label', [$this, 'defaultEntityTypeLabel']],
       'entity_type_id' => ['Entity type id', [$this, 'defaultEntityTypeId']],
       'entity_base_path' => ['Entity base path', [$this, 'defaultEntityBasePath']],
+      'fieldable' => ['Make the entity type fieldable?', 'yes'],
+      'title_base_field' => ['Add "title" base field?', 'yes'],
+      'status_base_field' => ['Add "status" base field?', 'yes'],
+      'created_base_field' => ['Add "created" base field?', 'yes'],
+      'changed_base_field' => ['Add "changed" base field?', 'yes'],
+      'author_base_field' => ['Add "author" base field?', 'yes'],
+      'description_base_field' => ['Add "description" base field?', 'yes'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
+
     if ($vars['dependencies']) {
       $vars['dependencies'] = explode(',', $vars['dependencies']);
     }
@@ -42,7 +50,9 @@ class ContentEntity extends BaseGenerator {
       $vars['entity_base_path'] = '/' . $vars['entity_base_path'];
     }
 
-    $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '.collection';
+    if ($vars['fieldable']) {
+      $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '.collection';
+    }
 
     $vars['class_prefix'] = $this->human2class($vars['entity_type_label']);
 
