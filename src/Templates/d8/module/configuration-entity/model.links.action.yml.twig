@@ -1,5 +1,5 @@
-entity.{{ entity_id }}.add_form:
-  route_name: 'entity.{{ entity_id }}.add_form'
-  title: 'Add {{ entity_label }}'
+entity.{{ entity_type_id }}.add_form:
+  route_name: 'entity.{{ entity_type_id }}.add_form'
+  title: 'Add {{ entity_type_label|lower }}'
   appears_on:
-    - entity.{{ entity_id }}.collection
+    - entity.{{ entity_type_id }}.collection

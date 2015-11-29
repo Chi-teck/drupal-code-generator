@@ -1,33 +1,32 @@
-# {{ entity_label }} routing definition
-entity.{{ entity_id }}.collection:
-  path: '/admin/structure/{{ entity_id }}'
+entity.{{ entity_type_id }}.collection:
+  path: '/admin/structure/{{ entity_type_id|underscore2hyphen }}'
   defaults:
-    _entity_list: '{{ entity_id }}'
-    _title: '{{ entity_label }} Configuration'
+    _entity_list: '{{ entity_type_id }}'
+    _title: '{{ entity_type_label }} configuration'
   requirements:
     _permission: 'administer site configuration'
 
-entity.{{ entity_id }}.add_form:
-  path: '/admin/structure/{{ entity_id }}/add'
+entity.{{ entity_type_id }}.add_form:
+  path: '/admin/structure/{{ entity_type_id }}/add'
   defaults:
-    _entity_form: '{{ entity_id }}.add'
-    _title: 'Add {{ entity_label }}'
+    _entity_form: '{{ entity_type_id }}.add'
+    _title: 'Add {{ entity_type_label|article|lower }}'
   requirements:
     _permission: 'administer site configuration'
 
-entity.{{ entity_id }}.edit_form:
-  path: '/admin/structure/{{ entity_id }}/{{ '{' }}{{ entity_id }}{{ '}' }}'
+entity.{{ entity_type_id }}.edit_form:
+  path: '/admin/structure/{{ entity_type_id|underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
   defaults:
-    _entity_form: '{{ entity_id }}.edit'
-    _title: 'Edit {{ entity_label }}'
+    _entity_form: '{{ entity_type_id }}.edit'
+    _title: 'Edit {{ entity_type_label|article|lower }}'
   requirements:
     _permission: 'administer site configuration'
 
-entity.{{ entity_id }}.delete_form:
-  path: '/admin/structure/{{ entity_id }}/{{ '{' }}{{ entity_id }}{{ '}' }}/delete'
+entity.{{ entity_type_id }}.delete_form:
+  path: '/admin/structure/{{ entity_type_id|underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete'
   defaults:
-    _entity_form: '{{ entity_id }}.delete'
-    _title: 'Delete {{ entity_label }}'
+    _entity_form: '{{ entity_type_id }}.delete'
+    _title: 'Delete {{ entity_type_label|article|lower }}'
   requirements:
     _permission: 'administer site configuration'
 

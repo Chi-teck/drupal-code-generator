@@ -23,15 +23,11 @@ class ConfigurationEntity extends BaseGenerator {
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
-      'description' => [
-        'Module description',
-        'TODO: Write description for the module'
-      ],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
       'dependencies' => ['Dependencies (comma separated)', ''],
-      'entity_label' => ['Entity label', [$this, 'defaultEntityLabel']],
-      'entity_id' => ['Entity id', [$this, 'defaultEntityId']],
+      'entity_type_label' => ['Entity type label', [$this, 'defaultEntityTypeLabel']],
+      'entity_type_id' => ['Entity type id', [$this, 'defaultEntityTypeId']],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -39,7 +35,7 @@ class ConfigurationEntity extends BaseGenerator {
       $vars['dependencies'] = explode(',', $vars['dependencies']);
     }
 
-    $vars['class_prefix'] = $this->human2class($vars['entity_label']);
+    $vars['class_prefix'] = $this->human2class($vars['entity_type_label']);
 
     $templates = [
       'model.info.yml.twig',
@@ -50,8 +46,9 @@ class ConfigurationEntity extends BaseGenerator {
       'src/Entity/Example.php.twig',
       'model.routing.yml.twig',
       'model.links.action.yml.twig',
-      'config/schema/model.schema.yml.twig',
       'model.links.menu.yml.twig',
+      'model.permissions.yml.twig',
+      'config/schema/model.schema.yml.twig',
     ];
 
     $templates_path = 'd8/module/configuration-entity/';
@@ -65,15 +62,15 @@ class ConfigurationEntity extends BaseGenerator {
   /**
    * Returns default entity label.
    */
-  protected function defaultEntityLabel($vars) {
+  protected function defaultEntityTypeLabel($vars) {
     return $vars['name'];
   }
 
   /**
    * Returns default entity ID.
    */
-  protected function defaultEntityId($vars) {
-    return $this->human2machine($vars['entity_label']);
+  protected function defaultEntityTypeId($vars) {
+    return $this->human2machine($vars['entity_type_label']);
   }
 
 }

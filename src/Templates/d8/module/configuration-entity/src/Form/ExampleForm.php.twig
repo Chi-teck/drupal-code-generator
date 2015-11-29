@@ -11,9 +11,10 @@ use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * {{ entity_label }} form.
+ * {{ entity_type_label }} form.
  */
 class {{ class_prefix }}Form extends EntityForm {
+
   /**
    * {@inheritdoc}
    */
@@ -21,37 +22,36 @@ class {{ class_prefix }}Form extends EntityForm {
 
     $form = parent::form($form, $form_state);
 
-    ${{ entity_id }} = $this->entity;
-    $form['label'] = array(
+    $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
-      '#default_value' => ${{ entity_id }}->label(),
-      '#description' => $this->t('Label for the {{ entity_label }}.'),
+      '#default_value' => $this->entity->label(),
+      '#description' => $this->t('Label for the {{ entity_type_label|lower }}.'),
       '#required' => TRUE,
-    );
+    ];
 
-    $form['id'] = array(
+    $form['id'] = [
       '#type' => 'machine_name',
-      '#default_value' => ${{ entity_id }}->id(),
-      '#machine_name' => array(
+      '#default_value' => $this->entity->id(),
+      '#machine_name' => [
         'exists' => '\Drupal\{{ machine_name }}\Entity\{{ class_prefix }}::load',
-      ),
-      '#disabled' => !${{ entity_id }}->isNew(),
-    );
+      ],
+      '#disabled' => !$this->entity->isNew(),
+    ];
 
-    $form['status'] = array(
+    $form['status'] = [
       '#type' => 'checkbox',
       '#title' => t('Enabled'),
-      '#default_value' => ${{ entity_id }}->getStatus(),
-    );
+      '#default_value' => $this->entity->getStatus(),
+    ];
 
-    $form['description'] = array(
+    $form['description'] = [
       '#type' => 'textarea',
       '#title' => t('Description'),
-      '#default_value' => ${{ entity_id }}->getDescription(),
-      '#description' => t('Description of the {{ entity_id }}.')
-    );
+      '#default_value' => $this->entity->getDescription(),
+      '#description' => t('Description of the {{ entity_type_label|lower }}.')
+    ];
 
     return $form;
   }
@@ -60,20 +60,19 @@ class {{ class_prefix }}Form extends EntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-    ${{ entity_id }} = $this->entity;
-    $status = ${{ entity_id }}->save();
 
-    if ($status) {
-      drupal_set_message($this->t('Saved the %label {{ entity_label }}.', array(
-        '%label' => ${{ entity_id }}->label(),
-      )));
+    if ($this->entity->save()) {
+      drupal_set_message($this->t('Saved the %label {{ entity_type_label|lower }}.', [
+        '%label' => $this->entity->label(),
+      ]));
     }
     else {
-      drupal_set_message($this->t('The %label {{ entity_label }} was not saved.', array(
-        '%label' => ${{ entity_id }}->label(),
-      )));
+      drupal_set_message($this->t('The %label {{ entity_type_label|lower }} was not saved.', [
+        '%label' => $this->entity->label(),
+      ]));
     }
-    $form_state->setRedirectUrl(${{ entity_id }}->urlInfo('collection'));
+
+    $form_state->setRedirectUrl($this->entity->urlInfo('collection'));
   }
 
 }

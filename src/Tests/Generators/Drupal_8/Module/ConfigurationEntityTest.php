@@ -42,8 +42,9 @@ class ConfigurationEntityTest extends GeneratorTestCase {
     $lines[] = '- foo/src/Entity/Example.php';
     $lines[] = '- foo/foo.routing.yml';
     $lines[] = '- foo/foo.links.action.yml';
-    $lines[] = '- foo/config/schema/foo.schema.yml';
     $lines[] = '- foo/foo.links.menu.yml';
+    $lines[] = '- foo/foo.permissions.yml';
+    $lines[] = '- foo/config/schema/foo.schema.yml';
     $lines[] = '';
 
     $output = implode("\n", $lines);
