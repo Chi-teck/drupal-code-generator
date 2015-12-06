@@ -73,7 +73,7 @@ class Standard extends BaseGenerator {
     $block_vars['class'] = $this->human2class($block_vars['plugin_label'] . 'Block');
 
     $this->files[$vars['machine_name'] . '/src/Plugin/Block/' . $block_vars['class'] . '.php'] = $this->render(
-      'd8/plugin-block.twig',
+      'd8/plugin/block.twig',
       $vars + $block_vars
     );
 

@@ -30,7 +30,7 @@ class Filter extends BaseGenerator {
     $vars['class'] = $this->human2class($vars['plugin_label']);
 
     $path = $this->createPath('src/Plugin/Filter/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/plugin-filter.twig', $vars);
+    $this->files[$path] = $this->render('d8/plugin/filter.twig', $vars);
   }
 
 }

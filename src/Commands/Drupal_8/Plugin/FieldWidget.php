@@ -30,7 +30,7 @@ class FieldWidget extends BaseGenerator {
     $vars['class'] = $this->human2class($vars['plugin_label'] . 'Widget');
 
     $path = $this->createPath('src/Plugin/Field/FieldWidget/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/plugin-field-widget.twig', $vars);
+    $this->files[$path] = $this->render('d8/plugin/field-widget.twig', $vars);
   }
 
 }

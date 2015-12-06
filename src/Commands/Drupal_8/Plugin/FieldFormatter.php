@@ -30,7 +30,7 @@ class FieldFormatter extends BaseGenerator {
     $vars['class'] = $this->human2class($vars['plugin_label'] . 'Formatter');
 
     $path = $this->createPath('src/Plugin/Field/FieldFormatter/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/plugin-field-formatter.twig', $vars);
+    $this->files[$path] = $this->render('d8/plugin/field-formatter.twig', $vars);
   }
 
 }

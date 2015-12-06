@@ -30,7 +30,7 @@ class FieldType extends BaseGenerator {
     $vars['class'] = $this->human2class($vars['plugin_label'] . 'Item');
 
     $path = $this->createPath('src/Plugin/Field/FieldType/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/plugin-field-type.twig', $vars);
+    $this->files[$path] = $this->render('d8/plugin/field-type.twig', $vars);
   }
 
 }

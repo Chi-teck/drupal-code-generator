@@ -31,7 +31,7 @@ class Block extends BaseGenerator {
     $vars['class'] = $this->human2class($vars['plugin_label'] . 'Block');
 
     $path = $this->createPath('src/Plugin/Block/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/plugin-block.twig', $vars);
+    $this->files[$path] = $this->render('d8/plugin/block.twig', $vars);
   }
 
 }
