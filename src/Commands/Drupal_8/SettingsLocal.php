@@ -21,14 +21,21 @@ class SettingsLocal extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'database' => ['Database name', 'drupal_8'],
-      'username' => ['Database username', 'root'],
-      'password' => ['Database password', ''],
-      'host' => ['Database host', 'localhost'],
-      'driver' => ['Database type', 'mysql'],
+      'db_override' => ['Override database configuration?', 'yes'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
+
+    if ($vars['db_override']) {
+      $questions = [
+        'database' => ['Database name', 'drupal_8'],
+        'username' => ['Database username', 'root'],
+        'password' => ['Database password', ''],
+        'host' => ['Database host', 'localhost'],
+        'driver' => ['Database type', 'mysql'],
+      ];
+      $vars += $this->collectVars($input, $output, $questions);
+    }
 
     $this->files['settings.local.php'] = $this->render('d8/settings.local.twig', $vars);
 

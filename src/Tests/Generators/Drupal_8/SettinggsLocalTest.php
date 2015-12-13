@@ -15,6 +15,7 @@ class SettingsLocalTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_8\SettingsLocal';
     $this->answers = [
+      'yes',
       'drupal_8',
       'root',
       '123',
@@ -22,7 +23,7 @@ class SettingsLocalTest extends GeneratorTestCase {
       'mysql',
     ];
     $this->target = 'settings.local.php';
-    $this->fixture = __DIR__ . '/_settings_local.php';
+    $this->fixture = __DIR__ . '/_settings.local.php';
 
     parent::setUp();
   }

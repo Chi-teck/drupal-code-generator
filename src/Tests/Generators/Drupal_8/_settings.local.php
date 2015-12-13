@@ -104,7 +104,6 @@ $config['system.performance']['cache.page.max_age'] = 0;
  * Automated cron interval.
  */
 $config['automated_cron.settings']['interval'] = 0;
-{% if db_override %}
 
 /**
  * Database settings.
@@ -112,13 +111,12 @@ $config['automated_cron.settings']['interval'] = 0;
  * @DCG: Make sure this configuration is removed from settings.php.
  */
 $databases['default']['default'] = array (
-  'database' => '{{ database }}',
-  'username' => '{{ username }}',
-  'password' => '{{ password }}',
+  'database' => 'drupal_8',
+  'username' => 'root',
+  'password' => '123',
   'prefix' => '',
-  'host' => '{{ host }}',
+  'host' => 'localhost',
   'port' => '',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\{{ driver }}',
-  'driver' => '{{ driver }}',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
 );
-{% endif %}
