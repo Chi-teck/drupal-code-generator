@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Contains Drupal\{{ machine_name }}\{{ class_prefix }}AccessControlHandler.
+ */
+
+namespace Drupal\{{ machine_name }};
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityAccessControlHandler;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
+
+/**
+ * Defines the access control handler for the {{ entity_type_label|lower }} entity type.
+ */
+class {{ class_prefix }}AccessControlHandler extends EntityAccessControlHandler {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
+
+    switch ($operation) {
+      case 'view':
+        return AccessResult::allowedIfHasPermission($account, 'view {{ entity_type_id }}');
+
+      case 'edit':
+      case 'update':
+        return AccessResult::allowedIfHasPermissions($account, ['edit {{ entity_type_id }}', 'administer {{ entity_type_id }}'], 'OR');
+
+      case 'delete':
+        return AccessResult::allowedIfHasPermissions($account, ['delete {{ entity_type_id }}', 'administer {{ entity_type_id }}'], 'OR');
+
+      default:
+        // No opinion.
+        return AccessResult::neutral();
+    }
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
+    return AccessResult::allowedIfHasPermissions($account, ['create {{ entity_type_id }}', 'administer {{ entity_type_id }}'], 'OR');
+  }
+
+}

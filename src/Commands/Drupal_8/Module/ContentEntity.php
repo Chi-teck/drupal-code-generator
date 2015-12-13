@@ -32,7 +32,8 @@ class ContentEntity extends BaseGenerator {
       'entity_type_id' => ['Entity type id', [$this, 'defaultEntityTypeId']],
       'entity_base_path' => ['Entity base path', [$this, 'defaultEntityBasePath']],
       'fieldable' => ['Make the entity type fieldable?', 'yes'],
-      'template' => ['Provide entity template?', 'yes'],
+      'template' => ['Create entity template?', 'yes'],
+      'access_controller' => ['Create CRUD permissions?', 'no'],
       'title_base_field' => ['Add "title" base field?', 'yes'],
       'status_base_field' => ['Add "status" base field?', 'yes'],
       'created_base_field' => ['Add "created" base field?', 'yes'],
@@ -79,6 +80,10 @@ class ContentEntity extends BaseGenerator {
       $templates[] = 'src/ExampleViewBuilder.php.twig';
     }
 
+    if ($vars['access_controller']) {
+      $templates[] = 'src/ExampleAccessControlHandler.php.twig';
+    }
+
     $templates_path = 'd8/module/content-entity/';
 
     $vars['template_name'] = str_replace('_', '-', $vars['entity_type_id']) . '.html.twig';
@@ -90,7 +95,6 @@ class ContentEntity extends BaseGenerator {
       $path = preg_replace('#\.twig$#', '', $path);
       $this->files[$path] = $this->render($templates_path . $template, $vars);
     }
-
   }
 
   /**

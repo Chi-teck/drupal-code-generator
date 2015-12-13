@@ -17,19 +17,21 @@ class ContentEntityTest extends GeneratorTestCase {
     $this->answers = [
       'Foo',
       'foo',
-      'Description',
       'Custom',
       '8.x-1.0',
+      'views, fields, node',
       'Example',
-      'example',
+      'foo_example',
       '/example',
-      'yes',
-      'yes',
-      'yes',
-      'yes',
-      'yes',
-      'yes',
-      'yes',
+      TRUE,
+      TRUE,
+      FALSE,
+      TRUE,
+      TRUE,
+      TRUE,
+      TRUE,
+      TRUE,
+      TRUE,
     ];
     parent::setUp();
   }
@@ -53,7 +55,7 @@ class ContentEntityTest extends GeneratorTestCase {
     $lines[] = '- foo/src/ExampleListBuilder.php';
     $lines[] = '- foo/src/Form/ExampleForm.php';
     $lines[] = '- foo/src/Form/ExampleSettingsForm.php';
-    $lines[] = '- foo/templates/example.html.twig';
+    $lines[] = '- foo/templates/foo-example.html.twig';
     $lines[] = '- foo/foo.module';
     $lines[] = '';
 

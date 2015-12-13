@@ -20,7 +20,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% endif %}
 
 /**
- * Defines the {{ entity_type_label }} entity class.
+ * Defines the {{ entity_type_label|lower }} entity class.
  *
  * @ContentEntityType(
  *   id = "{{ entity_type_id }}",
@@ -33,6 +33,9 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% endif %}
  *     "list_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}ListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
+{% if access_controller %}
+ *     "access" = "Drupal\{{ machine_name }}\{{ class_prefix }}AccessControlHandler",
+{% endif %}
  *     "form" = {
  *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
  *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
@@ -40,7 +43,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     },
  *   },
  *   base_table = "{{ entity_type_id }}",
- *   admin_permission = "administer {{ entity_type_id }} entity",
+ *   admin_permission = "administer {{ entity_type_id }}",
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "{{ title_base_field ? 'title' : 'id' }}",
@@ -64,8 +67,8 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
   /**
    * {@inheritdoc}
    *
-   * When a new entity instance is added, set the uid entity reference to
-   * the current user as the creator of the instance.
+   * When a new {{ entity_type_label|lower }} entity is created, set the uid entity reference to
+   * the current user as the creator of the entity.
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
