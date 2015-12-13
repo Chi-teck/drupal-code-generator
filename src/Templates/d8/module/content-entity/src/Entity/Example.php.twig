@@ -26,7 +26,11 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   id = "{{ entity_type_id }}",
  *   label = @Translation("{{ entity_type_label }}"),
  *   handlers = {
+{% if template %}
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+{% else %}
+ *     "view_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}ViewBuilder",
+{% endif %}
  *     "list_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}ListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {

@@ -46,7 +46,6 @@ class ContentEntityTest extends GeneratorTestCase {
     $lines[] = '- foo/foo.links.action.yml';
     $lines[] = '- foo/foo.links.menu.yml';
     $lines[] = '- foo/foo.links.task.yml';
-    $lines[] = '- foo/foo.module';
     $lines[] = '- foo/foo.permissions.yml';
     $lines[] = '- foo/foo.routing.yml';
     $lines[] = '- foo/src/Entity/Example.php';
@@ -55,6 +54,7 @@ class ContentEntityTest extends GeneratorTestCase {
     $lines[] = '- foo/src/Form/ExampleForm.php';
     $lines[] = '- foo/src/Form/ExampleSettingsForm.php';
     $lines[] = '- foo/templates/example.html.twig';
+    $lines[] = '- foo/foo.module';
     $lines[] = '';
 
     $output = implode("\n", $lines);

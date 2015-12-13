@@ -32,6 +32,7 @@ class ContentEntity extends BaseGenerator {
       'entity_type_id' => ['Entity type id', [$this, 'defaultEntityTypeId']],
       'entity_base_path' => ['Entity base path', [$this, 'defaultEntityBasePath']],
       'fieldable' => ['Make the entity type fieldable?', 'yes'],
+      'template' => ['Provide entity template?', 'yes'],
       'title_base_field' => ['Add "title" base field?', 'yes'],
       'status_base_field' => ['Add "status" base field?', 'yes'],
       'created_base_field' => ['Add "created" base field?', 'yes'],
@@ -61,7 +62,6 @@ class ContentEntity extends BaseGenerator {
       'model.links.action.yml.twig',
       'model.links.menu.yml.twig',
       'model.links.task.yml.twig',
-      'model.module.twig',
       'model.permissions.yml.twig',
       'model.routing.yml.twig',
       'src/Entity/Example.php.twig',
@@ -69,8 +69,15 @@ class ContentEntity extends BaseGenerator {
       'src/ExampleListBuilder.php.twig',
       'src/Form/ExampleForm.php.twig',
       'src/Form/ExampleSettingsForm.php.twig',
-      'templates/model-example.html.twig.twig',
     ];
+
+    if ($vars['template']) {
+      $templates[] = 'templates/model-example.html.twig.twig';
+      $templates[] = 'model.module.twig';
+    }
+    else {
+      $templates[] = 'src/ExampleViewBuilder.php.twig';
+    }
 
     $templates_path = 'd8/module/content-entity/';
 
