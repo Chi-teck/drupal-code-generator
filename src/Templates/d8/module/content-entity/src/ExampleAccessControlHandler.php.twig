@@ -26,7 +26,6 @@ class {{ class_prefix }}AccessControlHandler extends EntityAccessControlHandler 
       case 'view':
         return AccessResult::allowedIfHasPermission($account, 'view {{ entity_type_id }}');
 
-      case 'edit':
       case 'update':
         return AccessResult::allowedIfHasPermissions($account, ['edit {{ entity_type_id }}', 'administer {{ entity_type_id }}'], 'OR');
 

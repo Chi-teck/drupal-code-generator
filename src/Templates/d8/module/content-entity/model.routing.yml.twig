@@ -37,7 +37,7 @@ entity.{{ entity_type_id }}.edit_form:
     _entity_form: {{ entity_type_id }}.edit
     _title: 'Edit {{ entity_type_label }}'
   requirements:
-    _entity_access: {{ entity_type_id }}.edit
+    _entity_access: {{ entity_type_id }}.update
 
 entity.{{ entity_type_id }}.delete_form:
   path: '{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete'
