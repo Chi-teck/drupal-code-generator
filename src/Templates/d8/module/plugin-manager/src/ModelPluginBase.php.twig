@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Contains \Drupal\{{ machine_name }}\{{ class_prefix }}PluginBase.
+ */
+
+namespace Drupal\{{ machine_name }};
+
+use Drupal\Component\Plugin\PluginBase;
+
+/**
+ * Base class for {{ name|lower }} plugins.
+ */
+abstract class {{ class_prefix }}PluginBase extends PluginBase implements {{ class_prefix }}Interface {
+
+  /**
+   * {@inheritdoc}
+   *
+   * @DCG: Optional.
+   */
+  public function method1() {
+    return 'default implementation of ' . __FUNCTION__;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @DCG: Optional.
+   */
+  public function method2() {
+    return 'default implementation of ' . __FUNCTION__;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @DCG: Optional.
+   */
+  public function method3() {
+    return 'default implementation of ' . __FUNCTION__;
+  }
+
+}

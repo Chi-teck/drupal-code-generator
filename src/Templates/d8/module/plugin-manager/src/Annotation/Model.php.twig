@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Contains \Drupal\{{ machine_name }}\Annotation\{{ class_prefix }}.
+ */
+
+namespace Drupal\{{ machine_name }}\Annotation;
+
+use Drupal\Component\Annotation\Plugin;
+
+/**
+ * Defines {{ name|lower }} annotation object.
+ *
+ * @Annotation
+ */
+class {{ class_prefix }} extends Plugin {
+
+  /**
+   * The plugin ID.
+   *
+   * @var string
+   */
+  public $id;
+
+  /**
+   * The human-readable name of the plugin.
+   *
+   * @ingroup plugin_translatable
+   *
+   * @var \Drupal\Core\Annotation\Translation
+   */
+  public $title;
+
+  /**
+   * The description of the plugin.
+   *
+   * @ingroup plugin_translatable
+   *
+   * @var \Drupal\Core\Annotation\Translation
+   */
+  public $description;
+
+}
