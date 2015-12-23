@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Module;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
