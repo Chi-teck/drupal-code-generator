@@ -12,6 +12,8 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * {{ entity_type_label }} form.
+ * 
+ * @property \Drupal\{{ machine_name }}\{{ class_prefix }}Interface $entity
  */
 class {{ class_prefix }}Form extends EntityForm {
 
@@ -43,13 +45,13 @@ class {{ class_prefix }}Form extends EntityForm {
     $form['status'] = [
       '#type' => 'checkbox',
       '#title' => t('Enabled'),
-      '#default_value' => $this->entity->getStatus(),
+      '#default_value' => $this->entity->status(),
     ];
 
     $form['description'] = [
       '#type' => 'textarea',
       '#title' => t('Description'),
-      '#default_value' => $this->entity->getDescription(),
+      '#default_value' => $this->entity->get('description'),
       '#description' => t('Description of the {{ entity_type_label|lower }}.')
     ];
 

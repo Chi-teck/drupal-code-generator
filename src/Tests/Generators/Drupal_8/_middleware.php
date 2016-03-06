@@ -24,7 +24,7 @@ class FooMiddleware implements HttpKernelInterface {
   protected $httpKernel;
 
   /**
-   * Constructs a FooMiddleware object.
+   * Constructs the FooMiddleware object.
    *
    * @param HttpKernelInterface $http_kernel
    *   The decorated kernel.
