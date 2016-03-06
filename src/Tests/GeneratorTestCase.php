@@ -48,14 +48,8 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-
-    $this->filesystem = new Filesystem();
-    $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
-    $twig = new TwigEnvironment($twig_loader);
-    $yaml_dumper = new Dumper();
-    $yaml_dumper->setIndentation(2);
     $command_class = 'DrupalCodeGenerator\Commands\\' . $this->class;
-    $this->command = new $command_class($this->filesystem, $twig, $yaml_dumper);
+    $this->command = $command_class::create([DCG_ROOT . '/src/Templates']);
     $this->commandName = $this->command->getName();
 
     $this->application = new Application();
@@ -72,8 +66,8 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
    * {@inheritdoc}
    */
   public function tearDown() {
-    $this->filesystem = new Filesystem();
-    $this->filesystem->remove($this->destination);
+    $filesystem = new Filesystem();
+    $filesystem->remove($this->destination);
   }
 
   /**

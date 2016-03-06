@@ -10,7 +10,6 @@ use Symfony\Component\Console\Helper\HelperInterface;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper;
 
 /**
  * A test for a whole application.
@@ -90,14 +89,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   public function setUp() {
 
     $this->application = new Application('Drupal Code Generator', '@git-version@');
-
-    $filesystem = new Filesystem();
-    $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
-    $twig = new \Twig_Environment($twig_loader);
-    $yaml_dumper = new Dumper();
-    $yaml_dumper->setIndentation(2);
-
-    $discovery = new GeneratorDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig, $yaml_dumper);
+    $discovery = new GeneratorDiscovery([DCG_ROOT . '/src/Commands'], [DCG_ROOT . '/src/Templates'], new Filesystem());
     $generators = $discovery->getGenerators();
 
     $this->application->addCommands($generators);

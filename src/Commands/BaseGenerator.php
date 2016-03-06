@@ -13,6 +13,8 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig_Environment;
 use Symfony\Component\Yaml\Dumper;
+use DrupalCodeGenerator\TwigEnvironment;
+use Twig_Loader_Filesystem;
 
 /**
  * Base class for all generators.
@@ -97,6 +99,23 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
+  public static function create($twig_directories) {
+    $file_system = new Filesystem();
+    $twig_loader = new Twig_Loader_Filesystem($twig_directories);
+    $twig = new TwigEnvironment($twig_loader);
+    $yaml_dumper = new Dumper();
+    $yaml_dumper->setIndentation(2);
+
+    return new static(
+      $file_system,
+      $twig,
+      $yaml_dumper
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function configure() {
     $this
       ->setName($this->name)
@@ -156,8 +175,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         $input,
         $output,
         $question_text,
-        $default_value,
-        empty($question[2])
+        $default_value
       );
     }
 
