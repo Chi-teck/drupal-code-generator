@@ -106,7 +106,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  public static function create($twig_directories) {
+  public static function create(array $twig_directories) {
     $file_system = new Filesystem();
     $twig_loader = new Twig_Loader_Filesystem($twig_directories);
     $twig = new TwigEnvironment($twig_loader);

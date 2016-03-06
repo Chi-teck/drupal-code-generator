@@ -3,8 +3,8 @@
 
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
-use DrupalCodeGenerator\GeneratorDiscovery;
 use DrupalCodeGenerator\Commands;
+use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 
