@@ -12,6 +12,7 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig_Environment;
+use Symfony\Component\Yaml\Dumper;
 
 /**
  * Base class for all generators.
@@ -38,7 +39,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $alias;
 
   /**
-   * List of files to create.
+   * Files to create.
    *
    * The key of the each item in the array is the path to the file and
    * the value is the generated content of it.
@@ -62,6 +63,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $twig;
 
   /**
+   * The yaml dumper.
+   *
+   * @var Dumper
+   */
+  protected $yamlDumper;
+
+  /**
    * The base name of the current working directory.
    *
    * @var string
@@ -69,12 +77,20 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $directoryBaseName;
 
   /**
+   * Services to dump.
+   *
+   * @var array
+   */
+  protected $services;
+
+  /**
    * Constructs a generator command.
    */
-  public function __construct(Filesystem $filesystem, Twig_Environment $twig) {
+  public function __construct(Filesystem $filesystem, Twig_Environment $twig, Dumper $yaml_dumper) {
     parent::__construct();
     $this->filesystem = $filesystem;
     $this->twig = $twig;
+    $this->yamlDumper = $yaml_dumper;
     $this->directoryBaseName = basename(getcwd());
   }
 
@@ -161,10 +177,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
     $destination .= '/';
 
-    // Save files.
-    foreach ($this->files as $file_path => $content) {
+    $dumped_files = [];
 
-      $file_path = $destination . $file_path;
+    // Save files.
+    foreach ($this->files as $name => $content) {
+
+      $file_path = $destination . $name;
       if ($this->filesystem->exists($file_path)) {
 
         $helper = $this->getHelper('question');
@@ -174,8 +192,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         );
 
         if (!$helper->ask($input, $output, $question)) {
-          $output->writeLn('Aborted.');
-          return 0;
+          continue;
         }
 
       }
@@ -195,14 +212,64 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         $output->writeLn('<error>An error occurred while creating your file at ' . $e->getPath() . '</error>');
         return 1;
       }
+
+      $dumped_files[] = $name;
+
     }
 
-    $result_message = empty($directories_created) ?
-      'The following files have been created:' :
-      'The following files and directories have been created:';
-    $output->writeLn("<title>$result_message</title>");
-    foreach ($this->files as $name => $content) {
-      $output->writeLn("- $name");
+    if ($this->services) {
+
+      $extension_root = $this->getExtensionRoot();
+      if ($extension_root) {
+        $extension_name = (basename($extension_root));
+        $file = $extension_root . '/' . $extension_name . '.services.yml';
+
+        if (file_exists($file)) {
+          $action = 'update';
+          $intend = 2;
+        }
+        else {
+          $this->services = ['services' => $this->services];
+          $intend = 0;
+          $action = 'create';
+        }
+
+        $question = new ConfirmationQuestion(
+          sprintf(
+            '<info>Would you like to %s <comment>%s.services.yml</comment> file?</info> [<comment>Yes</comment>]: ',
+            $action,
+            $extension_name
+          ),
+          TRUE
+        );
+
+        $helper = $this->getHelper('question');
+        if ($helper->ask($input, $output, $question)) {
+          $yaml = $this->yamlDumper->dump($this->services, 3, $intend);
+          file_put_contents($file, $yaml, FILE_APPEND);
+          $dumped_files[] = $extension_name . '.services.yml';
+          $services_updated = TRUE;
+        }
+
+      }
+
+    }
+
+    if (count($dumped_files) > 0) {
+      // Make precise result message.
+      if (empty($services_updated)) {
+        $result_message = empty($directories_created) ?
+          'The following files have been created:' :
+          'The following directories and files have been created:';
+      }
+      else {
+        $result_message = 'The following files have been created or updated:';
+      }
+
+      $output->writeLn("<title>$result_message</title>");
+      foreach ($dumped_files as $file) {
+        $output->writeLn("- $file");
+      }
     }
 
     return 0;

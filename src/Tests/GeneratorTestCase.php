@@ -7,6 +7,7 @@ use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Dumper;
 use Twig_Loader_Filesystem;
 
 /**
@@ -51,9 +52,10 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $this->filesystem = new Filesystem();
     $twig_loader = new Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
     $twig = new TwigEnvironment($twig_loader);
-
+    $yaml_dumper = new Dumper();
+    $yaml_dumper->setIndentation(2);
     $command_class = 'DrupalCodeGenerator\Commands\\' . $this->class;
-    $this->command = new $command_class($this->filesystem, $twig);
+    $this->command = new $command_class($this->filesystem, $twig, $yaml_dumper);
     $this->commandName = $this->command->getName();
 
     $this->application = new Application();

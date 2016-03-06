@@ -2,12 +2,13 @@
 
 namespace DrupalCodeGenerator;
 
-use ReflectionClass;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
-use Symfony\Component\Filesystem\Filesystem;
-use Twig_Environment;
 use DrupalCodeGenerator\Commands\GeneratorInterface;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use ReflectionClass;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Dumper;
+use Twig_Environment;
 
 /**
  * Discovery of generator commands.
@@ -39,12 +40,20 @@ class GeneratorDiscovery {
   protected $twig;
 
   /**
+   * The yaml dumper.
+   *
+   * @var Dumper
+   */
+  protected $yamlDumper;
+
+  /**
    * Constructs discovery object.
    */
-  public function __construct(array $directories, Filesystem $filesystem, Twig_Environment $twig) {
+  public function __construct(array $directories, Filesystem $filesystem, Twig_Environment $twig, Dumper $yaml_dumper) {
     $this->directories = $directories;
     $this->filesystem = $filesystem;
     $this->twig = $twig;
+    $this->yamlDumper = $yaml_dumper;
   }
 
   /**
@@ -68,7 +77,7 @@ class GeneratorDiscovery {
           $reflected_class = new ReflectionClass($class);
 
           if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMANDS_BASE_INTERFACE)) {
-            $commands[] = new $class($this->filesystem, $this->twig);
+            $commands[] = new $class($this->filesystem, $this->twig, $this->yamlDumper);
           }
 
         }

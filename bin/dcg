@@ -8,6 +8,7 @@ use DrupalCodeGenerator\TwigEnvironment;
 use DrupalCodeGenerator\Commands;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Dumper;
 
 // Setup target directories.
 if (file_exists(DCG_HOME . '/Commands')) {
@@ -23,7 +24,9 @@ $twig_directories[] = DCG_ROOT . '/src/Templates';
 // Discover generators.
 $twig_loader = new Twig_Loader_Filesystem($twig_directories);
 $twig = new TwigEnvironment($twig_loader);
-$discovery = new GeneratorDiscovery($commands_directories, new Filesystem(), $twig);
+$yaml_dumper = new Dumper();
+$yaml_dumper->setIndentation(2);
+$discovery = new GeneratorDiscovery($commands_directories, new Filesystem(), $twig, $yaml_dumper);
 $generators = $discovery->getGenerators();
 
 // Create navigation command.

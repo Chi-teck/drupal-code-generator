@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:breadcrumb-builder command.
@@ -29,6 +29,17 @@ class BreadcrumbBuilder extends BaseGenerator {
 
     $path = $this->createPath('src/', $vars['class'] . '.php', $vars['machine_name']);
     $this->files[$path] = $this->render('d8/breadcrumb-builder.twig', $vars);
+
+    $this->services[$vars['machine_name'] . '.breadcrumb'] = [
+      'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
+      'tags' => [
+        [
+          'name' => 'breadcrumb_builder',
+          'priority' => 1000,
+        ]
+      ],
+    ];
+
   }
 
   /**
