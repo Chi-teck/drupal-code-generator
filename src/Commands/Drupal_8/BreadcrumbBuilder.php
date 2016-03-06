@@ -43,7 +43,7 @@ class BreadcrumbBuilder extends BaseGenerator {
   }
 
   /**
-   * Return default class name for the breadcrumb builder.
+   * Returns default class name for the breadcrumb builder.
    */
   protected function defaultClass($vars) {
     return $this->human2class($vars['name'] . 'BreadcrumbBuilder');

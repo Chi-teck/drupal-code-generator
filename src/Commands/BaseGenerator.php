@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Commands;
 
+use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,9 +12,8 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Twig_Environment;
 use Symfony\Component\Yaml\Dumper;
-use DrupalCodeGenerator\TwigEnvironment;
+use Twig_Environment;
 use Twig_Loader_Filesystem;
 
 /**
@@ -84,6 +84,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @var array
    */
   protected $services;
+
+  /**
+   * The level where you switch to inline YAML.
+   *
+   * @var int
+   */
+  protected $inline = 3;
 
   /**
    * Constructs a generator command.
@@ -248,8 +255,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         }
         else {
           $this->services = ['services' => $this->services];
-          $intend = 0;
           $action = 'create';
+          $intend = 0;
+          $this->inline++;
         }
 
         $question = new ConfirmationQuestion(
@@ -263,7 +271,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
         $helper = $this->getHelper('question');
         if ($helper->ask($input, $output, $question)) {
-          $yaml = $this->yamlDumper->dump($this->services, 3, $intend);
+          $yaml = $this->yamlDumper->dump($this->services, $this->inline, $intend);
           file_put_contents($file, $yaml, FILE_APPEND);
           $dumped_files[] = $extension_name . '.services.yml';
           $services_updated = TRUE;

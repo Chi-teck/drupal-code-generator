@@ -17,6 +17,7 @@ class ServiceTest extends GeneratorTestCase {
     $this->answers = [
       'Foo',
       'foo',
+      'foo.example',
       'Example',
     ];
     $this->target = 'Example.php';
