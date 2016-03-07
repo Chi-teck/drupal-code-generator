@@ -37,6 +37,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
   /**
    * The command alias.
+   *
+   * @var string
    */
   protected $alias;
 

@@ -28,6 +28,16 @@ class EventSubscriber extends BaseGenerator {
 
     $path = $this->createPath('src/EventSubscriber/', $vars['class'] . '.php', $vars['machine_name']);
     $this->files[$path] = $this->render('d8/event-subscriber.twig', $vars);
+
+    $this->services[$vars['machine_name'] . '.event_subscriber'] = [
+      'class' => 'Drupal\\' . $vars['machine_name'] . '\\EventSubscriber\\' . $vars['class'],
+      'arguments' => ['@current_user'],
+      'tags' => [
+        [
+          'name' => 'event_subscriber',
+        ]
+      ],
+    ];
   }
 
 }
