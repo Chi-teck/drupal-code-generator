@@ -12,21 +12,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * FooMiddleware description.
+ * FooMiddleware middleware.
  */
 class FooMiddleware implements HttpKernelInterface {
 
   /**
    * The kernel.
    *
-   * @var HttpKernelInterface
+   * @var \Symfony\Component\HttpKernel\HttpKernelInterface
    */
   protected $httpKernel;
 
   /**
    * Constructs the FooMiddleware object.
    *
-   * @param HttpKernelInterface $http_kernel
+   * @param \Symfony\Component\HttpKernel\HttpKernelInterface $http_kernel
    *   The decorated kernel.
    */
   public function __construct(HttpKernelInterface $http_kernel) {

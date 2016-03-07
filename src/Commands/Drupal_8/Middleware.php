@@ -28,6 +28,17 @@ class Middleware extends BaseGenerator {
 
     $path = $this->createPath('src/', $vars['class'] . '.php', $vars['machine_name']);
     $this->files[$path] = $this->render('d8/middleware.twig', $vars);
+
+    $this->services[$vars['machine_name'] . '.middleware'] = [
+      'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
+      'tags' => [
+        [
+          'name' => 'http_middleware',
+          'priority' => 1000,
+        ]
+      ],
+    ];
+
   }
 
 }
