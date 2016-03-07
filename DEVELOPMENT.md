@@ -1,6 +1,6 @@
 # Development notes
 
-## Setting up development copy of the genetator
+## Setting up development copy of the project
 
 ```shell
 # Clone the project.
