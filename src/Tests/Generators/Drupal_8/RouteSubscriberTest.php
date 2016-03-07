@@ -5,24 +5,21 @@ namespace DrupalCodeGenerator\Tests\Drupal_8;
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:service command.
+ * Test for d8:route-subscriber command.
  */
-class ServiceTest extends GeneratorTestCase {
+class RouteSubscriberTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Service';
+    $this->class = 'Drupal_8\RouteSubscriber';
     $this->answers = [
       'Foo',
       'foo',
-      'foo.example',
-      'Example',
     ];
-    $this->target = 'Example.php';
-    $this->fixture = __DIR__ . '/_service.php';
-
+    $this->target = 'FooRouteSubscriber.php';
+    $this->fixture = __DIR__ . '/_route_subscriber.php';
     parent::setUp();
   }
 

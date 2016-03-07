@@ -24,6 +24,18 @@ class {{ class }} extends ControllerBase {
   protected $dateFormatter;
 
   /**
+   * Constructs the controller object.
+   *
+   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   The date formatter service.
+   *
+   * @DCG: Optional.
+   */
+  public function __construct(DateFormatterInterface $date_formatter) {
+    $this->dateFormatter = $date_formatter;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -33,17 +45,7 @@ class {{ class }} extends ControllerBase {
   }
 
   /**
-   * Constructs a FooController object.
-   *
-   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
-   *   The date formatter service.
-   */
-  public function __construct(DateFormatterInterface $date_formatter) {
-    $this->dateFormatter = $date_formatter;
-  }
-
-  /**
-   * Displays the site status report.
+   * Builds the response.
    */
   public function build() {
 

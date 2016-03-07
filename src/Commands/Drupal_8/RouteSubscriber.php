@@ -7,13 +7,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:event-subscriber command.
+ * Implements d8:route-subscriber command.
  */
-class EventSubscriber extends BaseGenerator {
+class RouteSubscriber extends BaseGenerator {
 
-  protected $name = 'd8:event-subscriber';
-  protected $description = 'Generates an event subscriber';
-  protected $alias = 'event-subscriber';
+  protected $name = 'd8:route-subscriber';
+  protected $description = 'Generates a route subscriber';
+  protected $alias = 'route-subscriber';
 
   /**
    * {@inheritdoc}
@@ -24,14 +24,13 @@ class EventSubscriber extends BaseGenerator {
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['name'] . 'Subscriber');
+    $vars['class'] = $this->human2class($vars['name'] . 'RouteSubscriber');
 
     $path = $this->createPath('src/EventSubscriber/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/event-subscriber.twig', $vars);
+    $this->files[$path] = $this->render('d8/route-subscriber.twig', $vars);
 
-    $this->services[$vars['machine_name'] . '.event_subscriber'] = [
+    $this->services[$vars['machine_name'] . '.route_subscriber'] = [
       'class' => 'Drupal\\' . $vars['machine_name'] . '\\EventSubscriber\\' . $vars['class'],
-      'arguments' => ['@current_user'],
       'tags' => [
         [
           'name' => 'event_subscriber',

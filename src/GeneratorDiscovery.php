@@ -2,12 +2,13 @@
 
 namespace DrupalCodeGenerator;
 
-use ReflectionClass;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
-use Symfony\Component\Filesystem\Filesystem;
-use Twig_Environment;
 use DrupalCodeGenerator\Commands\GeneratorInterface;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use ReflectionClass;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Dumper;
+use Twig_Environment;
 
 /**
  * Discovery of generator commands.
@@ -18,11 +19,18 @@ class GeneratorDiscovery {
   const COMMANDS_BASE_INTERFACE = '\DrupalCodeGenerator\Commands\GeneratorInterface';
 
   /**
-   * List of directories to look up.
+   * Directories to look up for commands.
    *
    * @var array
    */
-  protected $directories = [];
+  protected $commandDirectories = [];
+
+  /**
+   * Directories to look up for templates.
+   *
+   * @var array
+   */
+  protected $twigDirectories = [];
 
   /**
    * The file system utility.
@@ -39,12 +47,19 @@ class GeneratorDiscovery {
   protected $twig;
 
   /**
+   * The yaml dumper.
+   *
+   * @var Dumper
+   */
+  protected $yamlDumper;
+
+  /**
    * Constructs discovery object.
    */
-  public function __construct(array $directories, Filesystem $filesystem, Twig_Environment $twig) {
-    $this->directories = $directories;
+  public function __construct(array $command_directories, array $twig_directories, Filesystem $filesystem) {
+    $this->commandDirectories = $command_directories;
+    $this->twigDirectories = $twig_directories;
     $this->filesystem = $filesystem;
-    $this->twig = $twig;
   }
 
   /**
@@ -56,7 +71,7 @@ class GeneratorDiscovery {
   public function getGenerators() {
 
     $commands = [];
-    foreach ($this->directories as $directory) {
+    foreach ($this->commandDirectories as $directory) {
       $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS)
       );
@@ -68,7 +83,7 @@ class GeneratorDiscovery {
           $reflected_class = new ReflectionClass($class);
 
           if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMANDS_BASE_INTERFACE)) {
-            $commands[] = new $class($this->filesystem, $this->twig);
+            $commands[] = $class::create($this->twigDirectories);
           }
 
         }

@@ -7,12 +7,12 @@
 
 namespace Drupal\foo;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
-use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Node\NodeStorageInterface;
 
 /**
- * Example description.
+ * Example service.
  */
 class Example {
 
@@ -31,16 +31,16 @@ class Example {
   protected $nodeStorage;
 
   /**
-   * Constructs a(n) Example object.
+   * Constructs an Example object.
    *
    * @param QueryFactory $entity_query
    *   The entity query factory service.
-   * @param EntityManagerInterface $entity_manager
-   *   The entity manager.
+   * @param EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
-  public function __construct(QueryFactory $entity_query, EntityManagerInterface $entity_manager) {
+  public function __construct(QueryFactory $entity_query, EntityTypeManagerInterface $entity_type_manager) {
     $this->entityQuery = $entity_query;
-    $this->nodeStorage = $entity_manager->getStorage('node');
+    $this->nodeStorage = $entity_type_manager->getStorage('node');
   }
 
   /**

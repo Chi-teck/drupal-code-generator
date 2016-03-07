@@ -12,16 +12,13 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class GeneratorsDiscoveryTest extends \PHPUnit_Framework_TestCase {
 
-  const TOTAL_GENERATORS = 50;
+  const TOTAL_GENERATORS = 52;
 
   /**
    * Test callback.
    */
   public function testExecute() {
-    $filesystem = new Filesystem();
-    $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
-    $twig = new \Twig_Environment($twig_loader);
-    $discovery = new GeneratorDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
+    $discovery = new GeneratorDiscovery([DCG_ROOT . '/src/Commands'], [DCG_ROOT . '/src/Templates'], new Filesystem());
     $generators = $discovery->getGenerators();
     foreach ($generators as $generator) {
       $this->assertInstanceOf('DrupalCodeGenerator\Commands\BaseGenerator', $generator);

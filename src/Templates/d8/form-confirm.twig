@@ -26,11 +26,11 @@ class {{ class }} extends ConfirmFormBase {
   protected $connection;
 
   /**
-   * Constructs a new {{ class }}.
+   * Constructs new {{ class }} object.
    *
    * @param \Drupal\Core\Database\Connection $connection
    *   The database connection.
-   * 
+   *
    * @DCG: Optional.
    */
   public function __construct(Connection $connection) {
@@ -39,8 +39,6 @@ class {{ class }} extends ConfirmFormBase {
 
   /**
    * {@inheritdoc}
-   * 
-   * @DCG: Optional.
    */
   public static function create(ContainerInterface $container) {
     return new static(

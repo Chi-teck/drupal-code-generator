@@ -7,7 +7,7 @@
 
 namespace Drupal\foo\EventSubscriber;
 
-use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -21,26 +21,26 @@ class FooSubscriber implements EventSubscriberInterface {
   /**
    * Current logged in user.
    *
-   * @var AccountInterface
+   * @var \Drupal\Core\Session\AccountProxyInterface
    */
-  protected  $currentUser;
+  protected $currentUser;
 
   /**
    * Constructs event subscriber.
    *
-   * @param AccountInterface $current_user
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    *   Current logged in user.
    *
-   * @DSG: Optional.
+   * @DCG: Optional.
    */
-  public function __construct(AccountInterface $current_user) {
+  public function __construct(AccountProxyInterface $current_user) {
     $this->currentUser = $current_user;
   }
 
   /**
    * Kernel request event handler.
    *
-   * @param GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
    *   Response event.
    */
   public function onKernelRequest(GetResponseEvent $event) {
@@ -50,7 +50,7 @@ class FooSubscriber implements EventSubscriberInterface {
   /**
    * Kernel response event handler.
    *
-   * @param FilterResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
    *   Response event.
    */
   public function onKernelResponse(FilterResponseEvent $event) {

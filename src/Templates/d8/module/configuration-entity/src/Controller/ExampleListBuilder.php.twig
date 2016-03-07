@@ -29,9 +29,10 @@ class {{ class_prefix }}ListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
+    /** @var \Drupal\{{ machine_name }}\{{ class_prefix }}Interface $entity */
     $row['label'] = $entity->label();
     $row['id'] = $entity->id();
-    $row['status'] = $entity->getStatus() ? $this->t('Enabled') : $this->t('Disabled');
+    $row['status'] = $entity->status() ? $this->t('Enabled') : $this->t('Disabled');
     return $row + parent::buildRow($entity);
   }
 

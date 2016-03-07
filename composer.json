@@ -2,13 +2,11 @@
   "name": "drupal-code-generator",
   "description": "Drupal code generator",
   "require": {
-    "php": ">=5.4.5",
-    "symfony/console": "~2.7",
-    "symfony/filesystem": "~2.7",
-    "twig/twig": "~1.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "~4.8"
+    "php": ">=5.5.9",
+    "symfony/console": "~3.0",
+    "symfony/filesystem": "~3.0",
+    "twig/twig": "~1.0",
+    "symfony/yaml": "~3.0"
   },
   "autoload": {
     "files": ["src/bootstrap.php"],

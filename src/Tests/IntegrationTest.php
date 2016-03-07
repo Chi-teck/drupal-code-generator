@@ -89,12 +89,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   public function setUp() {
 
     $this->application = new Application('Drupal Code Generator', '@git-version@');
-
-    $filesystem = new Filesystem();
-    $twig_loader = new \Twig_Loader_Filesystem(DCG_ROOT . '/src/Templates');
-    $twig = new \Twig_Environment($twig_loader);
-
-    $discovery = new GeneratorDiscovery([DCG_ROOT . '/src/Commands'], $filesystem, $twig);
+    $discovery = new GeneratorDiscovery([DCG_ROOT . '/src/Commands'], [DCG_ROOT . '/src/Templates'], new Filesystem());
     $generators = $discovery->getGenerators();
 
     $this->application->addCommands($generators);
