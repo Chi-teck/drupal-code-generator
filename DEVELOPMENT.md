@@ -6,6 +6,9 @@
 # Clone the project.
 git clone https://github.com/Chi-teck/drupal-code-generator
 
+# Switch to develop branch.
+git checkout develop
+
 # Change working directory.
 cd drupal-code-generator
 
@@ -27,14 +30,10 @@ install it as follows: `composer global require "phpunit/phpunit=4.*"`. Make
 sure you have ~/.composer/vendor/bin in your path (`export PATH=~/.composer/vendor/bin:$PATH`).
 
 The following alias helps you to run tests form any location.
-alias dcg-test="(cd /path/to/dcg && phpunit && phpcs --standard=./rulset.xml)"
+`alias dcg-test="(cd /path/to/dcg && phpunit && phpcs --standard=./rulset.xml)"`
 
 ## Creating a Phar
 
-Install [Box 2 application](https://github.com/box-project/box2) and then navigate to the directory where Drupal code generator was installed and run the following command:
-```
-box build
-```
-Use `-v` option if you need verbose output.
+Install [Box 2 application](https://github.com/box-project/box2) and then navigate to the directory where Drupal code generator was installed and run the following command: `box build`. Use `-v` option if you need verbose output.
 
 
