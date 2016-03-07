@@ -26,11 +26,19 @@ Then after you have logged out and in the _dcg_ will be accessible through _$dcg
 
 ## Testing
 We stick with PHPUnit 4 because PHPUnit 5 does not support PHP 5.5. You can
-install it as follows: `composer global require "phpunit/phpunit=4.*"`. Make
-sure you have ~/.composer/vendor/bin in your path (`export PATH=~/.composer/vendor/bin:$PATH`).
+install it as follows:
+```shell
+composer global require "phpunit/phpunit=4.*"
+```
+Make sure you have ~/.composer/vendor/bin in your path:
+```shell
+export PATH=~/.composer/vendor/bin:$PATH
+```
 
-The following alias helps you to run tests form any location.
-`alias dcg-test="(cd /path/to/dcg && phpunit && phpcs --standard=./rulset.xml)"`
+The following alias helps you to run tests form any location:
+```
+alias dcg-test="(cd /path/to/dcg && phpunit && phpcs --standard=./rulset.xml)"
+```
 
 ## Creating a Phar
 
