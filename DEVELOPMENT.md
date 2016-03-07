@@ -22,7 +22,7 @@ bin/dcg
 
 To make _dcg_ avaible in any system location append this line to your _.bashrc_ file:
 `export dcg=/path/to/dcg/bin/dcg`
-Then after you have logged out and in the _dcg_ will be accessible through _$dcg_ variable.
+Then after you have logged out and in the _dcg_ will be accessible through _$dcg_ global shell variable.
 
 ## Testing
 We stick with PHPUnit 4 because PHPUnit 5 does not support PHP 5.5. You can
@@ -30,7 +30,7 @@ install it as follows:
 ```shell
 composer global require "phpunit/phpunit=4.*"
 ```
-Make sure you have ~/.composer/vendor/bin in your path:
+Make sure you have _~/.composer/vendor/bin_ in your PATH:
 ```shell
 export PATH=~/.composer/vendor/bin:$PATH
 ```
