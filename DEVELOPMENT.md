@@ -35,7 +35,7 @@ Make sure you have _~/.composer/vendor/bin_ in your PATH:
 export PATH=~/.composer/vendor/bin:$PATH
 ```
 
-The following alias helps you to run tests form any location:
+The following alias helps you run tests form any location:
 ```
 alias dcg-test="(cd /path/to/drupal-code-generator && phpunit && phpcs --standard=./rulset.xml)"
 ```
