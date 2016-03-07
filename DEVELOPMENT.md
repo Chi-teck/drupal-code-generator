@@ -6,11 +6,11 @@
 # Clone the project.
 git clone https://github.com/Chi-teck/drupal-code-generator
 
-# Switch to development branch.
-git checkout development
-
 # Change working directory.
 cd drupal-code-generator
+
+# Switch to development branch.
+git checkout development
 
 # Install dependencies.
 composer install
