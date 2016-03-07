@@ -43,7 +43,7 @@ alias dcg-test="(cd /path/to/dcg && phpunit && phpcs --standard=./rulset.xml)"
 ## Creating a Phar
 
 1. Install [Box 2 application](https://github.com/box-project/box2).
-2. Navigate to the directory where Drupal code generator was installed.
+2. Navigate to the directory where Drupal Code Generator was installed.
 3. Run the following command: `box build` (use `-v` option if you need verbose output).
 4. Test the archive: `php dcg.phar --verision`.
 
