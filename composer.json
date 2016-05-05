@@ -1,5 +1,5 @@
 {
-  "name": "drupal-code-generator",
+  "name": "chi-teck/drupal-code-generator",
   "description": "Drupal code generator",
   "require": {
     "php": ">=5.5.9",
