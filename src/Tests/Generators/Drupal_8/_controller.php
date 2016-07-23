@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\example\Controller\ExampleController.
- */
-
 namespace Drupal\example\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;

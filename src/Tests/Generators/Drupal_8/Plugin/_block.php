@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\foo\Plugin\Block\ExampleBlock.
- */
-
 namespace Drupal\foo\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;

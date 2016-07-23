@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\foo\Example.
- */
-
 namespace Drupal\foo;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\foo\EventSubscriber\FooSubscriber.
- */
-
 namespace Drupal\foo\EventSubscriber;
 
 use Drupal\Core\Session\AccountProxyInterface;
