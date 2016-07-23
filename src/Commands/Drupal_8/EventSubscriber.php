@@ -35,7 +35,7 @@ class EventSubscriber extends BaseGenerator {
       'tags' => [
         [
           'name' => 'event_subscriber',
-        ]
+        ],
       ],
     ];
   }

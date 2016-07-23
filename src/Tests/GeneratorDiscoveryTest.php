@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Commands;
-use DrupalCodeGenerator\Commands\Other;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Filesystem\Filesystem;
 

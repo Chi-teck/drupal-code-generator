@@ -28,9 +28,13 @@ class ContentEntity extends BaseGenerator {
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
       'dependencies' => ['Dependencies (comma separated)', ''],
-      'entity_type_label' => ['Entity type label', [$this, 'defaultEntityTypeLabel']],
+      'entity_type_label' => [
+        'Entity type label', [$this, 'defaultEntityTypeLabel'],
+      ],
       'entity_type_id' => ['Entity type id', [$this, 'defaultEntityTypeId']],
-      'entity_base_path' => ['Entity base path', [$this, 'defaultEntityBasePath']],
+      'entity_base_path' => [
+        'Entity base path', [$this, 'defaultEntityBasePath'],
+      ],
       'fieldable' => ['Make the entity type fieldable?', 'yes'],
       'template' => ['Create entity template?', 'yes'],
       'access_controller' => ['Create CRUD permissions?', 'no'],
@@ -89,7 +93,9 @@ class ContentEntity extends BaseGenerator {
     $vars['template_name'] = str_replace('_', '-', $vars['entity_type_id']) . '.html.twig';
 
     $path_placeholders = ['model-example.html.twig', 'model', 'Example'];
-    $path_replacements = [$vars['template_name'], $vars['machine_name'], $vars['class_prefix']];
+    $path_replacements = [
+      $vars['template_name'], $vars['machine_name'], $vars['class_prefix'],
+    ];
     foreach ($templates as $template) {
       $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $template);
       $path = preg_replace('#\.twig$#', '', $path);

@@ -2,13 +2,10 @@
 
 namespace DrupalCodeGenerator;
 
-use DrupalCodeGenerator\Commands\GeneratorInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper;
-use Twig_Environment;
 
 /**
  * Discovery of generator commands.
@@ -42,14 +39,14 @@ class GeneratorDiscovery {
   /**
    * The twig environment.
    *
-   * @var Twig_Environment
+   * @var \Twig_Environment
    */
   protected $twig;
 
   /**
    * The yaml dumper.
    *
-   * @var Dumper
+   * @var \Symfony\Component\Yaml\Dumper
    */
   protected $yamlDumper;
 
@@ -65,7 +62,7 @@ class GeneratorDiscovery {
   /**
    * Finds and instantiates generator commands.
    *
-   * @return GeneratorInterface[]
+   * @return \DrupalCodeGenerator\Commands\GeneratorInterface;[]
    *   Array of generators.
    */
   public function getGenerators() {

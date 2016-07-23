@@ -22,11 +22,15 @@ class ConfigurationEntity extends BaseGenerator {
 
     $questions = [
       'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'machine_name' => [
+        'Module machine name', [$this, 'defaultMachineName'],
+      ],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
       'dependencies' => ['Dependencies (comma separated)', ''],
-      'entity_type_label' => ['Entity type label', [$this, 'defaultEntityTypeLabel']],
+      'entity_type_label' => [
+        'Entity type label', [$this, 'defaultEntityTypeLabel'],
+      ],
       'entity_type_id' => ['Entity type id', [$this, 'defaultEntityTypeId']],
     ];
 
@@ -53,7 +57,11 @@ class ConfigurationEntity extends BaseGenerator {
 
     $templates_path = 'd8/module/configuration-entity/';
     foreach ($templates as $template) {
-      $path = $vars['machine_name'] . '/' . str_replace(['model', 'Example', '.twig'], [$vars['machine_name'], $vars['class_prefix'], ''], $template);
+      $path = $vars['machine_name'] . '/' . str_replace(
+          ['model', 'Example', '.twig'],
+          [$vars['machine_name'], $vars['class_prefix'], ''],
+          $template
+        );
       $this->files[$path] = $this->render($templates_path . $template, $vars);
     }
 

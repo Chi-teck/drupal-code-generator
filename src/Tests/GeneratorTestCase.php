@@ -2,13 +2,9 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Commands\Other;
-use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper;
-use Twig_Loader_Filesystem;
 
 /**
  * Base class for generators tests.
@@ -95,7 +91,7 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   protected function execute() {
     $this->commandTester->execute([
       'command' => $this->command->getName(),
-      '--destination' => $this->destination
+      '--destination' => $this->destination,
     ]);
 
     $this->display = $this->commandTester->getDisplay();

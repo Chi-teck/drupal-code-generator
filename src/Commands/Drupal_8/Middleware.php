@@ -35,7 +35,7 @@ class Middleware extends BaseGenerator {
         [
           'name' => 'http_middleware',
           'priority' => 1000,
-        ]
+        ],
       ],
     ];
 
