@@ -29,7 +29,7 @@ class Config extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
 
     $path = $this->createPath('src/Form/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/form-config.twig', $vars);
+    $this->files[$path] = $this->render('d8/form/config.twig', $vars);
   }
 
   /**

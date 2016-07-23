@@ -26,7 +26,7 @@ class Libraries extends BaseGenerator {
       'project_type' => ['Project type (module/theme)', 'module'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-    $this->files[$vars['machine_name'] . '.libraries.yml'] = $this->render('d8/libraries.yml.twig', $vars);
+    $this->files[$vars['machine_name'] . '.libraries.yml'] = $this->render('d8/yml/libraries.yml.twig', $vars);
   }
 
 }

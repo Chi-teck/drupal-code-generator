@@ -30,7 +30,7 @@ class ThemeInfo extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->files[$vars['machine_name'] . '.info.yml'] = $this->render('d8/theme-info.yml.twig', $vars);
+    $this->files[$vars['machine_name'] . '.info.yml'] = $this->render('d8/yml/theme-info.yml.twig', $vars);
   }
 
 }
