@@ -15,13 +15,14 @@ class RelationshipTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_7\CToolsPlugin\Relationship';
     $this->answers = [
+      'foo',
       'Example',
       'example',
       'Some description',
       'custom',
       'Term',
     ];
-    $this->target = 'example.inc';
+    $this->target = 'plugins/relationships/example.inc';
     $this->fixture = __DIR__ . '/_relationship.inc';
 
     parent::setUp();

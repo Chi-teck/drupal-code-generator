@@ -13,6 +13,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 abstract class BasePlugin extends BaseGenerator {
 
   protected $template;
+  protected $directory;
 
   /**
    * {@inheritdoc}
@@ -20,8 +21,11 @@ abstract class BasePlugin extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Plugin name', [$this, 'defaultName']],
-      'machine_name' => ['Plugin machine name', [$this, 'defaultMachineName']],
+      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'plugin_name' => ['Plugin name', [$this, 'defaultName']],
+      'plugin_machine_name' => [
+        'Plugin machine name', [$this, 'defaultPluginMachineName'],
+      ],
       'description' => ['Plugin description', 'TODO: Write description for the plugin'],
       'package' => ['Package', 'custom'],
     ];
@@ -37,8 +41,15 @@ abstract class BasePlugin extends BaseGenerator {
       ->getHelper('question')
       ->ask($input, $output, $question);
 
-    $this->files[$vars['machine_name'] . '.inc'] = $this->render($this->template, $vars);
+    $this->files[$this->directory . '/' . $vars['plugin_machine_name'] . '.inc'] = $this->render($this->template, $vars);
 
+  }
+
+  /**
+   * Returns default value for the plugin machine name question.
+   */
+  protected function defaultPluginMachineName($vars) {
+    return self::human2machine($vars['plugin_name']);
   }
 
 }
