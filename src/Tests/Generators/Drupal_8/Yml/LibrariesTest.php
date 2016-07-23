@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  *
  * @TODO: Split it into two separate tests for module and theme.
  */
-class LIbrariesTest extends GeneratorTestCase {
+class LibrariesTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

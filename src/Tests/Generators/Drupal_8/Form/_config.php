@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\foo\Form\SettingsForm.
- */
-
 namespace Drupal\foo\Form;
 
 use Drupal\Core\Form\FormStateInterface;

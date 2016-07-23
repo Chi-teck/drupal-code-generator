@@ -27,7 +27,7 @@ class Routing extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
 
     $vars['class'] = $this->human2class($vars['name'] . 'Controller');
-    $this->files[$vars['machine_name'] . '.routing.yml'] = $this->render('d8/routing.yml.twig', $vars);
+    $this->files[$vars['machine_name'] . '.routing.yml'] = $this->render('d8/yml/routing.yml.twig', $vars);
   }
 
 }

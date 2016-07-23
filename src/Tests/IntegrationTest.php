@@ -2,12 +2,9 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Commands;
-use DrupalCodeGenerator\Commands\Other;
+use DrupalCodeGenerator\Commands\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Helper\HelperInterface;
-use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -26,14 +23,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   /**
    * The application.
    *
-   * @var Application
+   * @var \Symfony\Component\Console\Application
    */
   protected $application;
 
   /**
    * The navigation command.
    *
-   * @var Commands\Navigation
+   * @var \DrupalCodeGenerator\Commands\Navigation
    */
   protected $command;
 
@@ -49,28 +46,28 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   /**
    * The question helper.
    *
-   * @var HelperInterface
+   * @var \Symfony\Component\Console\Helper\HelperInterface;
    */
   protected $questionHelper;
 
   /**
    * The helper set.
    *
-   * @var HelperSet
+   * @var \Symfony\Component\Console\Helper\HelperSet
    */
   protected $helperSet;
 
   /**
    * The command tester.
    *
-   * @var CommandTester
+   * @var \Symfony\Component\Console\Tester\CommandTester
    */
   protected $commandTester;
 
   /**
    * The filesystem utility.
    *
-   * @var Filesystem
+   * @var \Symfony\Component\Filesystem\Filesystem;
    */
   protected $filesystem;
 
@@ -94,13 +91,13 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
     $this->application->addCommands($generators);
 
-    $navigation = new Commands\Navigation();
+    $navigation = new Navigation();
     $navigation->init($generators);
     $this->application->add($navigation);
 
     $this->command = $this->application->find('navigation');
 
-    $this->questionHelper = $this->getMock('Symfony\Component\Console\Helper\QuestionHelper', ['ask']);
+    $this->questionHelper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     $this->helperSet = $this->command->getHelperSet();
 
@@ -128,7 +125,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
    */
   protected function mockQuestionHelper(array $answers) {
     foreach ($answers as $key => $answer) {
-      $this->questionHelper->expects($this->at($key))
+      $this->questionHelper->expects($this->at($key + 2))
         ->method('ask')
         ->will($this->returnValue($answer));
     }

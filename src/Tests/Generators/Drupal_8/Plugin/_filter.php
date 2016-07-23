@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\foo\Plugin\Filter\Example.
- */
-
 namespace Drupal\foo\Plugin\Filter;
 
 use Drupal\filter\Plugin\FilterBase;

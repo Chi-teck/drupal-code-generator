@@ -18,7 +18,7 @@ class ConfigTest extends GeneratorTestCase {
       'Foo',
       'foo',
       'SettingsForm',
-      'foo_settings'
+      'foo_settings',
     ];
 
     $this->target = 'SettingsForm.php';

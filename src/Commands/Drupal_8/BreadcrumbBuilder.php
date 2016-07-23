@@ -36,7 +36,7 @@ class BreadcrumbBuilder extends BaseGenerator {
         [
           'name' => 'breadcrumb_builder',
           'priority' => 1000,
-        ]
+        ],
       ],
     ];
 

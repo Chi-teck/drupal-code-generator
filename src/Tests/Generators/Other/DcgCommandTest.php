@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for other:dcg-command command.
  */
-class DsgCommandTest extends GeneratorTestCase {
+class DcgCommandTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}

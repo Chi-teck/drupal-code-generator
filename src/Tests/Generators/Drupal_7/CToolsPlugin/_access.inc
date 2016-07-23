@@ -14,14 +14,14 @@ $plugin = array(
   'description' => t('Some description'),
   'required context' => new ctools_context_required(t('User'), 'user'),
   'category' => t('Custom'),
-  'callback' => 'example_access_check',
-  'summary' => 'example_access_summary',
+  'callback' => 'foo_example_access_check',
+  'summary' => 'foo_example_access_summary',
 );
 
 /**
- * Render callback.
+ * Access callback.
  */
-function example_access_check($conf, $context) {
+function foo_example_access_check($conf, $context) {
 
   if (empty($context->data)) {
     return;
@@ -34,8 +34,8 @@ function example_access_check($conf, $context) {
 }
 
 /**
- * Provide a summary description based upon the checked conditions.
+ * Summary callback.
  */
-function example_access_summary($conf, $context) {
+function foo_example_access_summary($conf, $context) {
   return t('Summary placeholder');
 }

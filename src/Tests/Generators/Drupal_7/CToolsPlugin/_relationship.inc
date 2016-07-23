@@ -12,13 +12,13 @@ $plugin = array(
   'title' => t('Example'),
   'description' => t('Some description'),
   'required context' => new ctools_context_required(t('Term'), array('term', 'taxonomy_term')),
-  'context' => 'example_context',
+  'context' => 'foo_example_context',
 );
 
 /**
-* Return a new context based on an existing context.
+* Returns a new context based on an existing context.
  */
-function example_context($context, $conf) {
+function foo_example_context($context, $conf) {
 
   // @TODO: Replace "node" with identifier of the context
   // this plugin is meant to provide.

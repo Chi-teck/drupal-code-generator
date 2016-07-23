@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\example\ExampleBreadcrumbBuilder.
- */
-
 namespace Drupal\example;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;

@@ -23,7 +23,9 @@ class ArgumentDefault extends BaseGenerator {
       'name' => ['Module name', [$this, 'defaultName']],
       'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
       'plugin_name' => ['Plugin name', 'Example'],
-      'plugin_machine_name' => ['Plugin machine name', [$this, 'defaultPluginMachineName']],
+      'plugin_machine_name' => [
+        'Plugin machine name', [$this, 'defaultPluginMachineName'],
+      ],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

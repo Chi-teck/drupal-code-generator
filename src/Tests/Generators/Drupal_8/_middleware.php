@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\foo\FooMiddleware.
- */
-
 namespace Drupal\foo;
 
 use Symfony\Component\HttpFoundation\Request;

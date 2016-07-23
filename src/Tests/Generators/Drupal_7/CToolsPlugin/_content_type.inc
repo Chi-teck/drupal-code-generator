@@ -14,13 +14,13 @@ $plugin = array(
   'description' => t('Some description'),
   'required context' => new ctools_context_required(t('Node'), 'node'),
   'category' => t('Custom'),
-  'render callback' => 'example_content_type_render',
+  'render callback' => 'foo_example_content_type_render',
 );
 
 /**
  * Render callback.
  */
-function example_content_type_render($subtype, $conf, $panel_args, $context) {
+function foo_example_content_type_render($subtype, $conf, $panel_args, $context) {
 
   if (empty($context->data)) {
     return;
@@ -34,7 +34,7 @@ function example_content_type_render($subtype, $conf, $panel_args, $context) {
   );
 
   $block = new stdClass();
-  $block->module = 'example';
+  $block->module = 'foo';
   $block->title = t('Title placeholder');
   $block->content = $build;
   return $block;

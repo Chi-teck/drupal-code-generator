@@ -15,13 +15,14 @@ class ContentTypeTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_7\CToolsPlugin\ContentType';
     $this->answers = [
+      'foo',
       'Example',
       'example',
       'Some description',
       'custom',
       'Node',
     ];
-    $this->target = 'example.inc';
+    $this->target = 'plugins/content_types/example.inc';
     $this->fixture = __DIR__ . '/_content_type.inc';
 
     parent::setUp();

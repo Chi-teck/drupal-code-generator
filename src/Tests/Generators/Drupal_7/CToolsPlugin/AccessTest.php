@@ -15,13 +15,14 @@ class AccessTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_7\CToolsPlugin\Access';
     $this->answers = [
+      'foo',
       'Example',
       'example',
       'Some description',
       'custom',
       'User',
     ];
-    $this->target = 'example.inc';
+    $this->target = 'plugins/access/example.inc';
     $this->fixture = __DIR__ . '/_access.inc';
 
     parent::setUp();

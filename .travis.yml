@@ -1,12 +1,12 @@
 language: php
 
 php:
+  - 7.1
   - 7.0
   - 5.6
-  - 5.5
 
 before_script:
-  - composer global require "phpunit/phpunit=4.*"
+  - composer global require "phpunit/phpunit"
   - composer install
 
 script:  ~/.composer/vendor/bin/phpunit

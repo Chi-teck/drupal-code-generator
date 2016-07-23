@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Commands;
-use DrupalCodeGenerator\Commands\Other;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -12,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class GeneratorsDiscoveryTest extends \PHPUnit_Framework_TestCase {
 
-  const TOTAL_GENERATORS = 52;
+  const TOTAL_GENERATORS = 54;
 
   /**
    * Test callback.

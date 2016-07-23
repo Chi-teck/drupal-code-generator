@@ -37,7 +37,6 @@ class Service extends BaseGenerator {
     ];
   }
 
-
   /**
    * Returns default service name.
    */

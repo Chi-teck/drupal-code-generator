@@ -55,21 +55,21 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * The file system utility.
    *
-   * @var Filesystem
+   * @var \Symfony\Component\Filesystem\Filesystem
    */
   protected $filesystem;
 
   /**
    * The twig environment.
    *
-   * @var Twig_Environment
+   * @var \Twig_Environment
    */
   protected $twig;
 
   /**
    * The yaml dumper.
    *
-   * @var Dumper
+   * @var \Symfony\Component\Yaml\Dumper
    */
   protected $yamlDumper;
 
@@ -96,6 +96,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
   /**
    * Constructs a generator command.
+   *
+   * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+   *   The file system utility.
+   * @param \Twig_Environment $twig
+   *   The twig environment.
+   * @param \Symfony\Component\Yaml\Dumper $yaml_dumper
+   *   The yaml dumper.
    */
   public function __construct(Filesystem $filesystem, Twig_Environment $twig, Dumper $yaml_dumper) {
     parent::__construct();
@@ -142,7 +149,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   }
 
   /**
-   * Renders file.
+   * Renders a template.
    *
    * @param string $template
    *   Twig template.
@@ -150,7 +157,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Template variables.
    *
    * @return string
-   *   The rendered file.
+   *   A strign representing the rendered output.
    */
   protected function render($template, array $vars) {
     return $this->twig->render($template, $vars);
@@ -159,9 +166,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Asks the user for template variables.
    *
-   * @param InputInterface $input
+   * @param \Symfony\Component\Console\Input\InputInterface $input
    *   Input instance.
-   * @param OutputInterface $output
+   * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
    * @param array $questions
    *   List of questions that the user should answer.
@@ -306,9 +313,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Asks a question to the user.
    *
-   * @param InputInterface $input
+   * @param \Symfony\Component\Console\Input\InputInterface $input
    *   Input instance.
-   * @param OutputInterface $output
+   * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
    * @param string $question_text
    *   The text of the question.
@@ -316,7 +323,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Default value for the question.
    *
    * @return string
-   *   The user anwser.
+   *   The user answer.
    */
   protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */

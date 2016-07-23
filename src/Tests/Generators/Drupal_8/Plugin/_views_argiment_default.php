@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\foo\Plugin\views\argument_default\Example.
- */
-
 namespace Drupal\foo\Plugin\views\argument_default;
 
 use Drupal\Core\Cache\Cache;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\foo\Plugin\Field\FieldFormatter\ZooFormatter.
- */
-
 namespace Drupal\foo\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FormatterBase;

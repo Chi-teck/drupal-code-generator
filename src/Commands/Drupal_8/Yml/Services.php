@@ -27,7 +27,7 @@ class Services extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = $this->human2class($vars['name']);
-    $this->files[$vars['machine_name'] . '.services.yml'] = $this->render('d8/services.yml.twig', $vars);
+    $this->files[$vars['machine_name'] . '.services.yml'] = $this->render('d8/yml/services.yml.twig', $vars);
   }
 
 }

@@ -2,13 +2,9 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Commands\Other;
-use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper;
-use Twig_Loader_Filesystem;
 
 /**
  * Base class for generators tests.
@@ -75,12 +71,13 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
    */
   protected function mockQuestionHelper() {
 
-    $question_helper = $this->getMock('Symfony\Component\Console\Helper\QuestionHelper', ['ask']);
+    $question_helper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     foreach ($this->answers as $key => $answer) {
-      $question_helper->expects($this->at($key))
+      // @TODO: Figure out where this key ofset comes from.
+      $question_helper->expects($this->at($key + 2))
         ->method('ask')
-        ->will($this->returnValue($answer));
+        ->willReturn($answer);
     }
 
     // We override the question helper with our mock.
@@ -94,7 +91,7 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   protected function execute() {
     $this->commandTester->execute([
       'command' => $this->command->getName(),
-      '--destination' => $this->destination
+      '--destination' => $this->destination,
     ]);
 
     $this->display = $this->commandTester->getDisplay();

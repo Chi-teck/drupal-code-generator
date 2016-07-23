@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\example\Plugin\Field\FieldType\FooItem.
- */
-
 namespace Drupal\example\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
