@@ -100,7 +100,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
     $this->command = $this->application->find('navigation');
 
-    $this->questionHelper = $this->getMock('Symfony\Component\Console\Helper\QuestionHelper', ['ask']);
+    $this->questionHelper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     $this->helperSet = $this->command->getHelperSet();
 
@@ -128,7 +128,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
    */
   protected function mockQuestionHelper(array $answers) {
     foreach ($answers as $key => $answer) {
-      $this->questionHelper->expects($this->at($key))
+      $this->questionHelper->expects($this->at($key + 2))
         ->method('ask')
         ->will($this->returnValue($answer));
     }

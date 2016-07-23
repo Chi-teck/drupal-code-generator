@@ -6,7 +6,7 @@ php:
   - 5.5
 
 before_script:
-  - composer global require "phpunit/phpunit=4.*"
+  - composer global require "phpunit/phpunit"
   - composer install
 
 script:  ~/.composer/vendor/bin/phpunit

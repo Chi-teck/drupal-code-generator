@@ -25,8 +25,7 @@ To make _dcg_ avaible in any system location append this line to your _.bashrc_ 
 Then after you have logged out and in the _dcg_ will be accessible through _$dcg_ global shell variable.
 
 ## Testing
-We stick to PHPUnit 4 because PHP 5.5 is not supported by PHPUnit 5. You can
-install it as follows:
+Install PHPUnit globally:
 ```shell
 composer global require "phpunit/phpunit=4.*"
 ```

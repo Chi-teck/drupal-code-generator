@@ -78,9 +78,9 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $question_helper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     foreach ($this->answers as $key => $answer) {
-      $question_helper->expects($this->at($key))
+      $question_helper->expects($this->at($key + 2))
         ->method('ask')
-        ->will($this->returnValue($answer));
+        ->willReturn($answer);
     }
 
     // We override the question helper with our mock.
