@@ -75,7 +75,7 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
    */
   protected function mockQuestionHelper() {
 
-    $question_helper = $this->getMock('Symfony\Component\Console\Helper\QuestionHelper', ['ask']);
+    $question_helper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     foreach ($this->answers as $key => $answer) {
       $question_helper->expects($this->at($key))
