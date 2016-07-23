@@ -78,6 +78,7 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $question_helper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     foreach ($this->answers as $key => $answer) {
+      // @TODO: Figure out where this key ofset comes from.
       $question_helper->expects($this->at($key + 2))
         ->method('ask')
         ->willReturn($answer);
