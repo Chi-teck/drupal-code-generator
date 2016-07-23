@@ -1,0 +1,36 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Command;
+
+use Drupal\Console\Command\Shared\{{ command_trait }};
+use Drupal\Console\Style\DrupalStyle;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+/**
+ * Implements {{ command_name }} command.
+ */
+class {{ class }} extends Command {
+
+  use {{ command_trait }};
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function configure() {
+    $this
+      ->setName('{{ command_name }}')
+      ->setDescription('{{ description }}');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function execute(InputInterface $input, OutputInterface $output) {
+    $io = new DrupalStyle($input, $output);
+
+    $io->info('It works!');
+  }
+
+}
