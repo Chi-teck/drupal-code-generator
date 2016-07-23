@@ -27,7 +27,7 @@ Then after you have logged out and in the _dcg_ will be accessible through _$dcg
 ## Testing
 Install PHPUnit globally:
 ```shell
-composer global require "phpunit/phpunit=4.*"
+composer global require "phpunit/phpunit"
 ```
 Make sure you have _~/.composer/vendor/bin_ in your PATH:
 ```shell
