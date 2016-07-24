@@ -10,6 +10,8 @@
 server {
     server_name example.local;
     root /var/www/example.local/docroot;
+    
+	client_max_body_size 16m;
 
     location = /favicon.ico {
         log_not_found off;
@@ -31,7 +33,7 @@ server {
         return 404;
     }
 
-    location ~ ^/sites/.*/private/ {
+    location ~ ^/files/private/ {
         return 403;
     }
 
@@ -49,6 +51,10 @@ server {
 
     location / {
         try_files $uri /index.php?$query_string;
+    }
+    
+    location @rewrite {
+        rewrite ^/(.*)$ /index.php?q=$1;
     }
 
     # Don't allow direct access to PHP files in the vendor directory.
@@ -83,7 +89,7 @@ server {
     }
 
     # Fighting with Styles? This little gem is amazing.
-    location ~ ^/sites/.*/files/styles/ {
+    location ~ ^/files/styles/ {
         try_files $uri @rewrite;
     }
 
