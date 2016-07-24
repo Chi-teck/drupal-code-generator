@@ -10,6 +10,8 @@
 server {
     server_name {{ server_name }};
     root {{ docroot }};
+    
+	client_max_body_size 16m;
 
     location = /favicon.ico {
         log_not_found off;
@@ -31,10 +33,12 @@ server {
         return 404;
     }
 
-    location ~ ^/sites/.*/private/ {
+{% if file_private_path %}
+    location ~ ^/{{ file_private_path }}/ {
         return 403;
     }
 
+{% endif %}
     # Allow "Well-Known URIs" as per RFC 5785
     location ~* ^/.well-known/ {
         allow all;
@@ -49,6 +53,10 @@ server {
 
     location / {
         try_files $uri /index.php?$query_string;
+    }
+    
+    location @rewrite {
+        rewrite ^/(.*)$ /index.php?q=$1;
     }
 
     # Don't allow direct access to PHP files in the vendor directory.
@@ -79,11 +87,11 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param PATH_INFO $fastcgi_path_info;
         fastcgi_intercept_errors on;
-        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        fastcgi_pass {{ fastcgi_pass }};
     }
 
     # Fighting with Styles? This little gem is amazing.
-    location ~ ^/sites/.*/files/styles/ {
+    location ~ ^/{{ file_public_path }}/styles/ {
         try_files $uri @rewrite;
     }
 
