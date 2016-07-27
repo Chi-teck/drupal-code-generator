@@ -62,7 +62,7 @@ class GeneratorDiscovery {
   /**
    * Finds and instantiates generator commands.
    *
-   * @return \DrupalCodeGenerator\Commands\GeneratorInterface;[]
+   * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
   public function getGenerators() {
