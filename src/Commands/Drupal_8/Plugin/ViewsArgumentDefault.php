@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Commands\BaseGenerator;
  */
 class ViewsArgumentDefault extends BaseGenerator {
 
-  protected $name = 'd8:plugin:views-argiment-default';
+  protected $name = 'd8:plugin:views-argument-default';
   protected $description = 'Generates views default argument plugin';
 
   /**

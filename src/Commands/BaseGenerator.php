@@ -239,7 +239,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         else {
           // Default mode for all parent directories is 0777. It can be
           // modified by the current umask, which you can change using umask().
-          $this->filesystem->dumpFile($file_path, $content, 0644);
+          $this->filesystem->dumpFile($file_path, $content);
+          $this->filesystem->chmod($file_path, 0644);
         }
       }
       catch (IOExceptionInterface $e) {
