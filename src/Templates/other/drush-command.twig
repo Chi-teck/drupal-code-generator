@@ -2,16 +2,16 @@
 
 /**
  * @file
- * Drush integration for {{ name }} module.
+ * Contains {{ command_name }} drush command.
  */
 
 /**
  * Implements hook_drush_help().
  */
-function {{ machine_name }}_drush_help($section) {
+function {{ command_file_prefix | hyphen2underscore }}_drush_help($section) {
   switch ($section) {
-    case 'drush:{{ machine_name }}-{{ command_name }}':
-      $help = dt('Help text here');
+    case 'drush:{{ command_name }}':
+      $help = dt('Help text here.');
       return $help;
   }
 }
@@ -19,34 +19,35 @@ function {{ machine_name }}_drush_help($section) {
 /**
  * Implements hook_drush_command().
  */
-function {{ machine_name }}_drush_command() {
+function {{ command_file_prefix | hyphen2underscore }}_drush_command() {
 
-  $items['{{ machine_name }}-{{ command_name }}'] = array(
+  $items['{{ command_name }}'] = [
     'description' => '{{ description }}',
-    'arguments' => array(
+    'arguments' => [
       '{{ argument }}' => 'Argument description',
-    ),
+    ],
     'required-arguments' => TRUE,
-    'options' => array(
+    'options' => [
       '{{ option }}' => 'Option description',
-    ),
+    ],
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
-    'aliases' => array('{{ alias }}'),
-    'examples' => array(
-      'drush {{ alias }} {{ argument }} --{{ option }}' => 'It does something with argument',
-    ),
-  );
+    'aliases' => ['{{ alias }}'],
+    'examples' => [
+      'drush {{ alias }} {{ argument }} --{{ option }}' => 'It does something with this argument',
+    ],
+  ];
+
   return $items;
 }
 
 /**
- * Callback function for {{ machine_name }}_{{ command_name }} command.
+ * Callback function for {{ command_name }} command.
  */
-function drush_{{ machine_name }}_{{ command_name }}($argument) {
+function drush_{{ command_callback_suffix | hyphen2underscore }}($argument) {
 
   $option = drush_get_option('{{ option }}', 'default');
-  drush_print(dt('Argument value is "@argument".', array('@argument' => $argument)));
-  drush_print(dt('Option value is "@option".', array('@option' => $option)));
+  drush_print(dt('Argument value is "@argument".', ['@argument' => $argument]));
+  drush_print(dt('Option value is "@option".', ['@option' => $option]));
 
   drush_set_error(dt('Error text here.'));
   drush_log(dt('Log text here'));
