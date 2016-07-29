@@ -355,7 +355,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * Returns extension root.
    *
    * @return string|bool
-   *   Extension root directory or false if it wasn't found.
+   *   Extension root directory or false if it was not found.
    */
   protected function getExtensionRoot() {
     static $extension_root;
