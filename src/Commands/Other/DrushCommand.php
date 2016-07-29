@@ -42,7 +42,7 @@ class DrushCommand extends BaseGenerator {
   }
 
   /**
-   * Returns command file name.
+   * Returns default command file name.
    */
   protected function defaultCommandFile($vars) {
     // The suggestion depends on whether the command global or local.
@@ -52,7 +52,7 @@ class DrushCommand extends BaseGenerator {
   }
 
   /**
-   * Returns command alias.
+   * Returns default command alias.
    */
   protected function defaultAlias($vars) {
     return substr($vars['command_name'], 0, 3);
