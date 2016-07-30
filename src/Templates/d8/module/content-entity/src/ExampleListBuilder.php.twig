@@ -118,7 +118,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
     ];
 {% endif %}
 {% if created_base_field %}
-    $row['created'] = $this->dateFormatter->format($entity->getChangedTime());
+    $row['created'] = $this->dateFormatter->format($entity->getCreatedTime());
 {% endif %}
 {% if changed_base_field %}
     $row['changed'] = $this->dateFormatter->format($entity->getChangedTime());
