@@ -17,7 +17,7 @@ $plugin = array(
 {% elseif  context == 'Term' %}
   'required context' => new ctools_context_required(t('{{ context }}'), array('term', 'taxonomy_term')),
 {% endif %}
-  'category' => t('Custom'),
+  'category' => {{ cateogry }},
   'callback' => '{{ machine_name }}_{{ plugin_machine_name }}_access_check',
   'summary' => '{{ machine_name }}_{{ plugin_machine_name }}_access_summary',
 );
