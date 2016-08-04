@@ -19,7 +19,7 @@ class ContentTypeTest extends GeneratorTestCase {
       'Example',
       'example',
       'Some description',
-      'custom',
+      'Custom',
       'Node',
     ];
     $this->target = 'plugins/content_types/example.inc';

@@ -19,7 +19,7 @@ class AccessTest extends GeneratorTestCase {
       'Example',
       'example',
       'Some description',
-      'custom',
+      'Custom',
       'User',
     ];
     $this->target = 'plugins/access/example.inc';
