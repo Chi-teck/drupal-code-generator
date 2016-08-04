@@ -11,7 +11,7 @@ server {
     server_name example.local;
     root /var/www/example.local/docroot;
     
-	client_max_body_size 16m;
+    client_max_body_size 16m;
 
     location = /favicon.ico {
         log_not_found off;
