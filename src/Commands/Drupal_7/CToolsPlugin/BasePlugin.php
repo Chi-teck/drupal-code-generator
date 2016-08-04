@@ -27,7 +27,7 @@ abstract class BasePlugin extends BaseGenerator {
         'Plugin machine name', [$this, 'defaultPluginMachineName'],
       ],
       'description' => ['Plugin description', 'TODO: Write description for the plugin'],
-      'package' => ['Package', 'custom'],
+      'category' => ['Category', 'custom'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
