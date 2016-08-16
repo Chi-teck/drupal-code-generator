@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Service;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:event-subscriber command.
+ * Test for d8:service/event-subscriber command.
  */
 class EventSubscriberTest extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class EventSubscriberTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\EventSubscriber';
+    $this->class = 'Drupal_8\Service\EventSubscriber';
     $this->answers = [
       'Foo',
       'foo',

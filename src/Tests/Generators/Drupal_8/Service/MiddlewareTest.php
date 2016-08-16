@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Service;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:middleware command.
+ * Test for d8:service:middleware command.
  */
 class MiddlewareTest extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class MiddlewareTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Middleware';
+    $this->class = 'Drupal_8\Service\Middleware';
     $this->answers = [
       'Foo',
       'foo',

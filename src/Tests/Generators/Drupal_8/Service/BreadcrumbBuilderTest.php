@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Service;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:breadcrumb-builder command.
+ * Test for d8:service:breadcrumb-builder command.
  */
 class BreadcrumbBuilderTest extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class BreadcrumbBuilderTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\BreadcrumbBuilder';
+    $this->class = 'Drupal_8\Service\BreadcrumbBuilder';
     $this->answers = [
       'Example',
       'example',

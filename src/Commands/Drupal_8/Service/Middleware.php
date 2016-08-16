@@ -1,17 +1,17 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Service;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:middleware command.
+ * Implements d8:service:middleware command.
  */
 class Middleware extends BaseGenerator {
 
-  protected $name = 'd8:middleware';
+  protected $name = 'd8:service:middleware';
   protected $description = 'Generates a middleware';
   protected $alias = 'middleware';
 
@@ -27,7 +27,7 @@ class Middleware extends BaseGenerator {
     $vars['class'] = $this->human2class($vars['name'] . 'Middleware');
 
     $path = $this->createPath('src/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/middleware.twig', $vars);
+    $this->files[$path] = $this->render('d8/service/middleware.twig', $vars);
 
     $this->services[$vars['machine_name'] . '.middleware'] = [
       'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
