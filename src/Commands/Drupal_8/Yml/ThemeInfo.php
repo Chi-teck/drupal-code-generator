@@ -20,8 +20,8 @@ class ThemeInfo extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Theme name', [$this, 'defaultName']],
-      'machine_name' => ['Theme machine name', [$this, 'defaultMachineName']],
+      'name' => ['Theme name'],
+      'machine_name' => ['Theme machine name'],
       'base_theme' => ['Base theme', 'classy'],
       'description' => ['Description', 'A flexible theme with a responsive, mobile-first layout.'],
       'package' => ['Package', 'custom'],

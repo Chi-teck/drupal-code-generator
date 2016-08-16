@@ -21,8 +21,8 @@ class Service extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'service_name' => ['Service name', [$this, 'defaultServiceName']],
       'class' => ['Class', 'Example'],
     ];

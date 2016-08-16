@@ -20,10 +20,10 @@ class ViewsArgumentDefault extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'plugin_label' => ['Plugin label', 'Example'],
-      'plugin_id' => ['Plugin id', [$this, 'defaultPluginId']],
+      'plugin_id' => ['Plugin id'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

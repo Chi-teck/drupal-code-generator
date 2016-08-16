@@ -21,8 +21,8 @@ abstract class BasePlugin extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
-      'plugin_name' => ['Plugin name', [$this, 'defaultName']],
+      'machine_name' => ['Module machine name'],
+      'plugin_name' => ['Plugin name'],
       'plugin_machine_name' => [
         'Plugin machine name', [$this, 'defaultPluginMachineName'],
       ],

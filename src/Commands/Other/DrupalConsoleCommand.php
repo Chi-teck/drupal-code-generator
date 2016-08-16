@@ -20,7 +20,7 @@ class DrupalConsoleCommand extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = [
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'machine_name' => ['Module machine name'],
       'command_name' => ['Command name', [$this, 'defaultCommandName']],
       'description' => ['Command description', 'Command description.'],
       'container_aware' => ['Make the command aware of the drupal site installation?', 'yes'],

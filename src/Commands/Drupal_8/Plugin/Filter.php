@@ -20,10 +20,10 @@ class Filter extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'plugin_label' => ['Filter name', 'Example'],
-      'plugin_id' => ['Filter machine name', [$this, 'defaultPluginId']],
+      'plugin_id' => ['Filter machine name'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

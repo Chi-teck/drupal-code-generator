@@ -21,8 +21,8 @@ class Libraries extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'project_type' => ['Project type (module/theme)', 'module'],
     ];
     $vars = $this->collectVars($input, $output, $questions);

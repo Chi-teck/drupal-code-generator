@@ -19,8 +19,8 @@ class ThemeFile extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = [
-      'name' => ['Theme name', [$this, 'defaultName']],
-      'machine_name' => ['Theme machine name', [$this, 'defaultMachineName']],
+      'name' => ['Theme name'],
+      'machine_name' => ['Theme machine name'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
