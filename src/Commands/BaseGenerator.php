@@ -164,7 +164,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Template variables.
    *
    * @return string
-   *   A strign representing the rendered output.
+   *   A string representing the rendered output.
    */
   protected function render($template, array $vars) {
     return $this->twig->render($template, $vars);
