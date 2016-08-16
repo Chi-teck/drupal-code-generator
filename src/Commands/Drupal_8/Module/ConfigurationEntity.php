@@ -25,7 +25,7 @@ class ConfigurationEntity extends BaseGenerator {
       'machine_name' => ['Module machine name'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', ''],
+      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
       'entity_type_label' => [
         'Entity type label', [$this, 'defaultEntityTypeLabel'],
       ],

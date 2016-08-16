@@ -25,8 +25,8 @@ class ModuleInfo extends BaseGenerator {
       'description' => ['Description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'configure' => ['Configuration page (route name)', ''],
-      'dependencies' => ['Dependencies (comma separated)', ''],
+      'configure' => ['Configuration page (route name)', '', FALSE],
+      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
