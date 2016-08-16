@@ -32,7 +32,7 @@ dcg d8
 dcg d8:plugin:field-widget
 
 # Generate code non interactively.
-dcg controller -a '{"name":"Example", "machine_name":"example", "class": "ExampleController"}'
+dcg controller -a '{"name": "Example", "machine_name": "example", "class": "ExampleController"}'
 ```
 
 ## Extending
