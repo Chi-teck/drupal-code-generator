@@ -30,6 +30,9 @@ dcg d8
 
 # Call generator directly.
 dcg d8:plugin:field-widget
+
+# Generate code non interactively.
+dcg controller -a '{"name":"Example", "machine_name":"example", "class": "ExampleController"}'
 ```
 
 ## Extending
