@@ -32,6 +32,7 @@ class ContentEntityTest extends GeneratorTestCase {
       TRUE,
       TRUE,
       TRUE,
+      FALSE,
     ];
     parent::setUp();
   }

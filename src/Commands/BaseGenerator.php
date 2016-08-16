@@ -141,6 +141,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         '-d',
         InputOption::VALUE_OPTIONAL,
         'Destination directory'
+      )
+      ->addOption(
+        'answers',
+        '-a',
+        InputOption::VALUE_OPTIONAL,
+        'Default JSON formatted answers'
       );
 
     if ($this->alias) {
@@ -179,20 +185,84 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
     $vars = [];
 
+    if ($answers_raw = $input->getOption('answers')) {
+      $answers = json_decode($answers_raw, TRUE);
+    }
+    else {
+      $answers = [];
+    }
+
     foreach ($questions as $name => $question) {
-      list($question_text, $default_value) = $question;
+
+      $question_text = $question[0];
+      $default_value = isset($question[1]) ? $question[1] : NULL;
+      $validator = isset($question[2]) ? $question[2] : NULL;
+
+      // Do some assumptions based on question name.
+      if ($default_value === NULL) {
+        switch ($name) {
+
+          case 'name':
+            $default_value = [$this, 'defaultName'];
+            break;
+
+          case 'machine_name':
+            $default_value = [$this, 'defaultMachineName'];
+            break;
+
+          case 'plugin_id':
+            $default_value = [$this, 'defaultPluginId'];
+            break;
+
+        }
+      }
+
+      if ($validator === NULL) {
+        switch ($name) {
+
+          case 'machine_name':
+          case 'plugin_id':
+            $validator = [$this, 'validateMachineName'];
+            break;
+
+          case 'class':
+            $validator = [$this, 'validateClassName'];
+            break;
+
+          // By default all values are required.
+          default:
+            $validator = [$this, 'validateRequired'];
+        }
+      }
 
       // Some default values match names of php functions.
       if (is_array($default_value) && is_callable($default_value)) {
         $default_value = call_user_func($default_value, $vars);
       }
 
-      $vars[$name] = $this->ask(
-        $input,
-        $output,
-        $question_text,
-        $default_value
-      );
+      $error = FALSE;
+      do {
+
+        // Do not ask if valid answer was passed through command line arguments.
+        if (!$error && isset($answers[$name])) {
+          $answer = $answers[$name];
+        }
+        else {
+          $answer = $this->ask(
+            $input,
+            $output,
+            $question_text,
+            $default_value
+          );
+        }
+
+        if (is_callable($validator)) {
+          if ($error = $validator($answer)) {
+            $output->writeln('<error>' . $error . '</error>');
+          }
+        }
+      } while ($error);
+      $vars[$name] = $answer;
     }
 
     return $vars;
@@ -343,11 +413,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $question = new Question($question_text, $default_value);
     }
 
-    return $helper->ask(
+    $answer = $helper->ask(
       $input,
       $output,
       $question
     );
+
+    return $answer;
 
   }
 
@@ -434,6 +506,35 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       '',
       ucwords(str_replace('_', ' ', $human_name))
     );
+  }
+
+  /**
+   * Machine name validator.
+   */
+  protected function validateMachineName($value) {
+    if (!preg_match('/^[a-z]+[a-z0-9_]*$/', $value)) {
+      return 'The value is not correct machine name.';
+    }
+  }
+
+  /**
+   * Class name validator.
+   *
+   * @see http://php.net/manual/en/language.oop5.basic.php
+   */
+  protected function validateClassName($value) {
+    if (!preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $value)) {
+      return 'The value is not correct class name.';
+    }
+  }
+
+  /**
+   * Required value validator.
+   */
+  protected function validateRequired($value) {
+    if ($value === NULL || $value === '') {
+      return 'The value is required.';
+    }
   }
 
 }
