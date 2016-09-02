@@ -184,6 +184,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Template variables
    */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
+
     $vars = [];
 
     if ($answers_raw = $input->getOption('answers')) {
@@ -315,7 +316,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         }
       }
       catch (IOExceptionInterface $e) {
-        $output->writeLn('<error>An error occurred while creating your file at ' . $e->getPath() . '</error>');
+        $output->writeln('<error>An error occurred while creating your file at ' . $e->getPath() . '</error>');
         return 1;
       }
 
@@ -373,9 +374,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         $result_message = 'The following files have been created or updated:';
       }
 
-      $output->writeLn("<title>$result_message</title>");
+      $output->writeln("<title>$result_message</title>");
       foreach ($dumped_files as $file) {
-        $output->writeLn("- $file");
+        $output->writeln("- $file");
       }
     }
 
@@ -421,7 +422,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     );
 
     return $answer;
-
   }
 
   /**
