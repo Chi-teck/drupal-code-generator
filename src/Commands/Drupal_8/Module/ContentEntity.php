@@ -23,11 +23,11 @@ class ContentEntity extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', ''],
+      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
       'entity_type_label' => [
         'Entity type label', [$this, 'defaultEntityTypeLabel'],
       ],
@@ -44,6 +44,7 @@ class ContentEntity extends BaseGenerator {
       'changed_base_field' => ['Add "changed" base field?', 'yes'],
       'author_base_field' => ['Add "author" base field?', 'yes'],
       'description_base_field' => ['Add "description" base field?', 'yes'],
+      'rest_configuration' => ['Create REST configuration for the entity?', 'no'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -88,14 +89,27 @@ class ContentEntity extends BaseGenerator {
       $templates[] = 'src/ExampleAccessControlHandler.php.twig';
     }
 
+    if ($vars['rest_configuration']) {
+      $templates[] = 'config/install/rest.resource.entity.example.yml.twig';
+    }
+
     $templates_path = 'd8/module/content-entity/';
 
     $vars['template_name'] = str_replace('_', '-', $vars['entity_type_id']) . '.html.twig';
 
-    $path_placeholders = ['model-example.html.twig', 'model', 'Example'];
-    $path_replacements = [
-      $vars['template_name'], $vars['machine_name'], $vars['class_prefix'],
+    $path_placeholders = [
+      'model-example.html.twig',
+      'model',
+      'Example',
+      'rest.resource.entity.example',
     ];
+    $path_replacements = [
+      $vars['template_name'],
+      $vars['machine_name'],
+      $vars['class_prefix'],
+      'rest.resource.entity.' . $vars['entity_type_id'],
+    ];
+
     foreach ($templates as $template) {
       $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $template);
       $path = preg_replace('#\.twig$#', '', $path);

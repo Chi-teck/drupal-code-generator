@@ -144,6 +144,9 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
           'Info (module)',
           'Example',
           'example',
+          'Some description',
+          'custom',
+          '6.x-1.0',
         ],
         'output' => [
           'Command: d6:module-info',
@@ -170,6 +173,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         'answers' => [
           '<comment>Drupal 7</comment>',
           'settings.php',
+          'mysql',
+          'drupal',
+          'root',
+          '123',
         ],
         'output' => [
           'Command: d7:settings.php',
@@ -190,6 +197,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
           'Foo',
           'foo',
           'Zoo',
+          'foo_zoo',
         ],
         'output' => [
           'Command: d8:plugin:field-formatter',

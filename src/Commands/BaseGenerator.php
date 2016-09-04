@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Commands;
 
 use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -141,6 +142,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         '-d',
         InputOption::VALUE_OPTIONAL,
         'Destination directory'
+      )
+      ->addOption(
+        'answers',
+        '-a',
+        InputOption::VALUE_OPTIONAL,
+        'Default JSON formatted answers'
       );
 
     if ($this->alias) {
@@ -157,7 +164,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Template variables.
    *
    * @return string
-   *   A strign representing the rendered output.
+   *   A string representing the rendered output.
    */
   protected function render($template, array $vars) {
     return $this->twig->render($template, $vars);
@@ -177,22 +184,87 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Template variables
    */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
+
     $vars = [];
 
+    if ($answers_raw = $input->getOption('answers')) {
+      $answers = json_decode($answers_raw, TRUE);
+      if (!is_array($answers)) {
+        throw new InvalidOptionException('Answers should be encoded in JSON format.');
+      }
+    }
+
     foreach ($questions as $name => $question) {
-      list($question_text, $default_value) = $question;
+
+      $question_text = $question[0];
+      $default_value = isset($question[1]) ? $question[1] : NULL;
+      $validator = isset($question[2]) ? $question[2] : NULL;
+
+      // Do some assumptions based on question name.
+      if ($default_value === NULL) {
+        switch ($name) {
+
+          case 'name':
+            $default_value = [$this, 'defaultName'];
+            break;
+
+          case 'machine_name':
+            $default_value = [$this, 'defaultMachineName'];
+            break;
+
+          case 'plugin_id':
+            $default_value = [$this, 'defaultPluginId'];
+            break;
+
+        }
+      }
+
+      if ($validator === NULL) {
+        switch ($name) {
+
+          case 'machine_name':
+          case 'plugin_id':
+            $validator = [$this, 'validateMachineName'];
+            break;
+
+          case 'class':
+            $validator = [$this, 'validateClassName'];
+            break;
+
+          // By default all values are required.
+          default:
+            $validator = [$this, 'validateRequired'];
+        }
+      }
 
       // Some default values match names of php functions.
       if (is_array($default_value) && is_callable($default_value)) {
         $default_value = call_user_func($default_value, $vars);
       }
 
-      $vars[$name] = $this->ask(
-        $input,
-        $output,
-        $question_text,
-        $default_value
-      );
+      $error = FALSE;
+      do {
+
+        // Do not ask if valid answer was passed through command line arguments.
+        if (!$error && isset($answers[$name])) {
+          $answer = $answers[$name];
+        }
+        else {
+          $answer = $this->ask(
+            $input,
+            $output,
+            $question_text,
+            $default_value
+          );
+        }
+
+        if (is_callable($validator)) {
+          if ($error = $validator($answer)) {
+            $output->writeln('<error>' . $error . '</error>');
+          }
+        }
+      } while ($error);
+      $vars[$name] = $answer;
     }
 
     return $vars;
@@ -239,11 +311,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         else {
           // Default mode for all parent directories is 0777. It can be
           // modified by the current umask, which you can change using umask().
-          $this->filesystem->dumpFile($file_path, $content, 0644);
+          $this->filesystem->dumpFile($file_path, $content);
+          $this->filesystem->chmod($file_path, 0644);
         }
       }
       catch (IOExceptionInterface $e) {
-        $output->writeLn('<error>An error occurred while creating your file at ' . $e->getPath() . '</error>');
+        $output->writeln('<error>An error occurred while creating your file at ' . $e->getPath() . '</error>');
         return 1;
       }
 
@@ -301,9 +374,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         $result_message = 'The following files have been created or updated:';
       }
 
-      $output->writeLn("<title>$result_message</title>");
+      $output->writeln("<title>$result_message</title>");
       foreach ($dumped_files as $file) {
-        $output->writeLn("- $file");
+        $output->writeln("- $file");
       }
     }
 
@@ -342,19 +415,20 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $question = new Question($question_text, $default_value);
     }
 
-    return $helper->ask(
+    $answer = $helper->ask(
       $input,
       $output,
       $question
     );
 
+    return $answer;
   }
 
   /**
    * Returns extension root.
    *
    * @return string|bool
-   *   Extension root directory or false if it wasn't found.
+   *   Extension root directory or false if it was not found.
    */
   protected function getExtensionRoot() {
     static $extension_root;
@@ -433,6 +507,35 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       '',
       ucwords(str_replace('_', ' ', $human_name))
     );
+  }
+
+  /**
+   * Machine name validator.
+   */
+  protected function validateMachineName($value) {
+    if (!preg_match('/^[a-z]+[a-z0-9_]*$/', $value)) {
+      return 'The value is not correct machine name.';
+    }
+  }
+
+  /**
+   * Class name validator.
+   *
+   * @see http://php.net/manual/en/language.oop5.basic.php
+   */
+  protected function validateClassName($value) {
+    if (!preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $value)) {
+      return 'The value is not correct class name.';
+    }
+  }
+
+  /**
+   * Required value validator.
+   */
+  protected function validateRequired($value) {
+    if ($value === NULL || $value === '') {
+      return 'The value is required.';
+    }
   }
 
 }

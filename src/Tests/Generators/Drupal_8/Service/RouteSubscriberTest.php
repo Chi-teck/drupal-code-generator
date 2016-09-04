@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Service;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:route-subscriber command.
+ * Test for d8:service:route-subscriber command.
  */
 class RouteSubscriberTest extends GeneratorTestCase {
 
@@ -13,7 +13,7 @@ class RouteSubscriberTest extends GeneratorTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\RouteSubscriber';
+    $this->class = 'Drupal_8\Service\RouteSubscriber';
     $this->answers = [
       'Foo',
       'foo',

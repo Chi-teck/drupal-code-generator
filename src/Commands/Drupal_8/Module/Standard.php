@@ -21,12 +21,12 @@ class Standard extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', ''],
+      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -46,19 +46,19 @@ class Standard extends BaseGenerator {
 
     $service_class = $this->human2class($vars['name'] . 'Example');
     $this->files[$vars['machine_name'] . '/src/' . $service_class . '.php'] = $this->render(
-      'd8/service.twig',
+      'd8/service/custom.twig',
       $vars + ['class' => $service_class]
     );
 
     $middleware_class = $this->human2class($vars['name'] . 'Middleware');
     $this->files[$vars['machine_name'] . '/src/' . $middleware_class . '.php'] = $this->render(
-      'd8/middleware.twig',
+      'd8/service/middleware.twig',
       $vars + ['class' => $middleware_class]
     );
 
     $subscriber_class = $this->human2class($vars['name'] . 'Subscriber');
     $this->files[$vars['machine_name'] . '/src/EventSubscriber/' . $subscriber_class . '.php'] = $this->render(
-      'd8/event-subscriber.twig',
+      'd8/service/event-subscriber.twig',
       $vars + ['class' => $subscriber_class]
     );
 

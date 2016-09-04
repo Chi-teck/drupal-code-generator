@@ -20,10 +20,10 @@ class FieldType extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultMachineName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'plugin_label' => ['Field type name', 'Example'],
-      'plugin_id' => ['Field type machine name', [$this, 'defaultPluginId']],
+      'plugin_id' => ['Field type machine name'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

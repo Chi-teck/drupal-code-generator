@@ -41,6 +41,10 @@ class TwigEnvironment extends Twig_Environment {
       return str_replace('_', '-', $string);
     }));
 
+    $this->addFilter(new Twig_SimpleFilter('hyphen2underscore', function ($string) {
+      return str_replace('-', '_', $string);
+    }));
+
   }
 
 }

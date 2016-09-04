@@ -21,13 +21,11 @@ class ConfigurationEntity extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => [
-        'Module machine name', [$this, 'defaultMachineName'],
-      ],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', ''],
+      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
       'entity_type_label' => [
         'Entity type label', [$this, 'defaultEntityTypeLabel'],
       ],

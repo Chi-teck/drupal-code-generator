@@ -20,13 +20,13 @@ class ModuleInfo extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'description' => ['Description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'configure' => ['Configuration page (route name)', ''],
-      'dependencies' => ['Dependencies (comma separated)', ''],
+      'configure' => ['Configuration page (route name)', '', FALSE],
+      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

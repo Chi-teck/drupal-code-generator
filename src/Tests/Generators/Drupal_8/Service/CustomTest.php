@@ -1,19 +1,19 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Service;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:service command.
+ * Test for d8:service:custom command.
  */
-class ServiceTest extends GeneratorTestCase {
+class CustomTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->class = 'Drupal_8\Service';
+    $this->class = 'Drupal_8\Service\Custom';
     $this->answers = [
       'Foo',
       'foo',
@@ -21,7 +21,7 @@ class ServiceTest extends GeneratorTestCase {
       'Example',
     ];
     $this->target = 'Example.php';
-    $this->fixture = __DIR__ . '/_service.php';
+    $this->fixture = __DIR__ . '/_custom.php';
 
     parent::setUp();
   }

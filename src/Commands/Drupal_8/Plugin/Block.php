@@ -20,10 +20,10 @@ class Block extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
       'plugin_label' => ['Block admin label', 'Example'],
-      'plugin_id' => ['Plugin ID', [$this, 'defaultPluginId']],
+      'plugin_id' => ['Plugin ID'],
       'category' => ['Block category', 'Custom'],
     ];
 

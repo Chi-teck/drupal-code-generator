@@ -63,7 +63,7 @@ class Navigation extends Command {
       isset($aliases[0]) ? $aliases[0] : $generator_name
     );
     $output->writeln($header);
-    $output->writeLn(str_repeat('<comment>-</comment>', strlen(strip_tags($header))));
+    $output->writeln(str_repeat('<comment>-</comment>', strlen(strip_tags($header))));
 
     // Run the generator.
     return $command->run($input, $output);
