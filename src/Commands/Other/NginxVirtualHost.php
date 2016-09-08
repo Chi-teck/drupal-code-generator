@@ -23,7 +23,7 @@ class NginxVirtualHost extends BaseGenerator {
       'server_name' => ['Server name', 'example.com'],
       'docroot' => ['Document root', [$this, 'defaultDocumentRoot']],
       'file_public_path' => ['Public file system path', 'sites/default/files'],
-      'file_private_path' => ['Private file system path', ''],
+      'file_private_path' => ['Private file system path', NULL, FALSE],
       'fastcgi_pass' => ['Address of a FastCGI server', 'unix:/run/php/php7.0-fpm.sock'],
     ];
 
