@@ -200,8 +200,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
           'foo_zoo',
         ],
         'output' => [
-          'Command: d8:plugin:field-formatter',
-          '----------------------------------',
+          'Command: formatter',
+          '------------------',
           'The following files have been created:',
           '- ZooFormatter.php',
         ],

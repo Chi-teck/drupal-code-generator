@@ -13,6 +13,7 @@ class Condition extends BaseGenerator {
 
   protected $name = 'd8:plugin:condition';
   protected $description = 'Generates condition plugin';
+  protected $alias = 'condition';
 
   /**
    * {@inheritdoc}

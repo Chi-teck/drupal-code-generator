@@ -13,6 +13,7 @@ class FieldFormatter extends BaseGenerator {
 
   protected $name = 'd8:plugin:field-formatter';
   protected $description = 'Generates formatter plugin';
+  protected $alias = 'formatter';
 
   /**
    * {@inheritdoc}

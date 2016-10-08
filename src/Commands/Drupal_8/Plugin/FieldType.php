@@ -13,6 +13,7 @@ class FieldType extends BaseGenerator {
 
   protected $name = 'd8:plugin:field-type';
   protected $description = 'Generates field type plugin';
+  protected $alias = 'field';
 
   /**
    * {@inheritdoc}

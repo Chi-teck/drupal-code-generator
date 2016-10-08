@@ -13,6 +13,7 @@ class Filter extends BaseGenerator {
 
   protected $name = 'd8:plugin:filter';
   protected $description = 'Generates filter plugin';
+  protected $alias = 'filter';
 
   /**
    * {@inheritdoc}

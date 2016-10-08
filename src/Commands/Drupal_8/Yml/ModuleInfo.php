@@ -13,6 +13,7 @@ class ModuleInfo extends BaseGenerator {
 
   protected $name = 'd8:yml:module-info';
   protected $description = 'Generates a module info yml file';
+  protected $alias = 'module.info.yml';
 
   /**
    * {@inheritdoc}
