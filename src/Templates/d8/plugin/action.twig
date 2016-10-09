@@ -1,0 +1,78 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\Action;
+
+{% if configurable %}
+use Drupal\Core\Action\ConfigurableActionBase;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Form\FormStateInterface;
+{% else %}
+use Drupal\Core\Action\ActionBase;
+use Drupal\Core\Session\AccountInterface;
+{% endif %}
+
+/**
+ * Provides a {{ plugin_label | article }} action.
+ *
+ * @Action(
+ *   id = "{{ plugin_id }}",
+ *   label =  @Translation("{{ plugin_label }}"),
+ *   type = "node",
+ *   category = @Translation("{{ category }}")
+ * )
+ */
+class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'ActionBase' }} {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function execute($node = NULL) {
+    /** @var \Drupal\node\NodeInterface $node */
+{% if configurable %}
+    $node->setTitle($this->configuration['title'])->save();
+{% else %}
+    $node->setTitle(t('New title'))->save();
+{% endif %}
+  }
+
+{% if configurable %}
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return ['title' => ''];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form['title'] = array(
+      '#title' => t('New title'),
+      '#type' => 'textfield',
+      '#required' => TRUE,
+      '#default_value' => $this->configuration['title'],
+    );
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+    $this->configuration['title'] = $form_state->getValue('title');
+  }
+
+{% endif %}
+  /**
+   * {@inheritdoc}
+   */
+  public function access($node, AccountInterface $account = NULL, $return_as_object = FALSE) {
+    /** @var \Drupal\node\NodeInterface $node */
+    $access = $node->access('update', $account, TRUE)
+      ->andIf($node->title->access('edit', $account, TRUE));
+
+    return $return_as_object ? $access : $access->isAllowed();
+  }
+
+}
