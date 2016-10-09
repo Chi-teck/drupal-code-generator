@@ -16,7 +16,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   /**
    * Total count of genetators.
    *
-   * @var integer
+   * @var int
    */
   protected $totalGenerators;
 
@@ -46,7 +46,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   /**
    * The question helper.
    *
-   * @var \Symfony\Component\Console\Helper\HelperInterface;
+   * @var \Symfony\Component\Console\Helper\HelperInterface
    */
   protected $questionHelper;
 
@@ -67,7 +67,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
   /**
    * The filesystem utility.
    *
-   * @var \Symfony\Component\Filesystem\Filesystem;
+   * @var \Symfony\Component\Filesystem\Filesystem
    */
   protected $filesystem;
 
@@ -200,8 +200,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
           'foo_zoo',
         ],
         'output' => [
-          'Command: d8:plugin:field-formatter',
-          '----------------------------------',
+          'Command: formatter',
+          '------------------',
           'The following files have been created:',
           '- ZooFormatter.php',
         ],

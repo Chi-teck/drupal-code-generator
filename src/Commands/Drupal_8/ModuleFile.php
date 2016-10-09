@@ -13,6 +13,7 @@ class ModuleFile extends BaseGenerator {
 
   protected $name = 'd8:module-file';
   protected $description = 'Generates a module file';
+  protected $alias = 'module file';
 
   /**
    * {@inheritdoc}

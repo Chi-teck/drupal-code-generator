@@ -7,13 +7,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
- * Implements d8:plugin:condition command.
+ * Implements d8:plugin:rest-resource command.
  */
-class Condition extends BaseGenerator {
+class RestResource extends BaseGenerator {
 
-  protected $name = 'd8:plugin:condition';
-  protected $description = 'Generates condition plugin';
-  protected $alias = 'condition';
+  protected $name = 'd8:plugin:rest-resource';
+  protected $description = 'Generates rest resource plugin';
+  protected $alias = 'rest-resource';
 
   /**
    * {@inheritdoc}
@@ -24,14 +24,14 @@ class Condition extends BaseGenerator {
       'name' => ['Module name'],
       'machine_name' => ['Module machine name'],
       'plugin_label' => ['Plugin label', 'Example'],
-      'plugin_id' => ['Plugin id'],
+      'plugin_id' => ['Plugin ID'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['plugin_label']);
+    $vars['class'] = $this->human2class($vars['plugin_label'] . 'Resource');
 
-    $path = $this->createPath('src/Plugin/Condition/', $vars['class'] . '.php', $vars['machine_name']);
-    $this->files[$path] = $this->render('d8/plugin/condition.twig', $vars);
+    $path = $this->createPath('src/Plugin/rest/resource/', $vars['class'] . '.php', $vars['machine_name']);
+    $this->files[$path] = $this->render('d8/plugin/rest-resource.twig', $vars);
   }
 
 }

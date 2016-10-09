@@ -13,6 +13,7 @@ class Block extends BaseGenerator {
 
   protected $name = 'd8:plugin:block';
   protected $description = 'Generates block plugin';
+  protected $alias = 'block';
 
   /**
    * {@inheritdoc}
