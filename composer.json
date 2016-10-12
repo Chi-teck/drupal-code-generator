@@ -6,7 +6,7 @@
     "symfony/console": "~2.7",
     "symfony/filesystem": "~3.1",
     "twig/twig": "~1.24",
-    "symfony/yaml": "~3.1"
+    "symfony/yaml": "~2.8"
   },
   "autoload": {
     "files": ["src/bootstrap.php"],
