@@ -1,0 +1,34 @@
+# Simple link.
+example.node_add:
+  title: Add content
+  description: Add new content.
+  menu_name: main
+  route_name: node.add_page
+  weight: 10
+
+# Child link.
+example.node_add_article:
+  title: Add article
+  menu_name: main
+  parent: bela.node_add
+  route_name: node.add
+  route_parameters:
+    node_type: article
+  weight: 20
+
+# Dynamic link.
+example.user:
+  menu_name: main
+  class: Drupal\user\Plugin\Menu\LoginLogoutMenuLink
+  weight: 30
+
+# External link.
+example.drupal.org:
+  title: Drupal.org
+  description: Drupal is an open source platform for building amazing digital experiences.
+  url: https://www.drupal.org
+  menu_name: main
+  weight: 40
+  options:
+    attributes:
+      target: _blank
