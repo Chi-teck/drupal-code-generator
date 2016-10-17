@@ -208,7 +208,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $validator = isset($question[2]) ? $question[2] : NULL;
       $suggestions = isset($question[3]) ? $question[3] : NULL;
 
-      // Do some assumptions based on question name.
+      // Make some assumptions based on question name.
       if ($default_value === NULL) {
         switch ($name) {
 
@@ -245,7 +245,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         }
       }
 
-      // Some default values match names of php functions.
+      // Some default values match names of php functions so make sure that
+      // callable is an array.
       if (is_array($default_value) && is_callable($default_value)) {
         $default_value = call_user_func($default_value, $vars);
       }
@@ -266,10 +267,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
           );
         }
 
-        if (is_callable($validator)) {
-          if ($error = $validator($answer)) {
-            $output->writeln('<error>' . $error . '</error>');
-          }
+        if (is_callable($validator) && ($error = $validator($answer))) {
+          $output->writeln('<error>' . $error . '</error>');
         }
       } while ($error);
 
@@ -294,10 +293,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
     $dumped_files = [];
 
-    // Save files.
-    foreach ($this->files as $name => $content) {
+    // Dump files.
+    foreach ($this->files as $file_name => $content) {
 
-      $file_path = $destination . $name;
+      $file_path = $destination . $file_name;
       if ($this->filesystem->exists($file_path)) {
 
         $helper = $this->getHelper('question');
@@ -329,11 +328,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         return 1;
       }
 
-      $dumped_files[] = $name;
+      $dumped_files[] = $file_name;
 
     }
 
-    // Add hooks.
+    // Dump hooks.
     foreach ($this->hooks as $file_name => $hook_info) {
       $file_path = $destination . $file_name;
       try {
@@ -341,12 +340,15 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         if ($this->filesystem->exists($file_path)) {
           $original_content = file_get_contents($file_path);
           $content = $original_content . "\n" . $hook_info['code'];
+          $files_updated = TRUE;
         }
+        // Otherwise create a new file with provided file doc comment.
         else {
           $content = $hook_info['file_doc'] . "\n" . $hook_info['code'];
         }
         $this->filesystem->dumpFile($file_path, $content);
         $this->filesystem->chmod($file_path, 0644);
+        $dumped_files[] = $file_name;
       }
       catch (IOExceptionInterface $exception) {
         $output->writeln('<error>An error occurred while creating your file at ' . $exception->getPath() . '</error>');
@@ -354,11 +356,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
     }
 
+    // Dump services.
     if ($this->services) {
-
       $extension_root = $this->getExtensionRoot();
       if ($extension_root) {
-        $extension_name = (basename($extension_root));
+        $extension_name = basename($extension_root);
         $file = $extension_root . '/' . $extension_name . '.services.yml';
 
         if (file_exists($file)) {
@@ -386,16 +388,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
           $yaml = $this->yamlDumper->dump($this->services, $this->inline, $intend);
           file_put_contents($file, $yaml, FILE_APPEND);
           $dumped_files[] = $extension_name . '.services.yml';
-          $services_updated = TRUE;
+          $files_updated = TRUE;
         }
-
       }
-
     }
 
     if (count($dumped_files) > 0) {
       // Make precise result message.
-      if (empty($services_updated)) {
+      if (empty($files_updated)) {
         $result_message = empty($directories_created) ?
           'The following files have been created:' :
           'The following directories and files have been created:';
