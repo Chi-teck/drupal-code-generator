@@ -89,6 +89,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $services;
 
   /**
+   * Hooks to dump.
+   *
+   * @var array
+   */
+  protected $hooks = [];
+
+  /**
    * The level where you switch to inline YAML.
    *
    * @var int
@@ -199,6 +206,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $question_text = $question[0];
       $default_value = isset($question[1]) ? $question[1] : NULL;
       $validator = isset($question[2]) ? $question[2] : NULL;
+      $suggestions = isset($question[3]) ? $question[3] : NULL;
 
       // Do some assumptions based on question name.
       if ($default_value === NULL) {
@@ -244,7 +252,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
       $error = FALSE;
       do {
-
         // Do not ask if valid answer was passed through command line arguments.
         if (!$error && isset($answers[$name])) {
           $answer = $answers[$name];
@@ -254,7 +261,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
             $input,
             $output,
             $question_text,
-            $default_value
+            $default_value,
+            $suggestions
           );
         }
 
@@ -264,6 +272,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
           }
         }
       } while ($error);
+
       $vars[$name] = $answer;
     }
 
@@ -322,6 +331,27 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
       $dumped_files[] = $name;
 
+    }
+
+    // Add hooks.
+    foreach ($this->hooks as $file_name => $hook_info) {
+      $file_path = $destination . $file_name;
+      try {
+        // If the file exists append hook code to it.
+        if ($this->filesystem->exists($file_path)) {
+          $original_content = file_get_contents($file_path);
+          $content = $original_content . "\n" . $hook_info['code'];
+        }
+        else {
+          $content = $hook_info['file_doc'] . "\n" . $hook_info['code'];
+        }
+        $this->filesystem->dumpFile($file_path, $content);
+        $this->filesystem->chmod($file_path, 0644);
+      }
+      catch (IOExceptionInterface $exception) {
+        $output->writeln('<error>An error occurred while creating your file at ' . $exception->getPath() . '</error>');
+        return 1;
+      }
     }
 
     if ($this->services) {
@@ -394,11 +424,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   The text of the question.
    * @param string $default_value
    *   Default value for the question.
+   * @param array $suggestions
+   *   (optional) Autocomplete values.
    *
    * @return string
    *   The user answer.
    */
-  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value) {
+  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, $suggestions) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
     $helper = $this->getHelper('question');
 
@@ -413,6 +445,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
     else {
       $question = new Question($question_text, $default_value);
+    }
+
+    if ($suggestions) {
+      $question->setAutocompleterValues($suggestions);
     }
 
     $answer = $helper->ask(
