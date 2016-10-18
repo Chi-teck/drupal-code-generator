@@ -1,0 +1,6 @@
+/**
+ * Implements hook_aggregator_fetch().
+ */
+function {{ machine_name }}_aggregator_fetch($feed) {
+  $feed->source_string = mymodule_fetch($feed->url);
+}

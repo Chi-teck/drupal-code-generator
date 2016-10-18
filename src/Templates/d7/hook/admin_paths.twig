@@ -1,0 +1,10 @@
+/**
+ * Implements hook_admin_paths().
+ */
+function {{ machine_name }}_admin_paths() {
+  $paths = array(
+    'mymodule/*/add' => TRUE,
+    'mymodule/*/edit' => TRUE,
+  );
+  return $paths;
+}

@@ -1,0 +1,7 @@
+/**
+ * Implements hook_file_delete().
+ */
+function {{ machine_name }}_file_delete($file) {
+  // Delete all information associated with the file.
+  db_delete('upload')->condition('fid', $file->fid)->execute();
+}

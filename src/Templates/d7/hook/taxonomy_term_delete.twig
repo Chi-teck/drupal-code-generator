@@ -1,0 +1,8 @@
+/**
+ * Implements hook_taxonomy_term_delete().
+ */
+function {{ machine_name }}_taxonomy_term_delete($term) {
+  db_delete('mytable')
+    ->condition('tid', $term->tid)
+    ->execute();
+}

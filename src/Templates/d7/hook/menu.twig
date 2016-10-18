@@ -2,8 +2,7 @@
  * Implements hook_menu().
  */
 function {{ machine_name }}_menu() {
-
- $items['example'] = array(
+  $items['example'] = array(
     'title' => 'Example Page',
     'page callback' => 'example_page',
     'access arguments' => array('access content'),
@@ -16,4 +15,5 @@ function {{ machine_name }}_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  return $items;
 }

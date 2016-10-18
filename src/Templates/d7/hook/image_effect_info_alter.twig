@@ -1,0 +1,9 @@
+/**
+ * Implements hook_image_effect_info_alter().
+ */
+function {{ machine_name }}_image_effect_info_alter(&$effects) {
+  // Override the Image module's crop effect with more options.
+  $effects['image_crop']['effect callback'] = 'mymodule_crop_effect';
+  $effects['image_crop']['dimensions callback'] = 'mymodule_crop_dimensions';
+  $effects['image_crop']['form callback'] = 'mymodule_crop_form';
+}

@@ -1,0 +1,6 @@
+/**
+ * Implements hook_taxonomy_term_presave().
+ */
+function {{ machine_name }}_taxonomy_term_presave($term) {
+  $term->foo = 'bar';
+}

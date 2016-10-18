@@ -1,0 +1,11 @@
+/**
+ * Implements hook_user_update().
+ */
+function {{ machine_name }}_user_update(&$edit, $account, $category) {
+  db_insert('user_changes')
+    ->fields(array(
+      'uid' => $account->uid,
+      'changed' => time(),
+    ))
+    ->execute();
+}

@@ -1,0 +1,8 @@
+/**
+ * Implements hook_boot().
+ */
+function {{ machine_name }}_boot() {
+  // We need user_access() in the shutdown function. Make sure it gets loaded.
+  drupal_load('module', 'user');
+  drupal_register_shutdown_function('devel_shutdown');
+}

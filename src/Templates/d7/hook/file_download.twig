@@ -1,0 +1,19 @@
+/**
+ * Implements hook_file_download().
+ */
+function {{ machine_name }}_file_download($uri) {
+  // Check if the file is controlled by the current module.
+  if (!file_prepare_directory($uri)) {
+    $uri = FALSE;
+  }
+  if (strpos(file_uri_target($uri), variable_get('user_picture_path', 'pictures') . '/picture-') === 0) {
+    if (!user_access('access user profiles')) {
+      // Access to the file is denied.
+      return -1;
+    }
+    else {
+      $info = image_get_info($uri);
+      return array('Content-Type' => $info['mime_type']);
+    }
+  }
+}

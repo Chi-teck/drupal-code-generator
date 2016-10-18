@@ -1,0 +1,24 @@
+/**
+ * Implements hook_filter_info().
+ */
+function {{ machine_name }}_filter_info() {
+  $filters['filter_html'] = array(
+    'title' => t('Limit allowed HTML tags'),
+    'description' => t('Allows you to restrict the HTML tags the user can use. It will also remove harmful content such as JavaScript events, JavaScript URLs and CSS styles from those tags that are not removed.'),
+    'process callback' => '_filter_html',
+    'settings callback' => '_filter_html_settings',
+    'default settings' => array(
+      'allowed_html' => '<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd>',
+      'filter_html_help' => 1,
+      'filter_html_nofollow' => 0,
+    ),
+    'tips callback' => '_filter_html_tips',
+  );
+  $filters['filter_autop'] = array(
+    'title' => t('Convert line breaks'),
+    'description' => t('Converts line breaks into HTML (i.e. &lt;br&gt; and &lt;p&gt;) tags.'),
+    'process callback' => '_filter_autop',
+    'tips callback' => '_filter_autop_tips',
+  );
+  return $filters;
+}

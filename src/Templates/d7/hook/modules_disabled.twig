@@ -1,0 +1,8 @@
+/**
+ * Implements hook_modules_disabled().
+ */
+function {{ machine_name }}_modules_disabled($modules) {
+  if (in_array('lousy_module', $modules)) {
+    mymodule_enable_functionality();
+  }
+}

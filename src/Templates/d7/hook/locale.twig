@@ -1,0 +1,9 @@
+/**
+ * Implements hook_locale().
+ */
+function {{ machine_name }}_locale($op = 'groups') {
+  switch ($op) {
+    case 'groups':
+      return array('custom' => t('Custom'));
+  }
+}

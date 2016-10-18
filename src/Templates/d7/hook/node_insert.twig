@@ -1,0 +1,11 @@
+/**
+ * Implements hook_node_insert().
+ */
+function {{ machine_name }}_node_insert($node) {
+  db_insert('mytable')
+    ->fields(array(
+      'nid' => $node->nid,
+      'extra' => $node->extra,
+    ))
+    ->execute();
+}

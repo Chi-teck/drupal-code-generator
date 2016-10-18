@@ -1,0 +1,15 @@
+/**
+ * Implements hook_field_validate().
+ */
+function {{ machine_name }}_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  foreach ($items as $delta => $item) {
+    if (!empty($item['value'])) {
+      if (!empty($field['settings']['max_length']) && drupal_strlen($item['value']) > $field['settings']['max_length']) {
+        $errors[$field['field_name']][$langcode][$delta][] = array(
+          'error' => 'text_max_length',
+          'message' => t('%name: the value may not be longer than %max characters.', array('%name' => $instance['label'], '%max' => $field['settings']['max_length'])),
+        );
+      }
+    }
+  }
+}

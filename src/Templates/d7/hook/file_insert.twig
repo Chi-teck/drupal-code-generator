@@ -1,0 +1,10 @@
+/**
+ * Implements hook_file_insert().
+ */
+function {{ machine_name }}_file_insert($file) {
+  // Add a message to the log, if the file is a jpg
+  $validate = file_validate_extensions($file, 'jpg');
+  if (empty($validate)) {
+    watchdog('file', 'A jpg has been added.');
+  }
+}

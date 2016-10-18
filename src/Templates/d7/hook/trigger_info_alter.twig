@@ -1,0 +1,6 @@
+/**
+ * Implements hook_trigger_info_alter().
+ */
+function {{ machine_name }}_trigger_info_alter(&$triggers) {
+  $triggers['node']['node_insert']['label'] = t('When content is saved');
+}

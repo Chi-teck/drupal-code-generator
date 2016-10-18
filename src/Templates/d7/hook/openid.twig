@@ -1,0 +1,9 @@
+/**
+ * Implements hook_openid().
+ */
+function {{ machine_name }}_openid($op, $request) {
+  if ($op == 'request') {
+    $request['openid.identity'] = 'http://myname.myopenid.com/';
+  }
+  return $request;
+}

@@ -1,0 +1,17 @@
+/**
+ * Implements hook_image_effect_info().
+ */
+function {{ machine_name }}_image_effect_info() {
+  $effects = array();
+
+  $effects['mymodule_resize'] = array(
+    'label' => t('Resize'),
+    'help' => t('Resize an image to an exact set of dimensions, ignoring aspect ratio.'),
+    'effect callback' => 'mymodule_resize_effect',
+    'dimensions callback' => 'mymodule_resize_dimensions',
+    'form callback' => 'mymodule_resize_form',
+    'summary theme' => 'mymodule_resize_summary',
+  );
+
+  return $effects;
+}

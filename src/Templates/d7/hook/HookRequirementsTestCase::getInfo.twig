@@ -1,0 +1,10 @@
+/**
+ * Implements HookRequirementsTestCase::getInfo().
+ */
+public static function getInfo() {
+  return array(
+    'name' => 'Requirements hook failure',
+    'description' => "Attempts enabling a module that fails hook_requirements('install').",
+    'group' => 'Module',
+  );
+}

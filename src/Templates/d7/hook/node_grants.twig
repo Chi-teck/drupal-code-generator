@@ -1,0 +1,10 @@
+/**
+ * Implements hook_node_grants().
+ */
+function {{ machine_name }}_node_grants($account, $op) {
+  if (user_access('access private content', $account)) {
+    $grants['example'] = array(1);
+  }
+  $grants['example_author'] = array($account->uid);
+  return $grants;
+}

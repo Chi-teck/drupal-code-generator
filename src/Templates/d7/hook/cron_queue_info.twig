@@ -1,0 +1,10 @@
+/**
+ * Implements hook_cron_queue_info().
+ */
+function {{ machine_name }}_cron_queue_info() {
+  $queues['aggregator_feeds'] = array(
+    'worker callback' => 'aggregator_refresh',
+    'time' => 60,
+  );
+  return $queues;
+}

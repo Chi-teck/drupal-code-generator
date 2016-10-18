@@ -1,0 +1,9 @@
+/**
+ * Implements hook_custom_theme().
+ */
+function {{ machine_name }}_custom_theme() {
+  // Allow the user to request a particular theme via a query parameter.
+  if (isset($_GET['theme'])) {
+    return $_GET['theme'];
+  }
+}

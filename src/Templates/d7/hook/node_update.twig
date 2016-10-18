@@ -1,0 +1,9 @@
+/**
+ * Implements hook_node_update().
+ */
+function {{ machine_name }}_node_update($node) {
+  db_update('mytable')
+    ->fields(array('extra' => $node->extra))
+    ->condition('nid', $node->nid)
+    ->execute();
+}

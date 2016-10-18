@@ -1,0 +1,8 @@
+/**
+ * Implements hook_prepare().
+ */
+function {{ machine_name }}_prepare($node) {
+  if (!isset($node->mymodule_value)) {
+    $node->mymodule_value = 'foo';
+  }
+}

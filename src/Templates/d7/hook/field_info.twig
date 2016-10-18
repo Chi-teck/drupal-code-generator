@@ -1,0 +1,31 @@
+/**
+ * Implements hook_field_info().
+ */
+function {{ machine_name }}_field_info() {
+  return array(
+    'text' => array(
+      'label' => t('Text'),
+      'description' => t('This field stores varchar text in the database.'),
+      'settings' => array('max_length' => 255),
+      'instance_settings' => array('text_processing' => 0),
+      'default_widget' => 'text_textfield',
+      'default_formatter' => 'text_default',
+    ),
+    'text_long' => array(
+      'label' => t('Long text'),
+      'description' => t('This field stores long text in the database.'),
+      'settings' => array('max_length' => ''),
+      'instance_settings' => array('text_processing' => 0),
+      'default_widget' => 'text_textarea',
+      'default_formatter' => 'text_default',
+    ),
+    'text_with_summary' => array(
+      'label' => t('Long text and summary'),
+      'description' => t('This field stores long text in the database along with optional summary text.'),
+      'settings' => array('max_length' => ''),
+      'instance_settings' => array('text_processing' => 1, 'display_summary' => 0),
+      'default_widget' => 'text_textarea_with_summary',
+      'default_formatter' => 'text_summary_or_trimmed',
+    ),
+  );
+}

@@ -1,0 +1,9 @@
+/**
+ * Implements hook_username_alter().
+ */
+function {{ machine_name }}_username_alter(&$name, $account) {
+  // Display the user's uid instead of name.
+  if (isset($account->uid)) {
+    $name = t('User !uid', array('!uid' => $account->uid));
+  }
+}

@@ -1,0 +1,17 @@
+/**
+ * Implements hook_updater_info().
+ */
+function {{ machine_name }}_updater_info() {
+  return array(
+    'module' => array(
+      'class' => 'ModuleUpdater',
+      'name' => t('Update modules'),
+      'weight' => 0,
+    ),
+    'theme' => array(
+      'class' => 'ThemeUpdater',
+      'name' => t('Update themes'),
+      'weight' => 0,
+    ),
+  );
+}

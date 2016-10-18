@@ -1,0 +1,8 @@
+/**
+ * Implements hook_field_storage_purge_field_instance().
+ */
+function {{ machine_name }}_field_storage_purge_field_instance($instance) {
+  db_delete('my_module_field_instance_info')
+    ->condition('id', $instance['id'])
+    ->execute();
+}

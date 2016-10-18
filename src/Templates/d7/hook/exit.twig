@@ -1,0 +1,9 @@
+/**
+ * Implements hook_exit().
+ */
+function {{ machine_name }}_exit($destination = NULL) {
+  db_update('counter')
+    ->expression('hits', 'hits + 1')
+    ->condition('type', 1)
+    ->execute();
+}

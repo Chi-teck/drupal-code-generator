@@ -1,0 +1,8 @@
+/**
+ * Implements hook_aggregator_process().
+ */
+function {{ machine_name }}_aggregator_process($feed) {
+  foreach ($feed->items as $item) {
+    mymodule_save($item);
+  }
+}

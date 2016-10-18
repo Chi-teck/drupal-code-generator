@@ -1,0 +1,16 @@
+/**
+ * Implements hook_language_init().
+ */
+function {{ machine_name }}_language_init() {
+  global $language, $conf;
+
+  switch ($language->language) {
+    case 'it':
+      $conf['site_name'] = 'Il mio sito Drupal';
+      break;
+
+    case 'fr':
+      $conf['site_name'] = 'Mon site Drupal';
+      break;
+  }
+}

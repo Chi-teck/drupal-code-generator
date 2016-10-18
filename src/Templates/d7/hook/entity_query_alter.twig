@@ -1,0 +1,6 @@
+/**
+ * Implements hook_entity_query_alter().
+ */
+function {{ machine_name }}_entity_query_alter($query) {
+  $query->executeCallback = 'my_module_query_callback';
+}

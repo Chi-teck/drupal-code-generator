@@ -1,0 +1,9 @@
+/**
+ * Implements hook_taxonomy_vocabulary_update().
+ */
+function {{ machine_name }}_taxonomy_vocabulary_update($vocabulary) {
+  db_update('mytable')
+    ->fields(array('foo' => $vocabulary->foo))
+    ->condition('vid', $vocabulary->vid)
+    ->execute();
+}

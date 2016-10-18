@@ -1,0 +1,50 @@
+/**
+ * Implements hook_field_storage_load().
+ */
+function {{ machine_name }}_field_storage_load($entity_type, $entities, $age, $fields, $options) {
+  $load_current = $age == FIELD_LOAD_CURRENT;
+
+  foreach ($fields as $field_id => $ids) {
+    // By the time this hook runs, the relevant field definitions have been
+    // populated and cached in FieldInfo, so calling field_info_field_by_id()
+    // on each field individually is more efficient than loading all fields in
+    // memory upfront with field_info_field_by_ids().
+    $field = field_info_field_by_id($field_id);
+    $field_name = $field['field_name'];
+    $table = $load_current ? _field_sql_storage_tablename($field) : _field_sql_storage_revision_tablename($field);
+
+    $query = db_select($table, 't')
+      ->fields('t')
+      ->condition('entity_type', $entity_type)
+      ->condition($load_current ? 'entity_id' : 'revision_id', $ids, 'IN')
+      ->condition('language', field_available_languages($entity_type, $field), 'IN')
+      ->orderBy('delta');
+
+    if (empty($options['deleted'])) {
+      $query->condition('deleted', 0);
+    }
+
+    $results = $query->execute();
+
+    $delta_count = array();
+    foreach ($results as $row) {
+      if (!isset($delta_count[$row->entity_id][$row->language])) {
+        $delta_count[$row->entity_id][$row->language] = 0;
+      }
+
+      if ($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED || $delta_count[$row->entity_id][$row->language] < $field['cardinality']) {
+        $item = array();
+        // For each column declared by the field, populate the item
+        // from the prefixed database column.
+        foreach ($field['columns'] as $column => $attributes) {
+          $column_name = _field_sql_storage_columnname($field_name, $column);
+          $item[$column] = $row->$column_name;
+        }
+
+        // Add the item to the field values for the entity.
+        $entities[$row->entity_id]->{$field_name}[$row->language][] = $item;
+        $delta_count[$row->entity_id][$row->language]++;
+      }
+    }
+  }
+}

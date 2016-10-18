@@ -1,0 +1,9 @@
+/**
+ * Implements hook_element_info().
+ */
+function {{ machine_name }}_element_info() {
+  $types['filter_format'] = array(
+    '#input' => TRUE,
+  );
+  return $types;
+}

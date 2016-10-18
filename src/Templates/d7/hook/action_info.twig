@@ -1,0 +1,27 @@
+/**
+ * Implements hook_action_info().
+ */
+function {{ machine_name }}_action_info() {
+  return array(
+    'comment_unpublish_action' => array(
+      'type' => 'comment',
+      'label' => t('Unpublish comment'),
+      'configurable' => FALSE,
+      'behavior' => array('changes_property'),
+      'triggers' => array('comment_presave', 'comment_insert', 'comment_update'),
+    ),
+    'comment_unpublish_by_keyword_action' => array(
+      'type' => 'comment',
+      'label' => t('Unpublish comment containing keyword(s)'),
+      'configurable' => TRUE,
+      'behavior' => array('changes_property'),
+      'triggers' => array('comment_presave', 'comment_insert', 'comment_update'),
+    ),
+    'comment_save_action' => array(
+      'type' => 'comment',
+      'label' => t('Save comment'),
+      'configurable' => FALSE,
+      'triggers' => array('comment_insert', 'comment_update'),
+    ),
+  );
+}

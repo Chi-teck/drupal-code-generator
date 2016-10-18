@@ -1,0 +1,47 @@
+/**
+ * Implements hook_file_url_alter().
+ */
+function {{ machine_name }}_file_url_alter(&$uri) {
+  global $user;
+
+  // User 1 will always see the local file in this example.
+  if ($user->uid == 1) {
+    return;
+  }
+
+  $cdn1 = 'http://cdn1.example.com';
+  $cdn2 = 'http://cdn2.example.com';
+  $cdn_extensions = array('css', 'js', 'gif', 'jpg', 'jpeg', 'png');
+
+  // Most CDNs don't support private file transfers without a lot of hassle,
+  // so don't support this in the common case.
+  $schemes = array('public');
+
+  $scheme = file_uri_scheme($uri);
+
+  // Only serve shipped files and public created files from the CDN.
+  if (!$scheme || in_array($scheme, $schemes)) {
+    // Shipped files.
+    if (!$scheme) {
+      $path = $uri;
+    }
+    // Public created files.
+    else {
+      $wrapper = file_stream_wrapper_get_instance_by_scheme($scheme);
+      $path = $wrapper->getDirectoryPath() . '/' . file_uri_target($uri);
+    }
+
+    // Clean up Windows paths.
+    $path = str_replace('\\', '/', $path);
+
+    // Serve files with one of the CDN extensions from CDN 1, all others from
+    // CDN 2.
+    $pathinfo = pathinfo($path);
+    if (isset($pathinfo['extension']) && in_array($pathinfo['extension'], $cdn_extensions)) {
+      $uri = $cdn1 . '/' . $path;
+    }
+    else {
+      $uri = $cdn2 . '/' . $path;
+    }
+  }
+}
