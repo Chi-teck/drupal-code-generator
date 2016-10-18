@@ -27,8 +27,28 @@ class Hook extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->hooks[$vars['machine_name'] . '.module'] = [
-      'file_doc' => $this->render('d7/file-docs/module.twig', $vars),
+    $install_hooks = [
+      'install',
+      'uninstall',
+      'enable',
+      'disable',
+      'schema',
+      'schema_alter',
+      'hook_field_schema',
+      'requirements',
+      'hook_update_N',
+      'hook_update_last_removed',
+    ];
+
+    if (in_array($vars['hook_name'], $install_hooks)) {
+      $file_type = 'install';
+    }
+    else {
+      $file_type = 'module';
+    }
+
+    $this->hooks[$vars['machine_name'] . '.' . $file_type] = [
+      'file_doc' => $this->render("d7/file-docs/$file_type.twig", $vars),
       'code' => $this->render('d7/hook/' . $vars['hook_name'] . '.twig', $vars),
     ];
   }
