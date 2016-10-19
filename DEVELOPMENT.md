@@ -21,7 +21,7 @@ bin/dcg
 ```
 
 To make _dcg_ avaible in any system location append this line to your _.bashrc_ file:
-`alias dcg-dev=/var/www/dcg/bin/dc`
+`alias dcg-dev=/path/to/to/drupal-code-generator/bin/dcg`
 Then after you have logged out and in the _dcg_ development version will be accessible through _dcg-dev_ command.
 
 ## Testing
