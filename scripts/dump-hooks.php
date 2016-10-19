@@ -10,8 +10,9 @@
  */
 
 $dir = '/tmp/hooks';
+$branch_id = 1;
 
-$query = db_query("SELECT object_name, code FROM {api_documentation} WHERE object_type = 'function' AND object_name LIKE 'hook_%'");
+$query = db_query("SELECT object_name, code FROM {api_documentation} WHERE object_type = 'function' AND branch_id = ? AND object_name LIKE 'hook\_%'", [$branch_id]);
 while ($hook = $query->fetch()) {
   $hook_name = str_replace('hook_', '', $hook->object_name);
   $comment = "/**\n * Implements {$hook->object_name}().\n */";
