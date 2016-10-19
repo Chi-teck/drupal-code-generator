@@ -51,6 +51,7 @@ class Hook extends BaseGenerator {
       'file_doc' => $this->render("d7/file-docs/$file_type.twig", $vars),
       'code' => $this->render('d7/hook/' . $vars['hook_name'] . '.twig', $vars),
     ];
+
   }
 
   /**
