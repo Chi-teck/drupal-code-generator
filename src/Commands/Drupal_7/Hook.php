@@ -34,10 +34,10 @@ class Hook extends BaseGenerator {
       'disable',
       'schema',
       'schema_alter',
-      'hook_field_schema',
+      'field_schema',
       'requirements',
-      'hook_update_N',
-      'hook_update_last_removed',
+      'update_N',
+      'update_last_removed',
     ];
 
     if (in_array($vars['hook_name'], $install_hooks)) {
