@@ -1,0 +1,7 @@
+/**
+ * Implements hook_views_plugins_pager_alter().
+ */
+function {{ machine_name }}_views_plugins_pager_alter(array &$plugins) {
+  // Remove the sql based plugin to force good performance.
+  unset($plugins['full']);
+}

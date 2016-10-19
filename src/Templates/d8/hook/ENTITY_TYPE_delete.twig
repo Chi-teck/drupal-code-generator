@@ -1,0 +1,10 @@
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function {{ machine_name }}_ENTITY_TYPE_delete(Drupal\Core\Entity\EntityInterface $entity) {
+  // Delete the entity's entry from a fictional table of all entities.
+  db_delete('example_entity')
+    ->condition('type', $entity->getEntityTypeId())
+    ->condition('id', $entity->id())
+    ->execute();
+}

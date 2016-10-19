@@ -1,0 +1,7 @@
+/**
+ * Implements hook_views_plugins_argument_validator_alter().
+ */
+function {{ machine_name }}_views_plugins_argument_validator_alter(array &$plugins) {
+  // Remove the available plugin because the users should not have access to it.
+  unset($plugins['php']);
+}

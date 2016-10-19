@@ -1,0 +1,10 @@
+/**
+ * Implements hook_entity_translation_delete().
+ */
+function {{ machine_name }}_entity_translation_delete(\Drupal\Core\Entity\EntityInterface $translation) {
+  $variables = array(
+    '@language' => $translation->language()->getName(),
+    '@label' => $translation->label(),
+  );
+  \Drupal::logger('example')->notice('The @language translation of @label has just been deleted.', $variables);
+}

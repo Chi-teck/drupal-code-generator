@@ -1,0 +1,7 @@
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function {{ machine_name }}_ENTITY_TYPE_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  // No opinion.
+  return AccessResult::neutral();
+}

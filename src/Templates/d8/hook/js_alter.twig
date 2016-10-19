@@ -1,0 +1,7 @@
+/**
+ * Implements hook_js_alter().
+ */
+function {{ machine_name }}_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  // Swap out jQuery to use an updated version of the library.
+  $javascript['core/assets/vendor/jquery/jquery.min.js']['data'] = drupal_get_path('module', 'jquery_update') . '/jquery.js';
+}

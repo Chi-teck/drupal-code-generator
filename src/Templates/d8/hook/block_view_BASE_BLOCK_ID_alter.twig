@@ -1,0 +1,7 @@
+/**
+ * Implements hook_block_view_BASE_BLOCK_ID_alter().
+ */
+function {{ machine_name }}_block_view_BASE_BLOCK_ID_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+  // Change the title of the specific block.
+  $build['#title'] = t('New title of the block');
+}

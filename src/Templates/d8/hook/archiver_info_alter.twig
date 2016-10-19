@@ -1,0 +1,6 @@
+/**
+ * Implements hook_archiver_info_alter().
+ */
+function {{ machine_name }}_archiver_info_alter(&$info) {
+  $info['tar']['extensions'][] = 'tgz';
+}

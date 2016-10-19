@@ -1,0 +1,6 @@
+/**
+ * Implements hook_ckeditor_css_alter().
+ */
+function {{ machine_name }}_ckeditor_css_alter(array &$css, Editor $editor) {
+  $css[] = drupal_get_path('module', 'mymodule') . '/css/mymodule-ckeditor.css';
+}

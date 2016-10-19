@@ -1,0 +1,7 @@
+/**
+ * Implements hook_css_alter().
+ */
+function {{ machine_name }}_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  // Remove defaults.css file.
+  unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
+}

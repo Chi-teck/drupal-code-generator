@@ -1,0 +1,7 @@
+/**
+ * Implements hook_views_plugins_area_alter().
+ */
+function {{ machine_name }}_views_plugins_area_alter(array &$plugins) {
+  // Change the 'title' handler class.
+  $plugins['title']['class'] = 'Drupal\\example\\ExampleClass';
+}

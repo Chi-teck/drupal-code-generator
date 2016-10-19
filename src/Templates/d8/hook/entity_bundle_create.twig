@@ -1,0 +1,8 @@
+/**
+ * Implements hook_entity_bundle_create().
+ */
+function {{ machine_name }}_entity_bundle_create($entity_type_id, $bundle) {
+  // When a new bundle is created, the menu needs to be rebuilt to add the
+  // Field UI menu item tabs.
+  \Drupal::service('router.builder')->setRebuildNeeded();
+}

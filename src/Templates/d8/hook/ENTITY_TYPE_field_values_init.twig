@@ -1,0 +1,8 @@
+/**
+ * Implements hook_ENTITY_TYPE_field_values_init().
+ */
+function {{ machine_name }}_ENTITY_TYPE_field_values_init(\Drupal\Core\Entity\FieldableEntityInterface $entity) {
+  if (!$entity->foo->value) {
+    $entity->foo->value = 'some_initial_value';
+  }
+}

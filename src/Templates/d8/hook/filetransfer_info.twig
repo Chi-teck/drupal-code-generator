@@ -1,0 +1,11 @@
+/**
+ * Implements hook_filetransfer_info().
+ */
+function {{ machine_name }}_filetransfer_info() {
+  $info['sftp'] = array(
+    'title' => t('SFTP (Secure FTP)'),
+    'class' => 'Drupal\Core\FileTransfer\SFTP',
+    'weight' => 10,
+  );
+  return $info;
+}

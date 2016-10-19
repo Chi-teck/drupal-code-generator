@@ -1,0 +1,58 @@
+/**
+ * Implements hook_library_info_build().
+ */
+function {{ machine_name }}_library_info_build() {
+  $libraries = [];
+  // Add a library whose information changes depending on certain conditions.
+  $libraries['mymodule.zombie'] = [
+    'dependencies' => [
+      'core/backbone',
+    ],
+  ];
+  if (Drupal::moduleHandler()->moduleExists('minifyzombies')) {
+    $libraries['mymodule.zombie'] += [
+      'js' => [
+        'mymodule.zombie.min.js' => [],
+      ],
+      'css' => [
+        'base' => [
+          'mymodule.zombie.min.css' => [],
+        ],
+      ],
+    ];
+  }
+  else {
+    $libraries['mymodule.zombie'] += [
+      'js' => [
+        'mymodule.zombie.js' => [],
+      ],
+      'css' => [
+        'base' => [
+          'mymodule.zombie.css' => [],
+        ],
+      ],
+    ];
+  }
+
+  // Add a library only if a certain condition is met. If code wants to
+  // integrate with this library it is safe to (try to) load it unconditionally
+  // without reproducing this check. If the library definition does not exist
+  // the library (of course) not be loaded but no notices or errors will be
+  // triggered.
+  if (Drupal::moduleHandler()->moduleExists('vampirize')) {
+    $libraries['mymodule.vampire'] = [
+      'js' => [
+        'js/vampire.js' => [],
+      ],
+      'css' => [
+        'base' => [
+          'css/vampire.css',
+        ],
+      ],
+      'dependencies' => [
+        'core/jquery',
+      ],
+    ];
+  }
+  return $libraries;
+}

@@ -1,0 +1,6 @@
+/**
+ * Implements hook_template_preprocess_default_variables_alter().
+ */
+function {{ machine_name }}_template_preprocess_default_variables_alter(&$variables) {
+  $variables['is_admin'] = \Drupal::currentUser()->hasPermission('access administration pages');
+}

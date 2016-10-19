@@ -1,0 +1,7 @@
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function {{ machine_name }}_field_widget_info_alter(array &$info) {
+  // Let a new field type re-use an existing widget.
+  $info['options_select']['field_types'][] = 'my_field_type';
+}

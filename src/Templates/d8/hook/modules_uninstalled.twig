@@ -1,0 +1,9 @@
+/**
+ * Implements hook_modules_uninstalled().
+ */
+function {{ machine_name }}_modules_uninstalled($modules) {
+  if (in_array('lousy_module', $modules)) {
+    \Drupal::state()->delete('mymodule.lousy_module_compatibility');
+  }
+  mymodule_cache_rebuild();
+}

@@ -1,0 +1,25 @@
+/**
+ * Implements hook_tokens_alter().
+ */
+function {{ machine_name }}_tokens_alter(array &$replacements, array $context, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  $options = $context['options'];
+
+  if (isset($options['langcode'])) {
+    $url_options['language'] = \Drupal::languageManager()->getLanguage($options['langcode']);
+    $langcode = $options['langcode'];
+  }
+  else {
+    $langcode = NULL;
+  }
+
+  if ($context['type'] == 'node' && !empty($context['data']['node'])) {
+    $node = $context['data']['node'];
+
+    // Alter the [node:title] token, and replace it with the rendered content
+    // of a field (field_title).
+    if (isset($context['tokens']['title'])) {
+      $title = $node->field_title->view('default');
+      $replacements[$context['tokens']['title']] = drupal_render($title);
+    }
+  }
+}

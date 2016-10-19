@@ -1,0 +1,6 @@
+/**
+ * Implements hook_entity_create().
+ */
+function {{ machine_name }}_entity_create(\Drupal\Core\Entity\EntityInterface $entity) {
+  \Drupal::logger('example')->info('Entity created: @label', ['@label' => $entity->label()]);
+}

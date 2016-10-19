@@ -1,0 +1,11 @@
+/**
+ * Implements hook_verify_update_archive().
+ */
+function {{ machine_name }}_verify_update_archive($project, $archive_file, $directory) {
+  $errors = array();
+  if (!file_exists($directory)) {
+    $errors[] = t('The %directory does not exist.', array('%directory' => $directory));
+  }
+  // Add other checks on the archive integrity here.
+  return $errors;
+}
