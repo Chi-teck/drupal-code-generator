@@ -21,7 +21,6 @@ class Permissions extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = [
-      'name' => ['Module name'],
       'machine_name' => ['Module machine name'],
     ];
     $vars = $this->collectVars($input, $output, $questions);

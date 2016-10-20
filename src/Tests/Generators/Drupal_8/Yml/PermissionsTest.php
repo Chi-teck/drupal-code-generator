@@ -14,13 +14,9 @@ class PermissionsTest extends GeneratorTestCase {
    */
   public function setUp() {
     $this->class = 'Drupal_8\Yml\Permissions';
-    $this->answers = [
-      'Example',
-      'example',
-    ];
+    $this->answers = ['example'];
     $this->target = 'example.permissions.yml';
     $this->fixture = __DIR__ . '/_permissions.yml';
-
     parent::setUp();
   }
 
