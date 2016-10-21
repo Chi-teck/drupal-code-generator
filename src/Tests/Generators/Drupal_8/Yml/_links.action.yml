@@ -1,0 +1,10 @@
+example.add_article:
+  route_name: node.add
+  route_parameters:
+    node_type: article
+  options:
+    attributes: {target: _blank}
+  title: Add article
+  weight: 10
+  appears_on:
+    - system.admin_content
