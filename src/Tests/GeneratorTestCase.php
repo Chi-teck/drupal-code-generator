@@ -55,7 +55,6 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $this->commandTester = new CommandTester($this->command);
 
     $this->destination = DCG_SANDBOX . '/tests';
-
   }
 
   /**

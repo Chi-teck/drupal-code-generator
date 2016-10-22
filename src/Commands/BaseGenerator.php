@@ -75,11 +75,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $yamlDumper;
 
   /**
-   * The base name of the current working directory.
+   * The destination directory.
    *
    * @var string
    */
-  protected $directoryBaseName;
+  protected $destination;
 
   /**
    * Services to dump.
@@ -117,7 +117,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $this->filesystem = $filesystem;
     $this->twig = $twig;
     $this->yamlDumper = $yaml_dumper;
-    $this->directoryBaseName = basename(getcwd());
   }
 
   /**
@@ -193,6 +192,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
 
     $vars = [];
+
+    // Input instance is not available in the constructor so we have to initiate
+    // the destination here.
+    $this->destination = $input->getOption('destination') ?
+      $this->normalizePath($input->getOption('destination')) : getcwd();
 
     if ($answers_raw = $input->getOption('answers')) {
       $answers = json_decode($answers_raw, TRUE);
@@ -286,10 +290,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    if (!$destination = $input->getOption('destination')) {
-      $destination = $this->getExtensionRoot() ? $this->getExtensionRoot() : '.';
-    }
-    $destination .= '/';
+    $destination = ($this->getExtensionRoot() ? $this->getExtensionRoot() : $this->destination) . '/';
 
     $dumped_files = [];
 
@@ -470,7 +471,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     static $extension_root;
     if ($extension_root === NULL) {
       $extension_root = FALSE;
-      $directory = getcwd();
+      $directory = $this->destination;
       for ($i = 1; $i <= 5; $i++) {
         $info_file = $directory . '/' . basename($directory) . '.info';
         if (file_exists($info_file) || file_exists($info_file . '.yml')) {
@@ -499,14 +500,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * Returns default value for the extension name question.
    */
   protected function defaultName() {
-    return self::machine2human($this->getExtensionRoot() ? basename($this->getExtensionRoot()) : $this->directoryBaseName);
+    return self::machine2human($this->getExtensionRoot() ? basename($this->getExtensionRoot()) : basename($this->destination));
   }
 
   /**
    * Returns default value for the machine name question.
    */
   protected function defaultMachineName($vars) {
-    return self::human2machine(isset($vars['name']) ? $vars['name'] : $this->directoryBaseName);
+    return self::human2machine(isset($vars['name']) ? $vars['name'] : basename($this->destination));
   }
 
   /**
@@ -572,6 +573,37 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     if ($value === NULL || $value === '') {
       return 'The value is required.';
     }
+  }
+
+  /**
+   * Returns normalized file path.
+   */
+  function normalizePath($path) {
+    $parts = [];
+    $path = str_replace('\\', '/', $path);
+    $path = preg_replace('/\/+/', '/', $path);
+    $segments = explode('/', $path);
+    foreach ($segments as $segment) {
+      if ($segment != '.') {
+        $test = array_pop($parts);
+        if (is_null($test)) {
+          $parts[] = $segment;
+        }
+        elseif ($segment == '..') {
+          if ($test == '..') {
+            $parts[] = $test;
+          }
+          if ($test == '..' || $test == '') {
+            $parts[] = $segment;
+          }
+        }
+        else {
+          $parts[] = $test;
+          $parts[] = $segment;
+        }
+      }
+    }
+    return implode('/', $parts);
   }
 
 }

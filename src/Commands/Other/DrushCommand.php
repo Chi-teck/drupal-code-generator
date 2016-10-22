@@ -45,9 +45,10 @@ class DrushCommand extends BaseGenerator {
    * Returns default command file name.
    */
   protected function defaultCommandFile($vars) {
+    $directoryBaseName = basename($this->destination);
     // The suggestion depends on whether the command global or local.
-    $prefix = $this->directoryBaseName == 'drush' || $this->directoryBaseName == '.drush' ?
-      $vars['command_name'] : $this->directoryBaseName;
+    $prefix = $directoryBaseName == 'drush' || $directoryBaseName == '.drush' ?
+      $vars['command_name'] : $directoryBaseName;
     return str_replace('-', '_', $prefix) . '.drush.inc';
   }
 
