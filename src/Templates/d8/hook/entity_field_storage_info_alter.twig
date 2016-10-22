@@ -1,0 +1,9 @@
+/**
+ * Implements hook_entity_field_storage_info_alter().
+ */
+function {{ machine_name }}_entity_field_storage_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type) {
+  // Alter the max_length setting.
+  if ($entity_type->id() == 'node' && !empty($fields['mymodule_text'])) {
+    $fields['mymodule_text']->setSetting('max_length', 128);
+  }
+}

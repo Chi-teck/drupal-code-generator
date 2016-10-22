@@ -1,0 +1,9 @@
+/**
+ * Implements hook_editor_xss_filter_alter().
+ */
+function {{ machine_name }}_editor_xss_filter_alter(&$editor_xss_filter_class, FilterFormatInterface $format, FilterFormatInterface $original_format = NULL) {
+  $filters = $format->filters()->getAll();
+  if (isset($filters['filter_wysiwyg']) && $filters['filter_wysiwyg']->status) {
+    $editor_xss_filter_class = '\Drupal\filter_wysiwyg\EditorXssFilter\WysiwygFilter';
+  }
+}

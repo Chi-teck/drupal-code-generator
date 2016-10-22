@@ -1,0 +1,8 @@
+/**
+ * Implements hook_search_plugin_alter().
+ */
+function {{ machine_name }}_search_plugin_alter(array &$definitions) {
+  if (isset($definitions['node_search'])) {
+    $definitions['node_search']['title'] = t('Nodes');
+  }
+}

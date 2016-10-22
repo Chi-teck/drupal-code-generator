@@ -1,0 +1,9 @@
+/**
+ * Implements hook_file_download_access_alter().
+ */
+function {{ machine_name }}_file_download_access_alter(&$grants, $file_item, $entity_type, $entity) {
+  // For our example module, we always enforce the rules set by node module.
+  if (isset($grants['node'])) {
+    $grants = array('node' => $grants['node']);
+  }
+}

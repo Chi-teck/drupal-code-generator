@@ -1,0 +1,8 @@
+/**
+ * Implements hook_views_plugins_row_alter().
+ */
+function {{ machine_name }}_views_plugins_row_alter(array &$plugins) {
+  // Change the used class of a plugin.
+  $plugins['entity:node']['class'] = 'Drupal\node\Plugin\views\row\NodeRow';
+  $plugins['entity:node']['module'] = 'node';
+}

@@ -1,0 +1,10 @@
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function {{ machine_name }}_theme_suggestions_HOOK(array $variables) {
+  $suggestions = array();
+
+  $suggestions[] = 'node__' . $variables['elements']['#langcode'];
+
+  return $suggestions;
+}

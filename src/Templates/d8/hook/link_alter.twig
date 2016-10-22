@@ -1,0 +1,9 @@
+/**
+ * Implements hook_link_alter().
+ */
+function {{ machine_name }}_link_alter(&$variables) {
+  // Add a warning to the end of route links to the admin section.
+  if (isset($variables['route_name']) && strpos($variables['route_name'], 'admin') !== FALSE) {
+    $variables['text'] = t('@text (Warning!)', ['@text' => $variables['text']]);
+  }
+}

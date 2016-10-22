@@ -1,0 +1,7 @@
+/**
+ * Implements hook_countries_alter().
+ */
+function {{ machine_name }}_countries_alter(&$countries) {
+  // Elbonia is now independent, so add it to the country list.
+  $countries['EB'] = 'Elbonia';
+}

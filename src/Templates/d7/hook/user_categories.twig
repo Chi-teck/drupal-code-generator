@@ -1,0 +1,10 @@
+/**
+ * Implements hook_user_categories().
+ */
+function {{ machine_name }}_user_categories() {
+  return array(array(
+    'name' => 'account',
+    'title' => t('Account settings'),
+    'weight' => 1,
+  ));
+}

@@ -1,0 +1,78 @@
+<?php
+
+namespace Drupal\example\Plugin\Menu;
+
+use Drupal\Core\Database\Connection;
+use Drupal\Core\Menu\MenuLinkDefault;
+use Drupal\Core\Menu\StaticMenuLinkOverridesInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+/**
+ * A menu link that displays count of messages.
+ */
+class FooMenuLink extends MenuLinkDefault {
+
+  /**
+   * The database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $dbConnection;
+
+  /**
+   * Constructs a new LoginLogoutMenuLink.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Menu\StaticMenuLinkOverridesInterface $static_override
+   *   The static override storage.
+   * @param \Drupal\Core\Database\Connection $db_connection
+   *   The database connection.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, StaticMenuLinkOverridesInterface $static_override, Connection $db_connection) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $static_override);
+
+    $this->dbConnection = $db_connection;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('menu_link.static.overrides'),
+      $container->get('database')
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getTitle() {
+    $count = $this->dbConnection->query('SELECT COUNT(*) FROM {messages}')->fetchField();
+    return $this->t('Messages (@count)', ['@count' => $count]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getRouteName() {
+    return 'example.messages';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    // DCG: Invalidate this tag when messages are created or removed.
+    return ['example.messages_count'];
+  }
+
+}

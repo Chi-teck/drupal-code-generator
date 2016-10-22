@@ -1,0 +1,6 @@
+/**
+ * Implements hook_page_bottom().
+ */
+function {{ machine_name }}_page_bottom(array &$page_bottom) {
+  $page_bottom['mymodule'] = ['#markup' => 'This is the bottom.'];
+}

@@ -1,0 +1,8 @@
+/**
+ * Implements hook_node_delete().
+ */
+function {{ machine_name }}_node_delete($node) {
+  db_delete('mytable')
+    ->condition('nid', $node->nid)
+    ->execute();
+}

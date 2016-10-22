@@ -1,0 +1,7 @@
+/**
+ * Implements hook_entity_bundle_info().
+ */
+function {{ machine_name }}_entity_bundle_info() {
+  $bundles['user']['user']['label'] = t('User');
+  return $bundles;
+}

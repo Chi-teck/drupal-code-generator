@@ -1,0 +1,9 @@
+/**
+ * Implements hook_js_settings_build().
+ */
+function {{ machine_name }}_js_settings_build(array &$settings, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  // Manipulate settings.
+  if (isset($settings['dialog'])) {
+    $settings['dialog']['autoResize'] = FALSE;
+  }
+}

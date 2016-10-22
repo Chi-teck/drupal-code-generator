@@ -75,11 +75,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $yamlDumper;
 
   /**
-   * The base name of the current working directory.
+   * The destination directory.
    *
    * @var string
    */
-  protected $directoryBaseName;
+  protected $destination;
 
   /**
    * Services to dump.
@@ -87,6 +87,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @var array
    */
   protected $services;
+
+  /**
+   * Hooks to dump.
+   *
+   * @var array
+   */
+  protected $hooks = [];
 
   /**
    * The level where you switch to inline YAML.
@@ -110,7 +117,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $this->filesystem = $filesystem;
     $this->twig = $twig;
     $this->yamlDumper = $yaml_dumper;
-    $this->directoryBaseName = basename(getcwd());
   }
 
   /**
@@ -187,6 +193,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
     $vars = [];
 
+    // Input instance is not available in the constructor so we have to initiate
+    // the destination here.
+    $this->destination = $input->getOption('destination') ?
+      $this->normalizePath($input->getOption('destination')) : getcwd();
+
     if ($answers_raw = $input->getOption('answers')) {
       $answers = json_decode($answers_raw, TRUE);
       if (!is_array($answers)) {
@@ -199,8 +210,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $question_text = $question[0];
       $default_value = isset($question[1]) ? $question[1] : NULL;
       $validator = isset($question[2]) ? $question[2] : NULL;
+      $suggestions = isset($question[3]) ? $question[3] : NULL;
 
-      // Do some assumptions based on question name.
+      // Make some assumptions based on question name.
       if ($default_value === NULL) {
         switch ($name) {
 
@@ -237,14 +249,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         }
       }
 
-      // Some default values match names of php functions.
+      // Some default values match names of php functions so make sure that
+      // callable is an array.
       if (is_array($default_value) && is_callable($default_value)) {
         $default_value = call_user_func($default_value, $vars);
       }
 
       $error = FALSE;
       do {
-
         // Do not ask if valid answer was passed through command line arguments.
         if (!$error && isset($answers[$name])) {
           $answer = $answers[$name];
@@ -254,16 +266,16 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
             $input,
             $output,
             $question_text,
-            $default_value
+            $default_value,
+            $suggestions
           );
         }
 
-        if (is_callable($validator)) {
-          if ($error = $validator($answer)) {
-            $output->writeln('<error>' . $error . '</error>');
-          }
+        if (is_callable($validator) && ($error = $validator($answer))) {
+          $output->writeln('<error>' . $error . '</error>');
         }
       } while ($error);
+
       $vars[$name] = $answer;
     }
 
@@ -278,17 +290,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    if (!$destination = $input->getOption('destination')) {
-      $destination = $this->getExtensionRoot() ? $this->getExtensionRoot() : '.';
-    }
-    $destination .= '/';
+    $destination = ($this->getExtensionRoot() ? $this->getExtensionRoot() : $this->destination) . '/';
 
     $dumped_files = [];
 
-    // Save files.
-    foreach ($this->files as $name => $content) {
+    // Dump files.
+    foreach ($this->files as $file_name => $content) {
 
-      $file_path = $destination . $name;
+      $file_path = $destination . $file_name;
       if ($this->filesystem->exists($file_path)) {
 
         $helper = $this->getHelper('question');
@@ -320,15 +329,39 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         return 1;
       }
 
-      $dumped_files[] = $name;
+      $dumped_files[] = $file_name;
 
     }
 
-    if ($this->services) {
+    // Dump hooks.
+    foreach ($this->hooks as $file_name => $hook_info) {
+      $file_path = $destination . $file_name;
+      try {
+        // If the file exists append hook code to it.
+        if ($this->filesystem->exists($file_path)) {
+          $original_content = file_get_contents($file_path);
+          $content = $original_content . "\n" . $hook_info['code'];
+          $files_updated = TRUE;
+        }
+        // Otherwise create a new file with provided file doc comment.
+        else {
+          $content = $hook_info['file_doc'] . "\n" . $hook_info['code'];
+        }
+        $this->filesystem->dumpFile($file_path, $content);
+        $this->filesystem->chmod($file_path, 0644);
+        $dumped_files[] = $file_name;
+      }
+      catch (IOExceptionInterface $exception) {
+        $output->writeln('<error>An error occurred while creating your file at ' . $exception->getPath() . '</error>');
+        return 1;
+      }
+    }
 
+    // Dump services.
+    if ($this->services) {
       $extension_root = $this->getExtensionRoot();
       if ($extension_root) {
-        $extension_name = (basename($extension_root));
+        $extension_name = basename($extension_root);
         $file = $extension_root . '/' . $extension_name . '.services.yml';
 
         if (file_exists($file)) {
@@ -356,16 +389,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
           $yaml = $this->yamlDumper->dump($this->services, $this->inline, $intend);
           file_put_contents($file, $yaml, FILE_APPEND);
           $dumped_files[] = $extension_name . '.services.yml';
-          $services_updated = TRUE;
+          $files_updated = TRUE;
         }
-
       }
-
     }
 
     if (count($dumped_files) > 0) {
       // Make precise result message.
-      if (empty($services_updated)) {
+      if (empty($files_updated)) {
         $result_message = empty($directories_created) ?
           'The following files have been created:' :
           'The following directories and files have been created:';
@@ -394,11 +425,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   The text of the question.
    * @param string $default_value
    *   Default value for the question.
+   * @param array $suggestions
+   *   (optional) Autocomplete values.
    *
    * @return string
    *   The user answer.
    */
-  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value) {
+  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, $suggestions) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
     $helper = $this->getHelper('question');
 
@@ -413,6 +446,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
     else {
       $question = new Question($question_text, $default_value);
+    }
+
+    if ($suggestions) {
+      $question->setAutocompleterValues($suggestions);
     }
 
     $answer = $helper->ask(
@@ -434,7 +471,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     static $extension_root;
     if ($extension_root === NULL) {
       $extension_root = FALSE;
-      $directory = getcwd();
+      $directory = $this->destination;
       for ($i = 1; $i <= 5; $i++) {
         $info_file = $directory . '/' . basename($directory) . '.info';
         if (file_exists($info_file) || file_exists($info_file . '.yml')) {
@@ -463,20 +500,20 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * Returns default value for the extension name question.
    */
   protected function defaultName() {
-    return self::machine2human($this->getExtensionRoot() ? basename($this->getExtensionRoot()) : $this->directoryBaseName);
+    return self::machine2human($this->getExtensionRoot() ? basename($this->getExtensionRoot()) : basename($this->destination));
   }
 
   /**
    * Returns default value for the machine name question.
    */
-  protected function defaultMachineName($vars) {
-    return self::human2machine(isset($vars['name']) ? $vars['name'] : $this->directoryBaseName);
+  protected function defaultMachineName(array $vars) {
+    return self::human2machine(isset($vars['name']) ? $vars['name'] : basename($this->destination));
   }
 
   /**
    * Creates default plugin ID.
    */
-  protected function defaultPluginId($vars) {
+  protected function defaultPluginId(array $vars) {
     return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
   }
 
@@ -536,6 +573,37 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     if ($value === NULL || $value === '') {
       return 'The value is required.';
     }
+  }
+
+  /**
+   * Returns normalized file path.
+   */
+  protected function normalizePath($path) {
+    $parts = [];
+    $path = str_replace('\\', '/', $path);
+    $path = preg_replace('/\/+/', '/', $path);
+    $segments = explode('/', $path);
+    foreach ($segments as $segment) {
+      if ($segment != '.') {
+        $test = array_pop($parts);
+        if (is_null($test)) {
+          $parts[] = $segment;
+        }
+        elseif ($segment == '..') {
+          if ($test == '..') {
+            $parts[] = $test;
+          }
+          if ($test == '..' || $test == '') {
+            $parts[] = $segment;
+          }
+        }
+        else {
+          $parts[] = $test;
+          $parts[] = $segment;
+        }
+      }
+    }
+    return implode('/', $parts);
   }
 
 }

@@ -1,0 +1,46 @@
+/**
+ * Implements hook_field_formatter_view().
+ */
+function {{ machine_name }}_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+
+  switch ($display['type']) {
+    case 'sample_field_formatter_simple':
+      // Common case: each value is displayed individually in a sub-element
+      // keyed by delta. The field.tpl.php template specifies the markup
+      // wrapping each value.
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array('#markup' => $settings['some_setting'] . $item['value']);
+      }
+      break;
+
+    case 'sample_field_formatter_themeable':
+      // More elaborate formatters can defer to a theme function for easier
+      // customization.
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#theme' => 'mymodule_theme_sample_field_formatter_themeable',
+          '#data' => $item['value'],
+          '#some_setting' => $settings['some_setting'],
+        );
+      }
+      break;
+
+    case 'sample_field_formatter_combined':
+      // Some formatters might need to display all values within a single piece
+      // of markup.
+      $rows = array();
+      foreach ($items as $delta => $item) {
+        $rows[] = array($delta, $item['value']);
+      }
+      $element[0] = array(
+        '#theme' => 'table',
+        '#header' => array(t('Delta'), t('Value')),
+        '#rows' => $rows,
+      );
+      break;
+  }
+
+  return $element;
+}

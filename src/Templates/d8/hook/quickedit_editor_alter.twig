@@ -1,0 +1,7 @@
+/**
+ * Implements hook_quickedit_editor_alter().
+ */
+function {{ machine_name }}_quickedit_editor_alter(&$editors) {
+  // Cleanly override editor.module's in-place editor plugin.
+  $editors['editor']['class'] = 'Drupal\advanced_editor\Plugin\quickedit\editor\AdvancedEditor';
+}

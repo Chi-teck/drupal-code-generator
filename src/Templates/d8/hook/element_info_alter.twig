@@ -1,0 +1,9 @@
+/**
+ * Implements hook_element_info_alter().
+ */
+function {{ machine_name }}_element_info_alter(array &$info) {
+  // Decrease the default size of textfields.
+  if (isset($info['textfield']['#size'])) {
+    $info['textfield']['#size'] = 40;
+  }
+}

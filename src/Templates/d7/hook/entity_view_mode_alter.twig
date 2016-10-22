@@ -1,0 +1,9 @@
+/**
+ * Implements hook_entity_view_mode_alter().
+ */
+function {{ machine_name }}_entity_view_mode_alter(&$view_mode, $context) {
+  // For nodes, change the view mode when it is teaser.
+  if ($context['entity_type'] == 'node' && $view_mode == 'teaser') {
+    $view_mode = 'my_custom_view_mode';
+  }
+}

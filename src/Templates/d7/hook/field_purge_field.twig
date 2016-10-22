@@ -1,0 +1,8 @@
+/**
+ * Implements hook_field_purge_field().
+ */
+function {{ machine_name }}_field_purge_field($field) {
+  db_delete('my_module_field_info')
+    ->condition('id', $field['id'])
+    ->execute();
+}

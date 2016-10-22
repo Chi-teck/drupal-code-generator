@@ -1,0 +1,6 @@
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function {{ machine_name }}_entity_bundle_info_alter(&$bundles) {
+  $bundles['user']['user']['label'] = t('Full account');
+}

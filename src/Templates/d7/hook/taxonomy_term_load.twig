@@ -1,0 +1,12 @@
+/**
+ * Implements hook_taxonomy_term_load().
+ */
+function {{ machine_name }}_taxonomy_term_load($terms) {
+  $result = db_select('mytable', 'm')
+    ->fields('m', array('tid', 'foo'))
+    ->condition('m.tid', array_keys($terms), 'IN')
+    ->execute();
+  foreach ($result as $record) {
+    $terms[$record->tid]->foo = $record->foo;
+  }
+}

@@ -1,0 +1,13 @@
+/**
+ * Implements hook_entity_operation().
+ */
+function {{ machine_name }}_entity_operation(\Drupal\Core\Entity\EntityInterface $entity) {
+  $operations = array();
+  $operations['translate'] = array(
+    'title' => t('Translate'),
+    'url' => \Drupal\Core\Url::fromRoute('foo_module.entity.translate'),
+    'weight' => 50,
+  );
+
+  return $operations;
+}

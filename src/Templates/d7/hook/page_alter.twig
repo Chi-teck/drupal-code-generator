@@ -1,0 +1,10 @@
+/**
+ * Implements hook_page_alter().
+ */
+function {{ machine_name }}_page_alter(&$page) {
+  // Add help text to the user login block.
+  $page['sidebar_first']['user_login']['help'] = array(
+    '#weight' => -10,
+    '#markup' => t('To post comments or add new content, you first have to log in.'),
+  );
+}

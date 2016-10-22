@@ -1,0 +1,7 @@
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ */
+function {{ machine_name }}_ENTITY_TYPE_create_access(\Drupal\Core\Session\AccountInterface $account, array $context, $entity_bundle) {
+  // No opinion.
+  return AccessResult::neutral();
+}

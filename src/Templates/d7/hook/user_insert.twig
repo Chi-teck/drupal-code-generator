@@ -1,0 +1,11 @@
+/**
+ * Implements hook_user_insert().
+ */
+function {{ machine_name }}_user_insert(&$edit, $account, $category) {
+  db_insert('mytable')
+    ->fields(array(
+      'myfield' => $edit['myfield'],
+      'uid' => $account->uid,
+    ))
+    ->execute();
+}

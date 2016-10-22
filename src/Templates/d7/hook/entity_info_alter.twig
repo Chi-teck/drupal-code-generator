@@ -1,0 +1,8 @@
+/**
+ * Implements hook_entity_info_alter().
+ */
+function {{ machine_name }}_entity_info_alter(&$entity_info) {
+  // Set the controller class for nodes to an alternate implementation of the
+  // DrupalEntityController interface.
+  $entity_info['node']['controller class'] = 'MyCustomNodeController';
+}

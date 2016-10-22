@@ -1,0 +1,6 @@
+/**
+ * Implements hook_search_access().
+ */
+function {{ machine_name }}_search_access() {
+  return user_access('access content');
+}

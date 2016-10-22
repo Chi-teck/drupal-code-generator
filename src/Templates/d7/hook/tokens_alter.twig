@@ -1,0 +1,26 @@
+/**
+ * Implements hook_tokens_alter().
+ */
+function {{ machine_name }}_tokens_alter(array &$replacements, array $context) {
+  $options = $context['options'];
+
+  if (isset($options['language'])) {
+    $url_options['language'] = $options['language'];
+    $language_code = $options['language']->language;
+  }
+  else {
+    $language_code = NULL;
+  }
+  $sanitize = !empty($options['sanitize']);
+
+  if ($context['type'] == 'node' && !empty($context['data']['node'])) {
+    $node = $context['data']['node'];
+
+    // Alter the [node:title] token, and replace it with the rendered content
+    // of a field (field_title).
+    if (isset($context['tokens']['title'])) {
+      $title = field_view_field('node', $node, 'field_title', 'default', $language_code);
+      $replacements[$context['tokens']['title']] = drupal_render($title);
+    }
+  }
+}

@@ -1,0 +1,13 @@
+/**
+ * Implements hook_search_info().
+ */
+function {{ machine_name }}_search_info() {
+  // Make the title translatable.
+  t('Content');
+
+  return array(
+    'title' => 'Content',
+    'path' => 'node',
+    'conditions_callback' => 'callback_search_conditions',
+  );
+}

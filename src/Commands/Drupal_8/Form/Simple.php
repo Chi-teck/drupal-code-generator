@@ -33,7 +33,7 @@ class Simple extends BaseGenerator {
   }
 
   /**
-   * Return default class name for the controller.
+   * Return default class name for the form.
    */
   protected function defaultClass($vars) {
     return $this->human2class($vars['name'] . 'Form');

@@ -1,0 +1,14 @@
+/**
+ * Implements hook_entity_bundle_field_info().
+ */
+function {{ machine_name }}_entity_bundle_field_info(\Drupal\Core\Entity\EntityTypeInterface $entity_type, $bundle, array $base_field_definitions) {
+  // Add a property only to nodes of the 'article' bundle.
+  if ($entity_type->id() == 'node' && $bundle == 'article') {
+    $fields = array();
+    $fields['mymodule_text_more'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('More text'))
+      ->setComputed(TRUE)
+      ->setClass('\Drupal\mymodule\EntityComputedMoreText');
+    return $fields;
+  }
+}

@@ -1,0 +1,6 @@
+/**
+ * Implements hook_comment_delete().
+ */
+function {{ machine_name }}_comment_delete($comment) {
+  drupal_set_message(t('Comment: @subject has been deleted', array('@subject' => $comment->subject)));
+}

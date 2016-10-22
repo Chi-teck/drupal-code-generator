@@ -1,0 +1,7 @@
+/**
+ * Implements hook_comment_presave().
+ */
+function {{ machine_name }}_comment_presave($comment) {
+  // Remove leading & trailing spaces from the comment subject.
+  $comment->subject = trim($comment->subject);
+}

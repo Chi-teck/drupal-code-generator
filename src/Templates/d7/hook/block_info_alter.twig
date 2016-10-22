@@ -1,0 +1,7 @@
+/**
+ * Implements hook_block_info_alter().
+ */
+function {{ machine_name }}_block_info_alter(&$blocks, $theme, $code_blocks) {
+  // Disable the login block.
+  $blocks['user']['login']['status'] = 0;
+}

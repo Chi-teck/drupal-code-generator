@@ -1,0 +1,6 @@
+/**
+ * Implements hook_disable().
+ */
+function {{ machine_name }}_disable() {
+  mymodule_cache_rebuild();
+}

@@ -1,0 +1,6 @@
+/**
+ * Implements hook_language_fallback_candidates_alter().
+ */
+function {{ machine_name }}_language_fallback_candidates_alter(array &$candidates, array $context) {
+  $candidates = array_reverse($candidates);
+}

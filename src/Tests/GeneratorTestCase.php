@@ -55,22 +55,19 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
     $this->commandTester = new CommandTester($this->command);
 
     $this->destination = DCG_SANDBOX . '/tests';
-
   }
 
   /**
    * {@inheritdoc}
    */
   public function tearDown() {
-    $filesystem = new Filesystem();
-    $filesystem->remove($this->destination);
+    (new Filesystem())->remove($this->destination);
   }
 
   /**
    * Mocks question helper.
    */
   protected function mockQuestionHelper() {
-
     $question_helper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     foreach ($this->answers as $key => $answer) {
@@ -82,7 +79,6 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
     // We override the question helper with our mock.
     $this->command->getHelperSet()->set($question_helper, 'question');
-
   }
 
   /**
@@ -98,18 +94,17 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * Checks file.
+   * Checks the file.
    */
   protected function checkFile($file, $fixture) {
     $this->assertFileExists($this->destination . '/' . $file);
-    $this->assertFileEquals($this->destination . '/' . $file, "$fixture");
+    $this->assertFileEquals($this->destination . '/' . $file, $fixture);
   }
 
   /**
    * Test callback.
    */
   public function testExecute() {
-
     $this->execute();
 
     $output = "The following files have been created:\n- $this->target\n";

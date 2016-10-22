@@ -1,0 +1,21 @@
+/**
+ * Implements hook_entity_predelete().
+ */
+function {{ machine_name }}_entity_predelete(Drupal\Core\Entity\EntityInterface $entity) {
+  // Count references to this entity in a custom table before they are removed
+  // upon entity deletion.
+  $id = $entity->id();
+  $type = $entity->getEntityTypeId();
+  $count = db_select('example_entity_data')
+    ->condition('type', $type)
+    ->condition('id', $id)
+    ->countQuery()
+    ->execute()
+    ->fetchField();
+
+  // Log the count in a table that records this statistic for deleted entities.
+  db_merge('example_deleted_entity_statistics')
+    ->key(array('type' => $type, 'id' => $id))
+    ->fields(array('count' => $count))
+    ->execute();
+}

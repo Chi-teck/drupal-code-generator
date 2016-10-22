@@ -1,0 +1,16 @@
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ */
+function {{ machine_name }}_field_widget_third_party_settings_form(\Drupal\Core\Field\WidgetInterface $plugin, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $form_mode, $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $element = array();
+  // Add a 'my_setting' checkbox to the settings form for 'foo_widget' field
+  // widgets.
+  if ($plugin->getPluginId() == 'foo_widget') {
+    $element['my_setting'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('My setting'),
+      '#default_value' => $plugin->getThirdPartySetting('my_module', 'my_setting'),
+    );
+  }
+  return $element;
+}

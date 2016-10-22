@@ -1,0 +1,8 @@
+/**
+ * Implements hook_ENTITY_TYPE_storage_load().
+ */
+function {{ machine_name }}_ENTITY_TYPE_storage_load(array $entities) {
+  foreach ($entities as $entity) {
+    $entity->foo = mymodule_add_something_uncached($entity);
+  }
+}

@@ -1,0 +1,7 @@
+/**
+ * Implements hook_file_presave().
+ */
+function {{ machine_name }}_file_presave($file) {
+  // Change the file timestamp to an hour prior.
+  $file->timestamp -= 3600;
+}

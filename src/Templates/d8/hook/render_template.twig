@@ -1,0 +1,8 @@
+/**
+ * Implements hook_render_template().
+ */
+function {{ machine_name }}_render_template($template_file, $variables) {
+  $twig_service = \Drupal::service('twig');
+
+  return $twig_service->loadTemplate($template_file)->render($variables);
+}

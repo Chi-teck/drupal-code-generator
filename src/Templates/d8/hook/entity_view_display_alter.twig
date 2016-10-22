@@ -1,0 +1,14 @@
+/**
+ * Implements hook_entity_view_display_alter().
+ */
+function {{ machine_name }}_entity_view_display_alter(\Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, array $context) {
+  // Leave field labels out of the search index.
+  if ($context['entity_type'] == 'node' && $context['view_mode'] == 'search_index') {
+    foreach ($display->getComponents() as $name => $options) {
+      if (isset($options['label'])) {
+        $options['label'] = 'hidden';
+        $display->setComponent($name, $options);
+      }
+    }
+  }
+}

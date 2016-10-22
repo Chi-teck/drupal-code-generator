@@ -1,0 +1,9 @@
+/**
+ * Implements hook_modules_enabled().
+ */
+function {{ machine_name }}_modules_enabled($modules) {
+  if (in_array('lousy_module', $modules)) {
+    drupal_set_message(t('mymodule is not compatible with lousy_module'), 'error');
+    mymodule_disable_functionality();
+  }
+}

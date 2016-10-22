@@ -1,0 +1,36 @@
+/**
+ * Implements hook_node_access_records().
+ */
+function {{ machine_name }}_node_access_records($node) {
+  // We only care about the node if it has been marked private. If not, it is
+  // treated just like any other node and we completely ignore it.
+  if ($node->private) {
+    $grants = array();
+    // Only published nodes should be viewable to all users. If we allow access
+    // blindly here, then all users could view an unpublished node.
+    if ($node->status) {
+      $grants[] = array(
+        'realm' => 'example',
+        'gid' => 1,
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => 0,
+      );
+    }
+    // For the example_author array, the GID is equivalent to a UID, which
+    // means there are many groups of just 1 user.
+    // Note that an author can always view his or her nodes, even if they
+    // have status unpublished.
+    $grants[] = array(
+      'realm' => 'example_author',
+      'gid' => $node->uid,
+      'grant_view' => 1,
+      'grant_update' => 1,
+      'grant_delete' => 1,
+      'priority' => 0,
+    );
+
+    return $grants;
+  }
+}

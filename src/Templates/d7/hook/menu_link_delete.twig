@@ -1,0 +1,9 @@
+/**
+ * Implements hook_menu_link_delete().
+ */
+function {{ machine_name }}_menu_link_delete($link) {
+  // Delete the record from our table.
+  db_delete('menu_example')
+    ->condition('mlid', $link['mlid'])
+    ->execute();
+}

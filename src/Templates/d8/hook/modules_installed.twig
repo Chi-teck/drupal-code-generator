@@ -1,0 +1,8 @@
+/**
+ * Implements hook_modules_installed().
+ */
+function {{ machine_name }}_modules_installed($modules) {
+  if (in_array('lousy_module', $modules)) {
+    \Drupal::state()->set('mymodule.lousy_module_compatibility', TRUE);
+  }
+}

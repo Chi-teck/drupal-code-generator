@@ -1,0 +1,7 @@
+/**
+ * Implements hook_views_plugins_wizard_alter().
+ */
+function {{ machine_name }}_views_plugins_wizard_alter(array &$plugins) {
+  // Change the title of a plugin.
+  $plugins['node_revision']['title'] = t('Node revision wizard');
+}

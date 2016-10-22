@@ -1,0 +1,8 @@
+/**
+ * Implements hook_taxonomy_vocabulary_delete().
+ */
+function {{ machine_name }}_taxonomy_vocabulary_delete($vocabulary) {
+  db_delete('mytable')
+    ->condition('vid', $vocabulary->vid)
+    ->execute();
+}

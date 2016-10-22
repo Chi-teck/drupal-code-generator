@@ -1,0 +1,17 @@
+/**
+ * Implements hook_search_page().
+ */
+function {{ machine_name }}_search_page($results) {
+  $output['prefix']['#markup'] = '<ol class="search-results">';
+
+  foreach ($results as $entry) {
+    $output[] = array(
+      '#theme' => 'search_result',
+      '#result' => $entry,
+      '#module' => 'my_module_name',
+    );
+  }
+  $output['suffix']['#markup'] = '</ol>' . theme('pager');
+
+  return $output;
+}

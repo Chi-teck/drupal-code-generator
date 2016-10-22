@@ -1,0 +1,8 @@
+/**
+ * Implements hook_translated_menu_link_alter().
+ */
+function {{ machine_name }}_translated_menu_link_alter(&$item, $map) {
+  if ($item['href'] == 'devel/cache/clear') {
+    $item['localized_options']['query'] = drupal_get_destination();
+  }
+}

@@ -1,0 +1,34 @@
+/**
+ * Implements hook_post_update_NAME().
+ */
+function {{ machine_name }}_post_update_NAME(&$sandbox) {
+  // Example of updating some content.
+  $node = \Drupal\node\Entity\Node::load(123);
+  $node->setTitle('foo');
+  $node->save();
+
+  $result = t('Node %nid saved', ['%nid' => $node->id()]);
+
+  // Example of disabling blocks with missing condition contexts. Note: The
+  // block itself is in a state which is valid at that point.
+  // @see block_update_8001()
+  // @see block_post_update_disable_blocks_with_missing_contexts()
+  $block_update_8001 = \Drupal::keyValue('update_backup')->get('block_update_8001', []);
+
+  $block_ids = array_keys($block_update_8001);
+  $block_storage = \Drupal::entityManager()->getStorage('block');
+  $blocks = $block_storage->loadMultiple($block_ids);
+  /** @var $blocks \Drupal\block\BlockInterface[] */
+  foreach ($blocks as $block) {
+    // This block has had conditions removed due to an inability to resolve
+    // contexts in block_update_8001() so disable it.
+
+    // Disable currently enabled blocks.
+    if ($block_update_8001[$block->id()]['status']) {
+      $block->setStatus(FALSE);
+      $block->save();
+    }
+  }
+
+  return $result;
+}

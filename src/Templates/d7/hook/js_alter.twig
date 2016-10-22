@@ -1,0 +1,7 @@
+/**
+ * Implements hook_js_alter().
+ */
+function {{ machine_name }}_js_alter(&$javascript) {
+  // Swap out jQuery to use an updated version of the library.
+  $javascript['misc/jquery.js']['data'] = drupal_get_path('module', 'jquery_update') . '/jquery.js';
+}

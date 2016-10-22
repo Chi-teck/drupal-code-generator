@@ -1,0 +1,7 @@
+/**
+ * Implements hook_local_tasks_alter().
+ */
+function {{ machine_name }}_local_tasks_alter(&$local_tasks) {
+  // Remove a specified local task plugin.
+  unset($local_tasks['example_plugin_id']);
+}

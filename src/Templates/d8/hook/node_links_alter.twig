@@ -1,0 +1,15 @@
+/**
+ * Implements hook_node_links_alter().
+ */
+function {{ machine_name }}_node_links_alter(array &$links, NodeInterface $entity, array &$context) {
+  $links['mymodule'] = array(
+    '#theme' => 'links__node__mymodule',
+    '#attributes' => array('class' => array('links', 'inline')),
+    '#links' => array(
+      'node-report' => array(
+        'title' => t('Report'),
+        'url' => Url::fromRoute('node_test.report', ['node' => $entity->id()], ['query' => ['token' => \Drupal::getContainer()->get('csrf_token')->get("node/{$entity->id()}/report")]]),
+      ),
+    ),
+  );
+}

@@ -1,0 +1,10 @@
+/**
+ * Implements hook_field_storage_create_field().
+ */
+function {{ machine_name }}_field_storage_create_field($field) {
+  $schema = _field_sql_storage_schema($field);
+  foreach ($schema as $name => $table) {
+    db_create_table($name, $table);
+  }
+  drupal_get_schema(NULL, TRUE);
+}
