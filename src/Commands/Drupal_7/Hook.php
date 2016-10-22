@@ -22,7 +22,12 @@ class Hook extends BaseGenerator {
     $questions = [
       'name' => ['Module name'],
       'machine_name' => ['Module machine name'],
-      'hook_name' => ['Hook name', NULL, [$this, 'validateHookName'], $this->getSupportedHooks()],
+      'hook_name' => [
+        'Hook name',
+        NULL,
+        [$this, 'validateHookName'],
+        $this->getSupportedHooks(),
+      ],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

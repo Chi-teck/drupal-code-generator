@@ -578,7 +578,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Returns normalized file path.
    */
-  function normalizePath($path) {
+  protected function normalizePath($path) {
     $parts = [];
     $path = str_replace('\\', '/', $path);
     $path = preg_replace('/\/+/', '/', $path);

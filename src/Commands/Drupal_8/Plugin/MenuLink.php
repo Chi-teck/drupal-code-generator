@@ -28,7 +28,6 @@ class MenuLink extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-
     $path = $this->createPath('src/Plugin/Menu/', $vars['class'] . '.php', $vars['machine_name']);
     $this->files[$path] = $this->render('d8/plugin/menu-link.twig', $vars);
   }

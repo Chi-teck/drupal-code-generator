@@ -2,6 +2,7 @@
 <ruleset name="Drupal Code Generator">
   <description>Drupal Code Generator coding standard</description>
   <file>./src</file>
+  <rule ref="Drupal"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>
