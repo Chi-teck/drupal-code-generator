@@ -506,14 +506,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Returns default value for the machine name question.
    */
-  protected function defaultMachineName($vars) {
+  protected function defaultMachineName(array $vars) {
     return self::human2machine(isset($vars['name']) ? $vars['name'] : basename($this->destination));
   }
 
   /**
    * Creates default plugin ID.
    */
-  protected function defaultPluginId($vars) {
+  protected function defaultPluginId(array $vars) {
     return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
   }
 
