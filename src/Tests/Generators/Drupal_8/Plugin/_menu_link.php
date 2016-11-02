@@ -20,7 +20,7 @@ class FooMenuLink extends MenuLinkDefault {
   protected $dbConnection;
 
   /**
-   * Constructs a new LoginLogoutMenuLink.
+   * Constructs the plugin object.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
