@@ -71,7 +71,7 @@ class FooMenuLink extends MenuLinkDefault {
    * {@inheritdoc}
    */
   public function getCacheTags() {
-    // DCG: Invalidate this tag when messages are created or removed.
+    // DCG: Invalidate this tags when messages are created or removed.
     return ['example.messages_count'];
   }
 
