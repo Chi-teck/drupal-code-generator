@@ -3,37 +3,57 @@
 namespace DrupalCodeGenerator\Commands;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Implements generate command.
- *
- * @TODO: Create a test for this.
  */
 class Navigation extends Command {
 
-  protected $name = 'navigation';
-  protected $description = 'Navigation';
   protected $activeMenuItems = [];
   protected $menuTree;
+  protected $generatorName;
 
   /**
    * {@inheritdoc}
    */
   protected function configure() {
     $this
-      ->setName($this->name)
-      ->setDescription($this->description)
+      ->setName('navigation')
+      ->setDescription('Navigation')
       ->addOption(
         'destination',
         '-d',
         InputOption::VALUE_OPTIONAL,
         'Destination directory'
+      )
+      ->addOption(
+        'answers',
+        '-a',
+        InputOption::VALUE_OPTIONAL,
+        'Default JSON formatted answers'
       );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function interact(InputInterface $input, OutputInterface $output) {
+
+    $style = new OutputFormatterStyle('black', 'cyan', []);
+    $output->getFormatter()->setStyle('title', $style);
+
+    $command_name = $input->getFirstArgument();
+    $this->activeMenuItems = $command_name == $this->getName() ?
+      [] : explode(':', $command_name);
+
+    /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator_name */
+    $this->generatorName = $this->selectGenerator($input, $output);
+
   }
 
   /**
@@ -41,29 +61,20 @@ class Navigation extends Command {
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
 
-    $style = new OutputFormatterStyle('black', 'cyan', []);
-    $output->getFormatter()->setStyle('title', $style);
-
-    $command_name = $input->getFirstArgument();
-    $this->activeMenuItems = $command_name == $this->name ?
-      [] : explode(':', $command_name);
-
-    /** @var \DrupalCodeGenerator\Commands\BaseGenerator $generator_name */
-    $generator_name = $this->selectGenerator($input, $output);
-    if (!$generator_name) {
+    if (!$this->generatorName) {
       return 0;
     }
 
-    $command = $this->getApplication()->find($generator_name);
+    $command = $this->getApplication()->find($this->generatorName);
     $aliases = $command->getAliases();
 
     $header = sprintf(
       '<info>Command:</info> <comment>%s</comment>',
       // Display alias instead command name if possible.
-      isset($aliases[0]) ? $aliases[0] : $generator_name
+      isset($aliases[0]) ? $aliases[0] : $this->generatorName
     );
     $output->writeln($header);
-    $output->writeln(str_repeat('<comment>-</comment>', strlen(strip_tags($header))));
+    $output->writeln(str_repeat('-', strlen(strip_tags($header))));
 
     // Run the generator.
     return $command->run($input, $output);
@@ -173,7 +184,7 @@ class Navigation extends Command {
   }
 
   /**
-   * Initialize generators navigation.
+   * Initialize menu structure.
    *
    * @param Command[] $commands
    *   List of registered commands.
@@ -187,7 +198,7 @@ class Navigation extends Command {
 
       $this->arraySetNestedValue($this->menuTree, $command_subnames, TRUE);
 
-      // Last subname is actual command name so it should not be used as
+      // The last subname is actual command name so it should not be used as
       // an alias for navigation command.
       array_pop($command_subnames);
 
