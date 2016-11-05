@@ -1,0 +1,284 @@
+Select generator:
+  [0] ..
+  [1] Drupal 6
+  [2] Drupal 7
+  [3] Drupal 8
+  [4] Other
+  >>> 1[K
+Select generator:
+  [0] ..
+  [1] Info (module)
+  >>> 0[K
+Select generator:
+  [0] ..
+  [1] Drupal 6
+  [2] Drupal 7
+  [3] Drupal 8
+  [4] Other
+  >>> 2[K
+Select generator:
+  [0 ] ..
+  [1 ] Ctools plugin
+  [2 ] Views plugin
+  [3 ] Hook
+  [4 ] Info (module)
+  [5 ] Info (theme)
+  [6 ] Install file
+  [7 ] Javascript
+  [8 ] Module
+  [9 ] Module file
+  [10] Test
+  [11] Theme
+  [12] settings.php
+  [13] template.php
+  >>> 1[K
+Select generator:
+  [0] ..
+  [1] Access
+  [2] Content type
+  [3] Relationship
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Ctools plugin
+  [2 ] Views plugin
+  [3 ] Hook
+  [4 ] Info (module)
+  [5 ] Info (theme)
+  [6 ] Install file
+  [7 ] Javascript
+  [8 ] Module
+  [9 ] Module file
+  [10] Test
+  [11] Theme
+  [12] settings.php
+  [13] template.php
+  >>> 2[K
+Select generator:
+  [0] ..
+  [1] Argument default
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Ctools plugin
+  [2 ] Views plugin
+  [3 ] Hook
+  [4 ] Info (module)
+  [5 ] Info (theme)
+  [6 ] Install file
+  [7 ] Javascript
+  [8 ] Module
+  [9 ] Module file
+  [10] Test
+  [11] Theme
+  [12] settings.php
+  [13] template.php
+  >>> 0[K
+Select generator:
+  [0] ..
+  [1] Drupal 6
+  [2] Drupal 7
+  [3] Drupal 8
+  [4] Other
+  >>> 3[K
+Select generator:
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Theme
+  [6 ] Yml
+  [7 ] Controller
+  [8 ] Hook
+  [9 ] Install file
+  [10] Javascript
+  [11] Module file
+  [12] Settings local
+  [13] Test
+  [14] Theme file
+  >>> 1[K
+Select generator:
+  [0] ..
+  [1] Config
+  [2] Confirm
+  [3] Simple
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Theme
+  [6 ] Yml
+  [7 ] Controller
+  [8 ] Hook
+  [9 ] Install file
+  [10] Javascript
+  [11] Module file
+  [12] Settings local
+  [13] Test
+  [14] Theme file
+  >>> 2[K
+Select generator:
+  [0] ..
+  [1] Configuration entity
+  [2] Content entity
+  [3] Plugin manager
+  [4] Standard
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Theme
+  [6 ] Yml
+  [7 ] Controller
+  [8 ] Hook
+  [9 ] Install file
+  [10] Javascript
+  [11] Module file
+  [12] Settings local
+  [13] Test
+  [14] Theme file
+  >>> 3[K
+Select generator:
+  [0 ] ..
+  [1 ] Action
+  [2 ] Block
+  [3 ] Condition
+  [4 ] Field formatter
+  [5 ] Field type
+  [6 ] Field widget
+  [7 ] Filter
+  [8 ] Menu link
+  [9 ] Rest resource
+  [10] Views argument default
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Theme
+  [6 ] Yml
+  [7 ] Controller
+  [8 ] Hook
+  [9 ] Install file
+  [10] Javascript
+  [11] Module file
+  [12] Settings local
+  [13] Test
+  [14] Theme file
+  >>> 4[K
+Select generator:
+  [0] ..
+  [1] Breadcrumb builder
+  [2] Custom
+  [3] Event subscriber
+  [4] Middleware
+  [5] Route subscriber
+  [6] Twig extension
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Theme
+  [6 ] Yml
+  [7 ] Controller
+  [8 ] Hook
+  [9 ] Install file
+  [10] Javascript
+  [11] Module file
+  [12] Settings local
+  [13] Test
+  [14] Theme file
+  >>> 5[K
+Select generator:
+  [0] ..
+  [1] Standard
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Theme
+  [6 ] Yml
+  [7 ] Controller
+  [8 ] Hook
+  [9 ] Install file
+  [10] Javascript
+  [11] Module file
+  [12] Settings local
+  [13] Test
+  [14] Theme file
+  >>> 6[K
+Select generator:
+  [0] ..
+  [1] Action links
+  [2] Info (module)
+  [3] Info (theme)
+  [4] Libraries
+  [5] Menu links
+  [6] Permissions
+  [7] Routing
+  [8] Services
+  [9] Task links
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Theme
+  [6 ] Yml
+  [7 ] Controller
+  [8 ] Hook
+  [9 ] Install file
+  [10] Javascript
+  [11] Module file
+  [12] Settings local
+  [13] Test
+  [14] Theme file
+  >>> 0[K
+Select generator:
+  [0] ..
+  [1] Drupal 6
+  [2] Drupal 7
+  [3] Drupal 8
+  [4] Other
+  >>> 4[K
+Select generator:
+  [0] ..
+  [1] Apache virtual host
+  [2] DCG command
+  [3] Drupal console command
+  [4] Drush command
+  [5] HTML page
+  [6] Nginx virtual host
+  >>> 0[K
+Select generator:
+  [0] ..
+  [1] Drupal 6
+  [2] Drupal 7
+  [3] Drupal 8
+  [4] Other
+  >>> 9[K
+ Value "9" is invalid 
+Select generator:
+  [0] ..
+  [1] Drupal 6
+  [2] Drupal 7
+  [3] Drupal 8
+  [4] Other
+  >>> 0[K
