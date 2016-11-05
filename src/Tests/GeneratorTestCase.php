@@ -107,7 +107,7 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   public function testExecute() {
     $this->execute();
 
-    $output = "The following files have been created:\n- $this->target\n";
+    $output = "The following directories and files have been created or updated:\n- $this->target\n";
 
     $this->assertEquals($output, $this->commandTester->getDisplay());
 

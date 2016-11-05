@@ -28,7 +28,7 @@ class HtmlPageTest extends GeneratorTestCase {
   public function testExecute() {
     $this->execute();
 
-    $output = "The following files have been created:\n- $this->target\n";
+    $output = "The following directories and files have been created or updated:\n- $this->target\n";
     $output .= "- css/main.css\n- js/main.js\n";
 
     $this->assertEquals($output, $this->commandTester->getDisplay());

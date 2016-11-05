@@ -151,7 +151,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         'output' => [
           'Command: d6:module-info',
           '-----------------------',
-          'The following files have been created:',
+          'The following directories and files have been created or updated:',
           '- example.info',
         ],
       ],
@@ -165,7 +165,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         'output' => [
           'Command: d7:module-file',
           '-----------------------',
-          'The following files have been created:',
+          'The following directories and files have been created or updated:',
           '- example.module',
         ],
       ],
@@ -181,7 +181,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         'output' => [
           'Command: d7:settings.php',
           '------------------------',
-          'The following files have been created:',
+          'The following directories and files have been created or updated:',
           '- settings.php',
         ],
       ],
@@ -202,7 +202,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         'output' => [
           'Command: formatter',
           '------------------',
-          'The following files have been created:',
+          'The following directories and files have been created or updated:',
           '- ZooFormatter.php',
         ],
       ],

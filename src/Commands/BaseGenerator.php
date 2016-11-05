@@ -296,7 +296,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
     // Dump files.
     foreach ($this->files as $file_name => $content) {
-
       $file_path = $destination . $file_name;
       if ($this->filesystem->exists($file_path)) {
 
@@ -315,7 +314,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         // NULL means it is a directory.
         if ($content === NULL) {
           $this->filesystem->mkdir([$file_path], 0775);
-          $directories_created = TRUE;
         }
         else {
           // Default mode for all parent directories is 0777. It can be
@@ -330,7 +328,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
 
       $dumped_files[] = $file_name;
-
     }
 
     // Dump hooks.
@@ -389,23 +386,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
           $yaml = $this->yamlDumper->dump($this->services, $this->inline, $intend);
           file_put_contents($file, $yaml, FILE_APPEND);
           $dumped_files[] = $extension_name . '.services.yml';
-          $files_updated = TRUE;
         }
       }
     }
 
     if (count($dumped_files) > 0) {
-      // Make precise result message.
-      if (empty($files_updated)) {
-        $result_message = empty($directories_created) ?
-          'The following files have been created:' :
-          'The following directories and files have been created:';
-      }
-      else {
-        $result_message = 'The following files have been created or updated:';
-      }
-
-      $output->writeln("<title>$result_message</title>");
+      $output->writeln('<title>The following directories and files have been created or updated:</title>');
       foreach ($dumped_files as $file) {
         $output->writeln("- $file");
       }

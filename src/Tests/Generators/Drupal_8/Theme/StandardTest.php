@@ -32,7 +32,7 @@ class StandardTest extends GeneratorTestCase {
 
     $this->execute();
 
-    $lines[] = 'The following directories and files have been created:';
+    $lines[] = 'The following directories and files have been created or updated:';
     $lines[] = '- foo/foo.info.yml';
     $lines[] = '- foo/foo.libraries.yml';
     $lines[] = '- foo/foo.theme';

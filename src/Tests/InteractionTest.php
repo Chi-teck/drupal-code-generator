@@ -42,7 +42,7 @@ class InteractionTest extends \PHPUnit_Framework_TestCase {
       'Block admin label [Example]: ',
       'Plugin ID [foo_bar]: ',
       'Block category [Custom]: ',
-      "The following files have been created:\n- BarBlock.php\n",
+      "The following directories and files have been created or updated:\n- BarBlock.php\n",
     ];
 
     $this->assertEquals($commandTester->getDisplay(), implode($expected_output));
