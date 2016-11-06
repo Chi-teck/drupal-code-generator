@@ -1,4 +1,4 @@
-# Third-party library.
+# Third-party library (self hosted).
 jquery-labelauty:
   remote: https://github.com/fntneves/jquery-labelauty
   version: 1.1.0
@@ -14,7 +14,18 @@ jquery-labelauty:
   dependencies:
     - core/jquery
 
-# Custom js for general purposes.
+# Third-party library (CDN).
+vuejs:
+  remote: https://vuejs.org
+  version: 2.0.5
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vue/blob/dev/LICENSE
+    gpl-compatible: true
+  js:
+    https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js: {type: external, minified: true}
+
+# Custom javascript for general purposes.
 example:
   js:
     js/example.js: {}
