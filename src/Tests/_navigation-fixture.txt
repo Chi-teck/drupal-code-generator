@@ -94,9 +94,10 @@ Select generator:
   [9 ] Install file
   [10] Javascript
   [11] Module file
-  [12] Settings local
-  [13] Test
-  [14] Theme file
+  [12] Service provider
+  [13] Settings local
+  [14] Test
+  [15] Theme file
   >>> 1[K
 Select generator:
   [0] ..
@@ -117,9 +118,10 @@ Select generator:
   [9 ] Install file
   [10] Javascript
   [11] Module file
-  [12] Settings local
-  [13] Test
-  [14] Theme file
+  [12] Service provider
+  [13] Settings local
+  [14] Test
+  [15] Theme file
   >>> 2[K
 Select generator:
   [0] ..
@@ -141,9 +143,10 @@ Select generator:
   [9 ] Install file
   [10] Javascript
   [11] Module file
-  [12] Settings local
-  [13] Test
-  [14] Theme file
+  [12] Service provider
+  [13] Settings local
+  [14] Test
+  [15] Theme file
   >>> 3[K
 Select generator:
   [0 ] ..
@@ -171,9 +174,10 @@ Select generator:
   [9 ] Install file
   [10] Javascript
   [11] Module file
-  [12] Settings local
-  [13] Test
-  [14] Theme file
+  [12] Service provider
+  [13] Settings local
+  [14] Test
+  [15] Theme file
   >>> 4[K
 Select generator:
   [0] ..
@@ -197,9 +201,10 @@ Select generator:
   [9 ] Install file
   [10] Javascript
   [11] Module file
-  [12] Settings local
-  [13] Test
-  [14] Theme file
+  [12] Service provider
+  [13] Settings local
+  [14] Test
+  [15] Theme file
   >>> 5[K
 Select generator:
   [0] ..
@@ -218,9 +223,10 @@ Select generator:
   [9 ] Install file
   [10] Javascript
   [11] Module file
-  [12] Settings local
-  [13] Test
-  [14] Theme file
+  [12] Service provider
+  [13] Settings local
+  [14] Test
+  [15] Theme file
   >>> 6[K
 Select generator:
   [0] ..
@@ -247,9 +253,10 @@ Select generator:
   [9 ] Install file
   [10] Javascript
   [11] Module file
-  [12] Settings local
-  [13] Test
-  [14] Theme file
+  [12] Service provider
+  [13] Settings local
+  [14] Test
+  [15] Theme file
   >>> 0[K
 Select generator:
   [0] ..
