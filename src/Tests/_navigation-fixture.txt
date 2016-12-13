@@ -181,12 +181,13 @@ Select generator:
   >>> 4[K
 Select generator:
   [0] ..
-  [1] Breadcrumb builder
-  [2] Custom
-  [3] Event subscriber
-  [4] Middleware
-  [5] Route subscriber
-  [6] Twig extension
+  [1] Access checker
+  [2] Breadcrumb builder
+  [3] Custom
+  [4] Event subscriber
+  [5] Middleware
+  [6] Route subscriber
+  [7] Twig extension
   >>> 0[K
 Select generator:
   [0 ] ..
