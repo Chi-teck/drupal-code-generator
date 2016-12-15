@@ -90,7 +90,7 @@ class ContentEntity extends BaseGenerator {
     }
 
     if ($vars['rest_configuration']) {
-      $templates[] = 'config/install/rest.resource.entity.example.yml.twig';
+      $templates[] = 'config/optional/rest.resource.entity.example.yml.twig';
     }
 
     $templates_path = 'd8/module/content-entity/';
