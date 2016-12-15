@@ -150,16 +150,17 @@ Select generator:
   >>> 3[K
 Select generator:
   [0 ] ..
-  [1 ] Action
-  [2 ] Block
-  [3 ] Condition
-  [4 ] Field formatter
-  [5 ] Field type
-  [6 ] Field widget
-  [7 ] Filter
-  [8 ] Menu link
-  [9 ] Rest resource
-  [10] Views argument default
+  [1 ] Views
+  [2 ] Action
+  [3 ] Block
+  [4 ] Condition
+  [5 ] Field formatter
+  [6 ] Field type
+  [7 ] Field widget
+  [8 ] Filter
+  [9 ] Menu link
+  [10] Rest resource
+  [11] Views argument default
   >>> 0[K
 Select generator:
   [0 ] ..

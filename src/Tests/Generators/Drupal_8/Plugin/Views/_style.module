@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Example module.
+ */
+
+/**
+ * Prepares variables for views-style-example-foo.html.twig template.
+ */
+function template_preprocess_views_style_example_foo(&$variables) {
+  $handler = $variables['view']->style_plugin;
+
+  // Fetch wrapper classes from handler options.
+  if ($handler->options['wrapper_class']) {
+    $wrapper_class = explode(' ', $handler->options['wrapper_class']);
+    $variables['attributes']['class'] = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $wrapper_class);
+  }
+
+  template_preprocess_views_view_unformatted($variables);
+}

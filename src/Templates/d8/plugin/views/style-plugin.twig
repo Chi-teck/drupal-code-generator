@@ -1,0 +1,55 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\views\style;
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\Plugin\views\style\StylePluginBase;
+
+/**
+ * {{ plugin_label }} style plugin.
+ *
+ * @ingroup views_style_plugins
+ *
+ * @ViewsStyle(
+ *   id = "{{ plugin_id }}",
+ *   title = @Translation("{{ plugin_label }}"),
+ *   help = @Translation("Foo style plugin help."),
+ *   theme = "views_style_{{ plugin_id }}",
+ *   display_types = {"normal"}
+ * )
+ */
+class {{ class }} extends StylePluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $usesRowPlugin = TRUE;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $usesRowClass = TRUE;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function defineOptions() {
+    $options = parent::defineOptions();
+    $options['wrapper_class'] = ['default' => 'item-list'];
+    return $options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+    parent::buildOptionsForm($form, $form_state);
+    $form['wrapper_class'] = [
+      '#title' => $this->t('Wrapper class'),
+      '#description' => $this->t('The class to provide on the wrapper, outside rows.'),
+      '#type' => 'textfield',
+      '#default_value' => $this->options['wrapper_class'],
+    ];
+  }
+
+}

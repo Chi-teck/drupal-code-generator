@@ -1,0 +1,14 @@
+/**
+ * Prepares variables for views-style-{{ plugin_id | underscore2hyphen }}.html.twig template.
+ */
+function template_preprocess_views_style_{{ plugin_id }}(&$variables) {
+  $handler = $variables['view']->style_plugin;
+
+  // Fetch wrapper classes from handler options.
+  if ($handler->options['wrapper_class']) {
+    $wrapper_class = explode(' ', $handler->options['wrapper_class']);
+    $variables['attributes']['class'] = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $wrapper_class);
+  }
+
+  template_preprocess_views_view_unformatted($variables);
+}

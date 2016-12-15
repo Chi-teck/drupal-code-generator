@@ -10,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class GeneratorsDiscoveryTest extends \PHPUnit_Framework_TestCase {
 
-  const TOTAL_GENERATORS = 65;
+  const TOTAL_GENERATORS = 66;
 
   /**
    * Test callback.

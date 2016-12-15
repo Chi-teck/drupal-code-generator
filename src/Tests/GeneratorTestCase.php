@@ -30,9 +30,25 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
 
   protected $display;
 
+  /**
+   * The generated file.
+   *
+   * @var string
+   *
+   * @deprecated
+   */
   protected $target;
 
+  /**
+   * The fixture.
+   *
+   * @var string
+   *
+   * @deprecated
+   */
   protected $fixture;
+
+  protected $fixtures;
 
   protected $filesystem;
 
@@ -107,11 +123,21 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
   public function testExecute() {
     $this->execute();
 
-    $output = "The following directories and files have been created or updated:\n- $this->target\n";
+    if ($this->fixtures) {
+      $targets = implode("\n- ", array_keys($this->fixtures));
+      $output = "The following directories and files have been created or updated:\n- $targets\n";
+      $this->assertEquals($output, $this->commandTester->getDisplay());
+      foreach ($this->fixtures as $target => $fixture) {
+        $this->checkFile($target, $fixture);
+      }
+    }
+    // TODO: Update all tests to provide fixtures array.
+    else {
+      $output = "The following directories and files have been created or updated:\n- $this->target\n";
+      $this->assertEquals($output, $this->commandTester->getDisplay());
+      $this->checkFile($this->target, $this->fixture);
+    }
 
-    $this->assertEquals($output, $this->commandTester->getDisplay());
-
-    $this->checkFile($this->target, $this->fixture);
   }
 
 }
