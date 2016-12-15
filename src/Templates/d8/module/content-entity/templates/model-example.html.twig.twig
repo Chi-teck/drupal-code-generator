@@ -1,4 +1,4 @@
-{#
+{{ '{#' }}
 /**
  * @file
  * Default theme implementation to present {{ entity_type_label|article|lower }} entity.
@@ -13,9 +13,9 @@
  *
  * @see template_preprocess_{{ entity_type_id }}()
  */
-#}
-<article{{ '{{' }} attributes {{ '}}' }}>
-  {{ '{%' }} if content {{ '%}' }}
-    {{ '{{' }}- content -{{ '}}' }}
-  {{ '{%' }} endif {{ '%}' }}
-</article>
+{{ '#}' }}{% verbatim %}
+<article{{ attributes }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</article>{% endverbatim %}
