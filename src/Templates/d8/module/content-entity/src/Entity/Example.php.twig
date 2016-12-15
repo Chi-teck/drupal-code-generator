@@ -175,13 +175,13 @@ class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
-        'type' => 'string',
+        'type' => 'string_textfield',
         'weight' => -5,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
         'label' => 'hidden',
-        'type' => 'string_textfield',
+        'type' => 'string',
         'weight' => -5,
       ])
       ->setDisplayConfigurable('view', TRUE);
