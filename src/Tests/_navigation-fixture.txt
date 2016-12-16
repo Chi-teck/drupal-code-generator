@@ -163,7 +163,6 @@ Select generator:
   [8 ] Filter
   [9 ] Menu link
   [10] Rest resource
-  [11] Views argument default
   >>> 0[K
 Select generator:
   [0 ] ..
