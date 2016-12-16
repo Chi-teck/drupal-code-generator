@@ -96,8 +96,9 @@ Select generator:
   [11] Module file
   [12] Service provider
   [13] Settings local
-  [14] Test
-  [15] Theme file
+  [14] Template
+  [15] Test
+  [16] Theme file
   >>> 1[K
 Select generator:
   [0] ..
@@ -120,8 +121,9 @@ Select generator:
   [11] Module file
   [12] Service provider
   [13] Settings local
-  [14] Test
-  [15] Theme file
+  [14] Template
+  [15] Test
+  [16] Theme file
   >>> 2[K
 Select generator:
   [0] ..
@@ -145,8 +147,9 @@ Select generator:
   [11] Module file
   [12] Service provider
   [13] Settings local
-  [14] Test
-  [15] Theme file
+  [14] Template
+  [15] Test
+  [16] Theme file
   >>> 3[K
 Select generator:
   [0 ] ..
@@ -177,8 +180,9 @@ Select generator:
   [11] Module file
   [12] Service provider
   [13] Settings local
-  [14] Test
-  [15] Theme file
+  [14] Template
+  [15] Test
+  [16] Theme file
   >>> 4[K
 Select generator:
   [0] ..
@@ -205,8 +209,9 @@ Select generator:
   [11] Module file
   [12] Service provider
   [13] Settings local
-  [14] Test
-  [15] Theme file
+  [14] Template
+  [15] Test
+  [16] Theme file
   >>> 5[K
 Select generator:
   [0] ..
@@ -227,8 +232,9 @@ Select generator:
   [11] Module file
   [12] Service provider
   [13] Settings local
-  [14] Test
-  [15] Theme file
+  [14] Template
+  [15] Test
+  [16] Theme file
   >>> 6[K
 Select generator:
   [0] ..
@@ -257,8 +263,9 @@ Select generator:
   [11] Module file
   [12] Service provider
   [13] Settings local
-  [14] Test
-  [15] Theme file
+  [14] Template
+  [15] Test
+  [16] Theme file
   >>> 0[K
 Select generator:
   [0] ..

@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Example module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function example_theme() {
+  return [
+    'example_foo' => [
+      'variables' => ['foo' => NULL],
+    ]
+  ];
+}
+
+/**
+ * Prepares variables for example-foo templates.
+ *
+ * Default template: example-foo.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - foo: Foo variable description.
+ */
+function template_preprocess_example_foo(&$variables) {
+  $variables['foo'] = 'foo';
+}

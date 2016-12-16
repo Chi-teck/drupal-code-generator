@@ -331,26 +331,30 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
 
     // Dump hooks.
-    foreach ($this->hooks as $file_name => $hook_info) {
-      $file_path = $destination . $file_name;
-      try {
-        // If the file exists append hook code to it.
-        if ($this->filesystem->exists($file_path)) {
-          $original_content = file_get_contents($file_path);
-          $content = $original_content . "\n" . $hook_info['code'];
-          $files_updated = TRUE;
+    foreach ($this->hooks as $file_name => $hooks) {
+      // TODO: Fix this.
+      $hooks = isset($hooks[0]) ? $hooks : [$hooks];
+      foreach ($hooks as $hook_info) {
+        $file_path = $destination . $file_name;
+        try {
+          // If the file exists append hook code to it.
+          if ($this->filesystem->exists($file_path)) {
+            $original_content = file_get_contents($file_path);
+            $content = $original_content . "\n" . $hook_info['code'];
+            $files_updated = TRUE;
+          }
+          // Otherwise create a new file with provided file doc comment.
+          else {
+            $content = $hook_info['file_doc'] . "\n" . $hook_info['code'];
+          }
+          $this->filesystem->dumpFile($file_path, $content);
+          $this->filesystem->chmod($file_path, 0644);
+          $dumped_files[] = $file_name;
         }
-        // Otherwise create a new file with provided file doc comment.
-        else {
-          $content = $hook_info['file_doc'] . "\n" . $hook_info['code'];
+        catch (IOExceptionInterface $exception) {
+          $output->writeln('<error>An error occurred while creating your file at ' . $exception->getPath() . '</error>');
+          return 1;
         }
-        $this->filesystem->dumpFile($file_path, $content);
-        $this->filesystem->chmod($file_path, 0644);
-        $dumped_files[] = $file_name;
-      }
-      catch (IOExceptionInterface $exception) {
-        $output->writeln('<error>An error occurred while creating your file at ' . $exception->getPath() . '</error>');
-        return 1;
       }
     }
 
@@ -390,6 +394,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
     }
 
+    // Multiple hooks can be dumped to the same file.
+    $dumped_files = array_unique($dumped_files);
     if (count($dumped_files) > 0) {
       $output->writeln('<title>The following directories and files have been created or updated:</title>');
       foreach ($dumped_files as $file) {

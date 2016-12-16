@@ -1,0 +1,10 @@
+/**
+ * Implements hook_theme().
+ */
+function {{ machine_name }}_theme() {
+  return [
+    '{{ template_name | hyphen2underscore }}' => [
+      'variables' => ['foo' => NULL],
+    ]
+  ];
+}

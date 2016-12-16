@@ -1,0 +1,18 @@
+{{ '{#' }}
+/**
+ * @file
+ * Default theme implementation to display something.
+ *
+ * Available variables:
+ * - foo: Foo variable description. 
+{% if create_preprocess %}
+ *
+ * @see template_preprocess_{{ template_name | hyphen2underscore }}()
+{% endif %}
+ *
+ * @ingroup themeable
+ */
+{{ '#}' }}
+<div class="wrapper-class">
+{% verbatim %}  {{ foo }} {% endverbatim %}
+</div>
