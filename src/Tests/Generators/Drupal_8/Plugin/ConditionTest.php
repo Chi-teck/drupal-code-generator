@@ -20,7 +20,7 @@ class CondtionTest extends GeneratorTestCase {
       'Example',
       'foo_example',
     ];
-    $this->target = 'Example.php';
+    $this->target = 'src/Plugin/Condition/Example.php';
     $this->fixture = __DIR__ . '/_condition.php';
 
     parent::setUp();

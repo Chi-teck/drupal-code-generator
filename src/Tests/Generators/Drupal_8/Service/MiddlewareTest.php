@@ -18,7 +18,7 @@ class MiddlewareTest extends GeneratorTestCase {
       'Foo',
       'foo',
     ];
-    $this->target = 'FooMiddleware.php';
+    $this->target = 'src/FooMiddleware.php';
     $this->fixture = __DIR__ . '/_middleware.php';
 
     parent::setUp();

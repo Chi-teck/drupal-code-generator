@@ -203,7 +203,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
           'Command: formatter',
           '------------------',
           'The following directories and files have been created or updated:',
-          '- ZooFormatter.php',
+          '- src/Plugin/Field/FieldFormatter/ZooFormatter.php',
         ],
       ],
     ];

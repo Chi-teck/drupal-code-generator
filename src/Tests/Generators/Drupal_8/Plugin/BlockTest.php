@@ -21,7 +21,7 @@ class BlockTest extends GeneratorTestCase {
       'foo_example',
       'Custom',
     ];
-    $this->target = 'ExampleBlock.php';
+    $this->target = 'src/Plugin/Block/ExampleBlock.php';
     $this->fixture = __DIR__ . '/_block.php';
 
     parent::setUp();

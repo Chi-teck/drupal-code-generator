@@ -19,7 +19,7 @@ class BreadcrumbBuilderTest extends GeneratorTestCase {
       'example',
       'ExampleBreadcrumbBuilder',
     ];
-    $this->target = 'ExampleBreadcrumbBuilder.php';
+    $this->target = 'src/ExampleBreadcrumbBuilder.php';
     $this->fixture = __DIR__ . '/_breadcrumb_builder.php';
 
     parent::setUp();

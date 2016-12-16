@@ -17,7 +17,7 @@ class ArgumentDefaultTest extends GeneratorTestCase {
     'foo_example',
   ];
   protected $fixtures = [
-    'Example.php' => __DIR__ . '/_argument_default.php',
+    'src/Plugin/views/argument_default/Example.php' => __DIR__ . '/_argument_default.php',
   ];
 
 }

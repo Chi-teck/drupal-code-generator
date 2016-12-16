@@ -21,7 +21,7 @@ class ConfigTest extends GeneratorTestCase {
       'foo_settings',
     ];
 
-    $this->target = 'SettingsForm.php';
+    $this->target = 'src/Form/SettingsForm.php';
     $this->fixture = __DIR__ . '/_config.php';
 
     parent::setUp();

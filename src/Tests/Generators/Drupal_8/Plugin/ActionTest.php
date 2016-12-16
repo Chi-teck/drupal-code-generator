@@ -22,7 +22,7 @@ class ActionTest extends GeneratorTestCase {
       'Custom',
       'yes',
     ];
-    $this->target = 'Foo.php';
+    $this->target = 'src/Plugin/Action/Foo.php';
     $this->fixture = __DIR__ . '/_action.php';
 
     parent::setUp();

@@ -19,7 +19,7 @@ class MenuLinkTest extends GeneratorTestCase {
       'example',
       'FooMenuLink',
     ];
-    $this->target = 'FooMenuLink.php';
+    $this->target = 'src/Plugin/Menu/FooMenuLink.php';
     $this->fixture = __DIR__ . '/_menu_link.php';
 
     parent::setUp();

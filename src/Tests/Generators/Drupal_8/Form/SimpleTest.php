@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:form:simple command.
  */
-class SimpeTest extends GeneratorTestCase {
+class SimpleTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
@@ -21,7 +21,7 @@ class SimpeTest extends GeneratorTestCase {
       'foo_example',
     ];
 
-    $this->target = 'ExampleForm.php';
+    $this->target = 'src/Form/ExampleForm.php';
     $this->fixture = __DIR__ . '/_simple.php';
 
     parent::setUp();

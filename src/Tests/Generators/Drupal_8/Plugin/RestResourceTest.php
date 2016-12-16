@@ -20,7 +20,7 @@ class RestResourceTest extends GeneratorTestCase {
       'Foo',
       'example_foo',
     ];
-    $this->target = 'FooResource.php';
+    $this->target = 'src/Plugin/rest/resource/FooResource.php';
     $this->fixture = __DIR__ . '/_rest_resource.php';
 
     parent::setUp();

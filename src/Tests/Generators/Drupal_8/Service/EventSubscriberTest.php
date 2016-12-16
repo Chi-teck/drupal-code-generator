@@ -18,7 +18,7 @@ class EventSubscriberTest extends GeneratorTestCase {
       'Foo',
       'foo',
     ];
-    $this->target = 'FooSubscriber.php';
+    $this->target = 'src/EventSubscriber/FooSubscriber.php';
     $this->fixture = __DIR__ . '/_event_subscriber.php';
     parent::setUp();
   }

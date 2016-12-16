@@ -21,7 +21,7 @@ class TemplateTest extends GeneratorTestCase {
       TRUE,
       TRUE,
     ];
-    $this->fixtures['example-foo.html.twig'] = __DIR__ . '/_template.twig';
+    $this->fixtures['templates/example-foo.html.twig'] = __DIR__ . '/_template.twig';
     $this->fixtures['example.module'] = __DIR__ . '/_template.module';
 
     parent::setUp();

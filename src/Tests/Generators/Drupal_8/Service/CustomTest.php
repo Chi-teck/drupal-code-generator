@@ -20,7 +20,7 @@ class CustomTest extends GeneratorTestCase {
       'foo.example',
       'Example',
     ];
-    $this->target = 'Example.php';
+    $this->target = 'src/Example.php';
     $this->fixture = __DIR__ . '/_custom.php';
 
     parent::setUp();

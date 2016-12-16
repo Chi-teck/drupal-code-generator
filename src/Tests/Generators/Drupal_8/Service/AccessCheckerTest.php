@@ -20,7 +20,7 @@ class AccessCheckerTest extends GeneratorTestCase {
       'foo',
       'FooAccessChecker',
     ];
-    $this->target = 'FooAccessChecker.php';
+    $this->target = 'src/Access/FooAccessChecker.php';
     $this->fixture = __DIR__ . '/_access_checker.php';
 
     parent::setUp();

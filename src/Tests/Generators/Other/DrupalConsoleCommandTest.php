@@ -20,7 +20,7 @@ class DrupalConsoleCommandTest extends GeneratorTestCase {
       'Command description.',
       FALSE,
     ];
-    $this->target = 'FooExampleCommand.php';
+    $this->target = 'src/Command/FooExampleCommand.php';
     $this->fixture = __DIR__ . '/_drupal_console_command.php';
     parent::setUp();
   }

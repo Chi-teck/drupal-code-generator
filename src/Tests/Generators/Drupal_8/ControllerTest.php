@@ -19,7 +19,7 @@ class ControllerTest extends GeneratorTestCase {
       'example',
       'ExampleController',
     ];
-    $this->target = 'ExampleController.php';
+    $this->target = 'src/Controller/ExampleController.php';
     $this->fixture = __DIR__ . '/_controller.php';
 
     parent::setUp();

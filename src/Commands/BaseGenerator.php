@@ -479,13 +479,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Creates file path.
    *
-   * @TODO: Create a test for this.
+   * @deprecated
    */
   protected function createPath($prefix, $path, $extension_machine_name) {
-    if (basename($this->getExtensionRoot()) == $extension_machine_name) {
-      $path = $prefix . $path;
-    }
-    return $path;
+    return $prefix . $path;
   }
 
   /**

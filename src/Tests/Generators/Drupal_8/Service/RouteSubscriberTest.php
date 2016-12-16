@@ -18,7 +18,7 @@ class RouteSubscriberTest extends GeneratorTestCase {
       'Foo',
       'foo',
     ];
-    $this->target = 'FooRouteSubscriber.php';
+    $this->target = 'src/EventSubscriber/FooRouteSubscriber.php';
     $this->fixture = __DIR__ . '/_route_subscriber.php';
     parent::setUp();
   }

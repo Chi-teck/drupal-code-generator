@@ -21,7 +21,7 @@ class ConfirmTest extends GeneratorTestCase {
       'foo_example_confirm',
     ];
 
-    $this->target = 'ExampleConfirmForm.php';
+    $this->target = 'src/Form/ExampleConfirmForm.php';
     $this->fixture = __DIR__ . '/_confirm.php';
 
     parent::setUp();

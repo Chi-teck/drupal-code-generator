@@ -19,7 +19,7 @@ class TwigExtensionTest extends GeneratorTestCase {
       'example',
       'ExampleTwigExtension',
     ];
-    $this->target = 'ExampleTwigExtension.php';
+    $this->target = 'src/ExampleTwigExtension.php';
     $this->fixture = __DIR__ . '/_twig_extension.php';
 
     parent::setUp();

@@ -18,7 +18,7 @@ class ServiceProviderTest extends GeneratorTestCase {
       'Example',
       'example',
     ];
-    $this->target = 'ExampleServiceProvider.php';
+    $this->target = 'src/ExampleServiceProvider.php';
     $this->fixture = __DIR__ . '/_service_provider.php';
 
     parent::setUp();

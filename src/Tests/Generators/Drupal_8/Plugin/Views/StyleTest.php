@@ -21,8 +21,8 @@ class StyleTest extends GeneratorTestCase {
       'example_foo',
     ];
 
-    $this->fixtures['Foo.php'] = __DIR__ . '/_style.php';
-    $this->fixtures['views-style-example-foo.html.twig'] = __DIR__ . '/_style.twig';
+    $this->fixtures['src/Plugin/views/style/Foo.php'] = __DIR__ . '/_style.php';
+    $this->fixtures['templates/views-style-example-foo.html.twig'] = __DIR__ . '/_style.twig';
     $this->fixtures['example.module'] = __DIR__ . '/_style.module';
 
     parent::setUp();
