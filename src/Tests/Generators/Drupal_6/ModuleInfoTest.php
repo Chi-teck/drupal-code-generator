@@ -9,22 +9,16 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ModuleInfoTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_6\ModuleInfo';
-    $this->answers = [
-      'Example',
-      'example',
-      'Some description',
-      'custom',
-      '6.x-1.0',
-    ];
-    $this->target = 'example.info';
-    $this->fixture = __DIR__ . '/_module_info.info';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_6\ModuleInfo';
+  protected $answers = [
+    'Example',
+    'example',
+    'Some description',
+    'custom',
+    '6.x-1.0',
+  ];
+  protected $fixtures = [
+    'example.info' => __DIR__ . '/_module_info.info',
+  ];
 
 }
