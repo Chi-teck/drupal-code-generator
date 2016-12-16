@@ -18,7 +18,7 @@ class ModuleInfoTest extends GeneratorTestCase {
     '6.x-1.0',
   ];
   protected $fixtures = [
-    'example.info' => __DIR__ . '/_module_info.info',
+    'example.info' => __DIR__ . '/_module.info',
   ];
 
 }
