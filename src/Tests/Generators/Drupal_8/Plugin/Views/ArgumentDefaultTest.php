@@ -9,19 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ArgumentDefaultTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\Views\ArgumentDefault';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Example',
-      'foo_example',
-    ];
-    $this->fixtures['Example.php'] = __DIR__ . '/_argument_default.php';
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\Plugin\Views\ArgumentDefault';
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Example',
+    'foo_example',
+  ];
+  protected $fixtures = [
+    'Example.php' => __DIR__ . '/_argument_default.php',
+  ];
 
 }
