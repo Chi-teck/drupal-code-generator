@@ -592,4 +592,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     return implode('/', $parts);
   }
 
+  /**
+   * Returns default questions.
+   */
+  protected function getDefaultQuestions() {
+    return [
+      'name' => ['Module name'],
+      'machine_name' => ['Module machine name'],
+    ];
+  }
+
 }
