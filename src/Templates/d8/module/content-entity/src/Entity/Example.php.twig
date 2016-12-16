@@ -50,7 +50,9 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
  *     "collection" = "/admin/content/{{ entity_type_id }}"
  *   },
- {% if fieldable %}*   field_ui_base_route = "entity.{{ entity_type_id }}.settings",{% endif %}
+{% if fieldable %}
+ *   field_ui_base_route = "entity.{{ entity_type_id }}.settings"
+{% endif %}
  * )
  */
 class {{ class_prefix }} extends ContentEntityBase implements {{ class_prefix }}Interface {
