@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:plugin:views:argument-default command.
  */
-class ViewsArgumentDefaultTest extends GeneratorTestCase {
+class ArgumentDefaultTest extends GeneratorTestCase {
 
   /**
    * {@inheritdoc}
@@ -20,9 +20,7 @@ class ViewsArgumentDefaultTest extends GeneratorTestCase {
       'Example',
       'foo_example',
     ];
-    $this->target = 'Example.php';
-    $this->fixture = __DIR__ . '/_argument_default.php';
-
+    $this->fixtures['Example.php'] = __DIR__ . '/_argument_default.php';
     parent::setUp();
   }
 
