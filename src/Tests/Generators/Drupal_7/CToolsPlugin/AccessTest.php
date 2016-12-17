@@ -9,24 +9,18 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class AccessTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_7\CToolsPlugin\Access';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Example',
-      'example',
-      'Some description',
-      'Custom',
-      'User',
-    ];
-    $this->target = 'plugins/access/example.inc';
-    $this->fixture = __DIR__ . '/_access.inc';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_7\CToolsPlugin\Access';
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Example',
+    'example',
+    'Some description',
+    'Custom',
+    'User',
+  ];
+  protected $fixtures = [
+    'plugins/access/example.inc' => __DIR__ . '/_access.inc',
+  ];
 
 }

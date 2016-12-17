@@ -9,24 +9,18 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ContentTypeTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_7\CToolsPlugin\ContentType';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Example',
-      'example',
-      'Some description',
-      'Custom',
-      'Node',
-    ];
-    $this->target = 'plugins/content_types/example.inc';
-    $this->fixture = __DIR__ . '/_content_type.inc';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_7\CToolsPlugin\ContentType';
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Example',
+    'example',
+    'Some description',
+    'Custom',
+    'Node',
+  ];
+  protected $fixtures = [
+    'plugins/content_types/example.inc' => __DIR__ . '/_content_type.inc',
+  ];
 
 }

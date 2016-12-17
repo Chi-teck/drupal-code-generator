@@ -9,24 +9,18 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class RelationshipTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_7\CToolsPlugin\Relationship';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Example',
-      'example',
-      'Some description',
-      'custom',
-      'Term',
-    ];
-    $this->target = 'plugins/relationships/example.inc';
-    $this->fixture = __DIR__ . '/_relationship.inc';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_7\CToolsPlugin\Relationship';
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Example',
+    'example',
+    'Some description',
+    'custom',
+    'Term',
+  ];
+  protected $fixtures = [
+    'plugins/relationships/example.inc' => __DIR__ . '/_relationship.inc',
+  ];
 
 }
