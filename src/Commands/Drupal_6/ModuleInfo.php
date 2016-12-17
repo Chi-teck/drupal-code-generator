@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_6;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d6:module-info command.
@@ -18,7 +18,6 @@ class ModuleInfo extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'name' => ['Module name'],
       'machine_name' => ['Module machine name'],
@@ -29,7 +28,6 @@ class ModuleInfo extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
     $this->files[$vars['machine_name'] . '.info'] = $this->render('d6/module-info.twig', $vars);
-
   }
 
 }
