@@ -19,9 +19,7 @@ class ArgumentDefault extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'plugin_name' => ['Plugin name', 'Example'],
       'plugin_machine_name' => [
         'Plugin machine name',
