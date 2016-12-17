@@ -22,7 +22,7 @@ abstract class BasePlugin extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = [
       'machine_name' => ['Module machine name'],
-      'plugin_name' => ['Plugin name'],
+      'plugin_name' => ['Plugin name', 'Example'],
       'plugin_machine_name' => [
         'Plugin machine name',
         function ($vars) {
