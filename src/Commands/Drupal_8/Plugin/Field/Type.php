@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin\Field;
 
 use DrupalCodeGenerator\Commands\BaseGenerator;
 use DrupalCodeGenerator\Commands\Utils;
@@ -8,11 +8,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Implements d8:plugin:field-type command.
+ * Implements d8:plugin:field:type command.
  */
-class FieldType extends BaseGenerator {
+class Type extends BaseGenerator {
 
-  protected $name = 'd8:plugin:field-type';
+  protected $name = 'd8:plugin:field:type';
   protected $description = 'Generates field type plugin';
   protected $alias = 'field';
 
@@ -29,7 +29,7 @@ class FieldType extends BaseGenerator {
     $vars['class'] = Utils::human2class($vars['plugin_label'] . 'Item');
 
     $path = 'src/Plugin/Field/FieldType/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/field-type.twig', $vars);
+    $this->files[$path] = $this->render('d8/plugin/field/type.twig', $vars);
   }
 
 }

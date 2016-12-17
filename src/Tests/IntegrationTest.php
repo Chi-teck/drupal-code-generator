@@ -193,7 +193,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
           // Test jumping on upper menu level.
           '..',
           '<comment>Plugin</comment>',
-          'Field formatter',
+          '<comment>Field</comment>',
+          'Formatter',
           'Foo',
           'foo',
           'Zoo',
