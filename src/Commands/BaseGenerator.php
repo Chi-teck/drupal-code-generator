@@ -190,13 +190,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Template variables
    */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
-
     $vars = [];
 
     // Input instance is not available in the constructor so we have to initiate
     // the destination here.
     $this->destination = $input->getOption('destination') ?
-      $this->normalizePath($input->getOption('destination')) : getcwd();
+      Utils::normalizePath($input->getOption('destination')) : getcwd();
 
     if ($answers_raw = $input->getOption('answers')) {
       $answers = json_decode($answers_raw, TRUE);
@@ -206,7 +205,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
 
     foreach ($questions as $name => $question) {
-
       $question_text = $question[0];
       $default_value = isset($question[1]) ? $question[1] : NULL;
       $validator = isset($question[2]) ? $question[2] : NULL;
@@ -215,37 +213,39 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       // Make some assumptions based on question name.
       if ($default_value === NULL) {
         switch ($name) {
-
+          // TODO: Test default values.
           case 'name':
-            $default_value = [$this, 'defaultName'];
+            $directory = basename($this->getExtensionRoot() ?: $this->destination);
+            $default_value = Utils::machine2human($directory);
             break;
 
           case 'machine_name':
-            $default_value = [$this, 'defaultMachineName'];
+            $default_value = function (array $vars) {
+              return Utils::human2machine(isset($vars['name']) ? $vars['name'] : basename($this->destination));
+            };
             break;
 
           case 'plugin_id':
-            $default_value = [$this, 'defaultPluginId'];
+            $default_value = [Utils::class, 'defaultPluginId'];
             break;
-
         }
       }
 
       if ($validator === NULL) {
         switch ($name) {
-
+          // TODO: Test this validation.
           case 'machine_name':
           case 'plugin_id':
-            $validator = [$this, 'validateMachineName'];
+            $validator = [Utils::class, 'validateMachineName'];
             break;
 
           case 'class':
-            $validator = [$this, 'validateClassName'];
+            $validator = [Utils::class, 'validateClassName'];
             break;
 
           // By default all values are required.
           default:
-            $validator = [$this, 'validateRequired'];
+            $validator = [Utils::class, 'validateRequired'];
         }
       }
 
@@ -288,11 +288,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    $destination = ($this->getExtensionRoot() ? $this->getExtensionRoot() : $this->destination) . '/';
+    $extension_root = $this->getExtensionRoot();
+    $destination = ($extension_root ?: $this->destination) . '/';
 
     $dumped_files = [];
 
@@ -362,7 +362,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
     // Dump services.
     if ($this->services) {
-      $extension_root = $this->getExtensionRoot();
       if ($extension_root) {
         $extension_name = basename($extension_root);
         $file = $extension_root . '/' . $extension_name . '.services.yml';
@@ -476,103 +475,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
     }
     return $extension_root;
-  }
-
-  /**
-   * Returns default value for the extension name question.
-   */
-  protected function defaultName() {
-    return self::machine2human($this->getExtensionRoot() ? basename($this->getExtensionRoot()) : basename($this->destination));
-  }
-
-  /**
-   * Returns default value for the machine name question.
-   */
-  protected function defaultMachineName(array $vars) {
-    return self::human2machine(isset($vars['name']) ? $vars['name'] : basename($this->destination));
-  }
-
-  /**
-   * Creates default plugin ID.
-   *
-   * @deprecated
-   */
-  protected function defaultPluginId(array $vars) {
-    return Utils::defaultPluginId($vars);
-  }
-
-  /**
-   * Transforms a machine name to human name.
-   *
-   * @deprecated
-   */
-  protected static function machine2human($machine_name) {
-    return Utils::machine2human($machine_name);
-  }
-
-  /**
-   * Transforms a human name to machine name.
-   *
-   * @deprecated
-   */
-  protected static function human2machine($human_name) {
-    return Utils::human2machine($human_name);
-  }
-
-  /**
-   * Transforms a human name to PHP class name.
-   *
-   * @deprecated
-   */
-  protected static function human2class($human_name) {
-    return Utils::human2class($human_name);
-  }
-
-  /**
-   * Machine name validator.
-   *
-   * @deprecated
-   */
-  protected static function validateMachineName($value) {
-    Utils::validateMachineName($value);
-  }
-
-  /**
-   * Class name validator.
-   *
-   * @see http://php.net/manual/en/language.oop5.basic.php
-   *
-   * @deprecated
-   */
-  protected static function validateClassName($value) {
-    return Utils::validateClassName($value);
-  }
-
-  /**
-   * Required value validator.
-   *
-   * @deprecated
-   */
-  protected static function validateRequired($value) {
-    return Utils::validateRequired($value);
-  }
-
-  /**
-   * Returns normalized file path.
-   *
-   * @deprecated
-   */
-  protected static function normalizePath($path) {
-    return Utils::normalizePath($path);
-  }
-
-  /**
-   * Returns default questions.
-   *
-   * @deprecated
-   */
-  protected static function defaultQuestions() {
-    return Utils::defaultQuestions();
   }
 
 }
