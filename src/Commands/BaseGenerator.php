@@ -598,7 +598,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Returns default questions.
    */
-  protected function getDefaultQuestions() {
+  protected function defaultQuestions() {
     return [
       'name' => ['Module name'],
       'machine_name' => ['Module machine name'],

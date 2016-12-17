@@ -19,7 +19,7 @@ class Template extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = $this->getDefaultQuestions();
+    $questions = $this->defaultQuestions();
     $questions['template_name'] = [
       'Template name', [$this, 'defaultTemplateName'],
     ];

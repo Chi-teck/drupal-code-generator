@@ -20,7 +20,7 @@ class ContentEntity extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
 
-    $questions = $this->getDefaultQuestions();
+    $questions = $this->defaultQuestions();
     $questions['name'] = ['Module name'];
     $questions['machine_name'] = ['Module machine name'];
     $questions['package'] = ['Package', 'custom'];
