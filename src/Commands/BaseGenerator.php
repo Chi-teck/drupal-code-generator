@@ -508,101 +508,76 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
   /**
    * Transforms a machine name to human name.
+   *
+   * @deprecated
    */
   protected static function machine2human($machine_name) {
-    return ucfirst(str_replace('_', ' ', $machine_name));
+    return Utils::machine2human($machine_name);
   }
 
   /**
    * Transforms a human name to machine name.
+   *
+   * @deprecated
    */
   protected static function human2machine($human_name) {
-    return preg_replace(
-      ['/^[0-9]/', '/[^a-z0-9_]+/'],
-      '_',
-      strtolower($human_name)
-    );
+    return Utils::human2machine($human_name);
   }
 
   /**
    * Transforms a human name to PHP class name.
+   *
+   * @deprecated
    */
   protected static function human2class($human_name) {
-    return preg_replace(
-      '/[^a-z0-9]/i',
-      '',
-      ucwords(str_replace('_', ' ', $human_name))
-    );
+    return Utils::human2class($human_name);
   }
 
   /**
    * Machine name validator.
+   *
+   * @deprecated
    */
   protected static function validateMachineName($value) {
-    if (!preg_match('/^[a-z]+[a-z0-9_]*$/', $value)) {
-      return 'The value is not correct machine name.';
-    }
+    Utils::validateMachineName($value);
   }
 
   /**
    * Class name validator.
    *
    * @see http://php.net/manual/en/language.oop5.basic.php
+   *
+   * @deprecated
    */
   protected static function validateClassName($value) {
-    if (!preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $value)) {
-      return 'The value is not correct class name.';
-    }
+    return Utils::validateClassName($value);
   }
 
   /**
    * Required value validator.
+   *
+   * @deprecated
    */
   protected static function validateRequired($value) {
-    if ($value === NULL || $value === '') {
-      return 'The value is required.';
-    }
+    return Utils::validateRequired($value);
   }
 
   /**
    * Returns normalized file path.
+   *
+   * @deprecated
    */
   protected static function normalizePath($path) {
-    $parts = [];
-    $path = str_replace('\\', '/', $path);
-    $path = preg_replace('/\/+/', '/', $path);
-    $segments = explode('/', $path);
-    foreach ($segments as $segment) {
-      if ($segment != '.') {
-        $test = array_pop($parts);
-        if (is_null($test)) {
-          $parts[] = $segment;
-        }
-        elseif ($segment == '..') {
-          if ($test == '..') {
-            $parts[] = $test;
-          }
-          if ($test == '..' || $test == '') {
-            $parts[] = $segment;
-          }
-        }
-        else {
-          $parts[] = $test;
-          $parts[] = $segment;
-        }
-      }
-    }
-    return implode('/', $parts);
+    return Utils::normalizePath($path);
   }
 
   /**
    * Returns default questions.
+   *
+   * @deprecated
    */
   protected static function defaultQuestions() {
-    return [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
-    ];
+    return Utils::defaultQuestions();
   }
 
 }
