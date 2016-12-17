@@ -9,20 +9,13 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class JavascriptTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_7\Javascript';
-    $this->answers = [
-      'Example',
-      'example',
-    ];
-
-    $this->target = 'example.js';
-    $this->fixture = __DIR__ . '/_javascript.js';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_7\Javascript';
+  protected $answers = [
+    'Example',
+    'example',
+  ];
+  protected $fixtures = [
+    'example.js' => __DIR__ . '/_javascript.js',
+  ];
 
 }

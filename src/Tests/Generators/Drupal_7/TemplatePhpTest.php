@@ -9,20 +9,13 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class TemplatePhpTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_7\TemplatePhp';
-    $this->answers = [
-      'Example',
-      'example',
-    ];
-
-    $this->target = 'template.php';
-    $this->fixture = __DIR__ . '/_template.php';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_7\TemplatePhp';
+  protected $answers = [
+    'Example',
+    'example',
+  ];
+  protected $fixtures = [
+    'template.php' => __DIR__ . '/_template.php',
+  ];
 
 }

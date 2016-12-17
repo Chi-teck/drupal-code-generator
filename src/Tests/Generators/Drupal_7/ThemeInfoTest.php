@@ -9,22 +9,16 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ThemeInfoTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_7\ThemeInfo';
-    $this->answers = [
-      'Bar',
-      'bar',
-      'Theme description',
-      'omega',
-      '7.x-1.0',
-    ];
-    $this->target = 'bar.info';
-    $this->fixture = __DIR__ . '/_theme.info';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_7\ThemeInfo';
+  protected $answers = [
+    'Bar',
+    'bar',
+    'Theme description',
+    'omega',
+    '7.x-1.0',
+  ];
+  protected $fixtures = [
+    'bar.info' => __DIR__ . '/_theme.info',
+  ];
 
 }
