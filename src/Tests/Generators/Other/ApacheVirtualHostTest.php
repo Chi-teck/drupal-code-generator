@@ -9,18 +9,14 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ApacheVirtualHostTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Other\ApacheVirtualHost';
-    $this->answers = [
-      'example.com',
-      '/var/www/example.com/public',
-    ];
-    $this->target = 'example.com.conf';
-    $this->fixture = __DIR__ . '/_apache_virtual_host.conf';
-    parent::setUp();
-  }
+  protected $class = 'Other\ApacheVirtualHost';
+  protected $answers = [
+    'example.com',
+    '/var/www/example.com/public',
+  ];
+  protected $target = 'example.com.conf';
+  protected $fixtures = [
+    'example.com.conf' => __DIR__ . '/_apache_virtual_host.conf',
+  ];
 
 }

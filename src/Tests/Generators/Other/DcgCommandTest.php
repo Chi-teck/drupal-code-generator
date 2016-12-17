@@ -9,19 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class DcgCommandTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Other\DcgCommand';
-    $this->answers = [
-      'custom:example',
-      'Some description',
-      'example',
-    ];
-    $this->target = 'custom/Example.php';
-    $this->fixture = __DIR__ . '/_dcg_command.php';
-    parent::setUp();
-  }
+  protected $class = 'Other\DcgCommand';
+  protected $answers = [
+    'custom:example',
+    'Some description',
+    'example',
+  ];
+  protected $target = 'custom/Example.php';
+  protected $fixtures = [
+    'custom/Example.php' => __DIR__ . '/_dcg_command.php',
+  ];
 
 }

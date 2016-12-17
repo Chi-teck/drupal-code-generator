@@ -127,7 +127,8 @@ abstract class GeneratorTestCase extends \PHPUnit_Framework_TestCase {
       $targets = implode("\n- ", array_keys($this->fixtures));
       $output = "The following directories and files have been created or updated:\n- $targets\n";
       $this->assertEquals($output, $this->commandTester->getDisplay());
-      foreach ($this->fixtures as $target => $fixture) {
+      // Tests may provide targets without fixtures.
+      foreach (array_filter($this->fixtures) as $target => $fixture) {
         $this->checkFile($target, $fixture);
       }
     }

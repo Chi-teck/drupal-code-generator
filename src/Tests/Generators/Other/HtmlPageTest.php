@@ -9,31 +9,14 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class HtmlPageTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Other\HtmlPage';
-    $this->answers = [
-      'example.html',
-    ];
-    $this->target = 'example.html';
-    $this->fixture = __DIR__ . '/_html_page.html';
-    parent::setUp();
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testExecute() {
-    $this->execute();
-
-    $output = "The following directories and files have been created or updated:\n- $this->target\n";
-    $output .= "- css/main.css\n- js/main.js\n";
-
-    $this->assertEquals($output, $this->commandTester->getDisplay());
-
-    $this->checkFile($this->target, $this->fixture);
-  }
+  protected $class = 'Other\HtmlPage';
+  protected $answers = [
+    'example.html',
+  ];
+  protected $fixtures = [
+    'example.html' => __DIR__ . '/_html_page.html',
+    'css/main.css' => NULL,
+    'js/main.js' => NULL,
+  ];
 
 }

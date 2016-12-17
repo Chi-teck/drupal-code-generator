@@ -9,22 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class DrushCommandTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Other\DrushCommand';
-    $this->answers = [
-      'yo-yo',
-      'yy',
-      'Description.',
-      'foo',
-      'bar',
-      'yo_yo.drush.inc',
-    ];
-    $this->target = 'yo_yo.drush.inc';
-    $this->fixture = __DIR__ . '/_drush_command.inc';
-    parent::setUp();
-  }
+  protected $class = 'Other\DrushCommand';
+  protected $answers = [
+    'yo-yo',
+    'yy',
+    'Description.',
+    'foo',
+    'bar',
+    'yo_yo.drush.inc',
+  ];
+  protected $fixtures = [
+    'yo_yo.drush.inc' => __DIR__ . '/_drush_command.inc',
+  ];
 
 }
