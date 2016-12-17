@@ -15,6 +15,7 @@ class RelationshipTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_7\CToolsPlugin\Relationship';
     $this->answers = [
+      'Foo',
       'foo',
       'Example',
       'example',

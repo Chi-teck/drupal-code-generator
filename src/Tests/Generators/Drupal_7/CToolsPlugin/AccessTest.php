@@ -15,6 +15,7 @@ class AccessTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Drupal_7\CToolsPlugin\Access';
     $this->answers = [
+      'Foo',
       'foo',
       'Example',
       'example',
