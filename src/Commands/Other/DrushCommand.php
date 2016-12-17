@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Other;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements other:drush-command command.
@@ -19,14 +19,27 @@ class DrushCommand extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'command_name' => ['Command name', ''],
-      'alias' => ['Command alias', [$this, 'defaultAlias']],
+      'alias' => [
+        'Command alias',
+        function ($vars) {
+          return substr($vars['command_name'], 0, 3);
+        },
+      ],
       'description' => ['Command description', 'Command description.'],
       'argument' => ['Argument name', 'foo'],
       'option' => ['Option name', 'bar'],
-      'command_file' => ['Command name', [$this, 'defaultCommandFile']],
+      'command_file' => [
+        'Command name',
+        function ($vars) {
+          $directoryBaseName = basename($this->destination);
+          // The suggestion depends on whether the command global or local.
+          $prefix = $directoryBaseName == 'drush' || $directoryBaseName == '.drush' ?
+            $vars['command_name'] : $directoryBaseName;
+          return str_replace('-', '_', $prefix) . '.drush.inc';
+        },
+      ],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -39,24 +52,6 @@ class DrushCommand extends BaseGenerator {
       $vars['command_file_prefix'] : $vars['command_file_prefix'] . '_' . $vars['command_name'];
 
     $this->files[$vars['command_file']] = $this->render('other/drush-command.twig', $vars);
-  }
-
-  /**
-   * Returns default command file name.
-   */
-  protected function defaultCommandFile($vars) {
-    $directoryBaseName = basename($this->destination);
-    // The suggestion depends on whether the command global or local.
-    $prefix = $directoryBaseName == 'drush' || $directoryBaseName == '.drush' ?
-      $vars['command_name'] : $directoryBaseName;
-    return str_replace('-', '_', $prefix) . '.drush.inc';
-  }
-
-  /**
-   * Returns default command alias.
-   */
-  protected function defaultAlias($vars) {
-    return substr($vars['command_name'], 0, 3);
   }
 
 }

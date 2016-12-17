@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Other;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements other:dcg-command command.
@@ -20,7 +21,6 @@ class DcgCommand extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = [
-      // Add validator.
       'name' => ['Command name', 'custom:example'],
       'description' => ['Command description', 'Some description'],
       'alias' => ['Command alias', 'example'],
@@ -31,7 +31,7 @@ class DcgCommand extends BaseGenerator {
     $subnames = explode(':', $vars['name']);
     $last_sub_name = array_pop($subnames);
     $vars['namespace'] = 'DrupalCodeGenerator\Commands\\' . implode('\\', $subnames);
-    $vars['class'] = $this->human2class($last_sub_name);
+    $vars['class'] = Utils::human2class($last_sub_name);
     $file_path = implode(DIRECTORY_SEPARATOR, $subnames) . '/' . $vars['class'] . '.php';
     $vars['directory'] = dirname($file_path);
 

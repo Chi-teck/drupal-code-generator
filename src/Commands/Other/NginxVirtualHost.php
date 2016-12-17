@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Other;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements other:nginx-virtual-host command.
@@ -21,7 +21,12 @@ class NginxVirtualHost extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = [
       'server_name' => ['Server name', 'example.com'],
-      'docroot' => ['Document root', [$this, 'defaultDocumentRoot']],
+      'docroot' => [
+        'Document root',
+        function ($vars) {
+          return '/var/www/' . $vars['server_name'] . '/docroot';
+        },
+      ],
       'file_public_path' => ['Public file system path', 'sites/default/files'],
       'file_private_path' => ['Private file system path', NULL, FALSE],
       'fastcgi_pass' => ['Address of a FastCGI server', 'unix:/run/php/php7.0-fpm.sock'],
@@ -33,13 +38,6 @@ class NginxVirtualHost extends BaseGenerator {
     $vars['file_private_path  '] = trim($vars['file_private_path'], '/');
 
     $this->files[$vars['server_name']] = $this->render('other/nginx-virtual-host.twig', $vars);
-  }
-
-  /**
-   * Returns default answer for docroot question.
-   */
-  protected function defaultDocumentRoot($vars) {
-    return '/var/www/' . $vars['server_name'] . '/docroot';
   }
 
 }

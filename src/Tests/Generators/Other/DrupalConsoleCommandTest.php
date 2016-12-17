@@ -15,6 +15,7 @@ class DrupalConsoleCommandTest extends GeneratorTestCase {
   public function setUp() {
     $this->class = 'Other\DrupalConsoleCommand';
     $this->answers = [
+      'Foo',
       'foo',
       'foo:example',
       'Command description.',

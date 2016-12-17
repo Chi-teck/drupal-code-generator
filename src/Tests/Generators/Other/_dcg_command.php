@@ -4,9 +4,10 @@
 
 namespace DrupalCodeGenerator\Commands\custom;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements custom:example command.
@@ -21,11 +22,11 @@ class Example extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     // Ask the user some questions.
-    $questions = [
-      'name' => ['Module name', [$this, 'defaultName']],
-      'machine_name' => ['Module machine name', [$this, 'defaultMachineName']],
+    $questions = Utils::defaultQuestions() + [
+      'description' => ['Module description', 'TODO: Write description for the module'],
+      'package' => ['Package', 'custom'],
+      'version' => ['Version', '7.x-1.0-dev'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
@@ -38,8 +39,7 @@ class Example extends BaseGenerator {
     // templates. However if you want to put some logic behind the
     // questions creating custom generator command is needed.
     // @DCG: }
-    $this->files[$vars['machine_name'] . '.module'] = $this->render('d7/module.twig', $vars);
-
+    $this->files[$vars['machine_name'] . '.info'] = $this->render('d7/module-info.twig', $vars);
   }
 
 }
