@@ -8,6 +8,13 @@ namespace DrupalCodeGenerator\Commands;
 class Utils {
 
   /**
+   * Creates default plugin ID.
+   */
+  public static function defaultPluginId(array $vars) {
+    return $vars['machine_name'] . '_' . self::human2machine($vars['plugin_label']);
+  }
+
+  /**
    * Transforms a machine name to human name.
    */
   public static function machine2human($machine_name) {

@@ -501,9 +501,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
   /**
    * Creates default plugin ID.
+   *
+   * @deprecated
    */
   protected function defaultPluginId(array $vars) {
-    return $vars['machine_name'] . '_' . $this->human2machine($vars['plugin_label']);
+    return Utils::defaultPluginId($vars);
   }
 
   /**
