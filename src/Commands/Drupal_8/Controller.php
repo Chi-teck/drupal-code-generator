@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:controller command.
@@ -19,23 +19,22 @@ class Controller extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'name' => ['Module name'],
       'machine_name' => ['Module machine name'],
-      'class' => ['Class', [$this, 'defaultClass']],
+      'class' => ['Class', [__CLASS__, 'defaultClass']],
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
-    $path = $this->createPath('src/Controller/', $vars['class'] . '.php', $vars['machine_name']);
+    $path = 'src/Controller/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/controller.twig', $vars);
   }
 
   /**
    * Return default class name for the controller.
    */
-  protected function defaultClass($vars) {
-    return $this->human2class($vars['name'] . 'Controller');
+  protected static function defaultClass($vars) {
+    return self::human2class($vars['name'] . 'Controller');
   }
 
 }
