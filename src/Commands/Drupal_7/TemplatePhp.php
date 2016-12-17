@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_7;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d7:template.php command.
@@ -19,16 +19,12 @@ class TemplatePhp extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+      'name' => ['Theme name'],
+      'machine_name' => ['Theme machine name'],
     ];
-
     $vars = $this->collectVars($input, $output, $questions);
-
     $this->files['template.php'] = $this->render('d7/template.php.twig', $vars);
-
   }
 
 }

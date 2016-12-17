@@ -19,7 +19,6 @@ class Hook extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = Utils::defaultQuestions();
     $questions['hook_name'] = [
       'Hook name',
@@ -47,8 +46,7 @@ class Hook extends BaseGenerator {
       'update_last_removed',
     ];
 
-    $file_type = in_array($vars['hook_name'], $install_hooks)
-      ? 'install' : 'module';
+    $file_type = in_array($vars['hook_name'], $install_hooks) ? 'install' : 'module';
 
     $this->hooks[$vars['machine_name'] . '.' . $file_type][] = [
       'file_doc' => $this->render("d7/file-docs/$file_type.twig", $vars),

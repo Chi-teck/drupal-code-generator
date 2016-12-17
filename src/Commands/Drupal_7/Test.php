@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_7;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d7:test command.
@@ -18,21 +19,16 @@ class Test extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
-      'class' => ['Class', [$this, 'defaultClass']],
+    $questions = Utils::defaultQuestions() + [
+      'class' => [
+        'Class',
+        function ($vars) {
+          return Utils::human2class($vars['machine_name']) . 'TestCase';
+        },
+      ],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-
     $this->files[$vars['machine_name'] . '.test'] = $this->render('d7/test.twig', $vars);
-  }
-
-  /**
-   * Returns default value for the class question.
-   */
-  protected function defaultClass($vars) {
-    return $this->human2class($vars['machine_name']) . 'TestCase';
   }
 
 }

@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_7;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d7:install command.
@@ -18,15 +19,8 @@ class Install extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
-    ];
-
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
     $this->files[$vars['machine_name'] . '.install'] = $this->render('d7/install.twig', $vars);
-
   }
 
 }

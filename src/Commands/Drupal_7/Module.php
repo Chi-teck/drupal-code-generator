@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_7;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d7:module command.
@@ -18,9 +19,7 @@ class Module extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '7.x-1.0-dev'],
@@ -28,8 +27,8 @@ class Module extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['project_type'] = 'module';
-    $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
 
+    $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
     $this->files[$prefix . '.info'] = $this->render('d7/module-info.twig', $vars);
     $this->files[$prefix . '.module'] = $this->render('d7/module.twig', $vars);
     $this->files[$prefix . '.install'] = $this->render('d7/install.twig', $vars);
