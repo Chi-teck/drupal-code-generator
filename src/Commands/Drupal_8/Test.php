@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:test command.
@@ -19,15 +20,11 @@ class Test extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'test_name' => ['Test name', 'Example'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['test_name'] . 'Test');
-
+    $vars['class'] = Utils::human2class($vars['test_name'] . 'Test');
     $this->files[$vars['class'] . '.php'] = $this->render('d8/test.twig', $vars);
   }
 

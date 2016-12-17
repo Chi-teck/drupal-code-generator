@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Yml;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:yml:libraries command.
@@ -19,10 +20,7 @@ class Libraries extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'project_type' => ['Project type (module/theme)', 'module'],
     ];
     $vars = $this->collectVars($input, $output, $questions);

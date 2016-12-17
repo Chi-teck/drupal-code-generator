@@ -475,15 +475,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   }
 
   /**
-   * Creates file path.
-   *
-   * @deprecated
-   */
-  protected static function createPath($prefix, $path, $extension_machine_name) {
-    return $prefix . $path;
-  }
-
-  /**
    * Returns default value for the extension name question.
    */
   protected function defaultName() {

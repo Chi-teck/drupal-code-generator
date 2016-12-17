@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Form;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:form:simple command.
@@ -19,31 +20,23 @@ class Simple extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
-      'class' => ['Class', [$this, 'defaultClass']],
-      'form_id' => ['Form ID', [$this, 'defaultFormId']],
+    $questions = Utils::defaultQuestions() + [
+      'class' => [
+        'Class',
+        function ($vars) {
+          return Utils::human2class($vars['name'] . 'Form');
+        },
+      ],
+      'form_id' => [
+        'Form ID',
+        function ($vars) {
+          return $vars['machine_name'] . '_example';
+        },
+      ],
     ];
-
     $vars = $this->collectVars($input, $output, $questions);
-
-    $path = $this->createPath('src/Form/', $vars['class'] . '.php', $vars['machine_name']);
+    $path = 'src/Form/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/form/simple.twig', $vars);
-  }
-
-  /**
-   * Return default class name for the form.
-   */
-  protected function defaultClass($vars) {
-    return $this->human2class($vars['name'] . 'Form');
-  }
-
-  /**
-   * Returns default form ID.
-   */
-  protected function defaultFormId($vars) {
-    return $vars['machine_name'] . '_example';
   }
 
 }

@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Yml;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:yml:module-info command.
@@ -19,10 +20,7 @@ class ModuleInfo extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'description' => ['Description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],

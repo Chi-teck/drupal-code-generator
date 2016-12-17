@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Commands\Drupal_8\Service;
 
 use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -19,15 +20,17 @@ class BreadcrumbBuilder extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
-      'class' => ['Class', [$this, 'defaultClass']],
+    $questions = Utils::defaultQuestions() + [
+      'class' => [
+        'Class',
+        function ($vars) {
+          return Utils::human2class($vars['name'] . 'BreadcrumbBuilder');
+        },
+      ],
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
-    $path = $this->createPath('src/', $vars['class'] . '.php', $vars['machine_name']);
+    $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/breadcrumb-builder.twig', $vars);
 
     $this->services[$vars['machine_name'] . '.breadcrumb'] = [
@@ -39,14 +42,6 @@ class BreadcrumbBuilder extends BaseGenerator {
         ],
       ],
     ];
-
-  }
-
-  /**
-   * Returns default class name for the breadcrumb builder.
-   */
-  protected function defaultClass($vars) {
-    return $this->human2class($vars['name'] . 'BreadcrumbBuilder');
   }
 
 }

@@ -19,11 +19,9 @@ class TaskLinks extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'machine_name' => ['Module machine name'],
     ];
-
     $vars = $this->collectVars($input, $output, $questions);
     $this->files[$vars['machine_name'] . '.links.task.yml'] = $this->render('d8/yml/links.task.yml.twig', $vars);
   }

@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:plugin:action command.
@@ -19,10 +20,7 @@ class Action extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'plugin_label' => ['Plugin label', 'Example'],
       'plugin_id' => ['Plugin ID'],
       'category' => ['Action category', 'Custom'],
@@ -30,9 +28,9 @@ class Action extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['plugin_label']);
+    $vars['class'] = Utils::human2class($vars['plugin_label']);
 
-    $path = $this->createPath('src/Plugin/Action/', $vars['class'] . '.php', $vars['machine_name']);
+    $path = 'src/Plugin/Action/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/plugin/action.twig', $vars);
   }
 

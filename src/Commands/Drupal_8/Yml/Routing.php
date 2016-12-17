@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Yml;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:yml:routing command.
@@ -19,14 +20,8 @@ class Routing extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
-    ];
-    $vars = $this->collectVars($input, $output, $questions);
-
-    $vars['class'] = $this->human2class($vars['name'] . 'Controller');
+    $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
+    $vars['class'] = Utils::human2class($vars['name'] . 'Controller');
     $this->files[$vars['machine_name'] . '.routing.yml'] = $this->render('d8/yml/routing.yml.twig', $vars);
   }
 

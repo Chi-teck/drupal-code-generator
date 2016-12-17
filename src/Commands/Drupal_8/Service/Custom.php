@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Service;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:service:custom command.
@@ -20,28 +21,24 @@ class Custom extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
-      'service_name' => ['Service name', [$this, 'defaultServiceName']],
+    $questions = Utils::defaultQuestions() + [
+      'service_name' => [
+        'Service name',
+        function ($vars) {
+          return $vars['machine_name'] . '.example';
+        },
+      ],
       'class' => ['Class', 'Example'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
-    $path = $this->createPath('src/', $vars['class'] . '.php', $vars['machine_name']);
+    $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/custom.twig', $vars);
 
     $this->services[$vars['service_name']] = [
       'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
       'arguments' => ['@entity.query', '@entity_type.manager'],
     ];
-  }
-
-  /**
-   * Returns default service name.
-   */
-  protected function defaultServiceName($vars) {
-    return $vars['machine_name'] . '.example';
   }
 
 }

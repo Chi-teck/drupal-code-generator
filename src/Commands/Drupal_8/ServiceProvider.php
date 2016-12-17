@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:service-provider command.
@@ -19,14 +20,9 @@ class ServiceProvider extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
-    ];
-    $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['name'] . 'ServiceProvider');
-
-    $path = $this->createPath('src/', $vars['class'] . '.php', $vars['machine_name']);
+    $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
+    $vars['class'] = Utils::human2class($vars['name'] . 'ServiceProvider');
+    $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service-provider.twig', $vars);
   }
 

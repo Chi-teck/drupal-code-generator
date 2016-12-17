@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\Commands\Drupal_8\Module;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 
 /**
  * Implements d8:module:standard command.
@@ -19,10 +20,7 @@ class Standard extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
@@ -44,19 +42,21 @@ class Standard extends BaseGenerator {
     $this->files[$prefix . '.permissions.yml'] = $this->render('d8/yml/permissions.yml.twig', $vars);
     $this->files[$vars['machine_name'] . '/js/' . $vars['machine_name'] . '.js'] = $this->render('d8/javascript.twig', $vars);
 
-    $service_class = $this->human2class($vars['name'] . 'Example');
+    $class_prefix = Utils::human2class($vars['name']);
+
+    $service_class = $class_prefix . 'Example';
     $this->files[$vars['machine_name'] . '/src/' . $service_class . '.php'] = $this->render(
       'd8/service/custom.twig',
       $vars + ['class' => $service_class]
     );
 
-    $middleware_class = $this->human2class($vars['name'] . 'Middleware');
+    $middleware_class = $class_prefix . 'Middleware';
     $this->files[$vars['machine_name'] . '/src/' . $middleware_class . '.php'] = $this->render(
       'd8/service/middleware.twig',
       $vars + ['class' => $middleware_class]
     );
 
-    $subscriber_class = $this->human2class($vars['name'] . 'Subscriber');
+    $subscriber_class = $class_prefix . 'Subscriber';
     $this->files[$vars['machine_name'] . '/src/EventSubscriber/' . $subscriber_class . '.php'] = $this->render(
       'd8/service/event-subscriber.twig',
       $vars + ['class' => $subscriber_class]
@@ -64,27 +64,26 @@ class Standard extends BaseGenerator {
 
     $this->files[$prefix . '.services.yml'] = $this->render(
       'd8/yml/services.yml.twig',
-      $vars + ['class' => $this->human2class($vars['name'])]
+      $vars + ['class' => $class_prefix]
     );
 
     $block_vars['plugin_label'] = 'Example';
-    $block_vars['plugin_id'] = $vars['machine_name'] . '_' . $this->human2machine($block_vars['plugin_label']);
+    $block_vars['plugin_id'] = $vars['machine_name'] . '_' . Utils::human2machine($block_vars['plugin_label']);
     $block_vars['category'] = $vars['name'];
-    $block_vars['class'] = $this->human2class($block_vars['plugin_label'] . 'Block');
+    $block_vars['class'] = 'ExampleBlock';
 
     $this->files[$vars['machine_name'] . '/src/Plugin/Block/' . $block_vars['class'] . '.php'] = $this->render(
       'd8/plugin/block.twig',
       $vars + $block_vars
     );
 
-    $controller_class = $this->human2class($vars['name'] . 'Controller');
+    $controller_class = $class_prefix . 'Controller';
     $this->files[$prefix . '.routing.yml'] = $this->render('d8/yml/routing.yml.twig', $vars + ['class' => $controller_class]);
     $controller_path = $vars['machine_name'] . "/src/Controller/$controller_class.php";
     $this->files[$controller_path] = $this->render('d8/controller.twig', $vars + ['class' => $controller_class]);
 
     $form_path = $vars['machine_name'] . '/src/Form/SettingsForm.php';
     $this->files[$form_path] = $this->render('d8/form/config.twig', $vars + ['class' => 'SettingsForm']);
-
   }
 
 }

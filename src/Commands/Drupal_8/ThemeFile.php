@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:theme-file command.
@@ -24,7 +24,6 @@ class ThemeFile extends BaseGenerator {
       'machine_name' => ['Theme machine name'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-
     $this->files[$vars['machine_name'] . '.theme'] = $this->render('d8/theme.twig', $vars);
   }
 

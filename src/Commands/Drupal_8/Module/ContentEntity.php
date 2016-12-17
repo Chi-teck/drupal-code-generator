@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Module;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:module:content-entity command.
@@ -19,33 +20,46 @@ class ContentEntity extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = $this->defaultQuestions();
-    $questions['name'] = ['Module name'];
-    $questions['machine_name'] = ['Module machine name'];
-    $questions['package'] = ['Package', 'custom'];
-    $questions['version'] = ['Version', '8.x-1.0-dev'];
-    $questions['dependencies'] = ['Dependencies (comma separated)', '', FALSE];
-    $questions['entity_type_label'] = [
-      'Entity type label', [$this, 'defaultEntityTypeLabel'],
+    $questions = Utils::defaultQuestions() + [
+      'package' => ['Package', 'custom'],
+      'version' => ['Version', '8.x-1.0-dev'],
+      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
+      'entity_type_label' => [
+        'Entity type label',
+        function ($vars) {
+          return $vars['name'];
+        },
+      ],
+      'entity_type_id' => [
+        'Entity type id',
+        function ($vars) {
+          $entity_type_id = Utils::human2machine($vars['entity_type_label']);
+          if ($entity_type_id != $vars['machine_name']) {
+            $entity_type_id = $vars['machine_name'] . '_' . $entity_type_id;
+          }
+          return $entity_type_id;
+        },
+      ],
+      'entity_base_path' => [
+        'Entity base path',
+        function ($vars) {
+          return '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']);
+        },
+      ],
+      'fieldable' => ['Make the entity type fieldable?', 'yes'],
+      'revisionable' => ['Make the entity type revisionable?', 'no'],
+      'template' => ['Create entity template?', 'yes'],
+      'access_controller' => ['Create CRUD permissions?', 'no'],
+      'title_base_field' => ['Add "title" base field?', 'yes'],
+      'status_base_field' => ['Add "status" base field?', 'yes'],
+      'created_base_field' => ['Add "created" base field?', 'yes'],
+      'changed_base_field' => ['Add "changed" base field?', 'yes'],
+      'author_base_field' => ['Add "author" base field?', 'yes'],
+      'description_base_field' => ['Add "description" base field?', 'yes'],
+      'rest_configuration' => ['Create REST configuration for the entity?',
+        'no',
+      ],
     ];
-    $questions['entity_type_id'] = [
-      'Entity type id', [$this, 'defaultEntityTypeId'],
-    ];
-    $questions['entity_base_path'] = [
-      'Entity base path', [$this, 'defaultEntityBasePath'],
-    ];
-    $questions['fieldable'] = ['Make the entity type fieldable?', 'yes'];
-    $questions['revisionable'] = ['Make the entity type revisionable?', 'no'];
-    $questions['template'] = ['Create entity template?', 'yes'];
-    $questions['access_controller'] = ['Create CRUD permissions?', 'no'];
-    $questions['title_base_field'] = ['Add "title" base field?', 'yes'];
-    $questions['status_base_field'] = ['Add "status" base field?', 'yes'];
-    $questions['created_base_field'] = ['Add "created" base field?', 'yes'];
-    $questions['changed_base_field'] = ['Add "changed" base field?', 'yes'];
-    $questions['author_base_field'] = ['Add "author" base field?', 'yes'];
-    $questions['description_base_field'] = ['Add "description" base field?', 'yes'];
-    $questions['rest_configuration'] = ['Create REST configuration for the entity?', 'no'];
 
     $vars = $this->collectVars($input, $output, $questions);
 
@@ -61,7 +75,7 @@ class ContentEntity extends BaseGenerator {
       $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '.collection';
     }
 
-    $vars['class_prefix'] = $this->human2class($vars['entity_type_label']);
+    $vars['class_prefix'] = Utils::human2class($vars['entity_type_label']);
 
     $templates = [
       'model.info.yml.twig',
@@ -115,31 +129,6 @@ class ContentEntity extends BaseGenerator {
       $path = preg_replace('#\.twig$#', '', $path);
       $this->files[$path] = $this->render($templates_path . $template, $vars);
     }
-  }
-
-  /**
-   * Returns default entity label.
-   */
-  protected function defaultEntityTypeLabel($vars) {
-    return $vars['name'];
-  }
-
-  /**
-   * Returns default entity ID.
-   */
-  protected function defaultEntityTypeId($vars) {
-    $entity_type_id = $this->human2machine($vars['entity_type_label']);
-    if ($entity_type_id != $vars['machine_name']) {
-      $entity_type_id = $vars['machine_name'] . '_' . $entity_type_id;
-    }
-    return $entity_type_id;
-  }
-
-  /**
-   * Returns default entity base path.
-   */
-  protected function defaultEntityBasePath($vars) {
-    return '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']);
   }
 
 }

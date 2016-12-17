@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Yml;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:yml:menu-links command.
@@ -19,11 +19,9 @@ class MenuLinks extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'machine_name' => ['Module machine name'],
     ];
-
     $vars = $this->collectVars($input, $output, $questions);
     $this->files[$vars['machine_name'] . '.links.menu.yml'] = $this->render('d8/yml/links.menu.yml.twig', $vars);
   }

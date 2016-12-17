@@ -19,7 +19,6 @@ class ThemeInfo extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'name' => ['Theme name'],
       'machine_name' => ['Theme machine name'],
@@ -28,9 +27,7 @@ class ThemeInfo extends BaseGenerator {
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
     ];
-
     $vars = $this->collectVars($input, $output, $questions);
-
     $this->files[$vars['machine_name'] . '.info.yml'] = $this->render('d8/yml/theme-info.yml.twig', $vars);
   }
 

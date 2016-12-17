@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin\Views;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:plugin:views:argument-default command.
@@ -19,18 +20,13 @@ class ArgumentDefault extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'plugin_label' => ['Plugin label', 'Example'],
       'plugin_id' => ['Plugin id'],
     ];
-
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['plugin_label']);
-
-    $path = $this->createPath('src/Plugin/views/argument_default/', $vars['class'] . '.php', $vars['machine_name']);
+    $vars['class'] = Utils::human2class($vars['plugin_label']);
+    $path = 'src/Plugin/views/argument_default/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/plugin/views-argument-default.twig', $vars);
   }
 

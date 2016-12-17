@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Commands\Drupal_8;
 
 use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -19,15 +20,18 @@ class Template extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = $this->defaultQuestions();
+    $questions = Utils::defaultQuestions();
     $questions['template_name'] = [
-      'Template name', [$this, 'defaultTemplateName'],
+      'Template name',
+      function ($vars) {
+        return str_replace('_', '-', $vars['machine_name']) . '-example';
+      },
     ];
     $questions['create_theme'] = ['Create theme hook?', 'yes'];
     $questions['create_preprocess'] = ['Create preprocess hook?', 'yes'];
     $vars = $this->collectVars($input, $output, $questions);
 
-    $path = $this->createPath('templates/', $vars['template_name'] . '.html.twig', $vars['machine_name']);
+    $path = 'templates/' . $vars['template_name'] . '.html.twig';
     $this->files[$path] = $this->render('d8/template-template.twig', $vars);
 
     if ($vars['create_theme']) {
@@ -42,13 +46,6 @@ class Template extends BaseGenerator {
         'code' => $this->render('d8/template-preprocess.twig', $vars),
       ];
     }
-  }
-
-  /**
-   * Return default template name.
-   */
-  protected function defaultTemplateName($vars) {
-    return str_replace('_', '-', $vars['machine_name']) . '-example';
   }
 
 }

@@ -19,7 +19,6 @@ class Permissions extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'machine_name' => ['Module machine name'],
     ];

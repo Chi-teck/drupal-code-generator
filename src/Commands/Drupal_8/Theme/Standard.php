@@ -21,7 +21,6 @@ class Standard extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = [
       'name' => ['Theme name'],
       'machine_name' => ['Theme machine name'],
@@ -57,7 +56,6 @@ class Standard extends BaseGenerator {
     $this->files[$vars['machine_name'] . '/css/components/buttons.css'] = '';
     $this->files[$vars['machine_name'] . '/css/layouts/layout.css'] = '';
     $this->files[$vars['machine_name'] . '/css/theme/print.css'] = '';
-
   }
 
 }

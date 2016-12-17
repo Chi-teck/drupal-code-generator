@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Commands\Drupal_8\Service;
 
 use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -19,16 +20,18 @@ class AccessChecker extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'applies_to' => ['Applies to', 'foo'],
-      'class' => ['Class', [$this, 'defaultClass']],
+      'class' => [
+        'Class',
+        function ($vars) {
+          return Utils::human2class($vars['applies_to'] . 'AccessChecker');
+        },
+      ],
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
-    $path = $this->createPath('src/Access/', $vars['class'] . '.php', $vars['machine_name']);
+    $path = 'src/Access/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/access-checker.twig', $vars);
 
     $this->services[$vars['machine_name'] . '.' . $vars['applies_to'] . '_access_checker'] = [
@@ -40,14 +43,6 @@ class AccessChecker extends BaseGenerator {
         ],
       ],
     ];
-
-  }
-
-  /**
-   * Returns default class name for the access checker.
-   */
-  protected function defaultClass($vars) {
-    return $this->human2class($vars['applies_to'] . 'AccessChecker');
   }
 
 }

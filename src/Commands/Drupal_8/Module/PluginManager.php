@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Module;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:module:plugin-manager command.
@@ -19,10 +20,7 @@ class PluginManager extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
@@ -35,7 +33,7 @@ class PluginManager extends BaseGenerator {
       $vars['dependencies'] = explode(',', $vars['dependencies']);
     }
 
-    $vars['class_prefix'] = $this->human2class($vars['machine_name']);
+    $vars['class_prefix'] = Utils::human2class($vars['machine_name']);
 
     $templates = [
       'model.drush.inc.twig',
@@ -57,7 +55,6 @@ class PluginManager extends BaseGenerator {
       $path = preg_replace('#\.twig$#', '', $path);
       $this->files[$path] = $this->render($templates_path . $template, $vars);
     }
-
   }
 
 }

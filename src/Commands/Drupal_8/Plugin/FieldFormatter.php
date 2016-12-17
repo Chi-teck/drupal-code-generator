@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Commands\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:plugin:field-formatter command.
@@ -19,18 +20,15 @@ class FieldFormatter extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
-    $questions = [
-      'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+    $questions = Utils::defaultQuestions() + [
       'plugin_label' => ['Formatter name', 'Example'],
       'plugin_id' => ['Formatter machine name'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = $this->human2class($vars['plugin_label'] . 'Formatter');
+    $vars['class'] = Utils::human2class($vars['plugin_label'] . 'Formatter');
 
-    $path = $this->createPath('src/Plugin/Field/FieldFormatter/', $vars['class'] . '.php', $vars['machine_name']);
+    $path = 'src/Plugin/Field/FieldFormatter/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/plugin/field-formatter.twig', $vars);
   }
 
