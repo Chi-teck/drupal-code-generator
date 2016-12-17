@@ -250,7 +250,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
 
       if (is_callable($default_value)) {
-        $default_value = call_user_func($default_value, $vars);
+        // Do not treat simple strings as callable because they may match PHP
+        // builtin functions.
+        if (!is_string($default_value) || strpos('::', $default_value) !== FALSE) {
+          $default_value = call_user_func($default_value, $vars);
+        }
       }
 
       $error = FALSE;
