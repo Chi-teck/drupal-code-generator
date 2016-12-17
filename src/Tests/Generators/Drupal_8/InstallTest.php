@@ -9,19 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class InstallTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Install';
-    $this->answers = [
-      'Foo',
-      'foo',
-    ];
-    $this->target = 'foo.install';
-    $this->fixture = __DIR__ . '/_.install';
+  protected $class = 'Drupal_8\Install';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Foo',
+    'foo',
+  ];
+
+  protected $fixtures = [
+    'foo.install' => __DIR__ . '/_.install',
+  ];
 
 }

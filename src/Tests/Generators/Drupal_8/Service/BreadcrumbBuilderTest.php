@@ -9,20 +9,16 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class BreadcrumbBuilderTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Service\BreadcrumbBuilder';
-    $this->answers = [
-      'Example',
-      'example',
-      'ExampleBreadcrumbBuilder',
-    ];
-    $this->target = 'src/ExampleBreadcrumbBuilder.php';
-    $this->fixture = __DIR__ . '/_breadcrumb_builder.php';
+  protected $class = 'Drupal_8\Service\BreadcrumbBuilder';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'ExampleBreadcrumbBuilder',
+  ];
+
+  protected $fixtures = [
+    'src/ExampleBreadcrumbBuilder.php' => __DIR__ . '/_breadcrumb_builder.php',
+  ];
 
 }

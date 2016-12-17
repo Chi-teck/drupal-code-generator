@@ -9,21 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class CustomTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Service\Custom';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'foo.example',
-      'Example',
-    ];
-    $this->target = 'src/Example.php';
-    $this->fixture = __DIR__ . '/_custom.php';
+  protected $class = 'Drupal_8\Service\Custom';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Foo',
+    'foo',
+    'foo.example',
+    'Example',
+  ];
+
+  protected $fixtures = [
+    'src/Example.php' => __DIR__ . '/_custom.php',
+  ];
 
 }

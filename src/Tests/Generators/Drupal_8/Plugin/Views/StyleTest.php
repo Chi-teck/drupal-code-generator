@@ -9,23 +9,19 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class StyleTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\Views\Style';
-    $this->answers = [
-      'Example',
-      'example',
-      'Foo',
-      'example_foo',
-    ];
+  protected $class = 'Drupal_8\Plugin\Views\Style';
 
-    $this->fixtures['src/Plugin/views/style/Foo.php'] = __DIR__ . '/_style.php';
-    $this->fixtures['templates/views-style-example-foo.html.twig'] = __DIR__ . '/_style.twig';
-    $this->fixtures['example.module'] = __DIR__ . '/_style.module';
+  protected $answers = [
+    'Example',
+    'example',
+    'Foo',
+    'example_foo',
+  ];
 
-    parent::setUp();
-  }
+  protected $fixtures = [
+    'src/Plugin/views/style/Foo.php' => __DIR__ . '/_style.php',
+    'templates/views-style-example-foo.html.twig' => __DIR__ . '/_style.twig',
+    'example.module' => __DIR__ . '/_style.module',
+  ];
 
 }

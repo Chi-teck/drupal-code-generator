@@ -10,6 +10,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class DrupalConsoleCommandTest extends GeneratorTestCase {
 
   protected $class = 'Other\DrupalConsoleCommand';
+
   protected $answers = [
     'Foo',
     'foo',
@@ -17,6 +18,7 @@ class DrupalConsoleCommandTest extends GeneratorTestCase {
     'Command description.',
     FALSE,
   ];
+
   protected $fixtures = [
     'src/Command/FooExampleCommand.php' => __DIR__ . '/_drupal_console_command.php',
   ];

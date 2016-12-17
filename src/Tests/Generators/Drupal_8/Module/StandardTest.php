@@ -9,48 +9,31 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class StandardTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Module\Standard';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Description',
-      'Custom',
-      '8.x-1.0',
-    ];
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\Module\Standard';
 
-  /**
-   * Test callback.
-   */
-  public function testExecute() {
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Description',
+    'Custom',
+    '8.x-1.0',
+  ];
 
-    $this->execute();
-
-    $lines[] = 'The following directories and files have been created or updated:';
-    $lines[] = '- foo/foo.info.yml';
-    $lines[] = '- foo/foo.module';
-    $lines[] = '- foo/foo.install';
-    $lines[] = '- foo/foo.libraries.yml';
-    $lines[] = '- foo/foo.services.yml';
-    $lines[] = '- foo/foo.permissions.yml';
-    $lines[] = '- foo/js/foo.js';
-    $lines[] = '- foo/src/FooExample.php';
-    $lines[] = '- foo/src/FooMiddleware.php';
-    $lines[] = '- foo/src/EventSubscriber/FooSubscriber.php';
-    $lines[] = '- foo/src/Plugin/Block/ExampleBlock.php';
-    $lines[] = '- foo/foo.routing.yml';
-    $lines[] = '- foo/src/Controller/FooController.php';
-    $lines[] = '- foo/src/Form/SettingsForm.php';
-    $lines[] = '';
-
-    $output = implode("\n", $lines);
-    $this->assertEquals($output, $this->commandTester->getDisplay());
-
-  }
+  protected $fixtures = [
+    'foo/foo.info.yml' => NULL,
+    'foo/foo.module' => NULL,
+    'foo/foo.install' => NULL,
+    'foo/foo.libraries.yml' => NULL,
+    'foo/foo.services.yml' => NULL,
+    'foo/foo.permissions.yml' => NULL,
+    'foo/js/foo.js' => NULL,
+    'foo/src/FooExample.php' => NULL,
+    'foo/src/FooMiddleware.php' => NULL,
+    'foo/src/EventSubscriber/FooSubscriber.php' => NULL,
+    'foo/src/Plugin/Block/ExampleBlock.php' => NULL,
+    'foo/foo.routing.yml' => NULL,
+    'foo/src/Controller/FooController.php' => NULL,
+    'foo/src/Form/SettingsForm.php' => NULL,
+  ];
 
 }

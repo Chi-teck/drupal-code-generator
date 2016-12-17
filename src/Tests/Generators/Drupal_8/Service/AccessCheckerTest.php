@@ -9,21 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class AccessCheckerTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Service\AccessChecker';
-    $this->answers = [
-      'Example',
-      'example',
-      'foo',
-      'FooAccessChecker',
-    ];
-    $this->target = 'src/Access/FooAccessChecker.php';
-    $this->fixture = __DIR__ . '/_access_checker.php';
+  protected $class = 'Drupal_8\Service\AccessChecker';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'foo',
+    'FooAccessChecker',
+  ];
+
+  protected $fixtures = [
+    'src/Access/FooAccessChecker.php' => __DIR__ . '/_access_checker.php',
+  ];
 
 }

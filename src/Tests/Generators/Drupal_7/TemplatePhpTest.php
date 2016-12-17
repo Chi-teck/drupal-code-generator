@@ -10,10 +10,12 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class TemplatePhpTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_7\TemplatePhp';
+
   protected $answers = [
     'Example',
     'example',
   ];
+
   protected $fixtures = [
     'template.php' => __DIR__ . '/_template.php',
   ];

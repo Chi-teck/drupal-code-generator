@@ -10,6 +10,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class DrushCommandTest extends GeneratorTestCase {
 
   protected $class = 'Other\DrushCommand';
+
   protected $answers = [
     'yo-yo',
     'yy',
@@ -18,6 +19,7 @@ class DrushCommandTest extends GeneratorTestCase {
     'bar',
     'yo_yo.drush.inc',
   ];
+
   protected $fixtures = [
     'yo_yo.drush.inc' => __DIR__ . '/_drush_command.inc',
   ];

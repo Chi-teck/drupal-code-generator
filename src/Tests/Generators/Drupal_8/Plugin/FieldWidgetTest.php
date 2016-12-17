@@ -9,21 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class FieldWidgetTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\FieldWidget';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Example',
-      'foo_example',
-    ];
-    $this->target = 'src/Plugin/Field/FieldWidget/ExampleWidget.php';
-    $this->fixture = __DIR__ . '/_field_widget.php';
+  protected $class = 'Drupal_8\Plugin\FieldWidget';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Example',
+    'foo_example',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/Field/FieldWidget/ExampleWidget.php' => __DIR__ . '/_field_widget.php',
+  ];
 
 }

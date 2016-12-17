@@ -9,18 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ThemeFileTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\ThemeFile';
-    $this->answers = [
-      'Foo',
-      'foo',
-    ];
-    $this->target = 'foo.theme';
-    $this->fixture = __DIR__ . '/_theme_file.theme';
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\ThemeFile';
+
+  protected $answers = [
+    'Foo',
+    'foo',
+  ];
+
+  protected $fixtures = [
+    'foo.theme' => __DIR__ . '/_theme_file.theme',
+  ];
 
 }

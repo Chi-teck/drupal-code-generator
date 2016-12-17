@@ -10,6 +10,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class RelationshipTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_7\CToolsPlugin\Relationship';
+
   protected $answers = [
     'Foo',
     'foo',
@@ -19,6 +20,7 @@ class RelationshipTest extends GeneratorTestCase {
     'custom',
     'Term',
   ];
+
   protected $fixtures = [
     'plugins/relationships/example.inc' => __DIR__ . '/_relationship.inc',
   ];

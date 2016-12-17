@@ -11,20 +11,14 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class LibrariesTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Yml\Libraries';
-    $this->answers = [
-      'Example',
-      'example',
-      'module',
-    ];
-    $this->target = 'example.libraries.yml';
-    $this->fixture = __DIR__ . '/_libraries.yml';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\Yml\Libraries';
+  protected $answers = [
+    'Example',
+    'example',
+    'module',
+  ];
+  protected $fixtures = [
+    'example.libraries.yml' => __DIR__ . '/_libraries.yml',
+  ];
 
 }

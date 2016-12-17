@@ -10,11 +10,13 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class HookTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_7\Hook';
+
   protected $answers = [
     'Example',
     'example',
     'init',
   ];
+
   protected $fixtures = [
     'example.module' => __DIR__ . '/_hook.module',
   ];

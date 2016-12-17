@@ -9,18 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class EventSubscriberTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Service\EventSubscriber';
-    $this->answers = [
-      'Foo',
-      'foo',
-    ];
-    $this->target = 'src/EventSubscriber/FooSubscriber.php';
-    $this->fixture = __DIR__ . '/_event_subscriber.php';
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\Service\EventSubscriber';
+
+  protected $answers = [
+    'Foo',
+    'foo',
+  ];
+
+  protected $fixtures = [
+    'src/EventSubscriber/FooSubscriber.php' => __DIR__ . '/_event_subscriber.php',
+  ];
 
 }

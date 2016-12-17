@@ -10,9 +10,11 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class HtmlPageTest extends GeneratorTestCase {
 
   protected $class = 'Other\HtmlPage';
+
   protected $answers = [
     'example.html',
   ];
+
   protected $fixtures = [
     'example.html' => __DIR__ . '/_html_page.html',
     'css/main.css' => NULL,

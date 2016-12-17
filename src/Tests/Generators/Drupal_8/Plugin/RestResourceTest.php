@@ -9,21 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class RestResourceTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\RestResource';
-    $this->answers = [
-      'Example',
-      'example',
-      'Foo',
-      'example_foo',
-    ];
-    $this->target = 'src/Plugin/rest/resource/FooResource.php';
-    $this->fixture = __DIR__ . '/_rest_resource.php';
+  protected $class = 'Drupal_8\Plugin\RestResource';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'Foo',
+    'example_foo',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/rest/resource/FooResource.php' => __DIR__ . '/_rest_resource.php',
+  ];
 
 }

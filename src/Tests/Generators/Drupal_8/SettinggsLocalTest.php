@@ -9,23 +9,19 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class SettingsLocalTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\SettingsLocal';
-    $this->answers = [
-      'yes',
-      'drupal_8',
-      'root',
-      '123',
-      'localhost',
-      'mysql',
-    ];
-    $this->target = 'settings.local.php';
-    $this->fixture = __DIR__ . '/_settings.local.php';
+  protected $class = 'Drupal_8\SettingsLocal';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'yes',
+    'drupal_8',
+    'root',
+    '123',
+    'localhost',
+    'mysql',
+  ];
+
+  protected $fixtures = [
+    'settings.local.php' => __DIR__ . '/_settings.local.php',
+  ];
 
 }

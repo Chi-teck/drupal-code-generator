@@ -10,10 +10,12 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class ModuleFileTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_7\ModuleFile';
+
   protected $answers = [
     'Example',
     'example',
   ];
+
   protected $fixtures = [
     'example.module' => __DIR__ . '/_module_file.module',
   ];

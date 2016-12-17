@@ -10,6 +10,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class ModuleInfoTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_6\ModuleInfo';
+
   protected $answers = [
     'Example',
     'example',
@@ -17,6 +18,7 @@ class ModuleInfoTest extends GeneratorTestCase {
     'custom',
     '6.x-1.0',
   ];
+
   protected $fixtures = [
     'example.info' => __DIR__ . '/_module.info',
   ];

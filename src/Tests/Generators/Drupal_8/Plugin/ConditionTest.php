@@ -7,23 +7,19 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 /**
  * Test for d8:plugin:condition command.
  */
-class CondtionTest extends GeneratorTestCase {
+class ConditionTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\Condition';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Example',
-      'foo_example',
-    ];
-    $this->target = 'src/Plugin/Condition/Example.php';
-    $this->fixture = __DIR__ . '/_condition.php';
+  protected $class = 'Drupal_8\Plugin\Condition';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Example',
+    'foo_example',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/Condition/Example.php' => __DIR__ . '/_condition.php',
+  ];
 
 }

@@ -9,16 +9,12 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class MenuLinksTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Yml\MenuLinks';
-    $this->answers = ['example'];
-    $this->target = 'example.links.menu.yml';
-    $this->fixture = __DIR__ . '/_links.menu.yml';
+  protected $class = 'Drupal_8\Yml\MenuLinks';
 
-    parent::setUp();
-  }
+  protected $answers = ['example'];
+
+  protected $fixtures = [
+    'example.links.menu.yml' => __DIR__ . '/_links.menu.yml',
+  ];
 
 }

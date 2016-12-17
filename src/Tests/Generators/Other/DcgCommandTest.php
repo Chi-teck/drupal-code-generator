@@ -10,12 +10,13 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class DcgCommandTest extends GeneratorTestCase {
 
   protected $class = 'Other\DcgCommand';
+
   protected $answers = [
     'custom:example',
     'Some description',
     'example',
   ];
-  protected $target = 'custom/Example.php';
+
   protected $fixtures = [
     'custom/Example.php' => __DIR__ . '/_dcg_command.php',
   ];

@@ -9,18 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ModuleFileTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\ModuleFile';
-    $this->answers = [
-      'Foo',
-      'foo',
-    ];
-    $this->target = 'foo.module';
-    $this->fixture = __DIR__ . '/_module_file.module';
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\ModuleFile';
+
+  protected $answers = [
+    'Foo',
+    'foo',
+  ];
+
+  protected $fixtures = [
+    'foo.module' => __DIR__ . '/_module_file.module',
+  ];
 
 }

@@ -9,19 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ServiceProviderTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\ServiceProvider';
-    $this->answers = [
-      'Example',
-      'example',
-    ];
-    $this->target = 'src/ExampleServiceProvider.php';
-    $this->fixture = __DIR__ . '/_service_provider.php';
+  protected $class = 'Drupal_8\ServiceProvider';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+  ];
+
+  protected $fixtures = [
+    'src/ExampleServiceProvider.php' => __DIR__ . '/_service_provider.php',
+  ];
 
 }

@@ -9,19 +9,13 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ServicesTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Yml\Services';
-    $this->answers = [
-      'Foo',
-      'foo',
-    ];
-    $this->target = 'foo.services.yml';
-    $this->fixture = __DIR__ . '/_services.yml';
-
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\Yml\Services';
+  protected $answers = [
+    'Foo',
+    'foo',
+  ];
+  protected $fixtures = [
+    'foo.services.yml' => __DIR__ . '/_services.yml',
+  ];
 
 }

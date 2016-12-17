@@ -10,11 +10,12 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class ApacheVirtualHostTest extends GeneratorTestCase {
 
   protected $class = 'Other\ApacheVirtualHost';
+
   protected $answers = [
     'example.com',
     '/var/www/example.com/public',
   ];
-  protected $target = 'example.com.conf';
+
   protected $fixtures = [
     'example.com.conf' => __DIR__ . '/_apache_virtual_host.conf',
   ];

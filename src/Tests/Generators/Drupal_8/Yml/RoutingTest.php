@@ -9,20 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class RoutingTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Yml\Routing';
-    $this->answers = [
-      'Example',
-      'example',
-    ];
+  protected $class = 'Drupal_8\Yml\Routing';
 
-    $this->target = 'example.routing.yml';
-    $this->fixture = __DIR__ . '/_routing.yml';
+  protected $answers = [
+    'Example',
+    'example',
+  ];
 
-    parent::setUp();
-  }
+  protected $fixtures = [
+    'example.routing.yml' => __DIR__ . '/_routing.yml',
+  ];
 
 }

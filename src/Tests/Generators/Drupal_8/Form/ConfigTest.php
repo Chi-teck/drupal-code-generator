@@ -9,22 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ConfigTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Form\Config';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'SettingsForm',
-      'foo_settings',
-    ];
+  protected $class = 'Drupal_8\Form\Config';
 
-    $this->target = 'src/Form/SettingsForm.php';
-    $this->fixture = __DIR__ . '/_config.php';
+  protected $answers = [
+    'Foo',
+    'foo',
+    'SettingsForm',
+    'foo_settings',
+  ];
 
-    parent::setUp();
-  }
+  protected $fixtures = [
+    'src/Form/SettingsForm.php' => __DIR__ . '/_config.php',
+  ];
 
 }

@@ -9,23 +9,19 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ActionTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\Action';
-    $this->answers = [
-      'Example',
-      'example',
-      'Foo',
-      'example_foo',
-      'Custom',
-      'yes',
-    ];
-    $this->target = 'src/Plugin/Action/Foo.php';
-    $this->fixture = __DIR__ . '/_action.php';
+  protected $class = 'Drupal_8\Plugin\Action';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'Foo',
+    'example_foo',
+    'Custom',
+    'yes',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/Action/Foo.php' => __DIR__ . '/_action.php',
+  ];
 
 }

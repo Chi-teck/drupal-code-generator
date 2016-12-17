@@ -10,12 +10,14 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class ArgumentDefaultTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_7\ViewsPlugin\ArgumentDefault';
+
   protected $answers = [
     'Example',
     'example',
     'Foo',
     'foo',
   ];
+
   protected $fixtures = [
     'views_plugin_argument_foo.inc' => __DIR__ . '/_argument_default.inc',
   ];

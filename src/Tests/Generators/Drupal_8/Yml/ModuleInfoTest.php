@@ -9,24 +9,20 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ModuleInfoTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Yml\ModuleInfo';
-    $this->answers = [
-      'Example',
-      'example',
-      'Example description.',
-      'custom',
-      '8.x-1.0-dev',
-      'example.settings',
-      'views, node, fields',
-    ];
-    $this->target = 'example.info.yml';
-    $this->fixture = __DIR__ . '/_module_info.yml';
+  protected $class = 'Drupal_8\Yml\ModuleInfo';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'Example description.',
+    'custom',
+    '8.x-1.0-dev',
+    'example.settings',
+    'views, node, fields',
+  ];
+
+  protected $fixtures = [
+    'example.info.yml' => __DIR__ . '/_module_info.yml',
+  ];
 
 }

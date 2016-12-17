@@ -9,18 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class RouteSubscriberTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Service\RouteSubscriber';
-    $this->answers = [
-      'Foo',
-      'foo',
-    ];
-    $this->target = 'src/EventSubscriber/FooRouteSubscriber.php';
-    $this->fixture = __DIR__ . '/_route_subscriber.php';
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\Service\RouteSubscriber';
+
+  protected $answers = [
+    'Foo',
+    'foo',
+  ];
+
+  protected $fixtures = [
+    'src/EventSubscriber/FooRouteSubscriber.php' => __DIR__ . '/_route_subscriber.php',
+  ];
 
 }

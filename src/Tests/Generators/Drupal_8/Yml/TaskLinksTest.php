@@ -9,16 +9,12 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class TaskLinksTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Yml\TaskLinks';
-    $this->answers = ['example'];
-    $this->target = 'example.links.task.yml';
-    $this->fixture = __DIR__ . '/_links.task.yml';
+  protected $class = 'Drupal_8\Yml\TaskLinks';
 
-    parent::setUp();
-  }
+  protected $answers = ['example'];
+
+  protected $fixtures = [
+    'example.links.task.yml' => __DIR__ . '/_links.task.yml',
+  ];
 
 }

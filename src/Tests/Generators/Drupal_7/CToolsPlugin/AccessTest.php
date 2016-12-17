@@ -10,6 +10,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class AccessTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_7\CToolsPlugin\Access';
+
   protected $answers = [
     'Foo',
     'foo',
@@ -19,6 +20,7 @@ class AccessTest extends GeneratorTestCase {
     'Custom',
     'User',
   ];
+
   protected $fixtures = [
     'plugins/access/example.inc' => __DIR__ . '/_access.inc',
   ];

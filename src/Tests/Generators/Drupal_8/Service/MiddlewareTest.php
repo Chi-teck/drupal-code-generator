@@ -9,19 +9,15 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class MiddlewareTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Service\Middleware';
-    $this->answers = [
-      'Foo',
-      'foo',
-    ];
-    $this->target = 'src/FooMiddleware.php';
-    $this->fixture = __DIR__ . '/_middleware.php';
+  protected $class = 'Drupal_8\Service\Middleware';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Foo',
+    'foo',
+  ];
+
+  protected $fixtures = [
+    'src/FooMiddleware.php' => __DIR__ . '/_middleware.php',
+  ];
 
 }

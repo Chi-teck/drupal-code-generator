@@ -9,22 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class SimpleTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Form\Simple';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'ExampleForm',
-      'foo_example',
-    ];
+  protected $class = 'Drupal_8\Form\Simple';
 
-    $this->target = 'src/Form/ExampleForm.php';
-    $this->fixture = __DIR__ . '/_simple.php';
+  protected $answers = [
+    'Foo',
+    'foo',
+    'ExampleForm',
+    'foo_example',
+  ];
 
-    parent::setUp();
-  }
+  protected $fixtures = [
+    'src/Form/ExampleForm.php' => __DIR__ . '/_simple.php',
+  ];
 
 }

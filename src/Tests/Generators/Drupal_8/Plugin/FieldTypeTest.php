@@ -9,21 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class FieldTypeTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\FieldType';
-    $this->answers = [
-      'Example',
-      'example',
-      'Foo',
-      'foo',
-    ];
-    $this->target = 'src/Plugin/Field/FieldType/FooItem.php';
-    $this->fixture = __DIR__ . '/_field_type.php';
+  protected $class = 'Drupal_8\Plugin\FieldType';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'Foo',
+    'foo',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/Field/FieldType/FooItem.php' => __DIR__ . '/_field_type.php',
+  ];
 
 }

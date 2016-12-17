@@ -10,6 +10,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class ThemeInfoTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_7\ThemeInfo';
+
   protected $answers = [
     'Bar',
     'bar',
@@ -17,6 +18,7 @@ class ThemeInfoTest extends GeneratorTestCase {
     'omega',
     '7.x-1.0',
   ];
+
   protected $fixtures = [
     'bar.info' => __DIR__ . '/_theme.info',
   ];

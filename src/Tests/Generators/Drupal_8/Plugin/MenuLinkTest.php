@@ -9,20 +9,16 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class MenuLinkTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\MenuLink';
-    $this->answers = [
-      'Example',
-      'example',
-      'FooMenuLink',
-    ];
-    $this->target = 'src/Plugin/Menu/FooMenuLink.php';
-    $this->fixture = __DIR__ . '/_menu_link.php';
+  protected $class = 'Drupal_8\Plugin\MenuLink';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'FooMenuLink',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/Menu/FooMenuLink.php' => __DIR__ . '/_menu_link.php',
+  ];
 
 }

@@ -9,22 +9,18 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class BlockTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\Block';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Example',
-      'foo_example',
-      'Custom',
-    ];
-    $this->target = 'src/Plugin/Block/ExampleBlock.php';
-    $this->fixture = __DIR__ . '/_block.php';
+  protected $class = 'Drupal_8\Plugin\Block';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Example',
+    'foo_example',
+    'Custom',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/Block/ExampleBlock.php' => __DIR__ . '/_block.php',
+  ];
 
 }

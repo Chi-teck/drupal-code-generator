@@ -10,6 +10,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class NginxVirtualHostTest extends GeneratorTestCase {
 
   protected $class = 'Other\NginxVirtualHost';
+
   protected $answers = [
     'example.local',
     '/var/www/example.local/docroot',
@@ -17,6 +18,7 @@ class NginxVirtualHostTest extends GeneratorTestCase {
     'files/private',
     'unix:/run/php/php7.0-fpm.sock',
   ];
+
   protected $fixtures = [
     'example.local' => __DIR__ . '/_nginx_virtual_host',
   ];

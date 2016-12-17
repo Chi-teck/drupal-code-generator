@@ -9,20 +9,16 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ControllerTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Controller';
-    $this->answers = [
-      'Example',
-      'example',
-      'ExampleController',
-    ];
-    $this->target = 'src/Controller/ExampleController.php';
-    $this->fixture = __DIR__ . '/_controller.php';
+  protected $class = 'Drupal_8\Controller';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'ExampleController',
+  ];
+
+  protected $fixtures = [
+    'src/Controller/ExampleController.php' => __DIR__ . '/_controller.php',
+  ];
 
 }

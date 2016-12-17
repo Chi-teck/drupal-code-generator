@@ -9,15 +9,12 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class PermissionsTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Yml\Permissions';
-    $this->answers = ['example'];
-    $this->target = 'example.permissions.yml';
-    $this->fixture = __DIR__ . '/_permissions.yml';
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\Yml\Permissions';
+
+  protected $answers = ['example'];
+
+  protected $fixtures = [
+    'example.permissions.yml' => __DIR__ . '/_permissions.yml',
+  ];
 
 }

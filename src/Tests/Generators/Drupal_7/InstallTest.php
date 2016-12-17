@@ -10,10 +10,12 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
 class InstallTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_7\Install';
+
   protected $answers = [
     'Example',
     'example',
   ];
+
   protected $fixtures = [
     'example.install' => __DIR__ . '/_.install',
   ];

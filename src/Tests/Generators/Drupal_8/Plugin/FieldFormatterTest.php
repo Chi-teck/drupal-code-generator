@@ -9,21 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class FieldFormatterTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\FieldFormatter';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Zoo',
-      'foo_zoo',
-    ];
-    $this->target = 'src/Plugin/Field/FieldFormatter/ZooFormatter.php';
-    $this->fixture = __DIR__ . '/_field_formatter.php';
+  protected $class = 'Drupal_8\Plugin\FieldFormatter';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Zoo',
+    'foo_zoo',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/Field/FieldFormatter/ZooFormatter.php' => __DIR__ . '/_field_formatter.php',
+  ];
 
 }

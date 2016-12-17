@@ -9,23 +9,19 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class ThemeInfoTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Yml\ThemeInfo';
-    $this->answers = [
-      'Example',
-      'example',
-      'garland',
-      'Example description.',
-      'custom',
-      '8.x-1.0-dev',
-    ];
-    $this->target = 'example.info.yml';
-    $this->fixture = __DIR__ . '/_theme_info.yml';
+  protected $class = 'Drupal_8\Yml\ThemeInfo';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'garland',
+    'Example description.',
+    'custom',
+    '8.x-1.0-dev',
+  ];
+
+  protected $fixtures = [
+    'example.info.yml' => __DIR__ . '/_theme_info.yml',
+  ];
 
 }

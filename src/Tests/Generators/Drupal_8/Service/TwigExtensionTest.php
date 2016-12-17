@@ -9,20 +9,16 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class TwigExtensionTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Service\TwigExtension';
-    $this->answers = [
-      'Example',
-      'example',
-      'ExampleTwigExtension',
-    ];
-    $this->target = 'src/ExampleTwigExtension.php';
-    $this->fixture = __DIR__ . '/_twig_extension.php';
+  protected $class = 'Drupal_8\Service\TwigExtension';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Example',
+    'example',
+    'ExampleTwigExtension',
+  ];
+
+  protected $fixtures = [
+    'src/ExampleTwigExtension.php' => __DIR__ . '/_twig_extension.php',
+  ];
 
 }

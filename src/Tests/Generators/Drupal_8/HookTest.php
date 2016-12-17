@@ -9,19 +9,16 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class HookTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Hook';
-    $this->answers = [
-      'Example',
-      'example',
-      'theme',
-    ];
-    $this->target = 'example.module';
-    $this->fixture = __DIR__ . '/_hook.module';
-    parent::setUp();
-  }
+  protected $class = 'Drupal_8\Hook';
+
+  protected $answers = [
+    'Example',
+    'example',
+    'theme',
+  ];
+
+  protected $fixtures = [
+    'example.module' => __DIR__ . '/_hook.module',
+  ];
 
 }

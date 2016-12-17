@@ -9,21 +9,17 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class FilterTest extends GeneratorTestCase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->class = 'Drupal_8\Plugin\Filter';
-    $this->answers = [
-      'Foo',
-      'foo',
-      'Example',
-      'filter_example',
-    ];
-    $this->target = 'src/Plugin/Filter/Example.php';
-    $this->fixture = __DIR__ . '/_filter.php';
+  protected $class = 'Drupal_8\Plugin\Filter';
 
-    parent::setUp();
-  }
+  protected $answers = [
+    'Foo',
+    'foo',
+    'Example',
+    'filter_example',
+  ];
+
+  protected $fixtures = [
+    'src/Plugin/Filter/Example.php' => __DIR__ . '/_filter.php',
+  ];
 
 }
