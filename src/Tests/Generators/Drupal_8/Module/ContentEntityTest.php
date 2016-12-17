@@ -25,6 +25,7 @@ class ContentEntityTest extends GeneratorTestCase {
       '/example',
       TRUE,
       TRUE,
+      TRUE,
       FALSE,
       TRUE,
       TRUE,
