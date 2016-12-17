@@ -481,7 +481,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @deprecated
    */
-  protected function createPath($prefix, $path, $extension_machine_name) {
+  protected static function createPath($prefix, $path, $extension_machine_name) {
     return $prefix . $path;
   }
 
@@ -538,7 +538,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Machine name validator.
    */
-  protected function validateMachineName($value) {
+  protected static function validateMachineName($value) {
     if (!preg_match('/^[a-z]+[a-z0-9_]*$/', $value)) {
       return 'The value is not correct machine name.';
     }
@@ -549,7 +549,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @see http://php.net/manual/en/language.oop5.basic.php
    */
-  protected function validateClassName($value) {
+  protected static function validateClassName($value) {
     if (!preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $value)) {
       return 'The value is not correct class name.';
     }
@@ -558,7 +558,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Required value validator.
    */
-  protected function validateRequired($value) {
+  protected static function validateRequired($value) {
     if ($value === NULL || $value === '') {
       return 'The value is required.';
     }
@@ -567,7 +567,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Returns normalized file path.
    */
-  protected function normalizePath($path) {
+  protected static function normalizePath($path) {
     $parts = [];
     $path = str_replace('\\', '/', $path);
     $path = preg_replace('/\/+/', '/', $path);
@@ -598,7 +598,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Returns default questions.
    */
-  protected function defaultQuestions() {
+  protected static function defaultQuestions() {
     return [
       'name' => ['Module name'],
       'machine_name' => ['Module machine name'],
