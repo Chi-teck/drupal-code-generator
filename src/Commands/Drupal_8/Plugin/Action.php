@@ -24,7 +24,7 @@ class Action extends BaseGenerator {
       'plugin_label' => ['Plugin label', 'Example'],
       'plugin_id' => ['Plugin ID'],
       'category' => ['Action category', 'Custom'],
-      'configurable' => ['Make the action configurable', 'no'],
+      'configurable' => ['Make the action configurable?', 'no'],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
