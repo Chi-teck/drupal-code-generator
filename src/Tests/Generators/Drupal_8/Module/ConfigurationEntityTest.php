@@ -16,15 +16,15 @@ class ConfigurationEntityTest extends GeneratorTestCase {
   protected $answers = [
     'Foo',
     'foo',
-    'Description',
     'Custom',
     '8.x-1.0',
+    'views',
     'Example',
     'example',
   ];
 
   protected $fixtures = [
-    'foo/foo.info.yml' => NULL,
+    'foo/foo.info.yml' => __DIR__ . '/_configuration_entity/_info.yml',
     'foo/src/Controller/ExampleListBuilder.php' => NULL,
     'foo/src/Form/ExampleForm.php' => NULL,
     'foo/src/Form/ExampleDeleteForm.php' => NULL,

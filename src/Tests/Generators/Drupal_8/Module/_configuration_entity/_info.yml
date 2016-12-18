@@ -1,0 +1,9 @@
+name: Foo
+type: module
+description: 'Provides an example configuration entity.'
+package: Custom
+version: 8.x-1.0
+core: 8.x
+dependencies:
+  - views
+configure: entity.example.collection
