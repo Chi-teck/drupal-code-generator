@@ -5,7 +5,7 @@ entity.{{ entity_type_id }}.settings:
     _form: '\Drupal\{{ machine_name }}\Form\{{ class_prefix }}SettingsForm'
     _title: '{{ entity_type_label }} Settings'
   requirements:
-    _permission: 'administer {{ entity_type_label|lower }}'
+    _permission: 'administer {{ entity_type_label | lower }}'
 {% endif %}
 entity.{{ entity_type_id }}.collection:
   path: '/admin/content/{{ entity_type_id }}'
@@ -13,7 +13,7 @@ entity.{{ entity_type_id }}.collection:
     _entity_list: '{{ entity_type_id }}'
     _title: '{{ entity_type_label }} list'
   requirements:
-    _permission: 'view {{ entity_type_label|lower }}'
+    _permission: 'access {{ entity_type_label | lower }} overview'
 
 entity.{{ entity_type_id }}.canonical:
   path: '{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
