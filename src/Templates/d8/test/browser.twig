@@ -1,0 +1,29 @@
+<?php
+
+namespace Drupal\Tests\{{ machine_name }}\Functional;
+
+use Drupal\Tests\BrowserTestBase;
+
+/**
+ * {{ test_name }} test.
+ *
+ * @group {{ machine_name }}
+ */
+class {{ class }} extends BrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static $modules = ['node'];
+
+  /**
+   * Tests content page.
+   */
+  public function testActionUninstall() {
+    $admin_user = $this->drupalCreateUser(['administer nodes']);
+    $this->drupalLogin($admin_user);
+    $this->drupalGet('admin/content');
+    $this->assertSession()->pageTextContains('Content');
+  }
+
+}
