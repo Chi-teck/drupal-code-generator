@@ -1,7 +1,7 @@
 {
   "chmod": "0755",
   "files": [
-    "vendor/autoload.php"
+    "vendor/autoload.php",
   ],
   "finder": [
     {
@@ -30,7 +30,7 @@
   "output": "dcg.phar",
   "bootstrap": "src/Box/PhpCompactor.php",
   "compactors": [
-    "DrupalCodeGenerator\\Box\\PhpCompactor"
+    "Herrera\\Box\\Compactor\\Php"
   ],
   "stub": true
 }

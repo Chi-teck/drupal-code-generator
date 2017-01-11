@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\{{ machine_name }}\Tests;
+namespace Drupal\foo\Tests;
 
 use Drupal\simpletest\WebTestBase;
 
 /**
- * Tests the creation of text fields.
+ * Tests the site configuration.
  *
- * @group {{ machine_name }}
+ * @group foo
  */
-class {{ class }} extends WebTestBase {
+class ExampleTest extends WebTestBase {
 
   /**
    * Modules to enable.

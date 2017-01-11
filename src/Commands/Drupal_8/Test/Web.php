@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Test;
 
 use DrupalCodeGenerator\Commands\BaseGenerator;
 use DrupalCodeGenerator\Commands\Utils;
@@ -8,13 +8,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Implements d8:test command.
+ * Implements d8:test:web command.
  */
-class Test extends BaseGenerator {
+class Web extends BaseGenerator {
 
-  protected $name = 'd8:test';
-  protected $description = 'Generates a test';
-  protected $alias = 'test';
+  protected $name = 'd8:test:web';
+  protected $description = 'Generates a web test';
+  protected $alias = 'web-test';
 
   /**
    * {@inheritdoc}
@@ -25,7 +25,8 @@ class Test extends BaseGenerator {
     ];
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::human2class($vars['test_name'] . 'Test');
-    $this->files[$vars['class'] . '.php'] = $this->render('d8/test.twig', $vars);
+    $path = 'src/Tests/' . $vars['class'] . '.php';
+    $this->files[$path] = $this->render('d8/test/web.twig', $vars);
   }
 
 }

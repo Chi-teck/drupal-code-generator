@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Drupal_8;
+namespace DrupalCodeGenerator\Tests\Drupal_8\Test;
 
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Tests\GeneratorTestCase;
  */
 class TestTest extends GeneratorTestCase {
 
-  protected $class = 'Drupal_8\Test';
+  protected $class = 'Drupal_8\Test\Web';
 
   protected $answers = [
     'Foo',
@@ -18,7 +18,7 @@ class TestTest extends GeneratorTestCase {
   ];
 
   protected $fixtures = [
-    'ExampleTest.php' => __DIR__ . '/_test.php',
+    'src/Tests/ExampleTest.php' => __DIR__ . '/_web.php',
   ];
 
 }

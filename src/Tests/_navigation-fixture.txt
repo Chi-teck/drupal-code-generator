@@ -87,17 +87,17 @@ Select generator:
   [2 ] Module
   [3 ] Plugin
   [4 ] Service
-  [5 ] Theme
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Module file
-  [12] Service provider
-  [13] Settings local
-  [14] Template
-  [15] Test
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Module file
+  [13] Service provider
+  [14] Settings local
+  [15] Template
   [16] Theme file
   >>> 1[K
 Select generator:
@@ -112,17 +112,17 @@ Select generator:
   [2 ] Module
   [3 ] Plugin
   [4 ] Service
-  [5 ] Theme
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Module file
-  [12] Service provider
-  [13] Settings local
-  [14] Template
-  [15] Test
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Module file
+  [13] Service provider
+  [14] Settings local
+  [15] Template
   [16] Theme file
   >>> 2[K
 Select generator:
@@ -138,17 +138,17 @@ Select generator:
   [2 ] Module
   [3 ] Plugin
   [4 ] Service
-  [5 ] Theme
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Module file
-  [12] Service provider
-  [13] Settings local
-  [14] Template
-  [15] Test
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Module file
+  [13] Service provider
+  [14] Settings local
+  [15] Template
   [16] Theme file
   >>> 3[K
 Select generator:
@@ -168,17 +168,17 @@ Select generator:
   [2 ] Module
   [3 ] Plugin
   [4 ] Service
-  [5 ] Theme
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Module file
-  [12] Service provider
-  [13] Settings local
-  [14] Template
-  [15] Test
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Module file
+  [13] Service provider
+  [14] Settings local
+  [15] Template
   [16] Theme file
   >>> 4[K
 Select generator:
@@ -197,19 +197,19 @@ Select generator:
   [2 ] Module
   [3 ] Plugin
   [4 ] Service
-  [5 ] Theme
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Module file
-  [12] Service provider
-  [13] Settings local
-  [14] Template
-  [15] Test
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Module file
+  [13] Service provider
+  [14] Settings local
+  [15] Template
   [16] Theme file
-  >>> 5[K
+  >>> 6[K
 Select generator:
   [0] ..
   [1] Standard
@@ -220,19 +220,19 @@ Select generator:
   [2 ] Module
   [3 ] Plugin
   [4 ] Service
-  [5 ] Theme
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Module file
-  [12] Service provider
-  [13] Settings local
-  [14] Template
-  [15] Test
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Module file
+  [13] Service provider
+  [14] Settings local
+  [15] Template
   [16] Theme file
-  >>> 6[K
+  >>> 7[K
 Select generator:
   [0] ..
   [1] Action links
@@ -251,17 +251,17 @@ Select generator:
   [2 ] Module
   [3 ] Plugin
   [4 ] Service
-  [5 ] Theme
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Module file
-  [12] Service provider
-  [13] Settings local
-  [14] Template
-  [15] Test
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Module file
+  [13] Service provider
+  [14] Settings local
+  [15] Template
   [16] Theme file
   >>> 0[K
 Select generator:
