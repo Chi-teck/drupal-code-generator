@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Web extends BaseGenerator {
 
   protected $name = 'd8:test:web';
-  protected $description = 'Generates a web test';
+  protected $description = 'Generates a web based test';
   protected $alias = 'web-test';
 
   /**

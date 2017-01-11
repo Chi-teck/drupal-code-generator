@@ -5,9 +5,9 @@ namespace DrupalCodeGenerator\Tests\Drupal_8\Test;
 use DrupalCodeGenerator\Tests\GeneratorTestCase;
 
 /**
- * Test for d8:test command.
+ * Test for d8:test:web command.
  */
-class TestTest extends GeneratorTestCase {
+class WebTest extends GeneratorTestCase {
 
   protected $class = 'Drupal_8\Test\Web';
 
