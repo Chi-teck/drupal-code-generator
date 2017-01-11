@@ -424,7 +424,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @return string
    *   The user answer.
    */
-  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, $suggestions) {
+  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, array $suggestions = NULL) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
     $helper = $this->getHelper('question');
 
