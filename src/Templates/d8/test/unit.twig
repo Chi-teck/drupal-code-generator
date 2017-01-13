@@ -1,0 +1,31 @@
+<?php
+
+namespace Drupal\Tests\{{ machine_name }}\Unit;
+
+use Drupal\Tests\UnitTestCase;
+
+/**
+ * {{ test_name }} test.
+ *
+ * @group {{ machine_name }}
+ */
+class {{ class }} extends UnitTestCase {
+
+  /**
+   * {@inheritdoc}
+   *
+   * @DCG: Optional.
+   */
+  protected function setUp() {
+    parent::setUp();
+    // @TODO: Mock required services here.
+  }
+
+  /**
+   * Tests something.
+   */
+  public function testSomething() {
+    $this->assertTrue(TRUE, 'This is TRUE!');
+  }
+
+}
