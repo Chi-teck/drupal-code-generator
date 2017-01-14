@@ -12,22 +12,14 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class GeneratorDiscovery {
 
-  const COMMANDS_NAMESPACE = '\DrupalCodeGenerator\Commands\\';
   const COMMANDS_BASE_INTERFACE = '\DrupalCodeGenerator\Commands\GeneratorInterface';
 
   /**
-   * Directories to look up for commands.
+   * Commands namespace.
    *
-   * @var array
+   * @var string
    */
-  protected $commandDirectories = [];
-
-  /**
-   * Directories to look up for templates.
-   *
-   * @var array
-   */
-  protected $twigDirectories = [];
+  protected $namespace;
 
   /**
    * The file system utility.
@@ -37,38 +29,27 @@ class GeneratorDiscovery {
   protected $filesystem;
 
   /**
-   * The twig environment.
-   *
-   * @var \Twig_Environment
-   */
-  protected $twig;
-
-  /**
-   * The yaml dumper.
-   *
-   * @var \Symfony\Component\Yaml\Dumper
-   */
-  protected $yamlDumper;
-
-  /**
    * Constructs discovery object.
    */
-  public function __construct(array $command_directories, array $twig_directories, Filesystem $filesystem) {
-    $this->commandDirectories = $command_directories;
-    $this->twigDirectories = $twig_directories;
+  public function __construct(Filesystem $filesystem, $namespace = '\DrupalCodeGenerator\Commands') {
     $this->filesystem = $filesystem;
+    $this->namespace = $namespace;
   }
 
   /**
    * Finds and instantiates generator commands.
    *
+   * @param array $command_directories
+   *   Directories to look up for commands.
+   * @param array $twig_directories
+   *   Directories to look up for templates.
+   *
    * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
-  public function getGenerators() {
-
+  public function getGenerators(array $command_directories, array $twig_directories) {
     $commands = [];
-    foreach ($this->commandDirectories as $directory) {
+    foreach ($command_directories as $directory) {
       $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS)
       );
@@ -76,13 +57,13 @@ class GeneratorDiscovery {
       foreach ($iterator as $path => $file) {
         if ($file->getExtension() == 'php') {
           $relative_path = $this->filesystem->makePathRelative($path, $directory);
-          $class = self::COMMANDS_NAMESPACE . str_replace('/', '\\', preg_replace('#.php/$#', '', $relative_path));
-          $reflected_class = new ReflectionClass($class);
-
-          if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMANDS_BASE_INTERFACE)) {
-            $commands[] = $class::create($this->twigDirectories);
+          $class = $this->namespace . '\\' . str_replace('/', '\\', preg_replace('#.php/$#', '', $relative_path));
+          if (class_exists($class)) {
+            $reflected_class = new ReflectionClass($class);
+            if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMANDS_BASE_INTERFACE)) {
+              $commands[] = $class::create($twig_directories);
+            }
           }
-
         }
       }
 

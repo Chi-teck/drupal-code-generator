@@ -20,9 +20,8 @@ if (file_exists(DCG_HOME . '/Templates')) {
   $twig_directories[] = DCG_HOME . '/Templates';
 }
 
-// Discover generators.
-$discovery = new GeneratorDiscovery($commands_directories, $twig_directories, new Filesystem());
-$generators = $discovery->getGenerators();
+$discovery = new GeneratorDiscovery(new Filesystem());
+$generators = $discovery->getGenerators($commands_directories, $twig_directories);
 
 // Create navigation command.
 $navigation = new Commands\Navigation();

@@ -25,8 +25,8 @@ class NavigationTest extends \PHPUnit_Framework_TestCase {
     // Create navigation command.
     $commands_directories[] = DCG_ROOT . '/src/Commands';
     $twig_directories[] = DCG_ROOT . '/src/Templates';
-    $discovery = new GeneratorDiscovery($commands_directories, $twig_directories, new Filesystem());
-    $generators = $discovery->getGenerators();
+    $discovery = new GeneratorDiscovery(new Filesystem());
+    $generators = $discovery->getGenerators($commands_directories, $twig_directories);
 
     $application = new Application();
     $application->addCommands($generators);
