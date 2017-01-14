@@ -19,6 +19,40 @@ class Navigation extends Command {
   protected $generatorName;
 
   /**
+   * Constructs menu command.
+   *
+   * @param Command[] $commands
+   *   List of registered commands.
+   */
+  public function __construct(array $commands) {
+    parent::__construct(NULL);
+
+    // Initialize the menu structure.
+    $this->menuTree = [];
+    $aliases = [];
+    foreach ($commands as $index => $command) {
+      $command_name = $command->getName();
+      $command_subnames = explode(':', $command_name);
+
+      $this->arraySetNestedValue($this->menuTree, $command_subnames, TRUE);
+
+      // The last subname is actual command name so it should not be used as
+      // an alias for navigation command.
+      array_pop($command_subnames);
+
+      // We cannot use $application->getNamespaces() here because
+      // the application is not ready at this point.
+      $alias = '';
+      foreach ($command_subnames as $key => $subname) {
+        $alias = $alias . ':' . $subname;
+        $aliases[] = ltrim($alias, ':');
+      }
+    }
+    $this->recursiveKsort($this->menuTree);
+    $this->setAliases(array_unique($aliases));
+  }
+
+  /**
    * {@inheritdoc}
    */
   protected function configure() {
@@ -181,39 +215,6 @@ class Navigation extends Command {
       $labels[$menu_item] : str_replace(['-', '_'], ' ', ucfirst($menu_item));
 
     return $comment ? "<comment>$label</comment>" : $label;
-  }
-
-  /**
-   * Initialize menu structure.
-   *
-   * @param Command[] $commands
-   *   List of registered commands.
-   */
-  public function init(array $commands) {
-    $this->menuTree = [];
-    $aliases = [];
-    foreach ($commands as $index => $command) {
-      $command_name = $command->getName();
-      $command_subnames = explode(':', $command_name);
-
-      $this->arraySetNestedValue($this->menuTree, $command_subnames, TRUE);
-
-      // The last subname is actual command name so it should not be used as
-      // an alias for navigation command.
-      array_pop($command_subnames);
-
-      // We cannot use $application->getNamespaces() here because
-      // the application is not ready at this point.
-      $alias = '';
-      foreach ($command_subnames as $key => $subname) {
-        $alias = $alias . ':' . $subname;
-        $aliases[] = ltrim($alias, ':');
-      }
-
-    }
-
-    $this->recursiveKsort($this->menuTree);
-    $this->setAliases(array_unique($aliases));
   }
 
   /**

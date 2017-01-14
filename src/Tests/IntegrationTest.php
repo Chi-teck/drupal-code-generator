@@ -84,16 +84,13 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-
     $this->application = new Application('Drupal Code Generator', '@git-version@');
     $discovery = new GeneratorDiscovery(new Filesystem());
     $generators = $discovery->getGenerators([DCG_ROOT . '/src/Commands'], [DCG_ROOT . '/src/Templates']);
 
     $this->application->addCommands($generators);
 
-    $navigation = new Navigation();
-    $navigation->init($generators);
-    $this->application->add($navigation);
+    $this->application->add(new Navigation($generators));
 
     $this->command = $this->application->find('navigation');
 

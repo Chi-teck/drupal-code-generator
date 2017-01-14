@@ -28,9 +28,7 @@ $application = new Application('Drupal Code Generator', '@git-version@');
 $application->addCommands($generators);
 
 // Add a navigation command.
-$navigation = new Navigation();
-$navigation->init($generators);
-$application->add($navigation);
+$application->add(new Navigation($generators));
 $application->setDefaultCommand('navigation');
 
 // Run.

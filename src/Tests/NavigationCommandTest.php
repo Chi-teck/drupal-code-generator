@@ -31,8 +31,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase {
     $application = new Application();
     $application->addCommands($generators);
 
-    $navigation = new Navigation();
-    $navigation->init($generators);
+    $navigation = new Navigation($generators);
     $application->add($navigation);
 
     $helper = $navigation->getHelper('question');
