@@ -3,7 +3,7 @@
 
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
-use DrupalCodeGenerator\Commands;
+use DrupalCodeGenerator\Commands\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
@@ -14,22 +14,24 @@ if (file_exists(DCG_HOME . '/Commands')) {
   $commands_directories[] = DCG_HOME . '/Commands';
   $autoloader->addPsr4('DrupalCodeGenerator\\', DCG_HOME);
 }
-
 $twig_directories[] = DCG_ROOT . '/src/Templates';
 if (file_exists(DCG_HOME . '/Templates')) {
   $twig_directories[] = DCG_HOME . '/Templates';
 }
 
+// Discovery generators.
 $discovery = new GeneratorDiscovery(new Filesystem());
 $generators = $discovery->getGenerators($commands_directories, $twig_directories);
 
-// Create navigation command.
-$navigation = new Commands\Navigation();
-$navigation->init($generators);
-
-// Build application.
+// Build an application.
 $application = new Application('Drupal Code Generator', '@git-version@');
 $application->addCommands($generators);
+
+// Add a navigation command.
+$navigation = new Navigation();
+$navigation->init($generators);
 $application->add($navigation);
 $application->setDefaultCommand('navigation');
+
+// Run.
 $application->run();
