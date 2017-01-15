@@ -209,6 +209,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $default_value = isset($question[1]) ? $question[1] : NULL;
       $validator = isset($question[2]) ? $question[2] : NULL;
       $suggestions = isset($question[3]) ? $question[3] : NULL;
+      $condition = isset($question[4]) ? $question[4] : NULL;
 
       // Make some assumptions based on question name.
       if ($default_value === NULL) {
@@ -264,6 +265,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
           $answer = $answers[$name];
         }
         else {
+          // Check if this question should be skipped.
+          if (is_callable($condition) && !$condition($vars)) {
+            continue;
+          }
           $answer = $this->ask(
             $input,
             $output,
