@@ -209,6 +209,7 @@ class Navigation extends Command {
       'module-info' => 'Info (module)',
       'theme-info' => 'Info (theme)',
       'dcg-command' => 'DCG command',
+      'composer' => 'composer.json',
     ];
 
     $label = isset($labels[$menu_item]) ?

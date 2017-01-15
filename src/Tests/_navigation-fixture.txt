@@ -99,6 +99,7 @@ Select generator:
   [14] Settings local
   [15] Template
   [16] Theme file
+  [17] composer.json
   >>> 1[K
 Select generator:
   [0] ..
@@ -124,6 +125,7 @@ Select generator:
   [14] Settings local
   [15] Template
   [16] Theme file
+  [17] composer.json
   >>> 2[K
 Select generator:
   [0] ..
@@ -150,6 +152,7 @@ Select generator:
   [14] Settings local
   [15] Template
   [16] Theme file
+  [17] composer.json
   >>> 3[K
 Select generator:
   [0] ..
@@ -180,6 +183,7 @@ Select generator:
   [14] Settings local
   [15] Template
   [16] Theme file
+  [17] composer.json
   >>> 4[K
 Select generator:
   [0] ..
@@ -209,6 +213,7 @@ Select generator:
   [14] Settings local
   [15] Template
   [16] Theme file
+  [17] composer.json
   >>> 6[K
 Select generator:
   [0] ..
@@ -232,6 +237,7 @@ Select generator:
   [14] Settings local
   [15] Template
   [16] Theme file
+  [17] composer.json
   >>> 7[K
 Select generator:
   [0] ..
@@ -263,6 +269,7 @@ Select generator:
   [14] Settings local
   [15] Template
   [16] Theme file
+  [17] composer.json
   >>> 0[K
 Select generator:
   [0] ..
