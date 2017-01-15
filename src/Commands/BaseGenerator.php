@@ -184,7 +184,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
    * @param array $questions
-   *   List of questions that the user should answer.
+   *   List of questions that the user should answer. Each question is a
+   *   numeric array including the following items.
+   *     0 - string - question text.
+   *     1 - string|callable|null - default value or callback.
+   *     2 - callable|null - validation callback.
+   *     3 - array|null - autocomplete suggestions.
+   *     4 - callable|null - condition callback.
    *
    * @return array
    *   Template variables
@@ -205,11 +211,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
 
     foreach ($questions as $name => $question) {
-      $question_text = $question[0];
-      $default_value = isset($question[1]) ? $question[1] : NULL;
-      $validator = isset($question[2]) ? $question[2] : NULL;
-      $suggestions = isset($question[3]) ? $question[3] : NULL;
-      $condition = isset($question[4]) ? $question[4] : NULL;
+      list(
+        $question_text,
+        $default_value,
+        $validator,
+        $suggestions,
+        $condition
+      ) = array_pad($question, 5, NULL);
 
       // Make some assumptions based on question name.
       if ($default_value === NULL) {
