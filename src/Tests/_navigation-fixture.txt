@@ -202,6 +202,34 @@ Select generator:
   [15] Template
   [16] Theme file
   [17] composer.json
+  >>> 5[K
+Select generator:
+  [0] ..
+  [1] Browser
+  [2] Javascript
+  [3] Kernel
+  [4] Unit
+  [5] Web
+  >>> 0[K
+Select generator:
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Module file
+  [13] Service provider
+  [14] Settings local
+  [15] Template
+  [16] Theme file
+  [17] composer.json
   >>> 6[K
 Select generator:
   [0] ..
