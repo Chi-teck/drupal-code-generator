@@ -137,23 +137,6 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     return [
       [
         'answers' => [
-          '<comment>Drupal 6</comment>',
-          'Info (module)',
-          'Example',
-          'example',
-          'Some description',
-          'custom',
-          '6.x-1.0',
-        ],
-        'output' => [
-          'Command: d6:module-info',
-          '-----------------------',
-          'The following directories and files have been created or updated:',
-          '- example.info',
-        ],
-      ],
-      [
-        'answers' => [
           '<comment>Drupal 7</comment>',
           'Module file',
           'Example',

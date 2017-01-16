@@ -1,21 +1,9 @@
 Select generator:
   [0] ..
-  [1] Drupal 6
-  [2] Drupal 7
-  [3] Drupal 8
-  [4] Other
+  [1] Drupal 7
+  [2] Drupal 8
+  [3] Other
   >>> 1[K
-Select generator:
-  [0] ..
-  [1] Info (module)
-  >>> 0[K
-Select generator:
-  [0] ..
-  [1] Drupal 6
-  [2] Drupal 7
-  [3] Drupal 8
-  [4] Other
-  >>> 2[K
 Select generator:
   [0 ] ..
   [1 ] Ctools plugin
@@ -76,11 +64,10 @@ Select generator:
   >>> 0[K
 Select generator:
   [0] ..
-  [1] Drupal 6
-  [2] Drupal 7
-  [3] Drupal 8
-  [4] Other
-  >>> 3[K
+  [1] Drupal 7
+  [2] Drupal 8
+  [3] Other
+  >>> 2[K
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -273,11 +260,10 @@ Select generator:
   >>> 0[K
 Select generator:
   [0] ..
-  [1] Drupal 6
-  [2] Drupal 7
-  [3] Drupal 8
-  [4] Other
-  >>> 4[K
+  [1] Drupal 7
+  [2] Drupal 8
+  [3] Other
+  >>> 3[K
 Select generator:
   [0] ..
   [1] Apache virtual host
@@ -289,16 +275,14 @@ Select generator:
   >>> 0[K
 Select generator:
   [0] ..
-  [1] Drupal 6
-  [2] Drupal 7
-  [3] Drupal 8
-  [4] Other
+  [1] Drupal 7
+  [2] Drupal 8
+  [3] Other
   >>> 9[K
  Value "9" is invalid 
 Select generator:
   [0] ..
-  [1] Drupal 6
-  [2] Drupal 7
-  [3] Drupal 8
-  [4] Other
+  [1] Drupal 7
+  [2] Drupal 8
+  [3] Other
   >>> 0[K
