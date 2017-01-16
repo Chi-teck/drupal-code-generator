@@ -179,8 +179,9 @@ Select generator:
   [3] Custom
   [4] Event subscriber
   [5] Middleware
-  [6] Route subscriber
-  [7] Twig extension
+  [6] Param converter
+  [7] Route subscriber
+  [8] Twig extension
   >>> 0[K
 Select generator:
   [0 ] ..
