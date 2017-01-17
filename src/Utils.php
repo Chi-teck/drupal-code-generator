@@ -18,18 +18,18 @@ class Utils {
    * Transforms a machine name to human name.
    */
   public static function machine2human($machine_name) {
-    return ucfirst(str_replace('_', ' ', $machine_name));
+    return ucfirst(trim(str_replace('_', ' ', $machine_name)));
   }
 
   /**
    * Transforms a human name to machine name.
    */
   public static function human2machine($human_name) {
-    return preg_replace(
+    return trim(preg_replace(
       ['/^[0-9]/', '/[^a-z0-9_]+/'],
       '_',
       strtolower($human_name)
-    );
+    ), '_');
   }
 
   /**
@@ -39,7 +39,7 @@ class Utils {
     return preg_replace(
       '/[^a-z0-9]/i',
       '',
-      ucwords(str_replace('_', ' ', $human_name))
+      ucwords(trim(str_replace('_', ' ', $human_name)))
     );
   }
 
@@ -47,7 +47,7 @@ class Utils {
    * Machine name validator.
    */
   public static function validateMachineName($value) {
-    if (!preg_match('/^[a-z]+[a-z0-9_]*$/', $value)) {
+    if (!preg_match('/^[a-z][a-z0-9_]*[a-z]$/', $value)) {
       return 'The value is not correct machine name.';
     }
   }
@@ -58,7 +58,7 @@ class Utils {
    * @see http://php.net/manual/en/language.oop5.basic.php
    */
   public static function validateClassName($value) {
-    if (!preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $value)) {
+    if (!preg_match('/^[A-Z][a-zA-Z0-0][a-zA-Z0-9]*$/', $value)) {
       return 'The value is not correct class name.';
     }
   }
