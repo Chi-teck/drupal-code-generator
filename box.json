@@ -1,7 +1,7 @@
 {
   "chmod": "0755",
   "files": [
-    "vendor/autoload.php"!
+    "vendor/autoload.php"
   ],
   "finder": [
     {
