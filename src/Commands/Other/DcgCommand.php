@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Commands\Other;
 
 use DrupalCodeGenerator\Commands\BaseGenerator;
-use DrupalCodeGenerator\Commands\Utils;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

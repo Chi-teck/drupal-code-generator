@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Commands;
 
 use DrupalCodeGenerator\TwigEnvironment;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;

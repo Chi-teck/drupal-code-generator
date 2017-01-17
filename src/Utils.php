@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands;
+namespace DrupalCodeGenerator;
 
 /**
  * Helper methods for code generators.
