@@ -175,7 +175,7 @@ class UtilsTest extends \PHPUnit_Framework_TestCase {
    * Test callback.
    *
    * @covers Utils::normalizePath
-   * @dataProvider vtestNormalizePathProvider
+   * @dataProvider testNormalizePathProvider
    */
   public function testNormalizePath($human_name, $expected) {
     $this->assertEquals($expected, Utils::normalizePath($human_name));
