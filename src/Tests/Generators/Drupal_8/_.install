@@ -57,7 +57,7 @@ function foo_schema() {
         'length' => 64,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Type of the record."',
+        'description' => 'Type of the record.',
       ],
       'created' => [
         'type' => 'int',
