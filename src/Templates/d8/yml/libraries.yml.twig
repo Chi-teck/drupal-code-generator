@@ -1,6 +1,8 @@
 {% if project_type == 'theme' %}
-# Global.
+# Main theme library.
 global:
+  js:
+    js/{{ machine_name }}.js: {}
   css:
     base:
       css/base/elements.css: {}
@@ -21,9 +23,19 @@ global:
       css/layouts/layout.css: {}
     theme:
       css/theme/print.css: { media: print }
+{% else %}
+# Custom module library for general purposes.
+{{ machine_name }}:
   js:
     js/{{ machine_name }}.js: {}
+  css:
+    component:
+      css/{{ machine_name }}.css: {}
+  dependencies:
+    - core/drupalSettings
+    - {{ machine_name }}/jquery-labelauty
 {% endif %}
+
 # Third-party library (self hosted).
 jquery-labelauty:
   remote: https://github.com/fntneves/jquery-labelauty
@@ -50,13 +62,3 @@ vuejs:
     gpl-compatible: true
   js:
     https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js: {type: external, minified: true}
-
-{% if project_type == 'module' %}
-# Custom javascript for general purposes.
-{{ machine_name }}:
-  js:
-    js/{{ machine_name }}.js: {}
-  dependencies:
-    - core/drupalSettings
-    - {{ machine_name }}/jquery-labelauty
-{% endif %}

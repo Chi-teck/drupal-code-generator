@@ -20,8 +20,18 @@ class Libraries extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
+    $suggestions = ['module', 'theme'];
     $questions = Utils::defaultQuestions() + [
-      'project_type' => ['Project type (module/theme)', 'module'],
+      'project_type' => [
+        'Project type (module/theme)',
+        'module',
+        function ($value) use ($suggestions) {
+          if (!in_array($value, $suggestions)) {
+            return 'Wrong project type.';
+          }
+        },
+        $suggestions,
+      ],
     ];
     $vars = $this->collectVars($input, $output, $questions);
     $this->files[$vars['machine_name'] . '.libraries.yml'] = $this->render('d8/yml/libraries.yml.twig', $vars);
