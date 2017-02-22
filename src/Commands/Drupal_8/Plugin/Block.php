@@ -27,7 +27,7 @@ class Block extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::human2class($vars['plugin_label'] . 'Block');
+    $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Block');
 
     $path = 'src/Plugin/Block/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/plugin/block.twig', $vars);

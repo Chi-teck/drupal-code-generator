@@ -25,7 +25,7 @@ class MenuLink extends BaseGenerator {
       'class' => [
         'Class',
         function ($vars) {
-          return Utils::human2class($vars['name']) . 'MenuLink';
+          return Utils::camelize($vars['name']) . 'MenuLink';
         },
       ],
     ];

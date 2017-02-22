@@ -44,7 +44,7 @@ class Standard extends BaseGenerator {
     $js_path = $vars['machine_name'] . '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
     $this->files[$js_path] = $this->render('d8/javascript.twig', $vars);
 
-    $class_prefix = Utils::human2class($vars['name']);
+    $class_prefix = Utils::camelize($vars['name']);
 
     $service_class = $class_prefix . 'Example';
     $this->files[$vars['machine_name'] . '/src/' . $service_class . '.php'] = $this->render(

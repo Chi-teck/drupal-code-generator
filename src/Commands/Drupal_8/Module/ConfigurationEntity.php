@@ -43,7 +43,7 @@ class ConfigurationEntity extends BaseGenerator {
       $vars['dependencies'] = explode(',', $vars['dependencies']);
     }
 
-    $vars['class_prefix'] = Utils::human2class($vars['entity_type_label']);
+    $vars['class_prefix'] = Utils::camelize($vars['entity_type_label']);
 
     $templates = [
       'model.info.yml.twig',

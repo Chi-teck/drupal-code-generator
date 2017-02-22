@@ -33,15 +33,6 @@ class Utils {
   }
 
   /**
-   * Transforms a human name to PHP class name.
-   *
-   * @deprecated
-   */
-  public static function human2class($human_name) {
-    return self::camelize($human_name);
-  }
-
-  /**
    * Camelize a string.
    */
   public static function camelize($string, $upper_camel = TRUE) {

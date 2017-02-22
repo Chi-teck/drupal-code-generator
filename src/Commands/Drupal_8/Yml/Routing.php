@@ -21,7 +21,7 @@ class Routing extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
-    $vars['class'] = Utils::human2class($vars['name'] . 'Controller');
+    $vars['class'] = Utils::camelize($vars['name'] . 'Controller');
     $this->files[$vars['machine_name'] . '.routing.yml'] = $this->render('d8/yml/routing.yml.twig', $vars);
   }
 

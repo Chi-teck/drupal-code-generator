@@ -32,7 +32,7 @@ class DrupalConsoleCommand extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::human2class(str_replace(':', '_', $vars['command_name'])) . 'Command';
+    $vars['class'] = Utils::camelize(str_replace(':', '_', $vars['command_name'])) . 'Command';
     $vars['command_trait'] = $vars['container_aware'] ? 'ContainerAwareCommandTrait' : 'CommandTrait';
 
     $path = 'src/Command/' . $vars['class'] . '.php';

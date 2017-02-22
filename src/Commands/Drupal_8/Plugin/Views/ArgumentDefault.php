@@ -25,7 +25,7 @@ class ArgumentDefault extends BaseGenerator {
       'plugin_id' => ['Plugin id'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::human2class($vars['plugin_label']);
+    $vars['class'] = Utils::camelize($vars['plugin_label']);
     $path = 'src/Plugin/views/argument_default/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/plugin/views-argument-default.twig', $vars);
   }

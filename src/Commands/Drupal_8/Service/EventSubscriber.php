@@ -22,7 +22,7 @@ class EventSubscriber extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::human2class($vars['name'] . 'Subscriber');
+    $vars['class'] = Utils::camelize($vars['name'] . 'Subscriber');
 
     $path = 'src/EventSubscriber/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/event-subscriber.twig', $vars);

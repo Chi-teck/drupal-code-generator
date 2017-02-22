@@ -26,7 +26,7 @@ class Type extends BaseGenerator {
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::human2class($vars['plugin_label'] . 'Item');
+    $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Item');
 
     $path = 'src/Plugin/Field/FieldType/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/plugin/field/type.twig', $vars);

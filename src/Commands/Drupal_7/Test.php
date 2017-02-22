@@ -23,7 +23,7 @@ class Test extends BaseGenerator {
       'class' => [
         'Class',
         function ($vars) {
-          return Utils::human2class($vars['machine_name']) . 'TestCase';
+          return Utils::camelize($vars['machine_name']) . 'TestCase';
         },
       ],
     ];

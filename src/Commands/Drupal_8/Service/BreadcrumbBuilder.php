@@ -24,7 +24,7 @@ class BreadcrumbBuilder extends BaseGenerator {
       'class' => [
         'Class',
         function ($vars) {
-          return Utils::human2class($vars['name'] . 'BreadcrumbBuilder');
+          return Utils::camelize($vars['name'] . 'BreadcrumbBuilder');
         },
       ],
     ];

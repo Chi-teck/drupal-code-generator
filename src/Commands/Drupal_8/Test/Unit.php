@@ -24,7 +24,7 @@ class Unit extends BaseGenerator {
       'test_name' => ['Test name', 'Example'],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::human2class($vars['test_name'] . 'Test');
+    $vars['class'] = Utils::camelize($vars['test_name'] . 'Test');
     $path = 'tests/src/Unit/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/test/unit.twig', $vars);
   }

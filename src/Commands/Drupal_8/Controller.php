@@ -24,7 +24,7 @@ class Controller extends BaseGenerator {
       'class' => [
         'Class',
         function ($vars) {
-          return Utils::human2class($vars['name']) . 'Controller';
+          return Utils::camelize($vars['name']) . 'Controller';
         },
       ],
     ];

@@ -21,7 +21,7 @@ class ServiceProvider extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
-    $vars['class'] = Utils::human2class($vars['name'] . 'ServiceProvider');
+    $vars['class'] = Utils::camelize($vars['name'] . 'ServiceProvider');
     $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service-provider.twig', $vars);
   }

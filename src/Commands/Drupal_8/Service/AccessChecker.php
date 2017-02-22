@@ -25,7 +25,7 @@ class AccessChecker extends BaseGenerator {
       'class' => [
         'Class',
         function ($vars) {
-          return Utils::human2class($vars['applies_to'] . 'AccessChecker');
+          return Utils::camelize($vars['applies_to'] . 'AccessChecker');
         },
       ],
     ];

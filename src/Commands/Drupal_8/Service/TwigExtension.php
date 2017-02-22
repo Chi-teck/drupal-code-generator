@@ -24,7 +24,7 @@ class TwigExtension extends BaseGenerator {
       'class' => [
         'Class',
         function ($vars) {
-          return Utils::human2class($vars['name'] . 'TwigExtension');
+          return Utils::camelize($vars['name'] . 'TwigExtension');
         },
       ],
     ];

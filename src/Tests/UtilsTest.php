@@ -79,27 +79,6 @@ class UtilsTest extends \PHPUnit_Framework_TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::human2class
-   * @dataProvider human2classProvider
-   */
-  public function testHuman2class($human_name, $expected) {
-    $this->assertEquals($expected, Utils::human2class($human_name));
-  }
-
-  /**
-   * Data provider callback for testHuman2class().
-   */
-  public function human2classProvider() {
-    return [
-      ['Hello world!', 'HelloWorld'],
-      ['snake_case_here', 'SnakeCaseHere'],
-      [' &*^*()@#a*&)(&*0b@#$$() c  ! ', 'a0bC'],
-    ];
-  }
-
-  /**
-   * Test callback.
-   *
    * @covers Utils::camelize
    * @dataProvider camelizeProvider
    */

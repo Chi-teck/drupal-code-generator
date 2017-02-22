@@ -25,12 +25,12 @@ class ParamConverter extends BaseGenerator {
       'class' => [
         'Class',
         function ($vars) {
-          return Utils::human2class($vars['parameter_type'] . 'ParamConverter');
+          return Utils::camelize($vars['parameter_type'] . 'ParamConverter');
         },
       ],
     ];
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['controller_class'] = Utils::human2class($vars['machine_name']) . 'Controller';
+    $vars['controller_class'] = Utils::camelize($vars['machine_name']) . 'Controller';
 
     $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/param-converter.twig', $vars);
