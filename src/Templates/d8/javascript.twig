@@ -8,9 +8,9 @@
   'use strict';
 
   /**
-   * Example behavior description.
+   * Behavior description.
    */
-  Drupal.behaviors.{{ behavior }}Example = {
+  Drupal.behaviors.{{ machine_name | camelize(false) }} = {
     attach: function (context, settings) {
 
       console.log('It works!');

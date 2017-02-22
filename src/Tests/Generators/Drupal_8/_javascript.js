@@ -8,9 +8,9 @@
   'use strict';
 
   /**
-   * Example behavior description.
+   * Behavior description.
    */
-  Drupal.behaviors.fooBarExample = {
+  Drupal.behaviors.fooBar = {
     attach: function (context, settings) {
 
       console.log('It works!');
