@@ -31,8 +31,8 @@ class Theme extends BaseGenerator {
 
     $this->files[$vars['machine_name'] . '/' . $vars['machine_name'] . '.info'] = $this->render('d7/theme-info.twig', $vars);
     $this->files[$vars['machine_name'] . '/template.php'] = $this->render('d7/template.php.twig', $vars);
-    $this->files[$vars['machine_name'] . '/css/' . $vars['machine_name'] . '.css'] = '';
-    $this->files[$vars['machine_name'] . '/js/' . $vars['machine_name'] . '.js'] = $this->render('d7/javascript.twig', $vars);
+    $this->files[$vars['machine_name'] . '/css/' . str_replace('_', '-', $vars['machine_name']) . '.css'] = '';
+    $this->files[$vars['machine_name'] . '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js'] = $this->render('d7/javascript.twig', $vars);
     $this->files[$vars['machine_name'] . '/templates'] = NULL;
     $this->files[$vars['machine_name'] . '/images'] = NULL;
   }
