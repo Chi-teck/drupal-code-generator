@@ -1,8 +1,8 @@
 /**
- * Core behavior for Example module.
+ * Core behavior for Another example module.
  */
 (function ($) {
-  Drupal.behaviors.example = {
+  Drupal.behaviors.anotherExample = {
     attach: function (context, settings) {
 
       alert('It works!');

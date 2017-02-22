@@ -12,12 +12,12 @@ class JavascriptTest extends GeneratorTestCase {
   protected $class = 'Drupal_7\Javascript';
 
   protected $answers = [
-    'Example',
-    'example',
+    'Another example',
+    'another_example',
   ];
 
   protected $fixtures = [
-    'example.js' => __DIR__ . '/_javascript.js',
+    'another-example.js' => __DIR__ . '/_javascript.js',
   ];
 
 }

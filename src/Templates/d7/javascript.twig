@@ -2,7 +2,7 @@
  * Core behavior for {{ name }} {{ project_type }}.
  */
 (function ($) {
-  Drupal.behaviors.{{ machine_name }} = {
+  Drupal.behaviors.{{ machine_name | camelize(false) }} = {
     attach: function (context, settings) {
 
       alert('It works!');
