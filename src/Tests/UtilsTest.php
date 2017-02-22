@@ -100,6 +100,29 @@ class UtilsTest extends \PHPUnit_Framework_TestCase {
   /**
    * Test callback.
    *
+   * @covers Utils::camelize
+   * @dataProvider camelizeProvider
+   */
+  public function testCamelize($string, $upper_camel, $expected) {
+    $this->assertEquals($expected, Utils::camelize($string, $upper_camel));
+  }
+
+  /**
+   * Data provider callback for testHuman2class().
+   */
+  public function camelizeProvider() {
+    return [
+      ['Hello world!', TRUE, 'HelloWorld'],
+      ['snake_case_here', TRUE, 'SnakeCaseHere'],
+      ['snake_case_here', FALSE, 'snakeCaseHere'],
+      ['foo', TRUE, 'Foo'],
+      [' &*^*()@#a*&)(&*0b@#$$() c  ! ', TRUE, 'a0bC'],
+    ];
+  }
+
+  /**
+   * Test callback.
+   *
    * @covers Utils::validateMachineName
    * @dataProvider validateMachineNameProvider
    */
