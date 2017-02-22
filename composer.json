@@ -3,10 +3,11 @@
   "description": "Drupal code generator",
   "require": {
     "php": ">=5.5.9",
-    "symfony/console": "~2.7",
-    "symfony/filesystem": "~3.1",
-    "twig/twig": "~1.24",
-    "symfony/yaml": "~2.8"
+    "symfony/console": "^3.2",
+    "symfony/yaml": "^3.2",
+    "symfony/filesystem": "^3.2",
+    "twig/twig": "^1.31"
+
   },
   "autoload": {
     "files": ["src/bootstrap.php"],
