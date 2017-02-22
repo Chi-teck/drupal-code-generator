@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Commands\Drupal_8\Theme;
 
 use DrupalCodeGenerator\Commands\BaseGenerator;
-use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -41,7 +40,6 @@ class Standard extends BaseGenerator {
     $this->files[$prefix . '.theme'] = $this->render('d8/theme.twig', $vars);
 
     $js_path = '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
-    $vars['behavior'] = lcfirst(Utils::human2class($vars['machine_name']));
     $this->files[$vars['machine_name'] . $js_path] = $this->render('d8/javascript.twig', $vars);
     $this->files[$vars['machine_name'] . '/templates'] = NULL;
     $this->files[$vars['machine_name'] . '/images'] = NULL;
