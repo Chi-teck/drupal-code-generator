@@ -33,14 +33,12 @@ class Utils {
   }
 
   /**
-   * Transforms a human name to PHP class name.
+   * Camelize a string.
    */
-  public static function human2class($human_name) {
-    return preg_replace(
-      '/[^a-z0-9]/i',
-      '',
-      ucwords(trim(str_replace('_', ' ', $human_name)))
-    );
+  public static function camelize($string, $upper_camel = TRUE) {
+    $output = ucwords(trim(str_replace('_', ' ', $string)));
+    $output = preg_replace('/[^a-z0-9]/i', '', $output);
+    return $upper_camel ? $output : lcfirst($output);
   }
 
   /**

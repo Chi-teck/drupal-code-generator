@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Commands\Drupal_8\Theme;
 
+use DrupalCodeGenerator\Commands\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Commands\BaseGenerator;
 
 /**
  * Implements d8:theme:standard command.
@@ -38,7 +38,9 @@ class Standard extends BaseGenerator {
     $this->files[$prefix . '.info.yml'] = $this->render('d8/yml/theme-info.yml.twig', $vars);
     $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/libraries.yml.twig', $vars);
     $this->files[$prefix . '.theme'] = $this->render('d8/theme.twig', $vars);
-    $this->files[$vars['machine_name'] . '/js/' . $vars['machine_name'] . '.js'] = $this->render('d8/javascript.twig', $vars);
+
+    $js_path = '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
+    $this->files[$vars['machine_name'] . $js_path] = $this->render('d8/javascript.twig', $vars);
     $this->files[$vars['machine_name'] . '/templates'] = NULL;
     $this->files[$vars['machine_name'] . '/images'] = NULL;
     $this->files[$vars['machine_name'] . '/css/base/elements.css'] = '';

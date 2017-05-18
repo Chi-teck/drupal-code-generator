@@ -21,7 +21,7 @@ class Javascript extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
-    $path = 'js/' . $vars['machine_name'] . '.js';
+    $path = 'js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
     $this->files[$path] = $this->render('d8/javascript.twig', $vars);
   }
 

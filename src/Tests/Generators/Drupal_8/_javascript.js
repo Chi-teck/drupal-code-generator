@@ -1,6 +1,6 @@
 /**
  * @file
- * Foo behaviors.
+ * Foo bar behaviors.
  */
 
 (function ($, Drupal) {
@@ -8,9 +8,9 @@
   'use strict';
 
   /**
-   * Example behavior description.
+   * Behavior description.
    */
-  Drupal.behaviors.fooExample = {
+  Drupal.behaviors.fooBar = {
     attach: function (context, settings) {
 
       console.log('It works!');

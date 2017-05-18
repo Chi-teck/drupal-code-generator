@@ -79,21 +79,23 @@ class UtilsTest extends \PHPUnit_Framework_TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::human2class
-   * @dataProvider human2classProvider
+   * @covers Utils::camelize
+   * @dataProvider camelizeProvider
    */
-  public function testHuman2class($human_name, $expected) {
-    $this->assertEquals($expected, Utils::human2class($human_name));
+  public function testCamelize($string, $upper_camel, $expected) {
+    $this->assertEquals($expected, Utils::camelize($string, $upper_camel));
   }
 
   /**
    * Data provider callback for testHuman2class().
    */
-  public function human2classProvider() {
+  public function camelizeProvider() {
     return [
-      ['Hello world!', 'HelloWorld'],
-      ['snake_case_here', 'SnakeCaseHere'],
-      [' &*^*()@#a*&)(&*0b@#$$() c  ! ', 'a0bC'],
+      ['Hello world!', TRUE, 'HelloWorld'],
+      ['snake_case_here', TRUE, 'SnakeCaseHere'],
+      ['snake_case_here', FALSE, 'snakeCaseHere'],
+      ['foo', TRUE, 'Foo'],
+      [' &*^*()@#a*&)(&*0b@#$$() c  ! ', TRUE, 'a0bC'],
     ];
   }
 
@@ -175,7 +177,7 @@ class UtilsTest extends \PHPUnit_Framework_TestCase {
    * Test callback.
    *
    * @covers Utils::normalizePath
-   * @dataProvider vtestNormalizePathProvider
+   * @dataProvider testNormalizePathProvider
    */
   public function testNormalizePath($human_name, $expected) {
     $this->assertEquals($expected, Utils::normalizePath($human_name));

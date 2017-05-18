@@ -31,7 +31,7 @@ class DcgCommand extends BaseGenerator {
     $subnames = explode(':', $vars['name']);
     $last_sub_name = array_pop($subnames);
     $vars['namespace'] = 'DrupalCodeGenerator\Commands\\' . implode('\\', $subnames);
-    $vars['class'] = Utils::human2class($last_sub_name);
+    $vars['class'] = Utils::camelize($last_sub_name);
     $file_path = implode(DIRECTORY_SEPARATOR, $subnames) . '/' . $vars['class'] . '.php';
     $vars['directory'] = dirname($file_path);
 

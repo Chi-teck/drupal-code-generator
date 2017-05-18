@@ -20,7 +20,7 @@ class Module extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions() + [
-      'description' => ['Module description', 'TODO: Write description for the module'],
+      'description' => ['Module description', 'The description.'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '7.x-1.0-dev'],
     ];
@@ -35,7 +35,9 @@ class Module extends BaseGenerator {
     $this->files[$prefix . '.admin.inc'] = $this->render('d7/admin.inc.twig', $vars);
     $this->files[$prefix . '.pages.inc'] = $this->render('d7/pages.inc.twig', $vars);
     $this->files[$prefix . '.test'] = $this->render('d7/test.twig', $vars);
-    $this->files[$prefix . '.js'] = $this->render('d7/javascript.twig', $vars);
+
+    $js_path = $vars['machine_name'] . '/' . str_replace('_', '-', $vars['machine_name']) . '.js';
+    $this->files[$js_path] = $this->render('d7/javascript.twig', $vars);
   }
 
 }

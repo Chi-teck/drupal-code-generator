@@ -25,6 +25,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  * @ContentEntityType(
  *   id = "{{ entity_type_id }}",
  *   label = @Translation("{{ entity_type_label }}"),
+ *   label_collection = @Translation("{{ entity_type_label | plural }}"),
  *   handlers = {
 {% if template %}
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",

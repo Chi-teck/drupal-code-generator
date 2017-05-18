@@ -21,7 +21,7 @@ class Services extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
-    $vars['class'] = Utils::human2class($vars['name']);
+    $vars['class'] = Utils::camelize($vars['name']);
     $this->files[$vars['machine_name'] . '.services.yml'] = $this->render('d8/yml/services.yml.twig', $vars);
   }
 

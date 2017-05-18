@@ -22,7 +22,7 @@ class RouteSubscriber extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::human2class($vars['name'] . 'RouteSubscriber');
+    $vars['class'] = Utils::camelize($vars['name'] . 'RouteSubscriber');
 
     $path = 'src/EventSubscriber/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/route-subscriber.twig', $vars);

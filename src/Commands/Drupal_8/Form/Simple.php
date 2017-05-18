@@ -24,7 +24,7 @@ class Simple extends BaseGenerator {
       'class' => [
         'Class',
         function ($vars) {
-          return Utils::human2class($vars['name'] . 'Form');
+          return Utils::camelize($vars['name'] . 'Form');
         },
       ],
       'form_id' => [

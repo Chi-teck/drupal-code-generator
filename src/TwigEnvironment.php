@@ -45,6 +45,10 @@ class TwigEnvironment extends Twig_Environment {
       return str_replace('-', '_', $string);
     }));
 
+    $this->addFilter(new Twig_SimpleFilter('camelize', function ($string, $upper_mode = TRUE) {
+      return Utils::camelize($string, $upper_mode);
+    }));
+
   }
 
 }

@@ -79,7 +79,7 @@ class {{ class }} extends FormBase {
   }
 
   /**
-   * Runs cron and reloads the page.
+   * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->loggerFactory->get('{{ machine_name }}')->debug(

@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin;
+namespace DrupalCodeGenerator\Commands\Drupal_8\Plugin\Views;
 
 use DrupalCodeGenerator\Commands\BaseGenerator;
 use DrupalCodeGenerator\Utils;
@@ -8,13 +8,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Implements d8:plugin:condition command.
+ * Implements d8:plugin:views:field command.
  */
-class Condition extends BaseGenerator {
+class Field extends BaseGenerator {
 
-  protected $name = 'd8:plugin:condition';
-  protected $description = 'Generates condition plugin';
-  protected $alias = 'condition';
+  protected $name = 'd8:plugin:views:field';
+  protected $description = 'Generates views field plugin';
+  protected $alias = 'views-field';
 
   /**
    * {@inheritdoc}
@@ -28,8 +28,8 @@ class Condition extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
-    $path = 'src/Plugin/Condition/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/condition.twig', $vars);
+    $path = 'src/Plugin/views/field/' . $vars['class'] . '.php';
+    $this->files[$path] = $this->render('d8/plugin/views/field.twig', $vars);
   }
 
 }

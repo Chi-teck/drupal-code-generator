@@ -21,7 +21,7 @@ class Standard extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions() + [
-      'description' => ['Module description', 'TODO: Write description for the module'],
+      'description' => ['Module description', 'The description.'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
       'dependencies' => ['Dependencies (comma separated)', '', FALSE],
@@ -40,9 +40,11 @@ class Standard extends BaseGenerator {
     $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/libraries.yml.twig', $vars);
     $this->files[$prefix . '.services.yml'] = $this->render('d8/yml/services.yml.twig', $vars);
     $this->files[$prefix . '.permissions.yml'] = $this->render('d8/yml/permissions.yml.twig', $vars);
-    $this->files[$vars['machine_name'] . '/js/' . $vars['machine_name'] . '.js'] = $this->render('d8/javascript.twig', $vars);
 
-    $class_prefix = Utils::human2class($vars['name']);
+    $js_path = $vars['machine_name'] . '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
+    $this->files[$js_path] = $this->render('d8/javascript.twig', $vars);
+
+    $class_prefix = Utils::camelize($vars['name']);
 
     $service_class = $class_prefix . 'Example';
     $this->files[$vars['machine_name'] . '/src/' . $service_class . '.php'] = $this->render(

@@ -33,7 +33,7 @@ class PluginManager extends BaseGenerator {
       $vars['dependencies'] = explode(',', $vars['dependencies']);
     }
 
-    $vars['class_prefix'] = Utils::human2class($vars['machine_name']);
+    $vars['class_prefix'] = Utils::camelize($vars['machine_name']);
 
     $templates = [
       'model.drush.inc.twig',
