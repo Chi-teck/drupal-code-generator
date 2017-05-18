@@ -3,12 +3,13 @@
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\GeneratorDiscovery;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Test for GeneratorsDiscovery.
  */
-class GeneratorsDiscoveryTest extends \PHPUnit_Framework_TestCase {
+class GeneratorsDiscoveryTest extends TestCase {
 
   const TOTAL_GENERATORS = 15;
 

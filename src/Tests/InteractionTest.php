@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
@@ -9,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * A test for a command interaction.
  */
-class InteractionTest extends \PHPUnit_Framework_TestCase {
+class InteractionTest extends TestCase {
 
   protected $destination;
 

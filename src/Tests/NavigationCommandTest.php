@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Commands\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
@@ -11,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * A test for navigation command.
  */
-class NavigationTest extends \PHPUnit_Framework_TestCase {
+class NavigationTest extends TestCase {
 
   protected $destination;
 

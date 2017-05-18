@@ -3,11 +3,12 @@
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Utils;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for a Utils class.
  */
-class UtilsTest extends \PHPUnit_Framework_TestCase {
+class UtilsTest extends TestCase {
 
   /**
    * Test callback.
@@ -177,7 +178,7 @@ class UtilsTest extends \PHPUnit_Framework_TestCase {
    * Test callback.
    *
    * @covers Utils::normalizePath
-   * @dataProvider testNormalizePathProvider
+   * @dataProvider normalizePathProvider
    */
   public function testNormalizePath($human_name, $expected) {
     $this->assertEquals($expected, Utils::normalizePath($human_name));
@@ -186,7 +187,7 @@ class UtilsTest extends \PHPUnit_Framework_TestCase {
   /**
    * Data provider callback for testNormalizePath().
    */
-  public function testNormalizePathProvider() {
+  public function normalizePathProvider() {
     return [
       ['/var/www/test', '/var/www/test'],
       ['./test', 'test'],
