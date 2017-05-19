@@ -194,7 +194,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *     4 - callable|null - condition callback.
    *
    * @return array
-   *   Template variables
+   *   Template variables.
    */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
     $vars = [];
@@ -211,14 +211,19 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
     }
 
+    // Normalize questions.
+    $questions = array_map(function ($question) {
+      return array_pad($question, 5, NULL);
+    }, $questions);
+
+    // Let third party applications modify these questions.
+    // @TODO: Create a test for this.
+    if ($this->getHelperSet()->has('input_preprocessor')) {
+      $this->getHelper('input_preprocessor')->preprocess($questions, $this);
+    }
+
     foreach ($questions as $name => $question) {
-      list(
-        $question_text,
-        $default_value,
-        $validator,
-        $suggestions,
-        $condition
-      ) = array_pad($question, 5, NULL);
+      list($question_text, $default_value, $validator, $suggestions, $condition) = $question;
 
       // Make some assumptions based on question name.
       if ($default_value === NULL) {
