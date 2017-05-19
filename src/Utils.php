@@ -111,4 +111,26 @@ class Utils {
     ];
   }
 
+  /**
+   * Returns extension root.
+   *
+   * @return string|bool
+   *   Extension root directory or false if it was not found.
+   */
+  public static function getExtensionRoot($directory) {
+    static $extension_root;
+    if ($extension_root === NULL) {
+      $extension_root = FALSE;
+      for ($i = 1; $i <= 5; $i++) {
+        $info_file = $directory . '/' . basename($directory) . '.info';
+        if (file_exists($info_file) || file_exists($info_file . '.yml')) {
+          $extension_root = $directory;
+          break;
+        }
+        $directory = dirname($directory);
+      }
+    }
+    return $extension_root;
+  }
+
 }

@@ -225,7 +225,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         switch ($name) {
           // TODO: Test default values.
           case 'name':
-            $directory = basename($this->getExtensionRoot() ?: $this->destination);
+            $directory = basename(Utils::getExtensionRoot($this->destination) ?: $this->destination);
             $default_value = Utils::machine2human($directory);
             break;
 
@@ -305,7 +305,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
-    $extension_root = $this->getExtensionRoot();
+    $extension_root = Utils::getExtensionRoot($this->destination);
     $destination = ($extension_root ?: $this->destination) . '/';
 
     $dumped_files = [];
@@ -466,29 +466,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     );
 
     return $answer;
-  }
-
-  /**
-   * Returns extension root.
-   *
-   * @return string|bool
-   *   Extension root directory or false if it was not found.
-   */
-  protected function getExtensionRoot() {
-    static $extension_root;
-    if ($extension_root === NULL) {
-      $extension_root = FALSE;
-      $directory = $this->destination;
-      for ($i = 1; $i <= 5; $i++) {
-        $info_file = $directory . '/' . basename($directory) . '.info';
-        if (file_exists($info_file) || file_exists($info_file . '.yml')) {
-          $extension_root = $directory;
-          break;
-        }
-        $directory = dirname($directory);
-      }
-    }
-    return $extension_root;
   }
 
 }

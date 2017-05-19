@@ -210,4 +210,13 @@ class UtilsTest extends TestCase {
     $this->assertEquals($expected, Utils::defaultQuestions());
   }
 
+  /**
+   * Test callback.
+   *
+   * @covers Utils::getExtensionRoot
+   */
+  public function testGetExtensionRoot() {
+    $this->markTestIncomplete('This test has not been implemented yet.');
+  }
+
 }
