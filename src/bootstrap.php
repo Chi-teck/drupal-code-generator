@@ -5,6 +5,7 @@
  * Globals.
  */
 
+use DrupalCodeGenerator\InputHandler;
 use DrupalCodeGenerator\OutputDumper;
 use DrupalCodeGenerator\Renderer;
 use DrupalCodeGenerator\TwigEnvironment;
@@ -29,6 +30,9 @@ function dcg_create_application(array $twig_directories) {
   $twig_loader = new Twig_Loader_Filesystem($twig_directories);
   $renderer = new Renderer(new TwigEnvironment($twig_loader));
   $helperSet->set($renderer);
+
+  $input_handler = new InputHandler();
+  $helperSet->set($input_handler);
 
   return $application;
 }
