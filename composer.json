@@ -3,9 +3,9 @@
   "description": "Drupal code generator",
   "require": {
     "php": ">=5.5.9",
-    "symfony/console": "^3.2",
-    "symfony/yaml": "^3.2",
-    "symfony/filesystem": "^3.2",
+    "symfony/console": "~2.7|^3",
+    "symfony/yaml": "~2.7|^3",
+    "symfony/filesystem": "~2.7|^3",
     "twig/twig": "^1.31"
 
   },
