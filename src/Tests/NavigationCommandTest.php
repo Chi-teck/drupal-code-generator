@@ -14,20 +14,18 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class NavigationCommandTest extends TestCase {
 
-  protected $destination;
+  protected $directory;
 
   /**
    * Test callback.
    */
   public function testExecute() {
 
-    $this->destination = DCG_SANDBOX . '/example';
+    $this->directory = DCG_SANDBOX . '/example';
 
     // Create navigation command.
-    $commands_directories[] = DCG_ROOT . '/src/Commands';
-    $twig_directories[] = DCG_ROOT . '/src/Templates';
     $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators($commands_directories, $twig_directories);
+    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Commands']);
 
     $application = new Application();
     $application->addCommands($generators);
@@ -46,7 +44,7 @@ class NavigationCommandTest extends TestCase {
     $helper->setInputStream($this->getInputStream(implode("\n", $answers)));
 
     $commandTester = new CommandTester($navigation);
-    $commandTester->execute(['command' => $navigation->getName(), '--directory' => $this->destination]);
+    $commandTester->execute(['command' => $navigation->getName(), '--directory' => $this->directory]);
 
     $output = trim($commandTester->getDisplay());
     $expected_output = trim(file_get_contents(__DIR__ . '/_navigation-fixture.txt'));
@@ -67,7 +65,7 @@ class NavigationCommandTest extends TestCase {
    * {@inheritdoc}
    */
   public function tearDown() {
-    (new Filesystem())->remove($this->destination);
+    (new Filesystem())->remove($this->directory);
   }
 
 }
