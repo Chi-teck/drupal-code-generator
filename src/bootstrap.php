@@ -7,6 +7,7 @@
 
 use DrupalCodeGenerator\InputHandler;
 use DrupalCodeGenerator\OutputDumper;
+use DrupalCodeGenerator\OutputHandler;
 use DrupalCodeGenerator\Renderer;
 use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Application;
@@ -31,8 +32,9 @@ function dcg_create_application(array $twig_directories) {
   $renderer = new Renderer(new TwigEnvironment($twig_loader));
   $helperSet->set($renderer);
 
-  $input_handler = new InputHandler();
-  $helperSet->set($input_handler);
+  $helperSet->set(new InputHandler());
+
+  $helperSet->set(new OutputHandler());
 
   return $application;
 }

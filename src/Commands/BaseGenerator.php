@@ -88,6 +88,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     if ($this->alias) {
       $this->setAliases([$this->alias]);
     }
+
   }
 
   /**
@@ -158,16 +159,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
     $dumped_files = $this->getHelper('output_dumper')->dump($input, $output, $this);
-
-    // Multiple hooks can be dumped to the same file.
-    $dumped_files = array_unique($dumped_files);
-    if (count($dumped_files) > 0) {
-      $output->writeln('<title>The following directories and files have been created or updated:</title>');
-      foreach ($dumped_files as $file) {
-        $output->writeln("- $file");
-      }
-    }
-
+    $this->getHelper('output_handler')->printSummary($output, $dumped_files, $this);
     return 0;
   }
 
