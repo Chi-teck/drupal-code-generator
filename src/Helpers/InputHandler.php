@@ -65,7 +65,7 @@ class InputHandler extends Helper {
 
     /** @var \DrupalCodeGenerator\Commands\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
-    $directory = $command->getDirectory($input);
+    $directory = $command->getDirectory();
     foreach ($questions as $name => $question) {
       list($question_text, $default_value, $validator, $suggestions, $condition) = $question;
 

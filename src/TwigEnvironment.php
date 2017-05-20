@@ -8,13 +8,14 @@ use Twig_SimpleFilter;
 
 /**
  * Stores the Twig configuration.
- *
- * @TODO: Test this.
  */
 class TwigEnvironment extends Twig_Environment {
 
   /**
    * Constructs Twig environment object.
+   *
+   * @param Twig_LoaderInterface $loader
+   *   The Twig loader.
    */
   public function __construct(Twig_LoaderInterface $loader) {
     parent::__construct($loader);
@@ -48,7 +49,6 @@ class TwigEnvironment extends Twig_Environment {
     $this->addFilter(new Twig_SimpleFilter('camelize', function ($string, $upper_mode = TRUE) {
       return Utils::camelize($string, $upper_mode);
     }));
-
   }
 
 }

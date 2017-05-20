@@ -102,6 +102,15 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
+  protected function execute(InputInterface $input, OutputInterface $output) {
+    $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output);
+    $this->getHelper('dcg_output_handler')->printSummary($output, $dumped_files);
+    return 0;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getAssets() {
     return [
       'files' => $this->files,
@@ -156,15 +165,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
     return $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function execute(InputInterface $input, OutputInterface $output) {
-    $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output);
-    $this->getHelper('dcg_output_handler')->printSummary($output, $dumped_files);
-    return 0;
   }
 
 }

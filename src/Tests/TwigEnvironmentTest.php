@@ -5,14 +5,14 @@ namespace DrupalCodeGenerator\Tests;
 use PHPUnit\Framework\TestCase;
 
 /**
- * A test for output handler.
+ * A test for Twig environment.
  */
-class OutputHandlerTest extends TestCase {
+class TwigEnvironmentTest extends TestCase {
 
   /**
    * Test callback.
    */
-  public function testOutputHandler() {
+  public function testTwigEnvironment() {
     $this->markTestIncomplete('This test has not been implemented yet.');
   }
 

@@ -1,18 +1,18 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests;
+namespace DrupalCodeGenerator\Tests\Helpers;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * A test for input handler.
+ * A test for output handler.
  */
-class InputHandlerTest extends TestCase {
+class OutputHandlerTest extends TestCase {
 
   /**
    * Test callback.
    */
-  public function testInputHandler() {
+  public function testOutputHandler() {
     $this->markTestIncomplete('This test has not been implemented yet.');
   }
 

@@ -20,6 +20,12 @@ define('DCG_SANDBOX', DCG_ROOT . '/sandbox');
 
 /**
  * Creates an application.
+ *
+ * @param array $twig_directories
+ *   An array of directories where to look for templates.
+ *
+ * @return \Symfony\Component\Console\Application
+ *   The initialized console application.
  */
 function dcg_create_application(array $twig_directories) {
   $application = new Application('Drupal Code Generator', '@git-version@');

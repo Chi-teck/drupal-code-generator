@@ -12,10 +12,10 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class GeneratorDiscovery {
 
-  const COMMANDS_BASE_INTERFACE = '\DrupalCodeGenerator\Commands\GeneratorInterface';
+  const COMMAND_INTERFACE = '\DrupalCodeGenerator\Commands\GeneratorInterface';
 
   /**
-   * Commands namespace.
+   * Command namespace.
    *
    * @var string
    */
@@ -30,6 +30,11 @@ class GeneratorDiscovery {
 
   /**
    * Constructs discovery object.
+   *
+   * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+   *   The file system utility.
+   * @param string $namespace
+   *   (Optional) The namespace to filter out commands.
    */
   public function __construct(Filesystem $filesystem, $namespace = '\DrupalCodeGenerator\Commands') {
     $this->filesystem = $filesystem;
@@ -58,7 +63,7 @@ class GeneratorDiscovery {
           $class = $this->namespace . '\\' . str_replace('/', '\\', preg_replace('#.php/$#', '', $relative_path));
           if (class_exists($class)) {
             $reflected_class = new ReflectionClass($class);
-            if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMANDS_BASE_INTERFACE)) {
+            if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {
               $commands[] = new $class();
             }
           }

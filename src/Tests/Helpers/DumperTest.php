@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests;
+namespace DrupalCodeGenerator\Tests\Helpers;
 
 use PHPUnit\Framework\TestCase;
 
