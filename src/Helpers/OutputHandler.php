@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator;
+namespace DrupalCodeGenerator\Helpers;
 
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Output\OutputInterface;

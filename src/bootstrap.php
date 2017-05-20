@@ -5,10 +5,10 @@
  * Globals.
  */
 
-use DrupalCodeGenerator\Dumper;
-use DrupalCodeGenerator\InputHandler;
-use DrupalCodeGenerator\OutputHandler;
-use DrupalCodeGenerator\Renderer;
+use DrupalCodeGenerator\Helpers\Dumper;
+use DrupalCodeGenerator\Helpers\InputHandler;
+use DrupalCodeGenerator\Helpers\OutputHandler;
+use DrupalCodeGenerator\Helpers\Renderer;
 use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;

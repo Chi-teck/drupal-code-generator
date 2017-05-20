@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator;
+namespace DrupalCodeGenerator\Helpers;
 
 use Symfony\Component\Console\Helper\Helper;
 use Twig_Environment;
