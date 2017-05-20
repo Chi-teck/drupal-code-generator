@@ -85,7 +85,7 @@ class IntegrationTest extends TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->application = dcg_create_application();
+    $this->application = dcg_create_application([DCG_ROOT . '/src/Templates']);
 
     $discovery = new GeneratorDiscovery(new Filesystem());
     $generators = $discovery->getGenerators([DCG_ROOT . '/src/Commands'], [DCG_ROOT . '/src/Templates']);

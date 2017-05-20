@@ -41,13 +41,11 @@ class GeneratorDiscovery {
    *
    * @param array $command_directories
    *   Directories to look up for commands.
-   * @param array $twig_directories
-   *   Directories to look up for templates.
    *
    * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
-  public function getGenerators(array $command_directories, array $twig_directories) {
+  public function getGenerators(array $command_directories) {
     $commands = [];
     foreach ($command_directories as $directory) {
       $iterator = new RecursiveIteratorIterator(
@@ -61,7 +59,7 @@ class GeneratorDiscovery {
           if (class_exists($class)) {
             $reflected_class = new ReflectionClass($class);
             if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMANDS_BASE_INTERFACE)) {
-              $commands[] = $class::create($twig_directories);
+              $commands[] = new $class();
             }
           }
         }

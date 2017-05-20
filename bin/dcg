@@ -20,10 +20,10 @@ if (file_exists(DCG_HOME . '/Templates')) {
 
 // Discovery generators.
 $discovery = new GeneratorDiscovery(new Filesystem());
-$generators = $discovery->getGenerators($commands_directories, $twig_directories);
+$generators = $discovery->getGenerators($commands_directories);
 
 // Build an application.
-$application = dcg_create_application();
+$application = dcg_create_application($twig_directories);
 $application->addCommands($generators);
 
 // Add a navigation command.

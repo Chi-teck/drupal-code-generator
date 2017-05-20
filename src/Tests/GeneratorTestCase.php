@@ -41,10 +41,10 @@ abstract class GeneratorTestCase extends TestCase {
    */
   public function setUp() {
     $command_class = 'DrupalCodeGenerator\Commands\\' . $this->class;
-    $this->command = $command_class::create([DCG_ROOT . '/src/Templates']);
+    $this->command = new $command_class();
     $this->commandName = $this->command->getName();
 
-    $this->application = dcg_create_application();
+    $this->application = dcg_create_application([DCG_ROOT . '/src/Templates']);
     $this->application->add($this->command);
 
     $this->mockQuestionHelper();

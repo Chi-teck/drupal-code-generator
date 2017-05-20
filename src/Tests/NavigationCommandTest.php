@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * A test for navigation command.
  */
-class NavigationTest extends TestCase {
+class NavigationCommandTest extends TestCase {
 
   protected $destination;
 

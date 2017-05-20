@@ -22,11 +22,11 @@ class InteractionTest extends TestCase {
 
     $command_class = 'DrupalCodeGenerator\Commands\Drupal_8\Plugin\Block';
     /** @var \Symfony\Component\Console\Command\Command $command */
-    $command = $command_class::create([DCG_ROOT . '/src/Templates']);
+    $command = new $command_class();
 
     $commandTester = new CommandTester($command);
 
-    $application = dcg_create_application();
+    $application = dcg_create_application([DCG_ROOT . '/src/Templates']);
     $application->add($command);
 
     $helper = $command->getHelper('question');

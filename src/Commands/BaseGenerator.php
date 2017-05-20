@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Commands;
 
-use DrupalCodeGenerator\TwigEnvironment;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidOptionException;
@@ -11,8 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use Twig_Environment;
-use Twig_Loader_Filesystem;
 
 /**
  * Base class for all generators.
@@ -39,13 +36,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @var string
    */
   protected $alias;
-
-  /**
-   * The twig environment.
-   *
-   * @var \Twig_Environment
-   */
-  protected $twig;
 
   /**
    * The working directory.
@@ -77,26 +67,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @var array
    */
   protected $hooks = [];
-
-  /**
-   * Constructs a generator command.
-   *
-   * @param \Twig_Environment $twig
-   *   The twig environment.
-   */
-  public function __construct(Twig_Environment $twig) {
-    parent::__construct();
-    $this->twig = $twig;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(array $twig_directories) {
-    $twig_loader = new Twig_Loader_Filesystem($twig_directories);
-    $twig = new TwigEnvironment($twig_loader);
-    return new static($twig);
-  }
 
   /**
    * {@inheritdoc}
@@ -164,7 +134,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   A string representing the rendered output.
    */
   protected function render($template, array $vars) {
-    return $this->twig->render($template, $vars);
+    return $this->getHelper('renderer')->render($template, $vars);
   }
 
   /**
