@@ -158,7 +158,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-    $dumped_files = $this->getHelper('output_dumper')->dump($input, $output, $this);
+    $dumped_files = $this->getHelper('dumper')->dump($input, $output, $this);
     $this->getHelper('output_handler')->printSummary($output, $dumped_files, $this);
     return 0;
   }

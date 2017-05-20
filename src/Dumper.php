@@ -9,12 +9,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper;
+use Symfony\Component\Yaml\Dumper as YamlDumper;
 
 /**
  * Output dumper form generators.
  */
-class OutputDumper extends Helper {
+class Dumper extends Helper {
 
   /**
    * The file system utility.
@@ -59,7 +59,7 @@ class OutputDumper extends Helper {
    * @param \Symfony\Component\Yaml\Dumper $yaml_dumper
    *   The yaml dumper.
    */
-  public function __construct(Filesystem $filesystem, Dumper $yaml_dumper) {
+  public function __construct(Filesystem $filesystem, YamlDumper $yaml_dumper) {
     $this->filesystem = $filesystem;
     $this->yamlDumper = $yaml_dumper;
     $this->yamlDumper->setIndentation(2);
@@ -69,7 +69,7 @@ class OutputDumper extends Helper {
    * {@inheritdoc}
    */
   public function getName() {
-    return 'output_dumper';
+    return 'dumper';
   }
 
   /**

@@ -5,9 +5,9 @@ namespace DrupalCodeGenerator\Tests;
 use PHPUnit\Framework\TestCase;
 
 /**
- * A test for output dumper.
+ * A test for dumper helper.
  */
-class OutputDumperTest extends TestCase {
+class DumperTest extends TestCase {
 
   /**
    * Test callback.
