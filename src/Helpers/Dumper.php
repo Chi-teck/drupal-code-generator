@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Helpers;
 
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -80,19 +79,19 @@ class Dumper extends Helper {
    *   Input instance.
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
-   * @param \Symfony\Component\Console\Command\Command $command
-   *   The generator command.
    *
    * @return array
    *   List of created or updated files.
    */
-  public function dump(InputInterface $input, OutputInterface $output, Command $command) {
+  public function dump(InputInterface $input, OutputInterface $output) {
     $this->input = $input;
     $this->output = $output;
     $formatter_style = new OutputFormatterStyle('black', 'cyan', []);
     $this->output->getFormatter()->setStyle('title', $formatter_style);
 
     /** @var \DrupalCodeGenerator\Commands\GeneratorInterface $command */
+    $command = $this->getHelperSet()->getCommand();
+
     $directory = $command->getDirectory($input);
     $extension_root = Utils::getExtensionRoot($directory);
     $this->baseDirectory = ($extension_root ?: $directory) . '/';

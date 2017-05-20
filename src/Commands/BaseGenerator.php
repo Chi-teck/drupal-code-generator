@@ -88,7 +88,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     if ($this->alias) {
       $this->setAliases([$this->alias]);
     }
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function initialize(InputInterface $input, OutputInterface $output) {
+    $this->getHelperSet()->setCommand($this);
   }
 
   /**
@@ -151,15 +157,15 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @see \DrupalCodeGenerator\InputHandler
    */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
-    return $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions, $this);
+    return $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions);
   }
 
   /**
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-    $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output, $this);
-    $this->getHelper('dcg_output_handler')->printSummary($output, $dumped_files, $this);
+    $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output);
+    $this->getHelper('dcg_output_handler')->printSummary($output, $dumped_files);
     return 0;
   }
 

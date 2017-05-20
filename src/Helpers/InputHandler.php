@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Helpers;
 
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,13 +37,11 @@ class InputHandler extends Helper {
    *     2 - callable|null - validation callback.
    *     3 - array|null - autocomplete suggestions.
    *     4 - callable|null - condition callback.
-   * @param \Symfony\Component\Console\Command\Command $command
-   *   The generator command.
    *
    * @return array
    *   Template variables.
    */
-  public function collectVars(InputInterface $input, OutputInterface $output, array $questions, Command $command) {
+  public function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
 
     $vars = [];
 
@@ -67,6 +64,7 @@ class InputHandler extends Helper {
     }
 
     /** @var \DrupalCodeGenerator\Commands\GeneratorInterface $command */
+    $command = $this->getHelperSet()->getCommand();
     $directory = $command->getDirectory($input);
     foreach ($questions as $name => $question) {
       list($question_text, $default_value, $validator, $suggestions, $condition) = $question;
