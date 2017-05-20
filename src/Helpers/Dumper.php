@@ -70,7 +70,7 @@ class Dumper extends Helper {
    * {@inheritdoc}
    */
   public function getName() {
-    return 'dumper';
+    return 'dcg_dumper';
   }
 
   /**

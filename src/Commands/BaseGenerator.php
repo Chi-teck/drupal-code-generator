@@ -132,7 +132,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   A string representing the rendered output.
    */
   protected function render($template, array $vars) {
-    return $this->getHelper('renderer')->render($template, $vars);
+    return $this->getHelper('dcg_renderer')->render($template, $vars);
   }
 
   /**
@@ -151,15 +151,15 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @see \DrupalCodeGenerator\InputHandler
    */
   protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
-    return $this->getHelper('input_handler')->collectVars($input, $output, $questions, $this);
+    return $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions, $this);
   }
 
   /**
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-    $dumped_files = $this->getHelper('dumper')->dump($input, $output, $this);
-    $this->getHelper('output_handler')->printSummary($output, $dumped_files, $this);
+    $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output, $this);
+    $this->getHelper('dcg_output_handler')->printSummary($output, $dumped_files, $this);
     return 0;
   }
 

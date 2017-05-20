@@ -31,7 +31,7 @@ class Renderer extends Helper {
    * {@inheritdoc}
    */
   public function getName() {
-    return 'renderer';
+    return 'dcg_renderer';
   }
 
   /**

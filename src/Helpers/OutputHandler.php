@@ -15,7 +15,7 @@ class OutputHandler extends Helper {
    * {@inheritdoc}
    */
   public function getName() {
-    return 'output_handler';
+    return 'dcg_output_handler';
   }
 
   /**

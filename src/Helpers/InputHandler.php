@@ -20,7 +20,7 @@ class InputHandler extends Helper {
    * {@inheritdoc}
    */
   public function getName() {
-    return 'input_handler';
+    return 'dcg_input_handler';
   }
 
   /**
