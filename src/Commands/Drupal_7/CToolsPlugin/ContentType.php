@@ -10,6 +10,6 @@ class ContentType extends BasePlugin {
   protected $name = 'd7:ctools-plugin:content-type';
   protected $description = 'Generates CTools content type plugin';
   protected $template = 'd7/ctools-content-type-plugin.twig';
-  protected $directory = 'plugins/content_types';
+  protected $subDirectory = 'plugins/content_types';
 
 }

@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -27,7 +26,7 @@ class InteractionTest extends TestCase {
 
     $commandTester = new CommandTester($command);
 
-    $application = new Application();
+    $application = dcg_create_application();
     $application->add($command);
 
     $helper = $command->getHelper('question');
@@ -35,7 +34,7 @@ class InteractionTest extends TestCase {
     $answers = ['Foo', 'foo', 'Bar', 'foo_bar', 'custom'];
     $helper->setInputStream($this->getInputStream(implode("\n", $answers)));
 
-    $commandTester->execute(['command' => $command->getName(), '--destination' => $this->destination]);
+    $commandTester->execute(['command' => $command->getName(), '--directory' => $this->destination]);
 
     $expected_output = [
       'Module name [Example]: ',

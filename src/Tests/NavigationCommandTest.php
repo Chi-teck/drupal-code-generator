@@ -46,7 +46,7 @@ class NavigationTest extends TestCase {
     $helper->setInputStream($this->getInputStream(implode("\n", $answers)));
 
     $commandTester = new CommandTester($navigation);
-    $commandTester->execute(['command' => $navigation->getName(), '--destination' => $this->destination]);
+    $commandTester->execute(['command' => $navigation->getName(), '--directory' => $this->destination]);
 
     $output = trim($commandTester->getDisplay());
     $expected_output = trim(file_get_contents(__DIR__ . '/_navigation-fixture.txt'));

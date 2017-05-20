@@ -5,7 +5,6 @@ $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
 use DrupalCodeGenerator\Commands\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 
 // Setup target directories.
@@ -24,7 +23,7 @@ $discovery = new GeneratorDiscovery(new Filesystem());
 $generators = $discovery->getGenerators($commands_directories, $twig_directories);
 
 // Build an application.
-$application = new Application('Drupal Code Generator', '@git-version@');
+$application = dcg_create_application();
 $application->addCommands($generators);
 
 // Add a navigation command.

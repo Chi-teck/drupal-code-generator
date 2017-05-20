@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -45,7 +44,7 @@ abstract class GeneratorTestCase extends TestCase {
     $this->command = $command_class::create([DCG_ROOT . '/src/Templates']);
     $this->commandName = $this->command->getName();
 
-    $this->application = new Application();
+    $this->application = dcg_create_application();
     $this->application->add($this->command);
 
     $this->mockQuestionHelper();
@@ -84,7 +83,7 @@ abstract class GeneratorTestCase extends TestCase {
   protected function execute() {
     $this->commandTester->execute([
       'command' => $this->command->getName(),
-      '--destination' => $this->destination,
+      '--directory' => $this->destination,
     ]);
 
     $this->display = $this->commandTester->getDisplay();

@@ -85,7 +85,8 @@ class IntegrationTest extends TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->application = new Application('Drupal Code Generator', '@git-version@');
+    $this->application = dcg_create_application();
+
     $discovery = new GeneratorDiscovery(new Filesystem());
     $generators = $discovery->getGenerators([DCG_ROOT . '/src/Commands'], [DCG_ROOT . '/src/Templates']);
 
@@ -112,7 +113,7 @@ class IntegrationTest extends TestCase {
   public function testExecute() {
     foreach ($this->fixtures() as $fixture) {
       $this->mockQuestionHelper($fixture['answers']);
-      $this->commandTester->execute(['command' => 'navigation', '--destination' => './sandbox/tests']);
+      $this->commandTester->execute(['command' => 'navigation', '--directory' => './sandbox/tests']);
       $this->assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
       $this->filesystem->remove($this->destination);
     }

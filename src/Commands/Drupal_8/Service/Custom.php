@@ -15,7 +15,6 @@ class Custom extends BaseGenerator {
   protected $name = 'd8:service:custom';
   protected $description = 'Generates a custom Drupal service';
   protected $alias = 'service';
-  protected $inline = 2;
 
   /**
    * {@inheritdoc}

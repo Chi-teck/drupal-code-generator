@@ -14,7 +14,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 abstract class BasePlugin extends BaseGenerator {
 
   protected $template;
-  protected $directory;
+  protected $subDirectory;
 
   /**
    * {@inheritdoc}
@@ -43,7 +43,7 @@ abstract class BasePlugin extends BaseGenerator {
       ->getHelper('question')
       ->ask($input, $output, $question);
 
-    $this->files[$this->directory . '/' . $vars['plugin_machine_name'] . '.inc'] = $this->render($this->template, $vars);
+    $this->files[$this->subDirectory . '/' . $vars['plugin_machine_name'] . '.inc'] = $this->render($this->template, $vars);
   }
 
 }

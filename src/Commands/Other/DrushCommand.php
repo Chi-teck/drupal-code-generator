@@ -33,7 +33,7 @@ class DrushCommand extends BaseGenerator {
       'command_file' => [
         'Command name',
         function ($vars) {
-          $directoryBaseName = basename($this->destination);
+          $directoryBaseName = basename($this->directory);
           // The suggestion depends on whether the command global or local.
           $prefix = $directoryBaseName == 'drush' || $directoryBaseName == '.drush' ?
             $vars['command_name'] : $directoryBaseName;

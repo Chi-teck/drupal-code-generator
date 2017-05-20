@@ -60,10 +60,10 @@ class Navigation extends Command {
       ->setName('navigation')
       ->setDescription('Navigation')
       ->addOption(
-        'destination',
+        'directory',
         '-d',
         InputOption::VALUE_OPTIONAL,
-        'Destination directory'
+        'Working directory'
       )
       ->addOption(
         'answers',
