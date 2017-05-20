@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Commands;
 
-use Symfony\Component\Console\Input\InputInterface;
-
 /**
  * Defines generator interface.
  */
@@ -24,10 +22,7 @@ interface GeneratorInterface {
 
   /**
    * Returns current working directory.
-   *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   (Optional) Input instance.
    */
-  public function getDirectory(InputInterface $input);
+  public function getDirectory();
 
 }

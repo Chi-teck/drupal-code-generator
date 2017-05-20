@@ -92,7 +92,7 @@ class Dumper extends Helper {
     /** @var \DrupalCodeGenerator\Commands\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
 
-    $directory = $command->getDirectory($input);
+    $directory = $command->getDirectory();
     $extension_root = Utils::getExtensionRoot($directory);
     $this->baseDirectory = ($extension_root ?: $directory) . '/';
 

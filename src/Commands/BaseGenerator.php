@@ -95,6 +95,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function initialize(InputInterface $input, OutputInterface $output) {
     $this->getHelperSet()->setCommand($this);
+    $this->directory = $input->getOption('directory') ?
+      Utils::normalizePath($input->getOption('directory')) : getcwd();
   }
 
   /**
@@ -118,11 +120,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDirectory(InputInterface $input = NULL) {
-    if (!$this->directory && $input) {
-      $this->directory = $input->getOption('directory') ?
-        Utils::normalizePath($input->getOption('directory')) : getcwd();
-    }
+  public function getDirectory() {
     return $this->directory;
   }
 
