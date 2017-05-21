@@ -52,11 +52,11 @@ class GeneratorDiscovery {
    */
   public function getGenerators(array $command_directories) {
     $commands = [];
+
     foreach ($command_directories as $directory) {
       $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS)
       );
-
       foreach ($iterator as $path => $file) {
         if ($file->getExtension() == 'php') {
           $relative_path = $this->filesystem->makePathRelative($path, $directory);
@@ -69,7 +69,6 @@ class GeneratorDiscovery {
           }
         }
       }
-
     }
 
     return $commands;
