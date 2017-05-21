@@ -49,4 +49,14 @@ class Renderer extends Helper {
     return $this->twig->render($template, $vars);
   }
 
+  /**
+   * Adds a path where templates are stored.
+   *
+   * @param string $path
+   *    A path where to look for templates.
+   */
+  public function addPath($path) {
+    return $this->twig->getLoader()->addPath($path);
+  }
+
 }

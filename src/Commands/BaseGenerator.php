@@ -35,6 +35,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $alias;
 
   /**
+   * A path where templates are stored.
+   *
+   * @var string
+   */
+  protected $templatePath;
+
+  /**
    * The working directory.
    *
    * @var string
@@ -88,6 +95,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     if ($this->alias) {
       $this->setAliases([$this->alias]);
     }
+
+    if (!$this->templatePath) {
+      $this->templatePath = DCG_ROOT . '/src/Templates';
+    }
   }
 
   /**
@@ -95,6 +106,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function initialize(InputInterface $input, OutputInterface $output) {
     $this->getHelperSet()->setCommand($this);
+    $this->getHelper('dcg_renderer')->addPath($this->templatePath);
     $this->directory = $input->getOption('directory') ?
       Utils::normalizePath($input->getOption('directory')) : getcwd();
   }

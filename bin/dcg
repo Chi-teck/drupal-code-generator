@@ -7,22 +7,16 @@ use DrupalCodeGenerator\Commands\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Filesystem\Filesystem;
 
-// Setup target directories.
+// Create an application.
+$application = dcg_create_application();
+
+// Discover generators.
+$discovery = new GeneratorDiscovery(new Filesystem());
 $commands_directories[] = DCG_ROOT . '/src/Commands';
 if (file_exists(DCG_HOME . '/Commands')) {
   $commands_directories[] = DCG_HOME . '/Commands';
   $autoloader->addPsr4('DrupalCodeGenerator\\', DCG_HOME);
 }
-$twig_directories[] = DCG_ROOT . '/src/Templates';
-if (file_exists(DCG_HOME . '/Templates')) {
-  $twig_directories[] = DCG_HOME . '/Templates';
-}
-
-// Create an application.
-$application = dcg_create_application($twig_directories);
-
-// Discover generators.
-$discovery = new GeneratorDiscovery(new Filesystem());
 $generators = $discovery->getGenerators($commands_directories);
 $application->addCommands($generators);
 
