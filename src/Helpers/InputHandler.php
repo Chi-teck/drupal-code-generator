@@ -59,8 +59,8 @@ class InputHandler extends Helper {
 
     // Let third party applications modify these questions.
     // @TODO: Create a test for this.
-    if ($this->getHelperSet()->has('input_preprocessor')) {
-      $this->getHelperSet()->get('input_preprocessor')->preprocess($questions, $this);
+    if ($this->getHelperSet()->has('dcg_input_preprocessor')) {
+      $this->getHelperSet()->get('dcg_input_preprocessor')->preprocess($questions, $this);
     }
 
     /** @var \DrupalCodeGenerator\Commands\GeneratorInterface $command */
