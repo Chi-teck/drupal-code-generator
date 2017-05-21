@@ -52,7 +52,7 @@ class GeneratorDiscovery {
       foreach ($iterator as $path => $file) {
         if ($file->getExtension() == 'php') {
           $relative_path = $this->filesystem->makePathRelative($path, $directory);
-          $class = $namespace . '\\' . str_replace('/', '\\', preg_replace('#.php/$#', '', $relative_path));
+          $class = $namespace . '\\' . str_replace('/', '\\', preg_replace('#\.php/$#', '', $relative_path));
           if (class_exists($class)) {
             $reflected_class = new ReflectionClass($class);
             if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {
