@@ -13,7 +13,7 @@ class ThemeInfo extends BaseGenerator {
 
   protected $name = 'd8:yml:theme-info';
   protected $description = 'Generates a theme info yml file';
-  protected $alias = 'theme info';
+  protected $alias = 'theme-info';
 
   /**
    * {@inheritdoc}
