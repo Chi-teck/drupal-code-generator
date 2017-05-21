@@ -15,13 +15,6 @@ class GeneratorDiscovery {
   const COMMAND_INTERFACE = '\DrupalCodeGenerator\Commands\GeneratorInterface';
 
   /**
-   * Command namespace.
-   *
-   * @var string
-   */
-  protected $namespace;
-
-  /**
    * The file system utility.
    *
    * @var Filesystem
@@ -33,12 +26,9 @@ class GeneratorDiscovery {
    *
    * @param \Symfony\Component\Filesystem\Filesystem $filesystem
    *   The file system utility.
-   * @param string $namespace
-   *   (Optional) The namespace to filter out commands.
    */
-  public function __construct(Filesystem $filesystem, $namespace = '\DrupalCodeGenerator\Commands') {
+  public function __construct(Filesystem $filesystem) {
     $this->filesystem = $filesystem;
-    $this->namespace = $namespace;
   }
 
   /**
@@ -46,11 +36,13 @@ class GeneratorDiscovery {
    *
    * @param array $command_directories
    *   Directories to look up for commands.
+   * @param string $namespace
+   *   (Optional) The namespace to filter out commands.
    *
    * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
-  public function getGenerators(array $command_directories) {
+  public function getGenerators(array $command_directories, $namespace = '\DrupalCodeGenerator\Commands') {
     $commands = [];
 
     foreach ($command_directories as $directory) {
@@ -60,7 +52,7 @@ class GeneratorDiscovery {
       foreach ($iterator as $path => $file) {
         if ($file->getExtension() == 'php') {
           $relative_path = $this->filesystem->makePathRelative($path, $directory);
-          $class = $this->namespace . '\\' . str_replace('/', '\\', preg_replace('#.php/$#', '', $relative_path));
+          $class = $namespace . '\\' . str_replace('/', '\\', preg_replace('#.php/$#', '', $relative_path));
           if (class_exists($class)) {
             $reflected_class = new ReflectionClass($class);
             if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {

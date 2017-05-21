@@ -17,8 +17,8 @@ class GeneratorsDiscoveryTest extends TestCase {
    * Test callback.
    */
   public function testExecute() {
-    $discovery = new GeneratorDiscovery(new Filesystem(), '\DrupalCodeGenerator\Commands\Drupal_7');
-    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Commands/Drupal_7']);
+    $discovery = new GeneratorDiscovery(new Filesystem());
+    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Commands/Drupal_7'], '\DrupalCodeGenerator\Commands\Drupal_7');
     foreach ($generators as $generator) {
       $this->assertInstanceOf('DrupalCodeGenerator\Commands\BaseGenerator', $generator);
     }
