@@ -220,12 +220,6 @@ class Dumper extends Helper {
 
     $extension_name = basename($this->baseDirectory);
 
-    $service_groups = [
-      $extension_name => [],
-      'drush' => [],
-      'console' => [],
-    ];
-
     $service_groups = [];
 
     // Sort services by type.
