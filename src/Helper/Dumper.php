@@ -228,7 +228,7 @@ class Dumper extends Helper {
         foreach ($service['tags'] as $tag) {
 
           switch ($tag['name']) {
-            case 'drush_command':
+            case 'drush.command':
               $service_groups['drush'][$service_name] = $service;
               break;
 
