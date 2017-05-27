@@ -26,7 +26,7 @@ class InteractionTest extends TestCase {
 
     $commandTester = new CommandTester($command);
 
-    $application = dcg_create_application([DCG_ROOT . '/src/Templates']);
+    $application = dcg_create_application();
     $application->add($command);
 
     $helper = $command->getHelper('question');
