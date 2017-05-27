@@ -10,6 +10,10 @@
       "exclude": ["Tests", "Box"]
     },
     {
+      "name": "*",
+      "in": "templates"
+    },
+    {
       "name": "*.php",
       "in": [
         "vendor/composer",
