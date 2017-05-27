@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Helpers;
+namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Exception\InvalidOptionException;
