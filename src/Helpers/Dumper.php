@@ -52,17 +52,27 @@ class Dumper extends Helper {
   protected $output;
 
   /**
+   * Override flag.
+   *
+   * @var bool
+   */
+  protected $override;
+
+  /**
    * Constructs a generator command.
    *
    * @param \Symfony\Component\Filesystem\Filesystem $filesystem
    *   The file system utility.
    * @param \Symfony\Component\Yaml\Dumper $yaml_dumper
    *   The yaml dumper.
+   * @param bool $override
+   *   (optional) Indicates weather or not existing files can be overridden.
    */
-  public function __construct(Filesystem $filesystem, YamlDumper $yaml_dumper) {
+  public function __construct(Filesystem $filesystem, YamlDumper $yaml_dumper, $override = NULL) {
     $this->filesystem = $filesystem;
     $this->yamlDumper = $yaml_dumper;
     $this->yamlDumper->setIndentation(2);
+    $this->override = $override;
   }
 
   /**
@@ -89,6 +99,13 @@ class Dumper extends Helper {
     $formatter_style = new OutputFormatterStyle('black', 'cyan', []);
     $this->output->getFormatter()->setStyle('title', $formatter_style);
 
+    $interactive = $input->isInteractive();
+
+    // Null means we should ask user for confirmation.
+    if ($this->override !== NULL) {
+      $input->setInteractive(FALSE);
+    }
+
     /** @var \DrupalCodeGenerator\Commands\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
 
@@ -98,11 +115,14 @@ class Dumper extends Helper {
 
     $assets = $command->getAssets();
 
-    return array_merge(
+    $dumped_files = array_merge(
       $this->dumpFiles($assets['files']),
       $this->dumpHooks($assets['hooks']),
       $this->dumpServices($assets['services'], $extension_root)
     );
+
+    $input->setInteractive($interactive);
+    return $dumped_files;
   }
 
   /**
@@ -122,11 +142,8 @@ class Dumper extends Helper {
 
       $file_path = $this->baseDirectory . $file_name;
       if ($this->filesystem->exists($file_path)) {
-        $question = new ConfirmationQuestion(
-          sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path),
-          TRUE
-        );
-        if (!$question_helper->ask($this->input, $this->output, $question)) {
+        $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path);
+        if (!$this->askConfirmationQuestion($question_text)) {
           continue;
         }
       }
@@ -217,18 +234,13 @@ class Dumper extends Helper {
         $inline++;
       }
 
-      $question = new ConfirmationQuestion(
-        sprintf(
-          '<info>Would you like to %s <comment>%s.services.yml</comment> file?</info> [<comment>Yes</comment>]: ',
-          $action,
-          $extension_name
-        ),
-        TRUE
+      $question_text = sprintf(
+        '<info>Would you like to %s <comment>%s.services.yml</comment> file?</info> [<comment>Yes</comment>]: ',
+        $action,
+        $extension_name
       );
 
-      /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
-      $question_helper = $this->getHelperSet()->get('question');
-      if ($question_helper->ask($this->input, $this->output, $question)) {
+      if (!$this->askConfirmationQuestion($question_text)) {
         $yaml = $this->yamlDumper->dump($services, $inline, $intend);
         file_put_contents($file, $yaml, FILE_APPEND);
         $dumped_files[] = $extension_name . '.services.yml';
@@ -236,6 +248,26 @@ class Dumper extends Helper {
     }
 
     return $dumped_files;
+  }
+
+  /**
+   * Asks user a confirmation question.
+   *
+   * @param string $question_text
+   *   The question to ask to the user.
+   *
+   * @return bool
+   *   User confirmation.
+   */
+  protected function askConfirmationQuestion($question_text) {
+    // If the input is not interactive print the question with default answer.
+    if ($this->override !== NULL) {
+      $this->output->writeln($question_text . ($this->override ? 'Yes' : 'No'));
+    }
+    $question = new ConfirmationQuestion($question_text, $this->override);
+    $question_helper = $this->getHelperSet()->get('question');
+    /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
+    return $question_helper->ask($this->input, $this->output, $question);
   }
 
 }
