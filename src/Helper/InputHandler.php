@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Generators input handler.
+ * Generator input handler.
  */
 class InputHandler extends Helper {
 
