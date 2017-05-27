@@ -240,7 +240,7 @@ class Dumper extends Helper {
         $extension_name
       );
 
-      if (!$this->askConfirmationQuestion($question_text)) {
+      if ($this->askConfirmationQuestion($question_text)) {
         $yaml = $this->yamlDumper->dump($services, $inline, $intend);
         file_put_contents($file, $yaml, FILE_APPEND);
         $dumped_files[] = $extension_name . '.services.yml';
@@ -264,9 +264,9 @@ class Dumper extends Helper {
     if ($this->override !== NULL) {
       $this->output->writeln($question_text . ($this->override ? 'Yes' : 'No'));
     }
-    $question = new ConfirmationQuestion($question_text, $this->override);
-    $question_helper = $this->getHelperSet()->get('question');
+    $question = new ConfirmationQuestion($question_text, $this->override !== FALSE);
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
+    $question_helper = $this->getHelperSet()->get('question');
     return $question_helper->ask($this->input, $this->output, $question);
   }
 
