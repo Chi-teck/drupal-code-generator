@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class GeneratorDiscovery {
 
-  const COMMAND_INTERFACE = '\DrupalCodeGenerator\Commands\GeneratorInterface';
+  const COMMAND_INTERFACE = '\DrupalCodeGenerator\Command\GeneratorInterface';
 
   /**
    * The file system utility.
@@ -42,7 +42,7 @@ class GeneratorDiscovery {
    * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
-  public function getGenerators(array $command_directories, $namespace = '\DrupalCodeGenerator\Commands') {
+  public function getGenerators(array $command_directories, $namespace = '\DrupalCodeGenerator\Command') {
     $commands = [];
 
     foreach ($command_directories as $directory) {

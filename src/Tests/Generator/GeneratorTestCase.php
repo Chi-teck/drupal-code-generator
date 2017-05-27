@@ -40,7 +40,7 @@ abstract class GeneratorTestCase extends TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $command_class = 'DrupalCodeGenerator\Commands\\' . $this->class;
+    $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
     $this->command = new $command_class();
     $this->commandName = $this->command->getName();
 

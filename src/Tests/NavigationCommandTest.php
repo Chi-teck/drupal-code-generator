@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Commands\Navigation;
+use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
@@ -25,7 +25,7 @@ class NavigationCommandTest extends TestCase {
 
     // Create navigation command.
     $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Commands']);
+    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Command']);
 
     $application = new Application();
     $application->addCommands($generators);

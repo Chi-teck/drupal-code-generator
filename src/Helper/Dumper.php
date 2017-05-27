@@ -106,7 +106,7 @@ class Dumper extends Helper {
       $input->setInteractive(FALSE);
     }
 
-    /** @var \DrupalCodeGenerator\Commands\GeneratorInterface $command */
+    /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
 
     $directory = $command->getDirectory();

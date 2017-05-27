@@ -63,7 +63,7 @@ class InputHandler extends Helper {
       $this->getHelperSet()->get('dcg_input_preprocessor')->preprocess($questions, $this);
     }
 
-    /** @var \DrupalCodeGenerator\Commands\GeneratorInterface $command */
+    /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
     $directory = $command->getDirectory();
     foreach ($questions as $name => $question) {

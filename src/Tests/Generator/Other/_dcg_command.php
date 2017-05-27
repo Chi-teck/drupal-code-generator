@@ -1,10 +1,10 @@
 <?php
 
-// @DCG: This file should be placed under $HOME/.dcg/Commands/custom directory.
+// @DCG: This file should be placed under $HOME/.dcg/Command/custom directory.
 
-namespace DrupalCodeGenerator\Commands\custom;
+namespace DrupalCodeGenerator\Command\custom;
 
-use DrupalCodeGenerator\Commands\BaseGenerator;
+use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

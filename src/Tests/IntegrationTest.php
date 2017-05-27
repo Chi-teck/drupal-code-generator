@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Commands\Navigation;
+use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
@@ -31,7 +31,7 @@ class IntegrationTest extends TestCase {
   /**
    * The navigation command.
    *
-   * @var \DrupalCodeGenerator\Commands\Navigation
+   * @var \DrupalCodeGenerator\Command\Navigation
    */
   protected $command;
 
@@ -88,7 +88,7 @@ class IntegrationTest extends TestCase {
     $this->application = dcg_create_application();
 
     $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Commands']);
+    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Command']);
 
     $this->application->addCommands($generators);
 

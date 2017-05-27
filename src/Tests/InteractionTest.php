@@ -20,7 +20,7 @@ class InteractionTest extends TestCase {
 
     $this->destination = DCG_SANDBOX . '/example';
 
-    $command_class = 'DrupalCodeGenerator\Commands\Drupal_8\Plugin\Block';
+    $command_class = 'DrupalCodeGenerator\Command\Drupal_8\Plugin\Block';
     /** @var \Symfony\Component\Console\Command\Command $command */
     $command = new $command_class();
 
