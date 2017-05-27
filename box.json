@@ -34,7 +34,7 @@
   "output": "dcg.phar",
   "bootstrap": "src/Box/PhpCompactor.php",
   "compactors": [
-    "Herrera\\Box\\Compactor\\Php"
+    "DrupalCodeGenerator\\Box\\PhpCompactor"
   ],
   "stub": true
 }
