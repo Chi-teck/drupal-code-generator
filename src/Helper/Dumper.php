@@ -254,7 +254,7 @@ class Dumper extends Helper {
         $intend = 2;
       }
       else {
-        $this->services = ['services' => $group];
+        $group = ['services' => $group];
         $action = 'create';
         $intend = 0;
         $inline++;
