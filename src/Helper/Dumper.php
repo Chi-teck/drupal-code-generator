@@ -101,7 +101,7 @@ class Dumper extends Helper {
 
     $interactive = $input->isInteractive();
 
-    // Null means we should ask user for confirmation.
+    // NULL means we should ask user for confirmation.
     if ($this->override !== NULL) {
       $input->setInteractive(FALSE);
     }
@@ -211,24 +211,56 @@ class Dumper extends Helper {
    *
    * @return array
    *   List of created or updated files.
+   *
+   * @todo Provide a method for dumping any kind of yml (not just services).
    */
   protected function dumpServices(array $services, $extension_root) {
 
     $dumped_files = [];
 
-    $inline = 3;
+    $extension_name = basename($this->baseDirectory);
 
-    // Dump services.
-    if ($services && $extension_root) {
-      $extension_name = basename($extension_root);
-      $file = $extension_root . '/' . $extension_name . '.services.yml';
+    $service_groups = [
+      $extension_name => [],
+      'drush' => [],
+      'console' => [],
+    ];
+
+    $service_groups = [];
+
+    // Sort services by type.
+    foreach ($services as $service_name => $service) {
+      if (isset($service['tags'])) {
+        foreach ($service['tags'] as $tag) {
+
+          switch ($tag['name']) {
+            case 'drush_command':
+              $service_groups['drush'][$service_name] = $service;
+              break;
+
+            case 'drupal.command':
+              $service_groups['console'][$service_name] = $service;
+              break;
+
+            default:
+              $service_groups[$extension_name][$service_name] = $service;
+          }
+
+        }
+      }
+    }
+
+    foreach ($service_groups as $group_name => $group) {
+      $inline = 3;
+
+      $file = $this->baseDirectory . '/' . $group_name . '.services.yml';
 
       if ($this->filesystem->exists($file)) {
         $action = 'update';
         $intend = 2;
       }
       else {
-        $this->services = ['services' => $services];
+        $this->services = ['services' => $group];
         $action = 'create';
         $intend = 0;
         $inline++;
@@ -237,14 +269,15 @@ class Dumper extends Helper {
       $question_text = sprintf(
         '<info>Would you like to %s <comment>%s.services.yml</comment> file?</info> [<comment>Yes</comment>]: ',
         $action,
-        $extension_name
+        $group_name
       );
 
       if ($this->askConfirmationQuestion($question_text)) {
-        $yaml = $this->yamlDumper->dump($services, $inline, $intend);
+        $yaml = $this->yamlDumper->dump($group, $inline, $intend);
         file_put_contents($file, $yaml, FILE_APPEND);
-        $dumped_files[] = $extension_name . '.services.yml';
+        $dumped_files[] = $group_name . '.services.yml';
       }
+
     }
 
     return $dumped_files;
