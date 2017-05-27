@@ -24,11 +24,11 @@ class Hook extends BaseGenerator {
       'Hook name',
       NULL,
       function ($value) {
-        if (!in_array($value, self::supportedHooks())) {
+        if (!in_array($value, $this->supportedHooks())) {
           return 'This hook is not supported.';
         }
       },
-      self::supportedHooks(),
+      $this->supportedHooks(),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -57,10 +57,10 @@ class Hook extends BaseGenerator {
   /**
    * Returns list of supported hooks.
    */
-  protected static function supportedHooks() {
+  protected function supportedHooks() {
     return array_map(function ($file) {
       return pathinfo($file, PATHINFO_FILENAME);
-    }, array_diff(scandir(DCG_ROOT . '/src/Templates/d7/hook'), ['.', '..']));
+    }, array_diff(scandir($this->templatePath . '/d7/hook'), ['.', '..']));
   }
 
 }
