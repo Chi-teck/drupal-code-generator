@@ -17,7 +17,7 @@ class GeneratorDiscovery {
   /**
    * The file system utility.
    *
-   * @var Filesystem
+   * @var \Symfony\Component\Filesystem\Filesystem
    */
   protected $filesystem;
 

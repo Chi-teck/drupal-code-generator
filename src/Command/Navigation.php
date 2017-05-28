@@ -21,7 +21,7 @@ class Navigation extends Command {
   /**
    * Constructs menu command.
    *
-   * @param Command[] $commands
+   * @param \Symfony\Component\Console\Command\Command[] $commands
    *   List of registered commands.
    */
   public function __construct(array $commands) {

@@ -14,7 +14,7 @@ class TwigEnvironment extends Twig_Environment {
   /**
    * Constructs Twig environment object.
    *
-   * @param Twig_LoaderInterface $loader
+   * @param \Twig_LoaderInterface $loader
    *   The Twig loader.
    */
   public function __construct(Twig_LoaderInterface $loader) {
