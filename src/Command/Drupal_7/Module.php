@@ -14,6 +14,7 @@ class Module extends BaseGenerator {
 
   protected $name = 'd7:module';
   protected $description = 'Generates Drupal 7 module';
+  protected $destination = 'modules';
 
   /**
    * {@inheritdoc}

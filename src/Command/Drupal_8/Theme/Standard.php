@@ -16,6 +16,7 @@ class Standard extends BaseGenerator {
   protected $name = 'd8:theme:standard';
   protected $description = 'Generates standard Drupal 8 theme';
   protected $alias = 'theme';
+  protected $destination = 'theme';
 
   /**
    * {@inheritdoc}

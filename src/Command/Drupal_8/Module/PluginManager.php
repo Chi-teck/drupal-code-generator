@@ -15,6 +15,7 @@ class PluginManager extends BaseGenerator {
   protected $name = 'd8:module:plugin-manager';
   protected $description = 'Generates plugin-manager module';
   protected $alias = 'plugin-manager';
+  protected $destination = 'modules';
 
   /**
    * {@inheritdoc}

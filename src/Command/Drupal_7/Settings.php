@@ -13,6 +13,7 @@ class Settings extends BaseGenerator {
 
   protected $name = 'd7:settings.php';
   protected $description = 'Generates Drupal 7 settings.php file';
+  protected $destination = 'sites/default';
 
   /**
    * {@inheritdoc}

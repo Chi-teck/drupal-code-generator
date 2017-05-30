@@ -15,6 +15,7 @@ class ConfigurationEntity extends BaseGenerator {
   protected $name = 'd8:module:configuration-entity';
   protected $description = 'Generates configuration entity module';
   protected $alias = 'configuration-entity';
+  protected $destination = 'modules';
 
   /**
    * {@inheritdoc}

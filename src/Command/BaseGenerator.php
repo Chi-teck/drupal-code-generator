@@ -49,6 +49,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $directory;
 
   /**
+   * The destination.
+   *
+   * @var mixed
+   */
+  protected $destination = 'modules/%';
+
+  /**
    * Files to create.
    *
    * The key of the each item in the array is the path to the file and
@@ -143,6 +150,20 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   public function getDirectory() {
     return $this->directory;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setDestination($destination) {
+    $this->destination = $destination;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDestination() {
+    return $this->destination;
   }
 
   /**

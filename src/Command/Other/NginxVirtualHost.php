@@ -14,6 +14,7 @@ class NginxVirtualHost extends BaseGenerator {
   protected $name = 'other:nginx-virtual-host';
   protected $description = 'Generates an Nginx site configuration file';
   protected $alias = 'nginx-virtual-host';
+  protected $destination = '/etc/nginx/sites-available';
 
   /**
    * {@inheritdoc}

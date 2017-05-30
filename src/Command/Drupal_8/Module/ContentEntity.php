@@ -15,6 +15,7 @@ class ContentEntity extends BaseGenerator {
   protected $name = 'd8:module:content-entity';
   protected $description = 'Generates content entity module';
   protected $alias = 'content-entity';
+  protected $destination = 'modules';
 
   /**
    * {@inheritdoc}

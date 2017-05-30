@@ -13,6 +13,7 @@ class Theme extends BaseGenerator {
 
   protected $name = 'd7:theme';
   protected $description = 'Generates Drupal 7 theme';
+  protected $destination = 'themes';
 
   /**
    * {@inheritdoc}

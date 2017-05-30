@@ -14,6 +14,7 @@ class ApacheVirtualHost extends BaseGenerator {
   protected $name = 'other:apache-virtual-host';
   protected $description = 'Generates an Apache site configuration file';
   protected $alias = 'apache-virtual-host';
+  protected $destination = '/etc/apache2/sites-available';
 
   /**
    * {@inheritdoc}
