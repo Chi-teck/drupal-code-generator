@@ -65,6 +65,8 @@ class Utils {
    * Required value validator.
    */
   public static function validateRequired($value) {
+    // FALSE is not considered as empty value because question helper use
+    // it as negative answer on confirmation questions.
     if ($value === NULL || $value === '') {
       return 'The value is required.';
     }
