@@ -58,7 +58,6 @@ class InputHandler extends Helper {
     }, $questions);
 
     // Let third party applications modify these questions.
-    // @TODO: Create a test for this.
     if ($this->getHelperSet()->has('dcg_input_preprocessor')) {
       $this->getHelperSet()->get('dcg_input_preprocessor')->preprocess($questions, $this);
     }
@@ -72,7 +71,6 @@ class InputHandler extends Helper {
       // Make some assumptions based on question name.
       if ($default_value === NULL) {
         switch ($name) {
-          // TODO: Test default values.
           case 'name':
             $root_directory = basename(Utils::getExtensionRoot($directory) ?: $directory);
             $default_value = Utils::machine2human($root_directory);
@@ -92,7 +90,6 @@ class InputHandler extends Helper {
 
       if ($validator === NULL) {
         switch ($name) {
-          // TODO: Test this validation.
           case 'machine_name':
           case 'plugin_id':
             $validator = [Utils::class, 'validateMachineName'];

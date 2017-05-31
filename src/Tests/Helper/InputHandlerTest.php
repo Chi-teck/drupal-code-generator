@@ -175,7 +175,41 @@ class InputHandlerTest extends TestCase {
     $row[] = 'Name [Zoo]: bar [*example*]: ';
     $data[] = $row;
 
-    $this->markTestIncomplete('This test has not been completed yet.');
+    // Test condition callback (visible question).
+    $row = [];
+    $callable = function ($vars) {
+      $this->assertEquals($vars['name'], 'example');
+      return TRUE;
+    };
+    $row[] = [
+      'name' => ['Name', 'Foo'],
+      'bar' => ['bar', 'Bar', NULL, NULL, $callable],
+    ];
+    $row[] = "example\nexample";
+    $row[] = [
+      'name' => 'example',
+      'bar' => 'example',
+    ];
+    $row[] = 'Name [Foo]: bar [Bar]: ';
+    $data[] = $row;
+
+    // Test condition callback (hidden question).
+    $row = [];
+    $callable = function ($vars) {
+      $this->assertEquals($vars['name'], 'example');
+      return FALSE;
+    };
+    $row[] = [
+      'name' => ['Name', 'Foo'],
+      'bar' => ['bar', 'Bar', NULL, NULL, $callable],
+    ];
+    $row[] = "example\nexample";
+    $row[] = [
+      'name' => 'example',
+      'bar' => 'example',
+    ];
+    $row[] = 'Name [Foo]: ';
+    $data[] = $row;
 
     return $data;
   }
