@@ -6,8 +6,7 @@
     "symfony/console": "~2.7|^3",
     "symfony/yaml": "~2.7|^3",
     "symfony/filesystem": "~2.7|^3",
-    "twig/twig": "^1.31"
-
+    "twig/twig": "^1.23.1"
   },
   "autoload": {
     "files": ["src/bootstrap.php"],
