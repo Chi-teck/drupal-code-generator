@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Javascript extends BaseGenerator {
 
   protected $name = 'd8:javascript';
-  protected $description = 'Generates Drupal 8 javaScript file';
+  protected $description = 'Generates Drupal 8 JavaScript file';
   protected $alias = 'javascript';
 
   /**
