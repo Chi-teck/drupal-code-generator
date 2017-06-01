@@ -45,9 +45,10 @@ class Hook extends BaseGenerator {
 
     $file_type = in_array($vars['hook_name'], $install_hooks) ? 'install' : 'module';
 
-    $this->hooks[$vars['machine_name'] . '.' . $file_type] = [
+    $this->files[$vars['machine_name'] . '.' . $file_type] = [
       'file_doc' => $this->render("d8/file-docs/$file_type.twig", $vars),
-      'code' => $this->render('d8/hook/' . $vars['hook_name'] . '.twig', $vars),
+      'content' => $this->render('d8/hook/' . $vars['hook_name'] . '.twig', $vars),
+      'merge_type' => 'append',
     ];
   }
 

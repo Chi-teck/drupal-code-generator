@@ -117,7 +117,6 @@ class Dumper extends Helper {
 
     $dumped_files = array_merge(
       $this->dumpFiles($assets['files']),
-      $this->dumpHooks($assets['hooks']),
       $this->dumpServices($assets['services'], $extension_root)
     );
 
@@ -136,66 +135,52 @@ class Dumper extends Helper {
    */
   protected function dumpFiles(array $files) {
     $dumped_files = [];
-    /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
-    $question_helper = $this->getHelperSet()->get('question');
-    foreach ($files as $file_name => $content) {
+
+    foreach ($files as $file_name => $file_info) {
+
+      // Support short syntax `$this->files['File.php'] => 'Rendered content';`.
+      $content = is_array($file_info) ? $file_info['content'] : $file_info;
+
+      $is_directory = $content === NULL;
+
+      // Default mode for all parent directories is 0777. It can be modified by
+      // changing umask.
+      $mode = isset($file_info['mode']) ? $file_info['mode'] : ($is_directory ? 0755 : 0644);
+
+      $merge_type = isset($file_info['merge_type']) ? $file_info['merge_type'] : 'replace';
 
       $file_path = $this->baseDirectory . $file_name;
-      if ($this->filesystem->exists($file_path)) {
-        $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path);
-        if (!$this->askConfirmationQuestion($question_text)) {
-          continue;
+      if ($this->filesystem->exists($file_path) && !$is_directory) {
+
+        if ($merge_type == 'replace') {
+          $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path);
+          if (!$this->askConfirmationQuestion($question_text)) {
+            continue;
+          }
         }
+        elseif ($merge_type == 'append') {
+          $content = file_get_contents($file_path) . "\n" . $content;
+        }
+        else {
+          throw new \LogicException("Unsupported merge type: $merge_type.");
+        }
+
+      }
+      // File doc makes sense only for new files.
+      elseif (isset($file_info['file_doc'])) {
+        $content = $file_info['file_doc'] . "\n" . $content;
       }
 
-      // NULL means it is a directory.
-      if ($content === NULL) {
-        $this->filesystem->mkdir([$file_path], 0775);
+      // Save data to file system.
+      if ($is_directory) {
+        $this->filesystem->mkdir([$file_path], $mode);
       }
       else {
-        // Default mode for all parent directories is 0777. It can be
-        // modified by the current umask, which you can change using umask().
         $this->filesystem->dumpFile($file_path, $content);
-        $this->filesystem->chmod($file_path, 0644);
+        $this->filesystem->chmod($file_path, $mode);
       }
 
       $dumped_files[] = $file_name;
-    }
-
-    return $dumped_files;
-  }
-
-  /**
-   * Dumps hooks.
-   *
-   * @param array $hooks
-   *   Hooks to dump.
-   *
-   * @return array
-   *   List of created or updated files.
-   */
-  protected function dumpHooks(array $hooks) {
-    $dumped_files = [];
-
-    // Dump hooks.
-    foreach ($hooks as $file_name => $file_hooks) {
-      // TODO: Fix this.
-      $file_hooks = isset($file_hooks[0]) ? $file_hooks : [$file_hooks];
-      foreach ($file_hooks as $hook_info) {
-        $file_path = $this->baseDirectory . $file_name;
-        // If the file exists append hook code to it.
-        if ($this->filesystem->exists($file_path)) {
-          $original_content = file_get_contents($file_path);
-          $content = $original_content . "\n" . $hook_info['code'];
-        }
-        // Otherwise create a new file with provided file doc comment.
-        else {
-          $content = $hook_info['file_doc'] . "\n" . $hook_info['code'];
-        }
-        $this->filesystem->dumpFile($file_path, $content);
-        $this->filesystem->chmod($file_path, 0644);
-        $dumped_files[] = $file_name;
-      }
     }
 
     return $dumped_files;

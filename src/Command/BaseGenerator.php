@@ -73,13 +73,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $services = [];
 
   /**
-   * Hooks to dump.
-   *
-   * @var array
-   */
-  protected $hooks = [];
-
-  /**
    * {@inheritdoc}
    */
   protected function configure() {
@@ -133,7 +126,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   public function getAssets() {
     return [
       'files' => $this->files,
-      'hooks' => $this->hooks,
       'services' => $this->services,
     ];
   }

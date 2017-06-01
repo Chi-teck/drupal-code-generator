@@ -34,18 +34,22 @@ class Template extends BaseGenerator {
     $path = 'templates/' . $vars['template_name'] . '.html.twig';
     $this->files[$path] = $this->render('d8/template-template.twig', $vars);
 
+    $content = '';
     if ($vars['create_theme']) {
-      $this->hooks[$vars['machine_name'] . '.module'][] = [
-        'file_doc' => $this->render('d8/file-docs/module.twig', $vars),
-        'code' => $this->render('d8/template-theme.twig', $vars),
-      ];
+      $content = $this->render('d8/template-theme.twig', $vars);
     }
     if ($vars['create_preprocess']) {
-      $this->hooks[$vars['machine_name'] . '.module'][] = [
+      $content .= "\n" . $this->render('d8/template-preprocess.twig', $vars);
+    }
+
+    if ($content) {
+      $this->files[$vars['machine_name'] . '.module'] = [
         'file_doc' => $this->render('d8/file-docs/module.twig', $vars),
-        'code' => $this->render('d8/template-preprocess.twig', $vars),
+        'content' => $content,
+        'merge_type' => 'append',
       ];
     }
+
   }
 
 }
