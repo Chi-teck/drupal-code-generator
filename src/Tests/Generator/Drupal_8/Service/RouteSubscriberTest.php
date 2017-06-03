@@ -14,10 +14,12 @@ class RouteSubscriberTest extends GeneratorTestCase {
   protected $answers = [
     'Foo',
     'foo',
+    TRUE,
   ];
 
   protected $fixtures = [
     'src/EventSubscriber/FooRouteSubscriber.php' => __DIR__ . '/_route_subscriber.php',
+    'tests.services.yml' => __DIR__ . '/_route_subscriber.services.yml',
   ];
 
 }
