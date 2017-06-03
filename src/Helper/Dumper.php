@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper as YamlDumper;
 
 /**
  * Output dumper form generators.
@@ -22,13 +21,6 @@ class Dumper extends Helper {
    * @var \Symfony\Component\Filesystem\Filesystem
    */
   public $filesystem;
-
-  /**
-   * The yaml dumper.
-   *
-   * @var \Symfony\Component\Yaml\Dumper
-   */
-  protected $yamlDumper;
 
   /**
    * The base directory.
@@ -63,15 +55,11 @@ class Dumper extends Helper {
    *
    * @param \Symfony\Component\Filesystem\Filesystem $filesystem
    *   The file system utility.
-   * @param \Symfony\Component\Yaml\Dumper $yaml_dumper
-   *   The yaml dumper.
    * @param bool $override
    *   (optional) Indicates weather or not existing files can be overridden.
    */
-  public function __construct(Filesystem $filesystem, YamlDumper $yaml_dumper, $override = NULL) {
+  public function __construct(Filesystem $filesystem, $override = NULL) {
     $this->filesystem = $filesystem;
-    $this->yamlDumper = $yaml_dumper;
-    $this->yamlDumper->setIndentation(2);
     $this->override = $override;
   }
 
