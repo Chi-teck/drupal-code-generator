@@ -14,12 +14,11 @@ class EventSubscriberTest extends GeneratorTestCase {
   protected $answers = [
     'Foo',
     'foo',
-    TRUE,
   ];
 
   protected $fixtures = [
     'src/EventSubscriber/FooSubscriber.php' => __DIR__ . '/_event_subscriber.php',
-    'tests.services.yml' => __DIR__ . '/_event_subscriber.services.yml',
+    'foo.services.yml' => __DIR__ . '/_event_subscriber.services.yml',
   ];
 
 }
