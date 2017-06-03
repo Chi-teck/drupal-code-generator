@@ -30,21 +30,21 @@ class Navigation extends Command {
     // Initialize the menu structure.
     $this->menuTree = [];
     $aliases = [];
-    foreach ($commands as $index => $command) {
+    foreach ($commands as $command) {
       $command_name = $command->getName();
-      $command_subnames = explode(':', $command_name);
+      $sub_names = explode(':', $command_name);
 
-      $this->arraySetNestedValue($this->menuTree, $command_subnames, TRUE);
+      $this->arraySetNestedValue($this->menuTree, $sub_names, TRUE);
 
-      // The last subname is actual command name so it should not be used as
-      // an alias for navigation command.
-      array_pop($command_subnames);
+      // The last sub-name is actual command name so it should not be used as an
+      // alias for navigation command.
+      array_pop($sub_names);
 
-      // We cannot use $application->getNamespaces() here because
-      // the application is not ready at this point.
+      // We cannot use $application->getNamespaces() here because the
+      // application is not ready at this point.
       $alias = '';
-      foreach ($command_subnames as $key => $subname) {
-        $alias = $alias . ':' . $subname;
+      foreach ($sub_names as $sub_name) {
+        $alias = $alias . ':' . $sub_name;
         $aliases[] = ltrim($alias, ':');
       }
     }

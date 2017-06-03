@@ -44,7 +44,7 @@ abstract class GeneratorTestCase extends TestCase {
     $this->command = new $command_class();
     $this->commandName = $this->command->getName();
 
-    $this->application = dcg_create_application([DCG_ROOT . '/src/Templates']);
+    $this->application = dcg_create_application();
     $this->application->add($this->command);
 
     $this->mockQuestionHelper();
@@ -67,7 +67,7 @@ abstract class GeneratorTestCase extends TestCase {
     $question_helper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     foreach ($this->answers as $key => $answer) {
-      // @TODO: Figure out where this key ofset comes from.
+      // @TODO: Figure out where this key offset comes from.
       $question_helper->expects($this->at($key + 2))
         ->method('ask')
         ->willReturn($answer);
@@ -91,6 +91,11 @@ abstract class GeneratorTestCase extends TestCase {
 
   /**
    * Checks the file.
+   *
+   * @param string $file
+   *   The file to check.
+   * @param string $fixture
+   *   The fixture to compare the file content.
    */
   protected function checkFile($file, $fixture) {
     $this->assertFileExists($this->destination . '/' . $file);

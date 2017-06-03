@@ -117,7 +117,7 @@ class Dumper extends Helper {
 
     $dumped_files = array_merge(
       $this->dumpFiles($assets['files']),
-      $this->dumpServices($assets['services'], $extension_root)
+      $this->dumpServices($assets['services'])
     );
 
     $input->setInteractive($interactive);
@@ -191,15 +191,13 @@ class Dumper extends Helper {
    *
    * @param array $services
    *   Services to dump.
-   * @param string $extension_root
-   *   Extension root directory.
    *
    * @return array
    *   List of created or updated files.
    *
    * @todo Provide a method for dumping any kind of yml (not just services).
    */
-  protected function dumpServices(array $services, $extension_root) {
+  protected function dumpServices(array $services) {
 
     $dumped_files = [];
 
