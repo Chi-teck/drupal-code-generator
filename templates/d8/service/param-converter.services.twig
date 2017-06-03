@@ -1,0 +1,7 @@
+services:
+  {{ machine_name }}.foo_param_converter:
+    class: Drupal\{{ machine_name }}\{{ class }}
+    arguments:
+      - @database
+    tags:
+      - { name: paramconverter }

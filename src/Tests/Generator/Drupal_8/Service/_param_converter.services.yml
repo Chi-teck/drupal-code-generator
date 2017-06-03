@@ -2,6 +2,6 @@ services:
   example.foo_param_converter:
     class: Drupal\example\FooParamConverter
     arguments:
-      - '@database'
+      - @database
     tags:
       - { name: paramconverter }
