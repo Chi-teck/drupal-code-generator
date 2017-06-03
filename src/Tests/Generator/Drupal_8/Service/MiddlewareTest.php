@@ -14,12 +14,11 @@ class MiddlewareTest extends GeneratorTestCase {
   protected $answers = [
     'Foo',
     'foo',
-    TRUE,
   ];
 
   protected $fixtures = [
     'src/FooMiddleware.php' => __DIR__ . '/_middleware.php',
-    'tests.services.yml' => __DIR__ . '/_middleware.services.yml',
+    'foo.services.yml' => __DIR__ . '/_middleware.services.yml',
   ];
 
 }

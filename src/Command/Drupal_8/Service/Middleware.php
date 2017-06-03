@@ -27,15 +27,7 @@ class Middleware extends BaseGenerator {
     $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/middleware.twig', $vars);
 
-    $this->services[$vars['machine_name'] . '.middleware'] = [
-      'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
-      'tags' => [
-        [
-          'name' => 'http_middleware',
-          'priority' => 1000,
-        ],
-      ],
-    ];
+    $this->addFile($vars['machine_name'] . '.services.yml', 'd8/service/middleware.services.twig', $vars, 1);
   }
 
 }

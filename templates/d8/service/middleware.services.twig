@@ -1,0 +1,5 @@
+services:
+  {{ machine_name }}.middleware:
+    class: Drupal\{{ machine_name }}\{{ class }}
+    tags:
+      - { name: http_middleware, priority: 1000 }
