@@ -34,10 +34,11 @@ class Style extends BaseGenerator {
     $template_path = 'templates/' . 'views-style-' . str_replace('_', '-', $vars['plugin_id']) . '.html.twig';
     $this->files[$template_path] = $this->render('d8/plugin/views/style-template.twig', $vars);
 
+    $header = $this->render('d8/file-docs/module.twig', $vars);
     $this->files[$vars['machine_name'] . '.module'] = [
-      'file_doc' => $this->render('d8/file-docs/module.twig', $vars),
-      'content' => $this->render('d8/plugin/views/style-preprocess.twig', $vars),
+      'content' => $header . "\n" . $this->render('d8/plugin/views/style-preprocess.twig', $vars),
       'merge_type' => 'append',
+      'header_height' => 7,
     ];
   }
 

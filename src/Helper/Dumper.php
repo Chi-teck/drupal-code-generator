@@ -141,6 +141,8 @@ class Dumper extends Helper {
       // Support short syntax `$this->files['File.php'] => 'Rendered content';`.
       $content = is_array($file_info) ? $file_info['content'] : $file_info;
 
+      $header_height = isset($file_info['header_height']) ? $file_info['header_height'] : 0;
+
       $is_directory = $content === NULL;
 
       // Default mode for all parent directories is 0777. It can be modified by
@@ -159,16 +161,15 @@ class Dumper extends Helper {
           }
         }
         elseif ($merge_type == 'append') {
+          if ($header_height > 0) {
+            $content = Utils::removeHeader($content, $header_height);
+          }
           $content = file_get_contents($file_path) . "\n" . $content;
         }
         else {
           throw new \LogicException("Unsupported merge type: $merge_type.");
         }
 
-      }
-      // File doc makes sense only for new files.
-      elseif (isset($file_info['file_doc'])) {
-        $content = $file_info['file_doc'] . "\n" . $content;
       }
 
       // Save data to file system.

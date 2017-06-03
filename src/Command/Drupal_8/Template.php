@@ -43,10 +43,11 @@ class Template extends BaseGenerator {
     }
 
     if ($content) {
+      $header = $this->render('d8/file-docs/module.twig', $vars);
       $this->files[$vars['machine_name'] . '.module'] = [
-        'file_doc' => $this->render('d8/file-docs/module.twig', $vars),
-        'content' => $content,
+        'content' => $header . "\n" . $content,
         'merge_type' => 'append',
+        'header_height' => 7,
       ];
     }
 
