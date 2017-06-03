@@ -15,12 +15,11 @@ class TwigExtensionTest extends GeneratorTestCase {
     'Example',
     'example',
     'ExampleTwigExtension',
-    TRUE,
   ];
 
   protected $fixtures = [
     'src/ExampleTwigExtension.php' => __DIR__ . '/_twig_extension.php',
-    'tests.services.yml' => __DIR__ . '/_twig_extension.services.yml',
+    'example.services.yml' => __DIR__ . '/_twig_extension.services.yml',
   ];
 
 }

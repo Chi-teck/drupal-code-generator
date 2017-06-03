@@ -37,6 +37,8 @@ class TwigExtension extends BaseGenerator {
       'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
       'tags' => [['name' => 'twig.extension']],
     ];
+
+    $this->addFile($vars['machine_name'] . '.services.yml', 'd8/service/twig-extension.services.twig', $vars, 1);
   }
 
 }

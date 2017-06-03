@@ -1,0 +1,5 @@
+services:
+  {{ machine_name }}.twig_extension:
+    class: Drupal\{{ machine_name }}\{{ class }}
+    tags:
+      - { name: twig.extension }
