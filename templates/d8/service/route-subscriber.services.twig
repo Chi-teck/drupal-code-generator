@@ -1,0 +1,5 @@
+services:
+  {{ machine_name }}.route_subscriber:
+    class: Drupal\{{ machine_name }}\EventSubscriber\{{ class }}
+    tags:
+      - { name: event_subscriber }
