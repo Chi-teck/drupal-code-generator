@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Dumper as YamlDumper;
 
 define('DCG_ROOT', dirname(__DIR__));
-define('DCG_HOME', $_SERVER['HOME'] . '/.dcg');
+define('DCG_HOME', (isset($_SERVER['HOME']) ? $_SERVER['HOME'] : getenv('HOME')) . '/.dcg');
 define('DCG_SANDBOX', DCG_ROOT . '/sandbox');
 
 /**
