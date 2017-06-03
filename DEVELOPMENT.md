@@ -33,7 +33,7 @@ export PATH=~/.composer/vendor/bin:$PATH
 
 The following alias helps you run tests form any location:
 ```
-alias dcg-test="(cd /path/to/drupal-code-generator && phpunit && phpcs --standard=./rulset.xml)"
+alias dcg-test="(cd /path/to/drupal-code-generator && phpunit && phpcs --standard=./phpcs.xml)"
 ```
 
 ## Creating a Phar
