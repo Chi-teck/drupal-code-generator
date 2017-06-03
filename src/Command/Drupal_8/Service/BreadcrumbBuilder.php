@@ -32,16 +32,7 @@ class BreadcrumbBuilder extends BaseGenerator {
 
     $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/breadcrumb-builder.twig', $vars);
-
-    $this->services[$vars['machine_name'] . '.breadcrumb'] = [
-      'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
-      'tags' => [
-        [
-          'name' => 'breadcrumb_builder',
-          'priority' => 1000,
-        ],
-      ],
-    ];
+    $this->addFile($vars['machine_name']. '.services.yml', 'd8/service/breadcrumb-builder.services.twig', $vars, 1);
   }
 
 }

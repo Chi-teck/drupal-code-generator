@@ -192,4 +192,16 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     return $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions);
   }
 
+  /**
+   * @param $template
+   * @param array $vars
+   */
+  protected function addFile($path, $template, array $vars, $header_height = 0) {
+    $this->files[$path] = [
+      'content' => $this->render($template, $vars),
+      'merge_type' => $header_height > 0 ? 'append' : 'replace',
+      'header_height' => $header_height,
+    ];
+  }
+
 }
