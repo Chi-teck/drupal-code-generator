@@ -3,6 +3,7 @@
   <description>Drupal Code Generator coding standard</description>
   <file>./src</file>
   <rule ref="Drupal"/>
+  <rule ref="DrupalPractice"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>
