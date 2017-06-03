@@ -34,10 +34,7 @@ class Custom extends BaseGenerator {
     $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/custom.twig', $vars);
 
-    $this->services[$vars['service_name']] = [
-      'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
-      'arguments' => ['@entity.query', '@entity_type.manager'],
-    ];
+    $this->addFile($vars['machine_name'] . '.services.yml', 'd8/service/custom.services.twig', $vars, 1);
   }
 
 }

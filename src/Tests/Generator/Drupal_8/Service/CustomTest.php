@@ -16,12 +16,11 @@ class CustomTest extends GeneratorTestCase {
     'foo',
     'foo.example',
     'Example',
-    TRUE,
   ];
 
   protected $fixtures = [
     'src/Example.php' => __DIR__ . '/_custom.php',
-    'tests.services.yml' => __DIR__ . '/_custom.services.yml',
+    'foo.services.yml' => __DIR__ . '/_custom.services.yml',
   ];
 
 }
