@@ -132,25 +132,25 @@ class Dumper extends Helper {
       // changing umask.
       $mode = isset($file_info['mode']) ? $file_info['mode'] : ($is_directory ? 0755 : 0644);
 
-      $merge_type = isset($file_info['merge_type']) ? $file_info['merge_type'] : 'replace';
+      $action = isset($file_info['action']) ? $file_info['action'] : 'replace';
 
       $file_path = $this->baseDirectory . $file_name;
       if ($this->filesystem->exists($file_path) && !$is_directory) {
 
-        if ($merge_type == 'replace') {
+        if ($action == 'replace') {
           $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path);
           if (!$this->askConfirmationQuestion($question_text)) {
             continue;
           }
         }
-        elseif ($merge_type == 'append') {
+        elseif ($action == 'append') {
           if ($header_height > 0) {
             $content = Utils::removeHeader($content, $header_height);
           }
           $content = file_get_contents($file_path) . "\n" . $content;
         }
         else {
-          throw new \LogicException("Unsupported merge type: $merge_type.");
+          throw new \LogicException("Unsupported action: $action.");
         }
 
       }

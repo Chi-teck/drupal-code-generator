@@ -197,7 +197,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected function addFile($path, $template, array $vars, $header_height = 0) {
     $this->files[$path] = [
       'content' => $this->render($template, $vars),
-      'merge_type' => $header_height > 0 ? 'append' : 'replace',
+      'action' => $header_height > 0 ? 'append' : 'replace',
       'header_height' => $header_height,
     ];
   }
