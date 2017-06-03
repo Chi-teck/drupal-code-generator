@@ -8,9 +8,13 @@ namespace DrupalCodeGenerator\Command;
 interface GeneratorInterface {
 
   /**
-   * Getter for dynamic properties.
+   * Returns list of rendered files.
+   *
+   * @return array
+   *   An associative array where each key is path to a file and value is
+   *   rendered content.
    */
-  public function getAssets();
+  public function getFiles();
 
   /**
    * Sets working directory.

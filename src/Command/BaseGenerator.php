@@ -66,13 +66,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $files = [];
 
   /**
-   * Services to dump.
-   *
-   * @var array
-   */
-  protected $services = [];
-
-  /**
    * {@inheritdoc}
    */
   protected function configure() {
@@ -123,11 +116,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  public function getAssets() {
-    return [
-      'files' => $this->files,
-      'services' => $this->services,
-    ];
+  public function getFiles() {
+    return $this->files;
   }
 
   /**
@@ -193,8 +183,16 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   }
 
   /**
-   * @param $template
+   * Add a file to generator stack.
+   *
+   * @param string $path
+   *   Path to a file.
+   * @param string $template
+   *   Twig template to render.
    * @param array $vars
+   *   Twig variables.
+   * @param int $header_height
+   *   (optional) Height of the file header.
    */
   protected function addFile($path, $template, array $vars, $header_height = 0) {
     $this->files[$path] = [
