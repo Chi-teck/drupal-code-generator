@@ -226,6 +226,9 @@ class Dumper extends Helper {
 
         }
       }
+      else {
+        $service_groups[$extension_name][$service_name] = $service;
+      }
     }
 
     foreach ($service_groups as $group_name => $group) {
