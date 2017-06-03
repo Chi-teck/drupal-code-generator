@@ -47,7 +47,7 @@ class Template extends BaseGenerator {
       $this->files[$vars['machine_name'] . '.module'] = [
         'content' => $header . "\n" . $content,
         'action' => 'append',
-        'header_height' => 7,
+        'header_size' => 7,
       ];
     }
 

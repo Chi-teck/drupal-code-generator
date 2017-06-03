@@ -124,7 +124,7 @@ class Dumper extends Helper {
       // Support short syntax `$this->files['File.php'] => 'Rendered content';`.
       $content = is_array($file_info) ? $file_info['content'] : $file_info;
 
-      $header_height = isset($file_info['header_height']) ? $file_info['header_height'] : 0;
+      $header_size = isset($file_info['header_size']) ? $file_info['header_size'] : 0;
 
       $is_directory = $content === NULL;
 
@@ -144,8 +144,8 @@ class Dumper extends Helper {
           }
         }
         elseif ($action == 'append') {
-          if ($header_height > 0) {
-            $content = Utils::removeHeader($content, $header_height);
+          if ($header_size > 0) {
+            $content = Utils::removeHeader($content, $header_size);
           }
           $content = file_get_contents($file_path) . "\n" . $content;
         }

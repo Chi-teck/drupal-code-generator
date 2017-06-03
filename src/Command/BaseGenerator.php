@@ -191,14 +191,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Twig template to render.
    * @param array $vars
    *   Twig variables.
-   * @param int $header_height
+   * @param int $header_size
    *   (optional) Height of the file header.
    */
-  protected function addFile($path, $template, array $vars, $header_height = 0) {
+  protected function addFile($path, $template, array $vars, $header_size = 0) {
     $this->files[$path] = [
       'content' => $this->render($template, $vars),
-      'action' => $header_height > 0 ? 'append' : 'replace',
-      'header_height' => $header_height,
+      'action' => $header_size > 0 ? 'append' : 'replace',
+      'header_size' => $header_size,
     ];
   }
 
