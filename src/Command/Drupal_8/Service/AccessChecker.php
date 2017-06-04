@@ -34,8 +34,7 @@ class AccessChecker extends BaseGenerator {
     $path = 'src/Access/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/access-checker.twig', $vars);
 
-    $this->setFile($vars['machine_name'] . '.services.yml', 'd8/service/access-checker.services.twig', $vars, 1);
-
+    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/access-checker.services.twig', $vars);
   }
 
 }

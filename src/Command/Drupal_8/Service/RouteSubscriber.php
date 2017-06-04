@@ -27,7 +27,7 @@ class RouteSubscriber extends BaseGenerator {
     $path = 'src/EventSubscriber/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/route-subscriber.twig', $vars);
 
-    $this->setFile($vars['machine_name'] . '.services.yml', 'd8/service/route-subscriber.services.twig', $vars, 1);
+    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/route-subscriber.services.twig', $vars);
   }
 
 }
