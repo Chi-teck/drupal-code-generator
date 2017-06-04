@@ -101,7 +101,7 @@ class Dumper extends Helper {
     $extension_root = Utils::getExtensionRoot($directory);
     $this->baseDirectory = ($extension_root ?: $directory) . '/';
 
-    $dumped_files = $this->dumpFiles($command->getFiles());
+    $dumped_files = $this->doDump($command->getFiles());
 
     $input->setInteractive($interactive);
     return $dumped_files;
@@ -116,7 +116,7 @@ class Dumper extends Helper {
    * @return array
    *   List of created or updated files.
    */
-  protected function dumpFiles(array $files) {
+  protected function doDump(array $files) {
     $dumped_files = [];
 
     foreach ($files as $file_name => $file_info) {
@@ -124,36 +124,39 @@ class Dumper extends Helper {
       // Support short syntax `$this->files['File.php'] => 'Rendered content';`.
       $content = is_array($file_info) ? $file_info['content'] : $file_info;
 
-      $header_size = isset($file_info['header_size']) ? $file_info['header_size'] : 0;
-
       $is_directory = $content === NULL;
+
+      $file_path = $this->baseDirectory . $file_name;
+      if ($this->filesystem->exists($file_path) && !$is_directory) {
+        $action = isset($file_info['action']) ? $file_info['action'] : 'replace';
+        if ($action == 'replace') {
+          $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path);
+          if (!$this->confirm($question_text)) {
+            continue;
+          }
+        }
+        else {
+          $original_content = file_get_contents($file_path);
+          if ($action == 'append') {
+            $header_size = isset($file_info['header_size']) ? $file_info['header_size'] : 0;
+            // Do not remove header if original file is empty.
+            if ($original_content && $header_size > 0) {
+              $content = Utils::removeHeader($content, $header_size);
+            }
+            $content = $original_content . "\n" . $content;
+          }
+          elseif (is_callable($action)) {
+            $content = $action($original_content, $content);
+          }
+          else {
+            throw new \LogicException("Unsupported action: $action.");
+          }
+        }
+      }
 
       // Default mode for all parent directories is 0777. It can be modified by
       // changing umask.
       $mode = isset($file_info['mode']) ? $file_info['mode'] : ($is_directory ? 0755 : 0644);
-
-      $action = isset($file_info['action']) ? $file_info['action'] : 'replace';
-
-      $file_path = $this->baseDirectory . $file_name;
-      if ($this->filesystem->exists($file_path) && !$is_directory) {
-
-        if ($action == 'replace') {
-          $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path);
-          if (!$this->askConfirmationQuestion($question_text)) {
-            continue;
-          }
-        }
-        elseif ($action == 'append') {
-          if ($header_size > 0) {
-            $content = Utils::removeHeader($content, $header_size);
-          }
-          $content = file_get_contents($file_path) . "\n" . $content;
-        }
-        else {
-          throw new \LogicException("Unsupported action: $action.");
-        }
-
-      }
 
       // Save data to file system.
       if ($is_directory) {
@@ -171,7 +174,7 @@ class Dumper extends Helper {
   }
 
   /**
-   * Asks user a confirmation question.
+   * Asks a user for confirmation.
    *
    * @param string $question_text
    *   The question to ask to the user.
@@ -179,7 +182,7 @@ class Dumper extends Helper {
    * @return bool
    *   User confirmation.
    */
-  protected function askConfirmationQuestion($question_text) {
+  protected function confirm($question_text) {
     // If the input is not interactive print the question with default answer.
     if ($this->override !== NULL) {
       $this->output->writeln($question_text . ($this->override ? 'Yes' : 'No'));
