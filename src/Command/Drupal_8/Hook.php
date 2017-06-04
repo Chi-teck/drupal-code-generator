@@ -50,8 +50,8 @@ class Hook extends BaseGenerator {
 
     $this->files[$vars['machine_name'] . '.' . $file_type] = [
       'content' => $header . "\n" . $content,
-      'merge_type' => 'append',
-      'header_height' => 7,
+      'action' => 'append',
+      'header_size' => 7,
     ];
   }
 

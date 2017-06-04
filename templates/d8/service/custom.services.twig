@@ -1,0 +1,6 @@
+services:
+  {{ service_name }}:
+    class: Drupal\{{ machine_name }}\{{ class }}
+    arguments:
+      - @entity.query
+      - @entity_type.manager

@@ -37,8 +37,8 @@ class Style extends BaseGenerator {
     $header = $this->render('d8/file-docs/module.twig', $vars);
     $this->files[$vars['machine_name'] . '.module'] = [
       'content' => $header . "\n" . $this->render('d8/plugin/views/style-preprocess.twig', $vars),
-      'merge_type' => 'append',
-      'header_height' => 7,
+      'action' => 'append',
+      'header_size' => 7,
     ];
   }
 

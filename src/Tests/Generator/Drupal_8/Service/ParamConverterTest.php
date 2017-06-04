@@ -20,6 +20,7 @@ class ParamConverterTest extends GeneratorTestCase {
 
   protected $fixtures = [
     'src/FooParamConverter.php' => __DIR__ . '/_param_converter.php',
+    'example.services.yml' => __DIR__ . '/_param_converter.services.yml',
   ];
 
 }

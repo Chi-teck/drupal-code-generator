@@ -18,6 +18,7 @@ class EventSubscriberTest extends GeneratorTestCase {
 
   protected $fixtures = [
     'src/EventSubscriber/FooSubscriber.php' => __DIR__ . '/_event_subscriber.php',
+    'foo.services.yml' => __DIR__ . '/_event_subscriber.services.yml',
   ];
 
 }

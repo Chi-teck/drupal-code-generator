@@ -35,15 +35,7 @@ class ParamConverter extends BaseGenerator {
     $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/param-converter.twig', $vars);
 
-    $this->services[$vars['machine_name'] . '.' . $vars['parameter_type'] . '_param_converter'] = [
-      'class' => 'Drupal\\' . $vars['machine_name'] . '\\' . $vars['class'],
-      'arguments' => ['@database'],
-      'tags' => [
-        [
-          'name' => 'paramconverter',
-        ],
-      ],
-    ];
+    $this->setFile($vars['machine_name'] . '.services.yml', 'd8/service/param-converter.services.twig', $vars, 1);
   }
 
 }

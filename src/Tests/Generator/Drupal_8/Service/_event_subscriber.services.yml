@@ -1,0 +1,7 @@
+services:
+  foo.event_subscriber:
+    class: Drupal\foo\EventSubscriber\FooSubscriber
+    arguments:
+      - @current_user
+    tags:
+      - { name: event_subscriber }

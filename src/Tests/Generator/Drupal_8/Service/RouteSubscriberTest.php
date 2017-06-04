@@ -18,6 +18,7 @@ class RouteSubscriberTest extends GeneratorTestCase {
 
   protected $fixtures = [
     'src/EventSubscriber/FooRouteSubscriber.php' => __DIR__ . '/_route_subscriber.php',
+    'foo.services.yml' => __DIR__ . '/_route_subscriber.services.yml',
   ];
 
 }

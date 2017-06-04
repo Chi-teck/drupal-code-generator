@@ -1,0 +1,5 @@
+services:
+  {{ machine_name }}.foo_access_checker:
+    class: Drupal\{{ machine_name }}\Access\{{ class }}
+    tags:
+      - { name: access_check, applies_to: _foo }

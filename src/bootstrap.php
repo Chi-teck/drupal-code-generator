@@ -12,7 +12,6 @@ use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper as YamlDumper;
 
 define('DCG_ROOT', dirname(__DIR__));
 define('DCG_HOME', (isset($_SERVER['HOME']) ? $_SERVER['HOME'] : getenv('HOME')) . '/.dcg');
@@ -28,7 +27,7 @@ function dcg_create_application() {
   $application = new Application('Drupal Code Generator', '@git-version@');
   $helperSet = $application->getHelperSet();
 
-  $dumper = new Dumper(new Filesystem(), new YamlDumper());
+  $dumper = new Dumper(new Filesystem());
   $helperSet->set($dumper);
 
   $twig_loader = new Twig_Loader_Filesystem();

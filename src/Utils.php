@@ -138,8 +138,8 @@ class Utils {
   /**
    * Removes a given number of lines from the beginning of the string.
    */
-  public static function removeHeader($content, $header_height) {
-    return implode("\n", array_slice(explode("\n", $content), $header_height));
+  public static function removeHeader($content, $header_size) {
+    return implode("\n", array_slice(explode("\n", $content), $header_size));
   }
 
 }

@@ -14,7 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class IntegrationTest extends TestCase {
 
   /**
-   * Total count of genetators.
+   * Total count of generators.
    *
    * @var int
    */
