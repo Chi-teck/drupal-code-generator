@@ -33,7 +33,7 @@ class TwigExtension extends BaseGenerator {
     $path = 'src/' . $vars['class'] . '.php';
     $this->files[$path] = $this->render('d8/service/twig-extension.twig', $vars);
 
-    $this->addFile($vars['machine_name'] . '.services.yml', 'd8/service/twig-extension.services.twig', $vars, 1);
+    $this->setFile($vars['machine_name'] . '.services.yml', 'd8/service/twig-extension.services.twig', $vars, 1);
   }
 
 }

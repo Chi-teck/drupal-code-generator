@@ -183,7 +183,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   }
 
   /**
-   * Add a file to generator stack.
+   * Renders content for a given file.
    *
    * @param string $path
    *   Path to a file.
@@ -194,7 +194,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @param int $header_size
    *   (optional) Height of the file header.
    */
-  protected function addFile($path, $template, array $vars, $header_size = 0) {
+  protected function setFile($path, $template, array $vars, $header_size = 0) {
     $this->files[$path] = [
       'content' => $this->render($template, $vars),
       'action' => $header_size > 0 ? 'append' : 'replace',
