@@ -130,7 +130,7 @@ class Dumper extends Helper {
       if ($this->filesystem->exists($file_path) && !$is_directory) {
         $action = isset($file_info['action']) ? $file_info['action'] : 'replace';
         if ($action == 'replace') {
-          $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to override it?</info> [<comment>Yes</comment>]: ', $file_path);
+          $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to replace it?</info> [<comment>Yes</comment>]: ', $file_path);
           if (!$this->confirm($question_text)) {
             continue;
           }
