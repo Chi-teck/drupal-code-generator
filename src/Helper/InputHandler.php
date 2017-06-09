@@ -66,7 +66,7 @@ class InputHandler extends Helper {
     $command = $this->getHelperSet()->getCommand();
     $directory = $command->getDirectory();
     foreach ($questions as $name => $question) {
-      list($question_text, $default_value, $validator, $suggestions, $condition) = $question;
+      list($question_text, $default_value, $validator, $suggestions, $condition, $normalizer) = $question;
 
       // Make some assumptions based on question name.
       if ($default_value === NULL) {
@@ -129,7 +129,8 @@ class InputHandler extends Helper {
             $output,
             $question_text,
             $default_value,
-            $suggestions
+            $suggestions,
+            $normalizer
           );
         }
 
@@ -157,11 +158,13 @@ class InputHandler extends Helper {
    *   Default value for the question.
    * @param array $suggestions
    *   (optional) Autocomplete values.
+   * @param callable $normalizer
+   *   A callable for adjusting user input.
    *
    * @return string
    *   The user answer.
    */
-  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, array $suggestions = NULL) {
+  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, array $suggestions = NULL, callable $normalizer = NULL) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
     $question_helper = $this->getHelperSet()->get('question');
 
@@ -180,6 +183,10 @@ class InputHandler extends Helper {
 
     if ($suggestions) {
       $question->setAutocompleterValues($suggestions);
+    }
+
+    if ($normalizer) {
+      $question->setNormalizer($normalizer);
     }
 
     $answer = $question_helper->ask(
