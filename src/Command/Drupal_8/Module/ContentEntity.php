@@ -24,7 +24,7 @@ class ContentEntity extends BaseGenerator {
     $questions = Utils::defaultQuestions() + [
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
+      'dependencies' => ['Dependencies (comma separated)', '', Utils::getDefaultValidator()],
       'entity_type_label' => [
         'Entity type label',
         function ($vars) {

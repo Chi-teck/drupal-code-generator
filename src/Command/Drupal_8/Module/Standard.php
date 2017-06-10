@@ -25,7 +25,7 @@ class Standard extends BaseGenerator {
       'description' => ['Module description', 'The description.'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
+      'dependencies' => ['Dependencies (comma separated)', '', Utils::getDefaultValidator()],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

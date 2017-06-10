@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Other;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -29,7 +30,7 @@ class NginxVirtualHost extends BaseGenerator {
         },
       ],
       'file_public_path' => ['Public file system path', 'sites/default/files'],
-      'file_private_path' => ['Private file system path', NULL, FALSE],
+      'file_private_path' => ['Private file system path', NULL, Utils::getDefaultValidator()],
       'fastcgi_pass' => ['Address of a FastCGI server', 'unix:/run/php/php7.0-fpm.sock'],
     ];
 

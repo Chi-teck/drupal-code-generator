@@ -2,13 +2,12 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\GeneratorQuestion;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Generator input handler.
@@ -52,11 +51,6 @@ class InputHandler extends Helper {
       }
     }
 
-    // Normalize questions.
-    $questions = array_map(function ($question) {
-      return array_pad($question, 5, NULL);
-    }, $questions);
-
     // Let third party applications modify these questions.
     if ($this->getHelperSet()->has('dcg_input_preprocessor')) {
       $this->getHelperSet()->get('dcg_input_preprocessor')->preprocess($questions, $this);
@@ -66,7 +60,17 @@ class InputHandler extends Helper {
     $command = $this->getHelperSet()->getCommand();
     $directory = $command->getDirectory();
     foreach ($questions as $name => $question) {
-      list($question_text, $default_value, $validator, $suggestions, $condition) = $question;
+
+      // Support array syntax.
+      if (is_array($question)) {
+        list($question_text, $default_value, $validator, $suggestions, $condition) = array_pad($question, 5, NULL);
+        $question = new GeneratorQuestion($question_text, $default_value);
+        $question->setValidator($validator);
+        $question->setAutocompleterValues($suggestions);
+        $question->setCondition($condition);
+      }
+
+      $default_value = $question->getDefault();
 
       // Make some assumptions based on question name.
       if ($default_value === NULL) {
@@ -88,6 +92,17 @@ class InputHandler extends Helper {
         }
       }
 
+      if (is_callable($default_value)) {
+        // Do not treat simple strings as callable because they may match PHP
+        // builtin functions.
+        if (!is_string($default_value) || strpos('::', $default_value) !== FALSE) {
+          $default_value = call_user_func($default_value, $vars);
+        }
+      }
+
+      $question->setDefault($default_value);
+
+      $validator = $question->getValidator();
       if ($validator === NULL) {
         switch ($name) {
           case 'machine_name':
@@ -99,18 +114,11 @@ class InputHandler extends Helper {
             $validator = [Utils::class, 'validateClassName'];
             break;
 
-          // By default all values are required.
+          // Make the value required if no validators were provided.
           default:
             $validator = [Utils::class, 'validateRequired'];
         }
-      }
-
-      if (is_callable($default_value)) {
-        // Do not treat simple strings as callable because they may match PHP
-        // builtin functions.
-        if (!is_string($default_value) || strpos('::', $default_value) !== FALSE) {
-          $default_value = call_user_func($default_value, $vars);
-        }
+        $question->setValidator($validator);
       }
 
       $error = FALSE;
@@ -121,21 +129,18 @@ class InputHandler extends Helper {
         }
         else {
           // Check if this question should be skipped.
-          if (is_callable($condition) && !$condition($vars)) {
+          if (!$question->checkCondition($vars)) {
             continue;
           }
           $answer = $this->ask(
             $input,
             $output,
-            $question_text,
-            $default_value,
-            $suggestions
+            $question
           );
+
+          $error = FALSE;
         }
 
-        if (is_callable($validator) && ($error = $validator($answer))) {
-          $output->writeln('<error>' . $error . '</error>');
-        }
       } while ($error);
 
       $vars[$name] = $answer;
@@ -151,36 +156,27 @@ class InputHandler extends Helper {
    *   Input instance.
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
-   * @param string $question_text
-   *   The text of the question.
-   * @param string $default_value
-   *   Default value for the question.
-   * @param array $suggestions
-   *   (optional) Autocomplete values.
+   * @param GeneratorQuestion $question
+   *   The question to ask.
    *
    * @return string
    *   The user answer.
    */
-  protected function ask(InputInterface $input, OutputInterface $output, $question_text, $default_value, array $suggestions = NULL) {
+  protected function ask(InputInterface $input, OutputInterface $output, GeneratorQuestion $question) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
     $question_helper = $this->getHelperSet()->get('question');
 
+    $default_value = $question->getDefault();
+    $question_text = $question->getQuestion();
+
+    // Format question text.
     $question_text = "<info>$question_text</info>";
     if ($default_value) {
       $question_text .= " [<comment>$default_value</comment>]";
     }
     $question_text .= ': ';
 
-    if ($default_value == 'yes' || $default_value == 'no') {
-      $question = new ConfirmationQuestion($question_text, $default_value == 'yes');
-    }
-    else {
-      $question = new Question($question_text, $default_value);
-    }
-
-    if ($suggestions) {
-      $question->setAutocompleterValues($suggestions);
-    }
+    $question->setQuestion($question_text);
 
     $answer = $question_helper->ask(
       $input,

@@ -25,7 +25,7 @@ class PluginManager extends BaseGenerator {
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', '', FALSE],
+      'dependencies' => ['Dependencies (comma separated)', '', Utils::getDefaultValidator()],
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

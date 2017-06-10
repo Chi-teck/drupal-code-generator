@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -25,7 +26,7 @@ class Composer extends BaseGenerator {
     $questions['description'] = [
       'Description',
       NULL,
-      FALSE,
+      Utils::getDefaultValidator(),
     ];
     $questions['type'] = [
       'Type',

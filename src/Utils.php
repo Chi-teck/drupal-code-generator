@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator;
 
+use DrupalCodeGenerator\Exception\InvalidValueException;
+
 /**
  * Helper methods for code generators.
  */
@@ -46,8 +48,9 @@ class Utils {
    */
   public static function validateMachineName($value) {
     if (!preg_match('/^[a-z][a-z0-9_]*[a-z]$/', $value)) {
-      return 'The value is not correct machine name.';
+      throw new \UnexpectedValueException('The value is not correct machine name.');
     }
+    return $value;
   }
 
   /**
@@ -57,8 +60,9 @@ class Utils {
    */
   public static function validateClassName($value) {
     if (!preg_match('/^[A-Z][a-zA-Z0-0][a-zA-Z0-9]*$/', $value)) {
-      return 'The value is not correct class name.';
+      throw new \UnexpectedValueException('The value is not correct class name.');
     }
+    return $value;
   }
 
   /**
@@ -68,8 +72,18 @@ class Utils {
     // FALSE is not considered as empty value because question helper use
     // it as negative answer on confirmation questions.
     if ($value === NULL || $value === '') {
-      return 'The value is required.';
+      throw new \UnexpectedValueException('The value is required.');
     }
+    return $value;
+  }
+
+  /**
+   * Required value validator.
+   */
+  public static function getDefaultValidator() {
+    return function ($value) {
+      return $value;
+    };
   }
 
   /**
