@@ -2,14 +2,14 @@
 
 namespace DrupalCodeGenerator;
 
-use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Question\Question as BaseQuestion;
 
-class GeneratorQuestion extends Question {
+class Question extends BaseQuestion {
 
   /**
    * @var bool|callable
    */
-  protected $condition = TRUE;
+  protected $condition;
 
   /**
    * @inheritDoc
@@ -59,7 +59,7 @@ class GeneratorQuestion extends Question {
     if (is_callable($this->condition)) {
       return $this->condition($vars);
     }
-    return $this->condition;
+    return $this->condition === NULL ? TRUE : $this->condition;
   }
 
   /**

@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\GeneratorQuestion;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Helper\Helper;
@@ -64,7 +64,7 @@ class InputHandler extends Helper {
       // Support array syntax.
       if (is_array($question)) {
         list($question_text, $default_value, $validator, $suggestions, $condition) = array_pad($question, 5, NULL);
-        $question = new GeneratorQuestion($question_text, $default_value);
+        $question = new Question($question_text, $default_value);
         $question->setValidator($validator);
         $question->setAutocompleterValues($suggestions);
         $question->setCondition($condition);
@@ -99,7 +99,6 @@ class InputHandler extends Helper {
           $default_value = call_user_func($default_value, $vars);
         }
       }
-
       $question->setDefault($default_value);
 
       $validator = $question->getValidator();
@@ -156,13 +155,13 @@ class InputHandler extends Helper {
    *   Input instance.
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
-   * @param GeneratorQuestion $question
+   * @param Question $question
    *   The question to ask.
    *
    * @return string
    *   The user answer.
    */
-  protected function ask(InputInterface $input, OutputInterface $output, GeneratorQuestion $question) {
+  protected function ask(InputInterface $input, OutputInterface $output, Question $question) {
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
     $question_helper = $this->getHelperSet()->get('question');
 
