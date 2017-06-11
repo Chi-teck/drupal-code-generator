@@ -241,7 +241,11 @@ class UtilsTest extends TestCase {
   public function testDefaultQuestions() {
     $expected = [
       'name' => ['Module name'],
-      'machine_name' => ['Module machine name', NULL, ['DrupalCodeGenerator\Utils', 'validateMachineName']],
+      'machine_name' => [
+        'Module machine name',
+        NULL,
+        ['DrupalCodeGenerator\Utils', 'validateMachineName'],
+      ],
     ];
     $this->assertEquals($expected, Utils::defaultQuestions());
   }

@@ -136,7 +136,7 @@ class InputHandler extends Helper {
    *   Input instance.
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
-   * @param Question $question
+   * @param \DrupalCodeGenerator\Question $question
    *   The question to ask.
    *
    * @return string

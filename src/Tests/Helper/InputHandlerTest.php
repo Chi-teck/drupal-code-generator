@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\InputHandler;
+use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -138,9 +139,13 @@ class InputHandlerTest extends TestCase {
     $row = [];
     $row[] = [
       // Machine name validator.
-      'machine_name' => ['Machine name'],
+      'machine_name' => [
+        'Machine name',
+        NULL,
+        [Utils::class, 'validateMachineName'],
+      ],
       // Class validator.
-      'class' => ['Class'],
+      'class' => ['Class', NULL, [Utils::class, 'validateClassName']],
       // Required value validator.
       'foo' => ['Foo'],
     ];
@@ -156,7 +161,7 @@ class InputHandlerTest extends TestCase {
       'Class: Foo: The value is required.',
       'Foo: ',
     ];
-//    $data[] = $row;
+    $data[] = $row;
 
     // Test default value callback.
     $row = [];

@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator;
 
-use DrupalCodeGenerator\Exception\InvalidValueException;
-
 /**
  * Helper methods for code generators.
  */
@@ -114,7 +112,11 @@ class Utils {
   public static function defaultQuestions() {
     return [
       'name' => ['Module name'],
-      'machine_name' => ['Module machine name', NULL, [Utils::class, 'validateMachineName']],
+      'machine_name' => [
+        'Module machine name',
+        NULL,
+        [Utils::class, 'validateMachineName'],
+      ],
     ];
   }
 
