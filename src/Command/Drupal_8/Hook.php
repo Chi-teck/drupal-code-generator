@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,16 +22,13 @@ class Hook extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
-    $questions['hook_name'] = [
-      'Hook name',
-      NULL,
-      function ($value) {
-        if (!in_array($value, $this->supportedHooks())) {
-          return 'This hook is not supported.';
-        }
-      },
-      $this->supportedHooks(),
-    ];
+    $questions['hook_name'] = new Question('Hook name');
+    $questions['hook_name']->setValidator(function ($value) {
+      if (!in_array($value, $this->supportedHooks())) {
+        return 'This hook is not supported.';
+      }
+    });
+    $questions['hook_name']->setAutocompleterValues($this->supportedHooks());
 
     $vars = $this->collectVars($input, $output, $questions);
 

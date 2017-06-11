@@ -29,13 +29,11 @@ class InputHandler extends Helper {
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
    * @param array $questions
-   *   List of questions that the user should answer. Each question is a
-   *   numeric array including the following items.
+   *   List of questions that the user should answer. Each question is either a
+   *   Question object or a numeric array including the following items.
    *     0 - string - question text.
    *     1 - string|callable|null - default value or callback.
    *     2 - callable|null - validation callback.
-   *     3 - array|null - autocomplete suggestions.
-   *     4 - callable|null - condition callback.
    *
    * @return array
    *   Template variables.
@@ -63,11 +61,8 @@ class InputHandler extends Helper {
 
       // Support array syntax.
       if (is_array($question)) {
-        list($question_text, $default_value, $validator, $suggestions, $condition) = array_pad($question, 5, NULL);
-        $question = new Question($question_text, $default_value);
-        $question->setValidator($validator);
-        $question->setAutocompleterValues($suggestions);
-        $question->setCondition($condition);
+        list($question_text, $default_value, $validator) = array_pad($question, 3, NULL);
+        $question = new Question($question_text, $default_value, $validator);
       }
 
       $default_value = $question->getDefault();
@@ -108,16 +103,11 @@ class InputHandler extends Helper {
           $answer = $answers[$name];
         }
         else {
-          // Check if this question should be skipped.
-          if (!$question->checkCondition($vars)) {
-            continue;
-          }
           $answer = $this->ask(
             $input,
             $output,
             $question
           );
-
           $error = FALSE;
         }
 
