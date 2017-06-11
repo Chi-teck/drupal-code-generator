@@ -61,6 +61,9 @@ class InputHandler extends Helper {
 
       // Support array syntax.
       if (is_array($question)) {
+        if (count($question) > 3) {
+          throw new \OutOfBoundsException('The question array is too long.');
+        }
         list($question_text, $default_value, $validator) = array_pad($question, 3, NULL);
         $question = new Question($question_text, $default_value, $validator);
       }
