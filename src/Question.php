@@ -19,15 +19,11 @@ class Question extends BaseQuestion {
    * @param callable|null $validator
    *   (Optional) The validator for the question.
    */
-  public function __construct($question, $default = NULL, $validator = [Utils::class, 'validateRequired']) {
+  public function __construct($question, $default = NULL, $validator = NULL) {
     if (($default == 'yes' || $default == 'no') && !$this->getNormalizer()) {
       $this->setNormalizer($this->getConfirmationNormalizer($default));
     }
-
-    if ($validator && !$this->getValidator()) {
-      $this->setValidator($validator);
-    }
-
+    $this->setValidator($validator);
     parent::__construct($question, $default);
   }
 
@@ -39,7 +35,7 @@ class Question extends BaseQuestion {
    */
   public function setQuestion($question) {
     // Set through the constructor because $question is private property.
-    $this->__construct($question, $this->getDefault());
+    $this->__construct($question, $this->getDefault(), $this->getValidator());
   }
 
   /**
@@ -50,7 +46,7 @@ class Question extends BaseQuestion {
    */
   public function setDefault($default) {
     // Set through the constructor because $default is private property.
-    $this->__construct($this->getQuestion(), $default);
+    $this->__construct($this->getQuestion(), $default, $this->getValidator());
   }
 
   /**

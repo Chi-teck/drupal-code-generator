@@ -26,7 +26,7 @@ class Standard extends BaseGenerator {
       'description' => ['Module description', 'The description.'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => new Question('Dependencies (comma separated)', '', NULL),
+      'dependencies' => new Question('Dependencies (comma separated)', ''),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

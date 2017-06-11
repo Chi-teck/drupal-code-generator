@@ -111,7 +111,11 @@ class Utils {
    */
   public static function defaultQuestions() {
     return [
-      'name' => ['Module name'],
+      'name' => [
+        'Module name',
+        NULL,
+        [Utils::class, 'validateRequired'],
+      ],
       'machine_name' => [
         'Module machine name',
         NULL,

@@ -147,7 +147,7 @@ class InputHandlerTest extends TestCase {
       // Class validator.
       'class' => ['Class', NULL, [Utils::class, 'validateClassName']],
       // Required value validator.
-      'foo' => ['Foo'],
+      'foo' => ['Foo', NULL, [Utils::class, 'validateRequired']],
     ];
     $row[] = "%wrong%\nexample\nb%ar\nBar\n\nexample";
     $row[] = [

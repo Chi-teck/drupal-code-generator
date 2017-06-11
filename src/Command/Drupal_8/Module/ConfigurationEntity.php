@@ -25,7 +25,7 @@ class ConfigurationEntity extends BaseGenerator {
     $questions = Utils::defaultQuestions() + [
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => new Question('Dependencies (comma separated)', '', NULL),
+      'dependencies' => new Question('Dependencies (comma separated)', ''),
       'entity_type_label' => [
         'Entity type label',
         function ($vars) {

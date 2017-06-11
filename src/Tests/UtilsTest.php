@@ -240,7 +240,11 @@ class UtilsTest extends TestCase {
    */
   public function testDefaultQuestions() {
     $expected = [
-      'name' => ['Module name'],
+      'name' => [
+        'Module name',
+        NULL,
+        ['DrupalCodeGenerator\Utils', 'validateRequired'],
+      ],
       'machine_name' => [
         'Module machine name',
         NULL,
