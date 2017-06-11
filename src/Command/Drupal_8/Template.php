@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,13 +22,13 @@ class Template extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
-    $questions['template_name'] = [
+    $questions['template_name'] = new Question(
       'Template name',
       function ($vars) {
         return str_replace('_', '-', $vars['machine_name']) . '-example';
-      },
-    ];
-    $questions['create_theme'] = ['Create theme hook?', 'yes'];
+      }
+    );
+    $questions['create_theme'] = new Question('Create theme hook?', 'yes');
     $questions['create_preprocess'] = ['Create preprocess hook?', 'yes'];
     $vars = $this->collectVars($input, $output, $questions);
 
