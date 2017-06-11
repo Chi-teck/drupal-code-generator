@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,7 +25,7 @@ class ContentEntity extends BaseGenerator {
     $questions = Utils::defaultQuestions() + [
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', '', Utils::getDefaultValidator()],
+      'dependencies' => new Question('Dependencies (comma separated)', '', NULL),
       'entity_type_label' => [
         'Entity type label',
         function ($vars) {

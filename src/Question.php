@@ -12,12 +12,17 @@ class Question extends BaseQuestion {
   protected $condition;
 
   /**
-   * @inheritDoc
+   * Constructs question object.
    */
-  public function __construct($question, $default = NULL) {
+  public function __construct($question, $default = NULL, $validator = [Utils::class, 'validateRequired']) {
     if (($default == 'yes' || $default == 'no') && !$this->getNormalizer()) {
       $this->setNormalizer($this->getConfirmationNormalizer($default));
     }
+
+    if ($validator && !$this->getValidator()) {
+      $this->setValidator($validator);
+    }
+
     parent::__construct($question, $default);
   }
 

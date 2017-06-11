@@ -106,6 +106,7 @@ class UtilsTest extends TestCase {
    * @param string $machine_name
    *   Machine name to validate.
    * @param \UnexpectedValueException|null $exception
+   *   Expected exception.
    *
    * @covers Utils::validateMachineName
    * @dataProvider validateMachineNameProvider
@@ -142,6 +143,7 @@ class UtilsTest extends TestCase {
    * @param string $class_name
    *   Class name to validate.
    * @param \UnexpectedValueException|null $exception
+   *   Expected exception.
    *
    * @covers Utils::validateClassName
    * @dataProvider validateClassNameProvider
@@ -176,7 +178,8 @@ class UtilsTest extends TestCase {
    *
    * @param mixed $value
    *   The value to validate.
-   * @param \UnexpectedValueException $exception
+   * @param \UnexpectedValueException|null $exception
+   *   Expected exception.
    *
    * @covers Utils::validateRequired
    * @dataProvider validateRequiredProvider
@@ -238,7 +241,7 @@ class UtilsTest extends TestCase {
   public function testDefaultQuestions() {
     $expected = [
       'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+      'machine_name' => ['Module machine name', NULL, ['DrupalCodeGenerator\Utils', 'validateMachineName']],
     ];
     $this->assertEquals($expected, Utils::defaultQuestions());
   }

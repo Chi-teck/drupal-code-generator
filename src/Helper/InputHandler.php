@@ -67,7 +67,6 @@ class InputHandler extends Helper {
         $question = new Question($question_text, $default_value);
         $question->setValidator($validator);
         $question->setAutocompleterValues($suggestions);
-//        var_dump($condition);
         $question->setCondition($condition);
       }
 
@@ -101,25 +100,6 @@ class InputHandler extends Helper {
         }
       }
       $question->setDefault($default_value);
-
-      $validator = $question->getValidator();
-      if ($validator === NULL) {
-        switch ($name) {
-          case 'machine_name':
-          case 'plugin_id':
-            $validator = [Utils::class, 'validateMachineName'];
-            break;
-
-          case 'class':
-            $validator = [Utils::class, 'validateClassName'];
-            break;
-
-          // Make the value required if no validators were provided.
-          default:
-            $validator = [Utils::class, 'validateRequired'];
-        }
-        $question->setValidator($validator);
-      }
 
       $error = FALSE;
       do {

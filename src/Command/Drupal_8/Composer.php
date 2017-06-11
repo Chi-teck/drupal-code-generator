@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Question;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -23,11 +23,7 @@ class Composer extends BaseGenerator {
     $questions['machine_name'] = [
       'Project machine name',
     ];
-    $questions['description'] = [
-      'Description',
-      NULL,
-      Utils::getDefaultValidator(),
-    ];
+    $questions['description'] = new Question('Description', NULL, NULL);
     $questions['type'] = [
       'Type',
       'drupal-module',

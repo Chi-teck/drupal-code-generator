@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
+use DrupalCodeGenerator\Question;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Command\BaseGenerator;
@@ -25,7 +26,7 @@ class Standard extends BaseGenerator {
       'description' => ['Module description', 'The description.'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', '', Utils::getDefaultValidator()],
+      'dependencies' => new Question('Dependencies (comma separated)', '', NULL),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

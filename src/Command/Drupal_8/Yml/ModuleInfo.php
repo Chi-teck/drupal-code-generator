@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,8 +25,8 @@ class ModuleInfo extends BaseGenerator {
       'description' => ['Description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'configure' => ['Configuration page (route name)', '', Utils::getDefaultValidator()],
-      'dependencies' => ['Dependencies (comma separated)', '', Utils::getDefaultValidator()],
+      'configure' => new Question('Configuration page (route name)', '', FALSE),
+      'dependencies' => new Question('Dependencies (comma separated)', '', FALSE),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,7 +26,7 @@ class PluginManager extends BaseGenerator {
       'description' => ['Module description', 'TODO: Write description for the module'],
       'package' => ['Package', 'custom'],
       'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => ['Dependencies (comma separated)', '', Utils::getDefaultValidator()],
+      'dependencies' => new Question('Dependencies (comma separated)', '', NULL),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

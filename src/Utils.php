@@ -78,15 +78,6 @@ class Utils {
   }
 
   /**
-   * Required value validator.
-   */
-  public static function getDefaultValidator() {
-    return function ($value) {
-      return $value;
-    };
-  }
-
-  /**
    * Returns normalized file path.
    */
   public static function normalizePath($path) {
@@ -123,7 +114,7 @@ class Utils {
   public static function defaultQuestions() {
     return [
       'name' => ['Module name'],
-      'machine_name' => ['Module machine name'],
+      'machine_name' => ['Module machine name', NULL, [Utils::class, 'validateMachineName']],
     ];
   }
 
