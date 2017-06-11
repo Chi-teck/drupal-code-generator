@@ -2,9 +2,10 @@
 
 namespace DrupalCodeGenerator\Command\Other;
 
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Command\BaseGenerator;
 
 /**
  * Implements other:apache-virtual-host command.
@@ -20,17 +21,18 @@ class ApacheVirtualHost extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
+
+    $default_docroot = function ($vars) {
+      return '/var/www/' . $vars['hostname'] . '/public';
+    };
+
     $questions = [
-      'hostname' => ['Host name', 'example.com'],
-      'docroot' => [
-        'Document root',
-        function ($vars) {
-          return '/var/www/' . $vars['hostname'] . '/public';
-        },
-      ],
+      'hostname' => new Question('Host name', 'example.com'),
+      'docroot' => new Question('Document root', $default_docroot),
     ];
+
     $vars = $this->collectVars($input, $output, $questions);
-    $this->files[$vars['hostname'] . '.conf'] = $this->render('other/apache-virtual-host.twig', $vars);
+    $this->setFile($vars['hostname'] . '.conf', 'other/apache-virtual-host.twig', $vars);
   }
 
 }

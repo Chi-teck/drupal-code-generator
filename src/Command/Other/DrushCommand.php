@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Other;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -19,27 +20,26 @@ class DrushCommand extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
+
+    $default_alias = function ($vars) {
+      return substr($vars['command_name'], 0, 3);
+    };
+
+    $default_command_file = function ($vars) {
+      $directoryBaseName = basename($this->directory);
+      // The suggestion depends on whether the command global or local.
+      $prefix = $directoryBaseName == 'drush' || $directoryBaseName == '.drush' ?
+        $vars['command_name'] : $directoryBaseName;
+      return str_replace('-', '_', $prefix) . '.drush.inc';
+    };
+
     $questions = [
-      'command_name' => ['Command name', ''],
-      'alias' => [
-        'Command alias',
-        function ($vars) {
-          return substr($vars['command_name'], 0, 3);
-        },
-      ],
-      'description' => ['Command description', 'Command description.'],
-      'argument' => ['Argument name', 'foo'],
-      'option' => ['Option name', 'bar'],
-      'command_file' => [
-        'Command name',
-        function ($vars) {
-          $directoryBaseName = basename($this->directory);
-          // The suggestion depends on whether the command global or local.
-          $prefix = $directoryBaseName == 'drush' || $directoryBaseName == '.drush' ?
-            $vars['command_name'] : $directoryBaseName;
-          return str_replace('-', '_', $prefix) . '.drush.inc';
-        },
-      ],
+      'command_name' => new Question('Command name', ''),
+      'alias' => new Question('Command alias', $default_alias),
+      'description' => new Question('Command description', 'Command description.'),
+      'argument' => new Question('Argument name', 'foo'),
+      'option' => new Question('Option name', 'bar'),
+      'command_file' => new Question('Command name', $default_command_file),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -48,10 +48,11 @@ class DrushCommand extends BaseGenerator {
 
     // Command callback name pattern gets shorter if command file name matches
     // command name.
-    $vars['command_callback_suffix'] = $vars['command_file_prefix'] == str_replace('-', '_', $vars['command_name']) ?
-      $vars['command_file_prefix'] : $vars['command_file_prefix'] . '_' . $vars['command_name'];
+    $vars['command_callback_suffix'] = $vars['command_file_prefix'] == str_replace('-', '_', $vars['command_name'])
+      ? $vars['command_file_prefix']
+      : $vars['command_file_prefix'] . '_' . $vars['command_name'];
 
-    $this->files[$vars['command_file']] = $this->render('other/drush-command.twig', $vars);
+    $this->setFile($vars['command_file'], 'other/drush-command.twig', $vars);
   }
 
 }

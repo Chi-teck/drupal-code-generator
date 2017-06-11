@@ -21,25 +21,25 @@ class NginxVirtualHost extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
+
+    $default_docroot = function ($vars) {
+      return '/var/www/' . $vars['server_name'] . '/docroot';
+    };
+
     $questions = [
-      'server_name' => ['Server name', 'example.com'],
-      'docroot' => [
-        'Document root',
-        function ($vars) {
-          return '/var/www/' . $vars['server_name'] . '/docroot';
-        },
-      ],
-      'file_public_path' => ['Public file system path', 'sites/default/files'],
-      'file_private_path' => new Question('Private file system path', NULL, NULL),
-      'fastcgi_pass' => ['Address of a FastCGI server', 'unix:/run/php/php7.0-fpm.sock'],
+      'server_name' => new Question('Server name', 'example.com'),
+      'docroot' => new Question('Document root', $default_docroot),
+      'file_public_path' => new Question('Public file system path', 'sites/default/files'),
+      'file_private_path' => new Question('Private file system path'),
+      'fastcgi_pass' => new Question('Address of a FastCGI server', 'unix:/run/php/php7.0-fpm.sock'),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
 
     $vars['file_public_path'] = trim($vars['file_public_path'], '/');
-    $vars['file_private_path  '] = trim($vars['file_private_path'], '/');
+    $vars['file_private_path'] = trim($vars['file_private_path'], '/');
 
-    $this->files[$vars['server_name']] = $this->render('other/nginx-virtual-host.twig', $vars);
+    $this->setFile($vars['server_name'], 'other/nginx-virtual-host.twig', $vars);
   }
 
 }

@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Other;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,10 +22,11 @@ class DcgCommand extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
+
     $questions = [
-      'name' => ['Command name', 'custom:example'],
-      'description' => ['Command description', 'Some description'],
-      'alias' => ['Command alias', 'example'],
+      'name' => new Question('Command name', 'custom:example'),
+      'description' => new Question('Command description', 'Some description'),
+      'alias' => new Question('Command alias', 'example'),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -33,6 +35,7 @@ class DcgCommand extends BaseGenerator {
     $last_sub_name = array_pop($sub_names);
     $vars['class'] = Utils::camelize($last_sub_name);
     $vars['namespace'] = 'DrupalCodeGenerator\Command';
+
     $file_path = $vars['class'] . '.php';
     $vars['path'] = '';
     if ($sub_names) {
@@ -41,7 +44,7 @@ class DcgCommand extends BaseGenerator {
       $vars['path'] = '/' . dirname($file_path);
     }
 
-    $this->files[$file_path] = $this->render('other/dcg-command.twig', $vars);
+    $this->setFile($file_path, 'other/dcg-command.twig', $vars);
   }
 
 }

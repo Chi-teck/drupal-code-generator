@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Other;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,15 +21,15 @@ class DrupalConsoleCommand extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
+
+    $default_command_name = function ($vars) {
+      return $vars['machine_name'] . ':example';
+    };
+
     $questions = Utils::defaultQuestions() + [
-      'command_name' => [
-        'Command name',
-        function ($vars) {
-          return $vars['machine_name'] . ':example';
-        },
-      ],
-      'description' => ['Command description', 'Command description.'],
-      'container_aware' => ['Make the command aware of the drupal site installation?', 'yes'],
+      'command_name' => new Question('Command name', $default_command_name),
+      'description' => new Question('Command description', 'Command description.'),
+      'container_aware' => new Question('Make the command aware of the drupal site installation?', 'yes'),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
@@ -36,7 +37,7 @@ class DrupalConsoleCommand extends BaseGenerator {
     $vars['command_trait'] = $vars['container_aware'] ? 'ContainerAwareCommandTrait' : 'CommandTrait';
 
     $path = 'src/Command/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('other/drupal-console-command.twig', $vars);
+    $this->setFile($path, 'other/drupal-console-command.twig', $vars);
   }
 
 }
