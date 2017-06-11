@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\InputHandler;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -137,18 +138,16 @@ class InputHandlerTest extends TestCase {
 
     // Test default validators.
     $row = [];
-    $row[] = [
-      // Machine name validator.
-      'machine_name' => [
-        'Machine name',
-        NULL,
-        [Utils::class, 'validateMachineName'],
-      ],
-      // Class validator.
-      'class' => ['Class', NULL, [Utils::class, 'validateClassName']],
-      // Required value validator.
-      'foo' => ['Foo', NULL, [Utils::class, 'validateRequired']],
-    ];
+
+    $questions = [];
+    $questions['machine_name'] = new Question('Machine name');
+    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    $questions['class'] = new Question('Class');
+    $questions['class']->setValidator([Utils::class, 'validateClassName']);
+    $questions['foo'] = new Question('Foo');
+    $questions['foo']->setValidator([Utils::class, 'validateRequired']);
+
+    $row[] = $questions;
     $row[] = "%wrong%\nexample\nb%ar\nBar\n\nexample";
     $row[] = [
       'machine_name' => 'example',

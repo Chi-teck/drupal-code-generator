@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
 
@@ -239,19 +240,11 @@ class UtilsTest extends TestCase {
    * @covers Utils::defaultQuestions
    */
   public function testDefaultQuestions() {
-    $expected = [
-      'name' => [
-        'Module name',
-        NULL,
-        ['DrupalCodeGenerator\Utils', 'validateRequired'],
-      ],
-      'machine_name' => [
-        'Module machine name',
-        NULL,
-        ['DrupalCodeGenerator\Utils', 'validateMachineName'],
-      ],
-    ];
-    $this->assertEquals($expected, Utils::defaultQuestions());
+    $questions['name'] = new Question('Module name');
+    $questions['name']->setValidator([Utils::class, 'validateRequired']);
+    $questions['machine_name'] = new Question('Module machine name');
+    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    $this->assertEquals($questions, Utils::defaultQuestions());
   }
 
   /**

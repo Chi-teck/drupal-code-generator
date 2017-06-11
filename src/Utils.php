@@ -110,18 +110,11 @@ class Utils {
    * Returns default questions.
    */
   public static function defaultQuestions() {
-    return [
-      'name' => [
-        'Module name',
-        NULL,
-        [Utils::class, 'validateRequired'],
-      ],
-      'machine_name' => [
-        'Module machine name',
-        NULL,
-        [Utils::class, 'validateMachineName'],
-      ],
-    ];
+    $questions['name'] = new Question('Module name');
+    $questions['name']->setValidator([Utils::class, 'validateRequired']);
+    $questions['machine_name'] = new Question('Module machine name');
+    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    return $questions;
   }
 
   /**

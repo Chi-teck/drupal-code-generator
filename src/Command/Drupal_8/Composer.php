@@ -23,19 +23,16 @@ class Composer extends BaseGenerator {
     $questions['machine_name'] = [
       'Project machine name',
     ];
-    $questions['description'] = new Question('Description', NULL, NULL);
-    $questions['type'] = [
-      'Type',
+    $questions['description'] = new Question('Description');
+    $questions['type'] = new Question('Type', 'drupal-module');
+    $questions['type']->setAutocompleterValues([
       'drupal-module',
-      NULL,
-      [
-        'drupal-module',
-        'drupal-theme',
-        'drupal-library',
-        'drupal-profile',
-        'drupal-drush',
-      ],
-    ];
+      'drupal-theme',
+      'drupal-library',
+      'drupal-profile',
+      'drupal-drush',
+    ]);
+
     $questions['drupal_org'] = [
       'Is this project hosted on drupal.org?',
       'no',
