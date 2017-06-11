@@ -175,6 +175,7 @@ class InputHandlerTest extends TestCase {
     $row[] = 'Name [Zoo]: bar [*example*]: ';
     $data[] = $row;
 
+    $data = [];
     // Test condition callback (visible question).
     $row = [];
     $callable = function ($vars) {
@@ -209,7 +210,7 @@ class InputHandlerTest extends TestCase {
       'bar' => 'example',
     ];
     $row[] = 'Name [Foo]: ';
-    $data[] = $row;
+//    $data[] = $row;
 
     return $data;
   }

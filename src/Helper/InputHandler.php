@@ -67,6 +67,7 @@ class InputHandler extends Helper {
         $question = new Question($question_text, $default_value);
         $question->setValidator($validator);
         $question->setAutocompleterValues($suggestions);
+//        var_dump($condition);
         $question->setCondition($condition);
       }
 

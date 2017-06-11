@@ -7,7 +7,7 @@ use Symfony\Component\Console\Question\Question as BaseQuestion;
 class Question extends BaseQuestion {
 
   /**
-   * @var bool|callable
+   * @var callable
    */
   protected $condition;
 
@@ -56,10 +56,11 @@ class Question extends BaseQuestion {
    * @return bool|callable
    */
   public function checkCondition($vars) {
-    if (is_callable($this->condition)) {
-      return $this->condition($vars);
+    $condition = $this->condition;
+    if (is_callable($condition)) {
+      return $condition($vars);
     }
-    return $this->condition === NULL ? TRUE : $this->condition;
+    return $condition === NULL ? TRUE : $condition;
   }
 
   /**
