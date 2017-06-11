@@ -64,8 +64,8 @@ class InputHandler extends Helper {
         if (count($question) > 2) {
           throw new \OutOfBoundsException('The question array is too long.');
         }
-        list($question_text, $default_value, $validator) = array_pad($question, 3, NULL);
-        $question = new Question($question_text, $default_value, $validator);
+        list($question_text, $default_value) = array_pad($question, 2, NULL);
+        $question = new Question($question_text, $default_value);
       }
 
       $default_value = $question->getDefault();
