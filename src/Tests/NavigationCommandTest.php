@@ -25,7 +25,7 @@ class NavigationCommandTest extends TestCase {
 
     // Create navigation command.
     $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators([__DIR__ . '/../Command']);
+    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Command']);
 
     $application = new Application();
     $application->addCommands($generators);

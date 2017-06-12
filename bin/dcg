@@ -13,7 +13,7 @@ $application = dcg_create_application();
 
 // Discover generators.
 $discovery = new GeneratorDiscovery(new Filesystem());
-$commands_directories[] = __DIR__ . '/../src/Command';
+$commands_directories[] = DCG_ROOT . '/src/Command';
 $home = Utils::getHomeDirectory();
 if (file_exists($home . '/.dcg/Command')) {
   $commands_directories[] = $home . '/.dcg/Command';

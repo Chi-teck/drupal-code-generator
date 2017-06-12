@@ -82,7 +82,7 @@ class IntegrationTest extends TestCase {
     $this->application = dcg_create_application();
 
     $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators([__DIR__ . '/../Command']);
+    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Command']);
 
     $this->application->addCommands($generators);
 
