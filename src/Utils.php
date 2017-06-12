@@ -107,13 +107,31 @@ class Utils {
   }
 
   /**
-   * Returns default questions.
+   * Returns default questions for module generators.
+   *
+   * @return \DrupalCodeGenerator\Question[]
+   *   Array of default questions.
    */
   public static function defaultQuestions() {
     $questions['name'] = new Question('Module name');
     $questions['name']->setValidator([Utils::class, 'validateRequired']);
     $questions['machine_name'] = new Question('Module machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    return $questions;
+  }
+
+  /**
+   * Returns default questions for plugin generators.
+   *
+   * @return \DrupalCodeGenerator\Question[]
+   *   Array of default plugin questions.
+   */
+  public static function defaultPluginQuestions() {
+    $questions = Utils::defaultQuestions();
+    $questions['plugin_label'] = new Question('Plugin label', 'Example');
+    $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
+    $questions['plugin_id'] = new Question('Plugin ID', [Utils::class, 'defaultPluginId']);
+    $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
     return $questions;
   }
 

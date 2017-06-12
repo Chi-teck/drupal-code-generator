@@ -20,11 +20,7 @@ class Widget extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'plugin_label' => ['Widget name', 'Example'],
-      'plugin_id' => ['Widget machine name'],
-    ];
-
+    $questions = Utils::defaultPluginQuestions();
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Widget');
 

@@ -20,9 +20,7 @@ class Action extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'plugin_label' => ['Plugin label', 'Example'],
-      'plugin_id' => ['Plugin ID'],
+    $questions = Utils::defaultPluginQuestions() + [
       'category' => ['Action category', 'Custom'],
       'configurable' => ['Make the action configurable?', 'no'],
     ];

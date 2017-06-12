@@ -240,11 +240,18 @@ class UtilsTest extends TestCase {
    * @covers Utils::defaultQuestions
    */
   public function testDefaultQuestions() {
-    $questions['name'] = new Question('Module name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-    $questions['machine_name'] = new Question('Module machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    $questions = $this->defaultQuestions();
     $this->assertEquals($questions, Utils::defaultQuestions());
+  }
+
+  /**
+   * Test callback.
+   *
+   * @covers Utils::defaultPluginQuestions
+   */
+  public function testDefaultPluginQuestions() {
+    $questions = $this->defaultQuestions() + $this->defaultPluginQuestions();
+    $this->assertEquals($questions, Utils::defaultPluginQuestions());
   }
 
   /**
@@ -254,6 +261,35 @@ class UtilsTest extends TestCase {
    */
   public function testGetExtensionRoot() {
     $this->markTestIncomplete('This test has not been implemented yet.');
+  }
+
+  /**
+   * Returns default questions.
+   *
+   * @return array
+   *   Array of default questions.
+   */
+  protected function defaultQuestions() {
+    $questions['name'] = new Question('Module name');
+    $questions['name']->setValidator([Utils::class, 'validateRequired']);
+    $questions['machine_name'] = new Question('Module machine name');
+    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    return $questions;
+  }
+
+  /**
+   * Returns default plugin questions.
+   *
+   * @return array
+   *   Array of default plugin questions.
+   */
+  protected function defaultPluginQuestions() {
+    $questions = $this->defaultQuestions();
+    $questions['plugin_label'] = new Question('Plugin label', 'Example');
+    $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
+    $questions['plugin_id'] = new Question('Plugin ID', [Utils::class, 'defaultPluginId']);
+    $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
+    return $questions;
   }
 
 }

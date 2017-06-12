@@ -20,10 +20,7 @@ class Formatter extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'plugin_label' => ['Formatter name', 'Example'],
-      'plugin_id' => ['Formatter machine name'],
-    ];
+    $questions = Utils::defaultPluginQuestions();
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Formatter');

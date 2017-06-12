@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,11 +21,9 @@ class Block extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'plugin_label' => ['Block admin label', 'Example'],
-      'plugin_id' => ['Plugin ID'],
-      'category' => ['Block category', 'Custom'],
-    ];
+    $questions = Utils::defaultPluginQuestions();
+    $questions['plugin_label']->setQuestion('Block admin label');
+    $questions['category'] = new Question('Block category', 'Custom');
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Block');

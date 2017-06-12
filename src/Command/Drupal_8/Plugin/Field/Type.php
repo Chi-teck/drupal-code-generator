@@ -20,10 +20,7 @@ class Type extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'plugin_label' => ['Field type name', 'Example'],
-      'plugin_id' => ['Field type machine name'],
-    ];
+    $questions = Utils::defaultPluginQuestions();
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Item');

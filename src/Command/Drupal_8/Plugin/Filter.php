@@ -20,10 +20,7 @@ class Filter extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'plugin_label' => ['Filter name', 'Example'],
-      'plugin_id' => ['Filter machine name'],
-    ];
+    $questions = Utils::defaultPluginQuestions();
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label']);
