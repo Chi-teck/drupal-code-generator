@@ -146,4 +146,11 @@ class Utils {
     return implode("\n", array_slice(explode("\n", $content), $header_size));
   }
 
+  /**
+   * Return the user's home directory.
+   */
+  public static function getHomeDirectory() {
+    return isset($_SERVER['HOME']) ? $_SERVER['HOME'] : getenv('HOME');
+  }
+
 }

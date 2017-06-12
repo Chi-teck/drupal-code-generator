@@ -16,7 +16,14 @@ class DcgCommand extends BaseGenerator {
   protected $name = 'other:dcg-command';
   protected $description = 'Generates DCG command';
   protected $alias = 'dcg-command';
-  protected $destination = DCG_HOME . '/.dcg/Command';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function configure() {
+    $this->destination = Utils::getHomeDirectory() . '/.dcg/Command';
+    parent::configure();
+  }
 
   /**
    * {@inheritdoc}

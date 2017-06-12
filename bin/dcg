@@ -6,6 +6,7 @@ $autoloader = require __DIR__ . '/../vendor/autoload.php';
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use Symfony\Component\Filesystem\Filesystem;
+use DrupalCodeGenerator\Utils;
 
 // Create an application.
 $application = dcg_create_application();
@@ -13,9 +14,10 @@ $application = dcg_create_application();
 // Discover generators.
 $discovery = new GeneratorDiscovery(new Filesystem());
 $commands_directories[] = DCG_ROOT . '/src/Command';
-if (file_exists(DCG_HOME . '/Command')) {
-  $commands_directories[] = DCG_HOME . '/Command';
-  $autoloader->addPsr4('DrupalCodeGenerator\\', DCG_HOME);
+$home = Utils::getHomeDirectory();
+if (file_exists($home . '/.dcg/Command')) {
+  $commands_directories[] = $home . '/.dcg/Command';
+  $autoloader->addPsr4('DrupalCodeGenerator\\', $home . '/.dcg');
 }
 $generators = $discovery->getGenerators($commands_directories);
 $application->addCommands($generators);
