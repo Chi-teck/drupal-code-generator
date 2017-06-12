@@ -13,8 +13,6 @@ use DrupalCodeGenerator\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 
-define('DCG_ROOT', dirname(__DIR__));
-
 /**
  * Creates an application.
  *

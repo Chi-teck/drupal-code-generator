@@ -90,7 +90,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
 
     if (!$this->templatePath) {
-      $this->templatePath = DCG_ROOT . '/templates';
+      $this->templatePath = __DIR__ . '/../../templates';
     }
   }
 
