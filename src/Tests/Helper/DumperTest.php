@@ -136,7 +136,7 @@ class DumperTest extends TestCase {
     $this->assertFileContents(['foo.txt' => $expected_content]);
     $this->assertOutput('The file {DIR}/foo.txt already exists. Would you like to replace it? [Yes]: ');
 
-    // -- Dumper with enabled override option (always yes).
+    // -- Dumper with enabled replace option (always yes).
     $this->setDumper(TRUE);
     $this->files = ['foo.txt' => $expected_content = __LINE__];
     $results = $this->dump();
@@ -144,7 +144,7 @@ class DumperTest extends TestCase {
     $this->assertFileContents();
     $this->assertOutput("The file {DIR}/foo.txt already exists. Would you like to replace it? [Yes]: Yes\n");
 
-    // -- Dumper with enabled override option (always not).
+    // -- Dumper with enabled replace option (always not).
     $this->setDumper(FALSE);
     $this->files = ['foo.txt' => __LINE__];
     $results = $this->dump();
@@ -282,11 +282,11 @@ class DumperTest extends TestCase {
   /**
    * Sets new dumper instance.
    *
-   * @param bool $override
-   *   (optional) Indicates weather or not existing files can be overridden.
+   * @param bool $replace
+   *   (optional) Indicates weather or not existing files can be replaced.
    */
-  protected function setDumper($override = NULL) {
-    $this->dumper = new Dumper(new Filesystem(), $override);
+  protected function setDumper($replace = NULL) {
+    $this->dumper = new Dumper(new Filesystem(), $replace);
     $this->dumper->setHelperSet($this->helperSet);
   }
 

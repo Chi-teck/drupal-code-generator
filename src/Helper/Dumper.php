@@ -44,23 +44,23 @@ class Dumper extends Helper {
   protected $output;
 
   /**
-   * Override flag.
+   * Replace flag.
    *
    * @var bool
    */
-  protected $override;
+  protected $replace;
 
   /**
    * Constructs a generator command.
    *
    * @param \Symfony\Component\Filesystem\Filesystem $filesystem
    *   The file system utility.
-   * @param bool $override
-   *   (optional) Indicates weather or not existing files can be overridden.
+   * @param bool $replace
+   *   (optional) Indicates weather or not existing files can be replaced.
    */
-  public function __construct(Filesystem $filesystem, $override = NULL) {
+  public function __construct(Filesystem $filesystem, $replace = NULL) {
     $this->filesystem = $filesystem;
-    $this->override = $override;
+    $this->replace = $replace;
   }
 
   /**
@@ -90,7 +90,7 @@ class Dumper extends Helper {
     $interactive = $input->isInteractive();
 
     // NULL means we should ask user for confirmation.
-    if ($this->override !== NULL) {
+    if ($this->replace !== NULL) {
       $input->setInteractive(FALSE);
     }
 
@@ -184,10 +184,10 @@ class Dumper extends Helper {
    */
   protected function confirm($question_text) {
     // If the input is not interactive print the question with default answer.
-    if ($this->override !== NULL) {
-      $this->output->writeln($question_text . ($this->override ? 'Yes' : 'No'));
+    if ($this->replace !== NULL) {
+      $this->output->writeln($question_text . ($this->replace ? 'Yes' : 'No'));
     }
-    $question = new ConfirmationQuestion($question_text, $this->override !== FALSE);
+    $question = new ConfirmationQuestion($question_text, $this->replace !== FALSE);
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
     $question_helper = $this->getHelperSet()->get('question');
     return $question_helper->ask($this->input, $this->output, $question);
