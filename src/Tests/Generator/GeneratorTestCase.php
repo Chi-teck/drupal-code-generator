@@ -2,14 +2,16 @@
 
 namespace DrupalCodeGenerator\Tests\Generator;
 
+use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Base class for generators tests.
  */
 abstract class GeneratorTestCase extends TestCase {
+
+  use WorkingDirectoryTrait;
 
   protected $application;
 
@@ -34,12 +36,12 @@ abstract class GeneratorTestCase extends TestCase {
 
   protected $class;
 
-  protected $destination;
-
   /**
    * {@inheritdoc}
    */
   public function setUp() {
+    $this->initWorkingDirectory();
+
     $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
     $this->command = new $command_class();
     $this->commandName = $this->command->getName();
@@ -49,15 +51,13 @@ abstract class GeneratorTestCase extends TestCase {
 
     $this->mockQuestionHelper();
     $this->commandTester = new CommandTester($this->command);
-
-    $this->destination = DCG_SANDBOX . '/tests';
   }
 
   /**
    * {@inheritdoc}
    */
   public function tearDown() {
-    (new Filesystem())->remove($this->destination);
+    $this->removeWorkingDirectory();
   }
 
   /**
@@ -83,7 +83,7 @@ abstract class GeneratorTestCase extends TestCase {
   protected function execute() {
     $this->commandTester->execute([
       'command' => $this->command->getName(),
-      '--directory' => $this->destination,
+      '--directory' => $this->directory,
     ]);
 
     $this->display = $this->commandTester->getDisplay();
@@ -98,8 +98,8 @@ abstract class GeneratorTestCase extends TestCase {
    *   The fixture to compare the file content.
    */
   protected function checkFile($file, $fixture) {
-    $this->assertFileExists($this->destination . '/' . $file);
-    $this->assertFileEquals($this->destination . '/' . $file, $fixture);
+    $this->assertFileExists($this->directory . '/' . $file);
+    $this->assertFileEquals($this->directory . '/' . $file, $fixture);
   }
 
   /**

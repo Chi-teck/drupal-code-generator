@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\Dumper;
+use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -16,6 +17,8 @@ use Symfony\Component\Filesystem\Filesystem;
  * A test for dumper helper.
  */
 class DumperTest extends TestCase {
+
+  use WorkingDirectoryTrait;
 
   /**
    * The input.
@@ -54,16 +57,11 @@ class DumperTest extends TestCase {
   protected $files = [];
 
   /**
-   * Working directory.
-   *
-   * @var string
-   */
-  protected $directory = DCG_SANDBOX . '/tests';
-
-  /**
    * {@inheritdoc}
    */
   public function setUp() {
+
+    $this->initWorkingDirectory();
 
     $this->input = new ArrayInput([], new InputDefinition());
     $this->output = new BufferedOutput();
@@ -91,7 +89,7 @@ class DumperTest extends TestCase {
    * {@inheritdoc}
    */
   public function tearDown() {
-    (new Filesystem())->remove($this->directory);
+    $this->removeWorkingDirectory();
   }
 
   /**

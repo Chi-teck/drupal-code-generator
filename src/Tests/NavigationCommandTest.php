@@ -14,14 +14,14 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class NavigationCommandTest extends TestCase {
 
-  protected $directory;
+  use WorkingDirectoryTrait;
 
   /**
    * Test callback.
    */
   public function testExecute() {
 
-    $this->directory = DCG_SANDBOX . '/example';
+    $this->initWorkingDirectory();
 
     // Create navigation command.
     $discovery = new GeneratorDiscovery(new Filesystem());
@@ -65,7 +65,7 @@ class NavigationCommandTest extends TestCase {
    * {@inheritdoc}
    */
   public function tearDown() {
-    (new Filesystem())->remove($this->directory);
+    $this->removeWorkingDirectory();
   }
 
 }

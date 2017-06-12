@@ -14,7 +14,6 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 
 define('DCG_ROOT', dirname(__DIR__));
-define('DCG_SANDBOX', DCG_ROOT . '/sandbox');
 
 /**
  * Creates an application.

@@ -13,6 +13,8 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class IntegrationTest extends TestCase {
 
+  use WorkingDirectoryTrait;
+
   /**
    * Total count of generators.
    *
@@ -72,18 +74,11 @@ class IntegrationTest extends TestCase {
   protected $filesystem;
 
   /**
-   * The destination directory.
-   *
-   * @var string
-   *
-   * @see Navigation::configure()
-   */
-  protected $destination;
-
-  /**
    * {@inheritdoc}
    */
   public function setUp() {
+    $this->initWorkingDirectory();
+
     $this->application = dcg_create_application();
 
     $discovery = new GeneratorDiscovery(new Filesystem());
@@ -102,8 +97,13 @@ class IntegrationTest extends TestCase {
     $this->commandTester = new CommandTester($this->command);
 
     $this->filesystem = new Filesystem();
+  }
 
-    $this->destination = DCG_SANDBOX . '/tests';
+  /**
+   * {@inheritdoc}
+   */
+  public function tearDown() {
+    $this->removeWorkingDirectory();
   }
 
   /**
@@ -112,9 +112,8 @@ class IntegrationTest extends TestCase {
   public function testExecute() {
     foreach ($this->fixtures() as $fixture) {
       $this->mockQuestionHelper($fixture['answers']);
-      $this->commandTester->execute(['command' => 'navigation', '--directory' => './sandbox/tests']);
+      $this->commandTester->execute(['command' => 'navigation', '--directory' => $this->directory]);
       $this->assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
-      $this->filesystem->remove($this->destination);
     }
   }
 

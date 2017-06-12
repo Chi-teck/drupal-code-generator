@@ -4,21 +4,21 @@ namespace DrupalCodeGenerator\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * A test for a command interaction.
  */
 class InteractionTest extends TestCase {
 
-  protected $destination;
+  use WorkingDirectoryTrait;
 
   /**
    * Test callback.
    */
   public function testExecute() {
 
-    $this->destination = DCG_SANDBOX . '/example';
+    $this->initWorkingDirectory();
+    $this->directory .= '/example';
 
     $command_class = 'DrupalCodeGenerator\Command\Drupal_8\Plugin\Block';
     /** @var \Symfony\Component\Console\Command\Command $command */
@@ -34,7 +34,7 @@ class InteractionTest extends TestCase {
     $answers = ['Foo', 'foo', 'Bar', 'foo_bar', 'custom'];
     $helper->setInputStream($this->getInputStream(implode("\n", $answers)));
 
-    $commandTester->execute(['command' => $command->getName(), '--directory' => $this->destination]);
+    $commandTester->execute(['command' => $command->getName(), '--directory' => $this->directory]);
 
     $expected_output = [
       'Module name [Example]: ',
@@ -62,7 +62,7 @@ class InteractionTest extends TestCase {
    * {@inheritdoc}
    */
   public function tearDown() {
-    (new Filesystem())->remove($this->destination);
+    $this->removeWorkingDirectory();
   }
 
 }
