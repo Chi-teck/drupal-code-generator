@@ -5,6 +5,7 @@
 namespace {{ namespace }};
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,13 +26,14 @@ class {{ class }} extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     // Ask the user some questions.
     $questions = Utils::defaultQuestions() + [
-      'description' => ['Module description'],
-      'package' => ['Package', 'custom'],
-      'version' => ['Version', '7.x-1.0-dev'],
+      'description' => new Question('Module description'),
+      'package' => new Question('Package', 'custom'),
+      'version' => new Question('Version', '7.x-1.0-dev'),
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->files[$vars['machine_name'] . '.info'] = $this->render('module-info.twig', $vars);
+    // @DCG: The template should be created under $self::templatePath directory.
+    $this->setFile($vars['machine_name'] . '.info', 'module-info.twig', $vars);
   }
 
 }
