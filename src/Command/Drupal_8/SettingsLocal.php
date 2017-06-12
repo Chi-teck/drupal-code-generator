@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\Command\Drupal_8;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 /**
  * Implements d8:settings-local command.
@@ -21,7 +22,7 @@ class SettingsLocal extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = [
-      'db_override' => ['Override database configuration?', 'yes'],
+      'db_override' => new ConfirmationQuestion('Override database configuration?', TRUE),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

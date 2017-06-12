@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
-use DrupalCodeGenerator\Question;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Command\BaseGenerator;
