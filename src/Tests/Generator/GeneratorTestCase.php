@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
@@ -79,8 +80,13 @@ abstract class GeneratorTestCase extends TestCase {
       $question_helper
         ->method('ask')
         ->will($this->returnCallback(function () {
-          preg_match('#<info>(.*)</info>#', func_get_arg(2)->getQuestion(), $match);
-          return $this->answers[$match[1]];
+          $question = func_get_arg(2);
+          preg_match('#<info>(.*)</info>#', $question->getQuestion(), $match);
+          $answer = $this->answers[$match[1]];
+          is_bool($answer)
+            ? $this->assertInstanceOf(ConfirmationQuestion::class, $question)
+            : $this->assertNotInstanceOf(ConfirmationQuestion::class, $question);
+          return $answer;
         }));
     }
 
