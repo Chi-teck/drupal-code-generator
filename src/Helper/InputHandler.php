@@ -22,7 +22,7 @@ class InputHandler extends Helper {
   }
 
   /**
-   * Interact with the user and create variables for Twig templates.
+   * Interacts with the user and returns variables for templates.
    *
    * @param \Symfony\Component\Console\Input\InputInterface $input
    *   Input instance.
@@ -38,6 +38,7 @@ class InputHandler extends Helper {
 
     $vars = [];
 
+    // A user can pass answers through command line option.
     if ($answers_raw = $input->getOption('answers')) {
       $answers = json_decode($answers_raw, TRUE);
       if (!is_array($answers)) {
@@ -87,6 +88,7 @@ class InputHandler extends Helper {
         }
       }
 
+      // Turn the callback into a value acceptable for Symfony question helper.
       if (is_callable($default_value)) {
         // Do not treat simple strings as callable because they may match PHP
         // builtin functions.
@@ -94,22 +96,19 @@ class InputHandler extends Helper {
           $default_value = call_user_func($default_value, $vars);
         }
       }
+
+      // Set trough constructor because default value has no setter method.
       $question->__construct($question->getQuestion(), $default_value);
 
-      $error = FALSE;
-      do {
-        // Do not ask if valid answer was passed through command line arguments.
-        if (!$error && isset($answers[$name])) {
-          $answer = $answers[$name];
-        }
-        else {
-          $this->formatQuestionText($question);
-          /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
-          $question_helper = $this->getHelperSet()->get('question');
-          $answer = $question_helper->ask($input, $output, $question);
-          $error = FALSE;
-        }
-      } while ($error);
+       if (isset($answers[$name])) {
+        $answer = $answers[$name];
+      }
+      else {
+        $this->formatQuestionText($question);
+        /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
+        $question_helper = $this->getHelperSet()->get('question');
+        $answer = $question_helper->ask($input, $output, $question);
+      }
 
       $vars[$name] = $answer;
     }
@@ -124,10 +123,9 @@ class InputHandler extends Helper {
    *   The question.
    */
   protected function formatQuestionText(Question $question) {
-    $default_value = $question->getDefault();
     $question_text = $question->getQuestion();
+    $default_value = $question->getDefault();
 
-    // Format question text.
     $question_text = "<info>$question_text</info>";
     if (is_bool($default_value)) {
       $default_value = $default_value ? 'Yes' : 'No';
@@ -136,6 +134,7 @@ class InputHandler extends Helper {
       $question_text .= " [<comment>$default_value</comment>]";
     }
     $question_text .= ': ';
+
     $question->__construct($question_text, $question->getDefault());
   }
 
