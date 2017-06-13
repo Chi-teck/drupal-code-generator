@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Tests for a Utils class.

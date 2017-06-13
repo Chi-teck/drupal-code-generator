@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\Question;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Generator input handler.
@@ -28,12 +28,8 @@ class InputHandler extends Helper {
    *   Input instance.
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
-   * @param array $questions
-   *   List of questions that the user should answer. Each question is either a
-   *   Question object or a numeric array including the following items.
-   *     0 - string - question text.
-   *     1 - string|callable|null - default value or callback.
-   *     2 - callable|null - validation callback.
+   * @param \Symfony\Component\Console\Question\Question[] $questions
+   *   List of questions that the user should answer.
    *
    * @return array
    *   Template variables.
@@ -70,8 +66,9 @@ class InputHandler extends Helper {
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
     $directory = $command->getDirectory();
-    foreach ($questions as $name => $question) {
 
+    foreach ($questions as $name => $question) {
+      /** @var \Symfony\Component\Console\Question\Question $question */
       $default_value = $question->getDefault();
 
       // Make some assumptions based on question name.
@@ -101,7 +98,7 @@ class InputHandler extends Helper {
           $default_value = call_user_func($default_value, $vars);
         }
       }
-      $question->setDefault($default_value);
+      $question->__construct($question->getQuestion(), $default_value);
 
       $error = FALSE;
       do {
@@ -133,7 +130,7 @@ class InputHandler extends Helper {
    *   Input instance.
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
-   * @param \DrupalCodeGenerator\Question $question
+   * @param \Symfony\Component\Console\Question\Question $question
    *   The question to ask.
    *
    * @return string
@@ -148,12 +145,15 @@ class InputHandler extends Helper {
 
     // Format question text.
     $question_text = "<info>$question_text</info>";
+    if (is_bool($default_value)) {
+      $default_value = $default_value ? 'Yes' : 'No';
+    }
     if ($default_value) {
       $question_text .= " [<comment>$default_value</comment>]";
     }
     $question_text .= ': ';
 
-    $question->setQuestion($question_text);
+    $question->__construct($question_text, $question->getDefault());
 
     $answer = $question_helper->ask(
       $input,

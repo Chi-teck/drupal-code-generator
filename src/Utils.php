@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator;
 
+use Symfony\Component\Console\Question\Question;
+
 /**
  * Helper methods for code generators.
  */

@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 /**
  * Implements d8:plugin:action command.
@@ -22,7 +23,7 @@ class Action extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions() + [
       'category' => ['Action category', 'Custom'],
-      'configurable' => ['Make the action configurable?', 'no'],
+      'configurable' => new ConfirmationQuestion('Make the action configurable?', FALSE),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
