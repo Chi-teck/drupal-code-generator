@@ -84,10 +84,6 @@ class InputHandler extends Helper {
               return Utils::human2machine(isset($vars['name']) ? $vars['name'] : basename($directory));
             };
             break;
-
-          case 'plugin_id':
-            $default_value = [Utils::class, 'defaultPluginId'];
-            break;
         }
       }
 

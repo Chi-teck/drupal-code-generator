@@ -84,7 +84,6 @@ class InputHandlerTest extends TestCase {
    * @dataProvider inputTestProvider()
    */
   public function testInputHandler($questions, $input_raw, $expected_vars, $output_raw) {
-
     $output_raw = is_array($output_raw) ? implode("\n", $output_raw) : $output_raw;
 
     $this->input->setStream($this->getInputStream($input_raw));
@@ -107,15 +106,13 @@ class InputHandlerTest extends TestCase {
     $row[] = [
       'name' => ['Name', 'Example'],
       'machine_name' => ['Machine name', 'example'],
-      'plugin_id' => ['Plugin ID', 'foo'],
     ];
     $row[] = "Example\nexample\nbar";
     $row[] = [
       'name' => 'Example',
       'machine_name' => 'example',
-      'plugin_id' => 'bar',
     ];
-    $row[] = 'Name [Example]: Machine name [example]: Plugin ID [foo]: ';
+    $row[] = 'Name [Example]: Machine name [example]: ';
     $data[] = $row;
 
     // Without default values.
@@ -133,7 +130,7 @@ class InputHandlerTest extends TestCase {
       'plugin_label' => 'Bar',
       'plugin_id' => 'bar',
     ];
-    $row[] = 'Name [Directory name]: Machine name [example]: Plugin label: Plugin ID [example_bar]: ';
+    $row[] = 'Name [Directory name]: Machine name [example]: Plugin label: Plugin ID: ';
     $data[] = $row;
 
     // Test default validators.
