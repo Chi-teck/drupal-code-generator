@@ -66,11 +66,23 @@ abstract class GeneratorTestCase extends TestCase {
   protected function mockQuestionHelper() {
     $question_helper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
-    foreach ($this->answers as $key => $answer) {
-      // @TODO: Figure out where this key offset comes from.
-      $question_helper->expects($this->at($key + 2))
+    // The answers can be either a numeric array or an associated array keyed by
+    // keyed by question text.
+    if (isset($this->answers[0])) {
+      foreach ($this->answers as $key => $answer) {
+        $question_helper
+          ->expects($this->at($key + 2))
+          ->method('ask')
+          ->willReturn($answer);
+      }
+    }
+    else {
+      $question_helper
         ->method('ask')
-        ->willReturn($answer);
+        ->will($this->returnCallback(function () {
+          preg_match('#<info>(.*)</info>#', func_get_arg(2)->getQuestion(), $match);
+          return $this->answers[$match[1]];
+        }));
     }
 
     // We override the question helper with our mock.
