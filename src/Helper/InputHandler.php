@@ -107,14 +107,12 @@ class InputHandler extends Helper {
           $answer = $answers[$name];
         }
         else {
-          $answer = $this->ask(
-            $input,
-            $output,
-            $question
-          );
+          $this->formatQuestionText($question);
+          /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
+          $question_helper = $this->getHelperSet()->get('question');
+          $answer = $question_helper->ask($input, $output, $question);
           $error = FALSE;
         }
-
       } while ($error);
 
       $vars[$name] = $answer;
@@ -124,22 +122,12 @@ class InputHandler extends Helper {
   }
 
   /**
-   * Asks a question to the user.
+   * Formats question text.
    *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   Input instance.
-   * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Output instance.
    * @param \Symfony\Component\Console\Question\Question $question
-   *   The question to ask.
-   *
-   * @return string
-   *   The user answer.
+   *   The question.
    */
-  protected function ask(InputInterface $input, OutputInterface $output, Question $question) {
-    /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
-    $question_helper = $this->getHelperSet()->get('question');
-
+  protected function formatQuestionText(Question $question) {
     $default_value = $question->getDefault();
     $question_text = $question->getQuestion();
 
@@ -152,16 +140,7 @@ class InputHandler extends Helper {
       $question_text .= " [<comment>$default_value</comment>]";
     }
     $question_text .= ': ';
-
     $question->__construct($question_text, $question->getDefault());
-
-    $answer = $question_helper->ask(
-      $input,
-      $output,
-      $question
-    );
-
-    return $answer;
   }
 
 }
