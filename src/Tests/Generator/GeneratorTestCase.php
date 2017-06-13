@@ -24,7 +24,7 @@ abstract class GeneratorTestCase extends TestCase {
 
   protected $commandName;
 
-  protected $answers;
+  protected $answers = [];
 
   protected $commandTester;
 
@@ -40,8 +40,6 @@ abstract class GeneratorTestCase extends TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->initWorkingDirectory();
-
     $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
     $this->command = new $command_class();
     $this->commandName = $this->command->getName();
@@ -49,8 +47,9 @@ abstract class GeneratorTestCase extends TestCase {
     $this->application = dcg_create_application();
     $this->application->add($this->command);
 
-    $this->mockQuestionHelper();
     $this->commandTester = new CommandTester($this->command);
+    $this->mockQuestionHelper();
+    $this->initWorkingDirectory();
   }
 
   /**
@@ -67,7 +66,7 @@ abstract class GeneratorTestCase extends TestCase {
     $question_helper = $this->createMock('Symfony\Component\Console\Helper\QuestionHelper');
 
     // The answers can be either a numeric array or an associated array keyed by
-    // keyed by question text.
+    // question text (preferable format).
     if (isset($this->answers[0])) {
       foreach ($this->answers as $key => $answer) {
         $question_helper
@@ -92,13 +91,21 @@ abstract class GeneratorTestCase extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function execute() {
+  protected function doTest() {
+    $this->removeWorkingDirectory();
     $this->commandTester->execute([
       'command' => $this->command->getName(),
       '--directory' => $this->directory,
     ]);
 
     $this->display = $this->commandTester->getDisplay();
+    $targets = implode("\n- ", array_keys($this->fixtures));
+    $output = "The following directories and files have been created or updated:\n- $targets\n";
+    $this->assertEquals($output, $this->commandTester->getDisplay());
+    // Tests may provide targets without fixtures.
+    foreach (array_filter($this->fixtures) as $target => $fixture) {
+      $this->checkFile($target, $fixture);
+    }
   }
 
   /**
@@ -117,15 +124,8 @@ abstract class GeneratorTestCase extends TestCase {
   /**
    * Test callback.
    */
-  public function testExecute() {
-    $this->execute();
-    $targets = implode("\n- ", array_keys($this->fixtures));
-    $output = "The following directories and files have been created or updated:\n- $targets\n";
-    $this->assertEquals($output, $this->commandTester->getDisplay());
-    // Tests may provide targets without fixtures.
-    foreach (array_filter($this->fixtures) as $target => $fixture) {
-      $this->checkFile($target, $fixture);
-    }
+  public function testGenerator() {
+    $this->doTest();
   }
 
 }
