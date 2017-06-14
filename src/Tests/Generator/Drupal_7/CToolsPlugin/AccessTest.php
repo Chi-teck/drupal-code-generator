@@ -16,7 +16,7 @@ class AccessTest extends GeneratorTestCase {
     'foo',
     'Example',
     'example',
-    'Some description',
+    'Some description.',
     'Custom',
     'User',
   ];

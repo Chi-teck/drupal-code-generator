@@ -7,6 +7,7 @@ use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -97,8 +98,7 @@ class InputHandler extends Helper {
         }
       }
 
-      // Set trough constructor because default value has no setter method.
-      $question->__construct($question->getQuestion(), $default_value);
+      $this->setQuestionDefault($question, $default_value);
 
       if (isset($answers[$name])) {
         $answer = $answers[$name];
@@ -135,7 +135,42 @@ class InputHandler extends Helper {
     }
     $question_text .= ': ';
 
-    $question->__construct($question_text, $question->getDefault());
+    $this->setQuestionText($question, $question_text);
+  }
+
+  /**
+   * Sets question text.
+   *
+   * @param \Symfony\Component\Console\Question\Question $question
+   *   The question to update.
+   * @param mixed $question_text
+   *   The question text.
+   */
+  protected function setQuestionText(Question $question, $question_text) {
+    // Choice question has a different constructor signature.
+    if ($question instanceof ChoiceQuestion) {
+      $question->__construct($question_text, $question->getChoices(), $question->getDefault());
+    }
+    else {
+      $question->__construct($question_text, $question->getDefault());
+    }
+  }
+
+  /**
+   * Sets question default value.
+   *
+   * @param \Symfony\Component\Console\Question\Question $question
+   *   The question to update.
+   * @param mixed $default_value
+   *   Default value for the question.
+   */
+  protected function setQuestionDefault(Question $question, $default_value) {
+    if ($question instanceof ChoiceQuestion) {
+      $question->__construct($question->getQuestion(), $question->getChoices(), $default_value);
+    }
+    else {
+      $question->__construct($question->getQuestion(), $default_value);
+    }
   }
 
 }

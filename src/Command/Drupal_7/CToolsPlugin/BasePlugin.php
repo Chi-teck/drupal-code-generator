@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Base class for d7:ctools-plugin commands.
@@ -20,28 +21,25 @@ abstract class BasePlugin extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'plugin_name' => ['Plugin name', 'Example'],
-      'plugin_machine_name' => [
-        'Plugin machine name',
-        function ($vars) {
-          return Utils::human2machine($vars['plugin_name']);
-        },
-      ],
-      'description' => ['Plugin description', 'TODO: Write description for the plugin'],
-      'category' => ['Category', 'Custom'],
-    ];
+    $questions = Utils::defaultQuestions();
+    $questions['plugin_name'] = new Question('Plugin name', 'Example');
+    $questions['plugin_name']->setValidator([Utils::class, 'validateRequired']);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $default_machine_name = function ($vars) {
+      return Utils::human2machine($vars['plugin_name']);
+    };
+    $questions['plugin_machine_name'] = new Question('Plugin machine name', $default_machine_name);
+    $questions['plugin_machine_name']->setValidator([Utils::class, 'validateMachineName']);
 
-    $question = new ChoiceQuestion(
+    $questions['description'] = new Question('Plugin description', 'Plugin description.');
+    $questions['category'] = new Question('Category', 'Custom');
+
+    $questions['context'] = new ChoiceQuestion(
       '<comment>Required context:</comment>',
       ['-', 'Node', 'User', 'Term']
     );
 
-    $vars['context'] = $this
-      ->getHelper('question')
-      ->ask($input, $output, $question);
+    $vars = $this->collectVars($input, $output, $questions);
 
     $this->files[$this->subDirectory . '/' . $vars['plugin_machine_name'] . '.inc'] = $this->render($this->template, $vars);
   }

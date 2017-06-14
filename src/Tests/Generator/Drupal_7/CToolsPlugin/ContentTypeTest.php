@@ -16,7 +16,7 @@ class ContentTypeTest extends GeneratorTestCase {
     'foo',
     'Example',
     'example',
-    'Some description',
+    'Some description.',
     'Custom',
     'Node',
   ];

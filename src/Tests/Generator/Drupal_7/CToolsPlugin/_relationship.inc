@@ -10,7 +10,7 @@
  */
 $plugin = array(
   'title' => t('Example'),
-  'description' => t('Some description'),
+  'description' => t('Some description.'),
   'required context' => new ctools_context_required(t('Term'), array('term', 'taxonomy_term')),
   'context' => 'foo_example_context',
 );

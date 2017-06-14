@@ -16,7 +16,7 @@ class RelationshipTest extends GeneratorTestCase {
     'foo',
     'Example',
     'example',
-    'Some description',
+    'Some description.',
     'custom',
     'Term',
   ];

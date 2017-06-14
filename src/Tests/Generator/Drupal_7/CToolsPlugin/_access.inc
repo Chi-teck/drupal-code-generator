@@ -11,7 +11,7 @@
 $plugin = array(
   'single' => TRUE,
   'title' => t('Example'),
-  'description' => t('Some description'),
+  'description' => t('Some description.'),
   'required context' => new ctools_context_required(t('User'), 'user'),
   'category' => t('Custom'),
   'callback' => 'foo_example_access_check',
