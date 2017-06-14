@@ -20,7 +20,6 @@
         "vendor/symfony/console",
         "vendor/symfony/filesystem",
         "vendor/symfony/polyfill-mbstring",
-        "vendor/symfony/yaml",
         "vendor/twig"
         ],
       "exclude": [
