@@ -256,16 +256,17 @@ Select generator:
   [17] composer.json
   >>> 7[K
 Select generator:
-  [0] ..
-  [1] Action links
-  [2] Info (module)
-  [3] Info (theme)
-  [4] Libraries
-  [5] Menu links
-  [6] Permissions
-  [7] Routing
-  [8] Services
-  [9] Task links
+  [0 ] ..
+  [1 ] Action links
+  [2 ] Breakpoints
+  [3 ] Info (module)
+  [4 ] Info (theme)
+  [5 ] Libraries
+  [6 ] Menu links
+  [7 ] Permissions
+  [8 ] Routing
+  [9 ] Services
+  [10] Task links
   >>> 0[K
 Select generator:
   [0 ] ..

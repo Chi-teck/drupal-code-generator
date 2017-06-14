@@ -100,7 +100,7 @@ class InputHandler extends Helper {
       // Set trough constructor because default value has no setter method.
       $question->__construct($question->getQuestion(), $default_value);
 
-       if (isset($answers[$name])) {
+      if (isset($answers[$name])) {
         $answer = $answers[$name];
       }
       else {
