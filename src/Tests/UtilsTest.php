@@ -14,7 +14,7 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::defaultPluginId
+   * @covers \DrupalCodeGenerator\Utils::defaultPluginId
    * @dataProvider defaultPluginIdProvider
    */
   public function testDefaultPluginId($machine_name, $plugin_label, $expected) {
@@ -39,7 +39,7 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::machine2human
+   * @covers \DrupalCodeGenerator\Utils::machine2human
    * @dataProvider machineToHumanProvider
    */
   public function testMachineToHuman($machine_name, $expected) {
@@ -60,7 +60,7 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::human2machine
+   * @covers \DrupalCodeGenerator\Utils::human2machine
    * @dataProvider human2machineProvider
    */
   public function testHumanToMachine($human_name, $expected) {
@@ -81,7 +81,7 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::camelize
+   * @covers \DrupalCodeGenerator\Utils::camelize
    * @dataProvider camelizeProvider
    */
   public function testCamelize($string, $upper_camel, $expected) {
@@ -109,7 +109,7 @@ class UtilsTest extends TestCase {
    * @param \UnexpectedValueException|null $exception
    *   Expected exception.
    *
-   * @covers Utils::validateMachineName
+   * @covers \DrupalCodeGenerator\Utils::validateMachineName
    * @dataProvider validateMachineNameProvider
    */
   public function testValidateMachineName($machine_name, $exception) {
@@ -146,7 +146,7 @@ class UtilsTest extends TestCase {
    * @param \UnexpectedValueException|null $exception
    *   Expected exception.
    *
-   * @covers Utils::validateClassName
+   * @covers \DrupalCodeGenerator\Utils::validateClassName
    * @dataProvider validateClassNameProvider
    */
   public function testValidateClassName($class_name, $exception) {
@@ -182,7 +182,7 @@ class UtilsTest extends TestCase {
    * @param \UnexpectedValueException|null $exception
    *   Expected exception.
    *
-   * @covers Utils::validateRequired
+   * @covers \DrupalCodeGenerator\Utils::validateRequired
    * @dataProvider validateRequiredProvider
    */
   public function testValidateRequired($value, $exception) {
@@ -214,7 +214,7 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::normalizePath
+   * @covers \DrupalCodeGenerator\Utils::normalizePath
    * @dataProvider normalizePathProvider
    */
   public function testNormalizePath($human_name, $expected) {
@@ -237,7 +237,7 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::defaultQuestions
+   * @covers \DrupalCodeGenerator\Utils::defaultQuestions
    */
   public function testDefaultQuestions() {
     $questions = $this->defaultQuestions();
@@ -247,7 +247,7 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::defaultPluginQuestions
+   * @covers \DrupalCodeGenerator\Utils::defaultPluginQuestions
    */
   public function testDefaultPluginQuestions() {
     $questions = $this->defaultQuestions() + $this->defaultPluginQuestions();
@@ -257,7 +257,7 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers Utils::getExtensionRoot
+   * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
    */
   public function testGetExtensionRoot() {
     $this->markTestIncomplete('This test has not been implemented yet.');
