@@ -38,6 +38,13 @@ class InputHandler extends Helper {
    */
   public function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
 
+    $questions = $this->normalizeQuestions($questions);
+
+    // Let third party applications modify these questions.
+    if ($this->getHelperSet()->has('dcg_input_preprocessor')) {
+      $this->getHelperSet()->get('dcg_input_preprocessor')->preprocess($questions, $this);
+    }
+
     $vars = [];
 
     // A user can pass answers through command line option.
@@ -46,24 +53,6 @@ class InputHandler extends Helper {
       if (!is_array($answers)) {
         throw new InvalidOptionException('Answers should be encoded in JSON format.');
       }
-    }
-
-    // Normalize questions.
-    $questions = array_map(function ($question) {
-      // Support array syntax.
-      if (is_array($question)) {
-        if (count($question) > 2) {
-          throw new \OutOfBoundsException('The question array is too long.');
-        }
-        list($question_text, $default_value) = array_pad($question, 2, NULL);
-        $question = new Question($question_text, $default_value);
-      }
-      return $question;
-    }, $questions);
-
-    // Let third party applications modify these questions.
-    if ($this->getHelperSet()->has('dcg_input_preprocessor')) {
-      $this->getHelperSet()->get('dcg_input_preprocessor')->preprocess($questions, $this);
     }
 
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
@@ -137,6 +126,31 @@ class InputHandler extends Helper {
     $question_text .= ': ';
 
     $this->setQuestionText($question, $question_text);
+  }
+
+  /**
+   * Normalizes questions.
+   *
+   * @param \Symfony\Component\Console\Question\Question[] $questions
+   *   Questions to normalize.
+   *
+   * @return \Symfony\Component\Console\Question\Question[]
+   *   Normalized questions
+   *
+   * @todo Remove it when all generators use object syntax for questions.
+   */
+  protected function normalizeQuestions(array $questions) {
+    return array_map(function ($question) {
+      // Support array syntax.
+      if (is_array($question)) {
+        if (count($question) > 2) {
+          throw new \OutOfBoundsException('The question array is too long.');
+        }
+        list($question_text, $default_value) = array_pad($question, 2, NULL);
+        $question = new Question($question_text, $default_value);
+      }
+      return $question;
+    }, $questions);
   }
 
 }
