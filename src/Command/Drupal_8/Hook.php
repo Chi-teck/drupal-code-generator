@@ -25,8 +25,9 @@ class Hook extends BaseGenerator {
     $questions['hook_name'] = new Question('Hook name');
     $questions['hook_name']->setValidator(function ($value) {
       if (!in_array($value, $this->supportedHooks())) {
-        return 'This hook is not supported.';
+        throw new \UnexpectedValueException('The value is not correct class name.');
       }
+      return $value;
     });
     $questions['hook_name']->setAutocompleterValues($this->supportedHooks());
 
