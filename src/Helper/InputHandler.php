@@ -32,15 +32,15 @@ class InputHandler extends Helper {
    *   Output instance.
    * @param \Symfony\Component\Console\Question\Question[] $questions
    *   List of questions that the user should answer.
+   * @param array $vars
+   *   Array of predefined template variables.
    *
    * @return array
    *   Template variables.
    */
-  public function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
+  public function collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) {
 
     $questions = $this->normalizeQuestions($questions);
-
-    $vars = [];
 
     // A user can pass answers through command line option.
     if ($answers_raw = $input->getOption('answers')) {
