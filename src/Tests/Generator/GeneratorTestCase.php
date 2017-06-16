@@ -9,6 +9,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * Base class for generators tests.
+ *
+ * @deprecated
+ *   Use GeneratorBaseTest.
  */
 abstract class GeneratorTestCase extends TestCase {
 
