@@ -40,11 +40,6 @@ class InputHandler extends Helper {
 
     $questions = $this->normalizeQuestions($questions);
 
-    // Let third party applications modify these questions.
-    if ($this->getHelperSet()->has('dcg_input_preprocessor')) {
-      $this->getHelperSet()->get('dcg_input_preprocessor')->preprocess($questions, $this);
-    }
-
     $vars = [];
 
     // A user can pass answers through command line option.
