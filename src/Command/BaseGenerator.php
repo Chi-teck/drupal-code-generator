@@ -100,8 +100,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected function initialize(InputInterface $input, OutputInterface $output) {
     $this->getHelperSet()->setCommand($this);
     $this->getHelper('dcg_renderer')->addPath($this->templatePath);
-    $this->directory = $input->getOption('directory') ?
-      Utils::normalizePath($input->getOption('directory')) : getcwd();
+
+    $directory_option = $input->getOption('directory');
+    $directory = $directory_option ? Utils::normalizePath($directory_option) : getcwd();
+    $this->directory = Utils::getExtensionRoot($directory) ?: $directory;
   }
 
   /**

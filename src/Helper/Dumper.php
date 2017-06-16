@@ -23,13 +23,6 @@ class Dumper extends Helper {
   public $filesystem;
 
   /**
-   * The base directory.
-   *
-   * @var string
-   */
-  protected $baseDirectory;
-
-  /**
    * Input instance.
    *
    * @var \Symfony\Component\Console\Input\InputInterface
@@ -97,11 +90,7 @@ class Dumper extends Helper {
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
 
-    $directory = $command->getDirectory();
-    $extension_root = Utils::getExtensionRoot($directory);
-    $this->baseDirectory = ($extension_root ?: $directory) . '/';
-
-    $dumped_files = $this->doDump($command->getFiles());
+    $dumped_files = $this->doDump($command->getFiles(), $command->getDirectory());
 
     $input->setInteractive($interactive);
     return $dumped_files;
@@ -112,11 +101,13 @@ class Dumper extends Helper {
    *
    * @param array $files
    *   Files to dump.
+   * @param string $directory
+   *   Directory where to dump the files.
    *
    * @return array
    *   List of created or updated files.
    */
-  protected function doDump(array $files) {
+  protected function doDump(array $files, $directory) {
     $dumped_files = [];
 
     foreach ($files as $file_name => $file_info) {
@@ -126,7 +117,7 @@ class Dumper extends Helper {
 
       $is_directory = $content === NULL;
 
-      $file_path = $this->baseDirectory . $file_name;
+      $file_path = $directory . '/' . $file_name;
       if ($this->filesystem->exists($file_path) && !$is_directory) {
         $action = isset($file_info['action']) ? $file_info['action'] : 'replace';
         if ($action == 'replace') {
