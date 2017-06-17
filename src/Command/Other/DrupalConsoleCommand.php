@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -29,7 +30,7 @@ class DrupalConsoleCommand extends BaseGenerator {
     $questions = Utils::defaultQuestions() + [
       'command_name' => new Question('Command name', $default_command_name),
       'description' => new Question('Command description', 'Command description.'),
-      'container_aware' => new Question('Make the command aware of the drupal site installation?', 'yes'),
+      'container_aware' => new ConfirmationQuestion('Make the command aware of the drupal site installation?', TRUE),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

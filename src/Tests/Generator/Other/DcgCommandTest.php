@@ -2,19 +2,19 @@
 
 namespace DrupalCodeGenerator\Tests\Other;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for other:dcg-command command.
  */
-class DcgCommandTest extends GeneratorTestCase {
+class DcgCommandTest extends GeneratorBaseTest {
 
   protected $class = 'Other\DcgCommand';
 
-  protected $answers = [
-    'custom:example',
-    'Some description',
-    'example',
+  protected $interaction = [
+    'Command name [custom:example]: ' => 'custom:example',
+    'Command description [Some description]: ' => 'Some description',
+    'Command alias [example]: ' => 'example',
   ];
 
   protected $fixtures = [

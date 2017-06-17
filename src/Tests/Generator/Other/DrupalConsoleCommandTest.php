@@ -2,21 +2,21 @@
 
 namespace DrupalCodeGenerator\Tests\Other;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for other:drupal-console-command command.
  */
-class DrupalConsoleCommandTest extends GeneratorTestCase {
+class DrupalConsoleCommandTest extends GeneratorBaseTest {
 
   protected $class = 'Other\DrupalConsoleCommand';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'foo:example',
-    'Command description.',
-    FALSE,
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Command name [foo:example]: ' => 'foo:example',
+    'Command description [Command description.]: ' => 'Command description.',
+    'Make the command aware of the drupal site installation? [Yes]: ' => 'no',
   ];
 
   protected $fixtures = [

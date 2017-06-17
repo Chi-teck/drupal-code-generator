@@ -2,22 +2,22 @@
 
 namespace DrupalCodeGenerator\Tests\Other;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for other:drush-command command.
  */
-class DrushCommandTest extends GeneratorTestCase {
+class DrushCommandTest extends GeneratorBaseTest {
 
   protected $class = 'Other\DrushCommand';
 
-  protected $answers = [
-    'yo-yo',
-    'yy',
-    'Description.',
-    'foo',
-    'bar',
-    'yo_yo.drush.inc',
+  protected $interaction = [
+    'Command name: ' => 'yo-yo',
+    'Command alias [yo-]: ' => 'yy',
+    'Command description [Command description.]: ' => 'Description.',
+    'Argument name [foo]: ' => 'foo',
+    'Option name [bar]: ' => 'bar',
+    'Command file [%default_machine_name%.drush.inc]: ' => 'yo_yo.drush.inc',
   ];
 
   protected $fixtures = [

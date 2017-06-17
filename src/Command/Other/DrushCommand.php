@@ -39,7 +39,7 @@ class DrushCommand extends BaseGenerator {
       'description' => new Question('Command description', 'Command description.'),
       'argument' => new Question('Argument name', 'foo'),
       'option' => new Question('Option name', 'bar'),
-      'command_file' => new Question('Command name', $default_command_file),
+      'command_file' => new Question('Command file', $default_command_file),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

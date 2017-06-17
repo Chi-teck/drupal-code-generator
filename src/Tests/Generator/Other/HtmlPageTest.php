@@ -2,17 +2,21 @@
 
 namespace DrupalCodeGenerator\Tests\Other;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for other:html-page command.
  */
-class HtmlPageTest extends GeneratorTestCase {
+class HtmlPageTest extends GeneratorBaseTest {
 
   protected $class = 'Other\HtmlPage';
 
   protected $answers = [
     'example.html',
+  ];
+
+  protected $interaction = [
+    'File name [index.html]: ' => 'example.html',
   ];
 
   protected $fixtures = [
