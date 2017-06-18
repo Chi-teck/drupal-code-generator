@@ -53,8 +53,7 @@ abstract class GeneratorBaseTest extends TestCase {
     $this->commandTester->execute([
       '--directory' => $this->directory,
     ]);
-
-    $this->assertEquals($this->getExpectedDisplay(), $this->commandTester->getDisplay());
+    $this->assertEquals($this->getExpectedDisplay(), $this->getDisplay());
     // Tests may provide targets without fixtures.
     foreach (array_filter($this->fixtures) as $target => $fixture) {
       $this->assertFileEquals($this->directory . '/' . $target, $fixture);
@@ -62,7 +61,21 @@ abstract class GeneratorBaseTest extends TestCase {
   }
 
   /**
-   * Returns expected display.
+   * Gets the display returned by the last execution of the command.
+   *
+   * @return string
+   *   The display.
+   */
+  protected function getDisplay() {
+    // Remove autocomplete output.
+    return preg_replace(
+      '/ > (.*)The following directories/', ' > The following directories',
+      $this->commandTester->getDisplay()
+    );
+  }
+
+  /**
+   * Gets expected display.
    *
    * @return string
    *   Expected display.
