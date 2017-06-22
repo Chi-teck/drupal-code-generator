@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_7;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d7:settings.php command.
  */
-class SettingsTest extends GeneratorTestCase {
+class SettingsTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_7\Settings';
 
-  protected $answers = [
-    'mysql',
-    'drupal',
-    'root',
-    '123',
+  protected $interaction = [
+    'Database driver [mysql]: ' => 'mysql',
+    'Database name [drupal]: ' => 'drupal',
+    'Database user [root]: ' => 'root',
+    'Database password [123]: ' => '123',
   ];
 
   protected $fixtures = [

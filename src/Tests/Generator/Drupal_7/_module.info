@@ -1,6 +1,6 @@
 name = Example
 description = Some description
-package = custom
+package = Custom
 version = 7.x-1.0
 core = 7.x
 

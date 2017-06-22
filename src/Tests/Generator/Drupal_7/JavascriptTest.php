@@ -2,18 +2,18 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_7;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d7:javascript-file command.
  */
-class JavascriptTest extends GeneratorTestCase {
+class JavascriptTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_7\Javascript';
 
-  protected $answers = [
-    'Another example',
-    'another_example',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Another example',
+    'Module machine name [another_example]: ' => 'another_example',
   ];
 
   protected $fixtures = [

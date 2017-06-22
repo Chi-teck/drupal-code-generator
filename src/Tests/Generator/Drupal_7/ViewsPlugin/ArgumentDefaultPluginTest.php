@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_7\ViewsPlugin;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d7:views-plugin:argument-default command.
  */
-class ArgumentDefaultTest extends GeneratorTestCase {
+class ArgumentDefaultTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_7\ViewsPlugin\ArgumentDefault';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'Foo',
-    'foo',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Plugin name [Example]: ' => 'Foo',
+    'Plugin machine name [foo]: ' => 'foo',
   ];
 
   protected $fixtures = [

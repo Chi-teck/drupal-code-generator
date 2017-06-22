@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d7:info-file command.
@@ -20,12 +21,12 @@ class ModuleInfo extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions() + [
-      'description' => ['Module description', 'TODO: Write description for the module'],
-      'package' => ['Package', 'custom'],
-      'version' => ['Version', '7.x-1.0-dev'],
+      'description' => new Question('Module description', 'Module description'),
+      'package' => new Question('Package', 'Custom'),
+      'version' => new Question('Version', '7.x-1.0-dev'),
     ];
     $vars = $this->collectVars($input, $output, $questions);
-    $this->files[$vars['machine_name'] . '.info'] = $this->render('d7/module-info.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.info', 'd7/module-info.twig', $vars);
   }
 
 }

@@ -111,7 +111,7 @@ class Utils {
   /**
    * Returns default questions for module generators.
    *
-   * @return \DrupalCodeGenerator\Question[]
+   * @return \Symfony\Component\Console\Question\Question[]
    *   Array of default questions.
    */
   public static function defaultQuestions() {
@@ -125,8 +125,8 @@ class Utils {
   /**
    * Returns default questions for plugin generators.
    *
-   * @return \DrupalCodeGenerator\Question[]
-   *   Array of default plugin questions.
+   * @return \Symfony\Component\Console\Question\Question[]
+   *   Array of default questions.
    */
   public static function defaultPluginQuestions() {
     $questions = Utils::defaultQuestions();

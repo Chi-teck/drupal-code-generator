@@ -2,21 +2,21 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_7;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d7:info-file command.
  */
-class ModuleInfoTest extends GeneratorTestCase {
+class ModuleInfoTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_7\ModuleInfo';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'Some description',
-    'custom',
-    '7.x-1.0',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Module description [Module description]: ' => 'Some description',
+    'Package [Custom]: ' => 'Custom',
+    'Version [7.x-1.0-dev]: ' => '7.x-1.0',
   ];
 
   protected $fixtures = [

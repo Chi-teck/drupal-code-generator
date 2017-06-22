@@ -2,18 +2,18 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_7;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d7:template.php command.
  */
-class TemplatePhpTest extends GeneratorTestCase {
+class TemplatePhpTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_7\TemplatePhp';
 
-  protected $answers = [
-    'Example',
-    'example',
+  protected $interaction = [
+    'Theme name [%default_name%]: ' => 'Example',
+    'Theme machine name [example]: ' => 'example',
   ];
 
   protected $fixtures = [
