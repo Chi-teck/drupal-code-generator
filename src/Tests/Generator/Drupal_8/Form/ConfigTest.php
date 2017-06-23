@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Form;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:form:config command.
  */
-class ConfigTest extends GeneratorTestCase {
+class ConfigTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Form\Config';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'SettingsForm',
-    'foo_settings',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Class [SettingsForm]: ' => 'SettingsForm',
+    'Form ID [foo_settings]: ' => 'foo_settings',
   ];
 
   protected $fixtures = [

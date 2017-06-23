@@ -2,10 +2,10 @@
 
 namespace Drupal\foo\Form;
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\ConfirmFormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -67,7 +67,7 @@ class ExampleConfirmForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->connection->delete('examples')->execute();
-    drupal_set_message($this->t('Examples cleared.'));
+    drupal_set_message($this->t('Examples deleted.'));
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
 

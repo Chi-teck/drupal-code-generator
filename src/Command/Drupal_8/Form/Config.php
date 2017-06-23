@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:form:config command.
@@ -20,18 +21,17 @@ class Config extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'class' => ['Class', 'SettingsForm'],
-      'form_id' => [
-        'Form ID',
-        function ($vars) {
-          return $vars['machine_name'] . '_settings';
-        },
-      ],
-    ];
+    $questions = Utils::defaultQuestions();
+    $questions['class'] = new Question('Class', 'SettingsForm');
+    $default_form_id = function ($vars) {
+      return $vars['machine_name'] . '_settings';
+    };
+    $questions['form_id'] = new Question('Form ID', $default_form_id);
+
     $vars = $this->collectVars($input, $output, $questions);
+
     $path = 'src/Form/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/form/config.twig', $vars);
+    $this->setFile($path, 'd8/form/config.twig', $vars);
   }
 
 }

@@ -2,11 +2,11 @@
 
 namespace Drupal\{{ machine_name }}\Form;
 
+use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
-use Drupal\Component\Utility\Unicode;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a {{ name }} form.
@@ -53,14 +53,14 @@ class {{ class }} extends FormBase {
 
     $form['message'] = [
       '#type' => 'textarea',
-      '#title' => t('Message'),
+      '#title' => $this->t('Message'),
       '#required' => TRUE,
     ];
 
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => t('Save'),
+      '#value' => $this->t('Save'),
     ];
 
     return $form;

@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Form;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:form:simple command.
  */
-class SimpleTest extends GeneratorTestCase {
+class SimpleTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Form\Simple';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'ExampleForm',
-    'foo_example',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Class [FooForm]: ' => 'ExampleForm',
+    'Form ID [foo_example]: ' => 'foo_example',
   ];
 
   protected $fixtures = [
