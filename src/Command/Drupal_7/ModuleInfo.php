@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Implements d7:info-file command.
+ * Implements d7:module-info command.
  */
 class ModuleInfo extends BaseGenerator {
 

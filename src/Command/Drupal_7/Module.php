@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d7:module command.
@@ -21,24 +22,24 @@ class Module extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions() + [
-      'description' => ['Module description', 'The description.'],
-      'package' => ['Package', 'custom'],
-      'version' => ['Version', '7.x-1.0-dev'],
+      'description' => new Question('Module description', 'Module description.'),
+      'package' => new Question('Package', 'Custom'),
+      'version' => new Question('Version', '7.x-1.0-dev'),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['project_type'] = 'module';
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $this->files[$prefix . '.info'] = $this->render('d7/module-info.twig', $vars);
-    $this->files[$prefix . '.module'] = $this->render('d7/module.twig', $vars);
-    $this->files[$prefix . '.install'] = $this->render('d7/install.twig', $vars);
-    $this->files[$prefix . '.admin.inc'] = $this->render('d7/admin.inc.twig', $vars);
-    $this->files[$prefix . '.pages.inc'] = $this->render('d7/pages.inc.twig', $vars);
-    $this->files[$prefix . '.test'] = $this->render('d7/test.twig', $vars);
+
+    $this->setFile($prefix . '.info', 'd7/module-info.twig', $vars);
+    $this->setFile($prefix . '.module', 'd7/module.twig', $vars);
+    $this->setFile($prefix . '.install', 'd7/install.twig', $vars);
+    $this->setFile($prefix . '.admin.inc', 'd7/admin.inc.twig', $vars);
+    $this->setFile($prefix . '.pages.inc', 'd7/pages.inc.twig', $vars);
 
     $js_path = $vars['machine_name'] . '/' . str_replace('_', '-', $vars['machine_name']) . '.js';
-    $this->files[$js_path] = $this->render('d7/javascript.twig', $vars);
+    $this->setFile($js_path, 'd7/javascript.twig', $vars);
   }
 
 }

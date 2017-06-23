@@ -17,7 +17,7 @@ class ModuleFileTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
-    'example.module' => __DIR__ . '/_module_file.module',
+    'example.module' => __DIR__ . '/_.module',
   ];
 
 }

@@ -20,7 +20,7 @@ class ModuleFile extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
-    $this->files[$vars['machine_name'] . '.module'] = $this->render('d7/module.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.module', 'd7/module.twig', $vars);
   }
 
 }

@@ -3,8 +3,10 @@
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d7:template.php command.
@@ -19,12 +21,12 @@ class TemplatePhp extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'name' => ['Theme name'],
-      'machine_name' => ['Theme machine name'],
-    ];
+    $questions['name'] = new Question('Theme name');
+    $questions['name']->setValidator([Utils::class, 'validateRequired']);
+    $questions['machine_name'] = new Question('Theme machine name');
+    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
     $vars = $this->collectVars($input, $output, $questions);
-    $this->files['template.php'] = $this->render('d7/template.php.twig', $vars);
+    $this->setFile('template.php', 'd7/template.php.twig', $vars);
   }
 
 }

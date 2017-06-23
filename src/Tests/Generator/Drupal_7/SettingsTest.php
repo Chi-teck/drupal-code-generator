@@ -22,4 +22,12 @@ class SettingsTest extends GeneratorBaseTest {
     'settings.php' => __DIR__ . '/_settings.php',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function getDisplay() {
+    // Remove autocomplete output.
+    return preg_replace("/Database driver \[mysql\]: (.*)Database name/s", 'Database driver [mysql]: Database name', parent::getDisplay());
+  }
+
 }

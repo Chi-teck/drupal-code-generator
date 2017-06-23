@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d7:test command.
@@ -19,16 +20,13 @@ class Test extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'class' => [
-        'Class',
-        function ($vars) {
-          return Utils::camelize($vars['machine_name']) . 'TestCase';
-        },
-      ],
-    ];
+    $questions = Utils::defaultQuestions();
+    $default_class = function ($vars) {
+      return Utils::camelize($vars['machine_name']) . 'TestCase';
+    };
+    $questions['class'] = new Question('Class', $default_class);
     $vars = $this->collectVars($input, $output, $questions);
-    $this->files[$vars['machine_name'] . '.test'] = $this->render('d7/test.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.test', 'd7/test.twig', $vars);
   }
 
 }

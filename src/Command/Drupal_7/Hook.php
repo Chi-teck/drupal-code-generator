@@ -23,12 +23,12 @@ class Hook extends BaseGenerator {
     $questions = Utils::defaultQuestions();
     $questions['hook_name'] = new Question('Hook name');
     $questions['hook_name']->setValidator(function ($value) {
-      if (!in_array($value, $this->supportedHooks())) {
+      if (!in_array($value, $this->getSupportedHooks())) {
         throw new \UnexpectedValueException('The value is not correct class name.');
       }
       return $value;
     });
-    $questions['hook_name']->setAutocompleterValues($this->supportedHooks());
+    $questions['hook_name']->setAutocompleterValues($this->getSupportedHooks());
 
     $vars = $this->collectVars($input, $output, $questions);
 
@@ -59,9 +59,12 @@ class Hook extends BaseGenerator {
   }
 
   /**
-   * Returns list of supported hooks.
+   * Gets list of supported hooks.
+   *
+   * @return array
+   *   List of supported hooks.
    */
-  protected function supportedHooks() {
+  protected function getSupportedHooks() {
     return array_map(function ($file) {
       return pathinfo($file, PATHINFO_FILENAME);
     }, array_diff(scandir($this->templatePath . '/d7/hook'), ['.', '..']));

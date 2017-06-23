@@ -41,7 +41,8 @@ abstract class BasePlugin extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->files[$this->subDirectory . '/' . $vars['plugin_machine_name'] . '.inc'] = $this->render($this->template, $vars);
+    $path = $this->subDirectory . '/' . $vars['plugin_machine_name'] . '.inc';
+    $this->setFile($path, $this->template, $vars);
   }
 
 }

@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_7;
 use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
- * Test for d7:info-file command.
+ * Test for d7:module-info command.
  */
 class ModuleInfoTest extends GeneratorBaseTest {
 
@@ -14,7 +14,7 @@ class ModuleInfoTest extends GeneratorBaseTest {
   protected $interaction = [
     'Module name [%default_name%]: ' => 'Example',
     'Module machine name [example]: ' => 'example',
-    'Module description [Module description]: ' => 'Some description',
+    'Module description [Module description]: ' => 'Some description.',
     'Package [Custom]: ' => 'Custom',
     'Version [7.x-1.0-dev]: ' => '7.x-1.0',
   ];

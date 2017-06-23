@@ -9,7 +9,7 @@ class Access extends BasePlugin {
 
   protected $name = 'd7:ctools-plugin:access';
   protected $description = 'Generates CTools access plugin';
-  protected $template = 'd7/ctools-access-plugin.twig';
+  protected $template = 'd7/ctools-plugin/access.twig';
   protected $subDirectory = 'plugins/access';
 
 }
