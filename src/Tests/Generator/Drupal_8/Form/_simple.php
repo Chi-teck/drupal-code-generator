@@ -5,7 +5,7 @@ namespace Drupal\foo\Form;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Logger\LoggerChannelFactory;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -14,19 +14,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ExampleForm extends FormBase {
 
   /**
-   * @var LoggerChannelFactory
+   * The logger factory.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
    */
   protected $logger;
 
   /**
    * Constructs a ExampleForm object.
    *
-   * @param  LoggerChannelFactory $logger_factory
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
    *   A logger instance.
-   * 
-   * @DCG: Optional.
    */
-  public function __construct(LoggerChannelFactory $logger_factory) {
+  public function __construct(LoggerChannelFactoryInterface $logger_factory) {
     $this->loggerFactory = $logger_factory;
   }
 
@@ -68,14 +68,11 @@ class ExampleForm extends FormBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if (Unicode::strlen($form_state->getValue('message')) < 10) {
       $form_state->setErrorByName('name', $this->t('Message should be at least 10 charaters.'));
     }
-
   }
 
   /**

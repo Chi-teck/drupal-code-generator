@@ -25,8 +25,6 @@ class ExampleConfirmForm extends ConfirmFormBase {
    *
    * @param \Drupal\Core\Database\Connection $connection
    *   The database connection.
-   *
-   * @DCG: Optional.
    */
   public function __construct(Connection $connection) {
     $this->connection = $connection;

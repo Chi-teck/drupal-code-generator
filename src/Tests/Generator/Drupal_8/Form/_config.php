@@ -40,8 +40,6 @@ class SettingsForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->getValue('example') != 'example') {
