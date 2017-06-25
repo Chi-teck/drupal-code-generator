@@ -7,6 +7,9 @@
     "symfony/filesystem": "~2.7|^3",
     "twig/twig": "^1.23.1"
   },
+  "bin": [
+    "bin/dcg"
+  ],
   "autoload": {
     "files": ["src/bootstrap.php"],
     "psr-4": {
