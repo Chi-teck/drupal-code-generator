@@ -3,12 +3,12 @@
 namespace Drupal\{{ machine_name }}\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Block\BlockBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Provides a '{{ plugin_label }}' block.
@@ -24,7 +24,7 @@ class {{ class }} extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * The route match.
    *
-   * @var RouteMatchInterface
+   * @var \Drupal\Core\Routing\RouteMatchInterface
    */
   protected $routeMatch;
 
@@ -40,7 +40,7 @@ class {{ class }} extends BlockBase implements ContainerFactoryPluginInterface {
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param RouteMatchInterface $route_match
+   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The route match.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, RouteMatchInterface $route_match) {
@@ -60,11 +60,8 @@ class {{ class }} extends BlockBase implements ContainerFactoryPluginInterface {
     );
   }
 
-
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public function defaultConfiguration() {
     return [
@@ -74,8 +71,6 @@ class {{ class }} extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public function blockForm($form, FormStateInterface $form_state) {
     $form['content'] = [
@@ -88,8 +83,6 @@ class {{ class }} extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['content'] = $form_state->getValue('content');
@@ -97,8 +90,6 @@ class {{ class }} extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   protected function blockAccess(AccountInterface $account) {
     $route_name = $this->routeMatch->getRouteName();
@@ -114,7 +105,7 @@ class {{ class }} extends BlockBase implements ContainerFactoryPluginInterface {
    */
   public function build() {
     $build['content'] = [
-      '#markup' => $this->configuration['content']
+      '#markup' => $this->configuration['content'],
     ];
     return $build;
   }

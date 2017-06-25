@@ -2,21 +2,21 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:block command.
  */
-class BlockTest extends GeneratorTestCase {
+class BlockTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\Block';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Example',
-    'foo_example',
-    'Custom',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Block admin label [Example]: ' => 'Example',
+    'Plugin ID [foo_example]: ' => 'foo_example',
+    'Block category [Custom]: ' => 'Custom',
   ];
 
   protected $fixtures = [

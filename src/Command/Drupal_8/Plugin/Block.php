@@ -30,7 +30,7 @@ class Block extends BaseGenerator {
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Block');
 
     $path = 'src/Plugin/Block/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/block.twig', $vars);
+    $this->setFile($path, 'd8/plugin/block.twig', $vars);
   }
 
 }

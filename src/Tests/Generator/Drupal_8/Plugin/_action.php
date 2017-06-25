@@ -11,7 +11,7 @@ use Drupal\Core\Session\AccountInterface;
  *
  * @Action(
  *   id = "example_foo",
- *   label =  @Translation("Foo"),
+ *   label = @Translation("Foo"),
  *   type = "node",
  *   category = @Translation("Custom")
  * )
