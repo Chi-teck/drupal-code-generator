@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:plugin:action command.
@@ -22,7 +23,7 @@ class Action extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions() + [
-      'category' => ['Action category', 'Custom'],
+      'category' => new Question('Action category', 'Custom'),
       'configurable' => new ConfirmationQuestion('Make the action configurable?', FALSE),
     ];
 
@@ -30,7 +31,7 @@ class Action extends BaseGenerator {
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
     $path = 'src/Plugin/Action/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/action.twig', $vars);
+    $this->setFile($path, 'd8/plugin/action.twig', $vars);
   }
 
 }

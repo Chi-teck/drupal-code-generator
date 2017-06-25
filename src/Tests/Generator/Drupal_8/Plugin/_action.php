@@ -3,8 +3,8 @@
 namespace Drupal\example\Plugin\Action;
 
 use Drupal\Core\Action\ConfigurableActionBase;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
 
 /**
  * Provides a a Foo action.
@@ -37,12 +37,12 @@ class Foo extends ConfigurableActionBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $form['title'] = array(
+    $form['title'] = [
       '#title' => t('New title'),
       '#type' => 'textfield',
       '#required' => TRUE,
       '#default_value' => $this->configuration['title'],
-    );
+    ];
     return $form;
   }
 
@@ -60,7 +60,6 @@ class Foo extends ConfigurableActionBase {
     /** @var \Drupal\node\NodeInterface $node */
     $access = $node->access('update', $account, TRUE)
       ->andIf($node->title->access('edit', $account, TRUE));
-
     return $return_as_object ? $access : $access->isAllowed();
   }
 
