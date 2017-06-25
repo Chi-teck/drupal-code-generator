@@ -1,0 +1,4 @@
+name: Foo
+type: module
+description: DCG sandbox module
+core: 8.x
