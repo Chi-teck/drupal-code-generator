@@ -59,5 +59,8 @@ if [ -z "$IS_RUNNING" ]; then
 fi
 
 # Run tests.
-echo -e "\e[30;43m -= Form test =- \e[0m\n"
+echo -e "\n\e[30;43m -= Form test =- \e[0m\n"
 source $SELF_PATH/form/test.sh
+
+echo -e "\n\e[30;43m -= Plugin test =- \e[0m\n"
+source $SELF_PATH/plugin/test.sh
