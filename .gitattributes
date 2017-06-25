@@ -1,1 +1,7 @@
 *.twig linguist-language=Text
+/phpcs.xml export-ignore
+/phpunit.xml export-ignore
+/*.md export-ignore
+/box.json export-ignore
+/scripts export-ignore
+/src/Tests export-ignore
