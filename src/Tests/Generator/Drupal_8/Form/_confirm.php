@@ -65,7 +65,7 @@ class ExampleConfirmForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->connection->delete('examples')->execute();
-    drupal_set_message($this->t('Examples deleted.'));
+    drupal_set_message($this->t('The examples have been deleted.'));
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
 

@@ -28,13 +28,11 @@ class {{ class }} extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
     $form['example'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Example'),
       '#default_value' => $this->config('{{ machine_name }}.settings')->get('example'),
     ];
-
     return parent::buildForm($form, $form_state);
   }
 
@@ -45,7 +43,6 @@ class {{ class }} extends ConfigFormBase {
     if ($form_state->getValue('example') != 'example') {
       $form_state->setErrorByName('example', $this->t('The value is not correct.'));
     }
-
     parent::validateForm($form, $form_state);
   }
 
@@ -56,7 +53,6 @@ class {{ class }} extends ConfigFormBase {
     $this->config('{{ machine_name }}.settings')
       ->set('example', $form_state->getValue('example'))
       ->save();
-
     parent::submitForm($form, $form_state);
   }
 

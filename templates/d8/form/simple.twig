@@ -71,7 +71,7 @@ class {{ class }} extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if (Unicode::strlen($form_state->getValue('message')) < 10) {
-      $form_state->setErrorByName('name', $this->t('Message should be at least 10 charaters.'));
+      $form_state->setErrorByName('name', $this->t('Message should be at least 10 characters.'));
     }
   }
 
