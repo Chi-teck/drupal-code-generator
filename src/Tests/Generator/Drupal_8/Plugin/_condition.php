@@ -27,14 +27,14 @@ class Example extends ConditionPluginBase implements ContainerFactoryPluginInter
   /**
    * The date formatter.
    *
-   * @var DateFormatterInterface
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
    */
   protected $dateFormatter;
 
   /**
    * Creates a new Example instance.
    *
-   * @param DateFormatterInterface $date_formatter
+   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter.
    * @param array $configuration
    *   The plugin configuration, i.e. an array with configuration values keyed
@@ -103,7 +103,6 @@ class Example extends ConditionPluginBase implements ContainerFactoryPluginInter
     if (!$age = $this->configuration['age']) {
       return !$this->isNegated();
     }
-
     return (REQUEST_TIME - $this->getContextValue('node')->getCreatedTime()) < $age;
   }
 

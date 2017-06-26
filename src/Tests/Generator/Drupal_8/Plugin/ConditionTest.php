@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:condition command.
  */
-class ConditionTest extends GeneratorTestCase {
+class ConditionTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\Condition';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Example',
-    'foo_example',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Plugin label [Example]: ' => 'Example',
+    'Plugin ID [foo_example]: ' => 'foo_example',
   ];
 
   protected $fixtures = [
