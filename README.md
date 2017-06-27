@@ -8,7 +8,7 @@ A command line code generator for Drupal.
 
 ```shell
 # Download the latest stable release of the code generator.
-wget https://github.com/Chi-teck/drupal-code-generator/releases/download/1.17.2/dcg.phar
+wget $(wget -qO- https://api.github.com/repos/chi-teck/drupal-code-generator/releases/latest | awk -F'"' '/browser_download_url/ { print $4 }')
 
 # Make the file executable.
 chmod +x dcg.phar
