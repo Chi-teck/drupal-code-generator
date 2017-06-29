@@ -1,0 +1,7 @@
+{{ route_name }}.reports:
+  path: '{{ route_path }}'
+  defaults:
+    _controller: '\Drupal\{{ machine_name }}\Controller\{{ class }}::build'
+    _title: '{{ route_title }} report'
+  requirements:
+    _permission: '{{ route_permission }}'
