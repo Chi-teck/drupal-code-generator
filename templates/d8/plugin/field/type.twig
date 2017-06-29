@@ -2,12 +2,12 @@
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldType;
 
-use Drupal\Core\Field\FieldItemBase;
-use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Field\FieldStorageDefinitionInterface;
-use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Component\Utility\Random;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemBase;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\TypedData\DataDefinition;
 
 /**
  * Defines the '{{ plugin_id }}' field type.
@@ -20,40 +20,32 @@ use Drupal\Component\Utility\Random;
  *   default_formatter = "string"
  * )
  *
- * @DSG: {
+ * @DCG
  * If you are implementing a single value field type you may want to inherit
- * this class form some of the base field item classes provided by Drupal core.
- *
- * @see Drupal\Core\Field\Plugin\Field\FieldType\NumericItemBase.
- * @see Drupal\Core\Field\Plugin\Field\FieldType
- *
- * @DCG: }
+ * this class form some of the field type classes provided by Drupal core.
+ * Check out /core/lib/Drupal/Core/Field/Plugin/Field/FieldType directory for
+ * list of available field type implementations.
  */
 class {{ class }} extends FieldItemBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DSG: Optional.
    */
   public static function defaultStorageSettings() {
-    $settings = ['lorem' => 123];
+    $settings = ['foo' => 123];
     return $settings + parent::defaultStorageSettings();
   }
 
   /**
    * {@inheritdoc}
-   *
-   * @DSG: Optional.
    */
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
     $settings = $this->getSettings();
 
-    $element['lorem'] = [
+    $element['foo'] = [
       '#type' => 'number',
-      '#title' => t('Lorem'),
-      // @DCG: For single setting you can use $this->getSetting('lorem');
-      '#default_value' => $settings['lorem'],
+      '#title' => $this->t('Foo'),
+      '#default_value' => $settings['foo'],
       '#disabled' => $has_data,
     ];
 
@@ -62,26 +54,22 @@ class {{ class }} extends FieldItemBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DSG: Optional.
    */
   public static function defaultFieldSettings() {
-    $settings = ['ipsum' => 'Bla bla bla'];
+    $settings = ['bar' => 'Bla bla bla'];
     return $settings + parent::defaultFieldSettings();
   }
 
   /**
    * {@inheritdoc}
-   *
-   * @DSG: Optional.
    */
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
     $settings = $this->getSettings();
 
-    $element['ipsum'] = [
+    $element['bar'] = [
       '#type' => 'textfield',
-      '#title' => t('Ipsum'),
-      '#default_value' => $settings['ipsum'],
+      '#title' => t('Bar'),
+      '#default_value' => $settings['bar'],
     ];
 
     return $element;
@@ -89,8 +77,6 @@ class {{ class }} extends FieldItemBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DSG: Optional.
    */
   public function isEmpty() {
     $value = $this->get('value')->getValue();
@@ -102,7 +88,9 @@ class {{ class }} extends FieldItemBase {
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
 
-    // @DCG: See \Drupal\Core\TypedData\Plugin\DataType\* for possible types.
+    // @DCG
+    // See /core/lib/Drupal/Core/TypedData/Plugin/DataType directory for
+    // available data types.
     $properties['value'] = DataDefinition::create('string')
       ->setLabel(t('Text value'))
       ->setRequired(TRUE);
@@ -112,19 +100,18 @@ class {{ class }} extends FieldItemBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DSG: Optional.
    */
   public function getConstraints() {
     $constraints = parent::getConstraints();
 
     $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
 
-    // @DCG: Assume our value should not be longer than 50 characters.
-    $options['value']['Length']['max'] = 50;
+    // @DCG Suppose our value must not be longer than 10 characters.
+    $options['value']['Length']['max'] = 10;
 
-    // @DSG: See \Drupal\Core\Validation\Plugin\Validation\Constraint\* for
-    // @DCG: available constraints.
+    // @DCG
+    // See /core/lib/Drupal/Core/Validation/Plugin/Validation/Constraint
+    // directory for available constraints.
     $constraints[] = $constraint_manager->create('ComplexData', $options);
     return $constraints;
   }
@@ -138,14 +125,14 @@ class {{ class }} extends FieldItemBase {
       'value' => [
         'type' => 'varchar',
         'not null' => FALSE,
-        'description' => '@TODO: Create a description for the column.',
+        'description' => 'Column description.',
         'length' => 255,
-      ]
+      ],
     ];
 
     $schema = [
-      'columns' => $columns
-      // @DCG: Add indexes here if needed.
+      'columns' => $columns,
+      // @DCG Add indexes here if needed.
     ];
 
     return $schema;

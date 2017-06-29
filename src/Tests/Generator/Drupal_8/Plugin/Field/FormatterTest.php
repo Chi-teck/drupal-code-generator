@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Field;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:field:formatter command.
  */
-class FormatterTest extends GeneratorTestCase {
+class FormatterTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\Field\Formatter';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Zoo',
-    'foo_zoo',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Plugin label [Example]: ' => 'Zoo',
+    'Plugin ID [foo_zoo]: ' => 'foo_zoo',
   ];
 
   protected $fixtures = [

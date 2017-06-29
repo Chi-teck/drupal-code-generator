@@ -26,7 +26,7 @@ class Formatter extends BaseGenerator {
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Formatter');
 
     $path = 'src/Plugin/Field/FieldFormatter/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/field/formatter.twig', $vars);
+    $this->setFile($path, 'd8/plugin/field/formatter.twig', $vars);
   }
 
 }

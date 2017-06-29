@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Field;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:field:type command.
  */
-class TypeTest extends GeneratorTestCase {
+class TypeTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\Field\Type';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'Foo',
-    'foo',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Plugin label [Example]: ' => 'Foo',
+    'Plugin ID [example_foo]: ' => 'foo',
   ];
 
   protected $fixtures = [

@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Field;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:field:widget command.
  */
-class WidgetTest extends GeneratorTestCase {
+class WidgetTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\Field\Widget';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Example',
-    'foo_example',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Plugin label [Example]: ' => 'Example',
+    'Plugin ID [foo_example]: ' => 'foo_example',
   ];
 
   protected $fixtures = [

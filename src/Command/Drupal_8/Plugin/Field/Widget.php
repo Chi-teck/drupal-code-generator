@@ -21,11 +21,12 @@ class Widget extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
+
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Widget');
 
     $path = 'src/Plugin/Field/FieldWidget/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/field/widget.twig', $vars);
+    $this->setFile($path, 'd8/plugin/field/widget.twig', $vars);
   }
 
 }

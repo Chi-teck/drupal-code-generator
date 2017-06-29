@@ -2,8 +2,8 @@
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -21,8 +21,6 @@ class {{ class }} extends FormatterBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public static function defaultSettings() {
     return [
@@ -33,41 +31,37 @@ class {{ class }} extends FormatterBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $settings = $this->getSettings();
 
-    $elements['prefix'] = array(
+    $elements['prefix'] = [
       '#type' => 'textfield',
-      '#title' => t('Prefix'),
+      '#title' => $this->t('Prefix'),
       '#default_value' => $settings['prefix'],
-    );
+    ];
 
-    $elements['suffix'] = array(
+    $elements['suffix'] = [
       '#type' => 'textfield',
-      '#title' => t('Suffix'),
+      '#title' => $this->t('Suffix'),
       '#default_value' => $settings['suffix'],
-    );
+    ];
 
     return $elements;
   }
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public function settingsSummary() {
     $settings = $this->getSettings();
     $summary = [];
 
     if ($settings['prefix']) {
-      $summary[] = t('Prefix: @prefix', ['@prefix' => $settings['prefix']]);
+      $summary[] = $this->t('Prefix: @prefix', ['@prefix' => $settings['prefix']]);
     }
     if ($settings['suffix']) {
-      $summary[] = t('Suffix: @suffix', ['@suffix' => $settings['suffix']]);
+      $summary[] = $this->t('Suffix: @suffix', ['@suffix' => $settings['suffix']]);
     }
 
     return $summary;
@@ -81,14 +75,15 @@ class {{ class }} extends FormatterBase {
     $settings = $this->getSettings();
 
     foreach ($items as $delta => $item) {
-      $element[$delta] = array(
+      $element[$delta] = [
         '#type' => 'item',
         '#markup' => $item->value,
         '#field_prefix' => $settings['prefix'],
         '#field_suffix' => $settings['suffix'],
-      );
+      ];
     }
 
     return $element;
   }
+
 }
