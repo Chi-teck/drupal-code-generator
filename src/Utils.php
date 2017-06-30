@@ -47,7 +47,7 @@ class Utils {
    * Machine name validator.
    */
   public static function validateMachineName($value) {
-    if (!preg_match('/^[a-z][a-z0-9_]*[a-z]$/', $value)) {
+    if (!preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/', $value)) {
       throw new \UnexpectedValueException('The value is not correct machine name.');
     }
     return $value;

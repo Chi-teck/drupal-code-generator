@@ -130,6 +130,7 @@ class UtilsTest extends TestCase {
     $exception = new \UnexpectedValueException('The value is not correct machine name.');
     return [
       ['snake_case_here', NULL],
+      ['snake_case_here123', NULL],
       [' not_trimmed ', $exception],
       ['Hello world ', $exception],
       ['foo_', $exception],
