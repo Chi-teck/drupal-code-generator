@@ -1,21 +1,21 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
+namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Views;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:views:field command.
  */
-class FieldTest extends GeneratorTestCase {
+class FieldTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\Views\Field';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Example',
-    'foo_example',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Plugin label [Example]: ' => 'Example',
+    'Plugin ID [foo_example]: ' => 'foo_example',
   ];
 
   protected $fixtures = [

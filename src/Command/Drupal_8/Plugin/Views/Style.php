@@ -26,10 +26,10 @@ class Style extends BaseGenerator {
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
     $plugin_path = 'src/Plugin/views/style/' . $vars['class'] . '.php';
-    $this->files[$plugin_path] = $this->render('d8/plugin/views/style-plugin.twig', $vars);
+    $this->setFile($plugin_path, 'd8/plugin/views/style-plugin.twig', $vars);
 
     $template_path = 'templates/' . 'views-style-' . str_replace('_', '-', $vars['plugin_id']) . '.html.twig';
-    $this->files[$template_path] = $this->render('d8/plugin/views/style-template.twig', $vars);
+    $this->setFile($template_path, 'd8/plugin/views/style-template.twig', $vars);
 
     $header = $this->render('d8/file-docs/module.twig', $vars);
     $this->files[$vars['machine_name'] . '.module'] = [

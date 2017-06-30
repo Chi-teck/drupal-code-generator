@@ -8,8 +8,6 @@ use Drupal\views\Plugin\views\style\StylePluginBase;
 /**
  * Foo style plugin.
  *
- * @ingroup views_style_plugins
- *
  * @ViewsStyle(
  *   id = "example_foo",
  *   title = @Translation("Foo"),

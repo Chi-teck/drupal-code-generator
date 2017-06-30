@@ -26,7 +26,7 @@ class ArgumentDefault extends BaseGenerator {
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
     $path = 'src/Plugin/views/argument_default/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/views/argument-default.twig', $vars);
+    $this->setFile($path, 'd8/plugin/views/argument-default.twig', $vars);
   }
 
 }

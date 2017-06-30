@@ -11,20 +11,12 @@
  * - title: The title of this group of rows. May be empty.
  *
  * @see template_preprocess_views_style_{{ plugin_id }}()
- *
- * @ingroup themeable
  */
 {{ '#}' }}{% verbatim %}
-{% if attributes -%}
-  <div{{ attributes }}>
-{% endif %}
+<div{{ attributes }}>
 
-  <div>
-    {% for row in rows %}
-      <div{{ row.attributes }}>{{ row.content }}</div>
-    {% endfor %}
-  </div>
+  {% for row in rows %}
+    <div{{ row.attributes }}>{{ row.content }}</div>
+  {% endfor %}
 
-{% if attributes -%}
-  </div>
-{% endif %}{% endverbatim %}
+</div>{% endverbatim %}

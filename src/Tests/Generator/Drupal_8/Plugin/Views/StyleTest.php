@@ -1,21 +1,21 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Style;
+namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Views;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:views:style command.
  */
-class StyleTest extends GeneratorTestCase {
+class StyleTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\Views\Style';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'Foo',
-    'example_foo',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Plugin label [Example]: ' => 'Foo',
+    'Plugin ID [example_foo]: ' => 'example_foo',
   ];
 
   protected $fixtures = [

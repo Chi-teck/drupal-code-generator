@@ -26,7 +26,7 @@ class Field extends BaseGenerator {
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
     $path = 'src/Plugin/views/field/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/views/field.twig', $vars);
+    $this->setFile($path, 'd8/plugin/views/field.twig', $vars);
   }
 
 }
