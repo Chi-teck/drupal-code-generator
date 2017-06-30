@@ -21,11 +21,11 @@ class ThemeTest extends GeneratorBaseTest {
 
   protected $fixtures = [
     'example/example.info' => NULL,
+    'example/images' => NULL,
     'example/template.php' => NULL,
+    'example/templates' => NULL,
     'example/css/example.css' => NULL,
     'example/js/example.js' => NULL,
-    'example/templates' => NULL,
-    'example/images' => NULL,
   ];
 
 }

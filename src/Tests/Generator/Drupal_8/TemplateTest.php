@@ -20,8 +20,8 @@ class TemplateTest extends GeneratorTestCase {
   ];
 
   protected $fixtures = [
-    'templates/example-foo.html.twig' => __DIR__ . '/_template.twig',
     'example.module' => __DIR__ . '/_template.module',
+    'templates/example-foo.html.twig' => __DIR__ . '/_template.twig',
   ];
 
 }

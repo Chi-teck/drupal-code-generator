@@ -24,12 +24,12 @@ class StandardTest extends GeneratorTestCase {
     'foo/foo.info.yml' => NULL,
     'foo/foo.libraries.yml' => NULL,
     'foo/foo.theme' => NULL,
-    'foo/js/foo.js' => NULL,
-    'foo/templates' => NULL,
     'foo/images' => NULL,
+    'foo/templates' => NULL,
     'foo/css/base/elements.css' => NULL,
     'foo/css/components/block.css' => NULL,
     'foo/css/components/breadcrumb.css' => NULL,
+    'foo/css/components/buttons.css' => NULL,
     'foo/css/components/field.css' => NULL,
     'foo/css/components/form.css' => NULL,
     'foo/css/components/header.css' => NULL,
@@ -39,9 +39,9 @@ class StandardTest extends GeneratorTestCase {
     'foo/css/components/sidebar.css' => NULL,
     'foo/css/components/table.css' => NULL,
     'foo/css/components/tabs.css' => NULL,
-    'foo/css/components/buttons.css' => NULL,
     'foo/css/layouts/layout.css' => NULL,
     'foo/css/theme/print.css' => NULL,
+    'foo/js/foo.js' => NULL,
   ];
 
 }

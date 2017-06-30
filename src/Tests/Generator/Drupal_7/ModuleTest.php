@@ -20,12 +20,12 @@ class ModuleTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
-    'example/example.info' => __DIR__ . '/_module.info',
-    'example/example.module' => __DIR__ . '/_.module',
-    'example/example.install' => __DIR__ . '/_.install',
     'example/example.admin.inc' => NULL,
-    'example/example.pages.inc' => NULL,
+    'example/example.info' => __DIR__ . '/_module.info',
+    'example/example.install' => __DIR__ . '/_.install',
     'example/example.js' => NULL,
+    'example/example.module' => __DIR__ . '/_.module',
+    'example/example.pages.inc' => NULL,
   ];
 
 }

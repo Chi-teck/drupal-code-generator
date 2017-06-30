@@ -18,8 +18,8 @@ class BreadcrumbBuilderTest extends GeneratorTestCase {
   ];
 
   protected $fixtures = [
-    'src/ExampleBreadcrumbBuilder.php' => __DIR__ . '/_breadcrumb_builder.php',
     'example.services.yml' => __DIR__ . '/_breadcrumb.services.yml',
+    'src/ExampleBreadcrumbBuilder.php' => __DIR__ . '/_breadcrumb_builder.php',
   ];
 
 }

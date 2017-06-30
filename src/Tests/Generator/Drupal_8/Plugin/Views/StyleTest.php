@@ -19,9 +19,9 @@ class StyleTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
-    'src/Plugin/views/style/Foo.php' => __DIR__ . '/_style.php',
-    'templates/views-style-example-foo.html.twig' => __DIR__ . '/_style.twig',
     'example.module' => __DIR__ . '/_style.module',
+    'templates/views-style-example-foo.html.twig' => __DIR__ . '/_style.twig',
+    'src/Plugin/views/style/Foo.php' => __DIR__ . '/_style.php',
   ];
 
 }

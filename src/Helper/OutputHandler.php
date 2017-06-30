@@ -28,6 +28,15 @@ class OutputHandler extends Helper {
   public function printSummary(OutputInterface $output, array $dumped_files) {
     // Multiple hooks can be dumped to the same file.
     $dumped_files = array_unique($dumped_files);
+
+    usort($dumped_files, function ($a, $b) {
+      $depth_a = substr_count($a, '/');
+      $depth_b = substr_count($b, '/');
+      // Top level files should be printed first.
+      return $depth_a == $depth_b || ($depth_a > 1 && $depth_b > 1) ?
+        strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
+    });
+
     if (count($dumped_files) > 0) {
       $output->writeln('<title>The following directories and files have been created or updated:</title>');
       foreach ($dumped_files as $file) {

@@ -25,16 +25,16 @@ class ConfigurationEntityTest extends GeneratorTestCase {
 
   protected $fixtures = [
     'foo/foo.info.yml' => __DIR__ . '/_configuration_entity/_info.yml',
-    'foo/src/Controller/ExampleListBuilder.php' => NULL,
-    'foo/src/Form/ExampleForm.php' => NULL,
-    'foo/src/Form/ExampleDeleteForm.php' => NULL,
-    'foo/src/ExampleInterface.php' => NULL,
-    'foo/src/Entity/Example.php' => NULL,
-    'foo/foo.routing.yml' => NULL,
     'foo/foo.links.action.yml' => NULL,
     'foo/foo.links.menu.yml' => NULL,
     'foo/foo.permissions.yml' => NULL,
+    'foo/foo.routing.yml' => NULL,
     'foo/config/schema/foo.schema.yml' => NULL,
+    'foo/src/Controller/ExampleListBuilder.php' => NULL,
+    'foo/src/Entity/Example.php' => NULL,
+    'foo/src/ExampleInterface.php' => NULL,
+    'foo/src/Form/ExampleDeleteForm.php' => NULL,
+    'foo/src/Form/ExampleForm.php' => NULL,
   ];
 
 }

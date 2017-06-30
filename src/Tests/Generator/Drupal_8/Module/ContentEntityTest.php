@@ -40,6 +40,7 @@ class ContentEntityTest extends GeneratorTestCase {
     'foo/foo.links.action.yml' => NULL,
     'foo/foo.links.menu.yml' => NULL,
     'foo/foo.links.task.yml' => NULL,
+    'foo/foo.module' => NULL,
     'foo/foo.permissions.yml' => NULL,
     'foo/foo.routing.yml' => NULL,
     'foo/src/Entity/Example.php' => NULL,
@@ -48,7 +49,6 @@ class ContentEntityTest extends GeneratorTestCase {
     'foo/src/Form/ExampleForm.php' => NULL,
     'foo/src/Form/ExampleSettingsForm.php' => NULL,
     'foo/templates/foo-example.html.twig' => NULL,
-    'foo/foo.module' => NULL,
   ];
 
 }
