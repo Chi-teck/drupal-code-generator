@@ -35,7 +35,6 @@ class {{ class }} extends MenuLinkDefault {
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, StaticMenuLinkOverridesInterface $static_override, Connection $db_connection) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $static_override);
-
     $this->dbConnection = $db_connection;
   }
 
@@ -71,7 +70,7 @@ class {{ class }} extends MenuLinkDefault {
    * {@inheritdoc}
    */
   public function getCacheTags() {
-    // DCG: Invalidate this tags when messages are created or removed.
+    // @DCG Invalidate this tags when messages are created or removed.
     return ['{{ machine_name }}.messages_count'];
   }
 

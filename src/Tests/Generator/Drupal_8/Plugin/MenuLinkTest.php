@@ -2,19 +2,19 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:menu-link command.
  */
-class MenuLinkTest extends GeneratorTestCase {
+class MenuLinkTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\MenuLink';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'FooMenuLink',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Class [ExampleMenuLink]: ' => 'FooMenuLink',
   ];
 
   protected $fixtures = [
