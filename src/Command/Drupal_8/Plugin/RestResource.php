@@ -26,7 +26,7 @@ class RestResource extends BaseGenerator {
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Resource');
 
     $path = 'src/Plugin/rest/resource/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/plugin/rest-resource.twig', $vars);
+    $this->setFile($path, 'd8/plugin/rest-resource.twig', $vars);
   }
 
 }

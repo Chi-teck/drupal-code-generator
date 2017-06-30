@@ -24,14 +24,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *   }
  * )
  *
- * @DCG: {
+ * @DCG
  * This plugin exposes database records as REST resources. To enable it import
  * resource configuration into active configuration storage. You may find an
  * example of such configuration in the following file:
  * core/modules/rest/config/optional/rest.resource.entity.node.yml.
  * For accessing Drupal entities through REST interface use
  * \Drupal\rest\Plugin\rest\resource\EntityResource plugin.
- * @DCG: }
  */
 class FooResource extends ResourceBase implements DependentPluginInterface {
 
@@ -58,7 +57,7 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
    * @param \Drupal\Core\Database\Connection $db_connection
    *   The database connection.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, $serializer_formats, LoggerInterface $logger, Connection $db_connection) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, array $serializer_formats, LoggerInterface $logger, Connection $db_connection) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $serializer_formats, $logger);
     $this->dbConnection = $db_connection;
   }
@@ -101,7 +100,7 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  public function post($record) {
+  public function post(array $record) {
 
     $this->validate($record);
 
@@ -128,7 +127,7 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  public function patch($id, $record) {
+  public function patch($id, array $record) {
     return $this->updateRecord($id, $record);
   }
 
@@ -143,7 +142,7 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  public function put($id, $record) {
+  public function put($id, array $record) {
     // Provide default values to make sure the record is completely replaced.
     $defaults = [
       'title' => '',
@@ -207,11 +206,11 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
   public function routes() {
     $collection = parent::routes();
 
-    // ResourceBase class has no support PUT method by some reason.
+    // ResourceBase class does not support PUT method by some reason.
     $definition = $this->getPluginDefinition();
     $canonical_path = $definition['uri_paths']['canonical'];
     $route = $this->getBaseRoute($canonical_path, 'PUT');
-    $route->addRequirements(array('_content_type_format' => implode('|', $this->serializerFormats)));
+    $route->addRequirements(['_content_type_format' => implode('|', $this->serializerFormats)]);
     $collection->add('example_foo.PUT', $route);
 
     return $collection;
@@ -225,7 +224,7 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
    *
    * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
    */
-  protected function validate($record) {
+  protected function validate(array $record) {
     if (!is_array($record) || count($record) == 0) {
       throw new BadRequestHttpException('No record content received.');
     }
@@ -235,7 +234,7 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
     elseif (isset($record['title']) && strlen($record['title'] > 255)) {
       throw new BadRequestHttpException('Title is too big.');
     }
-    // @TODO: Add more validation rules here.
+    // @DCG Add more validation rules here.
   }
 
   /**
@@ -270,7 +269,7 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  protected function updateRecord($id, $record, $defaults = []) {
+  protected function updateRecord($id, array $record, array $defaults = []) {
 
     // Make sure the record already exists.
     $this->loadRecord($id);

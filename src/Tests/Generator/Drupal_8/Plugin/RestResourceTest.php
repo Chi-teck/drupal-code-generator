@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:rest-resource command.
  */
-class RestResourceTest extends GeneratorTestCase {
+class RestResourceTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\RestResource';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'Foo',
-    'example_foo',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Plugin label [Example]: ' => 'Foo',
+    'Plugin ID [example_foo]: ' => 'example_foo',
   ];
 
   protected $fixtures = [
