@@ -75,6 +75,8 @@ class UtilsTest extends TestCase {
       ['Hello world!', 'hello_world'],
       ['Camel Case Here', 'camel_case_here'],
       [' &*^*()@#a*&)(&*0b@#$$() c  !', 'a_0b_c'],
+      ['12345abc', 'abc'],
+      ['12345', ''],
     ];
   }
 

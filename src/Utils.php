@@ -28,7 +28,7 @@ class Utils {
    */
   public static function human2machine($human_name) {
     return trim(preg_replace(
-      ['/^[0-9]/', '/[^a-z0-9_]+/'],
+      ['/^[0-9]+/', '/[^a-z0-9_]+/'],
       '_',
       strtolower($human_name)
     ), '_');
