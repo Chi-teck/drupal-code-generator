@@ -24,7 +24,7 @@ $DCG -d$MODULE_PATH d8:plugin:views:style -a'{"name":"Foo","machine_name":"foo",
 $DCG -d$MODULE_PATH d8:plugin:action -a'{"name":"Foo","machine_name":"foo","plugin_label":"Example","plugin_id":"example","category":"DCG","configurable":true}'
 $DCG -d$MODULE_PATH d8:plugin:block -a'{"name":"Foo","machine_name":"foo","plugin_label":"Example","plugin_id":"example","category":"DCG"}'
 $DCG -d$MODULE_PATH d8:plugin:condition -a'{"name":"Foo","machine_name":"foo","plugin_label":"Example","plugin_id":"example"}'
-$DCG -d$MODULE_PATH d8:plugin:filter -a'{"name":"Foo","machine_name":"foo","plugin_label":"Example","plugin_id":"example"}'
+$DCG -d$MODULE_PATH d8:plugin:filter -a'{"name":"Foo","machine_name":"foo","plugin_label":"Example","plugin_id":"example", "filter_type":"HTML restrictor"}'
 $DCG -d$MODULE_PATH d8:plugin:menu-link -a'{"name":"Foo","machine_name":"foo","class":"FooExample"}'
 $DCG -d$MODULE_PATH d8:plugin:rest-resource -a'{"name":"Foo","machine_name":"foo","plugin_label":"Example","plugin_id":"example"}'
 

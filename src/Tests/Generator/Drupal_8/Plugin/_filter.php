@@ -2,19 +2,19 @@
 
 namespace Drupal\foo\Plugin\Filter;
 
-use Drupal\filter\Plugin\FilterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\filter\FilterProcessResult;
+use Drupal\filter\Plugin\FilterBase;
 
 /**
  * Provides a 'Example' filter.
  *
  * @Filter(
- *   id = "filter_example",
+ *   id = "foo_example",
  *   title = @Translation("Example"),
  *   type = Drupal\filter\Plugin\FilterInterface::TYPE_HTML_RESTRICTOR,
  *   settings = {
- *     "example_setting" = "foo",
+ *     "example" = "foo",
  *   },
  *   weight = -10
  * )
@@ -25,10 +25,10 @@ class Example extends FilterBase {
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
-    $form['example_setting'] = [
+    $form['example'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Setting label'),
-      '#default_value' => $this->settings['example_setting'],
+      '#title' => $this->t('Example'),
+      '#default_value' => $this->settings['example'],
       '#description' => $this->t('Description of the setting.'),
     ];
     return $form;
@@ -38,8 +38,8 @@ class Example extends FilterBase {
    * {@inheritdoc}
    */
   public function process($text, $langcode) {
-    // Do something with the text here.
-    $text = str_replace($this->settings['example_setting'], 'bar', $text);
+    // DCG Process text here.
+    $text = str_replace($this->settings['example'], 'bar', $text);
     return new FilterProcessResult($text);
   }
 
@@ -47,7 +47,7 @@ class Example extends FilterBase {
    * {@inheritdoc}
    */
   public function tips($long = FALSE) {
-    return $this->t('Place your filter tips here.');
+    return $this->t('Some filter tips here.');
   }
 
 }

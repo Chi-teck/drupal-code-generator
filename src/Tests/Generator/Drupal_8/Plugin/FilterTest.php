@@ -2,24 +2,39 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:plugin:filter command.
  */
-class FilterTest extends GeneratorTestCase {
+class FilterTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Plugin\Filter';
-
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Example',
-    'filter_example',
-  ];
 
   protected $fixtures = [
     'src/Plugin/Filter/Example.php' => __DIR__ . '/_filter.php',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    $filter_type_output = implode("\n", [
+      'Filter type: ',
+      '  [1] HTML restrictor',
+      '  [2] Markup language',
+      '  [3] Irreversible transformation',
+      '  [4] Reversible transformation',
+      ' > ',
+    ]);
+    $this->interaction = [
+      'Module name [%default_name%]: ' => 'Foo',
+      'Module machine name [foo]: ' => 'foo',
+      'Plugin label [Example]: ' => 'Example',
+      'Plugin ID [foo_example]: ' => 'foo_example',
+      $filter_type_output => '1',
+    ];
+    parent::setUp();
+  }
 
 }
