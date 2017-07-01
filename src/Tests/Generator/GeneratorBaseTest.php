@@ -35,7 +35,10 @@ abstract class GeneratorBaseTest extends TestCase {
     $command = new $command_class();
     dcg_create_application()->add($command);
     $this->commandTester = new CommandTester($command);
-    $this->commandTester->setInputs(array_values($this->interaction));
+
+    $answers = array_values($this->interaction);
+    $this->commandTester->setInputs($answers);
+
     $this->initWorkingDirectory();
   }
 

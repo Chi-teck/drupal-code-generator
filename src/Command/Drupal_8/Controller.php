@@ -22,14 +22,11 @@ class Controller extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'class' => [
-        'Class',
-        function ($vars) {
-          return Utils::camelize($vars['name']) . 'Controller';
-        },
-      ],
-    ];
+    $questions = Utils::defaultQuestions();
+    $default_class = function ($vars) {
+      return Utils::camelize($vars['name']) . 'Controller';
+    };
+    $questions['class'] = new Question('Class', $default_class);
     $questions['route'] = new ConfirmationQuestion('Would you like to create a route for this controller?');
     $vars = $this->collectVars($input, $output, $questions);
 
@@ -47,7 +44,7 @@ class Controller extends BaseGenerator {
     }
 
     $path = 'src/Controller/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/controller.twig', $vars);
+    $this->setFile($path, 'd8/controller.twig', $vars);
   }
 
 }

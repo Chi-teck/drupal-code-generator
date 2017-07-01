@@ -1,20 +1,20 @@
 <?php
 
-namespace Drupal\example\Controller;
+namespace Drupal\foo\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DateFormatterInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Returns responses for Example routes.
+ * Returns responses for Foo routes.
  */
-class ExampleController extends ControllerBase {
+class FooController extends ControllerBase {
 
   /**
    * The date formatter service.
    *
-   * @var DateFormatterInterface
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
    */
   protected $dateFormatter;
 
@@ -23,8 +23,6 @@ class ExampleController extends ControllerBase {
    *
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
-   *
-   * @DCG: Optional.
    */
   public function __construct(DateFormatterInterface $date_formatter) {
     $this->dateFormatter = $date_formatter;
@@ -46,13 +44,13 @@ class ExampleController extends ControllerBase {
 
     $build['content'] = [
       '#type' => 'item',
-      '#title' => t('Content'),
-      '#markup' => t('Hello world!'),
+      '#title' => $this->t('Content'),
+      '#markup' => $this->t('Hello world!'),
     ];
 
     $build['date'] = [
       '#type' => 'item',
-      '#title' => t('Date'),
+      '#title' => $this->t('Date'),
       '#markup' => $this->dateFormatter->format(REQUEST_TIME),
     ];
 

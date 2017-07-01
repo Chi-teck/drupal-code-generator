@@ -28,6 +28,9 @@ $DCG -d$MODULE_PATH d8:plugin:filter -a'{"name":"Foo","machine_name":"foo","plug
 $DCG -d$MODULE_PATH d8:plugin:menu-link -a'{"name":"Foo","machine_name":"foo","class":"FooExample"}'
 $DCG -d$MODULE_PATH d8:plugin:rest-resource -a'{"name":"Foo","machine_name":"foo","plugin_label":"Example","plugin_id":"example"}'
 
+# Generate controller.
+$DCG -d$MODULE_PATH d8:controller -a'{"name":"Foo","machine_name":"foo","class":"FooController","route":true,"route_name":"foo.example","route_path":"/foo/example","route_title":"Example","route_permission":"access content"}'
+
 # Check code standards.
 dcg_phpcs --exclude=DrupalPractice.Yaml.RoutingAccess $MODULE_PATH
 

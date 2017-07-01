@@ -2,23 +2,29 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:controller command.
  */
-class ControllerTest extends GeneratorTestCase {
+class ControllerTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Controller';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'ExampleController',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Class [FooController]: ' => 'FooController',
+    'Would you like to create a route for this controller? [Yes]: ' => 'Yes',
+    'Route name [foo.example]: ' => 'example.bar',
+    'Route path [/foo/example]: ' => '/foo/example',
+    'Route title [Example]: ' => 'Bar',
+    'Route permission [access content]: ' => 'access content',
   ];
 
   protected $fixtures = [
-    'src/Controller/ExampleController.php' => __DIR__ . '/_controller.php',
+    'foo.routing.yml' => __DIR__ . '/_controller_routing.yml',
+    'src/Controller/FooController.php' => __DIR__ . '/_controller.php',
   ];
 
 }
