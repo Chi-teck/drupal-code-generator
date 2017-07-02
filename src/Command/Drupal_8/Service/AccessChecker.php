@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:service:access-checker command.
@@ -20,20 +21,23 @@ class AccessChecker extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'applies_to' => ['Applies to', 'foo'],
-      'class' => [
-        'Class',
-        function ($vars) {
-          return Utils::camelize($vars['applies_to'] . 'AccessChecker');
-        },
-      ],
-    ];
+    $questions = Utils::defaultQuestions();
+    $questions['applies_to'] = new Question('Applies to', '_foo');
+    $questions['applies_to']->setValidator(function ($value) {
+      if (!preg_match('/^_[a-z0-9_]*[a-z0-9]$/', $value)) {
+        throw new \UnexpectedValueException('The value is not correct name for "applies_to" property.');
+      }
+      return $value;
+    });
+    $default_class = function ($vars) {
+      return Utils::camelize($vars['applies_to'] . 'AccessChecker');
+    };
+    $questions['class'] = new Question('Class', $default_class);
+
     $vars = $this->collectVars($input, $output, $questions);
 
     $path = 'src/Access/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/service/access-checker.twig', $vars);
-
+    $this->setFile($path, 'd8/service/access-checker.twig', $vars);
     $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/access-checker.services.twig', $vars);
   }
 

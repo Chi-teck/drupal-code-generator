@@ -61,3 +61,6 @@ fi
 # Run tests.
 echo -e "\n\e[30;43m -= Components =- \e[0m\n"
 source $SELF_PATH/components/test.sh
+
+echo -e "\n\e[30;43m -= Services =- \e[0m\n"
+source $SELF_PATH/service/test.sh

@@ -1,5 +1,5 @@
 services:
-  {{ machine_name }}.foo_access_checker:
+  access_check.{{ machine_name }}.{{ applies_to | trim('_') }}:
     class: Drupal\{{ machine_name }}\Access\{{ class }}
     tags:
-      - { name: access_check, applies_to: _foo }
+      - { name: access_check, applies_to: {{ applies_to }} }

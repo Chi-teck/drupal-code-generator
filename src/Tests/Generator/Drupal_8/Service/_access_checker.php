@@ -8,6 +8,10 @@ use Symfony\Component\Routing\Route;
 
 /**
  * Checks if passed parameter matches the route configuration.
+ *
+ * @DCG
+ * To make use of this access checker add '_foo: Some value' entry to route
+ * definition under requirements section.
  */
 class FooAccessChecker implements AccessInterface {
 
@@ -22,8 +26,8 @@ class FooAccessChecker implements AccessInterface {
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function access(Route $route, ExampleInterface $param) {
-    return AccessResult::allowedIf($param->getSomeValue() == $route->getRequirement('_foo'));
+  public function access(Route $route, \ExampleInterface $parameter) {
+    return AccessResult::allowedIf($parameter->getSomeValue() == $route->getRequirement('_foo'));
   }
 
 }

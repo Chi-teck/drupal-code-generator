@@ -1,5 +1,5 @@
 services:
-  example.foo_access_checker:
+  access_check.example.foo:
     class: Drupal\example\Access\FooAccessChecker
     tags:
       - { name: access_check, applies_to: _foo }

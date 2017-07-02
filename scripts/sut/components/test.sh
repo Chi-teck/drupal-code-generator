@@ -37,5 +37,3 @@ dcg_phpcs --exclude=DrupalPractice.Yaml.RoutingAccess $MODULE_PATH
 dcg_drush en foo
 dcg_phpunit $MODULE_PATH/tests
 dcg_drush pmu foo
-
-rm -r $MODULE_PATH
