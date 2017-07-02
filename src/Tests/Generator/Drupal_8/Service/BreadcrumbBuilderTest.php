@@ -2,19 +2,19 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:service:breadcrumb-builder command.
  */
-class BreadcrumbBuilderTest extends GeneratorTestCase {
+class BreadcrumbBuilderTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Service\BreadcrumbBuilder';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'ExampleBreadcrumbBuilder',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Class [ExampleBreadcrumbBuilder]: ' => 'ExampleBreadcrumbBuilder',
   ];
 
   protected $fixtures = [

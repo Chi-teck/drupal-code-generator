@@ -6,6 +6,7 @@ cp -R $SELF_PATH/service/bar $MODULE_PATH
 
 # Generate services.
 $DCG -d$MODULE_PATH d8:service:access-checker -a'{"name":"Bar","machine_name":"bar","applies_to":"bar","class":"BarAccessChecker"}'
+$DCG -d$MODULE_PATH d8:service:breadcrumb-builder -a'{"name":"Bar","machine_name":"bar","class":"BarBreadcrumbBuilder"}'
 
 # Check code standards.
 dcg_phpcs $MODULE_PATH

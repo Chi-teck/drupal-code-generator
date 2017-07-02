@@ -6,6 +6,7 @@ use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\node\NodeInterface;
 
 /**
@@ -13,19 +14,14 @@ use Drupal\node\NodeInterface;
  */
 class ExampleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
-  /**
-   * The node.
-   *
-   * @var \Drupal\node\NodeInterface
-   */
-  protected $node;
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
    */
   public function applies(RouteMatchInterface $route_match) {
-    $this->node = $route_match->getParameter('node');
-    return $this->node instanceof NodeInterface && $this->node->getType() == 'article';
+    $node = $route_match->getParameter('node');
+    return $node instanceof NodeInterface && $node->getType() == 'article';
   }
 
   /**
@@ -34,11 +30,13 @@ class ExampleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   public function build(RouteMatchInterface $route_match) {
     $breadcrumb = new Breadcrumb();
 
-    $links[] = Link::createFromRoute(t('Home'), '<front>');
-    // Articles page is a view.
-    $links[] = Link::createFromRoute(t('Articles'), 'view.articles.page_1');
+    $links[] = Link::createFromRoute($this->t('Home'), '<front>');
 
-    $links[] = Link::createFromRoute($this->node->label(), '<none>');
+    // Articles page is a view.
+    $links[] = Link::createFromRoute($this->t('Articles'), 'view.articles.page_1');
+
+    $node = $route_match->getParameter('node');
+    $links[] = Link::createFromRoute($node->label(), '<none>');
 
     $breadcrumb->setLinks($links);
 
