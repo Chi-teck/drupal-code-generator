@@ -38,7 +38,7 @@ class Utils {
    * Camelize a string.
    */
   public static function camelize($string, $upper_camel = TRUE) {
-    $output = ucwords(trim(str_replace('_', ' ', $string)));
+    $output = ucwords(trim(str_replace(['_', '-', '.'], ' ', $string)));
     $output = preg_replace('/[^a-z0-9]/i', '', $output);
     return $upper_camel ? $output : lcfirst($output);
   }

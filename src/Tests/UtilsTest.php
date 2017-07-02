@@ -98,6 +98,8 @@ class UtilsTest extends TestCase {
       ['Hello world!', TRUE, 'HelloWorld'],
       ['snake_case_here', TRUE, 'SnakeCaseHere'],
       ['snake_case_here', FALSE, 'snakeCaseHere'],
+      ['train-case-here', TRUE, 'TrainCaseHere'],
+      ['dot.case.here', FALSE, 'dotCaseHere'],
       ['foo', TRUE, 'Foo'],
       [' &*^*()@#a*&)(&*0b@#$$() c  ! ', TRUE, 'a0bC'],
     ];
