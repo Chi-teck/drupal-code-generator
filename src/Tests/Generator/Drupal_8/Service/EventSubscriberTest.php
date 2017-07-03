@@ -2,18 +2,18 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:service/event-subscriber command.
  */
-class EventSubscriberTest extends GeneratorTestCase {
+class EventSubscriberTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Service\EventSubscriber';
 
-  protected $answers = [
-    'Foo',
-    'foo',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
   ];
 
   protected $fixtures = [
