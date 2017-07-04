@@ -2,6 +2,7 @@
 
 namespace Drupal\foo;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -10,6 +11,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  * FooMiddleware middleware.
  */
 class FooMiddleware implements HttpKernelInterface {
+
+  use StringTranslationTrait;
 
   /**
    * The kernel.
@@ -34,7 +37,7 @@ class FooMiddleware implements HttpKernelInterface {
   public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = TRUE) {
 
     if ($request->getClientIp() == '127.0.0.10') {
-      return new Response(t('Bye!'), 403);
+      return new Response($this->t('Bye!'), 403);
     }
 
     return $this->httpKernel->handle($request, $type, $catch);

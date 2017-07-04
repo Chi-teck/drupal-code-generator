@@ -9,6 +9,7 @@ $DCG -d$MODULE_PATH d8:service:access-checker -a'{"name":"Bar","machine_name":"b
 $DCG -d$MODULE_PATH d8:service:breadcrumb-builder -a'{"name":"Bar","machine_name":"bar","class":"BarBreadcrumbBuilder"}'
 $DCG -d$MODULE_PATH d8:service:custom -a'{"name":"Bar","machine_name":"bar", "service_name":"bar.example","class":"Example"}'
 $DCG -d$MODULE_PATH d8:service:event-subscriber -a'{"name":"Bar","machine_name":"bar"}'
+$DCG -d$MODULE_PATH d8:service:middleware -a'{"name":"Bar","machine_name":"bar"}'
 
 # Check code standards.
 dcg_phpcs $MODULE_PATH
