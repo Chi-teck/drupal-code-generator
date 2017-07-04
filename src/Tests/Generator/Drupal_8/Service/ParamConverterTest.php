@@ -2,20 +2,20 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:service:param-converter command.
  */
-class ParamConverterTest extends GeneratorTestCase {
+class ParamConverterTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Service\ParamConverter';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'foo',
-    'FooParamConverter',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Parameter type [example]: ' => 'foo',
+    'Class [FooParamConverter]: ' => 'FooParamConverter',
   ];
 
   protected $fixtures = [

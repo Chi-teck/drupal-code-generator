@@ -9,13 +9,13 @@ use Symfony\Component\Routing\Route;
 /**
  * Converts parameters for upcasting database record IDs to full std objects.
  *
- * @DCG: {
- * In order to use it you should specify some additional options in your route:
+ * @DCG
+ * To use this converter specify parameter type in a relevant route as follows:
  * @code
  * example.foo_parameter_converter:
  *   path: example/{record}
  *   defaults:
- *     _controller: '\Drupal\example\Controller\ExampleController:build'
+ *     _controller: '\Drupal\example\Controller\ExampleController::build'
  *   requirements:
  *     _access: 'TRUE'
  *   options:
@@ -26,8 +26,7 @@ use Symfony\Component\Routing\Route;
  *
  * Note that for entities you can make use of existing parameter converter
  * provided by Drupal core.
- * @see \Drupal\Core\ParamConverter\EntityConverter;
- * @DCG: }
+ * @see \Drupal\Core\ParamConverter\EntityConverter
  */
 class FooParamConverter implements ParamConverterInterface {
 
