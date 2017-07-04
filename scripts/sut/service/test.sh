@@ -11,6 +11,7 @@ $DCG -d$MODULE_PATH d8:service:custom -a'{"name":"Bar","machine_name":"bar", "se
 $DCG -d$MODULE_PATH d8:service:event-subscriber -a'{"name":"Bar","machine_name":"bar"}'
 $DCG -d$MODULE_PATH d8:service:middleware -a'{"name":"Bar","machine_name":"bar"}'
 $DCG -d$MODULE_PATH d8:service:param-converter -a'{"name":"Bar","machine_name":"bar","parameter_type":"example","class":"ExampleParamConverter"}'
+$DCG -d$MODULE_PATH d8:service:route-subscriber -a'{"name":"Bar","machine_name":"bar"}'
 
 # Check code standards.
 dcg_phpcs $MODULE_PATH
