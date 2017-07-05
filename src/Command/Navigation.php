@@ -207,6 +207,8 @@ class Navigation extends Command {
       'install' => 'Install file',
       'module-info' => 'Info (module)',
       'theme-info' => 'Info (theme)',
+      'module-libraries' => 'Libraries (module)',
+      'theme-libraries' => 'Libraries (theme)',
       'dcg-command' => 'DCG command',
       'composer' => 'composer.json',
     ];

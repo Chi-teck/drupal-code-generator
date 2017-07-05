@@ -1,7 +1,7 @@
 services:
   foo.example:
     class: Drupal\foo\FooExample
-    arguments: ['@entity.query', '@entity.manager']
+    arguments: ['@entity.query', '@entity_type.manager']
   foo.middleware:
     class: Drupal\foo\FooMiddleware
     tags:

@@ -39,7 +39,7 @@ class Standard extends BaseGenerator {
     $this->files[$prefix . '.info.yml'] = $this->render('d8/yml/module-info.yml.twig', $vars);
     $this->files[$prefix . '.module'] = $this->render('d8/module.twig', $vars);
     $this->files[$prefix . '.install'] = $this->render('d8/install.twig', $vars);
-    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/libraries.yml.twig', $vars);
+    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/module-libraries.yml.twig', $vars);
     $this->files[$prefix . '.services.yml'] = $this->render('d8/yml/services.yml.twig', $vars);
     $this->files[$prefix . '.permissions.yml'] = $this->render('d8/yml/permissions.yml.twig', $vars);
 

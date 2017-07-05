@@ -37,7 +37,7 @@ class Standard extends BaseGenerator {
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
     $this->files[$prefix . '.info.yml'] = $this->render('d8/yml/theme-info.yml.twig', $vars);
-    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/libraries.yml.twig', $vars);
+    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/theme-libraries.yml.twig', $vars);
     $this->files[$prefix . '.theme'] = $this->render('d8/theme.twig', $vars);
 
     $js_path = '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';

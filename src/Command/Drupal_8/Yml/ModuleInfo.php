@@ -21,20 +21,18 @@ class ModuleInfo extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'description' => ['Description', 'Module description.'],
-      'package' => ['Package', 'custom'],
-      'version' => ['Version', '8.x-1.0-dev'],
-      'configure' => new Question('Configuration page (route name)', ''),
-      'dependencies' => new Question('Dependencies (comma separated)', ''),
-    ];
+    $questions = Utils::defaultQuestions();
+    $questions['description'] = new Question('Description', 'Module description.');
+    $questions['package'] = new Question('Package', 'Custom');
+    $questions['configure'] = new Question('Configuration page (route name)');
+    $questions['dependencies'] = new Question('Dependencies (comma separated)');
 
     $vars = $this->collectVars($input, $output, $questions);
     if ($vars['dependencies']) {
-      $vars['dependencies'] = explode(',', $vars['dependencies']);
+      $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
 
-    $this->files[$vars['machine_name'] . '.info.yml'] = $this->render('d8/yml/module-info.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.info.yml', 'd8/yml/module-info.yml.twig', $vars);
   }
 
 }

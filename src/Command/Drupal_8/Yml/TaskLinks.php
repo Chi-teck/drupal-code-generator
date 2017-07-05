@@ -2,9 +2,11 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DrupalCodeGenerator\Command\BaseGenerator;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:yml:task-links command.
@@ -19,11 +21,12 @@ class TaskLinks extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'machine_name' => ['Module machine name'],
-    ];
+    $questions['machine_name'] = new Question('Module machine name');
+    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+
     $vars = $this->collectVars($input, $output, $questions);
-    $this->files[$vars['machine_name'] . '.links.task.yml'] = $this->render('d8/yml/links.task.yml.twig', $vars);
+
+    $this->setFile($vars['machine_name'] . '.links.task.yml', 'd8/yml/links.task.yml.twig', $vars);
   }
 
 }

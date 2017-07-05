@@ -1,13 +1,13 @@
 # Custom module library for general purposes.
-example:
+{{ machine_name }}:
   js:
-    js/example.js: {}
+    js/{{ machine_name | underscore2hyphen }}.js: {}
   css:
     component:
-      css/example.css: {}
+      css/{{ machine_name | underscore2hyphen }}.css: {}
   dependencies:
     - core/drupalSettings
-    - example/jquery-labelauty
+    - {{ machine_name }}/jquery-labelauty
 
 # Third-party library (self hosted).
 jquery-labelauty:
@@ -34,4 +34,4 @@ vuejs:
     url: https://github.com/vuejs/vue/blob/dev/LICENSE
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js: {type: external, minified: true}
+    https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js: {type: external, minified: true}

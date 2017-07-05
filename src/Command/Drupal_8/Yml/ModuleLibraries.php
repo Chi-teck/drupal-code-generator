@@ -9,13 +9,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Implements d8:yml:action-links command.
+ * Implements d8:yml:module-libraries command.
  */
-class ActionLinks extends BaseGenerator {
+class ModuleLibraries extends BaseGenerator {
 
-  protected $name = 'd8:yml:action-links';
-  protected $description = 'Generates a links.action yml file';
-  protected $alias = 'action-links';
+  protected $name = 'd8:yml:module-libraries';
+  protected $description = 'Generates module libraries yml file';
+  protected $alias = 'libraries.yml';
 
   /**
    * {@inheritdoc}
@@ -24,7 +24,7 @@ class ActionLinks extends BaseGenerator {
     $questions['machine_name'] = new Question('Module machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
     $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['machine_name'] . '.links.action.yml', 'd8/yml/links.action.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.libraries.yml', 'd8/yml/module-libraries.yml.twig', $vars);
   }
 
 }

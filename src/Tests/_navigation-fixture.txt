@@ -261,12 +261,13 @@ Select generator:
   [2 ] Breakpoints
   [3 ] Info (module)
   [4 ] Info (theme)
-  [5 ] Libraries
-  [6 ] Menu links
-  [7 ] Permissions
-  [8 ] Routing
-  [9 ] Services
-  [10] Task links
+  [5 ] Libraries (module)
+  [6 ] Libraries (theme)
+  [7 ] Menu links
+  [8 ] Permissions
+  [9 ] Routing
+  [10] Services
+  [11] Task links
   >>> 0[K
 Select generator:
   [0 ] ..

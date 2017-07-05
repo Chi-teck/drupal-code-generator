@@ -5,18 +5,18 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
- * Test for d8:yml:action-links command.
+ * Test for d8:yml:module-libraries command.
  */
-class ActionLinksTest extends GeneratorBaseTest {
+class ModuleLibrariesTest extends GeneratorBaseTest {
 
-  protected $class = 'Drupal_8\Yml\ActionLinks';
+  protected $class = 'Drupal_8\Yml\ModuleLibraries';
 
   protected $interaction = [
     'Module machine name [%default_machine_name%]: ' => 'example',
   ];
 
   protected $fixtures = [
-    'example.links.action.yml' => __DIR__ . '/_links.action.yml',
+    'example.libraries.yml' => __DIR__ . '/_module_libraries.yml',
   ];
 
 }

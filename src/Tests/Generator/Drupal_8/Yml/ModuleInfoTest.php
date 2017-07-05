@@ -2,23 +2,22 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:yml:module-info command.
  */
-class ModuleInfoTest extends GeneratorTestCase {
+class ModuleInfoTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Yml\ModuleInfo';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'Example description.',
-    'custom',
-    '8.x-1.0-dev',
-    'example.settings',
-    'views, node, fields',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Description [Module description.]: ' => 'Example description.',
+    'Package [Custom]: ' => 'Custom',
+    'Configuration page (route name): ' => 'example.settings',
+    'Dependencies (comma separated): ' => 'views, node, fields',
   ];
 
   protected $fixtures = [
