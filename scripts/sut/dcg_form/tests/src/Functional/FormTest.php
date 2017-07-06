@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\foo\Functional;
+namespace Drupal\Tests\dcg_form\Functional;
 
 use Drupal\Core\Database\Database;
 use Drupal\Tests\BrowserTestBase;
@@ -15,7 +15,7 @@ class FormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['foo'];
+  public static $modules = ['dcg_form'];
 
   /**
    * {@inheritdoc}

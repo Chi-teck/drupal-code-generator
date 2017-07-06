@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\qux\EventSubscriber;
+namespace Drupal\dcg_yml\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Qux event subscriber.
+ * Event subscriber.
  */
-class QuxSubscriber implements EventSubscriberInterface {
+class DcgYmlSubscriber implements EventSubscriberInterface {
 
   /**
    * Kernel request event handler.

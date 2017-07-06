@@ -38,8 +38,12 @@ class Utils {
    * Camelize a string.
    */
   public static function camelize($string, $upper_camel = TRUE) {
-    $output = ucwords(trim(str_replace(['_', '-', '.'], ' ', $string)));
-    $output = preg_replace('/[^a-z0-9]/i', '', $output);
+    $output = preg_replace('/([^A-Z])([A-Z])/', '$1 $2', $string);
+    $output = strtolower($output);
+    $output = preg_replace('/[^a-z0-9]/', ' ', $output);
+    $output = trim($output);
+    $output = ucwords($output);
+    $output = str_replace(' ', '', $output);
     return $upper_camel ? $output : lcfirst($output);
   }
 

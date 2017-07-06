@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\foo\Functional;
+namespace Drupal\Tests\dcg_service\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
@@ -14,7 +14,7 @@ class EventSubscriberTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['bar'];
+  public static $modules = ['dcg_service'];
 
   /**
    * Test callback.

@@ -1,5 +1,0 @@
-name: Bar
-type: module
-description: Helper module to test DCG generated services.
-package: DCG
-core: 8.x

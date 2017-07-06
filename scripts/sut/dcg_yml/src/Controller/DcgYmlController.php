@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\qux\Controller;
+namespace Drupal\dcg_yml\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 
 /**
- * Returns responses for Qux routes.
+ * Controller for generated routing.yml file.
  */
-class QuxController extends ControllerBase {
+class DcgYmlController extends ControllerBase {
 
   /**
    * Builds the response.

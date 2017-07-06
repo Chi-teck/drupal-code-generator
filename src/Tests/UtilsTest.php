@@ -101,7 +101,8 @@ class UtilsTest extends TestCase {
       ['train-case-here', TRUE, 'TrainCaseHere'],
       ['dot.case.here', FALSE, 'dotCaseHere'],
       ['foo', TRUE, 'Foo'],
-      [' &*^*()@#a*&)(&*0b@#$$() c  ! ', TRUE, 'a0bC'],
+      [' &*^*()@#a*&)(&*0b@#$$() c  ! ', TRUE, 'A0bC'],
+      ['Zx%ABcDDD123 ', FALSE, 'zxAbcDdd123'],
     ];
   }
 

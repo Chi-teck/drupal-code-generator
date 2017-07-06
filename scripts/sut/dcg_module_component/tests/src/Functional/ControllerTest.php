@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\foo\Functional;
+namespace Drupal\Tests\dcg_module_component\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
@@ -14,7 +14,7 @@ class ControllerTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['foo', 'node'];
+  public static $modules = ['dcg_module_component', 'node'];
 
   /**
    * Test callback.

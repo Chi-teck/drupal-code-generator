@@ -1,14 +1,14 @@
 <?php
 
-namespace Drupal\qux;
+namespace Drupal\dcg_yml;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * QuxMiddleware middleware.
+ * The middleware.
  */
-class QuxMiddleware implements HttpKernelInterface {
+class DcgYmlMiddleware implements HttpKernelInterface {
 
   /**
    * The kernel.

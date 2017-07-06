@@ -1,0 +1,5 @@
+name: DCG plugin
+type: module
+description: Helper module for testing generated plugins.
+package: DCG
+core: 8.x
