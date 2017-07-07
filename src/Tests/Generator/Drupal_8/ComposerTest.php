@@ -2,24 +2,32 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:composer command.
  */
-class ComposerTest extends GeneratorTestCase {
+class ComposerTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Composer';
 
-  protected $answers = [
-    'example',
-    'Example description.',
-    'drupal-module',
-    TRUE,
+  protected $interaction = [
+    'Project machine name [%default_machine_name%]: ' => 'example',
+    'Description: ' => 'Example description.',
+    'Type [drupal-module]: ' => 'drupal-module',
+    'Is this project hosted on drupal.org? [No]: ' => 'Yes',
   ];
 
   protected $fixtures = [
     'composer.json' => __DIR__ . '/_composer.json',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getDisplay() {
+    // Remove autocomplete output.
+    return preg_replace('/Type \[drupal-module\]: (.*)Is this project/s', 'Type [drupal-module]: Is this project', parent::getDisplay());
+  }
 
 }
