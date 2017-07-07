@@ -68,19 +68,18 @@ fi
 # === Tests === #
 
 # --- Test forms --- #
-TEST=form
-if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
-  echo -e "\n\e[30;43m -= $TEST =- \e[0m\n"
+if [ $TARGET_TEST = all -o $TARGET_TEST = form ]; then
+  echo -e "\n\e[30;43m -= Form =- \e[0m\n"
 
-  MODULE_MACHINE_NAME=dcg_$TEST
+  MODULE_MACHINE_NAME=foo
   MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
   # Generate forms.
-  $DCG -d$MODULE_PATH d8:form:simple -a'{"name":"DCG form","machine_name":"dcg_form","class":"SimpleForm","form_id":"foo_simple"}'
-  $DCG -d$MODULE_PATH d8:form:config -a'{"name":"DCG form form","machine_name":"dcg_form","class":"SettingsForm","form_id":"foo_settings"}'
-  $DCG -d$MODULE_PATH d8:form:confirm -a'{"name":"DCG form","machine_name":"dcg_form","class":"ConfirmForm","form_id":"foo_confirm"}'
+  $DCG -d$MODULE_PATH d8:form:simple -a'{"name":"Foo","machine_name":"foo","class":"SimpleForm","form_id":"foo_simple"}'
+  $DCG -d$MODULE_PATH d8:form:config -a'{"name":"Foo","machine_name":"foo","class":"SettingsForm","form_id":"foo_settings"}'
+  $DCG -d$MODULE_PATH d8:form:confirm -a'{"name":"Foo","machine_name":"foo","class":"ConfirmForm","form_id":"foo_confirm"}'
 
   dcg_phpcs --exclude=DrupalPractice.Yaml.RoutingAccess $MODULE_PATH
   dcg_drush en $MODULE_MACHINE_NAME
@@ -88,18 +87,18 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi
 
-# --- Test module components --- #
-TEST=module_component
-if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
-  echo -e "\n\e[30;43m -= $TEST =- \e[0m\n"
 
-  MODULE_MACHINE_NAME=dcg_$TEST
+# --- Test module components --- #
+if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
+  echo -e "\n\e[30;43m -= Module component =- \e[0m\n"
+
+  MODULE_MACHINE_NAME=bar
   MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
   # Generate controller.
-  $DCG -d$MODULE_PATH d8:controller -a'{"name":"DCG module component","machine_name":"dcg_module_component","class":"FooController","route":true,"route_name":"boop.example","route_path":"/foo/example","route_title":"Example","route_permission":"access content"}'
+  $DCG -d$MODULE_PATH d8:controller -a'{"name":"Bar","machine_name":"bar","class":"BarController","route":true,"route_name":"bar.example","route_path":"/bar/example","route_title":"Example","route_permission":"access content"}'
 
   dcg_phpcs $MODULE_PATH
   dcg_drush en $MODULE_MACHINE_NAME
@@ -108,30 +107,29 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
 fi
 
 # --- Test plugins --- #
-TEST=plugin
-if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
-  echo -e "\n\e[30;43m -= $TEST =- \e[0m\n"
+if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
+  echo -e "\n\e[30;43m -= Plugin =- \e[0m\n"
 
-  MODULE_MACHINE_NAME=dcg_$TEST
+  MODULE_MACHINE_NAME=qux
   MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
   # Generate plugins.
-  $DCG -d$MODULE_PATH d8:plugin:field:formatter -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example"}'
-  $DCG -d$MODULE_PATH d8:plugin:field:type -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example"}'
-  $DCG -d$MODULE_PATH d8:plugin:field:widget -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example"}'
+  $DCG -d$MODULE_PATH d8:plugin:field:formatter -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
+  $DCG -d$MODULE_PATH d8:plugin:field:type -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
+  $DCG -d$MODULE_PATH d8:plugin:field:widget -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
 
-  $DCG -d$MODULE_PATH d8:plugin:views:argument-default -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example"}'
-  $DCG -d$MODULE_PATH d8:plugin:views:field -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example"}'
-  $DCG -d$MODULE_PATH d8:plugin:views:style -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example"}'
+  $DCG -d$MODULE_PATH d8:plugin:views:argument-default -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
+  $DCG -d$MODULE_PATH d8:plugin:views:field -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
+  $DCG -d$MODULE_PATH d8:plugin:views:style -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
 
-  $DCG -d$MODULE_PATH d8:plugin:action -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example","category":"DCG","configurable":true}'
-  $DCG -d$MODULE_PATH d8:plugin:block -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example","category":"DCG"}'
-  $DCG -d$MODULE_PATH d8:plugin:condition -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example"}'
-  $DCG -d$MODULE_PATH d8:plugin:filter -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example", "filter_type":"HTML restrictor"}'
-  $DCG -d$MODULE_PATH d8:plugin:menu-link -a'{"name":"DCG plugin","machine_name":"dcg_plugin","class":"FooExample"}'
-  $DCG -d$MODULE_PATH d8:plugin:rest-resource -a'{"name":"DCG plugin","machine_name":"dcg_plugin","plugin_label":"Example","plugin_id":"example"}'
+  $DCG -d$MODULE_PATH d8:plugin:action -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","category":"DCG","configurable":true}'
+  $DCG -d$MODULE_PATH d8:plugin:block -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","category":"DCG"}'
+  $DCG -d$MODULE_PATH d8:plugin:condition -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
+  $DCG -d$MODULE_PATH d8:plugin:filter -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example", "filter_type":"HTML restrictor"}'
+  $DCG -d$MODULE_PATH d8:plugin:menu-link -a'{"name":"Qux","machine_name":"qux","class":"FooExample"}'
+  $DCG -d$MODULE_PATH d8:plugin:rest-resource -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
 
   dcg_phpcs $MODULE_PATH
   dcg_drush en $MODULE_MACHINE_NAME
@@ -140,24 +138,23 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
 fi
 
 # --- Test services --- #
-TEST=service
-if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
-  echo -e "\n\e[30;43m -= $TEST =- \e[0m\n"
+if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
+  echo -e "\n\e[30;43m -= Service =- \e[0m\n"
 
-  MODULE_MACHINE_NAME=dcg_$TEST
+  MODULE_MACHINE_NAME=zippo
   MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
   # Generate services.
-  $DCG -d$MODULE_PATH d8:service:access-checker -a'{"name":"DCG service","machine_name":"dcg_service","applies_to":"foo","class":"FooAccessChecker"}'
-  $DCG -d$MODULE_PATH d8:service:breadcrumb-builder -a'{"name":"DCG service","machine_name":"dcg_service","class":"FooBreadcrumbBuilder"}'
-  $DCG -d$MODULE_PATH d8:service:custom -a'{"name":"DCG service","machine_name":"dcg_service", "service_name":"dcg_service.example","class":"Example"}'
-  $DCG -d$MODULE_PATH d8:service:event-subscriber -a'{"name":"DCG service","machine_name":"dcg_service"}'
-  $DCG -d$MODULE_PATH d8:service:middleware -a'{"name":"Dcg service","machine_name":"dcg_service"}'
-  $DCG -d$MODULE_PATH d8:service:param-converter -a'{"name":"DCG service","machine_name":"dcg_service","parameter_type":"example","class":"ExampleParamConverter"}'
-  $DCG -d$MODULE_PATH d8:service:route-subscriber -a'{"name":"DCG service","machine_name":"dcg_service"}'
-  $DCG -d$MODULE_PATH d8:service:twig-extension -a'{"name":"DCG service","machine_name":"dcg_service","class":"FooTwigExtension"}'
+  $DCG -d$MODULE_PATH d8:service:access-checker -a'{"name":"Zippo","machine_name":"zippo","applies_to":"zippo","class":"ZippoAccessChecker"}'
+  $DCG -d$MODULE_PATH d8:service:breadcrumb-builder -a'{"name":"Zippo","machine_name":"zippo","class":"ZippoBreadcrumbBuilder"}'
+  $DCG -d$MODULE_PATH d8:service:custom -a'{"name":"Zippo","machine_name":"zippo", "service_name":"zippo.example","class":"Example"}'
+  $DCG -d$MODULE_PATH d8:service:event-subscriber -a'{"name":"Zippo","machine_name":"zippo"}'
+  $DCG -d$MODULE_PATH d8:service:middleware -a'{"name":"Dcg service","machine_name":"zippo"}'
+  $DCG -d$MODULE_PATH d8:service:param-converter -a'{"name":"Zippo","machine_name":"zippo","parameter_type":"example","class":"ExampleParamConverter"}'
+  $DCG -d$MODULE_PATH d8:service:route-subscriber -a'{"name":"Zippo","machine_name":"zippo"}'
+  $DCG -d$MODULE_PATH d8:service:twig-extension -a'{"name":"Zippo","machine_name":"zippo","class":"ZippoTwigExtension"}'
 
   dcg_phpcs $MODULE_PATH
   dcg_drush en $MODULE_MACHINE_NAME
@@ -166,24 +163,23 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
 fi
 
 # --- Test YML --- #
-TEST=yml
-if [ $TARGET_TEST = all -o $TARGET_TEST = $TEST ]; then
-  echo -e "\n\e[30;43m -= $TEST =- \e[0m\n"
+if [ $TARGET_TEST = all -o $TARGET_TEST = yml ]; then
+  echo -e "\n\e[30;43m -= YML =- \e[0m\n"
 
-  MODULE_MACHINE_NAME=dcg_$TEST
+  MODULE_MACHINE_NAME=yety
   MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
   # Generate YML files.
-  $DCG -d$MODULE_PATH d8:yml:action-links -a'{"machine_name":"dcg_yml"}'
-  $DCG -d$MODULE_PATH d8:yml:menu-links -a'{"machine_name":"dcg_yml"}'
-  $DCG -d$MODULE_PATH d8:yml:module-info -a'{"name":"DCG YML","machine_name":"dcg_yml","description":"Helper module for testing generated YML files.", "package": "DCG","configure":"", "dependencies":""}'
-  $DCG -d$MODULE_PATH d8:yml:module-libraries -a'{"name":"DCG YML","machine_name":"dcg_yml"}'
-  $DCG -d$MODULE_PATH d8:yml:permissions -a'{"machine_name":"dcg_yml"}'
-  $DCG -d$MODULE_PATH d8:yml:routing -a'{"name":"DCG YML","machine_name":"dcg_yml"}'
-  $DCG -d$MODULE_PATH d8:yml:services -a'{"name":"DCG YML","machine_name":"dcg_yml"}'
-  $DCG -d$MODULE_PATH d8:yml:task-links -a'{"machine_name":"dcg_yml"}'
+  $DCG -d$MODULE_PATH d8:yml:action-links -a'{"machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:menu-links -a'{"machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:module-info -a'{"name":"Yety","machine_name":"yety","description":"Helper module for testing generated YML files.", "package": "DCG","configure":"", "dependencies":""}'
+  $DCG -d$MODULE_PATH d8:yml:module-libraries -a'{"name":"Yety","machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:permissions -a'{"machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:routing -a'{"name":"Yety","machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:services -a'{"name":"Yety","machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:task-links -a'{"machine_name":"yety"}'
 
   dcg_phpcs $MODULE_PATH
   dcg_drush en $MODULE_MACHINE_NAME

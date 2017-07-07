@@ -1,5 +1,0 @@
-name: DCG service
-type: module
-description: Helper module to testing generated services.
-package: DCG
-core: 8.x
