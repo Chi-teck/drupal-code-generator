@@ -181,8 +181,8 @@ class IntegrationTest extends TestCase {
           'foo_zoo',
         ],
         'output' => [
-          'Command: formatter',
-          '------------------',
+          'Command: field-formatter',
+          '------------------------',
           'The following directories and files have been created or updated:',
           '- src/Plugin/Field/FieldFormatter/ZooFormatter.php',
         ],

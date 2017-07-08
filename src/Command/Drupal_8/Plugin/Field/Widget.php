@@ -14,7 +14,7 @@ class Widget extends BaseGenerator {
 
   protected $name = 'd8:plugin:field:widget';
   protected $description = 'Generates field widget plugin';
-  protected $alias = 'widget';
+  protected $alias = 'field-widget';
 
   /**
    * {@inheritdoc}
