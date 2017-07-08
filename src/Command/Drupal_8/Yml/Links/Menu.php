@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
+namespace DrupalCodeGenerator\Command\Drupal_8\Yml\Links;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
@@ -9,13 +9,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Implements d8:yml:task-links command.
+ * Implements d8:yml:links:menu command.
  */
-class TaskLinks extends BaseGenerator {
+class Menu extends BaseGenerator {
 
-  protected $name = 'd8:yml:task-links';
-  protected $description = 'Generates a links.task yml file';
-  protected $alias = 'task-links';
+  protected $name = 'd8:yml:links:menu';
+  protected $description = 'Generates a links.menu yml file';
+  protected $alias = 'menu-links';
 
   /**
    * {@inheritdoc}
@@ -26,7 +26,7 @@ class TaskLinks extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->setFile($vars['machine_name'] . '.links.task.yml', 'd8/yml/links.task.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.links.menu.yml', 'd8/yml/links.menu.yml.twig', $vars);
   }
 
 }

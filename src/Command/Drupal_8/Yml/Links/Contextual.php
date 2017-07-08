@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
+namespace DrupalCodeGenerator\Command\Drupal_8\Yml\Links;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
@@ -9,13 +9,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Implements d8:yml:action-links command.
+ * Implements d8:yml:links:contextual command.
  */
-class ActionLinks extends BaseGenerator {
+class Contextual extends BaseGenerator {
 
-  protected $name = 'd8:yml:action-links';
-  protected $description = 'Generates a links.action yml file';
-  protected $alias = 'action-links';
+  protected $name = 'd8:yml:links:contextual';
+  protected $description = 'Generates links.contextual yml file';
+  protected $alias = 'contextual-links';
 
   /**
    * {@inheritdoc}
@@ -23,8 +23,10 @@ class ActionLinks extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions['machine_name'] = new Question('Module machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+
     $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['machine_name'] . '.links.action.yml', 'd8/yml/links.action.yml.twig', $vars);
+
+    $this->setFile($vars['machine_name'] . '.links.contextual.yml', 'd8/yml/links.contextual.yml.twig', $vars);
   }
 
 }

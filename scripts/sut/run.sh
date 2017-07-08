@@ -173,15 +173,15 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = yml ]; then
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
   # Generate YML files.
-  $DCG -d$MODULE_PATH d8:yml:action-links -a'{"machine_name":"yety"}'
-  $DCG -d$MODULE_PATH d8:yml:menu-links -a'{"machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:links:action -a'{"machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:links:contextual -a'{"machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:links:menu -a'{"machine_name":"yety"}'
+  $DCG -d$MODULE_PATH d8:yml:links:task -a'{"machine_name":"yety"}'
   $DCG -d$MODULE_PATH d8:yml:module-info -a'{"name":"Yety","machine_name":"yety","description":"Helper module for testing generated YML files.", "package": "DCG","configure":"", "dependencies":""}'
   $DCG -d$MODULE_PATH d8:yml:module-libraries -a'{"name":"Yety","machine_name":"yety"}'
   $DCG -d$MODULE_PATH d8:yml:permissions -a'{"machine_name":"yety"}'
   $DCG -d$MODULE_PATH d8:yml:routing -a'{"name":"Yety","machine_name":"yety"}'
   $DCG -d$MODULE_PATH d8:yml:services -a'{"name":"Yety","machine_name":"yety"}'
-  $DCG -d$MODULE_PATH d8:yml:task-links -a'{"machine_name":"yety"}'
-  $DCG -d$MODULE_PATH d8:yml:contextual-links -a'{"machine_name":"yety"}'
 
   dcg_phpcs $MODULE_PATH
   dcg_drush en $MODULE_MACHINE_NAME
