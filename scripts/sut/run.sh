@@ -97,9 +97,10 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
   # Generate controller.
-  $DCG -d$MODULE_PATH d8:controller -a'{"name":"Bar","machine_name":"bar","class":"BarController","route":true,"route_name":"bar.example","route_path":"/bar/example","route_title":"Example","route_permission":"access content"}'
-  $DCG -d$MODULE_PATH d8:javascript -a'{"name":"Bar","machine_name":"bar"}'
   $DCG -d$MODULE_PATH d8:composer -a'{"machine_name":"bar","description":"Bar project.","type":"drupal-module","drupal_org":"Yes"}'
+  $DCG -d$MODULE_PATH d8:controller -a'{"name":"Bar","machine_name":"bar","class":"BarController","route":true,"route_name":"bar.example","route_path":"/bar/example","route_title":"Example","route_permission":"access content"}'
+  $DCG -d$MODULE_PATH d8:install -a'{"name":"Bar","machine_name":"bar"}'
+  $DCG -d$MODULE_PATH d8:javascript -a'{"name":"Bar","machine_name":"bar"}'
 
   dcg_phpcs $MODULE_PATH
   dcg_drush en $MODULE_MACHINE_NAME

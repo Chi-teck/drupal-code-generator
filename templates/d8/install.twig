@@ -7,26 +7,20 @@
 
 /**
  * Implements hook_install().
- *
- * @DCG: Optional.
  */
 function {{ machine_name }}_install() {
-  drupal_set_message('{{ name }} module has been installed.');
+  drupal_set_message(t('{{ name }} module has been installed.'));
 }
 
 /**
  * Implements hook_uninstall().
- *
- * @DCG: Optional.
  */
 function {{ machine_name }}_uninstall() {
-  drupal_set_message('{{ name }} module has been uninstalled.');
+  drupal_set_message(t('{{ name }} module has been uninstalled.'));
 }
 
 /**
  * Implements hook_schema().
- *
- * @DCG: Optional.
  */
 function {{ machine_name }}_schema() {
   $schema['{{ machine_name }}_example'] = [
@@ -83,11 +77,8 @@ function {{ machine_name }}_schema() {
   return $schema;
 }
 
-
 /**
  * Implements hook_requirements().
- *
- * @DCG: Optional.
  */
 function {{ machine_name }}_requirements($phase) {
   $requirements = [];

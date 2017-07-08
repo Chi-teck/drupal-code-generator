@@ -2,18 +2,18 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:install command.
  */
-class InstallTest extends GeneratorTestCase {
+class InstallTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Install';
 
-  protected $answers = [
-    'Foo',
-    'foo',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
   ];
 
   protected $fixtures = [

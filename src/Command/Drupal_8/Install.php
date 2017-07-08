@@ -21,7 +21,7 @@ class Install extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
-    $this->files[$vars['machine_name'] . '.install'] = $this->render('d8/install.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.install', 'd8/install.twig', $vars);
   }
 
 }
