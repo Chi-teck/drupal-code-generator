@@ -2,18 +2,18 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:module-file command.
  */
-class ModuleFileTest extends GeneratorTestCase {
+class ModuleFileTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\ModuleFile';
 
-  protected $answers = [
-    'Foo',
-    'foo',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
   ];
 
   protected $fixtures = [

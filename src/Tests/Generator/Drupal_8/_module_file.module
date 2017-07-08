@@ -4,11 +4,7 @@
  * @file
  * Primary module hooks for Foo module.
  *
- * @DSG: {
- * This file is optional in Drupal 8. It is no longer required to create
- * an empty module file.
- * See https://www.drupal.org/node/2217931
- * @DCG: }
- *
- * @DCG: Optional.
+ * @DCG:
+ * This file is no longer required in Drupal 8.
+ * @see https://www.drupal.org/node/2217931
  */
