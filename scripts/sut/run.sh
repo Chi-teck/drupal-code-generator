@@ -13,7 +13,8 @@ function dcg_on_exit {
 trap dcg_on_exit EXIT
 
 SELF_PATH=$(dirname $0)
-DRUPAL_PATH=${DRUPAL_PATH:-/tmp/dcg_sut}
+DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
+DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached}
 DRUPAL_VERSION=${DRUPAL_VERSION:-8.4.x-dev}
 SUT_HOST=${SUT_HOST:-127.0.0.1}
 SUT_PORT=${SUT_PORT:-8085}
@@ -21,7 +22,7 @@ DCG=${DCG:-/var/www/dcg/bin/dcg}
 TARGET_TEST=${1:-all}
 
 echo --------------------------------------
-echo ' DRUPAL_PATH:   ' $DRUPAL_PATH
+echo ' DRUPAL_PATH:   ' $DRUPAL_DIR
 echo ' DRUPAL_VERSION:' $DRUPAL_VERSION
 echo ' DRUPAL_HOST:   ' $SUT_HOST
 echo ' DRUPAL_PORT:   ' $SUT_PORT
@@ -31,38 +32,43 @@ echo --------------------------------------
 # === Helper functions. === #
 
 function dcg_drush {
-  $DRUPAL_PATH/vendor/bin/drush -r $DRUPAL_PATH -y $@
+  $DRUPAL_DIR/vendor/bin/drush -r $DRUPAL_DIR -y $@
 }
 
 function dcg_phpcs {
-  $DRUPAL_PATH/vendor/bin/phpcs --standard=Drupal,DrupalPractice $@
+  $DRUPAL_DIR/vendor/bin/phpcs --standard=Drupal,DrupalPractice $@
 }
 
 function dcg_phpunit {
   SIMPLETEST_BASE_URL=http://$SUT_HOST:$SUT_PORT \
   SIMPLETEST_DB=sqlite://sites/default/files/.ht.sqlite#st_ \
-  $DRUPAL_PATH/vendor/bin/phpunit \
-  -c $DRUPAL_PATH/core $@
+  $DRUPAL_DIR/vendor/bin/phpunit \
+  -c $DRUPAL_DIR/core $@
 }
 
 # === Create a site under testing. === #
 
-# Assuming that global Drush is not installed.
-sudo rm -rf $DRUPAL_PATH
-wget -P /tmp https://ftp.drupal.org/files/projects/drupal-$DRUPAL_VERSION.tar.gz
-tar xf /tmp/drupal-$DRUPAL_VERSION.tar.gz -C /tmp
-mv /tmp/drupal-$DRUPAL_VERSION $DRUPAL_PATH
-rm /tmp/drupal-$DRUPAL_VERSION.tar.gz
-composer -d=$DRUPAL_PATH require drush/drush:dev-master
-mkdir -m 777 $DRUPAL_PATH/sites/default/files
-composer -d=$DRUPAL_PATH update squizlabs/php_codesniffer
-$DRUPAL_PATH/vendor/bin/phpcs --config-set installed_paths $DRUPAL_PATH/vendor/drupal/coder/coder_sniffer
-dcg_drush si minimal --db-url=sqlite://sites/default/files/.ht.sqlite
+sudo rm -rf $DRUPAL_DIR
+if [ -d $DRUPAL_CACHED_DIR ]; then
+  cp -r $DRUPAL_CACHED_DIR $DRUPAL_DIR
+else
+  # Assuming that global Drush is not installed.
+  wget -P /tmp https://ftp.drupal.org/files/projects/drupal-$DRUPAL_VERSION.tar.gz
+  tar xf /tmp/drupal-$DRUPAL_VERSION.tar.gz -C /tmp
+  mv /tmp/drupal-$DRUPAL_VERSION $DRUPAL_DIR
+  rm /tmp/drupal-$DRUPAL_VERSION.tar.gz
+  composer -d=$DRUPAL_DIR require drush/drush:dev-master
+  mkdir -m 777 $DRUPAL_DIR/sites/default/files
+  composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
+  $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
+  dcg_drush si minimal --db-url=sqlite://sites/default/files/.ht.sqlite
+  cp -r $DRUPAL_DIR $DRUPAL_CACHED_DIR
+fi
 
 IS_RUNNING=$(netstat -lnt | awk "/$SUT_HOST:$SUT_PORT/ { print \"FOUND\" }")
 if [ -z "$IS_RUNNING" ]; then
   echo Staring server...
-  php -S $SUT_HOST:$SUT_PORT -t $DRUPAL_PATH &>/dev/null &
+  php -S $SUT_HOST:$SUT_PORT -t $DRUPAL_DIR &>/dev/null &
 fi
 
 # === Tests === #
@@ -72,7 +78,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = form ]; then
   echo -e "\n\e[30;43m -= Form =- \e[0m\n"
 
   MODULE_MACHINE_NAME=foo
-  MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
+  MODULE_PATH=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
@@ -92,7 +98,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
   echo -e "\n\e[30;43m -= Module component =- \e[0m\n"
 
   MODULE_MACHINE_NAME=bar
-  MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
+  MODULE_PATH=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
@@ -116,7 +122,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
   echo -e "\n\e[30;43m -= Plugin =- \e[0m\n"
 
   MODULE_MACHINE_NAME=qux
-  MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
+  MODULE_PATH=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
@@ -147,7 +153,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
   echo -e "\n\e[30;43m -= Service =- \e[0m\n"
 
   MODULE_MACHINE_NAME=zippo
-  MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
+  MODULE_PATH=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
@@ -172,7 +178,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = yml ]; then
   echo -e "\n\e[30;43m -= YML =- \e[0m\n"
 
   MODULE_MACHINE_NAME=yety
-  MODULE_PATH=$DRUPAL_PATH/modules/$MODULE_MACHINE_NAME
+  MODULE_PATH=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
