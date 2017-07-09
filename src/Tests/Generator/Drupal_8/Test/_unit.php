@@ -5,7 +5,7 @@ namespace Drupal\Tests\foo\Unit;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Example test.
+ * Test description.
  *
  * @group foo
  */
@@ -13,8 +13,6 @@ class ExampleTest extends UnitTestCase {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   protected function setUp() {
     parent::setUp();

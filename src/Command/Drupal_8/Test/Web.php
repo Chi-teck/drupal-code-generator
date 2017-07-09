@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:test:web command.
@@ -20,13 +21,14 @@ class Web extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'test_name' => ['Test name', 'Example'],
-    ];
+    $questions = Utils::defaultQuestions();
+    $questions['class'] = new Question('Class', 'ExampleTest');
+    $questions['class']->setValidator([Utils::class, 'validateClassName']);
+
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['test_name'] . 'Test');
+
     $path = 'src/Tests/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/test/web.twig', $vars);
+    $this->setFile($path, 'd8/test/web.twig', $vars);
   }
 
 }

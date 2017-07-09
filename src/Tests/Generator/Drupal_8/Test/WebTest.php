@@ -2,19 +2,19 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Test;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:test:web command.
  */
-class WebTest extends GeneratorTestCase {
+class WebTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Test\Web';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Example',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Class [ExampleTest]: ' => 'ExampleTest',
   ];
 
   protected $fixtures = [

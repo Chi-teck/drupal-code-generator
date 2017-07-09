@@ -41,7 +41,7 @@ function dcg_phpcs {
 
 function dcg_phpunit {
   SIMPLETEST_BASE_URL=http://$SUT_HOST:$SUT_PORT \
-  SIMPLETEST_DB=sqlite://sites/default/files/.ht.sqlite#st_ \
+  SIMPLETEST_DB=sqlite://tmp/test.sqlite \
   $DRUPAL_DIR/vendor/bin/phpunit \
   -c $DRUPAL_DIR/core $@
 }
@@ -61,7 +61,7 @@ else
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
-  dcg_drush si minimal --db-url=sqlite://sites/default/files/.ht.sqlite
+  dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite
   cp -r $DRUPAL_DIR $DRUPAL_CACHED_DIR
 fi
 
@@ -196,5 +196,27 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = yml ]; then
   dcg_phpcs $MODULE_PATH
   dcg_drush en $MODULE_MACHINE_NAME
   #dcg_phpunit $MODULE_PATH/tests
+  dcg_drush pmu $MODULE_MACHINE_NAME
+fi
+
+# --- Test tests --- #
+if [ $TARGET_TEST = all -o $TARGET_TEST = test ]; then
+  echo -e "\n\e[30;43m -= Test =- \e[0m\n"
+
+  MODULE_MACHINE_NAME=xerox
+  MODULE_PATH=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+
+  cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
+
+  # Generate tests.
+  $DCG -d$MODULE_PATH d8:test:browser -a'{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
+  $DCG -d$MODULE_PATH d8:test:javascript -a'{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
+  $DCG -d$MODULE_PATH d8:test:kernel -a'{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
+  $DCG -d$MODULE_PATH d8:test:unit -a'{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
+  $DCG -d$MODULE_PATH d8:test:web -a'{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
+
+  dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_PATH
+  dcg_drush en $MODULE_MACHINE_NAME
+  dcg_phpunit $MODULE_PATH/tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi

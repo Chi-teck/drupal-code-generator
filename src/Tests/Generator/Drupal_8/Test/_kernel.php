@@ -6,7 +6,7 @@ use Drupal\block\Entity\Block;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
- * Example test.
+ * Test description.
  *
  * @group foo
  */
@@ -22,7 +22,6 @@ class ExampleTest extends KernelTestBase {
    */
   protected function setUp() {
     parent::setUp();
-
     $this->container
       ->get('entity_type.manager')
       ->getStorage('block')
@@ -35,7 +34,7 @@ class ExampleTest extends KernelTestBase {
   }
 
   /**
-   * Tests the rendering of blocks.
+   * Test callback.
    */
   public function testBlockRendering() {
     $entity = Block::load('test_block');
@@ -51,7 +50,7 @@ class ExampleTest extends KernelTestBase {
 
     $this->assertTrue(
       strpos(strip_tags($content), 'Powered by Drupal') !== FALSE,
-      'Block content is correct'
+      'Valid block content was found.'
     );
   }
 

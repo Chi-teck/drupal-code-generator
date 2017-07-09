@@ -5,7 +5,7 @@ namespace Drupal\foo\Tests;
 use Drupal\simpletest\WebTestBase;
 
 /**
- * Tests the site configuration.
+ * Tests site configuration.
  *
  * @group foo
  */
@@ -29,10 +29,7 @@ class ExampleTest extends WebTestBase {
    */
   protected function setUp() {
     parent::setUp();
-
-    $user = $this->drupalCreateUser([
-      'administer site configuration',
-    ]);
+    $user = $this->drupalCreateUser(['administer site configuration']);
     $this->drupalLogin($user);
   }
 
@@ -46,7 +43,6 @@ class ExampleTest extends WebTestBase {
       'site_mail' => 'admin@example.local',
       'site_frontpage' => '/user',
     ];
-
     $this->drupalPostForm('admin/config/system/site-information', $edit, t('Save configuration'));
     $this->assertText(t('The configuration options have been saved.'), 'Configuration options have been saved');
   }

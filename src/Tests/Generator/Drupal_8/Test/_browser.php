@@ -5,7 +5,7 @@ namespace Drupal\Tests\foo\Functional;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Example test.
+ * Test description.
  *
  * @group foo
  */
@@ -17,9 +17,9 @@ class ExampleTest extends BrowserTestBase {
   public static $modules = ['node'];
 
   /**
-   * Tests content page.
+   * Test callback.
    */
-  public function testActionUninstall() {
+  public function testContentPage() {
     $admin_user = $this->drupalCreateUser(['administer nodes']);
     $this->drupalLogin($admin_user);
     $this->drupalGet('admin/content');
