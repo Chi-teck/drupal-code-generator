@@ -7,7 +7,7 @@ use Drupal\Core\DependencyInjection\ServiceProviderBase;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Defines a service profiler for the Example module.
+ * Defines a service provider for the Example module.
  */
 class ExampleServiceProvider extends ServiceProviderBase {
 
@@ -15,7 +15,7 @@ class ExampleServiceProvider extends ServiceProviderBase {
    * {@inheritdoc}
    */
   public function register(ContainerBuilder $container) {
-    $container->register('example.foo', 'Drupal\example\Foo')
+    $container->register('example.subscriber', 'Drupal\example\EventSubscriber\ExampleSubscriber')
       ->addTag('event_subscriber')
       ->addArgument(new Reference('entity_type.manager'));
   }
@@ -28,7 +28,7 @@ class ExampleServiceProvider extends ServiceProviderBase {
     if (isset($modules['dblog'])) {
       // Override default DB logger to exclude some unwanted log messages.
       $container->getDefinition('logger.dblog')
-        ->setClass('Drupal\example\Logger\DbLog');
+        ->setClass('Drupal\example\Logger\ExampleLog');
     }
   }
 

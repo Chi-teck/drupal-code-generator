@@ -2,18 +2,18 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:service:middleware command.
  */
-class ServiceProviderTest extends GeneratorTestCase {
+class ServiceProviderTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\ServiceProvider';
 
-  protected $answers = [
-    'Example',
-    'example',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
   ];
 
   protected $fixtures = [
