@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for {{ name }} module.
+ */
+{% if create_theme %}
+
+/**
+ * Implements hook_theme().
+ */
+function {{ machine_name }}_theme() {
+  return [
+    '{{ template_name | hyphen2underscore }}' => [
+      'variables' => ['foo' => NULL],
+    ],
+  ];
+}
+{% endif %}
+{% if create_preprocess %}
+
+/**
+ * Prepares variables for {{ template_name }} template.
+ *
+ * Default template: {{ template_name }}.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - foo: Foo variable description.
+ */
+function template_preprocess_{{ template_name | hyphen2underscore }}(array &$variables) {
+  $variables['foo'] = 'foo';
+}
+{% endif %}
