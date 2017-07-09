@@ -2,22 +2,21 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:yml:theme-info command.
  */
-class ThemeInfoTest extends GeneratorTestCase {
+class ThemeInfoTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Yml\ThemeInfo';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'garland',
-    'Example description.',
-    'custom',
-    '8.x-1.0-dev',
+  protected $interaction = [
+    'Theme name [%default_name%]: ' => 'Example',
+    'Theme machine name [example]: ' => 'example',
+    'Base theme [classy]: ' => 'garland',
+    'Description [A flexible theme with a responsive, mobile-first layout.]: ' => 'Example description.',
+    'Package [Custom]: ' => 'Custom',
   ];
 
   protected $fixtures = [

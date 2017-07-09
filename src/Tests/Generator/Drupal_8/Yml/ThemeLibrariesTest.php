@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
- * Test for d8:yml:module-libraries command.
+ * Test for d8:yml:theme-libraries command.
  */
 class ThemeLibrariesTest extends GeneratorBaseTest {
 

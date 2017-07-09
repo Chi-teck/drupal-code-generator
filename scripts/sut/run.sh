@@ -220,3 +220,22 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = test ]; then
   dcg_phpunit $MODULE_PATH/tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi
+
+# --- Test theme components --- #
+if [ $TARGET_TEST = all -o $TARGET_TEST = theme_component ]; then
+  echo -e "\n\e[30;43m -= Theme component =- \e[0m\n"
+
+  THEME_MACHINE_NAME=shreya
+  THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
+
+  mkdir $THEME_DIR
+
+  # Generate theme components.
+  $DCG -d$THEME_DIR d8:theme-file -a'{"name":"Shreya", "machine_name":"shreya"}'
+  $DCG -d$THEME_DIR d8:yml:breakpoints -a'{"machine_name":"shreya"}'
+  $DCG -d$THEME_DIR d8:yml:theme-libraries -a'{"machine_name":"shreya"}'
+  $DCG -d$THEME_DIR d8:yml:theme-info -a'{"name":"Shreya", "machine_name":"shreya", "base_theme":"bartic","description":"Helper theme for testing DCG components.","package":"DCG"}'
+
+  dcg_phpcs $THEME_DIR
+
+fi

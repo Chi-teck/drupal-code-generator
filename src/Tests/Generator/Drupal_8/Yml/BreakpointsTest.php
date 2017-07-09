@@ -2,17 +2,17 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:yml:breakpoints command.
  */
-class BreakpointsTest extends GeneratorTestCase {
+class BreakpointsTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Yml\Breakpoints';
 
-  protected $answers = [
-    'Theme machine name' => 'example',
+  protected $interaction = [
+    'Theme machine name [%default_machine_name%]: ' => 'example',
   ];
 
   protected $fixtures = [
