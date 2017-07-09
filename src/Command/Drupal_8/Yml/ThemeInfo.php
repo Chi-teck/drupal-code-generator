@@ -37,7 +37,7 @@ class ThemeInfo extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->setFile($vars['machine_name'] . '.info.yml', 'd8/yml/theme-info.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.info.yml', 'd8/yml/theme-info.twig', $vars);
   }
 
 }

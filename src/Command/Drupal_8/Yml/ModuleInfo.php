@@ -32,7 +32,7 @@ class ModuleInfo extends BaseGenerator {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
 
-    $this->setFile($vars['machine_name'] . '.info.yml', 'd8/yml/module-info.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.info.yml', 'd8/yml/module-info.twig', $vars);
   }
 
 }

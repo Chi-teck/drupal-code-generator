@@ -25,7 +25,7 @@ class Breakpoints extends BaseGenerator {
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
     $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['machine_name'] . '.breakpoints.yml', 'd8/yml/breakpoints.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.breakpoints.yml', 'd8/yml/breakpoints.twig', $vars);
   }
 
 }

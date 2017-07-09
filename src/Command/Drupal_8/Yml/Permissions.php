@@ -26,7 +26,7 @@ class Permissions extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->setFile($vars['machine_name'] . '.permissions.yml', 'd8/yml/permissions.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.permissions.yml', 'd8/yml/permissions.twig', $vars);
   }
 
 }

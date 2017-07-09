@@ -26,7 +26,7 @@ class Contextual extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->setFile($vars['machine_name'] . '.links.contextual.yml', 'd8/yml/links.contextual.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.links.contextual.yml', 'd8/yml/links.contextual.twig', $vars);
   }
 
 }

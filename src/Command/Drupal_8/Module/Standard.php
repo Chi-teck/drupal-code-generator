@@ -36,12 +36,12 @@ class Standard extends BaseGenerator {
     }
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $this->files[$prefix . '.info.yml'] = $this->render('d8/yml/module-info.yml.twig', $vars);
+    $this->files[$prefix . '.info.yml'] = $this->render('d8/yml/module-info.twig', $vars);
     $this->files[$prefix . '.module'] = $this->render('d8/module.twig', $vars);
     $this->files[$prefix . '.install'] = $this->render('d8/install.twig', $vars);
-    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/module-libraries.yml.twig', $vars);
-    $this->files[$prefix . '.services.yml'] = $this->render('d8/yml/services.yml.twig', $vars);
-    $this->files[$prefix . '.permissions.yml'] = $this->render('d8/yml/permissions.yml.twig', $vars);
+    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/module-libraries.twig', $vars);
+    $this->files[$prefix . '.services.yml'] = $this->render('d8/yml/services.twig', $vars);
+    $this->files[$prefix . '.permissions.yml'] = $this->render('d8/yml/permissions.twig', $vars);
 
     $js_path = $vars['machine_name'] . '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
     $this->files[$js_path] = $this->render('d8/javascript.twig', $vars);
@@ -67,7 +67,7 @@ class Standard extends BaseGenerator {
     );
 
     $this->files[$prefix . '.services.yml'] = $this->render(
-      'd8/yml/services.yml.twig',
+      'd8/yml/services.twig',
       $vars + ['class' => $class_prefix]
     );
 
@@ -82,7 +82,7 @@ class Standard extends BaseGenerator {
     );
 
     $controller_class = $class_prefix . 'Controller';
-    $this->files[$prefix . '.routing.yml'] = $this->render('d8/yml/routing.yml.twig', $vars + ['class' => $controller_class]);
+    $this->files[$prefix . '.routing.yml'] = $this->render('d8/yml/routing.twig', $vars + ['class' => $controller_class]);
     $controller_path = $vars['machine_name'] . "/src/Controller/$controller_class.php";
     $this->files[$controller_path] = $this->render('d8/controller.twig', $vars + ['class' => $controller_class]);
 

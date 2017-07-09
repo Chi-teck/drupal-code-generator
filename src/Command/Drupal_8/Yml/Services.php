@@ -22,7 +22,7 @@ class Services extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
     $vars['class'] = Utils::camelize($vars['name']);
-    $this->setFile($vars['machine_name'] . '.services.yml', 'd8/yml/services.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.services.yml', 'd8/yml/services.twig', $vars);
   }
 
 }

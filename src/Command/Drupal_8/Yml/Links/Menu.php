@@ -26,7 +26,7 @@ class Menu extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->setFile($vars['machine_name'] . '.links.menu.yml', 'd8/yml/links.menu.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.links.menu.yml', 'd8/yml/links.menu.twig', $vars);
   }
 
 }

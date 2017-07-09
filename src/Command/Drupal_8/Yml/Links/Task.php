@@ -26,7 +26,7 @@ class Task extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $this->setFile($vars['machine_name'] . '.links.task.yml', 'd8/yml/links.task.yml.twig', $vars);
+    $this->setFile($vars['machine_name'] . '.links.task.yml', 'd8/yml/links.task.twig', $vars);
   }
 
 }
