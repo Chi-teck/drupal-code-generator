@@ -2,12 +2,16 @@
 
 /**
  * @file
- * Local development override configuration.
+ * Local development override configuration feature.
  *
- * @DCG: {
- * To activate this feature, go to the bottom of 'sites/default/settings.php'
- * and uncomment the commented lines that mention 'settings.local.php'.
- * @DCG: }
+ * To activate this feature, copy and rename it such that its path plus
+ * filename is 'sites/default/settings.local.php'. Then, go to the bottom of
+ * 'sites/default/settings.php' and uncomment the commented lines that mention
+ * 'settings.local.php'.
+ *
+ * If you are using a site name in the path, such as 'sites/example.com', copy
+ * this file to 'sites/example.com/settings.local.php', and uncomment the lines
+ * at the bottom of 'sites/example.com/settings.php'.
  */
 
 /**
@@ -63,6 +67,14 @@ $config['system.performance']['js']['preprocess'] = FALSE;
 # $settings['cache']['bins']['render'] = 'cache.backend.null';
 
 /**
+ * Disable caching for migrations.
+ *
+ * Uncomment the code below to only store migrations in memory and not in the
+ * database. This makes it easier to develop custom migrations.
+ */
+# $settings['cache']['bins']['discovery_migration'] = 'cache.backend.memory';
+
+/**
  * Disable Dynamic Page Cache.
  *
  * Note: you should test with Dynamic Page Cache enabled, to ensure the correct
@@ -91,26 +103,21 @@ $settings['extension_discovery_scan_tests'] = TRUE;
 $settings['rebuild_access'] = TRUE;
 
 /**
- * Site name.
+ * Skip file system permissions hardening.
+ *
+ * The system module will periodically check the permissions of your site's
+ * site directory to ensure that it is not writable by the website user. For
+ * sites that are managed with a version control system, this can cause problems
+ * when files in that directory such as settings.php are updated, because the
+ * user pulling in the changes won't have permissions to modify files in the
+ * directory.
  */
-$config['system.site']['name'] = 'Example (local)';
-
-/**
- * The maximum time in seconds a page can be cached.
- */
-$config['system.performance']['cache.page.max_age'] = 0;
-
-/**
- * Automated cron interval.
- */
-$config['automated_cron.settings']['interval'] = 0;
+$settings['skip_permissions_hardening'] = TRUE;
 
 /**
  * Database settings.
- * 
- * @DCG: Make sure this configuration is removed from settings.php.
  */
-$databases['default']['default'] = array (
+$databases['default']['default'] = [
   'database' => 'drupal_8',
   'username' => 'root',
   'password' => '123',
@@ -119,4 +126,4 @@ $databases['default']['default'] = array (
   'port' => '',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
-);
+];
