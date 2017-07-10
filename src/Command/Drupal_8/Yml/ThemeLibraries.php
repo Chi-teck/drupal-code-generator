@@ -15,7 +15,7 @@ class ThemeLibraries extends BaseGenerator {
 
   protected $name = 'd8:yml:theme-libraries';
   protected $description = 'Generates theme libraries yml file';
-  protected $alias = 'libraries.yml';
+  protected $alias = 'theme-libraries';
 
   /**
    * {@inheritdoc}

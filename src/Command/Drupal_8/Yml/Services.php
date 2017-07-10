@@ -14,7 +14,7 @@ class Services extends BaseGenerator {
 
   protected $name = 'd8:yml:services';
   protected $description = 'Generates a services yml file';
-  protected $alias = 'services.yml';
+  protected $alias = 'services';
 
   /**
    * {@inheritdoc}
