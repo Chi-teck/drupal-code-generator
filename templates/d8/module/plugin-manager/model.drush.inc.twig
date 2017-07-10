@@ -25,7 +25,9 @@ function drush_{{ machine_name }}_list() {
     'ID',
     'Label',
     'Description',
-    'Method 1'
+    'Method 1',
+    'Method 2',
+    'Method 3',
   ];
 
   foreach ($plugin_manager->getDefinitions() as $definition) {
@@ -35,6 +37,8 @@ function drush_{{ machine_name }}_list() {
       $definition['label'],
       $definition['description'],
       ${{ machine_name }}->method1(),
+      ${{ machine_name }}->method2(),
+      ${{ machine_name }}->method3(),
     ];
   }
 

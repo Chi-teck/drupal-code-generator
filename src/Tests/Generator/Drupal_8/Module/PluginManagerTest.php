@@ -2,24 +2,23 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Module;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:module:plugin-manager command.
  *
- * @TODO: Create fixtures for this test.
+ * @todo Create fixtures for this test.
  */
-class PluginManagerTest extends GeneratorTestCase {
+class PluginManagerTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Module\PluginManager';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Foo description',
-    'custom',
-    '8.x-1.0',
-    'views, fields, node',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Description [Module description.]: ' => 'Foo description',
+    'Package [Custom]: ' => 'Custom',
+    'Dependencies (comma separated): ' => 'views, fields, node',
   ];
 
   protected $fixtures = [

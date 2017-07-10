@@ -231,11 +231,28 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = theme_component ]; then
   mkdir $THEME_DIR
 
   # Generate theme components.
-  $DCG -d$THEME_DIR d8:theme-file -a'{"name":"Shreya", "machine_name":"shreya"}'
+  $DCG -d$THEME_DIR d8:theme-file -a'{"name":"Shreya","machine_name":"shreya"}'
   $DCG -d$THEME_DIR d8:yml:breakpoints -a'{"machine_name":"shreya"}'
   $DCG -d$THEME_DIR d8:yml:theme-libraries -a'{"machine_name":"shreya"}'
-  $DCG -d$THEME_DIR d8:yml:theme-info -a'{"name":"Shreya", "machine_name":"shreya", "base_theme":"bartic","description":"Helper theme for testing DCG components.","package":"DCG"}'
+  $DCG -d$THEME_DIR d8:yml:theme-info -a'{"name":"Shreya","machine_name":"shreya","base_theme":"bartic","description":"Helper theme for testing DCG components.","package":"DCG"}'
 
   dcg_phpcs $THEME_DIR
+fi
 
+# --- Test plugin manager --- #
+if [ $TARGET_TEST = all -o $TARGET_TEST = plugin_manager ]; then
+  echo -e "\n\e[30;43m -= Plugin manager =- \e[0m\n"
+
+  MODULE_MACHINE_NAME=lamda
+  MODULE_PATH=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+
+  #cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
+
+  # Generate plugin manager.
+  $DCG -d$DRUPAL_DIR/modules d8:module:plugin-manager -a'{"name":"Lamda","machine_name":"lamda","description":"Helper module for testing plugin manager.","dependencies":"drupal:views","package":"DCG"}'
+
+  dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_PATH
+  dcg_drush en $MODULE_MACHINE_NAME
+  #dcg_phpunit $MODULE_PATH/tests
+  dcg_drush pmu $MODULE_MACHINE_NAME
 fi
