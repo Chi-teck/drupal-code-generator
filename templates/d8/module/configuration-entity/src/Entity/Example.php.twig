@@ -6,26 +6,26 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
 
 /**
- * Defines the {{ entity_type_label|lower }} entity type.
+ * Defines the {{ entity_type_label | lower }} entity type.
  *
  * @ConfigEntityType(
  *   id = "{{ entity_type_id }}",
  *   label = @Translation("{{ entity_type_label }}"),
  *   handlers = {
- *     "list_builder" = "Drupal\{{ machine_name }}\Controller\{{ class_prefix }}ListBuilder",
+ *     "list_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}ListBuilder",
  *     "form" = {
  *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
  *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
- *       "delete" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}DeleteForm"
+ *       "delete" = "Drupal\Core\Entity\EntityDeleteForm"
  *     }
  *   },
  *   config_prefix = "{{ entity_type_id }}",
  *   admin_permission = "administer {{ entity_type_id }}",
  *   links = {
- *     "collection" = "/admin/structure/{{ entity_type_id|underscore2hyphen }}",
- *     "add-form" = "/admin/structure/{{ entity_type_id|underscore2hyphen }}/add",
- *     "edit-form" = "/admin/structure/{{ entity_type_id|underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
- *     "delete-form" = "/admin/structure/{{ entity_type_id|underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete"
+ *     "collection" = "/admin/structure/{{ entity_type_id | underscore2hyphen }}",
+ *     "add-form" = "/admin/structure/{{ entity_type_id | underscore2hyphen }}/add",
+ *     "edit-form" = "/admin/structure/{{ entity_type_id | underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
+ *     "delete-form" = "/admin/structure/{{ entity_type_id | underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete"
  *   },
  *   entity_keys = {
  *     "id" = "id",
@@ -37,28 +37,28 @@ use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
 class {{ class_prefix }} extends ConfigEntityBase implements {{ class_prefix }}Interface {
 
   /**
-   * The {{ entity_type_label|lower }} ID.
+   * The {{ entity_type_label | lower }} ID.
    *
    * @var string
    */
   protected $id;
 
   /**
-   * The {{ entity_type_label|lower }} label.
+   * The {{ entity_type_label | lower }} label.
    *
    * @var string
    */
   protected $label;
 
   /**
-   * The {{ entity_type_label|lower }} status.
+   * The {{ entity_type_label | lower }} status.
    *
-   * @var boolean
+   * @var bool
    */
   protected $status;
 
   /**
-   * The {{ entity_type_id|lower }} description.
+   * The {{ entity_type_id | lower }} description.
    *
    * @var string
    */

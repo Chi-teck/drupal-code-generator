@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * {{ entity_type_label }} form.
- * 
+ *
  * @property \Drupal\{{ machine_name }}\{{ class_prefix }}Interface $entity
  */
 class {{ class_prefix }}Form extends EntityForm {
@@ -24,7 +24,7 @@ class {{ class_prefix }}Form extends EntityForm {
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
       '#default_value' => $this->entity->label(),
-      '#description' => $this->t('Label for the {{ entity_type_label|lower }}.'),
+      '#description' => $this->t('Label for the {{ entity_type_label | lower }}.'),
       '#required' => TRUE,
     ];
 
@@ -39,15 +39,15 @@ class {{ class_prefix }}Form extends EntityForm {
 
     $form['status'] = [
       '#type' => 'checkbox',
-      '#title' => t('Enabled'),
+      '#title' => $this->t('Enabled'),
       '#default_value' => $this->entity->status(),
     ];
 
     $form['description'] = [
       '#type' => 'textarea',
-      '#title' => t('Description'),
+      '#title' => $this->t('Description'),
       '#default_value' => $this->entity->get('description'),
-      '#description' => t('Description of the {{ entity_type_label|lower }}.')
+      '#description' => $this->t('Description of the {{ entity_type_label | lower }}.'),
     ];
 
     return $form;
@@ -57,14 +57,14 @@ class {{ class_prefix }}Form extends EntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-
-    $result = $this->entity->save();
-    $message = $result == SAVED_NEW ?
-      t('Created new {{ entity_type_label|lower }} %label.', ['%label' => $this->entity->label()]) :
-      t('Updated {{ entity_type_label|lower }} %label.', ['%label' => $this->entity->label()]);
+    $result = parent::save($form, $form_state);
+    $message_args = ['%label' => $this->entity->label()];
+    $message = $result == SAVED_NEW
+      ? $this->t('Created new {{ entity_type_label | lower }} %label.', $message_args)
+      : $this->t('Updated {{ entity_type_label | lower }} %label.', $message_args);
     drupal_set_message($message);
-
-    $form_state->setRedirectUrl($this->entity->urlInfo('collection'));
+    $form_state->setRedirectUrl($this->entity->toUrl('collection'));
+    return $result;
   }
 
 }

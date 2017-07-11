@@ -22,36 +22,32 @@ class ConfigurationEntity extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'package' => ['Package', 'custom'],
-      'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => new Question('Dependencies (comma separated)', ''),
-      'entity_type_label' => [
-        'Entity type label',
-        function ($vars) {
-          return $vars['name'];
-        },
-      ],
-      'entity_type_id' => [
-        'Entity type id',
-        function ($vars) {
-          return Utils::human2machine($vars['entity_type_label']);
-        },
-      ],
-    ];
+    $questions = Utils::defaultQuestions();
+    $questions['package'] = new Question('Package', 'Custom');
+    $questions['dependencies'] = new Question('Dependencies (comma separated)');
+    $questions['entity_type_label'] = new Question(
+      'Entity type label',
+      function ($vars) {
+        return $vars['name'];
+      }
+    );
+    $questions['entity_type_id'] = new Question(
+      'Entity type ID',
+      function ($vars) {
+        return Utils::human2machine($vars['entity_type_label']);
+      }
+    );
 
     $vars = $this->collectVars($input, $output, $questions);
     if ($vars['dependencies']) {
-      $vars['dependencies'] = explode(',', $vars['dependencies']);
+      $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
-
     $vars['class_prefix'] = Utils::camelize($vars['entity_type_label']);
 
     $templates = [
       'model.info.yml.twig',
-      'src/Controller/ExampleListBuilder.php.twig',
+      'src/ExampleListBuilder.php.twig',
       'src/Form/ExampleForm.php.twig',
-      'src/Form/ExampleDeleteForm.php.twig',
       'src/ExampleInterface.php.twig',
       'src/Entity/Example.php.twig',
       'model.routing.yml.twig',
@@ -62,11 +58,11 @@ class ConfigurationEntity extends BaseGenerator {
     ];
 
     $templates_path = 'd8/module/configuration-entity/';
+    $path_placeholders = ['model', 'Example', '.twig'];
+    $path_replacements = [$vars['machine_name'], $vars['class_prefix'], ''];
     foreach ($templates as $template) {
-      $search = ['model', 'Example', '.twig'];
-      $replace = [$vars['machine_name'], $vars['class_prefix'], ''];
-      $path = $vars['machine_name'] . '/' . str_replace($search, $replace, $template);
-      $this->files[$path] = $this->render($templates_path . $template, $vars);
+      $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $template);
+      $this->setFile($path, $templates_path . $template, $vars);
     }
   }
 

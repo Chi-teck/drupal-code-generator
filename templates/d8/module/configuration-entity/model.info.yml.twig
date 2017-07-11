@@ -1,13 +1,12 @@
 name: {{ name }}
 type: module
-description: 'Provides {{ entity_type_label|article|lower }} configuration entity.'
+description: 'Provides {{ entity_type_label | article | lower }} configuration entity.'
 package: {{ package }}
-version: {{ version }}
 core: 8.x
 {% if dependencies %}
 dependencies:
 {% for dependency in dependencies %}
-  - {{ dependency|trim|lower }}
+  - {{ dependency }}
 {% endfor %}
 {% endif %}
 configure: entity.{{ entity_type_id }}.collection

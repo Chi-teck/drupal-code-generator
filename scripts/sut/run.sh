@@ -256,3 +256,21 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin_manager ]; then
   #dcg_phpunit $MODULE_PATH/tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi
+
+# --- Test configuration entity --- #
+if [ $TARGET_TEST = all -o $TARGET_TEST = configuration_entity ]; then
+  echo -e "\n\e[30;43m -= Configuration entity =- \e[0m\n"
+
+  MODULE_MACHINE_NAME=wine
+  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+
+  #cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
+
+  # Generate plugin manager.
+  $DCG -d$DRUPAL_DIR/modules d8:module:configuration-entity -a'{"name":"wine","machine_name":"wine","description":"Helper module for testing plugin manager.","entity_type_label":"Example","entity_type_id":"example","dependencies":"drupal:views","package":"DCG"}'
+
+  dcg_phpcs $MODULE_DIR
+  dcg_drush en $MODULE_MACHINE_NAME
+  #dcg_phpunit $MODULE_PATH/tests
+  dcg_drush pmu $MODULE_MACHINE_NAME
+fi

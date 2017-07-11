@@ -1,32 +1,31 @@
 entity.{{ entity_type_id }}.collection:
-  path: '/admin/structure/{{ entity_type_id|underscore2hyphen }}'
+  path: '/admin/structure/{{ entity_type_id | underscore2hyphen }}'
   defaults:
     _entity_list: '{{ entity_type_id }}'
     _title: '{{ entity_type_label }} configuration'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'administer {{ entity_type_id }}'
 
 entity.{{ entity_type_id }}.add_form:
   path: '/admin/structure/{{ entity_type_id }}/add'
   defaults:
     _entity_form: '{{ entity_type_id }}.add'
-    _title: 'Add {{ entity_type_label|article|lower }}'
+    _title: 'Add {{ entity_type_label | article | lower }}'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'administer {{ entity_type_id }}'
 
 entity.{{ entity_type_id }}.edit_form:
-  path: '/admin/structure/{{ entity_type_id|underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
+  path: '/admin/structure/{{ entity_type_id | underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
   defaults:
     _entity_form: '{{ entity_type_id }}.edit'
     _title: 'Edit {{ entity_type_label|article|lower }}'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'administer {{ entity_type_id }}'
 
 entity.{{ entity_type_id }}.delete_form:
-  path: '/admin/structure/{{ entity_type_id|underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete'
+  path: '/admin/structure/{{ entity_type_id | underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete'
   defaults:
     _entity_form: '{{ entity_type_id }}.delete'
-    _title: 'Delete {{ entity_type_label|article|lower }}'
+    _title: 'Delete {{ entity_type_label | article | lower }}'
   requirements:
-    _permission: 'administer site configuration'
-
+    _permission: 'administer {{ entity_type_id }}'

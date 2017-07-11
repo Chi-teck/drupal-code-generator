@@ -2,25 +2,24 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Module;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:module:configuration-entity command.
  *
  * @TODO: Create fixtures for this test.
  */
-class ConfigurationEntityTest extends GeneratorTestCase {
+class ConfigurationEntityTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Module\ConfigurationEntity';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Custom',
-    '8.x-1.0',
-    'views',
-    'Example',
-    'example',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Package [Custom]: ' => 'Custom',
+    'Dependencies (comma separated): ' => 'drupal:views',
+    'Entity type label [Foo]: ' => 'Example',
+    'Entity type ID [example]: ' => 'example',
   ];
 
   protected $fixtures = [
@@ -30,10 +29,9 @@ class ConfigurationEntityTest extends GeneratorTestCase {
     'foo/foo.permissions.yml' => NULL,
     'foo/foo.routing.yml' => NULL,
     'foo/config/schema/foo.schema.yml' => NULL,
-    'foo/src/Controller/ExampleListBuilder.php' => NULL,
     'foo/src/Entity/Example.php' => NULL,
     'foo/src/ExampleInterface.php' => NULL,
-    'foo/src/Form/ExampleDeleteForm.php' => NULL,
+    'foo/src/ExampleListBuilder.php' => NULL,
     'foo/src/Form/ExampleForm.php' => NULL,
   ];
 
