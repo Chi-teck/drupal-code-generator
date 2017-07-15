@@ -2,37 +2,36 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Module;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:module:content-entity command.
  *
  * @TODO: Create fixtures for this test.
  */
-class ContentEntityTest extends GeneratorTestCase {
+class ContentEntityTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Module\ContentEntity';
 
-  protected $answers = [
-    'Foo',
-    'foo',
-    'Custom',
-    '8.x-1.0',
-    'views, fields, node',
-    'Example',
-    'foo_example',
-    '/example',
-    TRUE,
-    TRUE,
-    TRUE,
-    FALSE,
-    TRUE,
-    TRUE,
-    TRUE,
-    TRUE,
-    TRUE,
-    TRUE,
-    FALSE,
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Foo',
+    'Module machine name [foo]: ' => 'foo',
+    'Package [Custom]: ' => 'Custom',
+    'Dependencies (comma separated): ' => 'drupal:views, drupal:fields, drupal:node',
+    'Entity type label [Foo]: ' => 'Example',
+    'Entity type ID [example]: ' => 'foo_example',
+    'Entity base path [/admin/content/foo-example]: ' => '/example',
+    'Make the entity type fieldable? [Yes]: ' => 'Yes',
+    'Make the entity type revisionable? [No]: ' => 'Yes',
+    'Create entity template? [Yes]: ' => 'Yes',
+    'Create CRUD permissions? [No]: ' => 'No',
+    'Add "title" base field? [Yes]: ' => 'Yes',
+    'Add "status" base field? [Yes]: ' => 'Yes',
+    'Add "created" base field? [Yes]: ' => 'Yes',
+    'Add "changed" base field? [Yes]: ' => 'Yes',
+    'Add "author" base field? [Yes]: ' => 'Yes',
+    'Add "description" base field? [Yes]: ' => 'Yes',
+    'Create REST configuration for the entity? [No]: ' => 'No',
   ];
 
   protected $fixtures = [

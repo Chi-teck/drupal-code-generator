@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -22,51 +23,45 @@ class ContentEntity extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'package' => ['Package', 'custom'],
-      'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => new Question('Dependencies (comma separated)', ''),
-      'entity_type_label' => [
-        'Entity type label',
-        function ($vars) {
-          return $vars['name'];
-        },
-      ],
-      'entity_type_id' => [
-        'Entity type id',
-        function ($vars) {
-          $entity_type_id = Utils::human2machine($vars['entity_type_label']);
-          if ($entity_type_id != $vars['machine_name']) {
-            $entity_type_id = $vars['machine_name'] . '_' . $entity_type_id;
-          }
-          return $entity_type_id;
-        },
-      ],
-      'entity_base_path' => [
-        'Entity base path',
-        function ($vars) {
-          return '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']);
-        },
-      ],
-      'fieldable' => ['Make the entity type fieldable?', 'yes'],
-      'revisionable' => ['Make the entity type revisionable?', 'no'],
-      'template' => ['Create entity template?', 'yes'],
-      'access_controller' => ['Create CRUD permissions?', 'no'],
-      'title_base_field' => ['Add "title" base field?', 'yes'],
-      'status_base_field' => ['Add "status" base field?', 'yes'],
-      'created_base_field' => ['Add "created" base field?', 'yes'],
-      'changed_base_field' => ['Add "changed" base field?', 'yes'],
-      'author_base_field' => ['Add "author" base field?', 'yes'],
-      'description_base_field' => ['Add "description" base field?', 'yes'],
-      'rest_configuration' => ['Create REST configuration for the entity?',
-        'no',
-      ],
-    ];
+    $questions = Utils::defaultQuestions();
+
+    $questions['package'] = new Question('Package', 'Custom');
+    $questions['dependencies'] = new Question('Dependencies (comma separated)');
+    $questions['entity_type_label'] = new Question(
+      'Entity type label',
+      function ($vars) {
+        return $vars['name'];
+      }
+    );
+    $questions['entity_type_id'] = new Question(
+      'Entity type ID',
+      function ($vars) {
+        return Utils::human2machine($vars['entity_type_label']);
+      }
+    );
+    $questions['entity_base_path'] = new Question(
+      'Entity base path',
+      function ($vars) {
+        return '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']);
+      }
+    );
+
+    $questions['fieldable'] = new ConfirmationQuestion('Make the entity type fieldable?', TRUE);
+    $questions['revisionable'] = new ConfirmationQuestion('Make the entity type revisionable?', FALSE);
+    $questions['template'] = new ConfirmationQuestion('Create entity template?', TRUE);
+    $questions['access_controller'] = new ConfirmationQuestion('Create CRUD permissions?', FALSE);
+    $questions['title_base_field'] = new ConfirmationQuestion('Add "title" base field?', TRUE);
+    $questions['status_base_field'] = new ConfirmationQuestion('Add "status" base field?', TRUE);
+    $questions['created_base_field'] = new ConfirmationQuestion('Add "created" base field?', TRUE);
+    $questions['changed_base_field'] = new ConfirmationQuestion('Add "changed" base field?', TRUE);
+    $questions['author_base_field'] = new ConfirmationQuestion('Add "author" base field?', TRUE);
+    $questions['description_base_field'] = new ConfirmationQuestion('Add "description" base field?', TRUE);
+    $questions['rest_configuration'] = new ConfirmationQuestion('Create REST configuration for the entity?', FALSE);
 
     $vars = $this->collectVars($input, $output, $questions);
 
     if ($vars['dependencies']) {
-      $vars['dependencies'] = explode(',', $vars['dependencies']);
+      $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
 
     if ($vars['entity_base_path'][0] != '/') {
@@ -74,7 +69,7 @@ class ContentEntity extends BaseGenerator {
     }
 
     if ($vars['fieldable']) {
-      $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '.collection';
+      $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '.settings';
     }
 
     $vars['class_prefix'] = Utils::camelize($vars['entity_type_label']);
@@ -90,8 +85,11 @@ class ContentEntity extends BaseGenerator {
       'src/ExampleInterface.php.twig',
       'src/ExampleListBuilder.php.twig',
       'src/Form/ExampleForm.php.twig',
-      'src/Form/ExampleSettingsForm.php.twig',
     ];
+
+    if ($vars['fieldable']) {
+      $templates[] = 'src/Form/ExampleSettingsForm.php.twig';
+    }
 
     if ($vars['template']) {
       $templates[] = 'templates/model-example.html.twig.twig';
@@ -129,7 +127,7 @@ class ContentEntity extends BaseGenerator {
     foreach ($templates as $template) {
       $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $template);
       $path = preg_replace('#\.twig$#', '', $path);
-      $this->files[$path] = $this->render($templates_path . $template, $vars);
+      $this->setFile($path, $templates_path . $template, $vars);
     }
   }
 

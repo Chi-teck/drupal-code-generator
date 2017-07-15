@@ -11,7 +11,7 @@ use Drupal\Core\Routing\RedirectDestinationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a list controller for the {{ entity_type_label|lower }} entity type.
+ * Provides a list controller for the {{ entity_type_label | lower }} entity type.
  */
 class {{ class_prefix }}ListBuilder extends EntityListBuilder {
 
@@ -43,7 +43,6 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    */
   public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, DateFormatterInterface $date_formatter, RedirectDestinationInterface $redirect_destination) {
     parent::__construct($entity_type, $storage);
-
     $this->dateFormatter = $date_formatter;
     $this->redirectDestination = $redirect_destination;
   }
@@ -54,7 +53,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
     return new static(
       $entity_type,
-      $container->get('entity.manager')->getStorage($entity_type->id()),
+      $container->get('entity_type.manager')->getStorage($entity_type->id()),
       $container->get('date.formatter'),
       $container->get('redirect.destination')
     );
@@ -62,8 +61,6 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   public function render() {
     $build['table'] = parent::render();
@@ -72,7 +69,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
       ->query('SELECT COUNT(*) FROM {{ '{' }}{{ entity_type_id }}{{ '}' }}')
       ->fetchField();
 
-    $build['summary']['#markup'] = $this->t('Total records: @total', ['@total' => $total]);
+    $build['summary']['#markup'] = $this->t('Total {{ entity_type_label | lower | plural }}: @total', ['@total' => $total]);
     return $build;
   }
 
@@ -128,12 +125,9 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG: Optional.
    */
   protected function getDefaultOperations(EntityInterface $entity) {
     $operations = parent::getDefaultOperations($entity);
-
     $destination = $this->redirectDestination->getAsArray();
     foreach ($operations as $key => $operation) {
       $operations[$key]['query'] = $destination;

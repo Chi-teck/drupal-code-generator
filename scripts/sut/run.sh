@@ -266,8 +266,26 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = configuration_entity ]; then
 
   #cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
 
-  # Generate plugin manager.
-  $DCG -d$DRUPAL_DIR/modules d8:module:configuration-entity -a'{"name":"wine","machine_name":"wine","description":"Helper module for testing plugin manager.","entity_type_label":"Example","entity_type_id":"example","dependencies":"drupal:views","package":"DCG"}'
+  # Generate configuration entity.
+  $DCG -d$DRUPAL_DIR/modules d8:module:configuration-entity -a'{"name":"Wine","machine_name":"wine","description":"Helper module for testing configuration entity.","entity_type_label":"Example","entity_type_id":"example","dependencies":"drupal:views","package":"DCG"}'
+
+  dcg_phpcs $MODULE_DIR
+  dcg_drush en $MODULE_MACHINE_NAME
+  #dcg_phpunit $MODULE_PATH/tests
+  dcg_drush pmu $MODULE_MACHINE_NAME
+fi
+
+# --- Test content entity --- #
+if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
+  echo -e "\n\e[30;43m -= Content entity =- \e[0m\n"
+
+  MODULE_MACHINE_NAME=nigma
+  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+
+  #cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
+
+  # Generate content entity.
+  $DCG -d$DRUPAL_DIR/modules d8:module:content-entity -a'{"name":"Nigma","machine_name":"nigma","description":"Helper module for testing content entity.","entity_type_label":"Example","entity_type_id":"example","dependencies":"drupal:views","package":"DCG","entity_base_path":"/admin/content/example","fieldable":"yes","revisionable":"yes","template":"yes","access_controller":"yes","title_base_field":"yes","status_base_field":"yes","created_base_field":"yes","changed_base_field":"yes","author_base_field":"yes","description_base_field":"yes","rest_configuration":"yes"}'
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
