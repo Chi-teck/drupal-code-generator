@@ -6,17 +6,18 @@ A command line code generator for Drupal.
 
 ## Installation
 
+1. Download the latest stable release of the code generator.
+2. Make the file executable.
+3. Move the generator to a directory that is part of your `PATH`.
+
 ```shell
-# Download the latest stable release of the code generator.
 release_url=https://api.github.com/repos/chi-teck/drupal-code-generator/releases/latest
 wget $(wget -qO- $release_url | awk -F'"' '/browser_download_url/ { print $4 }')
-
-# Make the file executable.
 chmod +x dcg.phar
-
-# Make the generator available to all users as a systemwide executable.
 sudo mv dcg.phar /usr/local/bin/dcg
+dcg --version
 ```
+Installtion using Composer is also supported.
 
 ## Upgrade
 Simply repeat installation commands.
