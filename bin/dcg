@@ -10,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 // Composer package.
 $autoloader = file_exists(__DIR__ . '/../vendor/autoload.php')
   ? require __DIR__ . '/../vendor/autoload.php'
-  : require __DIR__ . '/../../vendor/autoload.php';
+  : require __DIR__ . '/../../../vendor/autoload.php';
 
 // Create an application.
 $application = dcg_create_application();
