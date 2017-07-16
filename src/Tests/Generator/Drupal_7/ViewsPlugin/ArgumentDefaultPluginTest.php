@@ -19,7 +19,9 @@ class ArgumentDefaultTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
-    'views_plugin_argument_foo.inc' => __DIR__ . '/_argument_default.inc',
+    'example.module' => __DIR__ . '/_argument_default.module',
+    'views/example.views.inc' => __DIR__ . '/_argument_default_views.inc',
+    'views/views_plugin_argument_foo.inc' => __DIR__ . '/_argument_default.inc',
   ];
 
 }

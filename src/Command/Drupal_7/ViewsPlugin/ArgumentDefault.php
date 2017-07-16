@@ -29,8 +29,22 @@ class ArgumentDefault extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $path = 'views_plugin_argument_' . $vars['plugin_machine_name'] . '.inc';
-    $this->setFile($path, 'd7/views-plugin/argument-default.twig', $vars);
+    $module_path = $vars['machine_name'] . '.module';
+    $this->files[$module_path] = [
+      'content' => $this->render('d7/views-plugin/argument-default.module.twig', $vars),
+      'action' => 'append',
+      'header_size' => 7,
+    ];
+
+    $views_inc_path = 'views/' . $vars['machine_name'] . '.views.inc';
+    $this->files[$views_inc_path] = [
+      'content' => $this->render('d7/views-plugin/argument-default-views.inc.twig', $vars),
+      'action' => 'append',
+      'header_size' => 7,
+    ];
+
+    $plugin_path = 'views/views_plugin_argument_' . $vars['plugin_machine_name'] . '.inc';
+    $this->setFile($plugin_path, 'd7/views-plugin/argument-default.twig', $vars);
   }
 
 }
