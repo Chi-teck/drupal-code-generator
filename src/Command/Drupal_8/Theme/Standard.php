@@ -3,8 +3,10 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Theme;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:theme:standard command.
@@ -22,26 +24,24 @@ class Standard extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = [
-      'name' => ['Theme name'],
-      'machine_name' => ['Theme machine name'],
-      'base_theme' => ['Base theme', 'classy'],
-      'description' => ['Description', 'A flexible theme with a responsive, mobile-first layout.'],
-      'package' => ['Package', 'custom'],
-      'version' => ['Version', '8.x-1.0-dev'],
-    ];
+    $questions['name'] = new Question('Theme name');
+    $questions['machine_name'] = new Question('Theme machine name');
+    $questions['base_theme'] = new Question('Base theme', 'classy');
+    $questions['description'] = new Question('Description', 'A flexible theme with a responsive, mobile-first layout.');
+    $questions['package'] = new Question('Package', 'Custom');
 
     $vars = $this->collectVars($input, $output, $questions);
-
-    $vars['project_type'] = 'theme';
+    $vars['base_theme'] = Utils::human2machine($vars['base_theme']);
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $this->files[$prefix . '.info.yml'] = $this->render('d8/yml/theme-info.twig', $vars);
-    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/theme-libraries.twig', $vars);
-    $this->files[$prefix . '.theme'] = $this->render('d8/theme.twig', $vars);
+    $this->setFile($prefix . '.info.yml', 'd8/yml/theme-info.twig', $vars);
+    $this->setFile($prefix . '.libraries.yml', 'd8/yml/theme-libraries.twig', $vars);
+    $this->setFile($prefix . '.breakpoints.yml', 'd8/yml/breakpoints.twig', $vars);
+    $this->setFile($prefix . '.theme', 'd8/theme.twig', $vars);
 
     $js_path = '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
-    $this->files[$vars['machine_name'] . $js_path] = $this->render('d8/javascript.twig', $vars);
+    $this->setFile($vars['machine_name'] . $js_path, 'd8/javascript.twig', $vars);
+    $this->setFile($vars['machine_name'] . '/logo.svg', 'd8/theme/standard/logo.twig', $vars);
     $this->files[$vars['machine_name'] . '/templates'] = NULL;
     $this->files[$vars['machine_name'] . '/images'] = NULL;
     $this->files[$vars['machine_name'] . '/css/base/elements.css'] = '';
