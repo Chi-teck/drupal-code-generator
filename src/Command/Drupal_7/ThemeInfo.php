@@ -26,7 +26,6 @@ class ThemeInfo extends BaseGenerator {
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
     $questions['description'] = new Question('Theme description', 'A simple Drupal 7 theme.');
     $questions['base_theme'] = new Question('Base theme');
-    $questions['version'] = new Question('Version', '7.x-1.0-dev');
 
     $vars = $this->collectVars($input, $output, $questions);
     $this->setFile($vars['machine_name'] . '.info', 'd7/theme-info.twig', $vars);

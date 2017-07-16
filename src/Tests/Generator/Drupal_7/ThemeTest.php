@@ -16,7 +16,6 @@ class ThemeTest extends GeneratorBaseTest {
     'Theme machine name [example]: ' => 'example',
     'Theme description [A simple Drupal 7 theme.]: ' => 'example',
     'Base theme: ' => 'example',
-    'Version [7.x-1.0-dev]: ' => 'example',
   ];
 
   protected $fixtures = [

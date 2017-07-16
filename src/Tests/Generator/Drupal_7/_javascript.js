@@ -1,12 +1,17 @@
 /**
- * Core behavior for Another example module.
+ * Another example behaviors.
  */
 (function ($) {
+
+  /**
+   * Behavior description.
+   */
   Drupal.behaviors.anotherExample = {
     attach: function (context, settings) {
 
-      alert('It works!');
+      console.log('It works!');
 
     }
   }
+
 }(jQuery));

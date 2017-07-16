@@ -26,7 +26,6 @@ class Module extends BaseGenerator {
     $questions['package'] = new Question('Package', 'Custom');
 
     $vars = $this->collectVars($input, $output, $questions);
-    $vars['project_type'] = 'module';
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
 

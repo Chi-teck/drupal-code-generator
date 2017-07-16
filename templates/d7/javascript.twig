@@ -1,12 +1,17 @@
 /**
- * Core behavior for {{ name }} {{ project_type }}.
+ * {{ name }} behaviors.
  */
 (function ($) {
+
+  /**
+   * Behavior description.
+   */
   Drupal.behaviors.{{ machine_name | camelize(false) }} = {
     attach: function (context, settings) {
 
-      alert('It works!');
+      console.log('It works!');
 
     }
   }
+
 }(jQuery));
