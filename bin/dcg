@@ -1,12 +1,16 @@
 #!/usr/bin/env php
 <?php
 
-$autoloader = require __DIR__ . '/../vendor/autoload.php';
-
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
-use Symfony\Component\Filesystem\Filesystem;
 use DrupalCodeGenerator\Utils;
+use Symfony\Component\Filesystem\Filesystem;
+
+// The autoloader may have a different location if DCG is installed as a local
+// Composer package.
+$autoloader = file_exists(__DIR__ . '/../vendor/autoload.php')
+  ? require __DIR__ . '/../vendor/autoload.php'
+  : require __DIR__ . '/../../vendor/autoload.php';
 
 // Create an application.
 $application = dcg_create_application();
