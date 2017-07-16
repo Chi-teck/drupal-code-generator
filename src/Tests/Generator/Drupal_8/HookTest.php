@@ -2,23 +2,31 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorTestCase;
+use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
  * Test for d8:hook command.
  */
-class HookTest extends GeneratorTestCase {
+class HookTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Hook';
 
-  protected $answers = [
-    'Example',
-    'example',
-    'theme',
+  protected $interaction = [
+    'Module name [%default_name%]: ' => 'Example',
+    'Module machine name [example]: ' => 'example',
+    'Hook name: ' => 'theme',
   ];
 
   protected $fixtures = [
     'example.module' => __DIR__ . '/_hook.module',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getDisplay() {
+    // Remove autocomplete output.
+    return preg_replace('/Hook name: (.*)The/', 'Hook name: The', parent::getDisplay());
+  }
 
 }
