@@ -15,7 +15,7 @@ class Custom extends BaseGenerator {
 
   protected $name = 'd8:service:custom';
   protected $description = 'Generates a custom Drupal service';
-  protected $alias = 'service';
+  protected $alias = 'custom-service';
 
   /**
    * {@inheritdoc}
@@ -39,8 +39,7 @@ class Custom extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $path = 'src/' . $vars['class'] . '.php';
-    $this->files[$path] = $this->render('d8/service/custom.twig', $vars);
+    $this->setFile('src/' . $vars['class'] . '.php', 'd8/service/custom.twig', $vars);
     $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/custom.services.twig', $vars);
   }
 
