@@ -2,11 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
-use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:module:standard command.
@@ -22,72 +23,100 @@ class Standard extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'description' => ['Module description', 'The description.'],
-      'package' => ['Package', 'custom'],
-      'version' => ['Version', '8.x-1.0-dev'],
-      'dependencies' => new Question('Dependencies (comma separated)', ''),
-    ];
+    $questions = Utils::defaultQuestions();
+    $questions['description'] = new Question('Module description', 'The description.');
+    $questions['package'] = new Question('Package', 'Custom');
+    $questions['dependencies'] = new Question('Dependencies (comma separated)');
 
     $vars = $this->collectVars($input, $output, $questions);
 
     if ($vars['dependencies']) {
-      $vars['dependencies'] = explode(',', $vars['dependencies']);
+      $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $this->files[$prefix . '.info.yml'] = $this->render('d8/yml/module-info.twig', $vars);
-    $this->files[$prefix . '.module'] = $this->render('d8/module.twig', $vars);
-    $this->files[$prefix . '.install'] = $this->render('d8/install.twig', $vars);
-    $this->files[$prefix . '.libraries.yml'] = $this->render('d8/yml/module-libraries.twig', $vars);
-    $this->files[$prefix . '.services.yml'] = $this->render('d8/yml/services.twig', $vars);
-    $this->files[$prefix . '.permissions.yml'] = $this->render('d8/yml/permissions.twig', $vars);
-
-    $js_path = $vars['machine_name'] . '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
-    $this->files[$js_path] = $this->render('d8/javascript.twig', $vars);
+    $this->setFile($prefix . '.info.yml', 'd8/yml/module-info.twig', $vars);
+    $this->setFile($prefix . '.module', 'd8/module.twig', $vars);
 
     $class_prefix = Utils::camelize($vars['name']);
 
-    $service_class = $class_prefix . 'Example';
-    $this->files[$vars['machine_name'] . '/src/' . $service_class . '.php'] = $this->render(
-      'd8/service/custom.twig',
-      $vars + ['class' => $service_class]
-    );
+    // Additional files.
+    $option_questions['install_file'] = new ConfirmationQuestion('Would you like to create install file?', TRUE);
+    $option_questions['libraries.yml'] = new ConfirmationQuestion('Would you like to create libraries.yml file?', TRUE);
+    $option_questions['permissions.yml'] = new ConfirmationQuestion('Would you like to create permissions.yml file?', TRUE);
+    $option_questions['event_subscriber'] = new ConfirmationQuestion('Would you like to create event subscriber?', TRUE);
+    $option_questions['block_plugin'] = new ConfirmationQuestion('Would you like to create block plugin?', TRUE);
+    $option_questions['controller'] = new ConfirmationQuestion('Would you like to create a controller?', TRUE);
+    $option_questions['settings_form'] = new ConfirmationQuestion('Would you like to create settings form?', TRUE);
 
-    $middleware_class = $class_prefix . 'Middleware';
-    $this->files[$vars['machine_name'] . '/src/' . $middleware_class . '.php'] = $this->render(
-      'd8/service/middleware.twig',
-      $vars + ['class' => $middleware_class]
-    );
+    $options = $this->collectVars($input, $output, $option_questions);
 
-    $subscriber_class = $class_prefix . 'Subscriber';
-    $this->files[$vars['machine_name'] . '/src/EventSubscriber/' . $subscriber_class . '.php'] = $this->render(
-      'd8/service/event-subscriber.twig',
-      $vars + ['class' => $subscriber_class]
-    );
+    if ($options['install_file']) {
+      $this->setFile($prefix . '.install', 'd8/install.twig', $vars);
+    }
 
-    $this->files[$prefix . '.services.yml'] = $this->render(
-      'd8/yml/services.twig',
-      $vars + ['class' => $class_prefix]
-    );
+    if ($options['libraries.yml']) {
+      $this->setFile($prefix . '.libraries.yml', 'd8/yml/module-libraries.twig', $vars);
+    }
 
-    $block_vars['plugin_label'] = 'Example';
-    $block_vars['plugin_id'] = $vars['machine_name'] . '_' . Utils::human2machine($block_vars['plugin_label']);
-    $block_vars['category'] = $vars['name'];
-    $block_vars['class'] = 'ExampleBlock';
+    if ($options['permissions.yml']) {
+      $this->setFile($prefix . '.permissions.yml', 'd8/yml/permissions.twig', $vars);
+    }
 
-    $this->files[$vars['machine_name'] . '/src/Plugin/Block/' . $block_vars['class'] . '.php'] = $this->render(
-      'd8/plugin/block.twig',
-      $vars + $block_vars
-    );
+    if ($options['event_subscriber']) {
+      $subscriber_class = $class_prefix . 'Subscriber';
+      $this->setFile(
+        $vars['machine_name'] . '/src/EventSubscriber/' . $subscriber_class . '.php',
+        'd8/service/event-subscriber.twig',
+        $vars + ['class' => $subscriber_class]
+      );
+      $this->setServicesFile(
+        $prefix . '.services.yml',
+        'd8/service/event-subscriber.services.twig',
+        $vars + ['class' => $subscriber_class]
+      );
+    }
 
-    $controller_class = $class_prefix . 'Controller';
-    $this->files[$prefix . '.routing.yml'] = $this->render('d8/yml/routing.twig', $vars + ['class' => $controller_class]);
-    $controller_path = $vars['machine_name'] . "/src/Controller/$controller_class.php";
-    $this->files[$controller_path] = $this->render('d8/controller.twig', $vars + ['class' => $controller_class]);
+    if ($options['block_plugin']) {
+      $block_vars['plugin_label'] = 'Example';
+      $block_vars['plugin_id'] = $vars['machine_name'] . '_' . Utils::human2machine($block_vars['plugin_label']);
+      $block_vars['category'] = $vars['name'];
+      $block_vars['class'] = 'ExampleBlock';
+      $this->setFile(
+        $vars['machine_name'] . '/src/Plugin/Block/' . $block_vars['class'] . '.php',
+        'd8/plugin/block.twig',
+        $vars + $block_vars
+      );
+    }
 
-    $form_path = $vars['machine_name'] . '/src/Form/SettingsForm.php';
-    $this->files[$form_path] = $this->render('d8/form/config.twig', $vars + ['class' => 'SettingsForm']);
+    if ($options['controller']) {
+      $controller_class = $class_prefix . 'Controller';
+      $this->setFile(
+        $vars['machine_name'] . "/src/Controller/$controller_class.php",
+        'd8/controller.twig',
+        $vars + ['class' => $controller_class]
+      );
+      $routing_vars = [
+        'route_name' => $vars['machine_name'] . '.example',
+        'route_path' => '/' . str_replace('_', '-', $vars['machine_name']) . '/example',
+        'route_title' => 'Example',
+        'route_permission' => 'access content',
+        'class' => $controller_class,
+      ];
+      $this->setFile(
+        $prefix . '.routing.yml',
+        'd8/controller-route.twig', $vars + $routing_vars
+      );
+    }
+
+    if ($options['settings_form']) {
+      $this->setFile(
+        $vars['machine_name'] . '/src/Form/SettingsForm.php',
+        'd8/form/config.twig',
+        $vars + ['class' => 'SettingsForm']
+      );
+    }
+
   }
 
 }
