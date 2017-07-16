@@ -25,15 +25,15 @@ class {{ class }} extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     // Ask the user some questions.
-    $questions = Utils::defaultQuestions() + [
-      'description' => new Question('Module description'),
-      'package' => new Question('Package', 'custom'),
-      'version' => new Question('Version', '7.x-1.0-dev'),
-    ];
+    $questions = Utils::defaultQuestions();
+    $default_class = function ($vars) {
+      return Utils::camelize($vars['name'] . 'Example');
+    };
+    $questions['class'] = new Question('Class', $default_class);
     $vars = $this->collectVars($input, $output, $questions);
 
     // @DCG The template should be created under $self::templatePath directory.
-    $this->setFile($vars['machine_name'] . '.info', 'module-info.twig', $vars);
+    $this->setFile('src/' . $vars['class'] . '.php', '{{ template_name }}', $vars);
   }
 
 }

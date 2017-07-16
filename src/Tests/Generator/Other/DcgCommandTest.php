@@ -19,6 +19,7 @@ class DcgCommandTest extends GeneratorBaseTest {
 
   protected $fixtures = [
     'custom/Example.php' => __DIR__ . '/_dcg_command.php',
+    'custom/example.twig' => __DIR__ . '/_dcg_command_template.twig',
   ];
 
 }

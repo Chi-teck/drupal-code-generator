@@ -42,16 +42,20 @@ class DcgCommand extends BaseGenerator {
     $last_sub_name = array_pop($sub_names);
     $vars['class'] = Utils::camelize($last_sub_name);
     $vars['namespace'] = 'DrupalCodeGenerator\Command';
+    $vars['template_name'] = $last_sub_name . '.twig';
 
-    $file_path = $vars['class'] . '.php';
     $vars['path'] = '';
+    $file_path = '';
     if ($sub_names) {
       $vars['namespace'] .= '\\' . implode('\\', $sub_names);
-      $file_path = implode(DIRECTORY_SEPARATOR, $sub_names) . '/' . $file_path;
-      $vars['path'] = '/' . dirname($file_path);
+      $file_path = implode(DIRECTORY_SEPARATOR, $sub_names);
+      $vars['path'] = '/' . $file_path;
     }
 
-    $this->setFile($file_path, 'other/dcg-command.twig', $vars);
+    $class_path = $file_path . '/' . $vars['class'] . '.php';
+    $this->setFile($class_path, 'other/dcg-command.twig', $vars);
+    $template_path = $file_path . '/' . $vars['template_name'];
+    $this->setFile($template_path, 'other/dcg-command-template.twig', $vars);
   }
 
 }
