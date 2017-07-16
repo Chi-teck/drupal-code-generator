@@ -16,7 +16,6 @@ class ModuleTest extends GeneratorBaseTest {
     'Module machine name [example]: ' => 'example',
     'Module description [Module description.]: ' => 'Some description.',
     'Package [Custom]: ' => 'Custom',
-    'Version [7.x-1.0-dev]: ' => '7.x-1.0',
   ];
 
   protected $fixtures = [

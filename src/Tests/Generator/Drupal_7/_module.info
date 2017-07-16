@@ -1,7 +1,6 @@
 name = Example
 description = Some description.
 package = Custom
-version = 7.x-1.0
 core = 7.x
 
 ;configure = admin/config/system/example

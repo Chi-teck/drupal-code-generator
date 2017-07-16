@@ -21,11 +21,9 @@ class Module extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions() + [
-      'description' => new Question('Module description', 'Module description.'),
-      'package' => new Question('Package', 'Custom'),
-      'version' => new Question('Version', '7.x-1.0-dev'),
-    ];
+    $questions = Utils::defaultQuestions();
+    $questions['description'] = new Question('Module description', 'Module description.');
+    $questions['package'] = new Question('Package', 'Custom');
 
     $vars = $this->collectVars($input, $output, $questions);
     $vars['project_type'] = 'module';
