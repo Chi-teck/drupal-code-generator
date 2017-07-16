@@ -11,7 +11,7 @@ use Drupal\Core\Entity\EntityChangedInterface;
 {% endif %}
 
 /**
- * Provides an interface defining {{ entity_type_label |article | lower }} entity type.
+ * Provides an interface defining {{ entity_type_label | article | lower }} entity type.
  */
 interface {{ class_prefix }}Interface extends ContentEntityInterface{% if author_base_field %}, EntityOwnerInterface{% endif %}{% if changed_base_field %}, EntityChangedInterface{% endif %} {
 

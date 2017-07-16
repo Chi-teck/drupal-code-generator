@@ -1,11 +1,9 @@
 #
-# @DCG: {
+# @DCG
 # The configuration is based on official Nginx recipe.
 # See https://www.nginx.com/resources/wiki/start/topics/recipes/drupal/
-#
 # Check out Perusio's config for more delicate configuration.
 # See https://github.com/perusio/drupal-with-nginx
-# @DCG: }
 #
 server {
     server_name example.local;

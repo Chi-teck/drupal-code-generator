@@ -18,7 +18,7 @@ entity.{{ entity_type_id }}.edit_form:
   path: '/admin/structure/{{ entity_type_id | underscore2hyphen }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
   defaults:
     _entity_form: '{{ entity_type_id }}.edit'
-    _title: 'Edit {{ entity_type_label|article|lower }}'
+    _title: 'Edit {{ entity_type_label | article | lower }}'
   requirements:
     _permission: 'administer {{ entity_type_id }}'
 

@@ -4,7 +4,7 @@
  * @file
  * Contains the Foo argument default plugin.
  *
- * @DCG: This file needs to be referenced from example.info using files[] directive.
+ * @DCG This file needs to be referenced from example.info using files[] directive.
  */
 
 /**

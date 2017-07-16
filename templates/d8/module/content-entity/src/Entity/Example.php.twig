@@ -20,7 +20,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% endif %}
 
 /**
- * Defines the {{ entity_type_label|lower }} entity class.
+ * Defines the {{ entity_type_label | lower }} entity class.
  *
  * @ContentEntityType(
  *   id = "{{ entity_type_id }}",
@@ -88,7 +88,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   /**
    * {@inheritdoc}
    *
-   * When a new {{ entity_type_label|lower }} entity is created, set the uid entity reference to
+   * When a new {{ entity_type_label | lower }} entity is created, set the uid entity reference to
    * the current user as the creator of the entity.
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {

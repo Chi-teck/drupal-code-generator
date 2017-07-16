@@ -6,27 +6,21 @@
  */
 
 /**
- * Implemnets HOOK_preprocess_html().
- *
- * @DCG: Optional.
+ * Implements HOOK_preprocess_html().
  */
 function example_preprocess_html(&$vars) {
 
 }
 
 /**
- * Implemnets HOOK_preprocess_page().
- *
- * @DCG: Optional.
+ * Implements HOOK_preprocess_page().
  */
 function example_preprocess_page(&$vars) {
 
 }
 
 /**
- * Implemnets HOOK_preprocess_node().
- *
- * @DCG: Optional.
+ * Implements HOOK_preprocess_node().
  */
 function example_preprocess_node(&$vars) {
 

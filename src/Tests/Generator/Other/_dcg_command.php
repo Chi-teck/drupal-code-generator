@@ -1,6 +1,6 @@
 <?php
 
-// @DCG: This file should be placed under $HOME/.dcg/Command/custom directory.
+// @DCG This file should be placed under $HOME/.dcg/Command/custom directory.
 
 namespace DrupalCodeGenerator\Command\custom;
 
@@ -32,7 +32,7 @@ class Example extends BaseGenerator {
     ];
     $vars = $this->collectVars($input, $output, $questions);
 
-    // @DCG: The template should be created under $self::templatePath directory.
+    // @DCG The template should be created under $self::templatePath directory.
     $this->setFile($vars['machine_name'] . '.info', 'module-info.twig', $vars);
   }
 

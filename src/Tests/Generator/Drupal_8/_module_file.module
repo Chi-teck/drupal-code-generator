@@ -4,7 +4,7 @@
  * @file
  * Primary module hooks for Foo module.
  *
- * @DCG:
+ * @DCG
  * This file is no longer required in Drupal 8.
  * @see https://www.drupal.org/node/2217931
  */
