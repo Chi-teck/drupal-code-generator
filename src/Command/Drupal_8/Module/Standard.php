@@ -110,10 +110,14 @@ class Standard extends BaseGenerator {
     }
 
     if ($options['settings_form']) {
+      $form_vars = [
+        'form_id' => $vars['machine_name'] . '_settings',
+        'class' => 'SettingsForm',
+      ];
       $this->setFile(
         $vars['machine_name'] . '/src/Form/SettingsForm.php',
         'd8/form/config.twig',
-        $vars + ['class' => 'SettingsForm']
+        $vars + $form_vars
       );
     }
 

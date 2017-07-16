@@ -3,6 +3,7 @@
 # === Configuration. === #
 
 set -e
+
 function dcg_on_exit {
   if [ $? -eq 0 ] ; then
     echo -e "\n\e[0;42m SUCCESS \e[0m"
