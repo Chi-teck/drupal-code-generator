@@ -58,7 +58,8 @@ class Navigation extends Command {
   protected function configure() {
     $this
       ->setName('navigation')
-      ->setDescription('Navigation')
+      ->setDescription('Provide an interactive menu to select generator')
+      ->setHidden(TRUE)
       ->addOption(
         'directory',
         '-d',
