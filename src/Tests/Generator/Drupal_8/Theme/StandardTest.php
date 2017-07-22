@@ -27,6 +27,7 @@ class StandardTest extends GeneratorBaseTest {
     'foo/images' => NULL,
     'foo/logo.svg' => NULL,
     'foo/templates' => NULL,
+    'foo/config/schema/foo.schema.yml' => NULL,
     'foo/css/base/elements.css' => NULL,
     'foo/css/components/block.css' => NULL,
     'foo/css/components/breadcrumb.css' => NULL,

@@ -39,11 +39,17 @@ class Standard extends BaseGenerator {
     $this->setFile($prefix . '.breakpoints.yml', 'd8/yml/breakpoints.twig', $vars);
     $this->setFile($prefix . '.theme', 'd8/theme.twig', $vars);
 
-    $js_path = '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
-    $this->setFile($vars['machine_name'] . $js_path, 'd8/javascript.twig', $vars);
+    $js_path = $vars['machine_name'] . '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
+    $this->setFile($js_path, 'd8/javascript.twig', $vars);
+
+    $schema_path = $vars['machine_name'] . '/config/schema/' . $vars['machine_name'] . '.schema.yml';
+    $this->setFile($schema_path, 'd8/theme/standard/schema.twig', $vars);
+
     $this->setFile($vars['machine_name'] . '/logo.svg', 'd8/theme/standard/logo.twig', $vars);
+
     $this->files[$vars['machine_name'] . '/templates'] = NULL;
     $this->files[$vars['machine_name'] . '/images'] = NULL;
+
     $this->files[$vars['machine_name'] . '/css/base/elements.css'] = '';
     $this->files[$vars['machine_name'] . '/css/components/block.css'] = '';
     $this->files[$vars['machine_name'] . '/css/components/breadcrumb.css'] = '';
