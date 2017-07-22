@@ -234,6 +234,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = theme_component ]; then
   # Generate theme components.
   $DCG -d$THEME_DIR d8:theme-file -a'{"name":"Shreya","machine_name":"shreya"}'
   $DCG -d$THEME_DIR d8:yml:breakpoints -a'{"machine_name":"shreya"}'
+  $DCG -d$THEME_DIR d8:theme-settings -a'{"name":"Shreya","machine_name":"shreya"}'
   $DCG -d$THEME_DIR d8:yml:theme-libraries -a'{"machine_name":"shreya"}'
   $DCG -d$THEME_DIR d8:yml:theme-info -a'{"name":"Shreya","machine_name":"shreya","base_theme":"bartic","description":"Helper theme for testing DCG components.","package":"DCG"}'
 
