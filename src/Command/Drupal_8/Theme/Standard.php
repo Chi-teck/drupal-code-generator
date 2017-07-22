@@ -42,8 +42,14 @@ class Standard extends BaseGenerator {
     $js_path = $vars['machine_name'] . '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
     $this->setFile($js_path, 'd8/javascript.twig', $vars);
 
-    $schema_path = $vars['machine_name'] . '/config/schema/' . $vars['machine_name'] . '.schema.yml';
-    $this->setFile($schema_path, 'd8/theme/standard/schema.twig', $vars);
+    $settings_form_path = $vars['machine_name'] . '/theme-settings.php';
+    $this->setFile($settings_form_path, 'd8/theme-settings-form.twig', $vars);
+
+    $settings_config_path = $vars['machine_name'] . '/config/install/' . $vars['machine_name'] . '.settings.yml';
+    $this->setFile($settings_config_path, 'd8/theme-settings-config.twig', $vars);
+
+    $settings_schema_path = $vars['machine_name'] . '/config/schema/' . $vars['machine_name'] . '.schema.yml';
+    $this->setFile($settings_schema_path, 'd8/theme-settings-schema.twig', $vars);
 
     $this->setFile($vars['machine_name'] . '/logo.svg', 'd8/theme/standard/logo.twig', $vars);
 
