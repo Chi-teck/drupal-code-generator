@@ -32,15 +32,22 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
+   * @param string $machine_name
+   *   Module machine name.
+   * @param string $plugin_label
+   *   Plugin label.
+   * @param string $expected_plugin_id
+   *   Expected default plugin ID.
+   *
    * @covers \DrupalCodeGenerator\Utils::defaultPluginId
    * @dataProvider defaultPluginIdProvider
    */
-  public function testDefaultPluginId($machine_name, $plugin_label, $expected) {
+  public function testDefaultPluginId($machine_name, $plugin_label, $expected_plugin_id) {
     $vars = [
       'machine_name' => $machine_name,
       'plugin_label' => $plugin_label,
     ];
-    $this->assertEquals($expected, Utils::defaultPluginId($vars));
+    static::assertEquals($expected_plugin_id, Utils::defaultPluginId($vars));
   }
 
   /**
@@ -57,11 +64,16 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
+   * @param string $machine_name
+   *   Machine name to process.
+   * @param string $expected_human_name
+   *   Expected human name.
+   *
    * @covers \DrupalCodeGenerator\Utils::machine2human
    * @dataProvider machineToHumanProvider
    */
-  public function testMachineToHuman($machine_name, $expected) {
-    $this->assertEquals($expected, Utils::machine2human($machine_name));
+  public function testMachineToHuman($machine_name, $expected_human_name) {
+    static::assertEquals($expected_human_name, Utils::machine2human($machine_name));
   }
 
   /**
@@ -78,11 +90,16 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
+   * @param string $human_name
+   *   Human name to process.
+   * @param string $expected_machine_name
+   *   Expected machine name.
+   *
    * @covers \DrupalCodeGenerator\Utils::human2machine
    * @dataProvider human2machineProvider
    */
-  public function testHumanToMachine($human_name, $expected) {
-    $this->assertEquals($expected, Utils::human2machine($human_name));
+  public function testHumanToMachine($human_name, $expected_machine_name) {
+    static::assertEquals($expected_machine_name, Utils::human2machine($human_name));
   }
 
   /**
@@ -101,11 +118,18 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
+   * @param string $text
+   *   Text to camelize.
+   * @param string $upper_camel
+   *   Indicates if the first letter should be in upper case.
+   * @param string $expected
+   *   Expected result.
+   *
    * @covers \DrupalCodeGenerator\Utils::camelize
    * @dataProvider camelizeProvider
    */
-  public function testCamelize($string, $upper_camel, $expected) {
-    $this->assertEquals($expected, Utils::camelize($string, $upper_camel));
+  public function testCamelize($text, $upper_camel, $expected) {
+    static::assertEquals($expected, Utils::camelize($text, $upper_camel));
   }
 
   /**
@@ -140,7 +164,7 @@ class UtilsTest extends TestCase {
       $this->expectException(get_class($exception));
       $this->expectExceptionMessage($exception->getMessage());
     }
-    $this->assertEquals($machine_name, Utils::validateMachineName($machine_name));
+    static::assertEquals($machine_name, Utils::validateMachineName($machine_name));
   }
 
   /**
@@ -178,7 +202,7 @@ class UtilsTest extends TestCase {
       $this->expectException(get_class($exception));
       $this->expectExceptionMessage($exception->getMessage());
     }
-    $this->assertEquals($class_name, Utils::validateClassName($class_name));
+    static::assertEquals($class_name, Utils::validateClassName($class_name));
   }
 
   /**
@@ -214,7 +238,7 @@ class UtilsTest extends TestCase {
       $this->expectException(get_class($exception));
       $this->expectExceptionMessage($exception->getMessage());
     }
-    $this->assertEquals($value, Utils::validateRequired($value));
+    static::assertEquals($value, Utils::validateRequired($value));
   }
 
   /**
@@ -238,11 +262,16 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
+   * @param string $path
+   *   Path to normalize.
+   * @param string $normalized_path
+   *   Expected normalized path.
+   *
    * @covers \DrupalCodeGenerator\Utils::normalizePath
    * @dataProvider normalizePathProvider
    */
-  public function testNormalizePath($human_name, $expected) {
-    $this->assertEquals($expected, Utils::normalizePath($human_name));
+  public function testNormalizePath($path, $normalized_path) {
+    static::assertEquals($normalized_path, Utils::normalizePath($path));
   }
 
   /**
@@ -263,8 +292,8 @@ class UtilsTest extends TestCase {
    *
    * @param string $target_directory
    *   Directory for which the extension root is checked.
-   * @param string $expected_extension_root
-   *   Expected extension root.
+   * @param string|bool $expected_extension_root
+   *   Expected extension root or FALSE if root directory should not be found.
    *
    * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
    * @dataProvider getExtensionRootProvider
@@ -295,7 +324,7 @@ class UtilsTest extends TestCase {
    */
   public function testDefaultQuestions() {
     $questions = $this->defaultQuestions();
-    $this->assertEquals($questions, Utils::defaultQuestions());
+    static::assertEquals($questions, Utils::defaultQuestions());
   }
 
   /**
@@ -305,7 +334,7 @@ class UtilsTest extends TestCase {
    */
   public function testDefaultPluginQuestions() {
     $questions = $this->defaultPluginQuestions();
-    $this->assertEquals($questions, Utils::defaultPluginQuestions());
+    static::assertEquals($questions, Utils::defaultPluginQuestions());
   }
 
   /**
