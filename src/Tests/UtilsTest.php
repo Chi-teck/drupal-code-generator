@@ -5,11 +5,29 @@ namespace DrupalCodeGenerator\Tests;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Tests for a Utils class.
  */
 class UtilsTest extends TestCase {
+
+  use WorkingDirectoryTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    $this->initWorkingDirectory();
+    (new Filesystem())->dumpFile($this->directory . '/foo/foo.info.yml', 'Content.');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function tearDown() {
+    $this->removeWorkingDirectory();
+  }
 
   /**
    * Test callback.
@@ -243,6 +261,36 @@ class UtilsTest extends TestCase {
   /**
    * Test callback.
    *
+   * @param string $target_directory
+   *   Directory for which the extension root is checked.
+   * @param string $expected_extension_root
+   *   Expected extension root.
+   *
+   * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
+   * @dataProvider getExtensionRootProvider
+   */
+  public function testGetExtensionRoot($target_directory, $expected_extension_root) {
+    $extension_root = Utils::getExtensionRoot($target_directory);
+    self::assertEquals($expected_extension_root, $extension_root);
+  }
+
+  /**
+   * Data provider callback for testGetExtensionRoot().
+   */
+  public function getExtensionRootProvider() {
+    $extension_root = sys_get_temp_dir() . '/dcg_sandbox/foo';
+    return [
+      ['/tmp', FALSE],
+      [$extension_root, $extension_root],
+      [$extension_root . '/src', $extension_root],
+      [$extension_root . '/src/Plugin', $extension_root],
+      [$extension_root . '/src/Plugin/Block', $extension_root],
+    ];
+  }
+
+  /**
+   * Test callback.
+   *
    * @covers \DrupalCodeGenerator\Utils::defaultQuestions
    */
   public function testDefaultQuestions() {
@@ -256,17 +304,8 @@ class UtilsTest extends TestCase {
    * @covers \DrupalCodeGenerator\Utils::defaultPluginQuestions
    */
   public function testDefaultPluginQuestions() {
-    $questions = $this->defaultQuestions() + $this->defaultPluginQuestions();
+    $questions = $this->defaultPluginQuestions();
     $this->assertEquals($questions, Utils::defaultPluginQuestions());
-  }
-
-  /**
-   * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
-   */
-  public function testGetExtensionRoot() {
-    $this->markTestIncomplete('This test has not been implemented yet.');
   }
 
   /**
