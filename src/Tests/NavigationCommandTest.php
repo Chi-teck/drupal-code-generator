@@ -46,7 +46,7 @@ class NavigationCommandTest extends TestCase {
     $commandTester = new CommandTester($navigation);
     $commandTester->execute(['command' => $navigation->getName(), '--directory' => $this->directory]);
 
-    $expected_output = trim(file_get_contents(__DIR__ . '/_navigation-fixture.txt'));
+    $expected_output = trim(file_get_contents(__DIR__ . '/_navigation_fixture.txt'));
     $output = trim($commandTester->getDisplay());
     $this->assertEquals($expected_output, $output);
   }

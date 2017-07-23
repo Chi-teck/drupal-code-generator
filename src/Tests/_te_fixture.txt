@@ -1,0 +1,16 @@
+-= Plural filter =-
+zoos
+guesses
+tories
+-= Article filter =-
+a Zoo
+a solt
+an Apple
+an ease
+a Yahoo
+-= Underscore to hyphen filter =-
+one-two-three
+-= Hyphen to underscore filter =-
+three_two_one
+-= Camelize filter =-
+ThisShouldBeInCamelCase
