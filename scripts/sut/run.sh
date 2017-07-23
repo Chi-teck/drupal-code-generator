@@ -145,7 +145,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
-  #dcg_phpunit $MODULE_PATH/tests
+  dcg_phpunit $MODULE_DIR/tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi
 
