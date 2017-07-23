@@ -16,6 +16,7 @@ class TemplatePhp extends BaseGenerator {
   protected $name = 'd7:template.php';
   protected $description = 'Generates Drupal 7 template.php file';
   protected $alias = 'template.php';
+  protected $label = 'template.php';
 
   /**
    * {@inheritdoc}

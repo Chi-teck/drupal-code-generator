@@ -17,6 +17,7 @@ class Composer extends BaseGenerator {
   protected $name = 'd8:composer';
   protected $description = 'Generates a composer.json file';
   protected $alias = 'composer.json';
+  protected $label = 'composer.json';
 
   /**
    * {@inheritdoc}

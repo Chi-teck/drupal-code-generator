@@ -35,6 +35,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $alias;
 
   /**
+   * Command label.
+   *
+   * @var string
+   */
+  protected $label;
+
+  /**
    * A path where templates are stored.
    *
    * @var string
@@ -113,6 +120,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output);
     $this->getHelper('dcg_output_handler')->printSummary($output, $dumped_files);
     return 0;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getLabel() {
+    return $this->label;
   }
 
   /**

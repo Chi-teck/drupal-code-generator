@@ -19,6 +19,16 @@ class Navigation extends Command {
   protected $generatorName;
 
   /**
+   * Command labels.
+   *
+   * @var array
+   */
+  protected $labels = [
+    'd7' => 'Drupal 7',
+    'd8' => 'Drupal 8',
+  ];
+
+  /**
    * Constructs menu command.
    *
    * @param \Symfony\Component\Console\Command\Command[] $commands
@@ -38,7 +48,12 @@ class Navigation extends Command {
 
       // The last sub-name is actual command name so it should not be used as an
       // alias for navigation command.
-      array_pop($sub_names);
+      $last_sub_name = array_pop($sub_names);
+
+      // Collect command labels.
+      if ($label = $command->getLabel()) {
+        $this->labels[$last_sub_name] = $label;
+      }
 
       // We cannot use $application->getNamespaces() here because the
       // application is not ready at this point.
@@ -198,25 +213,8 @@ class Navigation extends Command {
    *   The menu label.
    */
   protected function createMenuItemLabel($menu_item, $comment) {
-    // Some labels require individual approach.
-    $labels = [
-      'settings.php' => 'settings.php',
-      'template.php' => 'template.php',
-      'd7' => 'Drupal 7',
-      'd8' => 'Drupal 8',
-      'html-page' => 'HTML page',
-      'install' => 'Install file',
-      'module-info' => 'Info (module)',
-      'theme-info' => 'Info (theme)',
-      'module-libraries' => 'Libraries (module)',
-      'theme-libraries' => 'Libraries (theme)',
-      'dcg-command' => 'DCG command',
-      'composer' => 'composer.json',
-    ];
-
-    $label = isset($labels[$menu_item]) ?
-      $labels[$menu_item] : str_replace(['-', '_'], ' ', ucfirst($menu_item));
-
+    $label = isset($this->labels[$menu_item]) ?
+      $this->labels[$menu_item] : str_replace(['-', '_'], ' ', ucfirst($menu_item));
     return $comment ? "<comment>$label</comment>" : $label;
   }
 

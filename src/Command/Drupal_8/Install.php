@@ -15,6 +15,7 @@ class Install extends BaseGenerator {
   protected $name = 'd8:install';
   protected $description = 'Generates an install file';
   protected $alias = 'install';
+  protected $label = 'Install file';
 
   /**
    * {@inheritdoc}

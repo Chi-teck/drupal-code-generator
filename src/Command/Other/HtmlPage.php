@@ -15,6 +15,7 @@ class HtmlPage extends BaseGenerator {
   protected $name = 'other:html-page';
   protected $description = 'Generates a simple html page';
   protected $alias = 'html-page';
+  protected $label = 'HTML page';
   protected $destination = FALSE;
 
   /**

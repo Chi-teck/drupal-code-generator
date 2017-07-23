@@ -16,6 +16,7 @@ class DcgCommand extends BaseGenerator {
   protected $name = 'other:dcg-command';
   protected $description = 'Generates DCG command';
   protected $alias = 'dcg-command';
+  protected $label = 'DCG command';
 
   /**
    * {@inheritdoc}

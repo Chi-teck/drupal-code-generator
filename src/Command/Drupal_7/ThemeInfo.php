@@ -15,6 +15,7 @@ class ThemeInfo extends BaseGenerator {
 
   protected $name = 'd7:theme-info';
   protected $description = 'Generates info file for a Drupal 7 theme';
+  protected $label = 'Info (theme)';
 
   /**
    * {@inheritdoc}

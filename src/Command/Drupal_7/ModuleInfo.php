@@ -15,6 +15,7 @@ class ModuleInfo extends BaseGenerator {
 
   protected $name = 'd7:module-info';
   protected $description = 'Generates Drupal 7 info file for a module';
+  protected $label = 'Info (module)';
 
   /**
    * {@inheritdoc}

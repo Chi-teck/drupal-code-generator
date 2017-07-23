@@ -16,6 +16,7 @@ class ModuleLibraries extends BaseGenerator {
   protected $name = 'd8:yml:module-libraries';
   protected $description = 'Generates module libraries yml file';
   protected $alias = 'module-libraries';
+  protected $label = 'Libraries (module)';
 
   /**
    * {@inheritdoc}
