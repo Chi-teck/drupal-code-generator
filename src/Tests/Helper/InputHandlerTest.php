@@ -104,8 +104,8 @@ class InputHandlerTest extends TestCase {
     // Default case.
     $row = [];
     $row[] = [
-      'name' => ['Name', 'Example'],
-      'machine_name' => ['Machine name', 'example'],
+      'name' => new Question('Name', 'Example'),
+      'machine_name' => new Question('Machine name', 'example'),
     ];
     $row[] = "Example\nexample\nbar";
     $row[] = [
@@ -118,10 +118,10 @@ class InputHandlerTest extends TestCase {
     // Without default values.
     $row = [];
     $row[] = [
-      'name' => ['Name'],
-      'machine_name' => ['Machine name'],
-      'plugin_label' => ['Plugin label'],
-      'plugin_id' => ['Plugin ID'],
+      'name' => new Question('Name'),
+      'machine_name' => new Question('Machine name'),
+      'plugin_label' => new Question('Plugin label'),
+      'plugin_id' => new Question('Plugin ID'),
     ];
     $row[] = "Example\nexample\nBar\nbar";
     $row[] = [
@@ -165,8 +165,8 @@ class InputHandlerTest extends TestCase {
       return '*' . $vars['name'] . '*';
     };
     $row[] = [
-      'name' => ['Name', 'Zoo'],
-      'bar' => ['bar', $callable],
+      'name' => new Question('Name', 'Zoo'),
+      'bar' => new Question('bar', $callable),
     ];
     $row[] = "example\nexample";
     $row[] = [

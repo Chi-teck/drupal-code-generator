@@ -40,8 +40,6 @@ class InputHandler extends Helper {
    */
   public function collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) {
 
-    $questions = $this->normalizeQuestions($questions);
-
     // A user can pass answers through command line option.
     if ($answers_raw = $input->getOption('answers')) {
       $answers = json_decode($answers_raw, TRUE);
@@ -132,7 +130,8 @@ class InputHandler extends Helper {
    * @return \Symfony\Component\Console\Question\Question[]
    *   Normalized questions
    *
-   * @todo Remove it when all generators use object syntax for questions.
+   * @deprecated
+   *  Use Symfony\Component\Console\Question\Question to define questions.
    */
   protected function normalizeQuestions(array $questions) {
     return array_map(function ($question) {
