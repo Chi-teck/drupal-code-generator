@@ -20,10 +20,10 @@ class ExampleTest extends BrowserTestBase {
    * Test callback.
    */
   public function testContentPage() {
-    $admin_user = $this->drupalCreateUser(['administer nodes']);
+    $admin_user = $this->drupalCreateUser(['access content overview']);
     $this->drupalLogin($admin_user);
     $this->drupalGet('admin/content');
-    $this->assertSession()->pageTextContains('Content');
+    $this->assertSession()->elementExists('xpath', '//h1[text() = "Content"]');
   }
 
 }
