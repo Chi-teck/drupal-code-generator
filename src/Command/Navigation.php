@@ -14,8 +14,18 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
  */
 class Navigation extends Command {
 
-  protected $activeMenuItems = [];
+  /**
+   * Menu tree.
+   *
+   * @var array
+   */
   protected $menuTree;
+
+  /**
+   * Name of the generator to execute.
+   *
+   * @var string
+   */
   protected $generatorName;
 
   /**
@@ -31,7 +41,7 @@ class Navigation extends Command {
   /**
    * Constructs menu command.
    *
-   * @param \Symfony\Component\Console\Command\Command[] $commands
+   * @param \DrupalCodeGenerator\Command\GeneratorInterface[] $commands
    *   List of registered commands.
    */
   public function __construct(array $commands) {
@@ -40,13 +50,15 @@ class Navigation extends Command {
     // Initialize the menu structure.
     $this->menuTree = [];
     $aliases = [];
+
+    // Build aliases for the navigation based on command namespaces.
     foreach ($commands as $command) {
       $command_name = $command->getName();
       $sub_names = explode(':', $command_name);
 
       $this->arraySetNestedValue($this->menuTree, $sub_names, TRUE);
 
-      // The last sub-name is actual command name so it should not be used as an
+      // The last sub-name is actual command name so it cannot be used as an
       // alias for navigation command.
       $last_sub_name = array_pop($sub_names);
 
@@ -56,13 +68,14 @@ class Navigation extends Command {
       }
 
       // We cannot use $application->getNamespaces() here because the
-      // application is not ready at this point.
+      // application is not available at this point.
       $alias = '';
       foreach ($sub_names as $sub_name) {
-        $alias = $alias . ':' . $sub_name;
-        $aliases[] = ltrim($alias, ':');
+        $alias = $alias ? $alias . ':' . $sub_name : $sub_name;
+        $aliases[] = $alias;
       }
     }
+
     $this->recursiveKsort($this->menuTree);
     $this->setAliases(array_unique($aliases));
   }
@@ -73,7 +86,7 @@ class Navigation extends Command {
   protected function configure() {
     $this
       ->setName('navigation')
-      ->setDescription('Provide an interactive menu to select generator')
+      ->setDescription('Provides an interactive menu to select generator')
       ->setHidden(TRUE)
       ->addOption(
         'directory',
@@ -93,17 +106,14 @@ class Navigation extends Command {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $style = new OutputFormatterStyle('black', 'cyan', []);
     $output->getFormatter()->setStyle('title', $style);
 
     $command_name = $input->getFirstArgument();
-    $this->activeMenuItems = $command_name == $this->getName() ?
+    $menu_trail = $command_name == $this->getName() ?
       [] : explode(':', $command_name);
 
-    /** @var \DrupalCodeGenerator\Command\BaseGenerator $generator_name */
-    $this->generatorName = $this->selectGenerator($input, $output);
-
+    $this->generatorName = $this->selectGenerator($input, $output, $menu_trail);
   }
 
   /**
@@ -132,73 +142,68 @@ class Navigation extends Command {
 
   /**
    * Returns a generator selected by the user from a multilevel console menu.
+   *
+   * @param \Symfony\Component\Console\Input\InputInterface $input
+   *   Input instance.
+   * @param \Symfony\Component\Console\Output\OutputInterface $output
+   *   Output instance.
+   * @param array $menu_trail
+   *   Menu trail.
+   *
+   * @return string|null
+   *   Generator name or null if user decided to exit the navigation.
    */
-  protected function selectGenerator(InputInterface $input, OutputInterface $output) {
+  protected function selectGenerator(InputInterface $input, OutputInterface $output, array $menu_trail) {
 
-    // Narrow menu tree according to the active menu items.
+    // Narrow down menu tree.
     $active_menu_tree = $this->menuTree;
-    foreach ($this->activeMenuItems as $active_menu_item) {
+    foreach ($menu_trail as $active_menu_item) {
       $active_menu_tree = $active_menu_tree[$active_menu_item];
     }
 
-    // The $active_menu_tree can be either an array of child menu items or
-    // the TRUE value indicating that the user reached the final menu point and
-    // active menu items contain the actual command name.
-    if (is_array($active_menu_tree)) {
+    // The $active_menu_tree can be either an array of menu items or TRUE if the
+    // user reached the final menu point.
+    if ($active_menu_tree === TRUE) {
+      return implode(':', $menu_trail);
+    }
 
-      $subtrees = $command_names = [];
-      // We build $choices as an associative array to be able to find
-      // later menu items by respective labels.
-      foreach ($active_menu_tree as $menu_item => $subtree) {
-        $menu_item_label = $this->createMenuItemLabel($menu_item, is_array($subtree));
-        if (is_array($subtree)) {
-          $subtrees[$menu_item] = $menu_item_label;
-        }
-        else {
-          $command_names[$menu_item] = $menu_item_label;
-        }
-
-      }
-      asort($subtrees);
-      asort($command_names);
-
-      // Generally the choices array consists of the following parts:
-      // - Reference to the parent menu level.
-      // - Sorted list of nested menu levels.
-      // - Sorted list of commands.
-      $choices = ['..' => '..'] + $subtrees + $command_names;
-
-      $question = new ChoiceQuestion(
-        '<title>Select generator:</title>',
-        array_values($choices)
-      );
-      $question->setPrompt('  >>> ');
-      $answer_label = $this->getHelper('question')->ask($input, $output, $question);
-      $answer = array_search($answer_label, $choices);
-      if (!$answer) {
-        throw new \UnexpectedValueException(sprintf('"%s" menu item was not found', $answer_label));
-      }
-
-      if ($answer == '..') {
-        // Exit the application if the user choices zero key
-        // on the top menu level.
-        if (count($this->activeMenuItems) == 0) {
-          return NULL;
-        }
-        // Set the menu one level higher.
-        array_pop($this->activeMenuItems);
+    $sub_menu_labels = $command_labels = [];
+    foreach ($active_menu_tree as $menu_item => $subtree) {
+      if (is_array($subtree)) {
+        $sub_menu_labels[$menu_item] = $this->createMenuItemLabel($menu_item, TRUE);
       }
       else {
-        // Set the menu one level deeper.
-        $this->activeMenuItems[] = $answer;
+        $command_labels[$menu_item] = $this->createMenuItemLabel($menu_item, FALSE);
       }
+    }
+    asort($sub_menu_labels);
+    asort($command_labels);
 
-      return $this->selectGenerator($input, $output);
+    // Generally the choices array consists of the following parts:
+    // - Reference to the parent menu level.
+    // - Sorted list of nested menu levels.
+    // - Sorted list of commands.
+    $choices = ['..' => '..'] + $sub_menu_labels + $command_labels;
+    $question = new ChoiceQuestion('<title>Select generator:</title>', array_values($choices));
+    $question->setPrompt('  >>> ');
+
+    $answer_label = $this->getHelper('question')->ask($input, $output, $question);
+    $answer = array_search($answer_label, $choices);
+
+    if ($answer == '..') {
+      // Exit the application if the user selected zero on the top menu level.
+      if (count($menu_trail) == 0) {
+        return NULL;
+      }
+      // Decrease menu level.
+      array_pop($menu_trail);
     }
     else {
-      return implode(':', $this->activeMenuItems);
+      // Increase menu level.
+      $menu_trail[] = $answer;
     }
 
+    return $this->selectGenerator($input, $output, $menu_trail);
   }
 
   /**
@@ -209,7 +214,7 @@ class Navigation extends Command {
    * @param bool $comment
    *   A boolean indicating that the label should be wrapped with comment tag.
    *
-   * @return mixed|string
+   * @return string
    *   The menu label.
    */
   protected function createMenuItemLabel($menu_item, $comment) {
