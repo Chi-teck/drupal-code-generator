@@ -2,7 +2,7 @@
  * Implements hook_update_index().
  */
 function {{ machine_name }}_update_index() {
-  $limit = (int) variable_get('search_cron_limit', 100);
+  $limit = (int)variable_get('search_cron_limit', 100);
 
   $result = db_query_range("SELECT n.nid FROM {node} n LEFT JOIN {search_dataset} d ON d.type = 'node' AND d.sid = n.nid WHERE d.sid IS NULL OR d.reindex <> 0 ORDER BY d.reindex ASC, n.nid ASC", 0, $limit);
 

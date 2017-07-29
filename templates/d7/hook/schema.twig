@@ -35,12 +35,12 @@ function {{ machine_name }}_schema() {
       ),
     ),
     'indexes' => array(
-      'node_changed' => array('changed'),
-      'node_created' => array('created'),
+      'node_changed'        => array('changed'),
+      'node_created'        => array('created'),
     ),
     'unique keys' => array(
       'nid_vid' => array('nid', 'vid'),
-      'vid' => array('vid'),
+      'vid'     => array('vid'),
     ),
     // For documentation purposes only; foreign keys are not created in the
     // database.

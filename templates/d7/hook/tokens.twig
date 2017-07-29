@@ -32,7 +32,7 @@ function {{ machine_name }}_tokens($type, $tokens, array $data = array(), array 
           $replacements[$original] = url('node/' . $node->nid . '/edit', $url_options);
           break;
 
-          // Default values for the chained tokens handled below.
+        // Default values for the chained tokens handled below.
         case 'author':
           $name = ($node->uid == 0) ? variable_get('anonymous', t('Anonymous')) : $node->name;
           $replacements[$original] = $sanitize ? filter_xss($name) : $name;

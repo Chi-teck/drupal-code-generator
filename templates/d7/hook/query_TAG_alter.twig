@@ -21,7 +21,7 @@ function {{ machine_name }}_query_TAG_alter(QueryAlterableInterface $query) {
           $or->condition(db_and()
             ->condition($access_alias . '.gid', $gid)
             ->condition($access_alias . '.realm', $realm)
-            );
+          );
         }
       }
 

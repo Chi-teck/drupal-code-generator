@@ -6,13 +6,13 @@ function {{ machine_name }}_watchdog(array $log_entry) {
 
   $severity_list = array(
     WATCHDOG_EMERGENCY => t('Emergency'),
-    WATCHDOG_ALERT => t('Alert'),
-    WATCHDOG_CRITICAL => t('Critical'),
-    WATCHDOG_ERROR => t('Error'),
-    WATCHDOG_WARNING => t('Warning'),
-    WATCHDOG_NOTICE => t('Notice'),
-    WATCHDOG_INFO => t('Info'),
-    WATCHDOG_DEBUG => t('Debug'),
+    WATCHDOG_ALERT     => t('Alert'),
+    WATCHDOG_CRITICAL  => t('Critical'),
+    WATCHDOG_ERROR     => t('Error'),
+    WATCHDOG_WARNING   => t('Warning'),
+    WATCHDOG_NOTICE    => t('Notice'),
+    WATCHDOG_INFO      => t('Info'),
+    WATCHDOG_DEBUG     => t('Debug'),
   );
 
   $to = 'someone@example.com';
@@ -22,7 +22,7 @@ function {{ machine_name }}_watchdog(array $log_entry) {
     '@severity_desc' => $severity_list[$log_entry['severity']],
   ));
 
-  $params['message'] = "\nSite:         @base_url";
+  $params['message']  = "\nSite:         @base_url";
   $params['message'] .= "\nSeverity:     (@severity) @severity_desc";
   $params['message'] .= "\nTimestamp:    @timestamp";
   $params['message'] .= "\nType:         @type";
@@ -34,18 +34,18 @@ function {{ machine_name }}_watchdog(array $log_entry) {
   $params['message'] .= "\nMessage:      \n\n@message";
 
   $params['message'] = t($params['message'], array(
-    '@base_url' => $base_url,
-    '@severity' => $log_entry['severity'],
+    '@base_url'      => $base_url,
+    '@severity'      => $log_entry['severity'],
     '@severity_desc' => $severity_list[$log_entry['severity']],
-    '@timestamp' => format_date($log_entry['timestamp']),
-    '@type' => $log_entry['type'],
-    '@ip' => $log_entry['ip'],
-    '@request_uri' => $log_entry['request_uri'],
-    '@referer_uri' => $log_entry['referer'],
-    '@uid' => $log_entry['uid'],
-    '@name' => $log_entry['user']->name,
-    '@link' => strip_tags($log_entry['link']),
-    '@message' => strip_tags($log_entry['message']),
+    '@timestamp'     => format_date($log_entry['timestamp']),
+    '@type'          => $log_entry['type'],
+    '@ip'            => $log_entry['ip'],
+    '@request_uri'   => $log_entry['request_uri'],
+    '@referer_uri'   => $log_entry['referer'],
+    '@uid'           => $log_entry['uid'],
+    '@name'          => $log_entry['user']->name,
+    '@link'          => strip_tags($log_entry['link']),
+    '@message'       => strip_tags($log_entry['message']),
   ));
 
   drupal_mail('emaillog', 'entry', $to, $language, $params);

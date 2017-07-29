@@ -23,8 +23,7 @@ function {{ machine_name }}_block_view($delta = '') {
             '#theme' => 'node_recent_block',
             '#nodes' => $nodes,
           );
-        }
-        else {
+        } else {
           $block['content'] = t('No content available.');
         }
       }

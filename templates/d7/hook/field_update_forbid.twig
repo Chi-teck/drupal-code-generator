@@ -12,7 +12,7 @@ function {{ machine_name }}_field_update_forbid($field, $prior_field, $has_data)
     // If any data exist for those keys, forbid the update.
     $query = new EntityFieldQuery();
     $found = $query
-    ->fieldCondition($prior_field['field_name'], 'value', $lost_keys)
+      ->fieldCondition($prior_field['field_name'], 'value', $lost_keys)
       ->range(0, 1)
       ->execute();
     if ($found) {
