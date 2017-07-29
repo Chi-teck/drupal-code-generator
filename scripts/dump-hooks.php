@@ -1,31 +1,106 @@
 <?php
 
 /**
+ * @file
  * Generates hook templates from API documentation.
- *
- * This required modifying api_format_php() to make it return pure PHP code
- * without formatting.
- *
- * @see https://www.drupal.org/project/api
  */
 
-$dir = '/tmp/hooks';
-$branch_id = 1;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Exception\RuntimeException;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
-$query = db_query("SELECT object_name, code FROM {api_documentation} WHERE object_type = 'function' AND branch_id = ? AND object_name LIKE 'hook\_%'", [$branch_id]);
-while ($hook = $query->fetch()) {
-  $hook_name = str_replace('hook_', '', $hook->object_name);
-  $comment = "/**\n * Implements {$hook->object_name}().\n */";
-  $search = [
-    "<?php",
-    'function hook_',
-    "?>"
-  ];
-  $replace = [
-    $comment,
-    'function {{ machine_name }}_',
-    '',
-  ];
-  $code = str_replace($search, $replace, $hook->code);
-  file_put_contents("$dir/$hook_name.twig", $code);
+require __DIR__ . '/../vendor/autoload.php';
+
+/**
+ * Dumps hooks.
+ *
+ * @param \Symfony\Component\Console\Input\InputInterface $input
+ *   Input instance.
+ * @param \Symfony\Component\Console\Output\OutputInterface $output
+ *   Output instance.
+ */
+function dump_hooks(InputInterface $input, OutputInterface $output) {
+
+  $input_directory = $input->getArgument('input_directory');
+  $output_directory = $input->getArgument('output_directory');
+
+  check_directories($input_directory, $output_directory);
+
+  $iterator = new RecursiveIteratorIterator(
+    new RecursiveDirectoryIterator($input_directory, RecursiveDirectoryIterator::SKIP_DOTS)
+  );
+
+  $total = 0;
+  foreach ($iterator as $path => $file) {
+    $file_name = $file->getFileName();
+    if (substr($file_name, -7) == 'api.php') {
+      $output->writeln("<comment>$file_name</comment>");
+      $hooks = parse_hooks($path);
+      foreach ($hooks as $hook_name => $hook) {
+        $output->writeln('  - ' . $hook_name);
+        file_put_contents("$output_directory/$hook_name.twig", $hook);
+        $total++;
+      }
+    }
+  }
+
+  $output->writeln('-----------------');
+  $output->writeln('Dumped hooks: ' . $total);
 }
+
+/**
+ * Checks if target directories exist.
+ *
+ * @param string $input_directory
+ *   Directory to search for hooks.
+ * @param string $output_directory
+ *   Directory where hook templates should be dumped.
+ *
+ * @throws \Symfony\Component\Console\Exception\RuntimeException
+ */
+function check_directories($input_directory, $output_directory) {
+  $file_system = new Filesystem();
+  if (!$file_system->exists($input_directory)) {
+    throw new RuntimeException('Input directory does not exist.');
+  }
+  if (!$file_system->exists($output_directory)) {
+    throw new RuntimeException('Output directory does not exist.');
+  }
+}
+
+/**
+ * Extracts hooks from a singe PHP file.
+ *
+ * @param string $file
+ *   File to parse.
+ *
+ * @return array
+ *   Array of parsed hooks keyed by hook name.
+ */
+function parse_hooks($file) {
+  $code = file_get_contents($file);
+
+  preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);
+
+  $results = [];
+  foreach ($matches[0] as $index => $hook) {
+    $hook_name = $matches[1][$index];
+    $output = "/**\n * Implements hook_$hook_name().\n */\n";
+    $output .= str_replace('function hook_', 'function {{ machine_name }}_', $hook);
+    $results[$hook_name] = $output;
+  }
+
+  return $results;
+}
+
+(new Application('Hooks dumper'))
+  ->register('dump-hooks')
+  ->addArgument('input_directory', InputArgument::REQUIRED, 'Input directory')
+  ->addArgument('output_directory', InputArgument::REQUIRED, 'Output directory')
+  ->setCode('dump_hooks')
+  ->getApplication()
+  ->setDefaultCommand('dump-hooks', TRUE)
+  ->run();
