@@ -5,12 +5,12 @@ function {{ machine_name }}_field_views_data(\Drupal\field\FieldStorageConfigInt
   $data = views_field_default_views_data($field_storage);
   foreach ($data as $table_name => $table_data) {
     // Add the relationship only on the target_id field.
-    $data[$table_name][$field_storage->getName() . '_target_id']['relationship'] = array(
+    $data[$table_name][$field_storage->getName() . '_target_id']['relationship'] = [
       'id' => 'standard',
       'base' => 'file_managed',
       'base field' => 'target_id',
-      'label' => t('image from @field_name', array('@field_name' => $field_storage->getName())),
-    );
+      'label' => t('image from @field_name', ['@field_name' => $field_storage->getName()]),
+    ];
   }
 
   return $data;

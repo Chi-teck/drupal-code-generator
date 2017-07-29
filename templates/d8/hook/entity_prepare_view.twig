@@ -7,7 +7,7 @@ function {{ machine_name }}_entity_prepare_view($entity_type_id, array $entities
     // Only do the extra work if the component is configured to be
     // displayed. This assumes a 'mymodule_addition' extra field has been
     // defined for the entity bundle in hook_entity_extra_field_info().
-    $ids = array();
+    $ids = [];
     foreach ($entities as $id => $entity) {
       if ($displays[$entity->bundle()]->getComponent('mymodule_addition')) {
         $ids[] = $id;

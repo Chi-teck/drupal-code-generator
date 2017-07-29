@@ -15,7 +15,7 @@ function {{ machine_name }}_entity_predelete(Drupal\Core\Entity\EntityInterface 
 
   // Log the count in a table that records this statistic for deleted entities.
   db_merge('example_deleted_entity_statistics')
-    ->key(array('type' => $type, 'id' => $id))
-    ->fields(array('count' => $count))
+    ->key(['type' => $type, 'id' => $id])
+    ->fields(['count' => $count])
     ->execute();
 }

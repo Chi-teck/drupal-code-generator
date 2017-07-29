@@ -4,8 +4,8 @@
 function {{ machine_name }}_entity_form_display_alter(\Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display, array $context) {
   // Hide the 'user_picture' field from the register form.
   if ($context['entity_type'] == 'user' && $context['form_mode'] == 'register') {
-    $form_display->setComponent('user_picture', array(
-      'type' => 'hidden',
-    ));
+    $form_display->setComponent('user_picture', [
+      'region' => 'hidden',
+    ]);
   }
 }

@@ -9,7 +9,7 @@ function {{ machine_name }}_user_cancel($edit, $account, $method) {
       $nodes = \Drupal::entityQuery('node')
         ->condition('uid', $account->id())
         ->execute();
-      node_mass_update($nodes, array('status' => 0), NULL, TRUE);
+      node_mass_update($nodes, ['status' => 0], NULL, TRUE);
       break;
 
     case 'user_cancel_reassign':
@@ -18,10 +18,10 @@ function {{ machine_name }}_user_cancel($edit, $account, $method) {
       $nodes = \Drupal::entityQuery('node')
         ->condition('uid', $account->id())
         ->execute();
-      node_mass_update($nodes, array('uid' => 0), NULL, TRUE);
+      node_mass_update($nodes, ['uid' => 0], NULL, TRUE);
       // Anonymize old revisions.
       db_update('node_field_revision')
-        ->fields(array('uid' => 0))
+        ->fields(['uid' => 0])
         ->condition('uid', $account->id())
         ->execute();
       break;

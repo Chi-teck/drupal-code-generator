@@ -14,7 +14,7 @@ function {{ machine_name }}_node_grants_alter(&$grants, \Drupal\Core\Session\Acc
     // Now check the roles for this account against the restrictions.
     foreach ($account->getRoles() as $rid) {
       if (in_array($rid, $restricted)) {
-        $grants = array();
+        $grants = [];
       }
     }
   }

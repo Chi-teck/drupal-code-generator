@@ -2,7 +2,7 @@
  * Implements hook_entity_extra_field_info().
  */
 function {{ machine_name }}_entity_extra_field_info() {
-  $extra = array();
+  $extra = [];
   $module_language_enabled = \Drupal::moduleHandler()->moduleExists('language');
   $description = t('Node module element');
 
@@ -15,19 +15,19 @@ function {{ machine_name }}_entity_extra_field_info() {
     if ($module_language_enabled) {
       $configuration = ContentLanguageSettings::loadByEntityTypeBundle('node', $bundle->id());
       if ($configuration->isLanguageAlterable()) {
-        $extra['node'][$bundle->id()]['form']['language'] = array(
+        $extra['node'][$bundle->id()]['form']['language'] = [
           'label' => t('Language'),
           'description' => $description,
           'weight' => 0,
-        );
+        ];
       }
     }
-    $extra['node'][$bundle->id()]['display']['language'] = array(
+    $extra['node'][$bundle->id()]['display']['language'] = [
       'label' => t('Language'),
       'description' => $description,
       'weight' => 0,
       'visible' => FALSE,
-    );
+    ];
   }
 
   return $extra;

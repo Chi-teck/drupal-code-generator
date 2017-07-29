@@ -10,6 +10,6 @@ function {{ machine_name }}_node_access_records_alter(&$grants, Drupal\node\Node
     // Our module grants are set in $grants['example'].
     $temp = $grants['example'];
     // Now remove all module grants but our own.
-    $grants = array('example' => $temp);
+    $grants = ['example' => $temp];
   }
 }

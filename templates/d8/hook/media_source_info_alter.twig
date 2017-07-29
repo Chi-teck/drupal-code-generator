@@ -1,0 +1,6 @@
+/**
+ * Implements hook_media_source_info_alter().
+ */
+function {{ machine_name }}_media_source_info_alter(array &$sources) {
+  $sources['youtube']['label'] = t('Youtube rocks!');
+}

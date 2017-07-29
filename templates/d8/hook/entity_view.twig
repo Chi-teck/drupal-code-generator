@@ -6,9 +6,9 @@ function {{ machine_name }}_entity_view(array &$build, \Drupal\Core\Entity\Entit
   // This assumes a 'mymodule_addition' extra field has been defined for the
   // entity bundle in hook_entity_extra_field_info().
   if ($display->getComponent('mymodule_addition')) {
-    $build['mymodule_addition'] = array(
+    $build['mymodule_addition'] = [
       '#markup' => mymodule_addition($entity),
       '#theme' => 'mymodule_my_additional_field',
-    );
+    ];
   }
 }

@@ -2,11 +2,11 @@
  * Implements hook_hook_info().
  */
 function {{ machine_name }}_hook_info() {
-  $hooks['token_info'] = array(
+  $hooks['token_info'] = [
     'group' => 'tokens',
-  );
-  $hooks['tokens'] = array(
+  ];
+  $hooks['tokens'] = [
     'group' => 'tokens',
-  );
+  ];
   return $hooks;
 }

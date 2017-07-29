@@ -10,9 +10,9 @@ function {{ machine_name }}_field_views_data_alter(array &$data, \Drupal\field\F
 
   list($label) = views_entity_field_label($entity_type_id, $field_name);
 
-  $data['file_managed'][$pseudo_field_name]['relationship'] = array(
-    'title' => t('@entity using @field', array('@entity' => $entity_type->getLabel(), '@field' => $label)),
-    'help' => t('Relate each @entity with a @field set to the image.', array('@entity' => $entity_type->getLabel(), '@field' => $label)),
+  $data['file_managed'][$pseudo_field_name]['relationship'] = [
+    'title' => t('@entity using @field', ['@entity' => $entity_type->getLabel(), '@field' => $label]),
+    'help' => t('Relate each @entity with a @field set to the image.', ['@entity' => $entity_type->getLabel(), '@field' => $label]),
     'id' => 'entity_reverse',
     'field_name' => $field_name,
     'entity_type' => $entity_type_id,
@@ -21,12 +21,12 @@ function {{ machine_name }}_field_views_data_alter(array &$data, \Drupal\field\F
     'base' => $entity_type->getBaseTable(),
     'base field' => $entity_type->getKey('id'),
     'label' => $field_name,
-    'join_extra' => array(
-      0 => array(
+    'join_extra' => [
+      0 => [
         'field' => 'deleted',
         'value' => 0,
         'numeric' => TRUE,
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 }

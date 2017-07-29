@@ -4,10 +4,10 @@
 function {{ machine_name }}_ENTITY_TYPE_insert(Drupal\Core\Entity\EntityInterface $entity) {
   // Insert the new entity into a fictional table of this type of entity.
   db_insert('example_entity')
-    ->fields(array(
+    ->fields([
       'id' => $entity->id(),
       'created' => REQUEST_TIME,
       'updated' => REQUEST_TIME,
-    ))
+    ])
     ->execute();
 }

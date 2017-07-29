@@ -4,7 +4,7 @@
 function {{ machine_name }}_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
   $token_service = \Drupal::token();
 
-  $url_options = array('absolute' => TRUE);
+  $url_options = ['absolute' => TRUE];
   if (isset($options['langcode'])) {
     $url_options['language'] = \Drupal::languageManager()->getLanguage($options['langcode']);
     $langcode = $options['langcode'];
@@ -12,7 +12,7 @@ function {{ machine_name }}_tokens($type, $tokens, array $data, array $options, 
   else {
     $langcode = NULL;
   }
-  $replacements = array();
+  $replacements = [];
 
   if ($type == 'node' && !empty($data['node'])) {
     /** @var \Drupal\node\NodeInterface $node */
@@ -33,7 +33,7 @@ function {{ machine_name }}_tokens($type, $tokens, array $data, array $options, 
           $replacements[$original] = $node->url('edit-form', $url_options);
           break;
 
-          // Default values for the chained tokens handled below.
+        // Default values for the chained tokens handled below.
         case 'author':
           $account = $node->getOwner() ? $node->getOwner() : User::load(0);
           $replacements[$original] = $account->label();
@@ -47,11 +47,11 @@ function {{ machine_name }}_tokens($type, $tokens, array $data, array $options, 
     }
 
     if ($author_tokens = $token_service->findWithPrefix($tokens, 'author')) {
-      $replacements = $token_service->generate('user', $author_tokens, array('user' => $node->getOwner()), $options, $bubbleable_metadata);
+      $replacements += $token_service->generate('user', $author_tokens, ['user' => $node->getOwner()], $options, $bubbleable_metadata);
     }
 
     if ($created_tokens = $token_service->findWithPrefix($tokens, 'created')) {
-      $replacements = $token_service->generate('date', $created_tokens, array('date' => $node->getCreatedTime()), $options, $bubbleable_metadata);
+      $replacements += $token_service->generate('date', $created_tokens, ['date' => $node->getCreatedTime()], $options, $bubbleable_metadata);
     }
   }
 

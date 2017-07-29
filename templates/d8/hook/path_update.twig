@@ -4,7 +4,7 @@
 function {{ machine_name }}_path_update($path) {
   if ($path['alias'] != $path['original']['alias']) {
     db_update('mytable')
-      ->fields(array('alias' => $path['alias']))
+      ->fields(['alias' => $path['alias']])
       ->condition('pid', $path['pid'])
       ->execute();
   }

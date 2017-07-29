@@ -15,15 +15,15 @@ function {{ machine_name }}_views_data() {
   // );
 
   // Define the return array.
-  $data = array();
+  $data = [];
 
   // The outermost keys of $data are Views table names, which should usually
   // be the same as the hook_schema() table names.
-  $data['example_table'] = array();
+  $data['example_table'] = [];
 
   // The value corresponding to key 'table' gives properties of the table
   // itself.
-  $data['example_table']['table'] = array();
+  $data['example_table']['table'] = [];
 
   // Within 'table', the value of 'group' (translated string) is used as a
   // prefix in Views UI for this table's fields, filters, etc. When adding
@@ -40,7 +40,7 @@ function {{ machine_name }}_views_data() {
   // for views. Non-base tables can only be brought in via relationships in
   // views based on other tables. To define a table to be a base table, add
   // key 'base' to the 'table' array:
-  $data['example_table']['table']['base'] = array(
+  $data['example_table']['table']['base'] = [
     // Identifier (primary) field in this table for Views.
     'field' => 'nid',
     // Label in the UI.
@@ -48,7 +48,7 @@ function {{ machine_name }}_views_data() {
     // Longer description in the UI. Required.
     'help' => t('Example table contains example content and can be related to nodes.'),
     'weight' => -10,
-  );
+  ];
 
   // Some tables have an implicit, automatic relationship to other tables,
   // meaning that when the other table is available in a view (either as the
@@ -67,7 +67,7 @@ function {{ machine_name }}_views_data() {
   //   ... FROM example_table et ... JOIN node_field_data nfd
   //   ON et.nid = nfd.nid AND ('extra' clauses will be here) ...
   // although the table aliases will be different.
-  $data['example_table']['table']['join'] = array(
+  $data['example_table']['table']['join'] = [
     // Within the 'join' section, list one or more tables to automatically
     // join to. In this example, every time 'node_field_data' is available in
     // a view, 'example_table' will be too. The array keys here are the array
@@ -75,36 +75,36 @@ function {{ machine_name }}_views_data() {
     // implementations. If the table listed here is from another module's
     // hook_views_data() implementation, make sure your module depends on that
     // other module.
-    'node_field_data' => array(
+    'node_field_data' => [
       // Primary key field in node_field_data to use in the join.
       'left_field' => 'nid',
       // Foreign key field in example_table to use in the join.
       'field' => 'nid',
       // 'extra' is an array of additional conditions on the join.
-      'extra' => array(
-        0 => array(
+      'extra' => [
+        0 => [
           // Adds AND node_field_data.published = TRUE to the join.
           'field' => 'published',
           'value' => TRUE,
-        ),
-        1 => array(
+        ],
+        1 => [
           // Adds AND example_table.numeric_field = 1 to the join.
           'left_field' => 'numeric_field',
           'value' => 1,
           // If true, the value will not be surrounded in quotes.
           'numeric' => TRUE,
-        ),
-        2 => array(
+        ],
+        2 => [
           // Adds AND example_table.boolean_field <>
           // node_field_data.published to the join.
           'field' => 'published',
           'left_field' => 'boolean_field',
           // The operator used, Defaults to "=".
           'operator' => '!=',
-        ),
-      ),
-    ),
-  );
+        ],
+      ],
+    ],
+  ];
 
   // You can also do a more complex join, where in order to get to a certain
   // base table defined in a hook_views_data() implementation, you will join
@@ -119,7 +119,7 @@ function {{ machine_name }}_views_data() {
   //   JOIN node_field_data nfd ON (definition of the join from the foo
   //   module goes here) ...
   // although the table aliases will be different.
-  $data['example_table']['table']['join']['node_field_data'] = array(
+  $data['example_table']['table']['join']['node_field_data'] = [
     // 'node_field_data' above is the base we're joining to in Views.
     // 'left_table' is the table we're actually joining to, in order to get to
     // 'node_field_data'. It has to be something that Views knows how to join
@@ -128,16 +128,16 @@ function {{ machine_name }}_views_data() {
     'left_field' => 'nid',
     'field' => 'nid',
     // 'extra' is an array of additional conditions on the join.
-    'extra' => array(
+    'extra' => [
       // This syntax matches additional fields in the two tables:
       // ... AND foo.langcode = example_table.langcode ...
-      array('left_field' => 'langcode', 'field' => 'langcode'),
+      ['left_field' => 'langcode', 'field' => 'langcode'],
       // This syntax adds a condition on our table. 'operator' defaults to
       // '=' for non-array values, or 'IN' for array values.
       // ... AND example_table.numeric_field > 0 ...
-      array('field' => 'numeric_field', 'value' => 0, 'numeric' => TRUE, 'operator' => '>'),
-    ),
-  );
+      ['field' => 'numeric_field', 'value' => 0, 'numeric' => TRUE, 'operator' => '>'],
+    ],
+  ];
 
   // Other array elements at the top level of your table's array describe
   // individual database table fields made available to Views. The array keys
@@ -167,7 +167,7 @@ function {{ machine_name }}_views_data() {
 
   // Node ID field, exposed as relationship only, since it is a foreign key
   // in this table.
-  $data['example_table']['nid'] = array(
+  $data['example_table']['nid'] = [
     'title' => t('Example content'),
     'help' => t('Relate example content to the node content'),
 
@@ -177,7 +177,7 @@ function {{ machine_name }}_views_data() {
     // - Use hook_views_data_alter() -- see the function body example on that
     //   hook for details.
     // - Use the implicit join method described above.
-    'relationship' => array(
+    'relationship' => [
       // Views name of the table to join to for the relationship.
       'base' => 'node_field_data',
       // Database field name in the other table to join on.
@@ -186,78 +186,78 @@ function {{ machine_name }}_views_data() {
       'id' => 'standard',
       // Default label for relationship in the UI.
       'label' => t('Example node'),
-    ),
-  );
+    ],
+  ];
 
   // Plain text field, exposed as a field, sort, filter, and argument.
-  $data['example_table']['plain_text_field'] = array(
+  $data['example_table']['plain_text_field'] = [
     'title' => t('Plain text field'),
     'help' => t('Just a plain text field.'),
 
-    'field' => array(
+    'field' => [
       // ID of field handler plugin to use.
       'id' => 'standard',
-    ),
+    ],
 
-    'sort' => array(
+    'sort' => [
       // ID of sort handler plugin to use.
       'id' => 'standard',
-    ),
+    ],
 
-    'filter' => array(
+    'filter' => [
       // ID of filter handler plugin to use.
       'id' => 'string',
-    ),
+    ],
 
-    'argument' => array(
+    'argument' => [
       // ID of argument handler plugin to use.
       'id' => 'string',
-    ),
-  );
+    ],
+  ];
 
   // Numeric field, exposed as a field, sort, filter, and argument.
-  $data['example_table']['numeric_field'] = array(
+  $data['example_table']['numeric_field'] = [
     'title' => t('Numeric field'),
     'help' => t('Just a numeric field.'),
 
-    'field' => array(
+    'field' => [
       // ID of field handler plugin to use.
       'id' => 'numeric',
-    ),
+    ],
 
-    'sort' => array(
+    'sort' => [
       // ID of sort handler plugin to use.
       'id' => 'standard',
-    ),
+    ],
 
-    'filter' => array(
+    'filter' => [
       // ID of filter handler plugin to use.
       'id' => 'numeric',
-    ),
+    ],
 
-    'argument' => array(
+    'argument' => [
       // ID of argument handler plugin to use.
       'id' => 'numeric',
-    ),
-  );
+    ],
+  ];
 
   // Boolean field, exposed as a field, sort, and filter. The filter section
   // illustrates overriding various settings.
-  $data['example_table']['boolean_field'] = array(
+  $data['example_table']['boolean_field'] = [
     'title' => t('Boolean field'),
     'help' => t('Just an on/off field.'),
 
-    'field' => array(
+    'field' => [
       // ID of field handler plugin to use.
       'id' => 'boolean',
-    ),
+    ],
 
-    'sort' => array(
+    'sort' => [
       // ID of sort handler plugin to use.
       'id' => 'standard',
-    ),
+    ],
 
-    'filter' => array(
+    'filter' => [
       // ID of filter handler plugin to use.
       'id' => 'boolean',
       // Override the generic field title, so that the filter uses a different
@@ -269,43 +269,43 @@ function {{ machine_name }}_views_data() {
       // Override the default Boolean filter handler's 'use_equal' setting, to
       // make the query use 'boolean_field = 1' instead of 'boolean_field <> 0'.
       'use_equal' => TRUE,
-    ),
-  );
+    ],
+  ];
 
   // Integer timestamp field, exposed as a field, sort, and filter.
-  $data['example_table']['timestamp_field'] = array(
+  $data['example_table']['timestamp_field'] = [
     'title' => t('Timestamp field'),
     'help' => t('Just a timestamp field.'),
 
-    'field' => array(
+    'field' => [
       // ID of field handler plugin to use.
       'id' => 'date',
-    ),
+    ],
 
-    'sort' => array(
+    'sort' => [
       // ID of sort handler plugin to use.
       'id' => 'date',
-    ),
+    ],
 
-    'filter' => array(
+    'filter' => [
       // ID of filter handler plugin to use.
       'id' => 'date',
-    ),
-  );
+    ],
+  ];
 
   // Area example. Areas are not generally associated with actual data
   // tables and fields. This example is from views_views_data(), which defines
   // the "Global" table (not really a table, but a group of Fields, Filters,
   // etc. that are grouped into section "Global" in the UI). Here's the
   // definition of the generic "Text area":
-  $data['views']['area'] = array(
+  $data['views']['area'] = [
     'title' => t('Text area'),
     'help' => t('Provide markup text for the area.'),
-    'area' => array(
+    'area' => [
       // ID of the area handler plugin to use.
       'id' => 'text',
-    ),
-  );
+    ],
+  ];
 
   return $data;
 }

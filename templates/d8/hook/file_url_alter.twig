@@ -11,11 +11,11 @@ function {{ machine_name }}_file_url_alter(&$uri) {
 
   $cdn1 = 'http://cdn1.example.com';
   $cdn2 = 'http://cdn2.example.com';
-  $cdn_extensions = array('css', 'js', 'gif', 'jpg', 'jpeg', 'png');
+  $cdn_extensions = ['css', 'js', 'gif', 'jpg', 'jpeg', 'png'];
 
   // Most CDNs don't support private file transfers without a lot of hassle,
   // so don't support this in the common case.
-  $schemes = array('public');
+  $schemes = ['public'];
 
   $scheme = file_uri_scheme($uri);
 

@@ -7,12 +7,12 @@ function {{ machine_name }}_update_N(&$sandbox) {
 
   // Example function body for adding a field to a database table, which does
   // not require a batch operation:
-  $spec = array(
+  $spec = [
     'type' => 'varchar',
     'description' => "New Col",
     'length' => 20,
     'not null' => FALSE,
-  );
+  ];
   $schema = Database::getConnection()->schema();
   $schema->addField('mytable1', 'newcol', $spec);
 
@@ -32,7 +32,7 @@ function {{ machine_name }}_update_N(&$sandbox) {
 
   // Update in chunks of 20.
   $records = Database::getConnection()->select('mytable1', 'm')
-    ->fields('m', array('myprimarykey', 'otherfield'))
+    ->fields('m', ['myprimarykey', 'otherfield'])
     ->condition('myprimarykey', $sandbox['current_pk'], '>')
     ->range(0, 20)
     ->orderBy('myprimarykey', 'ASC')
@@ -41,7 +41,7 @@ function {{ machine_name }}_update_N(&$sandbox) {
     // Here, you would make an update something related to this record. In this
     // example, some text is added to the other field.
     Database::getConnection()->update('mytable1')
-      ->fields(array('otherfield' => $record->otherfield . '-suffix'))
+      ->fields(['otherfield' => $record->otherfield . '-suffix'])
       ->condition('myprimarykey', $record->myprimarykey)
       ->execute();
 

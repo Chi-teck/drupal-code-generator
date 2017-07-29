@@ -3,9 +3,9 @@
  */
 function {{ machine_name }}_path_insert($path) {
   db_insert('mytable')
-    ->fields(array(
+    ->fields([
       'alias' => $path['alias'],
       'pid' => $path['pid'],
-    ))
+    ])
     ->execute();
 }

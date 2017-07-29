@@ -2,16 +2,16 @@
  * Implements hook_updater_info().
  */
 function {{ machine_name }}_updater_info() {
-  return array(
-    'module' => array(
+  return [
+    'module' => [
       'class' => 'Drupal\Core\Updater\Module',
       'name' => t('Update modules'),
       'weight' => 0,
-    ),
-    'theme' => array(
+    ],
+    'theme' => [
       'class' => 'Drupal\Core\Updater\Theme',
       'name' => t('Update themes'),
       'weight' => 0,
-    ),
-  );
+    ],
+  ];
 }

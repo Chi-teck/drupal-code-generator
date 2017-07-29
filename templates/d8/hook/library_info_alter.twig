@@ -15,10 +15,10 @@ function {{ machine_name }}_library_info_alter(&$libraries, $extension) {
       // relative to the original extension, specify an absolute path (relative
       // to DRUPAL_ROOT / base_path()) to the new location.
       $new_path = '/' . drupal_get_path('module', 'farbtastic_update') . '/js';
-      $new_js = array();
-      $replacements = array(
+      $new_js = [];
+      $replacements = [
         $old_path . '/farbtastic.js' => $new_path . '/farbtastic-2.0.js',
-      );
+      ];
       foreach ($libraries['jquery.farbtastic']['js'] as $source => $options) {
         if (isset($replacements[$source])) {
           $new_js[$replacements[$source]] = $options;

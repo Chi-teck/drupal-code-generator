@@ -6,15 +6,15 @@ function {{ machine_name }}_views_data_alter(array &$data) {
   $data['node_field_data']['nid']['title'] = t('Node-Nid');
 
   // Add an additional field to the users_field_data table.
-  $data['users_field_data']['example_field'] = array(
+  $data['users_field_data']['example_field'] = [
     'title' => t('Example field'),
     'help' => t('Some example content that references a user'),
 
-    'field' => array(
+    'field' => [
       // ID of the field handler to use.
       'id' => 'example_field',
-    ),
-  );
+    ],
+  ];
 
   // Change the handler of the node title field, presumably to a handler plugin
   // you define in your module. Give the ID of this plugin.
@@ -32,11 +32,11 @@ function {{ machine_name }}_views_data_alter(array &$data) {
   // rather than adding this relationship directly to the $data['foo']['fid']
   // field entry, which could overwrite an existing relationship, we define
   // a dummy field key to handle the relationship.
-  $data['foo']['unique_dummy_name'] = array(
+  $data['foo']['unique_dummy_name'] = [
     'title' => t('Title seen while adding relationship'),
     'help' => t('More information about the relationship'),
 
-    'relationship' => array(
+    'relationship' => [
       // Views name of the table being joined to from foo.
       'base' => 'example_table',
       // Database field name in example_table for the join.
@@ -47,8 +47,8 @@ function {{ machine_name }}_views_data_alter(array &$data) {
       // ID of relationship handler plugin to use.
       'id' => 'standard',
       'label' => t('Default label for relationship'),
-    ),
-  );
+    ],
+  ];
 
   // Note that the $data array is not returned – it is modified by reference.
 }

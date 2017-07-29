@@ -10,7 +10,7 @@ function {{ machine_name }}_entity_field_storage_info(\Drupal\Core\Entity\Entity
       ->execute();
     // Fetch all fields and key them by field name.
     $field_storages = FieldStorageConfig::loadMultiple($ids);
-    $result = array();
+    $result = [];
     foreach ($field_storages as $field_storage) {
       $result[$field_storage->getName()] = $field_storage;
     }

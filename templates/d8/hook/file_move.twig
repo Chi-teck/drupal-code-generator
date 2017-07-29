@@ -7,6 +7,6 @@ function {{ machine_name }}_file_move(Drupal\file\FileInterface $file, Drupal\fi
     $file->setFilename($file->getOwner()->name . '_' . $file->getFilename());
     $file->save();
 
-    \Drupal::logger('file')->notice('Moved file %source has been renamed to %destination', array('%source' => $source->filename, '%destination' => $file->getFilename()));
+    \Drupal::logger('file')->notice('Moved file %source has been renamed to %destination', ['%source' => $source->filename, '%destination' => $file->getFilename()]);
   }
 }

@@ -3,7 +3,7 @@
  */
 function {{ machine_name }}_entity_base_field_info(\Drupal\Core\Entity\EntityTypeInterface $entity_type) {
   if ($entity_type->id() == 'node') {
-    $fields = array();
+    $fields = [];
     $fields['mymodule_text'] = BaseFieldDefinition::create('string')
       ->setLabel(t('The text'))
       ->setDescription(t('A text property added by mymodule.'))
