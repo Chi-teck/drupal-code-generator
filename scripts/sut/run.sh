@@ -248,14 +248,14 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin_manager ]; then
   MODULE_MACHINE_NAME=lamda
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  #cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
-
   # Generate plugin manager.
   $DCG -d$DRUPAL_DIR/modules d8:module:plugin-manager -a'{"name":"Lamda","machine_name":"lamda","description":"Helper module for testing plugin manager.","dependencies":"drupal:views","package":"DCG"}'
+  cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
   dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
-  #dcg_phpunit $MODULE_PATH/tests
+  echo $MODULE_DIR/tests
+  dcg_phpunit $MODULE_DIR/tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi
 
