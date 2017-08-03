@@ -14,11 +14,17 @@ class SimpleTest extends GeneratorBaseTest {
   protected $interaction = [
     'Module name [%default_name%]: ' => 'Foo',
     'Module machine name [foo]: ' => 'foo',
-    'Class [FooForm]: ' => 'ExampleForm',
+    'Class [ExampleForm]: ' => 'ExampleForm',
     'Form ID [foo_example]: ' => 'foo_example',
+    'Would you like to create a route for this form? [Yes]: ' => 'Yes',
+    'Route name [foo.example]: ' => 'foo.example',
+    'Route path [/foo/example]: ' => '/foo/example',
+    'Route title [Example]: ' => 'Hey',
+    'Route permission [access content]: ' => 'access content',
   ];
 
   protected $fixtures = [
+    'foo.routing.yml' => __DIR__ . '/_simple_routing.yml',
     'src/Form/ExampleForm.php' => __DIR__ . '/_simple.php',
   ];
 

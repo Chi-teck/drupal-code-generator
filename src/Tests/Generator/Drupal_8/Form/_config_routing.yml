@@ -1,0 +1,7 @@
+foo.example:
+  path: '/foo/example'
+  defaults:
+    _title: 'Yo'
+    _form: 'Drupal\foo\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

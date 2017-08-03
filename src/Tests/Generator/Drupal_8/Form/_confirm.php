@@ -57,7 +57,7 @@ class ExampleConfirmForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('foo.settings');
+    return new Url('system.admin');
   }
 
   /**

@@ -54,7 +54,7 @@ class FormTest extends BrowserTestBase {
    */
   public function testConfigForm() {
     $this->drupalGet('admin/config/foo/settings');
-    $prefix = '//form[@id="foo-settings"]';
+    $prefix = '//form[@id="foo-config"]';
     $this->assertXpath($prefix . '//label[text() = "Example"]');
     $this->assertXpath($prefix . '//input[@name = "example" and @value="none"]');
     $this->assertXpath($prefix . '//input[@type = "submit" and @value = "Save configuration"]');
@@ -80,7 +80,7 @@ class FormTest extends BrowserTestBase {
     $this->assertXpath('//h1[text() = "Are you sure you want to delete all examples?"]');
     $this->assertXpath('//form[@id="foo-confirm" and contains(., "This action cannot be undone.")]');
     $this->clickLink('Cancel');
-    $this->assertSession()->addressEquals('/admin/config/foo/settings');
+    $this->assertSession()->addressEquals('/admin');
 
     // Create a table for testing form submission.
     $table['fields']['id']['type'] = 'int';

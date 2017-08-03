@@ -2,16 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Form;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:form:config command.
  */
-class Config extends BaseGenerator {
+class Config extends Base {
 
   protected $name = 'd8:form:config';
   protected $description = 'Generates a configuration form';
@@ -21,17 +18,13 @@ class Config extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions();
-    $questions['class'] = new Question('Class', 'SettingsForm');
-    $default_form_id = function ($vars) {
+    $options['default_class'] = 'SettingsForm';
+    $options['default_form_id'] = function ($vars) {
       return $vars['machine_name'] . '_settings';
     };
-    $questions['form_id'] = new Question('Form ID', $default_form_id);
-
-    $vars = $this->collectVars($input, $output, $questions);
-
-    $path = 'src/Form/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/form/config.twig', $vars);
+    $options['default_permission'] = 'administer site configuration';
+    $options['template'] = 'd8/form/config.twig';
+    $this->doInteract($input, $output, $options);
   }
 
 }

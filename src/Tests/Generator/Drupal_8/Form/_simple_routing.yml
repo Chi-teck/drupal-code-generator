@@ -1,0 +1,7 @@
+foo.example:
+  path: '/foo/example'
+  defaults:
+    _title: 'Hey'
+    _form: 'Drupal\foo\Form\ExampleForm'
+  requirements:
+    _permission: 'access content'
