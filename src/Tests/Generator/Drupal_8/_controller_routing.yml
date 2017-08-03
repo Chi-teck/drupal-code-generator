@@ -1,7 +1,7 @@
 example.bar:
   path: '/foo/example'
   defaults:
-    _controller: '\Drupal\foo\Controller\FooController::build'
     _title: 'Bar'
+    _controller: '\Drupal\foo\Controller\FooController::build'
   requirements:
     _permission: 'access content'
