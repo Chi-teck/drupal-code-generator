@@ -103,22 +103,37 @@ class Standard extends BaseGenerator {
         'route_permission' => 'access content',
         'class' => $controller_class,
       ];
-      $this->setFile(
-        $prefix . '.routing.yml',
-        'd8/controller-route.twig', $vars + $routing_vars
-      );
+      $this->files[$prefix . '.routing.yml'] = [
+        'content' => $this->render('d8/controller-route.twig', $vars + $routing_vars),
+        'action' => 'append',
+      ];
     }
 
     if ($options['settings_form']) {
+      $form_class = 'SettingsForm';
       $form_vars = [
         'form_id' => $vars['machine_name'] . '_settings',
-        'class' => 'SettingsForm',
+        'class' => $form_class,
       ];
       $this->setFile(
         $vars['machine_name'] . '/src/Form/SettingsForm.php',
         'd8/form/config.twig',
         $vars + $form_vars
       );
+      $routing_vars = [
+        'route_name' => $vars['machine_name'] . '.settings_form',
+        'route_path' => '/admin/config/system/' . str_replace('_', '-', $vars['machine_name']),
+        'route_title' => $vars['name'] . ' settings',
+        'route_permission' => 'administer ' . $vars['machine_name'] . ' configuration',
+        'class' => $form_class,
+      ];
+
+      $content = isset($this->files[$prefix . '.routing.yml']) ?
+        $this->files[$prefix . '.routing.yml']['content'] . "\n" : '';
+      $this->files[$prefix . '.routing.yml'] = [
+        'content' => $content . $this->render('d8/form/route.twig', $vars + $routing_vars),
+        'action' => 'append',
+      ];
     }
 
   }
