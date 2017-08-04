@@ -17,7 +17,7 @@ bin/dcg
 
 ```
 
-To make _dcg_ avaible in any system location append this line to your _.bashrc_ file:
+To make _dcg_ available in any system location append this line to your _.bashrc_ file:
 `alias dcg-dev=/path/to/to/drupal-code-generator/bin/dcg`
 Then after you have logged out and in the _dcg_ development version will be accessible through _dcg-dev_ command.
 
@@ -31,16 +31,14 @@ Make sure you have _~/.composer/vendor/bin_ in your PATH:
 export PATH=~/.composer/vendor/bin:$PATH
 ```
 
-The following alias helps you run tests form any location:
+The following alias may help you run tests and check code style form any location:
 ```
 alias dcg-test="(cd /path/to/drupal-code-generator && phpunit && phpcs --standard=./phpcs.xml)"
 ```
 
-## Creating a Phar
+## Building PHAR executable
 
 1. Install [Box 2](https://github.com/box-project/box2).
 2. Navigate to the directory where Drupal Code Generator was installed.
 3. Run the following command: `box build` (use `-v` option if you need verbose output).
 4. Test the generated archive: `php dcg.phar --version`.
-
-
