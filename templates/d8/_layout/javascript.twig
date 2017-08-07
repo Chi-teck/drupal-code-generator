@@ -1,0 +1,18 @@
+/**
+ * @file
+ * Custom behaviors for {{ layout_name | lower }} layout.
+ */
+
+(function (Drupal) {
+
+  'use strict';
+
+  Drupal.behaviors.{{ layout_machine_name | camelize(false) }} = {
+    attach: function (context, settings) {
+
+      console.log('It works!');
+
+    }
+  };
+
+} (Drupal));

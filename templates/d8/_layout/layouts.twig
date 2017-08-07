@@ -1,0 +1,14 @@
+{{ machine_name }}_{{ layout_machine_name }}:
+  label: '{{ layout_name }}'
+  category: '{{ category }}'
+  path: layouts/{{ layout_machine_name }}
+  template: {{ layout_machine_name | underscore2hyphen }}
+{% if js or css %}
+  library: {{ machine_name }}/{{ layout_machine_name }}
+{% endif %}
+  regions:
+    main:
+      label: Main content
+    sidebar:
+      label: Sidebar
+  default_region: main

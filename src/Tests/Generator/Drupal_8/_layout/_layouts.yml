@@ -1,0 +1,12 @@
+example_foo_bar:
+  label: 'Foo bar'
+  category: 'My awesome layouts'
+  path: layouts/foo_bar
+  template: foo-bar
+  library: example/foo_bar
+  regions:
+    main:
+      label: Main content
+    sidebar:
+      label: Sidebar
+  default_region: main

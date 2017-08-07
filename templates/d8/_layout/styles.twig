@@ -1,0 +1,19 @@
+.layout--{{ layout_machine_name | underscore2hyphen }} {
+  outline: solid 1px orange;
+  display: flex;
+  padding: 10px;
+}
+
+.layout--{{ layout_machine_name | underscore2hyphen }} > .layout__region {
+  outline: solid 1px orange;
+  margin: 10px;
+  padding: 20px;
+}
+
+.layout--{{ layout_machine_name | underscore2hyphen }} .layout__region--main {
+  width: 66%;
+}
+
+.layout--{{ layout_machine_name | underscore2hyphen }} .layout__region--sidebar {
+  width: 33%;
+}

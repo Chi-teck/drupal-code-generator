@@ -81,13 +81,14 @@ Select generator:
   [9 ] Hook
   [10] Install file
   [11] Javascript
-  [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme file
-  [17] Theme settings
-  [18] composer.json
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
   >>> 1[K
 Select generator:
   [0] ..
@@ -108,13 +109,14 @@ Select generator:
   [9 ] Hook
   [10] Install file
   [11] Javascript
-  [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme file
-  [17] Theme settings
-  [18] composer.json
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
   >>> 2[K
 Select generator:
   [0] ..
@@ -136,13 +138,14 @@ Select generator:
   [9 ] Hook
   [10] Install file
   [11] Javascript
-  [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme file
-  [17] Theme settings
-  [18] composer.json
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
   >>> 3[K
 Select generator:
   [0] ..
@@ -168,13 +171,14 @@ Select generator:
   [9 ] Hook
   [10] Install file
   [11] Javascript
-  [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme file
-  [17] Theme settings
-  [18] composer.json
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
   >>> 4[K
 Select generator:
   [0] ..
@@ -200,13 +204,14 @@ Select generator:
   [9 ] Hook
   [10] Install file
   [11] Javascript
-  [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme file
-  [17] Theme settings
-  [18] composer.json
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
   >>> 5[K
 Select generator:
   [0] ..
@@ -229,13 +234,14 @@ Select generator:
   [9 ] Hook
   [10] Install file
   [11] Javascript
-  [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme file
-  [17] Theme settings
-  [18] composer.json
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
   >>> 6[K
 Select generator:
   [0] ..
@@ -254,13 +260,14 @@ Select generator:
   [9 ] Hook
   [10] Install file
   [11] Javascript
-  [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme file
-  [17] Theme settings
-  [18] composer.json
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
   >>> 7[K
 Select generator:
   [0] ..
@@ -306,13 +313,14 @@ Select generator:
   [9 ] Hook
   [10] Install file
   [11] Javascript
-  [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme file
-  [17] Theme settings
-  [18] composer.json
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
   >>> 0[K
 Select generator:
   [0] ..

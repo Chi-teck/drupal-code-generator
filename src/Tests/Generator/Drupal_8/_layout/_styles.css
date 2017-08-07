@@ -1,0 +1,19 @@
+.layout--foo-bar {
+  outline: solid 1px orange;
+  display: flex;
+  padding: 10px;
+}
+
+.layout--foo-bar > .layout__region {
+  outline: solid 1px orange;
+  margin: 10px;
+  padding: 20px;
+}
+
+.layout--foo-bar .layout__region--main {
+  width: 66%;
+}
+
+.layout--foo-bar .layout__region--sidebar {
+  width: 33%;
+}

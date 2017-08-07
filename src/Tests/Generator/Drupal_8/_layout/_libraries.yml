@@ -1,0 +1,6 @@
+foo_bar:
+  js:
+    layouts/foo_bar/foo-bar.js: {}
+  css:
+    component:
+      layouts/foo_bar/foo-bar.css: {}

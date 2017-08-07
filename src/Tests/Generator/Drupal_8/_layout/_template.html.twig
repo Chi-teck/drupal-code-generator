@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display foo bar layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout wrapper.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'layout',
+    'layout--foo-bar',
+  ]
+%}
+
+{% if content %}
+  <div{{ attributes.addClass(classes) }}>
+
+    {% if content.main %}
+      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main') }}>
+        {{ content.main }}
+      </div>
+    {% endif %}
+
+    {% if content.sidebar %}
+      <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar') }}>
+        {{ content.sidebar }}
+      </div>
+    {% endif %}
+
+  </div>
+{% endif %}
+
+
