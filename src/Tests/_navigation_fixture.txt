@@ -150,13 +150,14 @@ Select generator:
 Select generator:
   [0] ..
   [1] Field
-  [2] Views
-  [3] Action
-  [4] Block
-  [5] Condition
-  [6] Filter
-  [7] Menu link
-  [8] Rest resource
+  [2] Migrate
+  [3] Views
+  [4] Action
+  [5] Block
+  [6] Condition
+  [7] Filter
+  [8] Menu link
+  [9] Rest resource
   >>> 0[K
 Select generator:
   [0 ] ..
