@@ -29,6 +29,6 @@ function {{ machine_name }}_theme() {
  *   - foo: Foo variable description.
  */
 function template_preprocess_{{ template_name | hyphen2underscore }}(array &$variables) {
-  $variables['foo'] = 'foo';
+  $variables['foo'] = 'bar';
 }
 {% endif %}

@@ -26,5 +26,5 @@ function example_theme() {
  *   - foo: Foo variable description.
  */
 function template_preprocess_foo(array &$variables) {
-  $variables['foo'] = 'foo';
+  $variables['foo'] = 'bar';
 }
