@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 /**
  * Test for d8:layout command.
  */
-class LayoutTeskt extends GeneratorBaseTest {
+class LayoutTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Layout';
 

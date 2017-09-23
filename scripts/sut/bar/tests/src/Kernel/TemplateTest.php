@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class TestTest extends KernelTestBase {
+class TemplateTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}

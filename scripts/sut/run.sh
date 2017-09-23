@@ -111,7 +111,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
   $DCG -d$MODULE_DIR d8:module-file -a'{"name":"Bar","machine_name":"bar"}'
   $DCG -d$MODULE_DIR d8:service-provider -a'{"name":"Bar","machine_name":"bar"}'
   $DCG -d$MODULE_DIR d8:template -a'{"name":"Bar","machine_name":"bar","template_name":"example","create_theme":"yes","create_preprocess":"yes"}'
-  $DCG -d$MODULE_DIR d8:layout -a'{"machine_name":"bar","layout_name":"Foo bar","layout_machine_name":"foo_bar","category":"my","js":"Yes","css":"Yes"}'
+  $DCG -d$MODULE_DIR d8:layout -a'{"machine_name":"bar","layout_name":"Foo","layout_machine_name":"foo","category":"my","js":"Yes","css":"Yes"}'
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
