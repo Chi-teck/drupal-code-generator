@@ -14,9 +14,9 @@ function dcg_on_exit {
 trap dcg_on_exit EXIT
 
 SELF_PATH=$(dirname $0)
-DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
-DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached}
 DRUPAL_VERSION=${DRUPAL_VERSION:-8.4.x-dev}
+DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
+DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
 SUT_HOST=${SUT_HOST:-127.0.0.1}
 SUT_PORT=${SUT_PORT:-8085}
 DCG=${DCG:-/var/www/dcg/bin/dcg}
