@@ -1,10 +1,10 @@
 {{ layout_machine_name }}:
 {% if js %}
   js:
-    layouts/{{ layout_machine_name }}/{{ layout_machine_name | underscore2hyphen }}.js: {}
+    layouts/{{ layout_machine_name }}/{{ layout_machine_name | u2h }}.js: {}
 {% endif %}
 {% if css %}
   css:
     component:
-      layouts/{{ layout_machine_name }}/{{ layout_machine_name | underscore2hyphen }}.css: {}
+      layouts/{{ layout_machine_name }}/{{ layout_machine_name | u2h }}.css: {}
 {% endif %}

@@ -72,7 +72,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "canonical" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
  *     "edit-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/edit",
  *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
- *     "collection" = "/admin/content/{{ entity_type_id | underscore2hyphen }}"
+ *     "collection" = "/admin/content/{{ entity_type_id | u2h }}"
  *   },
 {% if fieldable %}
  *   field_ui_base_route = "entity.{{ entity_type_id }}.settings"

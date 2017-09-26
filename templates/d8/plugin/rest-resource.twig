@@ -19,8 +19,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *   id = "{{ plugin_id }}",
  *   label = @Translation("{{ plugin_label }}"),
  *   uri_paths = {
- *     "canonical" = "/api/{{ plugin_id | underscore2hyphen }}/{id}",
- *     "https://www.drupal.org/link-relations/create" = "/api/{{ plugin_id | underscore2hyphen  }}"
+ *     "canonical" = "/api/{{ plugin_id | u2h }}/{id}",
+ *     "https://www.drupal.org/link-relations/create" = "/api/{{ plugin_id | u2h  }}"
  *   }
  * )
  *

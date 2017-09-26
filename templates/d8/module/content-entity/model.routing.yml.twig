@@ -1,6 +1,6 @@
 {% if fieldable %}
 entity.{{ entity_type_id }}.settings:
-  path: 'admin/structure/{{ entity_type_id | underscore2hyphen }}'
+  path: 'admin/structure/{{ entity_type_id | u2h }}'
   defaults:
     _form: '\Drupal\{{ machine_name }}\Form\{{ class_prefix }}SettingsForm'
     _title: '{{ entity_type_label }}'
@@ -8,7 +8,7 @@ entity.{{ entity_type_id }}.settings:
     _permission: 'administer {{ entity_type_label | lower }}'
 {% endif %}
 entity.{{ entity_type_id }}.collection:
-  path: '/admin/content/{{ entity_type_id | underscore2hyphen }}'
+  path: '/admin/content/{{ entity_type_id | u2h }}'
   defaults:
     _entity_list: '{{ entity_type_id }}'
     _title: '{{ entity_type_label | plural }}'
