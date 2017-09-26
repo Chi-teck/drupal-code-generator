@@ -72,7 +72,7 @@ class DumperTest extends TestCase {
       ->willReturn($this->directory);
     $command
       ->method('getFiles')
-      ->will($this->returnCallback(function () {
+      ->will(static::returnCallback(function () {
         return $this->files;
       }));
 
@@ -162,14 +162,14 @@ class DumperTest extends TestCase {
     $this->assertFileContents();
     $this->assertOutput('');
     $permissions = decoct(fileperms($this->directory . '/hi.txt'));
-    $this->assertEquals($permissions, '100757');
+    static::assertEquals($permissions, '100757');
 
     // -- Directory.
     $this->setDumper();
     $this->files = ['example' => NULL];
     $results = $this->dump();
     $this->assertResults($results);
-    $this->assertTrue(is_dir($this->directory . '/example'));
+    static::assertTrue(is_dir($this->directory . '/example'));
     $this->assertOutput('');
 
     // -- Existing directory.
@@ -180,7 +180,7 @@ class DumperTest extends TestCase {
     $this->assertResults($results);
     // Make sure that files in the directory have not been overwritten.
     $this->assertFileContents(['foo/bar.txt' => $expected_content]);
-    $this->assertTrue(is_dir($this->directory . '/example'));
+    static::assertTrue(is_dir($this->directory . '/example'));
     $this->assertOutput('');
 
     // -- Append file content.
@@ -217,7 +217,7 @@ class DumperTest extends TestCase {
    *   List of dumped files.
    */
   protected function assertResults(array $expected_results) {
-    $this->assertEquals(array_keys($this->files), $expected_results);
+    static::assertEquals(array_keys($this->files), $expected_results);
   }
 
   /**
@@ -227,7 +227,7 @@ class DumperTest extends TestCase {
    *   List of dumped files.
    */
   protected function assertEmptyResults(array $expected_results) {
-    $this->assertEquals([], $expected_results);
+    static::assertEquals([], $expected_results);
   }
 
   /**
@@ -238,7 +238,7 @@ class DumperTest extends TestCase {
    */
   protected function assertOutput($expected_output) {
     $expected_output = str_replace('{DIR}', $this->directory, $expected_output);
-    $this->assertEquals($expected_output, $this->output->fetch());
+    static::assertEquals($expected_output, $this->output->fetch());
   }
 
   /**
@@ -250,7 +250,7 @@ class DumperTest extends TestCase {
   protected function assertFileContents(array $files = NULL) {
     foreach ($files ?: $this->files as $file_name => $file_info) {
       $content = is_array($file_info) ? $file_info['content'] : $file_info;
-      $this->assertStringEqualsFile($this->directory . '/' . $file_name, $content);
+      static::assertStringEqualsFile($this->directory . '/' . $file_name, $content);
     }
   }
 

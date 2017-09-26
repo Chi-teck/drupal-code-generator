@@ -74,7 +74,7 @@ class InputHandlerTest extends TestCase {
    * Test callback.
    */
   public function testHelperName() {
-    $this->assertEquals($this->handler->getName(), 'dcg_input_handler');
+    static::assertEquals($this->handler->getName(), 'dcg_input_handler');
   }
 
   /**
@@ -90,9 +90,9 @@ class InputHandlerTest extends TestCase {
 
     $vars = $this->handler->collectVars($this->input, $this->output, $questions);
 
-    $this->assertEquals($this->output->fetch(), $output_raw);
+    static::assertEquals($this->output->fetch(), $output_raw);
 
-    $this->assertEquals($expected_vars, $vars);
+    static::assertEquals($expected_vars, $vars);
   }
 
   /**

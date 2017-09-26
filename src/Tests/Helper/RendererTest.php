@@ -18,10 +18,10 @@ class RendererTest extends TestCase {
     $twig_loader = new \Twig_Loader_Filesystem();
     $twig = new TwigEnvironment($twig_loader);
     $renderer = new Renderer($twig);
-    $this->assertEquals($renderer->getName(), 'dcg_renderer');
+    static::assertEquals($renderer->getName(), 'dcg_renderer');
     $renderer->addPath(__DIR__);
     $content = $renderer->render('_renderer-fixture.twig', ['value' => 'foo']);
-    $this->assertEquals($content, "The value is: foo\n");
+    static::assertEquals($content, "The value is: foo\n");
   }
 
 }

@@ -113,7 +113,7 @@ class IntegrationTest extends TestCase {
     foreach ($this->fixtures() as $fixture) {
       $this->mockQuestionHelper($fixture['answers']);
       $this->commandTester->execute(['command' => 'navigation', '--directory' => $this->directory]);
-      $this->assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
+      static::assertEquals(implode("\n", $fixture['output']) . "\n", $this->commandTester->getDisplay());
     }
   }
 
@@ -122,9 +122,9 @@ class IntegrationTest extends TestCase {
    */
   protected function mockQuestionHelper(array $answers) {
     foreach ($answers as $key => $answer) {
-      $this->questionHelper->expects($this->at($key + 2))
+      $this->questionHelper->expects(static::at($key + 2))
         ->method('ask')
-        ->will($this->returnValue($answer));
+        ->will(static::returnValue($answer));
     }
 
     $this->helperSet->set($this->questionHelper, 'question');

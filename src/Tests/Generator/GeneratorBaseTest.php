@@ -56,10 +56,10 @@ abstract class GeneratorBaseTest extends TestCase {
     $this->commandTester->execute([
       '--directory' => $this->directory,
     ]);
-    $this->assertEquals($this->getExpectedDisplay(), $this->getDisplay());
+    static::assertEquals($this->getExpectedDisplay(), $this->getDisplay());
     // Tests may provide targets without fixtures.
     foreach (array_filter($this->fixtures) as $target => $fixture) {
-      $this->assertFileEquals($this->directory . '/' . $target, $fixture);
+      static::assertFileEquals($this->directory . '/' . $target, $fixture);
     }
   }
 

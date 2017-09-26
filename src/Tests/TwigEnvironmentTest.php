@@ -18,7 +18,7 @@ class TwigEnvironmentTest extends TestCase {
     $twig = new TwigEnvironment($twig_loader);
     $expected = file_get_contents(__DIR__ . '/_te_fixture.txt');
     $result = $twig->render('te-template.twig', []);
-    $this->assertEquals($expected, $result);
+    static::assertEquals($expected, $result);
   }
 
 }

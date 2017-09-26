@@ -20,9 +20,9 @@ class GeneratorsDiscoveryTest extends TestCase {
     $discovery = new GeneratorDiscovery(new Filesystem());
     $generators = $discovery->getGenerators([DCG_ROOT . '/src/Command/Drupal_7'], '\DrupalCodeGenerator\Command\Drupal_7');
     foreach ($generators as $generator) {
-      $this->assertInstanceOf('DrupalCodeGenerator\Command\BaseGenerator', $generator);
+      static::assertInstanceOf('DrupalCodeGenerator\Command\BaseGenerator', $generator);
     }
-    $this->assertCount(self::TOTAL_GENERATORS, $generators);
+    static::assertCount(self::TOTAL_GENERATORS, $generators);
   }
 
 }
