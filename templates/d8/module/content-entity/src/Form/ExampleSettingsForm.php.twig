@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Configuration form for {{ entity_type_label | article | lower }} entity type.
+ * Configuration form for {{ entity_type_label|article|lower }} entity type.
  */
 class {{ class_prefix }}SettingsForm extends FormBase {
 
@@ -23,7 +23,7 @@ class {{ class_prefix }}SettingsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $form['settings'] = [
-      '#markup' => $this->t('Settings form for {{ entity_type_label | article | lower }} entity type.'),
+      '#markup' => $this->t('Settings form for {{ entity_type_label|article|lower }} entity type.'),
     ];
 
     $form['actions'] = [

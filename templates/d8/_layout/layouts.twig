@@ -2,7 +2,7 @@
   label: '{{ layout_name }}'
   category: '{{ category }}'
   path: layouts/{{ layout_machine_name }}
-  template: {{ layout_machine_name | u2h }}
+  template: {{ layout_machine_name|u2h }}
 {% if js or css %}
   library: {{ machine_name }}/{{ layout_machine_name }}
 {% endif %}

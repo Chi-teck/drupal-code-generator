@@ -1,7 +1,7 @@
 {{ '{' }}#
 /**
  * @file
- * Default theme implementation to display {{ layout_name | lower }} layout.
+ * Default theme implementation to display {{ layout_name|lower }} layout.
  *
  * Available variables:
  * - content: The content for this layout.
@@ -13,7 +13,7 @@
 {{ '{' }}%
   set classes = [
     'layout',
-    'layout--{{ layout_machine_name | u2h }}',
+    'layout--{{ layout_machine_name|u2h }}',
   ]
 %{{ '}' }}
 {% verbatim %}

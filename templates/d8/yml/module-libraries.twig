@@ -1,10 +1,10 @@
 # Custom module library for general purposes.
 {{ machine_name }}:
   js:
-    js/{{ machine_name | u2h }}.js: {}
+    js/{{ machine_name|u2h }}.js: {}
   css:
     component:
-      css/{{ machine_name | u2h }}.css: {}
+      css/{{ machine_name|u2h }}.css: {}
   dependencies:
     - core/drupalSettings
     - {{ machine_name }}/jquery-labelauty

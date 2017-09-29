@@ -11,7 +11,7 @@ use Drupal\Core\Routing\RedirectDestinationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a list controller for the {{ entity_type_label | lower }} entity type.
+ * Provides a list controller for the {{ entity_type_label|lower }} entity type.
  */
 class {{ class_prefix }}ListBuilder extends EntityListBuilder {
 
@@ -69,7 +69,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
       ->query('SELECT COUNT(*) FROM {{ '{' }}{{ entity_type_id }}{{ '}' }}')
       ->fetchField();
 
-    $build['summary']['#markup'] = $this->t('Total {{ entity_type_label | lower | plural }}: @total', ['@total' => $total]);
+    $build['summary']['#markup'] = $this->t('Total {{ entity_type_label|lower|plural }}: @total', ['@total' => $total]);
     return $build;
   }
 

@@ -24,7 +24,7 @@ class {{ class_prefix }}Form extends EntityForm {
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
       '#default_value' => $this->entity->label(),
-      '#description' => $this->t('Label for the {{ entity_type_label | lower }}.'),
+      '#description' => $this->t('Label for the {{ entity_type_label|lower }}.'),
       '#required' => TRUE,
     ];
 
@@ -47,7 +47,7 @@ class {{ class_prefix }}Form extends EntityForm {
       '#type' => 'textarea',
       '#title' => $this->t('Description'),
       '#default_value' => $this->entity->get('description'),
-      '#description' => $this->t('Description of the {{ entity_type_label | lower }}.'),
+      '#description' => $this->t('Description of the {{ entity_type_label|lower }}.'),
     ];
 
     return $form;
@@ -60,8 +60,8 @@ class {{ class_prefix }}Form extends EntityForm {
     $result = parent::save($form, $form_state);
     $message_args = ['%label' => $this->entity->label()];
     $message = $result == SAVED_NEW
-      ? $this->t('Created new {{ entity_type_label | lower }} %label.', $message_args)
-      : $this->t('Updated {{ entity_type_label | lower }} %label.', $message_args);
+      ? $this->t('Created new {{ entity_type_label|lower }} %label.', $message_args)
+      : $this->t('Updated {{ entity_type_label|lower }} %label.', $message_args);
     drupal_set_message($message);
     $form_state->setRedirectUrl($this->entity->toUrl('collection'));
     return $result;

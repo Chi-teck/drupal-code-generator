@@ -20,12 +20,12 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% endif %}
 
 /**
- * Defines the {{ entity_type_label | lower }} entity class.
+ * Defines the {{ entity_type_label|lower }} entity class.
  *
  * @ContentEntityType(
  *   id = "{{ entity_type_id }}",
  *   label = @Translation("{{ entity_type_label }}"),
- *   label_collection = @Translation("{{ entity_type_label | plural }}"),
+ *   label_collection = @Translation("{{ entity_type_label|plural }}"),
  *   handlers = {
 {% if template %}
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
@@ -72,7 +72,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "canonical" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
  *     "edit-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/edit",
  *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
- *     "collection" = "/admin/content/{{ entity_type_id | u2h }}"
+ *     "collection" = "/admin/content/{{ entity_type_id|u2h }}"
  *   },
 {% if fieldable %}
  *   field_ui_base_route = "entity.{{ entity_type_id }}.settings"
@@ -88,7 +88,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   /**
    * {@inheritdoc}
    *
-   * When a new {{ entity_type_label | lower }} entity is created, set the uid entity reference to
+   * When a new {{ entity_type_label|lower }} entity is created, set the uid entity reference to
    * the current user as the creator of the entity.
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
@@ -192,7 +192,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ->setRevisionable(TRUE)
 {% endif %}
       ->setLabel(t('Title'))
-      ->setDescription(t('The title of the {{ entity_type_label | lower }} entity.'))
+      ->setDescription(t('The title of the {{ entity_type_label|lower }} entity.'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
@@ -214,7 +214,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ->setRevisionable(TRUE)
 {% endif %}
       ->setLabel(t('Status'))
-      ->setDescription(t('A boolean indicating whether the {{ entity_type_label | lower }} is enabled.'))
+      ->setDescription(t('A boolean indicating whether the {{ entity_type_label|lower }} is enabled.'))
       ->setDefaultValue(TRUE)
       ->setSetting('on_label', 'Enabled')
       ->setDisplayOptions('form', [
@@ -242,7 +242,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ->setRevisionable(TRUE)
 {% endif %}
       ->setLabel(t('Description'))
-      ->setDescription(t('A description of the {{ entity_type_label | lower }}.'))
+      ->setDescription(t('A description of the {{ entity_type_label|lower }}.'))
       ->setDisplayOptions('form', [
         'type' => 'text_textarea',
         'weight' => 10,
@@ -262,7 +262,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ->setRevisionable(TRUE)
 {% endif %}
       ->setLabel(t('Author'))
-      ->setDescription(t('The user ID of the {{ entity_type_label | lower }} author.'))
+      ->setDescription(t('The user ID of the {{ entity_type_label|lower }} author.'))
       ->setSetting('target_type', 'user')
       ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
@@ -285,7 +285,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
 {% if created_base_field %}
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
-      ->setDescription(t('The time that the {{ entity_type_label | lower }} was created.'))
+      ->setDescription(t('The time that the {{ entity_type_label|lower }} was created.'))
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'timestamp',
@@ -302,7 +302,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
 {% if changed_base_field %}
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
-      ->setDescription(t('The time that the {{ entity_type_label | lower }} was last edited.'));
+      ->setDescription(t('The time that the {{ entity_type_label|lower }} was last edited.'));
 
 {% endif %}
     return $fields;

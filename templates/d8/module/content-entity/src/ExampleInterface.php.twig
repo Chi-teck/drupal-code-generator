@@ -11,69 +11,69 @@ use Drupal\Core\Entity\EntityChangedInterface;
 {% endif %}
 
 /**
- * Provides an interface defining {{ entity_type_label | article | lower }} entity type.
+ * Provides an interface defining {{ entity_type_label|article|lower }} entity type.
  */
 interface {{ class_prefix }}Interface extends ContentEntityInterface{% if author_base_field %}, EntityOwnerInterface{% endif %}{% if changed_base_field %}, EntityChangedInterface{% endif %} {
 
 {% if title_base_field %}
   /**
-   * Gets the {{ entity_type_label | lower }} title.
+   * Gets the {{ entity_type_label|lower }} title.
    *
    * @return string
-   *   Title of the {{ entity_type_label | lower }}.
+   *   Title of the {{ entity_type_label|lower }}.
    */
   public function getTitle();
 
   /**
-   * Sets the {{ entity_type_label | lower }} title.
+   * Sets the {{ entity_type_label|lower }} title.
    *
    * @param string $title
-   *   The {{ entity_type_label | lower }} title.
+   *   The {{ entity_type_label|lower }} title.
    *
    * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
-   *   The called {{ entity_type_label | lower }} entity.
+   *   The called {{ entity_type_label|lower }} entity.
    */
   public function setTitle($title);
 
 {% endif %}
 {% if created_base_field %}
   /**
-   * Gets the {{ entity_type_label | lower }} creation timestamp.
+   * Gets the {{ entity_type_label|lower }} creation timestamp.
    *
    * @return int
-   *   Creation timestamp of the {{ entity_type_label | lower }}.
+   *   Creation timestamp of the {{ entity_type_label|lower }}.
    */
   public function getCreatedTime();
 
   /**
-   * Sets the {{ entity_type_label | lower }} creation timestamp.
+   * Sets the {{ entity_type_label|lower }} creation timestamp.
    *
    * @param int $timestamp
-   *   The {{ entity_type_label | lower }} creation timestamp.
+   *   The {{ entity_type_label|lower }} creation timestamp.
    *
    * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
-   *   The called {{ entity_type_label | lower }} entity.
+   *   The called {{ entity_type_label|lower }} entity.
    */
   public function setCreatedTime($timestamp);
 
 {% endif %}
 {% if status_base_field %}
   /**
-   * Returns the {{ entity_type_label | lower }} status.
+   * Returns the {{ entity_type_label|lower }} status.
    *
    * @return bool
-   *   TRUE if the {{ entity_type_label | lower }} is enabled, FALSE otherwise.
+   *   TRUE if the {{ entity_type_label|lower }} is enabled, FALSE otherwise.
    */
   public function isEnabled();
 
   /**
-   * Sets the {{ entity_type_label | lower }} status.
+   * Sets the {{ entity_type_label|lower }} status.
    *
    * @param bool $status
-   *   TRUE to enable this {{ entity_type_label | lower }}, FALSE to disable.
+   *   TRUE to enable this {{ entity_type_label|lower }}, FALSE to disable.
    *
    * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
-   *   The called {{ entity_type_label | lower }} entity.
+   *   The called {{ entity_type_label|lower }} entity.
    */
   public function setStatus($status);
 

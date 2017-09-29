@@ -1,12 +1,12 @@
 {% if fieldable %}
 entity.{{ entity_type_id }}.settings:
   title: {{ entity_type_label }}
-  description: Configure {{ entity_type_label | article }} entity type
+  description: Configure {{ entity_type_label|article }} entity type
   route_name:  entity.{{ entity_type_id }}.settings
   parent: system.admin_structure
 {% endif %}
 entity.{{ entity_type_id }}.collection:
-  title: {{ entity_type_label | plural }}
-  description: List of {{ entity_type_label | plural | lower }}
+  title: {{ entity_type_label|plural }}
+  description: List of {{ entity_type_label|plural|lower }}
   route_name: entity.{{ entity_type_id }}.collection
   parent: system.admin_content

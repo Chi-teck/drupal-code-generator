@@ -15,7 +15,7 @@ class {{ class }} extends ServiceProviderBase {
    * {@inheritdoc}
    */
   public function register(ContainerBuilder $container) {
-    $container->register('{{ machine_name }}.subscriber', 'Drupal\{{ machine_name }}\EventSubscriber\{{ machine_name | camelize }}Subscriber')
+    $container->register('{{ machine_name }}.subscriber', 'Drupal\{{ machine_name }}\EventSubscriber\{{ machine_name|camelize }}Subscriber')
       ->addTag('event_subscriber')
       ->addArgument(new Reference('entity_type.manager'));
   }
@@ -28,7 +28,7 @@ class {{ class }} extends ServiceProviderBase {
     if (isset($modules['dblog'])) {
       // Override default DB logger to exclude some unwanted log messages.
       $container->getDefinition('logger.dblog')
-        ->setClass('Drupal\{{ machine_name }}\Logger\{{ machine_name | camelize }}Log');
+        ->setClass('Drupal\{{ machine_name }}\Logger\{{ machine_name|camelize }}Log');
     }
   }
 

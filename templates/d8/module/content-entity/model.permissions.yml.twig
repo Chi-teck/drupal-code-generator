@@ -1,15 +1,15 @@
-administer {{ entity_type_label | lower }}:
-  title: Administer {{ entity_type_label | lower }} settings
+administer {{ entity_type_label|lower }}:
+  title: Administer {{ entity_type_label|lower }} settings
   restrict access: true
-access {{ entity_type_label | lower }} overview:
-  title: 'Access {{ entity_type_label | lower }} overview page'
+access {{ entity_type_label|lower }} overview:
+  title: 'Access {{ entity_type_label|lower }} overview page'
 {% if access_controller %}
-delete {{ entity_type_label | lower }}:
-  title: Delete {{ entity_type_label | lower }}
-create {{ entity_type_label | lower }}:
-  title: Create {{ entity_type_label | lower }}
-view {{ entity_type_label | lower }}:
-  title: View {{ entity_type_label | lower }}
-edit {{ entity_type_label | lower }}:
-  title: Edit {{ entity_type_label | lower }}
+delete {{ entity_type_label|lower }}:
+  title: Delete {{ entity_type_label|lower }}
+create {{ entity_type_label|lower }}:
+  title: Create {{ entity_type_label|lower }}
+view {{ entity_type_label|lower }}:
+  title: View {{ entity_type_label|lower }}
+edit {{ entity_type_label|lower }}:
+  title: Edit {{ entity_type_label|lower }}
 {% endif %}
