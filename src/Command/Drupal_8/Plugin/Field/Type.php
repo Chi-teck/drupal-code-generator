@@ -25,8 +25,17 @@ class Type extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Item');
 
-    $path = 'src/Plugin/Field/FieldType/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/field/type.twig', $vars);
+    $this->setFile(
+      'src/Plugin/Field/FieldType/' . $vars['class'] . '.php',
+      'd8/plugin/field/type.twig',
+      $vars
+    );
+
+    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
+      'content' => $this->render('d8/plugin/field/type-schema.twig', $vars),
+      'action' => 'append',
+    ];
+
   }
 
 }

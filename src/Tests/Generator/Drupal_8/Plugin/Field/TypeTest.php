@@ -19,6 +19,7 @@ class TypeTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
+    'config/schema/example.schema.yml' => __DIR__ . '/_type_schema.yml',
     'src/Plugin/Field/FieldType/FooItem.php' => __DIR__ . '/_type.php',
   ];
 
