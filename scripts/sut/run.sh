@@ -17,16 +17,15 @@ SELF_PATH=$(dirname $0)
 DRUPAL_VERSION=${DRUPAL_VERSION:-8.5.x-dev}
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
 DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
-SUT_HOST=${SUT_HOST:-127.0.0.1}
-SUT_PORT=${SUT_PORT:-8085}
+DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
+DRUPAL_PORT=${DRUPAL_PORT:-8085}
 DCG=${DCG:-/var/www/dcg/bin/dcg}
 TARGET_TEST=${1:-all}
 
 echo --------------------------------------
-echo ' DRUPAL_PATH:   ' $DRUPAL_DIR
-echo ' DRUPAL_VERSION:' $DRUPAL_VERSION
-echo ' DRUPAL_HOST:   ' $SUT_HOST
-echo ' DRUPAL_PORT:   ' $SUT_PORT
+echo ' DRUPAL PATH:   ' $DRUPAL_DIR
+echo ' DRUPAL VERSION:' $DRUPAL_VERSION
+echo ' SITE URL:      ' http://$DRUPAL_HOST:$DRUPAL_PORT
 echo ' DCG:           ' $DCG
 echo --------------------------------------
 
@@ -41,7 +40,7 @@ function dcg_phpcs {
 }
 
 function dcg_phpunit {
-  SIMPLETEST_BASE_URL=http://$SUT_HOST:$SUT_PORT \
+  SIMPLETEST_BASE_URL=http://$DRUPAL_HOST:$DRUPAL_PORT \
   SIMPLETEST_DB=sqlite://tmp/test.sqlite \
   $DRUPAL_DIR/vendor/bin/phpunit \
   -c $DRUPAL_DIR/core $@
@@ -49,28 +48,30 @@ function dcg_phpunit {
 
 # === Create a site under testing. === #
 
-sudo rm -rf $DRUPAL_DIR
-if [ -d $DRUPAL_CACHED_DIR ]; then
-  cp -r $DRUPAL_CACHED_DIR $DRUPAL_DIR
+# Keep Drupal dir itself because PHP built-in server is watching it.
+if [ -d $DRUPAL_DIR ]; then
+  sudo rm -rf $DRUPAL_DIR/* $DRUPAL_DIR/.[^.]*
 else
-  # Assuming that global Drush is not installed.
-  wget -P /tmp https://ftp.drupal.org/files/projects/drupal-$DRUPAL_VERSION.tar.gz
-  tar xf /tmp/drupal-$DRUPAL_VERSION.tar.gz -C /tmp
-  mv /tmp/drupal-$DRUPAL_VERSION $DRUPAL_DIR
-  rm /tmp/drupal-$DRUPAL_VERSION.tar.gz
+  mkdir -p $DRUPAL_DIR
+fi
+
+if [ -d $DRUPAL_CACHED_DIR ]; then
+  cp -r $DRUPAL_CACHED_DIR/* $DRUPAL_DIR
+else
+  composer -d=$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
   composer -d=$DRUPAL_DIR require drush/drush:dev-master
-  mkdir -m 777 $DRUPAL_DIR/sites/default/files
   composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
+  mkdir -m 777 $DRUPAL_DIR/sites/default/files
   dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite
   mkdir -p $DRUPAL_CACHED_DIR
   cp -r $DRUPAL_DIR/. $DRUPAL_CACHED_DIR
 fi
 
-IS_RUNNING=$(netstat -lnt | awk "/$SUT_HOST:$SUT_PORT/ { print \"FOUND\" }")
+IS_RUNNING=$(netstat -lnt | awk "/$DRUPAL_HOST:$DRUPAL_PORT/ { print \"FOUND\" }")
 if [ -z "$IS_RUNNING" ]; then
   echo Staring server...
-  php -S $SUT_HOST:$SUT_PORT -t $DRUPAL_DIR &>/dev/null &
+  dcg_drush rs $DRUPAL_HOST:$DRUPAL_PORT &>/dev/null &
 fi
 
 # === Tests === #
