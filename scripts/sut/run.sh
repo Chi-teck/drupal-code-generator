@@ -63,7 +63,8 @@ else
   composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite
-  cp -r $DRUPAL_DIR $DRUPAL_CACHED_DIR
+  mkdir -p $DRUPAL_CACHED_DIR
+  cp -r $DRUPAL_DIR/. $DRUPAL_CACHED_DIR
 fi
 
 IS_RUNNING=$(netstat -lnt | awk "/$SUT_HOST:$SUT_PORT/ { print \"FOUND\" }")
