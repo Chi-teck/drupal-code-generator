@@ -5,7 +5,9 @@
 set -e
 
 function dcg_on_exit {
-  if [ $? -eq 0 ] ; then
+  local STATUS=$?
+  $DRUPAL_DIR/vendor/bin/web.server stop
+  if [ $STATUS -eq 0 ] ; then
     echo -e "\n\e[0;42m SUCCESS \e[0m"
   else
     echo -e "\n\e[0;41m FAIL \e[0m"
@@ -60,6 +62,7 @@ if [ -d $DRUPAL_CACHED_DIR ]; then
 else
   composer -d=$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
   composer -d=$DRUPAL_DIR require drush/drush:dev-master
+  composer -d=$DRUPAL_DIR require chi-teck/web-server
   composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
@@ -68,11 +71,14 @@ else
   cp -r $DRUPAL_DIR/. $DRUPAL_CACHED_DIR
 fi
 
-IS_RUNNING=$(netstat -lnt | awk "/$DRUPAL_HOST:$DRUPAL_PORT/ { print \"FOUND\" }")
-if [ -z "$IS_RUNNING" ]; then
-  echo Staring server...
-  dcg_drush rs $DRUPAL_HOST:$DRUPAL_PORT &>/dev/null &
-fi
+# Start server.
+# Use Drush router PHP built-in server cannot handle routers with dots.
+# See https://bugs.php.net/bug.php?id=61286.
+$DRUPAL_DIR/vendor/bin/web.server \
+  start \
+  $DRUPAL_HOST:$DRUPAL_PORT \
+  --docroot=$DRUPAL_DIR \
+  --router=$DRUPAL_DIR/vendor/drush/drush/misc/d8-rs-router.php
 
 # === Tests === #
 
