@@ -5,7 +5,7 @@ namespace Drupal\Tests\qux\Functional;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Test description.
+ * Test field type.
  *
  * @group DCG
  */
@@ -69,7 +69,7 @@ class FieldTypeTest extends BrowserTestBase {
     $this->drupalPostForm('node/add/test', $edit, 'Save');
     $this->assertSession()->pageTextContains('This value is too long. It should have 10 characters or less.');
 
-    // Let's be less emotional to get in the limit.
+    // Remove exclamation sign to get in the limit.
     $edit = [
       'field_foo[0][value]' => 'Hello word',
     ];
