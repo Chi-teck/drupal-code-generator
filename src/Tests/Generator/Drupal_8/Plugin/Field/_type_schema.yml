@@ -1,6 +1,6 @@
 field.storage_settings.foo:
   type: mapping
-  label: Example storage settings
+  label: Foo storage settings
   mapping:
     foo:
       type: string
@@ -8,7 +8,7 @@ field.storage_settings.foo:
 
 field.field_settings.foo:
   type: mapping
-  label: Example field settings
+  label: Foo field settings
   mapping:
     bar:
       type: string
