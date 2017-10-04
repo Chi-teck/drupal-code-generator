@@ -1,0 +1,16 @@
+field.widget.settings.foo_example:
+  type: mapping
+  label: Example widget settings
+  mapping:
+    size:
+      type: integer
+      label: size
+    placeholder:
+      type: string
+      label: Placeholder
+    prefix:
+      type: string
+      label: Prefix
+    suffix:
+      type: string
+      label: Suffix

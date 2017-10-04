@@ -25,8 +25,16 @@ class Widget extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Widget');
 
-    $path = 'src/Plugin/Field/FieldWidget/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/field/widget.twig', $vars);
+    $this->setFile(
+      'src/Plugin/Field/FieldWidget/' . $vars['class'] . '.php',
+      'd8/plugin/field/widget.twig',
+      $vars
+    );
+
+    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
+      'content' => $this->render('d8/plugin/field/widget-schema.twig', $vars),
+      'action' => 'append',
+    ];
   }
 
 }
