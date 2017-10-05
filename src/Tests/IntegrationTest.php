@@ -184,6 +184,7 @@ class IntegrationTest extends TestCase {
           'Command: field-formatter',
           '------------------------',
           'The following directories and files have been created or updated:',
+          '- config/schema/foo.schema.yml',
           '- src/Plugin/Field/FieldFormatter/ZooFormatter.php',
         ],
       ],

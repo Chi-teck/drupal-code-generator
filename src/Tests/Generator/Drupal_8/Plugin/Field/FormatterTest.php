@@ -19,6 +19,7 @@ class FormatterTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
+    'config/schema/foo.schema.yml' => __DIR__ . '/_formatter_schema.yml',
     'src/Plugin/Field/FieldFormatter/ZooFormatter.php' => __DIR__ . '/_formatter.php',
   ];
 

@@ -25,8 +25,16 @@ class Formatter extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Formatter');
 
-    $path = 'src/Plugin/Field/FieldFormatter/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/field/formatter.twig', $vars);
+    $this->setFile(
+      'src/Plugin/Field/FieldFormatter/' . $vars['class'] . '.php',
+      'd8/plugin/field/formatter.twig',
+      $vars
+    );
+
+    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
+      'content' => $this->render('d8/plugin/field/formatter-schema.twig', $vars),
+      'action' => 'append',
+    ];
   }
 
 }

@@ -1,0 +1,10 @@
+field.formatter.settings.foo_zoo:
+  type: mapping
+  label: Zoo formatter settings
+  mapping:
+    prefix:
+      type: string
+      label: Prefix
+    suffix:
+      type: string
+      label: Suffix
