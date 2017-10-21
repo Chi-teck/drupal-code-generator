@@ -15,16 +15,11 @@ use Drupal\Core\Session\AccountInterface;
  *   type = "node",
  *   category = @Translation("Custom")
  * )
+ *
+ * @DCG
+ * For simple updating entity fields consider extending FieldUpdateActionBase.
  */
 class Foo extends ConfigurableActionBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function execute($node = NULL) {
-    /** @var \Drupal\node\NodeInterface $node */
-    $node->setTitle($this->configuration['title'])->save();
-  }
 
   /**
    * {@inheritdoc}
@@ -61,6 +56,14 @@ class Foo extends ConfigurableActionBase {
     $access = $node->access('update', $account, TRUE)
       ->andIf($node->title->access('edit', $account, TRUE));
     return $return_as_object ? $access : $access->isAllowed();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function execute($node = NULL) {
+    /** @var \Drupal\node\NodeInterface $node */
+    $node->setTitle($this->configuration['title'])->save();
   }
 
 }

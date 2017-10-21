@@ -20,20 +20,11 @@ use Drupal\Core\Session\AccountInterface;
  *   type = "node",
  *   category = @Translation("{{ category }}")
  * )
+ *
+ * @DCG
+ * For simple updating entity fields consider extending FieldUpdateActionBase.
  */
 class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'ActionBase' }} {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function execute($node = NULL) {
-    /** @var \Drupal\node\NodeInterface $node */
-{% if configurable %}
-    $node->setTitle($this->configuration['title'])->save();
-{% else %}
-    $node->setTitle(t('New title'))->save();
-{% endif %}
-  }
 
 {% if configurable %}
   /**
@@ -72,6 +63,18 @@ class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'ActionBa
     $access = $node->access('update', $account, TRUE)
       ->andIf($node->title->access('edit', $account, TRUE));
     return $return_as_object ? $access : $access->isAllowed();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function execute($node = NULL) {
+    /** @var \Drupal\node\NodeInterface $node */
+{% if configurable %}
+    $node->setTitle($this->configuration['title'])->save();
+{% else %}
+    $node->setTitle(t('New title'))->save();
+{% endif %}
   }
 
 }

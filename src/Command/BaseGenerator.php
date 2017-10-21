@@ -110,7 +110,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
     $directory_option = $input->getOption('directory');
     $directory = $directory_option ? Utils::normalizePath($directory_option) : getcwd();
-    $this->directory = Utils::getExtensionRoot($directory) ?: $directory;
+    // No need to look up for extension root when generating an extension.
+    $extension_destinations = ['modules', 'profiles', 'themes'];
+    $is_extension = in_array($this->destination, $extension_destinations);
+    $this->directory = $is_extension
+      ? $directory : (Utils::getExtensionRoot($directory) ?: $directory);
   }
 
   /**
