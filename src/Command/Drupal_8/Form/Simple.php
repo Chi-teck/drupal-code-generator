@@ -12,7 +12,7 @@ class Simple extends Base {
 
   protected $name = 'd8:form:simple';
   protected $description = 'Generates simple form';
-  protected $alias = 'form';
+  protected $alias = 'form-simple';
 
   /**
    * {@inheritdoc}

@@ -44,11 +44,16 @@ class NavigationCommandTest extends TestCase {
     $helper->setInputStream($this->getInputStream(implode("\n", $answers)));
 
     $commandTester = new CommandTester($navigation);
-    $commandTester->execute(['command' => $navigation->getName(), '--directory' => $this->directory]);
+    $options = ['directory' => $this->directory];
+    $commandTester->execute(['command' => $navigation->getName()], $options);
 
     $expected_output = trim(file_get_contents(__DIR__ . '/_navigation_fixture.txt'));
     $output = trim($commandTester->getDisplay());
     static::assertEquals($expected_output, $output);
+
+    // Make sure it does not fail when starting with default alias.
+    $helper->setInputStream($this->getInputStream("0\n0\n0"));
+    $commandTester->execute(['command' => 'yml'], $options);
   }
 
   /**

@@ -39,6 +39,22 @@ class Navigation extends Command {
   ];
 
   /**
+   * Aliases for some sub-menus.
+   *
+   * @var array
+   */
+  protected $defaultAliases = [
+    'service' => 'd8:service',
+    'plugin' => 'd8:plugin',
+    'theme' => 'd8:theme',
+    'module' => 'd8:module',
+    'form' => 'd8:form',
+    'test' => 'd8:test',
+    'yml' => 'd8:yml',
+    'links' => 'd8:yml:links',
+  ];
+
+  /**
    * Constructs menu command.
    *
    * @param \DrupalCodeGenerator\Command\GeneratorInterface[] $commands
@@ -49,7 +65,7 @@ class Navigation extends Command {
 
     // Initialize the menu structure.
     $this->menuTree = [];
-    $aliases = [];
+    $aliases = array_keys($this->defaultAliases);
 
     // Build aliases for the navigation based on command namespaces.
     foreach ($commands as $command) {
@@ -76,8 +92,8 @@ class Navigation extends Command {
       }
     }
 
-    $this->recursiveKsort($this->menuTree);
     $this->setAliases(array_unique($aliases));
+    $this->recursiveKsort($this->menuTree);
   }
 
   /**
@@ -110,6 +126,11 @@ class Navigation extends Command {
     $output->getFormatter()->setStyle('title', $style);
 
     $command_name = $input->getFirstArgument();
+
+    if (isset($this->defaultAliases[$command_name])) {
+      $command_name = $this->defaultAliases[$command_name];
+    }
+
     $menu_trail = $command_name == $this->getName() ?
       [] : explode(':', $command_name);
 
