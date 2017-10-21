@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\zippo\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+use TestBase\BrowserTestBase;
 
 /**
  * Event subscriber test.
@@ -21,9 +21,8 @@ class EventSubscriberTest extends BrowserTestBase {
    */
   public function testEventSubscriber() {
     $this->drupalGet('<front>');
-    $xpath = '//li[@class = "messages__item" and text() = "onKernelResponse"]';
-    $xpath .= '/following-sibling::li[@class = "messages__item" and text() = "onKernelRequest"]';
-    $this->assertSession()->elementExists('xpath', $xpath);
+    $this->assertStatusMessage('onKernelResponse');
+    $this->assertStatusMessage('onKernelRequest');
   }
 
 }

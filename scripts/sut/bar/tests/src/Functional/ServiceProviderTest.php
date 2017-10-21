@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\bar\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+use TestBase\BrowserTestBase;
 
 /**
  * Service provider test.
@@ -22,8 +22,8 @@ class ServiceProviderTest extends BrowserTestBase {
   public function testProvidedServices() {
     $user = $this->drupalCreateUser();
     $this->drupalLogin($user);
-    $this->assertSession()->responseContains('Bar subscriber is active.');
-    $this->assertSession()->responseContains('Bar logger is active.');
+    $this->assertStatusMessage('Bar subscriber is active.');
+    $this->assertStatusMessage('Bar logger is active.');
   }
 
 }

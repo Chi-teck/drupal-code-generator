@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\bar\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+use TestBase\BrowserTestBase;
 
 /**
  * Test install file.
@@ -23,13 +23,11 @@ class InstallTest extends BrowserTestBase {
       'modules[bar][enable]' => TRUE,
     ];
     $this->drupalPostForm('admin/modules', $edit, 'Install');
-    $xpath = '//li[@class = "messages__item" and text() = "bar_install"]';
-    $this->assertSession()->elementExists('xpath', $xpath);
+    $this->assertStatusMessage('bar_install');
 
     // Test hook_requirements().
     $this->drupalGet('admin/reports/status');
-    $xpath = '//details/summary[normalize-space(text()) = "Bar status"]';
-    $this->assertSession()->elementExists('xpath', $xpath);
+    $this->assertXpath('//details/summary[normalize-space(text()) = "Bar status"]');
 
     // Test hook_schema().
     $fields = [
@@ -50,8 +48,7 @@ class InstallTest extends BrowserTestBase {
     ];
     $this->drupalPostForm('admin/modules/uninstall', $edit, 'Uninstall');
     $this->drupalPostForm(NULL, [], 'Uninstall');
-    $xpath = '//li[@class = "messages__item" and text() = "bar_uninstall"]';
-    $this->assertSession()->elementExists('xpath', $xpath);
+    $this->assertStatusMessage('bar_uninstall');
   }
 
 }

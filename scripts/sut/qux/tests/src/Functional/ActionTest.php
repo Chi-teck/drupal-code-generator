@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\qux\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+use TestBase\BrowserTestBase;
 
 /**
  * Action plugin test.
@@ -20,8 +20,14 @@ class ActionTest extends BrowserTestBase {
    * Test callback.
    */
   public function testContentPage() {
+
+    // Before 8.5 it used hashed plugin IDs.
+    if (version_compare(\Drupal::VERSION, '8.5.0', '<=')) {
+      return;
+    }
+
     $this->createContentType(['type' => 'article']);
-    $this->createNode(['type' => 'article']);
+    $node = $this->createNode(['type' => 'article']);
 
     $user = $this->drupalCreateUser(['access content overview', 'administer actions']);
     $this->drupalLogin($user);
@@ -36,18 +42,22 @@ class ActionTest extends BrowserTestBase {
       'title' => 'Example',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertSession()->responseContains('The action has been successfully saved.');
+    $this->assertStatusMessage('The action has been successfully saved.');
 
     $this->drupalGet('admin/config/system/actions/configure/update_node_title');
-    $this->assertSession()->elementExists('xpath', '//input[@name = "label" and @value = "Update node title"]');
-    $this->assertSession()->elementExists('xpath', '//input[@name = "title" and @value = "Example"]');
+    $this->assertXpath('//input[@name = "label" and @value = "Update node title"]');
+    $this->assertXpath('//input[@name = "title" and @value = "Example"]');
 
     $edit = [
       'action' => 'update_node_title',
       'node_bulk_form[0]' => TRUE,
     ];
     $this->drupalPostForm('admin/content', $edit, 'Apply to selected items');
-    $this->assertSession()->responseContains(t('No access to execute %action_label', ['%action_label' => 'Update node title']));
+    $message_arguments = [
+      '%action_label' => 'Update node title',
+      '%node_label' => $node->label(),
+    ];
+    $this->assertErrorMessage(t('No access to execute %action_label on the Content %node_label.', $message_arguments));
 
     // Create another user with permission to edit articles.
     $content_manager = $this->drupalCreateUser(['access content overview', 'edit any article content']);
@@ -57,8 +67,11 @@ class ActionTest extends BrowserTestBase {
       'node_bulk_form[0]' => TRUE,
     ];
     $this->drupalPostForm('admin/content', $edit, 'Apply to selected items');
-    $this->assertSession()->responseContains(t('%action_label was applied to 1 item.', ['%action_label' => 'Update node title']));
-    $this->assertSession()->elementExists('xpath', '//table//td[@class = "views-field views-field-title"]/a[text() = "Example"]');
+    $message_arguments = [
+      '%action_label' => 'Update node title',
+    ];
+    $this->assertStatusMessage(t('%action_label was applied to 1 item.', $message_arguments));
+    $this->assertXpath('//table//td[@class = "views-field views-field-title"]/a[text() = "Example"]');
   }
 
 }

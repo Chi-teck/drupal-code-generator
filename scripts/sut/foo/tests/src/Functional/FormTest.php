@@ -3,7 +3,7 @@
 namespace Drupal\Tests\foo\Functional;
 
 use Drupal\Core\Database\Database;
-use Drupal\Tests\BrowserTestBase;
+use TestBase\BrowserTestBase;
 
 /**
  * Form test.
@@ -40,13 +40,13 @@ class FormTest extends BrowserTestBase {
       'message' => 123456789,
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertXpath('//div[contains(., "Message should be at least 10 characters.")]');
+    $this->assertErrorMessage('Message should be at least 10 characters.');
 
     $edit = [
       'message' => 1234567890,
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertXpath('//div[contains(., "The message has been sent.")]');
+    $this->assertStatusMessage('The message has been sent.');
   }
 
   /**
@@ -62,13 +62,13 @@ class FormTest extends BrowserTestBase {
       'example' => 'Some text.',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save configuration');
-    $this->assertXpath('//div[contains(., "The value is not correct.")]');
+    $this->assertErrorMessage('The value is not correct.');
 
     $edit = [
       'example' => 'example',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save configuration');
-    $this->assertXpath('//div[contains(., "The configuration options have been saved.")]');
+    $this->assertStatusMessage('The configuration options have been saved.');
     $this->assertXpath($prefix . '//input[@name = "example" and @value="example"]');
   }
 
@@ -77,7 +77,7 @@ class FormTest extends BrowserTestBase {
    */
   public function testConfirmForm() {
     $this->drupalGet('admin/config/foo/confirm');
-    $this->assertXpath('//h1[text() = "Are you sure you want to delete all examples?"]');
+    $this->assertPageTitle('Are you sure you want to delete all examples?');
     $this->assertXpath('//form[@id="foo-confirm" and contains(., "This action cannot be undone.")]');
     $this->clickLink('Cancel');
     $this->assertSession()->addressEquals('/admin');
@@ -86,17 +86,7 @@ class FormTest extends BrowserTestBase {
     $table['fields']['id']['type'] = 'int';
     Database::getConnection()->schema()->createTable('examples', $table);
     $this->drupalPostForm('admin/config/foo/confirm', [], 'Confirm');
-    $this->assertXpath('//div[contains(., "The examples have been deleted.")]');
-  }
-
-  /**
-   * Checks that an element exists on the current page.
-   *
-   * @param string $selector
-   *   The XPath identifying the element to check.
-   */
-  protected function assertXpath($selector) {
-    $this->assertSession()->elementExists('xpath', $selector);
+    $this->assertStatusMessage('The examples have been deleted.');
   }
 
 }

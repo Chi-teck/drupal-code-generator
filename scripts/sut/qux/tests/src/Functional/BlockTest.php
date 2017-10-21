@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\qux\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+use TestBase\BrowserTestBase;
 
 /**
  * Block plugin test.
@@ -30,11 +30,11 @@ class BlockTest extends BrowserTestBase {
     $this->drupalGet('admin/structure/block/library/classy');
     $link_xpath = '//td[. = "Example"]/following-sibling::td[text() = "DCG"]';
     $link_xpath .= '/following-sibling::td//a[text() = "Place block"]';
-    $this->getSession()->getDriver()->click($link_xpath);
+    $this->click($link_xpath);
 
     // Check default configuration.
-    $this->assertSession()->elementExists('xpath', '//input[@name = "settings[label]" and @value = "Example"]');
-    $this->assertSession()->elementExists('xpath', '//textarea[@name = "settings[content]" and text() = "Hello world!"]');
+    $this->assertXpath('//input[@name = "settings[label]" and @value = "Example"]');
+    $this->assertXpath('//textarea[@name = "settings[content]" and text() = "Hello world!"]');
 
     // Update block configuration.
     $edit = [
@@ -47,8 +47,8 @@ class BlockTest extends BrowserTestBase {
 
     // Make sure the configuration has been persisted.
     $this->drupalGet('admin/structure/block/manage/example');
-    $this->assertSession()->elementExists('xpath', '//input[@name = "settings[label]" and @value = "Beer"]');
-    $this->assertSession()->elementExists('xpath', '//textarea[@name = "settings[content]" and text() = "Wine"]');
+    $this->assertXpath('//input[@name = "settings[label]" and @value = "Beer"]');
+    $this->assertXpath('//textarea[@name = "settings[content]" and text() = "Wine"]');
 
     // The block should appear only for anonymous users.
     $this->drupalGet('<front>');

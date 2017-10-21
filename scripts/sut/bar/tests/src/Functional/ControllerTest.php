@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\bar\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+use TestBase\BrowserTestBase;
 
 /**
  * Controller test.
@@ -25,19 +25,9 @@ class ControllerTest extends BrowserTestBase {
 
     $this->drupalGet('bar/example');
 
-    $this->assertXpath('//h1[@class = "page-title" and text() = "Example"]');
+    $this->assertPageTitle('Example');
     $this->assertSession()->responseMatches('#<label>Content</label>\s*Hello world!#s');
     $this->assertSession()->responseMatches('#<label>Date</label>\s*[A-z]+, [0-9]{2}/[0-9]{2}/[0-9]{4} - [0-9]{2}:[0-9]{2}#s');
-  }
-
-  /**
-   * Checks that an element exists on the current page.
-   *
-   * @param string $selector
-   *   The XPath identifying the element to check.
-   */
-  protected function assertXpath($selector) {
-    $this->assertSession()->elementExists('xpath', $selector);
   }
 
 }

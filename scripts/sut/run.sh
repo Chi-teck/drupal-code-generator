@@ -60,9 +60,9 @@ fi
 if [ -d $DRUPAL_CACHED_DIR ]; then
   cp -r $DRUPAL_CACHED_DIR/* $DRUPAL_DIR
 else
+  export COMPOSER_PROCESS_TIMEOUT=1900
   composer -d=$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
-  composer -d=$DRUPAL_DIR require drush/drush:dev-master
-  composer -d=$DRUPAL_DIR require chi-teck/web-server
+  composer -d=$DRUPAL_DIR require drush/drush:dev-master chi-teck/web-server chi-teck/test-base
   composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
