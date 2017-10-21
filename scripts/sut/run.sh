@@ -147,7 +147,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
   $DCG -d$MODULE_DIR d8:plugin:views:field -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
   $DCG -d$MODULE_DIR d8:plugin:views:style -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
 
-  $DCG -d$MODULE_DIR d8:plugin:action -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","category":"DCG","configurable":true}'
+  $DCG -d$MODULE_DIR d8:plugin:action -a'{"name":"Qux","machine_name":"qux","plugin_label":"Update node title","plugin_id":"qux_update_node_title","category":"DCG","configurable":true}'
   $DCG -d$MODULE_DIR d8:plugin:block -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","category":"DCG"}'
   $DCG -d$MODULE_DIR d8:plugin:condition -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
   $DCG -d$MODULE_DIR d8:plugin:filter -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example", "filter_type":"HTML restrictor"}'
