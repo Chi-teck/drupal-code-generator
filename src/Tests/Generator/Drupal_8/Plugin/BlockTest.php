@@ -20,6 +20,7 @@ class BlockTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
+    'config/schema/foo.schema.yml' => __DIR__ . '/_block_schema.yml',
     'src/Plugin/Block/ExampleBlock.php' => __DIR__ . '/_block.php',
   ];
 

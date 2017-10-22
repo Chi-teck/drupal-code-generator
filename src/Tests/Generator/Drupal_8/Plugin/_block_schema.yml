@@ -1,0 +1,7 @@
+block.settings.foo_example:
+  type: block_settings
+  label: 'Example block'
+  mapping:
+    content:
+      type: string
+      label: Content

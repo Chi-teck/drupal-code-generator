@@ -31,6 +31,10 @@ class Block extends BaseGenerator {
 
     $path = 'src/Plugin/Block/' . $vars['class'] . '.php';
     $this->setFile($path, 'd8/plugin/block.twig', $vars);
+    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
+      'content' => $this->render('d8/plugin/block-schema.twig', $vars),
+      'action' => 'append',
+    ];
   }
 
 }
