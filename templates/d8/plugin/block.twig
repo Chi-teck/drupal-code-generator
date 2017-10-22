@@ -90,9 +90,12 @@ class {{ class }} extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @DCG Remove this method of you do not need any access restrictions.
    */
   protected function blockAccess(AccountInterface $account) {
     $route_name = $this->routeMatch->getRouteName();
+    // Display the block only for anonymous users.
     if ($account->isAnonymous() && $route_name != 'user.register') {
       return AccessResult::allowed()
         ->addCacheContexts(['route.name', 'user.roles:anonymous']);
