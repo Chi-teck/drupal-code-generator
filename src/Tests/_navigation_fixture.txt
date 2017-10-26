@@ -148,16 +148,17 @@ Select generator:
   [19] composer.json
   >>> 3[K
 Select generator:
-  [0] ..
-  [1] Field
-  [2] Migrate
-  [3] Views
-  [4] Action
-  [5] Block
-  [6] Condition
-  [7] Filter
-  [8] Menu link
-  [9] Rest resource
+  [0 ] ..
+  [1 ] Field
+  [2 ] Migrate
+  [3 ] Views
+  [4 ] Action
+  [5 ] Block
+  [6 ] CKEditor
+  [7 ] Condition
+  [8 ] Filter
+  [9 ] Menu link
+  [10] Rest resource
   >>> 0[K
 Select generator:
   [0 ] ..

@@ -1,0 +1,44 @@
+/**
+ * @file
+ * {{ plugin_label }} CKEditor plugin.
+ *
+ * Basic plugin inserting abbreviation elements into the CKEditor editing area.
+ *
+ * @DCG The code is based on an example from CKEditor Plugin SDK tutorial.
+ *
+ * @see http://docs.ckeditor.com/#!/guide/plugin_sdk_sample_1
+ */
+(function (Drupal) {
+
+  'use strict';
+
+  CKEDITOR.plugins.add('{{ plugin_id }}', {
+
+    // Register the icons.
+    icons: '{{ short_plugin_id }}',
+
+    // The plugin initialization logic goes inside this method.
+    init: function(editor) {
+
+      // Define an editor command that opens our dialog window.
+      editor.addCommand('{{ command_name }}', new CKEDITOR.dialogCommand('{{ command_name }}Dialog'));
+
+      // Create a toolbar button that executes the above command.
+      editor.ui.addButton('{{ short_plugin_id }}', {
+
+        // The text part of the button (if available) and the tooltip.
+        label: Drupal.t('Insert abbreviation'),
+
+        // The command to execute on click.
+        command: '{{ command_name }}',
+
+        // The button placement in the toolbar (toolbar group name).
+        toolbar: 'insert'
+      });
+
+      // Register our dialog file, this.path is the plugin folder path.
+      CKEDITOR.dialog.add('{{ command_name }}Dialog', this.path + 'dialogs/{{ short_plugin_id }}.js');
+    }
+  });
+
+} (Drupal));

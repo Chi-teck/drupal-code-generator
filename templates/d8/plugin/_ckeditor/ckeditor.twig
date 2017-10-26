@@ -1,0 +1,46 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\CKEditorPlugin;
+
+use Drupal\ckeditor\CKEditorPluginBase;
+use Drupal\editor\Entity\Editor;
+
+/**
+ * Defines the "{{ plugin_label }}" plugin.
+ *
+ * @CKEditorPlugin(
+ *   id = "{{ plugin_id }}",
+ *   label = @Translation("{{ plugin_label }}"),
+ *   module = "{{ machine_name }}"
+ * )
+ */
+class {{ class }} extends CKEditorPluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFile() {
+    return drupal_get_path('module', '{{ machine_name }}') . '/js/plugins/{{ short_plugin_id }}/plugin.js';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getConfig(Editor $editor) {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getButtons() {
+    $module_path = drupal_get_path('module', '{{ machine_name }}');
+    return [
+      '{{ short_plugin_id }}' => [
+        'label' => $this->t('{{ plugin_label }}'),
+        'image' => $module_path . '/js/plugins/{{ short_plugin_id }}/icons/{{ short_plugin_id }}.png',
+      ],
+    ];
+  }
+
+}
