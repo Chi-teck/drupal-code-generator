@@ -25,8 +25,16 @@ class Condition extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
-    $path = 'src/Plugin/Condition/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/condition.twig', $vars);
+    $this->setFile(
+      'src/Plugin/Condition/' . $vars['class'] . '.php',
+      'd8/plugin/condition.twig',
+      $vars
+    );
+
+    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
+      'content' => $this->render('d8/plugin/condition-schema.twig', $vars),
+      'action' => 'append',
+    ];
   }
 
 }
