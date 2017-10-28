@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="Drupal Code Generator">
-  <arg name="colors"/>
   <description>Drupal Code Generator coding standard</description>
+  <arg name="colors"/>
   <file>./src</file>
   <rule ref="Drupal"/>
   <rule ref="DrupalPractice"/>
