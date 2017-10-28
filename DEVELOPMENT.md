@@ -33,7 +33,7 @@ export PATH=~/.composer/vendor/bin:$PATH
 
 The following alias may help you run tests and check code style form any location:
 ```
-alias dcg-test="(cd /path/to/drupal-code-generator && phpunit && phpcs --standard=./phpcs.xml)"
+alias dcg-test="(cd /path/to/drupal-code-generator && phpunit && phpcs -p --standard=./phpcs.xml)"
 ```
 
 ## Building PHAR executable
