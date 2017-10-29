@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # === Configuration. === #
-
 set -e
 
 function dcg_on_exit {
@@ -21,7 +20,8 @@ DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
 DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
 DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
 DRUPAL_PORT=${DRUPAL_PORT:-8085}
-DCG=${DCG:-/var/www/dcg/bin/dcg}
+DEFAULT_DCG=$(realpath $(dirname $0)/../../bin/dcg)
+DCG=${DCG:-$DEFAULT_DCG}
 TARGET_TEST=${1:-all}
 
 echo --------------------------------------
