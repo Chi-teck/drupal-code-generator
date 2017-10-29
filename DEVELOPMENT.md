@@ -31,9 +31,14 @@ Make sure you have _~/.composer/vendor/bin_ in your PATH:
 export PATH=~/.composer/vendor/bin:$PATH
 ```
 
-The following alias may help you run tests and check code style form any location:
+The following alias may help you run tests and check code style from any location:
 ```
 alias dcg-test="(cd /path/to/drupal-code-generator && phpunit && phpcs -p --standard=./phpcs.xml)"
+```
+
+### Running tests against generated code
+```
+/path/to/drupal-code-generator/scripts/run-sut-tests.php
 ```
 
 ## Building PHAR executable
