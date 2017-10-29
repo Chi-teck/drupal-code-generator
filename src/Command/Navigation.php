@@ -127,12 +127,15 @@ class Navigation extends Command {
 
     $command_name = $input->getFirstArgument();
 
+    // Before version 3.3.6 of Symfony console getFistArgument returned default
+    // command name.
+    $command_name = $command_name == 'navigation' ? NULL : $command_name;
+
     if (isset($this->defaultAliases[$command_name])) {
       $command_name = $this->defaultAliases[$command_name];
     }
 
-    $menu_trail = $command_name == $this->getName() ?
-      [] : explode(':', $command_name);
+    $menu_trail = $command_name ? explode(':', $command_name) : [];
 
     $this->generatorName = $this->selectGenerator($input, $output, $menu_trail);
   }
