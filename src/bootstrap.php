@@ -22,7 +22,15 @@ define('DCG_ROOT', dirname(__DIR__));
  *   The initialized console application.
  */
 function dcg_create_application() {
-  $application = new Application('Drupal Code Generator', '@git-version@');
+  // This gets substituted with git version when DCG is packaged to PHAR file.
+  $version = '@git-version@';
+
+  // Fallback for composer installation.
+  if (!is_numeric($version[0])) {
+    $version = 'UNKNOWN';
+  }
+
+  $application = new Application('Drupal Code Generator', $version);
   $helperSet = $application->getHelperSet();
 
   $dumper = new Dumper(new Filesystem());
