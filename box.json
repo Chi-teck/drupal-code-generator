@@ -7,7 +7,7 @@
     {
       "name": "*",
       "in": "src",
-      "exclude": ["Tests", "Box"]
+      "exclude": ["Box"]
     },
     {
       "name": "*",
@@ -21,7 +21,7 @@
         "vendor/symfony/filesystem",
         "vendor/symfony/polyfill-mbstring",
         "vendor/twig"
-        ],
+      ],
       "exclude": [
         "Tests",
         "test"

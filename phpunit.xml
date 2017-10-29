@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
-         bootstrap="vendor/autoload.php"
->
+<phpunit colors="true" bootstrap="tests/dcg/autoload.php">
   <testsuites>
     <testsuite name="Drupal Code Generator Test Suite">
-      <directory suffix="Test.php">./src/Tests</directory>
+      <directory suffix="Test.php">./tests/dcg</directory>
     </testsuite>
   </testsuites>
   <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">./src</directory>
+      <directory suffix=".php">./tests/dcg</directory>
       <exclude>
-        <directory>./src/Tests</directory>
+        <directory>./tests/dcg</directory>
       </exclude>
     </whitelist>
   </filter>

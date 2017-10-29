@@ -14,13 +14,13 @@ function dcg_on_exit {
 }
 trap dcg_on_exit EXIT
 
-SELF_PATH=$(dirname $0)
+SELF_PATH=$(dirname $0)/../tests/sut
 DRUPAL_VERSION=${DRUPAL_VERSION:-8.5.x-dev}
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
 DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
 DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
 DRUPAL_PORT=${DRUPAL_PORT:-8085}
-DEFAULT_DCG=$(realpath $(dirname $0)/../../bin/dcg)
+DEFAULT_DCG=$(realpath $(dirname $0)/../bin/dcg)
 DCG=${DCG:-$DEFAULT_DCG}
 TARGET_TEST=${1:-all}
 
