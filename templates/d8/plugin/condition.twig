@@ -2,6 +2,7 @@
 
 namespace Drupal\{{ machine_name }}\Plugin\Condition;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Condition\ConditionPluginBase;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -32,10 +33,15 @@ class {{ class }} extends ConditionPluginBase implements ContainerFactoryPluginI
   protected $dateFormatter;
 
   /**
+   * The time service.
+   *
+   * @var \Drupal\Component\Datetime\TimeInterface
+   */
+  protected $time;
+
+  /**
    * Creates a new {{ class }} instance.
    *
-   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
-   *   The date formatter.
    * @param array $configuration
    *   The plugin configuration, i.e. an array with configuration values keyed
    *   by configuration option name. The special key 'context' may be used to
@@ -45,10 +51,15 @@ class {{ class }} extends ConditionPluginBase implements ContainerFactoryPluginI
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
+   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   The date formatter.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   *   The time service.
    */
-  public function __construct(DateFormatterInterface $date_formatter, array $configuration, $plugin_id, $plugin_definition) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, DateFormatterInterface $date_formatter, TimeInterface $time) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->dateFormatter = $date_formatter;
+    $this->time = $time;
   }
 
   /**
@@ -56,11 +67,19 @@ class {{ class }} extends ConditionPluginBase implements ContainerFactoryPluginI
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
-      $container->get('date.formatter'),
       $configuration,
       $plugin_id,
-      $plugin_definition
+      $plugin_definition,
+      $container->get('date.formatter'),
+      $container->get('datetime.time')
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return ['age' => NULL] + parent::defaultConfiguration();
   }
 
   /**
@@ -100,17 +119,11 @@ class {{ class }} extends ConditionPluginBase implements ContainerFactoryPluginI
    * {@inheritdoc}
    */
   public function evaluate() {
-    if (!$age = $this->configuration['age']) {
-      return !$this->isNegated();
+    if (!$this->configuration['age'] && !$this->isNegated()) {
+      return TRUE;
     }
-    return (REQUEST_TIME - $this->getContextValue('node')->getCreatedTime()) < $age;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function defaultConfiguration() {
-    return ['age' => NULL] + parent::defaultConfiguration();
+    $age = $this->time->getRequestTime() - $this->getContextValue('node')->getCreatedTime();
+    return $age < $this->configuration['age'];
   }
 
 }
