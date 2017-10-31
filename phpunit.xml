@@ -7,9 +7,9 @@
   </testsuites>
   <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">./tests/dcg</directory>
+      <directory suffix=".php">./src</directory>
       <exclude>
-        <directory>./tests/dcg</directory>
+        <directory>./tests</directory>
       </exclude>
     </whitelist>
   </filter>
