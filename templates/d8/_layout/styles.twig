@@ -17,3 +17,12 @@
 .layout--{{ layout_machine_name|u2h }} .layout__region--sidebar {
   width: 33%;
 }
+
+@media all and (max-width: 850px) {
+  .layout--{{ layout_machine_name|u2h }} {
+    flex-direction: column;
+  }
+  .layout--{{ layout_machine_name|u2h }} > .layout__region {
+    width: auto;
+  }
+}

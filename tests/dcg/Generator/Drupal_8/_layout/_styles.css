@@ -17,3 +17,12 @@
 .layout--foo-bar .layout__region--sidebar {
   width: 33%;
 }
+
+@media all and (max-width: 850px) {
+  .layout--foo-bar {
+    flex-direction: column;
+  }
+  .layout--foo-bar > .layout__region {
+    width: auto;
+  }
+}
