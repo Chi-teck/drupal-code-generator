@@ -3,6 +3,7 @@
   <description>Drupal Code Generator coding standard</description>
   <arg name="colors"/>
   <file>./src</file>
+  <file>./tests</file>
   <rule ref="Drupal"/>
   <rule ref="DrupalPractice"/>
   <!-- Exclude fixtures. -->
