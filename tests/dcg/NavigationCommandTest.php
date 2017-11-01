@@ -33,27 +33,26 @@ class NavigationCommandTest extends TestCase {
     $navigation = new Navigation($generators);
     $application->add($navigation);
 
-    $helper = $navigation->getHelper('question');
-
     $answers = [
       1, 1, 0, 2, 0, 0,
       2, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 1, 0, 0, 0,
       3, 0,
       9, 0, 0,
     ];
-    $helper->setInputStream($this->getInputStream(implode("\n", $answers)));
 
-    $commandTester = new CommandTester($navigation);
+    $command_tester = new CommandTester($navigation);
+    $command_tester->setInputs($answers);
+
     $options = ['directory' => $this->directory];
-    $commandTester->execute(['command' => $navigation->getName()], $options);
+    $command_tester->execute(['command' => $navigation->getName()], $options);
 
     $expected_output = trim(file_get_contents(__DIR__ . '/_navigation_fixture.txt'));
-    $output = trim($commandTester->getDisplay());
+    $output = trim($command_tester->getDisplay());
     static::assertEquals($expected_output, $output);
 
     // Make sure it does not fail when starting with default alias.
-    $helper->setInputStream($this->getInputStream("0\n0\n0"));
-    $commandTester->execute(['command' => 'yml'], $options);
+    $command_tester->setInputs([0, 0, 0]);
+    $command_tester->execute(['command' => 'yml'], $options);
   }
 
   /**
