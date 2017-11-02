@@ -90,9 +90,36 @@ class InputHandlerTest extends TestCase {
 
     $vars = $this->handler->collectVars($this->input, $this->output, $questions);
 
-    static::assertEquals($this->output->fetch(), $output_raw);
+    $output_raw = is_array($output_raw) ? implode("\n", $output_raw) : $output_raw;
 
+    static::assertEquals($this->output->fetch(), $output_raw);
     static::assertEquals($expected_vars, $vars);
+  }
+
+  /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Helper\InputHandler::collectVars()
+   */
+  public function testAnswerOption() {
+
+    $this->input->setStream($this->getInputStream("Zoo\n"));
+    $this->input->setOption('answers', '{"name":"Bar"}');
+
+    $questions['name'] = new Question('Name', 'Default name');
+    $questions['machine_name'] = new Question('Machine name', 'Default machine name');
+
+    $vars = $this->handler->collectVars($this->input, $this->output, $questions);
+    $expected_vars = [
+      'name' => 'Bar',
+      'machine_name' => 'Zoo',
+    ];
+    static::assertEquals($expected_vars, $vars);
+    static::assertEquals('Machine name [Default machine name]: ', $this->output->fetch());
+
+    $this->input->setOption('answers', 'Wrong JSON');
+    $this->expectException('Symfony\Component\Console\Exception\InvalidOptionException');
+    $this->handler->collectVars($this->input, $this->output, []);
   }
 
   /**
