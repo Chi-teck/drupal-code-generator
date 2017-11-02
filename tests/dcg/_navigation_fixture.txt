@@ -3,7 +3,7 @@ Select generator:
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
-  >>> 1[K
+  >>> 1⏎
 Select generator:
   [0 ] ..
   [1 ] Ctools plugin
@@ -19,13 +19,13 @@ Select generator:
   [11] Theme
   [12] settings.php
   [13] template.php
-  >>> 1[K
+  >>> 1⏎
 Select generator:
   [0] ..
   [1] Access
   [2] Content type
   [3] Relationship
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Ctools plugin
@@ -41,11 +41,11 @@ Select generator:
   [11] Theme
   [12] settings.php
   [13] template.php
-  >>> 2[K
+  >>> 2⏎
 Select generator:
   [0] ..
   [1] Argument default
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Ctools plugin
@@ -61,13 +61,13 @@ Select generator:
   [11] Theme
   [12] settings.php
   [13] template.php
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
-  >>> 2[K
+  >>> 2⏎
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -89,13 +89,13 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 1[K
+  >>> 1⏎
 Select generator:
   [0] ..
   [1] Config
   [2] Confirm
   [3] Simple
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -117,14 +117,14 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 2[K
+  >>> 2⏎
 Select generator:
   [0] ..
   [1] Configuration entity
   [2] Content entity
   [3] Plugin manager
   [4] Standard
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -146,7 +146,7 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 3[K
+  >>> 3⏎
 Select generator:
   [0 ] ..
   [1 ] Field
@@ -159,7 +159,7 @@ Select generator:
   [8 ] Filter
   [9 ] Menu link
   [10] Rest resource
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -181,7 +181,7 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 4[K
+  >>> 4⏎
 Select generator:
   [0] ..
   [1] Access checker
@@ -192,7 +192,7 @@ Select generator:
   [6] Param converter
   [7] Route subscriber
   [8] Twig extension
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -214,7 +214,7 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 5[K
+  >>> 5⏎
 Select generator:
   [0] ..
   [1] Browser
@@ -222,7 +222,7 @@ Select generator:
   [3] Kernel
   [4] Unit
   [5] Web
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -244,11 +244,11 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 6[K
+  >>> 6⏎
 Select generator:
   [0] ..
   [1] Standard
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -270,7 +270,7 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 7[K
+  >>> 7⏎
 Select generator:
   [0] ..
   [1] Links
@@ -282,14 +282,14 @@ Select generator:
   [7] Permissions
   [8] Routing
   [9] Services
-  >>> 1[K
+  >>> 1⏎
 Select generator:
   [0] ..
   [1] Action
   [2] Contextual
   [3] Menu
   [4] Task
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0] ..
   [1] Links
@@ -301,7 +301,7 @@ Select generator:
   [7] Permissions
   [8] Routing
   [9] Services
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0 ] ..
   [1 ] Form
@@ -323,13 +323,13 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
-  >>> 3[K
+  >>> 3⏎
 Select generator:
   [0] ..
   [1] Apache virtual host
@@ -338,17 +338,38 @@ Select generator:
   [4] Drush command
   [5] HTML page
   [6] Nginx virtual host
-  >>> 0[K
+  >>> 0⏎
 Select generator:
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
-  >>> 9[K
- Value "9" is invalid 
+  >>> 2⏎
 Select generator:
-  [0] ..
-  [1] Drupal 7
-  [2] Drupal 8
-  [3] Other
-  >>> 0[K
+  [0 ] ..
+  [1 ] Form
+  [2 ] Module
+  [3 ] Plugin
+  [4 ] Service
+  [5 ] Test
+  [6 ] Theme
+  [7 ] Yml
+  [8 ] Controller
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme file
+  [18] Theme settings
+  [19] composer.json
+  >>> 10⏎
+Command: install
+----------------
+Module name [Dcg sandbox]: Foo⏎
+Module machine name [foo]: foo⏎
+The following directories and files have been created or updated:
+- foo.install
