@@ -22,12 +22,4 @@ class ComposerTest extends GeneratorBaseTest {
     'composer.json' => __DIR__ . '/_composer.json',
   ];
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function getDisplay() {
-    // Remove autocomplete output.
-    return preg_replace('/Type \[drupal-module\]: (.*)Is this project/s', 'Type [drupal-module]: Is this project', parent::getDisplay());
-  }
-
 }

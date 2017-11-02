@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Generator;
 
+use DrupalCodeGenerator\Tests\QuestionHelper;
 use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
@@ -31,9 +32,14 @@ abstract class GeneratorBaseTest extends TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
+    $application = dcg_create_application();
+    $helper_set = $application->getHelperSet();
+    $helper_set->set(new QuestionHelper());
+
     $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
     $command = new $command_class();
-    dcg_create_application()->add($command);
+    $application->add($command);
+
     $this->commandTester = new CommandTester($command);
 
     $answers = array_values($this->interaction);
@@ -85,11 +91,11 @@ abstract class GeneratorBaseTest extends TestCase {
    */
   protected function getExpectedDisplay() {
     $default_name = Utils::machine2human(basename($this->directory));
-    $expected_display = str_replace('%default_name%', $default_name, implode(array_keys($this->interaction)));
+    $expected_display = str_replace('%default_name%', $default_name, implode("\n", array_keys($this->interaction)));
     $default_machine_name = Utils::human2machine(basename($this->directory));
     $expected_display = str_replace('%default_machine_name%', $default_machine_name, $expected_display);
     $targets = implode("\n- ", array_keys($this->fixtures));
-    $expected_display .= "The following directories and files have been created or updated:\n- $targets\n";
+    $expected_display .= "\nThe following directories and files have been created or updated:\n- $targets\n";
     return $expected_display;
   }
 

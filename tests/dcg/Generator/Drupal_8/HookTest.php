@@ -21,12 +21,4 @@ class HookTest extends GeneratorBaseTest {
     'example.module' => __DIR__ . '/_hook.module',
   ];
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function getDisplay() {
-    // Remove autocomplete output.
-    return preg_replace('/Hook name: (.*)The/', 'Hook name: The', parent::getDisplay());
-  }
-
 }
