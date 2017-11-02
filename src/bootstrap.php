@@ -31,18 +31,18 @@ function dcg_create_application() {
   }
 
   $application = new Application('Drupal Code Generator', $version);
-  $helperSet = $application->getHelperSet();
+  $helper_set = $application->getHelperSet();
 
   $dumper = new Dumper(new Filesystem());
-  $helperSet->set($dumper);
+  $helper_set->set($dumper);
 
   $twig_loader = new Twig_Loader_Filesystem();
   $renderer = new Renderer(new TwigEnvironment($twig_loader));
-  $helperSet->set($renderer);
+  $helper_set->set($renderer);
 
-  $helperSet->set(new InputHandler());
+  $helper_set->set(new InputHandler());
 
-  $helperSet->set(new OutputHandler());
+  $helper_set->set(new OutputHandler());
 
   return $application;
 }
