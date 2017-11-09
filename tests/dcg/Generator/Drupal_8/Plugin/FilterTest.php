@@ -12,6 +12,7 @@ class FilterTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\Filter';
 
   protected $fixtures = [
+    'config/schema/foo.schema.yml' => __DIR__ . '/_filter_schema.yml',
     'src/Plugin/Filter/Example.php' => __DIR__ . '/_filter.php',
   ];
 

@@ -41,6 +41,11 @@ class Filter extends BaseGenerator {
 
     $path = 'src/Plugin/Filter/' . $vars['class'] . '.php';
     $this->setFile($path, 'd8/plugin/filter.twig', $vars);
+
+    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
+      'content' => $this->render('d8/plugin/filter-schema.twig', $vars),
+      'action' => 'append',
+    ];
   }
 
 }
