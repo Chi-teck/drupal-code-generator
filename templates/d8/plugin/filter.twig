@@ -38,8 +38,9 @@ class {{ class }} extends FilterBase {
    * {@inheritdoc}
    */
   public function process($text, $langcode) {
-    // DCG Process text here.
-    $text = str_replace($this->settings['example'], 'bar', $text);
+    // @DCG Process text here.
+    $example = $this->settings['example'];
+    $text = str_replace($example, "<b>$example</b>", $text);
     return new FilterProcessResult($text);
   }
 
