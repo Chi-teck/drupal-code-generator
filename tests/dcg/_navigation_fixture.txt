@@ -19,7 +19,7 @@
   [11] Theme
   [12] settings.php
   [13] template.php
-  ➤➤➤ 1⏎
+  ➤➤➤➤ 1⏎
  Select generator: 
   [0] ..
   [1] Access
@@ -41,7 +41,7 @@
   [11] Theme
   [12] settings.php
   [13] template.php
-  ➤➤➤ 2⏎
+  ➤➤➤➤ 2⏎
  Select generator: 
   [0] ..
   [1] Argument default
@@ -61,7 +61,7 @@
   [11] Theme
   [12] settings.php
   [13] template.php
-  ➤➤➤ 0⏎
+  ➤➤➤➤ 0⏎
  Select generator: 
   [0] ..
   [1] Drupal 7
@@ -89,7 +89,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 1⏎
+  ➤➤➤➤ 1⏎
  Select generator: 
   [0] ..
   [1] Config
@@ -117,7 +117,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 2⏎
+  ➤➤➤➤ 2⏎
  Select generator: 
   [0] ..
   [1] Configuration entity
@@ -146,7 +146,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 3⏎
+  ➤➤➤➤ 3⏎
  Select generator: 
   [0 ] ..
   [1 ] Field
@@ -159,7 +159,7 @@
   [8 ] Filter
   [9 ] Menu link
   [10] Rest resource
-  ➤➤➤ 0⏎
+  ➤➤➤➤ 0⏎
  Select generator: 
   [0 ] ..
   [1 ] Form
@@ -181,7 +181,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 4⏎
+  ➤➤➤➤ 4⏎
  Select generator: 
   [0] ..
   [1] Access checker
@@ -214,7 +214,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 5⏎
+  ➤➤➤➤ 5⏎
  Select generator: 
   [0] ..
   [1] Browser
@@ -244,7 +244,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 6⏎
+  ➤➤➤➤ 6⏎
  Select generator: 
   [0] ..
   [1] Standard
@@ -270,7 +270,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 7⏎
+  ➤➤➤➤ 7⏎
  Select generator: 
   [0] ..
   [1] Links
@@ -323,7 +323,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 0⏎
+  ➤➤➤➤ 0⏎
  Select generator: 
   [0] ..
   [1] Drupal 7
@@ -366,7 +366,7 @@
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  ➤➤➤ 10⏎
+  ➤➤➤➤ 10⏎
 Generator: install
 ––––––––––––––––––
 Module name [Dcg sandbox]:
