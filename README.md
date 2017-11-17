@@ -34,7 +34,7 @@ dcg d8
 dcg d8:plugin:field:widget
 
 # Generate code non interactively.
-dcg controller -a '{"name": "Example", "machine_name": "example", "class": "ExampleController"}'
+dcg twig-extension -a '{"name": "Example", "machine_name": "example", "class": "ExampleTwigExtension"}'
 ```
 
 ## Extending
