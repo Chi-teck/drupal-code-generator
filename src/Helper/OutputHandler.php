@@ -40,7 +40,7 @@ class OutputHandler extends Helper {
       });
 
       $output->writeln('');
-      $output->writeln('<fg=white>The following directories and files have been created or updated:</>');
+      $output->writeln('The following directories and files have been created or updated:');
       $output->writeln('<fg=cyan;options=bold>–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––</>');
       foreach ($dumped_files as $file) {
         $output->writeln("• $file");
