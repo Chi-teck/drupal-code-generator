@@ -12,10 +12,10 @@ class ThemeInfoTest extends GeneratorBaseTest {
   protected $class = 'Drupal_7\ThemeInfo';
 
   protected $interaction = [
-    'Theme name [%default_name%]: ' => 'Bar',
-    'Theme machine name [bar]: ' => 'bar',
-    'Theme description [A simple Drupal 7 theme.]: ' => 'Theme description',
-    'Base theme: ' => 'omega',
+    'Theme name [%default_name%]:' => 'Bar',
+    'Theme machine name [bar]:' => 'bar',
+    'Theme description [A simple Drupal 7 theme.]:' => 'Theme description',
+    'Base theme:' => 'omega',
   ];
 
   protected $fixtures = [

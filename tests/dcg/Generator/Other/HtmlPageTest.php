@@ -16,7 +16,7 @@ class HtmlPageTest extends GeneratorBaseTest {
   ];
 
   protected $interaction = [
-    'File name [index.html]: ' => 'example.html',
+    'File name [index.html]:' => 'example.html',
   ];
 
   protected $fixtures = [

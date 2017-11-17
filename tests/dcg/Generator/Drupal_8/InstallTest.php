@@ -12,8 +12,8 @@ class InstallTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Install';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
   ];
 
   protected $fixtures = [

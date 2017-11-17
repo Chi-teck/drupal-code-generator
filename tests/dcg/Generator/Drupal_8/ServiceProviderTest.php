@@ -12,8 +12,8 @@ class ServiceProviderTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\ServiceProvider';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
   ];
 
   protected $fixtures = [

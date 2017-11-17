@@ -12,9 +12,9 @@ class MenuLinkTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\MenuLink';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Class [ExampleMenuLink]: ' => 'FooMenuLink',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Class [ExampleMenuLink]:' => 'FooMenuLink',
   ];
 
   protected $fixtures = [

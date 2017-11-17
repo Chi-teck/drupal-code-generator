@@ -39,9 +39,11 @@ class OutputHandler extends Helper {
           strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
       });
 
-      $output->writeln('<title>The following directories and files have been created or updated:</title>');
+      $output->writeln('');
+      $output->writeln('<fg=white>The following directories and files have been created or updated:</>');
+      $output->writeln('<fg=cyan;options=bold>–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––</>');
       foreach ($dumped_files as $file) {
-        $output->writeln("- $file");
+        $output->writeln("• $file");
       }
     }
 

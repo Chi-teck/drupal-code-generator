@@ -14,11 +14,11 @@ class PluginManagerTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Module\PluginManager';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Description [Module description.]: ' => 'Foo description',
-    'Package [Custom]: ' => 'Custom',
-    'Dependencies (comma separated): ' => 'views, fields, node',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Description [Module description.]:' => 'Foo description',
+    'Package [Custom]:' => 'Custom',
+    'Dependencies (comma separated):' => 'views, fields, node',
   ];
 
   protected $fixtures = [

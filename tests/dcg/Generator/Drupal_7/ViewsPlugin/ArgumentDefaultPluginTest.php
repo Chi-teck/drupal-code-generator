@@ -12,10 +12,10 @@ class ArgumentDefaultTest extends GeneratorBaseTest {
   protected $class = 'Drupal_7\ViewsPlugin\ArgumentDefault';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Plugin name [Example]: ' => 'Foo',
-    'Plugin machine name [foo]: ' => 'foo',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Plugin name [Example]:' => 'Foo',
+    'Plugin machine name [foo]:' => 'foo',
   ];
 
   protected $fixtures = [

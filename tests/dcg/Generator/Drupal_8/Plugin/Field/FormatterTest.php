@@ -12,10 +12,10 @@ class FormatterTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\Field\Formatter';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Plugin label [Example]: ' => 'Zoo',
-    'Plugin ID [foo_zoo]: ' => 'foo_zoo',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Plugin label [Example]:' => 'Zoo',
+    'Plugin ID [foo_zoo]:' => 'foo_zoo',
   ];
 
   protected $fixtures = [

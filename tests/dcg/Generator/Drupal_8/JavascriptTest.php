@@ -12,8 +12,8 @@ class JavascriptTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Javascript';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo bar',
-    'Module machine name [foo_bar]: ' => 'foo_bar',
+    'Module name [%default_name%]:' => 'Foo bar',
+    'Module machine name [foo_bar]:' => 'foo_bar',
   ];
 
   protected $fixtures = [

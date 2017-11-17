@@ -12,18 +12,18 @@ class StandardTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Module\Standard';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Module description [The description.]: ' => 'Some description.',
-    'Package [Custom]: ' => 'Custom',
-    'Dependencies (comma separated): ' => 'drupal:views',
-    'Would you like to create install file? [Yes]: ' => 'Yes',
-    'Would you like to create libraries.yml file? [Yes]: ' => 'Yes',
-    'Would you like to create permissions.yml file? [Yes]: ' => 'Yes',
-    'Would you like to create event subscriber? [Yes]: ' => 'Yes',
-    'Would you like to create block plugin? [Yes]: ' => 'Yes',
-    'Would you like to create a controller? [Yes]: ' => 'Yes',
-    'Would you like to create settings form? [Yes]: ' => 'Yes',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Module description [The description.]:' => 'Some description.',
+    'Package [Custom]:' => 'Custom',
+    'Dependencies (comma separated):' => 'drupal:views',
+    'Would you like to create install file? [Yes]:' => 'Yes',
+    'Would you like to create libraries.yml file? [Yes]:' => 'Yes',
+    'Would you like to create permissions.yml file? [Yes]:' => 'Yes',
+    'Would you like to create event subscriber? [Yes]:' => 'Yes',
+    'Would you like to create block plugin? [Yes]:' => 'Yes',
+    'Would you like to create a controller? [Yes]:' => 'Yes',
+    'Would you like to create settings form? [Yes]:' => 'Yes',
   ];
 
   protected $fixtures = [

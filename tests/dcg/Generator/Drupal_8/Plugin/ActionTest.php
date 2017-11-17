@@ -12,12 +12,12 @@ class ActionTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\Action';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Action label [Update node title]: ' => 'Foo',
-    'Plugin ID [example_foo]: ' => 'example_foo',
-    'Action category [Custom]: ' => 'Custom',
-    'Make the action configurable? [No]: ' => 'yes',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Action label [Update node title]:' => 'Foo',
+    'Plugin ID [example_foo]:' => 'example_foo',
+    'Action category [Custom]:' => 'Custom',
+    'Make the action configurable? [No]:' => 'yes',
   ];
 
   protected $fixtures = [

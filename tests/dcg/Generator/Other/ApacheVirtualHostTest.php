@@ -12,8 +12,8 @@ class ApacheVirtualHostTest extends GeneratorBaseTest {
   protected $class = 'Other\ApacheVirtualHost';
 
   protected $interaction = [
-    'Host name [example.com]: ' => 'site.com',
-    'Document root [/var/www/site.com/public]: ' => '/var/www/example.com/public',
+    'Host name [example.com]:' => 'site.com',
+    'Document root [/var/www/site.com/public]:' => '/var/www/example.com/public',
   ];
 
   protected $fixtures = [

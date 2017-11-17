@@ -115,7 +115,7 @@ class InputHandlerTest extends TestCase {
       'machine_name' => 'Zoo',
     ];
     static::assertEquals($expected_vars, $vars);
-    static::assertEquals('Machine name [Default machine name]: ', $this->output->fetch());
+    static::assertEquals("Machine name [Default machine name]:\n➤ ", $this->output->fetch());
 
     $this->input->setOption('answers', 'Wrong JSON');
     $this->expectException('Symfony\Component\Console\Exception\InvalidOptionException');
@@ -139,7 +139,7 @@ class InputHandlerTest extends TestCase {
       'name' => 'Example',
       'machine_name' => 'example',
     ];
-    $row[] = 'Name [Example]: Machine name [example]: ';
+    $row[] = "Name [Example]:\n➤ Machine name [example]:\n➤ ";
     $data[] = $row;
 
     // Without default values.
@@ -157,7 +157,7 @@ class InputHandlerTest extends TestCase {
       'plugin_label' => 'Bar',
       'plugin_id' => 'bar',
     ];
-    $row[] = 'Name [Directory name]: Machine name [example]: Plugin label: Plugin ID: ';
+    $row[] = "Name [Directory name]:\n➤ Machine name [example]:\n➤ Plugin label:\n➤ Plugin ID:\n➤ ";
     $data[] = $row;
 
     // Test default validators.
@@ -179,10 +179,10 @@ class InputHandlerTest extends TestCase {
       'foo' => 'example',
     ];
     $row[] = [
-      'Machine name [directory_name]: The value is not correct machine name.',
-      'Machine name [directory_name]: Class: The value is not correct class name.',
-      'Class: Foo: The value is required.',
-      'Foo: ',
+      "Machine name [directory_name]:\n➤ The value is not correct machine name.",
+      "Machine name [directory_name]:\n➤ Class:\n➤ The value is not correct class name.",
+      "Class:\n➤ Foo:\n➤ The value is required.",
+      "Foo:\n➤ ",
     ];
     $data[] = $row;
 
@@ -200,7 +200,7 @@ class InputHandlerTest extends TestCase {
       'name' => 'example',
       'bar' => 'example',
     ];
-    $row[] = 'Name [Zoo]: bar [*example*]: ';
+    $row[] = "Name [Zoo]:\n➤ bar [*example*]:\n➤ ";
     $data[] = $row;
 
     return $data;

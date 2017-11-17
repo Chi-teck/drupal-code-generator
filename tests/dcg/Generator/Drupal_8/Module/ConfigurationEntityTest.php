@@ -14,12 +14,12 @@ class ConfigurationEntityTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Module\ConfigurationEntity';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Package [Custom]: ' => 'Custom',
-    'Dependencies (comma separated): ' => 'drupal:views',
-    'Entity type label [Foo]: ' => 'Example',
-    'Entity type ID [example]: ' => 'example',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Package [Custom]:' => 'Custom',
+    'Dependencies (comma separated):' => 'drupal:views',
+    'Entity type label [Foo]:' => 'Example',
+    'Entity type ID [example]:' => 'example',
   ];
 
   protected $fixtures = [

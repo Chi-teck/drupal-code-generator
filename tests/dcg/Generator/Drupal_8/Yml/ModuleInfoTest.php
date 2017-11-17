@@ -12,12 +12,12 @@ class ModuleInfoTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Yml\ModuleInfo';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Description [Module description.]: ' => 'Example description.',
-    'Package [Custom]: ' => 'Custom',
-    'Configuration page (route name): ' => 'example.settings',
-    'Dependencies (comma separated): ' => 'views, node, fields',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Description [Module description.]:' => 'Example description.',
+    'Package [Custom]:' => 'Custom',
+    'Configuration page (route name):' => 'example.settings',
+    'Dependencies (comma separated):' => 'views, node, fields',
   ];
 
   protected $fixtures = [

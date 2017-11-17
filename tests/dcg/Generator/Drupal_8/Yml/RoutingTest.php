@@ -12,8 +12,8 @@ class RoutingTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Yml\Routing';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
   ];
 
   protected $fixtures = [

@@ -12,7 +12,7 @@ class ContextualLinksTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Yml\Links\Contextual';
 
   protected $interaction = [
-    'Module machine name [%default_machine_name%]: ' => 'example',
+    'Module machine name [%default_machine_name%]:' => 'example',
   ];
 
   protected $fixtures = [

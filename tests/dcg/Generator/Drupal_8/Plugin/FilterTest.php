@@ -21,7 +21,7 @@ class FilterTest extends GeneratorBaseTest {
    */
   public function setUp() {
     $filter_type_output = implode("\n", [
-      'Filter type: ',
+      'Filter type:',
       '  [1] HTML restrictor',
       '  [2] Markup language',
       '  [3] Irreversible transformation',
@@ -29,10 +29,10 @@ class FilterTest extends GeneratorBaseTest {
       ' > ',
     ]);
     $this->interaction = [
-      'Module name [%default_name%]: ' => 'Foo',
-      'Module machine name [foo]: ' => 'foo',
-      'Plugin label [Example]: ' => 'Example',
-      'Plugin ID [foo_example]: ' => 'foo_example',
+      'Module name [%default_name%]:' => 'Foo',
+      'Module machine name [foo]:' => 'foo',
+      'Plugin label [Example]:' => 'Example',
+      'Plugin ID [foo_example]:' => 'foo_example',
       $filter_type_output => '1',
     ];
     parent::setUp();

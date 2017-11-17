@@ -12,11 +12,11 @@ class ThemeInfoTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Yml\ThemeInfo';
 
   protected $interaction = [
-    'Theme name [%default_name%]: ' => 'Example',
-    'Theme machine name [example]: ' => 'example',
-    'Base theme [classy]: ' => 'garland',
-    'Description [A flexible theme with a responsive, mobile-first layout.]: ' => 'Example description.',
-    'Package [Custom]: ' => 'Custom',
+    'Theme name [%default_name%]:' => 'Example',
+    'Theme machine name [example]:' => 'example',
+    'Base theme [classy]:' => 'garland',
+    'Description [A flexible theme with a responsive, mobile-first layout.]:' => 'Example description.',
+    'Package [Custom]:' => 'Custom',
   ];
 
   protected $fixtures = [

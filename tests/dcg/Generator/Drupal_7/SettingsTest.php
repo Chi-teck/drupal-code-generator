@@ -12,10 +12,10 @@ class SettingsTest extends GeneratorBaseTest {
   protected $class = 'Drupal_7\Settings';
 
   protected $interaction = [
-    'Database driver [mysql]: ' => 'mysql',
-    'Database name [drupal]: ' => 'drupal',
-    'Database user [root]: ' => 'root',
-    'Database password [123]: ' => '123',
+    'Database driver [mysql]:' => 'mysql',
+    'Database name [drupal]:' => 'drupal',
+    'Database user [root]:' => 'root',
+    'Database password [123]:' => '123',
   ];
 
   protected $fixtures = [

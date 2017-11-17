@@ -12,12 +12,12 @@ class DrushCommandTest extends GeneratorBaseTest {
   protected $class = 'Other\DrushCommand';
 
   protected $interaction = [
-    'Command name: ' => 'yo-yo',
-    'Command alias [yo-]: ' => 'yy',
-    'Command description [Command description.]: ' => 'Description.',
-    'Argument name [foo]: ' => 'foo',
-    'Option name [bar]: ' => 'bar',
-    'Command file [%default_machine_name%.drush.inc]: ' => 'yo_yo.drush.inc',
+    'Command name:' => 'yo-yo',
+    'Command alias [yo-]:' => 'yy',
+    'Command description [Command description.]:' => 'Description.',
+    'Argument name [foo]:' => 'foo',
+    'Option name [bar]:' => 'bar',
+    'Command file [%default_machine_name%.drush.inc]:' => 'yo_yo.drush.inc',
   ];
 
   protected $fixtures = [

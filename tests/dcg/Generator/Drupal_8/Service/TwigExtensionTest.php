@@ -12,9 +12,9 @@ class TwigExtensionTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Service\TwigExtension';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Class [ExampleTwigExtension]: ' => 'ExampleTwigExtension',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Class [ExampleTwigExtension]:' => 'ExampleTwigExtension',
   ];
 
   protected $fixtures = [

@@ -12,8 +12,8 @@ class TemplatePhpTest extends GeneratorBaseTest {
   protected $class = 'Drupal_7\TemplatePhp';
 
   protected $interaction = [
-    'Theme name [%default_name%]: ' => 'Example',
-    'Theme machine name [example]: ' => 'example',
+    'Theme name [%default_name%]:' => 'Example',
+    'Theme machine name [example]:' => 'example',
   ];
 
   protected $fixtures = [

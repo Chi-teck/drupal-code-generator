@@ -12,9 +12,9 @@ class ProcessTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\Migrate\Process';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Plugin ID [example_example]: ' => 'example_qux',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Plugin ID [example_example]:' => 'example_qux',
   ];
 
   protected $fixtures = [

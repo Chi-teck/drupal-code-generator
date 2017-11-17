@@ -1,10 +1,10 @@
-Select generator:
+ Select generator: 
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
-  >>> 1⏎
-Select generator:
+  ➤➤➤ 1⏎
+ Select generator: 
   [0 ] ..
   [1 ] Ctools plugin
   [2 ] Views plugin
@@ -19,14 +19,14 @@ Select generator:
   [11] Theme
   [12] settings.php
   [13] template.php
-  >>> 1⏎
-Select generator:
+  ➤➤➤ 1⏎
+ Select generator: 
   [0] ..
   [1] Access
   [2] Content type
   [3] Relationship
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Ctools plugin
   [2 ] Views plugin
@@ -41,12 +41,12 @@ Select generator:
   [11] Theme
   [12] settings.php
   [13] template.php
-  >>> 2⏎
-Select generator:
+  ➤➤➤ 2⏎
+ Select generator: 
   [0] ..
   [1] Argument default
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Ctools plugin
   [2 ] Views plugin
@@ -61,14 +61,14 @@ Select generator:
   [11] Theme
   [12] settings.php
   [13] template.php
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
-  >>> 2⏎
-Select generator:
+  ➤➤➤ 2⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -89,14 +89,14 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 1⏎
-Select generator:
+  ➤➤➤ 1⏎
+ Select generator: 
   [0] ..
   [1] Config
   [2] Confirm
   [3] Simple
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -117,15 +117,15 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 2⏎
-Select generator:
+  ➤➤➤ 2⏎
+ Select generator: 
   [0] ..
   [1] Configuration entity
   [2] Content entity
   [3] Plugin manager
   [4] Standard
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -146,8 +146,8 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 3⏎
-Select generator:
+  ➤➤➤ 3⏎
+ Select generator: 
   [0 ] ..
   [1 ] Field
   [2 ] Migrate
@@ -159,8 +159,8 @@ Select generator:
   [8 ] Filter
   [9 ] Menu link
   [10] Rest resource
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -181,8 +181,8 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 4⏎
-Select generator:
+  ➤➤➤ 4⏎
+ Select generator: 
   [0] ..
   [1] Access checker
   [2] Breadcrumb builder
@@ -192,8 +192,8 @@ Select generator:
   [6] Param converter
   [7] Route subscriber
   [8] Twig extension
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -214,16 +214,16 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 5⏎
-Select generator:
+  ➤➤➤ 5⏎
+ Select generator: 
   [0] ..
   [1] Browser
   [2] Javascript
   [3] Kernel
   [4] Unit
   [5] Web
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -244,12 +244,12 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 6⏎
-Select generator:
+  ➤➤➤ 6⏎
+ Select generator: 
   [0] ..
   [1] Standard
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -270,8 +270,8 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 7⏎
-Select generator:
+  ➤➤➤ 7⏎
+ Select generator: 
   [0] ..
   [1] Links
   [2] Breakpoints
@@ -282,15 +282,15 @@ Select generator:
   [7] Permissions
   [8] Routing
   [9] Services
-  >>> 1⏎
-Select generator:
+  ➤➤➤ 1⏎
+ Select generator: 
   [0] ..
   [1] Action
   [2] Contextual
   [3] Menu
   [4] Task
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0] ..
   [1] Links
   [2] Breakpoints
@@ -301,8 +301,8 @@ Select generator:
   [7] Permissions
   [8] Routing
   [9] Services
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -323,14 +323,14 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
-  >>> 3⏎
-Select generator:
+  ➤➤➤ 3⏎
+ Select generator: 
   [0] ..
   [1] Apache virtual host
   [2] DCG command
@@ -338,14 +338,14 @@ Select generator:
   [4] Drush command
   [5] HTML page
   [6] Nginx virtual host
-  >>> 0⏎
-Select generator:
+  ➤➤➤ 0⏎
+ Select generator: 
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
-  >>> 2⏎
-Select generator:
+  ➤➤➤ 2⏎
+ Select generator: 
   [0 ] ..
   [1 ] Form
   [2 ] Module
@@ -366,10 +366,14 @@ Select generator:
   [17] Theme file
   [18] Theme settings
   [19] composer.json
-  >>> 10⏎
-Command: install
-----------------
-Module name [Dcg sandbox]: Foo⏎
-Module machine name [foo]: foo⏎
+  ➤➤➤ 10⏎
+Generator: install
+––––––––––––––––––
+Module name [Dcg sandbox]:
+➤ Foo⏎
+Module machine name [foo]:
+➤ foo⏎
+
 The following directories and files have been created or updated:
-- foo.install
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+• foo.install

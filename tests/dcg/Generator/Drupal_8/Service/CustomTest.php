@@ -12,10 +12,10 @@ class CustomTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Service\Custom';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Service name [foo.example]: ' => 'foo.example',
-    'Class [FooExample]: ' => 'Example',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Service name [foo.example]:' => 'foo.example',
+    'Class [FooExample]:' => 'Example',
   ];
 
   protected $fixtures = [

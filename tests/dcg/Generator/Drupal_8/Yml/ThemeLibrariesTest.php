@@ -12,7 +12,7 @@ class ThemeLibrariesTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Yml\ThemeLibraries';
 
   protected $interaction = [
-    'Theme machine name [%default_machine_name%]: ' => 'example',
+    'Theme machine name [%default_machine_name%]:' => 'example',
   ];
 
   protected $fixtures = [

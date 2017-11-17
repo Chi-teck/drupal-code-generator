@@ -12,14 +12,14 @@ class ControllerTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Controller';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Class [FooController]: ' => 'FooController',
-    'Would you like to create a route for this controller? [Yes]: ' => 'Yes',
-    'Route name [foo.example]: ' => 'example.bar',
-    'Route path [/foo/example]: ' => '/foo/example',
-    'Route title [Example]: ' => 'Bar',
-    'Route permission [access content]: ' => 'access content',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Class [FooController]:' => 'FooController',
+    'Would you like to create a route for this controller? [Yes]:' => 'Yes',
+    'Route name [foo.example]:' => 'example.bar',
+    'Route path [/foo/example]:' => '/foo/example',
+    'Route title [Example]:' => 'Bar',
+    'Route permission [access content]:' => 'access content',
   ];
 
   protected $fixtures = [

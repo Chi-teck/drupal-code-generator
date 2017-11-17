@@ -12,11 +12,11 @@ class BlockTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\Block';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Block admin label [Example]: ' => 'Example',
-    'Plugin ID [foo_example]: ' => 'foo_example',
-    'Block category [Custom]: ' => 'Custom',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Block admin label [Example]:' => 'Example',
+    'Plugin ID [foo_example]:' => 'foo_example',
+    'Block category [Custom]:' => 'Custom',
   ];
 
   protected $fixtures = [

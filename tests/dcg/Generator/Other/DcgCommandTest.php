@@ -12,9 +12,9 @@ class DcgCommandTest extends GeneratorBaseTest {
   protected $class = 'Other\DcgCommand';
 
   protected $interaction = [
-    'Command name [custom:example]: ' => 'custom:example',
-    'Command description [Some description]: ' => 'Some description',
-    'Command alias [example]: ' => 'example',
+    'Command name [custom:example]:' => 'custom:example',
+    'Command description [Some description]:' => 'Some description',
+    'Command alias [example]:' => 'example',
   ];
 
   protected $fixtures = [

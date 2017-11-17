@@ -12,10 +12,10 @@ class TypeTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\Field\Type';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Plugin label [Example]: ' => 'Foo',
-    'Plugin ID [example_foo]: ' => 'foo',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Plugin label [Example]:' => 'Foo',
+    'Plugin ID [example_foo]:' => 'foo',
   ];
 
   protected $fixtures = [

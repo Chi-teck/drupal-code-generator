@@ -12,9 +12,9 @@ class BreadcrumbBuilderTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Service\BreadcrumbBuilder';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Class [ExampleBreadcrumbBuilder]: ' => 'ExampleBreadcrumbBuilder',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Class [ExampleBreadcrumbBuilder]:' => 'ExampleBreadcrumbBuilder',
   ];
 
   protected $fixtures = [

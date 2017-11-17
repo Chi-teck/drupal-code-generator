@@ -12,8 +12,8 @@ class ThemeFileTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\ThemeFile';
 
   protected $interaction = [
-    'Theme name [%default_name%]: ' => 'Foo',
-    'Theme machine name [foo]: ' => 'foo',
+    'Theme name [%default_name%]:' => 'Foo',
+    'Theme machine name [foo]:' => 'foo',
   ];
 
   protected $fixtures = [

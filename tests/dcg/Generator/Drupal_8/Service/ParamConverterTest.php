@@ -12,10 +12,10 @@ class ParamConverterTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Service\ParamConverter';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Parameter type [example]: ' => 'foo',
-    'Class [FooParamConverter]: ' => 'FooParamConverter',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Parameter type [example]:' => 'foo',
+    'Class [FooParamConverter]:' => 'FooParamConverter',
   ];
 
   protected $fixtures = [

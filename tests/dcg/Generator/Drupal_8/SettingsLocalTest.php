@@ -12,12 +12,12 @@ class SettingsLocalTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\SettingsLocal';
 
   protected  $interaction = [
-    'Override database configuration? [No]: ' => 'Yes',
-    'Database name [drupal_local]: ' => 'drupal_8',
-    'Database username [root]: ' => 'root',
-    'Database password: ' => '123',
-    'Database host [localhost]: ' => 'localhost',
-    'Database type [mysql]: ' => 'mysql',
+    'Override database configuration? [No]:' => 'Yes',
+    'Database name [drupal_local]:' => 'drupal_8',
+    'Database username [root]:' => 'root',
+    'Database password:' => '123',
+    'Database host [localhost]:' => 'localhost',
+    'Database type [mysql]:' => 'mysql',
   ];
 
   protected $fixtures = [

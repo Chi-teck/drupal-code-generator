@@ -153,12 +153,12 @@ class Navigation extends Command {
     $aliases = $command->getAliases();
 
     $header = sprintf(
-      '<info>Command:</info> <comment>%s</comment>',
+      '<info>Generator:</info> %s',
       // Display alias instead command name if possible.
       isset($aliases[0]) ? $aliases[0] : $this->generatorName
     );
     $output->writeln($header);
-    $output->writeln(str_repeat('-', strlen(strip_tags($header))));
+    $output->writeln('<fg=cyan;options=bold>' . str_repeat('–', strlen(strip_tags($header))) . '</>');
 
     // Run the generator.
     return $command->run($input, $output);
@@ -208,8 +208,8 @@ class Navigation extends Command {
     // - Sorted list of nested menu levels.
     // - Sorted list of commands.
     $choices = ['..' => '..'] + $sub_menu_labels + $command_labels;
-    $question = new ChoiceQuestion('<title>Select generator:</title>', array_values($choices));
-    $question->setPrompt('  >>> ');
+    $question = new ChoiceQuestion('<title> Select generator: </title>', array_values($choices));
+    $question->setPrompt('  ➤➤➤ ');
 
     $answer_label = $this->getHelper('question')->ask($input, $output, $question);
     $answer = array_search($answer_label, $choices);

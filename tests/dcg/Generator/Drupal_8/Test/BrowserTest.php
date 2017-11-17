@@ -12,9 +12,9 @@ class BrowserTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Test\Browser';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Class [ExampleTest]: ' => 'ExampleTest',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Class [ExampleTest]:' => 'ExampleTest',
   ];
 
   protected $fixtures = [

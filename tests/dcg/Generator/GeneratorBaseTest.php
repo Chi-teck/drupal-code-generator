@@ -76,11 +76,7 @@ abstract class GeneratorBaseTest extends TestCase {
    *   The display.
    */
   protected function getDisplay() {
-    // Remove autocomplete output.
-    return preg_replace(
-      '/ > (.*)The following directories/', ' > The following directories',
-      $this->commandTester->getDisplay()
-    );
+    return str_replace("\n➤ ", '', $this->commandTester->getDisplay());
   }
 
   /**
@@ -91,11 +87,14 @@ abstract class GeneratorBaseTest extends TestCase {
    */
   protected function getExpectedDisplay() {
     $default_name = Utils::machine2human(basename($this->directory));
-    $expected_display = str_replace('%default_name%', $default_name, implode("\n", array_keys($this->interaction)));
+    $expected_display = str_replace('%default_name%', $default_name, implode("\n", array_keys($this->interaction))) . "\n";
     $default_machine_name = Utils::human2machine(basename($this->directory));
     $expected_display = str_replace('%default_machine_name%', $default_machine_name, $expected_display);
-    $targets = implode("\n- ", array_keys($this->fixtures));
-    $expected_display .= "\nThe following directories and files have been created or updated:\n- $targets\n";
+    $targets = implode("\n• ", array_keys($this->fixtures));
+    $expected_display .= "\n";
+    $expected_display .= "The following directories and files have been created or updated:\n";
+    $expected_display .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
+    $expected_display .= "• $targets\n";
     return $expected_display;
   }
 

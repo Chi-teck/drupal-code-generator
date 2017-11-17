@@ -12,10 +12,10 @@ class AccessCheckerTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Service\AccessChecker';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Applies to [_foo]: ' => '_foo',
-    'Class [FooAccessChecker]: ' => 'FooAccessChecker',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Applies to [_foo]:' => '_foo',
+    'Class [FooAccessChecker]:' => 'FooAccessChecker',
   ];
 
   protected $fixtures = [

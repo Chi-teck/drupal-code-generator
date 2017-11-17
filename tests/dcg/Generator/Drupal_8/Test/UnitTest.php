@@ -12,9 +12,9 @@ class UnitTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Test\Unit';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Class [ExampleTest]: ' => 'ExampleTest',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Class [ExampleTest]:' => 'ExampleTest',
   ];
 
   protected $fixtures = [

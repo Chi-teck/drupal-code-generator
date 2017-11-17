@@ -12,10 +12,10 @@ class RestResourceTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\RestResource';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Plugin label [Example]: ' => 'Foo',
-    'Plugin ID [example_foo]: ' => 'example_foo',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Plugin label [Example]:' => 'Foo',
+    'Plugin ID [example_foo]:' => 'example_foo',
   ];
 
   protected $fixtures = [

@@ -12,11 +12,11 @@ class TemplateTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Template';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Template name [example]: ' => 'foo',
-    'Create theme hook? [Yes]: ' => 'Yes',
-    'Create preprocess hook? [Yes]: ' => 'Yes',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Template name [example]:' => 'foo',
+    'Create theme hook? [Yes]:' => 'Yes',
+    'Create preprocess hook? [Yes]:' => 'Yes',
   ];
 
   protected $fixtures = [

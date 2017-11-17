@@ -116,7 +116,7 @@ class InputHandler extends Helper {
     if ($default_value) {
       $question_text .= " [<comment>$default_value</comment>]";
     }
-    $question_text .= ': ';
+    $question_text .= ":\n➤ ";
 
     $this->setQuestionText($question, $question_text);
   }

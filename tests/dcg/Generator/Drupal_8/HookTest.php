@@ -12,9 +12,9 @@ class HookTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Hook';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Example',
-    'Module machine name [example]: ' => 'example',
-    'Hook name: ' => 'theme',
+    'Module name [%default_name%]:' => 'Example',
+    'Module machine name [example]:' => 'example',
+    'Hook name:' => 'theme',
   ];
 
   protected $fixtures = [

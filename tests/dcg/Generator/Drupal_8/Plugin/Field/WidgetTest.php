@@ -12,10 +12,10 @@ class WidgetTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\Field\Widget';
 
   protected $interaction = [
-    'Module name [%default_name%]: ' => 'Foo',
-    'Module machine name [foo]: ' => 'foo',
-    'Plugin label [Example]: ' => 'Example',
-    'Plugin ID [foo_example]: ' => 'foo_example',
+    'Module name [%default_name%]:' => 'Foo',
+    'Module machine name [foo]:' => 'foo',
+    'Plugin label [Example]:' => 'Example',
+    'Plugin ID [foo_example]:' => 'foo_example',
   ];
 
   protected $fixtures = [
