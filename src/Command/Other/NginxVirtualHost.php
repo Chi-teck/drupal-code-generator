@@ -26,12 +26,16 @@ class NginxVirtualHost extends BaseGenerator {
       return '/var/www/' . $vars['server_name'] . '/docroot';
     };
 
+    $socket = PHP_MAJOR_VERSION == 5
+      ? '/run/php5-fpm.sock'
+      : sprintf('/run/php/php%s.%s-fpm.sock', PHP_MAJOR_VERSION, PHP_MINOR_VERSION);
+
     $questions = [
       'server_name' => new Question('Server name', 'example.com'),
       'docroot' => new Question('Document root', $default_docroot),
       'file_public_path' => new Question('Public file system path', 'sites/default/files'),
       'file_private_path' => new Question('Private file system path'),
-      'fastcgi_pass' => new Question('Address of a FastCGI server', 'unix:/run/php/php7.0-fpm.sock'),
+      'fastcgi_pass' => new Question('Address of a FastCGI server', 'unix:' . $socket),
     ];
 
     $vars = $this->collectVars($input, $output, $questions);

@@ -23,4 +23,12 @@ class NginxVirtualHostTest extends GeneratorBaseTest {
     'example.local' => __DIR__ . '/_nginx_virtual_host',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function getDisplay() {
+    // Default PHP version comes form the environment where the test is running.
+    return preg_replace('#unix:.*sock#', 'unix:/run/php/php7.0-fpm.sock', parent::getDisplay());
+  }
+
 }
