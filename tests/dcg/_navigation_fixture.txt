@@ -156,9 +156,10 @@
   [5 ] Block
   [6 ] CKEditor
   [7 ] Condition
-  [8 ] Filter
-  [9 ] Menu link
-  [10] Rest resource
+  [8 ] Entity reference selection
+  [9 ] Filter
+  [10] Menu link
+  [11] Rest resource
   ➤➤➤➤ 0⏎
  Select generator: 
   [0 ] ..

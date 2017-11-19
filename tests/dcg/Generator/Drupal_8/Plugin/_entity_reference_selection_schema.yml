@@ -1,0 +1,7 @@
+entity_reference_selection.example_advanced_node_selection:
+  type: entity_reference_selection.default
+  label: 'Advanced node selection handler settings'
+  mapping:
+    foo:
+      type: string
+      label: Foo

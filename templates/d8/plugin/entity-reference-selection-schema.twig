@@ -1,0 +1,10 @@
+entity_reference_selection.{{ plugin_id }}:
+{# User selection plugin provides has some additional options. #}
+  type: entity_reference_selection.default{{  entity_type == 'user' ? ':user' }}
+  label: '{{ plugin_label }} handler settings'
+{%  if configurable %}
+  mapping:
+    foo:
+      type: string
+      label: Foo
+{% endif %}

@@ -1,0 +1,66 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\EntityReferenceSelection;
+
+{% if configurable %}
+use Drupal\Core\Form\FormStateInterface;
+{% endif %}
+use {{ base_class_full }};
+
+/**
+ * Plugin description.
+ *
+ * @EntityReferenceSelection(
+ *   id = "{{ plugin_id }}",
+ *   label = @Translation("{{ plugin_label }}"),
+ *   group = "{{ plugin_id }}",
+ *   entity_types = {"{{ entity_type }}"},
+ *   weight = 0
+ * )
+ */
+class {{ class }} extends {{ base_class }} {
+
+{% if configurable %}
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+
+    $default_configuration = [
+      'foo' => 'bar',
+    ];
+
+    return $default_configuration + parent::defaultConfiguration();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form = parent::buildConfigurationForm($form, $form_state);
+
+    $form['foo'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Foo'),
+      '#default_value' => $this->configuration['foo'],
+    ];
+
+    return $form;
+  }
+
+{% endif %}
+  /**
+   * {@inheritdoc}
+   */
+  protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS') {
+    $query = parent::buildEntityQuery($match, $match_operator);
+
+    // @DCG
+    // Here you can apply addition conditions, sorting, etc to the query.
+    // Also see self::entityQueryAlter().
+    $query->condition('field_example', 123);
+
+    return $query;
+  }
+
+}
