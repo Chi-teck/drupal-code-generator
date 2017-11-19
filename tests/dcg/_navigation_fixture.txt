@@ -159,7 +159,7 @@
   [8 ] Entity reference selection
   [9 ] Filter
   [10] Menu link
-  [11] Rest resource
+  [11] REST resource
   ➤➤➤➤ 0⏎
  Select generator: 
   [0 ] ..

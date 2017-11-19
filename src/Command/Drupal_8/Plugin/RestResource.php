@@ -15,6 +15,7 @@ class RestResource extends BaseGenerator {
   protected $name = 'd8:plugin:rest-resource';
   protected $description = 'Generates rest resource plugin';
   protected $alias = 'rest-resource';
+  protected $label = 'REST resource';
 
   /**
    * {@inheritdoc}
