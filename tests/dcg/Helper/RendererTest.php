@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Helper\Renderer;
-use DrupalCodeGenerator\TwigEnvironment;
+use DrupalCodeGenerator\Twig\TwigEnvironment;
 use PHPUnit\Framework\TestCase;
 
 /**

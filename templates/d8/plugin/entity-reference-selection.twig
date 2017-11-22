@@ -2,10 +2,12 @@
 
 namespace Drupal\{{ machine_name }}\Plugin\EntityReferenceSelection;
 
+{% sort %}
 {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
 {% endif %}
 use {{ base_class_full }};
+{% endsort %}
 
 /**
  * Plugin description.

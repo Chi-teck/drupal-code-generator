@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\InputHandler;
 use DrupalCodeGenerator\Helper\OutputHandler;
 use DrupalCodeGenerator\Helper\Renderer;
-use DrupalCodeGenerator\TwigEnvironment;
+use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 

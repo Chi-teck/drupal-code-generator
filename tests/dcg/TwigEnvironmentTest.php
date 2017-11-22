@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests;
 
 use PHPUnit\Framework\TestCase;
-use DrupalCodeGenerator\TwigEnvironment;
+use DrupalCodeGenerator\Twig\TwigEnvironment;
 
 /**
  * A test for Twig environment.
