@@ -26,7 +26,7 @@ class FilterTest extends GeneratorBaseTest {
       '  [2] Markup language',
       '  [3] Irreversible transformation',
       '  [4] Reversible transformation',
-      ' > ',
+      '  ➤➤➤ ',
     ]);
     $this->interaction = [
       'Module name [%default_name%]:' => 'Foo',

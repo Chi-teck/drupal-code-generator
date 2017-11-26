@@ -18,7 +18,7 @@ class AccessTest extends GeneratorBaseTest {
     'Plugin machine name [example]:' => 'example',
     'Plugin description [Plugin description.]:' => 'Some description.',
     'Category [Custom]:' => 'Custom',
-    "Required context:\n  [0] -\n  [1] Node\n  [2] User\n  [3] Term\n > " => 'User',
+    "Required context:\n  [0] -\n  [1] Node\n  [2] User\n  [3] Term\n  ➤➤➤ " => 'User',
   ];
 
   protected $fixtures = [

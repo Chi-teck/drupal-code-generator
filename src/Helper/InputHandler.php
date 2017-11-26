@@ -7,6 +7,7 @@ use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -116,7 +117,13 @@ class InputHandler extends Helper {
     if ($default_value) {
       $question_text .= " [<comment>$default_value</comment>]";
     }
-    $question_text .= ":\n➤ ";
+    $question_text .= ":";
+    if ($question instanceof ChoiceQuestion) {
+      $question->setPrompt('  ➤➤➤ ');
+    }
+    else {
+      $question_text .= "\n➤ ";
+    }
 
     $this->setQuestionText($question, $question_text);
   }

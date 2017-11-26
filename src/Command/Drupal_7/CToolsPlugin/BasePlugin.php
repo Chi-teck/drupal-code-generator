@@ -35,7 +35,7 @@ abstract class BasePlugin extends BaseGenerator {
     $questions['category'] = new Question('Category', 'Custom');
 
     $questions['context'] = new ChoiceQuestion(
-      '<comment>Required context</comment>',
+      'Required context',
       ['-', 'Node', 'User', 'Term']
     );
 

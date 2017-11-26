@@ -121,7 +121,7 @@ class Dumper extends Helper {
       if ($this->filesystem->exists($file_path) && !$is_directory) {
         $action = isset($file_info['action']) ? $file_info['action'] : 'replace';
         if ($action == 'replace') {
-          $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to replace it?</info> [<comment>Yes</comment>]: ', $file_path);
+          $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to replace it?</info> [<comment>Yes</comment>]:', $file_path);
           if (!$this->confirm($question_text)) {
             continue;
           }
@@ -174,6 +174,7 @@ class Dumper extends Helper {
    *   User confirmation.
    */
   protected function confirm($question_text) {
+    $question_text .= "\n➤ ";
     // If the input is not interactive print the question with default answer.
     if ($this->replace !== NULL) {
       $this->output->writeln($question_text . ($this->replace ? 'Yes' : 'No'));
