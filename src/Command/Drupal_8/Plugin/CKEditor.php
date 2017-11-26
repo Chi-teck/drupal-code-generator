@@ -51,7 +51,7 @@ class CKEditor extends BaseGenerator {
     );
 
     $this->files["js/plugins/{$vars['short_plugin_id']}/icons/{$vars['short_plugin_id']}.png"] = [
-      'content' => file_get_contents($this->templatePath . '/' . 'd8/plugin/_ckeditor/icon.png'),
+      'content' => file_get_contents($this->templatePath . '/d8/plugin/_ckeditor/icon.png'),
       'action' => 'replace',
     ];
 
