@@ -248,7 +248,7 @@
   ➤➤➤➤ 6⏎
  Select generator: 
   [0] ..
-  [1] Standard
+  [1] Simple
   ➤➤➤ 0⏎
  Select generator: 
   [0 ] ..

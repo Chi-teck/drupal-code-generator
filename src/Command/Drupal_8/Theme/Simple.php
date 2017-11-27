@@ -9,14 +9,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Implements d8:theme:standard command.
+ * Implements d8:theme:simple command.
  *
  * @TODO: Create a test for this.
  */
-class Standard extends BaseGenerator {
+class Simple extends BaseGenerator {
 
-  protected $name = 'd8:theme:standard';
-  protected $description = 'Generates standard Drupal 8 theme';
+  protected $name = 'd8:theme:simple';
+  protected $description = 'Generates simple Drupal 8 theme';
   protected $alias = 'theme';
   protected $destination = 'themes';
 
@@ -51,7 +51,7 @@ class Standard extends BaseGenerator {
     $settings_schema_path = $vars['machine_name'] . '/config/schema/' . $vars['machine_name'] . '.schema.yml';
     $this->setFile($settings_schema_path, 'd8/theme-settings-schema.twig', $vars);
 
-    $this->setFile($vars['machine_name'] . '/logo.svg', 'd8/theme/standard/logo.twig', $vars);
+    $this->setFile($vars['machine_name'] . '/logo.svg', 'd8/theme/simple/logo.twig', $vars);
 
     $this->files[$vars['machine_name'] . '/templates'] = NULL;
     $this->files[$vars['machine_name'] . '/images'] = NULL;
