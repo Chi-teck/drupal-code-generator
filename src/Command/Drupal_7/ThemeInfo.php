@@ -29,7 +29,11 @@ class ThemeInfo extends BaseGenerator {
     $questions['base_theme'] = new Question('Base theme');
 
     $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['machine_name'] . '.info', 'd7/theme-info.twig', $vars);
+
+    $this->addFile()
+      ->path('{machine_name}.info')
+      ->template('d7/theme-info.twig')
+      ->vars($vars);
   }
 
 }

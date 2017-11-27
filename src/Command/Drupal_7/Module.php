@@ -27,16 +27,36 @@ class Module extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
+    $this->addFile()
+      ->path('{machine_name}/{machine_name}.info')
+      ->template('d7/module-info.twig')
+      ->vars($vars);
 
-    $this->setFile($prefix . '.info', 'd7/module-info.twig', $vars);
-    $this->setFile($prefix . '.module', 'd7/module.twig', $vars);
-    $this->setFile($prefix . '.install', 'd7/install.twig', $vars);
-    $this->setFile($prefix . '.admin.inc', 'd7/admin.inc.twig', $vars);
-    $this->setFile($prefix . '.pages.inc', 'd7/pages.inc.twig', $vars);
+    $this->addFile()
+      ->path('{machine_name}/{machine_name}.module')
+      ->template('d7/module.twig')
+      ->vars($vars);
 
-    $js_path = $vars['machine_name'] . '/' . str_replace('_', '-', $vars['machine_name']) . '.js';
-    $this->setFile($js_path, 'd7/javascript.twig', $vars);
+    $this->addFile()
+      ->path('{machine_name}/{machine_name}.install')
+      ->template('d7/install.twig')
+      ->vars($vars);
+
+    $this->addFile()
+      ->path('{machine_name}/{machine_name}.admin.inc')
+      ->template('d7/admin.inc.twig')
+      ->vars($vars);
+
+    $this->addFile()
+      ->path('{machine_name}/{machine_name}.pages.inc')
+      ->template('d7/pages.inc.twig')
+      ->vars($vars);
+
+    $this->addFile()
+      ->path('{machine_name}/' . str_replace('_', '-', $vars['machine_name']) . '.js')
+      ->template('d7/javascript.twig')
+      ->vars($vars);
+
   }
 
 }

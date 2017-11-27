@@ -25,8 +25,13 @@ class Test extends BaseGenerator {
       return Utils::camelize($vars['machine_name']) . 'TestCase';
     };
     $questions['class'] = new Question('Class', $default_class);
+
     $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['machine_name'] . '.test', 'd7/test.twig', $vars);
+
+    $this->addFile()
+      ->path('{machine_name}.test')
+      ->template('d7/test.twig')
+      ->vars($vars);
   }
 
 }

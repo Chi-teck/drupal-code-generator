@@ -20,8 +20,10 @@ class Javascript extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
-    $path = str_replace('_', '-', $vars['machine_name']) . '.js';
-    $this->setFile($path, 'd7/javascript.twig', $vars);
+    $this->addFile()
+      ->path(str_replace('_', '-', $vars['machine_name']) . '.js')
+      ->template('d7/javascript.twig')
+      ->vars($vars);
   }
 
 }

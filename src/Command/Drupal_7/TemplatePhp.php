@@ -26,8 +26,13 @@ class TemplatePhp extends BaseGenerator {
     $questions['name']->setValidator([Utils::class, 'validateRequired']);
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+
     $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile('template.php', 'd7/template.php.twig', $vars);
+
+    $this->addFile()
+      ->path('template.php')
+      ->template('d7/template.php.twig')
+      ->vars($vars);
   }
 
 }

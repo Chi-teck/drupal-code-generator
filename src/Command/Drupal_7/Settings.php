@@ -30,7 +30,12 @@ class Settings extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     // @see: drupal_get_hash_salt()
     $vars['hash_salt'] = hash('sha256', serialize($vars));
-    $this->setFile('settings.php', 'd7/settings.twig', $vars);
+
+    $this->addFile()
+      ->path('settings.php')
+      ->template('d7/settings.twig')
+      ->vars($vars);
+
   }
 
 }

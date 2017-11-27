@@ -29,22 +29,24 @@ class ArgumentDefault extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $module_path = $vars['machine_name'] . '.module';
-    $this->files[$module_path] = [
-      'content' => $this->render('d7/views-plugin/argument-default.module.twig', $vars),
-      'action' => 'append',
-      'header_size' => 7,
-    ];
+    $this->addFile()
+      ->path('{machine_name}.module')
+      ->template('d7/views-plugin/argument-default.module.twig')
+      ->vars($vars)
+      ->action('append')
+      ->headerSize(7);
 
-    $views_inc_path = 'views/' . $vars['machine_name'] . '.views.inc';
-    $this->files[$views_inc_path] = [
-      'content' => $this->render('d7/views-plugin/argument-default-views.inc.twig', $vars),
-      'action' => 'append',
-      'header_size' => 7,
-    ];
+    $this->addFile()
+      ->path('views/{machine_name}.views.inc')
+      ->template('d7/views-plugin/argument-default-views.inc.twig')
+      ->vars($vars)
+      ->action('append')
+      ->headerSize(7);
 
-    $plugin_path = 'views/views_plugin_argument_' . $vars['plugin_machine_name'] . '.inc';
-    $this->setFile($plugin_path, 'd7/views-plugin/argument-default.twig', $vars);
+    $this->addFile()
+      ->path('views/views_plugin_argument_{plugin_machine_name}.inc')
+      ->template('d7/views-plugin/argument-default.twig')
+      ->vars($vars);
   }
 
 }
