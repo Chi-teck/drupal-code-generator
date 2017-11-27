@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Helper;
 
+use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
@@ -54,7 +55,7 @@ class DumperTest extends TestCase {
    *
    * @var array
    */
-  protected $files = [];
+  protected $assets = [];
 
   /**
    * {@inheritdoc}
@@ -71,9 +72,9 @@ class DumperTest extends TestCase {
       ->method('getDirectory')
       ->willReturn($this->directory);
     $command
-      ->method('getFiles')
+      ->method('getAssets')
       ->will(static::returnCallback(function () {
-        return $this->files;
+        return $this->assets;
       }));
 
     $this->helperSet = $this->createMock(HelperSet::class);
@@ -102,10 +103,10 @@ class DumperTest extends TestCase {
     $question_text = 'The file {DIR}/foo.txt already exists. Would you like to replace it?';
 
     // -- Default case.
-    $this->files = [
-      'foo.txt' => __LINE__,
-      'bar.txt' => __LINE__,
-      'dir_1/dir_2/dir_3/baz.txt' => __LINE__,
+    $this->assets = [
+      static::createAsset('foo.txt', __LINE__),
+      static::createAsset('bar.txt', __LINE__),
+      static::createAsset('dir_1/dir_2/dir_3/baz.txt', __LINE__),
     ];
     $results = $this->dump();
     $this->assertResults($results);
@@ -115,6 +116,9 @@ class DumperTest extends TestCase {
     // -- File exists and user confirms replacing (default action).
     $this->setStream("\n");
     $this->files = ['foo.txt' => __LINE__];
+    $this->assets = [
+      static::createAsset('foo.txt', __LINE__),
+    ];
     $results = $this->dump();
     $this->assertResults($results);
     $this->assertFileContents();
@@ -122,7 +126,9 @@ class DumperTest extends TestCase {
 
     // -- File exists and user confirms replacing.
     $this->setStream("Yes\n");
-    $this->files = ['foo.txt' => $expected_content = __LINE__];
+    $this->assets = [
+      static::createAsset('foo.txt', $expected_content = __LINE__),
+    ];
     $results = $this->dump();
     $this->assertResults($results);
     $this->assertFileContents();
@@ -130,15 +136,19 @@ class DumperTest extends TestCase {
 
     // -- File exists and user cancels replacing.
     $this->setStream("Not\n");
-    $this->files = ['foo.txt' => __LINE__];
+    $this->assets = [
+      static::createAsset('foo.txt', __LINE__),
+    ];
     $results = $this->dump();
     $this->assertEmptyResults($results);
-    $this->assertFileContents(['foo.txt' => $expected_content]);
+    $this->assertFileContents([static::createAsset('foo.txt', $expected_content)]);
     $this->assertOutput("$question_text [Yes]:\n➤ ");
 
     // -- Dumper with enabled replace option (always yes).
     $this->setDumper(TRUE);
-    $this->files = ['foo.txt' => $expected_content = __LINE__];
+    $this->assets = [
+      static::createAsset('foo.txt', $expected_content = __LINE__),
+    ];
     $results = $this->dump();
     $this->assertResults($results);
     $this->assertFileContents();
@@ -146,18 +156,17 @@ class DumperTest extends TestCase {
 
     // -- Dumper with enabled replace option (always not).
     $this->setDumper(FALSE);
-    $this->files = ['foo.txt' => __LINE__];
+    $this->assets = [
+      static::createAsset('foo.txt', __LINE__),
+    ];
     $results = $this->dump();
     $this->assertEmptyResults($results);
-    $this->assertFileContents(['foo.txt' => $expected_content]);
+    $this->assertFileContents([static::createAsset('foo.txt', $expected_content)]);
     $this->assertOutput("$question_text [Yes]:\n➤ No\n");
 
     // -- File with special permissions.
-    $this->files = [
-      'hi.txt' => [
-        'content' => 'Hello world',
-        'mode' => 0757,
-      ],
+    $this->assets = [
+      static::createAsset('hi.txt', 'Hello world')->mode(0757),
     ];
     $results = $this->dump();
     $this->assertResults($results);
@@ -168,47 +177,44 @@ class DumperTest extends TestCase {
 
     // -- Directory.
     $this->setDumper();
-    $this->files = ['example' => NULL];
+    $this->assets = [
+      static::createAsset('example')->type('directory'),
+    ];
     $results = $this->dump();
     $this->assertResults($results);
     static::assertTrue(is_dir($this->directory . '/example'));
     $this->assertOutput('');
 
     // -- Existing directory.
-    $this->files = ['foo/bar.txt' => $expected_content = __LINE__];
+    $this->assets = [
+      static::createAsset('foo/bar.txt', $expected_content = __LINE__),
+    ];
     $this->dump();
-    $this->files = ['foo' => NULL];
+    $this->assets = [
+      static::createAsset('foo')->type('directory'),
+    ];
     $results = $this->dump();
     $this->assertResults($results);
     // Make sure that files in the directory have not been overwritten.
-    $this->assertFileContents(['foo/bar.txt' => $expected_content]);
+    $this->assertFileContents([static::createAsset('foo/bar.txt', $expected_content)]);
     static::assertTrue(is_dir($this->directory . '/example'));
     $this->assertOutput('');
 
     // -- Append file content.
-    $this->files = [
-      'example.txt' => [
-        'content' => "Line 1\n",
-      ],
+    $this->assets = [
+      static::createAsset('example.txt', "Line 1\n"),
     ];
     $this->dump();
-    $this->files = [
-      'example.txt' => [
-        'content' => "Line 2\n",
-        'action' => 'append',
-      ],
+    $this->assets = [
+      static::createAsset('example.txt', "Line 2\n")->action('append'),
     ];
     $this->dump();
-    $this->files = [
-      'example.txt' => [
-        'content' => "Header\nLine 3\n",
-        'action' => 'append',
-        'header_size' => 1,
-      ],
+    $this->assets = [
+      static::createAsset('example.txt', "Header\nLine 3\n")->action('append')->headerSize(1),
     ];
     $results = $this->dump();
     $this->assertResults($results);
-    $this->assertFileContents(['example.txt' => "Line 1\n\nLine 2\n\nLine 3\n"]);
+    $this->assertFileContents([static::createAsset('example.txt', "Line 1\n\nLine 2\n\nLine 3\n")]);
     $this->assertOutput('');
   }
 
@@ -219,7 +225,11 @@ class DumperTest extends TestCase {
    *   List of dumped files.
    */
   protected function assertResults(array $expected_results) {
-    static::assertEquals(array_keys($this->files), $expected_results);
+    $files = [];
+    foreach ($this->assets as $asset) {
+      $files[] = $asset->getPath();
+    }
+    static::assertEquals($files, $expected_results);
   }
 
   /**
@@ -244,15 +254,14 @@ class DumperTest extends TestCase {
   }
 
   /**
-   * Asserts contents of dumped files.
+   * Asserts contents of dumped assets.
    *
-   * @param array $files
-   *   (Optional) Files to check.
+   * @param \DrupalCodeGenerator\Asset[] $assets
+   *   (Optional) Assets to check.
    */
-  protected function assertFileContents(array $files = NULL) {
-    foreach ($files ?: $this->files as $file_name => $file_info) {
-      $content = is_array($file_info) ? $file_info['content'] : $file_info;
-      static::assertStringEqualsFile($this->directory . '/' . $file_name, $content);
+  protected function assertFileContents(array $assets = NULL) {
+    foreach ($assets ?: $this->assets as $asset) {
+      static::assertStringEqualsFile($this->directory . '/' . $asset->getPath(), $asset->getContent());
     }
   }
 
@@ -288,6 +297,21 @@ class DumperTest extends TestCase {
   protected function setDumper($replace = NULL) {
     $this->dumper = new Dumper(new Filesystem(), $replace);
     $this->dumper->setHelperSet($this->helperSet);
+  }
+
+  /**
+   * Creates an asset.
+   *
+   * @param string $path
+   *   Asset path.
+   * @param string $content
+   *   (optional) Asset content.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  protected static function createAsset($path, $content = NULL) {
+    return (new Asset())->path($path)->content($content);
   }
 
 }

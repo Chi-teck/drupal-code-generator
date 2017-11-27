@@ -90,36 +90,34 @@ class Dumper extends Helper {
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
 
-    $dumped_files = $this->doDump($command->getFiles(), $command->getDirectory());
+    $dumped_files = $this->doDump($command->getAssets(), $command->getDirectory());
 
     $input->setInteractive($interactive);
     return $dumped_files;
   }
 
   /**
-   * Dumps files.
+   * Dumps assets.
    *
-   * @param array $files
+   * @param \DrupalCodeGenerator\Asset[] $assets
    *   Files to dump.
    * @param string $directory
-   *   Directory where to dump the files.
+   *   Directory where to dump the assets.
    *
    * @return array
-   *   List of created or updated files.
+   *   List of created or updated assets.
    */
-  protected function doDump(array $files, $directory) {
+  protected function doDump(array $assets, $directory) {
     $dumped_files = [];
 
-    foreach ($files as $file_name => $file_info) {
+    foreach ($assets as $asset) {
 
-      // Support short syntax `$this->files['File.php'] => 'Rendered content';`.
-      $content = is_array($file_info) ? $file_info['content'] : $file_info;
+      $content = $asset->getContent();
+      $path = $asset->getPath();
 
-      $is_directory = $content === NULL;
-
-      $file_path = $directory . '/' . $file_name;
-      if ($this->filesystem->exists($file_path) && !$is_directory) {
-        $action = isset($file_info['action']) ? $file_info['action'] : 'replace';
+      $file_path = "$directory/$path";
+      if ($this->filesystem->exists($file_path) && !$asset->isDirectory()) {
+        $action = $asset->getAction();
         if ($action == 'replace') {
           $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to replace it?</info> [<comment>Yes</comment>]:', $file_path);
           if (!$this->confirm($question_text)) {
@@ -129,7 +127,7 @@ class Dumper extends Helper {
         else {
           $original_content = file_get_contents($file_path);
           if ($action == 'append') {
-            $header_size = isset($file_info['header_size']) ? $file_info['header_size'] : 0;
+            $header_size = $asset->getHeaderSize();
             // Do not remove header if original file is empty.
             if ($original_content && $header_size > 0) {
               $content = Utils::removeHeader($content, $header_size);
@@ -147,10 +145,10 @@ class Dumper extends Helper {
 
       // Default mode for all parent directories is 0777. It can be modified by
       // changing umask.
-      $mode = isset($file_info['mode']) ? $file_info['mode'] : ($is_directory ? 0755 : 0644);
+      $mode = $asset->getMode();
 
       // Save data to file system.
-      if ($is_directory) {
+      if ($asset->isDirectory()) {
         $this->filesystem->mkdir([$file_path], $mode);
       }
       else {
@@ -158,7 +156,7 @@ class Dumper extends Helper {
         $this->filesystem->chmod($file_path, $mode);
       }
 
-      $dumped_files[] = $file_name;
+      $dumped_files[] = $asset->getPath();
     }
 
     return $dumped_files;

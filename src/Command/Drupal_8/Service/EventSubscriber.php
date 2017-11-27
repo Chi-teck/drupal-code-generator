@@ -25,9 +25,14 @@ class EventSubscriber extends BaseGenerator {
     $vars = $this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['name'] . 'Subscriber');
 
-    $path = 'src/EventSubscriber/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/service/event-subscriber.twig', $vars);
-    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/event-subscriber.services.twig', $vars);
+    $this->addFile()
+      ->path('src/EventSubscriber/{class}.php')
+      ->template('d8/service/event-subscriber.twig')
+      ->vars($vars);
+
+    $this->addServicesFile()
+      ->template('d8/service/event-subscriber.services.twig')
+      ->vars($vars);
   }
 
 }

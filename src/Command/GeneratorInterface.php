@@ -16,13 +16,12 @@ interface GeneratorInterface {
   public function getLabel();
 
   /**
-   * Returns list of rendered files.
+   * Returns list of assets to dump.
    *
-   * @return array
-   *   An associative array where each key is path to a file and value is
-   *   rendered content.
+   * @return \DrupalCodeGenerator\Asset[]
+   *   An array of assets.
    */
-  public function getFiles();
+  public function getAssets();
 
   /**
    * Sets working directory.
