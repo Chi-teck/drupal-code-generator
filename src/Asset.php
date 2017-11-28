@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator;
 
+use DrupalCodeGenerator\Helper\Renderer;
+
 /**
  * Simple data structure to represent an asset being generated.
  */
@@ -272,6 +274,24 @@ class Asset {
    */
   public function isDirectory() {
     return $this->getType() == 'directory';
+  }
+
+  /**
+   * Renders the asset template.
+   *
+   * @param \DrupalCodeGenerator\Helper\Renderer $renderer
+   *   Renderer helper.
+   * @param array $vars
+   *   Template variables.
+   */
+  public function render(Renderer $renderer, array $vars) {
+    if (!$this->isDirectory() && is_null($this->getContent())) {
+      // Twig variables are also used in path substitution, so the asset
+      // should have them.
+      // @see \DrupalCodeGenerator\Asset::getPath().
+      $this->getVars() || $this->vars($vars);
+      $this->content($renderer->render($this->getTemplate(), $this->getVars()));
+    }
   }
 
 }

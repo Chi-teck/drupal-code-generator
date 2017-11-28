@@ -83,6 +83,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $assets = [];
 
   /**
+   * Twig template variables.
+   *
+   * @var array
+   */
+  protected $vars = [];
+
+  /**
    * {@inheritdoc}
    */
   protected function configure() {
@@ -132,11 +139,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
 
-    // Render assets.
+    // Render all assets.
+    $renderer = $this->getHelper('dcg_renderer');
     foreach ($this->getAssets() as $asset) {
-      if ($asset->getType() == 'file' && is_null($asset->getContent())) {
-        $asset->content($this->render($asset->getTemplate(), $asset->getVars()));
-      }
+      $asset->render($renderer, $this->vars);
     }
 
     $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output);
@@ -255,8 +261,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @see \DrupalCodeGenerator\InputHandler
    */
-  protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
-    return $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions);
+  protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions) {
+    $this->vars += $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions);
+    return $this->vars;
   }
 
   /**

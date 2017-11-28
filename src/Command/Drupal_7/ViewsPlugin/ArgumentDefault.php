@@ -27,26 +27,23 @@ class ArgumentDefault extends BaseGenerator {
     };
     $questions['plugin_machine_name'] = new Question('Plugin machine name', $default_machine_name);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('{machine_name}.module')
       ->template('d7/views-plugin/argument-default.module.twig')
-      ->vars($vars)
       ->action('append')
       ->headerSize(7);
 
     $this->addFile()
       ->path('views/{machine_name}.views.inc')
       ->template('d7/views-plugin/argument-default-views.inc.twig')
-      ->vars($vars)
       ->action('append')
       ->headerSize(7);
 
     $this->addFile()
       ->path('views/views_plugin_argument_{plugin_machine_name}.inc')
-      ->template('d7/views-plugin/argument-default.twig')
-      ->vars($vars);
+      ->template('d7/views-plugin/argument-default.twig');
   }
 
 }

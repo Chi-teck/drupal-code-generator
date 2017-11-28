@@ -22,17 +22,15 @@ class EventSubscriber extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['name'] . 'Subscriber');
 
     $this->addFile()
       ->path('src/EventSubscriber/{class}.php')
-      ->template('d8/service/event-subscriber.twig')
-      ->vars($vars);
+      ->template('d8/service/event-subscriber.twig');
 
     $this->addServicesFile()
-      ->template('d8/service/event-subscriber.services.twig')
-      ->vars($vars);
+      ->template('d8/service/event-subscriber.services.twig');
   }
 
 }
