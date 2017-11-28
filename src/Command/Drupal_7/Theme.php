@@ -28,32 +28,30 @@ class Theme extends BaseGenerator {
     $questions['description'] = new Question('Theme description', 'A simple Drupal 7 theme.');
     $questions['base_theme'] = new Question('Base theme');
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
+    $vars['asset_name'] = str_replace('_', '-', $vars['machine_name']);
 
     $this->addFile()
       ->path('{machine_name}/{machine_name}.info')
-      ->template('d7/theme-info.twig')
-      ->vars($vars);
+      ->template('d7/theme-info.twig');
 
     $this->addFile()
       ->path('{machine_name}/template.php')
-      ->template('d7/template.php.twig')
-      ->vars($vars);
+      ->template('d7/template.php.twig');
 
     $this->addFile()
-      ->path('{machine_name}/js/' . str_replace('_', '-', $vars['machine_name']) . '.js')
-      ->template('d7/javascript.twig')
-      ->vars($vars);
+      ->path('{machine_name}/js/{asset_name}.js')
+      ->template('d7/javascript.twig');
 
     $this->addFile()
-      ->path($vars['machine_name'] . '/css/' . str_replace('_', '-', $vars['machine_name']) . '.css')
+      ->path('{machine_name}/css/{asset_name}.css')
       ->content('');
 
     $this->addDirectory()
-      ->path($vars['machine_name'] . '/templates');
+      ->path('{machine_name}/templates');
 
     $this->addDirectory()
-      ->path($vars['machine_name'] . '/images');
+      ->path('{machine_name}/images');
   }
 
 }

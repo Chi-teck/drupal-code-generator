@@ -285,11 +285,11 @@ class Asset {
    *   Template variables.
    */
   public function render(Renderer $renderer, array $vars) {
+    // Template variables are also used in path substitution, so the asset
+    // should have them.
+    // @see \DrupalCodeGenerator\Asset::getPath().
+    $this->getVars() || $this->vars($vars);
     if (!$this->isDirectory() && is_null($this->getContent())) {
-      // Twig variables are also used in path substitution, so the asset
-      // should have them.
-      // @see \DrupalCodeGenerator\Asset::getPath().
-      $this->getVars() || $this->vars($vars);
       $this->content($renderer->render($this->getTemplate(), $this->getVars()));
     }
   }

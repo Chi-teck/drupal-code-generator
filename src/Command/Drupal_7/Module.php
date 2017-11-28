@@ -29,34 +29,27 @@ class Module extends BaseGenerator {
 
     $this->addFile()
       ->path('{machine_name}/{machine_name}.info')
-      ->template('d7/module-info.twig')
-      ->vars($vars);
+      ->template('d7/module-info.twig');
 
     $this->addFile()
       ->path('{machine_name}/{machine_name}.module')
-      ->template('d7/module.twig')
-      ->vars($vars);
+      ->template('d7/module.twig');
 
     $this->addFile()
       ->path('{machine_name}/{machine_name}.install')
-      ->template('d7/install.twig')
-      ->vars($vars);
+      ->template('d7/install.twig');
 
     $this->addFile()
       ->path('{machine_name}/{machine_name}.admin.inc')
-      ->template('d7/admin.inc.twig')
-      ->vars($vars);
+      ->template('d7/admin.inc.twig');
 
     $this->addFile()
       ->path('{machine_name}/{machine_name}.pages.inc')
-      ->template('d7/pages.inc.twig')
-      ->vars($vars);
+      ->template('d7/pages.inc.twig');
 
     $this->addFile()
       ->path('{machine_name}/' . str_replace('_', '-', $vars['machine_name']) . '.js')
-      ->template('d7/javascript.twig')
-      ->vars($vars);
-
+      ->template('d7/javascript.twig');
   }
 
 }

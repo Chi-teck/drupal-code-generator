@@ -24,11 +24,10 @@ class ModuleInfo extends BaseGenerator {
     $questions = Utils::defaultQuestions();
     $questions['description'] = new Question('Module description', 'Module description.');
     $questions['package'] = new Question('Package', 'Custom');
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
     $this->addFile()
       ->path('{machine_name}.info')
-      ->template('d7/module-info.twig')
-      ->vars($vars);
+      ->template('d7/module-info.twig');
   }
 
 }

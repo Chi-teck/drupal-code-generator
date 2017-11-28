@@ -22,8 +22,7 @@ class Javascript extends BaseGenerator {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
     $this->addFile()
       ->path(str_replace('_', '-', $vars['machine_name']) . '.js')
-      ->template('d7/javascript.twig')
-      ->vars($vars);
+      ->template('d7/javascript.twig');
   }
 
 }

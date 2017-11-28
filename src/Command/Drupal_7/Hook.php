@@ -52,8 +52,8 @@ class Hook extends BaseGenerator {
     $content = $this->render('d7/hook/' . $vars['hook_name'] . '.twig', $vars);
 
     $this->addFile()
-      ->path($vars['machine_name'] . '.' . $file_type)
-      ->content($header . "\n" . $content)
+      ->path("{machine_name}.$file_type")
+      ->content("$header\n$content")
       ->action('append')
       ->headerSize(7);
   }

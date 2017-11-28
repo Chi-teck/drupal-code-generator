@@ -27,12 +27,11 @@ class TemplatePhp extends BaseGenerator {
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('template.php')
-      ->template('d7/template.php.twig')
-      ->vars($vars);
+      ->template('d7/template.php.twig');
   }
 
 }

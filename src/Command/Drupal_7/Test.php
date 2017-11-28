@@ -26,12 +26,11 @@ class Test extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('{machine_name}.test')
-      ->template('d7/test.twig')
-      ->vars($vars);
+      ->template('d7/test.twig');
   }
 
 }
