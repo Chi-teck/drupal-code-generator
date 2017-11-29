@@ -48,6 +48,10 @@ function dcg_phpunit {
   -c $DRUPAL_DIR/core $@
 }
 
+function dcg_label {
+  echo -e "\n\e[30;43m -= $@ =- \e[0m\n"
+}
+
 # === Create a site under testing. === #
 
 # Keep Drupal dir itself because PHP built-in server is watching it.
@@ -84,14 +88,13 @@ $DRUPAL_DIR/vendor/bin/web.server \
 
 # --- Test forms --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = form ]; then
-  echo -e "\n\e[30;43m -= Form =- \e[0m\n"
+  dcg_label Form
 
   MODULE_MACHINE_NAME=foo
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  # Generate forms.
   $DCG -d$MODULE_DIR d8:form:simple -a'{"name":"Foo","machine_name":"foo","class":"SimpleForm","form_id":"foo_simple","route":"Yes","route_name":"foo_simple_form","route_path":"/admin/config/foo/simple","route_title":"example","route_permission":"access administration pages"}'
   $DCG -d$MODULE_DIR d8:form:config -a'{"name":"Foo","machine_name":"foo","class":"SettingsForm","form_id":"foo_config","route":"Yes","route_name":"foo_config_form","route_path":"/admin/config/foo/settings","route_title":"example","route_permission":"access administration pages"}'
   $DCG -d$MODULE_DIR d8:form:confirm -a'{"name":"Foo","machine_name":"foo","class":"ConfirmForm","form_id":"foo_confirm", "route":"Yes","route_name":"foo_confirm_form","route_path":"/admin/config/foo/confirm","route_title":"example","route_permission":"access administration pages"}'
@@ -104,14 +107,13 @@ fi
 
 # --- Test module components --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
-  echo -e "\n\e[30;43m -= Module component =- \e[0m\n"
+  dcg_label Module component
 
   MODULE_MACHINE_NAME=bar
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  # Generate module components.
   $DCG -d$MODULE_DIR d8:composer -a'{"machine_name":"bar","description":"Bar project.","type":"drupal-module","drupal_org":"Yes"}'
   $DCG -d$MODULE_DIR d8:controller -a'{"name":"Bar","machine_name":"bar","class":"BarController","route":true,"route_name":"bar.example","route_path":"/bar/example","route_title":"Example","route_permission":"access content"}'
   $DCG -d$MODULE_DIR d8:install -a'{"name":"Bar","machine_name":"bar"}'
@@ -129,14 +131,13 @@ fi
 
 # --- Test plugins --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
-  echo -e "\n\e[30;43m -= Plugin =- \e[0m\n"
+  dcg_label Plugin
 
   MODULE_MACHINE_NAME=qux
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  # Generate plugins.
   $DCG -d$MODULE_DIR d8:plugin:field:formatter -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
   $DCG -d$MODULE_DIR d8:plugin:field:type -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
   $DCG -d$MODULE_DIR d8:plugin:field:widget -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
@@ -163,14 +164,13 @@ fi
 
 # --- Test services --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
-  echo -e "\n\e[30;43m -= Service =- \e[0m\n"
+  dcg_label Service
 
   MODULE_MACHINE_NAME=zippo
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  # Generate services.
   $DCG -d$MODULE_DIR d8:service:access-checker -a'{"name":"Zippo","machine_name":"zippo","applies_to":"zippo","class":"ZippoAccessChecker"}'
   $DCG -d$MODULE_DIR d8:service:breadcrumb-builder -a'{"name":"Zippo","machine_name":"zippo","class":"ZippoBreadcrumbBuilder"}'
   $DCG -d$MODULE_DIR d8:service:custom -a'{"name":"Zippo","machine_name":"zippo", "service_name":"zippo.example","class":"Example"}'
@@ -188,14 +188,13 @@ fi
 
 # --- Test YML --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = yml ]; then
-  echo -e "\n\e[30;43m -= YML =- \e[0m\n"
+  dcg_label YML
 
   MODULE_MACHINE_NAME=yety
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  # Generate YML files.
   $DCG -d$MODULE_DIR d8:yml:links:action -a'{"machine_name":"yety"}'
   $DCG -d$MODULE_DIR d8:yml:links:contextual -a'{"machine_name":"yety"}'
   $DCG -d$MODULE_DIR d8:yml:links:menu -a'{"machine_name":"yety"}'
@@ -214,14 +213,13 @@ fi
 
 # --- Test tests --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = test ]; then
-  echo -e "\n\e[30;43m -= Test =- \e[0m\n"
+  dcg_label Test
 
   MODULE_MACHINE_NAME=xerox
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  # Generate tests.
   $DCG -d$MODULE_DIR d8:test:browser -a'{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
   $DCG -d$MODULE_DIR d8:test:javascript -a'{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
   $DCG -d$MODULE_DIR d8:test:kernel -a'{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
@@ -236,14 +234,13 @@ fi
 
 # --- Test theme components --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = theme_component ]; then
-  echo -e "\n\e[30;43m -= Theme component =- \e[0m\n"
+  dcg_label Theme component
 
   THEME_MACHINE_NAME=shreya
   THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
 
   mkdir $THEME_DIR
 
-  # Generate theme components.
   $DCG -d$THEME_DIR d8:theme-file -a'{"name":"Shreya","machine_name":"shreya"}'
   $DCG -d$THEME_DIR d8:yml:breakpoints -a'{"machine_name":"shreya"}'
   $DCG -d$THEME_DIR d8:theme-settings -a'{"name":"Shreya","machine_name":"shreya"}'
@@ -255,12 +252,11 @@ fi
 
 # --- Test plugin manager --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = plugin_manager ]; then
-  echo -e "\n\e[30;43m -= Plugin manager =- \e[0m\n"
+  dcg_label Plugin manager
 
   MODULE_MACHINE_NAME=lamda
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  # Generate plugin manager.
   $DCG -d$DRUPAL_DIR/modules d8:module:plugin-manager -a'{"name":"Lamda","machine_name":"lamda","description":"Helper module for testing plugin manager.","dependencies":"drupal:views","package":"DCG"}'
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
@@ -273,14 +269,11 @@ fi
 
 # --- Test configuration entity --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = configuration_entity ]; then
-  echo -e "\n\e[30;43m -= Configuration entity =- \e[0m\n"
+  dcg_label Configuration entity
 
   MODULE_MACHINE_NAME=wine
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  #cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
-
-  # Generate configuration entity.
   $DCG -d$DRUPAL_DIR/modules d8:module:configuration-entity -a'{"name":"Wine","machine_name":"wine","description":"Configuration entity module generated by DCG.","entity_type_label":"Example","entity_type_id":"example","dependencies":"drupal:views","package":"DCG"}'
 
   dcg_phpcs $MODULE_DIR
@@ -291,14 +284,11 @@ fi
 
 # --- Test content entity --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
-  echo -e "\n\e[30;43m -= Content entity =- \e[0m\n"
+  dcg_label Content entity
 
   MODULE_MACHINE_NAME=nigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  #cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_PATH
-
-  # Generate content entity.
   $DCG -d$DRUPAL_DIR/modules d8:module:content-entity -a'{"name":"Nigma","machine_name":"nigma","description":"Content entity module generated by DCG.","entity_type_label":"Example","entity_type_id":"example","dependencies":"drupal:views","package":"DCG","entity_base_path":"/admin/content/example","fieldable":"yes","revisionable":"yes","template":"yes","access_controller":"yes","title_base_field":"yes","status_base_field":"yes","created_base_field":"yes","changed_base_field":"yes","author_base_field":"yes","description_base_field":"yes","rest_configuration":"yes"}'
 
   dcg_phpcs $MODULE_DIR
@@ -309,13 +299,12 @@ fi
 
 # --- Test module --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = simmple_module ]; then
-  echo -e "\n\e[30;43m -= Simple module =- \e[0m\n"
+  dcg_label Simple module
 
   MODULE_MACHINE_NAME=peach
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  # Generate simple module.
-  $DCG -d$DRUPAL_DIR/modules d8:module:simple -a'{"name":"Peach","machine_name":"peach","description":"Standard module generated by DCG.","dependencies":"drupal:views, drupal:node, drupal:action","package":"DCG","install_file":"Yes","libraries.yml":"Yes","permissions.yml":"Yes","event_subscriber":"Yes","block_plugin":"Yes","controller":"Yes","settings_form":"Yes"}'
+  $DCG -d$DRUPAL_DIR/modules d8:module:simple -a'{"name":"Peach","machine_name":"peach","description":"Simple module generated by DCG.","dependencies":"drupal:views, drupal:node, drupal:action","package":"DCG","install_file":"Yes","libraries.yml":"Yes","permissions.yml":"Yes","event_subscriber":"Yes","block_plugin":"Yes","controller":"Yes","settings_form":"Yes"}'
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -325,13 +314,13 @@ fi
 
 # --- Test theme --- #
 if [ $TARGET_TEST = all -o $TARGET_TEST = simple_theme ]; then
-  echo -e "\n\e[30;43m -= Simple theme =- \e[0m\n"
+  dcg_label Simple theme
 
   THEME_MACHINE_NAME=azalea
   THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
 
   # Generate simple theme.
-  $DCG -d$DRUPAL_DIR/themes d8:theme:simple -a'{"name":"Azalea","machine_name":"azalea","base_theme":"bartik","description":"Standard theme generated by DCG.","package":"DCG"}'
+  $DCG -d$DRUPAL_DIR/themes d8:theme:simple -a'{"name":"Azalea","machine_name":"azalea","base_theme":"bartik","description":"Simple theme generated by DCG.","package":"DCG"}'
 
   # Code sniffer does not like empty files.
   dcg_phpcs --ignore='\.css' $THEME_DIR
