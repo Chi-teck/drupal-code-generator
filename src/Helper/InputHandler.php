@@ -82,6 +82,9 @@ class InputHandler extends Helper {
         }
       }
 
+      // Default value may have tokens.
+      $default_value = Utils::tokenReplace($default_value, $vars);
+
       $this->setQuestionDefault($question, $default_value);
 
       if (isset($answers[$name])) {

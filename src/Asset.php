@@ -74,14 +74,7 @@ class Asset {
    *   Asset path.
    */
   public function getPath() {
-    // Replace tokens in path with appropriate values.
-    $tokens = [];
-    foreach ($this->getVars() as $var_name => $var) {
-      if (is_string($var)) {
-        $tokens['{' . $var_name . '}'] = $var;
-      }
-    }
-    return str_replace(array_keys($tokens), array_values($tokens), $this->path);
+    return Utils::tokenReplace($this->path, $this->getVars());
   }
 
   /**

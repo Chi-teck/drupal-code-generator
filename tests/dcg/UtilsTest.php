@@ -366,4 +366,13 @@ class UtilsTest extends TestCase {
     return $questions;
   }
 
+  /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Utils::tokenReplace()
+   */
+  public function testTokenReplace() {
+    static::assertEquals('-=bar=-', Utils::tokenReplace('-={foo}=-', ['foo' => 'bar']));
+  }
+
 }
