@@ -22,17 +22,16 @@ class ApacheVirtualHost extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
 
-    $default_docroot = function ($vars) {
-      return '/var/www/' . $vars['hostname'] . '/public';
-    };
-
     $questions = [
       'hostname' => new Question('Host name', 'example.com'),
-      'docroot' => new Question('Document root', $default_docroot),
+      'docroot' => new Question('Document root', '/var/www/{hostname}/public'),
     ];
 
-    $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['hostname'] . '.conf', 'other/apache-virtual-host.twig', $vars);
+    $this->collectVars($input, $output, $questions);
+
+    $this->addFile()
+      ->path('{hostname}.conf')
+      ->template('other/apache-virtual-host.twig');
   }
 
 }

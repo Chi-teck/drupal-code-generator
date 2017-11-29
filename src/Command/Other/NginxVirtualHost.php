@@ -22,28 +22,26 @@ class NginxVirtualHost extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
 
-    $default_docroot = function ($vars) {
-      return '/var/www/' . $vars['server_name'] . '/docroot';
-    };
-
     $socket = PHP_MAJOR_VERSION == 5
       ? '/run/php5-fpm.sock'
       : sprintf('/run/php/php%s.%s-fpm.sock', PHP_MAJOR_VERSION, PHP_MINOR_VERSION);
 
     $questions = [
       'server_name' => new Question('Server name', 'example.com'),
-      'docroot' => new Question('Document root', $default_docroot),
+      'docroot' => new Question('Document root', '/var/www/{server_name}/docroot'),
       'file_public_path' => new Question('Public file system path', 'sites/default/files'),
       'file_private_path' => new Question('Private file system path'),
       'fastcgi_pass' => new Question('Address of a FastCGI server', 'unix:' . $socket),
     ];
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
 
     $vars['file_public_path'] = trim($vars['file_public_path'], '/');
     $vars['file_private_path'] = trim($vars['file_private_path'], '/');
 
-    $this->setFile($vars['server_name'], 'other/nginx-virtual-host.twig', $vars);
+    $this->addFile()
+      ->path('{server_name}')
+      ->template('other/nginx-virtual-host.twig');
   }
 
 }

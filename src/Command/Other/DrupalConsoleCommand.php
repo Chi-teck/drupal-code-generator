@@ -23,22 +23,19 @@ class DrupalConsoleCommand extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
 
-    $default_command_name = function ($vars) {
-      return $vars['machine_name'] . ':example';
-    };
-
     $questions = Utils::defaultQuestions() + [
-      'command_name' => new Question('Command name', $default_command_name),
+      'command_name' => new Question('Command name', '{machine_name}:example'),
       'description' => new Question('Command description', 'Command description.'),
       'container_aware' => new ConfirmationQuestion('Make the command aware of the drupal site installation?', TRUE),
     ];
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize(str_replace(':', '_', $vars['command_name'])) . 'Command';
     $vars['command_trait'] = $vars['container_aware'] ? 'ContainerAwareCommandTrait' : 'CommandTrait';
 
-    $path = 'src/Command/' . $vars['class'] . '.php';
-    $this->setFile($path, 'other/drupal-console-command.twig', $vars);
+    $this->addFile()
+      ->path('src/Command/{class}.php')
+      ->template('other/drupal-console-command.twig');
   }
 
 }

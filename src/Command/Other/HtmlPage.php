@@ -24,11 +24,19 @@ class HtmlPage extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions['file_name'] = new Question('File name', 'index.html');
 
-    $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['file_name'], 'other/html.twig', $vars);
+    $this->collectVars($input, $output, $questions);
 
-    $this->files['css/main.css'] = 'body{background-color: #EEE}';
-    $this->files['js/main.js'] = "console.log('It works!');";
+    $this->addFile()
+      ->path('{file_name}')
+      ->template('other/html.twig');
+
+    $this->addFile()
+      ->path('css/main.css')
+      ->content('body{background-color: #EEE}');
+
+    $this->addFile()
+      ->path('js/main.js')
+      ->content("console.log('It works!');");
   }
 
 }

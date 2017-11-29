@@ -37,7 +37,7 @@ class DcgCommand extends BaseGenerator {
       'alias' => new Question('Command alias', 'example'),
     ];
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
 
     $sub_names = explode(':', $vars['name']);
     $last_sub_name = array_pop($sub_names);
@@ -53,10 +53,13 @@ class DcgCommand extends BaseGenerator {
       $vars['path'] = '/' . $file_path;
     }
 
-    $class_path = $file_path . '/' . $vars['class'] . '.php';
-    $this->setFile($class_path, 'other/dcg-command.twig', $vars);
-    $template_path = $file_path . '/' . $vars['template_name'];
-    $this->setFile($template_path, 'other/dcg-command-template.twig', $vars);
+    $this->addFile()
+      ->path($file_path . '/{class}.php')
+      ->template('other/dcg-command.twig');
+
+    $this->addFile()
+      ->path($file_path . '/{template_name}')
+      ->template('other/dcg-command-template.twig');
   }
 
 }
