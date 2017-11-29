@@ -153,7 +153,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
   $DCG -d$MODULE_DIR d8:plugin:filter -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example", "filter_type":"HTML restrictor"}'
   $DCG -d$MODULE_DIR d8:plugin:menu-link -a'{"name":"Qux","machine_name":"qux","class":"FooExample"}'
   $DCG -d$MODULE_DIR d8:plugin:rest-resource -a'{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
-  $DCG -d$MODULE_DIR d8:plugin:entity-reference-selection -a'{"name":"Qux","machine_name":"qux","entity_type":"node","plugin_label":"Example","plugin_id":"example","configurable":"yes","class":"ExampleNodeSelection"}'
+  $DCG -d$MODULE_DIR d8:plugin:entity-reference-selection -a'{"name":"Qux","machine_name":"qux","entity_type":"node","plugin_label":"Example","plugin_id":"qux_example","configurable":"yes","class":"ExampleNodeSelection"}'
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
