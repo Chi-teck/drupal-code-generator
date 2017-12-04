@@ -29,14 +29,16 @@ class Template extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $path = 'templates/' . $vars['template_name'] . '.html.twig';
-    $this->setFile($path, 'd8/template-template.twig', $vars);
+    $this->addFile()
+      ->path('templates/{template_name}.html.twig')
+      ->template('d8/template-template.twig');
+
     if ($vars['create_theme'] || $vars['create_preprocess']) {
-      $this->files[$vars['machine_name'] . '.module'] = [
-        'content' => $this->render('d8/template-module.twig', $vars),
-        'action' => 'append',
-        'header_size' => 7,
-      ];
+      $this->addFile()
+        ->path('{machine_name}.module')
+        ->template('d8/template-module.twig')
+        ->action('append')
+        ->headerSize(7);
     }
   }
 

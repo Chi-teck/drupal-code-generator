@@ -26,15 +26,19 @@ class ThemeSettings extends BaseGenerator {
     $questions['name']->setValidator([Utils::class, 'validateRequired']);
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $this->setFile('theme-settings.php', 'd8/theme-settings-form.twig', $vars);
+    $this->addFile()
+      ->path('theme-settings.php')
+      ->template('d8/theme-settings-form.twig');
 
-    $schema_path = 'config/install/' . $vars['machine_name'] . '.settings.yml';
-    $this->setFile($schema_path, 'd8/theme-settings-config.twig', $vars);
+    $this->addFile()
+      ->path('config/install/{machine_name}.settings.yml')
+      ->template('d8/theme-settings-config.twig');
 
-    $schema_path = 'config/schema/' . $vars['machine_name'] . '.schema.yml';
-    $this->setFile($schema_path, 'd8/theme-settings-schema.twig', $vars);
+    $this->addFile()
+      ->path('config/schema/{machine_name}.schema.yml')
+      ->template('d8/theme-settings-schema.twig');
   }
 
 }

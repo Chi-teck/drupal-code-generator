@@ -34,11 +34,14 @@ class AccessChecker extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $path = 'src/Access/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/service/access-checker.twig', $vars);
-    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/access-checker.services.twig', $vars);
+    $this->addFile()
+      ->path('src/Access/{class}.php')
+      ->template('d8/service/access-checker.twig');
+
+    $this->addServicesFile()
+      ->template('d8/service/access-checker.services.twig');
   }
 
 }

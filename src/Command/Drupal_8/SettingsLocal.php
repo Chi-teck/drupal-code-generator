@@ -37,10 +37,12 @@ class SettingsLocal extends BaseGenerator {
       array_walk($questions, function (Question $question) {
         $question->setValidator([Utils::class, 'validateRequired']);
       });
-      $vars += $this->collectVars($input, $output, $questions);
+      $this->collectVars($input, $output, $questions);
     }
 
-    $this->setFile('settings.local.php', 'd8/settings.local.twig', $vars);
+    $this->addFile()
+      ->path('settings.local.php')
+      ->template('d8/settings.local.twig');
   }
 
 }

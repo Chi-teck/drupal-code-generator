@@ -255,14 +255,16 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Output instance.
    * @param array $questions
    *   List of questions that the user should answer.
+   * @param array $vars
+   *   Array of predefined template variables.
    *
    * @return array
    *   Template variables.
    *
    * @see \DrupalCodeGenerator\InputHandler
    */
-  protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions) {
-    $this->vars += $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions);
+  protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) {
+    $this->vars += $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions, $vars);
     return $this->vars;
   }
 

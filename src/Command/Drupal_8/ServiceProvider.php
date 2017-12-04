@@ -20,9 +20,11 @@ class ServiceProvider extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
+    $vars = &$this->collectVars($input, $output, Utils::defaultQuestions());
     $vars['class'] = Utils::camelize($vars['name'] . 'ServiceProvider');
-    $this->setFile('src/' . $vars['class'] . '.php', 'd8/service-provider.twig', $vars);
+    $this->addFile()
+      ->path('src/{class}.php')
+      ->template('d8/service-provider.twig');
   }
 
 }

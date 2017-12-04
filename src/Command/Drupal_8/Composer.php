@@ -37,9 +37,11 @@ class Composer extends BaseGenerator {
     ]);
     $questions['drupal_org'] = new ConfirmationQuestion('Is this project hosted on drupal.org?', FALSE);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $this->setFile('composer.json', 'd8/composer.twig', $vars);
+    $this->addFile()
+      ->path('composer.json')
+      ->template('d8/composer.twig');
   }
 
 }

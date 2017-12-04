@@ -35,30 +35,34 @@ class Layout extends BaseGenerator {
     $questions['js'] = new ConfirmationQuestion('Would you like to create JavaScript file for this layout?', FALSE);
     $questions['css'] = new ConfirmationQuestion('Would you like to create CSS file for this layout?', FALSE);
 
-    $vars = $this->collectVars($input, $output, $questions);
-
-    $this->files[$vars['machine_name'] . '.layouts.yml'] = [
-      'content' => $this->render('d8/_layout/layouts.twig', $vars),
-      'action' => 'append',
-    ];
+    $vars = &$this->collectVars($input, $output, $questions);
+    $this->addFile()
+      ->path('{machine_name}.layouts.yml')
+      ->template('d8/_layout/layouts.twig')
+      ->action('append');
 
     if ($vars['js'] || $vars['css']) {
-      $this->files[$vars['machine_name'] . '.libraries.yml'] = [
-        'content' => $this->render('d8/_layout/libraries.twig', $vars),
-        'action' => 'append',
-      ];
+      $this->addFile()
+        ->path('{machine_name}.libraries.yml')
+        ->template('d8/_layout/libraries.twig')
+        ->action('append');
     }
 
-    $path_prefix = 'layouts/' . $vars['layout_machine_name'] . '/';
-    $layout_asset_name = str_replace('_', '-', $vars['layout_machine_name']);
+    $vars['layout_asset_name'] = str_replace('_', '-', $vars['layout_machine_name']);
 
-    $this->setFile($path_prefix . $layout_asset_name . '.html.twig', 'd8/_layout/template.twig', $vars);
+    $this->addFile()
+      ->path('layouts/{layout_machine_name}/{layout_asset_name}.html.twig')
+      ->template('d8/_layout/template.twig');
 
     if ($vars['js']) {
-      $this->setFile($path_prefix . $layout_asset_name . '.js', 'd8/_layout/javascript.twig', $vars);
+      $this->addFile()
+        ->path('layouts/{layout_machine_name}/{layout_asset_name}.js')
+        ->template('d8/_layout/javascript.twig');
     }
     if ($vars['css']) {
-      $this->setFile($path_prefix . $layout_asset_name . '.css', 'd8/_layout/styles.twig', $vars);
+      $this->addFile()
+        ->path('layouts/{layout_machine_name}/{layout_asset_name}.css')
+        ->template('d8/_layout/styles.twig');
     }
 
   }
