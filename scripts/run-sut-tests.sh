@@ -76,7 +76,7 @@ else
 fi
 
 # Start server.
-# Use Drush router PHP built-in server cannot handle routers with dots.
+# Use Drush router because PHP built-in server cannot handle routers with dots.
 # See https://bugs.php.net/bug.php?id=61286.
 $DRUPAL_DIR/vendor/bin/web.server \
   start \
