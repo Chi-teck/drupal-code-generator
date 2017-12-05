@@ -123,7 +123,7 @@
   [1] Configuration entity
   [2] Content entity
   [3] Plugin manager
-  [4] Simple
+  [4] Standard
   ➤➤➤ 0⏎
  Select generator: 
   [0 ] ..

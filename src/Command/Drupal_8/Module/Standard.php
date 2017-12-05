@@ -10,12 +10,12 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Implements d8:module:simple command.
+ * Implements d8:module:standard command.
  */
-class Simple extends BaseGenerator {
+class Standard extends BaseGenerator {
 
-  protected $name = 'd8:module:simple';
-  protected $description = 'Generates simple Drupal 8 module';
+  protected $name = 'd8:module:standard';
+  protected $description = 'Generates standard Drupal 8 module';
   protected $alias = 'module';
   protected $destination = 'modules';
 
