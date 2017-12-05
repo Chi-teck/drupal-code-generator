@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_8\Theme;
+namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
@@ -9,14 +9,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Implements d8:theme:simple command.
+ * Implements d8:theme command.
  *
  * @TODO: Create a test for this.
  */
-class Simple extends BaseGenerator {
+class Theme extends BaseGenerator {
 
-  protected $name = 'd8:theme:simple';
-  protected $description = 'Generates simple Drupal 8 theme';
+  protected $name = 'd8:theme';
+  protected $description = 'Generates Drupal 8 theme';
   protected $alias = 'theme';
   protected $destination = 'themes';
 
