@@ -17,7 +17,7 @@ chmod +x dcg.phar
 sudo mv dcg.phar /usr/local/bin/dcg
 dcg --version
 ```
-Installtion using Composer is also supported.
+Installation using Composer is also supported.
 
 ## Upgrade
 Simply repeat installation commands.
@@ -36,13 +36,11 @@ dcg d8:plugin:field:widget
 # Generate code non interactively.
 dcg twig-extension -a '{"name": "Example", "machine_name": "example", "class": "ExampleTwigExtension"}'
 ```
-
 ## Extending
 All custom generators should be placed to _$HOME/.dcg/Command_ directory. The following command will help you to get started with creating own generators.
 ```bash
 # Create custom DCG command.
-dcg dcg-command -d$HOME/.dcg/Command
+dcg dcg-command -d $HOME/.dcg/Command
 ```
-
 ## License
 GNU General Public License, version 2
