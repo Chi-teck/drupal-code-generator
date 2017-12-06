@@ -115,7 +115,7 @@ class InputHandlerTest extends TestCase {
       'machine_name' => 'Zoo',
     ];
     static::assertEquals($expected_vars, $vars);
-    static::assertEquals("Machine name [Default machine name]:\n➤ ", $this->output->fetch());
+    static::assertEquals("\n Machine name [Default machine name]:\n ➤ ", $this->output->fetch());
 
     $this->input->setOption('answers', 'Wrong JSON');
     $this->expectException('Symfony\Component\Console\Exception\InvalidOptionException');
@@ -139,9 +139,8 @@ class InputHandlerTest extends TestCase {
       'name' => 'Example',
       'machine_name' => 'example',
     ];
-    $row[] = "Name [Example]:\n➤ Machine name [example]:\n➤ ";
+    $row[] = "\n Name [Example]:\n ➤ \n Machine name [example]:\n ➤ ";
     $data[] = $row;
-
     // Without default values.
     $row = [];
     $row[] = [
@@ -157,7 +156,7 @@ class InputHandlerTest extends TestCase {
       'plugin_label' => 'Bar',
       'plugin_id' => 'bar',
     ];
-    $row[] = "Name [Directory name]:\n➤ Machine name [example]:\n➤ Plugin label:\n➤ Plugin ID:\n➤ ";
+    $row[] = "\n Name [Directory name]:\n ➤ \n Machine name [example]:\n ➤ \n Plugin label:\n ➤ \n Plugin ID:\n ➤ ";
     $data[] = $row;
 
     // Test default validators.
@@ -179,10 +178,10 @@ class InputHandlerTest extends TestCase {
       'foo' => 'example',
     ];
     $row[] = [
-      "Machine name [directory_name]:\n➤ The value is not correct machine name.",
-      "Machine name [directory_name]:\n➤ Class:\n➤ The value is not correct class name.",
-      "Class:\n➤ Foo:\n➤ The value is required.",
-      "Foo:\n➤ ",
+      "\n Machine name [directory_name]:\n ➤ The value is not correct machine name.",
+      "\n Machine name [directory_name]:\n ➤ \n Class:\n ➤ The value is not correct class name.",
+      "\n Class:\n ➤ \n Foo:\n ➤ The value is required.",
+      "\n Foo:\n ➤ ",
     ];
     $data[] = $row;
 
@@ -200,7 +199,7 @@ class InputHandlerTest extends TestCase {
       'name' => 'example',
       'bar' => 'example',
     ];
-    $row[] = "Name [Zoo]:\n➤ bar [*example*]:\n➤ ";
+    $row[] = "\n Name [Zoo]:\n ➤ \n bar [*example*]:\n ➤ ";
     $data[] = $row;
 
     return $data;

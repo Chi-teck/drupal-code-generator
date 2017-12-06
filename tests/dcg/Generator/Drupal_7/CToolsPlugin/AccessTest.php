@@ -25,4 +25,12 @@ class AccessTest extends GeneratorBaseTest {
     'plugins/access/example.inc' => __DIR__ . '/_access.inc',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function getExpectedDisplay() {
+    $display = parent::getExpectedDisplay();
+    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
+  }
+
 }

@@ -35,9 +35,12 @@ class ApplicationTest extends TestCase {
 
     $expected_output = [
       '',
-      'The following directories and files have been created or updated:',
-      '–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––',
-      '• foo.install',
+      ' Welcome to d8:install generator!',
+      '––––––––––––––––––––––––––––––––––',
+      '',
+      ' The following directories and files have been created or updated:',
+      '–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––',
+      ' • foo.install',
     ];
     static::assertEquals($expected_output, $output);
     static::assertEquals(0, $return);

@@ -132,6 +132,15 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $is_extension = in_array($this->destination, $extension_destinations);
     $this->directory = $is_extension
       ? $directory : (Utils::getExtensionRoot($directory) ?: $directory);
+
+    // Display welcome message.
+    $header = sprintf(
+      "\n Welcome to %s generator!",
+      $this->getName()
+    );
+    $output->writeln($header);
+    $header_length = strlen(trim(strip_tags($header)));
+    $output->writeln('<fg=cyan;options=bold>–' . str_repeat('–', $header_length) . '–</>');
   }
 
   /**

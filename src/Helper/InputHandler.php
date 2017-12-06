@@ -113,7 +113,7 @@ class InputHandler extends Helper {
     $question_text = $question->getQuestion();
     $default_value = $question->getDefault();
 
-    $question_text = "<info>$question_text</info>";
+    $question_text = "\n <info>$question_text</info>";
     if (is_bool($default_value)) {
       $default_value = $default_value ? 'Yes' : 'No';
     }
@@ -125,7 +125,7 @@ class InputHandler extends Helper {
       $question->setPrompt('  ➤➤➤ ');
     }
     else {
-      $question_text .= "\n➤ ";
+      $question_text .= "\n ➤ ";
     }
 
     $this->setQuestionText($question, $question_text);
