@@ -41,6 +41,7 @@ class ApplicationTest extends TestCase {
       ' The following directories and files have been created or updated:',
       '–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––',
       ' • foo.install',
+      '',
     ];
     static::assertEquals($expected_output, $output);
     static::assertEquals(0, $return);

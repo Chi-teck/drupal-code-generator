@@ -31,6 +31,7 @@ class OutputHandlerTest extends TestCase {
       " • aaa/ddd\n",
       " • bbb/fff\n",
       " • bbb/eee/ggg\n",
+      "\n",
     ]);
     self::assertEquals($expected_output, $output->fetch());
 

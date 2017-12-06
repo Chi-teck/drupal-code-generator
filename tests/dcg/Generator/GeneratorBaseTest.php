@@ -107,6 +107,7 @@ abstract class GeneratorBaseTest extends TestCase {
     $expected_display .= " The following directories and files have been created or updated:\n";
     $expected_display .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
     $expected_display .= " • $targets\n";
+    $expected_display .= "\n";
     return $expected_display;
   }
 
