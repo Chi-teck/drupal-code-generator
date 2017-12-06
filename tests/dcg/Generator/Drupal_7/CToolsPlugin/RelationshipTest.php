@@ -25,4 +25,12 @@ class RelationshipTest extends GeneratorBaseTest {
     'plugins/relationships/example.inc' => __DIR__ . '/_relationship.inc',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function getExpectedDisplay() {
+    $display = parent::getExpectedDisplay();
+    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
+  }
+
 }

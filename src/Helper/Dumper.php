@@ -172,7 +172,7 @@ class Dumper extends Helper {
    *   User confirmation.
    */
   protected function confirm($question_text) {
-    $question_text .= "\n➤ ";
+    $question_text = "\n $question_text\n ➤ ";
     // If the input is not interactive print the question with default answer.
     if ($this->replace !== NULL) {
       $this->output->writeln($question_text . ($this->replace ? 'Yes' : 'No'));

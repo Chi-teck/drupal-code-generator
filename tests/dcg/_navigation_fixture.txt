@@ -342,13 +342,16 @@
   [18] Theme settings
   [19] composer.json
   ➤➤➤➤ 9⏎
-Generator: install
-––––––––––––––––––
-Module name [Dcg sandbox]:
-➤ Foo⏎
-Module machine name [foo]:
-➤ foo⏎
 
-The following directories and files have been created or updated:
-–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-• foo.install
+ Welcome to d8:install generator!
+––––––––––––––––––––––––––––––––––
+
+ Module name [Dcg sandbox]:
+ ➤ Foo⏎
+
+ Module machine name [foo]:
+ ➤ foo⏎
+
+ The following directories and files have been created or updated:
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ • foo.install

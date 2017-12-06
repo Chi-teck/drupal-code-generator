@@ -38,4 +38,12 @@ class FilterTest extends GeneratorBaseTest {
     parent::setUp();
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function getExpectedDisplay() {
+    $display = parent::getExpectedDisplay();
+    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
+  }
+
 }

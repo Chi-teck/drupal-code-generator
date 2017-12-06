@@ -149,19 +149,10 @@ class Navigation extends Command {
       return 0;
     }
 
-    $command = $this->getApplication()->find($this->generatorName);
-    $aliases = $command->getAliases();
-
-    $header = sprintf(
-      '<info>Generator:</info> %s',
-      // Display alias instead command name if possible.
-      isset($aliases[0]) ? $aliases[0] : $this->generatorName
-    );
-    $output->writeln($header);
-    $output->writeln('<fg=cyan;options=bold>' . str_repeat('–', strlen(strip_tags($header))) . '</>');
-
     // Run the generator.
-    return $command->run($input, $output);
+    return $this->getApplication()
+      ->find($this->generatorName)
+      ->run($input, $output);
   }
 
   /**

@@ -23,14 +23,14 @@ class OutputHandlerTest extends TestCase {
       ['bbb/eee/ggg', 'aaa/ddd', 'ccc', 'aaa', 'bbb/fff']
     );
     $expected_output = "\n";
-    $expected_output .= "The following directories and files have been created or updated:\n";
-    $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
+    $expected_output .= " The following directories and files have been created or updated:\n";
+    $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
     $expected_output .= implode([
-      "• aaa\n",
-      "• ccc\n",
-      "• aaa/ddd\n",
-      "• bbb/fff\n",
-      "• bbb/eee/ggg\n",
+      " • aaa\n",
+      " • ccc\n",
+      " • aaa/ddd\n",
+      " • bbb/fff\n",
+      " • bbb/eee/ggg\n",
     ]);
     self::assertEquals($expected_output, $output->fetch());
 

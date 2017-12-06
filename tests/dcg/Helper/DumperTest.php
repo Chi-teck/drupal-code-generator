@@ -122,7 +122,7 @@ class DumperTest extends TestCase {
     $results = $this->dump();
     $this->assertResults($results);
     $this->assertFileContents();
-    $this->assertOutput("$question_text [Yes]:\n➤ ");
+    $this->assertOutput("\n $question_text [Yes]:\n ➤ ");
 
     // -- File exists and user confirms replacing.
     $this->setStream("Yes\n");
@@ -132,7 +132,7 @@ class DumperTest extends TestCase {
     $results = $this->dump();
     $this->assertResults($results);
     $this->assertFileContents();
-    $this->assertOutput("$question_text [Yes]:\n➤ ");
+    $this->assertOutput("\n $question_text [Yes]:\n ➤ ");
 
     // -- File exists and user cancels replacing.
     $this->setStream("Not\n");
@@ -142,7 +142,7 @@ class DumperTest extends TestCase {
     $results = $this->dump();
     $this->assertEmptyResults($results);
     $this->assertFileContents([static::createAsset('foo.txt', $expected_content)]);
-    $this->assertOutput("$question_text [Yes]:\n➤ ");
+    $this->assertOutput("\n $question_text [Yes]:\n ➤ ");
 
     // -- Dumper with enabled replace option (always yes).
     $this->setDumper(TRUE);
@@ -152,7 +152,7 @@ class DumperTest extends TestCase {
     $results = $this->dump();
     $this->assertResults($results);
     $this->assertFileContents();
-    $this->assertOutput("$question_text [Yes]:\n➤ Yes\n");
+    $this->assertOutput("\n $question_text [Yes]:\n ➤ Yes\n");
 
     // -- Dumper with enabled replace option (always not).
     $this->setDumper(FALSE);
@@ -162,7 +162,7 @@ class DumperTest extends TestCase {
     $results = $this->dump();
     $this->assertEmptyResults($results);
     $this->assertFileContents([static::createAsset('foo.txt', $expected_content)]);
-    $this->assertOutput("$question_text [Yes]:\n➤ No\n");
+    $this->assertOutput("\n $question_text [Yes]:\n ➤ No\n");
 
     // -- File with special permissions.
     $this->assets = [

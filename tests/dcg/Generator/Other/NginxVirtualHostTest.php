@@ -16,7 +16,7 @@ class NginxVirtualHostTest extends GeneratorBaseTest {
     'Document root [/var/www/example.local/docroot]:' => '/var/www/example.local/docroot',
     'Public file system path [sites/default/files]:' => 'files',
     'Private file system path:' => 'files/private',
-    'Address of a FastCGI server [unix:/run/php/php7.0-fpm.sock]:' => 'unix:/run/php/php7.0-fpm.sock',
+    'Address of a FastCGI server [unix:%socket%]:' => 'unix:/run/php/php7.0-fpm.sock',
   ];
 
   protected $fixtures = [
@@ -26,9 +26,14 @@ class NginxVirtualHostTest extends GeneratorBaseTest {
   /**
    * {@inheritdoc}
    */
-  protected function getDisplay() {
-    // Default PHP version comes form the environment where the test is running.
-    return preg_replace('#unix:.*sock#', 'unix:/run/php/php7.0-fpm.sock', parent::getDisplay());
+  protected function getExpectedDisplay() {
+    $display = parent::getExpectedDisplay();
+
+    $socket = PHP_MAJOR_VERSION == 5
+      ? '/run/php5-fpm.sock'
+      : sprintf('/run/php/php%s.%s-fpm.sock', PHP_MAJOR_VERSION, PHP_MINOR_VERSION);
+
+    return str_replace('%socket%', $socket, $display);
   }
 
 }

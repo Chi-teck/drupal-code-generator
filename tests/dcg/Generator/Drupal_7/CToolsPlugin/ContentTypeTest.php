@@ -25,4 +25,12 @@ class ContentTypeTest extends GeneratorBaseTest {
     'plugins/content_types/example.inc' => __DIR__ . '/_content_type.inc',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function getExpectedDisplay() {
+    $display = parent::getExpectedDisplay();
+    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
+  }
+
 }
