@@ -45,6 +45,7 @@ class OutputHandler extends Helper {
       foreach ($dumped_files as $file) {
         $output->writeln(" • $file");
       }
+      $output->writeln('');
     }
 
   }
