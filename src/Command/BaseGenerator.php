@@ -189,6 +189,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       foreach ($this->getFiles() as $path => $file) {
         $asset = new Asset();
         $asset->path($path);
+        if (!is_array($file)) {
+          $file = ['content' => $file];
+        }
         if (isset($file['content'])) {
           $asset->content($file['content']);
         }
