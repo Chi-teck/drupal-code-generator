@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Base class form Drupal 8 form generators.
+ * Base class for Drupal 8 form generators.
  */
 abstract class Base extends BaseGenerator {
 
