@@ -338,7 +338,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @param array $vars
    *   Twig variables.
    *
-   * @deprecated Use self::createFile() or self::createDirectory().
+   * @deprecated Use self::addFile() or self::addDirectory().
    */
   protected function setFile($path = NULL, $template = NULL, array $vars = []) {
     $this->addFile()
@@ -357,7 +357,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @param array $vars
    *   Twig variables.
    *
-   * @deprecated Use self::createFile().
+   * @deprecated Use self::addServiceFile().
    */
   protected function setServicesFile($path, $template, array $vars) {
     $this->addServicesFile()
