@@ -6,7 +6,7 @@ use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Output printer form generators.
+ * Output printer for generators.
  */
 class OutputHandler extends Helper {
 
