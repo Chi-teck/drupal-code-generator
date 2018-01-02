@@ -27,19 +27,21 @@ abstract class Base extends BaseGenerator {
 
     if ($vars['route']) {
       $route_path = '/' . str_replace('_', '-', $vars['machine_name']) . '/example';
-      $route_questions['route_name'] = new Question('Route name', $vars['machine_name'] . '.example');
+      $route_questions['route_name'] = new Question('Route name', '{machine_name}.example');
       $route_questions['route_path'] = new Question('Route path', $route_path);
       $route_questions['route_title'] = new Question('Route title', 'Example');
       $route_questions['route_permission'] = new Question('Route permission', $options['default_permission']);
-      $vars += $this->collectVars($input, $output, $route_questions);
-      $this->files[$vars['machine_name'] . '.routing.yml'] = [
-        'content' => $this->render('d8/form/route.twig', $vars),
-        'action' => 'append',
-      ];
+
+      $this->collectVars($input, $output, $route_questions, $vars);
+      $this->addFile()
+        ->path('{machine_name}.routing.yml')
+        ->template('d8/form/route.twig')
+        ->action('append');
     }
 
-    $path = 'src/Form/' . $vars['class'] . '.php';
-    $this->setFile($path, $options['template'], $vars);
+    $this->addFile()
+      ->path('src/Form/{class}.php')
+      ->template($options['template']);
   }
 
 }

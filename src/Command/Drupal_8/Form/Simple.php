@@ -18,12 +18,12 @@ class Simple extends Base {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $options['default_class'] = 'ExampleForm';
-    $options['default_form_id'] = function ($vars) {
-      return $vars['machine_name'] . '_example';
-    };
-    $options['default_permission'] = 'access content';
-    $options['template'] = 'd8/form/simple.twig';
+    $options = [
+      'default_class' => 'ExampleForm',
+      'default_form_id' => '{machine_name}_example',
+      'default_permission' => 'access content',
+      'template' => 'd8/form/simple.twig',
+    ];
     $this->doInteract($input, $output, $options);
   }
 
