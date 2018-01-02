@@ -1,0 +1,6 @@
+services:
+  logger.{{ machine_name }}:
+    class: Drupal\{{ machine_name }}\Logger\{{ class }}
+    arguments: ['@config.factory', '@logger.log_message_parser', '@date.formatter']
+    tags:
+      - { name: logger }
