@@ -35,8 +35,8 @@ class ApplicationTest extends TestCase {
 
     $expected_output = [
       '',
-      ' Welcome to d8:install generator!',
-      '––––––––––––––––––––––––––––––––––',
+      ' Welcome to d8:install-file generator!',
+      '–––––––––––––––––––––––––––––––––––––––',
       '',
       ' The following directories and files have been created or updated:',
       '–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––',

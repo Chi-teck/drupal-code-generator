@@ -344,8 +344,8 @@
   [19] composer.json
   ➤➤➤➤ 9⏎
 
- Welcome to d8:install generator!
-––––––––––––––––––––––––––––––––––
+ Welcome to d8:install-file generator!
+–––––––––––––––––––––––––––––––––––––––
 
  Module name [Dcg sandbox]:
  ➤ Foo⏎

@@ -7,9 +7,9 @@ use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 /**
  * Test for d8:install command.
  */
-class InstallTest extends GeneratorBaseTest {
+class InstallFileTest extends GeneratorBaseTest {
 
-  protected $class = 'Drupal_8\Install';
+  protected $class = 'Drupal_8\InstallFile';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_8;
+namespace DrupalCodeGenerator\Command\Drupal_7;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
@@ -8,14 +8,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Implements d8:install command.
+ * Implements d7:install-file command.
  */
-class Install extends BaseGenerator {
+class InstallFile extends BaseGenerator {
 
-  protected $name = 'd8:install';
-  protected $description = 'Generates an install file';
-  protected $alias = 'install';
-  protected $label = 'Install file';
+  protected $name = 'd7:install-file';
+  protected $description = 'Generates Drupal 7 install file';
 
   /**
    * {@inheritdoc}
@@ -24,7 +22,7 @@ class Install extends BaseGenerator {
     $this->collectVars($input, $output, Utils::defaultQuestions());
     $this->addFile()
       ->path('{machine_name}.install')
-      ->template('d8/install.twig');
+      ->template('d7/install.twig');
   }
 
 }
