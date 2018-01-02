@@ -27,11 +27,14 @@ class TwigExtension extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $path = 'src/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/service/twig-extension.twig', $vars);
-    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/twig-extension.services.twig', $vars);
+    $this->addFile()
+      ->path('src/{class}.php')
+      ->template('d8/service/twig-extension.twig');
+
+    $this->addServicesFile()
+      ->template('d8/service/twig-extension.services.twig');
   }
 
 }

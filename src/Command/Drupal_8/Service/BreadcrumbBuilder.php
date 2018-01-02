@@ -27,11 +27,15 @@ class BreadcrumbBuilder extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $path = 'src/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/service/breadcrumb-builder.twig', $vars);
-    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/breadcrumb-builder.services.twig', $vars);
+    $this->addFile()
+      ->path('src/{class}.php')
+      ->template('d8/service/breadcrumb-builder.twig');
+
+    $this->addServicesFile()
+      ->path('{machine_name}.services.yml')
+      ->template('d8/service/breadcrumb-builder.services.twig');
   }
 
 }

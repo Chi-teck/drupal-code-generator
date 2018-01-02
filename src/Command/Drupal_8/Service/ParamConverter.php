@@ -28,12 +28,16 @@ class ParamConverter extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($input, $output, $questions);
-    $vars['controller_class'] = Utils::camelize($vars['machine_name']) . 'Controller';
+    $vars = &$this->collectVars($input, $output, $questions);
+    $vars['controller_class'] = Utils::camelize($vars['machine_name'] . 'Controller');
 
-    $path = 'src/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/service/param-converter.twig', $vars);
-    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/param-converter.services.twig', $vars);
+    $this->addFile()
+      ->path('src/{class}.php')
+      ->template('d8/service/param-converter.twig');
+
+    $this->addServicesFile()
+      ->path('{machine_name}.services.yml')
+      ->template('d8/service/param-converter.services.twig');
   }
 
 }

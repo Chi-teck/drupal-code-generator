@@ -21,13 +21,16 @@ class Middleware extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['name'] . 'Middleware');
 
-    $path = 'src/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/service/middleware.twig', $vars);
+    $this->addFile()
+      ->path('src/{class}.php')
+      ->template('d8/service/middleware.twig');
 
-    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/middleware.services.twig', $vars);
+    $this->addServicesFile()
+      ->path('{machine_name}.services.yml')
+      ->template('d8/service/middleware.services.twig');
   }
 
 }

@@ -22,10 +22,7 @@ class Custom extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
-    $default_service_name = function ($vars) {
-      return $vars['machine_name'] . '.example';
-    };
-    $questions['service_name'] = new Question('Service name', $default_service_name);
+    $questions['service_name'] = new Question('Service name', '{machine_name}.example');
     $questions['service_name']->setValidator(function ($value) {
       if (!preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
         throw new \UnexpectedValueException('The value is not correct service name.');
@@ -37,10 +34,14 @@ class Custom extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $this->setFile('src/' . $vars['class'] . '.php', 'd8/service/custom.twig', $vars);
-    $this->setServicesFile($vars['machine_name'] . '.services.yml', 'd8/service/custom.services.twig', $vars);
+    $this->addFile()
+      ->path('src/{class}.php')
+      ->template('d8/service/custom.twig');
+
+    $this->addServicesFile()
+      ->template('d8/service/custom.services.twig');
   }
 
 }
