@@ -248,7 +248,7 @@ class {{ class }} extends ResourceBase implements DependentPluginInterface {
     if (empty($record['title'])) {
       throw new BadRequestHttpException('Title is required.');
     }
-    elseif (isset($record['title']) && strlen($record['title'] > 255)) {
+    elseif (isset($record['title']) && strlen($record['title']) > 255) {
       throw new BadRequestHttpException('Title is too big.');
     }
     // @DCG Add more validation rules here.
