@@ -25,10 +25,11 @@ class Unit extends BaseGenerator {
     $questions['class'] = new Question('Class', 'ExampleTest');
     $questions['class']->setValidator([Utils::class, 'validateClassName']);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $path = 'tests/src/Unit/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/test/unit.twig', $vars);
+    $this->addFile()
+      ->path('tests/src/Unit/{class}.php')
+      ->template('d8/test/unit.twig');
   }
 
 }

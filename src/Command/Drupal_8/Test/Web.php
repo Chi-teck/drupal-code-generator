@@ -25,10 +25,11 @@ class Web extends BaseGenerator {
     $questions['class'] = new Question('Class', 'ExampleTest');
     $questions['class']->setValidator([Utils::class, 'validateClassName']);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $path = 'src/Tests/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/test/web.twig', $vars);
+    $this->addFile()
+      ->path('src/Tests/{class}.php')
+      ->template('d8/test/web.twig');
   }
 
 }

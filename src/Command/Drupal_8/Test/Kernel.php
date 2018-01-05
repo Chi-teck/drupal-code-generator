@@ -25,10 +25,11 @@ class Kernel extends BaseGenerator {
     $questions['class'] = new Question('Class', 'ExampleTest');
     $questions['class']->setValidator([Utils::class, 'validateClassName']);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $path = 'tests/src/Kernel/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/test/kernel.twig', $vars);
+    $this->addFile()
+      ->path('tests/src/Kernel/{class}.php')
+      ->template('d8/test/kernel.twig');
   }
 
 }
