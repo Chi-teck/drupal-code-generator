@@ -184,17 +184,18 @@
   [19] composer.json
   ➤➤➤➤ 4⏎
  Select generator: 
-  [0] ..
-  [1] Access checker
-  [2] Breadcrumb builder
-  [3] Custom
-  [4] Event subscriber
-  [5] Logger
-  [6] Middleware
-  [7] Param converter
-  [8] Route subscriber
-  [9] Twig extension
-  ➤➤➤ 0⏎
+  [0 ] ..
+  [1 ] Access checker
+  [2 ] Breadcrumb builder
+  [3 ] Custom
+  [4 ] Event subscriber
+  [5 ] Logger
+  [6 ] Middleware
+  [7 ] Param converter
+  [8 ] Route subscriber
+  [9 ] Theme negotiator
+  [10] Twig extension
+  ➤➤➤➤ 0⏎
  Select generator: 
   [0 ] ..
   [1 ] Form

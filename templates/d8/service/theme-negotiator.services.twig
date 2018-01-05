@@ -1,0 +1,6 @@
+services:
+  theme.negotiator.{{ machine_name }}.example:
+    class: Drupal\{{ machine_name }}\Theme\{{ class }}
+    arguments: ['@request_stack']
+    tags:
+      - { name: theme_negotiator, priority: 1000 }
