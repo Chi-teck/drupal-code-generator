@@ -33,11 +33,10 @@ class Style extends BaseGenerator {
       ->path('templates/views-style-' . str_replace('_', '-', $vars['plugin_id']) . '.html.twig')
       ->template('d8/plugin/views/style-template.twig');
 
-    $header = $this->render('d8/file-docs/module.twig', $vars);
-    $content = $this->render('d8/plugin/views/style-preprocess.twig', $vars);
     $this->addFile()
       ->path('{machine_name}.module')
-      ->content($header . "\n" . $content)
+      ->headerTemplate('d8/file-docs/module.twig')
+      ->template('d8/plugin/views/style-preprocess.twig')
       ->action('append')
       ->headerSize(7);
   }

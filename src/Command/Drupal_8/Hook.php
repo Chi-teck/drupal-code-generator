@@ -44,13 +44,10 @@ class Hook extends BaseGenerator {
 
     $file_type = in_array($vars['hook_name'], $install_hooks) ? 'install' : 'module';
 
-    // Move rendering to 'execute' step.
-    $header = $this->render("d8/file-docs/$file_type.twig", $vars);
-    $content = $this->render('d8/hook/' . $vars['hook_name'] . '.twig', $vars);
-
     $this->addFile()
       ->path('{machine_name}.' . $file_type)
-      ->content("$header\n$content")
+      ->headerTemplate("d8/file-docs/$file_type.twig")
+      ->template('d8/hook/' . $vars['hook_name'] . '.twig')
       ->action('append')
       ->headerSize(7);
   }

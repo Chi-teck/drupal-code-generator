@@ -24,7 +24,14 @@ class Asset {
   protected $content;
 
   /**
-   * Twig template to render.
+   * Twig template to render header.
+   *
+   * @var string
+   */
+  protected $headerTemplate;
+
+  /**
+   * Twig template to render main content.
    *
    * @var string
    */
@@ -85,6 +92,16 @@ class Asset {
    */
   public function getContent() {
     return $this->content;
+  }
+
+  /**
+   * Getter for header template.
+   *
+   * @return string
+   *   Asset header template.
+   */
+  public function getHeaderTemplate() {
+    return $this->headerTemplate;
   }
 
   /**
@@ -172,6 +189,20 @@ class Asset {
    */
   public function content($content) {
     $this->content = $content;
+    return $this;
+  }
+
+  /**
+   * Setter for asset header template.
+   *
+   * @param string $header_template
+   *   Asset template.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  public function headerTemplate($header_template) {
+    $this->headerTemplate = $header_template;
     return $this;
   }
 
@@ -283,7 +314,12 @@ class Asset {
     // @see \DrupalCodeGenerator\Asset::getPath().
     $this->getVars() || $this->vars($vars);
     if (!$this->isDirectory() && is_null($this->getContent())) {
-      $this->content($renderer->render($this->getTemplate(), $this->getVars()));
+      $content = '';
+      if ($header_template = $this->getHeaderTemplate()) {
+        $content .= $renderer->render($header_template, $this->getVars()) . "\n";
+      }
+      $content .= $renderer->render($this->getTemplate(), $this->getVars());
+      $this->content($content);
     }
   }
 
