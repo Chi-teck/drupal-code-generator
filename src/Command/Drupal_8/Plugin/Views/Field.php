@@ -22,11 +22,12 @@ class Field extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
-    $path = 'src/Plugin/views/field/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/views/field.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/views/field/{class}.php')
+      ->template('d8/plugin/views/field.twig');
   }
 
 }

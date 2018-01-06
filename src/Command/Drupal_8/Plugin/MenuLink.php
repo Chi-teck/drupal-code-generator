@@ -23,14 +23,15 @@ class MenuLink extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $default_class = function ($vars) {
-      return Utils::camelize($vars['name']) . 'MenuLink';
+      return Utils::camelize($vars['name'] . 'MenuLink');
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $path = 'src/Plugin/Menu/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/menu-link.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/Menu/{class}.php')
+      ->template('d8/plugin/menu-link.twig');
   }
 
 }

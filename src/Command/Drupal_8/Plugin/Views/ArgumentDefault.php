@@ -22,11 +22,12 @@ class ArgumentDefault extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
-    $path = 'src/Plugin/views/argument_default/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/views/argument-default.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/views/argument_default/{class}.php')
+      ->template('d8/plugin/views/argument-default.twig');
   }
 
 }

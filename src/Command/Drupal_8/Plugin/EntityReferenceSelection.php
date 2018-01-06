@@ -37,10 +37,7 @@ class EntityReferenceSelection extends BaseGenerator {
     $questions['entity_type']->setValidator([Utils::class, 'validateMachineName']);
     $questions['entity_type']->setAutocompleterValues(array_keys($base_classes));
 
-    $default_plugin_label = function ($vars) {
-      return "Advanced {$vars['entity_type']} selection";
-    };
-    $questions['plugin_label'] = new Question('Plugin label', $default_plugin_label);
+    $questions['plugin_label'] = new Question('Plugin label', 'Advanced {entity_type} selection');
     $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
 
     $questions['plugin_id'] = new Question('Plugin ID', [Utils::class, 'defaultPluginId']);
@@ -49,11 +46,11 @@ class EntityReferenceSelection extends BaseGenerator {
     $questions['configurable'] = new ConfirmationQuestion('Provide additional plugin configuration?', FALSE);
 
     $default_class = function ($vars) {
-      return Utils::camelize($vars['machine_name'] . '_' . $vars['entity_type']) . 'Selection';
+      return Utils::camelize($vars['machine_name'] . '_' . $vars['entity_type'] . 'Selection');
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
 
     if (isset($base_classes[$vars['entity_type']])) {
       $vars['base_class_full'] = $base_classes[$vars['entity_type']];
@@ -64,13 +61,14 @@ class EntityReferenceSelection extends BaseGenerator {
 
     $vars['base_class'] = explode('EntityReferenceSelection\\', $vars['base_class_full'])[1];
 
-    $path = 'src/Plugin/EntityReferenceSelection/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/entity-reference-selection.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/EntityReferenceSelection/{class}.php')
+      ->template('d8/plugin/entity-reference-selection.twig');
 
-    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
-      'content' => $this->render('d8/plugin/entity-reference-selection-schema.twig', $vars),
-      'action' => 'append',
-    ];
+    $this->addFile()
+      ->path('config/schema/{machine_name}.schema.yml')
+      ->template('d8/plugin/entity-reference-selection-schema.twig')
+      ->action('append');
   }
 
 }

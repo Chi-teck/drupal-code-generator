@@ -22,19 +22,17 @@ class Widget extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Widget');
 
-    $this->setFile(
-      'src/Plugin/Field/FieldWidget/' . $vars['class'] . '.php',
-      'd8/plugin/field/widget.twig',
-      $vars
-    );
+    $this->addFile()
+      ->path('src/Plugin/Field/FieldWidget/{class}.php')
+      ->template('d8/plugin/field/widget.twig');
 
-    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
-      'content' => $this->render('d8/plugin/field/widget-schema.twig', $vars),
-      'action' => 'append',
-    ];
+    $this->addFile()
+      ->path('config/schema/{machine_name}.schema.yml')
+      ->template('d8/plugin/field/widget-schema.twig')
+      ->action('append');
   }
 
 }

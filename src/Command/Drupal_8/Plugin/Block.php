@@ -26,15 +26,17 @@ class Block extends BaseGenerator {
     $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
     $questions['category'] = new Question('Block category', 'Custom');
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Block');
 
-    $path = 'src/Plugin/Block/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/block.twig', $vars);
-    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
-      'content' => $this->render('d8/plugin/block-schema.twig', $vars),
-      'action' => 'append',
-    ];
+    $this->addFile()
+      ->path('src/Plugin/Block/{class}.php')
+      ->template('d8/plugin/block.twig');
+
+    $this->addFile()
+      ->path('config/schema/{machine_name}.schema.yml')
+      ->template('d8/plugin/block-schema.twig')
+      ->action('append');
   }
 
 }

@@ -35,17 +35,18 @@ class Filter extends BaseGenerator {
     unset($choices[0]);
     $questions['filter_type'] = new ChoiceQuestion('Filter type', $choices);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label']);
     $vars['filter_type'] = array_search($vars['filter_type'], $filter_types);
 
-    $path = 'src/Plugin/Filter/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/filter.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/Filter/{class}.php')
+      ->template('d8/plugin/filter.twig');
 
-    $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
-      'content' => $this->render('d8/plugin/filter-schema.twig', $vars),
-      'action' => 'append',
-    ];
+    $this->addFile()
+      ->path('config/schema/{machine_name}.schema.yml')
+      ->template('d8/plugin/filter-schema.twig')
+      ->action('append');
   }
 
 }

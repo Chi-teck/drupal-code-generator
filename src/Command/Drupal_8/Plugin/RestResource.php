@@ -23,11 +23,12 @@ class RestResource extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Resource');
 
-    $path = 'src/Plugin/rest/resource/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/rest-resource.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/rest/resource/{class}.php')
+      ->template('d8/plugin/rest-resource.twig');
   }
 
 }

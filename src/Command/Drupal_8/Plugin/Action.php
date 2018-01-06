@@ -29,17 +29,18 @@ class Action extends BaseGenerator {
     // Plugin label should declare an action.
     $questions['plugin_label'] = new Question('Action label', 'Update node title');
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
-    $path = 'src/Plugin/Action/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/action.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/Action/{class}.php')
+      ->template('d8/plugin/action.twig');
 
     if ($vars['configurable']) {
-      $this->files['config/schema/' . $vars['machine_name'] . '.schema.yml'] = [
-        'content' => $this->render('d8/plugin/action-schema.twig', $vars),
-        'action' => 'append',
-      ];
+      $this->addFile()
+        ->path('config/schema/{machine_name}.schema.yml')
+        ->template('d8/plugin/action-schema.twig')
+        ->action('append');
     }
 
   }

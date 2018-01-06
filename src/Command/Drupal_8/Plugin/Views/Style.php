@@ -22,21 +22,24 @@ class Style extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label']);
 
-    $plugin_path = 'src/Plugin/views/style/' . $vars['class'] . '.php';
-    $this->setFile($plugin_path, 'd8/plugin/views/style-plugin.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/views/style/{class}.php')
+      ->template('d8/plugin/views/style-plugin.twig');
 
-    $template_path = 'templates/' . 'views-style-' . str_replace('_', '-', $vars['plugin_id']) . '.html.twig';
-    $this->setFile($template_path, 'd8/plugin/views/style-template.twig', $vars);
+    $this->addFile()
+      ->path('templates/views-style-' . str_replace('_', '-', $vars['plugin_id']) . '.html.twig')
+      ->template('d8/plugin/views/style-template.twig');
 
     $header = $this->render('d8/file-docs/module.twig', $vars);
-    $this->files[$vars['machine_name'] . '.module'] = [
-      'content' => $header . "\n" . $this->render('d8/plugin/views/style-preprocess.twig', $vars),
-      'action' => 'append',
-      'header_size' => 7,
-    ];
+    $content = $this->render('d8/plugin/views/style-preprocess.twig', $vars);
+    $this->addFile()
+      ->path('{machine_name}.module')
+      ->content($header . "\n" . $content)
+      ->action('append')
+      ->headerSize(7);
   }
 
 }

@@ -23,18 +23,17 @@ class Process extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
 
     $questions = Utils::defaultQuestions();
-    $questions['plugin_id'] = new Question('Plugin ID', function ($vars) {
-      return $vars['machine_name'] . '_example';
-    });
+    $questions['plugin_id'] = new Question('Plugin ID', '{machine_name}_example');
     $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
 
     $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
     $vars['class'] = Utils::camelize($unprefixed_plugin_id);
 
-    $path = 'src/Plugin/migrate/process/' . $vars['class'] . '.php';
-    $this->setFile($path, 'd8/plugin/migrate/process.twig', $vars);
+    $this->addFile()
+      ->path('src/Plugin/migrate/process/{class}.php')
+      ->template('d8/plugin/migrate/process.twig');
   }
 
 }
