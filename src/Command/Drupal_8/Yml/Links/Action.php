@@ -23,8 +23,12 @@ class Action extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions['machine_name'] = new Question('Module machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['machine_name'] . '.links.action.yml', 'd8/yml/links.action.twig', $vars);
+
+    $this->collectVars($input, $output, $questions);
+
+    $this->addFile()
+      ->path('{machine_name}.links.action.yml')
+      ->template('d8/yml/links.action.twig');
   }
 
 }

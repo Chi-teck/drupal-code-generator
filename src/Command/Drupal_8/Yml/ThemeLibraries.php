@@ -24,8 +24,12 @@ class ThemeLibraries extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['machine_name'] . '.libraries.yml', 'd8/yml/theme-libraries.twig', $vars);
+
+    $this->collectVars($input, $output, $questions);
+
+    $this->addFile()
+      ->path('{machine_name}.libraries.yml')
+      ->template('d8/yml/theme-libraries.twig');
   }
 
 }

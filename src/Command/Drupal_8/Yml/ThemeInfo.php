@@ -35,9 +35,11 @@ class ThemeInfo extends BaseGenerator {
 
     $questions['package'] = new Question('Package', 'Custom');
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $this->setFile($vars['machine_name'] . '.info.yml', 'd8/yml/theme-info.twig', $vars);
+    $this->addFile()
+      ->path('{machine_name}.info.yml')
+      ->template('d8/yml/theme-info.twig');
   }
 
 }

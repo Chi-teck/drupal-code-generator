@@ -20,9 +20,14 @@ class Services extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
+    $questions = Utils::defaultQuestions();
+
+    $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['name']);
-    $this->setFile($vars['machine_name'] . '.services.yml', 'd8/yml/services.twig', $vars);
+
+    $this->addFile()
+      ->path('{machine_name}.services.yml')
+      ->template('d8/yml/services.twig');
   }
 
 }

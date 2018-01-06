@@ -24,8 +24,12 @@ class Breakpoints extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    $vars = $this->collectVars($input, $output, $questions);
-    $this->setFile($vars['machine_name'] . '.breakpoints.yml', 'd8/yml/breakpoints.twig', $vars);
+
+    $this->collectVars($input, $output, $questions);
+
+    $this->addFile()
+      ->path('{machine_name}.breakpoints.yml')
+      ->template('d8/yml/breakpoints.twig');
   }
 
 }

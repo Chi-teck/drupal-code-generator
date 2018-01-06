@@ -24,9 +24,11 @@ class Contextual extends BaseGenerator {
     $questions['machine_name'] = new Question('Module machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $this->setFile($vars['machine_name'] . '.links.contextual.yml', 'd8/yml/links.contextual.twig', $vars);
+    $this->addFile()
+      ->path('{machine_name}.links.contextual.yml')
+      ->template('d8/yml/links.contextual.twig');
   }
 
 }
