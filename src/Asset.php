@@ -305,14 +305,8 @@ class Asset {
    *
    * @param \DrupalCodeGenerator\Helper\Renderer $renderer
    *   Renderer helper.
-   * @param array $vars
-   *   Template variables.
    */
-  public function render(Renderer $renderer, array $vars) {
-    // Template variables are also used in path substitution, so the asset
-    // should have them.
-    // @see \DrupalCodeGenerator\Asset::getPath().
-    $this->getVars() || $this->vars($vars);
+  public function render(Renderer $renderer) {
     if (!$this->isDirectory() && is_null($this->getContent())) {
       $content = '';
       if ($header_template = $this->getHeaderTemplate()) {
