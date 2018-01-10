@@ -8,6 +8,7 @@ use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -48,6 +49,9 @@ class InputHandler extends Helper {
         throw new InvalidOptionException('Answers should be encoded in JSON format.');
       }
     }
+    else {
+      $answers = [];
+    }
 
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
@@ -87,8 +91,16 @@ class InputHandler extends Helper {
 
       $this->setQuestionDefault($question, $default_value);
 
-      if (isset($answers[$name])) {
+      if (array_key_exists($name, $answers)) {
         $answer = $answers[$name];
+        // Null stands for default value.
+        if ($answer === NULL) {
+          $answer = $default_value;
+        }
+        // Turn 'yes/no' string into boolean.
+        elseif ($question instanceof ConfirmationQuestion && !is_bool($answer)) {
+          $answer = strcasecmp($answer, 'yes') == 0;
+        }
       }
       else {
         $this->formatQuestionText($question);
