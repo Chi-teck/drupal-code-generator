@@ -83,6 +83,9 @@ class Utils {
 
   /**
    * Returns normalized file path.
+   *
+   * @codeCoverageIgnore
+   * @deprecated
    */
   public static function normalizePath($path) {
     $parts = [];

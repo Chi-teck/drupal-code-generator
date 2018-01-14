@@ -125,8 +125,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $this->getHelperSet()->setCommand($this);
     $this->getHelper('dcg_renderer')->addPath($this->templatePath);
 
-    $directory_option = $input->getOption('directory');
-    $directory = $directory_option ? Utils::normalizePath($directory_option) : getcwd();
+    $directory = $input->getOption('directory') ?: getcwd();
     // No need to look up for extension root when generating an extension.
     $extension_destinations = ['modules', 'profiles', 'themes'];
     $is_extension = in_array($this->destination, $extension_destinations);
