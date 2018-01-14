@@ -61,7 +61,7 @@ class Navigation extends Command {
    *   List of registered commands.
    */
   public function __construct(array $commands) {
-    parent::__construct(NULL);
+    parent::__construct();
 
     // Initialize the menu structure.
     $this->menuTree = [];
@@ -99,10 +99,18 @@ class Navigation extends Command {
   /**
    * {@inheritdoc}
    */
+  public function getUsages() {
+    return ['<generator>'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function configure() {
     $this
       ->setName('navigation')
       ->setDescription('Provides an interactive menu to select generator')
+      ->setHelp('Run `dcg list` to check out all available generators.')
       ->setHidden(TRUE)
       ->addOption(
         'directory',
