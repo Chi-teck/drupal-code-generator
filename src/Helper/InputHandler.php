@@ -154,6 +154,8 @@ class InputHandler extends Helper {
    *
    * @deprecated
    *  Use Symfony\Component\Console\Question\Question to define questions.
+   *
+   * @codeCoverageIgnore
    */
   protected function normalizeQuestions(array $questions) {
     return array_map(function ($question) {

@@ -40,11 +40,15 @@ class TwigEnvironment extends Twig_Environment {
     }));
 
     $this->addFilter(new Twig_SimpleFilter('underscore2hyphen', function ($string) {
+      // @codeCoverageIgnoreStart
       return str_replace('_', '-', $string);
+      // @codeCoverageIgnoreEnd
     }, ['deprecated' => TRUE]));
 
     $this->addFilter(new Twig_SimpleFilter('hyphen2underscore', function ($string) {
+      // @codeCoverageIgnoreStart
       return str_replace('-', '_', $string);
+      // @codeCoverageIgnoreEnd
     }, ['deprecated' => TRUE]));
 
     $this->addFilter(new Twig_SimpleFilter('u2h', function ($string) {
