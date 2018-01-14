@@ -95,8 +95,6 @@ class DumperTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Helper\Dumper::dump()
    */
   public function testDumper() {
 

@@ -80,7 +80,6 @@ class InputHandlerTest extends TestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Helper\InputHandler::collectVars()
    * @dataProvider inputTestProvider()
    */
   public function testInputHandler($questions, $input_raw, $expected_vars, $output_raw) {
@@ -98,8 +97,6 @@ class InputHandlerTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Helper\InputHandler::collectVars()
    */
   public function testAnswerOption() {
 

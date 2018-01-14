@@ -39,7 +39,6 @@ class UtilsTest extends TestCase {
    * @param string $expected_plugin_id
    *   Expected default plugin ID.
    *
-   * @covers \DrupalCodeGenerator\Utils::defaultPluginId
    * @dataProvider defaultPluginIdProvider
    */
   public function testDefaultPluginId($machine_name, $plugin_label, $expected_plugin_id) {
@@ -69,7 +68,6 @@ class UtilsTest extends TestCase {
    * @param string $expected_human_name
    *   Expected human name.
    *
-   * @covers \DrupalCodeGenerator\Utils::machine2human
    * @dataProvider machineToHumanProvider
    */
   public function testMachineToHuman($machine_name, $expected_human_name) {
@@ -95,7 +93,6 @@ class UtilsTest extends TestCase {
    * @param string $expected_machine_name
    *   Expected machine name.
    *
-   * @covers \DrupalCodeGenerator\Utils::human2machine
    * @dataProvider human2machineProvider
    */
   public function testHumanToMachine($human_name, $expected_machine_name) {
@@ -125,7 +122,6 @@ class UtilsTest extends TestCase {
    * @param string $expected
    *   Expected result.
    *
-   * @covers \DrupalCodeGenerator\Utils::camelize
    * @dataProvider camelizeProvider
    */
   public function testCamelize($text, $upper_camel, $expected) {
@@ -156,7 +152,6 @@ class UtilsTest extends TestCase {
    * @param \UnexpectedValueException|null $exception
    *   Expected exception.
    *
-   * @covers \DrupalCodeGenerator\Utils::validateMachineName
    * @dataProvider validateMachineNameProvider
    */
   public function testValidateMachineName($machine_name, $exception) {
@@ -194,7 +189,6 @@ class UtilsTest extends TestCase {
    * @param \UnexpectedValueException|null $exception
    *   Expected exception.
    *
-   * @covers \DrupalCodeGenerator\Utils::validateClassName
    * @dataProvider validateClassNameProvider
    */
   public function testValidateClassName($class_name, $exception) {
@@ -230,7 +224,6 @@ class UtilsTest extends TestCase {
    * @param \UnexpectedValueException|null $exception
    *   Expected exception.
    *
-   * @covers \DrupalCodeGenerator\Utils::validateRequired
    * @dataProvider validateRequiredProvider
    */
   public function testValidateRequired($value, $exception) {
@@ -267,7 +260,6 @@ class UtilsTest extends TestCase {
    * @param string $normalized_path
    *   Expected normalized path.
    *
-   * @covers \DrupalCodeGenerator\Utils::normalizePath
    * @dataProvider normalizePathProvider
    */
   public function testNormalizePath($path, $normalized_path) {
@@ -284,6 +276,7 @@ class UtilsTest extends TestCase {
       ['../test', '../test'],
       ['../test/abc/../foo', '../test/foo'],
       ['..\test/abc\../../bar/../foo', '../foo'],
+      ['..\test/abc\../../bar/../foo', '../foo'],
     ];
   }
 
@@ -295,7 +288,6 @@ class UtilsTest extends TestCase {
    * @param string|bool $expected_extension_root
    *   Expected extension root or FALSE if root directory should not be found.
    *
-   * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
    * @dataProvider getExtensionRootProvider
    */
   public function testGetExtensionRoot($target_directory, $expected_extension_root) {
@@ -319,8 +311,6 @@ class UtilsTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::defaultQuestions
    */
   public function testDefaultQuestions() {
     $questions = $this->defaultQuestions();
@@ -329,8 +319,6 @@ class UtilsTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::defaultPluginQuestions
    */
   public function testDefaultPluginQuestions() {
     $questions = $this->defaultPluginQuestions();
@@ -368,8 +356,6 @@ class UtilsTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::tokenReplace()
    */
   public function testTokenReplace() {
     static::assertEquals('-=bar=-', Utils::tokenReplace('-={foo}=-', ['foo' => 'bar']));
