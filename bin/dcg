@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use DrupalCodeGenerator\ApplicationFactory;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use DrupalCodeGenerator\Utils;
@@ -13,11 +14,11 @@ $autoloader = file_exists(__DIR__ . '/../vendor/autoload.php')
   : require __DIR__ . '/../../../autoload.php';
 
 // Create an application.
-$application = dcg_create_application();
+$application = ApplicationFactory::create();
 
 // Discover generators.
 $discovery = new GeneratorDiscovery(new Filesystem());
-$commands_directories[] = DCG_ROOT . '/src/Command';
+$commands_directories[] = ApplicationFactory::getRoot() . '/src/Command';
 $home = Utils::getHomeDirectory();
 if (file_exists($home . '/.dcg/Command')) {
   $commands_directories[] = $home . '/.dcg/Command';

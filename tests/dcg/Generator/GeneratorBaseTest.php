@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Generator;
 
+use DrupalCodeGenerator\ApplicationFactory;
 use DrupalCodeGenerator\Tests\QuestionHelper;
 use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
 use DrupalCodeGenerator\Utils;
@@ -39,7 +40,7 @@ abstract class GeneratorBaseTest extends TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $application = dcg_create_application();
+    $application = ApplicationFactory::create();
     $helper_set = $application->getHelperSet();
     $helper_set->set(new QuestionHelper());
 

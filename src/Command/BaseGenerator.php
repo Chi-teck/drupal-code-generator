@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\ApplicationFactory;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
@@ -114,7 +115,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
 
     if (!$this->templatePath) {
-      $this->templatePath = DCG_ROOT . '/templates';
+      $this->templatePath = ApplicationFactory::getRoot() . '/templates';
     }
   }
 

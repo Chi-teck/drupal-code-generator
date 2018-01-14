@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
+use DrupalCodeGenerator\ApplicationFactory;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -30,7 +31,11 @@ class ApplicationTest extends TestCase {
    */
   public function testApplication() {
 
-    $cmd = sprintf(DCG_ROOT . '/bin/dcg install -d %s -a \'%s\'', $this->directory, '{"name":"Foo", "machine_name":"foo"}');
+    $cmd = sprintf(
+      ApplicationFactory::getRoot() . '/bin/dcg install -d %s -a \'%s\'',
+      $this->directory,
+      '{"name":"Foo", "machine_name":"foo"}'
+    );
     exec($cmd, $output, $return);
 
     $expected_output = [

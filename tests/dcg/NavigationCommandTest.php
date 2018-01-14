@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
+use DrupalCodeGenerator\ApplicationFactory;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use PHPUnit\Framework\TestCase;
@@ -24,9 +25,9 @@ class NavigationCommandTest extends TestCase {
 
     // Create navigation command.
     $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Command']);
+    $generators = $discovery->getGenerators([ApplicationFactory::getRoot() . '/src/Command']);
 
-    $application = dcg_create_application();
+    $application = ApplicationFactory::create();
     $helper_set = $application->getHelperSet();
     $helper_set->set(new QuestionHelper());
 

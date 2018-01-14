@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
+use DrupalCodeGenerator\ApplicationFactory;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
@@ -18,7 +19,10 @@ class GeneratorsDiscoveryTest extends TestCase {
    */
   public function testExecute() {
     $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators([DCG_ROOT . '/src/Command/Drupal_7'], '\DrupalCodeGenerator\Command\Drupal_7');
+    $generators = $discovery->getGenerators(
+      [ApplicationFactory::getRoot() . '/src/Command/Drupal_7'],
+      '\DrupalCodeGenerator\Command\Drupal_7'
+    );
     foreach ($generators as $generator) {
       static::assertInstanceOf('DrupalCodeGenerator\Command\BaseGenerator', $generator);
     }
