@@ -3,28 +3,11 @@
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\ApplicationFactory;
-use PHPUnit\Framework\TestCase;
 
 /**
  * A test for DCG application.
  */
 class ApplicationTest extends TestCase {
-
-  use WorkingDirectoryTrait;
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    $this->initWorkingDirectory();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function tearDown() {
-    $this->removeWorkingDirectory();
-  }
 
   /**
    * Test callback.

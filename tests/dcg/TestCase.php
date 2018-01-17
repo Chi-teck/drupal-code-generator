@@ -2,12 +2,15 @@
 
 namespace DrupalCodeGenerator\Tests;
 
+use PHPUnit\Framework\TestCase as BaseTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * A trait for managing command working directory.
+ * Base class for DCG tests.
+ *
+ * @package DrupalCodeGenerator\Tests
  */
-trait WorkingDirectoryTrait {
+abstract class TestCase extends BaseTestCase {
 
   /**
    * Working directory.
@@ -17,16 +20,16 @@ trait WorkingDirectoryTrait {
   protected $directory;
 
   /**
-   * Initialize working directory.
+   * {@inheritdoc}
    */
-  protected function initWorkingDirectory() {
+  public function setUp() {
     $this->directory = sys_get_temp_dir() . '/dcg_sandbox';
   }
 
   /**
-   * Removes working directory.
+   * {@inheritdoc}
    */
-  protected function removeWorkingDirectory() {
+  public function tearDown() {
     (new Filesystem())->remove($this->directory);
   }
 

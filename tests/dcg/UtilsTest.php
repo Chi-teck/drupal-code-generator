@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Utils;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -12,21 +11,12 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class UtilsTest extends TestCase {
 
-  use WorkingDirectoryTrait;
-
   /**
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->initWorkingDirectory();
+    parent::setUp();
     (new Filesystem())->dumpFile($this->directory . '/foo/foo.info.yml', 'Content.');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function tearDown() {
-    $this->removeWorkingDirectory();
   }
 
   /**

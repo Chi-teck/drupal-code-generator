@@ -5,8 +5,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\Dumper;
-use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
-use PHPUnit\Framework\TestCase;
+use DrupalCodeGenerator\Tests\TestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -18,8 +17,6 @@ use Symfony\Component\Filesystem\Filesystem;
  * A test for dumper helper.
  */
 class DumperTest extends TestCase {
-
-  use WorkingDirectoryTrait;
 
   /**
    * The input.
@@ -34,7 +31,6 @@ class DumperTest extends TestCase {
    * @var \Symfony\Component\Console\Output\BufferedOutput
    */
   protected $output;
-
 
   /**
    * Helper set.
@@ -62,7 +58,7 @@ class DumperTest extends TestCase {
    */
   public function setUp() {
 
-    $this->initWorkingDirectory();
+    parent::setUp();
 
     $this->input = new ArrayInput([], new InputDefinition());
     $this->output = new BufferedOutput();
@@ -84,13 +80,6 @@ class DumperTest extends TestCase {
       ->willReturn(new QuestionHelper());
 
     $this->setDumper();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function tearDown() {
-    $this->removeWorkingDirectory();
   }
 
   /**

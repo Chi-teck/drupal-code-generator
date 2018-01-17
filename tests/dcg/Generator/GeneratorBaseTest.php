@@ -3,15 +3,12 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\GeneratorTester;
-use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
-use PHPUnit\Framework\TestCase;
+use DrupalCodeGenerator\Tests\TestCase;
 
 /**
  * Base class for generators tests.
  */
 abstract class GeneratorBaseTest extends TestCase {
-
-  use WorkingDirectoryTrait;
 
   protected $class;
 
@@ -37,7 +34,7 @@ abstract class GeneratorBaseTest extends TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $this->initWorkingDirectory();
+    parent::setUp();
 
     $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
 
@@ -48,13 +45,6 @@ abstract class GeneratorBaseTest extends TestCase {
     $this->tester->setInteraction($this->interaction);
 
     $this->tester->setFixtures($this->fixtures);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function tearDown() {
-    $this->removeWorkingDirectory();
   }
 
   /**
