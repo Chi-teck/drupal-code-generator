@@ -2,12 +2,9 @@
 
 namespace DrupalCodeGenerator\Tests\Generator;
 
-use DrupalCodeGenerator\ApplicationFactory;
-use DrupalCodeGenerator\Tests\QuestionHelper;
+use DrupalCodeGenerator\GeneratorTester;
 use DrupalCodeGenerator\Tests\WorkingDirectoryTrait;
-use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * Base class for generators tests.
@@ -19,11 +16,11 @@ abstract class GeneratorBaseTest extends TestCase {
   protected $class;
 
   /**
-   * Command tester.
+   * Generator tester.
    *
-   * @var \Symfony\Component\Console\Tester\CommandTester
+   * @var \DrupalCodeGenerator\GeneratorTester
    */
-  protected $commandTester;
+  protected $tester;
 
   protected $fixtures;
 
@@ -40,20 +37,17 @@ abstract class GeneratorBaseTest extends TestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    $application = ApplicationFactory::create();
-    $helper_set = $application->getHelperSet();
-    $helper_set->set(new QuestionHelper());
+    $this->initWorkingDirectory();
 
     $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
-    $this->command = new $command_class();
-    $application->add($this->command);
 
-    $this->commandTester = new CommandTester($this->command);
+    $this->tester = new GeneratorTester(new $command_class());
 
-    $answers = array_values($this->interaction);
-    $this->commandTester->setInputs($answers);
+    $this->tester->setDirectory($this->directory);
 
-    $this->initWorkingDirectory();
+    $this->tester->setInteraction($this->interaction);
+
+    $this->tester->setFixtures($this->fixtures);
   }
 
   /**
@@ -67,49 +61,34 @@ abstract class GeneratorBaseTest extends TestCase {
    * Test callback.
    */
   public function testGenerator() {
-    $this->commandTester->execute([
-      '--directory' => $this->directory,
-    ]);
 
-    static::assertEquals($this->getExpectedDisplay(), $this->commandTester->getDisplay());
-    // Tests may provide targets without fixtures.
-    foreach (array_filter($this->fixtures) as $target => $fixture) {
-      static::assertFileEquals($this->directory . '/' . $target, $fixture);
+    $this->tester->execute();
+
+    static::assertEquals($this->getExpectedDisplay(), $this->getDisplay());
+
+    foreach (array_filter($this->tester->getFixtures()) as $target => $fixture) {
+      static::assertFileEquals($this->tester->getDirectory() . '/' . $target, $fixture);
     }
   }
 
   /**
-   * Gets expected display.
+   * Returns the display returned by the last execution of the command.
+   *
+   * @return string
+   *   The display.
+   */
+  protected function getDisplay() {
+    return $this->tester->getDisplay();
+  }
+
+  /**
+   * Returns expected display.
    *
    * @return string
    *   Expected display.
    */
   protected function getExpectedDisplay() {
-    $default_name = Utils::machine2human(basename($this->directory));
-
-    $expected_display = "\n";
-    $name = $this->command->getName();
-    $title = "Welcome to $name generator!";
-    $expected_display .= " $title\n";
-    $expected_display .= str_repeat('–', strlen($title) + 2) . "\n";
-
-    foreach ($this->interaction as $question => $answer) {
-      $expected_display .= "\n";
-      $expected_display .= " $question\n";
-      $expected_display .= " ➤ \n";
-    }
-
-    $expected_display = str_replace('%default_name%', $default_name, $expected_display);
-    $default_machine_name = Utils::human2machine(basename($this->directory));
-    $expected_display = str_replace('%default_machine_name%', $default_machine_name, $expected_display);
-
-    $targets = implode("\n • ", array_keys($this->fixtures));
-    $expected_display .= "\n";
-    $expected_display .= " The following directories and files have been created or updated:\n";
-    $expected_display .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
-    $expected_display .= " • $targets\n";
-    $expected_display .= "\n";
-    return $expected_display;
+    return $this->tester->getExpectedDisplay();
   }
 
 }
