@@ -192,9 +192,10 @@
   [5 ] Logger
   [6 ] Middleware
   [7 ] Param converter
-  [8 ] Route subscriber
-  [9 ] Theme negotiator
-  [10] Twig extension
+  [8 ] Path processor
+  [9 ] Route subscriber
+  [10] Theme negotiator
+  [11] Twig extension
   ➤➤➤➤ 0⏎
  Select generator: 
   [0 ] ..
