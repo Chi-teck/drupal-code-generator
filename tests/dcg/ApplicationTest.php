@@ -7,7 +7,7 @@ use DrupalCodeGenerator\ApplicationFactory;
 /**
  * A test for DCG application.
  */
-class ApplicationTest extends TestCase {
+class ApplicationTest extends BaseTestCase {
 
   /**
    * Test callback.

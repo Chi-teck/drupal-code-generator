@@ -9,7 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Tests for a Utils class.
  */
-class UtilsTest extends TestCase {
+class UtilsTest extends BaseTestCase {
 
   /**
    * {@inheritdoc}

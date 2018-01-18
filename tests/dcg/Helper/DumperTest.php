@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\Dumper;
-use DrupalCodeGenerator\Tests\TestCase;
+use DrupalCodeGenerator\Tests\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -16,7 +16,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * A test for dumper helper.
  */
-class DumperTest extends TestCase {
+class DumperTest extends BaseTestCase {
 
   /**
    * The input.

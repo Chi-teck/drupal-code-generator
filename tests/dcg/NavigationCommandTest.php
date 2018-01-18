@@ -11,7 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * A test for navigation command.
  */
-class NavigationCommandTest extends TestCase {
+class NavigationCommandTest extends BaseTestCase {
 
   /**
    * Test callback.

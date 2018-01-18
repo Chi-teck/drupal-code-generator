@@ -3,12 +3,12 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\GeneratorTester;
-use DrupalCodeGenerator\Tests\TestCase;
+use DrupalCodeGenerator\Tests\BaseTestCase;
 
 /**
  * Base class for generators tests.
  */
-abstract class GeneratorBaseTest extends TestCase {
+abstract class GeneratorBaseTest extends BaseTestCase {
 
   protected $class;
 

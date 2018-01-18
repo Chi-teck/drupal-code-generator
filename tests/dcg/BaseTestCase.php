@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use PHPUnit\Framework\TestCase as BaseTestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -10,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
  *
  * @package DrupalCodeGenerator\Tests
  */
-abstract class TestCase extends BaseTestCase {
+abstract class BaseTestCase extends TestCase {
 
   /**
    * Working directory.
