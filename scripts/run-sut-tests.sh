@@ -42,6 +42,7 @@ function dcg_phpcs {
 }
 
 function dcg_phpunit {
+  SYMFONY_DEPRECATIONS_HELPER=disabled \
   SIMPLETEST_BASE_URL=http://$DRUPAL_HOST:$DRUPAL_PORT \
   SIMPLETEST_DB=sqlite://tmp/test.sqlite \
   $DRUPAL_DIR/vendor/bin/phpunit \
@@ -83,7 +84,6 @@ $DRUPAL_DIR/vendor/bin/web.server \
   $DRUPAL_HOST:$DRUPAL_PORT \
   --docroot=$DRUPAL_DIR \
   --router=$DRUPAL_DIR/vendor/drush/drush/misc/d8-rs-router.php
-
 # === Tests === #
 
 # --- Test forms --- #

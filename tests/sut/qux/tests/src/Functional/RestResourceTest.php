@@ -113,7 +113,7 @@ class RestResourceTest extends ResourceTestBase {
       RequestOptions::BODY => $record_encoded,
       RequestOptions::HEADERS => ['Content-Type' => self::$mimeType],
     ];
-    $url = Url::fromRoute($route_prefix . $method);
+    $url = Url::fromRoute($route_prefix . $method, ['_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
     self::assertEquals(201, $response->getStatusCode());
@@ -161,7 +161,7 @@ class RestResourceTest extends ResourceTestBase {
     $method = 'PATCH';
     $record_encoded = '{"title":"Alpha patched"}';
     $request_options[RequestOptions::BODY] = $record_encoded;
-    $url = Url::fromRoute($route_prefix . $method, ['id' => 1]);
+    $url = Url::fromRoute($route_prefix . $method, ['id' => 1, '_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
     self::assertEquals(200, $response->getStatusCode());
@@ -172,7 +172,7 @@ class RestResourceTest extends ResourceTestBase {
     $method = 'PUT';
     $record_encoded = '{"title":"Alpha updated"}';
     $request_options[RequestOptions::BODY] = $record_encoded;
-    $url = Url::fromRoute($route_prefix . $method, ['id' => 1]);
+    $url = Url::fromRoute($route_prefix . $method, ['id' => 1, '_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
     self::assertEquals(200, $response->getStatusCode());
