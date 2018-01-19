@@ -15,7 +15,7 @@ function dcg_on_exit {
 trap dcg_on_exit EXIT
 
 SELF_PATH=$(dirname $0)/../tests/sut
-DRUPAL_VERSION=${DRUPAL_VERSION:-8.5.x-dev}
+DRUPAL_VERSION=${DRUPAL_VERSION:-8.6.x-dev}
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
 DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
 DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
@@ -181,6 +181,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
   $DCG d8:service:route-subscriber -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo"}'
   $DCG d8:service:theme-negotiator -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoThemeNegotiator"}'
   $DCG d8:service:twig-extension -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoTwigExtension"}'
+  $DCG d8:service:path-processor -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"PathProcessorZippo"}'
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
