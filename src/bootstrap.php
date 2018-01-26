@@ -24,7 +24,7 @@ define('DCG_ROOT', dirname(__DIR__));
  * @deprecated
  *   Use DrupalCodeGenerator\ApplicationFactory::create
  *
- * @coversIgnore
+ * @codeCoverageIgnore
  */
 function dcg_create_application() {
   return ApplicationFactory::create();
