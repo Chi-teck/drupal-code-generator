@@ -43,4 +43,4 @@ All custom generators should be placed to _$HOME/.dcg/Command_ directory. The fo
 dcg dcg-command -d $HOME/.dcg/Command
 ```
 ## License
-GNU General Public License, version 2
+GNU General Public License, version 2 or later.
