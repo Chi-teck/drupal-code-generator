@@ -1,0 +1,7 @@
+name: Foo
+type: module
+description: Some description.
+package: Custom
+core: 8.x
+dependencies:
+  - drupal:views
