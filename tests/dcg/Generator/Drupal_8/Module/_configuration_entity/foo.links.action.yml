@@ -1,0 +1,5 @@
+entity.example.add_form:
+  route_name: 'entity.example.add_form'
+  title: 'Add example'
+  appears_on:
+    - entity.example.collection

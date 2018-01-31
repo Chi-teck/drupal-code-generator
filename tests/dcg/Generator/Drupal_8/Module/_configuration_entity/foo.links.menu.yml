@@ -1,0 +1,5 @@
+entity.example.overview:
+  title: Examples
+  parent: system.admin_structure
+  description: 'List of examples to extend site functionality.'
+  route_name: entity.example.collection

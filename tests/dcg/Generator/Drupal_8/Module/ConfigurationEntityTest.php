@@ -23,16 +23,16 @@ class ConfigurationEntityTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
-    'foo/foo.info.yml' => __DIR__ . '/_configuration_entity/_info.yml',
-    'foo/foo.links.action.yml' => NULL,
-    'foo/foo.links.menu.yml' => NULL,
-    'foo/foo.permissions.yml' => NULL,
-    'foo/foo.routing.yml' => NULL,
-    'foo/config/schema/foo.schema.yml' => NULL,
-    'foo/src/Entity/Example.php' => NULL,
-    'foo/src/ExampleInterface.php' => NULL,
-    'foo/src/ExampleListBuilder.php' => NULL,
-    'foo/src/Form/ExampleForm.php' => NULL,
+    'foo/foo.info.yml' => __DIR__ . '/_configuration_entity/foo.info.yml',
+    'foo/foo.links.action.yml' => __DIR__ . '/_configuration_entity/foo.links.action.yml',
+    'foo/foo.links.menu.yml' => __DIR__ . '/_configuration_entity/foo.links.menu.yml',
+    'foo/foo.permissions.yml' => __DIR__ . '/_configuration_entity/foo.permissions.yml',
+    'foo/foo.routing.yml' => __DIR__ . '/_configuration_entity/foo.routing.yml',
+    'foo/config/schema/foo.schema.yml' => __DIR__ . '/_configuration_entity/config/schema/foo.schema.yml',
+    'foo/src/Entity/Example.php' => __DIR__ . '/_configuration_entity/src/Entity/Example.php',
+    'foo/src/ExampleInterface.php' => __DIR__ . '/_configuration_entity/src/ExampleInterface.php',
+    'foo/src/ExampleListBuilder.php' => __DIR__ . '/_configuration_entity/src/ExampleListBuilder.php',
+    'foo/src/Form/ExampleForm.php' => __DIR__ . '/_configuration_entity/src/Form/ExampleForm.php',
   ];
 
 }

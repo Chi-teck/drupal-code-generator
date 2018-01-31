@@ -1,0 +1,31 @@
+entity.example.collection:
+  path: '/admin/structure/example'
+  defaults:
+    _entity_list: 'example'
+    _title: 'Example configuration'
+  requirements:
+    _permission: 'administer example'
+
+entity.example.add_form:
+  path: '/admin/structure/example/add'
+  defaults:
+    _entity_form: 'example.add'
+    _title: 'Add an example'
+  requirements:
+    _permission: 'administer example'
+
+entity.example.edit_form:
+  path: '/admin/structure/example/{example}'
+  defaults:
+    _entity_form: 'example.edit'
+    _title: 'Edit an example'
+  requirements:
+    _permission: 'administer example'
+
+entity.example.delete_form:
+  path: '/admin/structure/example/{example}/delete'
+  defaults:
+    _entity_form: 'example.delete'
+    _title: 'Delete an example'
+  requirements:
+    _permission: 'administer example'
