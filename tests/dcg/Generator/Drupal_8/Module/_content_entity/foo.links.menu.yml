@@ -1,0 +1,10 @@
+entity.foo_example.settings:
+  title: Example
+  description: Configure an Example entity type
+  route_name:  entity.foo_example.settings
+  parent: system.admin_structure
+entity.foo_example.collection:
+  title: Examples
+  description: List of examples
+  route_name: entity.foo_example.collection
+  parent: system.admin_content

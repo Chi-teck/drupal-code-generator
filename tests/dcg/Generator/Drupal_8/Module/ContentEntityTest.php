@@ -35,19 +35,19 @@ class ContentEntityTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
-    'foo/foo.info.yml' => NULL,
-    'foo/foo.links.action.yml' => NULL,
-    'foo/foo.links.menu.yml' => NULL,
-    'foo/foo.links.task.yml' => NULL,
-    'foo/foo.module' => NULL,
-    'foo/foo.permissions.yml' => NULL,
-    'foo/foo.routing.yml' => NULL,
-    'foo/src/Entity/Example.php' => NULL,
-    'foo/src/ExampleInterface.php' => NULL,
-    'foo/src/ExampleListBuilder.php' => NULL,
-    'foo/src/Form/ExampleForm.php' => NULL,
-    'foo/src/Form/ExampleSettingsForm.php' => NULL,
-    'foo/templates/foo-example.html.twig' => NULL,
+    'foo/foo.info.yml' => __DIR__ . '/_content_entity/foo.info.yml',
+    'foo/foo.links.action.yml' => __DIR__ . '/_content_entity/foo.links.action.yml',
+    'foo/foo.links.menu.yml' => __DIR__ . '/_content_entity/foo.links.menu.yml',
+    'foo/foo.links.task.yml' => __DIR__ . '/_content_entity/foo.links.task.yml',
+    'foo/foo.module' => __DIR__ . '/_content_entity/foo.module',
+    'foo/foo.permissions.yml' => __DIR__ . '/_content_entity/foo.permissions.yml',
+    'foo/foo.routing.yml' => __DIR__ . '/_content_entity/foo.routing.yml',
+    'foo/src/Entity/Example.php' => __DIR__ . '/_content_entity/src/Entity/Example.php',
+    'foo/src/ExampleInterface.php' => __DIR__ . '/_content_entity/src/ExampleInterface.php',
+    'foo/src/ExampleListBuilder.php' => __DIR__ . '/_content_entity/src/ExampleListBuilder.php',
+    'foo/src/Form/ExampleForm.php' => __DIR__ . '/_content_entity/src/Form/ExampleForm.php',
+    'foo/src/Form/ExampleSettingsForm.php' => __DIR__ . '/_content_entity/src/Form/ExampleSettingsForm.php',
+    'foo/templates/foo-example.html.twig' => __DIR__ . '/_content_entity/templates/foo-example.html.twig',
   ];
 
 }
