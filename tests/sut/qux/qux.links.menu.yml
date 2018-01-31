@@ -1,0 +1,3 @@
+qux.test:
+  menu_name: main
+  class: Drupal\qux\Plugin\Menu\FooExampleLink
