@@ -1,0 +1,8 @@
+# Schema for the configuration files of the Foo theme.
+foo.settings:
+  type: theme_settings
+  label: 'Foo settings'
+  mapping:
+    font_size:
+      type: integer
+      label: Font size

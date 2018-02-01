@@ -14,7 +14,7 @@ class ThemeTest extends GeneratorBaseTest {
   protected $interaction = [
     'Theme name [%default_name%]:' => 'Foo',
     'Theme machine name [foo]:' => 'foo',
-    'Base theme [classy]:' => 'Bartik',
+    'Base theme [classy]:' => 'bartik',
     'Description [A flexible theme with a responsive, mobile-first layout.]:' => 'Some description.',
     'Package [Custom]:' => 'Custom',
   ];

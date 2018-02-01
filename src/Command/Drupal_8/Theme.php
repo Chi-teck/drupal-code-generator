@@ -34,43 +34,72 @@ class Theme extends BaseGenerator {
     $vars['base_theme'] = Utils::human2machine($vars['base_theme']);
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $this->setFile($prefix . '.info.yml', 'd8/yml/theme-info.twig', $vars);
-    $this->setFile($prefix . '.libraries.yml', 'd8/yml/theme-libraries.twig', $vars);
-    $this->setFile($prefix . '.breakpoints.yml', 'd8/yml/breakpoints.twig', $vars);
-    $this->setFile($prefix . '.theme', 'd8/theme.twig', $vars);
 
-    $js_path = $vars['machine_name'] . '/js/' . str_replace('_', '-', $vars['machine_name']) . '.js';
-    $this->setFile($js_path, 'd8/javascript.twig', $vars);
+    $this->addFile()
+      ->path($prefix . '.info.yml')
+      ->template('d8/yml/theme-info.twig');
 
-    $settings_form_path = $vars['machine_name'] . '/theme-settings.php';
-    $this->setFile($settings_form_path, 'd8/theme-settings-form.twig', $vars);
+    $this->addFile()
+      ->path($prefix . '.libraries.yml')
+      ->template('d8/yml/theme-libraries.twig');
 
-    $settings_config_path = $vars['machine_name'] . '/config/install/' . $vars['machine_name'] . '.settings.yml';
-    $this->setFile($settings_config_path, 'd8/theme-settings-config.twig', $vars);
+    $this->addFile()
+      ->path($prefix . '.breakpoints.yml')
+      ->template('d8/yml/breakpoints.twig');
 
-    $settings_schema_path = $vars['machine_name'] . '/config/schema/' . $vars['machine_name'] . '.schema.yml';
-    $this->setFile($settings_schema_path, 'd8/theme-settings-schema.twig', $vars);
+    $this->addFile()
+      ->path($prefix . '.theme')
+      ->template('d8/theme.twig');
 
-    $this->setFile($vars['machine_name'] . '/logo.svg', 'd8/theme/simple/logo.twig', $vars);
+    $this->addFile()
+      ->path('{machine_name}/js/' . str_replace('_', '-', $vars['machine_name']) . '.js')
+      ->template('d8/javascript.twig');
 
-    $this->files[$vars['machine_name'] . '/templates'] = NULL;
-    $this->files[$vars['machine_name'] . '/images'] = NULL;
+    $this->addFile()
+      ->path('{machine_name}/theme-settings.php')
+      ->template('d8/theme-settings-form.twig');
 
-    $this->files[$vars['machine_name'] . '/css/base/elements.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/block.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/breadcrumb.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/field.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/form.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/header.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/menu.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/messages.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/node.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/sidebar.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/table.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/tabs.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/components/buttons.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/layouts/layout.css'] = '';
-    $this->files[$vars['machine_name'] . '/css/theme/print.css'] = '';
+    $this->addFile()
+      ->path('{machine_name}/config/install/{machine_name}.settings.yml')
+      ->template('d8/theme-settings-config.twig');
+
+    $this->addFile()
+      ->path('{machine_name}/config/schema/{machine_name}.schema.yml')
+      ->template('d8/theme-settings-schema.twig');
+
+    $this->addFile()
+      ->path('{machine_name}/logo.svg')
+      ->template('d8/theme-logo.twig');
+
+    $this->addDirectory()
+      ->path('{machine_name}/templates');
+
+    $this->addDirectory()
+      ->path('{machine_name}/images');
+
+    $css_files = [
+      'base/elements.css',
+      'components/block.css',
+      'components/breadcrumb.css',
+      'components/field.css',
+      'components/form.css',
+      'components/header.css',
+      'components/menu.css',
+      'components/messages.css',
+      'components/node.css',
+      'components/sidebar.css',
+      'components/table.css',
+      'components/tabs.css',
+      'components/buttons.css',
+      'layouts/layout.css',
+      'theme/print.css',
+    ];
+    foreach ($css_files as $file) {
+      $this->addFile()
+        ->path('{machine_name}/css/' . $file)
+        ->content('');
+    }
+
   }
 
 }
