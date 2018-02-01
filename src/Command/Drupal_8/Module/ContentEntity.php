@@ -27,12 +27,8 @@ class ContentEntity extends BaseGenerator {
 
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
-    $questions['entity_type_label'] = new Question(
-      'Entity type label',
-      function ($vars) {
-        return $vars['name'];
-      }
-    );
+    $questions['entity_type_label'] = new Question('Entity type label', '{name}');
+
     $questions['entity_type_id'] = new Question(
       'Entity type ID',
       function ($vars) {
@@ -58,7 +54,7 @@ class ContentEntity extends BaseGenerator {
     $questions['description_base_field'] = new ConfirmationQuestion('Add "description" base field?', TRUE);
     $questions['rest_configuration'] = new ConfirmationQuestion('Create REST configuration for the entity?', FALSE);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
 
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
@@ -126,8 +122,9 @@ class ContentEntity extends BaseGenerator {
 
     foreach ($templates as $template) {
       $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $template);
-      $path = preg_replace('#\.twig$#', '', $path);
-      $this->setFile($path, $templates_path . $template, $vars);
+      $this->addFile()
+        ->path(preg_replace('#\.twig$#', '', $path))
+        ->template($templates_path . $template);
     }
   }
 

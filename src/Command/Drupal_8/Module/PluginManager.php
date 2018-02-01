@@ -27,12 +27,11 @@ class PluginManager extends BaseGenerator {
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
 
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
-
     $vars['class_prefix'] = Utils::camelize($vars['machine_name']);
 
     $templates = [
@@ -48,12 +47,12 @@ class PluginManager extends BaseGenerator {
 
     $templates_path = 'd8/module/plugin-manager/';
 
-    $path_placeholders = ['model', 'Model'];
-    $path_replacements = [$vars['machine_name'], $vars['class_prefix']];
+    $path_placeholders = ['model', 'Model', '.twig'];
+    $path_replacements = [$vars['machine_name'], $vars['class_prefix'], ''];
     foreach ($templates as $template) {
-      $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $template);
-      $path = preg_replace('#\.twig$#', '', $path);
-      $this->setFile($path, $templates_path . $template, $vars);
+      $this->addFile()
+        ->path('{machine_name}/' . str_replace($path_placeholders, $path_replacements, $template))
+        ->template($templates_path . $template);
     }
   }
 

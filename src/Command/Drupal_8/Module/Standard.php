@@ -28,15 +28,21 @@ class Standard extends BaseGenerator {
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($input, $output, $questions);
 
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-    $this->setFile($prefix . '.info.yml', 'd8/yml/module-info.twig', $vars);
-    $this->setFile($prefix . '.module', 'd8/module.twig', $vars);
+
+    $this->addFile()
+      ->path($prefix . '.info.yml')
+      ->template('d8/yml/module-info.twig');
+
+    $this->addFile()
+      ->path($prefix . '.module')
+      ->template('d8/module.twig');
 
     $class_prefix = Utils::camelize($vars['name']);
 
@@ -52,29 +58,35 @@ class Standard extends BaseGenerator {
     $options = $this->collectVars($input, $output, $option_questions);
 
     if ($options['install_file']) {
-      $this->setFile($prefix . '.install', 'd8/install.twig', $vars);
+      $this->addFile()
+        ->path($prefix . '.install')
+        ->template('d8/install.twig');
     }
 
     if ($options['libraries.yml']) {
-      $this->setFile($prefix . '.libraries.yml', 'd8/yml/module-libraries.twig', $vars);
+      $this->addFile()
+        ->path($prefix . '.libraries.yml')
+        ->template('d8/yml/module-libraries.twig');
     }
 
     if ($options['permissions.yml']) {
-      $this->setFile($prefix . '.permissions.yml', 'd8/yml/permissions.twig', $vars);
+      $this->addFile()
+        ->path($prefix . '.permissions.yml')
+        ->template('d8/yml/permissions.twig');
     }
 
     if ($options['event_subscriber']) {
       $subscriber_class = $class_prefix . 'Subscriber';
-      $this->setFile(
-        $vars['machine_name'] . '/src/EventSubscriber/' . $subscriber_class . '.php',
-        'd8/service/event-subscriber.twig',
-        $vars + ['class' => $subscriber_class]
-      );
-      $this->setServicesFile(
-        $prefix . '.services.yml',
-        'd8/service/event-subscriber.services.twig',
-        $vars + ['class' => $subscriber_class]
-      );
+
+      $this->addFile()
+        ->path("{machine_name}/src/EventSubscriber/$subscriber_class.php")
+        ->template('d8/service/event-subscriber.twig')
+        ->vars($vars + ['class' => $subscriber_class]);
+
+      $this->addFile()
+        ->path($prefix . '.services.yml')
+        ->template('d8/service/event-subscriber.services.twig')
+        ->vars($vars + ['class' => $subscriber_class]);
     }
 
     if ($options['block_plugin']) {
@@ -82,20 +94,21 @@ class Standard extends BaseGenerator {
       $block_vars['plugin_id'] = $vars['machine_name'] . '_' . Utils::human2machine($block_vars['plugin_label']);
       $block_vars['category'] = $vars['name'];
       $block_vars['class'] = 'ExampleBlock';
-      $this->setFile(
-        $vars['machine_name'] . '/src/Plugin/Block/' . $block_vars['class'] . '.php',
-        'd8/plugin/block.twig',
-        $vars + $block_vars
-      );
+
+      $this->addFile()
+        ->path('{machine_name}/src/Plugin/Block/' . $block_vars['class'] . '.php')
+        ->template('d8/plugin/block.twig')
+        ->vars($block_vars + $vars);
     }
 
     if ($options['controller']) {
       $controller_class = $class_prefix . 'Controller';
-      $this->setFile(
-        $vars['machine_name'] . "/src/Controller/$controller_class.php",
-        'd8/controller.twig',
-        $vars + ['class' => $controller_class]
-      );
+
+      $this->addFile()
+        ->path("{machine_name}/src/Controller/$controller_class.php")
+        ->template('d8/controller.twig')
+        ->vars(['class' => $controller_class] + $vars);
+
       $routing_vars = [
         'route_name' => $vars['machine_name'] . '.example',
         'route_path' => '/' . str_replace('_', '-', $vars['machine_name']) . '/example',
@@ -103,23 +116,26 @@ class Standard extends BaseGenerator {
         'route_permission' => 'access content',
         'class' => $controller_class,
       ];
-      $this->files[$prefix . '.routing.yml'] = [
-        'content' => $this->render('d8/controller-route.twig', $vars + $routing_vars),
-        'action' => 'append',
-      ];
+
+      $this->addFile()
+        ->path($prefix . '.routing.yml')
+        ->template('d8/controller-route.twig')
+        ->vars($routing_vars + $vars)
+        ->action('append');
     }
 
     if ($options['settings_form']) {
       $form_class = 'SettingsForm';
+
       $form_vars = [
         'form_id' => $vars['machine_name'] . '_settings',
         'class' => $form_class,
       ];
-      $this->setFile(
-        $vars['machine_name'] . '/src/Form/SettingsForm.php',
-        'd8/form/config.twig',
-        $vars + $form_vars
-      );
+      $this->addFile()
+        ->path('{machine_name}/src/Form/SettingsForm.php')
+        ->template('d8/form/config.twig')
+        ->vars($form_vars + $vars);
+
       $routing_vars = [
         'route_name' => $vars['machine_name'] . '.settings_form',
         'route_path' => '/admin/config/system/' . str_replace('_', '-', $vars['machine_name']),
@@ -127,13 +143,11 @@ class Standard extends BaseGenerator {
         'route_permission' => 'administer ' . $vars['machine_name'] . ' configuration',
         'class' => $form_class,
       ];
-
-      $content = isset($this->files[$prefix . '.routing.yml']) ?
-        $this->files[$prefix . '.routing.yml']['content'] . "\n" : '';
-      $this->files[$prefix . '.routing.yml'] = [
-        'content' => $content . $this->render('d8/form/route.twig', $vars + $routing_vars),
-        'action' => 'append',
-      ];
+      $this->addFile()
+        ->path($prefix . '.routing.yml')
+        ->template('d8/form/route.twig')
+        ->vars($routing_vars + $vars)
+        ->action('append');
     }
 
   }
