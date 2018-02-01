@@ -56,8 +56,17 @@ abstract class GeneratorBaseTest extends BaseTestCase {
 
     static::assertEquals($this->getExpectedDisplay(), $this->getDisplay());
 
-    foreach (array_filter($this->tester->getFixtures()) as $target => $fixture) {
-      static::assertFileEquals($this->tester->getDirectory() . '/' . $target, $fixture);
+    foreach ($this->tester->getFixtures() as $target => $fixture) {
+      $path = $this->tester->getDirectory() . '/' . $target;
+      if (is_array($fixture)) {
+        self::assertDirectoryExists($path);
+      }
+      elseif ($fixture !== NULL) {
+        self::assertFileEquals($path, $fixture);
+      }
+      else {
+        self::markTestSkipped();
+      }
     }
   }
 
