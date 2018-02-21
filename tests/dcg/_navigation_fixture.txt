@@ -82,13 +82,14 @@
   [10] Javascript
   [11] Layout
   [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme
-  [17] Theme file
-  [18] Theme settings
-  [19] composer.json
+  [13] Render element
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme
+  [18] Theme file
+  [19] Theme settings
+  [20] composer.json
   ➤➤➤➤ 1⏎
  Select generator: 
   [0] ..
@@ -110,13 +111,14 @@
   [10] Javascript
   [11] Layout
   [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme
-  [17] Theme file
-  [18] Theme settings
-  [19] composer.json
+  [13] Render element
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme
+  [18] Theme file
+  [19] Theme settings
+  [20] composer.json
   ➤➤➤➤ 2⏎
  Select generator: 
   [0] ..
@@ -139,13 +141,14 @@
   [10] Javascript
   [11] Layout
   [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme
-  [17] Theme file
-  [18] Theme settings
-  [19] composer.json
+  [13] Render element
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme
+  [18] Theme file
+  [19] Theme settings
+  [20] composer.json
   ➤➤➤➤ 3⏎
  Select generator: 
   [0 ] ..
@@ -175,13 +178,14 @@
   [10] Javascript
   [11] Layout
   [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme
-  [17] Theme file
-  [18] Theme settings
-  [19] composer.json
+  [13] Render element
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme
+  [18] Theme file
+  [19] Theme settings
+  [20] composer.json
   ➤➤➤➤ 4⏎
  Select generator: 
   [0 ] ..
@@ -211,13 +215,14 @@
   [10] Javascript
   [11] Layout
   [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme
-  [17] Theme file
-  [18] Theme settings
-  [19] composer.json
+  [13] Render element
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme
+  [18] Theme file
+  [19] Theme settings
+  [20] composer.json
   ➤➤➤➤ 5⏎
  Select generator: 
   [0] ..
@@ -241,13 +246,14 @@
   [10] Javascript
   [11] Layout
   [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme
-  [17] Theme file
-  [18] Theme settings
-  [19] composer.json
+  [13] Render element
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme
+  [18] Theme file
+  [19] Theme settings
+  [20] composer.json
   ➤➤➤➤ 6⏎
  Select generator: 
   [0] ..
@@ -294,13 +300,14 @@
   [10] Javascript
   [11] Layout
   [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme
-  [17] Theme file
-  [18] Theme settings
-  [19] composer.json
+  [13] Render element
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme
+  [18] Theme file
+  [19] Theme settings
+  [20] composer.json
   ➤➤➤➤ 0⏎
  Select generator: 
   [0] ..
@@ -337,13 +344,14 @@
   [10] Javascript
   [11] Layout
   [12] Module file
-  [13] Service provider
-  [14] Settings local
-  [15] Template
-  [16] Theme
-  [17] Theme file
-  [18] Theme settings
-  [19] composer.json
+  [13] Render element
+  [14] Service provider
+  [15] Settings local
+  [16] Template
+  [17] Theme
+  [18] Theme file
+  [19] Theme settings
+  [20] composer.json
   ➤➤➤➤ 9⏎
 
  Welcome to d8:install-file generator!
