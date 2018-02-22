@@ -67,9 +67,10 @@ if [ -d $DRUPAL_CACHED_DIR ]; then
 else
   export COMPOSER_PROCESS_TIMEOUT=1900
   composer -d=$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
-  composer -d=$DRUPAL_DIR require drush/drush:dev-master chi-teck/web-server chi-teck/test-base
+  composer -d=$DRUPAL_DIR require drush/drush chi-teck/web-server chi-teck/test-base
   composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
+  composer -d=$DRUPAL_DIR run-script drupal-phpunit-upgrade
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite
   mkdir -p $DRUPAL_CACHED_DIR
@@ -122,6 +123,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
   $DCG d8:service-provider -d $MODULE_DIR  -a '{"name":"Bar","machine_name":"bar"}'
   $DCG d8:template -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar","template_name":"example","create_theme":"yes","create_preprocess":"yes"}'
   $DCG d8:layout -d $MODULE_DIR -a '{"machine_name":"bar","layout_name":"Foo","layout_machine_name":"foo","category":"my","js":"Yes","css":"Yes"}'
+  $DCG d8:render-element -d $MODULE_DIR -a '{"machine_name":"bar"}'
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME

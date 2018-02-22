@@ -12,8 +12,7 @@ class RenderElementTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\RenderElement';
 
   protected $interaction = [
-    'Module name [%default_name%]:' => 'Foo',
-    'Module machine name [foo]:' => 'foo',
+    'Module machine name [%default_machine_name%]:' => 'foo',
   ];
 
   protected $fixtures = [
