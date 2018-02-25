@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 
 /**
- * Test for d8:install command.
+ * Test for d8:install-file command.
  */
 class InstallFileTest extends GeneratorBaseTest {
 
