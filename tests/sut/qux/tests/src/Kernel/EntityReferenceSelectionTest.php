@@ -10,7 +10,7 @@ use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
 /**
- * Test description.
+ * Test for EntityReferenceSelection plugin.
  *
  * @group DCG
  */
