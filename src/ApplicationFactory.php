@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\InputHandler;
 use DrupalCodeGenerator\Helper\OutputHandler;
 use DrupalCodeGenerator\Helper\Renderer;
-use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -45,7 +44,12 @@ class ApplicationFactory {
     $helper_set = new HelperSet([
       new QuestionHelper(),
       new Dumper(new Filesystem()),
-      new Renderer(new TwigEnvironment(new \Twig_Loader_Filesystem())),
+      // We cannot reference the TwigEnvironment class with use statement
+      // because of a PHP bug.
+      // @see https://bugs.php.net/bug.php?id=66773
+      // @codingStandardsIgnoreStart
+      new Renderer(new \DrupalCodeGenerator\Twig\TwigEnvironment(new \Twig_Loader_Filesystem())),
+      // @codingStandardsIgnoreEnd
       new InputHandler(),
       new OutputHandler(),
     ]);
