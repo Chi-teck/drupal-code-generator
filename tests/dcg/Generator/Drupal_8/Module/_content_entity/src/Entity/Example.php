@@ -30,7 +30,7 @@ use Drupal\user\UserInterface;
  *   base_table = "foo_example",
  *   revision_table = "foo_example_revision",
  *   show_revision_ui = TRUE,
- *   admin_permission = "administer foo_example",
+ *   admin_permission = "administer example",
  *   entity_keys = {
  *     "id" = "id",
  *     "revision" = "revision_id",
