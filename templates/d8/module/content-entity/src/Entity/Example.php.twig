@@ -50,7 +50,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   revision_table = "{{ entity_type_id }}_revision",
  *   show_revision_ui = TRUE,
 {% endif %}
- *   admin_permission = "administer {{ entity_type_id }}",
+ *   admin_permission = "administer {{ entity_type_label|lower }}",
  *   entity_keys = {
  *     "id" = "id",
 {% if revisionable %}
