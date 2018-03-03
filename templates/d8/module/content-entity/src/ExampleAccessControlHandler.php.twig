@@ -19,13 +19,13 @@ class {{ class_prefix }}AccessControlHandler extends EntityAccessControlHandler 
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view {{ entity_type_id }}');
+        return AccessResult::allowedIfHasPermission($account, 'view {{ entity_type_label|lower }}');
 
       case 'update':
-        return AccessResult::allowedIfHasPermissions($account, ['edit {{ entity_type_id }}', 'administer {{ entity_type_id }}'], 'OR');
+        return AccessResult::allowedIfHasPermissions($account, ['edit {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }}'], 'OR');
 
       case 'delete':
-        return AccessResult::allowedIfHasPermissions($account, ['delete {{ entity_type_id }}', 'administer {{ entity_type_id }}'], 'OR');
+        return AccessResult::allowedIfHasPermissions($account, ['delete {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }}'], 'OR');
 
       default:
         // No opinion.
@@ -38,7 +38,7 @@ class {{ class_prefix }}AccessControlHandler extends EntityAccessControlHandler 
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    return AccessResult::allowedIfHasPermissions($account, ['create {{ entity_type_id }}', 'administer {{ entity_type_id }}'], 'OR');
+    return AccessResult::allowedIfHasPermissions($account, ['create {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }}'], 'OR');
   }
 
 }
