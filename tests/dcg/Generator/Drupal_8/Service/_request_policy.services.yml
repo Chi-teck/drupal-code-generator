@@ -1,0 +1,5 @@
+services:
+  foo.page_cache_request_policy.example:
+    class: Drupal\foo\PageCache\Example
+    tags:
+      - { name: page_cache_request_policy }

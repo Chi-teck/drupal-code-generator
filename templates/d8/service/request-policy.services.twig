@@ -1,0 +1,5 @@
+services:
+  {{ machine_name }}.page_cache_request_policy.example:
+    class: Drupal\{{ machine_name }}\PageCache\{{ class }}
+    tags:
+      - { name: page_cache_request_policy }
