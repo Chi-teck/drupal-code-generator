@@ -50,11 +50,17 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   revision_table = "{{ entity_type_id }}_revision",
  *   show_revision_ui = TRUE,
 {% endif %}
+{% if translatable %}
+ *   translatable = TRUE,
+{% endif %}
  *   admin_permission = "administer {{ entity_type_label|lower }}",
  *   entity_keys = {
  *     "id" = "id",
 {% if revisionable %}
  *     "revision" = "revision_id",
+{% endif %}
+{% if translatable %}
+ *     "langcode" = "langcode",
 {% endif %}
  *     "label" = "{{ title_base_field ? 'title' : 'id' }}",
  *     "uuid" = "uuid"
@@ -193,6 +199,9 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
 {% if revisionable %}
       ->setRevisionable(TRUE)
 {% endif %}
+{% if translatable %}
+      ->setTranslatable(TRUE)
+{% endif %}
       ->setLabel(t('Title'))
       ->setDescription(t('The title of the {{ entity_type_label|lower }} entity.'))
       ->setRequired(TRUE)
@@ -243,6 +252,9 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
 {% if revisionable %}
       ->setRevisionable(TRUE)
 {% endif %}
+{% if translatable %}
+      ->setTranslatable(TRUE)
+{% endif %}
       ->setLabel(t('Description'))
       ->setDescription(t('A description of the {{ entity_type_label|lower }}.'))
       ->setDisplayOptions('form', [
@@ -262,6 +274,9 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
 {% if revisionable %}
       ->setRevisionable(TRUE)
+{% endif %}
+{% if translatable %}
+      ->setTranslatable(TRUE)
 {% endif %}
       ->setLabel(t('Author'))
       ->setDescription(t('The user ID of the {{ entity_type_label|lower }} author.'))
@@ -287,6 +302,9 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
 {% if created_base_field %}
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
+{% if translatable %}
+      ->setTranslatable(TRUE)
+{% endif %}
       ->setDescription(t('The time that the {{ entity_type_label|lower }} was created.'))
       ->setDisplayOptions('view', [
         'label' => 'above',
@@ -304,6 +322,9 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
 {% if changed_base_field %}
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
+{% if translatable %}
+      ->setTranslatable(TRUE)
+{% endif %}
       ->setDescription(t('The time that the {{ entity_type_label|lower }} was last edited.'));
 
 {% endif %}
