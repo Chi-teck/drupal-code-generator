@@ -44,6 +44,7 @@ class ContentEntity extends BaseGenerator {
 
     $questions['fieldable'] = new ConfirmationQuestion('Make the entity type fieldable?', TRUE);
     $questions['revisionable'] = new ConfirmationQuestion('Make the entity type revisionable?', FALSE);
+    $questions['translatable'] = new ConfirmationQuestion('Make the entity type translatable?', FALSE);
     $questions['template'] = new ConfirmationQuestion('Create entity template?', TRUE);
     $questions['access_controller'] = new ConfirmationQuestion('Create CRUD permissions?', FALSE);
     $questions['title_base_field'] = new ConfirmationQuestion('Add "title" base field?', TRUE);

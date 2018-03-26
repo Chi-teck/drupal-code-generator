@@ -23,6 +23,7 @@ class ContentEntityTest extends GeneratorBaseTest {
     'Entity base path [/admin/content/foo-example]:' => '/example',
     'Make the entity type fieldable? [Yes]:' => 'Yes',
     'Make the entity type revisionable? [No]:' => 'Yes',
+    'Make the entity type translatable? [No]:' => 'No',
     'Create entity template? [Yes]:' => 'Yes',
     'Create CRUD permissions? [No]:' => 'No',
     'Add "title" base field? [Yes]:' => 'Yes',
