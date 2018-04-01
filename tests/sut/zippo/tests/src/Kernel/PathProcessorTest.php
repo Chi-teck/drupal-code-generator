@@ -6,7 +6,7 @@ use Drupal\KernelTests\KernelTestBase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Test path processor.
+ * Path processor test.
  *
  * @group DCG
  */
