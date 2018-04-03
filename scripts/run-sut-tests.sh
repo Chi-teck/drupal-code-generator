@@ -146,7 +146,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
 
   $DCG d8:plugin:migrate:process -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_id":"example"}'
 
-  $DCG d8:plugin:views:argument-default -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
+  $DCG d8:plugin:views:argument-default -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example"}'
   $DCG d8:plugin:views:field -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
   $DCG d8:plugin:views:style -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
 
