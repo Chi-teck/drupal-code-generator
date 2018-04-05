@@ -1,0 +1,7 @@
+services:
+  foo.page_cache_response_policy.example:
+    class: Drupal\foo\PageCache\Example
+    public: false
+    tags:
+      - { name: page_cache_response_policy }
+      - { name: dynamic_page_cache_response_policy }

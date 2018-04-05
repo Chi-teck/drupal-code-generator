@@ -198,9 +198,10 @@
   [7 ] Param converter
   [8 ] Path processor
   [9 ] Request policy
-  [10] Route subscriber
-  [11] Theme negotiator
-  [12] Twig extension
+  [10] Response policy
+  [11] Route subscriber
+  [12] Theme negotiator
+  [13] Twig extension
   ➤➤➤➤ 0⏎
  Select generator: 
   [0 ] ..

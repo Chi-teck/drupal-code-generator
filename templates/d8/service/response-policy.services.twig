@@ -1,0 +1,7 @@
+services:
+  {{ machine_name }}.page_cache_response_policy.example:
+    class: Drupal\{{ machine_name }}\PageCache\{{ class }}
+    public: false
+    tags:
+      - { name: page_cache_response_policy }
+      - { name: dynamic_page_cache_response_policy }
