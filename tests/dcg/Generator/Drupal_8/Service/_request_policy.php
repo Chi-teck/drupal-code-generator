@@ -6,7 +6,7 @@ use Drupal\Core\PageCache\RequestPolicyInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * A policy disallowing caching of requests with 'no-cache' query parameter.
+ * A policy allowing to bypass cache for requests with 'no-cache' parameter.
  *
  * Example: https://example.com/node?no-cache.
  */
