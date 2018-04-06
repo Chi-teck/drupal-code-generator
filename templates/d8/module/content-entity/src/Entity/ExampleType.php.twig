@@ -1,0 +1,61 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Entity;
+
+use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
+
+/**
+ * Defines the {{ entity_type_label }} type configuration entity.
+ *
+ * @ConfigEntityType(
+ *   id = "{{ entity_type_id }}_type",
+ *   label = @Translation("{{ entity_type_label }} type"),
+ *   handlers = {
+ *     "form" = {
+ *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}TypeForm",
+ *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}TypeForm",
+ *       "delete" = "Drupal\Core\Entity\EntityDeleteForm",
+ *     },
+ *     "list_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}TypeListBuilder",
+ *     "route_provider" = {
+ *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
+ *     }
+ *   },
+ *   admin_permission = "administer {{ entity_type_label|lower }} types",
+ *   bundle_of = "{{ entity_type_id }}",
+ *   config_prefix = "{{ entity_type_id }}_type",
+ *   entity_keys = {
+ *     "id" = "id",
+ *     "label" = "label",
+ *     "uuid" = "uuid"
+ *   },
+ *   links = {
+ *     "add-form" = "/admin/structure/{{ entity_type_id }}_types/add",
+ *     "edit-form" = "/admin/structure/{{ entity_type_id }}_types/manage/{{ '{'~entity_type_id~'_type}' }}",
+ *     "delete-form" = "/admin/structure/{{ entity_type_id }}_types/manage/{{ '{'~entity_type_id~'_type}' }}/delete",
+ *     "collection" = "/admin/structure/{{ entity_type_id }}_types"
+ *   },
+ *   config_export = {
+ *     "id",
+ *     "label",
+ *     "uuid",
+ *   }
+ * )
+ */
+class {{ class_prefix }}Type extends ConfigEntityBundleBase {
+
+  /**
+   * The machine name of this {{ entity_type_label|lower }} type.
+   *
+   * @var string
+   */
+  protected $id;
+
+  /**
+   * The human-readable name of the {{ entity_type_label|lower }} type.
+   *
+   * @var string
+   */
+  protected $label;
+
+}

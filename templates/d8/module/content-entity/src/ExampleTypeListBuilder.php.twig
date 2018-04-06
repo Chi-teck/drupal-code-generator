@@ -1,0 +1,51 @@
+<?php
+
+namespace Drupal\{{ machine_name }};
+
+use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+
+/**
+ * Defines a class to build a listing of {{ entity_type_label|lower }} type entities.
+ *
+ * @see \Drupal\{{ machine_name }}\Entity\{{ class_prefix }}Type
+ */
+class {{ class_prefix }}TypeListBuilder extends ConfigEntityListBuilder {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildHeader() {
+    $header['title'] = $this->t('Label');
+
+    return $header + parent::buildHeader();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildRow(EntityInterface $entity) {
+    $row['title'] = [
+      'data' => $entity->label(),
+      'class' => ['menu-label'],
+    ];
+
+    return $row + parent::buildRow($entity);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function render() {
+    $build = parent::render();
+
+    $build['table']['#empty'] = $this->t(
+      'No {{ entity_type_label|lower }} types available. <a href=":link">Add {{ entity_type_label|lower }} type</a>.',
+      [':link' => Url::fromRoute('entity.{{ entity_type_id }}_type.add_form')->toString()]
+    );
+
+    return $build;
+  }
+
+}

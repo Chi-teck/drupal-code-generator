@@ -28,6 +28,9 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   id = "{{ entity_type_id }}",
  *   label = @Translation("{{ entity_type_label }}"),
  *   label_collection = @Translation("{{ entity_type_label|plural }}"),
+{% if bundle %}
+ *   bundle_label = @Translation("{{ entity_type_label }} type"),
+{% endif %}
  *   handlers = {
 {% if template %}
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
@@ -44,10 +47,15 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm"
  *     },
+ *     "route_provider" = {
+ *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
+ *     }
  *   },
  *   base_table = "{{ entity_type_id }}",
+ *   data_table = "{{ entity_type_id }}_field_data",
 {% if revisionable %}
  *   revision_table = "{{ entity_type_id }}_revision",
+ *   revision_data_table = "{{ entity_type_id }}_field_revision",
  *   show_revision_ui = TRUE,
 {% endif %}
 {% if translatable %}
@@ -61,6 +69,9 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% endif %}
 {% if translatable %}
  *     "langcode" = "langcode",
+{% endif %}
+{% if bundle %}
+ *     "bundle" = "bundle",
 {% endif %}
  *     "label" = "{{ title_base_field ? 'title' : 'id' }}",
  *     "uuid" = "uuid"
@@ -77,12 +88,21 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   },
 {% endif %}
  *   links = {
- *     "canonical" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
+{% if bundle %}
+ *     "add-form" = "{{ entity_base_path }}/add/{{ '{' }}{{ entity_type_id }}{{ '_type}' }}",
+ *     "add-page" = "{{ entity_base_path }}/add",
+{% else %}
+ *     "add-form" = "{{ entity_base_path }}/add",
+{% endif %}
+ *     "canonical" = "/{{ entity_type_id }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
  *     "edit-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/edit",
  *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
  *     "collection" = "/admin/content/{{ entity_type_id|u2h }}"
  *   },
-{% if fieldable %}
+{% if bundle %}
+ *   bundle_entity_type = "{{ entity_type_id }}_type",
+ *   field_ui_base_route = "entity.{{ entity_type_id }}_type.edit_form"
+{% elseif fieldable %}
  *   field_ui_base_route = "entity.{{ entity_type_id }}.settings"
 {% endif %}
  * )

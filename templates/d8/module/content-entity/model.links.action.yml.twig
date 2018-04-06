@@ -1,5 +1,19 @@
-entity.{{ entity_type_id }}.add:
+{% if bundle %}
+{{ entity_type_id }}.type_add:
+  route_name: entity.{{ entity_type_id }}_type.add_form
+  title: 'Add {{ entity_type_label|lower }} type'
+  appears_on:
+    - entity.{{ entity_type_id }}_type.collection
+
+{{ entity_type_id }}.add_page:
+  route_name: entity.{{ entity_type_id }}.add_page
+  title: 'Add {{ entity_type_label|lower }}'
+  appears_on:
+    - entity.{{ entity_type_id }}.collection
+{% else %}
+{{ entity_type_id }}.add_form:
   route_name: entity.{{ entity_type_id }}.add_form
   title: 'Add {{ entity_type_label|lower }}'
   appears_on:
     - entity.{{ entity_type_id }}.collection
+{% endif %}
