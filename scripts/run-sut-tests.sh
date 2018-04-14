@@ -185,6 +185,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
   $DCG d8:service:twig-extension -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoTwigExtension"}'
   $DCG d8:service:path-processor -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"PathProcessorZippo"}'
   $DCG d8:service:request-policy -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"Example"}'
+  $DCG d8:service:response-policy -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ExampleResponsePolicy"}'
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
