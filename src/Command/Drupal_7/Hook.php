@@ -32,20 +32,36 @@ class Hook extends BaseGenerator {
 
     $vars = $this->collectVars($input, $output, $questions);
 
-    $install_hooks = [
-      'install',
-      'uninstall',
-      'enable',
-      'disable',
-      'schema',
-      'schema_alter',
-      'field_schema',
-      'requirements',
-      'update_N',
-      'update_last_removed',
+    // Most Drupal hooks are situated in a module file but some are not.
+    $special_hooks = [
+      'install' => [
+        'install',
+        'uninstall',
+        'enable',
+        'disable',
+        'schema',
+        'schema_alter',
+        'field_schema',
+        'requirements',
+        'update_N',
+        'update_last_removed',
+      ],
+      // See system_hook_info().
+      'tokens.inc' => [
+        'token_info',
+        'token_info_alter',
+        'tokens',
+        'tokens_alter',
+      ],
     ];
 
-    $file_type = in_array($vars['hook_name'], $install_hooks) ? 'install' : 'module';
+    $file_type = 'module';
+    foreach ($special_hooks as $group => $hooks) {
+      if (in_array($vars['hook_name'], $hooks)) {
+        $file_type = $group;
+        break;
+      }
+    }
 
     $this->addFile()
       ->path("{machine_name}.$file_type")
