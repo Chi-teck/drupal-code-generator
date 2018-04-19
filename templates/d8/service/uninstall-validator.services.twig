@@ -1,0 +1,6 @@
+services:
+  {{ machine_name }}.uninstall_validator:
+    class: Drupal\{{ machine_name }}\{{ class }}
+    tags:
+      - { name: module_install.uninstall_validator }
+    arguments: ['@plugin.manager.block', '@entity_type.manager', '@string_translation']
