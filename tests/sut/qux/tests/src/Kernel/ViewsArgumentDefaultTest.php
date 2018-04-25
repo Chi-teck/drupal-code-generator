@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\qux\Kernel;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormState;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\Core\Cache\Cache;
 
 /**
  * A test for view argument default plugin.
@@ -25,7 +25,6 @@ class ViewsArgumentDefaultTest extends KernelTestBase {
 
     $plugin_manager = \Drupal::service('plugin.manager.views.argument_default');
 
-    /** @var \Drupal\xxx\Plugin\views\argument_default\Example $plugin */
     $plugin = $plugin_manager->createInstance('qux_example');
     $plugin->options['example_option'] = 'abc';
 
