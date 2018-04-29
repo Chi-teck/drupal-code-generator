@@ -1,3 +1,7 @@
+administer example types:
+  title: 'Administer example types'
+  description: 'Maintain the types of example entity.'
+  restrict access: true
 administer example:
   title: Administer example settings
   restrict access: true

@@ -69,7 +69,7 @@ class ContentEntity extends BaseGenerator {
     if (($vars['fieldable_no_bundle'] = $vars['fieldable'] && !$vars['bundle'])) {
       $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '.settings';
     }
-    else if ($vars['bundle']) {
+    elseif ($vars['bundle']) {
       $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '_type.collection';
     }
 

@@ -24,6 +24,7 @@ class ContentEntityTest extends GeneratorBaseTest {
     'Make the entity type fieldable? [Yes]:' => 'Yes',
     'Make the entity type revisionable? [No]:' => 'Yes',
     'Make the entity type translatable? [No]:' => 'No',
+    'The entity type has bundle? [No]:' => 'No',
     'Create entity template? [Yes]:' => 'Yes',
     'Create CRUD permissions? [No]:' => 'No',
     'Add "title" base field? [Yes]:' => 'Yes',

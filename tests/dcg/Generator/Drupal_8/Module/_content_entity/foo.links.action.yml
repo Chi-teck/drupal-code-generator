@@ -1,4 +1,4 @@
-entity.foo_example.add:
+foo_example.add_form:
   route_name: entity.foo_example.add_form
   title: 'Add example'
   appears_on:

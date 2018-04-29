@@ -26,9 +26,14 @@ use Drupal\user\UserInterface;
  *       "edit" = "Drupal\foo\Form\ExampleForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm"
  *     },
+ *     "route_provider" = {
+ *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
+ *     }
  *   },
  *   base_table = "foo_example",
+ *   data_table = "foo_example_field_data",
  *   revision_table = "foo_example_revision",
+ *   revision_data_table = "foo_example_field_revision",
  *   show_revision_ui = TRUE,
  *   admin_permission = "administer example",
  *   entity_keys = {
@@ -43,7 +48,8 @@ use Drupal\user\UserInterface;
  *     "revision_log_message" = "revision_log"
  *   },
  *   links = {
- *     "canonical" = "/example/{foo_example}",
+ *     "add-form" = "/example/add",
+ *     "canonical" = "/foo_example/{foo_example}",
  *     "edit-form" = "/example/{foo_example}/edit",
  *     "delete-form" = "/example/{foo_example}/delete",
  *     "collection" = "/admin/content/foo-example"
