@@ -16,6 +16,7 @@ entity.foo_example.delete_form:
   base_route: entity.foo_example.canonical
   weight: 10
 entity.foo_example.collection:
-  title: Examples
+  title: Example
   route_name: entity.foo_example.collection
   base_route: system.admin_content
+  weight: 10

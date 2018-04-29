@@ -1,4 +1,4 @@
-{% if fieldable %}
+{% if fieldable_no_bundle %}
 entity.{{ entity_type_id }}.settings:
   path: 'admin/structure/{{ entity_type_id|u2h }}'
   defaults:
@@ -7,42 +7,3 @@ entity.{{ entity_type_id }}.settings:
   requirements:
     _permission: 'administer {{ entity_type_label|lower }}'
 {% endif %}
-entity.{{ entity_type_id }}.collection:
-  path: '/admin/content/{{ entity_type_id|u2h }}'
-  defaults:
-    _entity_list: '{{ entity_type_id }}'
-    _title: '{{ entity_type_label|plural }}'
-  requirements:
-    _permission: 'access {{ entity_type_label|lower }} overview'
-
-entity.{{ entity_type_id }}.canonical:
-  path: '{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}'
-  defaults:
-    _entity_view: '{{ entity_type_id }}'
-    _title: '{{ entity_type_label }}'
-  requirements:
-    _entity_access: '{{ entity_type_id }}.view'
-
-entity.{{ entity_type_id }}.add_form:
-  path: '{{ entity_base_path }}/add'
-  defaults:
-    _entity_form: {{ entity_type_id }}.add
-    _title: 'Add {{ entity_type_label }}'
-  requirements:
-    _entity_create_access: {{ entity_type_id }}
-
-entity.{{ entity_type_id }}.edit_form:
-  path: '{{ entity_base_path }}/{{ '{' }}{{ entity_type_id  }}{{ '}' }}/edit'
-  defaults:
-    _entity_form: {{ entity_type_id }}.edit
-    _title: 'Edit {{ entity_type_label }}'
-  requirements:
-    _entity_access: {{ entity_type_id }}.update
-
-entity.{{ entity_type_id }}.delete_form:
-  path: '{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete'
-  defaults:
-    _entity_form: {{ entity_type_id }}.delete
-    _title: 'Delete {{ entity_type_label }}'
-  requirements:
-    _entity_access: {{ entity_type_id }}.delete

@@ -62,7 +62,7 @@ abstract class GeneratorBaseTest extends BaseTestCase {
         self::assertDirectoryExists($path);
       }
       elseif ($fixture !== NULL) {
-        self::assertFileEquals($fixture, $path);
+        self::assertFileEquals($fixture, $path, $fixture);
       }
       else {
         self::markTestSkipped();
