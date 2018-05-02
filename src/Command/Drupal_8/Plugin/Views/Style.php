@@ -39,6 +39,11 @@ class Style extends BaseGenerator {
       ->template('d8/plugin/views/style-preprocess.twig')
       ->action('append')
       ->headerSize(7);
+
+    $this->addFile()
+      ->path('config/schema/{machine_name}.schema.yml')
+      ->template('d8/plugin/views/style-schema.twig')
+      ->action('append');
   }
 
 }
