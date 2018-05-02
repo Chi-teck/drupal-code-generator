@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\xxx\Kernel;
+namespace Drupal\Tests\zippo\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\xxx\Kernel;
+namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 
