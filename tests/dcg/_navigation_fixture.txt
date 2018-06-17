@@ -191,18 +191,19 @@
   [0 ] ..
   [1 ] Access checker
   [2 ] Breadcrumb builder
-  [3 ] Custom service
-  [4 ] Event subscriber
-  [5 ] Logger
-  [6 ] Middleware
-  [7 ] Param converter
-  [8 ] Path processor
-  [9 ] Request policy
-  [10] Response policy
-  [11] Route subscriber
-  [12] Theme negotiator
-  [13] Twig extension
-  [14] Uninstall validator
+  [3 ] Cache context
+  [4 ] Custom service
+  [5 ] Event subscriber
+  [6 ] Logger
+  [7 ] Middleware
+  [8 ] Param converter
+  [9 ] Path processor
+  [10] Request policy
+  [11] Response policy
+  [12] Route subscriber
+  [13] Theme negotiator
+  [14] Twig extension
+  [15] Uninstall validator
   ➤➤➤➤ 0⏎
  Select generator: 
   [0 ] ..

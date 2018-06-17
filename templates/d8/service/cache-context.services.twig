@@ -1,0 +1,10 @@
+services:
+  cache_context.{{ context_id }}:
+    class: Drupal\{{ machine_name }}\Cache\Context\{{ class }}
+{% if base_class == 'RequestStackCacheContextBase' %}
+    arguments: ['@request_stack']
+{% elseif base_class == 'UserCacheContextBase' %}
+    arguments: ['@current_user']
+{% endif %}
+    tags:
+      - { name: cache.context}
