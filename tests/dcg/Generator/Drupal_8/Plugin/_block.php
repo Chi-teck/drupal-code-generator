@@ -3,11 +3,11 @@
 namespace Drupal\foo\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Session\AccountInterface;
+use Drupal\example\ExampleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -22,11 +22,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The route match.
+   * The example service.
    *
-   * @var \Drupal\Core\Routing\RouteMatchInterface
+   * @var \Drupal\example\ExampleInterface
    */
-  protected $routeMatch;
+  protected $example;
 
   /**
    * Constructs a new ExampleBlock instance.
@@ -40,12 +40,12 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
-   *   The route match.
+   * @param \Drupal\example\ExampleInterface $example
+   *   The example service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, RouteMatchInterface $route_match) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExampleInterface $example) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->routeMatch = $route_match;
+    $this->example = $example;
   }
 
   /**
@@ -56,7 +56,7 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('current_route_match')
+      $container->get('example')
     );
   }
 
@@ -65,7 +65,7 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
    */
   public function defaultConfiguration() {
     return [
-      'content' => $this->t('Hello world!'),
+      'foo' => $this->t('Hello world!'),
     ];
   }
 
@@ -73,10 +73,10 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state) {
-    $form['content'] = [
+    $form['foo'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Block content'),
-      '#default_value' => $this->configuration['content'],
+      '#title' => $this->t('Foo'),
+      '#default_value' => $this->configuration['foo'],
     ];
     return $form;
   }
@@ -85,22 +85,16 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->configuration['content'] = $form_state->getValue('content');
+    $this->configuration['foo'] = $form_state->getValue('foo');
   }
 
   /**
    * {@inheritdoc}
-   *
-   * @DCG Remove this method of you do not need any access restrictions.
    */
   protected function blockAccess(AccountInterface $account) {
-    $route_name = $this->routeMatch->getRouteName();
-    // Display the block only for anonymous users.
-    if ($account->isAnonymous() && $route_name != 'user.register') {
-      return AccessResult::allowed()
-        ->addCacheContexts(['route.name', 'user.roles:anonymous']);
-    }
-    return AccessResult::forbidden();
+    // @DCG Evaluate the access condition here.
+    $condition = TRUE;
+    return AccessResult::allowedIf($condition);
   }
 
   /**
@@ -108,7 +102,7 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
    */
   public function build() {
     $build['content'] = [
-      '#markup' => $this->configuration['content'],
+      '#markup' => $this->t('It works!'),
     ];
     return $build;
   }

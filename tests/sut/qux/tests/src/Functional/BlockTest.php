@@ -34,12 +34,12 @@ class BlockTest extends BrowserTestBase {
 
     // Check default configuration.
     $this->assertXpath('//input[@name = "settings[label]" and @value = "Example"]');
-    $this->assertXpath('//textarea[@name = "settings[content]" and text() = "Hello world!"]');
+    $this->assertXpath('//textarea[@name = "settings[foo]" and text() = "Hello world!"]');
 
     // Update block configuration.
     $edit = [
       'settings[label]' => 'Beer',
-      'settings[content]' => 'Wine',
+      'settings[foo]' => 'Wine',
       'region' => 'sidebar_first',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save block');
@@ -48,15 +48,12 @@ class BlockTest extends BrowserTestBase {
     // Make sure the configuration has been persisted.
     $this->drupalGet('admin/structure/block/manage/example');
     $this->assertXpath('//input[@name = "settings[label]" and @value = "Beer"]');
-    $this->assertXpath('//textarea[@name = "settings[content]" and text() = "Wine"]');
+    $this->assertXpath('//textarea[@name = "settings[foo]" and text() = "Wine"]');
 
-    // The block should appear only for anonymous users.
+    // Render the block.
     $this->drupalGet('<front>');
-    $this->assertSession()->responseNotContains('Beer');
-    $this->assertSession()->responseNotContains('Wine');
-    $this->drupalLogout();
     $this->assertSession()->responseContains('Beer');
-    $this->assertSession()->responseContains('Wine');
+    $this->assertSession()->responseContains('It works!');
   }
 
 }

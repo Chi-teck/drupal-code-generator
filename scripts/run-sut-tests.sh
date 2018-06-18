@@ -71,8 +71,9 @@ else
   composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   composer -d=$DRUPAL_DIR run-script drupal-phpunit-upgrade
+  cp -R $SELF_PATH/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
-  dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite
+  dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite --sites-subdir=default
   mkdir -p $DRUPAL_CACHED_DIR
   cp -r $DRUPAL_DIR/. $DRUPAL_CACHED_DIR
 fi
@@ -151,7 +152,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
   $DCG d8:plugin:views:style -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example"}'
 
   $DCG d8:plugin:action -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Update node title","plugin_id":"qux_update_node_title","category":"DCG","configurable":true}'
-  $DCG d8:plugin:block -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","category":"DCG"}'
+  $DCG d8:plugin:block -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","category":"DCG", "configurable":"Yes","di":"Yes","access":"Yes"}'
   $DCG d8:plugin:condition -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
   $DCG d8:plugin:filter -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example", "filter_type":"HTML restrictor"}'
   $DCG d8:plugin:menu-link -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","class":"FooExampleLink"}'

@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -25,6 +26,9 @@ class Block extends BaseGenerator {
     $questions['plugin_label'] = new Question('Block admin label', 'Example');
     $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
     $questions['category'] = new Question('Block category', 'Custom');
+    $questions['configurable'] = new ConfirmationQuestion('Make the block configurable?', FALSE);
+    $questions['di'] = new ConfirmationQuestion('Inject dependencies?', FALSE);
+    $questions['access'] = new ConfirmationQuestion('Create access callback?', FALSE);
 
     $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Block');
@@ -33,10 +37,12 @@ class Block extends BaseGenerator {
       ->path('src/Plugin/Block/{class}.php')
       ->template('d8/plugin/block.twig');
 
-    $this->addFile()
-      ->path('config/schema/{machine_name}.schema.yml')
-      ->template('d8/plugin/block-schema.twig')
-      ->action('append');
+    if ($vars['configurable']) {
+      $this->addFile()
+        ->path('config/schema/{machine_name}.schema.yml')
+        ->template('d8/plugin/block-schema.twig')
+        ->action('append');
+    }
   }
 
 }

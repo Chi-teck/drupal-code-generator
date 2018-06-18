@@ -17,6 +17,9 @@ class BlockTest extends GeneratorBaseTest {
     'Block admin label [Example]:' => 'Example',
     'Plugin ID [foo_example]:' => 'foo_example',
     'Block category [Custom]:' => 'Custom',
+    'Make the block configurable? [No]:' => 'Yes',
+    'Inject dependencies? [No]:' => 'Yes',
+    'Create access callback? [No]:' => 'Yes',
   ];
 
   protected $fixtures = [
