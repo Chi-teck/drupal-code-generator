@@ -27,6 +27,7 @@ class Controller extends BaseGenerator {
       return Utils::camelize($vars['name'] . 'Controller');
     };
     $questions['class'] = new Question('Class', $default_class);
+    $questions['di'] = new ConfirmationQuestion('Inject dependencies?', FALSE);
     $questions['route'] = new ConfirmationQuestion('Would you like to create a route for this controller?');
     $vars = $this->collectVars($input, $output, $questions);
 

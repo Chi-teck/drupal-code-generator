@@ -2,4 +2,6 @@ name: Bar
 type: module
 description: Helper module for testing generated module components.
 package: DCG
+dependencies:
+  - example:example
 core: 8.x

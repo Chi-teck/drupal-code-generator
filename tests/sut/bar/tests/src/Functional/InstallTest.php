@@ -20,6 +20,7 @@ class InstallTest extends BrowserTestBase {
 
     // Test hook_install().
     $edit = [
+      'modules[example][enable]' => TRUE,
       'modules[bar][enable]' => TRUE,
     ];
     $this->drupalPostForm('admin/modules', $edit, 'Install');

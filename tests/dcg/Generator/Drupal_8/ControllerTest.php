@@ -15,6 +15,7 @@ class ControllerTest extends GeneratorBaseTest {
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [FooController]:' => 'FooController',
+    'Inject dependencies? [No]:' => 'Yes',
     'Would you like to create a route for this controller? [Yes]:' => 'Yes',
     'Route name [foo.example]:' => 'example.bar',
     'Route path [/foo/example]:' => '/foo/example',
