@@ -109,10 +109,10 @@ class InputHandlerTest extends TestCase {
     $vars = $this->handler->collectVars($this->input, $this->output, $questions);
     $expected_vars = [
       'name' => 'Bar',
-      'machine_name' => 'Zoo',
+      'machine_name' => 'Default machine name',
     ];
     static::assertEquals($expected_vars, $vars);
-    static::assertEquals("\n Machine name [Default machine name]:\n ➤ ", $this->output->fetch());
+    static::assertEquals('', $this->output->fetch());
 
     $this->input->setOption('answers', 'Wrong JSON');
     $this->expectException('Symfony\Component\Console\Exception\InvalidOptionException');
