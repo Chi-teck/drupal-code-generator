@@ -308,7 +308,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
 fi
 
 # --- Test module --- #
-if [ $TARGET_TEST = all -o $TARGET_TEST = simmple_module ]; then
+if [ $TARGET_TEST = all -o $TARGET_TEST = module ]; then
   dcg_label Simple module
 
   MODULE_MACHINE_NAME=peach
@@ -323,7 +323,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = simmple_module ]; then
 fi
 
 # --- Test theme --- #
-if [ $TARGET_TEST = all -o $TARGET_TEST = simple_theme ]; then
+if [ $TARGET_TEST = all -o $TARGET_TEST = theme ]; then
   dcg_label Theme
 
   THEME_MACHINE_NAME=azalea
