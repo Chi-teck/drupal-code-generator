@@ -1,8 +1,5 @@
 {
   "chmod": "0755",
-  "files": [
-    "vendor/autoload.php"
-  ],
   "finder": [
     {
       "name": "*",
@@ -16,11 +13,7 @@
     {
       "name": "*.php",
       "in": [
-        "vendor/composer",
-        "vendor/symfony/console",
-        "vendor/symfony/filesystem",
-        "vendor/symfony/polyfill-mbstring",
-        "vendor/twig"
+        "vendor"
       ],
       "exclude": [
         "Tests",
