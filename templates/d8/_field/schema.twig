@@ -1,0 +1,55 @@
+{% if storage_settings %}
+# Storage schema.
+field.storage_settings.{{ field_id }}:
+  type: mapping
+  label: Example storage settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
+
+{% endif %}
+{% if instance_settings %}
+# Instance schema.
+field.field_settings.{{ field_id }}:
+  type: mapping
+  label: Example field settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
+
+{% endif %}
+# Default value schema.
+field.value.{{ field_id }}:
+  type: mapping
+  label: Default value
+  mapping:
+{% for subfield in subfields %}
+    {{ subfield.machine_name }}:
+      type: {{ subfield.type }}
+      label: {{ subfield.name }}
+{% endfor %}
+
+{% if widget_settings %}
+# Widget schema.
+field.widget.settings.{{ field_id }}:
+  type: mapping
+  label: Example widget settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
+
+{% endif %}
+{% if formatter_settings %}
+# Formatter schema.
+field.formatter.settings.{{ field_id }}:
+  type: mapping
+  label: Example formatter settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
+
+{% endif %}

@@ -1,0 +1,13 @@
+{% set class = field_id|u2h ~ '-elements' %}
+{% if inline %}
+.container-inline.{{ class }} .form-item {
+  margin: 0 3px;
+}
+.container-inline.{{ class }} label {
+  display: block;
+}
+{% else %}
+tr.odd .{{ class }} .form-item {
+  margin-bottom: 8px;
+}
+{% endif %}

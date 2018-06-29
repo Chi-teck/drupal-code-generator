@@ -1,0 +1,197 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\Field\FieldWidget;
+
+use Drupal\Core\Field\FieldItemListInterface;
+{% if datetime %}
+use Drupal\Core\Datetime\DrupalDateTime;
+{% endif %}
+use Drupal\Core\Field\WidgetBase;
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\Validator\ConstraintViolationInterface;
+{% if list %}
+use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
+{% endif %}
+
+/**
+ * Defines the '{{ field_id }}' field widget.
+ *
+ * @FieldWidget(
+ *   id = "{{ field_id }}",
+ *   label = @Translation("{{ field_label }}"),
+ *   field_types = {"{{ field_id }}"},
+ * )
+ */
+class {{ widget_class }} extends WidgetBase {
+
+{% if widget_settings %}
+  /**
+   * {@inheritdoc}
+   */
+  public static function defaultSettings() {
+    return ['foo' => 'bar'] + parent::defaultSettings();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array $form, FormStateInterface $form_state) {
+    $settings = $this->getSettings();
+    $element['foo'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Foo'),
+      '#default_value' => $settings['foo'],
+    ];
+    return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary() {
+    $settings = $this->getSettings();
+    $summary[] = $this->t('Foo: @foo', ['@foo' => $settings['foo']]);
+    return $summary;
+  }
+
+{% endif %}
+  /**
+   * {@inheritdoc}
+   */
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+{% for subfield in subfields %}
+{% set title %}'#title' => $this->t('{{ subfield.name }}'),{% endset %}
+{% set default_value %}'#default_value' => isset($items[$delta]->{{ subfield.machine_name }}) ? $items[$delta]->{{ subfield.machine_name }} : NULL,{% endset %}
+{% set size %}'#size' => 15,{% endset %}
+{% if subfield.list %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'select',
+      {{ title }}
+      '#options' => ['' => $this->t('- {{ subfield.required ? 'Select a value' : 'None' }} -')] + {{ type_class }}::allowed{{ subfield.name|camelize(true) }}Values(),
+      {{ default_value }}
+    ];
+{% else %}
+{% if subfield.type == 'boolean' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'checkbox',
+      {{ title }}
+      {{ default_value }}
+    ];
+{% elseif subfield.type == 'string' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'textfield',
+      {{ title }}
+      {{ default_value }}
+      {{ size }}
+    ];
+{% elseif subfield.type == 'text' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'textarea',
+      {{ title }}
+      {{ default_value }}
+    ];
+{% elseif subfield.type == 'integer' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'number',
+      {{ title }}
+      {{ default_value }}
+      {{ size }}
+    ];
+{% elseif subfield.type == 'float' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'number',
+      {{ title }}
+      {{ default_value }}
+      {{ size }}
+      '#step' => 0.001,
+    ];
+{% elseif subfield.type == 'numeric' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'number',
+      {{ title }}
+      {{ default_value }}
+      {{ size }}
+      '#step' => 0.01,
+    ];
+{% elseif subfield.type == 'email' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'email',
+      {{ title }}
+      {{ default_value }}
+      {{ size }}
+    ];
+{% elseif subfield.type == 'telephone' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'tel',
+      {{ title }}
+      {{ default_value }}
+      {{ size }}
+    ];
+{% elseif subfield.type == 'uri' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'url',
+      {{ title }}
+      {{ default_value }}
+      {{ size }}
+    ];
+{% elseif subfield.type == 'datetime' %}
+    $widget['{{ subfield.machine_name }}'] = [
+      '#type' => 'datetime',
+      {{ title }}
+      '#default_value' => NULL,
+{% if subfield.date_type == 'date' %}
+      '#date_time_element' => 'none',
+      '#date_time_format' => '',
+{% endif %}
+    ];
+    if (isset($items[$delta]->{{ subfield.machine_name }})) {
+      $widget['{{ subfield.machine_name }}']['#default_value'] = DrupalDateTime::createFromFormat(
+        '{{ subfield.date_storage_format }}',
+        $items[$delta]->{{ subfield.machine_name }},
+        'UTC'
+      );
+    }
+{% endif %}
+{% endif %}
+
+{% endfor %}
+    $element['#theme_wrappers'] = ['container', 'form_element'];
+{% if inline %}
+    $element['#attributes']['class'][] = 'container-inline';
+{% endif %}
+    $element['#attributes']['class'][] = '{{ field_id|u2h }}-elements';
+    $element['#attached']['library'][] = '{{ machine_name }}/{{ field_id }}';
+
+    return $widget + $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function errorElement(array $element, ConstraintViolationInterface $violation, array $form, FormStateInterface $form_state) {
+    return isset($violation->arrayPropertyPath[0]) ? $element[$violation->arrayPropertyPath[0]] : $element;
+  }
+
+{% if list or datetime %}
+  /**
+   * {@inheritdoc}
+   */
+  public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
+    foreach ($values as $delta => $value) {
+{% for subfield in subfields %}
+{% if subfield.list %}
+      if ($value['{{ subfield.machine_name }}'] === '') {
+        $values[$delta]['{{ subfield.machine_name }}'] = NULL;
+      }
+{% elseif subfield.type == 'datetime' %}
+      if ($value['{{ subfield.machine_name }}']) {
+        $values[$delta]['{{ subfield.machine_name }}'] = $value['{{ subfield.machine_name }}']->format('{{ subfield.date_storage_format }}');
+      }
+{% endif %}
+{% endfor %}
+    }
+    return $values;
+  }
+
+{% endif %}
+}

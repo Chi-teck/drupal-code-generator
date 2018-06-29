@@ -77,19 +77,20 @@
   [5 ] Test
   [6 ] Yml
   [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Layout
-  [12] Module file
-  [13] Render element
-  [14] Service provider
-  [15] Settings local
-  [16] Template
-  [17] Theme
-  [18] Theme file
-  [19] Theme settings
-  [20] composer.json
+  [8 ] Field
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Render element
+  [15] Service provider
+  [16] Settings local
+  [17] Template
+  [18] Theme
+  [19] Theme file
+  [20] Theme settings
+  [21] composer.json
   ➤➤➤➤ 1⏎
  Select generator: 
   [0] ..
@@ -106,19 +107,20 @@
   [5 ] Test
   [6 ] Yml
   [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Layout
-  [12] Module file
-  [13] Render element
-  [14] Service provider
-  [15] Settings local
-  [16] Template
-  [17] Theme
-  [18] Theme file
-  [19] Theme settings
-  [20] composer.json
+  [8 ] Field
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Render element
+  [15] Service provider
+  [16] Settings local
+  [17] Template
+  [18] Theme
+  [19] Theme file
+  [20] Theme settings
+  [21] composer.json
   ➤➤➤➤ 2⏎
  Select generator: 
   [0] ..
@@ -136,19 +138,20 @@
   [5 ] Test
   [6 ] Yml
   [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Layout
-  [12] Module file
-  [13] Render element
-  [14] Service provider
-  [15] Settings local
-  [16] Template
-  [17] Theme
-  [18] Theme file
-  [19] Theme settings
-  [20] composer.json
+  [8 ] Field
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Render element
+  [15] Service provider
+  [16] Settings local
+  [17] Template
+  [18] Theme
+  [19] Theme file
+  [20] Theme settings
+  [21] composer.json
   ➤➤➤➤ 3⏎
  Select generator: 
   [0 ] ..
@@ -173,19 +176,20 @@
   [5 ] Test
   [6 ] Yml
   [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Layout
-  [12] Module file
-  [13] Render element
-  [14] Service provider
-  [15] Settings local
-  [16] Template
-  [17] Theme
-  [18] Theme file
-  [19] Theme settings
-  [20] composer.json
+  [8 ] Field
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Render element
+  [15] Service provider
+  [16] Settings local
+  [17] Template
+  [18] Theme
+  [19] Theme file
+  [20] Theme settings
+  [21] composer.json
   ➤➤➤➤ 4⏎
  Select generator: 
   [0 ] ..
@@ -214,19 +218,20 @@
   [5 ] Test
   [6 ] Yml
   [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Layout
-  [12] Module file
-  [13] Render element
-  [14] Service provider
-  [15] Settings local
-  [16] Template
-  [17] Theme
-  [18] Theme file
-  [19] Theme settings
-  [20] composer.json
+  [8 ] Field
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Render element
+  [15] Service provider
+  [16] Settings local
+  [17] Template
+  [18] Theme
+  [19] Theme file
+  [20] Theme settings
+  [21] composer.json
   ➤➤➤➤ 5⏎
  Select generator: 
   [0] ..
@@ -245,19 +250,20 @@
   [5 ] Test
   [6 ] Yml
   [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Layout
-  [12] Module file
-  [13] Render element
-  [14] Service provider
-  [15] Settings local
-  [16] Template
-  [17] Theme
-  [18] Theme file
-  [19] Theme settings
-  [20] composer.json
+  [8 ] Field
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Render element
+  [15] Service provider
+  [16] Settings local
+  [17] Template
+  [18] Theme
+  [19] Theme file
+  [20] Theme settings
+  [21] composer.json
   ➤➤➤➤ 6⏎
  Select generator: 
   [0] ..
@@ -299,19 +305,20 @@
   [5 ] Test
   [6 ] Yml
   [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Layout
-  [12] Module file
-  [13] Render element
-  [14] Service provider
-  [15] Settings local
-  [16] Template
-  [17] Theme
-  [18] Theme file
-  [19] Theme settings
-  [20] composer.json
+  [8 ] Field
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Render element
+  [15] Service provider
+  [16] Settings local
+  [17] Template
+  [18] Theme
+  [19] Theme file
+  [20] Theme settings
+  [21] composer.json
   ➤➤➤➤ 0⏎
  Select generator: 
   [0] ..
@@ -343,20 +350,21 @@
   [5 ] Test
   [6 ] Yml
   [7 ] Controller
-  [8 ] Hook
-  [9 ] Install file
-  [10] Javascript
-  [11] Layout
-  [12] Module file
-  [13] Render element
-  [14] Service provider
-  [15] Settings local
-  [16] Template
-  [17] Theme
-  [18] Theme file
-  [19] Theme settings
-  [20] composer.json
-  ➤➤➤➤ 9⏎
+  [8 ] Field
+  [9 ] Hook
+  [10] Install file
+  [11] Javascript
+  [12] Layout
+  [13] Module file
+  [14] Render element
+  [15] Service provider
+  [16] Settings local
+  [17] Template
+  [18] Theme
+  [19] Theme file
+  [20] Theme settings
+  [21] composer.json
+  ➤➤➤➤ 10⏎
 
  Welcome to d8:install-file generator!
 –––––––––––––––––––––––––––––––––––––––
