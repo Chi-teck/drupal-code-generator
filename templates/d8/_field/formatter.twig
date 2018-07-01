@@ -66,16 +66,16 @@ class {{ formatter_class }} extends FormatterBase {
     foreach ($items as $delta => $item) {
 
 {% for subfield in subfields %}
-{% if subfield.type == 'boolean' %}
+  {%- if subfield.type == 'boolean' %}
       $element[$delta]['{{ subfield.machine_name }}'] = [
         '#type' => 'item',
         '#title' => $this->t('{{ subfield.name }}'),
         '#markup' => $item->{{ subfield.machine_name }} ? $this->t('Yes') : $this->t('No'),
       ];
 
-{% else %}
+  {%- else %}
       if ($item->{{ subfield.machine_name }}) {
-{% if subfield.type == 'datetime' %}
+    {%- if subfield.type == 'datetime' %}
         $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
         $date_formatter = \Drupal::service('date.formatter');
         $timestamp = $date->getTimestamp();
@@ -98,27 +98,27 @@ class {{ formatter_class }} extends FormatterBase {
             ],
           ],
         ];
-{% else %}
-{% if subfield.type == 'email' %}
+    {%- else %}
+      {%- if subfield.type == 'email' %}
         $url = Url::fromUri('mailto:' . $item->{{ subfield.machine_name }});
-{% elseif subfield.type == 'telephone' %}
+      {%- elseif subfield.type == 'telephone' %}
         $url = Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->{{ subfield.machine_name }})));
-{% elseif subfield.type == 'uri' %}
+      {%- elseif subfield.type == 'uri' %}
         $url = Url::fromUri($item->{{ subfield.machine_name }});
-{% endif %}
+      {%- endif %}
         $element[$delta]['{{ subfield.machine_name }}'] = [
           '#type' => 'item',
           '#title' => $this->t('{{ subfield.name }}'),
-{% if subfield.type == 'email' or subfield.type == 'telephone' or subfield.type == 'uri' %}
+      {%- if subfield.type == 'email' or subfield.type == 'telephone' or subfield.type == 'uri' %}
           '#markup' => Link::fromTextAndUrl($item->{{ subfield.machine_name }}, $url)->toString(),
-{% else %}
+      {%- else %}
           '#markup' => $item->{{ subfield.machine_name }},
-{% endif %}
+      {%- endif %}
         ];
-{% endif %}
+     {%- endif %}
       }
 
-{% endif %}
+  {%- endif %}
 {% endfor %}
     }
 
