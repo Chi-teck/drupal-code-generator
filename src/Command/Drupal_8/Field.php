@@ -256,7 +256,7 @@ class Field extends BaseGenerator {
       $property = "\$this->$machine_name";
       $vars['subfields'][$i]['is_empty_condition'] = $type == 'boolean'
         ? "$property == 1"
-        : "$property !== NULL && $property !== ''";
+        : "$property !== NULL";
     }
 
     $output->writeln('<fg=green>–––––––––––––––––––––––––––––––––––––––––––––––––––</>');

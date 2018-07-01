@@ -59,6 +59,7 @@ class {{ widget_class }} extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+
 {% for subfield in subfields %}
 {% set title %}'#title' => $this->t('{{ subfield.name }}'),{% endset %}
 {% set default_value %}'#default_value' => isset($items[$delta]->{{ subfield.machine_name }}) ? $items[$delta]->{{ subfield.machine_name }} : NULL,{% endset %}
@@ -179,11 +180,10 @@ class {{ widget_class }} extends WidgetBase {
   public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
     foreach ($values as $delta => $value) {
 {% for subfield in subfields %}
-{% if subfield.list %}
       if ($value['{{ subfield.machine_name }}'] === '') {
         $values[$delta]['{{ subfield.machine_name }}'] = NULL;
       }
-{% elseif subfield.type == 'datetime' %}
+{% if subfield.type == 'datetime' %}
       if ($value['{{ subfield.machine_name }}']) {
         $values[$delta]['{{ subfield.machine_name }}'] = $value['{{ subfield.machine_name }}']->format('{{ subfield.date_storage_format }}');
       }

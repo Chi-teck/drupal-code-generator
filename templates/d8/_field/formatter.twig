@@ -66,48 +66,59 @@ class {{ formatter_class }} extends FormatterBase {
     foreach ($items as $delta => $item) {
 
 {% for subfield in subfields %}
-{% if subfield.type == 'datetime' %}
-      $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
-      $date_formatter = \Drupal::service('date.formatter');
-      $timestamp = $date->getTimestamp();
-      $formatted_date = $date_formatter->format($timestamp, 'long');
-      $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
+{% if subfield.type == 'boolean' %}
       $element[$delta]['{{ subfield.machine_name }}'] = [
         '#type' => 'item',
         '#title' => $this->t('{{ subfield.name }}'),
-        'content' => [
-          '#theme' => 'time',
-          '#text' => $formatted_date,
-          '#html' => FALSE,
-          '#attributes' => [
-            'datetime' => $iso_date,
-          ],
-          '#cache' => [
-            'contexts' => [
-              'timezone',
+        '#markup' => $item->{{ subfield.machine_name }} ? $this->t('Yes') : $this->t('No'),
+      ];
+
+{% else %}
+      if ($item->{{ subfield.machine_name }}) {
+{% if subfield.type == 'datetime' %}
+        $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
+        $date_formatter = \Drupal::service('date.formatter');
+        $timestamp = $date->getTimestamp();
+        $formatted_date = $date_formatter->format($timestamp, 'long');
+        $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
+        $element[$delta]['{{ subfield.machine_name }}'] = [
+          '#type' => 'item',
+          '#title' => $this->t('{{ subfield.name }}'),
+          'content' => [
+            '#theme' => 'time',
+            '#text' => $formatted_date,
+            '#html' => FALSE,
+            '#attributes' => [
+              'datetime' => $iso_date,
+            ],
+            '#cache' => [
+              'contexts' => [
+                'timezone',
+              ],
             ],
           ],
-        ]
-      ];
+        ];
 {% else %}
 {% if subfield.type == 'email' %}
-      $url = Url::fromUri('mailto:' . $item->{{ subfield.machine_name }});
+        $url = Url::  fromUri('mailto:' . $item->{{ subfield.machine_name }});
 {% elseif subfield.type == 'telephone' %}
-      $url = Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->{{ subfield.machine_name }})));
+        $url =  Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->{{ subfield.machine_name }})));
 {% elseif subfield.type == 'uri' %}
-      $url = Url::fromUri($item->{{ subfield.machine_name }});
+        $url =   Url::fromUri($item->{{ subfield.machine_name }});
 {% endif %}
-      $element[$delta]['{{ subfield.machine_name }}'] = [
-        '#type' => 'item',
-        '#title' => $this->t('{{ subfield.name }}'),
+        $element[$delta]['{{ subfield.machine_name }}'] = [
+          '#type' => 'item',
+          '#title' => $this->t('{{ subfield.name }}'),
 {% if subfield.type == 'email' or subfield.type == 'telephone' or subfield.type == 'uri' %}
-        '#markup' => Link::fromTextAndUrl($item->{{ subfield.machine_name }}, $url)->toString(),
+          '#markup' => Link::fromTextAndUrl($item->{{ subfield.machine_name }}, $url)->toString(),
 {% else %}
-        '#markup' => $item->{{ subfield.machine_name }}{% if subfield.type == 'boolean' %} ? $this->t('Yes') : $this->t('No'){% endif %},
+          '#markup' => $item->{{ subfield.machine_name }},
 {% endif %}
-      ];
+        ];
 {% endif %}
+      }
 
+{% endif %}
 {% endfor %}
     }
 
