@@ -1,0 +1,102 @@
+# Field storage.
+field.storage_settings.example_foo:
+  type: mapping
+  label: Example storage settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
+
+# Field instance.
+field.field_settings.example_foo:
+  type: mapping
+  label: Example field settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
+
+# Default value.
+field.value.example_foo:
+  type: mapping
+  label: Default value
+  mapping:
+    value_1:
+      type: boolean
+      label: Value 1
+    value_2:
+      type: boolean
+      label: Value 2
+    value_3:
+      type: string
+      label: Value 3
+    value_4:
+      type: string
+      label: Value 4
+    value_5:
+      type: text
+      label: Value 5
+    value_6:
+      type: text
+      label: Value 6
+    value_7:
+      type: integer
+      label: Value 7
+    value_8:
+      type: integer
+      label: Value 8
+    value_9:
+      type: float
+      label: Value 9
+    value_10:
+      type: float
+      label: Value 10
+    value_11:
+      type: numeric
+      label: Value 11
+    value_12:
+      type: numeric
+      label: Value 12
+    value_13:
+      type: email
+      label: Value 13
+    value_14:
+      type: email
+      label: Value 14
+    value_15:
+      type: telephone
+      label: Value 15
+    value_16:
+      type: telephone
+      label: Value 16
+    value_17:
+      type: uri
+      label: Value 17
+    value_18:
+      type: uri
+      label: Value 18
+    value_19:
+      type: datetime
+      label: Value 19
+    value_20:
+      type: datetime
+      label: Value 20
+
+# Field widget.
+field.widget.settings.example_foo:
+  type: mapping
+  label: Example widget settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
+
+# Field formatter.
+field.formatter.settings.example_foo:
+  type: mapping
+  label: Example formatter settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
+

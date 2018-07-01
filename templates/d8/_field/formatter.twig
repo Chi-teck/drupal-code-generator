@@ -2,10 +2,10 @@
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\FieldItemListInterface;
 {% if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
 {% endif %}
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 {% if formatter_settings %}
 use Drupal\Core\Form\FormStateInterface;
@@ -100,11 +100,11 @@ class {{ formatter_class }} extends FormatterBase {
         ];
 {% else %}
 {% if subfield.type == 'email' %}
-        $url = Url::  fromUri('mailto:' . $item->{{ subfield.machine_name }});
+        $url = Url::fromUri('mailto:' . $item->{{ subfield.machine_name }});
 {% elseif subfield.type == 'telephone' %}
-        $url =  Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->{{ subfield.machine_name }})));
+        $url = Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->{{ subfield.machine_name }})));
 {% elseif subfield.type == 'uri' %}
-        $url =   Url::fromUri($item->{{ subfield.machine_name }});
+        $url = Url::fromUri($item->{{ subfield.machine_name }});
 {% endif %}
         $element[$delta]['{{ subfield.machine_name }}'] = [
           '#type' => 'item',

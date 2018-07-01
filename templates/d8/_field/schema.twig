@@ -1,5 +1,5 @@
 {% if storage_settings %}
-# Storage schema.
+# Field storage.
 field.storage_settings.{{ field_id }}:
   type: mapping
   label: Example storage settings
@@ -10,7 +10,7 @@ field.storage_settings.{{ field_id }}:
 
 {% endif %}
 {% if instance_settings %}
-# Instance schema.
+# Field instance.
 field.field_settings.{{ field_id }}:
   type: mapping
   label: Example field settings
@@ -20,7 +20,7 @@ field.field_settings.{{ field_id }}:
       label: Foo
 
 {% endif %}
-# Default value schema.
+# Default value.
 field.value.{{ field_id }}:
   type: mapping
   label: Default value
@@ -32,7 +32,7 @@ field.value.{{ field_id }}:
 {% endfor %}
 
 {% if widget_settings %}
-# Widget schema.
+# Field widget.
 field.widget.settings.{{ field_id }}:
   type: mapping
   label: Example widget settings
@@ -43,7 +43,7 @@ field.widget.settings.{{ field_id }}:
 
 {% endif %}
 {% if formatter_settings %}
-# Formatter schema.
+# Field formatter.
 field.formatter.settings.{{ field_id }}:
   type: mapping
   label: Example formatter settings

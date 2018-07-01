@@ -114,8 +114,8 @@ class {{ type_class }} extends FieldItemBase {
    */
   public function getConstraints() {
     $constraints = parent::getConstraints();
-{% for subfield in subfields %}
 
+{% for subfield in subfields %}
 {% if subfield.list %}
     $options['{{ subfield.machine_name }}']['AllowedValues'] = array_keys({{ type_class }}::allowed{{ subfield.name|camelize(true) }}Values());
 
@@ -131,7 +131,7 @@ class {{ type_class }} extends FieldItemBase {
     $options['{{ subfield.machine_name }}']['NotBlank'] = [];
 
 {% if subfield.type == 'email' %}
-     $options['{{ subfield.machine_name }}']['Length']['max'] = Email::EMAIL_MAX_LENGTH;
+    $options['{{ subfield.machine_name }}']['Length']['max'] = Email::EMAIL_MAX_LENGTH;
 
 {% endif %}
 {% endif %}
@@ -141,7 +141,6 @@ class {{ type_class }} extends FieldItemBase {
     $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
     $constraints[] = $constraint_manager->create('ComplexData', $options);
 {% endif %}
-
     // @todo Add more constrains here.
     return $constraints;
   }

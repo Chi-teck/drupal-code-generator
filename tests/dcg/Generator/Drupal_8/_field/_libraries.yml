@@ -1,0 +1,4 @@
+example_foo:
+  css:
+    component:
+      css/example-foo-widget.css: {}
