@@ -20,76 +20,81 @@ class Field extends BaseGenerator {
   protected $alias = 'field';
 
   /**
-   * All types.
+   * Field sub-types.
    *
    * @var array
    */
-  protected $allTypes = [
-    'boolean' => 'Boolean',
-    'string' => 'Text',
-    'text' => 'Text (long)',
-    'integer' => 'Integer',
-    'float' => 'Float',
-    'numeric' => 'Numeric',
-    'email' => 'Email',
-    'telephone' => 'Telephone',
-    'uri' => 'Url',
-    'datetime' => 'Date',
-  ];
-
-  /**
-   * List types.
-   *
-   * @var array
-   */
-  protected $listTypes = [
-    'string',
-    'integer',
-    'float',
-    'numeric',
-    'email',
-    'telephone',
-    'uri',
-    'datetime',
-  ];
-
-  /**
-   * Types that use Random component for generating sample values.
-   *
-   * @var array
-   */
-  protected $randomTypes = [
-    'string',
-    'text',
-    'email',
-    'uri',
-  ];
-
-  /**
-   * Inline types.
-   *
-   * @var array
-   */
-  protected $inlineTypes = [
-    'string',
-    'integer',
-    'float',
-    'numeric',
-    'email',
-    'telephone',
-    'uri',
-    'datetime',
-  ];
-
-  /**
-   * Links types.
-   *
-   * @var array
-   */
-  protected $linkTypes = [
-    'email',
-    'telephone',
-    'uri',
+  protected $subTypes = [
+    'boolean' => [
+      'label' => 'Boolean',
+      'list' => FALSE,
+      'random' => FALSE,
+      'inline' => FALSE,
+      'link' => FALSE,
+    ],
+    'string' => [
+      'label' => 'Text',
+      'list' => TRUE,
+      'random' => TRUE,
+      'inline' => TRUE,
+      'link' => FALSE,
+    ],
+    'text' => [
+      'label' => 'Text (long)',
+      'list' => FALSE,
+      'random' => TRUE,
+      'inline' => FALSE,
+      'link' => FALSE,
+    ],
+    'integer' => [
+      'label' => 'Integer',
+      'list' => TRUE,
+      'random' => FALSE,
+      'inline' => TRUE,
+      'link' => FALSE,
+    ],
+    'float' => [
+      'label' => 'Float',
+      'list' => TRUE,
+      'random' => FALSE,
+      'inline' => TRUE,
+      'link' => FALSE,
+    ],
+    'numeric' => [
+      'label' => 'Numeric',
+      'list' => TRUE,
+      'random' => FALSE,
+      'inline' => TRUE,
+      'link' => FALSE,
+    ],
+    'email' => [
+      'label' => 'Email',
+      'list' => TRUE,
+      'random' => TRUE,
+      'inline' => TRUE,
+      'link' => TRUE,
+    ],
+    'telephone' => [
+      'label' => 'Telephone',
+      'list' => TRUE,
+      'random' => FALSE,
+      'inline' => TRUE,
+      'link' => TRUE,
+    ],
+    'uri' => [
+      'label' => 'Url',
+      'list' => TRUE,
+      'random' => TRUE,
+      'inline' => TRUE,
+      'link' => TRUE,
+    ],
+    'datetime' => [
+      'label' => 'Date',
+      'list' => TRUE,
+      'random' => FALSE,
+      'inline' => FALSE,
+      'link' => FALSE,
+    ],
   ];
 
   /**
@@ -130,7 +135,7 @@ class Field extends BaseGenerator {
 
     $vars = &$this->collectVars($input, $output, $questions);
 
-    $type_choices = array_values($this->allTypes);
+    $type_choices = array_column($this->subTypes, 'label');
 
     // Make options start from 1 instead of 0.
     array_unshift($type_choices, NULL);
@@ -171,7 +176,13 @@ class Field extends BaseGenerator {
 
       // Reset previous questions since we already collected their answers.
       $subfield_questions = [];
-      $type = array_search($vars['type_' . $i], $this->allTypes);
+
+      // Determine the type ID by its label.
+      foreach ($this->subTypes as $type => $definition) {
+        if ($vars['type_' . $i] == $definition['label']) {
+          break;
+        }
+      }
 
       if ($type == 'datetime') {
         $date_type_choices = array_values($this->dateTypes);
@@ -182,7 +193,7 @@ class Field extends BaseGenerator {
         $subfield_questions['date_type_' . $i] = new ChoiceQuestion("Date type for sub-field #$i", $date_type_choices, 'Date only');
       }
 
-      if (in_array($type, $this->listTypes)) {
+      if ($definition['list']) {
         $subfield_questions['list_' . $i] = new ConfirmationQuestion("Limit allowed values for sub-field #$i?", FALSE);
       }
       $subfield_questions['required_' . $i] = new ConfirmationQuestion("Make sub-field #$i required?", FALSE);
@@ -225,11 +236,11 @@ class Field extends BaseGenerator {
       }
       unset($vars['name_' . $i], $vars['machine_name_' . $i], $vars['type_' . $i], $vars['list_' . $i], $vars['required_' . $i], $vars['date_type_' . $i]);
 
-      if (in_array($type, $this->randomTypes)) {
+      if ($definition['random']) {
         $vars['random'] = TRUE;
       }
 
-      if (!in_array($type, $this->inlineTypes)) {
+      if (!$definition['inline']) {
         $vars['inline'] = FALSE;
       }
 
@@ -245,7 +256,7 @@ class Field extends BaseGenerator {
         $vars['email'] = TRUE;
       }
 
-      if (in_array($type, $this->linkTypes)) {
+      if ($definition['link']) {
         $vars['link'] = TRUE;
       }
 
