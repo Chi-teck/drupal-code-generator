@@ -173,7 +173,6 @@ class {{ widget_class }} extends WidgetBase {
     return isset($violation->arrayPropertyPath[0]) ? $element[$violation->arrayPropertyPath[0]] : $element;
   }
 
-{% if list or datetime %}
   /**
    * {@inheritdoc}
    */
@@ -193,5 +192,4 @@ class {{ widget_class }} extends WidgetBase {
     return $values;
   }
 
-{% endif %}
 }
