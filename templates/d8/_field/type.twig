@@ -262,7 +262,7 @@ class {{ type_class }} extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function allowed{{ subfield.name|camelize(true) }}Values() {
+  public static function {{ subfield.allowed_values_method }}() {
     return [
     {%- if subfield.type == 'string' %}
       'alpha' => t('Alpha'),

@@ -174,6 +174,10 @@ class Field extends BaseGenerator {
       $subfield_questions['type_' . $i] = new ChoiceQuestion("Type of sub-field #$i", $type_choices, 'Text');
       $this->collectVars($input, $output, $subfield_questions);
 
+      $vars['type_class'] = Utils::camelize($vars['field_label'] . 'Item');
+      $vars['widget_class'] = Utils::camelize($vars['field_label'] . 'Widget');
+      $vars['formatter_class'] = Utils::camelize($vars['field_label'] . 'Formatter');
+
       // Reset previous questions since we already collected their answers.
       $subfield_questions = [];
 
@@ -226,6 +230,7 @@ class Field extends BaseGenerator {
         'type' => $type,
         'data_type' => $data_type,
         'list' => !empty($vars['list_' . $i]),
+        'allowed_values_method' => 'allowed' . Utils::camelize($vars['name_' . $i], TRUE) . 'Values',
         'required' => $vars['required_' . $i],
       ];
       if (isset($vars['date_type_' . $i])) {
@@ -278,10 +283,6 @@ class Field extends BaseGenerator {
     $settings_questions['formatter_settings'] = new ConfirmationQuestion('Would you like to create field formatter settings form?', FALSE);
 
     $vars += $this->collectVars($input, $output, $settings_questions);
-
-    $vars['type_class'] = Utils::camelize($vars['field_label'] . 'Item');
-    $vars['widget_class'] = Utils::camelize($vars['field_label'] . 'Widget');
-    $vars['formatter_class'] = Utils::camelize($vars['field_label'] . 'Formatter');
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldType/{type_class}.php')

@@ -2,6 +2,7 @@
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
+{% sort %}
 {% if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
 {% endif %}
@@ -14,6 +15,10 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 {% endif %}
+{% if list %}
+use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
+{% endif %}
+{% endsort %}
 
 /**
  * Plugin implementation of the '{{ field_id }}' formatter.
@@ -75,11 +80,20 @@ class {{ formatter_class }} extends FormatterBase {
 
   {%- else %}
       if ($item->{{ subfield.machine_name }}) {
+    {%- set display_value = '$item->' ~ subfield.machine_name  %}
+    {%- if subfield.list %}
+        $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
+      {%- set display_value = '$allowed_values[' ~ display_value ~ ']' %}
+    {%- endif %}
     {%- if subfield.type == 'datetime' %}
         $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
         $date_formatter = \Drupal::service('date.formatter');
         $timestamp = $date->getTimestamp();
+      {%- if subfield.list %}
+        $formatted_date = {{ display_value|raw }};
+      {%- else %}
         $formatted_date = $date_formatter->format($timestamp, 'long');
+      {%- endif %}
         $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
         $element[$delta]['{{ subfield.machine_name }}'] = [
           '#type' => 'item',
@@ -110,9 +124,9 @@ class {{ formatter_class }} extends FormatterBase {
           '#type' => 'item',
           '#title' => $this->t('{{ subfield.name }}'),
       {%- if subfield.type == 'email' or subfield.type == 'telephone' or subfield.type == 'uri' %}
-          '#markup' => Link::fromTextAndUrl($item->{{ subfield.machine_name }}, $url)->toString(),
+          '#markup' => Link::fromTextAndUrl({{ display_value|raw }}, $url)->toString(),
       {%- else %}
-          '#markup' => $item->{{ subfield.machine_name }},
+          '#markup' => {{ display_value|raw }},
       {%- endif %}
         ];
      {%- endif %}

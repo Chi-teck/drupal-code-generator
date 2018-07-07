@@ -8,6 +8,7 @@ use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\example\Plugin\Field\FieldType\FooItem;
 
 /**
  * Plugin implementation of the 'example_foo' formatter.
@@ -110,10 +111,11 @@ class FooFormatter extends FormatterBase {
       }
 
       if ($item->value_8) {
+        $allowed_values = FooItem::allowedValue8Values();
         $element[$delta]['value_8'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 8'),
-          '#markup' => $item->value_8,
+          '#markup' => $allowed_values[$item->value_8],
         ];
       }
 
@@ -126,10 +128,11 @@ class FooFormatter extends FormatterBase {
       }
 
       if ($item->value_10) {
+        $allowed_values = FooItem::allowedValue10Values();
         $element[$delta]['value_10'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 10'),
-          '#markup' => $item->value_10,
+          '#markup' => $allowed_values[$item->value_10],
         ];
       }
 
@@ -142,10 +145,11 @@ class FooFormatter extends FormatterBase {
       }
 
       if ($item->value_12) {
+        $allowed_values = FooItem::allowedValue12Values();
         $element[$delta]['value_12'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 12'),
-          '#markup' => $item->value_12,
+          '#markup' => $allowed_values[$item->value_12],
         ];
       }
 
@@ -159,11 +163,12 @@ class FooFormatter extends FormatterBase {
       }
 
       if ($item->value_14) {
+        $allowed_values = FooItem::allowedValue14Values();
         $url = Url::fromUri('mailto:' . $item->value_14);
         $element[$delta]['value_14'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 14'),
-          '#markup' => Link::fromTextAndUrl($item->value_14, $url)->toString(),
+          '#markup' => Link::fromTextAndUrl($allowed_values[$item->value_14], $url)->toString(),
         ];
       }
 
@@ -177,11 +182,12 @@ class FooFormatter extends FormatterBase {
       }
 
       if ($item->value_16) {
+        $allowed_values = FooItem::allowedValue16Values();
         $url = Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->value_16)));
         $element[$delta]['value_16'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 16'),
-          '#markup' => Link::fromTextAndUrl($item->value_16, $url)->toString(),
+          '#markup' => Link::fromTextAndUrl($allowed_values[$item->value_16], $url)->toString(),
         ];
       }
 
@@ -195,11 +201,12 @@ class FooFormatter extends FormatterBase {
       }
 
       if ($item->value_18) {
+        $allowed_values = FooItem::allowedValue18Values();
         $url = Url::fromUri($item->value_18);
         $element[$delta]['value_18'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 18'),
-          '#markup' => Link::fromTextAndUrl($item->value_18, $url)->toString(),
+          '#markup' => Link::fromTextAndUrl($allowed_values[$item->value_18], $url)->toString(),
         ];
       }
 
@@ -229,10 +236,11 @@ class FooFormatter extends FormatterBase {
       }
 
       if ($item->value_20) {
+        $allowed_values = FooItem::allowedValue20Values();
         $date = DrupalDateTime::createFromFormat('Y-m-d', $item->value_20);
         $date_formatter = \Drupal::service('date.formatter');
         $timestamp = $date->getTimestamp();
-        $formatted_date = $date_formatter->format($timestamp, 'long');
+        $formatted_date = $allowed_values[$item->value_20];
         $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
         $element[$delta]['value_20'] = [
           '#type' => 'item',
