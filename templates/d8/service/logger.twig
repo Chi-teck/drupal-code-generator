@@ -10,7 +10,7 @@ use Drupal\Core\Logger\RfcLogLevel;
 use Psr\Log\LoggerInterface;
 
 /**
- * Redirects logging messages to a file.
+ * Redirects messages to a file.
  */
 class {{ class }} implements LoggerInterface {
 
@@ -38,7 +38,7 @@ class {{ class }} implements LoggerInterface {
   protected $dateFormatter;
 
   /**
-   * Constructs a SysLog object.
+   * Constructs {{ class|article }} object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration factory object.
