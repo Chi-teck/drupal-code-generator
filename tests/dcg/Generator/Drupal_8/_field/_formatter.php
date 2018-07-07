@@ -6,7 +6,6 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\example\Plugin\Field\FieldType\FooItem;
 
@@ -154,59 +153,77 @@ class FooFormatter extends FormatterBase {
       }
 
       if ($item->value_13) {
-        $url = Url::fromUri('mailto:' . $item->value_13);
         $element[$delta]['value_13'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 13'),
-          '#markup' => Link::fromTextAndUrl($item->value_13, $url)->toString(),
+          'content' => [
+            '#type' => 'link',
+            '#title' => $item->value_13,
+            '#url' => Url::fromUri('mailto:' . $item->value_13),
+          ],
         ];
       }
 
       if ($item->value_14) {
         $allowed_values = FooItem::allowedValue14Values();
-        $url = Url::fromUri('mailto:' . $item->value_14);
         $element[$delta]['value_14'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 14'),
-          '#markup' => Link::fromTextAndUrl($allowed_values[$item->value_14], $url)->toString(),
+          'content' => [
+            '#type' => 'link',
+            '#title' => $allowed_values[$item->value_14],
+            '#url' => Url::fromUri('mailto:' . $item->value_14),
+          ],
         ];
       }
 
       if ($item->value_15) {
-        $url = Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->value_15)));
         $element[$delta]['value_15'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 15'),
-          '#markup' => Link::fromTextAndUrl($item->value_15, $url)->toString(),
+          'content' => [
+            '#type' => 'link',
+            '#title' => $item->value_15,
+            '#url' => Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->value_15))),
+          ],
         ];
       }
 
       if ($item->value_16) {
         $allowed_values = FooItem::allowedValue16Values();
-        $url = Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->value_16)));
         $element[$delta]['value_16'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 16'),
-          '#markup' => Link::fromTextAndUrl($allowed_values[$item->value_16], $url)->toString(),
+          'content' => [
+            '#type' => 'link',
+            '#title' => $allowed_values[$item->value_16],
+            '#url' => Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->value_16))),
+          ],
         ];
       }
 
       if ($item->value_17) {
-        $url = Url::fromUri($item->value_17);
         $element[$delta]['value_17'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 17'),
-          '#markup' => Link::fromTextAndUrl($item->value_17, $url)->toString(),
+          'content' => [
+            '#type' => 'link',
+            '#title' => $item->value_17,
+            '#url' => Url::fromUri($item->value_17),
+          ],
         ];
       }
 
       if ($item->value_18) {
         $allowed_values = FooItem::allowedValue18Values();
-        $url = Url::fromUri($item->value_18);
         $element[$delta]['value_18'] = [
           '#type' => 'item',
           '#title' => $this->t('Value 18'),
-          '#markup' => Link::fromTextAndUrl($allowed_values[$item->value_18], $url)->toString(),
+          'content' => [
+            '#type' => 'link',
+            '#title' => $allowed_values[$item->value_18],
+            '#url' => Url::fromUri($item->value_18),
+          ],
         ];
       }
 

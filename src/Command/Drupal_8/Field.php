@@ -232,6 +232,7 @@ class Field extends BaseGenerator {
         'list' => !empty($vars['list_' . $i]),
         'allowed_values_method' => 'allowed' . Utils::camelize($vars['name_' . $i], TRUE) . 'Values',
         'required' => $vars['required_' . $i],
+        'link' => $definition['link'],
       ];
       if (isset($vars['date_type_' . $i])) {
         $date_type = array_search($vars['date_type_' . $i], $this->dateTypes);

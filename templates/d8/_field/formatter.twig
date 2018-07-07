@@ -12,7 +12,6 @@ use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 {% endif %}
 {% if link %}
-use Drupal\Core\Link;
 use Drupal\Core\Url;
 {% endif %}
 {% if list %}
@@ -113,23 +112,26 @@ class {{ formatter_class }} extends FormatterBase {
           ],
         ];
     {%- else %}
-      {%- if subfield.type == 'email' %}
-        $url = Url::fromUri('mailto:' . $item->{{ subfield.machine_name }});
-      {%- elseif subfield.type == 'telephone' %}
-        $url = Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->{{ subfield.machine_name }})));
-      {%- elseif subfield.type == 'uri' %}
-        $url = Url::fromUri($item->{{ subfield.machine_name }});
-      {%- endif %}
         $element[$delta]['{{ subfield.machine_name }}'] = [
           '#type' => 'item',
           '#title' => $this->t('{{ subfield.name }}'),
-      {%- if subfield.type == 'email' or subfield.type == 'telephone' or subfield.type == 'uri' %}
-          '#markup' => Link::fromTextAndUrl({{ display_value|raw }}, $url)->toString(),
+      {%- if subfield.link %}
+          'content' => [
+            '#type' => 'link',
+            '#title' => {{ display_value|raw }},
+        {%- if subfield.type == 'email' %}
+            '#url' => Url::fromUri('mailto:' . $item->{{ subfield.machine_name }}),
+        {%- elseif subfield.type == 'telephone' %}
+            '#url' => Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->{{ subfield.machine_name }}))),
+        {%- elseif subfield.type == 'uri' %}
+            '#url' => Url::fromUri($item->{{ subfield.machine_name }}),
+        {%- endif %}
+          ],
       {%- else %}
           '#markup' => {{ display_value|raw }},
       {%- endif %}
         ];
-     {%- endif %}
+    {%- endif %}
       }
 
   {%- endif %}
