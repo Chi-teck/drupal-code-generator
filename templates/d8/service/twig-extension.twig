@@ -2,18 +2,34 @@
 
 namespace Drupal\{{ machine_name }};
 
+{% if di %}
+use Drupal\example\ExampleInterface;
+
+{% endif %}
 /**
  * Twig extension.
  */
 class {{ class }} extends \Twig_Extension {
 
+{% if di %}
   /**
-   * {@inheritdoc}
+   * The example service.
+   *
+   * @var \Drupal\example\ExampleInterface
    */
-  public function getName() {
-    return '{{ machine_name }}';
+  protected $example;
+
+  /**
+   * Constructs a new {{ class }} instance.
+   *
+   * @param \Drupal\example\ExampleInterface $example
+   *   The example service.
+   */
+  public function __construct(ExampleInterface $example) {
+    $this->example = $example;
   }
 
+{% endif %}
   /**
    * {@inheritdoc}
    */

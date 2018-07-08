@@ -2,16 +2,28 @@
 
 namespace Drupal\example;
 
+use Drupal\example\ExampleInterface;
+
 /**
  * Twig extension.
  */
 class ExampleTwigExtension extends \Twig_Extension {
 
   /**
-   * {@inheritdoc}
+   * The example service.
+   *
+   * @var \Drupal\example\ExampleInterface
    */
-  public function getName() {
-    return 'example';
+  protected $example;
+
+  /**
+   * Constructs a new ExampleTwigExtension instance.
+   *
+   * @param \Drupal\example\ExampleInterface $example
+   *   The example service.
+   */
+  public function __construct(ExampleInterface $example) {
+    $this->example = $example;
   }
 
   /**

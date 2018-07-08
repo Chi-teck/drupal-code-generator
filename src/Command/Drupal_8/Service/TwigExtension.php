@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -26,6 +27,7 @@ class TwigExtension extends BaseGenerator {
       return Utils::camelize($vars['name'] . 'TwigExtension');
     };
     $questions['class'] = new Question('Class', $default_class);
+    $questions['di'] = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
 
     $this->collectVars($input, $output, $questions);
 

@@ -1,5 +1,6 @@
 services:
   example.twig_extension:
     class: Drupal\example\ExampleTwigExtension
+    arguments: ['@example']
     tags:
       - { name: twig.extension }

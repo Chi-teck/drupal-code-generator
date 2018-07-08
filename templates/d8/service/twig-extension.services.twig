@@ -1,5 +1,8 @@
 services:
   {{ machine_name }}.twig_extension:
     class: Drupal\{{ machine_name }}\{{ class }}
+{% if di %}
+    arguments: ['@example']
+{% endif %}
     tags:
       - { name: twig.extension }
