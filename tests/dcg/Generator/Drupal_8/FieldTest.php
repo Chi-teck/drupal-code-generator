@@ -15,7 +15,8 @@ class FieldTest extends GeneratorBaseTest {
     'example.libraries.yml' => __DIR__ . '/_field/_libraries.yml',
     'css/example-foo-widget.css' => __DIR__ . '/_field/_widget.css',
     'config/schema/example.schema.yml' => __DIR__ . '/_field/_schema.yml',
-    'src/Plugin/Field/FieldFormatter/FooFormatter.php' => __DIR__ . '/_field/_formatter.php',
+    'src/Plugin/Field/FieldFormatter/FooDefaultFormatter.php' => __DIR__ . '/_field/_default_formatter.php',
+    'src/Plugin/Field/FieldFormatter/FooTableFormatter.php' => NULL,
     'src/Plugin/Field/FieldType/FooItem.php' => __DIR__ . '/_field/_type.php',
     'src/Plugin/Field/FieldWidget/FooWidget.php' => __DIR__ . '/_field/_widget.php',
   ];
@@ -175,6 +176,7 @@ class FieldTest extends GeneratorBaseTest {
       'Would you like to create field instance settings form? [No]:' => 'Yes',
       'Would you like to create field widget settings form? [No]:' => 'Yes',
       'Would you like to create field formatter settings form? [No]:' => 'Yes',
+      'Would you like to create table formatter? [No]:' => 'Yes',
     ];
 
     parent::setUp();

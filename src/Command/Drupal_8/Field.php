@@ -176,7 +176,7 @@ class Field extends BaseGenerator {
 
       $vars['type_class'] = Utils::camelize($vars['field_label'] . 'Item');
       $vars['widget_class'] = Utils::camelize($vars['field_label'] . 'Widget');
-      $vars['formatter_class'] = Utils::camelize($vars['field_label'] . 'Formatter');
+      $vars['formatter_class'] = Utils::camelize($vars['field_label'] . 'DefaultFormatter');
 
       // Reset previous questions since we already collected their answers.
       $subfield_questions = [];
@@ -282,6 +282,7 @@ class Field extends BaseGenerator {
     $settings_questions['instance_settings'] = new ConfirmationQuestion('Would you like to create field instance settings form?', FALSE);
     $settings_questions['widget_settings'] = new ConfirmationQuestion('Would you like to create field widget settings form?', FALSE);
     $settings_questions['formatter_settings'] = new ConfirmationQuestion('Would you like to create field formatter settings form?', FALSE);
+    $settings_questions['table_formatter'] = new ConfirmationQuestion('Would you like to create table formatter?', FALSE);
 
     $vars += $this->collectVars($input, $output, $settings_questions);
 
@@ -295,7 +296,7 @@ class Field extends BaseGenerator {
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldFormatter/{formatter_class}.php')
-      ->template('d8/_field/formatter.twig');
+      ->template('d8/_field/default-formatter.twig');
 
     $this->addFile()
       ->path('config/schema/{machine_name}.schema.yml')
@@ -310,6 +311,14 @@ class Field extends BaseGenerator {
     $this->addFile()
       ->path('css/' . str_replace('_', '-', $vars['field_id']) . '-widget.css')
       ->template('d8/_field/widget-css.twig');
+
+    if ($vars['table_formatter']) {
+      $vars['table_formatter_class'] = Utils::camelize($vars['field_label'] . 'TableFormatter');
+      $this->addFile()
+        ->path('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php')
+        ->template('d8/_field/table-formatter.twig');
+    }
+
   }
 
 }

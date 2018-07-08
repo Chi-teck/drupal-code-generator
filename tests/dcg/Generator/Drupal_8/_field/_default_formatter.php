@@ -13,12 +13,12 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
  * Plugin implementation of the 'example_foo' formatter.
  *
  * @FieldFormatter(
- *   id = "example_foo",
- *   label = @Translation("Example"),
+ *   id = "example_foo_default",
+ *   label = @Translation("Default"),
  *   field_types = {"example_foo"}
  * )
  */
-class FooFormatter extends FormatterBase {
+class FooDefaultFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}

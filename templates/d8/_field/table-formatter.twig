@@ -1,0 +1,105 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
+
+{% sort %}
+{% if datetime %}
+use Drupal\Core\Datetime\DrupalDateTime;
+{% endif %}
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FormatterBase;
+{% if formatter_settings %}
+use Drupal\Core\Form\FormStateInterface;
+{% endif %}
+{% if list %}
+use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
+{% endif %}
+{% endsort %}
+
+/**
+ * Plugin implementation of the '{{ field_id }}' formatter.
+ *
+ * @FieldFormatter(
+ *   id = "{{ field_id }}_table",
+ *   label = @Translation("Table"),
+ *   field_types = {"{{ field_id }}"}
+ * )
+ */
+class {{ table_formatter_class }} extends FormatterBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function viewElements(FieldItemListInterface $items, $langcode) {
+
+    $header[] = '#';
+{% for subfield in subfields %}
+    $header[] = $this->t('{{ subfield.name }}');
+{% endfor %}
+
+    $table = [
+      '#type' => 'table',
+      '#header' => $header,
+    ];
+
+    foreach ($items as $delta => $item) {
+      $row = [];
+
+      $row[]['#markup'] = $delta + 1;
+
+{% for subfield in subfields %}
+  {%- if subfield.type == 'boolean' %}
+      $row[]['#markup'] = $item->{{ subfield.machine_name }} ? $this->t('Yes') : $this->t('No');
+
+  {%- elseif subfield.type == 'datetime' %}
+      if ($item->{{ subfield.machine_name }}) {
+        $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
+        $date_formatter = \Drupal::service('date.formatter');
+        $timestamp = $date->getTimestamp();
+    {%- if subfield.list %}
+        $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
+        $formatted_date = $allowed_values[$item->{{ subfield.machine_name }}];
+    {%- else %}
+        $formatted_date = $date_formatter->format($timestamp, 'long');
+    {%- endif %}
+        $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
+        $row[] = [
+          '#theme' => 'time',
+          '#text' => $formatted_date,
+          '#html' => FALSE,
+          '#attributes' => [
+            'datetime' => $iso_date,
+          ],
+          '#cache' => [
+            'contexts' => [
+              'timezone',
+            ],
+          ],
+        ];
+      }
+      else {
+        $row[]['#markup'] = '';
+      }
+
+  {%- else %}
+    {%- if subfield.list %}
+      if ($item->{{ subfield.machine_name }}) {
+        $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
+        $row[]['#markup'] = $allowed_values[$item->{{ subfield.machine_name }}];
+      }
+      else {
+        $row[]['#markup'] = '';
+      }
+    {%- else %}
+      $row[]['#markup'] = $item->{{ subfield.machine_name }};
+    {%- endif %}
+
+  {%- endif %}
+{% endfor %}
+      $table[$delta] = $row;
+    }
+
+    return [$table];
+  }
+
+}
