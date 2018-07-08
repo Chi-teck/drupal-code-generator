@@ -14,7 +14,7 @@ class UninstallValidatorTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['block', 'system', 'help', 'zippo'];
+  public static $modules = ['block', 'system', 'help', 'zippo', 'example'];
 
   /**
    * Test callback.

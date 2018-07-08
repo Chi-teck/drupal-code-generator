@@ -15,7 +15,7 @@ class PathProcessorTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['zippo'];
+  public static $modules = ['zippo', 'example'];
 
   /**
    * Test callback.

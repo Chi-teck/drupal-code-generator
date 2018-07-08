@@ -66,11 +66,11 @@ if [ -d $DRUPAL_CACHED_DIR ]; then
   cp -r $DRUPAL_CACHED_DIR/* $DRUPAL_DIR
 else
   export COMPOSER_PROCESS_TIMEOUT=1900
-  composer -d=$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
-  composer -d=$DRUPAL_DIR require drush/drush chi-teck/web-server chi-teck/test-base
-  composer -d=$DRUPAL_DIR update squizlabs/php_codesniffer
+  composer -d$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
+  composer -d$DRUPAL_DIR require drush/drush chi-teck/web-server chi-teck/test-base
+  composer -d$DRUPAL_DIR update squizlabs/php_codesniffer
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
-  composer -d=$DRUPAL_DIR run-script drupal-phpunit-upgrade
+  composer -d$DRUPAL_DIR run-script drupal-phpunit-upgrade
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite --sites-subdir=default
@@ -183,7 +183,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
   $DCG d8:service:param-converter -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","parameter_type":"example","class":"ExampleParamConverter"}'
   $DCG d8:service:route-subscriber -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo"}'
   $DCG d8:service:theme-negotiator -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoThemeNegotiator"}'
-  $DCG d8:service:twig-extension -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoTwigExtension"}'
+  $DCG d8:service:twig-extension -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoTwigExtension","di":"Yes"}'
   $DCG d8:service:path-processor -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"PathProcessorZippo"}'
   $DCG d8:service:request-policy -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"Example"}'
   $DCG d8:service:response-policy -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ExampleResponsePolicy"}'

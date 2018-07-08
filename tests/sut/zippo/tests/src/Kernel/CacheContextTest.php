@@ -15,7 +15,7 @@ class CacheContextTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['system', 'zippo'];
+  public static $modules = ['system', 'zippo', 'example'];
 
   /**
    * Test callback.
