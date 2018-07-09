@@ -18,7 +18,7 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("Foo"),
  *   category = @Translation("General"),
  *   default_widget = "example_foo",
- *   default_formatter = "example_foo"
+ *   default_formatter = "example_foo_default"
  * )
  */
 class FooItem extends FieldItemBase {

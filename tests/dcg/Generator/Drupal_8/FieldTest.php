@@ -16,7 +16,7 @@ class FieldTest extends GeneratorBaseTest {
     'css/example-foo-widget.css' => __DIR__ . '/_field/_widget.css',
     'config/schema/example.schema.yml' => __DIR__ . '/_field/_schema.yml',
     'src/Plugin/Field/FieldFormatter/FooDefaultFormatter.php' => __DIR__ . '/_field/_default_formatter.php',
-    'src/Plugin/Field/FieldFormatter/FooTableFormatter.php' => NULL,
+    'src/Plugin/Field/FieldFormatter/FooTableFormatter.php' => __DIR__ . '/_field/_table_formatter.php',
     'src/Plugin/Field/FieldType/FooItem.php' => __DIR__ . '/_field/_type.php',
     'src/Plugin/Field/FieldWidget/FooWidget.php' => __DIR__ . '/_field/_widget.php',
   ];
