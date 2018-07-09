@@ -65,7 +65,7 @@ abstract class GeneratorBaseTest extends BaseTestCase {
         self::assertFileEquals($fixture, $path, $fixture);
       }
       else {
-        self::markTestSkipped();
+        self::markTestIncomplete();
       }
     }
   }
