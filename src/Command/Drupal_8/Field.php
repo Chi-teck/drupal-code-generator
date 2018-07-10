@@ -283,6 +283,7 @@ class Field extends BaseGenerator {
     $settings_questions['widget_settings'] = new ConfirmationQuestion('Would you like to create field widget settings form?', FALSE);
     $settings_questions['formatter_settings'] = new ConfirmationQuestion('Would you like to create field formatter settings form?', FALSE);
     $settings_questions['table_formatter'] = new ConfirmationQuestion('Would you like to create table formatter?', FALSE);
+    $settings_questions['key_value_formatter'] = new ConfirmationQuestion('Would you like to create key-value formatter?', FALSE);
 
     $vars += $this->collectVars($input, $output, $settings_questions);
 
@@ -317,6 +318,13 @@ class Field extends BaseGenerator {
       $this->addFile()
         ->path('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php')
         ->template('d8/_field/table-formatter.twig');
+    }
+
+    if ($vars['key_value_formatter']) {
+      $vars['key_value_formatter_class'] = Utils::camelize($vars['field_label'] . 'KeyValueFormatter');
+      $this->addFile()
+        ->path('src/Plugin/Field/FieldFormatter/{key_value_formatter_class}.php')
+        ->template('d8/_field/key-value-formatter.twig');
     }
 
   }

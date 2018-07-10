@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\example\Plugin\Field\FieldType\FooItem;
 
 /**
- * Plugin implementation of the 'example_foo' formatter.
+ * Plugin implementation of the 'example_foo_table' formatter.
  *
  * @FieldFormatter(
  *   id = "example_foo_table",

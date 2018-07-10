@@ -10,7 +10,7 @@ use Drupal\Core\Url;
 use Drupal\example\Plugin\Field\FieldType\FooItem;
 
 /**
- * Plugin implementation of the 'example_foo' formatter.
+ * Plugin implementation of the 'example_foo_default' formatter.
  *
  * @FieldFormatter(
  *   id = "example_foo_default",
