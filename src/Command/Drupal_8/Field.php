@@ -278,14 +278,15 @@ class Field extends BaseGenerator {
 
     $output->writeln('<fg=green>–––––––––––––––––––––––––––––––––––––––––––––––––––</>');
 
-    $settings_questions['storage_settings'] = new ConfirmationQuestion('Would you like to create field storage settings form?', FALSE);
-    $settings_questions['instance_settings'] = new ConfirmationQuestion('Would you like to create field instance settings form?', FALSE);
-    $settings_questions['widget_settings'] = new ConfirmationQuestion('Would you like to create field widget settings form?', FALSE);
-    $settings_questions['formatter_settings'] = new ConfirmationQuestion('Would you like to create field formatter settings form?', FALSE);
-    $settings_questions['table_formatter'] = new ConfirmationQuestion('Would you like to create table formatter?', FALSE);
-    $settings_questions['key_value_formatter'] = new ConfirmationQuestion('Would you like to create key-value formatter?', FALSE);
+    $questions = [];
+    $questions['storage_settings'] = new ConfirmationQuestion('Would you like to create field storage settings form?', FALSE);
+    $questions['instance_settings'] = new ConfirmationQuestion('Would you like to create field instance settings form?', FALSE);
+    $questions['widget_settings'] = new ConfirmationQuestion('Would you like to create field widget settings form?', FALSE);
+    $questions['formatter_settings'] = new ConfirmationQuestion('Would you like to create field formatter settings form?', FALSE);
+    $questions['table_formatter'] = new ConfirmationQuestion('Would you like to create table formatter?', FALSE);
+    $questions['key_value_formatter'] = new ConfirmationQuestion('Would you like to create key-value formatter?', FALSE);
 
-    $vars += $this->collectVars($input, $output, $settings_questions);
+    $vars += $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldType/{type_class}.php')

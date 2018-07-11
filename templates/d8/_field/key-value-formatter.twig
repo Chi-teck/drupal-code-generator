@@ -82,7 +82,7 @@ class {{ key_value_formatter_class }} extends FormatterBase {
                 ],
   {%- else %}
     {%- if subfield.list %}
-               '#markup' => $allowed_values[$item->{{ subfield.machine_name }}],
+                '#markup' => $allowed_values[$item->{{ subfield.machine_name }}],
     {%- else %}
                 '#markup' => $item->{{ subfield.machine_name }},
     {%- endif %}
