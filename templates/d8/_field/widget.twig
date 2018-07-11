@@ -65,7 +65,7 @@ class {{ widget_class }} extends WidgetBase {
 {% set default_value %}'#default_value' => isset($items[$delta]->{{ subfield.machine_name }}) ? $items[$delta]->{{ subfield.machine_name }} : NULL,{% endset %}
 {% set size %}'#size' => 15,{% endset %}
 {% if subfield.list %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'select',
       {{ title }}
       '#options' => ['' => $this->t('- {{ subfield.required ? 'Select a value' : 'None' }} -')] + {{ type_class }}::allowed{{ subfield.name|camelize(true) }}Values(),
@@ -73,33 +73,33 @@ class {{ widget_class }} extends WidgetBase {
     ];
 {% else %}
 {% if subfield.type == 'boolean' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'checkbox',
       {{ title }}
       {{ default_value }}
     ];
 {% elseif subfield.type == 'string' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'textfield',
       {{ title }}
       {{ default_value }}
       {{ size }}
     ];
 {% elseif subfield.type == 'text' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'textarea',
       {{ title }}
       {{ default_value }}
     ];
 {% elseif subfield.type == 'integer' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'number',
       {{ title }}
       {{ default_value }}
       {{ size }}
     ];
 {% elseif subfield.type == 'float' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'number',
       {{ title }}
       {{ default_value }}
@@ -107,7 +107,7 @@ class {{ widget_class }} extends WidgetBase {
       '#step' => 0.001,
     ];
 {% elseif subfield.type == 'numeric' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'number',
       {{ title }}
       {{ default_value }}
@@ -115,28 +115,28 @@ class {{ widget_class }} extends WidgetBase {
       '#step' => 0.01,
     ];
 {% elseif subfield.type == 'email' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'email',
       {{ title }}
       {{ default_value }}
       {{ size }}
     ];
 {% elseif subfield.type == 'telephone' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'tel',
       {{ title }}
       {{ default_value }}
       {{ size }}
     ];
 {% elseif subfield.type == 'uri' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'url',
       {{ title }}
       {{ default_value }}
       {{ size }}
     ];
 {% elseif subfield.type == 'datetime' %}
-    $widget['{{ subfield.machine_name }}'] = [
+    $element['{{ subfield.machine_name }}'] = [
       '#type' => 'datetime',
       {{ title }}
       '#default_value' => NULL,
@@ -146,7 +146,7 @@ class {{ widget_class }} extends WidgetBase {
 {% endif %}
     ];
     if (isset($items[$delta]->{{ subfield.machine_name }})) {
-      $widget['{{ subfield.machine_name }}']['#default_value'] = DrupalDateTime::createFromFormat(
+      $element['{{ subfield.machine_name }}']['#default_value'] = DrupalDateTime::createFromFormat(
         '{{ subfield.date_storage_format }}',
         $items[$delta]->{{ subfield.machine_name }},
         'UTC'
@@ -163,7 +163,7 @@ class {{ widget_class }} extends WidgetBase {
     $element['#attributes']['class'][] = '{{ field_id|u2h }}-elements';
     $element['#attached']['library'][] = '{{ machine_name }}/{{ field_id }}';
 
-    return $widget + $element;
+    return $element;
   }
 
   /**
