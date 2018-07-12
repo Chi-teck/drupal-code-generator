@@ -8,7 +8,7 @@
 server {
     server_name {{ server_name }};
     root {{ docroot }};
-    
+
     client_max_body_size 16m;
 
     location = /favicon.ico {
@@ -37,7 +37,7 @@ server {
     }
 
 {% endif %}
-    # Allow "Well-Known URIs" as per RFC 5785
+    # Allow "Well-Known URIs" as per RFC 5785.
     location ~* ^/.well-known/ {
         allow all;
     }
@@ -52,7 +52,7 @@ server {
     location / {
         try_files $uri /index.php?$query_string;
     }
-    
+
     location @rewrite {
         rewrite ^/(.*)$ /index.php?q=$1;
     }

@@ -8,7 +8,7 @@
 /**
  * Implements hook_drush_help().
  */
-function {{ command_file_prefix | h2u }}_drush_help($section) {
+function {{ command_file_prefix|h2u }}_drush_help($section) {
   switch ($section) {
     case 'drush:{{ command_name }}':
       $help = dt('Help text here.');
@@ -19,7 +19,7 @@ function {{ command_file_prefix | h2u }}_drush_help($section) {
 /**
  * Implements hook_drush_command().
  */
-function {{ command_file_prefix | h2u }}_drush_command() {
+function {{ command_file_prefix|h2u }}_drush_command() {
 
   $items['{{ command_name }}'] = [
     'description' => '{{ description }}',
@@ -43,7 +43,7 @@ function {{ command_file_prefix | h2u }}_drush_command() {
 /**
  * Callback function for {{ command_name }} command.
  */
-function drush_{{ command_callback_suffix | h2u }}($argument) {
+function drush_{{ command_callback_suffix|h2u }}($argument) {
 
   $option = drush_get_option('{{ option }}', 'default');
   drush_print(dt('Argument value is "@argument".', ['@argument' => $argument]));

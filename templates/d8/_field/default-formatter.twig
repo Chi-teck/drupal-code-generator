@@ -79,7 +79,7 @@ class {{ formatter_class }} extends FormatterBase {
 
   {%- else %}
       if ($item->{{ subfield.machine_name }}) {
-    {%- set display_value = '$item->' ~ subfield.machine_name  %}
+    {%- set display_value = '$item->' ~ subfield.machine_name %}
     {%- if subfield.list %}
         $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
       {%- set display_value = '$allowed_values[' ~ display_value ~ ']' %}
