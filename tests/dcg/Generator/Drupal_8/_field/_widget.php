@@ -2,12 +2,12 @@
 
 namespace Drupal\example\Plugin\Field\FieldWidget;
 
-use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\Validator\ConstraintViolationInterface;
 use Drupal\example\Plugin\Field\FieldType\FooItem;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 
 /**
  * Defines the 'example_foo' field widget.
@@ -70,14 +70,12 @@ class FooWidget extends WidgetBase {
       '#type' => 'textfield',
       '#title' => $this->t('Value 3'),
       '#default_value' => isset($items[$delta]->value_3) ? $items[$delta]->value_3 : NULL,
-      '#size' => 15,
     ];
 
     $element['value_4'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Value 4'),
       '#default_value' => isset($items[$delta]->value_4) ? $items[$delta]->value_4 : NULL,
-      '#size' => 15,
     ];
 
     $element['value_5'] = [
@@ -96,7 +94,6 @@ class FooWidget extends WidgetBase {
       '#type' => 'number',
       '#title' => $this->t('Value 7'),
       '#default_value' => isset($items[$delta]->value_7) ? $items[$delta]->value_7 : NULL,
-      '#size' => 15,
     ];
 
     $element['value_8'] = [
@@ -110,7 +107,6 @@ class FooWidget extends WidgetBase {
       '#type' => 'number',
       '#title' => $this->t('Value 9'),
       '#default_value' => isset($items[$delta]->value_9) ? $items[$delta]->value_9 : NULL,
-      '#size' => 15,
       '#step' => 0.001,
     ];
 
@@ -125,7 +121,6 @@ class FooWidget extends WidgetBase {
       '#type' => 'number',
       '#title' => $this->t('Value 11'),
       '#default_value' => isset($items[$delta]->value_11) ? $items[$delta]->value_11 : NULL,
-      '#size' => 15,
       '#step' => 0.01,
     ];
 
@@ -140,7 +135,6 @@ class FooWidget extends WidgetBase {
       '#type' => 'email',
       '#title' => $this->t('Value 13'),
       '#default_value' => isset($items[$delta]->value_13) ? $items[$delta]->value_13 : NULL,
-      '#size' => 15,
     ];
 
     $element['value_14'] = [
@@ -154,7 +148,6 @@ class FooWidget extends WidgetBase {
       '#type' => 'tel',
       '#title' => $this->t('Value 15'),
       '#default_value' => isset($items[$delta]->value_15) ? $items[$delta]->value_15 : NULL,
-      '#size' => 15,
     ];
 
     $element['value_16'] = [
@@ -168,7 +161,6 @@ class FooWidget extends WidgetBase {
       '#type' => 'url',
       '#title' => $this->t('Value 17'),
       '#default_value' => isset($items[$delta]->value_17) ? $items[$delta]->value_17 : NULL,
-      '#size' => 15,
     ];
 
     $element['value_18'] = [

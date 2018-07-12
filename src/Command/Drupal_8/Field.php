@@ -31,6 +31,7 @@ class Field extends BaseGenerator {
       'random' => FALSE,
       'inline' => FALSE,
       'link' => FALSE,
+      'data_type' => 'boolean',
     ],
     'string' => [
       'label' => 'Text',
@@ -38,6 +39,7 @@ class Field extends BaseGenerator {
       'random' => TRUE,
       'inline' => TRUE,
       'link' => FALSE,
+      'data_type' => 'string',
     ],
     'text' => [
       'label' => 'Text (long)',
@@ -45,6 +47,7 @@ class Field extends BaseGenerator {
       'random' => TRUE,
       'inline' => FALSE,
       'link' => FALSE,
+      'data_type' => 'string',
     ],
     'integer' => [
       'label' => 'Integer',
@@ -52,6 +55,7 @@ class Field extends BaseGenerator {
       'random' => FALSE,
       'inline' => TRUE,
       'link' => FALSE,
+      'data_type' => 'integer',
     ],
     'float' => [
       'label' => 'Float',
@@ -59,6 +63,7 @@ class Field extends BaseGenerator {
       'random' => FALSE,
       'inline' => TRUE,
       'link' => FALSE,
+      'data_type' => 'float',
     ],
     'numeric' => [
       'label' => 'Numeric',
@@ -66,6 +71,7 @@ class Field extends BaseGenerator {
       'random' => FALSE,
       'inline' => TRUE,
       'link' => FALSE,
+      'data_type' => 'float',
     ],
     'email' => [
       'label' => 'Email',
@@ -73,6 +79,7 @@ class Field extends BaseGenerator {
       'random' => TRUE,
       'inline' => TRUE,
       'link' => TRUE,
+      'data_type' => 'email',
     ],
     'telephone' => [
       'label' => 'Telephone',
@@ -80,6 +87,7 @@ class Field extends BaseGenerator {
       'random' => FALSE,
       'inline' => TRUE,
       'link' => TRUE,
+      'data_type' => 'string',
     ],
     'uri' => [
       'label' => 'Url',
@@ -87,6 +95,7 @@ class Field extends BaseGenerator {
       'random' => TRUE,
       'inline' => TRUE,
       'link' => TRUE,
+      'data_type' => 'uri',
     ],
     'datetime' => [
       'label' => 'Date',
@@ -94,6 +103,7 @@ class Field extends BaseGenerator {
       'random' => FALSE,
       'inline' => FALSE,
       'link' => FALSE,
+      'data_type' => 'datetime_iso8601',
     ],
   ];
 
@@ -205,30 +215,12 @@ class Field extends BaseGenerator {
 
       $machine_name = $vars['machine_name_' . $i];
 
-      switch ($type) {
-        case 'text':
-        case 'telephone':
-          $data_type = 'string';
-          break;
-
-        case 'numeric':
-          $data_type = 'float';
-          break;
-
-        case 'datetime':
-          $data_type = 'datetime_iso8601';
-          break;
-
-        default:
-          $data_type = $type;
-      }
-
       // Group sub-field vars.
       $vars['subfields'][$i] = [
         'name' => $vars['name_' . $i],
         'machine_name' => $machine_name,
         'type' => $type,
-        'data_type' => $data_type,
+        'data_type' => $definition['data_type'],
         'list' => !empty($vars['list_' . $i]),
         'allowed_values_method' => 'allowed' . Utils::camelize($vars['name_' . $i], TRUE) . 'Values',
         'required' => $vars['required_' . $i],
@@ -270,10 +262,6 @@ class Field extends BaseGenerator {
         $vars['datetime'] = TRUE;
       }
 
-      $property = "\$this->$machine_name";
-      $vars['subfields'][$i]['is_empty_condition'] = $type == 'boolean'
-        ? "$property == 1"
-        : "$property !== NULL";
     }
 
     $output->writeln('<fg=green>–––––––––––––––––––––––––––––––––––––––––––––––––––</>');

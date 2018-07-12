@@ -3,17 +3,17 @@
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
 {% sort %}
-{% if datetime %}
+  {%- if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
-{% endif %}
+  {%- endif %}
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-{% if formatter_settings %}
+  {%- if formatter_settings %}
 use Drupal\Core\Form\FormStateInterface;
-{% endif %}
-{% if list %}
+  {%- endif %}
+  {%- if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
-{% endif %}
+  {%- endif %}
 {% endsort %}
 
 /**

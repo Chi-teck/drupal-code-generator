@@ -248,104 +248,84 @@ class FooItem extends FieldItemBase {
       'value_1' => [
         'type' => 'int',
         'size' => 'tiny',
-        'description' => 'Column description.',
       ],
       'value_2' => [
         'type' => 'int',
         'size' => 'tiny',
-        'description' => 'Column description.',
       ],
       'value_3' => [
         'type' => 'varchar',
         'length' => 255,
-        'description' => 'Column description.',
       ],
       'value_4' => [
         'type' => 'varchar',
         'length' => 255,
-        'description' => 'Column description.',
       ],
       'value_5' => [
         'type' => 'text',
         'size' => 'big',
-        'description' => 'Column description.',
       ],
       'value_6' => [
         'type' => 'text',
         'size' => 'big',
-        'description' => 'Column description.',
       ],
       'value_7' => [
         'type' => 'int',
         'size' => 'normal',
-        'description' => 'Column description.',
       ],
       'value_8' => [
         'type' => 'int',
         'size' => 'normal',
-        'description' => 'Column description.',
       ],
       'value_9' => [
         'type' => 'float',
         'size' => 'normal',
-        'description' => 'Column description.',
       ],
       'value_10' => [
         'type' => 'float',
         'size' => 'normal',
-        'description' => 'Column description.',
       ],
       'value_11' => [
         'type' => 'numeric',
         'precision' => 10,
         'scale' => 2,
-        'description' => 'Column description.',
       ],
       'value_12' => [
         'type' => 'numeric',
         'precision' => 10,
         'scale' => 2,
-        'description' => 'Column description.',
       ],
       'value_13' => [
         'type' => 'varchar',
         'length' => Email::EMAIL_MAX_LENGTH,
-        'description' => 'Column description.',
       ],
       'value_14' => [
         'type' => 'varchar',
         'length' => Email::EMAIL_MAX_LENGTH,
-        'description' => 'Column description.',
       ],
       'value_15' => [
         'type' => 'varchar',
         'length' => 255,
-        'description' => 'Column description.',
       ],
       'value_16' => [
         'type' => 'varchar',
         'length' => 255,
-        'description' => 'Column description.',
       ],
       'value_17' => [
         'type' => 'varchar',
         'length' => 2048,
-        'description' => 'Column description.',
       ],
       'value_18' => [
         'type' => 'varchar',
         'length' => 2048,
-        'description' => 'Column description.',
       ],
       'value_19' => [
         'type' => 'varchar',
         'length' => 20,
-        'description' => 'Column description.',
       ],
       'value_20' => [
         'type' => 'varchar',
         'length' => 20,
-        'description' => 'Column description.',
       ],
     ];
 

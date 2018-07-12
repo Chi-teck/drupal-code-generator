@@ -3,14 +3,14 @@
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
 {% sort %}
-{% if datetime %}
+  {%- if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
-{% endif %}
+  {%- endif %}
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-{% if list %}
+  {%- if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
-{% endif %}
+  {%- endif %}
 {% endsort %}
 
 /**
@@ -52,7 +52,7 @@ class {{ key_value_formatter_class }} extends FormatterBase {
     {%- endif %}
         $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
 
-  {%- elseif subfield.type != 'boolean' and subfield.list %}
+  {%- elseif subfield.list %}
         $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
 
   {%- endif %}

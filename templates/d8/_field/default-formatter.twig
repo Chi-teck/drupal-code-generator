@@ -3,20 +3,20 @@
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
 {% sort %}
-{% if datetime %}
+  {%- if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
-{% endif %}
+  {%- endif %}
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-{% if formatter_settings %}
+  {%- if formatter_settings %}
 use Drupal\Core\Form\FormStateInterface;
-{% endif %}
-{% if link %}
+  {%- endif %}
+  {%- if link %}
 use Drupal\Core\Url;
-{% endif %}
-{% if list %}
+  {%- endif %}
+  {%- if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
-{% endif %}
+  {%- endif %}
 {% endsort %}
 
 /**
@@ -79,17 +79,18 @@ class {{ formatter_class }} extends FormatterBase {
 
   {%- else %}
       if ($item->{{ subfield.machine_name }}) {
-    {%- set display_value = '$item->' ~ subfield.machine_name %}
     {%- if subfield.list %}
         $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
-      {%- set display_value = '$allowed_values[' ~ display_value ~ ']' %}
     {%- endif %}
+    {%- set item_value %}
+      {%- if subfield.list %}$allowed_values[$item->{{ subfield.machine_name }}]{% else %}$item->{{ subfield.machine_name }}{% endif %}
+    {%- endset %}
     {%- if subfield.type == 'datetime' %}
         $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
         $date_formatter = \Drupal::service('date.formatter');
         $timestamp = $date->getTimestamp();
       {%- if subfield.list %}
-        $formatted_date = {{ display_value|raw }};
+        $formatted_date = {{ item_value }};
       {%- else %}
         $formatted_date = $date_formatter->format($timestamp, 'long');
       {%- endif %}
@@ -118,7 +119,7 @@ class {{ formatter_class }} extends FormatterBase {
       {%- if subfield.link %}
           'content' => [
             '#type' => 'link',
-            '#title' => {{ display_value|raw }},
+            '#title' => {{ item_value }},
         {%- if subfield.type == 'email' %}
             '#url' => Url::fromUri('mailto:' . $item->{{ subfield.machine_name }}),
         {%- elseif subfield.type == 'telephone' %}
@@ -128,7 +129,7 @@ class {{ formatter_class }} extends FormatterBase {
         {%- endif %}
           ],
       {%- else %}
-          '#markup' => {{ display_value|raw }},
+          '#markup' => {{ item_value }},
       {%- endif %}
         ];
     {%- endif %}

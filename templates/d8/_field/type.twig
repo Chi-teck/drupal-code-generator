@@ -85,10 +85,13 @@ class {{ type_class }} extends FieldItemBase {
    */
   public function isEmpty() {
 {% for subfield in subfields %}
+  {%- set condition %}
+    {%- if subfield.type == 'boolean' %}$this->{{ subfield.machine_name }} == 1{% else %}$this->{{ subfield.machine_name }} !== NULL{% endif %}
+  {%- endset %}
   {%- if loop.index == 1 %}
-    if ({{ subfield.is_empty_condition|raw }}) {
+    if ({{ condition }}) {
   {%- else %}
-    elseif ({{ subfield.is_empty_condition|raw }}) {
+    elseif ({{ condition }}) {
   {%- endif %}
       return FALSE;
     }
@@ -117,7 +120,7 @@ class {{ type_class }} extends FieldItemBase {
 
 {% for subfield in subfields %}
   {%- if subfield.list %}
-    $options['{{ subfield.machine_name }}']['AllowedValues'] = array_keys({{ type_class }}::allowed{{ subfield.name|camelize(true) }}Values());
+    $options['{{ subfield.machine_name }}']['AllowedValues'] = array_keys({{ type_class }}::{{ subfield.allowed_values_method }}());
 
   {%- endif %}
   {%- if subfield.required %}
@@ -185,7 +188,6 @@ class {{ type_class }} extends FieldItemBase {
         'type' => 'varchar',
         'length' => 20,
   {%- endif %}
-        'description' => 'Column description.',
       ],
 {% endfor %}
     ];
