@@ -297,13 +297,13 @@ class FooItem extends FieldItemBase {
       ],
       'value_11' => [
         'type' => 'numeric',
-        'precise' => 10,
+        'precision' => 10,
         'scale' => 2,
         'description' => 'Column description.',
       ],
       'value_12' => [
         'type' => 'numeric',
-        'precise' => 10,
+        'precision' => 10,
         'scale' => 2,
         'description' => 'Column description.',
       ],
@@ -378,31 +378,27 @@ class FooItem extends FieldItemBase {
 
     $values['value_7'] = mt_rand(-1000, 1000);
 
-    $values['value_8'] = mt_rand(-1000, 1000);
+    $values['value_8'] = array_rand(self::allowedValue8Values());
 
     $scale = rand(1, 5);
     $random_decimal =  mt_rand() / mt_getrandmax() * (1000 - 0);
     $values['value_9'] = floor($random_decimal * pow(10, $scale)) / pow(10, $scale);
 
-    $scale = rand(1, 5);
-    $random_decimal =  mt_rand() / mt_getrandmax() * (1000 - 0);
-    $values['value_10'] = floor($random_decimal * pow(10, $scale)) / pow(10, $scale);
+    $values['value_10'] = array_rand(self::allowedValue10Values());
 
     $scale = rand(10, 2);
     $random_decimal = -1000 + mt_rand() / mt_getrandmax() * (-1000 - 1000);
     $values['value_11'] = floor($random_decimal * pow(10, $scale)) / pow(10, $scale);
 
-    $scale = rand(10, 2);
-    $random_decimal = -1000 + mt_rand() / mt_getrandmax() * (-1000 - 1000);
-    $values['value_12'] = floor($random_decimal * pow(10, $scale)) / pow(10, $scale);
+    $values['value_12'] = array_rand(self::allowedValue12Values());
 
     $values['value_13'] = strtolower($random->name()) . '@example.com';
 
-    $values['value_14'] = strtolower($random->name()) . '@example.com';
+    $values['value_14'] = array_rand(self::allowedValue14Values());
 
     $values['value_15'] = mt_rand(pow(10, 8), pow(10, 9) - 1);
 
-    $values['value_16'] = mt_rand(pow(10, 8), pow(10, 9) - 1);
+    $values['value_16'] = array_rand(self::allowedValue16Values());
 
     $tlds = ['com', 'net', 'gov', 'org', 'edu', 'biz', 'info'];
     $domain_length = mt_rand(7, 15);
@@ -412,19 +408,12 @@ class FooItem extends FieldItemBase {
     $tld = $tlds[mt_rand(0, (count($tlds) - 1))];
     $values['value_17'] = "$protocol://$www.$domain.$tld";
 
-    $tlds = ['com', 'net', 'gov', 'org', 'edu', 'biz', 'info'];
-    $domain_length = mt_rand(7, 15);
-    $protocol = mt_rand(0, 1) ? 'https' : 'http';
-    $www = mt_rand(0, 1) ? 'www' : '';
-    $domain = $random->word($domain_length);
-    $tld = $tlds[mt_rand(0, (count($tlds) - 1))];
-    $values['value_18'] = "$protocol://$www.$domain.$tld";
+    $values['value_18'] = array_rand(self::allowedValue18Values());
 
     $timestamp = \Drupal::time()->getRequestTime() - mt_rand(0, 86400 * 365);
     $values['value_19'] = gmdate('Y-m-d', $timestamp);
 
-    $timestamp = \Drupal::time()->getRequestTime() - mt_rand(0, 86400 * 365);
-    $values['value_20'] = gmdate('Y-m-d', $timestamp);
+    $values['value_20'] = array_rand(self::allowedValue20Values());
 
     return $values;
   }

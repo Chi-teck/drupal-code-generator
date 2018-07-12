@@ -183,7 +183,7 @@ class {{ widget_class }} extends WidgetBase {
         $values[$delta]['{{ subfield.machine_name }}'] = NULL;
       }
 {% if subfield.type == 'datetime' %}
-      if ($value['{{ subfield.machine_name }}']) {
+      if ($value['{{ subfield.machine_name }}'] instanceof DrupalDateTime) {
         $values[$delta]['{{ subfield.machine_name }}'] = $value['{{ subfield.machine_name }}']->format('{{ subfield.date_storage_format }}');
       }
 {% endif %}

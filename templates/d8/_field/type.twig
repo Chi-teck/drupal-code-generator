@@ -170,7 +170,7 @@ class {{ type_class }} extends FieldItemBase {
         'size' => 'normal',
   {%- elseif subfield.type == 'numeric' %}
         'type' => 'numeric',
-        'precise' => 10,
+        'precision' => 10,
         'scale' => 2,
   {%- elseif subfield.type == 'email' %}
         'type' => 'varchar',
@@ -208,7 +208,10 @@ class {{ type_class }} extends FieldItemBase {
 
 {% endif %}
 {% for subfield in subfields %}
-  {%- if subfield.type == 'boolean' %}
+  {%- if subfield.list %}
+    $values['{{ subfield.machine_name }}'] = array_rand(self::{{ subfield.allowed_values_method }}());
+
+  {%- elseif subfield.type == 'boolean' %}
     $values['{{ subfield.machine_name }}'] = (bool) mt_rand(0, 1);
 
   {%- elseif subfield.type == 'string' %}

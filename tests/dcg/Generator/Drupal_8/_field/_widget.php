@@ -276,13 +276,13 @@ class FooWidget extends WidgetBase {
       if ($value['value_19'] === '') {
         $values[$delta]['value_19'] = NULL;
       }
-      if ($value['value_19']) {
+      if ($value['value_19'] instanceof DrupalDateTime) {
         $values[$delta]['value_19'] = $value['value_19']->format('Y-m-d');
       }
       if ($value['value_20'] === '') {
         $values[$delta]['value_20'] = NULL;
       }
-      if ($value['value_20']) {
+      if ($value['value_20'] instanceof DrupalDateTime) {
         $values[$delta]['value_20'] = $value['value_20']->format('Y-m-d');
       }
     }
