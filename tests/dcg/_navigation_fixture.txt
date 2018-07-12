@@ -236,10 +236,10 @@
  Select generator: 
   [0] ..
   [1] Browser
-  [2] Javascript
-  [3] Kernel
-  [4] Unit
-  [5] Web
+  [2] Kernel
+  [3] Unit
+  [4] Web (simpletest)
+  [5] WebDriver
   ➤➤➤ 0⏎
  Select generator: 
   [0 ] ..

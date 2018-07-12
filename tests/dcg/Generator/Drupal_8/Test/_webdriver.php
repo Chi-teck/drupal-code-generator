@@ -2,21 +2,36 @@
 
 namespace Drupal\Tests\foo\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
 /**
  * Tests the JavaScript functionality of the Foo module.
  *
  * @group foo
  */
-class ExampleTest extends JavascriptTestBase {
+class ExampleTest extends WebDriverTestBase {
 
   /**
-   * Tests password strength widget.
+   * {@inheritdoc}
    */
-  public function testLogin() {
-    $admin_user = $this->drupalCreateUser();
-    $this->drupalLogin($admin_user);
+  public static $modules = ['foo'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+    // Set up the test here.
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testSomething() {
+    // Let's test password strength widget.
+    \Drupal::configFactory()->getEditable('user.settings')
+      ->set('verify_mail', FALSE)
+      ->save();
 
     $this->drupalGet('user/register');
 
