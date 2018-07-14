@@ -22,21 +22,19 @@ To make _dcg_ available in any system location append this line to your _.bashrc
 Then after you have logged out and in the _dcg_ development version will be accessible through _dcg-dev_ command.
 
 ## Testing
-Install PHPUnit globally:
-```shell
-composer global require "phpunit/phpunit"
+
+### Prerequisites
+
+* [Install Coder Sniffer](https://www.drupal.org/node/1419988)
+* [Install PHPUnit](https://phpunit.de/)
+* [Install Twigcs](https://github.com/allocine/twigcs)
+
+### Testing code generator
 ```
-Make sure you have _~/.composer/vendor/bin_ in your PATH:
-```shell
-export PATH=~/.composer/vendor/bin:$PATH
+/path/to/drupal-code-generator/scripts/run-dcg-tests.php
 ```
 
-The following alias may help you run tests and check code style from any location:
-```
-alias dcg-test="(cd /path/to/drupal-code-generator && phpunit && phpcs -p --standard=./phpcs.xml)"
-```
-
-### Running tests against generated code
+### Testing generated code
 ```
 /path/to/drupal-code-generator/scripts/run-sut-tests.php
 ```
