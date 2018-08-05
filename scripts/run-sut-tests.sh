@@ -15,7 +15,7 @@ function dcg_on_exit {
 trap dcg_on_exit EXIT
 
 SELF_PATH=$(dirname $0)/../tests/sut
-DRUPAL_VERSION=${DRUPAL_VERSION:-8.6.x-dev}
+DRUPAL_VERSION=${DRUPAL_VERSION:-8.7.x-dev}
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
 DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
 DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
@@ -230,11 +230,11 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = test ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:test:browser -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
-  $DCG d8:test:javascript -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
-  $DCG d8:test:kernel -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
-  $DCG d8:test:unit -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
-  $DCG d8:test:web -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"Xerox","class":"ExampleTest"}'
+  $DCG d8:test:browser -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
+  $DCG d8:test:webdriver -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
+  $DCG d8:test:kernel -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
+  $DCG d8:test:unit -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
+  $DCG d8:test:web -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
 
   dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
