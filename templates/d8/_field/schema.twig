@@ -15,9 +15,9 @@ field.field_settings.{{ field_id }}:
   type: mapping
   label: Example field settings
   mapping:
-    foo:
+    bar:
       type: string
-      label: Foo
+      label: Bar
 
 {% endif %}
 # Default value.
@@ -44,7 +44,7 @@ field.widget.settings.{{ field_id }}:
 {% endif %}
 {% if formatter_settings %}
 # Field formatter.
-field.formatter.settings.{{ field_id }}:
+field.formatter.settings.{{ field_id }}_default:
   type: mapping
   label: Example formatter settings
   mapping:

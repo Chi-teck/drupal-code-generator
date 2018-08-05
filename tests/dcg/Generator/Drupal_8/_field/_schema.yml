@@ -12,9 +12,9 @@ field.field_settings.example_foo:
   type: mapping
   label: Example field settings
   mapping:
-    foo:
+    bar:
       type: string
-      label: Foo
+      label: Bar
 
 # Default value.
 field.value.example_foo:
@@ -92,7 +92,7 @@ field.widget.settings.example_foo:
       label: Foo
 
 # Field formatter.
-field.formatter.settings.example_foo:
+field.formatter.settings.example_foo_default:
   type: mapping
   label: Example formatter settings
   mapping:

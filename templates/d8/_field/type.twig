@@ -34,7 +34,7 @@ class {{ type_class }} extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
-    $settings = ['foo' => 'bar'];
+    $settings = ['foo' => 'example'];
     return $settings + parent::defaultStorageSettings();
   }
 
@@ -60,7 +60,7 @@ class {{ type_class }} extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultFieldSettings() {
-    $settings = ['foo' => 'bar'];
+    $settings = ['bar' => 'example'];
     return $settings + parent::defaultFieldSettings();
   }
 
@@ -70,10 +70,10 @@ class {{ type_class }} extends FieldItemBase {
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
     $settings = $this->getSettings();
 
-    $element['foo'] = [
+    $element['bar'] = [
       '#type' => 'textfield',
-      '#title' => t('Foo'),
-      '#default_value' => $settings['foo'],
+      '#title' => $this->t('Foo'),
+      '#default_value' => $settings['bar'],
     ];
 
     return $element;
@@ -127,8 +127,8 @@ class {{ type_class }} extends FieldItemBase {
     {%- if subfield.type == 'boolean' %}
     // NotBlank validator is not suitable for booleans because it does not
     // recognize '0' as an empty value.
-    $options['{{ subfield.machine_name }}']['NotEqualTo']['value'] = 0;
-    $options['{{ subfield.machine_name }}']['NotEqualTo']['message'] = $this->t('This value should not be blank.');
+    $options['{{ subfield.machine_name }}']['AllowedValues']['choices'] = [1];
+    $options['{{ subfield.machine_name }}']['AllowedValues']['message'] = $this->t('This value should not be blank.');
 
     {%- else %}
     $options['{{ subfield.machine_name }}']['NotBlank'] = [];

@@ -27,7 +27,7 @@ class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
-    $settings = ['foo' => 'bar'];
+    $settings = ['foo' => 'example'];
     return $settings + parent::defaultStorageSettings();
   }
 
@@ -51,7 +51,7 @@ class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultFieldSettings() {
-    $settings = ['foo' => 'bar'];
+    $settings = ['bar' => 'example'];
     return $settings + parent::defaultFieldSettings();
   }
 
@@ -61,10 +61,10 @@ class FooItem extends FieldItemBase {
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
     $settings = $this->getSettings();
 
-    $element['foo'] = [
+    $element['bar'] = [
       '#type' => 'textfield',
-      '#title' => t('Foo'),
-      '#default_value' => $settings['foo'],
+      '#title' => $this->t('Foo'),
+      '#default_value' => $settings['bar'],
     ];
 
     return $element;
@@ -194,8 +194,8 @@ class FooItem extends FieldItemBase {
 
     // NotBlank validator is not suitable for booleans because it does not
     // recognize '0' as an empty value.
-    $options['value_2']['NotEqualTo']['value'] = 0;
-    $options['value_2']['NotEqualTo']['message'] = $this->t('This value should not be blank.');
+    $options['value_2']['AllowedValues']['choices'] = [1];
+    $options['value_2']['AllowedValues']['message'] = $this->t('This value should not be blank.');
 
     $options['value_6']['NotBlank'] = [];
 
