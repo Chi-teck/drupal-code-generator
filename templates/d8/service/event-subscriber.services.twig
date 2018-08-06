@@ -1,6 +1,6 @@
 services:
   {{ machine_name }}.event_subscriber:
     class: Drupal\{{ machine_name }}\EventSubscriber\{{ class }}
-    arguments: ['@current_user']
+    arguments: ['@messenger']
     tags:
       - { name: event_subscriber }
