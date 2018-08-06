@@ -229,7 +229,10 @@ class FooDefaultFormatter extends FormatterBase {
 
       if ($item->value_19) {
         $date = DrupalDateTime::createFromFormat('Y-m-d', $item->value_19);
+        // @DCG: Consider injecting the date formatter service.
+        // @codingStandardsIgnoreStart
         $date_formatter = \Drupal::service('date.formatter');
+        // @codingStandardsIgnoreStart
         $timestamp = $date->getTimestamp();
         $formatted_date = $date_formatter->format($timestamp, 'long');
         $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
@@ -255,7 +258,10 @@ class FooDefaultFormatter extends FormatterBase {
       if ($item->value_20) {
         $allowed_values = FooItem::allowedValue20Values();
         $date = DrupalDateTime::createFromFormat('Y-m-d', $item->value_20);
+        // @DCG: Consider injecting the date formatter service.
+        // @codingStandardsIgnoreStart
         $date_formatter = \Drupal::service('date.formatter');
+        // @codingStandardsIgnoreStart
         $timestamp = $date->getTimestamp();
         $formatted_date = $allowed_values[$item->value_20];
         $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';

@@ -65,7 +65,7 @@ class {{ widget_class }} extends WidgetBase {
 {% for subfield in subfields %}
   {%- set title %}'#title' => $this->t('{{ subfield.name }}'),{% endset %}
   {%- set default_value %}'#default_value' => isset($items[$delta]->{{ subfield.machine_name }}) ? $items[$delta]->{{ subfield.machine_name }} : NULL,{% endset %}
-  {%- set size %}#size' => 15,{% endset %}
+  {%- set size %}'#size' => 20,{% endset %}
   {%- if subfield.list %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'select',
@@ -100,18 +100,12 @@ class {{ widget_class }} extends WidgetBase {
       '#type' => 'number',
       {{ title }}
       {{ default_value }}
-      {%- if inline %}
-      {{ size }}
-      {%- endif %}
     ];
     {%- elseif subfield.type == 'float' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'number',
       {{ title }}
       {{ default_value }}
-      {%- if inline %}
-      {{ size }}
-      {%- endif %}
       '#step' => 0.001,
     ];
     {%- elseif subfield.type == 'numeric' %}
@@ -119,9 +113,6 @@ class {{ widget_class }} extends WidgetBase {
       '#type' => 'number',
       {{ title }}
       {{ default_value }}
-      {%- if inline %}
-      {{ size }}
-      {%- endif %}
       '#step' => 0.01,
     ];
     {%- elseif subfield.type == 'email' %}

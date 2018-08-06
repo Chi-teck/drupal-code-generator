@@ -87,7 +87,10 @@ class {{ formatter_class }} extends FormatterBase {
     {%- endset %}
     {%- if subfield.type == 'datetime' %}
         $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
+        // @DCG: Consider injecting the date formatter service.
+        // @codingStandardsIgnoreStart
         $date_formatter = \Drupal::service('date.formatter');
+        // @codingStandardsIgnoreStart
         $timestamp = $date->getTimestamp();
       {%- if subfield.list %}
         $formatted_date = {{ item_value }};

@@ -361,7 +361,7 @@ class FooItem extends FieldItemBase {
     $values['value_8'] = array_rand(self::allowedValue8Values());
 
     $scale = rand(1, 5);
-    $random_decimal =  mt_rand() / mt_getrandmax() * (1000 - 0);
+    $random_decimal = mt_rand() / mt_getrandmax() * (1000 - 0);
     $values['value_9'] = floor($random_decimal * pow(10, $scale)) / pow(10, $scale);
 
     $values['value_10'] = array_rand(self::allowedValue10Values());
@@ -434,9 +434,9 @@ class FooItem extends FieldItemBase {
    */
   public static function allowedValue12Values() {
     return [
-      '12.30' => '12.30',
-      '45.60' => '45.60',
-      '78.90' => '78.90',
+      '12.35' => '12.35',
+      '45.65' => '45.65',
+      '78.95' => '78.95',
     ];
   }
 

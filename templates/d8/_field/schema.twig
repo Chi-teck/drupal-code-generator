@@ -7,7 +7,6 @@ field.storage_settings.{{ field_id }}:
     foo:
       type: string
       label: Foo
-
 {% endif %}
 {% if instance_settings %}
 # Field instance.
@@ -18,7 +17,6 @@ field.field_settings.{{ field_id }}:
     bar:
       type: string
       label: Bar
-
 {% endif %}
 # Default value.
 field.value.{{ field_id }}:
@@ -30,7 +28,6 @@ field.value.{{ field_id }}:
       type: {{ subfield.type }}
       label: {{ subfield.name }}
 {% endfor %}
-
 {% if widget_settings %}
 # Field widget.
 field.widget.settings.{{ field_id }}:
@@ -40,7 +37,6 @@ field.widget.settings.{{ field_id }}:
     foo:
       type: string
       label: Foo
-
 {% endif %}
 {% if formatter_settings %}
 # Field formatter.
@@ -51,5 +47,4 @@ field.formatter.settings.{{ field_id }}_default:
     foo:
       type: string
       label: Foo
-
 {% endif %}

@@ -126,6 +126,10 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
   $DCG d8:layout -d $MODULE_DIR -a '{"machine_name":"bar","layout_name":"Foo","layout_machine_name":"foo","category":"my","js":"Yes","css":"Yes"}'
   $DCG d8:render-element -d $MODULE_DIR -a '{"machine_name":"bar"}'
 
+  $DCG d8:field -d $MODULE_DIR -a '{"machine_name":"bar","field_label":"Example 1","subfield_count":"10","type_1":"Boolean","type_2":"Text","type_3":"Text (long)","type_4":"Integer","type_5":"Float","type_6":"Numeric","type_7":"Email","type_8":"Telephone","type_9":"Url","type_10":"Date"}'
+  $DCG d8:field -d $MODULE_DIR -a '{"machine_name":"bar","field_label":"Example 2","subfield_count":"10","type_1":"Boolean","required_1":"Yes","type_2":"Text","list_2":"Yes","required_2":"Yes","type_3":"Text (long)","required_3":"Yes","type_4":"Integer","list_4":"Yes","type_5":"Float","list_5":"Yes","required_5":"Yes","type_6":"Numeric","list_6":"Yes","type_7":"Email","list_7":"Yes","required_7":"Yes","type_8":"Telephone","list_8":"Yes","type_9":"Url","list_9":"Yes","required_9":"Yes","type_10":"Date","list_10":"Yes","date_type_10":"datetime"}'
+  $DCG d8:field -d $MODULE_DIR -a '{"machine_name":"bar","field_label":"Example 3","subfield_count":"5","type_1":"Boolean","type_2":"Text","type_3":"Text (long)","type_4":"Email","type_5":"Url","storage_settings":"Yes","instance_settings":"Yes","widget_settings":"Yes","formatter_settings":"Yes","table_formatter":"Yes","key_value_formatter":"Yes"}'
+
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
   dcg_phpunit $MODULE_DIR/tests
