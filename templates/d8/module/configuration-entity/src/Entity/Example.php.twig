@@ -13,6 +13,13 @@ use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
  * @ConfigEntityType(
  *   id = "{{ entity_type_id }}",
  *   label = @Translation("{{ entity_type_label }}"),
+ *   label_collection = @Translation("{{ entity_type_label|plural }}"),
+ *   label_singular = @Translation("{{ entity_type_label|lower }}"),
+ *   label_plural = @Translation("{{ entity_type_label|plural|lower }}"),
+ *   label_count = @PluralTranslation(
+ *     singular = "@count {{ entity_type_label|lower }}",
+ *     plural = "@count {{ entity_type_label|plural|lower }}",
+ *   ),
  *   handlers = {
  *     "list_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}ListBuilder",
  *     "form" = {

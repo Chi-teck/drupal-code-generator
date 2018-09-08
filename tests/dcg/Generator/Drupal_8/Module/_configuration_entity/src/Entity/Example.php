@@ -11,6 +11,13 @@ use Drupal\foo\ExampleInterface;
  * @ConfigEntityType(
  *   id = "example",
  *   label = @Translation("Example"),
+ *   label_collection = @Translation("Examples"),
+ *   label_singular = @Translation("example"),
+ *   label_plural = @Translation("examples"),
+ *   label_count = @PluralTranslation(
+ *     singular = "@count example",
+ *     plural = "@count examples",
+ *   ),
  *   handlers = {
  *     "list_builder" = "Drupal\foo\ExampleListBuilder",
  *     "form" = {

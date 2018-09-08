@@ -32,7 +32,7 @@ class ConfigurationEntityTest extends BrowserTestBase {
 
     $this->drupalGet('admin/structure/example');
     $this->assertPageTitle('Example configuration');
-    $this->assertXpath('//td[@class = "empty message" and text() = "There are no example entities yet."]');
+    $this->assertXpath('//td[@class = "empty message" and text() = "There are no examples yet."]');
 
     $this->drupalGet('admin/structure/example/add');
     $this->assertPageTitle('Add an example');
@@ -66,7 +66,7 @@ class ConfigurationEntityTest extends BrowserTestBase {
 
     $this->drupalPostForm(NULL, [], 'Delete');
     $this->assertStatusMessage(t('The example %label has been deleted.', ['%label' => 'Updated test']));
-    $this->assertXpath('//td[@class = "empty message" and text() = "There are no example entities yet."]');
+    $this->assertXpath('//td[@class = "empty message" and text() = "There are no examples yet."]');
   }
 
 }

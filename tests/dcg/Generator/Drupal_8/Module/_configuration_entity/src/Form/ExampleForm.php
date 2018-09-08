@@ -62,7 +62,7 @@ class ExampleForm extends EntityForm {
     $message = $result == SAVED_NEW
       ? $this->t('Created new example %label.', $message_args)
       : $this->t('Updated example %label.', $message_args);
-    drupal_set_message($message);
+    $this->messenger()->addStatus($message);
     $form_state->setRedirectUrl($this->entity->toUrl('collection'));
     return $result;
   }
