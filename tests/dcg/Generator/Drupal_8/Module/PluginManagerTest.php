@@ -22,7 +22,6 @@ class PluginManagerTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
-    'foo/foo.drush.inc' => __DIR__ . '/_plugin_manager/foo.drush.inc',
     'foo/foo.info.yml' => __DIR__ . '/_plugin_manager/foo.info.yml',
     'foo/foo.services.yml' => __DIR__ . '/_plugin_manager/foo.services.yml',
     'foo/src/Annotation/Foo.php' => __DIR__ . '/_plugin_manager/src/Annotation/Foo.php',

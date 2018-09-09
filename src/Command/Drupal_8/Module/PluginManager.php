@@ -35,7 +35,6 @@ class PluginManager extends BaseGenerator {
     $vars['class_prefix'] = Utils::camelize($vars['machine_name']);
 
     $templates = [
-      'model.drush.inc.twig',
       'model.info.yml.twig',
       'model.services.yml.twig',
       'src/Annotation/Model.php.twig',
