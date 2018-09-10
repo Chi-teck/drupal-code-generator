@@ -24,7 +24,6 @@ class PluginManager extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
-    $questions['description'] = new Question('Description', 'Module description.');
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
     $default_plugin_type = function ($vars) {

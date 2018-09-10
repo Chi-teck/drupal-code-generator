@@ -14,7 +14,6 @@ class PluginManagerAnnotationTest extends GeneratorBaseTest {
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
-    'Description [Module description.]:' => 'Foo description.',
     'Package [Custom]:' => 'Custom',
     'Dependencies (comma separated):' => 'drupal:views, drupal:field, drupal:node',
     'Plugin type [foo]:' => 'bar',

@@ -1,6 +1,6 @@
 name: Foo
 type: module
-description: Foo description.
+description: Provides bar plugin type.
 package: Custom
 core: 8.x
 dependencies:
