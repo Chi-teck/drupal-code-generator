@@ -1,0 +1,9 @@
+name: Foo
+type: module
+description: Foo description.
+package: Custom
+core: 8.x
+dependencies:
+  - drupal:views
+  - drupal:field
+  - drupal:node

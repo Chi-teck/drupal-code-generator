@@ -1,4 +1,0 @@
-services:
-  plugin.manager.foo:
-    class: Drupal\foo\FooPluginManager
-    parent: default_plugin_manager

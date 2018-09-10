@@ -1,0 +1,4 @@
+services:
+  plugin.manager.bar:
+    class: Drupal\foo\BarPluginManager
+    parent: default_plugin_manager

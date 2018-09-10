@@ -1,0 +1,9 @@
+foo_1:
+  label: 'Foo 1'
+  description: 'Plugin description.'
+foo_2:
+  label: 'Foo 2'
+  description: 'Plugin description.'
+foo_3:
+  label: 'Foo 3'
+  description: 'Plugin description.'

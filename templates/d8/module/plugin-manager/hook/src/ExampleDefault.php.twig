@@ -1,0 +1,20 @@
+<?php
+
+namespace Drupal\{{ machine_name }};
+
+use Drupal\Core\Plugin\PluginBase;
+
+/**
+ * Default class used for {{ plugin_type|plural }} plugins.
+ */
+class {{ class_prefix }}Default extends PluginBase implements {{ class_prefix }}Interface {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function label() {
+    // The title from hook discovery may be a TranslatableMarkup object.
+    return (string) $this->pluginDefinition['label'];
+  }
+
+}

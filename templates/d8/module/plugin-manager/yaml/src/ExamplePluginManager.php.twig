@@ -1,0 +1,70 @@
+<?php
+
+namespace Drupal\{{ machine_name }};
+
+use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Plugin\DefaultPluginManager;
+use Drupal\Core\Plugin\Discovery\YamlDiscovery;
+use Drupal\Core\Plugin\Factory\ContainerFactory;
+
+/**
+ * Defines a plugin manager to deal with {{ plugin_type|plural }}.
+ *
+ * Modules can define {{ plugin_type|plural }} in a MODULE_NAME.{{ plugin_type|plural }}.yml file contained
+ * in the module's base directory. Each {{ plugin_type }} has the following structure:
+ *
+ * @code
+ *   MACHINE_NAME:
+ *     label: STRING
+ *     description: STRING
+ * @endcode
+ *
+ * @see \Drupal\{{ machine_name }}\{{ class_prefix }}Default
+ * @see \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
+ * @see plugin_api
+ */
+class {{ class_prefix }}PluginManager extends DefaultPluginManager {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaults = [
+    // The {{ plugin_type }} id. Set by the plugin system based on the top-level YAML key.
+    'id' => '',
+    // The {{ plugin_type }} label.
+    'label' => '',
+    // The {{ plugin_type }} description.
+    'description' => '',
+    // Default plugin class.
+    'class' => 'Drupal\{{ machine_name }}\{{ class_prefix }}Default',
+  ];
+
+  /**
+   * Constructs {{ class_prefix }}PluginManager object.
+   *
+   * @param \Drupal\Core\Cache\CacheBackendInterface $cache_backend
+   *   Cache backend instance to use.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler to invoke the alter hook with.
+   */
+  public function __construct(ModuleHandlerInterface $module_handler, CacheBackendInterface $cache_backend) {
+    $this->factory = new ContainerFactory($this);
+    $this->moduleHandler = $module_handler;
+    $this->alterInfo('{{ plugin_type }}_info');
+    $this->setCacheBackend($cache_backend, '{{ plugin_type }}_plugins');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getDiscovery() {
+    if (!isset($this->discovery)) {
+      $this->discovery = new YamlDiscovery('{{ plugin_type|plural }}', $this->moduleHandler->getModuleDirectories());
+      $this->discovery->addTranslatableProperty('label', 'label_context');
+      $this->discovery->addTranslatableProperty('description', 'description_context');
+    }
+    return $this->discovery;
+  }
+
+}
