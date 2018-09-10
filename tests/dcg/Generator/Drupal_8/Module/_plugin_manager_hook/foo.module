@@ -5,6 +5,9 @@
  * Primary module hooks for Foo module.
  */
 
+/**
+ * Implements hook_bar_info().
+ */
 function foo_bar_info() {
   return [
     'foo' => [

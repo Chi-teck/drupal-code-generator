@@ -268,17 +268,25 @@ fi
 if [ $TARGET_TEST = all -o $TARGET_TEST = plugin_manager ]; then
   dcg_label Plugin manager
 
-  MODULE_MACHINE_NAME=lamda
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  # The generator supports different types of discovery. We create a module
+  # and run tests for them individually.
+  COUNT=1
+  DISCOVERIES="Annotation YAML Hook"
+  for DISCOVERY in $DISCOVERIES; do
+    MODULE_MACHINE_NAME=lamda_$COUNT
+    MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:plugin-manager -d $DRUPAL_DIR/modules -a '{"name":"Lamda","machine_name":"lamda","description":"Helper module for testing plugin manager.","dependencies":"drupal:views","package":"DCG"}'
-  cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
+    $DCG d8:module:plugin-manager -d $DRUPAL_DIR/modules -a '{"name":"Lamda","machine_name":"'$MODULE_MACHINE_NAME'","description":"Helper module for testing plugin manager.","dependencies":"drupal:views","package":"DCG","plugin_type":"bar","discovery":"'$DISCOVERY'"}'
+    cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
-  dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
-  dcg_drush en $MODULE_MACHINE_NAME
-  echo $MODULE_DIR/tests
-  dcg_phpunit $MODULE_DIR/tests
-  dcg_drush pmu $MODULE_MACHINE_NAME
+    dcg_phpcs $MODULE_DIR
+    dcg_drush en $MODULE_MACHINE_NAME
+    echo $MODULE_DIR/tests
+    dcg_phpunit $MODULE_DIR/tests
+    dcg_drush pmu $MODULE_MACHINE_NAME
+    (( COUNT++ ))
+  done
+
 fi
 
 # --- Test configuration entity --- #

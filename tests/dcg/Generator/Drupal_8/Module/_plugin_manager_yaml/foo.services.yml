@@ -2,4 +2,3 @@ services:
   plugin.manager.bar:
     class: Drupal\foo\BarPluginManager
     arguments: ['@module_handler', '@cache.discovery']
-
