@@ -1,22 +1,17 @@
-<?php
-
-/**
- * @file
- * Primary module hooks for {{ name }} module.
- */
-
 /**
  * Implements hook_{{ plugin_type }}_info().
  */
 function {{ machine_name }}_{{ plugin_type }}_info() {
   return [
     'foo' => [
+      'id' => 'foo',
       'label' => t('Foo'),
-      'description' => t('Plugin description.'),
+      'description' => t('Foo description.'),
     ],
     'bar' => [
+      'id' => 'bar',
       'label' => t('Bar'),
-      'description' => t('Plugin description.'),
+      'description' => t('Bar description.'),
     ],
   ];
 }

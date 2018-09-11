@@ -268,25 +268,18 @@ fi
 if [ $TARGET_TEST = all -o $TARGET_TEST = plugin_manager ]; then
   dcg_label Plugin manager
 
-  # The generator supports different types of discovery. We create a module
-  # and run tests for them individually.
-  COUNT=1
-  DISCOVERIES="Annotation YAML Hook"
-  for DISCOVERY in $DISCOVERIES; do
-    MODULE_MACHINE_NAME=lamda_$COUNT
-    MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  MODULE_MACHINE_NAME=lamda
+  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-    $DCG d8:module:plugin-manager -d $DRUPAL_DIR/modules -a '{"name":"Lamda","machine_name":"'$MODULE_MACHINE_NAME'","description":"Helper module for testing plugin manager.","dependencies":"drupal:views","package":"DCG","plugin_type":"bar","discovery":"'$DISCOVERY'"}'
-    cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
+  $DCG d8:plugin-manager -d $MODULE_DIR -a '{"name":"Lamda","machine_name":"lamda","plugin_type":"alpha","discovery":"Annotation"}'
+  $DCG d8:plugin-manager -d $MODULE_DIR -a '{"name":"Lamda","machine_name":"lamda","plugin_type":"beta","discovery":"YAML"}'
+  $DCG d8:plugin-manager -d $MODULE_DIR -a '{"name":"Lamda","machine_name":"lamda","plugin_type":"gamma","discovery":"Hook"}'
 
-    dcg_phpcs $MODULE_DIR
-    dcg_drush en $MODULE_MACHINE_NAME
-    echo $MODULE_DIR/tests
-    dcg_phpunit $MODULE_DIR/tests
-    dcg_drush pmu $MODULE_MACHINE_NAME
-    (( COUNT++ ))
-  done
-
+  dcg_phpcs $MODULE_DIR
+  dcg_drush en $MODULE_MACHINE_NAME
+  dcg_phpunit $MODULE_DIR/tests
+  dcg_drush pmu $MODULE_MACHINE_NAME
 fi
 
 # --- Test configuration entity --- #

@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Drupal_8\Module;
+namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
@@ -10,22 +10,19 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Implements d8:module:plugin-manager command.
+ * Implements d8:plugin-manager command.
  */
 class PluginManager extends BaseGenerator {
 
-  protected $name = 'd8:module:plugin-manager';
-  protected $description = 'Generates plugin-manager module';
+  protected $name = 'd8:plugin-manager';
+  protected $description = 'Generates plugin manager';
   protected $alias = 'plugin-manager';
-  protected $destination = 'modules';
 
   /**
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
-    $questions['package'] = new Question('Package', 'Custom');
-    $questions['dependencies'] = new Question('Dependencies (comma separated)');
     $default_plugin_type = function ($vars) {
       return $vars['machine_name'];
     };
@@ -50,14 +47,10 @@ class PluginManager extends BaseGenerator {
 
     $vars = &$this->collectVars($input, $output, $questions);
 
-    if ($vars['dependencies']) {
-      $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
-    }
     $vars['class_prefix'] = Utils::camelize($vars['plugin_type']);
     $vars['discovery'] = array_search($vars['discovery'], $discovery_types);
 
     $common_files = [
-      'model.info.yml',
       'model.services.yml',
       'src/ExampleInterface.php',
       'src/ExamplePluginManager.php',
@@ -90,7 +83,7 @@ class PluginManager extends BaseGenerator {
 
     $files = array_merge($common_files, $files);
 
-    $templates_path = 'd8/module/plugin-manager/' . $vars['discovery'] . '/';
+    $templates_path = 'd8/plugin-manager/' . $vars['discovery'] . '/';
 
     $path_placeholders = ['model', 'Example', 'examples'];
     $path_replacements = [
@@ -100,9 +93,18 @@ class PluginManager extends BaseGenerator {
     ];
 
     foreach ($files as $file) {
-      $this->addFile()
-        ->path('{machine_name}/' . str_replace($path_placeholders, $path_replacements, $file))
+      $asset = $this->addFile()
+        ->path(str_replace($path_placeholders, $path_replacements, $file))
         ->template($templates_path . $file . '.twig');
+      if ($file === 'model.services.yml') {
+        $asset->action('append')->headerSize(1);
+      }
+      elseif ($file == 'model.module') {
+        $asset
+          ->action('append')
+          ->headerTemplate('d8/file-docs/module.twig')
+          ->headerSize(7);
+      }
     }
   }
 

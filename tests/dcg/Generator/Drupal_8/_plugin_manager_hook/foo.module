@@ -11,12 +11,14 @@
 function foo_bar_info() {
   return [
     'foo' => [
+      'id' => 'foo',
       'label' => t('Foo'),
-      'description' => t('Plugin description.'),
+      'description' => t('Foo description.'),
     ],
     'bar' => [
+      'id' => 'bar',
       'label' => t('Bar'),
-      'description' => t('Plugin description.'),
+      'description' => t('Bar description.'),
     ],
   ];
 }
