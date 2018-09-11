@@ -220,4 +220,22 @@ class Utils {
     }
   }
 
+  /**
+   * Prepares choices.
+   *
+   * @param array $raw_choices
+   *   The choices to be prepared.
+   *
+   * @return array
+   *   The prepared choices.
+   */
+  public static function prepareChoices(array $raw_choices) {
+    // The $raw_choices can be an associative array.
+    $choices = array_values($raw_choices);
+    // Start choices list form '1'.
+    array_unshift($choices, NULL);
+    unset($choices[0]);
+    return $choices;
+  }
+
 }

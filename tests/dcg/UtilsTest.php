@@ -348,4 +348,23 @@ class UtilsTest extends BaseTestCase {
     static::assertEquals('bosses', Utils::pluralize('boss'));
   }
 
+  /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Utils::prepareChoices()
+   */
+  public function testPrepareChoices() {
+    $expected_choices = [
+      1 => 'Foo',
+      2 => 'Bar',
+      3 => 'Qux',
+    ];
+    $raw_choices = [
+      'foo' => 'Foo',
+      'bar' => 'Bar',
+      'qux' => 'Qux',
+    ];
+    static::assertEquals($expected_choices, Utils::prepareChoices($raw_choices));
+  }
+
 }

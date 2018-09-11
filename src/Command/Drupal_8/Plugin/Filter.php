@@ -29,10 +29,7 @@ class Filter extends BaseGenerator {
       'TYPE_TRANSFORM_IRREVERSIBLE' => 'Irreversible transformation',
       'TYPE_TRANSFORM_REVERSIBLE' => 'Reversible transformation',
     ];
-    $choices = array_values($filter_types);
-    // Start choices list form '1'.
-    array_unshift($choices, NULL);
-    unset($choices[0]);
+    $choices = Utils::prepareChoices($filter_types);
     $questions['filter_type'] = new ChoiceQuestion('Filter type', $choices);
 
     $vars = &$this->collectVars($input, $output, $questions);

@@ -45,10 +45,7 @@ class PluginManager extends BaseGenerator {
       'yaml' => 'YAML',
       'hook' => 'Hook',
     ];
-    $choices = array_values($discovery_types);
-    // Start choices list form '1'.
-    array_unshift($choices, NULL);
-    unset($choices[0]);
+    $choices = Utils::prepareChoices($discovery_types);
     $questions['discovery'] = new ChoiceQuestion('Discovery type', $choices, 'Annotation');
 
     $vars = &$this->collectVars($input, $output, $questions);
