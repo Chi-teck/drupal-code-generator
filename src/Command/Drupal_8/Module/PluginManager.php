@@ -30,8 +30,16 @@ class PluginManager extends BaseGenerator {
       return $vars['machine_name'];
     };
     $questions['plugin_type'] = new Question('Plugin type', $default_plugin_type);
-    // @todo Allow dots in plugin type.
-    $questions['plugin_type']->setValidator([Utils::class, 'validateMachineName']);
+
+    // Utils::validateMachineName does not allow dots. But they can appear in
+    // plugin types (field.widget, views.argument, etc).
+    $questions['plugin_type']->setValidator(function ($value) {
+      if (!preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
+        throw new \UnexpectedValueException('The value is not correct machine name.');
+      }
+      return $value;
+    });
+
     $discovery_types = [
       'annotation' => 'Annotation',
       'yaml' => 'YAML',
