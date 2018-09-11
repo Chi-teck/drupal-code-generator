@@ -337,4 +337,15 @@ class UtilsTest extends BaseTestCase {
     static::assertEquals('-=bar=-', Utils::tokenReplace('-={foo}=-', ['foo' => 'bar']));
   }
 
+  /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Utils::pluralize()
+   */
+  public function testPluralize() {
+    static::assertEquals('cats', Utils::pluralize('cat'));
+    static::assertEquals('flies', Utils::pluralize('fly'));
+    static::assertEquals('bosses', Utils::pluralize('boss'));
+  }
+
 }

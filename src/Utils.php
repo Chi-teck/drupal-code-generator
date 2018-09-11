@@ -198,4 +198,26 @@ class Utils {
     return str_replace(array_keys($tokens), array_values($tokens), $text);
   }
 
+  /**
+   * Pluralizes a noun.
+   *
+   * @param string $string
+   *   A noun to pluralize.
+   *
+   * @return string
+   *   The pluralized noun.
+   */
+  public static function pluralize($string) {
+    switch (substr($string, -1)) {
+      case 'y':
+        return substr($string, 0, -1) . 'ies';
+
+      case 's':
+        return $string . 'es';
+
+      default:
+        return $string . 's';
+    }
+  }
+
 }

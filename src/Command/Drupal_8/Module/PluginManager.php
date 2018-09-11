@@ -91,31 +91,13 @@ class PluginManager extends BaseGenerator {
     $path_replacements = [
       $vars['machine_name'],
       $vars['class_prefix'],
-      self::plural($vars['plugin_type']),
+      Utils::pluralize($vars['plugin_type']),
     ];
 
     foreach ($files as $file) {
       $this->addFile()
         ->path('{machine_name}/' . str_replace($path_placeholders, $path_replacements, $file))
         ->template($templates_path . $file . '.twig');
-    }
-  }
-
-  /**
-   * Pluralizes a noun.
-   *
-   * @todo Move this to Utils.
-   */
-  protected static function plural($string) {
-    switch (substr($string, -1)) {
-      case 'y':
-        return substr($string, 0, -1) . 'ies';
-
-      case 's':
-        return $string . 'es';
-
-      default:
-        return $string . 's';
     }
   }
 
