@@ -241,9 +241,10 @@
   [0] ..
   [1] Browser
   [2] Kernel
-  [3] Unit
-  [4] Web (simpletest)
-  [5] WebDriver
+  [3] Nightwatch
+  [4] Unit
+  [5] Web (simpletest)
+  [6] WebDriver
   ➤➤➤ 0⏎
  Select generator: 
   [0 ] ..
