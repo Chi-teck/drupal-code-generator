@@ -1,4 +1,4 @@
 services:
   foo.example:
     class: Drupal\foo\Example
-    arguments: ['@entity_type.manager']
+    arguments: ['@example']

@@ -2,40 +2,39 @@
 
 namespace Drupal\{{ machine_name }};
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
+{% if di %}
+use Drupal\example\ExampleInterface;
 
+{% endif %}
 /**
  * {{ class }} service.
  */
 class {{ class }} {
 
+{% if di %}
   /**
-   * Node storage.
+   * The example service.
    *
-   * @var \Drupal\Node\NodeStorageInterface
+   * @var \Drupal\example\ExampleInterface
    */
-  protected $nodeStorage;
+  protected $example;
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs {{ class|article|lower }} object.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
+   * @param \Drupal\example\ExampleInterface $example
+   *   The example service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
-    $this->nodeStorage = $entity_type_manager->getStorage('node');
+  public function __construct(ExampleInterface $example) {
+    $this->example = $example;
   }
 
+{% endif %}
   /**
-   * Retrieves the last created node.
+   * Does something.
    */
-  public function getLastNode() {
-    $nids = $this->nodeStorage->getQuery()
-      ->sort('created', 'DESC')
-      ->range(0, 1)
-      ->execute();
-    $nid = reset($nids);
-    return $nid ? $this->nodeStorage->load($nid) : FALSE;
+  public function doSomething() {
+    // @DCG place your code here.
   }
 
 }

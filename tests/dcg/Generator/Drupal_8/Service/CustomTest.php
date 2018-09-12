@@ -15,7 +15,8 @@ class CustomTest extends GeneratorBaseTest {
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Service name [foo.example]:' => 'foo.example',
-    'Class [FooExample]:' => 'Example',
+    'Class [Example]:' => 'Example',
+    'Inject dependencies? [No]:' => 'Yes',
   ];
 
   protected $fixtures = [

@@ -180,7 +180,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
 
   $DCG d8:service:access-checker -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","applies_to":"zippo","class":"ZippoAccessChecker"}'
   $DCG d8:service:breadcrumb-builder -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoBreadcrumbBuilder"}'
-  $DCG d8:service:custom -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo", "service_name":"zippo.example","class":"Example"}'
+  $DCG d8:service:custom -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo", "service_name":"zippo.foo","class":"Foo","di":"Yes"}'
   $DCG d8:service:event-subscriber -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo"}'
   $DCG d8:service:logger -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"FileLog"}'
   $DCG d8:service:middleware -d $MODULE_DIR -a '{"name":"Dcg service","machine_name":"zippo"}'

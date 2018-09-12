@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -30,10 +31,14 @@ class Custom extends BaseGenerator {
       }
       return $value;
     });
+
     $default_class = function ($vars) {
-      return Utils::camelize($vars['service_name']);
+      $service = preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
+      return Utils::camelize($service);
     };
     $questions['class'] = new Question('Class', $default_class);
+    $questions['class']->setValidator([Utils::class, 'validateClassName']);
+    $questions['di'] = new ConfirmationQuestion('Inject dependencies?', FALSE);
 
     $this->collectVars($input, $output, $questions);
 
