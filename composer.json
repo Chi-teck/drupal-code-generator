@@ -16,5 +16,10 @@
       "DrupalCodeGenerator\\": "src"
     }
   },
-  "license": "GPL-2.0-or-later"
+  "license": "GPL-2.0-or-later",
+  "extra": {
+    "branch-alias": {
+        "dev-master": "1.x-dev"
+    }
+  }
 }
