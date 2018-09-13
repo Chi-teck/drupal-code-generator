@@ -2,9 +2,6 @@ field.formatter.settings.foo_zoo:
   type: mapping
   label: Zoo formatter settings
   mapping:
-    prefix:
+    foo:
       type: string
-      label: Prefix
-    suffix:
-      type: string
-      label: Suffix
+      label: Foo

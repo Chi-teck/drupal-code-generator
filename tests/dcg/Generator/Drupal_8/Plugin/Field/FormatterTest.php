@@ -16,6 +16,7 @@ class FormatterTest extends GeneratorBaseTest {
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Zoo',
     'Plugin ID [foo_zoo]:' => 'foo_zoo',
+    'Make the formatter configurable? [No]:' => 'Yes',
   ];
 
   protected $fixtures = [
