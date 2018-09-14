@@ -17,15 +17,13 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class {{ class }} extends WidgetBase {
 
+{% if configurable %}
   /**
    * {@inheritdoc}
    */
   public static function defaultSettings() {
     return [
-      'size' => 60,
-      'placeholder' => '',
-      'prefix' => '',
-      'suffix' => '',
+      'foo' => 'bar',
     ] + parent::defaultSettings();
   }
 
@@ -33,30 +31,11 @@ class {{ class }} extends WidgetBase {
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
-    $settings = $this->getSettings();
 
-    $element['size'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Size of textfield'),
-      '#default_value' => $settings['size'],
-      '#required' => TRUE,
-      '#min' => 1,
-    ];
-    $element['placeholder'] = [
+    $element['foo'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Placeholder'),
-      '#default_value' => $settings['placeholder'],
-      '#description' => $this->t('Text that will be shown inside the field until a value is entered. This hint is usually a sample value or a brief description of the expected format.'),
-    ];
-    $element['prefix'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Prefix'),
-      '#default_value' => $settings['prefix'],
-    ];
-    $element['suffix'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Suffix'),
-      '#default_value' => $settings['suffix'],
+      '#title' => $this->t('Foo'),
+      '#default_value' => $this->getSetting('foo'),
     ];
 
     return $element;
@@ -66,37 +45,23 @@ class {{ class }} extends WidgetBase {
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $settings = $this->getSettings();
-    $summary[] = $this->t('Textfield size: @size', ['@size' => $settings['size']]);
-
-    if ($settings['placeholder']) {
-      $summary[] = $this->t('Placeholder: @placeholder', ['@placeholder' => $settings['placeholder']]);
-    }
-    if ($settings['prefix']) {
-      $summary[] = $this->t('Prefix: @prefix', ['@prefix' => $settings['prefix']]);
-    }
-    if ($settings['suffix']) {
-      $summary[] = $this->t('Suffix: @suffix', ['@suffix' => $settings['suffix']]);
-    }
-
+    $summary[] = $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]);
     return $summary;
   }
 
+{% endif %}
   /**
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+    $element = [];
 
-    $settings = $this->getSettings();
-    $element['value'] = $element + [
-      '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
-      '#size' => $settings['size'],
-      '#placeholder' => $settings['placeholder'],
-      '#maxlength' => $this->getFieldSetting('max_length'),
-      '#field_prefix' => $settings['prefix'],
-      '#field_suffix' => $settings['suffix'],
-    ];
+    foreach ($items as $delta => $item) {
+      $element[$delta] = [
+        '#type' => 'textfield',
+        '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
+      ];
+    }
 
     return $element;
   }

@@ -22,8 +22,8 @@ class Formatter extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
-
     $questions['configurable'] = new ConfirmationQuestion('Make the formatter configurable?', FALSE);
+
     $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Formatter');
 
