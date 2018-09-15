@@ -93,6 +93,10 @@ class InputHandler extends Helper {
       if ($answers) {
         if (array_key_exists($name, $answers)) {
           $answer = $answers[$name];
+          // Validate provided answer.
+          if ($validator = $question->getValidator()) {
+            $validator($answer);
+          }
           // Turn 'yes/no' string into boolean.
           if ($question instanceof ConfirmationQuestion && !is_bool($answer)) {
             $answer = strcasecmp($answer, 'yes') == 0;
