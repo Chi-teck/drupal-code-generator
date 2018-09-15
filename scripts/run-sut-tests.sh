@@ -146,7 +146,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
   $DCG d8:plugin:field:formatter -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
-  $DCG d8:plugin:field:type -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
+  $DCG d8:plugin:field:type -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","configurable_storage":"Yes","configurable_instance":"Yes"}'
   $DCG d8:plugin:field:widget -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
 
   $DCG d8:plugin:migrate:process -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_id":"example"}'
