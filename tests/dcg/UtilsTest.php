@@ -108,6 +108,32 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
+   * @param string $camel_input
+   *   Camel string to process.
+   * @param string $expected_machine_name
+   *   Expected machine name.
+   *
+   * @covers \DrupalCodeGenerator\Utils::camel2machine
+   * @dataProvider camel2machineProvider
+   */
+  public function testCamelToMachine($camel_input, $expected_machine_name) {
+    static::assertEquals($expected_machine_name, Utils::camel2machine($camel_input));
+  }
+
+  /**
+   * Data provider callback for testCamelToMachine().
+   */
+  public function camel2machineProvider() {
+    return [
+      ['HelloWorld!', 'hello_world'],
+      ['lowerCamel', 'lower_camel'],
+      ['_xXx_', 'x_xx'],
+    ];
+  }
+
+  /**
+   * Test callback.
+   *
    * @param string $text
    *   Text to camelize.
    * @param string $upper_camel

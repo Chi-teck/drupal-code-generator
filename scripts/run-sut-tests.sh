@@ -97,9 +97,9 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = form ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:form:simple -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"SimpleForm","form_id":"foo_simple","route":"Yes","route_name":"foo_simple_form","route_path":"/admin/config/foo/simple","route_title":"example","route_permission":"access administration pages"}'
-  $DCG d8:form:config -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"SettingsForm","form_id":"foo_config","route":"Yes","route_name":"foo_config_form","route_path":"/admin/config/foo/settings","route_title":"example","route_permission":"access administration pages"}'
-  $DCG d8:form:confirm -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"ConfirmForm","form_id":"foo_confirm", "route":"Yes","route_name":"foo_confirm_form","route_path":"/admin/config/foo/confirm","route_title":"example","route_permission":"access administration pages"}'
+  $DCG d8:form:simple -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"SimpleForm","route":"Yes","route_name":"foo_simple_form","route_path":"/admin/config/foo/simple","route_title":"Example","route_permission":"access administration pages"}'
+  $DCG d8:form:config -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"SettingsForm","route":"Yes","route_name":"foo_config_form","route_path":"/admin/config/foo/settings","route_title":"Example","route_permission":"access administration pages"}'
+  $DCG d8:form:confirm -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"ConfirmForm","route":"Yes","route_name":"foo_confirm_form","route_path":"/admin/config/foo/confirm","route_title":"Example","route_permission":"access administration pages"}'
 
   dcg_phpcs --exclude=DrupalPractice.Yaml.RoutingAccess $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME

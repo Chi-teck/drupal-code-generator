@@ -20,8 +20,8 @@ class Confirm extends Base {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $options = [
       'default_class' => 'ExampleConfirmForm',
-      'default_form_id' => '{machine_name}_example_confirm',
       'default_permission' => 'administer site configuration',
+      'default_path_prefix' => '/admin',
       'template' => 'd8/form/confirm.twig',
     ];
     $this->doInteract($input, $output, $options);

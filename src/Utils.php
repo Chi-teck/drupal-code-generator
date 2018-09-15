@@ -35,6 +35,13 @@ class Utils {
   }
 
   /**
+   * Transforms a camelized sting to machine name.
+   */
+  public static function camel2machine($input) {
+    return self::human2machine(preg_replace('/[A-Z]/', ' \0', $input));
+  }
+
+  /**
    * Camelize a string.
    */
   public static function camelize($string, $upper_camel = TRUE) {

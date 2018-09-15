@@ -20,7 +20,6 @@ class Simple extends Base {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $options = [
       'default_class' => 'ExampleForm',
-      'default_form_id' => '{machine_name}_example',
       'default_permission' => 'access content',
       'template' => 'd8/form/simple.twig',
     ];

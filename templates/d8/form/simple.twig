@@ -2,10 +2,9 @@
 
 namespace Drupal\{{ machine_name }}\Form;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -14,20 +13,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class {{ class }} extends FormBase {
 
   /**
-   * The logger factory.
+   * The messenger.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   * @var \Drupal\Core\Messenger\MessengerInterface
    */
-  protected $logger;
+  protected $messenger;
 
   /**
    * Constructs a {{ class }} object.
    *
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
-   *   A logger instance.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
    */
-  public function __construct(LoggerChannelFactoryInterface $logger_factory) {
-    $this->loggerFactory = $logger_factory;
+  public function __construct(MessengerInterface $messenger) {
+    $this->messenger = $messenger;
   }
 
   /**
@@ -35,7 +34,7 @@ class {{ class }} extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('logger.factory')
+      $container->get('messenger')
     );
   }
 
@@ -57,10 +56,12 @@ class {{ class }} extends FormBase {
       '#required' => TRUE,
     ];
 
-    $form['actions'] = ['#type' => 'actions'];
+    $form['actions'] = [
+      '#type' => 'actions',
+    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Save'),
+      '#value' => $this->t('Send'),
     ];
 
     return $form;
@@ -70,7 +71,7 @@ class {{ class }} extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if (Unicode::strlen($form_state->getValue('message')) < 10) {
+    if (mb_strlen($form_state->getValue('message')) < 10) {
       $form_state->setErrorByName('name', $this->t('Message should be at least 10 characters.'));
     }
   }
@@ -79,11 +80,8 @@ class {{ class }} extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->loggerFactory->get('{{ machine_name }}')->debug(
-      $form_state->getValue('message')
-    );
-    drupal_set_message($this->t('The message has been sent.'));
-    $form_state->setRedirect('system.admin');
+    $this->messenger->addStatus($this->t('The message has been sent.'));
+    $form_state->setRedirect('<front>');
   }
 
 }

@@ -2,9 +2,9 @@
 
 namespace Drupal\{{ machine_name }}\Form;
 
-use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -14,20 +14,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class {{ class }} extends ConfirmFormBase {
 
   /**
-   * The database connection.
+   * The messenger.
    *
-   * @var \Drupal\Core\Database\Connection
+   * @var \Drupal\Core\Messenger\MessengerInterface
    */
-  protected $connection;
+  protected $messenger;
 
   /**
-   * Constructs new {{ class }} object.
+   * Constructs a {{ class }} object.
    *
-   * @param \Drupal\Core\Database\Connection $connection
-   *   The database connection.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
    */
-  public function __construct(Connection $connection) {
-    $this->connection = $connection;
+  public function __construct(MessengerInterface $messenger) {
+    $this->messenger = $messenger;
   }
 
   /**
@@ -35,7 +35,7 @@ class {{ class }} extends ConfirmFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('database')
+      $container->get('messenger')
     );
   }
 
@@ -50,22 +50,22 @@ class {{ class }} extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return $this->t('Are you sure you want to delete all examples?');
+    return $this->t('Are you sure you want to do this?');
   }
 
   /**
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('system.admin');
+    return new Url('system.admin_config');
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->connection->delete('examples')->execute();
-    drupal_set_message($this->t('The examples have been deleted.'));
+    // @DCG Place your code here.
+    $this->messenger->addStatus($this->t('Done!'));
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
 

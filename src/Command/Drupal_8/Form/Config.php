@@ -20,8 +20,8 @@ class Config extends Base {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $options = [
       'default_class' => 'SettingsForm',
-      'default_form_id' => '{machine_name}_settings',
       'default_permission' => 'administer site configuration',
+      'default_path_prefix' => '/admin',
       'template' => 'd8/form/config.twig',
     ];
     $this->doInteract($input, $output, $options);

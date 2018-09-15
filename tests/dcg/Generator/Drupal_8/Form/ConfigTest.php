@@ -15,11 +15,10 @@ class ConfigTest extends GeneratorBaseTest {
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [SettingsForm]:' => 'SettingsForm',
-    'Form ID [foo_settings]:' => 'foo_settings',
     'Would you like to create a route for this form? [Yes]:' => 'Yes',
-    'Route name [foo.example]:' => 'foo.example',
-    'Route path [/foo/example]:' => '/foo/example',
-    'Route title [Example]:' => 'Yo',
+    'Route name [foo.settings]:' => 'foo.example',
+    'Route path [/admin/settings]:' => '/foo/example',
+    'Route title [Settings]:' => 'Yo',
     'Route permission [administer site configuration]:' => 'administer site configuration',
   ];
 
