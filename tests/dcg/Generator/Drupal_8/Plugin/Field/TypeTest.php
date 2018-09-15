@@ -16,6 +16,8 @@ class TypeTest extends GeneratorBaseTest {
     'Module machine name [example]:' => 'example',
     'Plugin label [Example]:' => 'Foo',
     'Plugin ID [example_foo]:' => 'foo',
+    'Make the field storage configurable? [No]:' => 'Yes',
+    'Make the field instance configurable? [No]:' => 'Yes',
   ];
 
   protected $fixtures = [

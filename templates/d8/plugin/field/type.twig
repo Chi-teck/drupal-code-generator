@@ -6,7 +6,9 @@ use Drupal\Component\Utility\Random;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
+{% if configurable_storage or configurable_instance %}
 use Drupal\Core\Form\FormStateInterface;
+{% endif %}
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
@@ -23,16 +25,17 @@ use Drupal\Core\TypedData\DataDefinition;
  * @DCG
  * If you are implementing a single value field type you may want to inherit
  * this class form some of the field type classes provided by Drupal core.
- * Check out /core/lib/Drupal/Core/Field/Plugin/Field/FieldType directory for
+ * Check out /core/lib/Drupal/Core/Field/Plugin/Field/FieldType directory for a
  * list of available field type implementations.
  */
 class {{ class }} extends FieldItemBase {
 
+{% if configurable_storage %}
   /**
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
-    $settings = ['foo' => 123];
+    $settings = ['foo' => 'bar'];
     return $settings + parent::defaultStorageSettings();
   }
 
@@ -40,23 +43,24 @@ class {{ class }} extends FieldItemBase {
    * {@inheritdoc}
    */
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
-    $settings = $this->getSettings();
 
     $element['foo'] = [
-      '#type' => 'number',
+      '#type' => 'textfield',
       '#title' => $this->t('Foo'),
-      '#default_value' => $settings['foo'],
+      '#default_value' => $this->getSetting('foo'),
       '#disabled' => $has_data,
     ];
 
     return $element;
   }
 
+{% endif %}
+{% if configurable_instance %}
   /**
    * {@inheritdoc}
    */
   public static function defaultFieldSettings() {
-    $settings = ['bar' => 'Bla bla bla'];
+    $settings = ['bar' => 'foo'];
     return $settings + parent::defaultFieldSettings();
   }
 
@@ -64,17 +68,17 @@ class {{ class }} extends FieldItemBase {
    * {@inheritdoc}
    */
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
-    $settings = $this->getSettings();
 
     $element['bar'] = [
       '#type' => 'textfield',
       '#title' => t('Bar'),
-      '#default_value' => $settings['bar'],
+      '#default_value' => $this->getSetting('bar'),
     ];
 
     return $element;
   }
 
+{% endif %}
   /**
    * {@inheritdoc}
    */
@@ -132,7 +136,7 @@ class {{ class }} extends FieldItemBase {
 
     $schema = [
       'columns' => $columns,
-      // @DCG Add indexes here if needed.
+      // @DCG Add indexes here if necessary.
     ];
 
     return $schema;

@@ -23,7 +23,7 @@ use Drupal\Core\TypedData\DataDefinition;
  * @DCG
  * If you are implementing a single value field type you may want to inherit
  * this class form some of the field type classes provided by Drupal core.
- * Check out /core/lib/Drupal/Core/Field/Plugin/Field/FieldType directory for
+ * Check out /core/lib/Drupal/Core/Field/Plugin/Field/FieldType directory for a
  * list of available field type implementations.
  */
 class FooItem extends FieldItemBase {
@@ -32,7 +32,7 @@ class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
-    $settings = ['foo' => 123];
+    $settings = ['foo' => 'bar'];
     return $settings + parent::defaultStorageSettings();
   }
 
@@ -40,12 +40,11 @@ class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
-    $settings = $this->getSettings();
 
     $element['foo'] = [
-      '#type' => 'number',
+      '#type' => 'textfield',
       '#title' => $this->t('Foo'),
-      '#default_value' => $settings['foo'],
+      '#default_value' => $this->getSetting('foo'),
       '#disabled' => $has_data,
     ];
 
@@ -56,7 +55,7 @@ class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultFieldSettings() {
-    $settings = ['bar' => 'Bla bla bla'];
+    $settings = ['bar' => 'foo'];
     return $settings + parent::defaultFieldSettings();
   }
 
@@ -64,12 +63,11 @@ class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
-    $settings = $this->getSettings();
 
     $element['bar'] = [
       '#type' => 'textfield',
       '#title' => t('Bar'),
-      '#default_value' => $settings['bar'],
+      '#default_value' => $this->getSetting('bar'),
     ];
 
     return $element;
@@ -132,7 +130,7 @@ class FooItem extends FieldItemBase {
 
     $schema = [
       'columns' => $columns,
-      // @DCG Add indexes here if needed.
+      // @DCG Add indexes here if necessary.
     ];
 
     return $schema;
