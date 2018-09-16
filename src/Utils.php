@@ -154,7 +154,7 @@ class Utils {
     $extension_root = FALSE;
     for ($i = 1; $i <= 5; $i++) {
       $info_file = $directory . '/' . basename($directory) . '.info';
-      if (file_exists($info_file) || file_exists($info_file . '.yml')) {
+      if ((file_exists($info_file) && basename($directory) !== 'drush') || file_exists($info_file . '.yml')) {
         $extension_root = $directory;
         break;
       }
