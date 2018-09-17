@@ -32,7 +32,7 @@ class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
-    $settings = ['foo' => 'bar'];
+    $settings = ['foo' => 'wine'];
     return $settings + parent::defaultStorageSettings();
   }
 
@@ -55,7 +55,7 @@ class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultFieldSettings() {
-    $settings = ['bar' => 'foo'];
+    $settings = ['bar' => 'beer'];
     return $settings + parent::defaultFieldSettings();
   }
 
