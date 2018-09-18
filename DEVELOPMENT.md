@@ -31,12 +31,12 @@ Then after you have logged out and in the _dcg_ development version will be acce
 
 ### Testing code generator
 ```
-/path/to/drupal-code-generator/scripts/run-dcg-tests.php
+/path/to/drupal-code-generator/scripts/run-dcg-tests.sh
 ```
 
 ### Testing generated code
 ```
-/path/to/drupal-code-generator/scripts/run-sut-tests.php
+/path/to/drupal-code-generator/scripts/run-sut-tests.sh
 ```
 
 ## Building PHAR executable
