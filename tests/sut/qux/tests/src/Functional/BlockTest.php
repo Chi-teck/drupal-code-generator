@@ -17,14 +17,9 @@ class BlockTest extends BrowserTestBase {
   public static $modules = ['qux', 'block'];
 
   /**
-   * {@inheritdoc}
-   */
-  protected $strictConfigSchema = FALSE;
-
-  /**
    * Test callback.
    */
-  public function testContentPage() {
+  public function testAction() {
     $admin_user = $this->drupalCreateUser(['administer blocks', 'administer themes']);
     $this->drupalLogin($admin_user);
     $this->drupalGet('admin/structure/block/library/classy');
