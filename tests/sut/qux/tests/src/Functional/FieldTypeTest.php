@@ -14,12 +14,12 @@ class FieldTypeTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['node', 'field_ui', 'qux'];
+  public static $modules = ['qux', 'node', 'field_ui'];
 
   /**
    * Test callback.
    */
-  public function testContentPage() {
+  public function testFieldType() {
 
     $this->drupalCreateContentType(['type' => 'test']);
 
@@ -37,19 +37,19 @@ class FieldTypeTest extends BrowserTestBase {
     $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
-      'new_storage_type' => 'example',
+      'new_storage_type' => 'qux_example',
     ];
     $this->drupalPostForm('admin/structure/types/manage/test/fields/add-field', $edit, 'Save and continue');
 
     // Update storage settings.
-    $this->xpath('//input[@name = "settings[foo]" and @value = "123"]');
+    $this->assertXpath('//input[@name = "settings[foo]" and @value = "wine"]');
     $edit = [
-      'settings[foo]' => 555,
+      'settings[foo]' => 'Hi!',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save field settings');
 
     // Update instance settings.
-    $this->xpath('//input[@name = "settings[bar]" and @value = "Bla bla bla"]');
+    $this->assertXpath('//input[@name = "settings[bar]" and @value = "beer"]');
     $edit = [
       'settings[bar]' => 'Yo!',
     ];
@@ -58,10 +58,11 @@ class FieldTypeTest extends BrowserTestBase {
     // Make sure field settings have been persisted correctly.
     $field_settings_url = 'admin/structure/types/manage/test/fields/node.test.field_foo';
     $this->drupalGet($field_settings_url);
-    $this->xpath('//input[@name = "settings[bar]" and @value = "Yo!"]');
+    $this->assertXpath('//input[@name = "settings[bar]" and @value = "Yo!"]');
     $this->drupalGet($field_settings_url . '/storage');
-    $this->xpath('//input[@name = "settings[foo]" and @value = "555"]');
+    $this->assertXpath('//input[@name = "settings[foo]" and @value = "Hi!"]');
 
+    // Check the field length constraint.
     $edit = [
       'title[0][value]' => 'Alpha',
       'field_foo[0][value]' => 'Hello word!',
@@ -69,12 +70,12 @@ class FieldTypeTest extends BrowserTestBase {
     $this->drupalPostForm('node/add/test', $edit, 'Save');
     $this->assertErrorMessage(t('This value is too long. It should have %limit characters or less.', ['%limit' => 10]));
 
-    // Remove exclamation sign to get in the limit.
+    // Remove the exclamation sign to get in the limit.
     $edit = [
       'field_foo[0][value]' => 'Hello word',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->xpath('//div[@class = "field__item" and text() = "Hello word"]');
+    $this->assertXpath('//div[@class = "field__item" and text() = "Hello word"]');
   }
 
 }

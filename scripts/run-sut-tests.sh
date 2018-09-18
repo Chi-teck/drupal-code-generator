@@ -22,14 +22,16 @@ DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
 DRUPAL_PORT=${DRUPAL_PORT:-8085}
 DEFAULT_DCG=$(realpath $(dirname $0)/../bin/dcg)
 DCG=${DCG:-$DEFAULT_DCG}
+WD_URL=${WD_URL:-http://localhost:4444/wd/hub}
 TARGET_TEST=${1:-all}
 
-echo --------------------------------------
+echo ---------------------------------------------
 echo ' DRUPAL PATH:   ' $DRUPAL_DIR
 echo ' DRUPAL VERSION:' $DRUPAL_VERSION
 echo ' SITE URL:      ' http://$DRUPAL_HOST:$DRUPAL_PORT
 echo ' DCG:           ' $DCG
-echo --------------------------------------
+echo ' WD_URL:        ' $WD_URL
+echo ---------------------------------------------
 
 # === Helper functions. === #
 
@@ -45,8 +47,10 @@ function dcg_phpunit {
   SYMFONY_DEPRECATIONS_HELPER=disabled \
   SIMPLETEST_BASE_URL=http://$DRUPAL_HOST:$DRUPAL_PORT \
   SIMPLETEST_DB=sqlite://tmp/test.sqlite \
+  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", null, "'$WD_URL'"]' \
   $DRUPAL_DIR/vendor/bin/phpunit \
-  -c $DRUPAL_DIR/core $@
+  -c $DRUPAL_DIR/core \
+  $@
 }
 
 function dcg_label {
@@ -145,9 +149,9 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:plugin:field:formatter -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
-  $DCG d8:plugin:field:type -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","configurable_storage":"Yes","configurable_instance":"Yes"}'
-  $DCG d8:plugin:field:widget -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
+  $DCG d8:plugin:field:formatter -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example","configurable":"Yes"}'
+  $DCG d8:plugin:field:type -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example","configurable_storage":"Yes","configurable_instance":"Yes"}'
+  $DCG d8:plugin:field:widget -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example","configurable":"Yes"}'
 
   $DCG d8:plugin:migrate:process -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_id":"example"}'
 
