@@ -1,0 +1,10 @@
+/**
+ * Implements hook_aggregator_parser_info_alter().
+ */
+function {{ machine_name }}_aggregator_parser_info_alter(array &$info) {
+  if (empty($info['foo_parser'])) {
+    return;
+  }
+
+  $info['foo_parser']['class'] = Drupal\foo\Plugin\aggregator\parser\FooDefaultParser::class;
+}

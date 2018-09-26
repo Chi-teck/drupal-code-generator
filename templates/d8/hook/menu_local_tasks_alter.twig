@@ -1,7 +1,7 @@
 /**
  * Implements hook_menu_local_tasks_alter().
  */
-function {{ machine_name }}_menu_local_tasks_alter(&$data, $route_name) {
+function {{ machine_name }}_menu_local_tasks_alter(&$data, $route_name, \Drupal\Core\Cache\RefinableCacheableDependencyInterface &$cacheability) {
 
   // Add a tab linking to node/add to all pages.
   $data['tabs'][0]['node.add_page'] = [
@@ -16,4 +16,6 @@ function {{ machine_name }}_menu_local_tasks_alter(&$data, $route_name) {
           ],
       ],
   ];
+  // The tab we're adding is dependent on a user's access to add content.
+  $cacheability->addCacheTags(['user.permissions']);
 }

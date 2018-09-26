@@ -1,7 +1,7 @@
 /**
  * Implements hook_user_cancel().
  */
-function {{ machine_name }}_user_cancel($edit, $account, $method) {
+function {{ machine_name }}_user_cancel($edit, UserInterface $account, $method) {
   switch ($method) {
     case 'user_cancel_block_unpublish':
       // Unpublish nodes (current revisions).
@@ -20,7 +20,7 @@ function {{ machine_name }}_user_cancel($edit, $account, $method) {
         ->execute();
       node_mass_update($nodes, ['uid' => 0], NULL, TRUE);
       // Anonymize old revisions.
-      db_update('node_field_revision')
+      \Drupal::database()->update('node_field_revision')
         ->fields(['uid' => 0])
         ->condition('uid', $account->id())
         ->execute();

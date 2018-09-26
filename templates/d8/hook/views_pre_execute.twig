@@ -9,6 +9,6 @@ function {{ machine_name }}_views_pre_execute(ViewExecutable $view) {
   $account = \Drupal::currentUser();
 
   if (count($view->query->tables) > 2 && $account->hasPermission('administer views')) {
-    drupal_set_message(t('The view %view may be heavy to execute.', ['%view' => $view->id()]), 'warning');
+    \Drupal::messenger()->addWarning(t('The view %view may be heavy to execute.', ['%view' => $view->id()]));
   }
 }

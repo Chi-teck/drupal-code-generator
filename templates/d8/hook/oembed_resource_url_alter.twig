@@ -1,0 +1,9 @@
+/**
+ * Implements hook_oembed_resource_url_alter().
+ */
+function {{ machine_name }}_oembed_resource_url_alter(array &$parsed_url, \Drupal\media\OEmbed\Provider $provider) {
+  // Always serve YouTube videos from youtube-nocookie.com.
+  if ($provider->getName() === 'YouTube') {
+    $parsed_url['path'] = str_replace('://youtube.com/', '://youtube-nocookie.com/', $parsed_url['path']);
+  }
+}

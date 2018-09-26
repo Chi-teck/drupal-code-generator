@@ -1,0 +1,8 @@
+/**
+ * Implements hook_entity_revision_create().
+ */
+function {{ machine_name }}_entity_revision_create(Drupal\Core\Entity\EntityInterface $new_revision, Drupal\Core\Entity\EntityInterface $entity, $keep_untranslatable_fields) {
+  // Retain the value from an untranslatable field, which are by default
+  // synchronized from the default revision.
+  $new_revision->set('untranslatable_field', $entity->get('untranslatable_field'));
+}

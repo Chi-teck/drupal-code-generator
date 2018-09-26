@@ -1,0 +1,11 @@
+/**
+ * Implements hook_field_widget_multivalue_form_alter().
+ */
+function {{ machine_name }}_field_widget_multivalue_form_alter(array &$elements, \Drupal\Core\Form\FormStateInterface $form_state, array $context) {
+  // Add a css class to widget form elements for all fields of type mytype.
+  $field_definition = $context['items']->getFieldDefinition();
+  if ($field_definition->getType() == 'mytype') {
+    // Be sure not to overwrite existing attributes.
+    $elements['#attributes']['class'][] = 'myclass';
+  }
+}

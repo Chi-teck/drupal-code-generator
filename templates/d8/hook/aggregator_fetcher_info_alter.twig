@@ -1,0 +1,10 @@
+/**
+ * Implements hook_aggregator_fetcher_info_alter().
+ */
+function {{ machine_name }}_aggregator_fetcher_info_alter(array &$info) {
+  if (empty($info['foo_fetcher'])) {
+    return;
+  }
+
+  $info['foo_fetcher']['class'] = Drupal\foo\Plugin\aggregator\fetcher\FooDefaultFetcher::class;
+}

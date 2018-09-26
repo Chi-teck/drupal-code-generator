@@ -3,7 +3,7 @@
  */
 function {{ machine_name }}_block_build_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
   // Add the 'user' cache context to some blocks.
-  if ($some_condition) {
+  if ($block->label() === 'some condition') {
     $build['#cache']['contexts'][] = 'user';
   }
 }

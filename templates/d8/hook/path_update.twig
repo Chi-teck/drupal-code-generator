@@ -3,7 +3,7 @@
  */
 function {{ machine_name }}_path_update($path) {
   if ($path['alias'] != $path['original']['alias']) {
-    db_update('mytable')
+    \Drupal::database()->update('mytable')
       ->fields(['alias' => $path['alias']])
       ->condition('pid', $path['pid'])
       ->execute();

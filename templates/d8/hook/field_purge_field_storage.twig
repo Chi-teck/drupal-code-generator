@@ -2,7 +2,7 @@
  * Implements hook_field_purge_field_storage().
  */
 function {{ machine_name }}_field_purge_field_storage(\Drupal\field\Entity\FieldStorageConfig $field_storage) {
-  db_delete('my_module_field_storage_info')
+  \Drupal::database()->delete('my_module_field_storage_info')
     ->condition('uuid', $field_storage->uuid())
     ->execute();
 }

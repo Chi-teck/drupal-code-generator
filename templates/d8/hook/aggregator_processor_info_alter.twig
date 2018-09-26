@@ -1,0 +1,10 @@
+/**
+ * Implements hook_aggregator_processor_info_alter().
+ */
+function {{ machine_name }}_aggregator_processor_info_alter(array &$info) {
+  if (empty($info['foo_processor'])) {
+    return;
+  }
+
+  $info['foo_processor']['class'] = Drupal\foo\Plugin\aggregator\processor\FooDefaultProcessor::class;
+}

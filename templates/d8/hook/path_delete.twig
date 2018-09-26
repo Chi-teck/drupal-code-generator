@@ -2,7 +2,7 @@
  * Implements hook_path_delete().
  */
 function {{ machine_name }}_path_delete($path) {
-  db_delete('mytable')
+  \Drupal::database()->delete('mytable')
     ->condition('pid', $path['pid'])
     ->execute();
 }

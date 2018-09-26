@@ -2,11 +2,12 @@
  * Implements hook_ENTITY_TYPE_predelete().
  */
 function {{ machine_name }}_ENTITY_TYPE_predelete(Drupal\Core\Entity\EntityInterface $entity) {
+  $connection = \Drupal::database();
   // Count references to this entity in a custom table before they are removed
   // upon entity deletion.
   $id = $entity->id();
   $type = $entity->getEntityTypeId();
-  $count = db_select('example_entity_data')
+  $count = \Drupal::database()->select('example_entity_data')
     ->condition('type', $type)
     ->condition('id', $id)
     ->countQuery()
@@ -14,7 +15,7 @@ function {{ machine_name }}_ENTITY_TYPE_predelete(Drupal\Core\Entity\EntityInter
     ->fetchField();
 
   // Log the count in a table that records this statistic for deleted entities.
-  db_merge('example_deleted_entity_statistics')
+  $connection->merge('example_deleted_entity_statistics')
     ->key(['type' => $type, 'id' => $id])
     ->fields(['count' => $count])
     ->execute();
