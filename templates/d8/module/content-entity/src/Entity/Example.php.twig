@@ -153,7 +153,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
    * {@inheritdoc}
    */
   public function setStatus($status) {
-    $this->set('promote', $status);
+    $this->set('status', $status);
     return $this;
   }
 
