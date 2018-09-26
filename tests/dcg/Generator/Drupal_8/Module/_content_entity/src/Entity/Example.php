@@ -98,7 +98,7 @@ class Example extends RevisionableContentEntityBase implements ExampleInterface 
    * {@inheritdoc}
    */
   public function setStatus($status) {
-    $this->set('promote', $status);
+    $this->set('status', $status);
     return $this;
   }
 
