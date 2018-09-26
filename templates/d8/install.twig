@@ -9,14 +9,14 @@
  * Implements hook_install().
  */
 function {{ machine_name }}_install() {
-  // @DCG Place your code here.
+  \Drupal::messenger()->addStatus(__FUNCTION__);
 }
 
 /**
  * Implements hook_uninstall().
  */
 function {{ machine_name }}_uninstall() {
-  // @DCG Place your code here.
+  \Drupal::messenger()->addStatus(__FUNCTION__);
 }
 
 /**
