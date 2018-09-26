@@ -9,14 +9,14 @@
  * Implements hook_install().
  */
 function foo_install() {
-  drupal_set_message(__FUNCTION__);
+  // @DCG Place your code here.
 }
 
 /**
  * Implements hook_uninstall().
  */
 function foo_uninstall() {
-  drupal_set_message(__FUNCTION__);
+  // @DCG Place your code here.
 }
 
 /**
