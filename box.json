@@ -19,6 +19,10 @@
         "Tests",
         "test"
       ]
+    },
+    {
+      "name": "*",
+      "in": "resources"
     }
   ],
   "git-version": "git-version",
