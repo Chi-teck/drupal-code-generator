@@ -159,6 +159,7 @@ class GeneratorTester {
     $expected_display .= str_repeat('–', strlen($title) + 2) . "\n";
 
     foreach ($this->interaction as $question => $answer) {
+      $question = preg_replace('/^<\d*> /', '', $question);
       $expected_display .= "\n";
       $expected_display .= " $question\n";
       $expected_display .= " ➤ \n";

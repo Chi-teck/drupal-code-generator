@@ -106,7 +106,7 @@ class Standard extends BaseGenerator {
 
       $controller_vars = [
         'class' => $controller_class,
-        'di' => TRUE,
+        'services' => [],
       ];
 
       $this->addFile()

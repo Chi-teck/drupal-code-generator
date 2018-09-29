@@ -162,7 +162,7 @@ foreach ($raw_definitions as $service_id => $raw_definition) {
       throw new UnexpectedValueException("No type declared for service $service_id.");
     }
     $definitions[$service_id] = [
-      'type' => '\\' . $type,
+      'type' => $type,
       'name' => str_replace('.', '_', $service_id),
       'description' => "The $service_id service.",
     ];
@@ -250,7 +250,7 @@ function process_class(array &$raw_definitions, $service_id, $class, array $depe
     if (!isset($annotations[1][$position])) {
       continue;
     }
-    $annotated_type = $annotations[1][$position];
+    $annotated_type = ltrim($annotations[1][$position], '\\');
     // Normalize array type.
     if ($annotated_type == 'array' || preg_match('/.+\[\]$/', $annotated_type)) {
       $annotated_type = '\\array';
@@ -258,7 +258,7 @@ function process_class(array &$raw_definitions, $service_id, $class, array $depe
     $annotated_name = $annotations[2][$position];
     $annotated_description = $annotations[3][$position];
     $type = $parameter->getType();
-    $real_type = $type ? '\\' . $type->getName() : '';
+    $real_type = $type ? $type->getName() : '';
     $real_name = $parameter->getName();
 
     // Do some basic validation.

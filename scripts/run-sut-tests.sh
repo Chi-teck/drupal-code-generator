@@ -121,7 +121,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
   $DCG d8:composer -d $MODULE_DIR -a '{"machine_name":"bar","description":"Bar project.","type":"drupal-module","drupal_org":"Yes"}'
-  $DCG d8:controller -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar","class":"BarController","di":"Yes","route":true,"route_name":"bar.example","route_path":"/bar/example","route_title":"Example","route_permission":"access content"}'
+  $DCG d8:controller -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar","class":"BarController","di":"No","route":true,"route_name":"bar.example","route_path":"/bar/example","route_title":"Example","route_permission":"access content"}'
   $DCG d8:install -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar"}'
   $DCG d8:javascript -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar"}'
   $DCG d8:module-file -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar"}'

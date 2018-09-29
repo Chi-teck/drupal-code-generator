@@ -9,6 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Base class for all generators.
@@ -277,11 +278,33 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @return array
    *   Template variables.
    *
-   * @see \DrupalCodeGenerator\InputHandler
+   * @see \DrupalCodeGenerator\InputHandler::collectVars()
    */
   protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) {
     $this->vars += $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions, $vars);
     return $this->vars;
+  }
+
+  /**
+   * Asks the user a single question and returns the answer.
+   *
+   * @param \Symfony\Component\Console\Input\InputInterface $input
+   *   Input instance.
+   * @param \Symfony\Component\Console\Output\OutputInterface $output
+   *   Output instance.
+   * @param \Symfony\Component\Console\Question\Question $question
+   *   A question to ask.
+   * @param array $vars
+   *   Array of predefined template variables.
+   *
+   * @return string
+   *   The answer.
+   *
+   * @see \DrupalCodeGenerator\InputHandler::collectVars()
+   */
+  protected function ask(InputInterface $input, OutputInterface $output, Question $question, array $vars = []) {
+    $answers = $this->getHelper('dcg_input_handler')->collectVars($input, $output, ['key' => $question], $vars);
+    return $answers['key'];
   }
 
   /**
@@ -368,6 +391,65 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       ->path($path)
       ->template($template)
       ->vars($vars);
+  }
+
+  /**
+   * Collects services.
+   *
+   * @param \Symfony\Component\Console\Input\InputInterface $input
+   *   Input instance.
+   * @param \Symfony\Component\Console\Output\OutputInterface $output
+   *   Output instance.
+   *
+   * @return array
+   *   List of collected services.
+   */
+  protected function collectServices(InputInterface $input, OutputInterface $output) {
+
+    $service_definitions = self::getServiceDefinitions();
+    $service_ids = array_keys($service_definitions);
+
+    $services = [];
+    while (TRUE) {
+      $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
+      // @todo Add service name validator.
+      $question->setAutocompleterValues($service_ids);
+      $service = $this->ask($input, $output, $question);
+      if (!$service) {
+        break;
+      }
+      $services[] = $service;
+    }
+
+    $this->vars['services'] = [];
+    foreach (array_unique($services) as $service_id) {
+      if (isset($service_definitions[$service_id])) {
+        $definition = $service_definitions[$service_id];
+      }
+      else {
+        // Build the definition if the service is unknown.
+        $definition = [
+          'type' => 'Drupal\example\ExampleInterface',
+          'name' => str_replace('.', '_', $service_id),
+          'description' => "The $service_id service.",
+        ];
+      }
+      $type_parts = explode('\\', $definition['type']);
+      $definition['short_type'] = end($type_parts);
+      $this->vars['services'][$service_id] = $definition;
+    }
+    return $this->vars['services'];
+  }
+
+  /**
+   * Gets service definitions.
+   *
+   * @return array
+   *   List of service definitions keyed by service ID.
+   */
+  protected static function getServiceDefinitions() {
+    $data_encoded = file_get_contents(ApplicationFactory::getRoot() . '/resources/service-definitions.json');
+    return json_decode($data_encoded, TRUE);
   }
 
 }

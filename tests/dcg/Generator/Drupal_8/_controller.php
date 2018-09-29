@@ -3,7 +3,7 @@
 namespace Drupal\foo\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\example\ExampleInterface;
+use Drupal\Core\Database\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -12,20 +12,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class FooController extends ControllerBase {
 
   /**
-   * The example service.
+   * The database connection.
    *
-   * @var \Drupal\example\ExampleInterface
+   * @var \Drupal\Core\Database\Connection
    */
-  protected $example;
+  protected $connection;
 
   /**
-   * Constructs the controller object.
+   * The controller constructor.
    *
-   * @param \Drupal\example\ExampleInterface $example
-   *   The example service.
+   * @param \Drupal\Core\Database\Connection $connection
+   *   The database connection.
    */
-  public function __construct(ExampleInterface $example) {
-    $this->example = $example;
+  public function __construct(Connection $connection) {
+    $this->connection = $connection;
   }
 
   /**
@@ -33,7 +33,7 @@ class FooController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('example')
+      $container->get('database')
     );
   }
 

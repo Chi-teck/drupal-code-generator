@@ -1,0 +1,37 @@
+{% macro use(services) %}
+  {%- for service in services %}
+use {{ service.type }};
+  {%- endfor %}
+{% endmacro %}
+
+{% macro properties(services) %}
+  {%- for service in services %}
+  /**
+   * {{ service.description }}
+   *
+   * @var \{{ service.type }}
+   */
+  protected ${{ service.name|camelize(false) }};{{ loop.last ? '' : "\n\n" }}{% endfor %}
+{% endmacro %}
+
+{% macro annotation(services) %}
+  {%- for service in services %}
+   * @param \{{ service.type }} ${{ service.name }}
+   *   {{ service.description }}{{ loop.last ? '' : "\n" }}{% endfor %}
+{% endmacro %}
+
+{% macro signature(services) %}
+  {%- for service in services %}
+{{ service.short_type }} ${{ service.name }}{{ loop.last ? '' : ", " }}{% endfor %}
+{% endmacro %}
+
+{% macro assignment(services) %}
+  {%- for service in services %}
+    $this->{{ service.name|camelize(false) }} = ${{ service.name }};{{ loop.last ? '' : "\n" }}{% endfor %}
+{% endmacro %}
+
+{% macro container(services) %}
+  {%- for service_id, service in services %}
+      $container->get('{{ service_id }}'){{ loop.last ? '' : ",\n" }}{% endfor %}
+{% endmacro %}
+
