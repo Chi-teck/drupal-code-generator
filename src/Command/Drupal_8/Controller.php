@@ -24,7 +24,7 @@ class Controller extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $default_class = function ($vars) {
-      return Utils::camelize($vars['name'] . 'Controller');
+      return Utils::camelize($vars['name']) . 'Controller';
     };
     $questions['class'] = new Question('Class', $default_class);
     $questions['di'] = new ConfirmationQuestion('Inject dependencies?', FALSE);

@@ -26,7 +26,7 @@ class CacheContext extends BaseGenerator {
     $questions = Utils::defaultQuestions();
     $questions['context_id'] = new Question('Context ID', 'example');
     $default_class = function ($vars) {
-      return Utils::camelize($vars['context_id'] . 'CacheContext');
+      return Utils::camelize($vars['context_id']) . 'CacheContext';
     };
     $questions['class'] = new Question('Class', $default_class);
     $base_class_choices = [

@@ -30,7 +30,7 @@ class AccessChecker extends BaseGenerator {
       return $value;
     });
     $default_class = function ($vars) {
-      return Utils::camelize($vars['applies_to'] . 'AccessChecker');
+      return Utils::camelize($vars['applies_to']) . 'AccessChecker';
     };
     $questions['class'] = new Question('Class', $default_class);
 

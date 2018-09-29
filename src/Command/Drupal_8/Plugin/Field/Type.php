@@ -23,7 +23,7 @@ class Type extends BaseGenerator {
     $questions = Utils::defaultPluginQuestions();
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Item');
+    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Item';
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldType/{class}.php')

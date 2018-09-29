@@ -23,7 +23,7 @@ class Formatter extends BaseGenerator {
     $questions = Utils::defaultPluginQuestions();
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Formatter');
+    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Formatter';
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldFormatter/{class}.php')

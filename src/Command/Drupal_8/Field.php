@@ -185,9 +185,9 @@ class Field extends BaseGenerator {
       $subfield_questions['type_' . $i] = new ChoiceQuestion("Type of sub-field #$i", $type_choices, 'Text');
       $this->collectVars($input, $output, $subfield_questions);
 
-      $vars['type_class'] = Utils::camelize($vars['field_label'] . 'Item');
-      $vars['widget_class'] = Utils::camelize($vars['field_label'] . 'Widget');
-      $vars['formatter_class'] = Utils::camelize($vars['field_label'] . 'DefaultFormatter');
+      $vars['type_class'] = Utils::camelize($vars['field_label']) . 'Item';
+      $vars['widget_class'] = Utils::camelize($vars['field_label']) . 'Widget';
+      $vars['formatter_class'] = Utils::camelize($vars['field_label']) . 'DefaultFormatter';
 
       // Reset previous questions since we already collected their answers.
       $subfield_questions = [];
@@ -306,14 +306,14 @@ class Field extends BaseGenerator {
       ->template('d8/_field/widget-css.twig');
 
     if ($vars['table_formatter']) {
-      $vars['table_formatter_class'] = Utils::camelize($vars['field_label'] . 'TableFormatter');
+      $vars['table_formatter_class'] = Utils::camelize($vars['field_label']) . 'TableFormatter';
       $this->addFile()
         ->path('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php')
         ->template('d8/_field/table-formatter.twig');
     }
 
     if ($vars['key_value_formatter']) {
-      $vars['key_value_formatter_class'] = Utils::camelize($vars['field_label'] . 'KeyValueFormatter');
+      $vars['key_value_formatter_class'] = Utils::camelize($vars['field_label']) . 'KeyValueFormatter';
       $this->addFile()
         ->path('src/Plugin/Field/FieldFormatter/{key_value_formatter_class}.php')
         ->template('d8/_field/key-value-formatter.twig');

@@ -23,7 +23,7 @@ class Widget extends BaseGenerator {
     $questions = Utils::defaultPluginQuestions();
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Widget');
+    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Widget';
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldWidget/{class}.php')

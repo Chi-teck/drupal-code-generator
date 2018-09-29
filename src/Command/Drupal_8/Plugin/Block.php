@@ -31,7 +31,7 @@ class Block extends BaseGenerator {
     $questions['access'] = new ConfirmationQuestion('Create access callback?', FALSE);
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Block');
+    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Block';
 
     $this->addFile()
       ->path('src/Plugin/Block/{class}.php')
