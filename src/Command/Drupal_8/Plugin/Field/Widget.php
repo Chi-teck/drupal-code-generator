@@ -25,7 +25,7 @@ class Widget extends BaseGenerator {
     $questions['configurable'] = new ConfirmationQuestion('Make the widget configurable?', FALSE);
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Widget');
+    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Widget';
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldWidget/{class}.php')

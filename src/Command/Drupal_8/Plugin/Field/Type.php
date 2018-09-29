@@ -27,7 +27,7 @@ class Type extends BaseGenerator {
     $questions['configurable_instance'] = new ConfirmationQuestion('Make the field instance configurable?', FALSE);
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label'] . 'Item');
+    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Item';
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldType/{class}.php')

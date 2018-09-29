@@ -27,7 +27,7 @@ class {{ class }} extends BaseGenerator {
     // Ask the user some questions.
     $questions = Utils::defaultQuestions();
     $default_class = function ($vars) {
-      return Utils::camelize($vars['name'] . 'Example');
+      return Utils::camelize($vars['name']) . 'Example';
     };
     $questions['class'] = new Question('Class', $default_class);
 

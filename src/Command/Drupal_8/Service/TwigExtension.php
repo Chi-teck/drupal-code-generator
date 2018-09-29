@@ -24,7 +24,7 @@ class TwigExtension extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $default_class = function ($vars) {
-      return Utils::camelize($vars['name'] . 'TwigExtension');
+      return Utils::camelize($vars['name']) . 'TwigExtension';
     };
     $questions['class'] = new Question('Class', $default_class);
     $questions['di'] = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);

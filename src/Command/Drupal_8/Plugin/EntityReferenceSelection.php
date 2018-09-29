@@ -46,7 +46,7 @@ class EntityReferenceSelection extends BaseGenerator {
     $questions['configurable'] = new ConfirmationQuestion('Provide additional plugin configuration?', FALSE);
 
     $default_class = function ($vars) {
-      return Utils::camelize($vars['machine_name'] . '_' . $vars['entity_type'] . 'Selection');
+      return Utils::camelize($vars['machine_name'] . '_' . $vars['entity_type']) . 'Selection';
     };
     $questions['class'] = new Question('Class', $default_class);
 

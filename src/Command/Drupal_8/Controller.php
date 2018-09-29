@@ -25,7 +25,7 @@ class Controller extends BaseGenerator {
     $questions = Utils::defaultQuestions();
 
     $default_class = function ($vars) {
-      return Utils::camelize($vars['name'] . 'Controller');
+      return Utils::camelize($vars['name']) . 'Controller';
     };
     $questions['class'] = new Question('Class', $default_class);
 

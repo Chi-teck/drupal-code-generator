@@ -24,12 +24,12 @@ class ParamConverter extends BaseGenerator {
     $questions = Utils::defaultQuestions();
     $questions['parameter_type'] = new Question('Parameter type', 'example');
     $default_class = function ($vars) {
-      return Utils::camelize($vars['parameter_type'] . 'ParamConverter');
+      return Utils::camelize($vars['parameter_type']) . 'ParamConverter';
     };
     $questions['class'] = new Question('Class', $default_class);
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['controller_class'] = Utils::camelize($vars['machine_name'] . 'Controller');
+    $vars['controller_class'] = Utils::camelize($vars['machine_name']) . 'Controller';
 
     $this->addFile()
       ->path('src/{class}.php')
