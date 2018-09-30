@@ -27,10 +27,17 @@ class Block extends BaseGenerator {
     $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
     $questions['category'] = new Question('Block category', 'Custom');
     $questions['configurable'] = new ConfirmationQuestion('Make the block configurable?', FALSE);
-    $questions['di'] = new ConfirmationQuestion('Inject dependencies?', FALSE);
-    $questions['access'] = new ConfirmationQuestion('Create access callback?', FALSE);
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
+
+    $di_question = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
+    if ($this->ask($input, $output, $di_question)) {
+      $this->collectServices($input, $output);
+    }
+
+    $access_question = new ConfirmationQuestion('Create access callback?', FALSE);
+    $vars = &$this->collectVars($input, $output, ['access' => $access_question]);
+
     $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Block';
 
     $this->addFile()

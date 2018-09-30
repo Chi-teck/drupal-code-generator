@@ -3,15 +3,15 @@
 namespace Drupal\foo\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\CronInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\example\ExampleInterface;
+use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a 'Example' block.
+ * Provides an example block.
  *
  * @Block(
  *   id = "foo_example",
@@ -22,11 +22,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The example service.
+   * The cron service.
    *
-   * @var \Drupal\example\ExampleInterface
+   * @var \Drupal\Core\CronInterface
    */
-  protected $example;
+  protected $cron;
 
   /**
    * Constructs a new ExampleBlock instance.
@@ -40,12 +40,12 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\example\ExampleInterface $example
-   *   The example service.
+   * @param \Drupal\Core\CronInterface $cron
+   *   The cron service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExampleInterface $example) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CronInterface $cron) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->example = $example;
+    $this->cron = $cron;
   }
 
   /**
@@ -56,7 +56,7 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('example')
+      $container->get('cron')
     );
   }
 

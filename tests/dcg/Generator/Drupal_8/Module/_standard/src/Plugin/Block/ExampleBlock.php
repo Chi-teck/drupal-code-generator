@@ -5,7 +5,7 @@ namespace Drupal\foo\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 
 /**
- * Provides a 'Example' block.
+ * Provides an example block.
  *
  * @Block(
  *   id = "foo_example",

@@ -1,23 +1,26 @@
+{% import 'lib/di.twig' as di %}
 <?php
 
 namespace Drupal\{{ machine_name }}\Plugin\Block;
 
-{% if access %}
+{% sort %}
+  {% if access %}
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
-{% endif %}
+  {% endif %}
 use Drupal\Core\Block\BlockBase;
-{% if configurable %}
+  {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
-{% endif %}
-{% if di %}
+  {% endif %}
+  {% if services %}
+{{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\example\ExampleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-{% endif %}
+  {% endif %}
+{% endsort %}
 
 /**
- * Provides a '{{ plugin_label }}' block.
+ * Provides {{ plugin_label|article|lower }} block.
  *
  * @Block(
  *   id = "{{ plugin_id }}",
@@ -25,15 +28,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   category = @Translation("{{ category }}")
  * )
  */
-class {{ class }} extends BlockBase {% if di %}implements ContainerFactoryPluginInterface {% endif %}{
+class {{ class }} extends BlockBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
 
-{% if di %}
-  /**
-   * The example service.
-   *
-   * @var \Drupal\example\ExampleInterface
-   */
-  protected $example;
+{% if services %}
+{{ di.properties(services) }}
 
   /**
    * Constructs a new {{ class }} instance.
@@ -47,12 +45,11 @@ class {{ class }} extends BlockBase {% if di %}implements ContainerFactoryPlugin
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\example\ExampleInterface $example
-   *   The example service.
+{{ di.annotation(services) }}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExampleInterface $example) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, {{ di.signature(services) }}) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->example = $example;
+{{ di.assignment(services) }}
   }
 
   /**
@@ -63,7 +60,7 @@ class {{ class }} extends BlockBase {% if di %}implements ContainerFactoryPlugin
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('example')
+{{ di.container(services) }}
     );
   }
 

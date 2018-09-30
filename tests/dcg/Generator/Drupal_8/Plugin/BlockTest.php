@@ -18,7 +18,9 @@ class BlockTest extends GeneratorBaseTest {
     'Plugin ID [foo_example]:' => 'foo_example',
     'Block category [Custom]:' => 'Custom',
     'Make the block configurable? [No]:' => 'Yes',
-    'Inject dependencies? [No]:' => 'Yes',
+    'Would you like to inject dependencies? [No]:' => 'Yes',
+    '<1> Type the service name or use arrows up/down. Press enter to continue:' => 'cron',
+    '<2> Type the service name or use arrows up/down. Press enter to continue:' => '',
     'Create access callback? [No]:' => 'Yes',
   ];
 
