@@ -2,7 +2,9 @@
 
 namespace Drupal\foo;
 
-use Drupal\example\ExampleInterface;
+use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
+use Drupal\Core\CronInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Example service.
@@ -10,24 +12,44 @@ use Drupal\example\ExampleInterface;
 class Example {
 
   /**
-   * The example service.
+   * The entity type manager.
    *
-   * @var \Drupal\example\ExampleInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $example;
+  protected $entityTypeManager;
+
+  /**
+   * The cron service.
+   *
+   * @var \Drupal\Core\CronInterface
+   */
+  protected $cron;
+
+  /**
+   * The cache tags invalidator.
+   *
+   * @var \Drupal\Core\Cache\CacheTagsInvalidatorInterface
+   */
+  protected $cacheTagsInvalidator;
 
   /**
    * Constructs an example object.
    *
-   * @param \Drupal\example\ExampleInterface $example
-   *   The example service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   * @param \Drupal\Core\CronInterface $cron
+   *   The cron service.
+   * @param \Drupal\Core\Cache\CacheTagsInvalidatorInterface $cache_tags_invalidator
+   *   The cache tags invalidator.
    */
-  public function __construct(ExampleInterface $example) {
-    $this->example = $example;
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, CronInterface $cron, CacheTagsInvalidatorInterface $cache_tags_invalidator) {
+    $this->entityTypeManager = $entity_type_manager;
+    $this->cron = $cron;
+    $this->cacheTagsInvalidator = $cache_tags_invalidator;
   }
 
   /**
-   * Does something.
+   * Method description.
    */
   public function doSomething() {
     // @DCG place your code here.

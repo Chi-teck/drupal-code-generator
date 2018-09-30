@@ -38,9 +38,13 @@ class Custom extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
     $questions['class']->setValidator([Utils::class, 'validateClassName']);
-    $questions['di'] = new ConfirmationQuestion('Inject dependencies?', FALSE);
 
     $this->collectVars($input, $output, $questions);
+
+    $di_question = new ConfirmationQuestion('Would you like to inject dependencies?');
+    if ($this->ask($input, $output, $di_question)) {
+      $this->collectServices($input, $output);
+    }
 
     $this->addFile()
       ->path('src/{class}.php')

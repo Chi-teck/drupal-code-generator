@@ -1,6 +1,7 @@
+{% import 'lib/di.twig' as di %}
 services:
   {{ service_name }}:
     class: Drupal\{{ machine_name }}\{{ class }}
-{% if di %}
-    arguments: ['@example']
+{% if services %}
+    arguments: [{{ di.arguments(services) }}]
 {% endif %}

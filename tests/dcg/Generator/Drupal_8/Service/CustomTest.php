@@ -16,7 +16,11 @@ class CustomTest extends GeneratorBaseTest {
     'Module machine name [foo]:' => 'foo',
     'Service name [foo.example]:' => 'foo.example',
     'Class [Example]:' => 'Example',
-    'Inject dependencies? [No]:' => 'Yes',
+    'Would you like to inject dependencies? [Yes]:' => 'Yes',
+    '<1> Type the service name or use arrows up/down. Press enter to continue:' => 'entity_type.manager',
+    '<2> Type the service name or use arrows up/down. Press enter to continue:' => 'cron',
+    '<3> Type the service name or use arrows up/down. Press enter to continue:' => 'cache_tags.invalidator',
+    '<4> Type the service name or use arrows up/down. Press enter to continue:' => "\n",
   ];
 
   protected $fixtures = [
