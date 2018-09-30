@@ -3,14 +3,14 @@
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
 {% sort %}
-  {%- if datetime %}
+  {% if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
-  {%- endif %}
+  {% endif %}
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-  {%- if list %}
+  {% if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
-  {%- endif %}
+  {% endif %}
 {% endsort %}
 
 /**
@@ -45,20 +45,20 @@ class {{ table_formatter_class }} extends FormatterBase {
       $row[]['#markup'] = $delta + 1;
 
 {% for subfield in subfields %}
-  {%- if subfield.type == 'boolean' %}
+  {% if subfield.type == 'boolean' %}
       $row[]['#markup'] = $item->{{ subfield.machine_name }} ? $this->t('Yes') : $this->t('No');
 
-  {%- elseif subfield.type == 'datetime' %}
+  {% elseif subfield.type == 'datetime' %}
       if ($item->{{ subfield.machine_name }}) {
         $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
         $date_formatter = \Drupal::service('date.formatter');
         $timestamp = $date->getTimestamp();
-    {%- if subfield.list %}
+    {% if subfield.list %}
         $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
         $formatted_date = $allowed_values[$item->{{ subfield.machine_name }}];
-    {%- else %}
+    {% else %}
         $formatted_date = $date_formatter->format($timestamp, 'long');
-    {%- endif %}
+    {% endif %}
         $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
         $row[] = [
           '#theme' => 'time',
@@ -78,8 +78,8 @@ class {{ table_formatter_class }} extends FormatterBase {
         $row[]['#markup'] = '';
       }
 
-  {%- else %}
-    {%- if subfield.list %}
+  {% else %}
+    {% if subfield.list %}
       if ($item->{{ subfield.machine_name }}) {
         $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
         $row[]['#markup'] = $allowed_values[$item->{{ subfield.machine_name }}];
@@ -87,11 +87,11 @@ class {{ table_formatter_class }} extends FormatterBase {
       else {
         $row[]['#markup'] = '';
       }
-    {%- else %}
+    {% else %}
       $row[]['#markup'] = $item->{{ subfield.machine_name }};
-    {%- endif %}
+    {% endif %}
 
-  {%- endif %}
+  {% endif %}
 {% endfor %}
       $table[$delta] = $row;
     }

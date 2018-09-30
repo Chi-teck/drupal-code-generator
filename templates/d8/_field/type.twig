@@ -85,14 +85,14 @@ class {{ type_class }} extends FieldItemBase {
    */
   public function isEmpty() {
 {% for subfield in subfields %}
-  {%- set condition %}
-    {%- if subfield.type == 'boolean' %}$this->{{ subfield.machine_name }} == 1{% else %}$this->{{ subfield.machine_name }} !== NULL{% endif %}
-  {%- endset %}
-  {%- if loop.index == 1 %}
+  {% set condition %}
+    {% if subfield.type == 'boolean' %}$this->{{ subfield.machine_name }} == 1{% else %}$this->{{ subfield.machine_name }} !== NULL{% endif %}
+  {% endset %}
+  {% if loop.index == 1 %}
     if ({{ condition }}) {
-  {%- else %}
+  {% else %}
     elseif ({{ condition }}) {
-  {%- endif %}
+  {% endif %}
       return FALSE;
     }
 {% endfor %}
@@ -119,26 +119,26 @@ class {{ type_class }} extends FieldItemBase {
     $constraints = parent::getConstraints();
 
 {% for subfield in subfields %}
-  {%- if subfield.list %}
+  {% if subfield.list %}
     $options['{{ subfield.machine_name }}']['AllowedValues'] = array_keys({{ type_class }}::{{ subfield.allowed_values_method }}());
 
-  {%- endif %}
-  {%- if subfield.required %}
-    {%- if subfield.type == 'boolean' %}
+  {% endif %}
+  {% if subfield.required %}
+    {% if subfield.type == 'boolean' %}
     // NotBlank validator is not suitable for booleans because it does not
     // recognize '0' as an empty value.
     $options['{{ subfield.machine_name }}']['AllowedValues']['choices'] = [1];
     $options['{{ subfield.machine_name }}']['AllowedValues']['message'] = $this->t('This value should not be blank.');
 
-    {%- else %}
+    {% else %}
     $options['{{ subfield.machine_name }}']['NotBlank'] = [];
 
-      {%- if subfield.type == 'email' %}
+      {% if subfield.type == 'email' %}
     $options['{{ subfield.machine_name }}']['Length']['max'] = Email::EMAIL_MAX_LENGTH;
 
-      {%- endif %}
-    {%- endif %}
-  {%- endif %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
 {% endfor %}
 {% if list or required %}
     $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
@@ -156,38 +156,38 @@ class {{ type_class }} extends FieldItemBase {
     $columns = [
 {% for subfield in subfields %}
       '{{ subfield.machine_name }}' => [
-  {%- if subfield.type == 'boolean' %}
+  {% if subfield.type == 'boolean' %}
         'type' => 'int',
         'size' => 'tiny',
-  {%- elseif subfield.type == 'string' %}
+  {% elseif subfield.type == 'string' %}
         'type' => 'varchar',
         'length' => 255,
-  {%- elseif subfield.type == 'text' %}
+  {% elseif subfield.type == 'text' %}
         'type' => 'text',
         'size' => 'big',
-  {%- elseif subfield.type == 'integer' %}
+  {% elseif subfield.type == 'integer' %}
         'type' => 'int',
         'size' => 'normal',
-  {%- elseif subfield.type == 'float' %}
+  {% elseif subfield.type == 'float' %}
         'type' => 'float',
         'size' => 'normal',
-  {%- elseif subfield.type == 'numeric' %}
+  {% elseif subfield.type == 'numeric' %}
         'type' => 'numeric',
         'precision' => 10,
         'scale' => 2,
-  {%- elseif subfield.type == 'email' %}
+  {% elseif subfield.type == 'email' %}
         'type' => 'varchar',
         'length' => Email::EMAIL_MAX_LENGTH,
-  {%- elseif subfield.type == 'telephone' %}
+  {% elseif subfield.type == 'telephone' %}
         'type' => 'varchar',
         'length' => 255,
-  {%- elseif subfield.type == 'uri' %}
+  {% elseif subfield.type == 'uri' %}
         'type' => 'varchar',
         'length' => 2048,
-  {%- elseif subfield.type == 'datetime' %}
+  {% elseif subfield.type == 'datetime' %}
         'type' => 'varchar',
         'length' => 20,
-  {%- endif %}
+  {% endif %}
       ],
 {% endfor %}
     ];
@@ -210,38 +210,38 @@ class {{ type_class }} extends FieldItemBase {
 
 {% endif %}
 {% for subfield in subfields %}
-  {%- if subfield.list %}
+  {% if subfield.list %}
     $values['{{ subfield.machine_name }}'] = array_rand(self::{{ subfield.allowed_values_method }}());
 
-  {%- elseif subfield.type == 'boolean' %}
+  {% elseif subfield.type == 'boolean' %}
     $values['{{ subfield.machine_name }}'] = (bool) mt_rand(0, 1);
 
-  {%- elseif subfield.type == 'string' %}
+  {% elseif subfield.type == 'string' %}
     $values['{{ subfield.machine_name }}'] = $random->word(mt_rand(1, 255));
 
-  {%- elseif subfield.type == 'text' %}
+  {% elseif subfield.type == 'text' %}
     $values['{{ subfield.machine_name }}'] = $random->paragraphs(5);
 
-  {%- elseif subfield.type == 'integer' %}
+  {% elseif subfield.type == 'integer' %}
     $values['{{ subfield.machine_name }}'] = mt_rand(-1000, 1000);
 
-  {%- elseif subfield.type == 'float' %}
+  {% elseif subfield.type == 'float' %}
     $scale = rand(1, 5);
     $random_decimal = mt_rand() / mt_getrandmax() * (1000 - 0);
     $values['{{ subfield.machine_name }}'] = floor($random_decimal * pow(10, $scale)) / pow(10, $scale);
 
-  {%- elseif subfield.type == 'numeric' %}
+  {% elseif subfield.type == 'numeric' %}
     $scale = rand(10, 2);
     $random_decimal = -1000 + mt_rand() / mt_getrandmax() * (-1000 - 1000);
     $values['{{ subfield.machine_name }}'] = floor($random_decimal * pow(10, $scale)) / pow(10, $scale);
 
-  {%- elseif subfield.type == 'email' %}
+  {% elseif subfield.type == 'email' %}
     $values['{{ subfield.machine_name }}'] = strtolower($random->name()) . '@example.com';
 
-  {%- elseif subfield.type == 'telephone' %}
+  {% elseif subfield.type == 'telephone' %}
     $values['{{ subfield.machine_name }}'] = mt_rand(pow(10, 8), pow(10, 9) - 1);
 
-  {%- elseif subfield.type == 'uri' %}
+  {% elseif subfield.type == 'uri' %}
     $tlds = ['com', 'net', 'gov', 'org', 'edu', 'biz', 'info'];
     $domain_length = mt_rand(7, 15);
     $protocol = mt_rand(0, 1) ? 'https' : 'http';
@@ -250,17 +250,17 @@ class {{ type_class }} extends FieldItemBase {
     $tld = $tlds[mt_rand(0, (count($tlds) - 1))];
     $values['{{ subfield.machine_name }}'] = "$protocol://$www.$domain.$tld";
 
-  {%- elseif subfield.type == 'datetime' %}
+  {% elseif subfield.type == 'datetime' %}
     $timestamp = \Drupal::time()->getRequestTime() - mt_rand(0, 86400 * 365);
     $values['{{ subfield.machine_name }}'] = gmdate('{{ subfield.date_storage_format }}', $timestamp);
 
-  {%- endif %}
+  {% endif %}
 {% endfor %}
     return $values;
   }
 
 {% for subfield in subfields %}
-  {%- if subfield.list %}
+  {% if subfield.list %}
   /**
    * Returns allowed values for '{{ subfield.machine_name }}' sub-field.
    *
@@ -269,48 +269,48 @@ class {{ type_class }} extends FieldItemBase {
    */
   public static function {{ subfield.allowed_values_method }}() {
     return [
-    {%- if subfield.type == 'string' %}
+    {% if subfield.type == 'string' %}
       'alpha' => t('Alpha'),
       'beta' => t('Beta'),
       'gamma' => t('Gamma'),
-    {%- elseif subfield.type == 'integer' %}
+    {% elseif subfield.type == 'integer' %}
       123 => 123,
       456 => 456,
       789 => 789,
-    {%- elseif subfield.type == 'float' %}
+    {% elseif subfield.type == 'float' %}
       '12.3' => '12.3',
       '4.56' => '4.56',
       '0.789' => '0.789',
-    {%- elseif subfield.type == 'numeric' %}
+    {% elseif subfield.type == 'numeric' %}
       '12.35' => '12.35',
       '45.65' => '45.65',
       '78.95' => '78.95',
-    {%- elseif subfield.type == 'email' %}
+    {% elseif subfield.type == 'email' %}
       'alpha@example.com' => 'alpha@example.com',
       'beta@example.com' => 'beta@example.com',
       'gamma@example.com' => 'gamma@example.com',
-    {%- elseif subfield.type == 'telephone' %}
+    {% elseif subfield.type == 'telephone' %}
       '71234567001' => '+7(123)45-67-001',
       '71234567002' => '+7(123)45-67-002',
       '71234567003' => '+7(123)45-67-003',
-    {%- elseif subfield.type == 'uri' %}
+    {% elseif subfield.type == 'uri' %}
       'https://example.com' => 'https://example.com',
       'http://www.php.net' => 'http://www.php.net',
       'https://www.drupal.org' => 'https://www.drupal.org',
-    {%- elseif subfield.type == 'datetime' %}
-      {%- if subfield.date_type == 'date' %}
+    {% elseif subfield.type == 'datetime' %}
+      {% if subfield.date_type == 'date' %}
       '2018-01-01' => '1 January 2018',
       '2018-02-01' => '1 February 2018',
       '2018-03-01' => '1 March 2018',
-      {%- else %}
+      {% else %}
       '2018-01-01T00:10:10' => '1 January 2018, 00:10:10',
       '2018-02-01T00:20:20' => '1 February 2018, 00:20:20',
       '2018-03-01T00:30:30' => '1 March 2018, 00:30:30',
-      {%- endif %}
-    {%- endif %}
+      {% endif %}
+    {% endif %}
     ];
   }
 
-  {%- endif %}
+  {% endif %}
 {% endfor %}
 }

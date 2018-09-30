@@ -66,7 +66,10 @@ class TwigEnvironment extends Twig_Environment {
     }
     // Remove leading whitespaces to preserve indentation.
     // @see https://github.com/twigphp/Twig/issues/1423
-    $code = preg_replace("/\n +\{%-/", "\n{%", $source->getCode());
+    $code = $source->getCode();
+    if (strpos($code, '{% verbatim %}') === FALSE) {
+      $code = preg_replace("/\n +\{%/", "\n{%", $source->getCode());
+    }
     // Twig source has no setters.
     $source = new \Twig_Source($code, $source->getName(), $source->getPath());
     return parent::tokenize($source, $name);

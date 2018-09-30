@@ -3,20 +3,20 @@
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
 {% sort %}
-  {%- if datetime %}
+  {% if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
-  {%- endif %}
+  {% endif %}
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-  {%- if formatter_settings %}
+  {% if formatter_settings %}
 use Drupal\Core\Form\FormStateInterface;
-  {%- endif %}
-  {%- if link %}
+  {% endif %}
+  {% if link %}
 use Drupal\Core\Url;
-  {%- endif %}
-  {%- if list %}
+  {% endif %}
+  {% if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
-  {%- endif %}
+  {% endif %}
 {% endsort %}
 
 /**
@@ -70,33 +70,33 @@ class {{ formatter_class }} extends FormatterBase {
     foreach ($items as $delta => $item) {
 
 {% for subfield in subfields %}
-  {%- if subfield.type == 'boolean' %}
+  {% if subfield.type == 'boolean' %}
       $element[$delta]['{{ subfield.machine_name }}'] = [
         '#type' => 'item',
         '#title' => $this->t('{{ subfield.name }}'),
         '#markup' => $item->{{ subfield.machine_name }} ? $this->t('Yes') : $this->t('No'),
       ];
 
-  {%- else %}
+  {% else %}
       if ($item->{{ subfield.machine_name }}) {
-    {%- if subfield.list %}
+    {% if subfield.list %}
         $allowed_values = {{ type_class }}::{{ subfield.allowed_values_method }}();
-    {%- endif %}
-    {%- set item_value %}
-      {%- if subfield.list %}$allowed_values[$item->{{ subfield.machine_name }}]{% else %}$item->{{ subfield.machine_name }}{% endif %}
-    {%- endset %}
-    {%- if subfield.type == 'datetime' %}
+    {% endif %}
+    {% set item_value %}
+      {% if subfield.list %}$allowed_values[$item->{{ subfield.machine_name }}]{% else %}$item->{{ subfield.machine_name }}{% endif %}
+    {% endset %}
+    {% if subfield.type == 'datetime' %}
         $date = DrupalDateTime::createFromFormat('{{ subfield.date_storage_format }}', $item->{{ subfield.machine_name }});
         // @DCG: Consider injecting the date formatter service.
         // @codingStandardsIgnoreStart
         $date_formatter = \Drupal::service('date.formatter');
         // @codingStandardsIgnoreStart
         $timestamp = $date->getTimestamp();
-      {%- if subfield.list %}
+      {% if subfield.list %}
         $formatted_date = {{ item_value }};
-      {%- else %}
+      {% else %}
         $formatted_date = $date_formatter->format($timestamp, 'long');
-      {%- endif %}
+      {% endif %}
         $iso_date = $date_formatter->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
         $element[$delta]['{{ subfield.machine_name }}'] = [
           '#type' => 'item',
@@ -115,30 +115,30 @@ class {{ formatter_class }} extends FormatterBase {
             ],
           ],
         ];
-    {%- else %}
+    {% else %}
         $element[$delta]['{{ subfield.machine_name }}'] = [
           '#type' => 'item',
           '#title' => $this->t('{{ subfield.name }}'),
-      {%- if subfield.link %}
+      {% if subfield.link %}
           'content' => [
             '#type' => 'link',
             '#title' => {{ item_value }},
-        {%- if subfield.type == 'email' %}
+        {% if subfield.type == 'email' %}
             '#url' => Url::fromUri('mailto:' . $item->{{ subfield.machine_name }}),
-        {%- elseif subfield.type == 'telephone' %}
+        {% elseif subfield.type == 'telephone' %}
             '#url' => Url::fromUri('tel:' . rawurlencode(preg_replace('/\s+/', '', $item->{{ subfield.machine_name }}))),
-        {%- elseif subfield.type == 'uri' %}
+        {% elseif subfield.type == 'uri' %}
             '#url' => Url::fromUri($item->{{ subfield.machine_name }}),
-        {%- endif %}
+        {% endif %}
           ],
-      {%- else %}
+      {% else %}
           '#markup' => {{ item_value }},
-      {%- endif %}
+      {% endif %}
         ];
-    {%- endif %}
+    {% endif %}
       }
 
-  {%- endif %}
+  {% endif %}
 {% endfor %}
     }
 

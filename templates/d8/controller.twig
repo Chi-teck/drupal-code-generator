@@ -5,10 +5,10 @@ namespace Drupal\{{ machine_name }}\Controller;
 
 {% sort %}
 use Drupal\Core\Controller\ControllerBase;
-  {%- if services %}
+  {% if services %}
 use Symfony\Component\DependencyInjection\ContainerInterface;
 {{ di.use(services) }}
-  {%- endif %}
+  {% endif %}
 {% endsort %}
 
 /**
