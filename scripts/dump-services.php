@@ -158,7 +158,12 @@ foreach ($raw_definitions as $service_id => $raw_definition) {
     if (isset($raw_definition['type'][0])) {
       $type = $raw_definition['type'][0];
     }
-    elseif (!in_array($service_id, $skipped_services)) {
+    elseif (in_array($service_id, $skipped_services)) {
+      // Skipped services might get to the definitions through references.
+      unset($definitions[$service_id]);
+      continue;
+    }
+    else {
       throw new UnexpectedValueException("No type declared for service $service_id.");
     }
     $definitions[$service_id] = [
