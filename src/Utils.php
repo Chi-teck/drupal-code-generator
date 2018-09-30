@@ -77,6 +77,16 @@ class Utils {
   }
 
   /**
+   * Service name validator.
+   */
+  public static function validateServiceName($value) {
+    if ($value !== '' && !preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
+      throw new \UnexpectedValueException('The value is not correct service name.');
+    }
+    return $value;
+  }
+
+  /**
    * Required value validator.
    */
   public static function validateRequired($value) {

@@ -241,6 +241,44 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
+   * @param string $service_name
+   *   Service name to validate.
+   * @param \UnexpectedValueException|null $exception
+   *   Expected exception.
+   *
+   * @covers \DrupalCodeGenerator\Utils::validateServiceName
+   * @dataProvider validateServiceNameProvider
+   */
+  public function testValidateServiceName($service_name, $exception) {
+    if ($exception) {
+      $this->expectException(get_class($exception));
+      $this->expectExceptionMessage($exception->getMessage());
+    }
+    static::assertEquals($service_name, Utils::validateServiceName($service_name));
+  }
+
+  /**
+   * Data provider callback for testValidateServiceName().
+   *
+   * @return array
+   *   Array of arguments of test callback.
+   */
+  public function validateServiceNameProvider() {
+    $exception = new \UnexpectedValueException('The value is not correct service name.');
+    return [
+      ['CamelCaseHere', $exception],
+      ['snake_case_here', NULL],
+      [' not_trimmed ', $exception],
+      ['dot.inside', NULL],
+      ['.leading.dot', $exception],
+      ['ending.dot.', $exception],
+      ['special&character', $exception],
+    ];
+  }
+
+  /**
+   * Test callback.
+   *
    * @param mixed $value
    *   The value to validate.
    * @param \UnexpectedValueException|null $exception

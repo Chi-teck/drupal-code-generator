@@ -25,12 +25,7 @@ class Custom extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $questions['service_name'] = new Question('Service name', '{machine_name}.example');
-    $questions['service_name']->setValidator(function ($value) {
-      if (!preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
-        throw new \UnexpectedValueException('The value is not correct service name.');
-      }
-      return $value;
-    });
+    $questions['service_name']->setValidator([Utils::class, 'validateServiceName']);
 
     $default_class = function ($vars) {
       $service = preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);

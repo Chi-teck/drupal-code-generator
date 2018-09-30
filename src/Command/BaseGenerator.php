@@ -412,7 +412,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $services = [];
     while (TRUE) {
       $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
-      // @todo Add service name validator.
+      $question->setValidator([Utils::class, 'validateServiceName']);
       $question->setAutocompleterValues($service_ids);
       $service = $this->ask($input, $output, $question);
       if (!$service) {
