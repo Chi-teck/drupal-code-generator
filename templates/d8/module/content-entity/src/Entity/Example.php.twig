@@ -52,10 +52,16 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     }
  *   },
  *   base_table = "{{ entity_type_id }}",
+{% if translatable %}
  *   data_table = "{{ entity_type_id }}_field_data",
+{% endif %}
 {% if revisionable %}
  *   revision_table = "{{ entity_type_id }}_revision",
+{% endif %}
+{% if revisionable and translatable %}
  *   revision_data_table = "{{ entity_type_id }}_field_revision",
+{% endif %}
+{% if revisionable %}
  *   show_revision_ui = TRUE,
 {% endif %}
 {% if translatable %}
