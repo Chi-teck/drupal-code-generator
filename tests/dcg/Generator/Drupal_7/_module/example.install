@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Example module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function example_schema() {
+  $schema['example_table'] = array(
+    'description' => 'Table description',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique ID.',
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Column description',
+      ),
+      'weight' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Column description',
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'title' => array('title'),
+    ),
+    'indexes' => array(
+      'weight' => array('weight'),
+    ),
+  );
+
+  return $schema;
+}

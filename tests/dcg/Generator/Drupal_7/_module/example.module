@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Example module.
+ */
+
+/**
+ * Implements hook_init().
+ */
+function example_init() {
+  drupal_set_message('It works!');
+}
+
+/**
+ * Implements hook_menu().
+ */
+function example_menu() {
+
+   $items['example'] = array(
+    'title' => 'example',
+    'description' => 'example main page.',
+    'page callback' => 'example_main_page',
+    'page arguments' => array('example_settings_form'),
+    'access arguments' => array('view example page'),
+    'file' => 'example.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/system/example'] = array(
+    'title' => 'Example',
+    'description' => 'Example settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('example_settings_form'),
+    'access arguments' => array('administer example configuration'),
+    'file' => 'example.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function example_permission() {
+  return array(
+    'view example page' => array(
+      'title' => t('View example page'),
+      'description' => t('View example page.'),
+    ),
+    'administer example configuration' => array(
+      'title' => t('Administer example configuration'),
+      'description' => t('Administer example configuration.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
