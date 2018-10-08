@@ -45,7 +45,7 @@ class Theme extends BaseGenerator {
 
     $this->addFile()
       ->path('{machine_name}/css/{asset_name}.css')
-      ->content('');
+      ->template('d7/theme-css.twig');
 
     $this->addDirectory()
       ->path('{machine_name}/templates');

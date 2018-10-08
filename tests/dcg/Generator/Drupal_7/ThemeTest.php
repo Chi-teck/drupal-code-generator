@@ -14,17 +14,17 @@ class ThemeTest extends GeneratorBaseTest {
   protected $interaction = [
     'Theme name [%default_name%]:' => 'Example',
     'Theme machine name [example]:' => 'example',
-    'Theme description [A simple Drupal 7 theme.]:' => 'example',
-    'Base theme:' => 'example',
+    'Theme description [A simple Drupal 7 theme.]:' => 'A theme for test.',
+    'Base theme:' => 'garland',
   ];
 
   protected $fixtures = [
-    'example/example.info' => NULL,
-    'example/images' => NULL,
-    'example/template.php' => NULL,
-    'example/templates' => NULL,
-    'example/css/example.css' => NULL,
-    'example/js/example.js' => NULL,
+    'example/example.info' => __DIR__ . '/_theme/example.info',
+    'example/images' => [],
+    'example/template.php' => __DIR__ . '/_theme/template.php',
+    'example/templates' => [],
+    'example/css/example.css' => __DIR__ . '/_theme/css/example.css',
+    'example/js/example.js' => __DIR__ . '/_theme/js/example.js',
   ];
 
 }
