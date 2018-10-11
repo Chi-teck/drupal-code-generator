@@ -31,10 +31,16 @@ abstract class GeneratorBaseTest extends BaseTestCase {
   protected $command;
 
   /**
-   * {@inheritdoc}
+   * Test callback.
    */
-  public function setUp() {
-    parent::setUp();
+  public function testGenerator() {
+    $this->doTest($this->interaction, $this->fixtures);
+  }
+
+  /**
+   * Executes tests using provided interaction and fixtures.
+   */
+  public function doTest(array $interaction, array $fixtures) {
 
     $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
 
@@ -42,15 +48,9 @@ abstract class GeneratorBaseTest extends BaseTestCase {
 
     $this->tester->setDirectory($this->directory);
 
-    $this->tester->setInteraction($this->interaction);
+    $this->tester->setInteraction($interaction);
 
-    $this->tester->setFixtures($this->fixtures);
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testGenerator() {
+    $this->tester->setFixtures($fixtures);
 
     $this->tester->execute();
 

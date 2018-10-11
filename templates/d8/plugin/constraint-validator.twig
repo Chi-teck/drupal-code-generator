@@ -1,0 +1,62 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\Validation\Constraint;
+
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
+
+/**
+ * Validates the {{ plugin_label }} constraint.
+ */
+class {{ class }}Validator extends ConstraintValidator {
+
+  /**
+   * {@inheritdoc}
+   */
+{% if input_type == 'entity' %}
+  public function validate($entity, Constraint $constraint) {
+
+    // @DCG Validate the entity here.
+    if ($entity->label() == 'foo') {
+      $this->context->buildViolation($constraint->errorMessage)
+        // @DCG The path depends on entity type. It can be title, name, etc.
+        ->atPath('title')
+        ->addViolation();
+    }
+
+  }
+{% elseif input_type == 'item_list' %}
+  public function validate($items, Constraint $constraint) {
+
+    foreach ($items as $delta => $item) {
+      // @DCG Validate the item here.
+      if ($item->value == 'foo') {
+        $this->context->buildViolation($constraint->errorMessage)
+          ->atPath($delta)
+          ->addViolation();
+      }
+    }
+
+  }
+{% elseif input_type == 'item' %}
+  public function validate($item, Constraint $constraint) {
+
+    $value = $item->getValue()['value'];
+    // @DCG Validate the value here.
+    if ($value == 'foo') {
+      $this->context->addViolation($constraint->errorMessage);
+    }
+
+  }
+{% else %}
+  public function validate($value, Constraint $constraint) {
+
+    // @DCG Validate the value here.
+    if ($value == 'foo') {
+      $this->context->addViolation($constraint->errorMessage);
+    }
+
+  }
+{% endif %}
+
+}
