@@ -18,13 +18,6 @@ abstract class GeneratorBaseTest extends BaseTestCase {
   protected $class;
 
   /**
-   * The fixtures.
-   *
-   * @var array
-   */
-  protected $fixtures;
-
-  /**
    * The interaction.
    *
    * This should be represented as an associative array where keys are questions
@@ -32,7 +25,14 @@ abstract class GeneratorBaseTest extends BaseTestCase {
    *
    * @var array
    */
-  protected $interaction;
+  protected $interaction = [];
+
+  /**
+   * The fixtures.
+   *
+   * @var array
+   */
+  protected $fixtures = [];
 
   /**
    * Command to test.
