@@ -16,7 +16,7 @@ class CacheContextTest extends GeneratorBaseTest {
     'Module machine name [foo]:' => 'foo',
     'Context ID [example]:' => 'example',
     'Class [ExampleCacheContext]:' => 'ExampleCacheContext',
-    "Base class:\n  [0] -\n  [1] RequestStackCacheContextBase\n  [2] UserCacheContextBase\n ➤➤➤ " => 'RequestStackCacheContextBase',
+    "Base class:\n  [0] -\n  [1] RequestStackCacheContextBase\n  [2] UserCacheContextBase" => 1,
     'Make the context calculated? [No]:' => 'No',
   ];
 
@@ -24,12 +24,5 @@ class CacheContextTest extends GeneratorBaseTest {
     'foo.services.yml' => __DIR__ . '/_cache_context.services.yml',
     'src/Cache/Context/ExampleCacheContext.php' => __DIR__ . '/_cache_context.php',
   ];
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function processExpectedDisplay($display) {
-    return str_replace(" ➤➤➤ \n ➤ ", '  ➤➤➤ ', $display);
-  }
 
 }

@@ -18,18 +18,11 @@ class AccessTest extends GeneratorBaseTest {
     'Plugin machine name [example]:' => 'example',
     'Plugin description [Plugin description.]:' => 'Some description.',
     'Category [Custom]:' => 'Custom',
-    "Required context:\n  [0] -\n  [1] Node\n  [2] User\n  [3] Term\n  ➤➤➤ " => 'User',
+    "Required context:\n  [0] -\n  [1] Node\n  [2] User\n  [3] Term" => 'User',
   ];
 
   protected $fixtures = [
     'plugins/access/example.inc' => __DIR__ . '/_access.inc',
   ];
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function processExpectedDisplay($display) {
-    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
-  }
 
 }

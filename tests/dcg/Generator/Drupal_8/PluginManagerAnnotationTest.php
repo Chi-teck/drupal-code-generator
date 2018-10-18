@@ -15,7 +15,7 @@ class PluginManagerAnnotationTest extends GeneratorBaseTest {
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin type [foo]:' => 'bar',
-    "Discovery type [Annotation]:\n  [1] Annotation\n  [2] YAML\n  [3] Hook\n  ➤➤➤ " => 'Annotation',
+    "Discovery type [Annotation]:\n  [1] Annotation\n  [2] YAML\n  [3] Hook" => 'Annotation',
   ];
 
   protected $fixtures = [
@@ -26,12 +26,5 @@ class PluginManagerAnnotationTest extends GeneratorBaseTest {
     'src/Annotation/Bar.php' => __DIR__ . '/_plugin_manager_annotation/src/Annotation/Bar.php',
     'src/Plugin/Bar/Foo.php' => __DIR__ . '/_plugin_manager_annotation/src/Plugin/Bar/Foo.php',
   ];
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function processExpectedDisplay($display) {
-    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
-  }
 
 }

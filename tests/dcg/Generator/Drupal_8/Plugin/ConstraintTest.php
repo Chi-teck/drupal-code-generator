@@ -12,13 +12,6 @@ class ConstraintTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Plugin\Constraint';
 
   /**
-   * {@inheritdoc}
-   */
-  protected function processExpectedDisplay($display) {
-    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
-  }
-
-  /**
    * Test callback.
    */
   public function testGenerator() {
@@ -29,7 +22,6 @@ class ConstraintTest extends GeneratorBaseTest {
       '  [2] Item list',
       '  [3] Item',
       '  [4] Raw value',
-      '  ➤➤➤ ',
     ]);
 
     // Entity type.

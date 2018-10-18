@@ -39,13 +39,13 @@ class FieldTest extends GeneratorBaseTest {
       '  [9 ] Url',
       '  [10] Date',
     ];
-    $type_options = "\n" . implode("\n", $type_options) . "\n  ➤➤➤ ";
+    $type_options = "\n" . implode("\n", $type_options);
 
     $date_options = [
       '  [1] Date only',
       '  [2] Date and time',
     ];
-    $date_options = "\n" . implode("\n", $date_options) . "\n  ➤➤➤ ";
+    $date_options = "\n" . implode("\n", $date_options);
 
     $this->interaction = [
       // General questions.
@@ -188,7 +188,6 @@ class FieldTest extends GeneratorBaseTest {
    * {@inheritdoc}
    */
   protected function processExpectedDisplay($display) {
-    $display = str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
     $display = self::insertLine($display, 'Label for sub-field');
     $display = self::insertLine($display, 'Would you like to create field storage settings form');
     return $display;

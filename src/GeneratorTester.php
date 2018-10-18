@@ -162,7 +162,14 @@ class GeneratorTester {
       $question = preg_replace('/^<\d*> /', '', $question);
       $expected_display .= "\n";
       $expected_display .= " $question\n";
-      $expected_display .= " ➤ \n";
+      // Regular question.
+      if (strpos($question, "\n") === FALSE) {
+        $expected_display .= " ➤ \n";
+      }
+      // Choice question.
+      else {
+        $expected_display .= "  ➤➤➤ \n";
+      }
     }
 
     $expected_display = str_replace('%default_name%', $default_name, $expected_display);

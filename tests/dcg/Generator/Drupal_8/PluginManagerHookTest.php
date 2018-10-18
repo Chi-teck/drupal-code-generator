@@ -15,7 +15,7 @@ class PluginManagerHookTest extends GeneratorBaseTest {
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin type [foo]:' => 'bar',
-    "Discovery type [Annotation]:\n  [1] Annotation\n  [2] YAML\n  [3] Hook\n  ➤➤➤ " => 'Hook',
+    "Discovery type [Annotation]:\n  [1] Annotation\n  [2] YAML\n  [3] Hook" => 'Hook',
   ];
 
   protected $fixtures = [
@@ -25,12 +25,5 @@ class PluginManagerHookTest extends GeneratorBaseTest {
     'src/BarInterface.php' => __DIR__ . '/_plugin_manager_hook/src/BarInterface.php',
     'src/BarPluginManager.php' => __DIR__ . '/_plugin_manager_hook/src/BarPluginManager.php',
   ];
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function processExpectedDisplay($display) {
-    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
-  }
 
 }
