@@ -187,8 +187,7 @@ class FieldTest extends GeneratorBaseTest {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDisplay() {
-    $display = parent::getExpectedDisplay();
+  protected function processExpectedDisplay($display) {
     $display = str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
     $display = self::insertLine($display, 'Label for sub-field');
     $display = self::insertLine($display, 'Would you like to create field storage settings form');

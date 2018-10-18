@@ -44,20 +44,17 @@ abstract class GeneratorBaseTest extends BaseTestCase {
 
     $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
 
-    $this->tester = new GeneratorTester(new $command_class());
+    $tester = new GeneratorTester(new $command_class());
+    $tester->setDirectory($this->directory);
+    $tester->setInteraction($interaction);
+    $tester->setFixtures($fixtures);
+    $tester->execute();
 
-    $this->tester->setDirectory($this->directory);
+    $expected_display = $this->processExpectedDisplay($tester->getExpectedDisplay());
+    static::assertEquals($expected_display, $tester->getDisplay());
 
-    $this->tester->setInteraction($interaction);
-
-    $this->tester->setFixtures($fixtures);
-
-    $this->tester->execute();
-
-    static::assertEquals($this->getExpectedDisplay(), $this->getDisplay());
-
-    foreach ($this->tester->getFixtures() as $target => $fixture) {
-      $path = $this->tester->getDirectory() . '/' . $target;
+    foreach ($tester->getFixtures() as $target => $fixture) {
+      $path = $tester->getDirectory() . '/' . $target;
       if (is_array($fixture)) {
         self::assertDirectoryExists($path);
       }
@@ -71,23 +68,16 @@ abstract class GeneratorBaseTest extends BaseTestCase {
   }
 
   /**
-   * Returns the display returned by the last execution of the command.
+   * Processed the display from command.
+   *
+   * @param string $display
+   *   The display to process.
    *
    * @return string
-   *   The display.
+   *   The processed display.
    */
-  protected function getDisplay() {
-    return $this->tester->getDisplay();
-  }
-
-  /**
-   * Returns expected display.
-   *
-   * @return string
-   *   Expected display.
-   */
-  protected function getExpectedDisplay() {
-    return $this->tester->getExpectedDisplay();
+  protected function processExpectedDisplay($display) {
+    return $display;
   }
 
 }

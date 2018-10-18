@@ -29,8 +29,7 @@ class PluginManagerYamlTest extends GeneratorBaseTest {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDisplay() {
-    $display = parent::getExpectedDisplay();
+  protected function processExpectedDisplay($display) {
     return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
   }
 

@@ -26,13 +26,10 @@ class NginxVirtualHostTest extends GeneratorBaseTest {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDisplay() {
-    $display = parent::getExpectedDisplay();
-
+  protected function processExpectedDisplay($display) {
     $socket = PHP_MAJOR_VERSION == 5
       ? '/run/php5-fpm.sock'
       : sprintf('/run/php/php%s.%s-fpm.sock', PHP_MAJOR_VERSION, PHP_MINOR_VERSION);
-
     return str_replace('%socket%', $socket, $display);
   }
 
