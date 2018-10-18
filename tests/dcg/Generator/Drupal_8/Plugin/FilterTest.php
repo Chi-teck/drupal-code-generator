@@ -38,11 +38,4 @@ class FilterTest extends GeneratorBaseTest {
     parent::setUp();
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function processExpectedDisplay($display) {
-    return str_replace(" ➤➤➤ \n ➤ ", ' ➤➤➤ ', $display);
-  }
-
 }
