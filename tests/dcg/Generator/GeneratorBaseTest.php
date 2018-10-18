@@ -10,17 +10,28 @@ use DrupalCodeGenerator\Tests\BaseTestCase;
  */
 abstract class GeneratorBaseTest extends BaseTestCase {
 
+  /**
+   * Command class to be tested.
+   *
+   * @var string
+   */
   protected $class;
 
   /**
-   * Generator tester.
+   * The fixtures.
    *
-   * @var \DrupalCodeGenerator\GeneratorTester
+   * @var array
    */
-  protected $tester;
-
   protected $fixtures;
 
+  /**
+   * The interaction.
+   *
+   * This should be represented as an associative array where keys are questions
+   * and values are user answers.
+   *
+   * @var array
+   */
   protected $interaction;
 
   /**
