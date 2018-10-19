@@ -14,41 +14,40 @@ class CacheContextTest extends GeneratorBaseTest {
   /**
    * Test callback.
    */
-  public function testGenerator() {
+  public function testCalculatedNo() {
+    parent::doTest(self::getInteraction('no'), self::getFixtures('no'));
+  }
 
-    $interaction = [
+  /**
+   * Test callback.
+   */
+  public function testCalculatedYes() {
+    parent::doTest(self::getInteraction('yes'), self::getFixtures('yes'));
+  }
+
+  /**
+   * Returns test fixtures.
+   */
+  protected static function getFixtures($calculated) {
+    $dir = __DIR__ . '/_cache_context_calculated_' . $calculated;
+    return [
+      'foo.services.yml' => $dir . '/_cache_context.services.yml',
+      'src/Cache/Context/ExampleCacheContext.php' => $dir . '/_cache_context.php',
+    ];
+  }
+
+  /**
+   * Returns command interaction.
+   */
+  protected static function getInteraction($calculated) {
+    return [
       'Module name [%default_name%]:' => 'Foo',
       'Module machine name [foo]:' => 'foo',
       'Context ID [example]:' => 'example',
       'Class [ExampleCacheContext]:' => 'ExampleCacheContext',
       "Base class:\n  [0] -\n  [1] RequestStackCacheContextBase\n  [2] UserCacheContextBase" => 1,
-      'Make the context calculated? [No]:' => 'No',
+      'Make the context calculated? [No]:' => $calculated,
     ];
-
-    $fixtures = [
-      'foo.services.yml' => __DIR__ . '/_cache_context.services.yml',
-      'src/Cache/Context/ExampleCacheContext.php' => __DIR__ . '/_cache_context.php',
-    ];
-
-    parent::doTest($interaction, $fixtures);
-
-    parent::tearDown();
-
-    $interaction = [
-      'Module name [%default_name%]:' => 'Bar',
-      'Module machine name [bar]:' => 'bar',
-      'Context ID [example]:' => 'example',
-      'Class [ExampleCacheContext]:' => 'ExampleCacheContext',
-      "Base class:\n  [0] -\n  [1] RequestStackCacheContextBase\n  [2] UserCacheContextBase" => 1,
-      'Make the context calculated? [No]:' => 'Yes',
-    ];
-
-    $fixtures = [
-      'bar.services.yml' => __DIR__ . '/_cache_context_calculated.services.yml',
-      'src/Cache/Context/ExampleCacheContext.php' => __DIR__ . '/_cache_context_calculated.php',
-    ];
-
-    parent::doTest($interaction, $fixtures);
   }
 
 }

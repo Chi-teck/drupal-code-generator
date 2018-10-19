@@ -45,7 +45,15 @@ abstract class GeneratorBaseTest extends BaseTestCase {
    * Test callback.
    */
   public function testGenerator() {
-    $this->doTest($this->interaction, $this->fixtures);
+    if ($this->interaction || $this->fixtures) {
+      $this->doTest($this->interaction, $this->fixtures);
+    }
+    else {
+      // Nothing to test here because the child class probably declares own test
+      // callbacks. Increment the assertion counter to suppress a warning about
+      // risky tests.
+      $this->addToAssertionCount(1);
+    }
   }
 
   /**
