@@ -11,9 +11,11 @@ env:
   - DEPENDENCIES_LOWEST=0
   - DEPENDENCIES_LOWEST=1
 
-before_script:
+install:
   - composer install
   - if [ $DEPENDENCIES_LOWEST -eq 1 ]; then composer update --prefer-lowest; fi
-  - composer global require "phpunit/phpunit" "^5.7"
+
+before_script:
+  - composer global require phpunit/phpunit ^5.7
 
 script: $(composer config home)/vendor/bin/phpunit
