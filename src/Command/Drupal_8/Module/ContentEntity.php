@@ -73,7 +73,7 @@ class ContentEntity extends BaseGenerator {
       $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '_type.collection';
     }
 
-    $vars['class_prefix'] = Utils::camelize($vars['entity_type_label']);
+    $vars['class_prefix'] = Utils::camelize($vars['entity_type_id']);
 
     $templates = [
       'model.info.yml.twig',
