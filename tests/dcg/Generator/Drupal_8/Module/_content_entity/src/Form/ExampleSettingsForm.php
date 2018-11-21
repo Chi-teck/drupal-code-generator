@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configuration form for an example entity type.
  */
-class ExampleSettingsForm extends FormBase {
+class FooExampleSettingsForm extends FormBase {
 
   /**
    * {@inheritdoc}

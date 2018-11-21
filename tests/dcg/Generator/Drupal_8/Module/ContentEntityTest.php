@@ -44,11 +44,11 @@ class ContentEntityTest extends GeneratorBaseTest {
     'foo/foo.module' => __DIR__ . '/_content_entity/foo.module',
     'foo/foo.permissions.yml' => __DIR__ . '/_content_entity/foo.permissions.yml',
     'foo/foo.routing.yml' => __DIR__ . '/_content_entity/foo.routing.yml',
-    'foo/src/Entity/Example.php' => __DIR__ . '/_content_entity/src/Entity/Example.php',
-    'foo/src/ExampleInterface.php' => __DIR__ . '/_content_entity/src/ExampleInterface.php',
-    'foo/src/ExampleListBuilder.php' => __DIR__ . '/_content_entity/src/ExampleListBuilder.php',
-    'foo/src/Form/ExampleForm.php' => __DIR__ . '/_content_entity/src/Form/ExampleForm.php',
-    'foo/src/Form/ExampleSettingsForm.php' => __DIR__ . '/_content_entity/src/Form/ExampleSettingsForm.php',
+    'foo/src/Entity/FooExample.php' => __DIR__ . '/_content_entity/src/Entity/Example.php',
+    'foo/src/FooExampleInterface.php' => __DIR__ . '/_content_entity/src/ExampleInterface.php',
+    'foo/src/FooExampleListBuilder.php' => __DIR__ . '/_content_entity/src/ExampleListBuilder.php',
+    'foo/src/Form/FooExampleForm.php' => __DIR__ . '/_content_entity/src/Form/ExampleForm.php',
+    'foo/src/Form/FooExampleSettingsForm.php' => __DIR__ . '/_content_entity/src/Form/ExampleSettingsForm.php',
     'foo/templates/foo-example.html.twig' => __DIR__ . '/_content_entity/templates/foo-example.html.twig',
   ];
 
