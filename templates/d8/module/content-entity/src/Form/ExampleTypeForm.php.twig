@@ -101,14 +101,13 @@ class {{ class_prefix }}TypeForm extends BundleEntityFormBase {
     $status = $entity_type->save();
 
     $t_args = ['%name' => $entity_type->label()];
-
     if ($status == SAVED_UPDATED) {
-      $message = 'The {{ entity_type_label|lower }} type %name has been updated.';
+      $message = $this->t('The {{ entity_type_label|lower }} type %name has been updated.', $t_args);
     }
     elseif ($status == SAVED_NEW) {
-      $message = 'The {{ entity_type_label|lower }} type %name has been added.';
+      $message = $this->t('The {{ entity_type_label|lower }} type %name has been added.', $t_args);
     }
-    drupal_set_message($this->t($message, $t_args));
+    drupal_set_message($message);
 
     $this->entityManager->clearCachedFieldDefinitions();
     $form_state->setRedirectUrl($entity_type->urlInfo('collection'));
