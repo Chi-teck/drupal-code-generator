@@ -116,7 +116,6 @@ class ContentEntity extends BaseGenerator {
     }
 
     if ($vars['bundle']) {
-      $templates[] = 'config/optional/views.view.example.yml.twig';
       $templates[] = 'config/schema/model.entity_type.schema.yml.twig';
       $templates[] = 'src/ExampleTypeListBuilder.php.twig';
       $templates[] = 'src/Entity/ExampleType.php.twig';
@@ -132,7 +131,6 @@ class ContentEntity extends BaseGenerator {
       'model',
       'Example',
       'rest.resource.entity.example',
-      'views.view.example',
     ];
     $path_replacements = [
       $vars['template_name'],

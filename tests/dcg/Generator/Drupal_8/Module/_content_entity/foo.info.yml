@@ -7,4 +7,5 @@ dependencies:
   - drupal:views
   - drupal:fields
   - drupal:node
+  - drupal:text
 configure: entity.foo_example.settings
