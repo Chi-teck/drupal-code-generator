@@ -61,6 +61,13 @@ class ContentEntity extends BaseGenerator {
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
+    else {
+      $vars['dependencies'] = [];
+    }
+    // 'text_long' field item plugin is provided by Text module.
+    if ($vars['description_base_field']) {
+      $vars['dependencies'][] = 'drupal:text';
+    }
 
     if ($vars['entity_base_path'][0] != '/') {
       $vars['entity_base_path'] = '/' . $vars['entity_base_path'];
