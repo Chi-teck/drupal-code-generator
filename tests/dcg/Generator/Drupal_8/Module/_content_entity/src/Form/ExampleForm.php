@@ -23,11 +23,11 @@ class FooExampleForm extends ContentEntityForm {
     $logger_arguments = $message_arguments + ['link' => render($link)];
 
     if ($result == SAVED_NEW) {
-      drupal_set_message($this->t('New example %label has been created.', $message_arguments));
+      $this->messenger()->addStatus($this->t('New example %label has been created.', $message_arguments));
       $this->logger('foo')->notice('Created new example %label', $logger_arguments);
     }
     else {
-      drupal_set_message($this->t('The example %label has been updated.', $message_arguments));
+      $this->messenger()->addStatus($this->t('The example %label has been updated.', $message_arguments));
       $this->logger('foo')->notice('Created new example %label.', $logger_arguments);
     }
 

@@ -42,7 +42,7 @@ class FooExampleSettingsForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    drupal_set_message($this->t('The configuration has been updated.'));
+    $this->messenger()->addStatus($this->t('The configuration has been updated.'));
   }
 
 }

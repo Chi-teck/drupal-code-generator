@@ -107,7 +107,7 @@ class {{ class_prefix }}TypeForm extends BundleEntityFormBase {
     elseif ($status == SAVED_NEW) {
       $message = $this->t('The {{ entity_type_label|lower }} type %name has been added.', $t_args);
     }
-    drupal_set_message($message);
+    $this->messenger()->addStatus($message);
 
     $this->entityManager->clearCachedFieldDefinitions();
     $form_state->setRedirectUrl($entity_type->urlInfo('collection'));
