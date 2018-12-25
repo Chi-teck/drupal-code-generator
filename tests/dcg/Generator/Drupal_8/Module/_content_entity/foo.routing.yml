@@ -1,7 +1,7 @@
 entity.foo_example.settings:
   path: 'admin/structure/foo-example'
   defaults:
-    _form: '\Drupal\foo\Form\ExampleSettingsForm'
+    _form: '\Drupal\foo\Form\FooExampleSettingsForm'
     _title: 'Example'
   requirements:
     _permission: 'administer example'

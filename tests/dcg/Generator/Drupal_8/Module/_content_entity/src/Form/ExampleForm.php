@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Form controller for the example entity edit forms.
  */
-class ExampleForm extends ContentEntityForm {
+class FooExampleForm extends ContentEntityForm {
 
   /**
    * {@inheritdoc}

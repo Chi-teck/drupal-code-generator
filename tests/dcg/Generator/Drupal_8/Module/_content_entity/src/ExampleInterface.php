@@ -9,7 +9,7 @@ use Drupal\Core\Entity\EntityChangedInterface;
 /**
  * Provides an interface defining an example entity type.
  */
-interface ExampleInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface {
+interface FooExampleInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface {
 
   /**
    * Gets the example title.
@@ -25,7 +25,7 @@ interface ExampleInterface extends ContentEntityInterface, EntityOwnerInterface,
    * @param string $title
    *   The example title.
    *
-   * @return \Drupal\foo\ExampleInterface
+   * @return \Drupal\foo\FooExampleInterface
    *   The called example entity.
    */
   public function setTitle($title);
@@ -44,7 +44,7 @@ interface ExampleInterface extends ContentEntityInterface, EntityOwnerInterface,
    * @param int $timestamp
    *   The example creation timestamp.
    *
-   * @return \Drupal\foo\ExampleInterface
+   * @return \Drupal\foo\FooExampleInterface
    *   The called example entity.
    */
   public function setCreatedTime($timestamp);
@@ -63,7 +63,7 @@ interface ExampleInterface extends ContentEntityInterface, EntityOwnerInterface,
    * @param bool $status
    *   TRUE to enable this example, FALSE to disable.
    *
-   * @return \Drupal\foo\ExampleInterface
+   * @return \Drupal\foo\FooExampleInterface
    *   The called example entity.
    */
   public function setStatus($status);

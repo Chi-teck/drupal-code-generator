@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides a list controller for the example entity type.
  */
-class ExampleListBuilder extends EntityListBuilder {
+class FooExampleListBuilder extends EntityListBuilder {
 
   /**
    * The date formatter service.
@@ -30,7 +30,7 @@ class ExampleListBuilder extends EntityListBuilder {
   protected $redirectDestination;
 
   /**
-   * Constructs a new ExampleListBuilder object.
+   * Constructs a new FooExampleListBuilder object.
    *
    * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
    *   The entity type definition.
@@ -90,7 +90,7 @@ class ExampleListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\foo\Entity\Example */
+    /* @var $entity \Drupal\foo\Entity\FooExample */
     $row['id'] = $entity->id();
     $row['title'] = $entity->link();
     $row['status'] = $entity->isEnabled() ? $this->t('Enabled') : $this->t('Disabled');

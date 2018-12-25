@@ -37,7 +37,7 @@ class ConfigurationEntity extends BaseGenerator {
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
-    $vars['class_prefix'] = Utils::camelize($vars['entity_type_label']);
+    $vars['class_prefix'] = Utils::camelize($vars['entity_type_id']);
 
     $templates = [
       'model.info.yml.twig',

@@ -7,7 +7,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\RevisionableContentEntityBase;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\foo\ExampleInterface;
+use Drupal\foo\FooExampleInterface;
 use Drupal\user\UserInterface;
 
 /**
@@ -19,11 +19,11 @@ use Drupal\user\UserInterface;
  *   label_collection = @Translation("Examples"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\foo\ExampleListBuilder",
+ *     "list_builder" = "Drupal\foo\FooExampleListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {
- *       "add" = "Drupal\foo\Form\ExampleForm",
- *       "edit" = "Drupal\foo\Form\ExampleForm",
+ *       "add" = "Drupal\foo\Form\FooExampleForm",
+ *       "edit" = "Drupal\foo\Form\FooExampleForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm"
  *     },
  *     "route_provider" = {
@@ -57,7 +57,7 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "entity.foo_example.settings"
  * )
  */
-class Example extends RevisionableContentEntityBase implements ExampleInterface {
+class FooExample extends RevisionableContentEntityBase implements FooExampleInterface {
 
   use EntityChangedTrait;
 
