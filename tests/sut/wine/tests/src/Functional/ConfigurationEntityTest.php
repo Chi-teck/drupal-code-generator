@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\zippo\Functional;
+namespace Drupal\Tests\wine\Functional;
 
 use TestBase\BrowserTestBase;
 

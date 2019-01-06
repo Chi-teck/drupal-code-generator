@@ -15,13 +15,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @Condition(
  *   id = "{{ plugin_id }}",
  *   label = @Translation("{{ plugin_label }}"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *        label = @Translation("Node")
  *      )
  *   }
  * )
+ *
+ * @DCG prior to Drupal 8.7 the 'context_definitions' key was called 'context'.
  */
 class {{ class }} extends ConditionPluginBase implements ContainerFactoryPluginInterface {
 

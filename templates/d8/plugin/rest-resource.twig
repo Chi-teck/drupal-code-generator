@@ -4,6 +4,7 @@ namespace Drupal\{{ machine_name }}\Plugin\rest\resource;
 
 use Drupal\Component\Plugin\DependentPluginInterface;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Routing\BcRoute;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ResourceResponse;
@@ -218,6 +219,15 @@ class {{ class }} extends ResourceBase implements DependentPluginInterface {
     $route = $this->getBaseRoute($canonical_path, 'PUT');
     $route->addRequirements(['_content_type_format' => implode('|', $this->serializerFormats)]);
     $collection->add('{{ plugin_id }}.PUT', $route);
+
+    // Take out BC routes added in base class.
+    // @see https://www.drupal.org/node/2865645
+    // @todo Remove this in Drupal 9.
+    foreach ($collection as $route_name => $route) {
+      if ($route instanceof BcRoute) {
+        $collection->remove($route_name);
+      }
+    }
 
     return $collection;
   }

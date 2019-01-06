@@ -44,7 +44,6 @@ function dcg_phpcs {
 }
 
 function dcg_phpunit {
-  SYMFONY_DEPRECATIONS_HELPER=disabled \
   SIMPLETEST_BASE_URL=http://$DRUPAL_HOST:$DRUPAL_PORT \
   SIMPLETEST_DB=sqlite://tmp/test.sqlite \
   MINK_DRIVER_ARGS_WEBDRIVER='["chrome", null, "'$WD_URL'"]' \

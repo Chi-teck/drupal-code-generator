@@ -35,7 +35,7 @@ class BarSubscriber implements EventSubscriberInterface {
    * Kernel request event handler.
    */
   public function onKernelRequest() {
-    drupal_set_message($this->t('Bar subscriber is active.'));
+    \Drupal::messenger()->addStatus($this->t('Bar subscriber is active.'));
   }
 
   /**

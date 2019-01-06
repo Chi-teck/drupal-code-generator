@@ -16,7 +16,7 @@ class BarLog extends DbLog {
    * {@inheritdoc}
    */
   public function log($level, $message, array $context = []) {
-    drupal_set_message($this->t('Bar logger is active.'));
+    \Drupal::messenger()->addStatus($this->t('Bar logger is active.'));
     parent::log($level, $message, $context);
   }
 

@@ -38,6 +38,11 @@ use Drupal\foo\ExampleInterface;
  *     "id" = "id",
  *     "label" = "label",
  *     "uuid" = "uuid"
+ *   },
+ *   config_export = {
+ *     "id",
+ *     "label",
+ *     "description"
  *   }
  * )
  */

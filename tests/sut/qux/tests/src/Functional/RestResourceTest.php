@@ -94,7 +94,7 @@ class RestResourceTest extends ResourceTestBase {
 
     // -- Test GET method.
     $method = 'GET';
-    $url = Url::fromRoute($route_prefix . $method . '.' . self::$format, ['id' => 1, '_format' => self::$format]);
+    $url = Url::fromRoute($route_prefix . $method, ['id' => 1, '_format' => self::$format]);
     $response = $this->request($method, $url, []);
 
     self::assertEquals(200, $response->getStatusCode());
@@ -102,7 +102,7 @@ class RestResourceTest extends ResourceTestBase {
     self::assertEquals($expected_body, $response->getBody());
 
     // Request for non existing record should return 404.
-    $url = Url::fromRoute($route_prefix . $method . '.' . self::$format, ['id' => 100, '_format' => self::$format]);
+    $url = Url::fromRoute($route_prefix . $method, ['id' => 100, '_format' => self::$format]);
     $response = $this->request($method, $url, []);
     self::assertEquals(404, $response->getStatusCode());
 
