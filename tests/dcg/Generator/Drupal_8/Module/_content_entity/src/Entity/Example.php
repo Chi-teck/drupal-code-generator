@@ -31,9 +31,7 @@ use Drupal\user\UserInterface;
  *     }
  *   },
  *   base_table = "foo_example",
- *   data_table = "foo_example_field_data",
  *   revision_table = "foo_example_revision",
- *   revision_data_table = "foo_example_field_revision",
  *   show_revision_ui = TRUE,
  *   admin_permission = "administer example",
  *   entity_keys = {

@@ -59,7 +59,7 @@ class ContentEntityTest extends BrowserTestBase {
     self::assertEquals('administer example', $entity_type->getAdminPermission());
     self::assertNull($entity_type->getBundleEntityType());
     self::assertEquals('Example bundle', $entity_type->getBundleLabel());
-    self::assertEquals('example_field_data', $entity_type->getDataTable());
+    self::assertNull($entity_type->getDataTable());
 
     $handlers = [
       'view_builder' => 'Drupal\sigma\ExampleViewBuilder',
