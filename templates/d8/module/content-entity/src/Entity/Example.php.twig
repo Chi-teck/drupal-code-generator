@@ -119,6 +119,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   use EntityChangedTrait;
 
 {% endif %}
+{% if author_base_field %}
   /**
    * {@inheritdoc}
    *
@@ -127,11 +128,10 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
-{% if author_base_field %}
     $values += ['uid' => \Drupal::currentUser()->id()];
-{% endif %}
   }
 
+{% endif %}
 {% if title_base_field %}
   /**
    * {@inheritdoc}
