@@ -119,6 +119,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   use EntityChangedTrait;
 
 {% endif %}
+{% if author_base_field %}
   /**
    * {@inheritdoc}
    *
@@ -130,6 +131,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
     $values += ['uid' => \Drupal::currentUser()->id()];
   }
 
+{% endif %}
 {% if title_base_field %}
   /**
    * {@inheritdoc}
