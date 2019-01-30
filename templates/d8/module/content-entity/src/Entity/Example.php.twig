@@ -6,7 +6,9 @@ namespace Drupal\{{ machine_name }}\Entity;
 {% if not revisionable %}
 use Drupal\Core\Entity\ContentEntityBase;
 {% endif %}
+{% if author_base_field %}
 use Drupal\Core\Entity\EntityStorageInterface;
+{% endif %}
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 {% if revisionable %}
