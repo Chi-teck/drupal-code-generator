@@ -127,7 +127,7 @@ class ContentEntityTest extends BrowserTestBase {
     $entity = Example::load(1);
     self::assertEquals(1, $entity->id());
     self::assertEquals('Beer', $entity->getTitle());
-    \Drupal::service('plugin.cache_clearer')->clearCachedDefinitions();
+    drupal_flush_all_caches();
     self::assertEquals('Dark', $entity->get('field_foo')->getString());
 
     $edit = [

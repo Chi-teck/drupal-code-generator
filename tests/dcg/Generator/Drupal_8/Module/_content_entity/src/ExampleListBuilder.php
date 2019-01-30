@@ -90,9 +90,9 @@ class FooExampleListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\foo\Entity\FooExample */
+    /* @var $entity \Drupal\foo\FooExampleInterface */
     $row['id'] = $entity->id();
-    $row['title'] = $entity->link();
+    $row['title'] = $entity->toLink();
     $row['status'] = $entity->isEnabled() ? $this->t('Enabled') : $this->t('Disabled');
     $row['uid']['data'] = [
       '#theme' => 'username',

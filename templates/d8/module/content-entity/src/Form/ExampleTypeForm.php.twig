@@ -110,7 +110,7 @@ class {{ class_prefix }}TypeForm extends BundleEntityFormBase {
     $this->messenger()->addStatus($message);
 
     $this->entityManager->clearCachedFieldDefinitions();
-    $form_state->setRedirectUrl($entity_type->urlInfo('collection'));
+    $form_state->setRedirectUrl($entity_type->toUrl('collection'));
   }
 
 }
