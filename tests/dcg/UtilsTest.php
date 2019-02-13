@@ -356,6 +356,21 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
+   * @covers \DrupalCodeGenerator\Utils::pluginClassQuestion
+   */
+  public function testPluginClassQuestion() {
+    $question = Utils::pluginClassQuestion('Formatter');
+    self::assertEquals('Plugin class', $question->getQuestion());
+
+    $default = $question->getDefault();
+    $vars['machine_name'] = 'example';
+    $vars['plugin_id'] = 'example_foo';
+    static::assertEquals($default($vars), 'FooFormatter');
+  }
+
+  /**
+   * Test callback.
+   *
    * @covers \DrupalCodeGenerator\Utils::defaultPluginQuestions
    */
   public function testDefaultPluginQuestions() {

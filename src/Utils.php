@@ -17,6 +17,17 @@ class Utils {
   }
 
   /**
+   * Creates plugin class question.
+   */
+  public static function pluginClassQuestion($suffix = '') {
+    $default_class = function ($vars) use ($suffix) {
+      $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
+      return Utils::camelize($unprefixed_plugin_id) . $suffix;
+    };
+    return new Question('Plugin class', $default_class);
+  }
+
+  /**
    * Transforms a machine name to human name.
    */
   public static function machine2human($machine_name) {
