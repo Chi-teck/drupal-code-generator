@@ -17,8 +17,8 @@ class EntityReferenceSelectionTest extends GeneratorBaseTest {
     'Entity type that can be referenced by this plugin [node]:' => 'node',
     'Plugin label [Advanced node selection]:' => 'Advanced node selection',
     'Plugin ID [example_advanced_node_selection]:' => 'example_advanced_node_selection',
+    'Class [NodeSelection]:' => 'ExampleNodeSelection',
     'Provide additional plugin configuration? [No]:' => 'Yes',
-    'Class [ExampleNodeSelection]:' => 'ExampleNodeSelection',
   ];
 
   protected $fixtures = [

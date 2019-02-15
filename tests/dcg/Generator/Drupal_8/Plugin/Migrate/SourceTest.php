@@ -27,6 +27,7 @@ class SourceTest extends GeneratorBaseTest {
       'Module name [%default_name%]:' => 'Example',
       'Module machine name [example]:' => 'example',
       'Plugin ID [example_example]:' => 'example_foo',
+      'Plugin class [Foo]:' => 'Foo',
       $data_type_output => 1,
     ];
     $fixtures = [
@@ -39,6 +40,7 @@ class SourceTest extends GeneratorBaseTest {
       'Module name [%default_name%]:' => 'Example',
       'Module machine name [example]:' => 'example',
       'Plugin ID [example_example]:' => 'example_bar',
+      'Plugin class [Bar]:' => 'Bar',
       $data_type_output => 2,
     ];
     $fixtures = [

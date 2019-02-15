@@ -16,6 +16,7 @@ class FormatterTest extends GeneratorBaseTest {
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Zoo',
     'Plugin ID [foo_zoo]:' => 'foo_zoo',
+    'Plugin class [ZooFormatter]:' => 'ZooFormatter',
     'Make the formatter configurable? [No]:' => 'Yes',
   ];
 

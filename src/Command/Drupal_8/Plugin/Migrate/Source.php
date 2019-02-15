@@ -22,10 +22,10 @@ class Source extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-
     $questions = Utils::defaultQuestions();
     $questions['plugin_id'] = new Question('Plugin ID', '{machine_name}_example');
     $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
+    $questions['class'] = Utils::pluginClassQuestion();
 
     $source_types = [
       'sql' => 'SQL',
@@ -36,8 +36,6 @@ class Source extends BaseGenerator {
 
     $vars = &$this->collectVars($input, $output, $questions);
 
-    $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
-    $vars['class'] = Utils::camelize($unprefixed_plugin_id);
     $vars['base_class'] = $vars['source_type'] == 'sql' ? 'SqlBase' : 'SourcePluginBase';
 
     $this->addFile()

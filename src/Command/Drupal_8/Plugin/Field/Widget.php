@@ -22,10 +22,11 @@ class Widget extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
+    $questions['class'] = Utils::pluginClassQuestion('Widget');
+
     $questions['configurable'] = new ConfirmationQuestion('Make the widget configurable?', FALSE);
 
-    $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Widget';
+    $vars = $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldWidget/{class}.php')

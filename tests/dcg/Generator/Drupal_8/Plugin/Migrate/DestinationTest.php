@@ -15,6 +15,7 @@ class DestinationTest extends GeneratorBaseTest {
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Plugin ID [example_example]:' => 'example_bar',
+    'Plugin class [Bar]:' => 'Bar',
   ];
 
   protected $fixtures = [

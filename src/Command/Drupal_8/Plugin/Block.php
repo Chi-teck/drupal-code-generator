@@ -25,6 +25,7 @@ class Block extends BaseGenerator {
     $questions = Utils::defaultPluginQuestions();
     $questions['plugin_label'] = new Question('Block admin label', 'Example');
     $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
+    $questions['class'] = Utils::pluginClassQuestion('Block');
     $questions['category'] = new Question('Block category', 'Custom');
     $questions['configurable'] = new ConfirmationQuestion('Make the block configurable?', FALSE);
 
@@ -36,9 +37,7 @@ class Block extends BaseGenerator {
     }
 
     $access_question = new ConfirmationQuestion('Create access callback?', FALSE);
-    $vars = &$this->collectVars($input, $output, ['access' => $access_question]);
-
-    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Block';
+    $vars = $this->collectVars($input, $output, ['access' => $access_question]);
 
     $this->addFile()
       ->path('src/Plugin/Block/{class}.php')

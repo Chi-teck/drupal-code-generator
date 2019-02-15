@@ -37,6 +37,12 @@ class Constraint extends BaseGenerator {
     };
     $questions['plugin_id']->setValidator($plugin_id_validator);
 
+    $default_class = function ($vars) {
+      $unprefixed_plugin_id = preg_replace('/^' . Utils::camelize($vars['machine_name']) . '/', '', $vars['plugin_id']);
+      return Utils::camelize($unprefixed_plugin_id) . 'Constraint';
+    };
+    $questions['class'] = new Question('Plugin class', $default_class);
+
     $input_types = [
       'entity' => 'Entity',
       'item_list' => 'Item list',
@@ -47,7 +53,6 @@ class Constraint extends BaseGenerator {
     $questions['input_type'] = new ChoiceQuestion('Type of data to validate', $type_choices, 'Item list');
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Constraint';
     $vars['input_type'] = array_search($vars['input_type'], $input_types);
 
     $this->addFile()

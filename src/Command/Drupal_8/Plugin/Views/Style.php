@@ -21,9 +21,9 @@ class Style extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
+    $questions['class'] = Utils::pluginClassQuestion();
 
-    $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label']);
+    $vars = $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('src/Plugin/views/style/{class}.php')

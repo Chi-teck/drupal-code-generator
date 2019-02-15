@@ -30,6 +30,7 @@ class ConstraintTest extends GeneratorBaseTest {
       'Module machine name [foo]:' => 'foo',
       'Plugin label [Example]:' => 'Alpha',
       'Constraint ID [FooAlpha]:' => 'FooAlpha',
+      'Plugin class [AlphaConstraint]:' => 'AlphaConstraint',
       $data_type_output => 1,
     ];
     $fixtures = [
@@ -44,6 +45,7 @@ class ConstraintTest extends GeneratorBaseTest {
       'Module machine name [foo]:' => 'foo',
       'Plugin label [Example]:' => 'Beta',
       'Constraint ID [FooBeta]:' => 'FooBeta',
+      'Plugin class [BetaConstraint]:' => 'BetaConstraint',
       $data_type_output => 2,
     ];
     $fixtures = [
@@ -58,6 +60,7 @@ class ConstraintTest extends GeneratorBaseTest {
       'Module machine name [foo]:' => 'foo',
       'Plugin label [Example]:' => 'Gamma',
       'Constraint ID [FooGamma]:' => 'FooGamma',
+      'Plugin class [GammaConstraint]:' => 'GammaConstraint',
       $data_type_output => 3,
     ];
     $fixtures = [
@@ -72,6 +75,7 @@ class ConstraintTest extends GeneratorBaseTest {
       'Module machine name [foo]:' => 'foo',
       'Plugin label [Example]:' => 'Delta',
       'Constraint ID [FooDelta]:' => 'FooDelta',
+      'Plugin class [DeltaConstraint]:' => 'DeltaConstraint',
       $data_type_output => 4,
     ];
     $fixtures = [

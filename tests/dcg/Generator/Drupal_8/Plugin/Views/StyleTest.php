@@ -16,6 +16,7 @@ class StyleTest extends GeneratorBaseTest {
     'Module machine name [example]:' => 'example',
     'Plugin label [Example]:' => 'Foo',
     'Plugin ID [example_foo]:' => 'example_foo',
+    'Plugin class [Foo]:' => 'Foo',
   ];
 
   protected $fixtures = [

@@ -15,6 +15,7 @@ class ProcessTest extends GeneratorBaseTest {
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Plugin ID [example_example]:' => 'example_qux',
+    'Plugin class [Qux]:' => 'Qux',
   ];
 
   protected $fixtures = [

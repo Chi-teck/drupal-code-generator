@@ -22,9 +22,9 @@ class RestResource extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
+    $questions['class'] = Utils::pluginClassQuestion('Resource');
 
-    $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label']) . 'Resource';
+    $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('src/Plugin/rest/resource/{class}.php')

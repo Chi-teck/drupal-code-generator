@@ -16,6 +16,7 @@ class ActionTest extends GeneratorBaseTest {
     'Module machine name [example]:' => 'example',
     'Action label [Update node title]:' => 'Foo',
     'Plugin ID [example_foo]:' => 'example_foo',
+    'Plugin class [Foo]:' => 'Foo',
     'Action category [Custom]:' => 'Custom',
     'Make the action configurable? [No]:' => 'yes',
   ];

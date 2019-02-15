@@ -16,6 +16,7 @@ class BlockTest extends GeneratorBaseTest {
     'Module machine name [foo]:' => 'foo',
     'Block admin label [Example]:' => 'Example',
     'Plugin ID [foo_example]:' => 'foo_example',
+    'Plugin class [ExampleBlock]:' => 'ExampleBlock',
     'Block category [Custom]:' => 'Custom',
     'Make the block configurable? [No]:' => 'Yes',
     'Would you like to inject dependencies? [No]:' => 'Yes',

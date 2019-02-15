@@ -21,9 +21,9 @@ class ArgumentDefault extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultPluginQuestions();
+    $questions['class'] = Utils::pluginClassQuestion();
 
-    $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['plugin_label']);
+    $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('src/Plugin/views/argument_default/{class}.php')

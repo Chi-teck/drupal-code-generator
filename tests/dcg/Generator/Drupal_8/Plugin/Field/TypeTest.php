@@ -16,6 +16,7 @@ class TypeTest extends GeneratorBaseTest {
     'Module machine name [example]:' => 'example',
     'Plugin label [Example]:' => 'Foo',
     'Plugin ID [example_foo]:' => 'foo',
+    'Plugin class [FooItem]:' => 'FooItem',
     'Make the field storage configurable? [No]:' => 'Yes',
     'Make the field instance configurable? [No]:' => 'Yes',
   ];

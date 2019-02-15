@@ -16,6 +16,7 @@ class FieldTest extends GeneratorBaseTest {
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Example',
     'Plugin ID [foo_example]:' => 'foo_example',
+    'Plugin class [Example]:' => 'Example',
   ];
 
   protected $fixtures = [
