@@ -21,8 +21,8 @@ class Widget extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultPluginQuestions();
-    $questions['class'] = Utils::pluginClassQuestion('Widget');
+    $questions = Utils::moduleQuestions();
+    $questions += Utils::pluginQuestions('Widget');
 
     $questions['configurable'] = new ConfirmationQuestion('Make the widget configurable?', FALSE);
 

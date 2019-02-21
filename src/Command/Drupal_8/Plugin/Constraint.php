@@ -22,7 +22,7 @@ class Constraint extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultPluginQuestions();
+    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
 
     $default_plugin_id = function (array $vars) {
       // Unlike other plugin types. Constraint IDs use camel case.

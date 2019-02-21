@@ -21,7 +21,8 @@ class MenuLink extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
+
     $default_class = function ($vars) {
       return Utils::camelize($vars['machine_name']) . 'MenuLink';
     };

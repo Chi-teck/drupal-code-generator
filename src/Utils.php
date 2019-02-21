@@ -9,22 +9,13 @@ use Symfony\Component\Console\Question\Question;
  */
 class Utils {
 
+  use LegacyUtilsTrait;
+
   /**
    * Creates default plugin ID.
    */
   public static function defaultPluginId(array $vars) {
     return $vars['machine_name'] . '_' . self::human2machine($vars['plugin_label']);
-  }
-
-  /**
-   * Creates plugin class question.
-   */
-  public static function pluginClassQuestion($suffix = '') {
-    $default_class = function ($vars) use ($suffix) {
-      $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
-      return Utils::camelize($unprefixed_plugin_id) . $suffix;
-    };
-    return new Question('Plugin class', $default_class);
   }
 
   /**
@@ -110,46 +101,12 @@ class Utils {
   }
 
   /**
-   * Returns normalized file path.
-   *
-   * @codeCoverageIgnore
-   * @deprecated
-   */
-  public static function normalizePath($path) {
-    $parts = [];
-    $path = str_replace('\\', '/', $path);
-    $path = preg_replace('/\/+/', '/', $path);
-    $segments = explode('/', $path);
-    foreach ($segments as $segment) {
-      if ($segment != '.') {
-        $test = array_pop($parts);
-        if (is_null($test)) {
-          $parts[] = $segment;
-        }
-        elseif ($segment == '..') {
-          if ($test == '..') {
-            $parts[] = $test;
-          }
-          if ($test == '..' || $test == '') {
-            $parts[] = $segment;
-          }
-        }
-        else {
-          $parts[] = $test;
-          $parts[] = $segment;
-        }
-      }
-    }
-    return implode('/', $parts);
-  }
-
-  /**
    * Returns default questions for module generators.
    *
    * @return \Symfony\Component\Console\Question\Question[]
-   *   Array of default questions.
+   *   Array of module questions.
    */
-  public static function defaultQuestions() {
+  public static function moduleQuestions() {
     $questions['name'] = new Question('Module name');
     $questions['name']->setValidator([Utils::class, 'validateRequired']);
     $questions['machine_name'] = new Question('Module machine name');
@@ -161,15 +118,26 @@ class Utils {
    * Returns default questions for plugin generators.
    *
    * @return \Symfony\Component\Console\Question\Question[]
-   *   Array of default questions.
+   *   Array of plugin questions.
    */
-  public static function defaultPluginQuestions() {
-    $questions = Utils::defaultQuestions();
+  public static function pluginQuestions($class_suffix = '') {
     $questions['plugin_label'] = new Question('Plugin label', 'Example');
     $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
     $questions['plugin_id'] = new Question('Plugin ID', [Utils::class, 'defaultPluginId']);
     $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
+    $questions['class'] = static::pluginClassQuestion($class_suffix);
     return $questions;
+  }
+
+  /**
+   * Creates plugin class question.
+   */
+  public static function pluginClassQuestion($suffix = '') {
+    $default_class = function ($vars) use ($suffix) {
+      $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
+      return Utils::camelize($unprefixed_plugin_id) . $suffix;
+    };
+    return new Question('Plugin class', $default_class);
   }
 
   /**
@@ -216,7 +184,7 @@ class Utils {
    * @return string
    *   Text with tokens replaced.
    */
-  public static function tokenReplace($text, array $data) {
+  public static function replaceTokens($text, array $data) {
     $tokens = [];
     foreach ($data as $var_name => $var) {
       if (is_string($var)) {

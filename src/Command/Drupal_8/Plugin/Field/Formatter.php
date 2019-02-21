@@ -21,8 +21,8 @@ class Formatter extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultPluginQuestions();
-    $questions['class'] = Utils::pluginClassQuestion('Formatter');
+    $questions = Utils::moduleQuestions();
+    $questions += Utils::pluginQuestions('Formatter');
     $questions['configurable'] = new ConfirmationQuestion('Make the formatter configurable?', FALSE);
 
     $vars = $this->collectVars($input, $output, $questions);

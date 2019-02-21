@@ -20,8 +20,7 @@ class Style extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultPluginQuestions();
-    $questions['class'] = Utils::pluginClassQuestion();
+    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
 
     $vars = $this->collectVars($input, $output, $questions);
 

@@ -22,10 +22,11 @@ class Block extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultPluginQuestions();
+
+    $questions = Utils::moduleQuestions();
+    $questions += Utils::pluginQuestions('Block');
     $questions['plugin_label'] = new Question('Block admin label', 'Example');
     $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
-    $questions['class'] = Utils::pluginClassQuestion('Block');
     $questions['category'] = new Question('Block category', 'Custom');
     $questions['configurable'] = new ConfirmationQuestion('Make the block configurable?', FALSE);
 

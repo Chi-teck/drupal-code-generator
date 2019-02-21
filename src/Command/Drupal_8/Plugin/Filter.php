@@ -21,8 +21,7 @@ class Filter extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultPluginQuestions();
-    $questions['class'] = Utils::pluginClassQuestion();
+    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
 
     $filter_types = [
       'TYPE_HTML_RESTRICTOR' => 'HTML restrictor',

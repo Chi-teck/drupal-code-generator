@@ -31,7 +31,7 @@ class EntityReferenceSelection extends BaseGenerator {
       'user' => 'Drupal\user\Plugin\EntityReferenceSelection\UserSelection',
     ];
 
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
 
     $questions['entity_type'] = new Question('Entity type that can be referenced by this plugin', 'node');
     $questions['entity_type']->setValidator([Utils::class, 'validateMachineName']);
@@ -46,7 +46,7 @@ class EntityReferenceSelection extends BaseGenerator {
     $default_class = function ($vars) {
       return Utils::camelize($vars['entity_type']) . 'Selection';
     };
-    $questions['class'] = new Question('Class', $default_class);
+    $questions['class'] = new Question('Plugin class', $default_class);
 
     $questions['configurable'] = new ConfirmationQuestion('Provide additional plugin configuration?', FALSE);
     $vars = &$this->collectVars($input, $output, $questions);

@@ -21,8 +21,8 @@ class RestResource extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::defaultPluginQuestions();
-    $questions['class'] = Utils::pluginClassQuestion('Resource');
+    $questions = Utils::moduleQuestions();
+    $questions += Utils::pluginQuestions('Resource');
 
     $this->collectVars($input, $output, $questions);
 
