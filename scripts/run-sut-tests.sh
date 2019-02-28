@@ -45,7 +45,7 @@ function dcg_phpcs {
 
 function dcg_phpunit {
   SIMPLETEST_BASE_URL=http://$DRUPAL_HOST:$DRUPAL_PORT \
-  SIMPLETEST_DB=sqlite://tmp/test.sqlite \
+  SIMPLETEST_DB=sqlite://localhost//dev/shm/dcg_test.sqlite \
   MINK_DRIVER_ARGS_WEBDRIVER='["chrome", null, "'$WD_URL'"]' \
   $DRUPAL_DIR/vendor/bin/phpunit \
   -c $DRUPAL_DIR/core \
