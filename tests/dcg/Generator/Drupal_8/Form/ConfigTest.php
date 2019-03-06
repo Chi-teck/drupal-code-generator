@@ -17,12 +17,15 @@ class ConfigTest extends GeneratorBaseTest {
     'Class [SettingsForm]:' => 'SettingsForm',
     'Would you like to create a route for this form? [Yes]:' => 'Yes',
     'Route name [foo.settings]:' => 'foo.example',
-    'Route path [/admin/settings]:' => '/foo/example',
+    'Route path [/admin/config/system/settings]:' => '/admin/config/content/example',
     'Route title [Settings]:' => 'Yo',
     'Route permission [administer site configuration]:' => 'administer site configuration',
+    'Would you like to create a menu link for this route? [Yes]:' => 'Yes',
+    'Parent menu item [system.admin_config_content]:' => 'system.admin_config_content',
   ];
 
   protected $fixtures = [
+    'foo.links.menu.yml' => __DIR__ . '/_config_menu.links.yml',
     'foo.routing.yml' => __DIR__ . '/_config_routing.yml',
     'src/Form/SettingsForm.php' => __DIR__ . '/_config.php',
   ];

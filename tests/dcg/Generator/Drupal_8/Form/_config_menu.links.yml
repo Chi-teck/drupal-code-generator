@@ -1,0 +1,5 @@
+foo.example:
+  title: Yo
+  parent: system.admin_config_content
+  route_name: foo.example
+  weight: 10

@@ -1,5 +1,5 @@
 foo.example:
-  path: '/foo/example'
+  path: '/admin/config/content/example'
   defaults:
     _title: 'Yo'
     _form: 'Drupal\foo\Form\SettingsForm'
