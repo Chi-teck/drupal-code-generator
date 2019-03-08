@@ -21,6 +21,8 @@ class ConfigTest extends GeneratorBaseTest {
     'Route title [Settings]:' => 'Yo',
     'Route permission [administer site configuration]:' => 'administer site configuration',
     'Would you like to create a menu link for this route? [Yes]:' => 'Yes',
+    'Link title [Yo]:' => 'Foo settings',
+    'Link description:' => 'Configure foo.',
     'Parent menu item [system.admin_config_content]:' => 'system.admin_config_content',
   ];
 

@@ -28,15 +28,21 @@ class Config extends Base {
     ];
     $this->doInteract($input, $output, $options);
 
-    if ($this->vars['route']) {
+    $vars = &$this->vars;
+
+    if ($vars['route']) {
       $link_question = new ConfirmationQuestion('Would you like to create a menu link for this route?', TRUE);
-      $this->vars['link'] = $this->ask($input, $output, $link_question);
-      if ($this->vars['link']) {
+      $vars['link'] = $this->ask($input, $output, $link_question);
+      if ($vars['link']) {
+
+        $questions['link_title'] = new Question('Link title', $vars['route_title']);
+        $questions['link_description'] = new Question('Link description');
         // Try to guess parent menu item using route path.
-        if (preg_match('#^/admin/config/([^/]+)/[^/]+$#', $this->vars['route_path'], $matches)) {
-          $link_parent_question = new Question('Parent menu item', 'system.admin_config_' . $matches[1]);
-          $this->vars['link_parent'] = $this->ask($input, $output, $link_parent_question);
+        if (preg_match('#^/admin/config/([^/]+)/[^/]+$#', $vars['route_path'], $matches)) {
+          $questions['link_parent'] = new Question('Parent menu item', 'system.admin_config_' . $matches[1]);
         }
+
+        $this->collectVars($input, $output, $questions);
         $this->addFile()
           ->path('{machine_name}.links.menu.yml')
           ->template('d8/form/links.menu.twig')

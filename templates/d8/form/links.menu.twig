@@ -1,5 +1,8 @@
 {{ route_name }}:
-  title: {{ route_title }}
+  title: {{ link_title }}
+{% if link_description %}
+  description: {{ link_description }}
+{% endif %}
 {% if link_parent %}
   parent: {{ link_parent }}
 {% endif %}
