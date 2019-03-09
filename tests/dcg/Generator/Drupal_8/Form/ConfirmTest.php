@@ -17,7 +17,7 @@ class ConfirmTest extends GeneratorBaseTest {
     'Class [ExampleConfirmForm]:' => 'ExampleConfirmForm',
     'Would you like to create a route for this form? [Yes]:' => 'Yes',
     'Route name [foo.example_confirm]:' => 'foo.example',
-    'Route path [/admin/example-confirm]:' => '/foo/example',
+    'Route path [/foo/example-confirm]:' => '/foo/example',
     'Route title [Example confirm]:' => 'Wow',
     'Route permission [administer site configuration]:' => 'administer site configuration',
   ];

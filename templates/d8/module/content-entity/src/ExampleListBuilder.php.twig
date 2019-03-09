@@ -65,9 +65,10 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
   public function render() {
     $build['table'] = parent::render();
 
-    $total = \Drupal::database()
-      ->query('SELECT COUNT(*) FROM {{ '{' }}{{ entity_type_id }}{{ '}' }}')
-      ->fetchField();
+    $total = $this->getStorage()
+      ->getQuery()
+      ->count()
+      ->execute();
 
     $build['summary']['#markup'] = $this->t('Total {{ entity_type_label|lower|plural }}: @total', ['@total' => $total]);
     return $build;
