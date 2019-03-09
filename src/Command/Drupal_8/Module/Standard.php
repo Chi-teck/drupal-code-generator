@@ -150,7 +150,7 @@ class Standard extends BaseGenerator {
       ];
       $this->addFile()
         ->path($prefix . '.routing.yml')
-        ->template('d8/form/route.twig')
+        ->template('d8/form/routing.twig')
         ->vars($routing_vars + $vars)
         ->action('append');
     }

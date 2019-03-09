@@ -65,9 +65,10 @@ class FooExampleListBuilder extends EntityListBuilder {
   public function render() {
     $build['table'] = parent::render();
 
-    $total = \Drupal::database()
-      ->query('SELECT COUNT(*) FROM {foo_example}')
-      ->fetchField();
+    $total = $this->getStorage()
+      ->getQuery()
+      ->count()
+      ->execute();
 
     $build['summary']['#markup'] = $this->t('Total examples: @total', ['@total' => $total]);
     return $build;
