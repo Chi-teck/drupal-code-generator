@@ -1,10 +1,13 @@
+{% if bundle %}
 administer {{ entity_type_label|lower }} types:
   title: 'Administer {{ entity_type_label|lower }} types'
   description: 'Maintain the types of {{ entity_type_label|lower }} entity.'
   restrict access: true
+{% elseif fieldable %}
 administer {{ entity_type_label|lower }}:
-  title: Administer {{ entity_type_label|lower }} settings
+  title: 'Administer {{ entity_type_label|lower }} settings'
   restrict access: true
+{% endif %}
 access {{ entity_type_label|lower }} overview:
   title: 'Access {{ entity_type_label|lower }} overview page'
 {% if access_controller %}

@@ -15,7 +15,9 @@ function dcg_on_exit {
 trap dcg_on_exit EXIT
 
 SELF_PATH=$(dirname $0)/../tests/sut
-DRUPAL_VERSION=${DRUPAL_VERSION:-8.7.x-dev}
+if [ -z $DRUPAL_VERSION ]; then
+  DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '8\..\.x' | tail -n1)'-dev'
+fi
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
 DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
 DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
