@@ -70,7 +70,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   translatable = TRUE,
 {% endif %}
 {% if bundle %}
- *   admin_permission = "{{ entity_type_label|lower }} types",
+ *   admin_permission = "administer {{ entity_type_label|lower }} types",
 {% elseif fieldable %}
  *   admin_permission = "administer {{ entity_type_label|lower }}",
  {% endif %}

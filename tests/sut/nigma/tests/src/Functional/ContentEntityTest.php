@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\model\Functional;
+namespace Drupal\Tests\nigma\Functional;
 
 use Drupal\nigma\Entity\Example;
 use TestBase\BrowserTestBase;
@@ -25,8 +25,10 @@ class ContentEntityTest extends BrowserTestBase {
     $permissions = [
       'administer example types',
       'administer example fields',
-      'administer example',
       'view example',
+      'create example',
+      'edit example',
+      'delete example',
     ];
     $admin_user = $this->drupalCreateUser($permissions, 'example_admin');
     $this->drupalLogin($admin_user);
@@ -68,7 +70,7 @@ class ContentEntityTest extends BrowserTestBase {
     self::assertEquals('example', $entity_type->getBaseTable());
     self::assertEquals('Drupal\nigma\Entity\Example', $entity_type->getClass());
     self::assertEquals('Drupal\nigma\ExampleAccessControlHandler', $entity_type->getAccessControlClass());
-    self::assertEquals('administer example', $entity_type->getAdminPermission());
+    self::assertEquals('administer example types', $entity_type->getAdminPermission());
     self::assertEquals('example_type', $entity_type->getBundleEntityType());
     self::assertEquals('Example type', $entity_type->getBundleLabel());
     self::assertEquals('example_field_data', $entity_type->getDataTable());

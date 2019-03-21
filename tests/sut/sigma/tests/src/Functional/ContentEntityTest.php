@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\model\Functional;
+namespace Drupal\Tests\sigma\Functional;
 
 use Drupal\sigma\Entity\Example;
 use TestBase\BrowserTestBase;
@@ -23,9 +23,8 @@ class ContentEntityTest extends BrowserTestBase {
   public function testEntityTypeUi() {
 
     $permissions = [
-      'administer example types',
-      'administer example fields',
       'administer example',
+      'administer example fields',
     ];
     $admin_user = $this->drupalCreateUser($permissions);
     $this->drupalLogin($admin_user);
