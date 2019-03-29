@@ -3,5 +3,7 @@ type: module
 description: Helper module for testing generated plugins.
 package: DCG
 dependencies:
+  - drupal:filter
+  - drupal:ckeditor
   - example:example
 core: 8.x

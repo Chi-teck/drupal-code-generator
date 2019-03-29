@@ -1,0 +1,15 @@
+format: test
+name: Test
+roles:
+  - anonymous
+  - authenticated
+status: true
+langcode: en
+filters:
+  filter_url:
+    id: filter_url
+    provider: filter
+    status: true
+    weight: 0
+    settings:
+      filter_url_length: 72

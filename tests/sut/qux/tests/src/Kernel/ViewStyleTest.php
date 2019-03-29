@@ -18,7 +18,16 @@ class ViewStyleTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['qux', 'system', 'user', 'views', 'node', 'filter'];
+  public static $modules = [
+    'qux',
+    'system',
+    'user',
+    'views',
+    'node',
+    'filter',
+    'editor',
+    'ckeditor',
+  ];
 
   /**
    * {@inheritdoc}
@@ -28,6 +37,7 @@ class ViewStyleTest extends KernelTestBase {
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
     $this->installConfig('filter');
+    $this->installConfig('editor');
     $this->installConfig('qux');
     $this->createNode(['title' => 'Hello world!']);
   }
