@@ -26,20 +26,20 @@ class ViewsArgumentDefaultTest extends KernelTestBase {
     $plugin_manager = \Drupal::service('plugin.manager.views.argument_default');
 
     $plugin = $plugin_manager->createInstance('qux_example');
-    $plugin->options['example_option'] = 'abc';
+    $plugin->options['example'] = 'abc';
 
-    $expected_form['example_option'] = [
+    $expected_form['example'] = [
       '#type' => 'textfield',
-      '#title' => t('Some example option'),
+      '#title' => t('Example'),
       '#default_value' => 'abc',
     ];
     $form = [];
     $plugin->buildOptionsForm($form, new FormState());
     self::assertEquals($expected_form, $form);
 
-    self::assertEquals('abc', $plugin->getArgument());
+    self::assertEquals('123', $plugin->getArgument());
     self::assertEquals(Cache::PERMANENT, $plugin->getCacheMaxAge());
-    self::assertEquals(['url'], $plugin->getCacheContexts());
+    self::assertEquals([], $plugin->getCacheContexts());
   }
 
 }

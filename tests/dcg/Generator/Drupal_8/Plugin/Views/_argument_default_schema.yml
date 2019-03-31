@@ -1,0 +1,7 @@
+views.argument_default.foo_example:
+  type: mapping
+  label: 'Example'
+  mapping:
+    example:
+      type: string
+      label: 'Example'

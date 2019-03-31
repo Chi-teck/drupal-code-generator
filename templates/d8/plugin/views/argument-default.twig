@@ -1,16 +1,23 @@
+{% import 'lib/di.twig' as di %}
 <?php
 
 namespace Drupal\{{ machine_name }}\Plugin\views\argument_default;
 
+{% sort %}
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
+  {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Routing\RouteMatchInterface;
+  {% endif %}
 use Drupal\views\Plugin\views\argument_default\ArgumentDefaultPluginBase;
+  {% if services %}
+{{ di.use(services) }}
 use Symfony\Component\DependencyInjection\ContainerInterface;
+  {% endif %}
+{% endsort %}
 
 /**
- * Example of argument default plugin.
+ * {{ plugin_label }} argument default plugin.
  *
  * @ViewsArgumentDefault(
  *   id = "{{ plugin_id }}",
@@ -19,32 +26,26 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
 
-  /**
-   * The route match.
-   *
-   * @var \Drupal\Core\Routing\RouteMatchInterface
-   */
-  protected $routeMatch;
+{% if services %}
+{{ di.properties(services) }}
 
   /**
    * Constructs a new {{ class }} instance.
    *
    * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
+   *   The plugin configuration, i.e. an array with configuration values keyed
+   *   by configuration option name. The special key 'context' may be used to
+   *   initialize the defined contexts by setting it to an array of context
+   *   values keyed by context names.
    * @param string $plugin_id
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
-   *   The route match.
+{{ di.annotation(services) }}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, RouteMatchInterface $route_match) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, {{ di.signature(services) }}) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-
-    // @DCG
-    // The Route match service is used to extract argument from the current
-    // route.
-    $this->routeMatch = $route_match;
+{{ di.assignment(services) }}
   }
 
   /**
@@ -55,16 +56,18 @@ class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependen
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('current_route_match')
+{{ di.container(services) }}
     );
   }
 
+{% endif %}
+{% if configurable %}
   /**
    * {@inheritdoc}
    */
   protected function defineOptions() {
     $options = parent::defineOptions();
-    $options['example_option'] = ['default' => ''];
+    $options['example'] = ['default' => ''];
     return $options;
   }
 
@@ -72,13 +75,14 @@ class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependen
    * {@inheritdoc}
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
-    $form['example_option'] = [
+    $form['example'] = [
       '#type' => 'textfield',
-      '#title' => t('Some example option'),
-      '#default_value' => $this->options['example_option'],
+      '#title' => $this->t('Example'),
+      '#default_value' => $this->options['example'],
     ];
   }
 
+{% endif %}
   /**
    * {@inheritdoc}
    */
@@ -89,8 +93,7 @@ class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependen
     // contextual filter. The source of this argument depends on your needs.
     // For example, you can extract the value from the URL or fetch it from
     // some fields of the current viewed entity.
-    // For now let's use example option as an argument.
-    $argument = $this->options['example_option'];
+    $argument = 123;
 
     return $argument;
   }
@@ -106,7 +109,8 @@ class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependen
    * {@inheritdoc}
    */
   public function getCacheContexts() {
-    return ['url'];
+    // @DCG Use 'url' context if the argument comes from URL.
+    return [];
   }
 
 }

@@ -17,9 +17,14 @@ class ArgumentDefaultTest extends GeneratorBaseTest {
     'Plugin label [Example]:' => 'Example',
     'Plugin ID [foo_example]:' => 'foo_example',
     'Plugin class [Example]:' => 'Example',
+    'Make the plugin configurable? [No]:' => 'Yes',
+    'Would you like to inject dependencies? [No]:' => 'Yes',
+    '<1> Type the service name or use arrows up/down. Press enter to continue:' => 'current_route_match',
+    '<2> Type the service name or use arrows up/down. Press enter to continue:' => "\n",
   ];
 
   protected $fixtures = [
+    'config/schema/foo.views.schema.yml' => __DIR__ . '/_argument_default_schema.yml',
     'src/Plugin/views/argument_default/Example.php' => __DIR__ . '/_argument_default.php',
   ];
 
