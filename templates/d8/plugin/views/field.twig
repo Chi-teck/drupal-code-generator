@@ -1,25 +1,75 @@
+{% import 'lib/di.twig' as di %}
 <?php
 
 namespace Drupal\{{ machine_name }}\Plugin\views\field;
 
-use Drupal\Core\Form\FormStateInterface;
+{% sort %}
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
+  {% if configurable %}
+use Drupal\Core\Form\FormStateInterface;
+  {% endif %}
+  {% if services %}
+{{ di.use(services) }}
+use Symfony\Component\DependencyInjection\ContainerInterface;
+  {% endif %}
+{% endsort %}
 
 /**
  * Provides {{ plugin_label }} field handler.
  *
  * @ViewsField("{{ plugin_id }}")
+ *
+ * @DCG
+ * The plugin needs to be assigned to a specific table column through
+ * hook_views_data() or hook_views_data_alter().
+ * For non-existent columns (i.e. computed fields) you need to override
+ * self::query() method.
  */
 class {{ class }} extends FieldPluginBase {
 
+{% if services %}
+{{ di.properties(services) }}
+
+  /**
+   * Constructs a new {{ class }} instance.
+   *
+   * @param array $configuration
+   *   The plugin configuration, i.e. an array with configuration values keyed
+   *   by configuration option name. The special key 'context' may be used to
+   *   initialize the defined contexts by setting it to an array of context
+   *   values keyed by context names.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+{{ di.annotation(services) }}
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, {{ di.signature(services) }}) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+{{ di.assignment(services) }}
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+{{ di.container(services) }}
+    );
+  }
+
+{% endif %}
+{% if configurable %}
   /**
    * {@inheritdoc}
    */
   protected function defineOptions() {
     $options = parent::defineOptions();
-    $options['prefix'] = ['default' => ''];
-    $options['suffix'] = ['default' => ''];
+    $options['example'] = ['default' => ''];
     return $options;
   }
 
@@ -28,25 +78,21 @@ class {{ class }} extends FieldPluginBase {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
-
-    $form['prefix'] = [
+    $form['example'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Prefix'),
-      '#default_value' => $this->options['prefix'],
-    ];
-
-    $form['suffix'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Suffix'),
-      '#default_value' => $this->options['suffix'],
+      '#title' => $this->t('Example'),
+      '#default_value' => $this->options['example'],
     ];
   }
 
+{% endif %}
   /**
    * {@inheritdoc}
    */
   public function render(ResultRow $values) {
-    return $this->options['prefix'] . parent::render($values) . $this->options['suffix'];
+    $value = parent::render($values);
+    // @DCG Modify or replace the rendered value here.
+    return $value;
   }
 
 }

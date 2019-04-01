@@ -24,11 +24,11 @@ class ExampleTest extends KernelTestBase {
     $plugin = \Drupal::service('plugin.manager.views.field')
       ->createInstance('qux_example');
 
-    $plugin->options['prefix'] = '-= ';
-    $plugin->options['suffix'] = ' =-';
+    // The option isn't used anywhere.
+    $plugin->options['example'] = 'bar';
 
     $output = $plugin->render(new ResultRow(['unknown' => 'foo']));
-    self::assertEquals('-= foo =-', $output);
+    self::assertEquals('foo', $output);
   }
 
 }
