@@ -333,13 +333,12 @@ class Project extends BaseGenerator {
    *
    * @param array $section
    *   Section for the package (require|require-dev)
-   *
-   * @param $package
+   * @param string $package
    *   A package to be added.
    *
    * @todo Find a way to track versions automatically.
    */
-  protected static function addPackage(&$section, $package) {
+  protected static function addPackage(array &$section, $package) {
     $versions = [
       'drupal/core' => '^8.6',
       'composer/installers' => '^1.4',

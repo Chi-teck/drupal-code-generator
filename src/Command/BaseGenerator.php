@@ -326,32 +326,41 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Creates file asset.
    *
+   * @param string $path
+   *   (Optional) File path.
+   *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addFile() {
-    return $this->addAsset('file');
+  protected function addFile($path = NULL) {
+    return $this->addAsset('file')->path($path);
   }
 
   /**
    * Creates directory asset.
    *
+   * @param string $path
+   *   (Optional) Directory path.
+   *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addDirectory() {
-    return $this->addAsset('directory');
+  protected function addDirectory($path = NULL) {
+    return $this->addAsset('directory')->path($path);
   }
 
   /**
    * Creates service file asset.
    *
+   * @param string $path
+   *   (Optional) File path.
+   *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addServicesFile() {
+  protected function addServicesFile($path = NULL) {
     return $this->addFile()
-      ->path('{machine_name}.services.yml')
+      ->path($path ?: '{machine_name}.services.yml')
       ->action('append')
       ->headerSize(1);
   }
