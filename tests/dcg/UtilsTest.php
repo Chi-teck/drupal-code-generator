@@ -296,6 +296,23 @@ class UtilsTest extends BaseTestCase {
   }
 
   /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Utils::getOptionsValidator
+   */
+  public function testOptionsValidator() {
+    $options = [
+      'aaa',
+      'bbb',
+      'ccc',
+    ];
+    $validator = Utils::getOptionsValidator($options);
+    self::assertEquals('aaa', $validator('aaa'));
+    $this->expectException(\UnexpectedValueException::class);
+    $validator('sss');
+  }
+
+  /**
    * Data provider callback for testValidateRequired().
    *
    * @return array

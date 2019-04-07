@@ -303,8 +303,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @see \DrupalCodeGenerator\InputHandler::collectVars()
    */
   protected function ask(InputInterface $input, OutputInterface $output, Question $question, array $vars = []) {
-    $answers = $this->getHelper('dcg_input_handler')->collectVars($input, $output, ['key' => $question], $vars);
-    return $answers['key'];
+    $key = mt_rand();
+    $answers = $this->getHelper('dcg_input_handler')->collectVars($input, $output, [$key => $question], $vars);
+    return $answers[$key];
   }
 
   /**
