@@ -85,6 +85,7 @@ class Project extends BaseGenerator {
     $this->collectVars($input, $output, $questions);
 
     $sections = ['require', 'require-dev'];
+
     $questions['drush'] = new ConfirmationQuestion('Would you like to install Drush?', TRUE);
     $vars = $this->collectVars($input, $output, $questions);
     if ($vars['drush']) {
@@ -106,6 +107,7 @@ class Project extends BaseGenerator {
     $questions['composer_patches'] = new ConfirmationQuestion('Would you like to install Composer patches plugin?', TRUE);
     $questions['composer_merge'] = new ConfirmationQuestion('Would you like to install Composer merge plugin?', FALSE);
     $questions['behat'] = new ConfirmationQuestion('Would you like to create Behat tests?', FALSE);
+    $questions['asset_packagist'] = new ConfirmationQuestion('Would you like to add asset-packagist repository?', FALSE);
 
     $vars = &$this->collectVars($input, $output, $questions);
 
@@ -220,6 +222,12 @@ class Project extends BaseGenerator {
       'type' => 'composer',
       'url' => 'https://packages.drupal.org/8',
     ];
+    if ($vars['asset_packagist']) {
+      $composer_json['repositories'][] = [
+        'type' => 'composer',
+        'url' => 'https://asset-packagist.org',
+      ];
+    }
 
     $require = [];
     $require_dev = [];
@@ -228,6 +236,9 @@ class Project extends BaseGenerator {
     self::addPackage($require, 'composer/installers');
     self::addPackage($require, 'drupal-composer/drupal-scaffold');
     self::addPackage($require_dev, 'webflo/drupal-core-require-dev');
+    if ($vars['asset_packagist']) {
+      self::addPackage($require_dev, 'oomphinc/composer-installers-extender');
+    }
 
     if ($vars['drush']) {
       $vars['drush_installation'] == 'require'
@@ -285,6 +296,12 @@ class Project extends BaseGenerator {
       $composer_json['extra']['composer-exit-on-patch-failure'] = TRUE;
     }
 
+    if ($vars['asset_packagist']) {
+      $composer_json['extra']['installer-types'] = [
+        'bower-asset',
+        'npm-asset',
+      ];
+    }
     $composer_json['extra']['installer-paths'] = [
       $vars['document_root_path'] . 'core' => ['type:drupal-core'],
       $vars['document_root_path'] . 'libraries/{$name}' => ['type:drupal-library'],
@@ -292,6 +309,10 @@ class Project extends BaseGenerator {
       $vars['document_root_path'] . 'themes/{$name}' => ['type:drupal-theme'],
       'drush/{$name}' => ['type:drupal-drush'],
     ];
+    if ($vars['asset_packagist']) {
+      $composer_json['extra']['installer-paths'][$vars['document_root_path'] . 'libraries/{$name}'][] = 'type:bower-asset';
+      $composer_json['extra']['installer-paths'][$vars['document_root_path'] . 'libraries/{$name}'][] = 'type:npm-asset';
+    }
 
     $composer_json['extra']['drupal-scaffold']['excludes'] = [
       '.csslintrc',
@@ -344,6 +365,7 @@ class Project extends BaseGenerator {
       'composer/installers' => '^1.4',
       'drupal-composer/drupal-scaffold' => '^2.5',
       'webflo/drupal-core-require-dev' => '^8.6',
+      'oomphinc/composer-installers-extender' => '^1.1',
       'drupal' => '^8.6',
       'drush/drush' => '^9.6',
       'drupal/console' => '^1.0',
