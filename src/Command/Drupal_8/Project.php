@@ -32,9 +32,10 @@ class Project extends BaseGenerator {
     $questions['name'] = new Question('Project name (vendor/name)', FALSE);
     $questions['name']->setValidator($name_validator);
 
-    $questions['description'] = new Question('Description', FALSE);
+    $questions['description'] = new Question('Description');
 
     $questions['license'] = new Question('License', 'proprietary');
+    // @see https://getcomposer.org/doc/04-schema.md#license
     $licenses = [
       'Apache-2.0',
       'BSD-2-Clause',
@@ -53,6 +54,7 @@ class Project extends BaseGenerator {
     ];
     $questions['license']->setAutocompleterValues($licenses);
 
+    // Suggest most typical document roots.
     $document_roots = [
       'docroot',
       'web',
@@ -70,17 +72,6 @@ class Project extends BaseGenerator {
     $questions['document_root']->setAutocompleterValues($document_roots);
 
     $questions['php'] = new Question('PHP version', '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION);
-
-    $stabilities = [
-      'stable',
-      'RC',
-      'beta',
-      'alpha',
-      'dev',
-    ];
-    $questions['stability'] = new Question('Minimum Stability', 'dev');
-    $questions['stability']->setValidator(Utils::getOptionsValidator($stabilities));
-    $questions['stability']->setAutocompleterValues($stabilities);
 
     $this->collectVars($input, $output, $questions);
 
@@ -114,35 +105,28 @@ class Project extends BaseGenerator {
     $vars['document_root_path'] = $vars['document_root'] ?
       $vars['document_root'] . '/' : $vars['document_root'];
 
-    $this->addFile()
-      ->path('composer.json')
+    $this->addFile('composer.json')
       ->content(self::buildComposerJson($vars));
 
-    $this->addFile()
-      ->path('.gitignore')
+    $this->addFile('.gitignore')
       ->template('d8/_project/gitignore.twig');
 
     if ($vars['drupal_coder']) {
-      $this->addFile()
-        ->path('phpcs.xml')
+      $this->addFile('phpcs.xml')
         ->template('d8/_project/phpcs.xml.twig');
     }
 
     if ($vars['behat']) {
-      $this->addFile()
-        ->path('tests/behat/behat.yml')
+      $this->addFile('tests/behat/behat.yml')
         ->template('d8/_project/tests/behat/behat.yml.twig');
 
-      $this->addFile()
-        ->path('tests/behat/local.behat.yml')
+      $this->addFile('tests/behat/local.behat.yml')
         ->template('d8/_project/tests/behat/local.behat.yml.twig');
 
-      $this->addFile()
-        ->path('tests/behat/bootstrap/BaseContext.php')
+      $this->addFile('tests/behat/bootstrap/BaseContext.php')
         ->template('d8/_project/tests/behat/bootstrap/BaseContext.php.twig');
 
-      $this->addFile()
-        ->path('tests/behat/bootstrap/ExampleContext.php')
+      $this->addFile('tests/behat/bootstrap/ExampleContext.php')
         ->template('d8/_project/tests/behat/bootstrap/ExampleContext.php.twig');
 
       $this->addFile()
@@ -150,41 +134,25 @@ class Project extends BaseGenerator {
         ->template('d8/_project/tests/behat/features/example/user_forms.feature.twig');
     }
 
-    $this->addFile()
-      ->path('patches/.keep')
-      ->content('');
-
-    $this->addDirectory()
-      ->path('scripts');
-
     if ($vars['document_root']) {
-      $this->addDirectory()
-        ->path('config/sync');
+      $this->addDirectory('config/sync');
     }
 
     if ($vars['drush']) {
-      $this->addFile()
-        ->path('drush/drush.yml')
+      $this->addFile('drush/drush.yml')
         ->template('d8/_project/drush/drush.yml.twig');
-      $this->addFile()
-        ->path('drush/Commands/PolicyCommands.php')
+      $this->addFile('drush/Commands/PolicyCommands.php')
         ->template('d8/_project/drush/Commands/PolicyCommands.php.twig');
-      $this->addFile()
-        ->path('drush/sites/self.site.yml')
+      $this->addFile('drush/sites/self.site.yml')
         ->template('d8/_project/drush/sites/self.site.yml.twig');
     }
 
-    $this->addDirectory()
-      ->path($vars['document_root_path'] . 'modules/contrib');
-
-    $this->addDirectory()
-      ->path($vars['document_root_path'] . 'modules/custom');
-
-    $this->addDirectory()
-      ->path($vars['document_root_path'] . 'themes');
-
-    $this->addDirectory()
-      ->path($vars['document_root_path'] . 'libraries');
+    $this->addFile('patches/.keep')->content('');
+    $this->addDirectory('scripts');
+    $this->addDirectory($vars['document_root_path'] . 'modules/contrib');
+    $this->addDirectory($vars['document_root_path'] . 'modules/custom');
+    $this->addDirectory($vars['document_root_path'] . 'modules/custom');
+    $this->addDirectory($vars['document_root_path'] . 'libraries');
   }
 
   /**
@@ -193,7 +161,11 @@ class Project extends BaseGenerator {
   protected function execute(InputInterface $input, OutputInterface $output) {
     $result = parent::execute($input, $output);
     if ($result === 0) {
-      $output->writeln(' <info>Review <comment>composer.json</comment> file and run <comment>composer install</comment> command.</info>');
+      $output->writeln(' <info>Next steps.</info>');
+      $output->writeln(' <info>Review <comment>composer.json</comment> file.</info>');
+      $output->writeln(' <info>Run <comment>composer install</comment> command.</info>');
+      $output->writeln(' <info>Install Drupal.</info>');
+      $output->writeln(' <info>Enjoy Drupaling!</info>');
     }
     return $result;
   }
@@ -209,6 +181,8 @@ class Project extends BaseGenerator {
    */
   protected static function buildComposerJson(array $vars) {
 
+    $document_root_path = $vars['document_root_path'];
+
     $composer_json = [];
 
     $composer_json['name'] = $vars['name'];
@@ -216,7 +190,7 @@ class Project extends BaseGenerator {
     $composer_json['type'] = 'project';
     $composer_json['license'] = $vars['license'];
     $composer_json['prefer-stable'] = TRUE;
-    $composer_json['minimum-stability'] = $vars['stability'];
+    $composer_json['minimum-stability'] = 'dev';
 
     $composer_json['repositories'][] = [
       'type' => 'composer',
@@ -271,14 +245,14 @@ class Project extends BaseGenerator {
       'ext-gd' => '*',
       'ext-json' => '*',
     ];
-
     ksort($require);
     $composer_json['require'] += $require;
+
     ksort($require_dev);
     $composer_json['require-dev'] = $require_dev;
 
     // PHPUnit is core dev dependency.
-    $composer_json['scripts']['phpunit'] = 'phpunit --colors=always --configuration ' . $vars['document_root_path'] . 'core ' . $vars['document_root_path'] . 'modules/custom';
+    $composer_json['scripts']['phpunit'] = 'phpunit --colors=always --configuration ' . $document_root_path . 'core ' . $document_root_path . 'modules/custom';
     if ($vars['behat']) {
       $composer_json['scripts']['behat'] = 'behat --colors --config=tests/behat/local.behat.yml';
     }
@@ -303,15 +277,15 @@ class Project extends BaseGenerator {
       ];
     }
     $composer_json['extra']['installer-paths'] = [
-      $vars['document_root_path'] . 'core' => ['type:drupal-core'],
-      $vars['document_root_path'] . 'libraries/{$name}' => ['type:drupal-library'],
-      $vars['document_root_path'] . 'modules/contrib/{$name}' => ['type:drupal-module'],
-      $vars['document_root_path'] . 'themes/{$name}' => ['type:drupal-theme'],
+      $document_root_path . 'core' => ['type:drupal-core'],
+      $document_root_path . 'libraries/{$name}' => ['type:drupal-library'],
+      $document_root_path . 'modules/contrib/{$name}' => ['type:drupal-module'],
+      $document_root_path . 'themes/{$name}' => ['type:drupal-theme'],
       'drush/{$name}' => ['type:drupal-drush'],
     ];
     if ($vars['asset_packagist']) {
-      $composer_json['extra']['installer-paths'][$vars['document_root_path'] . 'libraries/{$name}'][] = 'type:bower-asset';
-      $composer_json['extra']['installer-paths'][$vars['document_root_path'] . 'libraries/{$name}'][] = 'type:npm-asset';
+      $composer_json['extra']['installer-paths'][$document_root_path . 'libraries/{$name}'][] = 'type:bower-asset';
+      $composer_json['extra']['installer-paths'][$document_root_path . 'libraries/{$name}'][] = 'type:npm-asset';
     }
 
     $composer_json['extra']['drupal-scaffold']['excludes'] = [
@@ -331,6 +305,8 @@ class Project extends BaseGenerator {
       '.htaccess' => '.htaccess',
       'robots.txt' => 'robots.txt',
     ];
+
+    // Move these files to Composer root.
     if ($vars['document_root']) {
       $composer_json['extra']['drupal-scaffold']['initial']['.editorconfig'] = '../.editorconfig';
       $composer_json['extra']['drupal-scaffold']['initial']['.gitattributes'] = '../.gitattributes';
@@ -340,7 +316,7 @@ class Project extends BaseGenerator {
     if ($vars['composer_merge']) {
       $composer_json['extra']['merge-plugin'] = [
         'include' => [
-          $vars['document_root_path'] . 'modules/custom/*/composer.json',
+          $document_root_path . 'modules/custom/*/composer.json',
         ],
         'recurse' => TRUE,
       ];
