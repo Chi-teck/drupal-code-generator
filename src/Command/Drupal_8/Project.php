@@ -111,10 +111,8 @@ class Project extends BaseGenerator {
     $this->addFile('.gitignore')
       ->template('d8/_project/gitignore.twig');
 
-    if ($vars['drupal_coder']) {
-      $this->addFile('phpcs.xml')
-        ->template('d8/_project/phpcs.xml.twig');
-    }
+    $this->addFile('phpcs.xml')
+      ->template('d8/_project/phpcs.xml.twig');
 
     if ($vars['behat']) {
       $this->addFile('tests/behat/behat.yml')
@@ -129,8 +127,7 @@ class Project extends BaseGenerator {
       $this->addFile('tests/behat/bootstrap/ExampleContext.php')
         ->template('d8/_project/tests/behat/bootstrap/ExampleContext.php.twig');
 
-      $this->addFile()
-        ->path('tests/behat/features/example/user_forms.feature')
+      $this->addFile('tests/behat/features/example/user_forms.feature')
         ->template('d8/_project/tests/behat/features/example/user_forms.feature.twig');
     }
 
@@ -161,11 +158,12 @@ class Project extends BaseGenerator {
   protected function execute(InputInterface $input, OutputInterface $output) {
     $result = parent::execute($input, $output);
     if ($result === 0) {
-      $output->writeln(' <info>Next steps.</info>');
-      $output->writeln(' <info>Review <comment>composer.json</comment> file.</info>');
-      $output->writeln(' <info>Run <comment>composer install</comment> command.</info>');
-      $output->writeln(' <info>Install Drupal.</info>');
-      $output->writeln(' <info>Enjoy Drupaling!</info>');
+      $output->writeln(' <info>Next steps:</info>');
+      $output->writeln(' <info>–––––––––––</info>');
+      $output->writeln(' <info>1. Review generated files</info>');
+      $output->writeln(' <info>2. Run <comment>composer install</comment> command</info>');
+      $output->writeln(' <info>3. Install Drupal</info>');
+      $output->writeln('');
     }
     return $result;
   }
