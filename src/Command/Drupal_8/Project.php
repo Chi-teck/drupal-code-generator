@@ -11,6 +11,8 @@ use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:composer command.
+ *
+ * Inspired by drupal-composer/drupal-project.
  */
 class Project extends BaseGenerator {
 
@@ -98,6 +100,7 @@ class Project extends BaseGenerator {
     $questions['composer_patches'] = new ConfirmationQuestion('Would you like to install Composer patches plugin?', TRUE);
     $questions['composer_merge'] = new ConfirmationQuestion('Would you like to install Composer merge plugin?', FALSE);
     $questions['behat'] = new ConfirmationQuestion('Would you like to create Behat tests?', FALSE);
+    $questions['env'] = new ConfirmationQuestion('Would you like to load environment variables from .env files?', FALSE);
     $questions['asset_packagist'] = new ConfirmationQuestion('Would you like to add asset-packagist repository?', FALSE);
 
     $vars = &$this->collectVars($input, $output, $questions);
@@ -129,6 +132,13 @@ class Project extends BaseGenerator {
 
       $this->addFile('tests/behat/features/example/user_forms.feature')
         ->template('d8/_project/tests/behat/features/example/user_forms.feature.twig');
+    }
+
+    if ($vars['env']) {
+      $this->addFile('.env.example')
+        ->template('d8/_project/env.example.twig');
+      $this->addFile('load.environment.php')
+        ->template('d8/_project/load.environment.php.twig');
     }
 
     if ($vars['document_root']) {
@@ -237,6 +247,10 @@ class Project extends BaseGenerator {
       self::addPackage($require_dev, 'drupal/drupal-extension');
     }
 
+    if ($vars['env']) {
+      self::addPackage($require, 'vlucas/phpdotenv');
+    }
+
     $composer_json['require'] = [
       'php' => $vars['php'],
       'ext-curl' => '*',
@@ -263,6 +277,10 @@ class Project extends BaseGenerator {
       'sort-packages' => TRUE,
       'bin-dir' => 'bin',
     ];
+
+    if ($vars['env']) {
+      $composer_json['autoload']['files'][] = 'load.environment.php';
+    }
 
     if ($vars['composer_patches']) {
       $composer_json['extra']['composer-exit-on-patch-failure'] = TRUE;
@@ -346,6 +364,7 @@ class Project extends BaseGenerator {
       'cweagans/composer-patches' => '^1.6',
       'wikimedia/composer-merge-plugin' => '^1.4',
       'drupal/drupal-extension' => '^3.4',
+      'vlucas/phpdotenv' => '^3.3',
     ];
     $section[$package] = $versions[$package];
   }
