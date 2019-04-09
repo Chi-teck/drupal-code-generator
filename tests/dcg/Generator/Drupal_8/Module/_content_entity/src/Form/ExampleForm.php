@@ -28,7 +28,7 @@ class FooExampleForm extends ContentEntityForm {
     }
     else {
       $this->messenger()->addStatus($this->t('The example %label has been updated.', $message_arguments));
-      $this->logger('foo')->notice('Created new example %label.', $logger_arguments);
+      $this->logger('foo')->notice('Updated new example %label.', $logger_arguments);
     }
 
     $form_state->setRedirect('entity.foo_example.canonical', ['foo_example' => $entity->id()]);

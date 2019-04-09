@@ -28,7 +28,7 @@ class {{ class_prefix }}Form extends ContentEntityForm {
     }
     else {
       $this->messenger()->addStatus($this->t('The {{ entity_type_label|lower }} %label has been updated.', $message_arguments));
-      $this->logger('{{ machine_name }}')->notice('Created new {{ entity_type_label|lower }} %label.', $logger_arguments);
+      $this->logger('{{ machine_name }}')->notice('Updated new {{ entity_type_label|lower }} %label.', $logger_arguments);
     }
 
     $form_state->setRedirect('entity.{{ entity_type_id }}.canonical', ['{{ entity_type_id }}' => $entity->id()]);
