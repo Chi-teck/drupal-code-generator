@@ -117,6 +117,9 @@ class Project extends BaseGenerator {
     $this->addFile('phpcs.xml')
       ->template('d8/_project/phpcs.xml.twig');
 
+    $this->addFile('scripts/composer/create_required_files.php')
+      ->template('d8/_project/scripts/composer/create_required_files.php.twig');
+
     if ($vars['behat']) {
       $this->addFile('tests/behat/behat.yml')
         ->template('d8/_project/tests/behat/behat.yml.twig');
@@ -155,7 +158,6 @@ class Project extends BaseGenerator {
     }
 
     $this->addFile('patches/.keep')->content('');
-    $this->addDirectory('scripts');
     $this->addDirectory($vars['document_root_path'] . 'modules/contrib');
     $this->addDirectory($vars['document_root_path'] . 'modules/custom');
     $this->addDirectory($vars['document_root_path'] . 'modules/custom');
@@ -269,6 +271,8 @@ class Project extends BaseGenerator {
       $composer_json['scripts']['behat'] = 'behat --colors --config=tests/behat/local.behat.yml';
     }
     $composer_json['scripts']['phpcs'] = 'phpcs --standard=phpcs.xml';
+    $composer_json['scripts']['post-install-cmd'][] = '@php ./scripts/composer/create_required_files.php';
+    $composer_json['scripts']['post-update-cmd'][] = '@php ./scripts/composer/create_required_files.php';
 
     // @todo Remove this once Drupal 8.6.14 released.
     $composer_json['conflict']['symfony/http-foundation'] = '3.4.24';
