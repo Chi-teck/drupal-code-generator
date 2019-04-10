@@ -224,6 +224,7 @@ class Project extends BaseGenerator {
     $require['drupal/core'] = $vars['drupal'];
     self::addPackage($require, 'composer/installers');
     self::addPackage($require, 'drupal-composer/drupal-scaffold');
+    self::addPackage($require, 'zaporylie/composer-drupal-optimizations');
     $require_dev['webflo/drupal-core-require-dev'] = $vars['drupal'];
 
     if ($vars['asset_packagist']) {
@@ -380,6 +381,7 @@ class Project extends BaseGenerator {
       'webflo/drupal-core-require-dev' => self::DRUPAL_DEFAULT_VERSION,
       'webflo/drupal-core-strict' => self::DRUPAL_DEFAULT_VERSION,
       'wikimedia/composer-merge-plugin' => '^1.4',
+      'zaporylie/composer-drupal-optimizations' => '^1.1',
     ];
     $section[$package] = $versions[$package];
   }
