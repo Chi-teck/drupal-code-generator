@@ -20,6 +20,8 @@ class Project extends BaseGenerator {
   protected $description = 'Generates a composer project';
   protected $alias = 'project';
 
+  const DRUPAL_DEFAULT_VERSION = '~8.6.0';
+
   /**
    * {@inheritdoc}
    */
@@ -36,7 +38,7 @@ class Project extends BaseGenerator {
 
     $questions['description'] = new Question('Description');
 
-    $questions['license'] = new Question('License', 'proprietary');
+    $questions['license'] = new Question('License', 'GPL-2.0-or-later');
     // @see https://getcomposer.org/doc/04-schema.md#license
     $licenses = [
       'Apache-2.0',
@@ -74,6 +76,8 @@ class Project extends BaseGenerator {
     $questions['document_root']->setAutocompleterValues($document_roots);
 
     $questions['php'] = new Question('PHP version', '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION);
+    $questions['drupal'] = new Question('Drupal version', self::DRUPAL_DEFAULT_VERSION);
+    $questions['drupal_core_strict'] = new ConfirmationQuestion('Would you like to get the same versions of Drupal core\'s dependencies as in Drupal core\'s composer.lock file?', FALSE);
 
     $this->collectVars($input, $output, $questions);
 
@@ -201,8 +205,6 @@ class Project extends BaseGenerator {
     $composer_json['description'] = $vars['description'];
     $composer_json['type'] = 'project';
     $composer_json['license'] = $vars['license'];
-    $composer_json['prefer-stable'] = TRUE;
-    $composer_json['minimum-stability'] = 'dev';
 
     $composer_json['repositories'][] = [
       'type' => 'composer',
@@ -219,11 +221,17 @@ class Project extends BaseGenerator {
     $require_dev = [];
 
     self::addPackage($require, 'drupal/core');
+    $require['drupal/core'] = $vars['drupal'];
     self::addPackage($require, 'composer/installers');
     self::addPackage($require, 'drupal-composer/drupal-scaffold');
-    self::addPackage($require_dev, 'webflo/drupal-core-require-dev');
+    $require_dev['webflo/drupal-core-require-dev'] = $vars['drupal'];
+
     if ($vars['asset_packagist']) {
       self::addPackage($require_dev, 'oomphinc/composer-installers-extender');
+    }
+
+    if ($vars['drupal_core_strict']) {
+      $require['webflo/drupal-core-strict'] = $vars['drupal'];
     }
 
     if ($vars['drush']) {
@@ -276,8 +284,8 @@ class Project extends BaseGenerator {
     $composer_json['scripts']['post-install-cmd'][] = '@php ./scripts/composer/create_required_files.php';
     $composer_json['scripts']['post-update-cmd'][] = '@php ./scripts/composer/create_required_files.php';
 
-    // @todo Remove this once Drupal 8.6.14 released.
-    $composer_json['conflict']['symfony/http-foundation'] = '3.4.24';
+    $composer_json['minimum-stability'] = 'dev';
+    $composer_json['prefer-stable'] = TRUE;
 
     $composer_json['config'] = [
       'sort-packages' => TRUE,
@@ -359,18 +367,19 @@ class Project extends BaseGenerator {
    */
   protected static function addPackage(array &$section, $package) {
     $versions = [
-      'drupal/core' => '^8.6',
       'composer/installers' => '^1.4',
-      'drupal-composer/drupal-scaffold' => '^2.5',
-      'webflo/drupal-core-require-dev' => '^8.6',
-      'oomphinc/composer-installers-extender' => '^1.1',
-      'drupal' => '^8.6',
-      'drush/drush' => '^9.6',
-      'drupal/console' => '^1.0',
       'cweagans/composer-patches' => '^1.6',
-      'wikimedia/composer-merge-plugin' => '^1.4',
+      'drupal' => '^8.6',
+      'drupal-composer/drupal-scaffold' => '^2.5',
+      'drupal/console' => '^1.0',
+      'drupal/core' => self::DRUPAL_DEFAULT_VERSION,
       'drupal/drupal-extension' => '^3.4',
+      'drush/drush' => '^9.6',
+      'oomphinc/composer-installers-extender' => '^1.1',
       'vlucas/phpdotenv' => '^3.3',
+      'webflo/drupal-core-require-dev' => self::DRUPAL_DEFAULT_VERSION,
+      'webflo/drupal-core-strict' => self::DRUPAL_DEFAULT_VERSION,
+      'wikimedia/composer-merge-plugin' => '^1.4',
     ];
     $section[$package] = $versions[$package];
   }
