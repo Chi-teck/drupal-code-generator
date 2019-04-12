@@ -1,0 +1,111 @@
+{
+    "name": "example/foo",
+    "description": "",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-json": "*",
+        "composer/installers": "^1.4",
+        "cweagans/composer-patches": "^1.6",
+        "drupal-composer/drupal-scaffold": "^2.5",
+        "drupal/core": "^8.6.5",
+        "vlucas/phpdotenv": "^3.3",
+        "webflo/drupal-core-strict": "^8.6.5",
+        "wikimedia/composer-merge-plugin": "^1.4",
+        "zaporylie/composer-drupal-optimizations": "^1.1"
+    },
+    "require-dev": {
+        "drupal/console": "^1.0",
+        "drupal/drupal-extension": "^3.4",
+        "drush/drush": "^9.6",
+        "oomphinc/composer-installers-extender": "^1.1",
+        "webflo/drupal-core-require-dev": "^8.6.5"
+    },
+    "scripts": {
+        "phpunit": "phpunit --colors=always --configuration web/core web/modules/custom",
+        "behat": "behat --colors --config=tests/behat/local.behat.yml",
+        "phpcs": "phpcs --standard=phpcs.xml",
+        "post-install-cmd": [
+            "@php ./scripts/composer/create_required_files.php"
+        ],
+        "post-update-cmd": [
+            "@php ./scripts/composer/create_required_files.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "files": [
+            "load.environment.php"
+        ]
+    },
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/themes/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "drupal-scaffold": {
+            "excludes": [
+                ".csslintrc",
+                ".editorconfig",
+                ".eslintignore",
+                ".eslintrc.json",
+                ".gitattributes",
+                ".ht.router.php",
+                ".htaccess",
+                "robots.txt",
+                "update.php",
+                "web.config"
+            ],
+            "initial": {
+                ".editorconfig": "../.editorconfig",
+                ".gitattributes": "../.gitattributes",
+                ".htaccess": ".htaccess",
+                "robots.txt": "robots.txt"
+            }
+        },
+        "merge-plugin": {
+            "include": [
+                "web/modules/custom/*/composer.json"
+            ],
+            "recurse": true
+        }
+    }
+}

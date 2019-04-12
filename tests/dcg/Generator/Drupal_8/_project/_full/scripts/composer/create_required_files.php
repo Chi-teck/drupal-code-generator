@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$default_file = './{{ document_root_path }}sites/default/default.settings.php';
-$main_file = './{{ document_root_path }}sites/default/settings.php';
+$default_file = './web/sites/default/default.settings.php';
+$main_file = './web/sites/default/settings.php';
 
 if (!file_exists($main_file) && file_exists($default_file)) {
   $default_content = file_get_contents($default_file);
@@ -31,15 +31,15 @@ EOS;
   }
 }
 
-$example_local_file = './{{ document_root_path }}sites/example.settings.local.php';
-$local_file = './{{ document_root_path }}sites/default/settings.local.php';
+$example_local_file = './web/sites/example.settings.local.php';
+$local_file = './web/sites/default/settings.local.php';
 if (!file_exists($local_file) && file_exists($example_local_file)) {
   if (!@copy($example_local_file, $local_file)) {
     file_put_contents('php://stderr', "Could not create $local_file file\n", FILE_APPEND);
   }
 }
 
-$default_dir = './{{ document_root_path }}sites/default';
+$default_dir = './web/sites/default';
 $files_dir = $default_dir . '/files';
 if (file_exists($default_dir) && !file_exists($files_dir)) {
   $original_umask = umask(0);

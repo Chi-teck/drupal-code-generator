@@ -1,0 +1,78 @@
+{
+    "name": "example/foo",
+    "description": "",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-json": "*",
+        "composer/installers": "^1.4",
+        "drupal-composer/drupal-scaffold": "^2.5",
+        "drupal/core": "^8.6.5",
+        "zaporylie/composer-drupal-optimizations": "^1.1"
+    },
+    "require-dev": {
+        "webflo/drupal-core-require-dev": "^8.6.5"
+    },
+    "scripts": {
+        "phpunit": "phpunit --colors=always --configuration core modules/custom",
+        "phpcs": "phpcs --standard=phpcs.xml",
+        "post-install-cmd": [
+            "@php ./scripts/composer/create_required_files.php"
+        ],
+        "post-update-cmd": [
+            "@php ./scripts/composer/create_required_files.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "installer-paths": {
+            "core": [
+                "type:drupal-core"
+            ],
+            "libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "themes/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "drupal-scaffold": {
+            "excludes": [
+                ".csslintrc",
+                ".editorconfig",
+                ".eslintignore",
+                ".eslintrc.json",
+                ".gitattributes",
+                ".ht.router.php",
+                ".htaccess",
+                "robots.txt",
+                "update.php",
+                "web.config"
+            ],
+            "initial": {
+                ".htaccess": ".htaccess",
+                "robots.txt": "robots.txt"
+            }
+        }
+    }
+}

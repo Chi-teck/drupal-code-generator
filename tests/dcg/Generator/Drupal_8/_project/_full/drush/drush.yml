@@ -1,0 +1,3 @@
+# Running commands without a pseudo-terminal on remote server is safer.
+ssh:
+  tty: false
