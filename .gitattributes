@@ -1,4 +1,3 @@
-*.twig linguist-language=Text
 /phpcs.xml export-ignore
 /phpunit.xml export-ignore
 /DEVELOPMENT.md export-ignore
