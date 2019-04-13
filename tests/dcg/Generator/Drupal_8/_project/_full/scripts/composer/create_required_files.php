@@ -52,4 +52,3 @@ if (file_exists($default_dir) && !file_exists($files_dir)) {
   }
   umask($original_umask);
 }
-
