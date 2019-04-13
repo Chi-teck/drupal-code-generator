@@ -22,7 +22,8 @@ default:
       sessions:
         default:
           selenium2:
-            wd_host: http://localhost/wd/hub
+            wd_host: http://localhost:4444/wd/hub
+            browser: chrome
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
