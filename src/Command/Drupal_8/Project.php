@@ -160,7 +160,8 @@ class Project extends BaseGenerator {
       $this->addFile('drush/sites/self.site.yml')
         ->template('d8/_project/drush/sites/self.site.yml.twig');
       $this->addFile('scripts/sync-site.sh')
-        ->template('d8/_project/scripts/sync-site.sh.twig');
+        ->template('d8/_project/scripts/sync-site.sh.twig')
+        ->mode(0544);
     }
 
     $this->addFile('patches/.keep')->content('');
