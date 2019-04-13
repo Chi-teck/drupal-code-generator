@@ -22,6 +22,7 @@
         "cweagans/composer-patches": "^1.6",
         "drupal-composer/drupal-scaffold": "^2.5",
         "drupal/core": "^8.6.5",
+        "oomphinc/composer-installers-extender": "^1.1",
         "vlucas/phpdotenv": "^3.3",
         "webflo/drupal-core-strict": "^8.6.5",
         "wikimedia/composer-merge-plugin": "^1.4",
@@ -31,7 +32,6 @@
         "drupal/console": "^1.0",
         "drupal/drupal-extension": "^3.4",
         "drush/drush": "^9.6",
-        "oomphinc/composer-installers-extender": "^1.1",
         "webflo/drupal-core-require-dev": "^8.6.5"
     },
     "scripts": {

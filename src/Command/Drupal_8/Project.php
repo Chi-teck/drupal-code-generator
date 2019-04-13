@@ -228,7 +228,7 @@ class Project extends BaseGenerator {
     $require_dev['webflo/drupal-core-require-dev'] = $vars['drupal'];
 
     if ($vars['asset_packagist']) {
-      self::addPackage($require_dev, 'oomphinc/composer-installers-extender');
+      self::addPackage($require, 'oomphinc/composer-installers-extender');
     }
 
     if ($vars['drupal_core_strict']) {
