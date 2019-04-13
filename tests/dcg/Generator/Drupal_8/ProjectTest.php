@@ -16,12 +16,13 @@ class ProjectTest extends GeneratorBaseTest {
    */
   public function testLight() {
 
+    $default_php_version = '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
     $interaction = [
       'Project name (vendor/name):' => 'example/foo',
       'Description:' => '',
       'License [GPL-2.0-or-later]:' => '',
       'Document root directory, type single dot to use Composer root [docroot]:' => '.',
-      'PHP version [>=7.3]:' => '',
+      "PHP version [$default_php_version]:" => '',
       'Drupal version [~8.6.0]:' => '^8.6.5',
       'Would you like to get the same versions of Drupal core\'s dependencies as in Drupal core\'s composer.lock file? [No]:' => 'No',
       'Would you like to install Drush? [Yes]:' => 'No',
@@ -53,12 +54,13 @@ class ProjectTest extends GeneratorBaseTest {
    */
   public function testFull() {
 
+    $default_php_version = '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
     $interaction = [
       'Project name (vendor/name):' => 'example/foo',
       'Description:' => '',
       'License [GPL-2.0-or-later]:' => 'GPL-2.0-or-later',
       'Document root directory, type single dot to use Composer root [docroot]:' => 'web',
-      'PHP version [>=7.3]:' => '',
+      "PHP version [$default_php_version]:" => '',
       'Drupal version [~8.6.0]:' => '^8.6.5',
       'Would you like to get the same versions of Drupal core\'s dependencies as in Drupal core\'s composer.lock file? [No]:' => 'Yes',
       'Would you like to install Drush? [Yes]:' => 'Yes',
