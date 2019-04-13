@@ -2,7 +2,9 @@
 
 namespace Drupal\{{ machine_name }}\Plugin\views\style;
 
+{% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
+{% endif %}
 use Drupal\views\Plugin\views\style\StylePluginBase;
 
 /**
@@ -28,6 +30,7 @@ class {{ class }} extends StylePluginBase {
    */
   protected $usesRowClass = TRUE;
 
+{% if configurable %}
   /**
    * {@inheritdoc}
    */
@@ -50,4 +53,5 @@ class {{ class }} extends StylePluginBase {
     ];
   }
 
+{% endif %}
 }

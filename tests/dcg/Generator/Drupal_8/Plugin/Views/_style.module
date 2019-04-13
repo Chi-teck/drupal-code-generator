@@ -5,17 +5,28 @@
  * Primary module hooks for Example module.
  */
 
+use Drupal\Core\Template\Attribute;
+
 /**
  * Prepares variables for views-style-example-foo.html.twig template.
  */
 function template_preprocess_views_style_example_foo(&$variables) {
-  $handler = $variables['view']->style_plugin;
+
+  $view = $variables['view'];
+  $options = $view->style_plugin->options;
 
   // Fetch wrapper classes from handler options.
-  if ($handler->options['wrapper_class']) {
-    $wrapper_class = explode(' ', $handler->options['wrapper_class']);
-    $variables['attributes']['class'] = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $wrapper_class);
+  if ($options['wrapper_class']) {
+    $variables['attributes']['class'] = explode(' ', $options['wrapper_class']);
   }
 
-  template_preprocess_views_view_unformatted($variables);
+  $variables['default_row_class'] = $options['default_row_class'];
+  foreach ($variables['rows'] as $id => $row) {
+    $variables['rows'][$id] = [];
+    $variables['rows'][$id]['content'] = $row;
+    $variables['rows'][$id]['attributes'] = new Attribute();
+    if ($row_class = $view->style_plugin->getRowClass($id)) {
+      $variables['rows'][$id]['attributes']->addClass($row_class);
+    }
+  }
 }

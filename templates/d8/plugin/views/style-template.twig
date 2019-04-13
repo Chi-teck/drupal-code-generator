@@ -14,9 +14,14 @@
  */
 {{ '#}' }}{% verbatim %}
 <div{{ attributes }}>
-
+  {%
+    set row_classes = [
+    default_row_class ? 'views-row',
+  ]
+  %}
   {% for row in rows %}
-    <div{{ row.attributes }}>{{ row.content }}</div>
+    <div{{ row.attributes.addClass(row_classes) }}>
+      {{ row.content }}
+    </div>
   {% endfor %}
-
 </div>{% endverbatim %}

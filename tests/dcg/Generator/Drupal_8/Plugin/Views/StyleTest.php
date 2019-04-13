@@ -17,6 +17,7 @@ class StyleTest extends GeneratorBaseTest {
     'Plugin label [Example]:' => 'Foo',
     'Plugin ID [example_foo]:' => 'example_foo',
     'Plugin class [Foo]:' => 'Foo',
+    'Make the plugin configurable? [Yes]:' => 'Yes',
   ];
 
   protected $fixtures = [
