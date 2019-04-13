@@ -371,7 +371,6 @@ class Project extends BaseGenerator {
     $versions = [
       'composer/installers' => '^1.4',
       'cweagans/composer-patches' => '^1.6',
-      'drupal' => '^8.6',
       'drupal-composer/drupal-scaffold' => '^2.5',
       'drupal/console' => '^1.0',
       'drupal/core' => self::DRUPAL_DEFAULT_VERSION,
