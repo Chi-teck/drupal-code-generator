@@ -17,7 +17,7 @@ use Drupal\Core\Session\AccountInterface;
  * )
  *
  * @DCG
- * For simple updating entity fields consider extending FieldUpdateActionBase.
+ * For a simple updating entity fields consider extending FieldUpdateActionBase.
  */
 class Foo extends ConfigurableActionBase {
 
@@ -33,7 +33,7 @@ class Foo extends ConfigurableActionBase {
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form['title'] = [
-      '#title' => t('New title'),
+      '#title' => $this->t('New title'),
       '#type' => 'textfield',
       '#required' => TRUE,
       '#default_value' => $this->configuration['title'],

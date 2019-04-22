@@ -22,7 +22,7 @@ use Drupal\Core\Session\AccountInterface;
  * )
  *
  * @DCG
- * For simple updating entity fields consider extending FieldUpdateActionBase.
+ * For a simple updating entity fields consider extending FieldUpdateActionBase.
  */
 class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'ActionBase' }} {
 
@@ -39,7 +39,7 @@ class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'ActionBa
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form['title'] = [
-      '#title' => t('New title'),
+      '#title' => $this->t('New title'),
       '#type' => 'textfield',
       '#required' => TRUE,
       '#default_value' => $this->configuration['title'],
@@ -73,7 +73,7 @@ class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'ActionBa
 {% if configurable %}
     $node->setTitle($this->configuration['title'])->save();
 {% else %}
-    $node->setTitle(t('New title'))->save();
+    $node->setTitle($this->t('New title'))->save();
 {% endif %}
   }
 

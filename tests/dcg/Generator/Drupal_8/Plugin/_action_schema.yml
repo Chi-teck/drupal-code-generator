@@ -1,6 +1,6 @@
 action.configuration.example_foo:
   type: mapping
-  label: 'Foo configuration'
+  label: 'Configuration for "Foo" action'
   mapping:
     title:
       type: string

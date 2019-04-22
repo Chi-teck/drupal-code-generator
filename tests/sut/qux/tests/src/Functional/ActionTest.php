@@ -21,11 +21,6 @@ class ActionTest extends BrowserTestBase {
    */
   public function testAction() {
 
-    // Before 8.5 it used hashed plugin IDs.
-    if (version_compare(\Drupal::VERSION, '8.5.0', '<=')) {
-      return;
-    }
-
     $this->createContentType(['type' => 'article']);
     $node = $this->createNode(['type' => 'article']);
 
