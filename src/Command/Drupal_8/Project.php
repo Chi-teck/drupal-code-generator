@@ -262,7 +262,7 @@ class Project extends BaseGenerator {
     }
 
     if ($vars['env']) {
-      self::addPackage($require, 'vlucas/phpdotenv');
+      self::addPackage($require, 'symfony/dotenv');
     }
 
     $composer_json['require'] = [
@@ -377,7 +377,7 @@ class Project extends BaseGenerator {
       'drupal/drupal-extension' => '^3.4',
       'drush/drush' => '^9.6',
       'oomphinc/composer-installers-extender' => '^1.1',
-      'vlucas/phpdotenv' => '^3.3',
+      'symfony/dotenv' => '^3.4',
       'webflo/drupal-core-require-dev' => self::DRUPAL_DEFAULT_VERSION,
       'webflo/drupal-core-strict' => self::DRUPAL_DEFAULT_VERSION,
       'wikimedia/composer-merge-plugin' => '^1.4',

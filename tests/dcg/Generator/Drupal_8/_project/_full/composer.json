@@ -23,7 +23,7 @@
         "drupal-composer/drupal-scaffold": "^2.5",
         "drupal/core": "^8.6.5",
         "oomphinc/composer-installers-extender": "^1.1",
-        "vlucas/phpdotenv": "^3.3",
+        "symfony/dotenv": "^3.4",
         "webflo/drupal-core-strict": "^8.6.5",
         "wikimedia/composer-merge-plugin": "^1.4",
         "zaporylie/composer-drupal-optimizations": "^1.1"

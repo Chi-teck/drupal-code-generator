@@ -8,13 +8,9 @@
  * @see composer.json For autoload section.
  */
 
-use Dotenv\Dotenv;
-use Dotenv\Exception\InvalidPathException;
+use Symfony\Component\Dotenv\Dotenv;
 
-$dotenv = Dotenv::create(__DIR__);
-try {
-  $dotenv->load();
-}
-catch (InvalidPathException $exception) {
-  // Do nothing. The environment may have no any .env files.
+$file = __DIR__ . '/.env';
+if (file_exists($file)) {
+  (new Dotenv())->load($file);
 }
