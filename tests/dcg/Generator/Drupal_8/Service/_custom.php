@@ -33,7 +33,7 @@ class Example {
   protected $cacheTagsInvalidator;
 
   /**
-   * Constructs an example object.
+   * Constructs an Example object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
