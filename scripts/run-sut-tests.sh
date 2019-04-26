@@ -193,7 +193,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
   $DCG d8:service:param-converter -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","parameter_type":"example","class":"ExampleParamConverter"}'
   $DCG d8:service:route-subscriber -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo"}'
   $DCG d8:service:theme-negotiator -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoThemeNegotiator"}'
-  $DCG d8:service:twig-extension -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoTwigExtension","di":"Yes"}'
+  $DCG d8:service:twig-extension -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoTwigExtension","di":"No"}'
   $DCG d8:service:path-processor -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"PathProcessorZippo"}'
   $DCG d8:service:request-policy -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"Example"}'
   $DCG d8:service:response-policy -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ExampleResponsePolicy"}'

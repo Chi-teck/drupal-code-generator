@@ -2,7 +2,7 @@
 
 namespace Drupal\example;
 
-use Drupal\example\ExampleInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Twig extension.
@@ -10,20 +10,20 @@ use Drupal\example\ExampleInterface;
 class ExampleTwigExtension extends \Twig_Extension {
 
   /**
-   * The example service.
+   * The entity type manager.
    *
-   * @var \Drupal\example\ExampleInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $example;
+  protected $entityTypeManager;
 
   /**
-   * Constructs a new ExampleTwigExtension instance.
+   * Constructs a new ExampleTwigExtension object.
    *
-   * @param \Drupal\example\ExampleInterface $example
-   *   The example service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
-  public function __construct(ExampleInterface $example) {
-    $this->example = $example;
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**

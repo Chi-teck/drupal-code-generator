@@ -15,7 +15,9 @@ class TwigExtensionTest extends GeneratorBaseTest {
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Class [ExampleTwigExtension]:' => 'ExampleTwigExtension',
-    'Would you like to inject dependencies? [No]:' => 'Yes',
+    'Would you like to inject dependencies? [Yes]:' => 'Yes',
+    '<1> Type the service name or use arrows up/down. Press enter to continue:' => 'entity_type.manager',
+    '<2> Type the service name or use arrows up/down. Press enter to continue:' => "\n",
   ];
 
   protected $fixtures = [

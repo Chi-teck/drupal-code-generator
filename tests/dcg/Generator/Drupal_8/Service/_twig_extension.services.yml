@@ -1,6 +1,4 @@
 services:
   example.twig_extension:
     class: Drupal\example\ExampleTwigExtension
-    arguments: ['@example']
-    tags:
-      - { name: twig.extension }
+    arguments: ['@entity_type.manager']
