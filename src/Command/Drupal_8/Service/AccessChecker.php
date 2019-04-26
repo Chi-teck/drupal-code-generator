@@ -21,7 +21,7 @@ class AccessChecker extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $questions['applies_to'] = new Question('Applies to', '_foo');
     $questions['applies_to']->setValidator(function ($value) {
       if (!preg_match('/^_[a-z0-9_]*[a-z0-9]$/', $value)) {

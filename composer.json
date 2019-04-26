@@ -12,7 +12,6 @@
     "bin/dcg"
   ],
   "autoload": {
-    "files": ["src/bootstrap.php"],
     "psr-4": {
       "DrupalCodeGenerator\\": "src"
     }

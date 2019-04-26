@@ -9,8 +9,6 @@ use Symfony\Component\Console\Question\Question;
  */
 class Utils {
 
-  use LegacyUtilsTrait;
-
   /**
    * Creates default plugin ID.
    */
@@ -188,8 +186,11 @@ class Utils {
 
   /**
    * Return the user's home directory.
+   *
+   * @return string|bool
+   *   User's home directory or FALSE.
    */
-  public static function getHomeDirectory() :?string {
+  public static function getHomeDirectory() {
     return isset($_SERVER['HOME']) ? $_SERVER['HOME'] : getenv('HOME');
   }
 

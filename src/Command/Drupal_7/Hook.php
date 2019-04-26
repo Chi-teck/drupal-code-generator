@@ -20,7 +20,7 @@ class Hook extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $questions['hook_name'] = new Question('Hook name');
     $questions['hook_name']->setValidator(function ($value) {
       if (!in_array($value, $this->getSupportedHooks())) {

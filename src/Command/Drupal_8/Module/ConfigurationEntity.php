@@ -22,7 +22,7 @@ class ConfigurationEntity extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
     $questions['entity_type_label'] = new Question('Entity type label', '{name}');

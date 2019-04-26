@@ -66,18 +66,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $destination = 'modules/%';
 
   /**
-   * Files to create.
-   *
-   * The key of the each item in the array is the path to the file and
-   * the value is the generated content of it.
-   *
-   * @var array
-   *
-   * @deprecated Use self::$assets.
-   */
-  protected $files = [];
-
-  /**
    * Assets to create.
    *
    * @var \DrupalCodeGenerator\Asset[]
@@ -172,51 +160,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   }
 
   /**
-   * Returns list of rendered files.
-   *
-   * @return array
-   *   An associative array where each key is path to a file and value is
-   *   rendered content.
-   *
-   * @deprecated.
-   */
-  public function getFiles() :array {
-    return $this->files;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getAssets() :array {
-    if ($this->files) {
-      // Convert files into assets for legacy commands.
-      $assets = [];
-      foreach ($this->getFiles() as $path => $file) {
-        $asset = new Asset();
-        $asset->path($path);
-        if (!is_array($file)) {
-          $file = ['content' => $file];
-        }
-        if (isset($file['content'])) {
-          $asset->content($file['content']);
-        }
-        else {
-          $asset->type('directory');
-        }
-        if (isset($file['action'])) {
-          $asset->action($file['action']);
-        }
-        if (isset($file['header_size'])) {
-          $asset->headerSize($file['header_size']);
-        }
-        if (isset($file['mode'])) {
-          $asset->mode($file['mode']);
-        }
-        $assets[] = $asset;
-      }
-      return array_merge($assets, $this->assets);
-    }
-
     return $this->assets;
   }
 
@@ -363,44 +309,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       ->path($path ?: '{machine_name}.services.yml')
       ->action('append')
       ->headerSize(1);
-  }
-
-  /**
-   * Creates file asset.
-   *
-   * @param string $path
-   *   Path to the file.
-   * @param string $template
-   *   Twig template to render.
-   * @param array $vars
-   *   Twig variables.
-   *
-   * @deprecated Use self::addFile() or self::addDirectory().
-   */
-  protected function setFile(string $path = NULL, string $template = NULL, array $vars = []) :array {
-    $this->addFile()
-      ->path($path)
-      ->template($template)
-      ->vars($vars);
-  }
-
-  /**
-   * Creates service file asset.
-   *
-   * @param string $path
-   *   Path to the file.
-   * @param string $template
-   *   Twig template to render.
-   * @param array $vars
-   *   Twig variables.
-   *
-   * @deprecated Use self::addServiceFile().
-   */
-  protected function setServicesFile(string $path, string $template, array $vars) :void {
-    $this->addServicesFile()
-      ->path($path)
-      ->template($template)
-      ->vars($vars);
   }
 
   /**

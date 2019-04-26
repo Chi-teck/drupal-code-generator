@@ -122,7 +122,7 @@ class Field extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
 
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
 
     $questions['field_label'] = new Question('Field label', 'Example');
     $questions['field_label']->setValidator([Utils::class, 'validateRequired']);

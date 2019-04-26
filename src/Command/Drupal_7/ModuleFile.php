@@ -19,7 +19,7 @@ class ModuleFile extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $this->collectVars($input, $output, Utils::defaultQuestions());
+    $this->collectVars($input, $output, Utils::moduleQuestions());
     $this->addFile()
       ->path('{machine_name}.module')
       ->template('d7/module.twig');

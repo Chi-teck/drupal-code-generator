@@ -23,7 +23,7 @@ class DrupalConsoleCommand extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
 
-    $questions = Utils::defaultQuestions() + [
+    $questions = Utils::moduleQuestions() + [
       'command_name' => new Question('Command name', '{machine_name}:example'),
       'description' => new Question('Command description', 'Command description.'),
       'container_aware' => new ConfirmationQuestion('Make the command aware of the drupal site installation?', TRUE),

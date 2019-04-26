@@ -70,7 +70,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
       ->count()
       ->execute();
 
-    $build['summary']['#markup'] = $this->t('Total {{ entity_type_label|lower|plural }}: @total', ['@total' => $total]);
+    $build['summary']['#markup'] = $this->t('Total {{ entity_type_label|lower|pluralize }}: @total', ['@total' => $total]);
     return $build;
   }
 

@@ -21,7 +21,7 @@ class Browser extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $questions['class'] = new Question('Class', 'ExampleTest');
     $questions['class']->setValidator([Utils::class, 'validateClassName']);
 

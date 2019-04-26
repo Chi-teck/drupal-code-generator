@@ -81,7 +81,7 @@ class Asset {
    *   Asset path.
    */
   public function getPath() :string {
-    return Utils::tokenReplace($this->path, $this->getVars());
+    return Utils::replaceTokens($this->path, $this->getVars());
   }
 
   /**

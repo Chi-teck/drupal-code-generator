@@ -21,7 +21,7 @@ class ParamConverter extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $questions['parameter_type'] = new Question('Parameter type', 'example');
     $default_class = function ($vars) {
       return Utils::camelize($vars['parameter_type']) . 'ParamConverter';

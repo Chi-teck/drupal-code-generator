@@ -5,8 +5,8 @@ entity.{{ entity_type_id }}.settings:
   route_name:  entity.{{ entity_type_id }}.settings
   parent: system.admin_structure
 entity.{{ entity_type_id }}.collection:
-  title: {{ entity_type_label|plural }}
-  description: List of {{ entity_type_label|plural|lower }}
+  title: {{ entity_type_label|pluralize }}
+  description: List of {{ entity_type_label|pluralize|lower }}
   route_name: entity.{{ entity_type_id }}.collection
   parent: system.admin_content
 {% elseif bundle %}

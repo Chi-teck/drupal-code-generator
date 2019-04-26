@@ -23,26 +23,12 @@ class TwigEnvironment extends Twig_Environment {
   public function __construct(Twig_LoaderInterface $loader) {
     parent::__construct($loader);
 
-    $this->addFilter(new Twig_SimpleFilter('plural', [Utils::class, 'pluralize']), ['deprecated' => TRUE]);
-
     $this->addFilter(new Twig_SimpleFilter('pluralize', [Utils::class, 'pluralize']));
 
     $this->addFilter(new Twig_SimpleFilter('article', function ($string) {
       $article = in_array(strtolower($string[0]), ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
       return $article . ' ' . $string;
     }));
-
-    $this->addFilter(new Twig_SimpleFilter('underscore2hyphen', function ($string) {
-      // @codeCoverageIgnoreStart
-      return str_replace('_', '-', $string);
-      // @codeCoverageIgnoreEnd
-    }, ['deprecated' => TRUE]));
-
-    $this->addFilter(new Twig_SimpleFilter('hyphen2underscore', function ($string) {
-      // @codeCoverageIgnoreStart
-      return str_replace('-', '_', $string);
-      // @codeCoverageIgnoreEnd
-    }, ['deprecated' => TRUE]));
 
     $this->addFilter(new Twig_SimpleFilter('u2h', function ($string) {
       return str_replace('_', '-', $string);

@@ -21,7 +21,7 @@ class Nightwatch extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $questions['test_name'] = new Question('Test name', 'example');
 
     $vars = &$this->collectVars($input, $output, $questions);

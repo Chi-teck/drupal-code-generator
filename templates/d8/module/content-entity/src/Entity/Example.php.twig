@@ -29,7 +29,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  * @ContentEntityType(
  *   id = "{{ entity_type_id }}",
  *   label = @Translation("{{ entity_type_label }}"),
- *   label_collection = @Translation("{{ entity_type_label|plural }}"),
+ *   label_collection = @Translation("{{ entity_type_label|pluralize }}"),
 {% if bundle %}
  *   bundle_label = @Translation("{{ entity_type_label }} type"),
 {% endif %}

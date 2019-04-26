@@ -9,9 +9,9 @@ use Drupal\Core\Plugin\Discovery\YamlDiscovery;
 use Drupal\Core\Plugin\Factory\ContainerFactory;
 
 /**
- * Defines a plugin manager to deal with {{ plugin_type|plural }}.
+ * Defines a plugin manager to deal with {{ plugin_type|pluralize }}.
  *
- * Modules can define {{ plugin_type|plural }} in a MODULE_NAME.{{ plugin_type|plural }}.yml file contained
+ * Modules can define {{ plugin_type|pluralize }} in a MODULE_NAME.{{ plugin_type|pluralize }}.yml file contained
  * in the module's base directory. Each {{ plugin_type }} has the following structure:
  *
  * @code
@@ -60,7 +60,7 @@ class {{ class_prefix }}PluginManager extends DefaultPluginManager {
    */
   protected function getDiscovery() {
     if (!isset($this->discovery)) {
-      $this->discovery = new YamlDiscovery('{{ plugin_type|plural }}', $this->moduleHandler->getModuleDirectories());
+      $this->discovery = new YamlDiscovery('{{ plugin_type|pluralize }}', $this->moduleHandler->getModuleDirectories());
       $this->discovery->addTranslatableProperty('label', 'label_context');
       $this->discovery->addTranslatableProperty('description', 'description_context');
     }

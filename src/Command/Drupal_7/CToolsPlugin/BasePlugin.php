@@ -21,7 +21,7 @@ abstract class BasePlugin extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $questions['plugin_name'] = new Question('Plugin name', 'Example');
     $questions['plugin_name']->setValidator([Utils::class, 'validateRequired']);
 

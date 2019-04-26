@@ -362,11 +362,14 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::defaultQuestions
+   * @covers \DrupalCodeGenerator\Utils::moduleQuestions
    */
-  public function testDefaultQuestions() {
-    $questions = $this->defaultQuestions();
-    static::assertEquals($questions, Utils::defaultQuestions());
+  public function testModuleQuestions() {
+    $questions['name'] = new Question('Module name');
+    $questions['name']->setValidator([Utils::class, 'validateRequired']);
+    $questions['machine_name'] = new Question('Module machine name');
+    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    static::assertEquals($questions, Utils::moduleQuestions());
   }
 
   /**
@@ -387,49 +390,10 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::defaultPluginQuestions
-   */
-  public function testDefaultPluginQuestions() {
-    $questions = $this->defaultPluginQuestions();
-    static::assertEquals($questions, Utils::defaultPluginQuestions());
-  }
-
-  /**
-   * Returns default questions.
-   *
-   * @return array
-   *   Array of default questions.
-   */
-  protected function defaultQuestions() {
-    $questions['name'] = new Question('Module name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-    $questions['machine_name'] = new Question('Module machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    return $questions;
-  }
-
-  /**
-   * Returns default plugin questions.
-   *
-   * @return array
-   *   Array of default plugin questions.
-   */
-  protected function defaultPluginQuestions() {
-    $questions = $this->defaultQuestions();
-    $questions['plugin_label'] = new Question('Plugin label', 'Example');
-    $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
-    $questions['plugin_id'] = new Question('Plugin ID', [Utils::class, 'defaultPluginId']);
-    $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
-    return $questions;
-  }
-
-  /**
-   * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::tokenReplace()
+   * @covers \DrupalCodeGenerator\Utils::replaceTokens()
    */
   public function testTokenReplace() {
-    static::assertEquals('-=bar=-', Utils::tokenReplace('-={foo}=-', ['foo' => 'bar']));
+    static::assertEquals('-=bar=-', Utils::replaceTokens('-={foo}=-', ['foo' => 'bar']));
   }
 
   /**

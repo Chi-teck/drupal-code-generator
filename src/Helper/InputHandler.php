@@ -101,7 +101,7 @@ class InputHandler extends Helper {
       }
       // Default value may have tokens.
       if ($default_value) {
-        $default_value = Utils::tokenReplace($default_value, $vars);
+        $default_value = Utils::replaceTokens($default_value, $vars);
       }
       $this->setQuestionDefault($question, $default_value);
 
@@ -158,34 +158,6 @@ class InputHandler extends Helper {
     }
 
     $this->setQuestionText($question, $question_text);
-  }
-
-  /**
-   * Normalizes questions.
-   *
-   * @param \Symfony\Component\Console\Question\Question[] $questions
-   *   Questions to normalize.
-   *
-   * @return \Symfony\Component\Console\Question\Question[]
-   *   Normalized questions
-   *
-   * @deprecated
-   *  Use Symfony\Component\Console\Question\Question to define questions.
-   *
-   * @codeCoverageIgnore
-   */
-  protected function normalizeQuestions(array $questions) :array {
-    return array_map(function ($question) {
-      // Support array syntax.
-      if (is_array($question)) {
-        if (count($question) > 2) {
-          throw new \OutOfBoundsException('The question array is too long.');
-        }
-        list($question_text, $default_value) = array_pad($question, 2, NULL);
-        $question = new Question($question_text, $default_value);
-      }
-      return $question;
-    }, $questions);
   }
 
 }

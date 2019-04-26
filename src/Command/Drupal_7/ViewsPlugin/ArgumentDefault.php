@@ -20,7 +20,7 @@ class ArgumentDefault extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $questions['plugin_name'] = new Question('Plugin name', 'Example');
     $default_machine_name = function ($vars) {
       return Utils::human2machine($vars['plugin_name']);
