@@ -19,7 +19,7 @@ class Middleware extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $vars = &$this->collectVars($input, $output, $questions);
     $vars['class'] = Utils::camelize($vars['name']) . 'Middleware';

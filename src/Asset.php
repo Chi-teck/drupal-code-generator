@@ -80,7 +80,7 @@ class Asset {
    * @return string
    *   Asset path.
    */
-  public function getPath() {
+  public function getPath() :string {
     return Utils::tokenReplace($this->path, $this->getVars());
   }
 
@@ -90,17 +90,17 @@ class Asset {
    * @return string
    *   Asset content.
    */
-  public function getContent() {
+  public function getContent() :?string {
     return $this->content;
   }
 
   /**
    * Getter for header template.
    *
-   * @return string
+   * @return string|null
    *   Asset header template.
    */
-  public function getHeaderTemplate() {
+  public function getHeaderTemplate() :?string {
     return $this->headerTemplate;
   }
 
@@ -110,7 +110,7 @@ class Asset {
    * @return string
    *   Asset template.
    */
-  public function getTemplate() {
+  public function getTemplate() :string {
     return $this->template;
   }
 
@@ -120,7 +120,7 @@ class Asset {
    * @return array
    *   Asset template variables.
    */
-  public function getVars() {
+  public function getVars() :array {
     return $this->vars;
   }
 
@@ -130,7 +130,7 @@ class Asset {
    * @return string
    *   Asset action.
    */
-  public function getAction() {
+  public function getAction() :string {
     return $this->action;
   }
 
@@ -150,7 +150,7 @@ class Asset {
    * @return string
    *   Asset file mode.
    */
-  public function getMode() {
+  public function getMode() :string {
     return $this->mode ?: ($this->isDirectory() ? 0755 : 0644);
   }
 
@@ -160,20 +160,20 @@ class Asset {
    * @return string
    *   Asset type.
    */
-  public function getType() {
+  public function getType() :string {
     return $this->type;
   }
 
   /**
    * Setter for asset path.
    *
-   * @param string $path
+   * @param string|null $path
    *   Asset path.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function path($path) {
+  public function path(?string $path) :Asset {
     $this->path = $path;
     return $this;
   }
@@ -181,13 +181,13 @@ class Asset {
   /**
    * Setter for asset content.
    *
-   * @param string $content
+   * @param string|null $content
    *   Asset content.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function content($content) {
+  public function content(?string $content) :Asset {
     $this->content = $content;
     return $this;
   }
@@ -195,13 +195,13 @@ class Asset {
   /**
    * Setter for asset header template.
    *
-   * @param string $header_template
+   * @param string|null $header_template
    *   Asset template.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function headerTemplate($header_template) {
+  public function headerTemplate(?string $header_template) :Asset {
     $this->headerTemplate = $header_template;
     return $this;
   }
@@ -209,13 +209,13 @@ class Asset {
   /**
    * Setter for asset template.
    *
-   * @param string $template
+   * @param string|null $template
    *   Asset template.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function template($template) {
+  public function template(?string $template) :Asset {
     $this->template = $template;
     return $this;
   }
@@ -229,7 +229,7 @@ class Asset {
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function vars(array $vars) {
+  public function vars(array $vars) :Asset {
     $this->vars = $vars;
     return $this;
   }
@@ -237,13 +237,13 @@ class Asset {
   /**
    * Setter for asset action.
    *
-   * @param string $action
+   * @param string|null $action
    *   Asset action.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function action($action) {
+  public function action(?string $action) :Asset {
     $this->action = $action;
     return $this;
   }
@@ -251,13 +251,13 @@ class Asset {
   /**
    * Setter for asset header size.
    *
-   * @param int $header_size
+   * @param int|null $header_size
    *   Asset header size.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function headerSize($header_size) {
+  public function headerSize(?int $header_size) :Asset {
     $this->headerSize = $header_size;
     return $this;
   }
@@ -265,13 +265,13 @@ class Asset {
   /**
    * Setter for asset mode.
    *
-   * @param string $mode
+   * @param string|null $mode
    *   Asset mode.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function mode($mode) {
+  public function mode(?string $mode) :Asset {
     $this->mode = $mode;
     return $this;
   }
@@ -285,7 +285,7 @@ class Asset {
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function type($type) {
+  public function type(string $type) :Asset {
     $this->type = $type;
     return $this;
   }
@@ -296,7 +296,7 @@ class Asset {
    * @return bool
    *   True if the asset is a directory, false otherwise.
    */
-  public function isDirectory() {
+  public function isDirectory() :bool {
     return $this->getType() == 'directory';
   }
 

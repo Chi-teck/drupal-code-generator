@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Twig;
 
 use DrupalCodeGenerator\Utils;
+use Twig\TokenStream;
 use Twig_Environment;
 use Twig_LoaderInterface;
 use Twig_SimpleFilter;
@@ -60,7 +61,7 @@ class TwigEnvironment extends Twig_Environment {
   /**
    * {@inheritdoc}
    */
-  public function tokenize($source, $name = NULL) {
+  public function tokenize($source, $name = NULL) :TokenStream {
     if (!$source instanceof \Twig_Source) {
       $source = new \Twig_Source($source, $name);
     }

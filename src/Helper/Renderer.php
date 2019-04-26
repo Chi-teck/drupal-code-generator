@@ -30,7 +30,7 @@ class Renderer extends Helper {
   /**
    * {@inheritdoc}
    */
-  public function getName() {
+  public function getName() :string {
     return 'dcg_renderer';
   }
 
@@ -45,7 +45,7 @@ class Renderer extends Helper {
    * @return string
    *   A string representing the rendered output.
    */
-  public function render($template, array $vars) {
+  public function render(string $template, array $vars) :string {
     return $this->twig->render($template, $vars);
   }
 
@@ -55,8 +55,8 @@ class Renderer extends Helper {
    * @param string $path
    *   A path where to look for templates.
    */
-  public function addPath($path) {
-    return $this->twig->getLoader()->addPath($path);
+  public function addPath(string $path) :void {
+    $this->twig->getLoader()->addPath($path);
   }
 
 }

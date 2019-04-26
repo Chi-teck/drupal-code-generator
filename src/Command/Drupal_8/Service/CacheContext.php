@@ -22,7 +22,7 @@ class CacheContext extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $questions['context_id'] = new Question('Context ID', 'example');
     $default_class = function ($vars) {

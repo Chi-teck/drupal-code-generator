@@ -20,7 +20,7 @@ class ModuleInfo extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $questions['description'] = new Question('Description', 'Module description.');
     $questions['package'] = new Question('Package', 'Custom');

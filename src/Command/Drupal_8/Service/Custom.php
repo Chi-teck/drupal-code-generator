@@ -22,7 +22,7 @@ class Custom extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $questions['service_name'] = new Question('Service name', '{machine_name}.example');
     $questions['service_name']->setValidator([Utils::class, 'validateServiceName']);

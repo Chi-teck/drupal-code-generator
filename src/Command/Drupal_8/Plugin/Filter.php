@@ -20,7 +20,7 @@ class Filter extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
 
     $filter_types = [

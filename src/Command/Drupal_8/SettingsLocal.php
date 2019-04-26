@@ -22,7 +22,7 @@ class SettingsLocal extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions['db_override'] = new ConfirmationQuestion('Override database configuration?', FALSE);
 
     $vars = $this->collectVars($input, $output, $questions);

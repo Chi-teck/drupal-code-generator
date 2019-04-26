@@ -20,7 +20,7 @@ class Settings extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions['db_driver'] = new Question('Database driver', 'mysql');
     $questions['db_driver']->setAutocompleterValues(['mysql', 'pgsql', 'sqlite']);
     $questions['db_name'] = new Question('Database name', 'drupal');

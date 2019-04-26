@@ -19,7 +19,7 @@ class Condition extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
 
     $this->collectVars($input, $output, $questions);

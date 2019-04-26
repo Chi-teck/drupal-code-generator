@@ -20,7 +20,7 @@ class ApacheVirtualHost extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
 
     $questions = [
       'hostname' => new Question('Host name', 'example.com'),

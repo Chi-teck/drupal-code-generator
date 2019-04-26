@@ -42,7 +42,7 @@ class GeneratorDiscovery {
    * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
-  public function getGenerators(array $command_directories, $namespace = '\DrupalCodeGenerator\Command') {
+  public function getGenerators(array $command_directories, $namespace = '\DrupalCodeGenerator\Command') :array {
     $commands = [];
 
     foreach ($command_directories as $directory) {

@@ -20,7 +20,7 @@ class Destination extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions();
 
     $questions['plugin_id'] = new Question('Plugin ID', '{machine_name}_example');

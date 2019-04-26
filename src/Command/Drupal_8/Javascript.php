@@ -19,7 +19,7 @@ class Javascript extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $vars = $this->collectVars($input, $output, Utils::defaultQuestions());
     $this->addFile()
       ->path('js/' . str_replace('_', '-', $vars['machine_name']) . '.js')

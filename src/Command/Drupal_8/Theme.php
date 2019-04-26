@@ -24,7 +24,7 @@ class Theme extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions['name'] = new Question('Theme name');
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['base_theme'] = new Question('Base theme', 'classy');

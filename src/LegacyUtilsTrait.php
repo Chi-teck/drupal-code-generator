@@ -15,7 +15,7 @@ trait LegacyUtilsTrait {
    *
    * @deprecated Use Utils::moduleQuestions().
    */
-  public static function defaultQuestions() {
+  public static function defaultQuestions() :array {
     @trigger_error('Utils::defaultQuestions() method is deprecated.', E_USER_DEPRECATED);
     return static::moduleQuestions();
   }
@@ -28,7 +28,7 @@ trait LegacyUtilsTrait {
    *
    * @deprecated Use Utils::moduleQuestions() and Utils::pluginQuestions().
    */
-  public static function defaultPluginQuestions() {
+  public static function defaultPluginQuestions() :array {
     @trigger_error('Utils::defaultPluginQuestions() method is deprecated.', E_USER_DEPRECATED);
     $plugin_questions = static::pluginQuestions();
     // Plugin class question wasn't in original method implementation.
@@ -42,7 +42,7 @@ trait LegacyUtilsTrait {
    * @codeCoverageIgnore
    * @deprecated
    */
-  public static function normalizePath($path) {
+  public static function normalizePath(string $path) :string {
     $parts = [];
     $path = str_replace('\\', '/', $path);
     $path = preg_replace('/\/+/', '/', $path);
@@ -73,7 +73,7 @@ trait LegacyUtilsTrait {
   /**
    * Replaces all tokens in a given string with appropriate values.
    *
-   * @param string $text
+   * @param string|null $text
    *   A string potentially containing replaceable tokens.
    * @param array $data
    *   An array where keys are token names and values are replacements.
@@ -83,7 +83,7 @@ trait LegacyUtilsTrait {
    *
    * @deprecated Use Utils::replaceTokens instead.
    */
-  public static function tokenReplace($text, array $data) {
+  public static function tokenReplace(?string $text, array $data) :string {
     return static::replaceTokens($text, $data);
   }
 

@@ -21,7 +21,7 @@ class EntityReferenceSelection extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
 
     $base_classes = [
       'comment' => 'Drupal\comment\Plugin\EntityReferenceSelection\CommentSelection',

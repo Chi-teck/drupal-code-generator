@@ -13,7 +13,7 @@ interface GeneratorInterface {
    * @return string|null
    *   A label suitable for navigation command.
    */
-  public function getLabel();
+  public function getLabel() :?string;
 
   /**
    * Returns list of assets to dump.
@@ -21,15 +21,15 @@ interface GeneratorInterface {
    * @return \DrupalCodeGenerator\Asset[]
    *   An array of assets.
    */
-  public function getAssets();
+  public function getAssets() :array;
 
   /**
    * Sets working directory.
    *
-   * @param string|null $directory
+   * @param string $directory
    *   The working directory.
    */
-  public function setDirectory($directory);
+  public function setDirectory(string $directory);
 
   /**
    * Returns current working directory.
@@ -37,15 +37,15 @@ interface GeneratorInterface {
    * @return string|null
    *   The directory.
    */
-  public function getDirectory();
+  public function getDirectory() :string;
 
   /**
    * Sets destination.
    *
-   * @param mixed $destination
+   * @param string $destination
    *   The destination.
    */
-  public function setDestination($destination);
+  public function setDestination(string $destination);
 
   /**
    * Returns destination.
@@ -66,6 +66,6 @@ interface GeneratorInterface {
    *   Note that the paths without leading slash are related to Drupal root
    *   directory.
    */
-  public function getDestination();
+  public function getDestination() :string;
 
 }

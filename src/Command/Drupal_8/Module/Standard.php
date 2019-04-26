@@ -22,7 +22,7 @@ class Standard extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $questions['description'] = new Question('Module description', 'The description.');
     $questions['package'] = new Question('Package', 'Custom');

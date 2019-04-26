@@ -21,7 +21,7 @@ class Template extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $questions['template_name'] = new Question('Template name', 'example');
     $questions['create_theme'] = new ConfirmationQuestion('Create theme hook?', TRUE);

@@ -17,7 +17,7 @@ class PhpCompactor extends Compactor {
   /**
    * {@inheritdoc}
    */
-  public function compact($contents) {
+  public function compact($contents) :string {
     // php_strip_whitespace() takes file name as argument so we have to save the
     // contents to a temporary file.
     $temp_file = tempnam(sys_get_temp_dir(), 'dcg-');

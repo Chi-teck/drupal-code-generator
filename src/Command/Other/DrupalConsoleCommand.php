@@ -21,7 +21,7 @@ class DrupalConsoleCommand extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
 
     $questions = Utils::defaultQuestions() + [
       'command_name' => new Question('Command name', '{machine_name}:example'),

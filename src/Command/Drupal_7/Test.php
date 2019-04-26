@@ -19,7 +19,7 @@ class Test extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $default_class = function ($vars) {
       return Utils::camelize($vars['machine_name']) . 'TestCase';

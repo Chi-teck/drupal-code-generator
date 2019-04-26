@@ -20,7 +20,7 @@ class AccessChecker extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $questions['applies_to'] = new Question('Applies to', '_foo');
     $questions['applies_to']->setValidator(function ($value) {

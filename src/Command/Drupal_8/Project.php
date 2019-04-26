@@ -25,7 +25,7 @@ class Project extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
 
     $name_validator = function ($value) {
       if (!preg_match('#[^/]+/[^/]+$#i', $value)) {
@@ -174,7 +174,7 @@ class Project extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function execute(InputInterface $input, OutputInterface $output) {
+  protected function execute(InputInterface $input, OutputInterface $output) :int {
     $result = parent::execute($input, $output);
     if ($result === 0) {
       $output->writeln(' <info>Next steps:</info>');
@@ -203,7 +203,7 @@ class Project extends BaseGenerator {
     $composer_json = [];
 
     $composer_json['name'] = $vars['name'];
-    $composer_json['description'] = $vars['description'];
+    $composer_json['description'] = (string) $vars['description'];
     $composer_json['type'] = 'project';
     $composer_json['license'] = $vars['license'];
 

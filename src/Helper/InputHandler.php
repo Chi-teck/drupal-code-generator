@@ -19,13 +19,18 @@ class InputHandler extends Helper {
   use QuestionSettersTrait;
 
   /**
+   * Asked questions.
+   *
+   * @var array
+   */
+  protected $askedQuestions = [];
+
+  /**
    * {@inheritdoc}
    */
-  public function getName() {
+  public function getName() :string {
     return 'dcg_input_handler';
   }
-
-  protected $askedQuestions = [];
 
   /**
    * Interacts with the user and returns variables for templates.
@@ -42,7 +47,7 @@ class InputHandler extends Helper {
    * @return array
    *   Template variables.
    */
-  public function collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) {
+  public function collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) :array {
 
     // A user can pass answers through the command line option.
     $answers = NULL;
@@ -95,7 +100,9 @@ class InputHandler extends Helper {
         }
       }
       // Default value may have tokens.
-      $default_value = Utils::tokenReplace($default_value, $vars);
+      if ($default_value) {
+        $default_value = Utils::tokenReplace($default_value, $vars);
+      }
       $this->setQuestionDefault($question, $default_value);
 
       if ($answers) {
@@ -131,12 +138,12 @@ class InputHandler extends Helper {
    * @param \Symfony\Component\Console\Question\Question $question
    *   The question.
    */
-  protected function formatQuestionText(Question $question) {
+  protected function formatQuestionText(Question $question) :void {
     $question_text = $question->getQuestion();
     $default_value = $question->getDefault();
 
     $question_text = "\n <info>$question_text</info>";
-    if (is_bool($default_value)) {
+    if ($question instanceof ConfirmationQuestion && is_bool($default_value)) {
       $default_value = $default_value ? 'Yes' : 'No';
     }
     if ($default_value) {
@@ -167,7 +174,7 @@ class InputHandler extends Helper {
    *
    * @codeCoverageIgnore
    */
-  protected function normalizeQuestions(array $questions) {
+  protected function normalizeQuestions(array $questions) :array {
     return array_map(function ($question) {
       // Support array syntax.
       if (is_array($question)) {

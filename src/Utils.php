@@ -14,21 +14,21 @@ class Utils {
   /**
    * Creates default plugin ID.
    */
-  public static function defaultPluginId(array $vars) {
+  public static function defaultPluginId(array $vars) :string {
     return $vars['machine_name'] . '_' . self::human2machine($vars['plugin_label']);
   }
 
   /**
    * Transforms a machine name to human name.
    */
-  public static function machine2human($machine_name) {
+  public static function machine2human(string $machine_name) :string {
     return ucfirst(trim(str_replace('_', ' ', $machine_name)));
   }
 
   /**
    * Transforms a human name to machine name.
    */
-  public static function human2machine($human_name) {
+  public static function human2machine(string $human_name) :string {
     return trim(preg_replace(
       ['/^[0-9]+/', '/[^a-z0-9_]+/'],
       '_',
@@ -39,15 +39,15 @@ class Utils {
   /**
    * Transforms a camelized sting to machine name.
    */
-  public static function camel2machine($input) {
+  public static function camel2machine($input) :string {
     return self::human2machine(preg_replace('/[A-Z]/', ' \0', $input));
   }
 
   /**
    * Camelize a string.
    */
-  public static function camelize($string, $upper_camel = TRUE) {
-    $output = preg_replace('/([^A-Z])([A-Z])/', '$1 $2', $string);
+  public static function camelize(string $input, $upper_camel = TRUE) :string {
+    $output = preg_replace('/([^A-Z])([A-Z])/', '$1 $2', $input);
     $output = strtolower($output);
     $output = preg_replace('/[^a-z0-9]/', ' ', $output);
     $output = trim($output);
@@ -59,7 +59,7 @@ class Utils {
   /**
    * Machine name validator.
    */
-  public static function validateMachineName($value) {
+  public static function validateMachineName(string $value) :string {
     if (!preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/', $value)) {
       throw new \UnexpectedValueException('The value is not correct machine name.');
     }
@@ -71,7 +71,7 @@ class Utils {
    *
    * @see http://php.net/manual/en/language.oop5.basic.php
    */
-  public static function validateClassName($value) {
+  public static function validateClassName(string $value) :string {
     if (!preg_match('/^[A-Z][a-zA-Z0-9]+$/', $value)) {
       throw new \UnexpectedValueException('The value is not correct class name.');
     }
@@ -81,8 +81,8 @@ class Utils {
   /**
    * Service name validator.
    */
-  public static function validateServiceName($value) {
-    if ($value !== '' && !preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
+  public static function validateServiceName($value) :?string {
+    if ($value !== '' && $value !== NULL && !preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
       throw new \UnexpectedValueException('The value is not correct service name.');
     }
     return $value;
@@ -91,7 +91,7 @@ class Utils {
   /**
    * Required value validator.
    */
-  public static function validateRequired($value) {
+  public static function validateRequired(?string $value) :?string {
     // FALSE is not considered as empty value because question helper use
     // it as negative answer on confirmation questions.
     if ($value === NULL || $value === '') {
@@ -109,7 +109,7 @@ class Utils {
    * @return callable
    *   Question validator.
    */
-  public static function getOptionsValidator(array $options) {
+  public static function getOptionsValidator(array $options) :callable {
     return function ($value) use ($options) {
       if (!in_array($value, $options)) {
         $options_formatted = implode(', ', $options);
@@ -126,7 +126,7 @@ class Utils {
    * @return \Symfony\Component\Console\Question\Question[]
    *   Array of module questions.
    */
-  public static function moduleQuestions() {
+  public static function moduleQuestions() :array {
     $questions['name'] = new Question('Module name');
     $questions['name']->setValidator([Utils::class, 'validateRequired']);
     $questions['machine_name'] = new Question('Module machine name');
@@ -140,7 +140,7 @@ class Utils {
    * @return \Symfony\Component\Console\Question\Question[]
    *   Array of plugin questions.
    */
-  public static function pluginQuestions($class_suffix = '') {
+  public static function pluginQuestions(string $class_suffix = '') :array {
     $questions['plugin_label'] = new Question('Plugin label', 'Example');
     $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
     $questions['plugin_id'] = new Question('Plugin ID', [Utils::class, 'defaultPluginId']);
@@ -152,7 +152,7 @@ class Utils {
   /**
    * Creates plugin class question.
    */
-  public static function pluginClassQuestion($suffix = '') {
+  public static function pluginClassQuestion(string $suffix = '') :Question {
     $default_class = function ($vars) use ($suffix) {
       $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
       return Utils::camelize($unprefixed_plugin_id) . $suffix;
@@ -166,7 +166,7 @@ class Utils {
    * @return string|bool
    *   Extension root directory or false if it was not found.
    */
-  public static function getExtensionRoot($directory) {
+  public static function getExtensionRoot(string $directory) :string {
     $extension_root = FALSE;
     for ($i = 1; $i <= 5; $i++) {
       $info_file = $directory . '/' . basename($directory) . '.info';
@@ -182,14 +182,14 @@ class Utils {
   /**
    * Removes a given number of lines from the beginning of the string.
    */
-  public static function removeHeader($content, $header_size) {
+  public static function removeHeader(string $content, int $header_size) :string {
     return implode("\n", array_slice(explode("\n", $content), $header_size));
   }
 
   /**
    * Return the user's home directory.
    */
-  public static function getHomeDirectory() {
+  public static function getHomeDirectory() :?string {
     return isset($_SERVER['HOME']) ? $_SERVER['HOME'] : getenv('HOME');
   }
 
@@ -204,7 +204,7 @@ class Utils {
    * @return string
    *   Text with tokens replaced.
    */
-  public static function replaceTokens($text, array $data) {
+  public static function replaceTokens(string $text, array $data) :string {
     $tokens = [];
     foreach ($data as $var_name => $var) {
       if (is_string($var)) {
@@ -223,7 +223,7 @@ class Utils {
    * @return string
    *   The pluralized noun.
    */
-  public static function pluralize($string) {
+  public static function pluralize(string $string) :string {
     switch (substr($string, -1)) {
       case 'y':
         return substr($string, 0, -1) . 'ies';
@@ -245,7 +245,7 @@ class Utils {
    * @return array
    *   The prepared choices.
    */
-  public static function prepareChoices(array $raw_choices) {
+  public static function prepareChoices(array $raw_choices) :array {
     // The $raw_choices can be an associative array.
     $choices = array_values($raw_choices);
     // Start choices list form '1'.

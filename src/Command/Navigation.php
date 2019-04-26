@@ -99,7 +99,7 @@ class Navigation extends Command {
   /**
    * {@inheritdoc}
    */
-  public function getUsages() {
+  public function getUsages() :array {
     return ['<generator>'];
   }
 

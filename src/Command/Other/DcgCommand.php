@@ -21,7 +21,7 @@ class DcgCommand extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function configure() {
+  protected function configure() :void {
     $this->destination = Utils::getHomeDirectory() . '/.dcg/Command';
     parent::configure();
   }
@@ -29,7 +29,7 @@ class DcgCommand extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
 
     $questions = [
       'name' => new Question('Command name', 'custom:example'),

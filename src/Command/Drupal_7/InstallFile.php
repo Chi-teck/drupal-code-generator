@@ -18,7 +18,7 @@ class InstallFile extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $this->collectVars($input, $output, Utils::defaultQuestions());
     $this->addFile()
       ->path('{machine_name}.install')

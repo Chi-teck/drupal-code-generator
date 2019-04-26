@@ -21,7 +21,7 @@ class WebDriver extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $questions['class'] = new Question('Class', 'ExampleTest');
     $questions['class']->setValidator([Utils::class, 'validateClassName']);

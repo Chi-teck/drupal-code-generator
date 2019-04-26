@@ -94,7 +94,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  protected function configure() {
+  protected function configure():void {
     $this
       ->setName($this->name)
       ->setDescription($this->description)
@@ -123,7 +123,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  protected function initialize(InputInterface $input, OutputInterface $output) {
+  protected function initialize(InputInterface $input, OutputInterface $output) :void {
     $this->getHelperSet()->setCommand($this);
     $this->getHelper('dcg_renderer')->addPath($this->templatePath);
 
@@ -147,7 +147,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  protected function execute(InputInterface $input, OutputInterface $output) {
+  protected function execute(InputInterface $input, OutputInterface $output) :int {
 
     // Render all assets.
     $renderer = $this->getHelper('dcg_renderer');
@@ -167,7 +167,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  public function getLabel() {
+  public function getLabel() :?string {
     return $this->label;
   }
 
@@ -180,14 +180,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @deprecated.
    */
-  public function getFiles() {
+  public function getFiles() :array {
     return $this->files;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getAssets() {
+  public function getAssets() :array {
     if ($this->files) {
       // Convert files into assets for legacy commands.
       $assets = [];
@@ -223,28 +223,28 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  public function setDirectory($directory) {
+  public function setDirectory(string $directory) :void {
     $this->directory = $directory;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDirectory() {
+  public function getDirectory() :string {
     return $this->directory;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setDestination($destination) {
+  public function setDestination(string $destination) {
     $this->destination = $destination;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDestination() {
+  public function getDestination() :string {
     return $this->destination;
   }
 
@@ -259,7 +259,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @return string
    *   A string representing the rendered output.
    */
-  protected function render($template, array $vars) {
+  protected function render(string $template, array $vars) :string {
     return $this->getHelper('dcg_renderer')->render($template, $vars);
   }
 
@@ -280,7 +280,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @see \DrupalCodeGenerator\InputHandler::collectVars()
    */
-  protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) {
+  protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) : array {
     $this->vars += $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions, $vars);
     return $this->vars;
   }
@@ -297,12 +297,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @param array $vars
    *   Array of predefined template variables.
    *
-   * @return string
+   * @return string|null
    *   The answer.
    *
    * @see \DrupalCodeGenerator\InputHandler::collectVars()
    */
-  protected function ask(InputInterface $input, OutputInterface $output, Question $question, array $vars = []) {
+  protected function ask(InputInterface $input, OutputInterface $output, Question $question, array $vars = []) :?string {
     $key = mt_rand();
     $answers = $this->getHelper('dcg_input_handler')->collectVars($input, $output, [$key => $question], $vars);
     return $answers[$key];
@@ -317,7 +317,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addAsset($type) {
+  protected function addAsset(string $type) :Asset {
     $asset = (new Asset())->type($type);
     $this->assets[] = $asset;
     return $asset;
@@ -345,7 +345,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addDirectory($path = NULL) {
+  protected function addDirectory(string $path = NULL) :Asset {
     return $this->addAsset('directory')->path($path);
   }
 
@@ -358,7 +358,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addServicesFile($path = NULL) {
+  protected function addServicesFile(string $path = NULL) :Asset {
     return $this->addFile()
       ->path($path ?: '{machine_name}.services.yml')
       ->action('append')
@@ -377,7 +377,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @deprecated Use self::addFile() or self::addDirectory().
    */
-  protected function setFile($path = NULL, $template = NULL, array $vars = []) {
+  protected function setFile(string $path = NULL, string $template = NULL, array $vars = []) :array {
     $this->addFile()
       ->path($path)
       ->template($template)
@@ -396,7 +396,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @deprecated Use self::addServiceFile().
    */
-  protected function setServicesFile($path, $template, array $vars) {
+  protected function setServicesFile(string $path, string $template, array $vars) :void {
     $this->addServicesFile()
       ->path($path)
       ->template($template)
@@ -414,7 +414,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @return array
    *   List of collected services.
    */
-  protected function collectServices(InputInterface $input, OutputInterface $output) {
+  protected function collectServices(InputInterface $input, OutputInterface $output) :array {
 
     $service_definitions = self::getServiceDefinitions();
     $service_ids = array_keys($service_definitions);
@@ -457,7 +457,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @return array
    *   List of service definitions keyed by service ID.
    */
-  protected static function getServiceDefinitions() {
+  protected static function getServiceDefinitions() :array {
     $data_encoded = file_get_contents(ApplicationFactory::getRoot() . '/resources/service-definitions.json');
     return json_decode($data_encoded, TRUE);
   }

@@ -13,7 +13,7 @@ class OutputHandler extends Helper {
   /**
    * {@inheritdoc}
    */
-  public function getName() {
+  public function getName() :string {
     return 'dcg_output_handler';
   }
 
@@ -25,7 +25,7 @@ class OutputHandler extends Helper {
    * @param array $dumped_files
    *   List of created or updated files.
    */
-  public function printSummary(OutputInterface $output, array $dumped_files) {
+  public function printSummary(OutputInterface $output, array $dumped_files) :void {
 
     if (count($dumped_files) > 0) {
       // Multiple hooks can be dumped to the same file.

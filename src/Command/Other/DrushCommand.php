@@ -19,7 +19,7 @@ class DrushCommand extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
 
     $default_alias = function ($vars) {
       return substr($vars['command_name'], 0, 3);

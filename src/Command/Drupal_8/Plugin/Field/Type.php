@@ -20,7 +20,7 @@ class Type extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions();
     $questions += Utils::pluginQuestions('Item');
 

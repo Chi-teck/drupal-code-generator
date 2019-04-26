@@ -59,7 +59,7 @@ class Dumper extends Helper {
   /**
    * {@inheritdoc}
    */
-  public function getName() {
+  public function getName() :string {
     return 'dcg_dumper';
   }
 
@@ -74,7 +74,7 @@ class Dumper extends Helper {
    * @return array
    *   List of created or updated files.
    */
-  public function dump(InputInterface $input, OutputInterface $output) {
+  public function dump(InputInterface $input, OutputInterface $output) :array {
     $this->input = $input;
     $this->output = $output;
     $formatter_style = new OutputFormatterStyle('black', 'cyan', []);
@@ -107,7 +107,7 @@ class Dumper extends Helper {
    * @return array
    *   List of created or updated assets.
    */
-  protected function doDump(array $assets, $directory) {
+  protected function doDump(array $assets, string $directory) :array {
     $dumped_files = [];
 
     foreach ($assets as $asset) {
@@ -171,7 +171,7 @@ class Dumper extends Helper {
    * @return bool
    *   User confirmation.
    */
-  protected function confirm($question_text) {
+  protected function confirm(string $question_text) :bool {
     $question_text = "\n $question_text\n ➤ ";
     // If the input is not interactive print the question with default answer.
     if ($this->replace !== NULL) {

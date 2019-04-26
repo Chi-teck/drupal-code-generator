@@ -22,7 +22,7 @@ require __DIR__ . '/../vendor/autoload.php';
  * @param \Symfony\Component\Console\Output\OutputInterface $output
  *   Output instance.
  */
-function dump_hooks(InputInterface $input, OutputInterface $output) {
+function dump_hooks(InputInterface $input, OutputInterface $output) :void {
 
   $input_directory = $input->getArgument('input_directory');
   $output_directory = $input->getArgument('output_directory');
@@ -61,7 +61,7 @@ function dump_hooks(InputInterface $input, OutputInterface $output) {
  *
  * @throws \Symfony\Component\Console\Exception\RuntimeException
  */
-function check_directories($input_directory, $output_directory) {
+function check_directories(string $input_directory, string $output_directory) :void {
   $file_system = new Filesystem();
   if (!$file_system->exists($input_directory)) {
     throw new RuntimeException('Input directory does not exist.');
@@ -80,7 +80,7 @@ function check_directories($input_directory, $output_directory) {
  * @return array
  *   Array of parsed hooks keyed by hook name.
  */
-function parse_hooks($file) {
+function parse_hooks(string $file) :array {
   $code = file_get_contents($file);
 
   preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);

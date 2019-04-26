@@ -21,7 +21,7 @@ class PluginManager extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::defaultQuestions();
     $default_plugin_type = function ($vars) {
       return $vars['machine_name'];

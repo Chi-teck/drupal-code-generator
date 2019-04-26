@@ -22,7 +22,7 @@ class ApplicationFactory {
    * @return string
    *   Path to DCG root directory.
    */
-  public static function getRoot() {
+  public static function getRoot() :string {
     return dirname(__DIR__);
   }
 
@@ -32,7 +32,7 @@ class ApplicationFactory {
    * @return \Symfony\Component\Console\Application
    *   The initialized console application.
    */
-  public static function create() {
+  public static function create() :Application {
     // This gets substituted with git version when DCG is packaged to PHAR file.
     $version = '@git-version@';
     // Fallback for composer installation.

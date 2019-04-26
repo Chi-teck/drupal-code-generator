@@ -324,7 +324,6 @@ class UtilsTest extends BaseTestCase {
       ['yes', NULL],
       ['0', NULL],
       [0, NULL],
-      [FALSE, NULL],
       ['', $exception],
       [NULL, $exception],
     ];

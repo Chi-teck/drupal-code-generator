@@ -6,6 +6,7 @@
  */
 
 use DrupalCodeGenerator\ApplicationFactory;
+use Symfony\Component\Console\Application;
 
 /**
  * DCG root.
@@ -26,6 +27,6 @@ define('DCG_ROOT', dirname(__DIR__));
  *
  * @codeCoverageIgnore
  */
-function dcg_create_application() {
+function dcg_create_application() :Application {
   return ApplicationFactory::create();
 }

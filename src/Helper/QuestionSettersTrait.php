@@ -15,10 +15,10 @@ trait QuestionSettersTrait {
    *
    * @param \Symfony\Component\Console\Question\Question $question
    *   The question to update.
-   * @param mixed $question_text
+   * @param string $question_text
    *   The question text.
    */
-  protected function setQuestionText(Question $question, $question_text) {
+  protected function setQuestionText(Question $question, string $question_text) :void {
     // Choice question has a different constructor signature.
     if ($question instanceof ChoiceQuestion) {
       $question->__construct($question_text, $question->getChoices(), $question->getDefault());
@@ -36,7 +36,7 @@ trait QuestionSettersTrait {
    * @param mixed $default_value
    *   Default value for the question.
    */
-  protected function setQuestionDefault(Question $question, $default_value) {
+  protected function setQuestionDefault(Question $question, $default_value) :void {
     if ($question instanceof ChoiceQuestion) {
       $question->__construct($question->getQuestion(), $question->getChoices(), $default_value);
     }

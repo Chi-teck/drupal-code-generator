@@ -20,7 +20,7 @@ class Action extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
+  protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions['machine_name'] = new Question('Module machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
 
