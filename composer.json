@@ -2,7 +2,7 @@
   "name": "chi-teck/drupal-code-generator",
   "description": "Drupal code generator",
   "require": {
-    "php": ">=5.5.9",
+    "php": ">=7.1.0",
     "ext-json": "*",
     "symfony/console": "^3.4 || ^4.0",
     "symfony/filesystem": "^2.7 || ^3.4 || ^4.0",
