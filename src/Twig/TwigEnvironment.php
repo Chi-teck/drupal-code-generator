@@ -7,7 +7,6 @@ use Twig\TokenStream;
 use Twig_Environment;
 use Twig_LoaderInterface;
 use Twig_SimpleFilter;
-use Twig\Source;
 
 /**
  * Stores the Twig configuration.
@@ -48,7 +47,10 @@ class TwigEnvironment extends Twig_Environment {
   /**
    * {@inheritdoc}
    */
-  public function tokenize(Source $source) :TokenStream {
+  public function tokenize($source, $name = NULL) :TokenStream {
+    if (!$source instanceof \Twig_Source) {
+      $source = new \Twig_Source($source, $name);
+    }
     // Remove leading whitespaces to preserve indentation.
     // @see https://github.com/twigphp/Twig/issues/1423
     $code = $source->getCode();
@@ -57,7 +59,7 @@ class TwigEnvironment extends Twig_Environment {
     }
     // Twig source has no setters.
     $source = new \Twig_Source($code, $source->getName(), $source->getPath());
-    return parent::tokenize($source);
+    return parent::tokenize($source, $name);
   }
 
 }

@@ -4,9 +4,9 @@
   "require": {
     "php": ">=7.1.0",
     "ext-json": "*",
-    "symfony/console": "^4.2",
-    "symfony/filesystem": "^4.2",
-    "twig/twig": "^2.8"
+    "symfony/console": "^3.4.0",
+    "symfony/filesystem": "^3.4.0",
+    "twig/twig": "^1.38.2"
   },
   "bin": [
     "bin/dcg"
