@@ -5,9 +5,9 @@ namespace DrupalCodeGenerator\Tests\Helper;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\Dumper;
+use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Tests\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -61,6 +61,7 @@ class DumperTest extends BaseTestCase {
     parent::setUp();
 
     $this->input = new ArrayInput([], new InputDefinition());
+
     $this->output = new BufferedOutput();
 
     $command = $this->createMock(GeneratorInterface::class);
@@ -139,7 +140,7 @@ class DumperTest extends BaseTestCase {
     $results = $this->dump();
     $this->assertResults($results);
     $this->assertFileContents();
-    $this->assertOutput("\n $question_text [Yes]:\n ➤ Yes\n");
+    $this->assertOutput('');
 
     // -- Dumper with enabled replace option (always not).
     $this->setDumper(FALSE);
@@ -149,7 +150,7 @@ class DumperTest extends BaseTestCase {
     $results = $this->dump();
     $this->assertEmptyResults($results);
     $this->assertFileContents([static::createAsset('foo.txt', $expected_content)]);
-    $this->assertOutput("\n $question_text [Yes]:\n ➤ No\n");
+    $this->assertOutput('');
 
     // -- File with special permissions.
     $this->assets = [

@@ -170,9 +170,7 @@ class Field extends BaseGenerator {
     $vars['datetime'] = FALSE;
 
     for ($i = 1; $i <= $vars['subfield_count']; $i++) {
-      if (!$input->getOption('answers')) {
-        $output->writeln('<fg=green>–––––––––––––––––––––––––––––––––––––––––––––––––––</>');
-      }
+      $output->writeln('<fg=green>–––––––––––––––––––––––––––––––––––––––––––––––––––</>');
       $subfield_questions = [];
       $subfield_questions['name_' . $i] = new Question("Label for sub-field #$i", "Value $i");
       $default_machine_name = function (array $vars) use ($i) {
@@ -261,9 +259,7 @@ class Field extends BaseGenerator {
 
     }
 
-    if (!$input->getOption('answers')) {
-      $output->writeln('<fg=green>–––––––––––––––––––––––––––––––––––––––––––––––––––</>');
-    }
+    $output->writeln('<fg=green>–––––––––––––––––––––––––––––––––––––––––––––––––––</>');
 
     $questions = [];
     $questions['storage_settings'] = new ConfirmationQuestion('Would you like to create field storage settings form?', FALSE);

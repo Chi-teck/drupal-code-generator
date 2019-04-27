@@ -93,10 +93,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         'Working directory'
       )
       ->addOption(
-        'answers',
+        'answer',
         '-a',
-        InputOption::VALUE_OPTIONAL,
-        'Default JSON formatted answers'
+        InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL,
+        'Answer to generator question'
       );
 
     if ($this->alias) {
@@ -122,11 +122,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $this->directory = $is_extension
       ? $directory : (Utils::getExtensionRoot($directory) ?: $directory);
 
-    // Display welcome message.
-    $header = sprintf(
-      "\n Welcome to %s generator!",
-      $this->getName()
-    );
+    $header = sprintf("\n Welcome to %s generator!", $this->getName());
     $output->writeln($header);
     $header_length = strlen(trim(strip_tags($header)));
     $output->writeln('<fg=cyan;options=bold>–' . str_repeat('–', $header_length) . '–</>');

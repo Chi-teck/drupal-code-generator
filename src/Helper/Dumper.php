@@ -114,13 +114,15 @@ class Dumper extends Helper {
 
       $content = $asset->getContent();
       $path = $asset->getPath();
-
       $file_path = "$directory/$path";
       if ($this->filesystem->exists($file_path) && !$asset->isDirectory()) {
         $action = $asset->getAction();
         if ($action == 'replace') {
-          $question_text = sprintf('<info>The file <comment>%s</comment> already exists. Would you like to replace it?</info> [<comment>Yes</comment>]:', $file_path);
-          if (!$this->confirm($question_text)) {
+          $question_text = "The file <comment>$file_path</comment> already exists. Would you like to replace it?";
+          $question = new ConfirmationQuestion($question_text, $this->replace !== FALSE);
+          /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
+          $question_helper = $this->getHelperSet()->get('question');
+          if (!$question_helper->ask($this->input, $this->output, $question)) {
             continue;
           }
         }
@@ -160,27 +162,6 @@ class Dumper extends Helper {
     }
 
     return $dumped_files;
-  }
-
-  /**
-   * Asks a user for confirmation.
-   *
-   * @param string $question_text
-   *   The question to ask to the user.
-   *
-   * @return bool
-   *   User confirmation.
-   */
-  protected function confirm(string $question_text) :bool {
-    $question_text = "\n $question_text\n ➤ ";
-    // If the input is not interactive print the question with default answer.
-    if ($this->replace !== NULL) {
-      $this->output->writeln($question_text . ($this->replace ? 'Yes' : 'No'));
-    }
-    $question = new ConfirmationQuestion($question_text, $this->replace !== FALSE);
-    /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
-    $question_helper = $this->getHelperSet()->get('question');
-    return $question_helper->ask($this->input, $this->output, $question);
   }
 
 }

@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Helper\QuestionHelper;
+use DrupalCodeGenerator\Helper\QuestionHelper;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**

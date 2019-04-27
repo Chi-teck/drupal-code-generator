@@ -117,12 +117,6 @@ class Navigation extends Command {
         '-d',
         InputOption::VALUE_OPTIONAL,
         'Working directory'
-      )
-      ->addOption(
-        'answers',
-        '-a',
-        InputOption::VALUE_OPTIONAL,
-        'Default JSON formatted answers'
       );
   }
 
@@ -208,7 +202,6 @@ class Navigation extends Command {
     // - Sorted list of commands.
     $choices = ['..' => '..'] + $sub_menu_labels + $command_labels;
     $question = new ChoiceQuestion('<title> Select generator: </title>', array_values($choices));
-    $question->setPrompt(count($choices) <= 10 ? '  ➤➤➤ ' : '  ➤➤➤➤ ');
 
     $answer_label = $this->getHelper('question')->ask($input, $output, $question);
     $answer = array_search($answer_label, $choices);

@@ -3,20 +3,16 @@
 namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Generator input handler.
  */
 class InputHandler extends Helper {
-
-  use QuestionSettersTrait;
 
   /**
    * Asked questions.
@@ -48,15 +44,6 @@ class InputHandler extends Helper {
    *   Template variables.
    */
   public function collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) :array {
-
-    // A user can pass answers through the command line option.
-    $answers = NULL;
-    if ($answers_raw = $input->getOption('answers')) {
-      $answers = json_decode($answers_raw, TRUE);
-      if (!is_array($answers)) {
-        throw new InvalidOptionException('Answers should be encoded in JSON format.');
-      }
-    }
 
     /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
     $question_helper = $this->getHelperSet()->get('question');
@@ -105,26 +92,7 @@ class InputHandler extends Helper {
       }
       $this->setQuestionDefault($question, $default_value);
 
-      if ($answers) {
-        if (array_key_exists($name, $answers)) {
-          $answer = $answers[$name];
-          // Validate provided answer.
-          if ($validator = $question->getValidator()) {
-            $validator($answer);
-          }
-          // Turn 'yes/no' string into boolean.
-          if ($question instanceof ConfirmationQuestion && !is_bool($answer)) {
-            $answer = strcasecmp($answer, 'yes') == 0;
-          }
-        }
-        else {
-          $answer = $default_value;
-        }
-      }
-      else {
-        $this->formatQuestionText($question);
-        $answer = $question_helper->ask($input, $output, $question);
-      }
+      $answer = $question_helper->ask($input, $output, $question);
 
       $vars[$name] = $answer;
     }
@@ -133,31 +101,20 @@ class InputHandler extends Helper {
   }
 
   /**
-   * Formats question text.
+   * Sets question default value.
    *
    * @param \Symfony\Component\Console\Question\Question $question
-   *   The question.
+   *   The question to update.
+   * @param mixed $default_value
+   *   Default value for the question.
    */
-  protected function formatQuestionText(Question $question) :void {
-    $question_text = $question->getQuestion();
-    $default_value = $question->getDefault();
-
-    $question_text = "\n <info>$question_text</info>";
-    if ($question instanceof ConfirmationQuestion && is_bool($default_value)) {
-      $default_value = $default_value ? 'Yes' : 'No';
-    }
-    if ($default_value) {
-      $question_text .= " [<comment>$default_value</comment>]";
-    }
-    $question_text .= ":";
+  protected function setQuestionDefault(Question $question, $default_value) :void {
     if ($question instanceof ChoiceQuestion) {
-      $question->setPrompt('  ➤➤➤ ');
+      $question->__construct($question->getQuestion(), $question->getChoices(), $default_value);
     }
     else {
-      $question_text .= "\n ➤ ";
+      $question->__construct($question->getQuestion(), $default_value);
     }
-
-    $this->setQuestionText($question, $question_text);
   }
 
 }

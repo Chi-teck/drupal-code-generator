@@ -14,17 +14,19 @@ class ApplicationTest extends BaseTestCase {
    */
   public function testApplication() {
 
-    $cmd = sprintf(
-      ApplicationFactory::getRoot() . '/bin/dcg install -d %s -a \'%s\'',
-      $this->directory,
-      '{"name":"Foo", "machine_name":"foo"}'
-    );
+    $cmd = sprintf('%s/bin/dcg install -d %s -a Foo -a foo 2>&1', ApplicationFactory::getRoot(), $this->directory);
     exec($cmd, $output, $return);
 
     $expected_output = [
       '',
       ' Welcome to d8:install-file generator!',
       '–––––––––––––––––––––––––––––––––––––––',
+      '',
+      ' Module name [Dcg sandbox]:',
+      ' ➤ Foo',
+      '',
+      ' Module machine name [foo]:',
+      ' ➤ foo',
       '',
       ' The following directories and files have been created or updated:',
       '–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––',
