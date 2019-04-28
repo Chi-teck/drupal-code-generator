@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator;
 
-use DrupalCodeGenerator\Helper\Renderer;
-
 /**
  * Simple data structure to represent an asset being generated.
  */
@@ -47,7 +45,7 @@ class Asset {
   /**
    * Action.
    *
-   * This defines an action to take if specified file already exists.
+   * An action to take if specified file already exists.
    *
    * @var string
    */
@@ -80,8 +78,12 @@ class Asset {
    * @return string
    *   Asset path.
    */
-  public function getPath() :string {
-    return Utils::replaceTokens($this->path, $this->getVars());
+  public function getPath() :?string {
+    $path = $this->path;
+    if ($path && $this->getVars()) {
+      $path = Utils::replaceTokens($path, $this->getVars());
+    }
+    return $path;
   }
 
   /**
@@ -110,7 +112,7 @@ class Asset {
    * @return string
    *   Asset template.
    */
-  public function getTemplate() :string {
+  public function getTemplate() :?string {
     return $this->template;
   }
 
@@ -130,7 +132,7 @@ class Asset {
    * @return string
    *   Asset action.
    */
-  public function getAction() :string {
+  public function getAction() :?string {
     return $this->action;
   }
 
@@ -150,7 +152,7 @@ class Asset {
    * @return string
    *   Asset file mode.
    */
-  public function getMode() :string {
+  public function getMode() :?string {
     return $this->mode ?: ($this->isDirectory() ? 0755 : 0644);
   }
 
@@ -160,7 +162,7 @@ class Asset {
    * @return string
    *   Asset type.
    */
-  public function getType() :string {
+  public function getType() :?string {
     return $this->type;
   }
 
@@ -223,7 +225,7 @@ class Asset {
   /**
    * Setter for asset vars.
    *
-   * @param array $vars
+   * @param array|null $vars
    *   Asset template variables.
    *
    * @return \DrupalCodeGenerator\Asset
@@ -279,15 +281,25 @@ class Asset {
   /**
    * Setter for asset type.
    *
-   * @param string $type
+   * @param string|null $type
    *   Asset type.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function type(string $type) :Asset {
+  public function type(?string $type) :Asset {
     $this->type = $type;
     return $this;
+  }
+
+  /**
+   * Determines if the asset is a regular file.
+   *
+   * @return bool
+   *   True if the asset is a file, false otherwise.
+   */
+  public function isFile() :bool {
+    return $this->getType() == 'file';
   }
 
   /**
@@ -298,23 +310,6 @@ class Asset {
    */
   public function isDirectory() :bool {
     return $this->getType() == 'directory';
-  }
-
-  /**
-   * Renders the asset template.
-   *
-   * @param \DrupalCodeGenerator\Helper\Renderer $renderer
-   *   Renderer helper.
-   */
-  public function render(Renderer $renderer) {
-    if (!$this->isDirectory() && is_null($this->getContent())) {
-      $content = '';
-      if ($header_template = $this->getHeaderTemplate()) {
-        $content .= $renderer->render($header_template, $this->getVars()) . "\n";
-      }
-      $content .= $renderer->render($this->getTemplate(), $this->getVars());
-      $this->content($content);
-    }
   }
 
 }

@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\Asset;
 use Symfony\Component\Console\Helper\Helper;
 use Twig_Environment;
 
@@ -18,7 +19,7 @@ class Renderer extends Helper {
   protected $twig;
 
   /**
-   * Constructs a generator command.
+   * Constructs the Renderer object.
    *
    * @param \Twig_Environment $twig
    *   The twig environment.
@@ -47,6 +48,23 @@ class Renderer extends Helper {
    */
   public function render(string $template, array $vars) :string {
     return $this->twig->render($template, $vars);
+  }
+
+  /**
+   * Renders an asset.
+   *
+   * @param \DrupalCodeGenerator\Asset $asset
+   *   Asset to render.
+   */
+  public function renderAsset(Asset $asset) :void {
+    if ($asset->isFile() && $asset->getTemplate()) {
+      $content = '';
+      if ($header_template = $asset->getHeaderTemplate()) {
+        $content .= $this->render($header_template, $asset->getVars()) . "\n";
+      }
+      $content .= $this->render($asset->getTemplate(), $asset->getVars());
+      $asset->content($content);
+    }
   }
 
   /**
