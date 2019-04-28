@@ -27,13 +27,13 @@ DCG=${DCG:-$DEFAULT_DCG}
 WD_URL=${WD_URL:-http://localhost:4444/wd/hub}
 TARGET_TEST=${1:-all}
 
-echo ---------------------------------------------
+echo -----------------------------------------------
 echo ' DRUPAL PATH:   ' $DRUPAL_DIR
 echo ' DRUPAL VERSION:' $DRUPAL_VERSION
 echo ' SITE URL:      ' http://$DRUPAL_HOST:$DRUPAL_PORT
 echo ' DCG:           ' $DCG
 echo ' WD_URL:        ' $WD_URL
-echo ---------------------------------------------
+echo -----------------------------------------------
 
 # === Helper functions. === #
 
@@ -102,9 +102,9 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = form ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:form:simple -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"SimpleForm","route":"Yes","route_name":"foo_simple_form","route_path":"/admin/config/foo/simple","route_title":"Example","route_permission":"access administration pages"}'
-  $DCG d8:form:config -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"SettingsForm","route":"Yes","route_name":"foo_config_form","route_path":"/admin/config/foo/settings","route_title":"Example","route_permission":"access administration pages"}'
-  $DCG d8:form:confirm -d $MODULE_DIR -a '{"name":"Foo","machine_name":"foo","class":"ConfirmForm","route":"Yes","route_name":"foo_confirm_form","route_path":"/admin/config/foo/confirm","route_title":"Example","route_permission":"access administration pages"}'
+  $DCG d8:form:simple -d $MODULE_DIR -a Foo -a foo -a SimpleForm -a Yes -a foo.simple_form -a /admin/config/foo/simple -a Example -a 'access administration pages'
+  $DCG d8:form:config -d $MODULE_DIR -a Foo -a foo -a SettingsForm -a Yes -a foo.config_form -a /admin/config/foo/settings -a Example -a 'access administration pages' -a No
+  $DCG d8:form:confirm -d $MODULE_DIR -a Foo -a foo -a ConfirmForm -a Yes -a foo.confirm_form -a /admin/config/foo/confirm -a Example -a 'access administration pages'
 
   dcg_phpcs --exclude=DrupalPractice.Yaml.RoutingAccess $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -121,19 +121,53 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:composer -d $MODULE_DIR -a '{"machine_name":"bar","description":"Bar project.","type":"drupal-module","drupal_org":"Yes"}'
-  $DCG d8:controller -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar","class":"BarController","di":"No","route":true,"route_name":"bar.example","route_path":"/bar/example","route_title":"Example","route_permission":"access content"}'
-  $DCG d8:install -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar"}'
-  $DCG d8:javascript -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar"}'
-  $DCG d8:module-file -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar"}'
-  $DCG d8:service-provider -d $MODULE_DIR  -a '{"name":"Bar","machine_name":"bar"}'
-  $DCG d8:template -d $MODULE_DIR -a '{"name":"Bar","machine_name":"bar","template_name":"example","create_theme":"Yes","create_preprocess":"Yes"}'
-  $DCG d8:layout -d $MODULE_DIR -a '{"machine_name":"bar","layout_name":"Foo","layout_machine_name":"foo","category":"my","js":"Yes","css":"Yes"}'
-  $DCG d8:render-element -d $MODULE_DIR -a '{"machine_name":"bar"}'
+  $DCG d8:composer -d $MODULE_DIR -a bar -a 'Bar project' -a 'drupal-module' -a Yes
+  $DCG d8:controller -d $MODULE_DIR -a Bar -a bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
+  $DCG d8:install -d $MODULE_DIR -a Bar -a bar
+  $DCG d8:javascript -d $MODULE_DIR -a Bar -a bar
+  $DCG d8:module-file -d $MODULE_DIR -a Bar -a bar
+  $DCG d8:service-provider -d $MODULE_DIR  -a Bar -a bar
+  $DCG d8:template -d $MODULE_DIR -a Bar -a bar -a example -a Yes -a Yes
+  $DCG d8:layout -d $MODULE_DIR -a bar -a Foo -a foo -a my -a Yes -a Yes
 
-  $DCG d8:field -d $MODULE_DIR -a '{"machine_name":"bar","field_label":"Example 1","subfield_count":"10","type_1":"Boolean","type_2":"Text","type_3":"Text (long)","type_4":"Integer","type_5":"Float","type_6":"Numeric","type_7":"Email","type_8":"Telephone","type_9":"Url","type_10":"Date"}'
-  $DCG d8:field -d $MODULE_DIR -a '{"machine_name":"bar","field_label":"Example 2","subfield_count":"10","type_1":"Boolean","required_1":"Yes","type_2":"Text","list_2":"Yes","required_2":"Yes","type_3":"Text (long)","required_3":"Yes","type_4":"Integer","list_4":"Yes","type_5":"Float","list_5":"Yes","required_5":"Yes","type_6":"Numeric","list_6":"Yes","type_7":"Email","list_7":"Yes","required_7":"Yes","type_8":"Telephone","list_8":"Yes","type_9":"Url","list_9":"Yes","required_9":"Yes","type_10":"Date","list_10":"Yes","date_type_10":"Date and time"}'
-  $DCG d8:field -d $MODULE_DIR -a '{"machine_name":"bar","field_label":"Example 3","subfield_count":"5","type_1":"Boolean","type_2":"Text","type_3":"Text (long)","type_4":"Email","type_5":"Url","storage_settings":"Yes","instance_settings":"Yes","widget_settings":"Yes","formatter_settings":"Yes","table_formatter":"Yes","key_value_formatter":"Yes"}'
+  $DCG d8:render-element -d $MODULE_DIR -a bar
+
+  $DCG d8:field -d $MODULE_DIR \
+    -a Bar -a bar -a 'Example 1' -a bar_example_1 -a 10 \
+    -a 'Value 1' -a value_1 -a Boolean -a No \
+    -a 'Value 2' -a value_2 -a Text -a No -a No \
+    -a 'Value 3' -a value_3 -a 'Text (long)' -a No \
+    -a 'Value 4' -a value_4 -a Integer -a No -a No \
+    -a 'Value 5' -a value_5 -a Float -a No -a No \
+    -a 'Value 6' -a value_6 -a Numeric -a No -a No \
+    -a 'Value 7' -a value_7 -a Email -a No -a No \
+    -a 'Value 8' -a value_8 -a Telephone -a No -a No \
+    -a 'Value 9' -a value_9 -a Url -a No -a No \
+    -a 'Value 10' -a value_10 -a Date -a 'Date only' -a No -a No \
+    -a No -a No -a No -a No -a No -a No
+
+  $DCG d8:field -d $MODULE_DIR \
+    -a Bar -a bar -a 'Example 2' -a bar_example_2 -a 10 \
+    -a 'Value 1' -a value_1 -a Boolean -a Yes \
+    -a 'Value 2' -a value_2 -a Text -a Yes -a Yes \
+    -a 'Value 3' -a value_3 -a 'Text (long)' -a Yes \
+    -a 'Value 4' -a value_4 -a Integer -a Yes -a No \
+    -a 'Value 5' -a value_5 -a Float -a Yes -a Yes \
+    -a 'Value 6' -a value_6 -a Numeric -a Yes -a No \
+    -a 'Value 7' -a value_7 -a Email -a Yes -a Yes \
+    -a 'Value 8' -a value_8 -a Telephone -a Yes -a No \
+    -a 'Value 9' -a value_9 -a Url -a Yes -a Yes \
+    -a 'Value 10' -a value_10 -a Date -a 'Date and time' -a Yes -a No \
+    -a No -a No -a No -a No -a No -a No
+
+  $DCG d8:field -d $MODULE_DIR \
+    -a Bar -a bar -a 'Example 3' -a bar_example_3 -a 5 \
+    -a 'Value 1' -a value_1 -a Boolean -a No \
+    -a 'Value 2' -a value_2 -a Text -a No -a No \
+    -a 'Value 3' -a value_3 -a 'Text (long)' -a No \
+    -a 'Value 4' -a value_4 -a Email -a No -a No \
+    -a 'Value 5' -a value_5 -a Url -a No -a No \
+    -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -150,24 +184,24 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:plugin:field:formatter -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example","configurable":"Yes"}'
-  $DCG d8:plugin:field:type -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example","configurable_storage":"Yes","configurable_instance":"Yes"}'
-  $DCG d8:plugin:field:widget -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example","configurable":"Yes"}'
+  $DCG d8:plugin:field:formatter -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleFormatter -a Yes
+  $DCG d8:plugin:field:type -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleItem -a Yes -a Yes
+  $DCG d8:plugin:field:widget -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleWidget -a Yes
 
-  $DCG d8:plugin:migrate:process -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_id":"example"}'
+  $DCG d8:plugin:migrate:process -d $MODULE_DIR -a Qux -a qux -a example -a Example
 
-  $DCG d8:plugin:views:argument-default -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example","configurable":"Yes"}'
-  $DCG d8:plugin:views:field -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example", "configurable":"Yes"}'
-  $DCG d8:plugin:views:style -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example","configurable":"Yes"}'
+  $DCG d8:plugin:views:argument-default -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
+  $DCG d8:plugin:views:field -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
+  $DCG d8:plugin:views:style -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
 
-  $DCG d8:plugin:action -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Update node title","plugin_id":"qux_update_node_title","category":"DCG","configurable":true}'
-  $DCG d8:plugin:block -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example","category":"DCG", "configurable":"Yes","di":"Yes","access":"Yes"}'
-  $DCG d8:plugin:condition -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example"}'
-  $DCG d8:plugin:filter -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"example", "filter_type":"HTML restrictor"}'
-  $DCG d8:plugin:menu-link -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","class":"FooExampleLink"}'
-  $DCG d8:plugin:rest-resource -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example"}'
-  $DCG d8:plugin:entity-reference-selection -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","entity_type":"node","plugin_label":"Example","plugin_id":"qux_example","configurable":"Yes","class":"ExampleNodeSelection"}'
-  $DCG d8:plugin:ckeditor -d $MODULE_DIR -a '{"name":"Qux","machine_name":"qux","plugin_label":"Example","plugin_id":"qux_example"}'
+  $DCG d8:plugin:action -d $MODULE_DIR -a Qux -a qux -a 'Update node title' -a qux_update_node_title -a UpdateNodeTitle -a DCG -a Yes
+  $DCG d8:plugin:block -d $MODULE_DIR -a Qux -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
+  $DCG d8:plugin:condition -d $MODULE_DIR -a Qux -a qux -a Example -a example -a Example
+  $DCG d8:plugin:filter -d $MODULE_DIR -a Qux -a qux -a Example -a example -a Example -a 'HTML restrictor'
+  $DCG d8:plugin:menu-link -d $MODULE_DIR -a Qux -a qux -a FooExampleLink
+  $DCG d8:plugin:rest-resource -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleResource
+  $DCG d8:plugin:entity-reference-selection -d $MODULE_DIR -a Qux -a qux -a node -a Example -a qux_example -a Example -a Yes
+  $DCG d8:plugin:ckeditor -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -184,21 +218,21 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:service:access-checker -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","applies_to":"_zippo","class":"ZippoAccessChecker"}'
-  $DCG d8:service:breadcrumb-builder -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoBreadcrumbBuilder"}'
-  $DCG d8:service:custom -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo", "service_name":"zippo.foo","class":"Foo","di":"Yes"}'
-  $DCG d8:service:event-subscriber -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo"}'
-  $DCG d8:service:logger -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"FileLog"}'
-  $DCG d8:service:middleware -d $MODULE_DIR -a '{"name":"Dcg service","machine_name":"zippo"}'
-  $DCG d8:service:param-converter -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","parameter_type":"example","class":"ExampleParamConverter"}'
-  $DCG d8:service:route-subscriber -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo"}'
-  $DCG d8:service:theme-negotiator -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoThemeNegotiator"}'
-  $DCG d8:service:twig-extension -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ZippoTwigExtension","di":"No"}'
-  $DCG d8:service:path-processor -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"PathProcessorZippo"}'
-  $DCG d8:service:request-policy -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"Example"}'
-  $DCG d8:service:response-policy -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ExampleResponsePolicy"}'
-  $DCG d8:service:uninstall-validator -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ExampleUninstallValidator"}'
-  $DCG d8:service:cache-context -d $MODULE_DIR -a '{"name":"Zippo","machine_name":"zippo","class":"ExampleCacheContext"}'
+  $DCG d8:service:access-checker -d $MODULE_DIR -a Zippo -a zippo -a _zippo -a ZippoAccessChecker
+  $DCG d8:service:breadcrumb-builder -d $MODULE_DIR -a Zippo -a zippo -a ZippoBreadcrumbBuilder
+  $DCG d8:service:custom -d $MODULE_DIR -a Zippo -a zippo -a zippo.foo -a Foo -a Y -a entity_type.manager -a
+  $DCG d8:service:event-subscriber -d $MODULE_DIR -a Zippo -a zippo
+  $DCG d8:service:logger -d $MODULE_DIR -a Zippo -a zippo -a FileLog
+  $DCG d8:service:middleware -d $MODULE_DIR -a Zippo -a zippo
+  $DCG d8:service:param-converter -d $MODULE_DIR -a Zippo -a zippo -a example -a ExampleParamConverter
+  $DCG d8:service:route-subscriber -d $MODULE_DIR -a Zippo -a zippo
+  $DCG d8:service:theme-negotiator -d $MODULE_DIR -a Zippo -a zippo -a ZippoThemeNegotiator
+  $DCG d8:service:twig-extension -d $MODULE_DIR -a Zippo -a zippo -a ZippoTwigExtension -a No
+  $DCG d8:service:path-processor -d $MODULE_DIR -a Zippo -a zippo -a PathProcessorZippo
+  $DCG d8:service:request-policy -d $MODULE_DIR -a Zippo -a zippo -a Example
+  $DCG d8:service:response-policy -d $MODULE_DIR -a Zippo -a zippo -a ExampleResponsePolicy
+  $DCG d8:service:uninstall-validator -d $MODULE_DIR -a Zippo -a zippo -a ExampleUninstallValidator
+  $DCG d8:service:cache-context -d $MODULE_DIR -a Zippo -a zippo -a example -a ExampleCacheContext -a UserCacheContextBase -a Yes
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -215,19 +249,19 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = yml ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:yml:links:action -d $MODULE_DIR -a '{"machine_name":"yety"}'
-  $DCG d8:yml:links:contextual -d $MODULE_DIR -a '{"machine_name":"yety"}'
-  $DCG d8:yml:links:menu -d $MODULE_DIR -a '{"machine_name":"yety"}'
-  $DCG d8:yml:links:task -d $MODULE_DIR -a '{"machine_name":"yety"}'
-  $DCG d8:yml:module-info -d $MODULE_DIR -a '{"name":"Yety","machine_name":"yety","description":"Helper module for testing generated YML files.", "package": "DCG","configure":"", "dependencies":""}'
-  $DCG d8:yml:module-libraries -d $MODULE_DIR -a '{"name":"Yety","machine_name":"yety"}'
-  $DCG d8:yml:permissions -d $MODULE_DIR -a '{"machine_name":"yety"}'
-  $DCG d8:yml:routing -d $MODULE_DIR -a '{"name":"Yety","machine_name":"yety"}'
-  $DCG d8:yml:services -d $MODULE_DIR -a '{"name":"Yety","machine_name":"yety"}'
+  $DCG d8:yml:links:action -d $MODULE_DIR -a yety
+  $DCG d8:yml:links:contextual -d $MODULE_DIR -a yety
+  $DCG d8:yml:links:menu -d $MODULE_DIR -a yety
+  $DCG d8:yml:links:task -d $MODULE_DIR -a yet
+  $DCG d8:yml:module-info -d $MODULE_DIR -a Yety -a yety -a 'Helper module for testing generated YML files' -a DCG -a -a drupal:system,drupal:node,drupal:user
+  $DCG d8:yml:module-libraries -d $MODULE_DIR -a yety
+  $DCG d8:yml:permissions -d $MODULE_DIR -a yety
+  $DCG d8:yml:routing -d $MODULE_DIR -a Yety -a yety
+  $DCG d8:yml:services -d $MODULE_DIR -a Yety -a yety
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
-  #dcg_phpunit $MODULE_PATH/tests
+#  dcg_phpunit $MODULE_DIR/tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi
 
@@ -240,11 +274,11 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = test ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:test:browser -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
-  $DCG d8:test:webdriver -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
-  $DCG d8:test:kernel -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
-  $DCG d8:test:unit -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
-  $DCG d8:test:web -d $MODULE_DIR -a '{"name":"Xerox", "machine_name":"xerox","class":"ExampleTest"}'
+  $DCG d8:test:browser -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
+  $DCG d8:test:webdriver -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
+  $DCG d8:test:kernel -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
+  $DCG d8:test:unit -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
+  $DCG d8:test:web -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
 
   dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -261,11 +295,11 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = theme_component ]; then
 
   mkdir $THEME_DIR
 
-  $DCG d8:theme-file -d $MODULE_DIR -a '{"name":"Shreya","machine_name":"shreya"}'
-  $DCG d8:yml:breakpoints -d $MODULE_DIR -a '{"machine_name":"shreya"}'
-  $DCG d8:theme-settings -d $MODULE_DIR -a '{"name":"Shreya","machine_name":"shreya"}'
-  $DCG d8:yml:theme-libraries -d $MODULE_DIR -a '{"machine_name":"shreya"}'
-  $DCG d8:yml:theme-info -d $MODULE_DIR -a '{"name":"Shreya","machine_name":"shreya","base_theme":"bartik","description":"Helper theme for testing DCG components.","package":"DCG"}'
+  $DCG d8:theme-file -d $THEME_DIR -a Shreya -a shreya
+  $DCG d8:yml:breakpoints -d $THEME_DIR -a shreya
+  $DCG d8:theme-settings -d $THEME_DIR -a Shreya -a shreya
+  $DCG d8:yml:theme-libraries -d $THEME_DIR -a shreya
+  $DCG d8:yml:theme-info -d $THEME_DIR -a Shreya -a shreya -a bartik -a 'Helper theme for testing DCG components.' -a DCG
 
   dcg_phpcs $THEME_DIR
 fi
@@ -278,9 +312,9 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin_manager ]; then
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:plugin-manager -d $MODULE_DIR -a '{"name":"Lamda","machine_name":"lamda","plugin_type":"alpha","discovery":"Annotation"}'
-  $DCG d8:plugin-manager -d $MODULE_DIR -a '{"name":"Lamda","machine_name":"lamda","plugin_type":"beta","discovery":"YAML"}'
-  $DCG d8:plugin-manager -d $MODULE_DIR -a '{"name":"Lamda","machine_name":"lamda","plugin_type":"gamma","discovery":"Hook"}'
+  $DCG d8:plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a alpha -a Annotation
+  $DCG d8:plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a beta -a YAML
+  $DCG d8:plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a gamma -a Hook
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -295,7 +329,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = configuration_entity ]; then
   MODULE_MACHINE_NAME=wine
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:configuration-entity -d $DRUPAL_DIR/modules -a '{"name":"Wine","machine_name":"wine","description":"Configuration entity module generated by DCG.","entity_type_label":"Example","entity_type_id":"example","dependencies":"drupal:views","package":"DCG"}'
+  $DCG d8:module:configuration-entity -d $DRUPAL_DIR/modules -a Wine -a wine -a DCG -a drupal:user -a Example -a example
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
   dcg_phpcs $MODULE_DIR
@@ -311,7 +345,10 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
   MODULE_MACHINE_NAME=nigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:content-entity -d $DRUPAL_DIR/modules -a '{"name":"Nigma","machine_name":"nigma","description":"Content entity module generated by DCG.","entity_type_label":"Example","entity_type_id":"example","package":"DCG","entity_base_path":"/admin/content/example","fieldable":"Yes","revisionable":"Yes","translatable":"Yes","bundle":"Yes","template":"Yes","access_controller":"Yes","title_base_field":"Yes","status_base_field":"Yes","created_base_field":"Yes","changed_base_field":"Yes","author_base_field":"Yes","description_base_field":"Yes","rest_configuration":"Yes"}'
+  $DCG d8:module:content-entity -d $DRUPAL_DIR/modules \
+    -a Nigma -a nigma -a DCG -a drupal:user -a Example -a example -a /admin/content/example \
+    -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
+
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
   dcg_phpcs $MODULE_DIR
@@ -324,7 +361,10 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
   MODULE_MACHINE_NAME=sigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:content-entity -d $DRUPAL_DIR/modules -a '{"name":"Sigma","machine_name":"sigma","description":"Content entity module generated by DCG.","entity_type_label":"Example","entity_type_id":"example","package":"DCG","entity_base_path":"/example","fieldable":"Yes","revisionable":"No","translatable":"No","bundle":"No","template":"No","access_controller":"No","title_base_field":"Yes","status_base_field":"No","created_base_field":"No","changed_base_field":"No","author_base_field":"No","description_base_field":"No","rest_configuration":"No"}'
+  $DCG d8:module:content-entity -d $DRUPAL_DIR/modules \
+    -a Sigma -a sigma -a DCG -a drupal:system -a Example -a example -a /example \
+    -a Yes -a No -a No -a No -a No -a No -a Yes -a No -a No -a No -a No -a No -a No
+
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
   dcg_phpcs $MODULE_DIR
@@ -340,7 +380,8 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module ]; then
   MODULE_MACHINE_NAME=peach
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:standard -d $DRUPAL_DIR/modules -a '{"name":"Peach","machine_name":"peach","description":"Simple module generated by DCG.","dependencies":"drupal:views, drupal:node, drupal:action","package":"DCG","install_file":"Yes","libraries.yml":"Yes","permissions.yml":"Yes","event_subscriber":"Yes","block_plugin":"Yes","controller":"Yes","settings_form":"Yes"}'
+  $DCG d8:module:standard -d $DRUPAL_DIR/modules -a Peach -a peach -a 'Simple module generated by DCG.' \
+    -a DCG -a 'drupal:views, drupal:node, drupal:action' -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -355,8 +396,8 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = theme ]; then
   THEME_MACHINE_NAME=azalea
   THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
 
-  # Generate a theme.
-  $DCG d8:theme -d $DRUPAL_DIR/themes -a '{"name":"Azalea","machine_name":"azalea","base_theme":"bartik","description":"Simple theme generated by DCG.","package":"DCG","sass":"Yes","breakpoints":"Yes","theme_settings":"Yes"}'
+  $DCG d8:theme -d $DRUPAL_DIR/themes -a Azalea -a azalea -a bartik -a 'Simple responsive theme generated by DCG.' \
+    -a DCG -a Yes -a Yes -a Yes
 
   # Code sniffer does not like empty files.
   dcg_phpcs --ignore='\.css' $THEME_DIR
