@@ -34,7 +34,7 @@ dcg d8
 dcg d8:plugin:field:widget
 
 # Generate code non interactively.
-dcg twig-extension -a '{"name": "Example", "machine_name": "example", "class": "ExampleTwigExtension"}'
+dcg config-form -a Example -a example -a SettingsForm -a No
 ```
 ## Extending
 All custom generators should be placed to _$HOME/.dcg/Command_ directory. The following command will help you to get started with creating own generators.
