@@ -22,12 +22,20 @@ class OutputHandler extends Helper {
    *
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *   Output instance.
-   * @param array $dumped_files
-   *   List of created or updated files.
+   * @param \DrupalCodeGenerator\Asset[] $assets
+   *   List of created or updated assets.
+   * @param string $directory
+   *   The working directory.
    */
-  public function printSummary(OutputInterface $output, array $dumped_files) :void {
+  public function printSummary(OutputInterface $output, array $assets, string $directory) :void {
 
-    if (count($dumped_files) > 0) {
+    if (count($assets) > 0) {
+
+      $dumped_files = [];
+      foreach ($assets as $asset) {
+        $dumped_files[] = $asset->getPath();
+      }
+
       // Multiple hooks can be dumped to the same file.
       $dumped_files = array_unique($dumped_files);
 

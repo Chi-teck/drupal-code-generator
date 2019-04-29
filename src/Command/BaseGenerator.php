@@ -143,8 +143,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $renderer->renderAsset($asset);
     }
 
-    $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output);
-    $this->getHelper('dcg_output_handler')->printSummary($output, $dumped_files);
+    $dumped_assets = $this->getHelper('dcg_dumper')
+      ->dump($input, $output, $this->getAssets(), $this->getDirectory());
+
+    $this->getHelper('dcg_output_handler')
+      ->printSummary($output, $dumped_assets, $this->getDirectory());
+
     return 0;
   }
 

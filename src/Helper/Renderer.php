@@ -57,7 +57,7 @@ class Renderer extends Helper {
    *   Asset to render.
    */
   public function renderAsset(Asset $asset) :void {
-    if ($asset->isFile() && $asset->getTemplate()) {
+    if (!$asset->isDirectory() && $asset->getTemplate()) {
       $content = '';
       if ($header_template = $asset->getHeaderTemplate()) {
         $content .= $this->render($header_template, $asset->getVars()) . "\n";

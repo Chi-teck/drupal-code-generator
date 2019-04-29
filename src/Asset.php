@@ -293,16 +293,6 @@ class Asset {
   }
 
   /**
-   * Determines if the asset is a regular file.
-   *
-   * @return bool
-   *   True if the asset is a file, false otherwise.
-   */
-  public function isFile() :bool {
-    return $this->getType() == 'file';
-  }
-
-  /**
    * Determines if the asset is a directory.
    *
    * @return bool

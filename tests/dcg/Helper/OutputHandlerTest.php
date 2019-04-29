@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Helper;
 
+use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Helper\OutputHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -18,10 +19,13 @@ class OutputHandlerTest extends TestCase {
     $handler = new OutputHandler();
     $output = new BufferedOutput();
 
-    $handler->printSummary(
-      $output,
-      ['bbb/eee/ggg', 'aaa/ddd', 'ccc', 'aaa', 'bbb/fff']
-    );
+    $assets[] = (new Asset())->path('bbb/eee/ggg');
+    $assets[] = (new Asset())->path('aaa/ddd');
+    $assets[] = (new Asset())->path('ccc');
+    $assets[] = (new Asset())->path('aaa');
+    $assets[] = (new Asset())->path('bbb/fff');
+
+    $handler->printSummary($output, $assets, '');
     $expected_output = "\n";
     $expected_output .= " The following directories and files have been created or updated:\n";
     $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
@@ -35,7 +39,7 @@ class OutputHandlerTest extends TestCase {
     ]);
     self::assertEquals($expected_output, $output->fetch());
 
-    $handler->printSummary($output, []);
+    $handler->printSummary($output, [], '');
     self::assertEquals('', $output->fetch());
 
     self::assertEquals('dcg_output_handler', $handler->getName());

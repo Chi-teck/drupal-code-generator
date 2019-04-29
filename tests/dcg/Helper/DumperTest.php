@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Asset;
-use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Tests\BaseTestCase;
@@ -61,22 +60,9 @@ class DumperTest extends BaseTestCase {
     parent::setUp();
 
     $this->input = new ArrayInput([], new InputDefinition());
-
     $this->output = new BufferedOutput();
 
-    $command = $this->createMock(GeneratorInterface::class);
-    $command
-      ->method('getDirectory')
-      ->willReturn($this->directory);
-    $command
-      ->method('getAssets')
-      ->will(static::returnCallback(function () {
-        return $this->assets;
-      }));
-
     $this->helperSet = $this->createMock(HelperSet::class);
-    $this->helperSet->method('getCommand')
-      ->willReturn($command);
     $this->helperSet->method('get')
       ->willReturn(new QuestionHelper());
 
@@ -217,7 +203,10 @@ class DumperTest extends BaseTestCase {
     foreach ($this->assets as $asset) {
       $files[] = $asset->getPath();
     }
-    static::assertEquals($files, $expected_results);
+    foreach ($expected_results as $asset) {
+      $results[] = $asset->getPath();
+    }
+    static::assertEquals($files, $results);
   }
 
   /**
@@ -260,7 +249,7 @@ class DumperTest extends BaseTestCase {
    *   List of created or updated files.
    */
   protected function dump() {
-    return $this->dumper->dump($this->input, $this->output);
+    return $this->dumper->dump($this->input, $this->output, $this->assets, $this->directory);
   }
 
   /**
