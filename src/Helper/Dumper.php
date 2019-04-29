@@ -78,7 +78,11 @@ class Dumper extends Helper {
       $content = $asset->getContent();
       $file_path = $directory . '/' . $asset->getPath();
 
-      if ($this->filesystem->exists($file_path) && !$asset->isDirectory()) {
+      if ($this->filesystem->exists($file_path)) {
+
+        if ($asset->isDirectory()) {
+          continue;
+        }
 
         $action = $asset->getAction();
         if ($action == 'replace') {
