@@ -22,7 +22,7 @@ class RendererTest extends TestCase {
     $renderer = new Renderer($twig);
     $renderer->addPath(__DIR__);
 
-    self::assertEquals($renderer->getName(), 'dcg_renderer');
+    self::assertEquals($renderer->getName(), 'renderer');
 
     $content = $renderer->render('_template.twig', ['value' => 'example']);
     self::assertEquals($content, "The value is example\n");

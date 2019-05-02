@@ -48,7 +48,7 @@ class Dumper extends Helper {
    * {@inheritdoc}
    */
   public function getName() :string {
-    return 'dcg_dumper';
+    return 'dumper';
   }
 
   /**

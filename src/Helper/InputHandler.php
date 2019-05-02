@@ -25,7 +25,7 @@ class InputHandler extends Helper {
    * {@inheritdoc}
    */
   public function getName() :string {
-    return 'dcg_input_handler';
+    return 'input_handler';
   }
 
   /**

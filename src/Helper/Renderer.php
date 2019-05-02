@@ -32,7 +32,7 @@ class Renderer extends Helper {
    * {@inheritdoc}
    */
   public function getName() :string {
-    return 'dcg_renderer';
+    return 'renderer';
   }
 
   /**

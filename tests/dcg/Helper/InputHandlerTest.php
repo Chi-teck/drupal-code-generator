@@ -70,7 +70,7 @@ class InputHandlerTest extends TestCase {
    * Test callback.
    */
   public function testHelperName() {
-    static::assertEquals($this->handler->getName(), 'dcg_input_handler');
+    static::assertEquals($this->handler->getName(), 'input_handler');
   }
 
   /**

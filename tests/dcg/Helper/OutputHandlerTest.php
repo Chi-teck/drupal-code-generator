@@ -42,7 +42,7 @@ class OutputHandlerTest extends TestCase {
     $handler->printSummary($output, [], '');
     self::assertEquals('', $output->fetch());
 
-    self::assertEquals('dcg_output_handler', $handler->getName());
+    self::assertEquals('output_handler', $handler->getName());
   }
 
 }

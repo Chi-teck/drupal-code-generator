@@ -113,7 +113,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function initialize(InputInterface $input, OutputInterface $output) :void {
     $this->getHelperSet()->setCommand($this);
-    $this->getHelper('dcg_renderer')->addPath($this->templatePath);
+    $this->getHelper('renderer')->addPath($this->templatePath);
 
     $directory = $input->getOption('directory') ?: getcwd();
     // No need to look up for extension root when generating an extension.
@@ -134,7 +134,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected function execute(InputInterface $input, OutputInterface $output) :int {
 
     // Render all assets.
-    $renderer = $this->getHelper('dcg_renderer');
+    $renderer = $this->getHelper('renderer');
     foreach ($this->getAssets() as $asset) {
       // Supply the asset with all collected variables if it has no local ones.
       if (!$asset->getVars()) {
@@ -143,10 +143,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $renderer->renderAsset($asset);
     }
 
-    $dumped_assets = $this->getHelper('dcg_dumper')
+    $dumped_assets = $this->getHelper('dumper')
       ->dump($input, $output, $this->getAssets(), $this->getDirectory());
 
-    $this->getHelper('dcg_output_handler')
+    $this->getHelper('output_handler')
       ->printSummary($output, $dumped_assets, $this->getDirectory());
 
     return 0;
@@ -206,7 +206,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   A string representing the rendered output.
    */
   protected function render(string $template, array $vars) :string {
-    return $this->getHelper('dcg_renderer')->render($template, $vars);
+    return $this->getHelper('renderer')->render($template, $vars);
   }
 
   /**
@@ -227,7 +227,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @see \DrupalCodeGenerator\InputHandler::collectVars()
    */
   protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) : array {
-    $this->vars += $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions, $vars);
+    $this->vars += $this->getHelper('input_handler')->collectVars($input, $output, $questions, $vars);
     return $this->vars;
   }
 
@@ -250,7 +250,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function ask(InputInterface $input, OutputInterface $output, Question $question, array $vars = []) :?string {
     $key = mt_rand();
-    $answers = $this->getHelper('dcg_input_handler')->collectVars($input, $output, [$key => $question], $vars);
+    $answers = $this->getHelper('input_handler')->collectVars($input, $output, [$key => $question], $vars);
     return $answers[$key];
   }
 

@@ -14,7 +14,7 @@ class OutputHandler extends Helper {
    * {@inheritdoc}
    */
   public function getName() :string {
-    return 'dcg_output_handler';
+    return 'output_handler';
   }
 
   /**
