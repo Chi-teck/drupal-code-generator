@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -45,8 +46,8 @@ class InputHandler extends Helper {
    */
   public function collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) :array {
 
-    /** @var \Symfony\Component\Console\Helper\QuestionHelper $question_helper */
     $question_helper = $this->getHelperSet()->get('question');
+    $io = new OutputStyle($input, $output, $question_helper);
 
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
@@ -92,9 +93,7 @@ class InputHandler extends Helper {
       }
       $this->setQuestionDefault($question, $default_value);
 
-      $answer = $question_helper->ask($input, $output, $question);
-
-      $vars[$name] = $answer;
+      $vars[$name] = $io->askQuestion($question);
     }
 
     return $vars;
