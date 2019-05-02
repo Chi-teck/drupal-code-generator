@@ -28,15 +28,15 @@ class FieldTest extends GeneratorBaseTest {
   public function setUp() {
 
     $type_options = [
-      '  [1 ] Boolean',
-      '  [2 ] Text',
-      '  [3 ] Text (long)',
-      '  [4 ] Integer',
-      '  [5 ] Float',
-      '  [6 ] Numeric',
-      '  [7 ] Email',
-      '  [8 ] Telephone',
-      '  [9 ] Url',
+      '  [ 1] Boolean',
+      '  [ 2] Text',
+      '  [ 3] Text (long)',
+      '  [ 4] Integer',
+      '  [ 5] Float',
+      '  [ 6] Numeric',
+      '  [ 7] Email',
+      '  [ 8] Telephone',
+      '  [ 9] Url',
       '  [10] Date',
     ];
     $type_options = "\n" . implode("\n", $type_options);

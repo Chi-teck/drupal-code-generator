@@ -5,16 +5,16 @@
   [3] Other
   ➤➤➤ 1⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Ctools plugin
-  [2 ] Views plugin
-  [3 ] Hook
-  [4 ] Info (module)
-  [5 ] Info (theme)
-  [6 ] Install file
-  [7 ] Javascript
-  [8 ] Module
-  [9 ] Module file
+  [ 0] ..
+  [ 1] Ctools plugin
+  [ 2] Views plugin
+  [ 3] Hook
+  [ 4] Info (module)
+  [ 5] Info (theme)
+  [ 6] Install file
+  [ 7] Javascript
+  [ 8] Module
+  [ 9] Module file
   [10] Test
   [11] Theme
   [12] settings.php
@@ -27,16 +27,16 @@
   [3] Relationship
   ➤➤➤ 0⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Ctools plugin
-  [2 ] Views plugin
-  [3 ] Hook
-  [4 ] Info (module)
-  [5 ] Info (theme)
-  [6 ] Install file
-  [7 ] Javascript
-  [8 ] Module
-  [9 ] Module file
+  [ 0] ..
+  [ 1] Ctools plugin
+  [ 2] Views plugin
+  [ 3] Hook
+  [ 4] Info (module)
+  [ 5] Info (theme)
+  [ 6] Install file
+  [ 7] Javascript
+  [ 8] Module
+  [ 9] Module file
   [10] Test
   [11] Theme
   [12] settings.php
@@ -47,16 +47,16 @@
   [1] Argument default
   ➤➤➤ 0⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Ctools plugin
-  [2 ] Views plugin
-  [3 ] Hook
-  [4 ] Info (module)
-  [5 ] Info (theme)
-  [6 ] Install file
-  [7 ] Javascript
-  [8 ] Module
-  [9 ] Module file
+  [ 0] ..
+  [ 1] Ctools plugin
+  [ 2] Views plugin
+  [ 3] Hook
+  [ 4] Info (module)
+  [ 5] Info (theme)
+  [ 6] Install file
+  [ 7] Javascript
+  [ 8] Module
+  [ 9] Module file
   [10] Test
   [11] Theme
   [12] settings.php
@@ -69,16 +69,16 @@
   [3] Other
   ➤➤➤ 2⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Form
-  [2 ] Module
-  [3 ] Plugin
-  [4 ] Service
-  [5 ] Test
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Field
-  [9 ] Hook
+  [ 0] ..
+  [ 1] Form
+  [ 2] Module
+  [ 3] Plugin
+  [ 4] Service
+  [ 5] Test
+  [ 6] Yml
+  [ 7] Controller
+  [ 8] Field
+  [ 9] Hook
   [10] Install file
   [11] Javascript
   [12] Layout
@@ -101,16 +101,16 @@
   [3] Simple
   ➤➤➤ 0⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Form
-  [2 ] Module
-  [3 ] Plugin
-  [4 ] Service
-  [5 ] Test
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Field
-  [9 ] Hook
+  [ 0] ..
+  [ 1] Form
+  [ 2] Module
+  [ 3] Plugin
+  [ 4] Service
+  [ 5] Test
+  [ 6] Yml
+  [ 7] Controller
+  [ 8] Field
+  [ 9] Hook
   [10] Install file
   [11] Javascript
   [12] Layout
@@ -133,16 +133,16 @@
   [3] Standard
   ➤➤➤ 0⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Form
-  [2 ] Module
-  [3 ] Plugin
-  [4 ] Service
-  [5 ] Test
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Field
-  [9 ] Hook
+  [ 0] ..
+  [ 1] Form
+  [ 2] Module
+  [ 3] Plugin
+  [ 4] Service
+  [ 5] Test
+  [ 6] Yml
+  [ 7] Controller
+  [ 8] Field
+  [ 9] Hook
   [10] Install file
   [11] Javascript
   [12] Layout
@@ -159,31 +159,31 @@
   [23] composer.json
   ➤➤➤➤ 3⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Field
-  [2 ] Migrate
-  [3 ] Views
-  [4 ] Action
-  [5 ] Block
-  [6 ] CKEditor
-  [7 ] Condition
-  [8 ] Constraint
-  [9 ] Entity reference selection
+  [ 0] ..
+  [ 1] Field
+  [ 2] Migrate
+  [ 3] Views
+  [ 4] Action
+  [ 5] Block
+  [ 6] CKEditor
+  [ 7] Condition
+  [ 8] Constraint
+  [ 9] Entity reference selection
   [10] Filter
   [11] Menu link
   [12] REST resource
   ➤➤➤➤ 0⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Form
-  [2 ] Module
-  [3 ] Plugin
-  [4 ] Service
-  [5 ] Test
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Field
-  [9 ] Hook
+  [ 0] ..
+  [ 1] Form
+  [ 2] Module
+  [ 3] Plugin
+  [ 4] Service
+  [ 5] Test
+  [ 6] Yml
+  [ 7] Controller
+  [ 8] Field
+  [ 9] Hook
   [10] Install file
   [11] Javascript
   [12] Layout
@@ -200,16 +200,16 @@
   [23] composer.json
   ➤➤➤➤ 4⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Access checker
-  [2 ] Breadcrumb builder
-  [3 ] Cache context
-  [4 ] Custom service
-  [5 ] Event subscriber
-  [6 ] Logger
-  [7 ] Middleware
-  [8 ] Param converter
-  [9 ] Path processor
+  [ 0] ..
+  [ 1] Access checker
+  [ 2] Breadcrumb builder
+  [ 3] Cache context
+  [ 4] Custom service
+  [ 5] Event subscriber
+  [ 6] Logger
+  [ 7] Middleware
+  [ 8] Param converter
+  [ 9] Path processor
   [10] Request policy
   [11] Response policy
   [12] Route subscriber
@@ -218,16 +218,16 @@
   [15] Uninstall validator
   ➤➤➤➤ 0⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Form
-  [2 ] Module
-  [3 ] Plugin
-  [4 ] Service
-  [5 ] Test
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Field
-  [9 ] Hook
+  [ 0] ..
+  [ 1] Form
+  [ 2] Module
+  [ 3] Plugin
+  [ 4] Service
+  [ 5] Test
+  [ 6] Yml
+  [ 7] Controller
+  [ 8] Field
+  [ 9] Hook
   [10] Install file
   [11] Javascript
   [12] Layout
@@ -253,16 +253,16 @@
   [6] WebDriver
   ➤➤➤ 0⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Form
-  [2 ] Module
-  [3 ] Plugin
-  [4 ] Service
-  [5 ] Test
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Field
-  [9 ] Hook
+  [ 0] ..
+  [ 1] Form
+  [ 2] Module
+  [ 3] Plugin
+  [ 4] Service
+  [ 5] Test
+  [ 6] Yml
+  [ 7] Controller
+  [ 8] Field
+  [ 9] Hook
   [10] Install file
   [11] Javascript
   [12] Layout
@@ -310,16 +310,16 @@
   [9] Services
   ➤➤➤ 0⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Form
-  [2 ] Module
-  [3 ] Plugin
-  [4 ] Service
-  [5 ] Test
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Field
-  [9 ] Hook
+  [ 0] ..
+  [ 1] Form
+  [ 2] Module
+  [ 3] Plugin
+  [ 4] Service
+  [ 5] Test
+  [ 6] Yml
+  [ 7] Controller
+  [ 8] Field
+  [ 9] Hook
   [10] Install file
   [11] Javascript
   [12] Layout
@@ -357,16 +357,16 @@
   [3] Other
   ➤➤➤ 2⏎
  Select generator: 
-  [0 ] ..
-  [1 ] Form
-  [2 ] Module
-  [3 ] Plugin
-  [4 ] Service
-  [5 ] Test
-  [6 ] Yml
-  [7 ] Controller
-  [8 ] Field
-  [9 ] Hook
+  [ 0] ..
+  [ 1] Form
+  [ 2] Module
+  [ 3] Plugin
+  [ 4] Service
+  [ 5] Test
+  [ 6] Yml
+  [ 7] Controller
+  [ 8] Field
+  [ 9] Hook
   [10] Install file
   [11] Javascript
   [12] Layout
