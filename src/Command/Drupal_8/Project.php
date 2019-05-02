@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -177,12 +178,16 @@ class Project extends BaseGenerator {
   protected function execute(InputInterface $input, OutputInterface $output) :int {
     $result = parent::execute($input, $output);
     if ($result === 0) {
-      $output->writeln(' <info>Next steps:</info>');
-      $output->writeln(' <info>–––––––––––</info>');
-      $output->writeln(' <info>1. Review generated files</info>');
-      $output->writeln(' <info>2. Run <comment>composer install</comment> command</info>');
-      $output->writeln(' <info>3. Install Drupal</info>');
-      $output->writeln('');
+      $io = new OutputStyle($input, $output);
+      $message = [
+        'Next steps:',
+        '–––––––––––',
+        '1. Review generated files',
+        '2. Run <comment>composer install</comment> command',
+        '3. Install Drupal',
+      ];
+      $io->text($message);
+      $io->newLine();
     }
     return $result;
   }

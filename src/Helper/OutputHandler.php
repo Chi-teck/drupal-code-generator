@@ -2,7 +2,9 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\OutputStyle;
 use Symfony\Component\Console\Helper\Helper;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -20,14 +22,16 @@ class OutputHandler extends Helper {
   /**
    * Prints summary.
    *
+   * @param \Symfony\Component\Console\Input\InputInterface $input
+   *   Console input.
    * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Output instance.
+   *   Console output.
    * @param \DrupalCodeGenerator\Asset[] $assets
    *   List of created or updated assets.
    * @param string $directory
    *   The working directory.
    */
-  public function printSummary(OutputInterface $output, array $assets, string $directory) :void {
+  public function printSummary(InputInterface $input, OutputInterface $output, array $assets, string $directory) :void {
 
     if (count($assets) > 0) {
 
@@ -47,13 +51,9 @@ class OutputHandler extends Helper {
           strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
       });
 
-      $output->writeln('');
-      $output->writeln(' The following directories and files have been created or updated:');
-      $output->writeln('<fg=cyan;options=bold>–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––</>');
-      foreach ($dumped_files as $file) {
-        $output->writeln(" • $file");
-      }
-      $output->writeln('');
+      $io = new OutputStyle($input, $output);
+      $io->title('The following directories and files have been created or updated:');
+      $io->listing($dumped_files);
     }
 
   }

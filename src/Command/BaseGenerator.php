@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\ApplicationFactory;
 use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -122,10 +123,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $this->directory = $is_extension
       ? $directory : (Utils::getExtensionRoot($directory) ?: $directory);
 
-    $header = sprintf("\n Welcome to %s generator!", $this->getName());
-    $output->writeln($header);
-    $header_length = strlen(trim(strip_tags($header)));
-    $output->writeln('<fg=cyan;options=bold>–' . str_repeat('–', $header_length) . '–</>');
+    $io = new OutputStyle($input, $output);
+    $io->title(sprintf("Welcome to %s generator!", $this->getName()));
   }
 
   /**
@@ -147,7 +146,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       ->dump($input, $output, $this->getAssets(), $this->getDirectory());
 
     $this->getHelper('output_handler')
-      ->printSummary($output, $dumped_assets, $this->getDirectory());
+      ->printSummary($input, $output, $dumped_assets, $this->getDirectory());
 
     return 0;
   }

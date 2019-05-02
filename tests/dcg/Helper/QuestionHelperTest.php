@@ -106,7 +106,7 @@ class QuestionHelperTest extends TestCase {
 
     // -- Question answer option.
     $output = $this->createOutput();
-    $input = $this->createInput("\n", ['5:00', NULL, '4:00']);
+    $input = $this->createInput('', ['5:00', NULL, '4:00']);
 
     $dialog = new QuestionHelper();
     $question = new Question('What time is it?');
@@ -127,7 +127,6 @@ class QuestionHelperTest extends TestCase {
     $expected_display .= "\n";
     $expected_display .= " What time is it? [3:00]:\n";
     $expected_display .= " ➤ \n";
-    $expected_display .= "\n";
     $expected_display .= " What time is it?\n";
     $expected_display .= " ➤ 4:00\n";
     self::assertEquals($expected_display, $this->getDisplay($output));

@@ -188,16 +188,16 @@ class FieldTest extends GeneratorBaseTest {
    * {@inheritdoc}
    */
   protected function processExpectedDisplay($display) {
-    $display = self::insertLine($display, 'Label for sub-field');
-    $display = self::insertLine($display, 'Would you like to create field storage settings form');
+    $display = self::insertRule($display, 'Label for sub-field');
+    $display = self::insertRule($display, 'Would you like to create field storage settings form');
     return $display;
   }
 
   /**
    * Inserts header line into display.
    */
-  protected static function insertLine($display, $text) {
-    $line = "–––––––––––––––––––––––––––––––––––––––––––––––––––\n\n";
+  protected static function insertRule($display, $text) {
+    $line = "––––––––––––––––––––––––––––––––––––––––––––––––––\n\n";
     return preg_replace("/\n $text/", $line . " $text", $display);
   }
 

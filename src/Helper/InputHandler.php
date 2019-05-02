@@ -46,8 +46,10 @@ class InputHandler extends Helper {
    */
   public function collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) :array {
 
+    /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
     $question_helper = $this->getHelperSet()->get('question');
-    $io = new OutputStyle($input, $output, $question_helper);
+    $io = new OutputStyle($input, $output);
+    $io->setQuestionHelper($question_helper);
 
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
