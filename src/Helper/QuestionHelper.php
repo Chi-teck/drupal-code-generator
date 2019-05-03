@@ -41,7 +41,7 @@ class QuestionHelper extends BaseQuestionHelper {
 
       $this->writePrompt($output, $question);
 
-      $output->writeln($answer);
+      $output->write("$answer\n");
 
       if ($answer === NULL) {
         $answer = $question->getDefault();

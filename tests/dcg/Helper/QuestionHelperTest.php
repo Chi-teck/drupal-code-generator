@@ -127,6 +127,7 @@ class QuestionHelperTest extends TestCase {
     $expected_display .= "\n";
     $expected_display .= " What time is it? [3:00]:\n";
     $expected_display .= " ➤ \n";
+    $expected_display .= "\n";
     $expected_display .= " What time is it?\n";
     $expected_display .= " ➤ 4:00\n";
     self::assertEquals($expected_display, $this->getDisplay($output));
