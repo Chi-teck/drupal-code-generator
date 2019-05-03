@@ -10,13 +10,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Output printer for generators.
  */
-class OutputHandler extends Helper {
+class ResultPrinter extends Helper {
 
   /**
    * {@inheritdoc}
    */
   public function getName() :string {
-    return 'output_handler';
+    return 'result_printer';
   }
 
   /**
@@ -31,7 +31,7 @@ class OutputHandler extends Helper {
    * @param string $directory
    *   The working directory.
    */
-  public function printSummary(InputInterface $input, OutputInterface $output, array $assets, string $directory) :void {
+  public function printResult(InputInterface $input, OutputInterface $output, array $assets, string $directory) :void {
 
     if (count($assets) > 0) {
 

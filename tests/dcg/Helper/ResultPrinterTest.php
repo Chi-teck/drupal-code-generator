@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Asset;
-use DrupalCodeGenerator\Helper\OutputHandler;
+use DrupalCodeGenerator\Helper\ResultPrinter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -11,13 +11,13 @@ use Symfony\Component\Console\Output\BufferedOutput;
 /**
  * A test for output handler.
  */
-class OutputHandlerTest extends TestCase {
+class ResultPrinterTest extends TestCase {
 
   /**
    * Test callback.
    */
   public function testOutputHandler() {
-    $handler = new OutputHandler();
+    $printer = new ResultPrinter();
     $input = new ArgvInput();
     $output = new BufferedOutput();
 
@@ -27,7 +27,7 @@ class OutputHandlerTest extends TestCase {
     $assets[] = (new Asset())->path('aaa');
     $assets[] = (new Asset())->path('bbb/fff');
 
-    $handler->printSummary($input, $output, $assets, '');
+    $printer->printResult($input, $output, $assets, '');
     $expected_output = "\n";
     $expected_output .= " The following directories and files have been created or updated:\n";
     $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
@@ -41,10 +41,10 @@ class OutputHandlerTest extends TestCase {
     ]);
     self::assertEquals($expected_output, $output->fetch());
 
-    $handler->printSummary($input, $output, [], '');
+    $printer->printResult($input, $output, [], '');
     self::assertEquals('', $output->fetch());
 
-    self::assertEquals('output_handler', $handler->getName());
+    self::assertEquals('result_printer', $printer->getName());
   }
 
 }

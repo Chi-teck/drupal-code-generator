@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator;
 
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\InputHandler;
-use DrupalCodeGenerator\Helper\OutputHandler;
+use DrupalCodeGenerator\Helper\ResultPrinter;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application;
@@ -47,7 +47,7 @@ class ApplicationFactory {
       new Dumper(new Filesystem()),
       new Renderer(new TwigEnvironment(new \Twig_Loader_Filesystem())),
       new InputHandler(),
-      new OutputHandler(),
+      new ResultPrinter(),
     ]);
     $application->setHelperSet($helper_set);
 

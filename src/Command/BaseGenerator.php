@@ -145,8 +145,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $dumped_assets = $this->getHelper('dumper')
       ->dump($input, $output, $this->getAssets(), $this->getDirectory());
 
-    $this->getHelper('output_handler')
-      ->printSummary($input, $output, $dumped_assets, $this->getDirectory());
+    $this->getHelper('result_printer')
+      ->printResult($input, $output, $dumped_assets, $this->getDirectory());
 
     return 0;
   }
