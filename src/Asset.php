@@ -302,4 +302,11 @@ class Asset {
     return $this->getType() == 'directory';
   }
 
+  /**
+   * Implements the magic __toString() method.
+   */
+  public function __toString() :string {
+    return $this->getPath() ?: '';
+  }
+
 }

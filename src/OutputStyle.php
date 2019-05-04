@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Helper\Helper;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -100,6 +101,21 @@ class OutputStyle extends SymfonyStyle {
    */
   public function rule(int $length = 50) :void {
     $this->writeln(sprintf('<fg=green>%s</>', str_repeat('–', $length)));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildTable(array $headers, array $rows) {
+    $style = clone Table::getStyleDefinition('symfony-style-guide');
+    $style->setCellHeaderFormat('<info>%s</info>');
+
+    $table = new Table($this);
+    $table->setHeaders($headers);
+    $table->setRows($rows);
+    $table->setStyle($style);
+
+    return $table;
   }
 
 }

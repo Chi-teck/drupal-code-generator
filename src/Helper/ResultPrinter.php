@@ -2,8 +2,11 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\OutputStyle;
 use Symfony\Component\Console\Helper\Helper;
+use Symfony\Component\Console\Helper\TableSeparator;
+use Symfony\Component\Console\Helper\TableStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -35,15 +38,9 @@ class ResultPrinter extends Helper {
 
     if (count($assets) > 0) {
 
-      $dumped_files = [];
-      foreach ($assets as $asset) {
-        $dumped_files[] = $asset->getPath();
-      }
+      $assets = array_unique($assets);
 
-      // Multiple hooks can be dumped to the same file.
-      $dumped_files = array_unique($dumped_files);
-
-      usort($dumped_files, function ($a, $b) {
+      usort($assets, function (Asset $a, Asset $b) :int {
         $depth_a = substr_count($a, '/');
         $depth_b = substr_count($b, '/');
         // Top level files should be printed first.
@@ -53,7 +50,50 @@ class ResultPrinter extends Helper {
 
       $io = new OutputStyle($input, $output);
       $io->title('The following directories and files have been created or updated:');
-      $io->listing($dumped_files);
+
+      // Table.
+      if ($output->isVerbose()) {
+        $headers[] = ['Type', 'Path', 'Lines', 'Size'];
+
+        $rows = [];
+        $total_size = 0;
+        $total_lines = 0;
+        foreach ($assets as $asset) {
+          $size = mb_strlen($asset->getContent());
+          $total_size += $size;
+          $lines = $asset->getContent() === NULL ? 0 : substr_count($asset->getContent(), "\n") + 1;
+          $total_lines += $lines;
+          $rows[] = [
+            $asset->getType(),
+            $asset->getPath(),
+            $lines,
+            $size,
+          ];
+        }
+        $rows[] = new TableSeparator();
+
+        // Summary.
+        $total_assets = count($assets);
+        $rows[] = [
+          NULL,
+          sprintf('Total: %d %s', $total_assets, $total_assets == 1 ? 'asset' : 'assets'),
+          $total_lines,
+          self::formatMemory($total_size),
+        ];
+
+        $right_aligned = (new TableStyle())->setPadType(STR_PAD_LEFT);
+        $io->buildTable($headers, $rows)
+          ->setColumnStyle(2, $right_aligned)
+          ->setColumnStyle(3, $right_aligned)
+          ->render();
+
+        $io->newLine();
+      }
+      // Bulleted list.
+      else {
+        $io->listing($assets);
+      }
+
     }
 
   }
