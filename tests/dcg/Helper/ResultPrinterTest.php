@@ -31,7 +31,7 @@ class ResultPrinterTest extends TestCase {
     $assets[] = (new Asset())->path('bbb/fff.module');
 
     // -- Default output.
-    $printer->printResult($input, $output, $assets, '');
+    $printer->printResult($input, $output, $assets);
     $expected_output = "\n";
     $expected_output .= " The following directories and files have been created or updated:\n";
     $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
@@ -45,13 +45,28 @@ class ResultPrinterTest extends TestCase {
     ]);
     self::assertEquals($expected_output, $output->fetch());
 
+    // -- Output with base path.
+    $printer->printResult($input, $output, $assets, 'project/root/');
+    $expected_output = "\n";
+    $expected_output .= " The following directories and files have been created or updated:\n";
+    $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
+    $expected_output .= implode([
+      " • project/root/aaa\n",
+      " • project/root/ccc\n",
+      " • project/root/aaa/ddd.txt\n",
+      " • project/root/bbb/fff.module\n",
+      " • project/root/bbb/eee/ggg.php\n",
+      "\n",
+    ]);
+    self::assertEquals($expected_output, $output->fetch());
+
     // Empty output.
-    $printer->printResult($input, $output, [], '');
+    $printer->printResult($input, $output, []);
     self::assertEquals('', $output->fetch());
 
     // Verbose output.
     $output->setVerbosity(OutputInterface::VERBOSITY_VERBOSE);
-    $printer->printResult($input, $output, $assets, '');
+    $printer->printResult($input, $output, $assets);
     $expected_output = "\n";
     $expected_output .= " The following directories and files have been created or updated:\n";
     $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
