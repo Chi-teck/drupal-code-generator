@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Logger;
+use DrupalCodeGenerator\Helper\Logger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
@@ -20,7 +20,8 @@ class LoggerTest extends TestCase {
   public function testLogger() {
 
     $output = new BufferedOutput(OutputInterface::VERBOSITY_NORMAL, TRUE);
-    $logger = new Logger($output);
+    $logger = new Logger();
+    $logger->setOutput($output);
 
     $logger->emergency('Example');
     self::assertEquals("[\e[31;1memergency\e[39;22m] Example\n", $output->fetch());

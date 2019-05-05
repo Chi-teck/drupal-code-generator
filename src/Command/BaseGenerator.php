@@ -5,7 +5,6 @@ namespace DrupalCodeGenerator\Command;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\InputAwareInterface;
-use DrupalCodeGenerator\Logger;
 use DrupalCodeGenerator\OutputAwareInterface;
 use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
@@ -127,7 +126,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
     }
 
-    (new Logger($output))->debug('Command: {command}', ['command' => get_class($this)]);
+    ($this->getHelper('logger'))->debug('Command: {command}', ['command' => get_class($this)]);
 
     $this->getHelperSet()->setCommand($this);
     $this->getHelper('renderer')->addPath($this->templatePath);
@@ -148,7 +147,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function execute(InputInterface $input, OutputInterface $output) :int {
 
-    $logger = new Logger($output);
+    $logger = $this->getHelper('logger');
     $logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
 
     $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
