@@ -39,8 +39,9 @@ class InputHandler extends Helper {
    */
   public function collectVars(array $questions, array $vars = []) :array {
 
-    /** @var \DrupalCodeGenerator\Helper\OutputStyle $io */
-    $io = $this->getHelperSet()->get('io');
+    /** @var \DrupalCodeGenerator\Helper\OutputStyleFactory $output_style_factory */
+    $output_style_factory = $this->getHelperSet()->get('output_style_factory');
+    $io = $output_style_factory->getOutputStyle();
 
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();

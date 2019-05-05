@@ -136,7 +136,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
     $this->getHelperSet()->setCommand($this);
     $this->getHelper('renderer')->addPath($this->templatePath);
-    $this->io = $this->getHelper('io');
+    $this->io = $this->getHelper('output_style_factory')->getOutputStyle();
 
     $directory = $input->getOption('directory') ?: getcwd();
     // No need to look up for extension root when generating an extension.

@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\InputHandler;
-use DrupalCodeGenerator\Helper\OutputStyle;
+use DrupalCodeGenerator\Helper\OutputStyleFactory;
 use DrupalCodeGenerator\Tests\QuestionHelper;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
@@ -59,13 +59,13 @@ class InputHandlerTest extends TestCase {
 
     $question_helper = new QuestionHelper();
 
-    $output_style = new OutputStyle();
-    $output_style->setInput($this->input);
-    $output_style->setOutput($this->output);
+    $output_style_factory = new OutputStyleFactory();
+    $output_style_factory->setInput($this->input);
+    $output_style_factory->setOutput($this->output);
 
     $value_map = [
       ['question', $question_helper],
-      ['io', $output_style],
+      ['output_style_factory', $output_style_factory],
     ];
 
     $helper_set->expects($this->any())
@@ -75,7 +75,7 @@ class InputHandlerTest extends TestCase {
     $this->handler = new InputHandler();
     $this->handler->setHelperSet($helper_set);
     $question_helper->setHelperSet($helper_set);
-    $output_style->setHelperSet($helper_set);
+    $output_style_factory->setHelperSet($helper_set);
   }
 
   /**

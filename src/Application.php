@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator;
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\InputHandler;
 use DrupalCodeGenerator\Helper\LoggerFactory;
-use DrupalCodeGenerator\Helper\OutputStyle;
+use DrupalCodeGenerator\Helper\OutputStyleFactory;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\ResultPrinter;
@@ -48,7 +48,7 @@ class Application extends BaseApplication {
       new InputHandler(),
       new ResultPrinter(),
       new LoggerFactory(),
-      new OutputStyle(),
+      new OutputStyleFactory(),
     ]);
     $application->setHelperSet($helper_set);
 

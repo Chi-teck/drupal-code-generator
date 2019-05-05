@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\Helper;
 
 /**
- * PSR-3 compliant console logger.
+ * Defines console logger factory.
  */
 class LoggerFactory extends Helper implements OutputAwareInterface, LoggerAwareInterface {
 

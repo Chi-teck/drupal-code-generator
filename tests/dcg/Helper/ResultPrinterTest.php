@@ -3,8 +3,9 @@
 namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Asset;
-use DrupalCodeGenerator\Helper\OutputStyle;
+use DrupalCodeGenerator\Helper\OutputStyleFactory;
 use DrupalCodeGenerator\Helper\ResultPrinter;
+use DrupalCodeGenerator\Tests\QuestionHelper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -24,11 +25,13 @@ class ResultPrinterTest extends TestCase {
     $input = new ArgvInput();
     $output = new BufferedOutput();
 
-    $output_style = new OutputStyle();
+    $helper_set = new HelperSet();
+    $helper_set->set(new QuestionHelper());
+
+    $output_style = new OutputStyleFactory();
     $output_style->setOutput($output);
     $output_style->setInput($input);
 
-    $helper_set = new HelperSet();
     $helper_set->set($output_style);
 
     $printer = new ResultPrinter();
