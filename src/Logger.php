@@ -1,46 +1,24 @@
 <?php
 
-namespace DrupalCodeGenerator\Helper;
+namespace DrupalCodeGenerator;
 
-use DrupalCodeGenerator\OutputAwareInterface;
-use DrupalCodeGenerator\OutputAwareTrait;
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
-use Symfony\Component\Console\Helper\HelperInterface;
-use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * PSR-3 compliant console logger.
  */
-class Logger extends AbstractLogger implements OutputAwareInterface, HelperInterface {
-
-  use OutputAwareTrait;
-
-  protected $helperSet = NULL;
+class Logger extends AbstractLogger {
 
   /**
-   * {@inheritdoc}
+   * Console output.
+   *
+   * @var \Symfony\Component\Console\Output\OutputInterface
    */
-  public function setHelperSet(HelperSet $helperSet = NULL) {
-    $this->helperSet = $helperSet;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getHelperSet() {
-    return $this->helperSet;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getName() :string {
-    return 'logger';
-  }
+  protected $output;
 
   /**
    * Verbosity level map.
@@ -57,6 +35,13 @@ class Logger extends AbstractLogger implements OutputAwareInterface, HelperInter
     LogLevel::INFO => OutputInterface::VERBOSITY_VERY_VERBOSE,
     LogLevel::DEBUG => OutputInterface::VERBOSITY_DEBUG,
   ];
+
+  /**
+   * Logger constructor.
+   */
+  public function __construct(OutputInterface $output) {
+    $this->output = $output;
+  }
 
   /**
    * {@inheritdoc}

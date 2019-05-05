@@ -73,7 +73,7 @@ else
   export COMPOSER_PROCESS_TIMEOUT=1900
   composer -d$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
   composer -d$DRUPAL_DIR require drush/drush chi-teck/web-server chi-teck/test-base
-  composer -d$DRUPAL_DIR update squizlabs/php_codesniffer
+  composer -d$DRUPAL_DIR update squizlabs/php_codesniffer drupal/coder
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   composer -d$DRUPAL_DIR run-script drupal-phpunit-upgrade
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules

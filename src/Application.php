@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator;
 
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\InputHandler;
-use DrupalCodeGenerator\Helper\Logger;
+use DrupalCodeGenerator\Helper\LoggerFactory;
 use DrupalCodeGenerator\Helper\OutputStyle;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\Renderer;
@@ -47,7 +47,7 @@ class Application extends BaseApplication {
       new Renderer(new TwigEnvironment(new \Twig_Loader_Filesystem())),
       new InputHandler(),
       new ResultPrinter(),
-      new Logger(),
+      new LoggerFactory(),
       new OutputStyle(),
     ]);
     $application->setHelperSet($helper_set);

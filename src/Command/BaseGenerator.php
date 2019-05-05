@@ -132,7 +132,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
     }
 
-    ($this->getHelper('logger'))->debug('Command: {command}', ['command' => get_class($this)]);
+    ($this->getHelper('logger_factory')->getLogger())->debug('Command: {command}', ['command' => get_class($this)]);
 
     $this->getHelperSet()->setCommand($this);
     $this->getHelper('renderer')->addPath($this->templatePath);
@@ -153,7 +153,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function execute(InputInterface $input, OutputInterface $output) :int {
 
-    $logger = $this->getHelper('logger');
+    /** @var \Psr\Log\LoggerInterface $logger */
+    $logger = $this->getHelper('logger_factory')->getLogger();
     $logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
 
     $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
