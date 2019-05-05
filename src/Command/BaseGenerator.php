@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\ApplicationFactory;
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Logger;
 use DrupalCodeGenerator\OutputStyle;
@@ -107,7 +107,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
 
     if (!$this->templatePath) {
-      $this->templatePath = ApplicationFactory::getRoot() . '/templates';
+      $this->templatePath = Application::getRoot() . '/templates';
     }
   }
 
@@ -378,7 +378,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   List of service definitions keyed by service ID.
    */
   protected static function getServiceDefinitions() :array {
-    $data_encoded = file_get_contents(ApplicationFactory::getRoot() . '/resources/service-definitions.json');
+    $data_encoded = file_get_contents(Application::getRoot() . '/resources/service-definitions.json');
     return json_decode($data_encoded, TRUE);
   }
 

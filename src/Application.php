@@ -4,18 +4,18 @@ namespace DrupalCodeGenerator;
 
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\InputHandler;
-use DrupalCodeGenerator\Helper\ResultPrinter;
-use DrupalCodeGenerator\Helper\Renderer;
-use DrupalCodeGenerator\Twig\TwigEnvironment;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Helper\HelperSet;
 use DrupalCodeGenerator\Helper\QuestionHelper;
+use DrupalCodeGenerator\Helper\Renderer;
+use DrupalCodeGenerator\Helper\ResultPrinter;
+use DrupalCodeGenerator\Twig\TwigEnvironment;
+use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * DCG application factory.
+ * Console application.
  */
-class ApplicationFactory {
+class Application extends BaseApplication {
 
   /**
    * Determines path to DCG root directory.
@@ -28,19 +28,16 @@ class ApplicationFactory {
   }
 
   /**
-   * Creates an application.
-   *
-   * @return \Symfony\Component\Console\Application
-   *   The initialized console application.
+   * Creates the application.
    */
-  public static function create() :Application {
+  public static function create() : Application {
     // This gets substituted with git version when DCG is packaged to PHAR file.
     $version = '@git-version@';
     // Fallback for composer installation.
     if (!is_numeric($version[0])) {
       $version = 'UNKNOWN';
     }
-    $application = new Application('Drupal Code Generator', $version);
+    $application = new static('Drupal Code Generator', $version);
 
     $helper_set = new HelperSet([
       new QuestionHelper(),

@@ -53,7 +53,7 @@ class GeneratorTester {
     $this->command = $command;
     $this->commandTester = new CommandTester($this->command);
 
-    $application = ApplicationFactory::create();
+    $application = Application::create();
     $helper_set = $application->getHelperSet();
     $helper_set->set(new QuestionHelper());
     $application->add($this->command);
