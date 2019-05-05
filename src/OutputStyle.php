@@ -54,7 +54,7 @@ class OutputStyle extends SymfonyStyle {
     $this->writeln(' ' . $message);
     $length = Helper::strlenWithoutDecoration($this->getFormatter(), $message);
     $this->writeln(sprintf('<fg=cyan;options=bold>%s</>', str_repeat('–', $length + 2)));
-  }q
+  }
 
   /**
    * {@inheritdoc}

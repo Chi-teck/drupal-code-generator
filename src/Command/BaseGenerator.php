@@ -85,7 +85,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Output style.
    *
-   * @var \DrupalCodeGenerator\Helper\OutputStyle
+   * @var \DrupalCodeGenerator\OutputStyle
    */
   protected $io;
 
