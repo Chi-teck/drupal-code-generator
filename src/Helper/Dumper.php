@@ -2,22 +2,13 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\InputAwareInterface;
-use DrupalCodeGenerator\InputAwareTrait;
-use DrupalCodeGenerator\OutputAwareInterface;
-use DrupalCodeGenerator\OutputAwareTrait;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Helper\Helper;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Asset dumper form generators.
  */
-class Dumper extends Helper implements InputAwareInterface, OutputAwareInterface {
-
-  use InputAwareTrait;
-  use OutputAwareTrait;
+class Dumper extends Helper {
 
   /**
    * The file system utility.
@@ -71,9 +62,6 @@ class Dumper extends Helper implements InputAwareInterface, OutputAwareInterface
 
     $dumped_assets = [];
 
-    /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
-    $question_helper = $this->getHelperSet()->get('question');
-
     foreach ($assets as $asset) {
 
       $content = $asset->getContent();
@@ -91,9 +79,7 @@ class Dumper extends Helper implements InputAwareInterface, OutputAwareInterface
             continue;
           }
           elseif ($this->replace === NULL) {
-            $question_text = "The file <comment>$file_path</comment> already exists. Would you like to replace it?";
-            $question = new ConfirmationQuestion($question_text);
-            if (!$question_helper->ask($this->input, $this->output, $question)) {
+            if (!$this->io()->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?")) {
               continue;
             }
           }

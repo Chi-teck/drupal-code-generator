@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
@@ -38,10 +37,6 @@ class InputHandler extends Helper {
    *   Template variables.
    */
   public function collectVars(array $questions, array $vars = []) :array {
-
-    /** @var \DrupalCodeGenerator\Helper\OutputStyleFactory $output_style_factory */
-    $output_style_factory = $this->getHelperSet()->get('output_style_factory');
-    $io = $output_style_factory->getOutputStyle();
 
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
     $command = $this->getHelperSet()->getCommand();
@@ -86,7 +81,7 @@ class InputHandler extends Helper {
       }
       $this->setQuestionDefault($question, $default_value);
 
-      $vars[$name] = $io->askQuestion($question);
+      $vars[$name] = $this->io()->askQuestion($question);
     }
 
     return $vars;

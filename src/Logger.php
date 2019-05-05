@@ -62,7 +62,7 @@ class Logger extends AbstractLogger {
       LogLevel::ERROR,
     ];
     if (in_array($level, $error_levels)) {
-      if ($this->output instanceof ConsoleOutputInterface) {
+      if ($output instanceof ConsoleOutputInterface) {
         /** @var \Symfony\Component\Console\Output\ConsoleOutputInterface $output */
         $output = $output->getErrorOutput();
       }

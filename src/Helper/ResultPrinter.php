@@ -7,7 +7,6 @@ use DrupalCodeGenerator\InputAwareInterface;
 use DrupalCodeGenerator\InputAwareTrait;
 use DrupalCodeGenerator\OutputAwareInterface;
 use DrupalCodeGenerator\OutputAwareTrait;
-use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableStyle;
 
@@ -50,9 +49,7 @@ class ResultPrinter extends Helper implements InputAwareInterface, OutputAwareIn
         strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
     });
 
-    /** @var \DrupalCodeGenerator\Helper\OutputStyleFactory $output_style_factory */
-    $output_style_factory = $this->getHelperSet()->get('output_style_factory');
-    $io = $output_style_factory->getOutputStyle();
+    $io = $this->io();
     $io->title('The following directories and files have been created or updated:');
 
     // Table.

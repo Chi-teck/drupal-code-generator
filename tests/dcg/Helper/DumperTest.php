@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Helper\Dumper;
+use DrupalCodeGenerator\Helper\OutputStyleFactory;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Tests\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -205,9 +206,11 @@ class DumperTest extends BaseTestCase {
   protected function dump(array $assets, ?bool $replace = NULL) :array {
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
+    $output_style = new OutputStyleFactory();
+    $output_style->setInput($this->input);
+    $output_style->setOutput($this->output);
+    $helper_set->set($output_style);
     $dumper = new Dumper($this->filesystem, $replace);
-    $dumper->setInput($this->input);
-    $dumper->setOutput($this->output);
     $dumper->setHelperSet($helper_set);
     return $dumper->dump($assets, $this->directory);
   }
