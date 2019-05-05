@@ -9,9 +9,9 @@ use DrupalCodeGenerator\OutputAwareTrait;
 use Symfony\Component\Console\Formatter\OutputFormatterInterface;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Output decorator for the DCG style guide.
@@ -181,13 +181,18 @@ class OutputStyle extends Helper implements OutputInterface, InputAwareInterface
   }
 
   /**
-   * Returns error output.
+   * Implicitly support Symfony StyleInterface.
+   *
+   * @throws \Exception
+   *
+   * @see \Symfony\Component\Console\Style\StyleInterface
    */
-  protected function getErrorOutput() :OutputInterface {
-    if (!$this->output instanceof ConsoleOutputInterface) {
-      return $this->output;
+  public function __call(string $method, array $args) {
+    $io = new SymfonyStyle($this->input, $this->output);
+    if (is_callable([$io, $method])) {
+      return call_user_func_array([$io, $method], $args);
     }
-    return $this->output->getErrorOutput();
+    throw new \Exception(sprintf('Call to undefined method %s::%s', __CLASS__, $method));
   }
 
 }

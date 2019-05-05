@@ -21,9 +21,12 @@ class ResultPrinterTest extends TestCase {
    */
   public function testResultPrinter() :void {
 
+    $input = new ArgvInput();
     $output = new BufferedOutput();
+
     $output_style = new OutputStyle();
     $output_style->setOutput($output);
+    $output_style->setInput($input);
 
     $helper_set = new HelperSet();
     $helper_set->set($output_style);
@@ -33,7 +36,7 @@ class ResultPrinterTest extends TestCase {
 
     self::assertEquals('result_printer', $printer->getName());
 
-    $printer->setInput(new ArgvInput());
+    $printer->setInput($input);
 
     $assets[] = (new Asset())->path('bbb/eee/ggg.php');
     $assets[] = (new Asset())->path('aaa/ddd.txt')->content('123');
