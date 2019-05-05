@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\InputAwareInterface;
 use DrupalCodeGenerator\OutputAwareInterface;
-use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
@@ -84,6 +83,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   protected $vars = [];
 
   /**
+   * Output style.
+   *
+   * @var \DrupalCodeGenerator\Helper\OutputStyle
+   */
+  protected $io;
+
+  /**
    * {@inheritdoc}
    */
   protected function configure():void {
@@ -130,6 +136,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
 
     $this->getHelperSet()->setCommand($this);
     $this->getHelper('renderer')->addPath($this->templatePath);
+    $this->io = $this->getHelper('io');
 
     $directory = $input->getOption('directory') ?: getcwd();
     // No need to look up for extension root when generating an extension.
@@ -138,8 +145,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $this->directory = $is_extension
       ? $directory : (Utils::getExtensionRoot($directory) ?: $directory);
 
-    $io = new OutputStyle($input, $output);
-    $io->title(sprintf("Welcome to %s generator!", $this->getName()));
+    $this->io->title(sprintf("Welcome to %s generator!", $this->getName()));
   }
 
   /**

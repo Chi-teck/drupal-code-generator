@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -178,7 +177,6 @@ class Project extends BaseGenerator {
   protected function execute(InputInterface $input, OutputInterface $output) :int {
     $result = parent::execute($input, $output);
     if ($result === 0) {
-      $io = new OutputStyle($input, $output);
       $message = [
         'Next steps:',
         '–––––––––––',
@@ -186,8 +184,8 @@ class Project extends BaseGenerator {
         '2. Run <comment>composer install</comment> command',
         '3. Install Drupal',
       ];
-      $io->text($message);
-      $io->newLine();
+      $this->io->text($message);
+      $this->io->newLine();
     }
     return $result;
   }

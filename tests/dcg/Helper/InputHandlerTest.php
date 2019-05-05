@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\Helper\InputHandler;
+use DrupalCodeGenerator\Helper\OutputStyle;
 use DrupalCodeGenerator\Tests\QuestionHelper;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
@@ -46,6 +47,7 @@ class InputHandlerTest extends TestCase {
     parent::__construct($name, $data, $dataName);
 
     $this->input = new ArrayInput([], new InputDefinition());
+    $this->output = new BufferedOutput();
 
     $command = $this->createMock(GeneratorInterface::class);
     $command->method('getDirectory')
@@ -57,13 +59,23 @@ class InputHandlerTest extends TestCase {
 
     $question_helper = new QuestionHelper();
 
-    $helper_set->method('get')
-      ->willReturn($question_helper);
+    $output_style = new OutputStyle();
+    $output_style->setInput($this->input);
+    $output_style->setOutput($this->output);
+
+    $value_map = [
+      ['question', $question_helper],
+      ['io', $output_style],
+    ];
+
+    $helper_set->expects($this->any())
+      ->method('get')
+      ->will($this->returnValueMap($value_map));
 
     $this->handler = new InputHandler();
     $this->handler->setHelperSet($helper_set);
-
-    $this->output = new BufferedOutput();
+    $question_helper->setHelperSet($helper_set);
+    $output_style->setHelperSet($helper_set);
   }
 
   /**

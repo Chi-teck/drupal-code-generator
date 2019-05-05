@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -170,9 +169,8 @@ class Field extends BaseGenerator {
     // Indicates that at least one of sub-fields is of datetime type.
     $vars['datetime'] = FALSE;
 
-    $io = new OutputStyle($input, $output);
     for ($i = 1; $i <= $vars['subfield_count']; $i++) {
-      $io->rule();
+      $this->io->rule();
       $subfield_questions = [];
       $subfield_questions['name_' . $i] = new Question("Label for sub-field #$i", "Value $i");
       $default_machine_name = function (array $vars) use ($i) {
@@ -261,7 +259,7 @@ class Field extends BaseGenerator {
 
     }
 
-    $io->rule();
+    $this->io->rule();
 
     $questions = [];
     $questions['storage_settings'] = new ConfirmationQuestion('Would you like to create field storage settings form?', FALSE);

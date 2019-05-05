@@ -3,8 +3,10 @@
 namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Helper\OutputStyle;
 use DrupalCodeGenerator\Helper\ResultPrinter;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,13 +20,20 @@ class ResultPrinterTest extends TestCase {
    * Test callback.
    */
   public function testResultPrinter() :void {
+
+    $output = new BufferedOutput();
+    $output_style = new OutputStyle();
+    $output_style->setOutput($output);
+
+    $helper_set = new HelperSet();
+    $helper_set->set($output_style);
+
     $printer = new ResultPrinter();
+    $printer->setHelperSet($helper_set);
 
     self::assertEquals('result_printer', $printer->getName());
 
     $printer->setInput(new ArgvInput());
-    $output = new BufferedOutput();
-    $printer->setOutput($output);
 
     $assets[] = (new Asset())->path('bbb/eee/ggg.php');
     $assets[] = (new Asset())->path('aaa/ddd.txt')->content('123');
