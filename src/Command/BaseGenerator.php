@@ -4,9 +4,11 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\ApplicationFactory;
 use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Logger;
 use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -113,6 +115,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * {@inheritdoc}
    */
   protected function initialize(InputInterface $input, OutputInterface $output) :void {
+
+    (new Logger($output))->debug('Command: {command}', ['command' => get_class($this)]);
+
     $this->getHelperSet()->setCommand($this);
     $this->getHelper('renderer')->addPath($this->templatePath);
 
@@ -132,6 +137,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function execute(InputInterface $input, OutputInterface $output) :int {
 
+    $logger = new Logger($output);
+    $logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
+
+    $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
+    $logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
+
     // Render all assets.
     $renderer = $this->getHelper('renderer');
     foreach ($this->getAssets() as $asset) {
@@ -140,6 +151,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
         $asset->vars($this->vars);
       }
       $renderer->renderAsset($asset);
+      $logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
     }
 
     $dumped_assets = $this->getHelper('dumper')
@@ -148,6 +160,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $this->getHelper('result_printer')
       ->printResult($input, $output, $dumped_assets);
 
+    $logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
     return 0;
   }
 
