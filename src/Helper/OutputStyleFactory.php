@@ -7,8 +7,8 @@ use DrupalCodeGenerator\InputAwareTrait;
 use DrupalCodeGenerator\OutputAwareInterface;
 use DrupalCodeGenerator\OutputAwareTrait;
 use DrupalCodeGenerator\OutputStyle;
+use DrupalCodeGenerator\OutputStyleInterface;
 use Symfony\Component\Console\Helper\Helper;
-use Symfony\Component\Console\Style\StyleInterface;
 
 /**
  * Defines the output style factory.
@@ -21,7 +21,7 @@ class OutputStyleFactory extends Helper implements InputAwareInterface, OutputAw
   /**
    * Output style.
    *
-   * @var \Symfony\Component\Console\Style\StyleInterface
+   * @var \DrupalCodeGenerator\OutputStyleInterface
    */
   private $outputStyle;
 
@@ -35,10 +35,10 @@ class OutputStyleFactory extends Helper implements InputAwareInterface, OutputAw
   /**
    * Creates output style.
    *
-   * @return \Symfony\Component\Console\Style\StyleInterface
+   * @return \DrupalCodeGenerator\OutputStyleInterface
    *   Output style.
    */
-  public function getOutputStyle() :StyleInterface {
+  public function getOutputStyle() :OutputStyleInterface {
     if (!$this->outputStyle) {
       /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
       $question_helper = $this->getHelperSet()->get('question');

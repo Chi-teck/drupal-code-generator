@@ -13,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Output decorator for the DCG style guide.
  */
-class OutputStyle extends SymfonyStyle {
+class OutputStyle extends SymfonyStyle implements OutputStyleInterface {
 
   /**
    * Console input.
@@ -86,7 +86,7 @@ class OutputStyle extends SymfonyStyle {
   }
 
   /**
-   * Prints horizontal rule.
+   * {@inheritdoc}
    */
   public function rule(int $length = 50): void {
     $this->writeln(sprintf('<fg=green>%s</>', str_repeat('–', $length)));
@@ -95,7 +95,7 @@ class OutputStyle extends SymfonyStyle {
   /**
    * {@inheritdoc}
    */
-  public function buildTable(array $headers, array $rows) {
+  public function buildTable(array $headers, array $rows) :Table {
     $style = clone Table::getStyleDefinition('symfony-style-guide');
     $style->setCellHeaderFormat('<info>%s</info>');
 
