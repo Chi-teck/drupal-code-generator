@@ -4,7 +4,9 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\InputAwareInterface;
 use DrupalCodeGenerator\Logger;
+use DrupalCodeGenerator\OutputAwareInterface;
 use DrupalCodeGenerator\OutputStyle;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
@@ -116,6 +118,15 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    */
   protected function initialize(InputInterface $input, OutputInterface $output) :void {
 
+    foreach ($this->getHelperSet() as $helper) {
+      if ($helper instanceof InputAwareInterface) {
+        $helper->setInput($input);
+      }
+      if ($helper instanceof OutputAwareInterface) {
+        $helper->setOutput($output);
+      }
+    }
+
     (new Logger($output))->debug('Command: {command}', ['command' => get_class($this)]);
 
     $this->getHelperSet()->setCommand($this);
@@ -155,10 +166,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     }
 
     $dumped_assets = $this->getHelper('dumper')
-      ->dump($input, $output, $this->getAssets(), $this->getDirectory());
+      ->dump($this->getAssets(), $this->getDirectory());
 
-    $this->getHelper('result_printer')
-      ->printResult($input, $output, $dumped_assets);
+    $this->getHelper('result_printer')->printResult($dumped_assets);
 
     $logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
     return 0;

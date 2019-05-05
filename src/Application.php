@@ -30,7 +30,7 @@ class Application extends BaseApplication {
   /**
    * Creates the application.
    */
-  public static function create() : Application {
+  public static function create() :Application {
     // This gets substituted with git version when DCG is packaged to PHAR file.
     $version = '@git-version@';
     // Fallback for composer installation.

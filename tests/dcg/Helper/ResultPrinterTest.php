@@ -19,10 +19,12 @@ class ResultPrinterTest extends TestCase {
    */
   public function testResultPrinter() :void {
     $printer = new ResultPrinter();
+
     self::assertEquals('result_printer', $printer->getName());
 
-    $input = new ArgvInput();
+    $printer->setInput(new ArgvInput());
     $output = new BufferedOutput();
+    $printer->setOutput($output);
 
     $assets[] = (new Asset())->path('bbb/eee/ggg.php');
     $assets[] = (new Asset())->path('aaa/ddd.txt')->content('123');
@@ -31,7 +33,7 @@ class ResultPrinterTest extends TestCase {
     $assets[] = (new Asset())->path('bbb/fff.module');
 
     // -- Default output.
-    $printer->printResult($input, $output, $assets);
+    $printer->printResult($assets);
     $expected_output = "\n";
     $expected_output .= " The following directories and files have been created or updated:\n";
     $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
@@ -46,7 +48,7 @@ class ResultPrinterTest extends TestCase {
     self::assertEquals($expected_output, $output->fetch());
 
     // -- Output with base path.
-    $printer->printResult($input, $output, $assets, 'project/root/');
+    $printer->printResult($assets, 'project/root/');
     $expected_output = "\n";
     $expected_output .= " The following directories and files have been created or updated:\n";
     $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";
@@ -61,12 +63,12 @@ class ResultPrinterTest extends TestCase {
     self::assertEquals($expected_output, $output->fetch());
 
     // Empty output.
-    $printer->printResult($input, $output, []);
+    $printer->printResult([]);
     self::assertEquals('', $output->fetch());
 
     // Verbose output.
     $output->setVerbosity(OutputInterface::VERBOSITY_VERBOSE);
-    $printer->printResult($input, $output, $assets);
+    $printer->printResult($assets);
     $expected_output = "\n";
     $expected_output .= " The following directories and files have been created or updated:\n";
     $expected_output .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";

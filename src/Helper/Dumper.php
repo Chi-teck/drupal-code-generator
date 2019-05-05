@@ -2,17 +2,22 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\InputAwareInterface;
+use DrupalCodeGenerator\InputAwareTrait;
+use DrupalCodeGenerator\OutputAwareInterface;
+use DrupalCodeGenerator\OutputAwareTrait;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Asset dumper form generators.
  */
-class Dumper extends Helper {
+class Dumper extends Helper implements InputAwareInterface, OutputAwareInterface {
+
+  use InputAwareTrait;
+  use OutputAwareTrait;
 
   /**
    * The file system utility.
@@ -54,10 +59,6 @@ class Dumper extends Helper {
   /**
    * Dumps the generated code to file system.
    *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   Input instance.
-   * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Output instance.
    * @param \DrupalCodeGenerator\Asset[] $assets
    *   Assets to be dumped.
    * @param string $directory
@@ -66,7 +67,7 @@ class Dumper extends Helper {
    * @return \DrupalCodeGenerator\Asset[]
    *   A list of created or updated assets.
    */
-  public function dump(InputInterface $input, OutputInterface $output, array $assets, string $directory) :array {
+  public function dump(array $assets, string $directory) :array {
 
     $dumped_assets = [];
 
@@ -92,7 +93,7 @@ class Dumper extends Helper {
           elseif ($this->replace === NULL) {
             $question_text = "The file <comment>$file_path</comment> already exists. Would you like to replace it?";
             $question = new ConfirmationQuestion($question_text);
-            if (!$question_helper->ask($input, $output, $question)) {
+            if (!$question_helper->ask($this->input, $this->output, $question)) {
               continue;
             }
           }

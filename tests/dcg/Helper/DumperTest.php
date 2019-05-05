@@ -206,8 +206,10 @@ class DumperTest extends BaseTestCase {
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
     $dumper = new Dumper($this->filesystem, $replace);
+    $dumper->setInput($this->input);
+    $dumper->setOutput($this->output);
     $dumper->setHelperSet($helper_set);
-    return $dumper->dump($this->input, $this->output, $assets, $this->directory);
+    return $dumper->dump($assets, $this->directory);
   }
 
   /**

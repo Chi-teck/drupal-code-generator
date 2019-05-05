@@ -3,17 +3,22 @@
 namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\InputAwareInterface;
+use DrupalCodeGenerator\InputAwareTrait;
+use DrupalCodeGenerator\OutputAwareInterface;
+use DrupalCodeGenerator\OutputAwareTrait;
 use DrupalCodeGenerator\OutputStyle;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableStyle;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Output printer for generators.
  */
-class ResultPrinter extends Helper {
+class ResultPrinter extends Helper implements InputAwareInterface, OutputAwareInterface {
+
+  use InputAwareTrait;
+  use OutputAwareTrait;
 
   /**
    * {@inheritdoc}
@@ -25,16 +30,12 @@ class ResultPrinter extends Helper {
   /**
    * Prints summary.
    *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   Console input.
-   * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Console output.
    * @param \DrupalCodeGenerator\Asset[] $assets
    *   List of created or updated assets.
    * @param string $base_path
    *   (Optional) Base path.
    */
-  public function printResult(InputInterface $input, OutputInterface $output, array $assets, string $base_path = '') :void {
+  public function printResult(array $assets, string $base_path = '') :void {
 
     if (count($assets) == 0) {
       return;
@@ -50,11 +51,11 @@ class ResultPrinter extends Helper {
         strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
     });
 
-    $io = new OutputStyle($input, $output);
+    $io = new OutputStyle($this->input, $this->output);
     $io->title('The following directories and files have been created or updated:');
 
     // Table.
-    if ($output->isVerbose()) {
+    if ($this->output->isVerbose()) {
       $headers[] = ['Type', 'Path', 'Lines', 'Size'];
 
       $rows = [];
