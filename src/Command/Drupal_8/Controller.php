@@ -33,7 +33,7 @@ class Controller extends BaseGenerator {
 
     $di_question = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
     if ($this->ask($di_question)) {
-      $this->collectServices($input, $output);
+      $this->collectServices();
     }
 
     $route_question = new ConfirmationQuestion('Would you like to create a route for this controller?');

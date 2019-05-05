@@ -342,15 +342,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, Logg
   /**
    * Collects services.
    *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   Input instance.
-   * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Output instance.
-   *
    * @return array
    *   List of collected services.
    */
-  protected function collectServices(InputInterface $input, OutputInterface $output) :array {
+  protected function collectServices() :array {
 
     $service_definitions = self::getServiceDefinitions();
     $service_ids = array_keys($service_definitions);

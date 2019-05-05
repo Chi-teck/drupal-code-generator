@@ -31,7 +31,7 @@ class TwigExtension extends BaseGenerator {
 
     $di_question = new ConfirmationQuestion('Would you like to inject dependencies?');
     if ($this->ask($di_question)) {
-      $this->collectServices($input, $output);
+      $this->collectServices();
     }
 
     $this->addFile()

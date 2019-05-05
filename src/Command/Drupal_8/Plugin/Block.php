@@ -34,7 +34,7 @@ class Block extends BaseGenerator {
 
     $di_question = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
     if ($this->ask($di_question)) {
-      $this->collectServices($input, $output);
+      $this->collectServices();
     }
 
     $access_question = new ConfirmationQuestion('Create access callback?', FALSE);
