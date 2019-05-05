@@ -27,7 +27,7 @@ class ModuleInfo extends BaseGenerator {
     $questions['configure'] = new Question('Configuration page (route name)');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }

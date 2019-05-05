@@ -22,7 +22,7 @@ class Services extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions();
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $vars['class'] = Utils::camelize($vars['name']);
 
     $this->addFile()

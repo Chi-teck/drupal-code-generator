@@ -24,7 +24,7 @@ class HtmlPage extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions['file_name'] = new Question('File name', 'index.html');
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('{file_name}')

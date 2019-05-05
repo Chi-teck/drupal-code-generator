@@ -27,7 +27,7 @@ class ApacheVirtualHost extends BaseGenerator {
       'docroot' => new Question('Document root', '/var/www/{hostname}/public'),
     ];
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('{hostname}.conf')

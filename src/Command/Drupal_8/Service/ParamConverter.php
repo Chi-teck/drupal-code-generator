@@ -28,7 +28,7 @@ class ParamConverter extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $vars['controller_class'] = Utils::camelize($vars['machine_name']) . 'Controller';
 
     $this->addFile()

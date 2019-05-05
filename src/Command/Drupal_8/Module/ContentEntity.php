@@ -56,7 +56,7 @@ class ContentEntity extends BaseGenerator {
     $questions['description_base_field'] = new ConfirmationQuestion('Add "description" base field?', TRUE);
     $questions['rest_configuration'] = new ConfirmationQuestion('Create REST configuration for the entity?', FALSE);
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));

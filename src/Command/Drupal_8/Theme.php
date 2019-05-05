@@ -34,7 +34,7 @@ class Theme extends BaseGenerator {
     $questions['breakpoints'] = new ConfirmationQuestion('Would you like to create breakpoints?', FALSE);
     $questions['theme_settings'] = new ConfirmationQuestion('Would you like to create theme settings form?', FALSE);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
     $vars['base_theme'] = Utils::human2machine($vars['base_theme']);
 
     $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];

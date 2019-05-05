@@ -28,7 +28,7 @@ class Standard extends BaseGenerator {
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
@@ -55,7 +55,7 @@ class Standard extends BaseGenerator {
     $option_questions['controller'] = new ConfirmationQuestion('Would you like to create a controller?', TRUE);
     $option_questions['settings_form'] = new ConfirmationQuestion('Would you like to create settings form?', TRUE);
 
-    $options = $this->collectVars($input, $output, $option_questions);
+    $options = $this->collectVars($option_questions);
 
     if ($options['install_file']) {
       $this->addFile()

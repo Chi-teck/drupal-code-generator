@@ -45,7 +45,7 @@ class PluginManager extends BaseGenerator {
     $choices = Utils::prepareChoices($discovery_types);
     $questions['discovery'] = new ChoiceQuestion('Discovery type', $choices, 'Annotation');
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     $vars['class_prefix'] = Utils::camelize($vars['plugin_type']);
     $vars['discovery'] = array_search($vars['discovery'], $discovery_types);

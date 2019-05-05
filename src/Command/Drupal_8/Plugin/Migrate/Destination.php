@@ -27,7 +27,7 @@ class Destination extends BaseGenerator {
     $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
     $questions['class'] = Utils::pluginClassQuestion();
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Plugin/migrate/destination/{class}.php')

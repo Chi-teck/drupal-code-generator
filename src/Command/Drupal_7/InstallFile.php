@@ -19,7 +19,7 @@ class InstallFile extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $this->collectVars($input, $output, Utils::moduleQuestions());
+    $this->collectVars(Utils::moduleQuestions());
     $this->addFile()
       ->path('{machine_name}.install')
       ->template('d7/install.twig');

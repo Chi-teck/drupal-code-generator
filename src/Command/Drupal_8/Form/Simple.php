@@ -26,7 +26,7 @@ class Simple extends BaseGenerator {
 
     $questions = Utils::moduleQuestions();
     $questions['class'] = new Question('Class', 'ExampleForm');
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->defaultPermission = 'access content';
     $this->routeInteraction($input, $output);

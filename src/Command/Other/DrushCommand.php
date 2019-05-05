@@ -42,7 +42,7 @@ class DrushCommand extends BaseGenerator {
       'command_file' => new Question('Command file', $default_command_file),
     ];
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     list($vars['command_file_prefix']) = explode('.drush.inc', $vars['command_file']);
 

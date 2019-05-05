@@ -49,7 +49,7 @@ class EntityReferenceSelection extends BaseGenerator {
     $questions['class'] = new Question('Plugin class', $default_class);
 
     $questions['configurable'] = new ConfirmationQuestion('Provide additional plugin configuration?', FALSE);
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     if (isset($base_classes[$vars['entity_type']])) {
       $vars['base_class_full'] = $base_classes[$vars['entity_type']];

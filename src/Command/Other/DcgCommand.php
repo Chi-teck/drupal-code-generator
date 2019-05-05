@@ -37,7 +37,7 @@ class DcgCommand extends BaseGenerator {
       'alias' => new Question('Command alias', 'example'),
     ];
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     $sub_names = explode(':', $vars['name']);
     $last_sub_name = array_pop($sub_names);

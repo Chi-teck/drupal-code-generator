@@ -23,7 +23,7 @@ class ResponsePolicy extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions();
     $questions['class'] = new Question('Class', 'Example');
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/PageCache/{class}.php')

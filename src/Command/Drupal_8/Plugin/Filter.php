@@ -32,7 +32,7 @@ class Filter extends BaseGenerator {
     $choices = Utils::prepareChoices($filter_types);
     $questions['filter_type'] = new ChoiceQuestion('Filter type', $choices);
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $vars['filter_type'] = array_search($vars['filter_type'], $filter_types);
 
     $this->addFile()

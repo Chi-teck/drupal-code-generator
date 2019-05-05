@@ -29,7 +29,7 @@ class Action extends BaseGenerator {
     $questions['category'] = new Question('Action category', 'Custom');
     $questions['configurable'] = new ConfirmationQuestion('Make the action configurable?', FALSE);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Plugin/Action/{class}.php')

@@ -28,7 +28,7 @@ class Theme extends BaseGenerator {
     $questions['description'] = new Question('Theme description', 'A simple Drupal 7 theme.');
     $questions['base_theme'] = new Question('Base theme');
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $vars['asset_name'] = str_replace('_', '-', $vars['machine_name']);
 
     $this->addFile()

@@ -26,7 +26,7 @@ class Web extends BaseGenerator {
     $questions['class'] = new Question('Class', 'ExampleTest');
     $questions['class']->setValidator([Utils::class, 'validateClassName']);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Tests/{class}.php')

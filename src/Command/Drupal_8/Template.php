@@ -27,7 +27,7 @@ class Template extends BaseGenerator {
     $questions['create_theme'] = new ConfirmationQuestion('Create theme hook?', TRUE);
     $questions['create_preprocess'] = new ConfirmationQuestion('Create preprocess hook?', TRUE);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
 
     $this->addFile()
       ->path('templates/{template_name}.html.twig')

@@ -79,26 +79,26 @@ class Project extends BaseGenerator {
     $questions['drupal'] = new Question('Drupal version', self::DRUPAL_DEFAULT_VERSION);
     $questions['drupal_core_strict'] = new ConfirmationQuestion('Would you like to get the same versions of Drupal core\'s dependencies as in Drupal core\'s composer.lock file?', FALSE);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $sections = ['require', 'require-dev'];
 
     $questions['drush'] = new ConfirmationQuestion('Would you like to install Drush?', TRUE);
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
     if ($vars['drush']) {
       $questions['drush_installation'] = new Question('Drush installation (require|require-dev)', 'require');
       $questions['drush_installation']->setValidator(Utils::getOptionsValidator($sections));
       $questions['drush_installation']->setAutocompleterValues($sections);
-      $this->collectVars($input, $output, $questions);
+      $this->collectVars($questions);
     }
 
     $questions['drupal_console'] = new ConfirmationQuestion('Would you like to install Drupal Console?', !$vars['drush']);
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
     if ($vars['drupal_console']) {
       $questions['drupal_console_installation'] = new Question('Drupal Console installation (require|require-dev)', 'require-dev');
       $questions['drupal_console_installation']->setValidator(Utils::getOptionsValidator($sections));
       $questions['drupal_console_installation']->setAutocompleterValues($sections);
-      $this->collectVars($input, $output, $questions);
+      $this->collectVars($questions);
     }
 
     $questions['composer_patches'] = new ConfirmationQuestion('Would you like to install Composer patches plugin?', TRUE);
@@ -107,7 +107,7 @@ class Project extends BaseGenerator {
     $questions['env'] = new ConfirmationQuestion('Would you like to load environment variables from .env files?', FALSE);
     $questions['asset_packagist'] = new ConfirmationQuestion('Would you like to add asset-packagist repository?', FALSE);
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     $vars['document_root_path'] = $vars['document_root'] ?
       $vars['document_root'] . '/' : $vars['document_root'];

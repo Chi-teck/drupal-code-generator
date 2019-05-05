@@ -24,7 +24,7 @@ class RestResource extends BaseGenerator {
     $questions = Utils::moduleQuestions();
     $questions += Utils::pluginQuestions('Resource');
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Plugin/rest/resource/{class}.php')

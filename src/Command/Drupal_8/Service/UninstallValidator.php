@@ -26,7 +26,7 @@ class UninstallValidator extends BaseGenerator {
       return Utils::camelize($vars['name']) . 'UninstallValidator';
     };
     $questions['class'] = new Question('Class', $default_class);
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/{class}.php')

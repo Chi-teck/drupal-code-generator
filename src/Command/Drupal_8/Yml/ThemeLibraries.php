@@ -25,7 +25,7 @@ class ThemeLibraries extends BaseGenerator {
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('{machine_name}.libraries.yml')

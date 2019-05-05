@@ -31,7 +31,7 @@ class Hook extends BaseGenerator {
     });
     $questions['hook_name']->setAutocompleterValues($this->supportedHooks());
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
 
     // Most Drupal hooks are situated in a module file but some are not.
     $special_hooks = [

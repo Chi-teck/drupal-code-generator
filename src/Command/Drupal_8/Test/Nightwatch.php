@@ -24,7 +24,7 @@ class Nightwatch extends BaseGenerator {
     $questions = Utils::moduleQuestions();
     $questions['test_name'] = new Question('Test name', 'example');
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $vars['test_name'] = Utils::camelize($vars['test_name'], FALSE);
 
     $this->addFile()

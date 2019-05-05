@@ -37,7 +37,7 @@ class Composer extends BaseGenerator {
     ]);
     $questions['drupal_org'] = new ConfirmationQuestion('Is this project hosted on drupal.org?', FALSE);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('composer.json')

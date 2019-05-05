@@ -35,7 +35,7 @@ class ThemeInfo extends BaseGenerator {
 
     $questions['package'] = new Question('Package', 'Custom');
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('{machine_name}.info.yml')

@@ -25,7 +25,7 @@ class SettingsLocal extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions['db_override'] = new ConfirmationQuestion('Override database configuration?', FALSE);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
     if ($vars['db_override']) {
       $questions = [
         'database' => new Question('Database name', 'drupal_local'),
@@ -37,7 +37,7 @@ class SettingsLocal extends BaseGenerator {
       array_walk($questions, function (Question $question) {
         $question->setValidator([Utils::class, 'validateRequired']);
       });
-      $this->collectVars($input, $output, $questions);
+      $this->collectVars($questions);
     }
 
     $this->addFile()

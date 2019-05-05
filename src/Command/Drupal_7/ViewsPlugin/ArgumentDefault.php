@@ -27,7 +27,7 @@ class ArgumentDefault extends BaseGenerator {
     };
     $questions['plugin_machine_name'] = new Question('Plugin machine name', $default_machine_name);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('{machine_name}.module')

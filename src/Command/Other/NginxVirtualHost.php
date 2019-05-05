@@ -34,7 +34,7 @@ class NginxVirtualHost extends BaseGenerator {
       'fastcgi_pass' => new Question('Address of a FastCGI server', 'unix:' . $socket),
     ];
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     $vars['file_public_path'] = trim($vars['file_public_path'], '/');
     $vars['file_private_path'] = trim($vars['file_private_path'], '/');

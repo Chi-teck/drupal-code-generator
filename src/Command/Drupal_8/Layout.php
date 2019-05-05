@@ -35,7 +35,7 @@ class Layout extends BaseGenerator {
     $questions['js'] = new ConfirmationQuestion('Would you like to create JavaScript file for this layout?', FALSE);
     $questions['css'] = new ConfirmationQuestion('Would you like to create CSS file for this layout?', FALSE);
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $this->addFile()
       ->path('{machine_name}.layouts.yml')
       ->template('d8/_layout/layouts.twig')

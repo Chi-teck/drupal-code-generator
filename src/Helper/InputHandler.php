@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
@@ -31,10 +29,6 @@ class InputHandler extends Helper {
   /**
    * Interacts with the user and returns variables for templates.
    *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   Input instance.
-   * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Output instance.
    * @param \Symfony\Component\Console\Question\Question[] $questions
    *   List of questions that the user should answer.
    * @param array $vars
@@ -43,8 +37,9 @@ class InputHandler extends Helper {
    * @return array
    *   Template variables.
    */
-  public function collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) :array {
+  public function collectVars(array $questions, array $vars = []) :array {
 
+    /** @var \DrupalCodeGenerator\Helper\OutputStyle $io */
     $io = $this->getHelperSet()->get('io');
 
     /** @var \DrupalCodeGenerator\Command\GeneratorInterface $command */
@@ -58,7 +53,6 @@ class InputHandler extends Helper {
       }
       $this->askedQuestions[] = $name;
 
-      /** @var \Symfony\Component\Console\Question\Question $question */
       $default_value = $question->getDefault();
 
       // Make some assumptions based on question name.

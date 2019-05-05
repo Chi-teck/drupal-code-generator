@@ -143,7 +143,7 @@ class Field extends BaseGenerator {
     };
     $questions['subfield_count']->setValidator($subfield_count_validator);
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     $type_choices = array_column($this->subTypes, 'label');
     $type_choices = Utils::prepareChoices($type_choices);
@@ -178,7 +178,7 @@ class Field extends BaseGenerator {
       };
       $subfield_questions['machine_name_' . $i] = new Question("Machine name for sub-field #$i", $default_machine_name);
       $subfield_questions['type_' . $i] = new ChoiceQuestion("Type of sub-field #$i", $type_choices, 'Text');
-      $this->collectVars($input, $output, $subfield_questions);
+      $this->collectVars($subfield_questions);
 
       $vars['type_class'] = Utils::camelize($vars['field_label']) . 'Item';
       $vars['widget_class'] = Utils::camelize($vars['field_label']) . 'Widget';
@@ -206,7 +206,7 @@ class Field extends BaseGenerator {
         $subfield_questions['list_' . $i] = new ConfirmationQuestion("Limit allowed values for sub-field #$i?", FALSE);
       }
       $subfield_questions['required_' . $i] = new ConfirmationQuestion("Make sub-field #$i required?", FALSE);
-      $this->collectVars($input, $output, $subfield_questions);
+      $this->collectVars($subfield_questions);
 
       $machine_name = $vars['machine_name_' . $i];
 
@@ -269,7 +269,7 @@ class Field extends BaseGenerator {
     $questions['table_formatter'] = new ConfirmationQuestion('Would you like to create table formatter?', FALSE);
     $questions['key_value_formatter'] = new ConfirmationQuestion('Would you like to create key-value formatter?', FALSE);
 
-    $vars += $this->collectVars($input, $output, $questions);
+    $vars += $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldType/{type_class}.php')

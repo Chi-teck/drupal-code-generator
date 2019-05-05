@@ -35,7 +35,7 @@ trait RouteInteractionTrait {
     $vars = &$this->vars;
 
     $route_question = new ConfirmationQuestion('Would you like to create a route for this form?');
-    $vars['route'] = $this->ask($input, $output, $route_question);
+    $vars['route'] = $this->ask($route_question);
 
     $raw_form_id = preg_replace('/_form/', '', Utils::camel2machine($vars['class']));
     $vars['form_id'] = $vars['machine_name'] . '_' . $raw_form_id;
@@ -48,7 +48,7 @@ trait RouteInteractionTrait {
       $route_questions['route_title'] = new Question('Route title', Utils::machine2human($raw_form_id));
       $route_questions['route_permission'] = new Question('Route permission', $this->defaultPermission);
 
-      $this->collectVars($input, $output, $route_questions, $vars);
+      $this->collectVars($route_questions, $vars);
 
       $this->addFile()
         ->path('{machine_name}.routing.yml')

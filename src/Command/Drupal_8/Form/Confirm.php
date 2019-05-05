@@ -26,7 +26,7 @@ class Confirm extends BaseGenerator {
 
     $questions = Utils::moduleQuestions();
     $questions['class'] = new Question('Class', 'ExampleConfirmForm');
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->defaultPermission = 'administer site configuration';
     $this->routeInteraction($input, $output);

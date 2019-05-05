@@ -27,7 +27,7 @@ class Settings extends BaseGenerator {
     $questions['db_user'] = new Question('Database user', 'root');
     $questions['db_password'] = new Question('Database password', '123');
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     // @see: drupal_get_hash_salt()
     $vars['hash_salt'] = hash('sha256', serialize($vars));
 

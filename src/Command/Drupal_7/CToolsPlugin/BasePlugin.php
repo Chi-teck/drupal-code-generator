@@ -39,7 +39,7 @@ abstract class BasePlugin extends BaseGenerator {
       ['-', 'Node', 'User', 'Term']
     );
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path($this->subDirectory . '/{plugin_machine_name}.inc')

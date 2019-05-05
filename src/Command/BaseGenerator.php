@@ -239,10 +239,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   /**
    * Asks the user for template variables.
    *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   Input instance.
-   * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Output instance.
    * @param array $questions
    *   List of questions that the user should answer.
    * @param array $vars
@@ -253,18 +249,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @see \DrupalCodeGenerator\InputHandler::collectVars()
    */
-  protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) : array {
-    $this->vars += $this->getHelper('input_handler')->collectVars($input, $output, $questions, $vars);
+  protected function &collectVars(array $questions, array $vars = []) : array {
+    $this->vars += $this->getHelper('input_handler')->collectVars($questions, $vars);
     return $this->vars;
   }
 
   /**
    * Asks the user a single question and returns the answer.
    *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   Input instance.
-   * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Output instance.
    * @param \Symfony\Component\Console\Question\Question $question
    *   A question to ask.
    * @param array $vars
@@ -275,9 +267,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *
    * @see \DrupalCodeGenerator\InputHandler::collectVars()
    */
-  protected function ask(InputInterface $input, OutputInterface $output, Question $question, array $vars = []) :?string {
+  protected function ask(Question $question, array $vars = []) :?string {
     $key = mt_rand();
-    $answers = $this->getHelper('input_handler')->collectVars($input, $output, [$key => $question], $vars);
+    $answers = $this->getHelper('input_handler')->collectVars([$key => $question], $vars);
     return $answers[$key];
   }
 
@@ -359,7 +351,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
       $question->setValidator([Utils::class, 'validateServiceName']);
       $question->setAutocompleterValues($service_ids);
-      $service = $this->ask($input, $output, $question);
+      $service = $this->ask($question);
       if (!$service) {
         break;
       }

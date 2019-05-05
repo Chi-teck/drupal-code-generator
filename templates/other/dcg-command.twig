@@ -31,7 +31,7 @@ class {{ class }} extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     // @DCG The template should be located under directory specified in
     // $self::templatePath property.

@@ -29,7 +29,7 @@ class DrupalConsoleCommand extends BaseGenerator {
       'container_aware' => new ConfirmationQuestion('Make the command aware of the drupal site installation?', TRUE),
     ];
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $vars['class'] = Utils::camelize(str_replace(':', '_', $vars['command_name'])) . 'Command';
     $vars['command_trait'] = $vars['container_aware'] ? 'ContainerAwareCommandTrait' : 'CommandTrait';
 

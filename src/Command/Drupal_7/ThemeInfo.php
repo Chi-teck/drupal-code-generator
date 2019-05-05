@@ -28,7 +28,7 @@ class ThemeInfo extends BaseGenerator {
     $questions['description'] = new Question('Theme description', 'A simple Drupal 7 theme.');
     $questions['base_theme'] = new Question('Base theme');
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('{machine_name}.info')

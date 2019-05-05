@@ -22,7 +22,7 @@ class Condition extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Plugin/Condition/{class}.php')

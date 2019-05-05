@@ -25,7 +25,7 @@ class Formatter extends BaseGenerator {
     $questions += Utils::pluginQuestions('Formatter');
     $questions['configurable'] = new ConfirmationQuestion('Make the formatter configurable?', FALSE);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldFormatter/{class}.php')

@@ -25,7 +25,7 @@ class Module extends BaseGenerator {
     $questions['description'] = new Question('Module description', 'Module description.');
     $questions['package'] = new Question('Package', 'Custom');
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
 
     $this->addFile()
       ->path('{machine_name}/{machine_name}.info')

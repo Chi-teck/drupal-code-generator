@@ -30,15 +30,15 @@ class Block extends BaseGenerator {
     $questions['category'] = new Question('Block category', 'Custom');
     $questions['configurable'] = new ConfirmationQuestion('Make the block configurable?', FALSE);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $di_question = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
-    if ($this->ask($input, $output, $di_question)) {
+    if ($this->ask($di_question)) {
       $this->collectServices($input, $output);
     }
 
     $access_question = new ConfirmationQuestion('Create access callback?', FALSE);
-    $vars = $this->collectVars($input, $output, ['access' => $access_question]);
+    $vars = $this->collectVars(['access' => $access_question]);
 
     $this->addFile()
       ->path('src/Plugin/Block/{class}.php')

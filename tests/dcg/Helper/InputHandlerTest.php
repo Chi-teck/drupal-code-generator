@@ -95,7 +95,7 @@ class InputHandlerTest extends TestCase {
 
     $this->input->setStream($this->getInputStream($input_raw));
 
-    $vars = $this->handler->collectVars($this->input, $this->output, $questions);
+    $vars = $this->handler->collectVars($questions);
 
     $output_raw = is_array($output_raw) ? implode("\n", $output_raw) : $output_raw;
 

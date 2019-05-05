@@ -24,7 +24,7 @@ class Menu extends BaseGenerator {
     $questions['machine_name'] = new Question('Module machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('{machine_name}.links.menu.yml')

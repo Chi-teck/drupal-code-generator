@@ -52,7 +52,7 @@ class Constraint extends BaseGenerator {
     $type_choices = Utils::prepareChoices($input_types);
     $questions['input_type'] = new ChoiceQuestion('Type of data to validate', $type_choices, 'Item list');
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $vars['input_type'] = array_search($vars['input_type'], $input_types);
 
     $this->addFile()

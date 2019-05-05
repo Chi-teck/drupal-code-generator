@@ -24,7 +24,7 @@ class Style extends BaseGenerator {
     $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
     $questions['configurable'] = new ConfirmationQuestion('Make the plugin configurable?', TRUE);
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Plugin/views/style/{class}.php')

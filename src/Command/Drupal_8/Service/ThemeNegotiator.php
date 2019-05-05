@@ -27,7 +27,7 @@ class ThemeNegotiator extends BaseGenerator {
     };
     $questions['class'] = new Question('Class', $default_class);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Theme/{class}.php')

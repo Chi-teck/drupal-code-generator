@@ -20,7 +20,7 @@ class Javascript extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $vars = $this->collectVars($input, $output, Utils::moduleQuestions());
+    $vars = $this->collectVars(Utils::moduleQuestions());
     $this->addFile()
       ->path('js/' . str_replace('_', '-', $vars['machine_name']) . '.js')
       ->template('d8/javascript.twig');

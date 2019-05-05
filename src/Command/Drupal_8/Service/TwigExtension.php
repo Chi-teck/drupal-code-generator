@@ -27,10 +27,10 @@ class TwigExtension extends BaseGenerator {
       return Utils::camelize($vars['name']) . 'TwigExtension';
     };
     $questions['class'] = new Question('Class', $default_class);
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $di_question = new ConfirmationQuestion('Would you like to inject dependencies?');
-    if ($this->ask($input, $output, $di_question)) {
+    if ($this->ask($di_question)) {
       $this->collectServices($input, $output);
     }
 

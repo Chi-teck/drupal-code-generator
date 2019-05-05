@@ -23,7 +23,7 @@ class CKEditor extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
 
     $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
 

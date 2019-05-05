@@ -27,7 +27,7 @@ class Type extends BaseGenerator {
     $questions['configurable_storage'] = new ConfirmationQuestion('Make the field storage configurable?', FALSE);
     $questions['configurable_instance'] = new ConfirmationQuestion('Make the field instance configurable?', FALSE);
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldType/{class}.php')

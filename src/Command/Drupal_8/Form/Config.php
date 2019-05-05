@@ -28,7 +28,7 @@ class Config extends BaseGenerator {
     $questions = Utils::moduleQuestions();
     $questions['class'] = new Question('Class', 'SettingsForm');
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->defaultPathPrefix = '/admin/config/system';
     $this->defaultPermission = 'administer site configuration';
@@ -38,7 +38,7 @@ class Config extends BaseGenerator {
 
     if ($vars['route']) {
       $link_question = new ConfirmationQuestion('Would you like to create a menu link for this route?', TRUE);
-      $vars['link'] = $this->ask($input, $output, $link_question);
+      $vars['link'] = $this->ask($link_question);
       if ($vars['link']) {
 
         $link_questions['link_title'] = new Question('Link title', $vars['route_title']);
@@ -48,7 +48,7 @@ class Config extends BaseGenerator {
           $link_questions['link_parent'] = new Question('Parent menu item', 'system.admin_config_' . $matches[1]);
         }
 
-        $this->collectVars($input, $output, $link_questions);
+        $this->collectVars($link_questions);
         $this->addFile()
           ->path('{machine_name}.links.menu.yml')
           ->template('d8/form/links.menu.twig')

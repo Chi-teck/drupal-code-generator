@@ -37,7 +37,7 @@ class CacheContext extends BaseGenerator {
     $questions['base_class'] = new ChoiceQuestion('Base class', $base_class_choices);
     $questions['calculated'] = new ConfirmationQuestion('Make the context calculated?', FALSE);
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $vars = &$this->collectVars($questions);
     $vars['context_label'] = Utils::machine2human($vars['context_id']);
 
     $vars['interface'] = $vars['calculated'] ?

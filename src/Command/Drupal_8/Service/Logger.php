@@ -24,7 +24,7 @@ class Logger extends BaseGenerator {
     $questions = Utils::moduleQuestions();
     $questions['class'] = new Question('Class', 'FileLog');
 
-    $this->collectVars($input, $output, $questions);
+    $this->collectVars($questions);
 
     $this->addFile()
       ->path('src/Logger/{class}.php')

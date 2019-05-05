@@ -20,7 +20,7 @@ class ServiceProvider extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $vars = &$this->collectVars($input, $output, Utils::moduleQuestions());
+    $vars = &$this->collectVars(Utils::moduleQuestions());
     $vars['class'] = Utils::camelize($vars['name']) . 'ServiceProvider';
     $this->addFile()
       ->path('src/{class}.php')

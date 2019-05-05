@@ -23,10 +23,10 @@ class ArgumentDefault extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) :void {
     $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
     $questions['configurable'] = new ConfirmationQuestion('Make the plugin configurable?', FALSE);
-    $vars = $this->collectVars($input, $output, $questions);
+    $vars = $this->collectVars($questions);
 
     $di_question = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
-    if ($this->ask($input, $output, $di_question)) {
+    if ($this->ask($di_question)) {
       $this->collectServices($input, $output);
     }
 
