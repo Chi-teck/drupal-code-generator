@@ -7,6 +7,8 @@ use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\InputAwareInterface;
 use DrupalCodeGenerator\OutputAwareInterface;
 use DrupalCodeGenerator\Utils;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,7 +19,9 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Base class for all generators.
  */
-abstract class BaseGenerator extends Command implements GeneratorInterface {
+abstract class BaseGenerator extends Command implements GeneratorInterface, LoggerAwareInterface {
+
+  use LoggerAwareTrait;
 
   /**
    * The command name.
@@ -132,14 +136,18 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
       }
     }
 
-    ($this->getHelper('logger_factory')->getLogger())->debug('Command: {command}', ['command' => get_class($this)]);
+    $this->setLogger($this->getHelper('logger_factory')->getLogger());
 
     $this->getHelperSet()->setCommand($this);
+
     $this->getHelper('renderer')->addPath($this->templatePath);
+
     $this->io = $this->getHelper('output_style_factory')->getOutputStyle();
 
+    $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
+
     $directory = $input->getOption('directory') ?: getcwd();
-    // No need to look up for extension root when generating an extension.
+    // Do not look up for extension root when generating an extension.
     $extension_destinations = ['modules', 'profiles', 'themes'];
     $is_extension = in_array($this->destination, $extension_destinations);
     $this->directory = $is_extension
