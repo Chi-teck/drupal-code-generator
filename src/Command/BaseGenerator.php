@@ -153,12 +153,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
 
     $this->generate();
 
-    /** @var \Psr\Log\LoggerInterface $logger */
-    $logger = $this->getHelper('logger_factory')->getLogger();
-    $logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
+    $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
 
     $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
-    $logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
+    $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
 
     // Render all assets.
     $renderer = $this->getHelper('renderer');
@@ -168,7 +166,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
         $asset->vars($this->vars);
       }
       $renderer->renderAsset($asset);
-      $logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
+      $this->logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
     }
 
     $dumped_assets = $this->getHelper('dumper')
@@ -176,7 +174,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
 
     $this->getHelper('result_printer')->printResult($dumped_assets);
 
-    $logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
+    $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
     return 0;
   }
 
