@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
-use DrupalCodeGenerator\Logger;
+use DrupalCodeGenerator\Logger\ConsoleLogger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * A test for console logger.
  */
-class LoggerTest extends TestCase {
+class ConsoleLoggerTest extends TestCase {
 
   /**
    * Test callback.
@@ -20,7 +20,7 @@ class LoggerTest extends TestCase {
   public function testLogger() {
 
     $output = new BufferedOutput(OutputInterface::VERBOSITY_NORMAL, TRUE);
-    $logger = new Logger($output);
+    $logger = new ConsoleLogger($output);
 
     $logger->emergency('Example');
     self::assertEquals("[\e[31;1memergency\e[39;22m] Example\n", $output->fetch());

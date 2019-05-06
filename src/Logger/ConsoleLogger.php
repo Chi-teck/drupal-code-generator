@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator;
+namespace DrupalCodeGenerator\Logger;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * PSR-3 compliant console logger.
  */
-class Logger extends AbstractLogger {
+class ConsoleLogger extends AbstractLogger {
 
   /**
    * Console output.

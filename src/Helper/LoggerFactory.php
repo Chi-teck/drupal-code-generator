@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
-use DrupalCodeGenerator\Logger;
+use DrupalCodeGenerator\Logger\ConsoleLogger;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -33,7 +33,7 @@ class LoggerFactory extends Helper implements IOAwareInterface, LoggerAwareInter
    */
   public function getLogger() :LoggerInterface {
     if (!$this->logger) {
-      $this->logger = new Logger($this->io);
+      $this->logger = new ConsoleLogger($this->io);
     }
     return $this->logger;
   }
