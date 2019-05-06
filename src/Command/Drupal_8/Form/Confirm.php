@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Form;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -21,13 +19,13 @@ class Confirm extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $this->collectDefault();
     $questions['class'] = new Question('Class', 'ExampleConfirmForm');
     $this->collectVars($questions);
 
     $this->defaultPermission = 'administer site configuration';
-    $this->routeInteraction($input, $output);
+    $this->routeInteraction();
 
     $this->addFile('src/Form/{class}.php')
       ->template('d8/form/confirm.twig');

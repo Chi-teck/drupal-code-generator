@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_7\CToolsPlugin;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
@@ -20,7 +18,7 @@ abstract class BasePlugin extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $questions = Utils::moduleQuestions();
     $questions['plugin_name'] = new Question('Plugin name', 'Example');
     $questions['plugin_name']->setValidator([Utils::class, 'validateRequired']);

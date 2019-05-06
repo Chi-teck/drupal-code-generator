@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -20,7 +18,7 @@ class Controller extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $vars = $this->collectDefault();
 
     $default_class = Utils::camelize($vars['machine_name']) . 'Controller';

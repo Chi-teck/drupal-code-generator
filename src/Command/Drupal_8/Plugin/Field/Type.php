@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Field;
 
 use DrupalCodeGenerator\Command\PluginGenerator;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Implements d8:plugin:field:type command.
@@ -19,7 +17,7 @@ class Type extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $vars = &$this->collectDefault();
 
     $vars['configurable_storage'] = $this->confirm('Make the field storage configurable?', FALSE);

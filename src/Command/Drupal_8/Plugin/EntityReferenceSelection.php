@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -20,7 +18,7 @@ class EntityReferenceSelection extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
 
     $this->collectDefault();
 

@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
 use DrupalCodeGenerator\Command\PluginGenerator;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Implements d8:plugin:rest-resource command.
@@ -20,7 +18,7 @@ class RestResource extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $this->collectDefault();
     $this->addFile('src/Plugin/rest/resource/{class}.php')
       ->template('d8/plugin/rest-resource.twig');

@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Field;
 
 use DrupalCodeGenerator\Command\PluginGenerator;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Implements d8:plugin:field:formatter command.
@@ -20,7 +18,7 @@ class Formatter extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['configurable'] = $this->confirm('Make the formatter configurable?', FALSE);
 

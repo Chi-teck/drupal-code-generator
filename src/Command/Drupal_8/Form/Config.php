@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Form;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -21,7 +19,7 @@ class Config extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $this->collectDefault();
     $questions['class'] = new Question('Class', 'SettingsForm');
 
@@ -29,7 +27,7 @@ class Config extends ModuleGenerator {
 
     $this->defaultPathPrefix = '/admin/config/system';
     $this->defaultPermission = 'administer site configuration';
-    $this->routeInteraction($input, $output);
+    $this->routeInteraction();
 
     $vars = &$this->vars;
 

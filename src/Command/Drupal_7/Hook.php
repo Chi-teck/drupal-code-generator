@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_7;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -19,7 +17,7 @@ class Hook extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $questions = Utils::moduleQuestions();
     $questions['hook_name'] = new Question('Hook name');
     $questions['hook_name']->setValidator(function ($value) {

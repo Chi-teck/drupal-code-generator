@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -21,7 +19,7 @@ class ThemeLibraries extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $questions['machine_name'] = new Question('Theme machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
 

@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Form;
 
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -29,7 +27,7 @@ trait RouteInteractionTrait {
   /**
    * Interacts with the user and builds route variables.
    */
-  protected function routeInteraction(InputInterface $input, OutputInterface $output) {
+  protected function routeInteraction() {
 
     $vars = &$this->vars;
 

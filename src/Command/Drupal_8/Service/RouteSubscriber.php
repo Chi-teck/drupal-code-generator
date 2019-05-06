@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Implements d8:service:route-subscriber command.
@@ -19,7 +17,7 @@ class RouteSubscriber extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $questions = Utils::moduleQuestions();
 
     $vars = &$this->collectVars($questions);

@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Implements d8:javascript command.
@@ -19,7 +17,7 @@ class Javascript extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $vars = $this->collectVars(Utils::moduleQuestions());
     $this->addFile()
       ->path('js/' . str_replace('_', '-', $vars['machine_name']) . '.js')

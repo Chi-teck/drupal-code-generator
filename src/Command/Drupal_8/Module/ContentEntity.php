@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -21,7 +19,7 @@ class ContentEntity extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $vars = &$this->collectDefault();
 
     $questions['package'] = new Question('Package', 'Custom');

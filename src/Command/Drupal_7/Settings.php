@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -20,7 +18,7 @@ class Settings extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $questions['db_driver'] = new Question('Database driver', 'mysql');
     $questions['db_driver']->setAutocompleterValues(['mysql', 'pgsql', 'sqlite']);
     $questions['db_name'] = new Question('Database name', 'drupal');

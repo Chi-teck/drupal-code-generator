@@ -151,6 +151,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    */
   protected function execute(InputInterface $input, OutputInterface $output) :int {
 
+    $this->generate();
+
     /** @var \Psr\Log\LoggerInterface $logger */
     $logger = $this->getHelper('logger_factory')->getLogger();
     $logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
@@ -176,6 +178,15 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
 
     $logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
     return 0;
+  }
+
+  /**
+   * Generates assets.
+   *
+   * @todo Make it abstract.
+   */
+  protected function generate() :void {
+
   }
 
   /**

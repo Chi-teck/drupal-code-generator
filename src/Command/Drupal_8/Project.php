@@ -25,7 +25,7 @@ class Project extends BaseGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
 
     $name_validator = function ($value) {
       if (!preg_match('#[^/]+/[^/]+$#i', $value)) {

@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Migrate;
 
 use DrupalCodeGenerator\Command\PluginGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 
 /**
@@ -22,7 +20,7 @@ class Source extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) :void {
+  protected function generate() :void {
     $this->collectDefault();
 
     $source_types = [
