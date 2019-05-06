@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -31,19 +30,17 @@ class Controller extends BaseGenerator {
 
     $vars = $this->collectVars($questions);
 
-    $di_question = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
-    if ($this->ask($di_question)) {
+    if ($this->confirm('Would you like to inject dependencies?', FALSE)) {
       $this->collectServices();
     }
 
-    $route_question = new ConfirmationQuestion('Would you like to create a route for this controller?');
-    if ($this->ask($route_question)) {
+    if ($this->confirm('Would you like to create a route for this controller?')) {
       $route_path = '/' . str_replace('_', '-', $vars['machine_name']) . '/example';
-      $route_questions['route_name'] = new Question('Route name', '{machine_name}.example');
-      $route_questions['route_path'] = new Question('Route path', $route_path);
-      $route_questions['route_title'] = new Question('Route title', 'Example');
-      $route_questions['route_permission'] = new Question('Route permission', 'access content');
-      $this->collectVars($route_questions, $vars);
+      $questions['route_name'] = new Question('Route name', '{machine_name}.example');
+      $questions['route_path'] = new Question('Route path', $route_path);
+      $questions['route_title'] = new Question('Route title', 'Example');
+      $questions['route_permission'] = new Question('Route permission', 'access content');
+      $this->collectVars($questions, $vars);
       $this->addFile()
         ->path('{machine_name}.routing.yml')
         ->template('d8/controller-route.twig')

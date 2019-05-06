@@ -2,13 +2,18 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\IOAwareInterface;
+use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Utils;
+use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Asset dumper form generators.
  */
-class Dumper extends Helper {
+class Dumper extends Helper implements IOAwareInterface {
+
+  use IOAwareTrait;
 
   /**
    * The file system utility.
@@ -79,7 +84,7 @@ class Dumper extends Helper {
             continue;
           }
           elseif ($this->replace === NULL) {
-            if (!$this->io()->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?")) {
+            if (!$this->io->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?")) {
               continue;
             }
           }

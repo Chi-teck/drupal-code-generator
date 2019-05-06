@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\IOAwareInterface;
+use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Logger;
-use DrupalCodeGenerator\OutputAwareInterface;
-use DrupalCodeGenerator\OutputAwareTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -13,9 +13,9 @@ use Symfony\Component\Console\Helper\Helper;
 /**
  * Defines console logger factory.
  */
-class LoggerFactory extends Helper implements OutputAwareInterface, LoggerAwareInterface {
+class LoggerFactory extends Helper implements IOAwareInterface, LoggerAwareInterface {
 
-  use OutputAwareTrait;
+  use IOAwareTrait;
   use LoggerAwareTrait;
 
   /**
@@ -33,7 +33,7 @@ class LoggerFactory extends Helper implements OutputAwareInterface, LoggerAwareI
    */
   public function getLogger() :LoggerInterface {
     if (!$this->logger) {
-      $this->logger = new Logger($this->output);
+      $this->logger = new Logger($this->io);
     }
     return $this->logger;
   }

@@ -4,8 +4,8 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Helper\Dumper;
-use DrupalCodeGenerator\Helper\OutputStyleFactory;
 use DrupalCodeGenerator\Helper\QuestionHelper;
+use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Tests\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -204,13 +204,12 @@ class DumperTest extends BaseTestCase {
    * Dumps assets into file system.
    */
   protected function dump(array $assets, ?bool $replace = NULL) :array {
+    $question_helper = new QuestionHelper();
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
-    $output_style = new OutputStyleFactory();
-    $output_style->setInput($this->input);
-    $output_style->setOutput($this->output);
-    $helper_set->set($output_style);
+    $io = new GeneratorStyle($this->input, $this->output, $question_helper);
     $dumper = new Dumper($this->filesystem, $replace);
+    $dumper->io($io);
     $dumper->setHelperSet($helper_set);
     return $dumper->dump($assets, $this->directory);
   }

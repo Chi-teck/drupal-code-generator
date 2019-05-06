@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator;
+namespace DrupalCodeGenerator\Style;
 
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use Symfony\Component\Console\Helper\Helper;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Output decorator for the DCG style guide.
  */
-class OutputStyle extends SymfonyStyle implements OutputStyleInterface {
+class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
 
   /**
    * Console input.

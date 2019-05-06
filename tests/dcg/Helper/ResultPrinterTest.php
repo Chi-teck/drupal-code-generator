@@ -3,8 +3,8 @@
 namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Asset;
-use DrupalCodeGenerator\Helper\OutputStyleFactory;
 use DrupalCodeGenerator\Helper\ResultPrinter;
+use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Tests\QuestionHelper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -28,18 +28,15 @@ class ResultPrinterTest extends TestCase {
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
 
-    $output_style = new OutputStyleFactory();
-    $output_style->setOutput($output);
-    $output_style->setInput($input);
-
-    $helper_set->set($output_style);
+    $question_helper = new QuestionHelper();
+    $io = new GeneratorStyle($input, $output, $question_helper);
 
     $printer = new ResultPrinter();
     $printer->setHelperSet($helper_set);
 
     self::assertEquals('result_printer', $printer->getName());
 
-    $printer->setInput($input);
+    $printer->io($io);
 
     $assets[] = (new Asset())->path('bbb/eee/ggg.php');
     $assets[] = (new Asset())->path('aaa/ddd.txt')->content('123');

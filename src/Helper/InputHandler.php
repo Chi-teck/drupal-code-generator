@@ -2,14 +2,19 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\IOAwareInterface;
+use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Utils;
+use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Generator input handler.
  */
-class InputHandler extends Helper {
+class InputHandler extends Helper implements IOAwareInterface {
+
+  use IOAwareTrait;
 
   /**
    * Asked questions.
@@ -81,7 +86,7 @@ class InputHandler extends Helper {
       }
       $this->setQuestionDefault($question, $default_value);
 
-      $vars[$name] = $this->io()->askQuestion($question);
+      $vars[$name] = $this->io->askQuestion($question);
     }
 
     return $vars;

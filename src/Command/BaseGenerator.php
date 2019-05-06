@@ -4,8 +4,9 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
-use DrupalCodeGenerator\InputAwareInterface;
-use DrupalCodeGenerator\OutputAwareInterface;
+use DrupalCodeGenerator\IOAwareInterface;
+use DrupalCodeGenerator\IOAwareTrait;
+use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Utils;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -19,8 +20,9 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Base class for all generators.
  */
-abstract class BaseGenerator extends Command implements GeneratorInterface, LoggerAwareInterface {
+abstract class BaseGenerator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
 
+  use IOAwareTrait;
   use LoggerAwareTrait;
 
   /**
@@ -87,13 +89,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, Logg
   protected $vars = [];
 
   /**
-   * Output style.
-   *
-   * @var \DrupalCodeGenerator\OutputStyle
-   */
-  protected $io;
-
-  /**
    * {@inheritdoc}
    */
   protected function configure():void {
@@ -127,22 +122,17 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, Logg
    */
   protected function initialize(InputInterface $input, OutputInterface $output) :void {
 
+    $this->io = new GeneratorStyle($input, $output, $this->getHelper('question'));
     foreach ($this->getHelperSet() as $helper) {
-      if ($helper instanceof InputAwareInterface) {
-        $helper->setInput($input);
-      }
-      if ($helper instanceof OutputAwareInterface) {
-        $helper->setOutput($output);
+      if ($helper instanceof IOAwareInterface) {
+        $helper->io($this->io);
       }
     }
-
-    $this->setLogger($this->getHelper('logger_factory')->getLogger());
 
     $this->getHelperSet()->setCommand($this);
 
     $this->getHelper('renderer')->addPath($this->templatePath);
-
-    $this->io = $this->getHelper('output_style_factory')->getOutputStyle();
+    $this->setLogger($this->getHelper('logger_factory')->getLogger());
 
     $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
 
@@ -280,6 +270,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, Logg
     $key = mt_rand();
     $answers = $this->getHelper('input_handler')->collectVars([$key => $question], $vars);
     return $answers[$key];
+  }
+
+  /**
+   * Asks for confirmation.
+   */
+  protected function confirm(string $question, bool $default = TRUE) :bool {
+    return $this->io->confirm($question, $default);
   }
 
   /**
