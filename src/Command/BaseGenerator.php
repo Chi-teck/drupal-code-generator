@@ -255,25 +255,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   }
 
   /**
-   * Asks the user a single question and returns the answer.
-   *
-   * @param \Symfony\Component\Console\Question\Question $question
-   *   A question to ask.
-   * @param array $vars
-   *   Array of predefined template variables.
-   *
-   * @return string|null
-   *   The answer.
-   *
-   * @see \DrupalCodeGenerator\InputHandler::collectVars()
-   */
-  protected function ask(Question $question, array $vars = []) :?string {
-    $key = mt_rand();
-    $answers = $this->getHelper('input_handler')->collectVars([$key => $question], $vars);
-    return $answers[$key];
-  }
-
-  /**
    * Asks for confirmation.
    */
   protected function confirm(string $question, bool $default = TRUE) :bool {
@@ -353,7 +334,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
       $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
       $question->setValidator([Utils::class, 'validateServiceName']);
       $question->setAutocompleterValues($service_ids);
-      $service = $this->ask($question);
+      $service = $this->io()->askQuestion($question);
       if (!$service) {
         break;
       }

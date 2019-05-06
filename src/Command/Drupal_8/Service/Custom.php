@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -36,8 +35,7 @@ class Custom extends ModuleGenerator {
 
     $this->collectVars($questions);
 
-    $di_question = new ConfirmationQuestion('Would you like to inject dependencies?');
-    if ($this->ask($di_question)) {
+    if ($this->confirm('Would you like to inject dependencies?')) {
       $this->collectServices();
     }
 

@@ -31,8 +31,7 @@ class Block extends PluginGenerator {
 
     $this->collectVars($questions);
 
-    $di_question = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
-    if ($this->ask($di_question)) {
+    if ($this->confirm('Would you like to inject dependencies?', FALSE)) {
       $this->collectServices();
     }
 
