@@ -2,17 +2,15 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Form;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:form:config command.
  */
-class Config extends BaseGenerator {
+class Config extends ModuleGenerator {
 
   use RouteInteractionTrait;
 
@@ -24,8 +22,7 @@ class Config extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-
-    $questions = Utils::moduleQuestions();
+    $this->collectDefault();
     $questions['class'] = new Question('Class', 'SettingsForm');
 
     $this->collectVars($questions);
@@ -37,27 +34,23 @@ class Config extends BaseGenerator {
     $vars = &$this->vars;
 
     if ($vars['route']) {
-      $link_question = new ConfirmationQuestion('Would you like to create a menu link for this route?', TRUE);
-      $vars['link'] = $this->ask($link_question);
-      if ($vars['link']) {
+      if ($vars['link'] = $this->confirm('Would you like to create a menu link for this route?')) {
 
-        $link_questions['link_title'] = new Question('Link title', $vars['route_title']);
-        $link_questions['link_description'] = new Question('Link description');
+        $questions['link_title'] = new Question('Link title', $vars['route_title']);
+        $questions['link_description'] = new Question('Link description');
         // Try to guess parent menu item using route path.
         if (preg_match('#^/admin/config/([^/]+)/[^/]+$#', $vars['route_path'], $matches)) {
-          $link_questions['link_parent'] = new Question('Parent menu item', 'system.admin_config_' . $matches[1]);
+          $questions['link_parent'] = new Question('Parent menu item', 'system.admin_config_' . $matches[1]);
         }
 
-        $this->collectVars($link_questions);
-        $this->addFile()
-          ->path('{machine_name}.links.menu.yml')
+        $this->collectVars($questions);
+        $this->addFile('{machine_name}.links.menu.yml')
           ->template('d8/form/links.menu.twig')
           ->action('append');
       }
     }
 
-    $this->addFile()
-      ->path('src/Form/{class}.php')
+    $this->addFile('src/Form/{class}.php')
       ->template('d8/form/config.twig');
 
   }

@@ -2,17 +2,16 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:module:standard command.
  */
-class Standard extends BaseGenerator {
+class Standard extends ModuleGenerator {
 
   protected $name = 'd8:module:standard';
   protected $description = 'Generates standard Drupal 8 module';
@@ -23,7 +22,8 @@ class Standard extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions();
+    $this->collectDefault();
+
     $questions['description'] = new Question('Module description', 'The description.');
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
@@ -47,44 +47,37 @@ class Standard extends BaseGenerator {
     $class_prefix = Utils::camelize($vars['name']);
 
     // Additional files.
-    $option_questions['install_file'] = new ConfirmationQuestion('Would you like to create install file?', TRUE);
-    $option_questions['libraries.yml'] = new ConfirmationQuestion('Would you like to create libraries.yml file?', TRUE);
-    $option_questions['permissions.yml'] = new ConfirmationQuestion('Would you like to create permissions.yml file?', TRUE);
-    $option_questions['event_subscriber'] = new ConfirmationQuestion('Would you like to create event subscriber?', TRUE);
-    $option_questions['block_plugin'] = new ConfirmationQuestion('Would you like to create block plugin?', TRUE);
-    $option_questions['controller'] = new ConfirmationQuestion('Would you like to create a controller?', TRUE);
-    $option_questions['settings_form'] = new ConfirmationQuestion('Would you like to create settings form?', TRUE);
-
-    $options = $this->collectVars($option_questions);
+    $options['install_file'] = $this->confirm('Would you like to create install file?', TRUE);
+    $options['libraries.yml'] = $this->confirm('Would you like to create libraries.yml file?', TRUE);
+    $options['permissions.yml'] = $this->confirm('Would you like to create permissions.yml file?', TRUE);
+    $options['event_subscriber'] = $this->confirm('Would you like to create event subscriber?', TRUE);
+    $options['block_plugin'] = $this->confirm('Would you like to create block plugin?', TRUE);
+    $options['controller'] = $this->confirm('Would you like to create a controller?', TRUE);
+    $options['settings_form'] = $this->confirm('Would you like to create settings form?', TRUE);
 
     if ($options['install_file']) {
-      $this->addFile()
-        ->path($prefix . '.install')
+      $this->addFile($prefix . '.install')
         ->template('d8/install.twig');
     }
 
     if ($options['libraries.yml']) {
-      $this->addFile()
-        ->path($prefix . '.libraries.yml')
+      $this->addFile($prefix . '.libraries.yml')
         ->template('d8/yml/module-libraries.twig');
     }
 
     if ($options['permissions.yml']) {
-      $this->addFile()
-        ->path($prefix . '.permissions.yml')
+      $this->addFile($prefix . '.permissions.yml')
         ->template('d8/yml/permissions.twig');
     }
 
     if ($options['event_subscriber']) {
       $subscriber_class = $class_prefix . 'Subscriber';
 
-      $this->addFile()
-        ->path("{machine_name}/src/EventSubscriber/$subscriber_class.php")
+      $this->addFile("{machine_name}/src/EventSubscriber/$subscriber_class.php")
         ->template('d8/service/event-subscriber.twig')
         ->vars($vars + ['class' => $subscriber_class]);
 
-      $this->addFile()
-        ->path($prefix . '.services.yml')
+      $this->addFile($prefix . '.services.yml')
         ->template('d8/service/event-subscriber.services.twig')
         ->vars($vars + ['class' => $subscriber_class]);
     }
@@ -95,8 +88,7 @@ class Standard extends BaseGenerator {
       $block_vars['category'] = $vars['name'];
       $block_vars['class'] = 'ExampleBlock';
 
-      $this->addFile()
-        ->path('{machine_name}/src/Plugin/Block/' . $block_vars['class'] . '.php')
+      $this->addFile('{machine_name}/src/Plugin/Block/' . $block_vars['class'] . '.php')
         ->template('d8/plugin/block.twig')
         ->vars($block_vars + $vars);
     }
@@ -109,8 +101,7 @@ class Standard extends BaseGenerator {
         'services' => [],
       ];
 
-      $this->addFile()
-        ->path("{machine_name}/src/Controller/$controller_class.php")
+      $this->addFile("{machine_name}/src/Controller/$controller_class.php")
         ->template('d8/controller.twig')
         ->vars($controller_vars + $vars);
 
@@ -122,8 +113,7 @@ class Standard extends BaseGenerator {
         'class' => $controller_class,
       ];
 
-      $this->addFile()
-        ->path($prefix . '.routing.yml')
+      $this->addFile($prefix . '.routing.yml')
         ->template('d8/controller-route.twig')
         ->vars($routing_vars + $vars)
         ->action('append');
@@ -136,8 +126,7 @@ class Standard extends BaseGenerator {
         'form_id' => $vars['machine_name'] . '_settings',
         'class' => $form_class,
       ];
-      $this->addFile()
-        ->path('{machine_name}/src/Form/SettingsForm.php')
+      $this->addFile('{machine_name}/src/Form/SettingsForm.php')
         ->template('d8/form/config.twig')
         ->vars($form_vars + $vars);
 
@@ -148,8 +137,7 @@ class Standard extends BaseGenerator {
         'route_permission' => 'administer ' . $vars['machine_name'] . ' configuration',
         'class' => $form_class,
       ];
-      $this->addFile()
-        ->path($prefix . '.routing.yml')
+      $this->addFile($prefix . '.routing.yml')
         ->template('d8/form/routing.twig')
         ->vars($routing_vars + $vars)
         ->action('append');

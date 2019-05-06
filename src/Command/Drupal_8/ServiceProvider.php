@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Implements d8:service-provider command.
  */
-class ServiceProvider extends BaseGenerator {
+class ServiceProvider extends ModuleGenerator {
 
   protected $name = 'd8:service-provider';
   protected $description = 'Generates a service provider';

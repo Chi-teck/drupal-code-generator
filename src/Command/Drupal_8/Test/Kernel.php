@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Test;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:test:kernel command.
  */
-class Kernel extends BaseGenerator {
+class Kernel extends ModuleGenerator {
 
   protected $name = 'd8:test:kernel';
   protected $description = 'Generates a kernel based test';

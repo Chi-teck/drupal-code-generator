@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:plugin:constraint command.
  */
-class Constraint extends BaseGenerator {
+class Constraint extends ModuleGenerator {
 
   protected $name = 'd8:plugin:constraint';
   protected $description = 'Generates constraint plugin';
@@ -22,7 +22,8 @@ class Constraint extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
+    $this->collectDefault();
+    $questions = Utils::pluginQuestions();
 
     $default_plugin_id = function (array $vars) {
       // Unlike other plugin types. Constraint IDs use camel case.
@@ -31,7 +32,7 @@ class Constraint extends BaseGenerator {
     $questions['plugin_id'] = new Question('Constraint ID', $default_plugin_id);
     $plugin_id_validator = function ($value) {
       if (!preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/i', $value)) {
-        throw new \UnexpectedValueException('The value is not correct machine name.');
+        throw new \UnexpectedValueException('The value is not correct constraint ID.');
       }
       return $value;
     };
@@ -55,12 +56,10 @@ class Constraint extends BaseGenerator {
     $vars = &$this->collectVars($questions);
     $vars['input_type'] = array_search($vars['input_type'], $input_types);
 
-    $this->addFile()
-      ->path('src/Plugin/Validation/Constraint/{class}.php')
+    $this->addFile('src/Plugin/Validation/Constraint/{class}.php')
       ->template('d8/plugin/constraint.twig');
 
-    $this->addFile()
-      ->path('src/Plugin/Validation/Constraint/{class}Validator.php')
+    $this->addFile('src/Plugin/Validation/Constraint/{class}Validator.php')
       ->template('d8/plugin/constraint-validator.twig');
   }
 

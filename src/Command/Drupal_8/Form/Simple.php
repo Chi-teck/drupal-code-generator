@@ -2,8 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Form;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -11,7 +10,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:form:simple command.
  */
-class Simple extends BaseGenerator {
+class Simple extends ModuleGenerator {
 
   use RouteInteractionTrait;
 
@@ -23,16 +22,15 @@ class Simple extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
+    $this->collectDefault();
 
-    $questions = Utils::moduleQuestions();
     $questions['class'] = new Question('Class', 'ExampleForm');
     $this->collectVars($questions);
 
     $this->defaultPermission = 'access content';
     $this->routeInteraction($input, $output);
 
-    $this->addFile()
-      ->path('src/Form/{class}.php')
+    $this->addFile('src/Form/{class}.php')
       ->template('d8/form/simple.twig');
   }
 

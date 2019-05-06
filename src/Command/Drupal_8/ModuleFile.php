@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Implements d8:module-file command.
  */
-class ModuleFile extends BaseGenerator {
+class ModuleFile extends ModuleGenerator {
 
   protected $name = 'd8:module-file';
   protected $description = 'Generates a module file';

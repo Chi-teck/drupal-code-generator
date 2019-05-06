@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:service:param-converter command.
  */
-class ParamConverter extends BaseGenerator {
+class ParamConverter extends ModuleGenerator {
 
   protected $name = 'd8:service:param-converter';
   protected $description = 'Generates a param converter service';

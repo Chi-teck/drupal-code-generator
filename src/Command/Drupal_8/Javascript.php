@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Implements d8:javascript command.
  */
-class Javascript extends BaseGenerator {
+class Javascript extends ModuleGenerator {
 
   protected $name = 'd8:javascript';
   protected $description = 'Generates Drupal 8 JavaScript file';

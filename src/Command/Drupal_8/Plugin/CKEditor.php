@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Implements d8:plugin:ckeditor command.
  */
-class CKEditor extends BaseGenerator {
+class CKEditor extends PluginGenerator {
 
   protected $name = 'd8:plugin:ckeditor';
   protected $description = 'Generates CKEditor plugin';
@@ -21,9 +21,7 @@ class CKEditor extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
-
-    $vars = &$this->collectVars($questions);
+    $vars = &$this->collectDefault();
 
     $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
 
@@ -31,20 +29,16 @@ class CKEditor extends BaseGenerator {
     $vars['short_plugin_id'] = str_replace('_', '-', $unprefixed_plugin_id);
     $vars['command_name'] = Utils::camelize($unprefixed_plugin_id, FALSE);
 
-    $this->addFile()
-      ->path('src/Plugin/CKEditorPlugin/{class}.php')
+    $this->addFile('src/Plugin/CKEditorPlugin/{class}.php')
       ->template('d8/plugin/_ckeditor/ckeditor.twig');
 
-    $this->addFile()
-      ->path('js/plugins/{short_plugin_id}/plugin.js')
+    $this->addFile('js/plugins/{short_plugin_id}/plugin.js')
       ->template('d8/plugin/_ckeditor/plugin.twig');
 
-    $this->addFile()
-      ->path('js/plugins/{short_plugin_id}/dialogs/{short_plugin_id}.js')
+    $this->addFile('js/plugins/{short_plugin_id}/dialogs/{short_plugin_id}.js')
       ->template('d8/plugin/_ckeditor/dialog.twig');
 
-    $this->addFile()
-      ->path('js/plugins/{short_plugin_id}/icons/{short_plugin_id}.png')
+    $this->addFile('js/plugins/{short_plugin_id}/icons/{short_plugin_id}.png')
       ->content(file_get_contents($this->templatePath . '/d8/plugin/_ckeditor/icon.png'))
       ->action('replace');
   }

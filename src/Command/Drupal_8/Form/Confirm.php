@@ -2,8 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Form;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -11,7 +10,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:form:confirm command.
  */
-class Confirm extends BaseGenerator {
+class Confirm extends ModuleGenerator {
 
   use RouteInteractionTrait;
 
@@ -23,16 +22,14 @@ class Confirm extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-
-    $questions = Utils::moduleQuestions();
+    $this->collectDefault();
     $questions['class'] = new Question('Class', 'ExampleConfirmForm');
     $this->collectVars($questions);
 
     $this->defaultPermission = 'administer site configuration';
     $this->routeInteraction($input, $output);
 
-    $this->addFile()
-      ->path('src/Form/{class}.php')
+    $this->addFile('src/Form/{class}.php')
       ->template('d8/form/confirm.twig');
   }
 

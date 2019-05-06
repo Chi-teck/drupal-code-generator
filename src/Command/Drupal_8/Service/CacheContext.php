@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:service:cache-context command.
  */
-class CacheContext extends BaseGenerator {
+class CacheContext extends ModuleGenerator {
 
   protected $name = 'd8:service:cache-context';
   protected $description = 'Generates a cache context service';

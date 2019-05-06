@@ -2,30 +2,27 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Field;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 /**
  * Implements d8:plugin:field:formatter command.
  */
-class Formatter extends BaseGenerator {
+class Formatter extends PluginGenerator {
 
   protected $name = 'd8:plugin:field:formatter';
   protected $description = 'Generates field formatter plugin';
   protected $alias = 'field-formatter';
 
+  protected $classSuffix = 'Formatter';
+
   /**
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions();
-    $questions += Utils::pluginQuestions('Formatter');
-    $questions['configurable'] = new ConfirmationQuestion('Make the formatter configurable?', FALSE);
-
-    $vars = $this->collectVars($questions);
+    $vars = &$this->collectDefault();
+    $vars['configurable'] = $this->confirm('Make the formatter configurable?', FALSE);
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldFormatter/{class}.php')

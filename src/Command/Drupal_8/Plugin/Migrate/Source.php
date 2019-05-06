@@ -2,30 +2,28 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Migrate;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:plugin:migrate:source command.
  */
-class Source extends BaseGenerator {
+class Source extends PluginGenerator {
 
   protected $name = 'd8:plugin:migrate:source';
   protected $description = 'Generates migrate source plugin';
   protected $alias = 'migrate-source';
+  protected $pluginLabelQuestion = FALSE;
+  protected $pluginIdDefault = '{machine_name}_example';
 
   /**
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions();
-    $questions['plugin_id'] = new Question('Plugin ID', '{machine_name}_example');
-    $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
-    $questions['class'] = Utils::pluginClassQuestion();
+    $this->collectDefault();
 
     $source_types = [
       'sql' => 'SQL',
@@ -35,11 +33,9 @@ class Source extends BaseGenerator {
     $questions['source_type'] = new ChoiceQuestion('Source type', $choices);
 
     $vars = &$this->collectVars($questions);
-
     $vars['base_class'] = $vars['source_type'] == 'sql' ? 'SqlBase' : 'SourcePluginBase';
 
-    $this->addFile()
-      ->path('src/Plugin/migrate/source/{class}.php')
+    $this->addFile('src/Plugin/migrate/source/{class}.php')
       ->template('d8/plugin/migrate/source.twig');
   }
 

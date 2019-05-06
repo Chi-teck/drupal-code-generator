@@ -248,7 +248,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    *
    * @see \DrupalCodeGenerator\InputHandler::collectVars()
    */
-  protected function &collectVars(array $questions, array $vars = []) : array {
+  protected function &collectVars(array $questions, array $vars = []) :array {
+    $vars = $vars ?: $this->vars;
     $this->vars += $this->getHelper('input_handler')->collectVars($questions, $vars);
     return $this->vars;
   }
@@ -388,6 +389,13 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   protected static function getServiceDefinitions() :array {
     $data_encoded = file_get_contents(Application::getRoot() . '/resources/service-definitions.json');
     return json_decode($data_encoded, TRUE);
+  }
+
+  /**
+   * Collects default questions.
+   */
+  protected function &collectDefault() {
+    return $this->collectVars([]);
   }
 
 }

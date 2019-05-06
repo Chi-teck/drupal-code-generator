@@ -2,17 +2,16 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:module:content-entity command.
  */
-class ContentEntity extends BaseGenerator {
+class ContentEntity extends ModuleGenerator {
 
   protected $name = 'd8:module:content-entity';
   protected $description = 'Generates content entity module';
@@ -23,12 +22,11 @@ class ContentEntity extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions();
+    $vars = &$this->collectDefault();
 
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
     $questions['entity_type_label'] = new Question('Entity type label', '{name}');
-
     $questions['entity_type_id'] = new Question(
       'Entity type ID',
       function ($vars) {
@@ -41,22 +39,21 @@ class ContentEntity extends BaseGenerator {
         return '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']);
       }
     );
+    $this->collectVars($questions);
 
-    $questions['fieldable'] = new ConfirmationQuestion('Make the entity type fieldable?', TRUE);
-    $questions['revisionable'] = new ConfirmationQuestion('Make the entity type revisionable?', FALSE);
-    $questions['translatable'] = new ConfirmationQuestion('Make the entity type translatable?', FALSE);
-    $questions['bundle'] = new ConfirmationQuestion('The entity type has bundle?', FALSE);
-    $questions['template'] = new ConfirmationQuestion('Create entity template?', TRUE);
-    $questions['access_controller'] = new ConfirmationQuestion('Create CRUD permissions?', FALSE);
-    $questions['title_base_field'] = new ConfirmationQuestion('Add "title" base field?', TRUE);
-    $questions['status_base_field'] = new ConfirmationQuestion('Add "status" base field?', TRUE);
-    $questions['created_base_field'] = new ConfirmationQuestion('Add "created" base field?', TRUE);
-    $questions['changed_base_field'] = new ConfirmationQuestion('Add "changed" base field?', TRUE);
-    $questions['author_base_field'] = new ConfirmationQuestion('Add "author" base field?', TRUE);
-    $questions['description_base_field'] = new ConfirmationQuestion('Add "description" base field?', TRUE);
-    $questions['rest_configuration'] = new ConfirmationQuestion('Create REST configuration for the entity?', FALSE);
-
-    $vars = &$this->collectVars($questions);
+    $vars['fieldable'] = $this->confirm('Make the entity type fieldable?');
+    $vars['revisionable'] = $this->confirm('Make the entity type revisionable?', FALSE);
+    $vars['translatable'] = $this->confirm('Make the entity type translatable?', FALSE);
+    $vars['bundle'] = $this->confirm('The entity type has bundle?', FALSE);
+    $vars['template'] = $this->confirm('Create entity template?');
+    $vars['access_controller'] = $this->confirm('Create CRUD permissions?', FALSE);
+    $vars['title_base_field'] = $this->confirm('Add "title" base field?');
+    $vars['status_base_field'] = $this->confirm('Add "status" base field?');
+    $vars['created_base_field'] = $this->confirm('Add "created" base field?');
+    $vars['changed_base_field'] = $this->confirm('Add "changed" base field?');
+    $vars['author_base_field'] = $this->confirm('Add "author" base field?');
+    $vars['description_base_field'] = $this->confirm('Add "description" base field?');
+    $vars['rest_configuration'] = $this->confirm('Create REST configuration for the entity?', FALSE);
 
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));

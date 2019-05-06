@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:yml:module-info command.
  */
-class ModuleInfo extends BaseGenerator {
+class ModuleInfo extends ModuleGenerator {
 
   protected $name = 'd8:yml:module-info';
   protected $description = 'Generates a module info yml file';

@@ -2,32 +2,28 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Field;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 /**
  * Implements d8:plugin:field:type command.
  */
-class Type extends BaseGenerator {
+class Type extends PluginGenerator {
 
   protected $name = 'd8:plugin:field:type';
   protected $description = 'Generates field type plugin';
   protected $alias = 'field-type';
+  protected $classSuffix = 'Item';
 
   /**
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions();
-    $questions += Utils::pluginQuestions('Item');
+    $vars = &$this->collectDefault();
 
-    $questions['configurable_storage'] = new ConfirmationQuestion('Make the field storage configurable?', FALSE);
-    $questions['configurable_instance'] = new ConfirmationQuestion('Make the field instance configurable?', FALSE);
-
-    $this->collectVars($questions);
+    $vars['configurable_storage'] = $this->confirm('Make the field storage configurable?', FALSE);
+    $vars['configurable_instance'] = $this->confirm('Make the field instance configurable?', FALSE);
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldType/{class}.php')

@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 /**
  * Implements d8:plugin:filter command.
  */
-class Filter extends BaseGenerator {
+class Filter extends PluginGenerator {
 
   protected $name = 'd8:plugin:filter';
   protected $description = 'Generates filter plugin';
@@ -21,7 +21,7 @@ class Filter extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
+    $this->collectDefault();
 
     $filter_types = [
       'TYPE_HTML_RESTRICTOR' => 'HTML restrictor',
@@ -35,12 +35,10 @@ class Filter extends BaseGenerator {
     $vars = &$this->collectVars($questions);
     $vars['filter_type'] = array_search($vars['filter_type'], $filter_types);
 
-    $this->addFile()
-      ->path('src/Plugin/Filter/{class}.php')
+    $this->addFile('src/Plugin/Filter/{class}.php')
       ->template('d8/plugin/filter.twig');
 
-    $this->addFile()
-      ->path('config/schema/{machine_name}.schema.yml')
+    $this->addFile('config/schema/{machine_name}.schema.yml')
       ->template('d8/plugin/filter-schema.twig')
       ->action('append');
   }

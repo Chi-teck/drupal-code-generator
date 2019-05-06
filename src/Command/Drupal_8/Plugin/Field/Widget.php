@@ -2,31 +2,26 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Field;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 /**
  * Implements d8:plugin:field:widget command.
  */
-class Widget extends BaseGenerator {
+class Widget extends PluginGenerator {
 
   protected $name = 'd8:plugin:field:widget';
   protected $description = 'Generates field widget plugin';
   protected $alias = 'field-widget';
+  protected $classSuffix = 'Widget';
 
   /**
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions();
-    $questions += Utils::pluginQuestions('Widget');
-
-    $questions['configurable'] = new ConfirmationQuestion('Make the widget configurable?', FALSE);
-
-    $vars = $this->collectVars($questions);
+    $vars = &$this->collectDefault();
+    $vars['configurable'] = $this->confirm('Make the widget configurable?', FALSE);
 
     $this->addFile()
       ->path('src/Plugin/Field/FieldWidget/{class}.php')

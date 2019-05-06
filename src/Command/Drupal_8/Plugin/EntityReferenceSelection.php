@@ -2,17 +2,16 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:plugin:entity-reference-selection command.
  */
-class EntityReferenceSelection extends BaseGenerator {
+class EntityReferenceSelection extends ModuleGenerator {
 
   protected $name = 'd8:plugin:entity-reference-selection';
   protected $description = 'Generates entity reference selection plugin';
@@ -23,6 +22,8 @@ class EntityReferenceSelection extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
 
+    $this->collectDefault();
+
     $base_classes = [
       'comment' => 'Drupal\comment\Plugin\EntityReferenceSelection\CommentSelection',
       'file' => 'Drupal\file\Plugin\EntityReferenceSelection\FileSelection',
@@ -30,8 +31,6 @@ class EntityReferenceSelection extends BaseGenerator {
       'taxonomy_term' => 'Drupal\taxonomy\Plugin\EntityReferenceSelection\TermSelection',
       'user' => 'Drupal\user\Plugin\EntityReferenceSelection\UserSelection',
     ];
-
-    $questions = Utils::moduleQuestions();
 
     $questions['entity_type'] = new Question('Entity type that can be referenced by this plugin', 'node');
     $questions['entity_type']->setValidator([Utils::class, 'validateMachineName']);
@@ -48,24 +47,18 @@ class EntityReferenceSelection extends BaseGenerator {
     };
     $questions['class'] = new Question('Plugin class', $default_class);
 
-    $questions['configurable'] = new ConfirmationQuestion('Provide additional plugin configuration?', FALSE);
     $vars = &$this->collectVars($questions);
+    $vars['configurable'] = $this->confirm('Provide additional plugin configuration?', FALSE);
 
-    if (isset($base_classes[$vars['entity_type']])) {
-      $vars['base_class_full'] = $base_classes[$vars['entity_type']];
-    }
-    else {
-      $vars['base_class_full'] = 'Drupal\Core\Entity\Plugin\EntityReferenceSelection\DefaultSelection';
-    }
+    $vars['base_class_full'] = $base_classes[$vars['entity_type']] ??
+      'Drupal\Core\Entity\Plugin\EntityReferenceSelection\DefaultSelection';
 
     $vars['base_class'] = explode('EntityReferenceSelection\\', $vars['base_class_full'])[1];
 
-    $this->addFile()
-      ->path('src/Plugin/EntityReferenceSelection/{class}.php')
+    $this->addFile('src/Plugin/EntityReferenceSelection/{class}.php')
       ->template('d8/plugin/entity-reference-selection.twig');
 
-    $this->addFile()
-      ->path('config/schema/{machine_name}.schema.yml')
+    $this->addFile('config/schema/{machine_name}.schema.yml')
       ->template('d8/plugin/entity-reference-selection-schema.twig')
       ->action('append');
   }

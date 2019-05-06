@@ -2,15 +2,14 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Implements d8:plugin:condition command.
  */
-class Condition extends BaseGenerator {
+class Condition extends PluginGenerator {
 
   protected $name = 'd8:plugin:condition';
   protected $description = 'Generates condition plugin';
@@ -20,16 +19,12 @@ class Condition extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
+    $this->collectDefault();
 
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('src/Plugin/Condition/{class}.php')
+    $this->addFile('src/Plugin/Condition/{class}.php')
       ->template('d8/plugin/condition.twig');
 
-    $this->addFile()
-      ->path('config/schema/{machine_name}.schema.yml')
+    $this->addFile('config/schema/{machine_name}.schema.yml')
       ->template('d8/plugin/condition-schema.twig')
       ->action('append');
   }

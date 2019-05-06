@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:field command.
  */
-class Field extends BaseGenerator {
+class Field extends ModuleGenerator {
 
   protected $name = 'd8:field';
   protected $description = 'Generates a field';

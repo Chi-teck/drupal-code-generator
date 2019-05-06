@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:controller command.
  */
-class Controller extends BaseGenerator {
+class Controller extends ModuleGenerator {
 
   protected $name = 'd8:controller';
   protected $description = 'Generates a controller';
@@ -21,14 +21,12 @@ class Controller extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions();
+    $vars = $this->collectDefault();
 
-    $default_class = function ($vars) {
-      return Utils::camelize($vars['machine_name']) . 'Controller';
-    };
+    $default_class = Utils::camelize($vars['machine_name']) . 'Controller';
     $questions['class'] = new Question('Class', $default_class);
 
-    $vars = $this->collectVars($questions);
+    $this->collectVars($questions);
 
     if ($this->confirm('Would you like to inject dependencies?', FALSE)) {
       $this->collectServices();

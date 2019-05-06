@@ -2,8 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
@@ -12,22 +11,22 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:plugin:block command.
  */
-class Block extends BaseGenerator {
+class Block extends PluginGenerator {
 
   protected $name = 'd8:plugin:block';
   protected $description = 'Generates block plugin';
   protected $alias = 'block';
+  protected $classSuffix = 'Block';
+  protected $pluginLabelQuestion = 'Block admin label';
 
   /**
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
+    $vars = &$this->collectDefault();
 
-    $questions = Utils::moduleQuestions();
-    $questions += Utils::pluginQuestions('Block');
-    $questions['plugin_label'] = new Question('Block admin label', 'Example');
-    $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
     $questions['category'] = new Question('Block category', 'Custom');
+
     $questions['configurable'] = new ConfirmationQuestion('Make the block configurable?', FALSE);
 
     $this->collectVars($questions);

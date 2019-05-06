@@ -2,16 +2,14 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Views;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\PluginGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 /**
  * Implements d8:plugin:views:field command.
  */
-class Field extends BaseGenerator {
+class Field extends PluginGenerator {
 
   protected $name = 'd8:plugin:views:field';
   protected $description = 'Generates views field plugin';
@@ -21,22 +19,18 @@ class Field extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
-    $questions['configurable'] = new ConfirmationQuestion('Make the plugin configurable?', FALSE);
-    $vars = $this->collectVars($questions);
+    $vars = &$this->collectDefault();
+    $vars['configurable'] = $this->confirm('Make the plugin configurable?', FALSE);
 
-    $di_question = new ConfirmationQuestion('Would you like to inject dependencies?', FALSE);
-    if ($this->ask($di_question)) {
+    if ($this->confirm('Would you like to inject dependencies?', FALSE)) {
       $this->collectServices();
     }
 
-    $this->addFile()
-      ->path('src/Plugin/views/field/{class}.php')
+    $this->addFile('src/Plugin/views/field/{class}.php')
       ->template('d8/plugin/views/field.twig');
 
     if ($vars['configurable']) {
-      $this->addFile()
-        ->path('config/schema/{machine_name}.views.schema.yml')
+      $this->addFile('config/schema/{machine_name}.views.schema.yml')
         ->template('d8/plugin/views/field-schema.twig')
         ->action('append');
     }

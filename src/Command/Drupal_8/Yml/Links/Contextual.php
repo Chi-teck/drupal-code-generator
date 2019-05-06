@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml\Links;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:yml:links:contextual command.
  */
-class Contextual extends BaseGenerator {
+class Contextual extends ModuleGenerator {
 
   protected $name = 'd8:yml:links:contextual';
   protected $description = 'Generates links.contextual yml file';

@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements d8:module:configuration-entity command.
  */
-class ConfigurationEntity extends BaseGenerator {
+class ConfigurationEntity extends ModuleGenerator {
 
   protected $name = 'd8:module:configuration-entity';
   protected $description = 'Generates configuration entity module';
@@ -22,13 +22,14 @@ class ConfigurationEntity extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function interact(InputInterface $input, OutputInterface $output) :void {
-    $questions = Utils::moduleQuestions();
+    $this->collectDefault();
+
     $questions['package'] = new Question('Package', 'Custom');
     $questions['dependencies'] = new Question('Dependencies (comma separated)');
     $questions['entity_type_label'] = new Question('Entity type label', '{name}');
     $questions['entity_type_id'] = new Question(
       'Entity type ID',
-      function ($vars) {
+      function (array $vars) :string {
         return Utils::human2machine($vars['entity_type_label']);
       }
     );
@@ -56,8 +57,7 @@ class ConfigurationEntity extends BaseGenerator {
     $path_placeholders = ['model', 'Example', '.twig'];
     $path_replacements = [$vars['machine_name'], $vars['class_prefix'], ''];
     foreach ($templates as $template) {
-      $this->addFile()
-        ->path('{machine_name}/' . str_replace($path_placeholders, $path_replacements, $template))
+      $this->addFile('{machine_name}/' . str_replace($path_placeholders, $path_replacements, $template))
         ->template($templates_path . $template);
     }
   }
