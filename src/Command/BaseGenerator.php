@@ -232,21 +232,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   }
 
   /**
-   * Renders a template.
-   *
-   * @param string $template
-   *   Twig template.
-   * @param array $vars
-   *   Template variables.
-   *
-   * @return string
-   *   A string representing the rendered output.
-   */
-  protected function render(string $template, array $vars) :string {
-    return $this->getHelper('renderer')->render($template, $vars);
-  }
-
-  /**
    * Asks the user for template variables.
    *
    * @param array $questions
