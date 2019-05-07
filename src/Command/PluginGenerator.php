@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command;
 use DrupalCodeGenerator\Utils;
 
 /**
- * Base class for module generators.
+ * Base class for plugin generators.
  */
 abstract class PluginGenerator extends ModuleGenerator {
 
