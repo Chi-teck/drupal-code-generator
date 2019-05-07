@@ -2,13 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Implements d7:module-file command.
  */
-class ModuleFile extends BaseGenerator {
+class ModuleFile extends ModuleGenerator {
 
   protected $name = 'd7:module-file';
   protected $description = 'Generates Drupal 7 module file';
@@ -17,10 +16,8 @@ class ModuleFile extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->collectVars(Utils::moduleQuestions());
-    $this->addFile()
-      ->path('{machine_name}.module')
-      ->template('d7/module.twig');
+    $this->collectDefault();
+    $this->addFile('{machine_name}.module', 'd7/module');
   }
 
 }

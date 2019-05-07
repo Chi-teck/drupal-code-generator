@@ -2,14 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Implements d7:module command.
  */
-class Module extends BaseGenerator {
+class Module extends ModuleGenerator {
 
   protected $name = 'd7:module';
   protected $description = 'Generates Drupal 7 module';
@@ -19,35 +17,17 @@ class Module extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['description'] = new Question('Module description', 'Module description.');
-    $questions['package'] = new Question('Package', 'Custom');
+    $vars = &$this->collectDefault();
 
-    $vars = $this->collectVars($questions);
+    $vars['description'] = $this->ask('Module description', 'Module description.');
+    $vars['package'] = $this->ask('Package', 'Custom');
 
-    $this->addFile()
-      ->path('{machine_name}/{machine_name}.info')
-      ->template('d7/module-info.twig');
-
-    $this->addFile()
-      ->path('{machine_name}/{machine_name}.module')
-      ->template('d7/module.twig');
-
-    $this->addFile()
-      ->path('{machine_name}/{machine_name}.install')
-      ->template('d7/install.twig');
-
-    $this->addFile()
-      ->path('{machine_name}/{machine_name}.admin.inc')
-      ->template('d7/admin.inc.twig');
-
-    $this->addFile()
-      ->path('{machine_name}/{machine_name}.pages.inc')
-      ->template('d7/pages.inc.twig');
-
-    $this->addFile()
-      ->path('{machine_name}/' . str_replace('_', '-', $vars['machine_name']) . '.js')
-      ->template('d7/javascript.twig');
+    $this->addFile('{machine_name}/{machine_name}.info', 'd7/module-info');
+    $this->addFile('{machine_name}/{machine_name}.module', 'd7/module');
+    $this->addFile('{machine_name}/{machine_name}.install', 'd7/install');
+    $this->addFile('{machine_name}/{machine_name}.admin.inc', 'd7/admin.inc');
+    $this->addFile('{machine_name}/{machine_name}.pages.inc', 'd7/pages.inc');
+    $this->addFile('{machine_name}/' . str_replace('_', '-', $vars['machine_name']) . '.js', 'd7/javascript');
   }
 
 }

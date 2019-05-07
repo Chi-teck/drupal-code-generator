@@ -19,19 +19,18 @@ class Settings extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['db_driver'] = new Question('Database driver', 'mysql');
-    $questions['db_driver']->setAutocompleterValues(['mysql', 'pgsql', 'sqlite']);
-    $questions['db_name'] = new Question('Database name', 'drupal');
-    $questions['db_user'] = new Question('Database user', 'root');
-    $questions['db_password'] = new Question('Database password', '123');
+    $vars = &$this->vars;
+    $db_driver_question = new Question('Database driver', 'mysql');
+    $db_driver_question->setAutocompleterValues(['mysql', 'pgsql', 'sqlite']);
+    $vars['db_driver'] = $this->askQuestion($db_driver_question);
+    $vars['db_name'] = $this->ask('Database name', 'drupal');
+    $vars['db_user'] = $this->ask('Database user', 'root');
+    $vars['db_password'] = $this->ask('Database password', '123');
 
-    $vars = &$this->collectVars($questions);
     // @see: drupal_get_hash_salt()
     $vars['hash_salt'] = hash('sha256', serialize($vars));
 
-    $this->addFile()
-      ->path('settings.php')
-      ->template('d7/settings.twig');
+    $this->addFile('settings.php', 'd7/settings');
   }
 
 }

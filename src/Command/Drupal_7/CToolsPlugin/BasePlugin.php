@@ -2,15 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7\CToolsPlugin;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Base class for d7:ctools-plugin commands.
  */
-abstract class BasePlugin extends BaseGenerator {
+abstract class BasePlugin extends ModuleGenerator {
 
   protected $template;
   protected $subDirectory;
@@ -19,28 +17,21 @@ abstract class BasePlugin extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['plugin_name'] = new Question('Plugin name', 'Example');
-    $questions['plugin_name']->setValidator([Utils::class, 'validateRequired']);
+    $vars = &$this->collectDefault();
 
-    $default_machine_name = function ($vars) {
-      return Utils::human2machine($vars['plugin_name']);
-    };
-    $questions['plugin_machine_name'] = new Question('Plugin machine name', $default_machine_name);
-    $questions['plugin_machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    $vars['plugin_name'] = $this->ask('Plugin name', 'Example', [Utils::class, 'validateRequired']);
 
-    $questions['description'] = new Question('Plugin description', 'Plugin description.');
-    $questions['category'] = new Question('Category', 'Custom');
+    $default = Utils::human2machine($vars['plugin_name']);
+    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', $default, [Utils::class, 'validateMachineName']);
 
-    $questions['context'] = new ChoiceQuestion(
-      'Required context',
-      ['-', 'Node', 'User', 'Term']
-    );
+    $vars['description'] = $this->ask('Plugin description', 'Plugin description.');
 
-    $this->collectVars($questions);
+    $vars['category'] = $this->ask('Category', 'Custom');
 
-    $this->addFile()
-      ->path($this->subDirectory . '/{plugin_machine_name}.inc')
+    $contexts = ['-', 'Node', 'User', 'Term'];
+    $vars['context'] = $this->io->choice('Required context', $contexts);
+
+    $this->addFile($this->subDirectory . '/{plugin_machine_name}.inc')
       ->template($this->template);
   }
 

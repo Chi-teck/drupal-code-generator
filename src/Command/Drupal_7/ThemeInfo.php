@@ -2,14 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
  * Implements d7:theme-info command.
  */
-class ThemeInfo extends BaseGenerator {
+class ThemeInfo extends ThemeGenerator {
 
   protected $name = 'd7:theme-info';
   protected $description = 'Generates info file for a Drupal 7 theme';
@@ -19,18 +17,10 @@ class ThemeInfo extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['name'] = new Question('Theme name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-    $questions['machine_name'] = new Question('Theme machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    $questions['description'] = new Question('Theme description', 'A simple Drupal 7 theme.');
-    $questions['base_theme'] = new Question('Base theme');
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('{machine_name}.info')
-      ->template('d7/theme-info.twig');
+    $vars = &$this->collectDefault();
+    $vars['description'] = $this->ask('Theme description', 'A simple Drupal 7 theme.');
+    $vars['base_theme'] = $this->ask('Base theme');
+    $this->addFile('{machine_name}.info', 'd7/theme-info');
   }
 
 }

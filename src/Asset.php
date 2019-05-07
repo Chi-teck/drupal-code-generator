@@ -204,7 +204,7 @@ class Asset {
    *   The asset.
    */
   public function headerTemplate(?string $header_template) :Asset {
-    $this->headerTemplate = $header_template;
+    $this->headerTemplate = self::addExtension($header_template);
     return $this;
   }
 
@@ -218,7 +218,7 @@ class Asset {
    *   The asset.
    */
   public function template(?string $template) :Asset {
-    $this->template = $template;
+    $this->template = self::addExtension($template);
     return $this;
   }
 
@@ -307,6 +307,16 @@ class Asset {
    */
   public function __toString() :string {
     return $this->getPath() ?: '';
+  }
+
+  /**
+   * Adds twig extension if needed.
+   */
+  private static function addExtension(?string $template) {
+    if ($template && pathinfo($template, PATHINFO_EXTENSION) != 'twig') {
+      $template .= '.twig';
+    }
+    return $template;
   }
 
 }

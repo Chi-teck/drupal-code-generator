@@ -2,14 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d7:hook command.
  */
-class Hook extends BaseGenerator {
+class Hook extends ModuleGenerator {
 
   protected $name = 'd7:hook';
   protected $description = 'Generates a hook';
@@ -18,17 +17,18 @@ class Hook extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['hook_name'] = new Question('Hook name');
-    $questions['hook_name']->setValidator(function ($value) {
+    $vars = &$this->collectDefault();
+
+    $question = new Question('Hook name');
+    $question->setValidator(function (?string $value) :string {
       if (!in_array($value, $this->getSupportedHooks())) {
-        throw new \UnexpectedValueException('The value is not correct class name.');
+        throw new \UnexpectedValueException('The value is not correct hook name.');
       }
       return $value;
     });
-    $questions['hook_name']->setAutocompleterValues($this->getSupportedHooks());
+    $question->setAutocompleterValues($this->getSupportedHooks());
 
-    $vars = $this->collectVars($questions);
+    $vars['hook_name'] = $this->askQuestion($question);
 
     // Most Drupal hooks are situated in a module file but some are not.
     $special_hooks = [
@@ -61,10 +61,9 @@ class Hook extends BaseGenerator {
       }
     }
 
-    $this->addFile()
-      ->path("{machine_name}.$file_type")
-      ->headerTemplate("d7/file-docs/$file_type.twig")
-      ->template('d7/hook/' . $vars['hook_name'] . '.twig')
+    $this->addFile("{machine_name}.$file_type")
+      ->headerTemplate("d7/file-docs/$file_type")
+      ->template('d7/hook/' . $vars['hook_name'])
       ->action('append')
       ->headerSize(7);
   }
@@ -75,8 +74,8 @@ class Hook extends BaseGenerator {
    * @return array
    *   List of supported hooks.
    */
-  protected function getSupportedHooks() {
-    return array_map(function ($file) {
+  protected function getSupportedHooks() :array {
+    return array_map(function (string $file) :string {
       return pathinfo($file, PATHINFO_FILENAME);
     }, array_diff(scandir($this->templatePath . '/d7/hook'), ['.', '..']));
   }

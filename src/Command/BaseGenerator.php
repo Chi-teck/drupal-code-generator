@@ -316,12 +316,16 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    *
    * @param string $path
    *   (Optional) File path.
+   * @param string $template
+   *   (Optional) Template.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addFile($path = NULL) {
-    return $this->addAsset('file')->path($path);
+  protected function addFile(string $path = NULL, string $template = NULL) :Asset {
+    return $this->addAsset('file')
+      ->path($path)
+      ->template($template);
   }
 
   /**

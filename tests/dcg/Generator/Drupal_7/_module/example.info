@@ -4,5 +4,5 @@ package = Custom
 core = 7.x
 
 ;configure = admin/config/system/example
-;dependencies[] = system (>7.34)
+;dependencies[] = system (>7.66)
 ;files[] = tests/example.test

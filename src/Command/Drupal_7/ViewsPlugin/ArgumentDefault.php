@@ -2,14 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7\ViewsPlugin;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d7:views-plugin:argument-default command.
  */
-class ArgumentDefault extends BaseGenerator {
+class ArgumentDefault extends ModuleGenerator {
 
   protected $name = 'd7:views-plugin:argument-default';
   protected $description = 'Generates Drupal 7 argument default views plugin';
@@ -18,30 +17,25 @@ class ArgumentDefault extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['plugin_name'] = new Question('Plugin name', 'Example');
-    $default_machine_name = function ($vars) {
-      return Utils::human2machine($vars['plugin_name']);
-    };
-    $questions['plugin_machine_name'] = new Question('Plugin machine name', $default_machine_name);
+    $vars = &$this->collectDefault();
 
-    $this->collectVars($questions);
+    $vars['plugin_name'] = $this->ask('Plugin name', 'Example');
 
-    $this->addFile()
-      ->path('{machine_name}.module')
-      ->template('d7/views-plugin/argument-default.module.twig')
+    $default_machine_name = Utils::human2machine($vars['plugin_name']);
+    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', $default_machine_name);
+
+    $this->addFile('{machine_name}.module')
+      ->template('d7/views-plugin/argument-default.module')
       ->action('append')
       ->headerSize(7);
 
-    $this->addFile()
-      ->path('views/{machine_name}.views.inc')
-      ->template('d7/views-plugin/argument-default-views.inc.twig')
+    $this->addFile('views/{machine_name}.views.inc')
+      ->template('d7/views-plugin/argument-default-views.inc')
       ->action('append')
       ->headerSize(7);
 
-    $this->addFile()
-      ->path('views/views_plugin_argument_{plugin_machine_name}.inc')
-      ->template('d7/views-plugin/argument-default.twig');
+    $this->addFile('views/views_plugin_argument_{plugin_machine_name}.inc')
+      ->template('d7/views-plugin/argument-default');
   }
 
 }

@@ -50,4 +50,30 @@ class AssetTest extends TestCase {
     self::assertTrue($asset->isDirectory());
   }
 
+  /**
+   * Test callback.
+   */
+  public function testTemplate() {
+    $asset = new Asset();
+
+    $asset->template('foo');
+    self::assertEquals('foo.twig', $asset->getTemplate());
+
+    $asset->template('bar.twig');
+    self::assertEquals('bar.twig', $asset->getTemplate());
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testHeaderTemplate() {
+    $asset = new Asset();
+
+    $asset->headerTemplate('foo');
+    self::assertEquals('foo.twig', $asset->getHeaderTemplate());
+
+    $asset->headerTemplate('bar.twig');
+    self::assertEquals('bar.twig', $asset->getHeaderTemplate());
+  }
+
 }

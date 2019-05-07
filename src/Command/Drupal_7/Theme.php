@@ -2,14 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
  * Implements d7:theme command.
  */
-class Theme extends BaseGenerator {
+class Theme extends ThemeGenerator {
 
   protected $name = 'd7:theme';
   protected $description = 'Generates Drupal 7 theme';
@@ -19,37 +17,19 @@ class Theme extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['name'] = new Question('Theme name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-    $questions['machine_name'] = new Question('Theme machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    $questions['description'] = new Question('Theme description', 'A simple Drupal 7 theme.');
-    $questions['base_theme'] = new Question('Base theme');
+    $vars = &$this->collectDefault();
 
-    $vars = &$this->collectVars($questions);
+    $vars['description'] = $this->ask('Theme description', 'A simple Drupal 7 theme.');
+    $vars['base_theme'] = $this->ask('Base theme');
+
     $vars['asset_name'] = str_replace('_', '-', $vars['machine_name']);
 
-    $this->addFile()
-      ->path('{machine_name}/{machine_name}.info')
-      ->template('d7/theme-info.twig');
-
-    $this->addFile()
-      ->path('{machine_name}/template.php')
-      ->template('d7/template.php.twig');
-
-    $this->addFile()
-      ->path('{machine_name}/js/{asset_name}.js')
-      ->template('d7/javascript.twig');
-
-    $this->addFile()
-      ->path('{machine_name}/css/{asset_name}.css')
-      ->template('d7/theme-css.twig');
-
-    $this->addDirectory()
-      ->path('{machine_name}/templates');
-
-    $this->addDirectory()
-      ->path('{machine_name}/images');
+    $this->addFile('{machine_name}/{machine_name}.info', 'd7/theme-info');
+    $this->addFile('{machine_name}/template.php', 'd7/template.php');
+    $this->addFile('{machine_name}/js/{asset_name}.js', 'd7/javascript');
+    $this->addFile('{machine_name}/css/{asset_name}.css', 'd7/theme-css');
+    $this->addDirectory('{machine_name}/templates');
+    $this->addDirectory('{machine_name}/images');
   }
 
 }

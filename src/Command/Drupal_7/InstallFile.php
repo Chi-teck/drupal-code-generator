@@ -2,13 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Implements d7:install-file command.
  */
-class InstallFile extends BaseGenerator {
+class InstallFile extends ModuleGenerator {
 
   protected $name = 'd7:install-file';
   protected $description = 'Generates Drupal 7 install file';
@@ -17,10 +16,8 @@ class InstallFile extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->collectVars(Utils::moduleQuestions());
-    $this->addFile()
-      ->path('{machine_name}.install')
-      ->template('d7/install.twig');
+    $this->collectDefault();
+    $this->addFile('{machine_name}.install', 'd7/install');
   }
 
 }

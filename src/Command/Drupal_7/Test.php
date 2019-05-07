@@ -2,14 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d7:test command.
  */
-class Test extends BaseGenerator {
+class Test extends ModuleGenerator {
 
   protected $name = 'd7:test';
   protected $description = 'Generates Drupal 7 test case';
@@ -18,17 +17,10 @@ class Test extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $default_class = function ($vars) {
-      return Utils::camelize($vars['machine_name']) . 'TestCase';
-    };
-    $questions['class'] = new Question('Class', $default_class);
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('{machine_name}.test')
-      ->template('d7/test.twig');
+    $vars = &$this->collectDefault();
+    $default_class = Utils::camelize($vars['machine_name']) . 'TestCase';
+    $vars['class'] = $this->ask('Class', $default_class);
+    $this->addFile('{machine_name}.test', 'd7/test');
   }
 
 }
