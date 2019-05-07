@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Base class for module generators.
@@ -14,7 +13,7 @@ abstract class PluginGenerator extends ModuleGenerator {
   protected $pluginLabelQuestion = 'Plugin label';
   protected $pluginLabelDefault = 'Example';
   protected $pluginIdQuestion = 'Plugin ID';
-  protected $pluginIdDefault = [Utils::class, 'defaultPluginId'];
+  protected $pluginIdDefault;
 
   /**
    * {@inheritdoc}
@@ -22,25 +21,32 @@ abstract class PluginGenerator extends ModuleGenerator {
   protected function &collectDefault() :array {
     parent::collectDefault();
 
-    $questions = [];
+    $vars = &$this->vars;
 
     if ($this->pluginLabelQuestion) {
-      $questions['plugin_label'] = new Question($this->pluginLabelQuestion, $this->pluginLabelDefault);
-      $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
+      $vars['plugin_label'] = $this->ask(
+        $this->pluginLabelQuestion,
+        $this->pluginLabelDefault,
+        [Utils::class, 'validateRequired']
+      );
     }
 
     if ($this->pluginIdQuestion) {
-      $questions['plugin_id'] = new Question($this->pluginIdQuestion, $this->pluginIdDefault);
-      $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
+      if ($this->pluginIdDefault === NULL) {
+        $this->pluginIdDefault = $vars['machine_name'] . '_' . Utils::human2machine($vars['plugin_label']);
+      }
+      $vars['plugin_id'] = $this->ask(
+        $this->pluginIdQuestion,
+        $this->pluginIdDefault,
+        [Utils::class, 'validateMachineName']
+      );
     }
 
-    $vars = $this->collectVars($questions);
-
-    $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
+    $unprefixed_plugin_id = preg_replace('/^' . $this->vars['machine_name'] . '_/', '', $vars['plugin_id']);
     $default_class = Utils::camelize($unprefixed_plugin_id) . $this->classSuffix;
-    $questions['class'] = new Question('Plugin class', $default_class);
+    $vars['class'] = $this->ask('Plugin class', $default_class);
 
-    return $this->collectVars($questions);
+    return $this->vars;
   }
 
 }

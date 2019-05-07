@@ -15,21 +15,20 @@ abstract class ModuleGenerator extends BaseGenerator {
    */
   protected function &collectDefault() :array {
 
-    $directory = $this->directory;
+    $root_directory = basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
 
-    $root_directory = basename(Utils::getExtensionRoot($directory) ?: $directory);
     $default_value = Utils::machine2human($root_directory);
+    $name_question = new Question('Module name', $default_value);
+    $name_question->setValidator([Utils::class, 'validateRequired']);
 
-    $questions['name'] = new Question('Module name', $default_value);
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
+    $this->vars['name'] = $this->askQuestion($name_question);
 
-    $default_value = function (array $vars) use ($directory) :string {
-      return Utils::human2machine($vars['name'] ?? basename($directory));
-    };
-    $questions['machine_name'] = new Question('Module machine name', $default_value);
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    $default_value = Utils::human2machine($this->vars['name'] ?? basename($this->directory));
+    $machine_name_question = new Question('Module machine name', $default_value);
+    $machine_name_question->setValidator([Utils::class, 'validateMachineName']);
+    $this->vars['machine_name'] = $this->askQuestion($machine_name_question);
 
-    return $this->collectVars($questions);
+    return $this->vars;
   }
 
 }
