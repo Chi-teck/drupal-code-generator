@@ -2,55 +2,45 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Form;
 
-use DrupalCodeGenerator\Command\ModuleGenerator;
-use Symfony\Component\Console\Question\Question;
-
 /**
  * Implements d8:form:config command.
  */
-class Config extends ModuleGenerator {
-
-  use RouteInteractionTrait;
+class Config extends FormGenerator {
 
   protected $name = 'd8:form:config';
   protected $description = 'Generates a configuration form';
   protected $alias = 'config-form';
+  protected $defaultPathPrefix = '/admin/config/system';
+  protected $defaultPermission = 'administer site configuration';
+  protected $defaultClass = 'SettingsForm';
 
   /**
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->collectDefault();
-    $questions['class'] = new Question('Class', 'SettingsForm');
-
-    $this->collectVars($questions);
-
-    $this->defaultPathPrefix = '/admin/config/system';
-    $this->defaultPermission = 'administer site configuration';
-    $this->routeInteraction();
-
-    $vars = &$this->vars;
+    $vars = &$this->collectDefault();
+    $this->generateRoute();
 
     if ($vars['route']) {
       if ($vars['link'] = $this->confirm('Would you like to create a menu link for this route?')) {
 
-        $questions['link_title'] = new Question('Link title', $vars['route_title']);
-        $questions['link_description'] = new Question('Link description');
+        $vars['link_title'] = $this->ask('Link title', $vars['route_title']);
+        $vars['link_description'] = $this->ask('Link description');
         // Try to guess parent menu item using route path.
         if (preg_match('#^/admin/config/([^/]+)/[^/]+$#', $vars['route_path'], $matches)) {
-          $questions['link_parent'] = new Question('Parent menu item', 'system.admin_config_' . $matches[1]);
+          $vars['link_parent'] = $this->ask('Parent menu item', 'system.admin_config_' . $matches[1]);
         }
 
-        $this->collectVars($questions);
         $this->addFile('{machine_name}.links.menu.yml')
-          ->template('d8/form/links.menu.twig')
+          ->template('d8/form/links.menu')
           ->action('append');
       }
     }
 
-    $this->addFile('src/Form/{class}.php')
-      ->template('d8/form/config.twig');
-
+    $this->addFile('src/Form/{class}.php', 'd8/form/config');
+    $this->addFile('config/schema/{machine_name}.schema.yml')
+      ->template('d8/form/config-schema')
+      ->action('append');
   }
 
 }

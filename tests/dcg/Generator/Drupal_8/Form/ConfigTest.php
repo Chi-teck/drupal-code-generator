@@ -29,6 +29,7 @@ class ConfigTest extends GeneratorBaseTest {
   protected $fixtures = [
     'foo.links.menu.yml' => __DIR__ . '/_config_menu.links.yml',
     'foo.routing.yml' => __DIR__ . '/_config_routing.yml',
+    'config/schema/foo.schema.yml' => __DIR__ . '/_config-schema.yml',
     'src/Form/SettingsForm.php' => __DIR__ . '/_config.php',
   ];
 
