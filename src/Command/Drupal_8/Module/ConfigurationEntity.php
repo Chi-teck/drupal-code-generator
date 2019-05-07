@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:module:configuration-entity command.
@@ -20,43 +19,38 @@ class ConfigurationEntity extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->collectDefault();
+    $vars = &$this->collectDefault();
 
-    $questions['package'] = new Question('Package', 'Custom');
-    $questions['dependencies'] = new Question('Dependencies (comma separated)');
-    $questions['entity_type_label'] = new Question('Entity type label', '{name}');
-    $questions['entity_type_id'] = new Question(
-      'Entity type ID',
-      function (array $vars) :string {
-        return Utils::human2machine($vars['entity_type_label']);
-      }
-    );
+    $vars['package'] = $this->ask('Package', 'Custom');
+    $vars['dependencies'] = $this->ask('Dependencies (comma separated)');
+    $vars['entity_type_label'] = $this->ask('Entity type label', '{name}');
 
-    $vars = &$this->collectVars($questions);
+    $default_entity_type_id = Utils::human2machine($vars['entity_type_label']);
+    $vars['entity_type_id'] = $this->ask('Entity type ID', $default_entity_type_id);
+
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
     $vars['class_prefix'] = Utils::camelize($vars['entity_type_id']);
 
-    $templates = [
-      'model.info.yml.twig',
-      'src/ExampleListBuilder.php.twig',
-      'src/Form/ExampleForm.php.twig',
-      'src/ExampleInterface.php.twig',
-      'src/Entity/Example.php.twig',
-      'model.routing.yml.twig',
-      'model.links.action.yml.twig',
-      'model.links.menu.yml.twig',
-      'model.permissions.yml.twig',
-      'config/schema/model.schema.yml.twig',
+    $files = [
+      'model.info.yml',
+      'src/ExampleListBuilder.php',
+      'src/Form/ExampleForm.php',
+      'src/ExampleInterface.php',
+      'src/Entity/Example.php',
+      'model.routing.yml',
+      'model.links.action.yml',
+      'model.links.menu.yml',
+      'model.permissions.yml',
+      'config/schema/model.schema.yml',
     ];
 
-    $templates_path = 'd8/module/configuration-entity/';
-    $path_placeholders = ['model', 'Example', '.twig'];
-    $path_replacements = [$vars['machine_name'], $vars['class_prefix'], ''];
-    foreach ($templates as $template) {
-      $this->addFile('{machine_name}/' . str_replace($path_placeholders, $path_replacements, $template))
-        ->template($templates_path . $template);
+    $path_placeholders = ['model', 'Example'];
+    $path_replacements = [$vars['machine_name'], $vars['class_prefix']];
+    foreach ($files as $file) {
+      $this->addFile('{machine_name}/' . str_replace($path_placeholders, $path_replacements, $file))
+        ->template('d8/module/configuration-entity/' . $file);
     }
   }
 
