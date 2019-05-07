@@ -1,8 +1,9 @@
 <?php
 
-namespace DrupalCodeGenerator\Command;
+namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
 use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Base class for plugin generators.

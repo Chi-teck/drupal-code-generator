@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Migrate;
 
-use DrupalCodeGenerator\Command\PluginGenerator;
+use DrupalCodeGenerator\Command\Drupal_8\Plugin\PluginGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 

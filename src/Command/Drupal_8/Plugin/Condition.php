@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\PluginGenerator;
-
 /**
  * Implements d8:plugin:condition command.
  */

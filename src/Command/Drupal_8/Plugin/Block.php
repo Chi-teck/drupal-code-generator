@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\PluginGenerator;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 

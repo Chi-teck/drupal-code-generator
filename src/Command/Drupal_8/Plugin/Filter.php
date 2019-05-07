@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\PluginGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 

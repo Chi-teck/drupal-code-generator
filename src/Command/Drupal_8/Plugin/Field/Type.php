@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Field;
 
-use DrupalCodeGenerator\Command\PluginGenerator;
+use DrupalCodeGenerator\Command\Drupal_8\Plugin\PluginGenerator;
 
 /**
  * Implements d8:plugin:field:type command.

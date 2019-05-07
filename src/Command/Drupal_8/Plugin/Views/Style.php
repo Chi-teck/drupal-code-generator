@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin\Views;
 
-use DrupalCodeGenerator\Command\PluginGenerator;
+use DrupalCodeGenerator\Command\Drupal_8\Plugin\PluginGenerator;
 
 /**
  * Implements d8:plugin:views:style command.
