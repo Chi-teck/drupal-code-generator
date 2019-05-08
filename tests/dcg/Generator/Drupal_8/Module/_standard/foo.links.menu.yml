@@ -1,0 +1,6 @@
+foo.settings_form:
+  title: 'Foo settings'
+  description: 'Optional description.'
+  parent: system.admin_config_system
+  route_name: foo.settings_form
+  weight: 10

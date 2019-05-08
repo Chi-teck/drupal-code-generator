@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:module:standard command.
@@ -20,125 +19,65 @@ class Standard extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->collectDefault();
+    $vars = &$this->collectDefault();
 
-    $questions['description'] = new Question('Module description', 'The description.');
-    $questions['package'] = new Question('Package', 'Custom');
-    $questions['dependencies'] = new Question('Dependencies (comma separated)');
+    $vars['description'] = $this->ask('Module description');
+    $vars['package'] = $this->ask('Package', 'Custom');
+    $vars['dependencies'] = $this->ask('Dependencies (comma separated)');
 
-    $vars = &$this->collectVars($questions);
+    $vars['dependencies'] = $vars['dependencies'] ?
+      array_map('trim', explode(',', strtolower($vars['dependencies']))) : [];
 
-    if ($vars['dependencies']) {
-      $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
+    $vars['class_prefix'] = Utils::camelize($vars['name']);
+
+    $template_path = 'd8/module/standard/';
+
+    $this->addFile('{machine_name}/{machine_name}.info.yml', $template_path . 'model.info.yml');
+
+    if ($this->confirm('Would you like to create module file?')) {
+      $this->addFile('{machine_name}/{machine_name}.module', $template_path . 'model.module');
     }
 
-    $prefix = $vars['machine_name'] . '/' . $vars['machine_name'];
-
-    $this->addFile()
-      ->path($prefix . '.info.yml')
-      ->template('d8/yml/module-info.twig');
-
-    $this->addFile()
-      ->path($prefix . '.module')
-      ->template('d8/module.twig');
-
-    $class_prefix = Utils::camelize($vars['name']);
-
-    // Additional files.
-    $options['install_file'] = $this->confirm('Would you like to create install file?', TRUE);
-    $options['libraries.yml'] = $this->confirm('Would you like to create libraries.yml file?', TRUE);
-    $options['permissions.yml'] = $this->confirm('Would you like to create permissions.yml file?', TRUE);
-    $options['event_subscriber'] = $this->confirm('Would you like to create event subscriber?', TRUE);
-    $options['block_plugin'] = $this->confirm('Would you like to create block plugin?', TRUE);
-    $options['controller'] = $this->confirm('Would you like to create a controller?', TRUE);
-    $options['settings_form'] = $this->confirm('Would you like to create settings form?', TRUE);
-
-    if ($options['install_file']) {
-      $this->addFile($prefix . '.install')
-        ->template('d8/install.twig');
+    if ($this->confirm('Would you like to create install file?')) {
+      $this->addFile('{machine_name}/{machine_name}.install', $template_path . 'model.install');
     }
 
-    if ($options['libraries.yml']) {
-      $this->addFile($prefix . '.libraries.yml')
-        ->template('d8/yml/module-libraries.twig');
+    if ($this->confirm('Would you like to create libraries.yml file?')) {
+      $this->addFile('{machine_name}/{machine_name}.libraries.yml', $template_path . 'model.libraries.yml');
     }
 
-    if ($options['permissions.yml']) {
-      $this->addFile($prefix . '.permissions.yml')
-        ->template('d8/yml/permissions.twig');
+    if ($this->confirm('Would you like to create permissions.yml file?')) {
+      $this->addFile('{machine_name}/{machine_name}.permissions.yml', $template_path . 'model.permissions.yml');
     }
 
-    if ($options['event_subscriber']) {
-      $subscriber_class = $class_prefix . 'Subscriber';
-
-      $this->addFile("{machine_name}/src/EventSubscriber/$subscriber_class.php")
-        ->template('d8/service/event-subscriber.twig')
-        ->vars($vars + ['class' => $subscriber_class]);
-
-      $this->addFile($prefix . '.services.yml')
-        ->template('d8/service/event-subscriber.services.twig')
-        ->vars($vars + ['class' => $subscriber_class]);
+    if ($this->confirm('Would you like to create event subscriber?')) {
+      $this->addFile("{machine_name}/src/EventSubscriber/{class_prefix}Subscriber.php")
+        ->template($template_path . 'src/EventSubscriber/ExampleSubscriber.php');
+      $this->addFile('{machine_name}/{machine_name}.services.yml', $template_path . 'model.services.yml');
     }
 
-    if ($options['block_plugin']) {
-      $block_vars['plugin_label'] = 'Example';
-      $block_vars['plugin_id'] = $vars['machine_name'] . '_' . Utils::human2machine($block_vars['plugin_label']);
-      $block_vars['category'] = $vars['name'];
-      $block_vars['class'] = 'ExampleBlock';
-
-      $this->addFile('{machine_name}/src/Plugin/Block/' . $block_vars['class'] . '.php')
-        ->template('d8/plugin/block.twig')
-        ->vars($block_vars + $vars);
+    if ($this->confirm('Would you like to create block plugin?')) {
+      $this->addFile('{machine_name}/src/Plugin/Block/ExampleBlock.php')
+        ->template($template_path . 'src/Plugin/Block/ExampleBlock.php');
     }
 
-    if ($options['controller']) {
-      $controller_class = $class_prefix . 'Controller';
-
-      $controller_vars = [
-        'class' => $controller_class,
-        'services' => [],
-      ];
-
-      $this->addFile("{machine_name}/src/Controller/$controller_class.php")
-        ->template('d8/controller.twig')
-        ->vars($controller_vars + $vars);
-
-      $routing_vars = [
-        'route_name' => $vars['machine_name'] . '.example',
-        'route_path' => '/' . str_replace('_', '-', $vars['machine_name']) . '/example',
-        'route_title' => 'Example',
-        'route_permission' => 'access content',
-        'class' => $controller_class,
-      ];
-
-      $this->addFile($prefix . '.routing.yml')
-        ->template('d8/controller-route.twig')
-        ->vars($routing_vars + $vars)
-        ->action('append');
+    if ($vars['controller'] = $this->confirm('Would you like to create a controller?')) {
+      $this->addFile("{machine_name}/src/Controller/{class_prefix}Controller.php")
+        ->template($template_path . 'src/Controller/ExampleController.php');
     }
 
-    if ($options['settings_form']) {
-      $form_class = 'SettingsForm';
-
-      $form_vars = [
-        'form_id' => $vars['machine_name'] . '_settings',
-        'class' => $form_class,
-      ];
+    if ($vars['form']  = $this->confirm('Would you like to create settings form?')) {
       $this->addFile('{machine_name}/src/Form/SettingsForm.php')
-        ->template('d8/form/config.twig')
-        ->vars($form_vars + $vars);
+        ->template($template_path . 'src/Form/SettingsForm.php');
+      $this->addFile('{machine_name}/config/schema/{machine_name}.schema.yml')
+        ->template($template_path . 'config/schema/model.schema.yml.twig');
+      $this->addFile('{machine_name}/{machine_name}.links.menu.yml')
+        ->template($template_path . 'model.links.menu');
+    }
 
-      $routing_vars = [
-        'route_name' => $vars['machine_name'] . '.settings_form',
-        'route_path' => '/admin/config/system/' . str_replace('_', '-', $vars['machine_name']),
-        'route_title' => $vars['name'] . ' settings',
-        'route_permission' => 'administer ' . $vars['machine_name'] . ' configuration',
-        'class' => $form_class,
-      ];
-      $this->addFile($prefix . '.routing.yml')
-        ->template('d8/form/routing.twig')
-        ->vars($routing_vars + $vars)
-        ->action('append');
+    if ($vars['controller'] || $vars['form']) {
+      $this->addFile('{machine_name}/{machine_name}.routing.yml')
+        ->template($template_path . 'model.routing.yml');
     }
 
   }

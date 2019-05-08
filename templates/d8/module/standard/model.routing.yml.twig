@@ -1,0 +1,19 @@
+{% if controller %}
+{{ machine_name }}.example:
+  path: '/{{ machine_name|u2h }}/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\{{ machine_name }}\Controller\{{ class_prefix }}Controller::build'
+  requirements:
+    _permission: 'access content'
+
+{% endif %}
+{% if form %}
+{{ machine_name }}.settings_form:
+  path: '/admin/config/system/{{ machine_name|u2h }}'
+  defaults:
+    _title: '{{ name }} settings'
+    _form: 'Drupal\{{ machine_name }}\Form\SettingsForm'
+  requirements:
+    _permission: 'administer {{ machine_name }} configuration'
+{% endif %}
