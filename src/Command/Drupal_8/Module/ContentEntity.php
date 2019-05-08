@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Module;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:module:content-entity command.
@@ -22,23 +21,11 @@ class ContentEntity extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
 
-    $questions['package'] = new Question('Package', 'Custom');
-    $questions['dependencies'] = new Question('Dependencies (comma separated)');
-    $questions['entity_type_label'] = new Question('Entity type label', '{name}');
-    $questions['entity_type_id'] = new Question(
-      'Entity type ID',
-      function ($vars) {
-        return Utils::human2machine($vars['entity_type_label']);
-      }
-    );
-    $questions['entity_base_path'] = new Question(
-      'Entity base path',
-      function ($vars) {
-        return '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']);
-      }
-    );
-    $this->collectVars($questions);
-
+    $vars['package'] = $this->ask('Package', 'Custom');
+    $vars['dependencies'] = $this->ask('Dependencies (comma separated)');
+    $vars['entity_type_label'] = $this->ask('Entity type label', '{name}');
+    $vars['entity_type_id'] = $this->ask('Entity type ID', Utils::human2machine($vars['entity_type_label']));
+    $vars['entity_base_path'] = $this->ask('Entity base path', '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']));
     $vars['fieldable'] = $this->confirm('Make the entity type fieldable?');
     $vars['revisionable'] = $this->confirm('Make the entity type revisionable?', FALSE);
     $vars['translatable'] = $this->confirm('Make the entity type translatable?', FALSE);
@@ -53,12 +40,9 @@ class ContentEntity extends ModuleGenerator {
     $vars['description_base_field'] = $this->confirm('Add "description" base field?');
     $vars['rest_configuration'] = $this->confirm('Create REST configuration for the entity?', FALSE);
 
-    if ($vars['dependencies']) {
-      $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
-    }
-    else {
-      $vars['dependencies'] = [];
-    }
+    $vars['dependencies'] = $vars['dependencies'] ?
+      array_map('trim', explode(',', strtolower($vars['dependencies']))) : [];
+
     // 'text_long' field item plugin is provided by Text module.
     if ($vars['description_base_field']) {
       $vars['dependencies'][] = 'drupal:text';
@@ -77,47 +61,45 @@ class ContentEntity extends ModuleGenerator {
 
     $vars['class_prefix'] = Utils::camelize($vars['entity_type_id']);
 
-    $templates = [
-      'model.info.yml.twig',
-      'model.links.action.yml.twig',
-      'model.links.menu.yml.twig',
-      'model.links.task.yml.twig',
-      'model.permissions.yml.twig',
-      'src/Entity/Example.php.twig',
-      'src/ExampleInterface.php.twig',
-      'src/ExampleListBuilder.php.twig',
-      'src/Form/ExampleForm.php.twig',
+    $files = [
+      'model.info.yml',
+      'model.links.action.yml',
+      'model.links.menu.yml',
+      'model.links.task.yml',
+      'model.permissions.yml',
+      'src/Entity/Example.php',
+      'src/ExampleInterface.php',
+      'src/ExampleListBuilder.php',
+      'src/Form/ExampleForm.php',
     ];
 
     if ($vars['fieldable_no_bundle']) {
-      $templates[] = 'model.routing.yml.twig';
-      $templates[] = 'src/Form/ExampleSettingsForm.php.twig';
+      $files[] = 'model.routing.yml';
+      $files[] = 'src/Form/ExampleSettingsForm.php';
     }
 
     if ($vars['template']) {
-      $templates[] = 'templates/model-example.html.twig.twig';
-      $templates[] = 'model.module.twig';
+      $files[] = 'templates/model-example.html.twig';
+      $files[] = 'model.module';
     }
     else {
-      $templates[] = 'src/ExampleViewBuilder.php.twig';
+      $files[] = 'src/ExampleViewBuilder.php';
     }
 
     if ($vars['access_controller']) {
-      $templates[] = 'src/ExampleAccessControlHandler.php.twig';
+      $files[] = 'src/ExampleAccessControlHandler.php';
     }
 
     if ($vars['rest_configuration']) {
-      $templates[] = 'config/optional/rest.resource.entity.example.yml.twig';
+      $files[] = 'config/optional/rest.resource.entity.example.yml';
     }
 
     if ($vars['bundle']) {
-      $templates[] = 'config/schema/model.entity_type.schema.yml.twig';
-      $templates[] = 'src/ExampleTypeListBuilder.php.twig';
-      $templates[] = 'src/Entity/ExampleType.php.twig';
-      $templates[] = 'src/Form/ExampleTypeForm.php.twig';
+      $files[] = 'config/schema/model.entity_type.schema.yml';
+      $files[] = 'src/ExampleTypeListBuilder.php';
+      $files[] = 'src/Entity/ExampleType.php';
+      $files[] = 'src/Form/ExampleTypeForm.php';
     }
-
-    $templates_path = 'd8/module/content-entity/';
 
     $vars['template_name'] = str_replace('_', '-', $vars['entity_type_id']) . '.html.twig';
 
@@ -132,14 +114,15 @@ class ContentEntity extends ModuleGenerator {
       $vars['machine_name'],
       $vars['class_prefix'],
       'rest.resource.entity.' . $vars['entity_type_id'],
-      'views.view.' . $vars['entity_type_id'],
     ];
 
-    foreach ($templates as $template) {
-      $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $template);
-      $this->addFile()
-        ->path(preg_replace('#\.twig$#', '', $path))
-        ->template($templates_path . $template);
+    foreach ($files as $file) {
+      $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $file);
+      $template = 'd8/module/content-entity/' . $file;
+      if ($file == 'templates/model-example.html.twig') {
+        $template .= '.twig';
+      }
+      $this->addFile($path, $template);
     }
   }
 
