@@ -20,8 +20,7 @@ class Destination extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Plugin/migrate/destination/{class}.php')
-      ->template('d8/plugin/migrate/destination.twig');
+    $this->addFile('src/Plugin/migrate/destination/{class}.php', 'd8/plugin/migrate/destination');
   }
 
 }

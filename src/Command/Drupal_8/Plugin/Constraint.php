@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:plugin:constraint command.
@@ -20,27 +18,23 @@ class Constraint extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->collectDefault();
-    $questions = Utils::pluginQuestions();
+    $vars = &$this->collectDefault();
 
-    $default_plugin_id = function (array $vars) {
-      // Unlike other plugin types. Constraint IDs use camel case.
-      return Utils::camelize($vars['name'] . $vars['plugin_label']);
-    };
-    $questions['plugin_id'] = new Question('Constraint ID', $default_plugin_id);
+    $vars['plugin_label'] = $this->ask('Plugin label', 'Example', [Utils::class, 'validateRequired']);
+
+    // Unlike other plugin types. Constraint IDs use camel case.
+    $default_plugin_id = '{name|camelize}{plugin_label|camelize}';
     $plugin_id_validator = function ($value) {
       if (!preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/i', $value)) {
         throw new \UnexpectedValueException('The value is not correct constraint ID.');
       }
       return $value;
     };
-    $questions['plugin_id']->setValidator($plugin_id_validator);
+    $vars['plugin_id'] = $this->ask('Constraint ID', $default_plugin_id, $plugin_id_validator);
 
-    $default_class = function ($vars) {
-      $unprefixed_plugin_id = preg_replace('/^' . Utils::camelize($vars['machine_name']) . '/', '', $vars['plugin_id']);
-      return Utils::camelize($unprefixed_plugin_id) . 'Constraint';
-    };
-    $questions['class'] = new Question('Plugin class', $default_class);
+    $unprefixed_plugin_id = preg_replace('/^' . Utils::camelize($vars['machine_name']) . '/', '', $vars['plugin_id']);
+    $default_class = Utils::camelize($unprefixed_plugin_id) . 'Constraint';
+    $vars['class'] = $this->ask('Plugin class', $default_class);
 
     $input_types = [
       'entity' => 'Entity',
@@ -48,17 +42,14 @@ class Constraint extends ModuleGenerator {
       'item' => 'Item',
       'raw_value' => 'Raw value',
     ];
-    $type_choices = Utils::prepareChoices($input_types);
-    $questions['input_type'] = new ChoiceQuestion('Type of data to validate', $type_choices, 'Item list');
 
-    $vars = &$this->collectVars($questions);
-    $vars['input_type'] = array_search($vars['input_type'], $input_types);
+    $vars['input_type'] = $this->choice('Type of data to validate', $input_types, 'Item list');
 
     $this->addFile('src/Plugin/Validation/Constraint/{class}.php')
-      ->template('d8/plugin/constraint.twig');
+      ->template('d8/plugin/constraint');
 
     $this->addFile('src/Plugin/Validation/Constraint/{class}Validator.php')
-      ->template('d8/plugin/constraint-validator.twig');
+      ->template('d8/plugin/constraint-validator');
   }
 
 }

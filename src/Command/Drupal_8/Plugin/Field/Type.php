@@ -23,13 +23,11 @@ class Type extends PluginGenerator {
     $vars['configurable_storage'] = $this->confirm('Make the field storage configurable?', FALSE);
     $vars['configurable_instance'] = $this->confirm('Make the field instance configurable?', FALSE);
 
-    $this->addFile()
-      ->path('src/Plugin/Field/FieldType/{class}.php')
-      ->template('d8/plugin/field/type.twig');
+    $this->addFile('src/Plugin/Field/FieldType/{class}.php')
+      ->template('d8/plugin/field/type');
 
-    $this->addFile()
-      ->path('config/schema/{machine_name}.schema.yml')
-      ->template('d8/plugin/field/type-schema.twig')
+    $this->addFile('config/schema/{machine_name}.schema.yml')
+      ->template('d8/plugin/field/type-schema')
       ->action('append');
   }
 

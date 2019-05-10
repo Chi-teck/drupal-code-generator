@@ -18,8 +18,7 @@ class RestResource extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Plugin/rest/resource/{class}.php')
-      ->template('d8/plugin/rest-resource.twig');
+    $this->addFile('src/Plugin/rest/resource/{class}.php', 'd8/plugin/rest-resource');
   }
 
 }

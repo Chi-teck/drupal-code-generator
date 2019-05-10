@@ -25,11 +25,11 @@ class ArgumentDefault extends PluginGenerator {
     }
 
     $this->addFile('src/Plugin/views/argument_default/{class}.php')
-      ->template('d8/plugin/views/argument-default.twig');
+      ->template('d8/plugin/views/argument-default');
 
     if ($vars['configurable']) {
       $this->addFile('config/schema/{machine_name}.views.schema.yml')
-        ->template('d8/plugin/views/argument-default-schema.twig')
+        ->template('d8/plugin/views/argument-default-schema')
         ->action('append');
     }
   }

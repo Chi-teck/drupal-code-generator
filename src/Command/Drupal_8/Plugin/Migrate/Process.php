@@ -20,8 +20,7 @@ class Process extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Plugin/migrate/process/{class}.php')
-      ->template('d8/plugin/migrate/process.twig');
+    $this->addFile('src/Plugin/migrate/process/{class}.php', 'd8/plugin/migrate/process');
   }
 
 }

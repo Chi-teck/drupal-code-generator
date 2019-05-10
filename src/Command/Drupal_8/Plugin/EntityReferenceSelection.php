@@ -19,8 +19,7 @@ class EntityReferenceSelection extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-
-    $this->collectDefault();
+    $vars = &$this->collectDefault();
 
     $base_classes = [
       'comment' => 'Drupal\comment\Plugin\EntityReferenceSelection\CommentSelection',
@@ -30,22 +29,17 @@ class EntityReferenceSelection extends ModuleGenerator {
       'user' => 'Drupal\user\Plugin\EntityReferenceSelection\UserSelection',
     ];
 
-    $questions['entity_type'] = new Question('Entity type that can be referenced by this plugin', 'node');
-    $questions['entity_type']->setValidator([Utils::class, 'validateMachineName']);
-    $questions['entity_type']->setAutocompleterValues(array_keys($base_classes));
+    $entity_type_question = new Question('Entity type that can be referenced by this plugin', 'node');
+    $entity_type_question->setValidator([Utils::class, 'validateMachineName']);
+    $entity_type_question->setAutocompleterValues(array_keys($base_classes));
+    $vars['entity_type'] = $this->askQuestion($entity_type_question);
 
-    $questions['plugin_label'] = new Question('Plugin label', 'Advanced {entity_type} selection');
-    $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
+    $vars['plugin_label'] = $this->ask('Plugin label', 'Advanced {entity_type} selection', [Utils::class, 'validateRequired']);
+    $default_plugin_id = $vars['machine_name'] . '_' . Utils::human2machine($vars['plugin_label']);
+    $vars['plugin_id'] = $this->ask('Plugin ID', $default_plugin_id, [Utils::class, 'validateRequired']);
 
-    $questions['plugin_id'] = new Question('Plugin ID', [Utils::class, 'defaultPluginId']);
-    $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
+    $vars['class'] = $this->ask('Plugin class', '{entity_type|camelize}Selection');
 
-    $default_class = function ($vars) {
-      return Utils::camelize($vars['entity_type']) . 'Selection';
-    };
-    $questions['class'] = new Question('Plugin class', $default_class);
-
-    $vars = &$this->collectVars($questions);
     $vars['configurable'] = $this->confirm('Provide additional plugin configuration?', FALSE);
 
     $vars['base_class_full'] = $base_classes[$vars['entity_type']] ??
@@ -54,10 +48,10 @@ class EntityReferenceSelection extends ModuleGenerator {
     $vars['base_class'] = explode('EntityReferenceSelection\\', $vars['base_class_full'])[1];
 
     $this->addFile('src/Plugin/EntityReferenceSelection/{class}.php')
-      ->template('d8/plugin/entity-reference-selection.twig');
+      ->template('d8/plugin/entity-reference-selection');
 
     $this->addFile('config/schema/{machine_name}.schema.yml')
-      ->template('d8/plugin/entity-reference-selection-schema.twig')
+      ->template('d8/plugin/entity-reference-selection-schema')
       ->action('append');
   }
 

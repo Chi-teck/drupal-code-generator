@@ -21,14 +21,12 @@ class Widget extends PluginGenerator {
     $vars = &$this->collectDefault();
     $vars['configurable'] = $this->confirm('Make the widget configurable?', FALSE);
 
-    $this->addFile()
-      ->path('src/Plugin/Field/FieldWidget/{class}.php')
-      ->template('d8/plugin/field/widget.twig');
+    $this->addFile('src/Plugin/Field/FieldWidget/{class}.php')
+      ->template('d8/plugin/field/widget');
 
     if ($vars['configurable']) {
-      $this->addFile()
-        ->path('config/schema/{machine_name}.schema.yml')
-        ->template('d8/plugin/field/widget-schema.twig')
+      $this->addFile('config/schema/{machine_name}.schema.yml')
+        ->template('d8/plugin/field/widget-schema')
         ->action('append');
     }
   }

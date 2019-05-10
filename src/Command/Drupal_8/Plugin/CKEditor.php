@@ -27,13 +27,13 @@ class CKEditor extends PluginGenerator {
     $vars['command_name'] = Utils::camelize($unprefixed_plugin_id, FALSE);
 
     $this->addFile('src/Plugin/CKEditorPlugin/{class}.php')
-      ->template('d8/plugin/_ckeditor/ckeditor.twig');
+      ->template('d8/plugin/_ckeditor/ckeditor');
 
     $this->addFile('js/plugins/{short_plugin_id}/plugin.js')
-      ->template('d8/plugin/_ckeditor/plugin.twig');
+      ->template('d8/plugin/_ckeditor/plugin');
 
     $this->addFile('js/plugins/{short_plugin_id}/dialogs/{short_plugin_id}.js')
-      ->template('d8/plugin/_ckeditor/dialog.twig');
+      ->template('d8/plugin/_ckeditor/dialog');
 
     $this->addFile('js/plugins/{short_plugin_id}/icons/{short_plugin_id}.png')
       ->content(file_get_contents($this->templatePath . '/d8/plugin/_ckeditor/icon.png'))

@@ -22,20 +22,20 @@ class Style extends PluginGenerator {
 
     $this->addFile('src/Plugin/views/style/{class}.php')
       ->path('src/Plugin/views/style/{class}.php')
-      ->template('d8/plugin/views/style-plugin.twig');
+      ->template('d8/plugin/views/style-plugin');
 
-    $this->addFile('templates/views-style-' . str_replace('_', '-', $vars['plugin_id']) . '.html.twig')
-      ->template('d8/plugin/views/style-template.twig');
+    $this->addFile('templates/views-style-{plugin_id|u2h}.html.twig')
+      ->template('d8/plugin/views/style-template');
 
     $this->addFile('{machine_name}.module')
-      ->headerTemplate('d8/file-docs/module.twig')
-      ->template('d8/plugin/views/style-preprocess.twig')
+      ->headerTemplate('d8/file-docs/module')
+      ->template('d8/plugin/views/style-preprocess')
       ->action('append')
       ->headerSize(7);
 
     if ($vars['configurable']) {
       $this->addFile('config/schema/{machine_name}.schema.yml')
-        ->template('d8/plugin/views/style-schema.twig')
+        ->template('d8/plugin/views/style-schema')
         ->action('append');
     }
 

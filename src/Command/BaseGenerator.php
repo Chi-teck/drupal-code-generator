@@ -284,7 +284,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
     array_unshift($choice_labels, NULL);
     unset($choice_labels[0]);
 
-    $answer = $this->io->choice($question, $choice_labels, $default);
+    // Do not use IO choice here as it prints choice key as default value.
+    // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
+    $answer = $this->askQuestion(new ChoiceQuestion($question, $choice_labels, $default));
     return array_search($answer, $choices);
   }
 

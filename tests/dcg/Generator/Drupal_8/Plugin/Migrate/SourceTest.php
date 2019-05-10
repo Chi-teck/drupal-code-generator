@@ -28,7 +28,7 @@ class SourceTest extends GeneratorBaseTest {
       'Module machine name [example]:' => 'example',
       'Plugin ID [example_example]:' => 'example_foo',
       'Plugin class [Foo]:' => 'Foo',
-      $data_type_output => 1,
+      $data_type_output => '2',
     ];
     $fixtures = [
       'src/Plugin/migrate/source/Foo.php' => __DIR__ . '/_source_sql.php',

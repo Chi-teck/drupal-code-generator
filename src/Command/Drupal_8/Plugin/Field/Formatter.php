@@ -22,14 +22,12 @@ class Formatter extends PluginGenerator {
     $vars = &$this->collectDefault();
     $vars['configurable'] = $this->confirm('Make the formatter configurable?', FALSE);
 
-    $this->addFile()
-      ->path('src/Plugin/Field/FieldFormatter/{class}.php')
-      ->template('d8/plugin/field/formatter.twig');
+    $this->addFile('src/Plugin/Field/FieldFormatter/{class}.php')
+      ->template('d8/plugin/field/formatter');
 
     if ($vars['configurable']) {
-      $this->addFile()
-        ->path('config/schema/{machine_name}.schema.yml')
-        ->template('d8/plugin/field/formatter-schema.twig')
+      $this->addFile('config/schema/{machine_name}.schema.yml')
+        ->template('d8/plugin/field/formatter-schema')
         ->action('append');
     }
 

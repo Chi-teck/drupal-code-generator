@@ -18,10 +18,10 @@ class Condition extends PluginGenerator {
     $this->collectDefault();
 
     $this->addFile('src/Plugin/Condition/{class}.php')
-      ->template('d8/plugin/condition.twig');
+      ->template('d8/plugin/condition');
 
     $this->addFile('config/schema/{machine_name}.schema.yml')
-      ->template('d8/plugin/condition-schema.twig')
+      ->template('d8/plugin/condition-schema')
       ->action('append');
   }
 
