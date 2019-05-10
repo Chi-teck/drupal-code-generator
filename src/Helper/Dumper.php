@@ -76,7 +76,7 @@ class Dumper extends Helper implements IOAwareInterface {
 
       if ($dry_run) {
         $this->io->title($file_path);
-        $this->io->write($content);
+        $this->io->writeln($content);
         continue;
       }
 

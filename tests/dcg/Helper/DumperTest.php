@@ -184,15 +184,15 @@ class DumperTest extends BaseTestCase {
 
     // -- Dry dump.
     $assets = [
-      (new Asset())->path('example.txt')->content("Example"),
+      (new Asset())->path('example.txt')->content('Example'),
     ];
     $dumped_assets = $this->dump($assets, NULL, TRUE);
 
     self::assertEquals([], $dumped_assets);
     $expected_output = "\n";
     $expected_output .= " /tmp/dcg_sandbox/example.txt\n";
-    $expected_output .= " ––––––––––––––––––––––––––––––\n";
-    $expected_output .= " Example";
+    $expected_output .= "––––––––––––––––––––––––––––––\n";
+    $expected_output .= "Example\n";
     self::assertOutput($expected_output);
   }
 
