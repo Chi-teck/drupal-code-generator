@@ -59,11 +59,13 @@ class Dumper extends Helper implements IOAwareInterface {
    *   Assets to be dumped.
    * @param string $directory
    *   The working directory.
+   * @param bool $dry_run
+   *   Do not dump the files.
    *
    * @return \DrupalCodeGenerator\Asset[]
    *   A list of created or updated assets.
    */
-  public function dump(array $assets, string $directory) :array {
+  public function dump(array $assets, string $directory, bool $dry_run = FALSE) :array {
 
     $dumped_assets = [];
 
@@ -71,6 +73,12 @@ class Dumper extends Helper implements IOAwareInterface {
 
       $content = $asset->getContent();
       $file_path = $directory . '/' . $asset->getPath();
+
+      if ($dry_run) {
+        $this->io->title($file_path);
+        $this->io->write($content);
+        continue;
+      }
 
       if ($this->filesystem->exists($file_path)) {
 

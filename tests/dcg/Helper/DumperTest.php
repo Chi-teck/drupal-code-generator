@@ -181,6 +181,19 @@ class DumperTest extends BaseTestCase {
     $content = "File header\nRecord 1\nRecord 2";
     self::assertStringEqualsFile($this->directory . '/log.txt', $content);
     self::assertOutput('');
+
+    // -- Dry dump.
+    $assets = [
+      (new Asset())->path('example.txt')->content("Example"),
+    ];
+    $dumped_assets = $this->dump($assets, NULL, TRUE);
+
+    self::assertEquals([], $dumped_assets);
+    $expected_output = "\n";
+    $expected_output .= " /tmp/dcg_sandbox/example.txt\n";
+    $expected_output .= " ––––––––––––––––––––––––––––––\n";
+    $expected_output .= " Example";
+    self::assertOutput($expected_output);
   }
 
   /**
@@ -203,7 +216,7 @@ class DumperTest extends BaseTestCase {
   /**
    * Dumps assets into file system.
    */
-  protected function dump(array $assets, ?bool $replace = NULL) :array {
+  protected function dump(array $assets, ?bool $replace = NULL, bool $dry_run = FALSE) :array {
     $question_helper = new QuestionHelper();
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
@@ -211,7 +224,7 @@ class DumperTest extends BaseTestCase {
     $dumper = new Dumper($this->filesystem, $replace);
     $dumper->io($io);
     $dumper->setHelperSet($helper_set);
-    return $dumper->dump($assets, $this->directory);
+    return $dumper->dump($assets, $this->directory, $dry_run);
   }
 
   /**

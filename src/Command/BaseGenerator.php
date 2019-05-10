@@ -121,6 +121,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
         '-a',
         InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL,
         'Answer to generator question'
+      )
+      ->addOption(
+        'dry-run',
+        NULL,
+        InputOption::VALUE_NONE,
+        'Output the generated code but not save it to file system'
       );
 
     if ($this->alias) {
@@ -188,7 +194,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
     }
 
     $dumped_assets = $this->getHelper('dumper')
-      ->dump($this->getAssets(), $this->getDirectory());
+      ->dump($this->getAssets(), $this->getDirectory(), $input->getOption('dry-run'));
 
     $this->getHelper('result_printer')->printResult($dumped_assets);
 
