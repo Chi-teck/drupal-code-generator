@@ -10,7 +10,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 abstract class PluginGenerator extends ModuleGenerator {
 
-  protected $classSuffix = '';
+  protected $pluginClassSuffix = '';
   protected $pluginLabelQuestion = 'Plugin label';
   protected $pluginLabelDefault = 'Example';
   protected $pluginIdQuestion = 'Plugin ID';
@@ -58,7 +58,7 @@ abstract class PluginGenerator extends ModuleGenerator {
   protected function askPluginClassQuestion() :string {
     if (!$this->pluginClassDefault) {
       $unprefixed_plugin_id = preg_replace('/^' . $this->vars['machine_name'] . '_/', '', $this->vars['plugin_id']);
-      $this->pluginClassDefault = Utils::camelize($unprefixed_plugin_id) . $this->classSuffix;
+      $this->pluginClassDefault = Utils::camelize($unprefixed_plugin_id) . $this->pluginClassSuffix;
     }
     return $this->ask($this->pluginClassQuestion, $this->pluginClassDefault);
   }

@@ -11,7 +11,7 @@ class RestResource extends PluginGenerator {
   protected $description = 'Generates rest resource plugin';
   protected $alias = 'rest-resource';
   protected $label = 'REST resource';
-  protected $classSuffix = 'Resource';
+  protected $pluginClassSuffix = 'Resource';
 
   /**
    * {@inheritdoc}

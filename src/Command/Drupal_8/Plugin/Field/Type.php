@@ -12,7 +12,7 @@ class Type extends PluginGenerator {
   protected $name = 'd8:plugin:field:type';
   protected $description = 'Generates field type plugin';
   protected $alias = 'field-type';
-  protected $classSuffix = 'Item';
+  protected $pluginClassSuffix = 'Item';
 
   /**
    * {@inheritdoc}

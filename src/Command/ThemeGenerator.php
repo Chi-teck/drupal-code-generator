@@ -7,7 +7,6 @@ namespace DrupalCodeGenerator\Command;
  */
 abstract class ThemeGenerator extends BaseGenerator {
 
-
   protected $nameQuestion = 'Theme name';
   protected $machineNameQuestion = 'Theme machine name';
 

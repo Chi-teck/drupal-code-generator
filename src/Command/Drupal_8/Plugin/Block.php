@@ -10,7 +10,7 @@ class Block extends PluginGenerator {
   protected $name = 'd8:plugin:block';
   protected $description = 'Generates block plugin';
   protected $alias = 'block';
-  protected $classSuffix = 'Block';
+  protected $pluginClassSuffix = 'Block';
   protected $pluginLabelQuestion = 'Block admin label';
 
   /**
