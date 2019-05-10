@@ -391,9 +391,41 @@ class UtilsTest extends BaseTestCase {
    * Test callback.
    *
    * @covers \DrupalCodeGenerator\Utils::replaceTokens()
+   * @dataProvider replaceTokensProvider
    */
-  public function testTokenReplace() {
-    static::assertEquals('-=bar=-', Utils::replaceTokens('-={foo}=-', ['foo' => 'bar']));
+  public function testReplaceTokens($input, $vars, $expected_output, bool $exception = FALSE) :void {
+    if ($exception) {
+      self::expectException(\UnexpectedValueException::class);
+      self::expectExceptionMessage($expected_output);
+      Utils::replaceTokens($input, $vars);
+    }
+    else {
+      self::assertEquals($expected_output, Utils::replaceTokens($input, $vars));
+    }
+  }
+
+  /**
+   * Data provider callback for testReplaceTokens().
+   */
+  public function replaceTokensProvider() :array {
+    return [
+      ['-={foo}=-', ['foo' => 'bar'], '-=bar=-'],
+      ['-={foo|camelize}=-', ['foo' => 'bar'], '-=Bar=-'],
+      ['-={foo|u2h}=-', ['foo' => 'alpha_beta'], '-=alpha-beta=-'],
+      ['-={foo|h2u}=-', ['foo' => 'alpha-beta'], '-=alpha_beta=-'],
+      [
+        '-={foo|h2u|camelize}=-',
+        ['foo' => 'alpha-beta'],
+        'Filter "h2u|camelize" is not defined',
+        TRUE,
+      ],
+      [
+        '-={foo|wrong}=-',
+        ['foo' => 'alpha-beta'],
+        'Filter "wrong" is not defined',
+        TRUE,
+      ],
+    ];
   }
 
   /**

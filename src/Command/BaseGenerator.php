@@ -156,11 +156,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
 
     $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
 
+    // Render all assets.
+    $renderer = $this->getHelper('renderer');
+
+    $this->processVars();
+
     $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
     $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
 
-    // Render all assets.
-    $renderer = $this->getHelper('renderer');
     foreach ($this->getAssets() as $asset) {
       // Supply the asset with all collected variables if it has no local ones.
       if (!$asset->getVars()) {
@@ -253,9 +256,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    * Asks a question.
    */
   protected function ask(string $question, $default = NULL, $validator = NULL) {
-    if ($default && $this->vars) {
-      $default = Utils::replaceTokens($default, $this->vars);
-    }
+    $this->processVars();
+    $question = Utils::replaceTokens($question, $this->vars);
+    $default = Utils::replaceTokens($default, $this->vars);
     return $this->io->ask($question, $default, $validator);
   }
 
@@ -263,6 +266,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    * Asks for confirmation.
    */
   protected function confirm(string $question, bool $default = TRUE) :bool {
+    $this->processVars();
+    $question = Utils::replaceTokens($question, $this->vars);
     return $this->io->confirm($question, $default);
   }
 
@@ -270,9 +275,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    * Asks a choice question.
    */
   protected function choice(string $question, array $choices, $default = NULL) {
-    if ($default && $this->vars) {
-      $default = Utils::replaceTokens($default, $this->vars);
-    }
+    $this->processVars();
+    $question = Utils::replaceTokens($question, $this->vars);
 
     // The choices can be an associative array.
     $choice_labels = array_values($choices);
@@ -433,6 +437,17 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
     else {
       $question->__construct($question->getQuestion(), $default_value);
     }
+  }
+
+  /**
+   * Processes collected variables.
+   */
+  protected function processVars() {
+    array_walk_recursive($this->vars, function (&$var, string $key, array $vars) :void {
+      if (is_string($var)) {
+        $var = Utils::replaceTokens($var, $vars);
+      }
+    }, $this->vars);
   }
 
 }

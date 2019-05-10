@@ -197,22 +197,50 @@ class Utils {
   /**
    * Replaces all tokens in a given string with appropriate values.
    *
-   * @param string $text
+   * @param string|null $text
    *   A string potentially containing replaceable tokens.
    * @param array $data
    *   An array where keys are token names and values are replacements.
    *
-   * @return string
+   * @return string|null
    *   Text with tokens replaced.
    */
-  public static function replaceTokens(string $text, array $data) :string {
-    $tokens = [];
-    foreach ($data as $var_name => $var) {
-      if (is_string($var)) {
-        $tokens['{' . $var_name . '}'] = $var;
-      }
+  public static function replaceTokens(?string $text, array $data) :?string {
+
+    if (!$text || !$data) {
+      return $text;
     }
-    return str_replace(array_keys($tokens), array_values($tokens), $text);
+
+    $process_token = function (array $matches) use ($data) :string {
+      list($name, $filter) = array_pad(explode('|', $matches[1], 2), 2, NULL);
+
+      if (!array_key_exists($name, $data)) {
+        throw new \UnexpectedValueException(sprintf('Variable "%s" is not defined', $name));
+      }
+      $result = (string) $data[$name];
+
+      if ($filter) {
+        switch ($filter) {
+          case 'u2h';
+            $result = str_replace('_', '-', $result);
+            break;
+
+          case 'h2u';
+            $result = str_replace('-', '_', $result);
+            break;
+
+          case 'camelize':
+            $result = Utils::camelize($result);
+            break;
+
+          default;
+            throw new \UnexpectedValueException(sprintf('Filter "%s" is not defined', $filter));
+        }
+      }
+      return $result;
+    };
+
+    return preg_replace_callback('/{(.+?)\}/', $process_token, $text);
   }
 
   /**

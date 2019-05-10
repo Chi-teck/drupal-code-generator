@@ -79,11 +79,7 @@ class Asset {
    *   Asset path.
    */
   public function getPath() :?string {
-    $path = $this->path;
-    if ($path && $this->getVars()) {
-      $path = Utils::replaceTokens($path, $this->getVars());
-    }
-    return $path;
+    return Utils::replaceTokens($this->path, $this->getVars());
   }
 
   /**
@@ -103,7 +99,7 @@ class Asset {
    *   Asset header template.
    */
   public function getHeaderTemplate() :?string {
-    return $this->headerTemplate;
+    return Utils::replaceTokens($this->headerTemplate, $this->getVars());
   }
 
   /**
@@ -113,7 +109,7 @@ class Asset {
    *   Asset template.
    */
   public function getTemplate() :?string {
-    return $this->template;
+    return Utils::replaceTokens($this->template, $this->getVars());
   }
 
   /**
