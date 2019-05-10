@@ -2,13 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:plugin:constraint command.
  */
-class Constraint extends ModuleGenerator {
+class Constraint extends PluginGenerator {
 
   protected $name = 'd8:plugin:constraint';
   protected $description = 'Generates constraint plugin';
@@ -20,8 +19,25 @@ class Constraint extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
 
-    $vars['plugin_label'] = $this->ask('Plugin label', 'Example', [Utils::class, 'validateRequired']);
+    $input_types = [
+      'entity' => 'Entity',
+      'item_list' => 'Item list',
+      'item' => 'Item',
+      'raw_value' => 'Raw value',
+    ];
+    $vars['input_type'] = $this->choice('Type of data to validate', $input_types, 'Item list');
 
+    $this->addFile('src/Plugin/Validation/Constraint/{class}.php')
+      ->template('d8/plugin/constraint');
+
+    $this->addFile('src/Plugin/Validation/Constraint/{class}Validator.php')
+      ->template('d8/plugin/constraint-validator');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function askPluginIdQuestion(): string {
     // Unlike other plugin types. Constraint IDs use camel case.
     $default_plugin_id = '{name|camelize}{plugin_label|camelize}';
     $plugin_id_validator = function ($value) {
@@ -30,26 +46,16 @@ class Constraint extends ModuleGenerator {
       }
       return $value;
     };
-    $vars['plugin_id'] = $this->ask('Constraint ID', $default_plugin_id, $plugin_id_validator);
+    return $this->ask('Constraint ID', $default_plugin_id, $plugin_id_validator);
+  }
 
-    $unprefixed_plugin_id = preg_replace('/^' . Utils::camelize($vars['machine_name']) . '/', '', $vars['plugin_id']);
+  /**
+   * {@inheritdoc}
+   */
+  protected function askPluginClassQuestion(): string {
+    $unprefixed_plugin_id = preg_replace('/^' . Utils::camelize($this->vars['machine_name']) . '/', '', $this->vars['plugin_id']);
     $default_class = Utils::camelize($unprefixed_plugin_id) . 'Constraint';
-    $vars['class'] = $this->ask('Plugin class', $default_class);
-
-    $input_types = [
-      'entity' => 'Entity',
-      'item_list' => 'Item list',
-      'item' => 'Item',
-      'raw_value' => 'Raw value',
-    ];
-
-    $vars['input_type'] = $this->choice('Type of data to validate', $input_types, 'Item list');
-
-    $this->addFile('src/Plugin/Validation/Constraint/{class}.php')
-      ->template('d8/plugin/constraint');
-
-    $this->addFile('src/Plugin/Validation/Constraint/{class}Validator.php')
-      ->template('d8/plugin/constraint-validator');
+    return $this->ask('Plugin class', $default_class);
   }
 
 }

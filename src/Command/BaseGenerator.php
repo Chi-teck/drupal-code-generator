@@ -90,6 +90,20 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   protected $vars = [];
 
   /**
+   * Name question.
+   *
+   * @var string
+   */
+  protected $nameQuestion = 'Extension name';
+
+  /**
+   * Machine name question.
+   *
+   * @var string
+   */
+  protected $machineNameQuestion = 'Extension machine name';
+
+  /**
    * {@inheritdoc}
    */
   protected function configure():void {
@@ -184,12 +198,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
 
   /**
    * Generates assets.
-   *
-   * @todo Make it abstract.
    */
-  protected function generate() :void {
-
-  }
+  abstract protected function generate() :void;
 
   /**
    * {@inheritdoc}
@@ -418,13 +428,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   }
 
   /**
-   * Collects default questions.
-   */
-  protected function &collectDefault() {
-    return $this->collectVars([]);
-  }
-
-  /**
    * Sets question default value.
    *
    * @param \Symfony\Component\Console\Question\Question $question
@@ -444,12 +447,46 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   /**
    * Processes collected variables.
    */
-  protected function processVars() {
+  protected function processVars() :void {
     array_walk_recursive($this->vars, function (&$var, string $key, array $vars) :void {
       if (is_string($var)) {
         $var = Utils::replaceTokens($var, $vars);
       }
     }, $this->vars);
+  }
+
+  /**
+   * Collects default variables.
+   */
+  protected function &collectDefault() :array {
+    if ($this->nameQuestion) {
+      $this->vars['name'] = $this->askNameQuestion();
+    }
+    if ($this->machineNameQuestion) {
+      $this->vars['machine_name'] = $this->askMachineNameQuestion();
+    }
+    return $this->vars;
+  }
+
+  /**
+   * Asks name question.
+   */
+  protected function askNameQuestion() :string {
+    $root_directory = basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
+    $default_value = Utils::machine2human($root_directory);
+    $name_question = new Question($this->nameQuestion, $default_value);
+    $name_question->setValidator([Utils::class, 'validateRequired']);
+    return $this->askQuestion($name_question);
+  }
+
+  /**
+   * Asks machine name question.
+   */
+  protected function askMachineNameQuestion() :string {
+    $default_value = Utils::human2machine($this->vars['name'] ?? basename($this->directory));
+    $machine_name_question = new Question($this->machineNameQuestion, $default_value);
+    $machine_name_question->setValidator([Utils::class, 'validateMachineName']);
+    return $this->askQuestion($machine_name_question);
   }
 
 }

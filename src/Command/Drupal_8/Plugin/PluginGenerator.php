@@ -15,39 +15,52 @@ abstract class PluginGenerator extends ModuleGenerator {
   protected $pluginLabelDefault = 'Example';
   protected $pluginIdQuestion = 'Plugin ID';
   protected $pluginIdDefault;
+  protected $pluginClassQuestion = 'Plugin class';
+  protected $pluginClassDefault;
 
   /**
    * {@inheritdoc}
    */
   protected function &collectDefault() :array {
     parent::collectDefault();
-
-    $vars = &$this->vars;
-
     if ($this->pluginLabelQuestion) {
-      $vars['plugin_label'] = $this->ask(
-        $this->pluginLabelQuestion,
-        $this->pluginLabelDefault,
-        [Utils::class, 'validateRequired']
-      );
+      $this->vars['plugin_label'] = $this->askPluginLabelQuestion();
     }
-
     if ($this->pluginIdQuestion) {
-      if ($this->pluginIdDefault === NULL) {
-        $this->pluginIdDefault = $vars['machine_name'] . '_' . Utils::human2machine($vars['plugin_label']);
-      }
-      $vars['plugin_id'] = $this->ask(
-        $this->pluginIdQuestion,
-        $this->pluginIdDefault,
-        [Utils::class, 'validateMachineName']
-      );
+      $this->vars['plugin_id'] = $this->askPluginIdQuestion();
     }
-
-    $unprefixed_plugin_id = preg_replace('/^' . $this->vars['machine_name'] . '_/', '', $vars['plugin_id']);
-    $default_class = Utils::camelize($unprefixed_plugin_id) . $this->classSuffix;
-    $vars['class'] = $this->ask('Plugin class', $default_class);
-
+    if ($this->pluginClassQuestion) {
+      $this->vars['class'] = $this->askPluginClassQuestion();
+    }
     return $this->vars;
+  }
+
+  /**
+   * Asks plugin label question.
+   */
+  protected function askPluginLabelQuestion() :string {
+    return $this->ask($this->pluginLabelQuestion, $this->pluginLabelDefault, [Utils::class, 'validateRequired']);
+  }
+
+  /**
+   * Asks plugin ID question.
+   */
+  protected function askPluginIdQuestion() :string {
+    if ($this->pluginIdDefault === NULL) {
+      $this->pluginIdDefault = $this->vars['machine_name'] . '_' . Utils::human2machine($this->vars['plugin_label']);
+    }
+    return $this->ask($this->pluginIdQuestion, $this->pluginIdDefault, [Utils::class, 'validateMachineName']);
+  }
+
+  /**
+   * Asks plugin class question.
+   */
+  protected function askPluginClassQuestion() :string {
+    if (!$this->pluginClassDefault) {
+      $unprefixed_plugin_id = preg_replace('/^' . $this->vars['machine_name'] . '_/', '', $this->vars['plugin_id']);
+      $this->pluginClassDefault = Utils::camelize($unprefixed_plugin_id) . $this->classSuffix;
+    }
+    return $this->ask($this->pluginClassQuestion, $this->pluginClassDefault);
   }
 
 }
