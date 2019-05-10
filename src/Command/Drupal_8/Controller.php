@@ -26,9 +26,7 @@ class Controller extends ModuleGenerator {
 
     $this->collectVars($questions);
 
-    if ($this->confirm('Would you like to inject dependencies?', FALSE)) {
-      $this->collectServices();
-    }
+    $this->collectServices(FALSE);
 
     if ($this->confirm('Would you like to create a route for this controller?')) {
       $route_path = '/' . str_replace('_', '-', $vars['machine_name']) . '/example';

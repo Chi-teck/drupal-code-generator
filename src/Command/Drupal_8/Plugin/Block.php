@@ -22,9 +22,7 @@ class Block extends PluginGenerator {
     $vars['category'] = $this->ask('Block category', 'Custom');
     $vars['configurable'] = $this->confirm('Make the block configurable?', FALSE);
 
-    if ($this->confirm('Would you like to inject dependencies?', FALSE)) {
-      $this->collectServices();
-    }
+    $this->collectServices(FALSE);
 
     $vars['access'] = $this->confirm('Create access callback?', FALSE);
 

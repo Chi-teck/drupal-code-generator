@@ -19,11 +19,7 @@ class TwigExtension extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}TwigExtension');
-
-    if ($this->confirm('Would you like to inject dependencies?')) {
-      $this->collectServices();
-    }
-
+    $this->collectServices();
     $this->addFile('src/{class}.php', 'd8/service/twig-extension');
     $this->addServicesFile()
       ->template('d8/service/twig-extension.services');

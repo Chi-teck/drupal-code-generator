@@ -37,7 +37,11 @@ abstract class ModuleGenerator extends BaseGenerator {
    * @return array
    *   List of collected services.
    */
-  protected function collectServices() :array {
+  protected function collectServices(bool $default = TRUE) :array {
+
+    if (!$this->confirm('Would you like to inject dependencies?', $default)) {
+      return $this->vars['services'] = [];
+    }
 
     $service_definitions = self::getServiceDefinitions();
     $service_ids = array_keys($service_definitions);

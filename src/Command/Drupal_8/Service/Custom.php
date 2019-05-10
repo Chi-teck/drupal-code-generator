@@ -25,9 +25,7 @@ class Custom extends ModuleGenerator {
     $service = preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
     $vars['class'] = $this->ask('Class', Utils::camelize($service), [Utils::class, 'validateClassName']);
 
-    if ($this->confirm('Would you like to inject dependencies?')) {
-      $this->collectServices();
-    }
+    $this->collectServices();
 
     $this->addFile('src/{class}.php', 'd8/service/custom');
     $this->addServicesFile()

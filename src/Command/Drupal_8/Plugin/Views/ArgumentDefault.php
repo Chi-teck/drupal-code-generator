@@ -20,9 +20,7 @@ class ArgumentDefault extends PluginGenerator {
     $vars = &$this->collectDefault();
     $vars['configurable'] = $this->confirm('Make the plugin configurable?', FALSE);
 
-    if ($this->confirm('Would you like to inject dependencies?', FALSE)) {
-      $this->collectServices();
-    }
+    $this->collectServices(FALSE);
 
     $this->addFile('src/Plugin/views/argument_default/{class}.php')
       ->template('d8/plugin/views/argument-default');
