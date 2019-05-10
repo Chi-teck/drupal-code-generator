@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:service:path-processor command.
@@ -19,20 +17,12 @@ class PathProcessor extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $default_class = function ($vars) {
-      return 'PathProcessor' . Utils::camelize($vars['name']);
-    };
-    $questions['class'] = new Question('Class', $default_class);
+    $vars = &$this->collectDefault();
+    $vars['class'] = $this->ask('Class', 'PathProcessor{machine_name|camelize}');
 
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('src/PathProcessor/{class}.php')
-      ->template('d8/service/path-processor.twig');
-
+    $this->addFile('src/PathProcessor/{class}.php', 'd8/service/path-processor');
     $this->addServicesFile()
-      ->template('d8/service/path-processor.services.twig');
+      ->template('d8/service/path-processor.services');
   }
 
 }

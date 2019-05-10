@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:service:event-subscriber command.
@@ -18,17 +17,11 @@ class EventSubscriber extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-
-    $vars = &$this->collectVars($questions);
-    $vars['class'] = Utils::camelize($vars['name']) . 'Subscriber';
-
-    $this->addFile()
-      ->path('src/EventSubscriber/{class}.php')
-      ->template('d8/service/event-subscriber.twig');
-
+    $vars = &$this->collectDefault();
+    $vars['class'] = '{machine_name|camelize}Subscriber';
+    $this->addFile('src/EventSubscriber/{class}.php', 'd8/service/event-subscriber');
     $this->addServicesFile()
-      ->template('d8/service/event-subscriber.services.twig');
+      ->template('d8/service/event-subscriber.services');
   }
 
 }

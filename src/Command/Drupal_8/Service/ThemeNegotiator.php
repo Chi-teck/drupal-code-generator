@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:service:theme-negotiator command.
@@ -19,20 +17,11 @@ class ThemeNegotiator extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $default_class = function ($vars) {
-      return Utils::camelize($vars['name']) . 'Negotiator';
-    };
-    $questions['class'] = new Question('Class', $default_class);
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('src/Theme/{class}.php')
-      ->template('d8/service/theme-negotiator.twig');
-
+    $vars = &$this->collectDefault();
+    $vars['class'] = $this->ask('Class', '{machine_name|camelize}Negotiator');
+    $this->addFile('src/Theme/{class}.php', 'd8/service/theme-negotiator');
     $this->addServicesFile()
-      ->template('d8/service/theme-negotiator.services.twig');
+      ->template('d8/service/theme-negotiator.services');
   }
 
 }

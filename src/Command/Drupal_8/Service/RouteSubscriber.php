@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:service:route-subscriber command.
@@ -18,17 +17,11 @@ class RouteSubscriber extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-
-    $vars = &$this->collectVars($questions);
-    $vars['class'] = Utils::camelize($vars['name']) . 'RouteSubscriber';
-
-    $this->addFile()
-      ->path('src/EventSubscriber/{class}.php')
-      ->template('d8/service/route-subscriber.twig');
-
+    $vars = &$this->collectDefault();
+    $vars['class'] = '{machine_name|camelize}RouteSubscriber';
+    $this->addFile('src/EventSubscriber/{class}.php', 'd8/service/route-subscriber');
     $this->addServicesFile()
-      ->template('d8/service/route-subscriber.services.twig');
+      ->template('d8/service/route-subscriber.services');
   }
 
 }

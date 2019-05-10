@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:service:request-policy command.
@@ -19,16 +17,11 @@ class RequestPolicy extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['class'] = new Question('Class', 'Example');
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('src/PageCache/{class}.php')
-      ->template('d8/service/request-policy.twig');
-
+    $vars = &$this->collectDefault();
+    $vars['class'] = $this->ask('Class', 'Example');
+    $this->addFile('src/PageCache/{class}.php', 'd8/service/request-policy');
     $this->addServicesFile()
-      ->template('d8/service/request-policy.services.twig');
+      ->template('d8/service/request-policy.services');
   }
 
 }

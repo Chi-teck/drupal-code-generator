@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:service:breadcrumb-builder command.
@@ -19,21 +17,12 @@ class BreadcrumbBuilder extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $default_class = function ($vars) {
-      return Utils::camelize($vars['name']) . 'BreadcrumbBuilder';
-    };
-    $questions['class'] = new Question('Class', $default_class);
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('src/{class}.php')
-      ->template('d8/service/breadcrumb-builder.twig');
-
+    $vars = &$this->collectDefault();
+    $vars['class'] = $this->ask('Class', '{machine_name|camelize}BreadcrumbBuilder');
+    $this->addFile('src/{class}.php', 'd8/service/breadcrumb-builder');
     $this->addServicesFile()
       ->path('{machine_name}.services.yml')
-      ->template('d8/service/breadcrumb-builder.services.twig');
+      ->template('d8/service/breadcrumb-builder.services');
   }
 
 }

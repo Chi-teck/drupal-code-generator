@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:service:access-checker command.
@@ -19,27 +17,21 @@ class AccessChecker extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['applies_to'] = new Question('Applies to', '_foo');
-    $questions['applies_to']->setValidator(function ($value) {
+    $vars = &$this->collectDefault();
+
+    $validator = function ($value) {
       if (!preg_match('/^_[a-z0-9_]*[a-z0-9]$/', $value)) {
         throw new \UnexpectedValueException('The value is not correct name for "applies_to" property.');
       }
       return $value;
-    });
-    $default_class = function ($vars) {
-      return Utils::camelize($vars['applies_to']) . 'AccessChecker';
     };
-    $questions['class'] = new Question('Class', $default_class);
 
-    $this->collectVars($questions);
+    $vars['applies_to'] = $this->ask('Applies to', '_foo', $validator);
+    $vars['class'] = $this->ask('Class', '{applies_to|camelize}AccessChecker');
 
-    $this->addFile()
-      ->path('src/Access/{class}.php')
-      ->template('d8/service/access-checker.twig');
-
+    $this->addFile('src/Access/{class}.php', 'd8/service/access-checker');
     $this->addServicesFile()
-      ->template('d8/service/access-checker.services.twig');
+      ->template('d8/service/access-checker.services');
   }
 
 }

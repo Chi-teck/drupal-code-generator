@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:service:logger command.
@@ -19,17 +17,11 @@ class Logger extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['class'] = new Question('Class', 'FileLog');
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('src/Logger/{class}.php')
-      ->template('d8/service/logger.twig');
-
+    $vars = &$this->collectDefault();
+    $vars['class'] = $this->ask('Class', 'FileLog');
+    $this->addFile('src/Logger/{class}.php', 'd8/service/logger');
     $this->addServicesFile()
-      ->template('d8/service/logger.services.twig');
+      ->template('d8/service/logger.services');
   }
 
 }
