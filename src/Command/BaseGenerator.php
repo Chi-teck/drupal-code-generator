@@ -250,25 +250,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   }
 
   /**
-   * Asks the user for template variables.
-   *
-   * @param array $questions
-   *   List of questions that the user should answer.
-   * @param array $vars
-   *   Array of predefined template variables.
-   *
-   * @return array
-   *   Template variables.
-   *
-   * @see \DrupalCodeGenerator\InputHandler::collectVars()
-   */
-  protected function &collectVars(array $questions, array $vars = []) :array {
-    $vars = $vars ?: $this->vars;
-    $this->vars += $this->getHelper('input_handler')->collectVars($questions, $vars);
-    return $this->vars;
-  }
-
-  /**
    * Asks a question.
    */
   protected function ask(string $question, $default = NULL, $validator = NULL) {
@@ -310,11 +291,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    * Asks a question.
    */
   protected function askQuestion(Question $question) {
-    $default_value = $question->getDefault();
-    if ($default_value) {
-      $default_value = Utils::replaceTokens($default_value, $this->vars);
-    }
-    $this->setQuestionDefault($question, $default_value);
     return $this->io->askQuestion($question);
   }
 
@@ -361,23 +337,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    */
   protected function addDirectory(string $path = NULL) :Asset {
     return $this->addAsset('directory')->path($path);
-  }
-
-  /**
-   * Sets question default value.
-   *
-   * @param \Symfony\Component\Console\Question\Question $question
-   *   The question to update.
-   * @param mixed $default_value
-   *   Default value for the question.
-   */
-  protected function setQuestionDefault(Question $question, $default_value) :void {
-    if ($question instanceof ChoiceQuestion) {
-      $question->__construct($question->getQuestion(), $question->getChoices(), $default_value);
-    }
-    else {
-      $question->__construct($question->getQuestion(), $default_value);
-    }
   }
 
   /**

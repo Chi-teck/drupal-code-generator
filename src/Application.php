@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator;
 
 use DrupalCodeGenerator\Helper\Dumper;
-use DrupalCodeGenerator\Helper\InputHandler;
 use DrupalCodeGenerator\Helper\LoggerFactory;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\Renderer;
@@ -44,7 +43,6 @@ class Application extends BaseApplication {
       new QuestionHelper(),
       new Dumper(new Filesystem()),
       new Renderer(new TwigEnvironment(new \Twig_Loader_Filesystem())),
-      new InputHandler(),
       new ResultPrinter(),
       new LoggerFactory(),
     ]);
