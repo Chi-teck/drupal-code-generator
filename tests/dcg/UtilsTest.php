@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -17,38 +16,6 @@ class UtilsTest extends BaseTestCase {
   public function setUp() {
     parent::setUp();
     (new Filesystem())->dumpFile($this->directory . '/foo/foo.info.yml', 'Content.');
-  }
-
-  /**
-   * Test callback.
-   *
-   * @param string $machine_name
-   *   Module machine name.
-   * @param string $plugin_label
-   *   Plugin label.
-   * @param string $expected_plugin_id
-   *   Expected default plugin ID.
-   *
-   * @covers \DrupalCodeGenerator\Utils::defaultPluginId
-   * @dataProvider defaultPluginIdProvider
-   */
-  public function testDefaultPluginId($machine_name, $plugin_label, $expected_plugin_id) {
-    $vars = [
-      'machine_name' => $machine_name,
-      'plugin_label' => $plugin_label,
-    ];
-    static::assertEquals($expected_plugin_id, Utils::defaultPluginId($vars));
-  }
-
-  /**
-   * Data provider callback for testDefaultPluginId().
-   */
-  public function defaultPluginIdProvider() {
-    return [
-      ['foo', 'Hello world', 'foo_hello_world'],
-      ['bar', 'Ok*123', 'bar_ok_123'],
-      ['abc', ' Hello world - %^$&*(^()& !', 'abc_hello_world'],
-    ];
   }
 
   /**
@@ -362,34 +329,6 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::moduleQuestions
-   */
-  public function testModuleQuestions() {
-    $questions['name'] = new Question('Module name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-    $questions['machine_name'] = new Question('Module machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    static::assertEquals($questions, Utils::moduleQuestions());
-  }
-
-  /**
-   * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::pluginClassQuestion
-   */
-  public function testPluginClassQuestion() {
-    $question = Utils::pluginClassQuestion('Formatter');
-    self::assertEquals('Plugin class', $question->getQuestion());
-
-    $default = $question->getDefault();
-    $vars['machine_name'] = 'example';
-    $vars['plugin_id'] = 'example_foo';
-    static::assertEquals($default($vars), 'FooFormatter');
-  }
-
-  /**
-   * Test callback.
-   *
    * @covers \DrupalCodeGenerator\Utils::replaceTokens()
    * @dataProvider replaceTokensProvider
    */
@@ -437,25 +376,6 @@ class UtilsTest extends BaseTestCase {
     static::assertEquals('cats', Utils::pluralize('cat'));
     static::assertEquals('flies', Utils::pluralize('fly'));
     static::assertEquals('bosses', Utils::pluralize('boss'));
-  }
-
-  /**
-   * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::prepareChoices()
-   */
-  public function testPrepareChoices() {
-    $expected_choices = [
-      1 => 'Foo',
-      2 => 'Bar',
-      3 => 'Qux',
-    ];
-    $raw_choices = [
-      'foo' => 'Foo',
-      'bar' => 'Bar',
-      'qux' => 'Qux',
-    ];
-    static::assertEquals($expected_choices, Utils::prepareChoices($raw_choices));
   }
 
 }

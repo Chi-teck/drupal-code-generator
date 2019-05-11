@@ -2,19 +2,10 @@
 
 namespace DrupalCodeGenerator;
 
-use Symfony\Component\Console\Question\Question;
-
 /**
  * Helper methods for code generators.
  */
 class Utils {
-
-  /**
-   * Creates default plugin ID.
-   */
-  public static function defaultPluginId(array $vars) :string {
-    return $vars['machine_name'] . '_' . self::human2machine($vars['plugin_label']);
-  }
 
   /**
    * Transforms a machine name to human name.
@@ -116,46 +107,6 @@ class Utils {
       }
       return $value;
     };
-  }
-
-  /**
-   * Returns default questions for module generators.
-   *
-   * @return \Symfony\Component\Console\Question\Question[]
-   *   Array of module questions.
-   */
-  public static function moduleQuestions() :array {
-    $questions['name'] = new Question('Module name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-    $questions['machine_name'] = new Question('Module machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    return $questions;
-  }
-
-  /**
-   * Returns default questions for plugin generators.
-   *
-   * @return \Symfony\Component\Console\Question\Question[]
-   *   Array of plugin questions.
-   */
-  public static function pluginQuestions(string $class_suffix = '') :array {
-    $questions['plugin_label'] = new Question('Plugin label', 'Example');
-    $questions['plugin_label']->setValidator([Utils::class, 'validateRequired']);
-    $questions['plugin_id'] = new Question('Plugin ID', [Utils::class, 'defaultPluginId']);
-    $questions['plugin_id']->setValidator([Utils::class, 'validateMachineName']);
-    $questions['class'] = static::pluginClassQuestion($class_suffix);
-    return $questions;
-  }
-
-  /**
-   * Creates plugin class question.
-   */
-  public static function pluginClassQuestion(string $suffix = '') :Question {
-    $default_class = function ($vars) use ($suffix) {
-      $unprefixed_plugin_id = preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
-      return Utils::camelize($unprefixed_plugin_id) . $suffix;
-    };
-    return new Question('Plugin class', $default_class);
   }
 
   /**
@@ -263,24 +214,6 @@ class Utils {
       default:
         return $string . 's';
     }
-  }
-
-  /**
-   * Prepares choices.
-   *
-   * @param array $raw_choices
-   *   The choices to be prepared.
-   *
-   * @return array
-   *   The prepared choices.
-   */
-  public static function prepareChoices(array $raw_choices) :array {
-    // The $raw_choices can be an associative array.
-    $choices = array_values($raw_choices);
-    // Start choices list form '1'.
-    array_unshift($choices, NULL);
-    unset($choices[0]);
-    return $choices;
   }
 
 }
