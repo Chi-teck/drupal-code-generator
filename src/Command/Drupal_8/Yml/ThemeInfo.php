@@ -2,14 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\ThemeGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:yml:theme-info command.
  */
-class ThemeInfo extends BaseGenerator {
+class ThemeInfo extends ThemeGenerator {
 
   protected $name = 'd8:yml:theme-info';
   protected $description = 'Generates a theme info yml file';
@@ -20,24 +19,11 @@ class ThemeInfo extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['name'] = new Question('Theme name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-
-    $questions['machine_name'] = new Question('Theme machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-
-    $questions['base_theme'] = new Question('Base theme', 'classy');
-    $questions['base_theme']->setValidator([Utils::class, 'validateMachineName']);
-
-    $questions['description'] = new Question('Description', 'A flexible theme with a responsive, mobile-first layout.');
-
-    $questions['package'] = new Question('Package', 'Custom');
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('{machine_name}.info.yml')
-      ->template('d8/yml/theme-info.twig');
+    $vars = &$this->collectDefault();
+    $vars['base_theme'] = $this->ask('Base theme', 'classy', [Utils::class, 'validateMachineName']);
+    $vars['description'] = $this->ask('Description', 'A flexible theme with a responsive, mobile-first layout.');
+    $vars['package'] = $this->ask('Package', 'Custom');
+    $this->addFile('{machine_name}.info.yml', 'd8/yml/theme-info');
   }
 
 }

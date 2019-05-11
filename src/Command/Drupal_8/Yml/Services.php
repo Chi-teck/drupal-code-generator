@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:yml:services command.
@@ -18,14 +17,9 @@ class Services extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-
-    $vars = &$this->collectVars($questions);
-    $vars['class'] = Utils::camelize($vars['name']);
-
-    $this->addFile()
-      ->path('{machine_name}.services.yml')
-      ->template('d8/yml/services.twig');
+    $vars = &$this->collectDefault();
+    $vars['class'] = '{machine_name|camelize}';
+    $this->addFile('{machine_name}.services.yml', 'd8/yml/services');
   }
 
 }

@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml\Links;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:yml:links:task command.
@@ -14,19 +12,14 @@ class Task extends ModuleGenerator {
   protected $name = 'd8:yml:links:task';
   protected $description = 'Generates a links.task yml file';
   protected $alias = 'task-links';
+  protected $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['machine_name'] = new Question('Module machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('{machine_name}.links.task.yml')
-      ->template('d8/yml/links.task.twig');
+    $this->collectDefault();
+    $this->addFile('{machine_name}.links.task.yml', 'd8/yml/links.task');
   }
 
 }

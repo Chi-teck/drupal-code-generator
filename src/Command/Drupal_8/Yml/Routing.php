@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:yml:routing command.
@@ -18,14 +17,9 @@ class Routing extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-
-    $vars = &$this->collectVars($questions);
-    $vars['class'] = Utils::camelize($vars['machine_name']) . 'Controller';
-
-    $this->addFile()
-      ->path('{machine_name}.routing.yml')
-      ->template('d8/yml/routing.twig');
+    $vars = &$this->collectDefault();
+    $vars['class'] = '{machine_name|camelize}Controller';
+    $this->addFile('{machine_name}.routing.yml', 'd8/yml/routing');
   }
 
 }

@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:yml:module-info command.
@@ -19,20 +17,15 @@ class ModuleInfo extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['description'] = new Question('Description', 'Module description.');
-    $questions['package'] = new Question('Package', 'Custom');
-    $questions['configure'] = new Question('Configuration page (route name)');
-    $questions['dependencies'] = new Question('Dependencies (comma separated)');
-
-    $vars = &$this->collectVars($questions);
+    $vars = &$this->collectDefault();
+    $vars['description'] = $this->ask('Description', 'Module description.');
+    $vars['package'] = $this->ask('Package', 'Custom');
+    $vars['configure'] = $this->ask('Configuration page (route name)');
+    $vars['dependencies'] = $this->ask('Dependencies (comma separated)');
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
-
-    $this->addFile()
-      ->path('{machine_name}.info.yml')
-      ->template('d8/yml/module-info.twig');
+    $this->addFile('{machine_name}.info.yml', 'd8/yml/module-info');
   }
 
 }

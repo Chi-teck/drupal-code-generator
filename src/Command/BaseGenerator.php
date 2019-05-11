@@ -92,14 +92,14 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   /**
    * Name question.
    *
-   * @var string
+   * @var string|null
    */
   protected $nameQuestion = 'Extension name';
 
   /**
    * Machine name question.
    *
-   * @var string
+   * @var string|null
    */
   protected $machineNameQuestion = 'Extension machine name';
 

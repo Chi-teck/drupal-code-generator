@@ -2,32 +2,25 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Yml;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
  * Implements d8:yml:theme-libraries command.
  */
-class ThemeLibraries extends BaseGenerator {
+class ThemeLibraries extends ThemeGenerator {
 
   protected $name = 'd8:yml:theme-libraries';
   protected $description = 'Generates theme libraries yml file';
   protected $alias = 'theme-libraries';
   protected $label = 'Libraries (theme)';
+  protected $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['machine_name'] = new Question('Theme machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('{machine_name}.libraries.yml')
-      ->template('d8/yml/theme-libraries.twig');
+    $this->collectDefault();
+    $this->addFile('{machine_name}.libraries.yml', 'd8/yml/theme-libraries');
   }
 
 }
