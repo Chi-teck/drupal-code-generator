@@ -57,7 +57,7 @@ class Project extends BaseGenerator {
       'proprietary',
     ];
     $license_question->setAutocompleterValues($licenses);
-    $vars['license'] = $this->askQuestion($license_question);
+    $vars['license'] = $this->io->askQuestion($license_question);
 
     // Suggest most typical document roots.
     $document_roots = [
@@ -75,7 +75,7 @@ class Project extends BaseGenerator {
       return $value == '.' ? '' : $value;
     });
     $document_root_question->setAutocompleterValues($document_roots);
-    $vars['document_root'] = $this->askQuestion($document_root_question);
+    $vars['document_root'] = $this->io->askQuestion($document_root_question);
 
     $vars['php'] = $this->ask('PHP version', '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION);
     $vars['drupal'] = $this->ask('Drupal version', self::DRUPAL_DEFAULT_VERSION);
@@ -88,7 +88,7 @@ class Project extends BaseGenerator {
       $drush_installation_question = new Question('Drush installation (require|require-dev)', 'require');
       $drush_installation_question->setValidator(Utils::getOptionsValidator($sections));
       $drush_installation_question->setAutocompleterValues($sections);
-      $vars['drush_installation'] = $this->askQuestion($drush_installation_question);
+      $vars['drush_installation'] = $this->io->askQuestion($drush_installation_question);
     }
 
     $vars['drupal_console'] = $this->confirm('Would you like to install Drupal Console?', !$vars['drush']);
@@ -96,7 +96,7 @@ class Project extends BaseGenerator {
       $dc_installation_question = new Question('Drupal Console installation (require|require-dev)', 'require-dev');
       $dc_installation_question->setValidator(Utils::getOptionsValidator($sections));
       $dc_installation_question->setAutocompleterValues($sections);
-      $vars['drupal_console_installation'] = $this->askQuestion($dc_installation_question);
+      $vars['drupal_console_installation'] = $this->io->askQuestion($dc_installation_question);
     }
 
     $vars['composer_patches'] = $this->confirm('Would you like to install Composer patches plugin?');

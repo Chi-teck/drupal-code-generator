@@ -34,7 +34,7 @@ class Composer extends BaseGenerator {
       'drupal-profile',
       'drupal-drush',
     ]);
-    $vars['type'] = $this->askQuestion($type_question);
+    $vars['type'] = $this->io->askQuestion($type_question);
 
     $vars['drupal_org'] = $this->confirm('Is this project hosted on drupal.org?', FALSE);
 

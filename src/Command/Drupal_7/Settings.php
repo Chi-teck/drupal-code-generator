@@ -22,7 +22,7 @@ class Settings extends BaseGenerator {
     $vars = &$this->vars;
     $db_driver_question = new Question('Database driver', 'mysql');
     $db_driver_question->setAutocompleterValues(['mysql', 'pgsql', 'sqlite']);
-    $vars['db_driver'] = $this->askQuestion($db_driver_question);
+    $vars['db_driver'] = $this->io->askQuestion($db_driver_question);
     $vars['db_name'] = $this->ask('Database name', 'drupal');
     $vars['db_user'] = $this->ask('Database user', 'root');
     $vars['db_password'] = $this->ask('Database password', '123');

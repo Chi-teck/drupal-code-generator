@@ -28,7 +28,7 @@ class Hook extends ModuleGenerator {
     });
     $question->setAutocompleterValues($this->getSupportedHooks());
 
-    $vars['hook_name'] = $this->askQuestion($question);
+    $vars['hook_name'] = $this->io->askQuestion($question);
 
     // Most Drupal hooks are situated in a module file but some are not.
     $special_hooks = [

@@ -283,15 +283,8 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
 
     // Do not use IO choice here as it prints choice key as default value.
     // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
-    $answer = $this->askQuestion(new ChoiceQuestion($question, $choice_labels, $default));
+    $answer = $this->io->askQuestion(new ChoiceQuestion($question, $choice_labels, $default));
     return array_search($answer, $choices);
-  }
-
-  /**
-   * Asks a question.
-   */
-  protected function askQuestion(Question $question) {
-    return $this->io->askQuestion($question);
   }
 
   /**
@@ -371,7 +364,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
     $default_value = Utils::machine2human($root_directory);
     $name_question = new Question($this->nameQuestion, $default_value);
     $name_question->setValidator([Utils::class, 'validateRequired']);
-    return $this->askQuestion($name_question);
+    return $this->io->askQuestion($name_question);
   }
 
   /**
@@ -381,7 +374,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
     $default_value = Utils::human2machine($this->vars['name'] ?? basename($this->directory));
     $machine_name_question = new Question($this->machineNameQuestion, $default_value);
     $machine_name_question->setValidator([Utils::class, 'validateMachineName']);
-    return $this->askQuestion($machine_name_question);
+    return $this->io->askQuestion($machine_name_question);
   }
 
 }
