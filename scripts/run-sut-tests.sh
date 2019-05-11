@@ -278,7 +278,6 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = test ]; then
   $DCG d8:test:webdriver -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
   $DCG d8:test:kernel -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
   $DCG d8:test:unit -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
-  $DCG d8:test:web -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
 
   dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
