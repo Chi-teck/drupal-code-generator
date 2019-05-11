@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -19,17 +18,18 @@ class Hook extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['hook_name'] = new Question('Hook name');
-    $questions['hook_name']->setValidator(function ($value) {
+    $vars = &$this->collectDefault();
+
+    $hook_question = new Question('Hook name');
+    $hook_question->setValidator(function ($value) {
       if (!in_array($value, $this->supportedHooks())) {
         throw new \UnexpectedValueException('The value is not correct class name.');
       }
       return $value;
     });
-    $questions['hook_name']->setAutocompleterValues($this->supportedHooks());
+    $hook_question->setAutocompleterValues($this->supportedHooks());
 
-    $vars = $this->collectVars($questions);
+    $vars['hook_name'] = $this->askQuestion($hook_question);
 
     // Most Drupal hooks are situated in a module file but some are not.
     $special_hooks = [
@@ -94,18 +94,18 @@ class Hook extends ModuleGenerator {
       ],
     ];
 
-    $file_type = 'module';
+    $vars['file_type'] = 'module';
     foreach ($special_hooks as $group => $hooks) {
       if (in_array($vars['hook_name'], $hooks)) {
-        $file_type = $group;
+        $vars['file_type'] = $group;
         break;
       }
     }
 
     $this->addFile()
-      ->path('{machine_name}.' . $file_type)
-      ->headerTemplate("d8/file-docs/$file_type.twig")
-      ->template('d8/hook/' . $vars['hook_name'] . '.twig')
+      ->path('{machine_name}.{file_type}')
+      ->headerTemplate('d8/file-docs/{file_type}')
+      ->template('d8/hook/{hook_name}')
       ->action('append')
       ->headerSize(7);
   }

@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:service-provider command.
@@ -18,11 +17,9 @@ class ServiceProvider extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $vars = &$this->collectVars(Utils::moduleQuestions());
-    $vars['class'] = Utils::camelize($vars['name']) . 'ServiceProvider';
-    $this->addFile()
-      ->path('src/{class}.php')
-      ->template('d8/service-provider.twig');
+    $vars = &$this->collectDefault();
+    $vars['class'] = '{machine_name|camelize}ServiceProvider';
+    $this->addFile('src/{class}.php', 'd8/service-provider');
   }
 
 }

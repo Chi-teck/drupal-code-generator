@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:plugin-manager command.
@@ -20,33 +18,25 @@ class PluginManager extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $default_plugin_type = function ($vars) {
-      return $vars['machine_name'];
-    };
-    $questions['plugin_type'] = new Question('Plugin type', $default_plugin_type);
+    $vars = &$this->collectDefault();
 
     // Utils::validateMachineName does not allow dots. But they can appear in
     // plugin types (field.widget, views.argument, etc).
-    $questions['plugin_type']->setValidator(function ($value) {
+    $plugin_type_validator = function ($value) {
       if (!preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
         throw new \UnexpectedValueException('The value is not correct machine name.');
       }
       return $value;
-    });
+    };
+    $vars['plugin_type'] = $this->ask('Plugin type', '{machine_name}', $plugin_type_validator);
 
     $discovery_types = [
       'annotation' => 'Annotation',
       'yaml' => 'YAML',
       'hook' => 'Hook',
     ];
-    $choices = Utils::prepareChoices($discovery_types);
-    $questions['discovery'] = new ChoiceQuestion('Discovery type', $choices, 'Annotation');
-
-    $vars = &$this->collectVars($questions);
-
-    $vars['class_prefix'] = Utils::camelize($vars['plugin_type']);
-    $vars['discovery'] = array_search($vars['discovery'], $discovery_types);
+    $vars['discovery'] = $this->choice('Discovery type', $discovery_types, 'Annotation');
+    $vars['class_prefix'] = '{plugin_type|camelize}';
 
     $common_files = [
       'model.services.yml',
@@ -81,7 +71,7 @@ class PluginManager extends ModuleGenerator {
 
     $files = array_merge($common_files, $files);
 
-    $templates_path = 'd8/plugin-manager/' . $vars['discovery'] . '/';
+    $templates_path = 'd8/plugin-manager/{discovery}/';
 
     $path_placeholders = ['model', 'Example', 'examples'];
     $path_replacements = [
@@ -93,14 +83,14 @@ class PluginManager extends ModuleGenerator {
     foreach ($files as $file) {
       $asset = $this->addFile()
         ->path(str_replace($path_placeholders, $path_replacements, $file))
-        ->template($templates_path . $file . '.twig');
+        ->template($templates_path . $file);
       if ($file === 'model.services.yml') {
         $asset->action('append')->headerSize(1);
       }
       elseif ($file == 'model.module') {
         $asset
           ->action('append')
-          ->headerTemplate('d8/file-docs/module.twig')
+          ->headerTemplate('d8/file-docs/module')
           ->headerSize(7);
       }
     }

@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:settings-local command.
@@ -21,26 +19,20 @@ class SettingsLocal extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['db_override'] = new ConfirmationQuestion('Override database configuration?', FALSE);
+    $vars = &$this->vars;
+    $vars['db_override'] = $this->confirm('Override database configuration?', FALSE);
 
-    $vars = $this->collectVars($questions);
     if ($vars['db_override']) {
-      $questions = [
-        'database' => new Question('Database name', 'drupal_local'),
-        'username' => new Question('Database username', 'root'),
-        'password' => new Question('Database password'),
-        'host' => new Question('Database host', 'localhost'),
-        'driver' => new Question('Database type', 'mysql'),
+      $vars += [
+        'database' => $this->ask('Database name', 'drupal_local', [Utils::class, 'validateRequired']),
+        'username' => $this->ask('Database username', 'root', [Utils::class, 'validateRequired']),
+        'password' => $this->ask('Database password', NULL, [Utils::class, 'validateRequired']),
+        'host' => $this->ask('Database host', 'localhost', [Utils::class, 'validateRequired']),
+        'driver' => $this->ask('Database type', 'mysql', [Utils::class, 'validateRequired']),
       ];
-      array_walk($questions, function (Question $question) {
-        $question->setValidator([Utils::class, 'validateRequired']);
-      });
-      $this->collectVars($questions);
     }
 
-    $this->addFile()
-      ->path('settings.local.php')
-      ->template('d8/settings.local.twig');
+    $this->addFile('settings.local.php', 'd8/settings.local.twig');
   }
 
 }

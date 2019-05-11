@@ -2,38 +2,33 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:layout command.
  */
-class Layout extends ModuleGenerator {
+class Layout extends BaseGenerator {
 
   protected $name = 'd8:layout';
   protected $description = 'Generates a layout';
   protected $alias = 'layout';
+  protected $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}
    */
   protected function generate() :void {
 
-    $questions['machine_name'] = new Question('Extension machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    $vars = &$this->collectDefault();
 
-    $questions['layout_name'] = new Question('Layout name', 'Example');
-    $questions['layout_machine_name'] = new Question('Layout machine name', function ($vars) {
-      return Utils::human2machine($vars['layout_name']);
-    });
-    $questions['category'] = new Question('Category', 'My layouts');
+    $vars['layout_name'] = $this->ask('Layout name', 'Example');
+    $vars['layout_machine_name'] = $this->ask('Layout machine name', Utils::human2machine($vars['layout_name']));
+    $vars['category'] = $this->ask('Category', 'My layouts');
 
-    $questions['js'] = new ConfirmationQuestion('Would you like to create JavaScript file for this layout?', FALSE);
-    $questions['css'] = new ConfirmationQuestion('Would you like to create CSS file for this layout?', FALSE);
+    $vars['js'] = $this->confirm('Would you like to create JavaScript file for this layout?', FALSE);
+    $vars['css'] = $this->confirm('Would you like to create CSS file for this layout?', FALSE);
 
-    $vars = &$this->collectVars($questions);
     $this->addFile()
       ->path('{machine_name}.layouts.yml')
       ->template('d8/_layout/layouts.twig')
@@ -46,21 +41,14 @@ class Layout extends ModuleGenerator {
         ->action('append');
     }
 
-    $vars['layout_asset_name'] = str_replace('_', '-', $vars['layout_machine_name']);
+    $vars['layout_asset_name'] = '{layout_machine_name|u2h}';
 
-    $this->addFile()
-      ->path('layouts/{layout_machine_name}/{layout_asset_name}.html.twig')
-      ->template('d8/_layout/template.twig');
-
+    $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.html.twig', 'd8/_layout/template');
     if ($vars['js']) {
-      $this->addFile()
-        ->path('layouts/{layout_machine_name}/{layout_asset_name}.js')
-        ->template('d8/_layout/javascript.twig');
+      $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.js', 'd8/_layout/javascript');
     }
     if ($vars['css']) {
-      $this->addFile()
-        ->path('layouts/{layout_machine_name}/{layout_asset_name}.css')
-        ->template('d8/_layout/styles.twig');
+      $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.css', 'd8/_layout/styles');
     }
 
   }

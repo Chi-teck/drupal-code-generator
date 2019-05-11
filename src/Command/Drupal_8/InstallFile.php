@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:install-file command.
@@ -18,10 +17,8 @@ class InstallFile extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->collectVars(Utils::moduleQuestions());
-    $this->addFile()
-      ->path('{machine_name}.install')
-      ->template('d8/install.twig');
+    $this->collectDefault();
+    $this->addFile('{machine_name}.install', 'd8/install');
   }
 
 }

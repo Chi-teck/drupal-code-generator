@@ -4,9 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:field command.
@@ -120,18 +117,11 @@ class Field extends ModuleGenerator {
    */
   protected function generate() :void {
 
-    $questions = Utils::moduleQuestions();
+    $vars = &$this->collectDefault();
 
-    $questions['field_label'] = new Question('Field label', 'Example');
-    $questions['field_label']->setValidator([Utils::class, 'validateRequired']);
+    $vars['field_label'] = $this->ask('Field label', 'Example', [Utils::class, 'validateRequired']);
 
-    $default_field_id = function (array $vars) {
-      return $vars['machine_name'] . '_' . Utils::human2machine($vars['field_label']);
-    };
-    $questions['field_id'] = new Question('Field ID', $default_field_id);
-    $questions['field_id']->setValidator([Utils::class, 'validateMachineName']);
-
-    $questions['subfield_count'] = new Question('How many sub-fields would you like to create?', 3);
+    $vars['field_id'] = $this->ask('Field ID', '{machine_name}_' . Utils::human2machine($vars['field_label']), [Utils::class, 'validateMachineName']);
 
     $subfield_count_validator = function ($value) {
       if (!is_numeric($value) || intval($value) != $value || $value <= 0) {
@@ -139,12 +129,12 @@ class Field extends ModuleGenerator {
       }
       return $value;
     };
-    $questions['subfield_count']->setValidator($subfield_count_validator);
 
-    $vars = &$this->collectVars($questions);
+    $vars['subfield_count'] = $this->ask('How many sub-fields would you like to create?', 3, $subfield_count_validator);
 
-    $type_choices = array_column($this->subTypes, 'label');
-    $type_choices = Utils::prepareChoices($type_choices);
+    $type_choice_keys = array_keys($this->subTypes);
+    $type_choice_labels = array_column($this->subTypes, 'label');
+    $type_choices = array_combine($type_choice_keys, $type_choice_labels);
 
     // Indicates that at least one of sub-fields needs Random component.
     $vars['random'] = FALSE;
@@ -169,42 +159,26 @@ class Field extends ModuleGenerator {
 
     for ($i = 1; $i <= $vars['subfield_count']; $i++) {
       $this->io->rule();
-      $subfield_questions = [];
-      $subfield_questions['name_' . $i] = new Question("Label for sub-field #$i", "Value $i");
-      $default_machine_name = function (array $vars) use ($i) {
-        return Utils::human2machine($vars['name_' . $i]);
-      };
-      $subfield_questions['machine_name_' . $i] = new Question("Machine name for sub-field #$i", $default_machine_name);
-      $subfield_questions['type_' . $i] = new ChoiceQuestion("Type of sub-field #$i", $type_choices, 'Text');
-      $this->collectVars($subfield_questions);
+      $vars['name_' . $i] = $this->ask("Label for sub-field #$i", "Value $i");
+      $default_machine_name = Utils::human2machine($vars['name_' . $i]);
+      $vars['machine_name_' . $i] = $this->ask("Machine name for sub-field #$i", $default_machine_name);
+      $type = $this->choice("Type of sub-field #$i", $type_choices, 'Text');
 
-      $vars['type_class'] = Utils::camelize($vars['field_label']) . 'Item';
-      $vars['widget_class'] = Utils::camelize($vars['field_label']) . 'Widget';
-      $vars['formatter_class'] = Utils::camelize($vars['field_label']) . 'DefaultFormatter';
+      $vars['type_class'] = '{field_label|camelize}Item';
+      $vars['widget_class'] = '{field_label|camelize}Widget';
+      $vars['formatter_class'] = '{field_label|camelize}DefaultFormatter';
 
-      // Reset previous questions since we already collected their answers.
-      $subfield_questions = [];
-
-      // Determine the type ID by its label.
-      foreach ($this->subTypes as $type => $definition) {
-        if ($vars['type_' . $i] == $definition['label']) {
-          break;
-        }
-      }
+      $definition = $this->subTypes[$type];
+      $vars['type_' . $i] = $definition['label'];
 
       if ($type == 'datetime') {
-        $subfield_questions['date_type_' . $i] = new ChoiceQuestion(
-          "Date type for sub-field #$i",
-           Utils::prepareChoices($this->dateTypes),
-          'Date only'
-        );
+        $vars['date_type_' . $i] = $this->choice("Date type for sub-field #$i", $this->dateTypes, 'Date only');
       }
 
       if ($definition['list']) {
-        $subfield_questions['list_' . $i] = new ConfirmationQuestion("Limit allowed values for sub-field #$i?", FALSE);
+        $vars['list_' . $i] = $this->confirm("Limit allowed values for sub-field #$i?", FALSE);
       }
-      $subfield_questions['required_' . $i] = new ConfirmationQuestion("Make sub-field #$i required?", FALSE);
-      $this->collectVars($subfield_questions);
+      $vars['required_' . $i] = $this->confirm("Make sub-field #$i required?", FALSE);
 
       $machine_name = $vars['machine_name_' . $i];
 
@@ -220,7 +194,7 @@ class Field extends ModuleGenerator {
         'link' => $definition['link'],
       ];
       if (isset($vars['date_type_' . $i])) {
-        $date_type = array_search($vars['date_type_' . $i], $this->dateTypes);
+        $date_type = $vars['date_type_' . $i];
         $vars['subfields'][$i]['date_type'] = $date_type;
         // Back to date type ID.
         $vars['subfields'][$i]['date_storage_format'] = $date_type == 'date' ? 'Y-m-d' : 'Y-m-d\TH:i:s';
@@ -259,54 +233,35 @@ class Field extends ModuleGenerator {
 
     $this->io->rule();
 
-    $questions = [];
-    $questions['storage_settings'] = new ConfirmationQuestion('Would you like to create field storage settings form?', FALSE);
-    $questions['instance_settings'] = new ConfirmationQuestion('Would you like to create field instance settings form?', FALSE);
-    $questions['widget_settings'] = new ConfirmationQuestion('Would you like to create field widget settings form?', FALSE);
-    $questions['formatter_settings'] = new ConfirmationQuestion('Would you like to create field formatter settings form?', FALSE);
-    $questions['table_formatter'] = new ConfirmationQuestion('Would you like to create table formatter?', FALSE);
-    $questions['key_value_formatter'] = new ConfirmationQuestion('Would you like to create key-value formatter?', FALSE);
+    $vars['storage_settings'] = $this->confirm('Would you like to create field storage settings form?', FALSE);
+    $vars['instance_settings'] = $this->confirm('Would you like to create field instance settings form?', FALSE);
+    $vars['widget_settings'] = $this->confirm('Would you like to create field widget settings form?', FALSE);
+    $vars['formatter_settings'] = $this->confirm('Would you like to create field formatter settings form?', FALSE);
+    $vars['table_formatter'] = $this->confirm('Would you like to create table formatter?', FALSE);
+    $vars['key_value_formatter'] = $this->confirm('Would you like to create key-value formatter?', FALSE);
 
-    $vars += $this->collectVars($questions);
+    $this->addFile('src/Plugin/Field/FieldType/{type_class}.php', 'd8/_field/type');
 
-    $this->addFile()
-      ->path('src/Plugin/Field/FieldType/{type_class}.php')
-      ->template('d8/_field/type.twig');
+    $this->addFile('src/Plugin/Field/FieldWidget/{widget_class}.php', 'd8/_field/widget');
 
-    $this->addFile()
-      ->path('src/Plugin/Field/FieldWidget/{widget_class}.php')
-      ->template('d8/_field/widget.twig');
+    $this->addFile('src/Plugin/Field/FieldFormatter/{formatter_class}.php', 'd8/_field/default-formatter');
 
-    $this->addFile()
-      ->path('src/Plugin/Field/FieldFormatter/{formatter_class}.php')
-      ->template('d8/_field/default-formatter.twig');
-
-    $this->addFile()
-      ->path('config/schema/{machine_name}.schema.yml')
-      ->template('d8/_field/schema.twig')
+    $this->addFile('config/schema/{machine_name}.schema.yml', 'd8/_field/schema')
       ->action('append');
 
-    $this->addFile()
-      ->path('{machine_name}.libraries.yml')
-      ->template('d8/_field/libraries.twig')
+    $this->addFile('{machine_name}.libraries.yml', 'd8/_field/libraries')
       ->action('append');
 
-    $this->addFile()
-      ->path('css/' . str_replace('_', '-', $vars['field_id']) . '-widget.css')
-      ->template('d8/_field/widget-css.twig');
+    $this->addFile('css/{field_id|u2h}-widget.css', 'd8/_field/widget-css');
 
     if ($vars['table_formatter']) {
-      $vars['table_formatter_class'] = Utils::camelize($vars['field_label']) . 'TableFormatter';
-      $this->addFile()
-        ->path('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php')
-        ->template('d8/_field/table-formatter.twig');
+      $vars['table_formatter_class'] = '{field_label|camelize}TableFormatter';
+      $this->addFile('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php', 'd8/_field/table-formatter');
     }
 
     if ($vars['key_value_formatter']) {
-      $vars['key_value_formatter_class'] = Utils::camelize($vars['field_label']) . 'KeyValueFormatter';
-      $this->addFile()
-        ->path('src/Plugin/Field/FieldFormatter/{key_value_formatter_class}.php')
-        ->template('d8/_field/key-value-formatter.twig');
+      $vars['key_value_formatter_class'] = '{field_label|camelize}KeyValueFormatter';
+      $this->addFile('src/Plugin/Field/FieldFormatter/{key_value_formatter_class}.php', 'd8/_field/key-value-formatter');
     }
 
   }

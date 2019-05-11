@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -20,12 +19,14 @@ class Project extends BaseGenerator {
   protected $description = 'Generates a composer project';
   protected $alias = 'project';
 
-  const DRUPAL_DEFAULT_VERSION = '~8.6.0';
+  const DRUPAL_DEFAULT_VERSION = '~8.7.0';
 
   /**
    * {@inheritdoc}
    */
   protected function generate() :void {
+
+    $vars = &$this->vars;
 
     $name_validator = function ($value) {
       if (!preg_match('#[^/]+/[^/]+$#i', $value)) {
@@ -33,12 +34,11 @@ class Project extends BaseGenerator {
       }
       return $value;
     };
-    $questions['name'] = new Question('Project name (vendor/name)', FALSE);
-    $questions['name']->setValidator($name_validator);
+    $vars['name'] = $this->ask('Project name (vendor/name)', NULL, $name_validator);
 
-    $questions['description'] = new Question('Description');
+    $vars['description'] = $this->ask('Description');
 
-    $questions['license'] = new Question('License', 'GPL-2.0-or-later');
+    $license_question = new Question('License', 'GPL-2.0-or-later');
     // @see https://getcomposer.org/doc/04-schema.md#license
     $licenses = [
       'Apache-2.0',
@@ -56,7 +56,8 @@ class Project extends BaseGenerator {
       'MIT',
       'proprietary',
     ];
-    $questions['license']->setAutocompleterValues($licenses);
+    $license_question->setAutocompleterValues($licenses);
+    $vars['license'] = $this->askQuestion($license_question);
 
     // Suggest most typical document roots.
     $document_roots = [
@@ -69,83 +70,61 @@ class Project extends BaseGenerator {
       'httpdocs',
       'html',
     ];
-    $questions['document_root'] = new Question('Document root directory, type single dot to use Composer root', 'docroot');
-    $questions['document_root']->setNormalizer(function ($value) {
+    $document_root_question = new Question('Document root directory, type single dot to use Composer root', 'docroot');
+    $document_root_question->setNormalizer(function ($value) {
       return $value == '.' ? '' : $value;
     });
-    $questions['document_root']->setAutocompleterValues($document_roots);
+    $document_root_question->setAutocompleterValues($document_roots);
+    $vars['document_root'] = $this->askQuestion($document_root_question);
 
-    $questions['php'] = new Question('PHP version', '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION);
-    $questions['drupal'] = new Question('Drupal version', self::DRUPAL_DEFAULT_VERSION);
-    $questions['drupal_core_strict'] = new ConfirmationQuestion('Would you like to get the same versions of Drupal core\'s dependencies as in Drupal core\'s composer.lock file?', FALSE);
-
-    $this->collectVars($questions);
+    $vars['php'] = $this->ask('PHP version', '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION);
+    $vars['drupal'] = $this->ask('Drupal version', self::DRUPAL_DEFAULT_VERSION);
+    $vars['drupal_core_strict'] = $this->confirm('Would you like to get the same versions of Drupal core\'s dependencies as in Drupal core\'s composer.lock file?', FALSE);
 
     $sections = ['require', 'require-dev'];
 
-    $questions['drush'] = new ConfirmationQuestion('Would you like to install Drush?', TRUE);
-    $vars = $this->collectVars($questions);
+    $vars['drush'] = $this->confirm('Would you like to install Drush?');
     if ($vars['drush']) {
-      $questions['drush_installation'] = new Question('Drush installation (require|require-dev)', 'require');
-      $questions['drush_installation']->setValidator(Utils::getOptionsValidator($sections));
-      $questions['drush_installation']->setAutocompleterValues($sections);
-      $this->collectVars($questions);
+      $drush_installation_question = new Question('Drush installation (require|require-dev)', 'require');
+      $drush_installation_question->setValidator(Utils::getOptionsValidator($sections));
+      $drush_installation_question->setAutocompleterValues($sections);
+      $vars['drush_installation'] = $this->askQuestion($drush_installation_question);
     }
 
-    $questions['drupal_console'] = new ConfirmationQuestion('Would you like to install Drupal Console?', !$vars['drush']);
-    $vars = $this->collectVars($questions);
+    $vars['drupal_console'] = $this->confirm('Would you like to install Drupal Console?', !$vars['drush']);
     if ($vars['drupal_console']) {
-      $questions['drupal_console_installation'] = new Question('Drupal Console installation (require|require-dev)', 'require-dev');
-      $questions['drupal_console_installation']->setValidator(Utils::getOptionsValidator($sections));
-      $questions['drupal_console_installation']->setAutocompleterValues($sections);
-      $this->collectVars($questions);
+      $dc_installation_question = new Question('Drupal Console installation (require|require-dev)', 'require-dev');
+      $dc_installation_question->setValidator(Utils::getOptionsValidator($sections));
+      $dc_installation_question->setAutocompleterValues($sections);
+      $vars['drupal_console_installation'] = $this->askQuestion($dc_installation_question);
     }
 
-    $questions['composer_patches'] = new ConfirmationQuestion('Would you like to install Composer patches plugin?', TRUE);
-    $questions['composer_merge'] = new ConfirmationQuestion('Would you like to install Composer merge plugin?', FALSE);
-    $questions['behat'] = new ConfirmationQuestion('Would you like to create Behat tests?', FALSE);
-    $questions['env'] = new ConfirmationQuestion('Would you like to load environment variables from .env files?', FALSE);
-    $questions['asset_packagist'] = new ConfirmationQuestion('Would you like to add asset-packagist repository?', FALSE);
-
-    $vars = &$this->collectVars($questions);
+    $vars['composer_patches'] = $this->confirm('Would you like to install Composer patches plugin?');
+    $vars['composer_merge'] = $this->confirm('Would you like to install Composer merge plugin?', FALSE);
+    $vars['behat'] = $this->confirm('Would you like to create Behat tests?', FALSE);
+    $vars['env'] = $this->confirm('Would you like to load environment variables from .env files?', FALSE);
+    $vars['asset_packagist'] = $this->confirm('Would you like to add asset-packagist repository?', FALSE);
 
     $vars['document_root_path'] = $vars['document_root'] ?
       $vars['document_root'] . '/' : $vars['document_root'];
 
     $this->addFile('composer.json')
       ->content(self::buildComposerJson($vars));
-
-    $this->addFile('.gitignore')
-      ->template('d8/_project/gitignore.twig');
-
-    $this->addFile('phpcs.xml')
-      ->template('d8/_project/phpcs.xml.twig');
-
-    $this->addFile('scripts/composer/create_required_files.php')
-      ->template('d8/_project/scripts/composer/create_required_files.php.twig');
+    $this->addFile('.gitignore', 'd8/_project/gitignore');
+    $this->addFile('phpcs.xml', 'd8/_project/phpcs.xml');
+    $this->addFile('scripts/composer/create_required_files.php', 'd8/_project/scripts/composer/create_required_files.php');
 
     if ($vars['behat']) {
-      $this->addFile('tests/behat/behat.yml')
-        ->template('d8/_project/tests/behat/behat.yml.twig');
-
-      $this->addFile('tests/behat/local.behat.yml')
-        ->template('d8/_project/tests/behat/local.behat.yml.twig');
-
-      $this->addFile('tests/behat/bootstrap/BaseContext.php')
-        ->template('d8/_project/tests/behat/bootstrap/BaseContext.php.twig');
-
-      $this->addFile('tests/behat/bootstrap/ExampleContext.php')
-        ->template('d8/_project/tests/behat/bootstrap/ExampleContext.php.twig');
-
-      $this->addFile('tests/behat/features/example/user_forms.feature')
-        ->template('d8/_project/tests/behat/features/example/user_forms.feature.twig');
+      $this->addFile('tests/behat/behat.yml', 'd8/_project/tests/behat/behat.yml');
+      $this->addFile('tests/behat/local.behat.yml', 'd8/_project/tests/behat/local.behat.yml');
+      $this->addFile('tests/behat/bootstrap/BaseContext.php', 'd8/_project/tests/behat/bootstrap/BaseContext.php');
+      $this->addFile('tests/behat/bootstrap/ExampleContext.php', 'd8/_project/tests/behat/bootstrap/ExampleContext.php');
+      $this->addFile('tests/behat/features/example/user_forms.feature', 'd8/_project/tests/behat/features/example/user_forms.feature');
     }
 
     if ($vars['env']) {
-      $this->addFile('.env.example')
-        ->template('d8/_project/env.example.twig');
-      $this->addFile('load.environment.php')
-        ->template('d8/_project/load.environment.php.twig');
+      $this->addFile('.env.example', 'd8/_project/env.example');
+      $this->addFile('load.environment.php', 'd8/_project/load.environment.php');
     }
 
     if ($vars['document_root']) {
@@ -153,22 +132,17 @@ class Project extends BaseGenerator {
     }
 
     if ($vars['drush']) {
-      $this->addFile('drush/drush.yml')
-        ->template('d8/_project/drush/drush.yml.twig');
-      $this->addFile('drush/Commands/PolicyCommands.php')
-        ->template('d8/_project/drush/Commands/PolicyCommands.php.twig');
-      $this->addFile('drush/sites/self.site.yml')
-        ->template('d8/_project/drush/sites/self.site.yml.twig');
-      $this->addFile('scripts/sync-site.sh')
-        ->template('d8/_project/scripts/sync-site.sh.twig')
-        ->mode(0544);
+      $this->addFile('drush/drush.yml', 'd8/_project/drush/drush.yml');
+      $this->addFile('drush/Commands/PolicyCommands.php', 'd8/_project/drush/Commands/PolicyCommands.php');
+      $this->addFile('drush/sites/self.site.yml', 'd8/_project/drush/sites/self.site.yml');
+      $this->addFile('scripts/sync-site.sh', 'd8/_project/scripts/sync-site.sh')->mode(0544);
     }
 
     $this->addFile('patches/.keep')->content('');
-    $this->addDirectory($vars['document_root_path'] . 'modules/contrib');
-    $this->addDirectory($vars['document_root_path'] . 'modules/custom');
-    $this->addDirectory($vars['document_root_path'] . 'modules/custom');
-    $this->addDirectory($vars['document_root_path'] . 'libraries');
+    $this->addDirectory('{document_root_path}modules/contrib');
+    $this->addDirectory('{document_root_path}modules/custom');
+    $this->addDirectory('{document_root_path}modules/custom');
+    $this->addDirectory('{document_root_path}libraries');
   }
 
   /**

@@ -2,14 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
  * Implements d8:theme-file command.
  */
-class ThemeFile extends BaseGenerator {
+class ThemeFile extends ThemeGenerator {
 
   protected $name = 'd8:theme-file';
   protected $description = 'Generates a theme file';
@@ -20,16 +18,8 @@ class ThemeFile extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['name'] = new Question('Theme name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-    $questions['machine_name'] = new Question('Theme machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('{machine_name}.theme')
-      ->template('d8/theme.twig');
+    $this->collectDefault();
+    $this->addFile('{machine_name}.theme', 'd8/theme');
   }
 
 }

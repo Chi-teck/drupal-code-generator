@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:module-file command.
@@ -18,10 +17,8 @@ class ModuleFile extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->collectVars(Utils::moduleQuestions());
-    $this->addFile()
-      ->path('{machine_name}.module')
-      ->template('d8/module.twig');
+    $this->collectDefault();
+    $this->addFile('{machine_name}.module', 'd8/module');
   }
 
 }

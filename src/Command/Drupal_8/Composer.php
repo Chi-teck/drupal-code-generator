@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -16,30 +15,30 @@ class Composer extends BaseGenerator {
   protected $description = 'Generates a composer.json file';
   protected $alias = 'composer.json';
   protected $label = 'composer.json';
+  protected $nameQuestion = NULL;
+  protected $machineNameQuestion = 'Project machine name';
 
   /**
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['machine_name'] = new Question('Project machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    $questions['description'] = new Question('Description');
-    $questions['type'] = new Question('Type', 'drupal-module');
-    $questions['type']->setValidator([Utils::class, 'validateRequired']);
-    $questions['type']->setAutocompleterValues([
+    $vars = &$this->collectDefault();
+    $vars['description'] = $this->ask('Description');
+
+    $type_question = new Question('Type', 'drupal-module');
+    $type_question->setValidator([Utils::class, 'validateRequired']);
+    $type_question->setAutocompleterValues([
       'drupal-module',
       'drupal-theme',
       'drupal-library',
       'drupal-profile',
       'drupal-drush',
     ]);
-    $questions['drupal_org'] = new ConfirmationQuestion('Is this project hosted on drupal.org?', FALSE);
+    $vars['type'] = $this->askQuestion($type_question);
 
-    $this->collectVars($questions);
+    $vars['drupal_org'] = $this->confirm('Is this project hosted on drupal.org?', FALSE);
 
-    $this->addFile()
-      ->path('composer.json')
-      ->template('d8/composer.twig');
+    $this->addFile('composer.json', 'd8/composer');
   }
 
 }

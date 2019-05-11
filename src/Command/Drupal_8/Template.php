@@ -3,9 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:template command.
@@ -20,21 +17,17 @@ class Template extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions = Utils::moduleQuestions();
-    $questions['template_name'] = new Question('Template name', 'example');
-    $questions['create_theme'] = new ConfirmationQuestion('Create theme hook?', TRUE);
-    $questions['create_preprocess'] = new ConfirmationQuestion('Create preprocess hook?', TRUE);
+    $vars = &$this->collectDefault();
 
-    $vars = $this->collectVars($questions);
+    $vars['template_name'] = $this->ask('Template name', 'example');
+    $vars['create_theme'] = $this->confirm('Create theme hook?');
+    $vars['create_preprocess'] = $this->confirm('Create preprocess hook?');
 
-    $this->addFile()
-      ->path('templates/{template_name}.html.twig')
-      ->template('d8/template-template.twig');
+    $this->addFile('templates/{template_name}.html.twig', 'd8/template-template');
 
     if ($vars['create_theme'] || $vars['create_preprocess']) {
-      $this->addFile()
-        ->path('{machine_name}.module')
-        ->template('d8/template-module.twig')
+      $this->addFile('{machine_name}.module')
+        ->template('d8/template-module')
         ->action('append')
         ->headerSize(7);
     }

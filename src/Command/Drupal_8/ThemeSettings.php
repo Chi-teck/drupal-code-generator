@@ -2,14 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
  * Implements d8:theme-settings command.
  */
-class ThemeSettings extends BaseGenerator {
+class ThemeSettings extends ThemeGenerator {
 
   protected $name = 'd8:theme-settings';
   protected $description = 'Generates Drupal 8 theme-settings.php file';
@@ -20,23 +18,10 @@ class ThemeSettings extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $questions['name'] = new Question('Theme name');
-    $questions['name']->setValidator([Utils::class, 'validateRequired']);
-    $questions['machine_name'] = new Question('Theme machine name');
-    $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
-    $this->collectVars($questions);
-
-    $this->addFile()
-      ->path('theme-settings.php')
-      ->template('d8/theme-settings-form.twig');
-
-    $this->addFile()
-      ->path('config/install/{machine_name}.settings.yml')
-      ->template('d8/theme-settings-config.twig');
-
-    $this->addFile()
-      ->path('config/schema/{machine_name}.schema.yml')
-      ->template('d8/theme-settings-schema.twig');
+    $this->collectDefault();
+    $this->addFile('theme-settings.php', 'd8/theme-settings-form');
+    $this->addFile('config/install/{machine_name}.settings.yml', 'd8/theme-settings-config');
+    $this->addFile('config/schema/{machine_name}.schema.yml', 'd8/theme-settings-schema.twig');
   }
 
 }

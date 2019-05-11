@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:javascript command.
@@ -18,10 +17,8 @@ class Javascript extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $vars = $this->collectVars(Utils::moduleQuestions());
-    $this->addFile()
-      ->path('js/' . str_replace('_', '-', $vars['machine_name']) . '.js')
-      ->template('d8/javascript.twig');
+    $this->collectDefault();
+    $this->addFile('js/{machine_name|u2h}.js', 'd8/javascript');
   }
 
 }
