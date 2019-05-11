@@ -24,9 +24,7 @@ class ConfigurationEntity extends ModuleGenerator {
     $vars['package'] = $this->ask('Package', 'Custom');
     $vars['dependencies'] = $this->ask('Dependencies (comma separated)');
     $vars['entity_type_label'] = $this->ask('Entity type label', '{name}');
-
-    $default_entity_type_id = Utils::human2machine($vars['entity_type_label']);
-    $vars['entity_type_id'] = $this->ask('Entity type ID', $default_entity_type_id);
+    $vars['entity_type_id'] = $this->ask('Entity type ID', '{entity_type_label|h2m}');
 
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));

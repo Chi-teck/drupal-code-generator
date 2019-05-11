@@ -24,8 +24,8 @@ class ContentEntity extends ModuleGenerator {
     $vars['package'] = $this->ask('Package', 'Custom');
     $vars['dependencies'] = $this->ask('Dependencies (comma separated)');
     $vars['entity_type_label'] = $this->ask('Entity type label', '{name}');
-    $vars['entity_type_id'] = $this->ask('Entity type ID', Utils::human2machine($vars['entity_type_label']));
-    $vars['entity_base_path'] = $this->ask('Entity base path', '/admin/content/' . str_replace('_', '-', $vars['entity_type_id']));
+    $vars['entity_type_id'] = $this->ask('Entity type ID', '{entity_type_label|h2m}');
+    $vars['entity_base_path'] = $this->ask('Entity base path', '/admin/content/{entity_type_id|u2h}');
     $vars['fieldable'] = $this->confirm('Make the entity type fieldable?');
     $vars['revisionable'] = $this->confirm('Make the entity type revisionable?', FALSE);
     $vars['translatable'] = $this->confirm('Make the entity type translatable?', FALSE);

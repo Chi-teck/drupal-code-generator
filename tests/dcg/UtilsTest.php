@@ -352,6 +352,9 @@ class UtilsTest extends BaseTestCase {
       ['-={foo|camelize}=-', ['foo' => 'bar'], '-=Bar=-'],
       ['-={foo|u2h}=-', ['foo' => 'alpha_beta'], '-=alpha-beta=-'],
       ['-={foo|h2u}=-', ['foo' => 'alpha-beta'], '-=alpha_beta=-'],
+      ['-={foo|h2m}=-', ['foo' => 'Alpha beta'], '-=alpha_beta=-'],
+      ['-={foo|m2h}=-', ['foo' => 'alpha_beta'], '-=Alpha beta=-'],
+      ['-={foo|c2m}=-', ['foo' => 'AlphaBeta'], '-=alpha_beta=-'],
       [
         '-={foo|h2u|camelize}=-',
         ['foo' => 'alpha-beta'],

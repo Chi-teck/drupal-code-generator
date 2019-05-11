@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_7\ViewsPlugin;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d7:views-plugin:argument-default command.
@@ -18,11 +17,8 @@ class ArgumentDefault extends ModuleGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-
     $vars['plugin_name'] = $this->ask('Plugin name', 'Example');
-
-    $default_machine_name = Utils::human2machine($vars['plugin_name']);
-    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', $default_machine_name);
+    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', '{plugin_name|h2m}');
 
     $this->addFile('{machine_name}.module')
       ->template('d7/views-plugin/argument-default.module')

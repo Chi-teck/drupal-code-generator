@@ -180,8 +180,20 @@ class Utils {
             $result = str_replace('-', '_', $result);
             break;
 
+          case 'h2m';
+            $result = self::human2machine($result);
+            break;
+
+          case 'm2h';
+            $result = self::machine2human($result);
+            break;
+
           case 'camelize':
-            $result = Utils::camelize($result);
+            $result = self::camelize($result);
+            break;
+
+          case 'c2m':
+            $result = self::camel2machine($result);
             break;
 
           default;

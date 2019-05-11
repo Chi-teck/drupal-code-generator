@@ -21,8 +21,7 @@ abstract class BasePlugin extends ModuleGenerator {
 
     $vars['plugin_name'] = $this->ask('Plugin name', 'Example', [Utils::class, 'validateRequired']);
 
-    $default = Utils::human2machine($vars['plugin_name']);
-    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', $default, [Utils::class, 'validateMachineName']);
+    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', '{plugin_name|h2m}', [Utils::class, 'validateMachineName']);
 
     $vars['description'] = $this->ask('Plugin description', 'Plugin description.');
 

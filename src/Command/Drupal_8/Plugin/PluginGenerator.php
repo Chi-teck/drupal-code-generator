@@ -14,7 +14,7 @@ abstract class PluginGenerator extends ModuleGenerator {
   protected $pluginLabelQuestion = 'Plugin label';
   protected $pluginLabelDefault = 'Example';
   protected $pluginIdQuestion = 'Plugin ID';
-  protected $pluginIdDefault;
+  protected $pluginIdDefault = '{machine_name}_{plugin_label|h2m}';
   protected $pluginClassQuestion = 'Plugin class';
   protected $pluginClassDefault;
 
@@ -46,9 +46,6 @@ abstract class PluginGenerator extends ModuleGenerator {
    * Asks plugin ID question.
    */
   protected function askPluginIdQuestion() :string {
-    if ($this->pluginIdDefault === NULL) {
-      $this->pluginIdDefault = $this->vars['machine_name'] . '_' . Utils::human2machine($this->vars['plugin_label']);
-    }
     return $this->ask($this->pluginIdQuestion, $this->pluginIdDefault, [Utils::class, 'validateMachineName']);
   }
 

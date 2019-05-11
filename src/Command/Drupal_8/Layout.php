@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:layout command.
@@ -23,7 +22,7 @@ class Layout extends BaseGenerator {
     $vars = &$this->collectDefault();
 
     $vars['layout_name'] = $this->ask('Layout name', 'Example');
-    $vars['layout_machine_name'] = $this->ask('Layout machine name', Utils::human2machine($vars['layout_name']));
+    $vars['layout_machine_name'] = $this->ask('Layout machine name', '{layout_name|h2m}');
     $vars['category'] = $this->ask('Category', 'My layouts');
 
     $vars['js'] = $this->confirm('Would you like to create JavaScript file for this layout?', FALSE);

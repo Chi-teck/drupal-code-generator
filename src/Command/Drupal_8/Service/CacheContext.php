@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:service:cache-context command.
@@ -34,7 +33,7 @@ class CacheContext extends ModuleGenerator {
     }
 
     $vars['calculated'] = $this->confirm('Make the context calculated?', FALSE);
-    $vars['context_label'] = Utils::machine2human($vars['context_id']);
+    $vars['context_label'] = '{context_id|m2h}';
 
     $vars['interface'] = $vars['calculated'] ?
       'CalculatedCacheContextInterface' : 'CacheContextInterface';
