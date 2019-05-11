@@ -26,7 +26,7 @@ class Filter extends PluginGenerator {
     $vars['filter_type'] = $this->choice('Filter type', $filter_types);
 
     $this->addFile('src/Plugin/Filter/{class}.php')
-      ->template('d8/plugin/filter.twig');
+      ->template('d8/plugin/filter');
 
     $this->addFile('config/schema/{machine_name}.schema.yml')
       ->template('d8/plugin/filter-schema')

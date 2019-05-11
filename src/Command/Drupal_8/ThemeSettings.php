@@ -21,7 +21,7 @@ class ThemeSettings extends ThemeGenerator {
     $this->collectDefault();
     $this->addFile('theme-settings.php', 'd8/theme-settings-form');
     $this->addFile('config/install/{machine_name}.settings.yml', 'd8/theme-settings-config');
-    $this->addFile('config/schema/{machine_name}.schema.yml', 'd8/theme-settings-schema.twig');
+    $this->addFile('config/schema/{machine_name}.schema.yml', 'd8/theme-settings-schema');
   }
 
 }

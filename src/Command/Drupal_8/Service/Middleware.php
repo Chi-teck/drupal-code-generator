@@ -19,10 +19,9 @@ class Middleware extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = '{machine_name|camelize}Middleware';
-    $this->addFile('src/{class}.php', 'd8/service/middleware.twig');
-    $this->addServicesFile()
-      ->path('{machine_name}.services.yml')
-      ->template('d8/service/middleware.services.twig');
+    $this->addFile('src/{class}.php', 'd8/service/middleware');
+    $this->addServicesFile('{machine_name}.services.yml')
+      ->template('d8/service/middleware.services');
   }
 
 }

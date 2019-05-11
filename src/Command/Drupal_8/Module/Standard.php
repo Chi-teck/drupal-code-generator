@@ -70,7 +70,7 @@ class Standard extends ModuleGenerator {
       $this->addFile('{machine_name}/src/Form/SettingsForm.php')
         ->template($template_path . 'src/Form/SettingsForm.php');
       $this->addFile('{machine_name}/config/schema/{machine_name}.schema.yml')
-        ->template($template_path . 'config/schema/model.schema.yml.twig');
+        ->template($template_path . 'config/schema/model.schema.yml');
       $this->addFile('{machine_name}/{machine_name}.links.menu.yml')
         ->template($template_path . 'model.links.menu');
     }

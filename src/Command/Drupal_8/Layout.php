@@ -29,15 +29,11 @@ class Layout extends BaseGenerator {
     $vars['js'] = $this->confirm('Would you like to create JavaScript file for this layout?', FALSE);
     $vars['css'] = $this->confirm('Would you like to create CSS file for this layout?', FALSE);
 
-    $this->addFile()
-      ->path('{machine_name}.layouts.yml')
-      ->template('d8/_layout/layouts.twig')
+    $this->addFile('{machine_name}.layouts.yml', 'd8/_layout/layouts')
       ->action('append');
 
     if ($vars['js'] || $vars['css']) {
-      $this->addFile()
-        ->path('{machine_name}.libraries.yml')
-        ->template('d8/_layout/libraries.twig')
+      $this->addFile('{machine_name}.libraries.yml', 'd8/_layout/libraries')
         ->action('append');
     }
 

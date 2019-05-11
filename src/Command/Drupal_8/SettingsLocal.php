@@ -32,7 +32,7 @@ class SettingsLocal extends BaseGenerator {
       ];
     }
 
-    $this->addFile('settings.local.php', 'd8/settings.local.twig');
+    $this->addFile('settings.local.php', 'd8/settings.local');
   }
 
 }

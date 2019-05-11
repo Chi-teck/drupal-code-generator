@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Command\Other;
 
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements other:dcg-command command.
@@ -28,14 +27,11 @@ class DcgCommand extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
+    $vars = &$this->vars;
 
-    $questions = [
-      'name' => new Question('Command name', 'custom:example'),
-      'description' => new Question('Command description', 'Some description'),
-      'alias' => new Question('Command alias', 'example'),
-    ];
-
-    $vars = &$this->collectVars($questions);
+    $vars['name'] = $this->ask('Command name', 'custom:example');
+    $vars['description'] = $this->ask('Command description', 'Some description');
+    $vars['alias'] = $this->ask('Command alias', 'example');
 
     $sub_names = explode(':', $vars['name']);
     $last_sub_name = array_pop($sub_names);
@@ -51,13 +47,8 @@ class DcgCommand extends BaseGenerator {
       $vars['path'] = '/' . $file_path;
     }
 
-    $this->addFile()
-      ->path($file_path . '/{class}.php')
-      ->template('other/dcg-command.twig');
-
-    $this->addFile()
-      ->path($file_path . '/{template_name}')
-      ->template('other/dcg-command-template.twig');
+    $this->addFile($file_path . '/{class}.php', 'other/dcg-command');
+    $this->addFile($file_path . '/{template_name}', 'other/dcg-command-template');
   }
 
 }

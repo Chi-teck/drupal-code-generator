@@ -29,7 +29,7 @@ class Custom extends ModuleGenerator {
 
     $this->addFile('src/{class}.php', 'd8/service/custom');
     $this->addServicesFile()
-      ->template('d8/service/custom.services.twig');
+      ->template('d8/service/custom.services');
   }
 
 }

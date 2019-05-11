@@ -19,7 +19,7 @@ class RenderElement extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Element/Entity.php', 'd8/render-element.twig');
+    $this->addFile('src/Element/Entity.php', 'd8/render-element');
   }
 
 }
