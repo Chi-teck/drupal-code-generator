@@ -184,7 +184,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
     $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
     $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
 
-    foreach ($this->getAssets() as $asset) {
+    foreach ($this->assets as $asset) {
       // Supply the asset with all collected variables if it has no local ones.
       if (!$asset->getVars()) {
         $asset->vars($this->vars);
@@ -194,7 +194,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
     }
 
     $dumped_assets = $this->getHelper('dumper')
-      ->dump($this->getAssets(), $this->getDirectory(), $input->getOption('dry-run'));
+      ->dump($this->assets, $this->getDirectory(), $input->getOption('dry-run'));
 
     $this->getHelper('result_printer')->printResult($dumped_assets);
 
@@ -212,13 +212,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    */
   public function getLabel() :?string {
     return $this->label;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getAssets() :array {
-    return $this->assets;
   }
 
   /**

@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d7:test command.
@@ -18,8 +17,7 @@ class Test extends ModuleGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-    $default_class = Utils::camelize($vars['machine_name']) . 'TestCase';
-    $vars['class'] = $this->ask('Class', $default_class);
+    $vars['class'] = $this->ask('Class', '{machine_name|camelize}TestCase');
     $this->addFile('{machine_name}.test', 'd7/test');
   }
 

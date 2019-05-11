@@ -16,14 +16,6 @@ interface GeneratorInterface {
   public function getLabel() :?string;
 
   /**
-   * Returns list of assets to dump.
-   *
-   * @return \DrupalCodeGenerator\Asset[]
-   *   An array of assets.
-   */
-  public function getAssets() :array;
-
-  /**
    * Sets working directory.
    *
    * @param string $directory

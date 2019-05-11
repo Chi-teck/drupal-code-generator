@@ -16,9 +16,8 @@ class Javascript extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $vars = $this->collectDefault();
-    $this->addFile(str_replace('_', '-', $vars['machine_name']) . '.js')
-      ->template('d7/javascript');
+    $this->collectDefault();
+    $this->addFile('{machine_name|u2h}.js', 'd7/javascript');
   }
 
 }

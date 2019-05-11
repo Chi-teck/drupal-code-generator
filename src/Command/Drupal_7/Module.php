@@ -27,7 +27,7 @@ class Module extends ModuleGenerator {
     $this->addFile('{machine_name}/{machine_name}.install', 'd7/install');
     $this->addFile('{machine_name}/{machine_name}.admin.inc', 'd7/admin.inc');
     $this->addFile('{machine_name}/{machine_name}.pages.inc', 'd7/pages.inc');
-    $this->addFile('{machine_name}/' . str_replace('_', '-', $vars['machine_name']) . '.js', 'd7/javascript');
+    $this->addFile('{machine_name}/{machine_name|u2h}.js', 'd7/javascript');
   }
 
 }

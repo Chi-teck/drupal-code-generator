@@ -21,8 +21,7 @@ class Theme extends ThemeGenerator {
 
     $vars['description'] = $this->ask('Theme description', 'A simple Drupal 7 theme.');
     $vars['base_theme'] = $this->ask('Base theme');
-
-    $vars['asset_name'] = str_replace('_', '-', $vars['machine_name']);
+    $vars['asset_name'] = '{machine_name|u2h}';
 
     $this->addFile('{machine_name}/{machine_name}.info', 'd7/theme-info');
     $this->addFile('{machine_name}/template.php', 'd7/template.php');
