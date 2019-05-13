@@ -23,12 +23,6 @@ Then after you have logged out and in the _dcg_ development version will be acce
 
 ## Testing
 
-### Prerequisites
-
-* [Install Coder Sniffer](https://www.drupal.org/node/1419988)
-* [Install PHPUnit](https://phpunit.de/)
-* [Install Twigcs](https://github.com/allocine/twigcs)
-
 ### Testing code generator
 ```
 /path/to/drupal-code-generator/scripts/run-dcg-tests.sh

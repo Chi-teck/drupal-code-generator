@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="Drupal Code Generator">
   <description>Drupal Code Generator coding standard</description>
+  <config name="installed_paths" value="vendor/drupal/coder/coder_sniffer"/>
   <arg name="colors"/>
   <file>./scripts/dump-hooks.php</file>
   <file>./scripts/dump-services.php</file>

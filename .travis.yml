@@ -14,7 +14,4 @@ install:
   - composer install
   - if [ $DEPENDENCIES_LOWEST -eq 1 ]; then composer update --prefer-lowest; fi
 
-before_script:
-  - composer global require phpunit/phpunit ^7.5
-
 script: $(composer config home)/vendor/bin/phpunit
