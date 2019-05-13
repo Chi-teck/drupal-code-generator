@@ -12,7 +12,7 @@ class LayoutTest extends GeneratorBaseTest {
   protected $class = 'Drupal_8\Layout';
 
   protected $interaction = [
-    'Extension machine name [%default_machine_name%]:' => 'example',
+    'Module machine name [%default_machine_name%]:' => 'example',
     'Layout name [Example]:' => 'Foo bar',
     'Layout machine name [foo_bar]:' => 'foo_bar',
     'Category [My layouts]:' => 'My awesome layouts',

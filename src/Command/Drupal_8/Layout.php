@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\DrupalGenerator;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Implements d8:layout command.
  */
-class Layout extends DrupalGenerator {
+class Layout extends ModuleGenerator {
 
   protected $name = 'd8:layout';
   protected $description = 'Generates a layout';
