@@ -34,6 +34,5 @@ Then after you have logged out and in the _dcg_ development version will be acce
 ## Building PHAR executable
 
 1. Install [Box 2](https://github.com/box-project/box2).
-2. Navigate to the directory where Drupal Code Generator was installed.
-3. Run the following command: `box build` (use `-v` option if you need verbose output).
-4. Test the generated archive: `php dcg.phar --version`.
+2. Run `/path/to/drupal-code-generator/scripts/run-sut-tests.sh` script.
+3. Test the generated archive: `php dcg.phar --version`.
