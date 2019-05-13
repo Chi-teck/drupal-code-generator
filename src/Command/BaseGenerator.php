@@ -16,7 +16,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Base class for all generators.
@@ -69,13 +68,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   protected $directory;
 
   /**
-   * The destination.
-   *
-   * @var mixed
-   */
-  protected $destination = 'modules/%';
-
-  /**
    * Assets to create.
    *
    * @var \DrupalCodeGenerator\Asset[]
@@ -88,20 +80,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    * @var array
    */
   protected $vars = [];
-
-  /**
-   * Name question.
-   *
-   * @var string|null
-   */
-  protected $nameQuestion = 'Extension name';
-
-  /**
-   * Machine name question.
-   *
-   * @var string|null
-   */
-  protected $machineNameQuestion = 'Extension machine name';
 
   /**
    * {@inheritdoc}
@@ -157,14 +135,9 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
 
     $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
 
-    $directory = $input->getOption('directory') ?: getcwd();
-    // Do not look up for extension root when generating an extension.
-    $extension_destinations = ['modules', 'profiles', 'themes'];
-    $is_extension = in_array($this->destination, $extension_destinations);
-    $this->directory = $is_extension
-      ? $directory : (Utils::getExtensionRoot($directory) ?: $directory);
-
     $this->io->title(sprintf("Welcome to %s generator!", $this->getName()));
+
+    $this->directory = $input->getOption('directory') ?: getcwd();
   }
 
   /**
@@ -194,7 +167,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
     }
 
     $dumped_assets = $this->getHelper('dumper')
-      ->dump($this->assets, $this->getDirectory(), $input->getOption('dry-run'));
+      ->dump($this->assets, $this->getDestination(), $input->getOption('dry-run'));
 
     $this->getHelper('result_printer')->printResult($dumped_assets);
 
@@ -226,20 +199,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
    */
   public function getDirectory() :string {
     return $this->directory;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setDestination(string $destination) {
-    $this->destination = $destination;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getDestination() :string {
-    return $this->destination;
   }
 
   /**
@@ -337,37 +296,10 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   }
 
   /**
-   * Collects default variables.
+   * Returns destination for generated files.
    */
-  protected function &collectDefault() :array {
-    if ($this->nameQuestion) {
-      $this->vars['name'] = $this->askNameQuestion();
-    }
-    if ($this->machineNameQuestion) {
-      $this->vars['machine_name'] = $this->askMachineNameQuestion();
-    }
-    return $this->vars;
-  }
-
-  /**
-   * Asks name question.
-   */
-  protected function askNameQuestion() :string {
-    $root_directory = basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
-    $default_value = Utils::machine2human($root_directory);
-    $name_question = new Question($this->nameQuestion, $default_value);
-    $name_question->setValidator([Utils::class, 'validateRequired']);
-    return $this->io->askQuestion($name_question);
-  }
-
-  /**
-   * Asks machine name question.
-   */
-  protected function askMachineNameQuestion() :string {
-    $default_value = Utils::human2machine($this->vars['name'] ?? basename($this->directory));
-    $machine_name_question = new Question($this->machineNameQuestion, $default_value);
-    $machine_name_question->setValidator([Utils::class, 'validateMachineName']);
-    return $this->io->askQuestion($machine_name_question);
+  protected function getDestination() {
+    return $this->directory;
   }
 
 }

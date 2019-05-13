@@ -12,7 +12,6 @@ class Breakpoints extends ThemeGenerator {
   protected $name = 'd8:yml:breakpoints';
   protected $description = 'Generates a breakpoints yml file';
   protected $alias = 'breakpoints';
-  protected $destination = 'themes/%';
   protected $nameQuestion = NULL;
 
   /**

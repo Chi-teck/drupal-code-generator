@@ -14,6 +14,7 @@ class ConfigurationEntity extends ModuleGenerator {
   protected $description = 'Generates configuration entity module';
   protected $alias = 'configuration-entity';
   protected $destination = 'modules';
+  protected $isNewExtension = TRUE;
 
   /**
    * {@inheritdoc}

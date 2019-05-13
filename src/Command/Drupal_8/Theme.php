@@ -15,7 +15,7 @@ class Theme extends ThemeGenerator {
   protected $name = 'd8:theme';
   protected $description = 'Generates Drupal 8 theme';
   protected $alias = 'theme';
-  protected $destination = 'themes';
+  protected $isNewExtension = TRUE;
 
   /**
    * {@inheritdoc}

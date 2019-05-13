@@ -12,7 +12,6 @@ class ThemeSettings extends ThemeGenerator {
   protected $name = 'd8:theme-settings';
   protected $description = 'Generates Drupal 8 theme-settings.php file';
   protected $alias = 'theme-settings';
-  protected $destination = 'themes/%';
 
   /**
    * {@inheritdoc}

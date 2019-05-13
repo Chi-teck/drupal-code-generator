@@ -2,14 +2,14 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\DrupalGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:composer command.
  */
-class Composer extends BaseGenerator {
+class Composer extends DrupalGenerator {
 
   protected $name = 'd8:composer';
   protected $description = 'Generates a composer.json file';

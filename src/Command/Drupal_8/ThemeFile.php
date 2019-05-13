@@ -12,7 +12,6 @@ class ThemeFile extends ThemeGenerator {
   protected $name = 'd8:theme-file';
   protected $description = 'Generates a theme file';
   protected $alias = 'theme-file';
-  protected $destination = 'themes/%';
 
   /**
    * {@inheritdoc}

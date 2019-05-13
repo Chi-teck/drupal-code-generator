@@ -14,6 +14,7 @@ class Standard extends ModuleGenerator {
   protected $description = 'Generates standard Drupal 8 module';
   protected $alias = 'module';
   protected $destination = 'modules';
+  protected $isNewExtension = TRUE;
 
   /**
    * {@inheritdoc}

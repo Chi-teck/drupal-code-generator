@@ -14,6 +14,7 @@ class ContentEntity extends ModuleGenerator {
   protected $description = 'Generates content entity module';
   protected $alias = 'content-entity';
   protected $destination = 'modules';
+  protected $isNewExtension = TRUE;
 
   /**
    * {@inheritdoc}

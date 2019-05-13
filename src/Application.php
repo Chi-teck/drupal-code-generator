@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator;
 
+use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\LoggerFactory;
 use DrupalCodeGenerator\Helper\QuestionHelper;
@@ -46,6 +47,10 @@ class Application extends BaseApplication {
       new ResultPrinter(),
       new LoggerFactory(),
     ]);
+
+    if (class_exists('Drupal')) {
+      $helper_set->set(new DrupalContext(\Drupal::getContainer()));
+    }
     $application->setHelperSet($helper_set);
 
     return $application;

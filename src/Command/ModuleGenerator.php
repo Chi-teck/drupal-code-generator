@@ -10,10 +10,11 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Base class for module generators.
  */
-abstract class ModuleGenerator extends BaseGenerator {
+abstract class ModuleGenerator extends DrupalGenerator {
 
   protected $nameQuestion = 'Module name';
   protected $machineNameQuestion = 'Module machine name';
+  protected $extensionType = 'module';
 
   /**
    * Creates service file asset.
