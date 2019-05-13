@@ -14,4 +14,4 @@ install:
   - composer install
   - if [ $DEPENDENCIES_LOWEST -eq 1 ]; then composer update --prefer-lowest; fi
 
-script: $(composer config home)/vendor/bin/phpunit
+script: ./vendor/bin/phpunit
