@@ -23,13 +23,11 @@ Then after you have logged out and in the _dcg_ development version will be acce
 
 ## Testing
 
-### Testing code generator
-```
+### 
+```sh
+# Testing code generator.
 /path/to/drupal-code-generator/scripts/run-dcg-tests.sh
-```
-
-### Testing generated code
-```
+# Testing generated code.
 /path/to/drupal-code-generator/scripts/run-sut-tests.sh
 ```
 
