@@ -168,8 +168,10 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       $this->logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
     }
 
+    $destination = $this->getDestination();
+    $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
     $dumped_assets = $this->getHelper('dumper')
-      ->dump($this->assets, $this->getDestination(), $input->getOption('dry-run'));
+      ->dump($this->assets, $destination, $input->getOption('dry-run'));
 
     $this->getHelper('result_printer')->printResult($dumped_assets);
 
