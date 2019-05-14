@@ -10,6 +10,11 @@
             "DrupalCodeGenerator\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "DrupalCodeGenerator\\Tests\\": "tests/dcg"
+        }
+    },
     "config": {
         "sort-packages": true
     },

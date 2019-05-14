@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="tests/dcg/autoload.php">
+<phpunit colors="true">
   <testsuites>
     <testsuite name="Drupal Code Generator Test Suite">
       <directory suffix="Test.php">./tests/dcg</directory>
