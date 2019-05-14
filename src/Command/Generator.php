@@ -190,20 +190,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function setDirectory(string $directory) :void {
-    $this->directory = $directory;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getDirectory() :string {
-    return $this->directory;
-  }
-
-  /**
    * Asks a question.
    */
   protected function ask(string $question, $default = NULL, $validator = NULL) {
