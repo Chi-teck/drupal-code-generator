@@ -30,10 +30,7 @@ class EntityReferenceSelection extends PluginGenerator {
 
     $this->addFile('src/Plugin/EntityReferenceSelection/{class}.php')
       ->template('d8/plugin/entity-reference-selection');
-
-    $this->addFile('config/schema/{machine_name}.schema.yml')
-      ->template('d8/plugin/entity-reference-selection-schema')
-      ->action('append');
+    $this->addSchemaFile()->template('d8/plugin/entity-reference-selection-schema');
   }
 
   /**

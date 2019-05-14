@@ -38,9 +38,7 @@ class Config extends FormGenerator {
     }
 
     $this->addFile('src/Form/{class}.php', 'd8/form/config');
-    $this->addFile('config/schema/{machine_name}.schema.yml')
-      ->template('d8/form/config-schema')
-      ->action('append');
+    $this->addSchemaFile()->template('d8/form/config-schema');
   }
 
 }

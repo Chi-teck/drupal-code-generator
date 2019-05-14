@@ -25,9 +25,8 @@ class Field extends PluginGenerator {
     $this->addFile('src/Plugin/views/field/{class}.php', 'd8/plugin/views/field');
 
     if ($vars['configurable']) {
-      $this->addFile('config/schema/{machine_name}.views.schema.yml')
-        ->template('d8/plugin/views/field-schema')
-        ->action('append');
+      $this->addSchemaFile('config/schema/{machine_name}.views.schema.yml')
+        ->template('d8/plugin/views/field-schema');
     }
 
   }

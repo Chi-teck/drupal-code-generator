@@ -25,9 +25,7 @@ class Action extends PluginGenerator {
     $this->addFile('src/Plugin/Action/{class}.php', 'd8/plugin/action');
 
     if ($vars['configurable']) {
-      $this->addFile('config/schema/{machine_name}.schema.yml')
-        ->template('d8/plugin/action-schema')
-        ->action('append');
+      $this->addSchemaFile()->template('d8/plugin/action-schema');
     }
   }
 

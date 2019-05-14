@@ -19,16 +19,10 @@ class Type extends PluginGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-
     $vars['configurable_storage'] = $this->confirm('Make the field storage configurable?', FALSE);
     $vars['configurable_instance'] = $this->confirm('Make the field instance configurable?', FALSE);
-
-    $this->addFile('src/Plugin/Field/FieldType/{class}.php')
-      ->template('d8/plugin/field/type');
-
-    $this->addFile('config/schema/{machine_name}.schema.yml')
-      ->template('d8/plugin/field/type-schema')
-      ->action('append');
+    $this->addFile('src/Plugin/Field/FieldType/{class}.php', 'd8/plugin/field/type');
+    $this->addSchemaFile()->template('d8/plugin/field/type-schema');
   }
 
 }

@@ -246,8 +246,7 @@ class Field extends ModuleGenerator {
 
     $this->addFile('src/Plugin/Field/FieldFormatter/{formatter_class}.php', 'd8/_field/default-formatter');
 
-    $this->addFile('config/schema/{machine_name}.schema.yml', 'd8/_field/schema')
-      ->action('append');
+    $this->addSchemaFile()->template('d8/_field/schema');
 
     $this->addFile('{machine_name}.libraries.yml', 'd8/_field/libraries')
       ->action('append');

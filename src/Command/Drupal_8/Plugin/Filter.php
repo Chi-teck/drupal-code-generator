@@ -28,9 +28,7 @@ class Filter extends PluginGenerator {
     $this->addFile('src/Plugin/Filter/{class}.php')
       ->template('d8/plugin/filter');
 
-    $this->addFile('config/schema/{machine_name}.schema.yml')
-      ->template('d8/plugin/filter-schema')
-      ->action('append');
+    $this->addSchemaFile()->template('d8/plugin/filter-schema');
   }
 
 }

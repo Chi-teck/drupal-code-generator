@@ -21,14 +21,9 @@ class Formatter extends PluginGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['configurable'] = $this->confirm('Make the formatter configurable?', FALSE);
-
-    $this->addFile('src/Plugin/Field/FieldFormatter/{class}.php')
-      ->template('d8/plugin/field/formatter');
-
+    $this->addFile('src/Plugin/Field/FieldFormatter/{class}.php', 'd8/plugin/field/formatter');
     if ($vars['configurable']) {
-      $this->addFile('config/schema/{machine_name}.schema.yml')
-        ->template('d8/plugin/field/formatter-schema')
-        ->action('append');
+      $this->addSchemaFile()->template('d8/plugin/field/formatter-schema');
     }
 
   }

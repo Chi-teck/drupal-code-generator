@@ -16,13 +16,8 @@ class Condition extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-
-    $this->addFile('src/Plugin/Condition/{class}.php')
-      ->template('d8/plugin/condition');
-
-    $this->addFile('config/schema/{machine_name}.schema.yml')
-      ->template('d8/plugin/condition-schema')
-      ->action('append');
+    $this->addFile('src/Plugin/Condition/{class}.php', 'd8/plugin/condition');
+    $this->addSchemaFile()->template('d8/plugin/condition-schema');
   }
 
 }

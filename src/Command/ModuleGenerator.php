@@ -24,11 +24,26 @@ abstract class ModuleGenerator extends DrupalGenerator {
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addServicesFile(string $path = NULL) :Asset {
+  protected function addServicesFile(string $path = '{machine_name}.services.yml') :Asset {
     return $this->addFile()
-      ->path($path ?: '{machine_name}.services.yml')
+      ->path($path)
       ->action('append')
       ->headerSize(1);
+  }
+
+  /**
+   * Creates configuration schema file asset.
+   *
+   * @param string $path
+   *   (Optional) File path.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  protected function addSchemaFile(string $path = 'config/schema/{machine_name}.schema.yml') :Asset {
+    return $this->addFile()
+      ->path($path)
+      ->action('append');
   }
 
   /**

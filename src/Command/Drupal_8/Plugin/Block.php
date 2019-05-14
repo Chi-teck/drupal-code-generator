@@ -29,9 +29,7 @@ class Block extends PluginGenerator {
     $this->addFile('src/Plugin/Block/{class}.php', 'd8/plugin/block');
 
     if ($vars['configurable']) {
-      $this->addFile('config/schema/{machine_name}.schema.yml')
-        ->template('d8/plugin/block-schema')
-        ->action('append');
+      $this->addSchemaFile()->template('d8/plugin/block-schema');
     }
   }
 

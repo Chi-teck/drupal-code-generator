@@ -34,9 +34,7 @@ class Style extends PluginGenerator {
       ->headerSize(7);
 
     if ($vars['configurable']) {
-      $this->addFile('config/schema/{machine_name}.schema.yml')
-        ->template('d8/plugin/views/style-schema')
-        ->action('append');
+      $this->addSchemaFile()->template('d8/plugin/views/style-schema');
     }
 
   }
