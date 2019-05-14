@@ -33,7 +33,7 @@ dcg d8
 # Call generator directly.
 dcg d8:plugin:field:widget
 
-# Generate code non interactively.
+# Generate code non-interactively.
 dcg config-form -a Example -a example -a SettingsForm -a No
 ```
 ## Extending
