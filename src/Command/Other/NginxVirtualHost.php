@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Other;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 
 /**
  * Implements other:nginx-virtual-host command.
  */
-class NginxVirtualHost extends BaseGenerator {
+class NginxVirtualHost extends Generator {
 
   protected $name = 'other:nginx-virtual-host';
   protected $description = 'Generates an Nginx site configuration file';

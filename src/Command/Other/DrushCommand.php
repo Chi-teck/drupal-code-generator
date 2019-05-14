@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Other;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 
 /**
  * Implements other:drush-command command.
  */
-class DrushCommand extends BaseGenerator {
+class DrushCommand extends Generator {
 
   protected $name = 'other:drush-command';
   protected $description = 'Generates Drush command';

@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Other;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 
 /**
  * Implements other:html-page command.
  */
-class HtmlPage extends BaseGenerator {
+class HtmlPage extends Generator {
 
   protected $name = 'other:html-page';
   protected $description = 'Generates a simple html page';

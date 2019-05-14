@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Base class for Drupal generators.
  */
-abstract class DrupalGenerator extends BaseGenerator {
+abstract class DrupalGenerator extends Generator {
 
   /**
    * Name question.

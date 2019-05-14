@@ -24,7 +24,7 @@ class GeneratorsDiscoveryTest extends TestCase {
       '\DrupalCodeGenerator\Command\Drupal_7'
     );
     foreach ($generators as $generator) {
-      static::assertInstanceOf('DrupalCodeGenerator\Command\BaseGenerator', $generator);
+      static::assertInstanceOf('DrupalCodeGenerator\Command\Generator', $generator);
     }
     static::assertCount(self::TOTAL_GENERATORS, $generators);
   }

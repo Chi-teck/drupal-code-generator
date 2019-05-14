@@ -4,7 +4,7 @@
 
 namespace DrupalCodeGenerator\Command\custom;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements custom:example command.
  */
-class Example extends BaseGenerator {
+class Example extends Generator {
 
   protected $name = 'custom:example';
   protected $description = 'Some description';

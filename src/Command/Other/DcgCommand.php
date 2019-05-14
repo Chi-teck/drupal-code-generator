@@ -2,13 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Other;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 use DrupalCodeGenerator\Utils;
 
 /**
  * Implements other:dcg-command command.
  */
-class DcgCommand extends BaseGenerator {
+class DcgCommand extends Generator {
 
   protected $name = 'other:dcg-command';
   protected $description = 'Generates DCG command';

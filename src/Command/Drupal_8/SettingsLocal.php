@@ -2,13 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 use DrupalCodeGenerator\Utils;
 
 /**
  * Implements d8:settings-local command.
  */
-class SettingsLocal extends BaseGenerator {
+class SettingsLocal extends Generator {
 
   protected $name = 'd8:settings-local';
   protected $description = 'Generates Drupal 8 settings.local.php file';

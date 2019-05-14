@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Command\Other;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 
 /**
  * Implements other:apache-virtual-host command.
  */
-class ApacheVirtualHost extends BaseGenerator {
+class ApacheVirtualHost extends Generator {
 
   protected $name = 'other:apache-virtual-host';
   protected $description = 'Generates an Apache site configuration file';

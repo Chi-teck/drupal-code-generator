@@ -20,7 +20,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 /**
  * Base class for all generators.
  */
-abstract class BaseGenerator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
+abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
 
   use IOAwareTrait;
   use LoggerAwareTrait;

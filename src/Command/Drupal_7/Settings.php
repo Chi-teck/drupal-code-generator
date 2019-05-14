@@ -2,13 +2,13 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_7;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d7:settings.php command.
  */
-class Settings extends BaseGenerator {
+class Settings extends Generator {
 
   protected $name = 'd7:settings.php';
   protected $description = 'Generates Drupal 7 settings.php file';

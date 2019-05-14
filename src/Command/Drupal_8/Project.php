@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
-use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\Command\Generator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Question\Question;
  *
  * Inspired by drupal-composer/drupal-project.
  */
-class Project extends BaseGenerator {
+class Project extends Generator {
 
   protected $name = 'd8:project';
   protected $description = 'Generates a composer project';
