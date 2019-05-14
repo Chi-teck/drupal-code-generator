@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Command\Drupal_8\Service;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
-use DrupalCodeGenerator\Utils\Validator;
 
 /**
  * Implements d8:service:custom command.
@@ -21,10 +20,10 @@ class Custom extends ModuleGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-    $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', [Validator::class, 'validateServiceName']);
+    $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', [__CLASS__, 'validateServiceName']);
 
     $service = preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
-    $vars['class'] = $this->ask('Class', Utils::camelize($service), [Validator::class, 'validateClassName']);
+    $vars['class'] = $this->ask('Class', Utils::camelize($service), [__CLASS__, 'validateClassName']);
 
     $this->collectServices();
 

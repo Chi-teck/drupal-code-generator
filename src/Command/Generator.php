@@ -8,6 +8,7 @@ use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\ValidatorTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command;
@@ -24,6 +25,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   use IOAwareTrait;
   use LoggerAwareTrait;
+  use ValidatorTrait;
 
   /**
    * The command name.

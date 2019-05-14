@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\Generator;
-use DrupalCodeGenerator\Utils\Validator;
 
 /**
  * Implements d8:settings-local command.
@@ -24,11 +23,11 @@ class SettingsLocal extends Generator {
 
     if ($vars['db_override']) {
       $vars += [
-        'database' => $this->ask('Database name', 'drupal_local', [Validator::class, 'validateRequired']),
-        'username' => $this->ask('Database username', 'root', [Validator::class, 'validateRequired']),
-        'password' => $this->ask('Database password', NULL, [Validator::class, 'validateRequired']),
-        'host' => $this->ask('Database host', 'localhost', [Validator::class, 'validateRequired']),
-        'driver' => $this->ask('Database type', 'mysql', [Validator::class, 'validateRequired']),
+        'database' => $this->ask('Database name', 'drupal_local', [__CLASS__, 'validateRequired']),
+        'username' => $this->ask('Database username', 'root', [__CLASS__, 'validateRequired']),
+        'password' => $this->ask('Database password', NULL, [__CLASS__, 'validateRequired']),
+        'host' => $this->ask('Database host', 'localhost', [__CLASS__, 'validateRequired']),
+        'driver' => $this->ask('Database type', 'mysql', [__CLASS__, 'validateRequired']),
       ];
     }
 

@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
 use DrupalCodeGenerator\Utils;
-use DrupalCodeGenerator\Utils\Validator;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -40,14 +39,14 @@ abstract class PluginGenerator extends ModuleGenerator {
    * Asks plugin label question.
    */
   protected function askPluginLabelQuestion() :string {
-    return $this->ask($this->pluginLabelQuestion, $this->pluginLabelDefault, [Validator::class, 'validateRequired']);
+    return $this->ask($this->pluginLabelQuestion, $this->pluginLabelDefault, [__CLASS__, 'validateRequired']);
   }
 
   /**
    * Asks plugin ID question.
    */
   protected function askPluginIdQuestion() :string {
-    return $this->ask($this->pluginIdQuestion, $this->pluginIdDefault, [Validator::class, 'validateMachineName']);
+    return $this->ask($this->pluginIdQuestion, $this->pluginIdDefault, [__CLASS__, 'validateMachineName']);
   }
 
   /**

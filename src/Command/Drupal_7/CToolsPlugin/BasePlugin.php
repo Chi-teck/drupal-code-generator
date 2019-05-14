@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_7\CToolsPlugin;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils\Validator;
 
 /**
  * Base class for d7:ctools-plugin commands.
@@ -19,9 +18,9 @@ abstract class BasePlugin extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
 
-    $vars['plugin_name'] = $this->ask('Plugin name', 'Example', [Validator::class, 'validateRequired']);
+    $vars['plugin_name'] = $this->ask('Plugin name', 'Example', [__CLASS__, 'validateRequired']);
 
-    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', '{plugin_name|h2m}', [Validator::class, 'validateMachineName']);
+    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', '{plugin_name|h2m}', [__CLASS__, 'validateMachineName']);
 
     $vars['description'] = $this->ask('Plugin description', 'Plugin description.');
 

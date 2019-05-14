@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command\Drupal_8\Plugin;
 
-use DrupalCodeGenerator\Utils\Validator;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -45,7 +44,7 @@ class EntityReferenceSelection extends PluginGenerator {
     $this->vars['machine_name'] = $this->askMachineNameQuestion();
 
     $entity_type_question = new Question('Entity type that can be referenced by this plugin', 'node');
-    $entity_type_question->setValidator([Validator::class, 'validateMachineName']);
+    $entity_type_question->setValidator([__CLASS__, 'validateMachineName']);
     $entity_type_question->setAutocompleterValues(array_keys(self::baseClasses()));
     $this->vars['entity_type'] = $this->io->askQuestion($entity_type_question);
 

@@ -20,7 +20,7 @@ class PluginManager extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
 
-    // Validator::validateMachineName does not allow dots. But they can appear
+    // self::validateMachineName does not allow dots. But they can appear
     // in plugin types (field.widget, views.argument, etc).
     $plugin_type_validator = function ($value) {
       if (!preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {

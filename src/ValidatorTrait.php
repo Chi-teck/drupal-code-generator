@@ -1,11 +1,11 @@
 <?php
 
-namespace DrupalCodeGenerator\Utils;
+namespace DrupalCodeGenerator;
 
 /**
  * Provides validators for console questions.
  */
-class Validator {
+trait ValidatorTrait {
 
   /**
    * Machine name validator.
