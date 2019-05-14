@@ -5,18 +5,18 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml\Links;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:yml:links:task command.
+ * Test for d8:yml:links:contextual command.
  */
-class TaskGeneratorTest extends BaseGeneratorTest {
+class ContextualLinksGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Yml\Links\Task';
+  protected $class = 'Drupal_8\Yml\Links\Contextual';
 
   protected $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',
   ];
 
   protected $fixtures = [
-    'example.links.task.yml' => __DIR__ . '/_links.task.yml',
+    'example.links.contextual.yml' => __DIR__ . '/_links.contextual.yml',
   ];
 
 }

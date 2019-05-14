@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_7\ViewsPlugin;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
+use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
  * Test for d7:views-plugin:argument-default command.
  */
-class ArgumentDefaultTest extends GeneratorBaseTest {
+class ArgumentDefaultGeneratorTest extends BaseGeneratorTest {
 
   protected $class = 'Drupal_7\ViewsPlugin\ArgumentDefault';
 

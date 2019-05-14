@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 
-use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
+use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
  * Test for d8:service:path-processor command.
  */
-class PathProcessorTestTest extends GeneratorBaseTest {
+class PathProcessorTestGeneratorTest extends BaseGeneratorTest {
 
   protected $class = 'Drupal_8\Service\PathProcessor';
 
