@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\DrupalGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Utils\Validator;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -26,7 +26,7 @@ class Composer extends DrupalGenerator {
     $vars['description'] = $this->ask('Description');
 
     $type_question = new Question('Type', 'drupal-module');
-    $type_question->setValidator([Utils::class, 'validateRequired']);
+    $type_question->setValidator([Validator::class, 'validateRequired']);
     $type_question->setAutocompleterValues([
       'drupal-module',
       'drupal-theme',

@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Utils\Validator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -92,7 +93,7 @@ abstract class DrupalGenerator extends Generator {
     $root_directory = basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
     $default_value = Utils::machine2human($root_directory);
     $name_question = new Question($this->nameQuestion, $default_value);
-    $name_question->setValidator([Utils::class, 'validateRequired']);
+    $name_question->setValidator([Validator::class, 'validateRequired']);
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
       $name_question->setAutocompleterValues($extensions);
     }
@@ -105,7 +106,7 @@ abstract class DrupalGenerator extends Generator {
   protected function askMachineNameQuestion() :string {
     $default_value = Utils::human2machine($this->vars['name'] ?? basename($this->directory));
     $machine_name_question = new Question($this->machineNameQuestion, $default_value);
-    $machine_name_question->setValidator([Utils::class, 'validateMachineName']);
+    $machine_name_question->setValidator([Validator::class, 'validateMachineName']);
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
       $machine_name_question->setAutocompleterValues(array_keys($extensions));
     }

@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Drupal_8\Test;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Utils\Validator;
 
 /**
  * Implements d8:test:kernel command.
@@ -19,7 +19,7 @@ class Kernel extends ModuleGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-    $vars['class'] = $this->ask('Class', 'ExampleTest', [Utils::class, 'validateClassName']);
+    $vars['class'] = $this->ask('Class', 'ExampleTest', [Validator::class, 'validateClassName']);
     $this->addFile('tests/src/Kernel/{class}.php', 'd8/test/kernel');
   }
 
