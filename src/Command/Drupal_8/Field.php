@@ -119,8 +119,8 @@ class Field extends ModuleGenerator {
 
     $vars = &$this->collectDefault();
 
-    $vars['field_label'] = $this->ask('Field label', 'Example', [__CLASS__, 'validateRequired']);
-    $vars['field_id'] = $this->ask('Field ID', '{machine_name}_{field_label|h2m}', [__CLASS__, 'validateMachineName']);
+    $vars['field_label'] = $this->ask('Field label', 'Example', '::validateRequired');
+    $vars['field_id'] = $this->ask('Field ID', '{machine_name}_{field_label|h2m}', '::validateMachineName');
 
     $subfield_count_validator = function ($value) {
       if (!is_numeric($value) || intval($value) != $value || $value <= 0) {

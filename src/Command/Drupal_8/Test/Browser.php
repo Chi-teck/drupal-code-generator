@@ -18,7 +18,7 @@ class Browser extends ModuleGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-    $vars['class'] = $this->ask('Class', 'ExampleTest', [__CLASS__, 'validateClassName']);
+    $vars['class'] = $this->ask('Class', 'ExampleTest', '::validateClassName');
     $this->addFile('tests/src/Functional/{class}.php', 'd8/test/browser');
   }
 

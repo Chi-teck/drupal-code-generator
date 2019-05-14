@@ -18,7 +18,7 @@ class ThemeInfo extends ThemeGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-    $vars['base_theme'] = $this->ask('Base theme', 'classy', [__CLASS__, 'validateMachineName']);
+    $vars['base_theme'] = $this->ask('Base theme', 'classy', '::validateMachineName');
     $vars['description'] = $this->ask('Description', 'A flexible theme with a responsive, mobile-first layout.');
     $vars['package'] = $this->ask('Package', 'Custom');
     $this->addFile('{machine_name}.info.yml', 'd8/yml/theme-info');

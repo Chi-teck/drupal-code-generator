@@ -210,6 +210,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $this->processVars();
     $question = Utils::replaceTokens($question, $this->vars);
     $default = Utils::replaceTokens($default, $this->vars);
+    if (is_string($validator) && substr($validator, 0, 2) == '::') {
+      $validator = [__CLASS__, substr($validator, 2)];
+    }
     return $this->io->ask($question, $default, $validator);
   }
 

@@ -23,11 +23,11 @@ class SettingsLocal extends Generator {
 
     if ($vars['db_override']) {
       $vars += [
-        'database' => $this->ask('Database name', 'drupal_local', [__CLASS__, 'validateRequired']),
-        'username' => $this->ask('Database username', 'root', [__CLASS__, 'validateRequired']),
-        'password' => $this->ask('Database password', NULL, [__CLASS__, 'validateRequired']),
-        'host' => $this->ask('Database host', 'localhost', [__CLASS__, 'validateRequired']),
-        'driver' => $this->ask('Database type', 'mysql', [__CLASS__, 'validateRequired']),
+        'database' => $this->ask('Database name', 'drupal_local', '::validateRequired'),
+        'username' => $this->ask('Database username', 'root', '::validateRequired'),
+        'password' => $this->ask('Database password', NULL, '::validateRequired'),
+        'host' => $this->ask('Database host', 'localhost', '::validateRequired'),
+        'driver' => $this->ask('Database type', 'mysql', '::validateRequired'),
       ];
     }
 

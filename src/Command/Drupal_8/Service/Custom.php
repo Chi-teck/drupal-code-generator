@@ -20,10 +20,10 @@ class Custom extends ModuleGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-    $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', [__CLASS__, 'validateServiceName']);
+    $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', '::validateServiceName');
 
     $service = preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
-    $vars['class'] = $this->ask('Class', Utils::camelize($service), [__CLASS__, 'validateClassName']);
+    $vars['class'] = $this->ask('Class', Utils::camelize($service), '::validateClassName');
 
     $this->collectServices();
 
