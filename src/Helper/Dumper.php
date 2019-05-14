@@ -75,7 +75,11 @@ class Dumper extends Helper implements IOAwareInterface {
       $file_path = $directory . '/' . $asset->getPath();
 
       if ($dry_run) {
-        $this->io->title($file_path);
+        $title = $file_path;
+        if ($asset->isDirectory()) {
+          $title .= ' (empty directory)';
+        }
+        $this->io->title($title);
         $this->io->writeln($content);
         continue;
       }
