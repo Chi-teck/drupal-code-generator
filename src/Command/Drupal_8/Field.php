@@ -157,7 +157,8 @@ class Field extends ModuleGenerator {
     $vars['datetime'] = FALSE;
 
     for ($i = 1; $i <= $vars['subfield_count']; $i++) {
-      $this->io->rule();
+      $this->io->writeln(sprintf('<fg=green>%s</>', str_repeat('–', 50)));
+
       $vars['name_' . $i] = $this->ask("Label for sub-field #$i", "Value $i");
       $default_machine_name = Utils::human2machine($vars['name_' . $i]);
       $vars['machine_name_' . $i] = $this->ask("Machine name for sub-field #$i", $default_machine_name);
@@ -230,7 +231,7 @@ class Field extends ModuleGenerator {
 
     }
 
-    $this->io->rule();
+    $this->io->writeln(sprintf('<fg=green>%s</>', str_repeat('–', 50)));
 
     $vars['storage_settings'] = $this->confirm('Would you like to create field storage settings form?', FALSE);
     $vars['instance_settings'] = $this->confirm('Would you like to create field instance settings form?', FALSE);

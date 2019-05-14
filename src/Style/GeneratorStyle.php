@@ -88,13 +88,6 @@ class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
   /**
    * {@inheritdoc}
    */
-  public function rule(int $length = 50): void {
-    $this->writeln(sprintf('<fg=green>%s</>', str_repeat('–', $length)));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function buildTable(array $headers, array $rows) :Table {
     $style = clone Table::getStyleDefinition('symfony-style-guide');
     $style->setCellHeaderFormat('<info>%s</info>');

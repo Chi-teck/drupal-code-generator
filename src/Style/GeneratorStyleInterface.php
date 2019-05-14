@@ -18,11 +18,6 @@ interface GeneratorStyleInterface extends SymfonyStyleInterface, OutputInterface
   public function askQuestion(Question $question);
 
   /**
-   * Prints horizontal rule.
-   */
-  public function rule(int $length) :void;
-
-  /**
    * Builds console table.
    */
   public function buildTable(array $headers, array $rows) :Table;
