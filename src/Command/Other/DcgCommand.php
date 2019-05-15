@@ -18,14 +18,6 @@ class DcgCommand extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function configure() :void {
-    $this->destination = Utils::getHomeDirectory() . '/.dcg/Command';
-    parent::configure();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   protected function generate() :void {
     $vars = &$this->vars;
 
