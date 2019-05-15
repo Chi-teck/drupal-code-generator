@@ -221,7 +221,7 @@ class Asset {
   /**
    * Setter for asset vars.
    *
-   * @param array|null $vars
+   * @param array $vars
    *   Asset template variables.
    *
    * @return \DrupalCodeGenerator\Asset

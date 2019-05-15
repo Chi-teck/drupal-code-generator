@@ -57,7 +57,7 @@ class Navigation extends Command {
   /**
    * Constructs menu command.
    *
-   * @param \DrupalCodeGenerator\Command\GeneratorInterface[] $commands
+   * @param \Symfony\Component\Console\Command\Command[] $commands
    *   List of registered commands.
    */
   public function __construct(array $commands) {

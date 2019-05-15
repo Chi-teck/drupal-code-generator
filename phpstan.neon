@@ -1,5 +1,5 @@
 includes:
-  - vendor/phpstan/phpstan/conf/config.level1.neon
+  - vendor/phpstan/phpstan/conf/config.level2.neon
 parameters:
   paths:
     - src
@@ -30,3 +30,10 @@ parameters:
     -
       message: '#Variable \$label might not be defined.#'
       path: src/Logger/ConsoleLogger.php
+
+    -
+      message: '#Call to an undefined method .*getLabel#'
+      path: src/Command/Navigation.php
+    -
+      message: '#Call to an undefined method .*addPath#'
+      path: src/Helper/Renderer.php

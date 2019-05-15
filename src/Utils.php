@@ -68,11 +68,11 @@ class Utils {
   /**
    * Returns extension root.
    *
-   * @return string|bool
-   *   Extension root directory or false if it was not found.
+   * @return string|null
+   *   Extension root directory or NULL if it was not found.
    */
-  public static function getExtensionRoot(string $directory) :string {
-    $extension_root = FALSE;
+  public static function getExtensionRoot(string $directory) :?string {
+    $extension_root = NULL;
     for ($i = 1; $i <= 5; $i++) {
       $info_file = $directory . '/' . basename($directory) . '.info';
       if ((file_exists($info_file) && basename($directory) !== 'drush') || file_exists($info_file . '.yml')) {
