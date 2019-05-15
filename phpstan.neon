@@ -8,6 +8,7 @@ parameters:
     - src/Helper/DrupalContext.php
     - src/Box/PhpCompactor.php
     - tests/dcg/CompactorTest.php
+    - src/Logger/ConsoleLogger.php
     # @todo Find a better pattern to exclude paths.
     - tests/dcg/Generator/Other/_
     - tests/dcg/Generator/Drupal_7/_
@@ -27,9 +28,6 @@ parameters:
     -
       message: '#Return typehint .* has invalid type Drupal\\Core\\Extension\\Extension#'
       path: src/Command/DrupalGenerator.php
-    -
-      message: '#Variable \$label might not be defined.#'
-      path: src/Logger/ConsoleLogger.php
     -
       message: '#Call to an undefined method .*getLabel#'
       path: src/Command/Navigation.php
