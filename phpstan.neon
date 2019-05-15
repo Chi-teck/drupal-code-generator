@@ -1,5 +1,5 @@
 includes:
-  - vendor/phpstan/phpstan/conf/config.level0.neon
+  - vendor/phpstan/phpstan/conf/config.level1.neon
 parameters:
   paths:
     - src
@@ -23,7 +23,10 @@ parameters:
   ignoreErrors:
     -
       message: '#Call to static method getContainer\(\) on an unknown class Drupal\.#'
-      path: 'src/Application.php'
+      path: src/Application.php
     -
       message: '#Return typehint .* has invalid type Drupal\\Core\\Extension\\Extension#'
-      path: 'src/Command/DrupalGenerator.php'
+      path: src/Command/DrupalGenerator.php
+    -
+      message: '#Variable \$label might not be defined.#'
+      path: src/Logger/ConsoleLogger.php
