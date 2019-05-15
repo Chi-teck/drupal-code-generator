@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Drupal_7\CtoolsPlugin;
+namespace DrupalCodeGenerator\Tests\Generator\Drupal_7\CToolsPlugin;
 
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 

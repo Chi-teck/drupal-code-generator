@@ -119,7 +119,7 @@ abstract class DrupalGenerator extends Generator {
    *   An associative array whose keys are the machine names of the extensions
    *   and whose values are extension names.
    */
-  protected function getExtensionList() {
+  protected function getExtensionList() :array {
     return $this->drupalContext ? $this->drupalContext->getExtensionList($this->extensionType) : [];
   }
 

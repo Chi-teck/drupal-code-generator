@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for d8:yml:links:task command.
  */
-class TaskGeneratorTest extends BaseGeneratorTest {
+class TaskLinksGeneratorTest extends BaseGeneratorTest {
 
   protected $class = 'Drupal_8\Yml\Links\Task';
 

@@ -21,3 +21,9 @@ parameters:
     - tests/dcg/Generator/Drupal_8/Module/_
     - tests/dcg/Generator/Drupal_8/Form/_
   ignoreErrors:
+    -
+      message: '#Call to static method getContainer\(\) on an unknown class Drupal\.#'
+      path: 'src/Application.php'
+    -
+      message: '#Return typehint .* has invalid type Drupal\\Core\\Extension\\Extension#'
+      path: 'src/Command/DrupalGenerator.php'
