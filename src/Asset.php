@@ -135,27 +135,27 @@ class Asset {
   /**
    * Getter for asset header size.
    *
-   * @return string
+   * @return int|null
    *   Asset header size.
    */
-  public function getHeaderSize() {
+  public function getHeaderSize() :?int {
     return $this->headerSize;
   }
 
   /**
    * Getter for asset mode.
    *
-   * @return string
+   * @return int|null
    *   Asset file mode.
    */
-  public function getMode() :?string {
+  public function getMode() :?int {
     return $this->mode ?: ($this->isDirectory() ? 0755 : 0644);
   }
 
   /**
    * Getter for asset type.
    *
-   * @return string
+   * @return string|null
    *   Asset type.
    */
   public function getType() :?string {
@@ -263,13 +263,13 @@ class Asset {
   /**
    * Setter for asset mode.
    *
-   * @param string|null $mode
+   * @param int|null $mode
    *   Asset mode.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function mode(?string $mode) :Asset {
+  public function mode(?int $mode) :Asset {
     $this->mode = $mode;
     return $this;
   }

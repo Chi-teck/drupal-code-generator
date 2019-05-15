@@ -1,5 +1,5 @@
 includes:
-  - vendor/phpstan/phpstan/conf/config.level2.neon
+  - vendor/phpstan/phpstan/conf/config.level3.neon
 parameters:
   paths:
     - src
@@ -30,10 +30,15 @@ parameters:
     -
       message: '#Variable \$label might not be defined.#'
       path: src/Logger/ConsoleLogger.php
-
     -
       message: '#Call to an undefined method .*getLabel#'
       path: src/Command/Navigation.php
     -
       message: '#Call to an undefined method .*addPath#'
       path: src/Helper/Renderer.php
+    -
+      message: '#Method .*createInput\(\) should return .*StreamableInputInterface but returns .*MockObject#'
+      path: tests/dcg/Helper/QuestionHelperTest.php
+    -
+      message: '#Property .*\$validator .* does not accept class@anonymous#'
+      path: tests/dcg/ValidatorTraitTest.php

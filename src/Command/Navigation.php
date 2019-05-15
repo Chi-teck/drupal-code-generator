@@ -244,17 +244,14 @@ class Navigation extends Command {
    *
    * @param array $array
    *   An array being sorted.
-   *
-   * @return array
-   *   Sorted array.
    */
-  protected function recursiveKsort(array &$array) {
+  protected function recursiveKsort(array &$array) :void {
     foreach ($array as &$value) {
       if (is_array($value)) {
         $this->recursiveKsort($value);
       }
     }
-    return ksort($array);
+    ksort($array);
   }
 
   /**
