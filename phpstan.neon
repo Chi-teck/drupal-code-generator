@@ -1,0 +1,23 @@
+includes:
+  - vendor/phpstan/phpstan/conf/config.level0.neon
+parameters:
+  paths:
+    - src
+    - tests/dcg
+  excludes_analyse:
+    - src/Helper/DrupalContext.php
+    - src/Box/PhpCompactor.php
+    - tests/dcg/CompactorTest.php
+    # @todo Find a better pattern to exclude paths.
+    - tests/dcg/Generator/Other/_
+    - tests/dcg/Generator/Drupal_7/_
+    - tests/dcg/Generator/Drupal_8/_
+    - tests/dcg/Generator/Drupal_8/Service/_
+    - tests/dcg/Generator/Drupal_8/Test/_
+    - tests/dcg/Generator/Drupal_8/Plugin/_
+    - tests/dcg/Generator/Drupal_8/Plugin/Views/_
+    - tests/dcg/Generator/Drupal_8/Plugin/Migrate/_
+    - tests/dcg/Generator/Drupal_8/Plugin/Field/_
+    - tests/dcg/Generator/Drupal_8/Module/_
+    - tests/dcg/Generator/Drupal_8/Form/_
+  ignoreErrors:
