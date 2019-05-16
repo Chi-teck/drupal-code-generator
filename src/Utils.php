@@ -28,7 +28,7 @@ class Utils {
   /**
    * Transforms a camelized sting to machine name.
    */
-  public static function camel2machine($input) :string {
+  public static function camel2machine(string $input) :string {
     return self::human2machine(preg_replace('/[A-Z]/', ' \0', $input));
   }
 

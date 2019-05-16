@@ -1,5 +1,5 @@
 includes:
-  - vendor/phpstan/phpstan/conf/config.level5.neon
+  - vendor/phpstan/phpstan/conf/config.level6.neon
 parameters:
   paths:
     - src
@@ -52,5 +52,59 @@ parameters:
     -
       message: '#Parameter \#2 \$content of method .*dumpFile\(\) expects string, int given.#'
       path: tests/dcg/Helper/DumperTest.php
+    -
+      message: '#Parameter \#1 \$arr1 of function array_diff expects array, array#'
+      path: src/Command/Drupal_7/Hook.php
+    -
+      message: '#Parameter \#1 \$arr1 of function array_diff expects array, array#'
+      path: src/Command/Drupal_8/Hook.php
+    -
+      message: '#Parameter \#2 \$choices of method .*choice\(\) expects array#'
+      path: src/Command/Drupal_8/Field.php
+    -
+      message: '#Parameter \#1 \$content of method .*content\(\) expects string#'
+      path: src/Command/Drupal_8/Plugin/CKEditor.php
+    -
+      message: '#Parameter \#1 \$input of static method .*camelize\(\) expects string#'
+      path: src/Command/
+    -
+      message: '#Property .*\$directory \(string\) does not accept#'
+      path: src/Command/Generator.php
+    -
+      message: '#Parameter \#1 \$json of function json_decode expects string#'
+      path: src/Command/ModuleGenerator.php
+    -
+      message: '#Parameter \#2 \$search of function array_key_exists expects array#'
+      path: src/Helper/QuestionHelper.php
+    -
+      message: '#Parameter \#1 \$decimal_number of function decoct expects int#'
+      path: tests/dcg/Helper/DumperTest.php
+    -
+      message: '#Parameter \#1 \$fp of function fwrite expects resource#'
+      path: tests/dcg/Helper/DumperTest.php
+    -
+      message: '#Parameter \#1 \$fp of function rewind expects resource#'
+      path: tests/dcg/Helper/DumperTest.php
+    -
+      message: '#Parameter \#1 \$stream of method .*setStream\(\) expects resource#'
+      path: tests/dcg/Helper/DumperTest.php
+    -
+      message: '#Parameter \#1 \$fp of function fwrite expects resource#'
+      path:  tests/dcg/Helper/QuestionHelperTest.php
+    -
+      message: '#Parameter \#1 \$fp of function rewind expects resource#'
+      path:  tests/dcg/Helper/QuestionHelperTest.php
+    -
+      message: '#Parameter \#1 \$stream of class .*StreamOutput constructor expects resource#'
+      path:  tests/dcg/Helper/QuestionHelperTest.php
+    -
+      message: '#Method .*getDisplay\(\) should return string#'
+      path:  tests/dcg/Helper/QuestionHelperTest.php
+    -
+      message: '#Parameter \#2 \$subject of function preg_match_all expects string#'
+      path: tests/dcg/NavigationCommandTest.php
+    -
+      message: '#Parameter \#3 \$subject of function preg_replace expects array\|string#'
+      path: tests/dcg/NavigationCommandTest.php
 
 
