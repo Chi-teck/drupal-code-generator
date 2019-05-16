@@ -46,7 +46,7 @@ abstract class PluginGenerator extends ModuleGenerator {
    * Asks plugin ID question.
    */
   protected function askPluginIdQuestion() :string {
-    return $this->ask($this->pluginIdQuestion, $this->pluginIdDefault, '::validateMachineName');
+    return $this->ask($this->pluginIdQuestion, $this->pluginIdDefault, '::validateRequiredMachineName');
   }
 
   /**

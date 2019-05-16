@@ -20,7 +20,7 @@ abstract class BasePlugin extends ModuleGenerator {
 
     $vars['plugin_name'] = $this->ask('Plugin name', 'Example', '::validateRequired');
 
-    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', '{plugin_name|h2m}', '::validateMachineName');
+    $vars['plugin_machine_name'] = $this->ask('Plugin machine name', '{plugin_name|h2m}', '::validateRequiredMachineName');
 
     $vars['description'] = $this->ask('Plugin description', 'Plugin description.');
 

@@ -45,7 +45,7 @@ class ValidatorTraitTest extends TestCase {
   }
 
   /**
-   * Data provider callback for testValidateMachineName().
+   * Data provider.
    *
    * @return array
    *   Array of arguments of test callback.
@@ -57,7 +57,7 @@ class ValidatorTraitTest extends TestCase {
       [' not_trimmed ', TRUE],
       ['Hello world ', TRUE],
       ['foo_', TRUE],
-      ['', TRUE],
+      ['', FALSE],
       ['foo*&)(*&@#()*&@#bar', TRUE],
     ];
   }
@@ -81,7 +81,7 @@ class ValidatorTraitTest extends TestCase {
   }
 
   /**
-   * Data provider callback for testValidateClassName().
+   * Data provider.
    *
    * @return array
    *   Array of arguments of test callback.
@@ -115,7 +115,7 @@ class ValidatorTraitTest extends TestCase {
   }
 
   /**
-   * Data provider callback for testValidateServiceName().
+   * Data provider.
    *
    * @return array
    *   Array of arguments of test callback.
@@ -151,7 +151,7 @@ class ValidatorTraitTest extends TestCase {
   }
 
   /**
-   * Data provider callback for testValidateRequired().
+   * Data provider.
    *
    * @return array
    *   Array of arguments of test callback.
@@ -161,6 +161,105 @@ class ValidatorTraitTest extends TestCase {
       ['yes', FALSE],
       ['0', FALSE],
       [0, FALSE],
+      ['', TRUE],
+      [NULL, TRUE],
+    ];
+  }
+
+  /**
+   * Test callback.
+   *
+   * @param mixed $value
+   *   The value to validate.
+   * @param bool $exception
+   *   Indicates that an exception is expected.
+   *
+   * @dataProvider validateRequiredMachineNameProvider()
+   */
+  public function testValidateRequiredMachineName($value, bool $exception) :void {
+    if ($exception) {
+      $this->expectException(\UnexpectedValueException::class);
+      $this->expectExceptionMessage($value ? 'The value is not correct machine name.' : 'The value is required.');
+    }
+    self::assertEquals($value, $this->validator::validateRequiredMachineName($value));
+  }
+
+  /**
+   * Data provider..
+   *
+   * @return array
+   *   Array of arguments of test callback.
+   */
+  public function validateRequiredMachineNameProvider() :array {
+    return [
+      ['test', FALSE],
+      ['wrong machine name', TRUE],
+      ['', TRUE],
+      [NULL, TRUE],
+    ];
+  }
+
+  /**
+   * Test callback.
+   *
+   * @param mixed $value
+   *   The value to validate.
+   * @param bool $exception
+   *   Indicates that an exception is expected.
+   *
+   * @dataProvider validateRequiredClassNameProvider()
+   */
+  public function testValidateRequiredClassName($value, bool $exception) :void {
+    if ($exception) {
+      $this->expectException(\UnexpectedValueException::class);
+      $this->expectExceptionMessage($value ? 'The value is not correct class name.' : 'The value is required.');
+    }
+    self::assertEquals($value, $this->validator::validateRequiredClassName($value));
+  }
+
+  /**
+   * Data provider.
+   *
+   * @return array
+   *   Array of arguments of test callback.
+   */
+  public function validateRequiredClassNameProvider() :array {
+    return [
+      ['GoodClassName', FALSE],
+      ['wrong class name', TRUE],
+      ['', TRUE],
+      [NULL, TRUE],
+    ];
+  }
+
+  /**
+   * Test callback.
+   *
+   * @param mixed $value
+   *   The value to validate.
+   * @param bool $exception
+   *   Indicates that an exception is expected.
+   *
+   * @dataProvider validateRequiredServiceNameProvider()
+   */
+  public function testValidateRequiredServiceName($value, bool $exception) :void {
+    if ($exception) {
+      $this->expectException(\UnexpectedValueException::class);
+      $this->expectExceptionMessage($value ? 'The value is not correct service name.' : 'The value is required.');
+    }
+    self::assertEquals($value, $this->validator::validateRequiredServiceName($value));
+  }
+
+  /**
+   * Data provider.
+   *
+   * @return array
+   *   Array of arguments of test callback.
+   */
+  public function validateRequiredServiceNameProvider() :array {
+    return [
+      ['good.service_name', FALSE],
+      ['wrong class name', TRUE],
       ['', TRUE],
       [NULL, TRUE],
     ];

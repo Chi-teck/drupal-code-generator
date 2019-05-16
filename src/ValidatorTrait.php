@@ -8,45 +8,126 @@ namespace DrupalCodeGenerator;
 trait ValidatorTrait {
 
   /**
-   * Machine name validator.
+   * Validates machine name.
+   *
+   * @param string|null $value
+   *   A value to validate.
+   *
+   * @return string|null
+   *   The validated value.
+   *
+   * @throws \UnexpectedValueException
    */
   public static function validateMachineName(?string $value) :?string {
-    if (!preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/', $value)) {
-      throw new \UnexpectedValueException('The value is not correct machine name.');
-    }
-    return $value;
+    return static::validate($value, '^[a-z][a-z0-9_]*[a-z0-9]$', 'The value is not correct machine name.');
   }
 
   /**
-   * Class name validator.
+   * Validates class name.
+   *
+   * @param string|null $value
+   *   A value to validate.
+   *
+   * @return string|null
+   *   The validated value.
    *
    * @see http://php.net/manual/en/language.oop5.basic.php
    */
   public static function validateClassName(?string $value) :?string {
-    if (!preg_match('/^[A-Z][a-zA-Z0-9]+$/', $value)) {
-      throw new \UnexpectedValueException('The value is not correct class name.');
-    }
-    return $value;
+    return static::validate($value, '^[A-Z][a-zA-Z0-9]+$', 'The value is not correct class name.');
   }
 
   /**
-   * Service name validator.
+   * Validates service name.
+   *
+   * @param string|null $value
+   *   A value to validate.
+   *
+   * @return string|null
+   *   The validated value.
    */
   public static function validateServiceName(?string $value) :?string {
-    if ($value !== '' && $value !== NULL && !preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
-      throw new \UnexpectedValueException('The value is not correct service name.');
-    }
-    return $value;
+    return static::validate($value, '^[a-z][a-z0-9_\.]*[a-z0-9]$', 'The value is not correct service name.');
   }
 
   /**
-   * Required value validator.
+   * Validates that the value is not empty.
+   *
+   * @param string|null $value
+   *   A value to validate.
+   *
+   * @return string
+   *   The validated value.
+   *
+   * @throws \UnexpectedValueException
    */
-  public static function validateRequired(?string $value) :?string {
+  public static function validateRequired(?string $value) :string {
     // FALSE is not considered as empty value because question helper use
     // it as negative answer on confirmation questions.
     if ($value === NULL || $value === '') {
       throw new \UnexpectedValueException('The value is required.');
+    }
+    return $value;
+  }
+
+  /**
+   * Validates required machine name.
+   *
+   * @param string|null $value
+   *   A value to validate.
+   *
+   * @return string
+   *   The validated value.
+   */
+  public static function validateRequiredMachineName(?string $value) :string {
+    $value = static::validateRequired($value);
+    return static::validateMachineName($value);
+  }
+
+  /**
+   * Validates required class name.
+   *
+   * @param string|null $value
+   *   A value to validate.
+   *
+   * @return string
+   *   The validated value.
+   */
+  public static function validateRequiredClassName(?string $value) :string {
+    $value = static::validateRequired($value);
+    return static::validateClassName($value);
+  }
+
+  /**
+   * Validates required service name.
+   *
+   * @param string|null $value
+   *   A value to validate.
+   *
+   * @return string
+   *   The validated value.
+   */
+  public static function validateRequiredServiceName(?string $value) :string {
+    $value = static::validateRequired($value);
+    return static::validateServiceName($value);
+  }
+
+  /**
+   * Validates a value with a given regular expression.
+   *
+   * @param string|null $value
+   *   A value to validate.
+   * @param string $pattern
+   *   To pattern to search for.
+   * @param string $message
+   *   An exception message.
+   *
+   * @return string|null
+   *   The validated value.
+   */
+  private static function validate(?string $value, string $pattern, string $message) :?string {
+    if ($value !== '' && $value !== NULL && !preg_match("/$pattern/", $value)) {
+      throw new \UnexpectedValueException($message);
     }
     return $value;
   }
