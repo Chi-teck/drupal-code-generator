@@ -1,5 +1,5 @@
 includes:
-  - vendor/phpstan/phpstan/conf/config.level3.neon
+  - vendor/phpstan/phpstan/conf/config.level5.neon
 parameters:
   paths:
     - src
@@ -40,3 +40,17 @@ parameters:
     -
       message: '#Property .*\$validator .* does not accept class@anonymous#'
       path: tests/dcg/ValidatorTraitTest.php
+    -
+      message: '#Call to function is_numeric\(\) with .* will always evaluate to false.#'
+      path:  src/Application.php
+    -
+      message: '#Negated boolean expression is always false.#'
+      path:  src/Helper/LoggerFactory.php
+    -
+      message: '#Strict comparison using === between string and null will always evaluate to false.#'
+      path:  src/Helper/QuestionHelper.php
+    -
+      message: '#Parameter \#2 \$content of method .*dumpFile\(\) expects string, int given.#'
+      path: tests/dcg/Helper/DumperTest.php
+
+
