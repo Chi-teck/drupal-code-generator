@@ -211,7 +211,7 @@ class DumperTest extends BaseTestCase {
   /**
    * Asserts contents of dumped assets.
    */
-  protected function assertFiles(array $assets = NULL) :void {
+  protected function assertFiles(array $assets) :void {
     foreach ($assets as $asset) {
       static::assertStringEqualsFile($this->directory . '/' . $asset->getPath(), $asset->getContent());
     }

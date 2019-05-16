@@ -10,28 +10,28 @@ class Asset {
   /**
    * Asset path.
    *
-   * @var string
+   * @var string|null
    */
   protected $path;
 
   /**
    * Asset content.
    *
-   * @var string
+   * @var string|null
    */
   protected $content;
 
   /**
    * Twig template to render header.
    *
-   * @var string
+   * @var string|null
    */
   protected $headerTemplate;
 
   /**
    * Twig template to render main content.
    *
-   * @var string
+   * @var string|null
    */
   protected $template;
 
@@ -54,14 +54,14 @@ class Asset {
   /**
    * Header size.
    *
-   * @var int
+   * @var int|null
    */
   protected $headerSize = 0;
 
   /**
    * Asset mode.
    *
-   * @var int
+   * @var int|null
    */
   protected $mode;
 
@@ -145,10 +145,10 @@ class Asset {
   /**
    * Getter for asset mode.
    *
-   * @return int|null
+   * @return int
    *   Asset file mode.
    */
-  public function getMode() :?int {
+  public function getMode() :int {
     return $this->mode ?: ($this->isDirectory() ? 0755 : 0644);
   }
 
@@ -235,13 +235,13 @@ class Asset {
   /**
    * Setter for asset action.
    *
-   * @param string|null $action
+   * @param string $action
    *   Asset action.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function action(?string $action) :Asset {
+  public function action(string $action) :Asset {
     $this->action = $action;
     return $this;
   }
@@ -277,13 +277,13 @@ class Asset {
   /**
    * Setter for asset type.
    *
-   * @param string|null $type
+   * @param string $type
    *   Asset type.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function type(?string $type) :Asset {
+  public function type(string $type) :Asset {
     $this->type = $type;
     return $this;
   }

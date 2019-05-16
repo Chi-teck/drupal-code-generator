@@ -20,7 +20,7 @@ class Hook extends ModuleGenerator {
     $vars = &$this->collectDefault();
 
     $question = new Question('Hook name');
-    $question->setValidator(function (?string $value) :string {
+    $question->setValidator(function (?string $value) :?string {
       if (!in_array($value, $this->getSupportedHooks())) {
         throw new \UnexpectedValueException('The value is not correct hook name.');
       }

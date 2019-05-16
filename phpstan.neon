@@ -1,5 +1,5 @@
 includes:
-  - vendor/phpstan/phpstan/conf/config.level6.neon
+  - vendor/phpstan/phpstan/conf/config.level7.neon
 parameters:
   paths:
     - src
@@ -106,5 +106,57 @@ parameters:
     -
       message: '#Parameter \#3 \$subject of function preg_replace expects array\|string#'
       path: tests/dcg/NavigationCommandTest.php
-
-
+    -
+      message: '#Parameter \#1 \$question of class .*Question constructor expects string#'
+      path: src/Command/DrupalGenerator.php
+    -
+      message: '#Parameter \#1 \$extension_type of method .*getExtensionList\(\) expects string#'
+      path: src/Command/DrupalGenerator.php
+    -
+      message: '#Parameter \#3 \$subject of function str_replace expects array\|string#'
+      path: src/Command/Drupal_8/Plugin/CKEditor.php
+    -
+      message: '#Parameter \#1 \$question of method .*ask\(\) expects string#'
+      path: src/Command/Generator.php
+    -
+      message: '#Parameter \#1 \$question of method .*confirm\(\) expects string#'
+      path: src/Command/Generator.php
+    -
+      message: '#Parameter \#1 \$question of class .*ChoiceQuestion constructor expects string#'
+      path: src/Command/Generator.php
+    -
+      message: '#Parameter \#3 \$subject of function str_replace expects array\|string#'
+      path: src/GeneratorDiscovery.php
+    -
+      message: '#Parameter \#1 \$haystack of function strpos expects string#'
+      path: src/GeneratorTester.php
+    -
+      message: '#Parameter \#1 \$messages of method .*writeln\(\) expects array\|string#'
+      path: src/Helper/Dumper.php
+    -
+      message: '#Parameter \#1 \$content of static method .*removeHeader\(\) expects string#'
+      path: src/Helper/Dumper.php
+    -
+      message: '#Parameter \#2 \$header_size of static method .*removeHeader\(\) expects int#'
+      path: src/Helper/Dumper.php
+    -
+      message: '#Parameter \#1 \$template of method .*render\(\) expects string#'
+      path: src/Helper/Renderer.php
+    -
+      message: '#Parameter \#1 \$str of function mb_strlen expects string#'
+      path: src/Helper/ResultPrinter.php
+    -
+      message: '#Parameter \#2 \$name of class Twig\\Source constructor expects string#'
+      path: src/Twig/TwigEnvironment.php
+    -
+      message: '#Parameter \#1 \$str of function trim expects string#'
+      path: src/Utils.php
+    -
+      message: '#Parameter \#1 \$human_name of static method.*human2machine\(\) expects string#'
+      path: src/Utils.php
+    -
+      message: '#Parameter \#1 \$str of function strtolower expects string#'
+      path: src/Utils.php
+    -
+      message: '#Parameter \#1 \$str of function rtrim expects string#'
+      path: tests/dcg/NavigationCommandTest.php

@@ -19,12 +19,12 @@ class Navigation extends Command {
    *
    * @var array
    */
-  protected $menuTree;
+  protected $menuTree = [];
 
   /**
    * Name of the generator to execute.
    *
-   * @var string
+   * @var string|null
    */
   protected $generatorName;
 

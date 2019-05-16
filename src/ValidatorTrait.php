@@ -11,7 +11,7 @@ trait ValidatorTrait {
    * Machine name validator.
    */
   public static function validateMachineName(?string $value) :?string {
-    if (!preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/', $value)) {
+    if (!$value || !preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/', $value)) {
       throw new \UnexpectedValueException('The value is not correct machine name.');
     }
     return $value;
@@ -23,7 +23,7 @@ trait ValidatorTrait {
    * @see http://php.net/manual/en/language.oop5.basic.php
    */
   public static function validateClassName(?string $value) :?string {
-    if (!preg_match('/^[A-Z][a-zA-Z0-9]+$/', $value)) {
+    if (!$value || !preg_match('/^[A-Z][a-zA-Z0-9]+$/', $value)) {
       throw new \UnexpectedValueException('The value is not correct class name.');
     }
     return $value;
