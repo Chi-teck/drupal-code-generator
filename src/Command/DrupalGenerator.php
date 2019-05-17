@@ -29,6 +29,13 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Indicates that generated code is a new Drupal extension.
    *
+   * Most of Drupal generators fall into two categories:
+   *  - new extensions (i.e. module, profile, theme)
+   *  - components for existing extensions (i.e. controller, form, service, etc)
+   * This flag makes the distinction. It is used for setting autocompleter
+   * values for the extension name and defining correct destination for
+   * generated code.
+   *
    * @var bool
    */
   protected $isNewExtension = FALSE;
@@ -42,6 +49,8 @@ abstract class DrupalGenerator extends Generator {
 
   /**
    * Drupal context.
+   *
+   * This helper is set if Drupal is fully bootstrapped.
    *
    * @var \DrupalCodeGenerator\Helper\DrupalContext|null
    */
@@ -126,7 +135,7 @@ abstract class DrupalGenerator extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function getDestination() {
+  protected function getDestination() :?string {
     if ($this->drupalContext && $this->extensionType) {
       $destination = $this->drupalContext->getDestination(
         $this->extensionType,

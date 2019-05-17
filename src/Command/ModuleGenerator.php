@@ -16,7 +16,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
   protected $extensionType = 'module';
 
   /**
-   * Creates service file asset.
+   * Adds an asset for service file.
    *
    * @param string $path
    *   (Optional) File path.
@@ -32,7 +32,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
   }
 
   /**
-   * Creates configuration schema file asset.
+   * Adds an asset for configuration schema file.
    *
    * @param string $path
    *   (Optional) File path.
@@ -48,6 +48,9 @@ abstract class ModuleGenerator extends DrupalGenerator {
 
   /**
    * Collects services.
+   *
+   * @param bool $default
+   *   (Optional) Default value for the confirmation question.
    *
    * @return array
    *   List of collected services.

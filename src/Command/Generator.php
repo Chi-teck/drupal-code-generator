@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 
 /**
- * Base class for all generators.
+ * Base class for code generators.
  */
 abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
 
@@ -64,6 +64,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * The working directory.
+   *
+   * This is used to supply generators with some context. For instance, the
+   * directory name can be used to set default extension name.
    *
    * @var string
    */
@@ -133,11 +136,12 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $this->getHelperSet()->setCommand($this);
 
     $this->getHelper('renderer')->addPath($this->templatePath);
+
     $this->setLogger($this->getHelper('logger_factory')->getLogger());
 
     $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
 
-    $this->io->title(sprintf("Welcome to %s generator!", $this->getName()));
+    $this->io->title(sprintf('Welcome to %s generator!', $this->getName()));
 
     $this->directory = $input->getOption('directory') ?: getcwd();
   }
@@ -198,6 +202,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $this->processVars();
     $question = Utils::replaceTokens($question, $this->vars);
     $default = Utils::replaceTokens($default, $this->vars);
+    // Allow the validators to be referenced in a short form like
+    // '::validateMachineName'.
     if (is_string($validator) && substr($validator, 0, 2) == '::') {
       $validator = [__CLASS__, substr($validator, 2)];
     }
@@ -291,7 +297,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Returns destination for generated files.
    */
-  protected function getDestination() {
+  protected function getDestination() :?string {
     return $this->directory;
   }
 

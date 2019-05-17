@@ -45,7 +45,7 @@ abstract class FormGenerator extends ModuleGenerator {
   /**
    * Interacts with the user and builds route variables.
    */
-  protected function generateRoute() {
+  protected function generateRoute() :void {
     $vars = &$this->vars;
 
     $vars['route'] = $this->confirm('Would you like to create a route for this form?');
