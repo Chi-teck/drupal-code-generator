@@ -46,26 +46,6 @@ class Utils {
   }
 
   /**
-   * Returns a validator for allowed options.
-   *
-   * @param array $options
-   *   Allowed values.
-   *
-   * @return callable
-   *   Question validator.
-   */
-  public static function getOptionsValidator(array $options) :callable {
-    return function ($value) use ($options) {
-      if (!in_array($value, $options)) {
-        $options_formatted = implode(', ', $options);
-        $error_message = sprintf('The value should be one of the following: %s.', $options_formatted);
-        throw new \UnexpectedValueException($error_message);
-      }
-      return $value;
-    };
-  }
-
-  /**
    * Returns extension root.
    *
    * @return string|null

@@ -134,23 +134,6 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::getOptionsValidator
-   */
-  public function testOptionsValidator() {
-    $options = [
-      'aaa',
-      'bbb',
-      'ccc',
-    ];
-    $validator = Utils::getOptionsValidator($options);
-    self::assertEquals('aaa', $validator('aaa'));
-    $this->expectException(\UnexpectedValueException::class);
-    $validator('sss');
-  }
-
-  /**
-   * Test callback.
-   *
    * @param string $target_directory
    *   Directory for which the extension root is checked.
    * @param string|bool $expected_extension_root
