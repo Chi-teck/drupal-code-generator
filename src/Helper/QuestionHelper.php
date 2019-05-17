@@ -128,4 +128,12 @@ class QuestionHelper extends BaseQuestionHelper {
 
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function writeError(OutputInterface $output, \Exception $error) {
+    // Add one-space indentation to comply with DCG output style.
+    $output->writeln(' <error>' . $error->getMessage() . '</error>');
+  }
+
 }

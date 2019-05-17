@@ -63,7 +63,7 @@ class QuestionHelperTest extends TestCase {
 
     $expected_display = "\n";
     $expected_display .= " What time is it?\n";
-    $expected_display .= " ➤ The time is not correct!\n";
+    $expected_display .= " ➤  The time is not correct!\n";
     $expected_display .= "\n";
     $expected_display .= " What time is it?\n";
     $expected_display .= ' ➤ ';
