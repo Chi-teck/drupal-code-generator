@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Drupal_8;
 
 use DrupalCodeGenerator\Command\Generator;
-use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -28,7 +27,8 @@ class Project extends Generator {
 
     $vars = &$this->vars;
 
-    $name_validator = function ($value) {
+    $name_validator = function (?string $value) :?string {
+      $value = self::validateRequired($value);
       if (!preg_match('#[^/]+/[^/]+$#i', $value)) {
         throw new \UnexpectedValueException('The value is not correct project name.');
       }
@@ -71,9 +71,10 @@ class Project extends Generator {
       'html',
     ];
     $document_root_question = new Question('Document root directory, type single dot to use Composer root', 'docroot');
-    $document_root_question->setNormalizer(function ($value) {
-      return $value == '.' ? '' : $value;
-    });
+    $document_root_normalizer = function (string $value) :string {
+      return $value == '.' ? '' : rtrim($value, '/');
+    };
+    $document_root_question->setNormalizer($document_root_normalizer);
     $document_root_question->setAutocompleterValues($document_roots);
     $vars['document_root'] = $this->io->askQuestion($document_root_question);
 
@@ -83,20 +84,20 @@ class Project extends Generator {
 
     $sections = ['require', 'require-dev'];
 
-    $vars['drush'] = $this->confirm('Would you like to install Drush?');
-    if ($vars['drush']) {
-      $drush_installation_question = new Question('Drush installation (require|require-dev)', 'require');
-      $drush_installation_question->setValidator(Utils::getOptionsValidator($sections));
-      $drush_installation_question->setAutocompleterValues($sections);
-      $vars['drush_installation'] = $this->io->askQuestion($drush_installation_question);
+    $vars['drush'] = NULL;
+    if ($vars['drush'] = $this->confirm('Would you like to install Drush?')) {
+      $drush_question = new Question('Drush installation (require|require-dev)', 'require');
+      $drush_question->setValidator([__CLASS__, 'validateSection']);
+      $drush_question->setAutocompleterValues($sections);
+      $vars['drush'] = $this->io->askQuestion($drush_question);
     }
 
-    $vars['drupal_console'] = $this->confirm('Would you like to install Drupal Console?', !$vars['drush']);
-    if ($vars['drupal_console']) {
-      $dc_installation_question = new Question('Drupal Console installation (require|require-dev)', 'require-dev');
-      $dc_installation_question->setValidator(Utils::getOptionsValidator($sections));
-      $dc_installation_question->setAutocompleterValues($sections);
-      $vars['drupal_console_installation'] = $this->io->askQuestion($dc_installation_question);
+    $vars['drupal_console'] = NULL;
+    if ($this->confirm('Would you like to install Drupal Console?', !$vars['drush'])) {
+      $dc_question = new Question('Drupal Console installation (require|require-dev)', 'require-dev');
+      $dc_question->setValidator([__CLASS__, 'validateSection']);
+      $dc_question->setAutocompleterValues($sections);
+      $vars['drupal_console'] = $this->io->askQuestion($dc_question);
     }
 
     $vars['composer_patches'] = $this->confirm('Would you like to install Composer patches plugin?');
@@ -105,11 +106,13 @@ class Project extends Generator {
     $vars['env'] = $this->confirm('Would you like to load environment variables from .env files?', FALSE);
     $vars['asset_packagist'] = $this->confirm('Would you like to add asset-packagist repository?', FALSE);
 
-    $vars['document_root_path'] = $vars['document_root'] ?
-      $vars['document_root'] . '/' : $vars['document_root'];
+    // Add ending slash if the path is not empty.
+    if ($vars['document_root_path'] = $vars['document_root']) {
+      $vars['document_root_path'] .= '/';
+    }
 
-    $this->addFile('composer.json')
-      ->content(self::buildComposerJson($vars));
+    $this->addFile('composer.json')->content(self::buildComposerJson($vars));
+
     $this->addFile('.gitignore', 'd8/_project/gitignore');
     $this->addFile('phpcs.xml', 'd8/_project/phpcs.xml');
     $this->addFile('scripts/composer/create_required_files.php', 'd8/_project/scripts/composer/create_required_files.php');
@@ -173,7 +176,7 @@ class Project extends Generator {
    * @return string
    *   Encoded JSON content.
    */
-  protected static function buildComposerJson(array $vars) {
+  protected static function buildComposerJson(array $vars) :string {
 
     $document_root_path = $vars['document_root_path'];
 
@@ -214,13 +217,13 @@ class Project extends Generator {
     }
 
     if ($vars['drush']) {
-      $vars['drush_installation'] == 'require'
+      $vars['drush'] == 'require'
         ? self::addPackage($require, 'drush/drush')
         : self::addPackage($require_dev, 'drush/drush');
     }
 
     if ($vars['drupal_console']) {
-      $vars['drupal_console_installation'] == 'require'
+      $vars['drupal_console'] == 'require'
         ? self::addPackage($require, 'drupal/console')
         : self::addPackage($require_dev, 'drupal/console');
     }
@@ -344,7 +347,7 @@ class Project extends Generator {
    *
    * @todo Find a way to track versions automatically.
    */
-  protected static function addPackage(array &$section, $package) {
+  protected static function addPackage(array &$section, $package) :void {
     $versions = [
       'composer/installers' => '^1.4',
       'cweagans/composer-patches' => '^1.6',
@@ -361,6 +364,16 @@ class Project extends Generator {
       'zaporylie/composer-drupal-optimizations' => '^1.1',
     ];
     $section[$package] = $versions[$package];
+  }
+
+  /**
+   * Validates require/require-dev answer.
+   */
+  public static function validateSection(?string $value) :?string {
+    if ($value != 'require' && $value != 'require-dev') {
+      throw new \UnexpectedValueException('The value should be either "require" or "require-dev".');
+    }
+    return $value;
   }
 
 }
