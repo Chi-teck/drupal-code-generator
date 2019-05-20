@@ -196,12 +196,13 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
 
   $DCG d8:plugin:action -d $MODULE_DIR -a Qux -a qux -a 'Update node title' -a qux_update_node_title -a UpdateNodeTitle -a DCG -a Yes
   $DCG d8:plugin:block -d $MODULE_DIR -a Qux -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
+  $DCG d8:plugin:ckeditor -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example
   $DCG d8:plugin:condition -d $MODULE_DIR -a Qux -a qux -a Example -a example -a Example
+  $DCG d8:plugin:entity-reference-selection -d $MODULE_DIR -a Qux -a qux -a node -a Example -a qux_example -a Example -a Yes
   $DCG d8:plugin:filter -d $MODULE_DIR -a Qux -a qux -a Example -a example -a Example -a 'HTML restrictor'
   $DCG d8:plugin:menu-link -d $MODULE_DIR -a Qux -a qux -a FooExampleLink
+  $DCG d8:plugin:queue-worker -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example
   $DCG d8:plugin:rest-resource -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleResource
-  $DCG d8:plugin:entity-reference-selection -d $MODULE_DIR -a Qux -a qux -a node -a Example -a qux_example -a Example -a Yes
-  $DCG d8:plugin:ckeditor -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME

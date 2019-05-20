@@ -171,7 +171,8 @@
   [ 9] Entity reference selection
   [10] Filter
   [11] Menu link
-  [12] REST resource
+  [12] Queue worker
+  [13] REST resource
   ➤➤➤➤ 0⏎
  Select generator: 
   [ 0] ..
