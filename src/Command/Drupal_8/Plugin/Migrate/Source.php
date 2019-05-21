@@ -35,6 +35,7 @@ class Source extends BaseGenerator {
     $questions['source_type'] = new ChoiceQuestion('Source type', $choices);
 
     $vars = &$this->collectVars($input, $output, $questions);
+    $vars['source_type'] = array_search($vars['source_type'], $source_types);
 
     $vars['base_class'] = $vars['source_type'] == 'sql' ? 'SqlBase' : 'SourcePluginBase';
 
