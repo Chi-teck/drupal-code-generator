@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Helper;
 
 use Symfony\Component\Console\Helper\Helper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Drupal context.
@@ -33,7 +34,7 @@ class DrupalContext extends Helper {
   /**
    * DrupalContext constructor.
    */
-  public function __construct($container) {
+  public function __construct(ContainerInterface $container) {
     $this->container = $container;
   }
 
@@ -51,8 +52,8 @@ class DrupalContext extends Helper {
    *   Extension type (module|theme|profile).
    *
    * @return \Drupal\Core\Extension\Extension[]
-   *   An associative array whose keys are the machine names of the themes and
-   *   whose values are extension names.
+   *   An associative array whose keys are the machine names of the extensions
+   *   and whose values are extension names.
    */
   public function getExtensionList(string $extension_type) :array {
     switch ($extension_type) {
@@ -79,6 +80,9 @@ class DrupalContext extends Helper {
       case 'profile':
         // @todo Support profiles.
         return [];
+
+      default:
+        throw new \UnexpectedValueException(sprintf('Unsupported extension type "%s".', $extension_type));
     }
   }
 
@@ -108,7 +112,7 @@ class DrupalContext extends Helper {
         }
         elseif ($machine_name) {
           $module_handler = $this->container->get('module_handler');
-          $destination = isset($this->modules[$machine_name])
+          $destination = isset($this->getExtensionList('module')[$machine_name])
             ? $module_handler->getModule($machine_name)->getPath()
             : $modules_dir . '/' . $machine_name;
         }
@@ -123,7 +127,7 @@ class DrupalContext extends Helper {
         }
         elseif ($machine_name) {
           $theme_handler = $this->container->get('theme_handler');
-          $destination = isset($this->themes[$machine_name])
+          $destination = isset($this->getExtensionList('theme')[$machine_name])
             ? $theme_handler->getTheme($machine_name)->getPath()
             : $themes_dir . '/' . $machine_name;
         }
@@ -139,7 +143,6 @@ class DrupalContext extends Helper {
     }
 
     return $destination;
-
   }
 
 }
