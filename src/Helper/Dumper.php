@@ -80,7 +80,9 @@ class Dumper extends Helper implements IOAwareInterface {
           $title .= ' (empty directory)';
         }
         $this->io->title($title);
-        $this->io->writeln($content);
+        if ($content !== NULL) {
+          $this->io->writeln($content);
+        }
         continue;
       }
 

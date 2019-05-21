@@ -26,8 +26,9 @@
     "require": {
         "php": ">=7.1.0",
         "ext-json": "*",
-        "symfony/console": "^3.4.0",
-        "symfony/filesystem": "^3.4.0",
+        "psr/log": "^1.1",
+        "symfony/console": "^4.2.0",
+        "symfony/filesystem": "^4.2.0",
         "twig/twig": "^1.40.1"
     },
     "require-dev": {
