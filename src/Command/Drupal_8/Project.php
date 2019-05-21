@@ -20,7 +20,7 @@ class Project extends BaseGenerator {
   protected $description = 'Generates a composer project';
   protected $alias = 'project';
 
-  const DRUPAL_DEFAULT_VERSION = '~8.6.0';
+  const DRUPAL_DEFAULT_VERSION = '~8.7.0';
 
   /**
    * {@inheritdoc}
