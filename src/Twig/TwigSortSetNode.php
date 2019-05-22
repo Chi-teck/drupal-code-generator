@@ -2,18 +2,18 @@
 
 namespace DrupalCodeGenerator\Twig;
 
-use Twig_Node;
-use Twig_Compiler;
+use Twig\Compiler;
+use Twig\Node\Node;
 
 /**
  * A class that defines the compiler for 'sort' token.
  */
-class TwigSortSetNode extends Twig_Node {
+class TwigSortSetNode extends Node {
 
   /**
    * {@inheritdoc}
    */
-  public function compile(Twig_Compiler $compiler) :void {
+  public function compile(Compiler $compiler) :void {
     $compiler
       ->addDebugInfo($this)
       ->write("ob_start();\n")
