@@ -36,6 +36,3 @@ $application->setDefaultCommand('navigation');
 
 // Run.
 $application->run();
-
-$q = [];
-each($q);
