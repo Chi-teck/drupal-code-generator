@@ -13,7 +13,7 @@ class DcgCommandGeneratorTest extends BaseGeneratorTest {
 
   protected $interaction = [
     'Command name [custom:example]:' => 'custom:example',
-    'Command description [Some description]:' => 'Some description',
+    'Command description:' => 'Some description',
     'Command alias [example]:' => 'example',
   ];
 

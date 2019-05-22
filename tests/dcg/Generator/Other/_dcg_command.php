@@ -4,16 +4,12 @@
 
 namespace DrupalCodeGenerator\Command\custom;
 
-use DrupalCodeGenerator\Command\Generator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Implements custom:example command.
  */
-class Example extends Generator {
+class Example extends ModuleGenerator {
 
   protected $name = 'custom:example';
   protected $description = 'Some description';
@@ -23,21 +19,15 @@ class Example extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
-    // Ask the user some questions.
-    $questions = Utils::defaultQuestions();
-    $default_class = function ($vars) {
-      return Utils::camelize($vars['name']) . 'Example';
-    };
-    $questions['class'] = new Question('Class', $default_class);
-
-    $this->collectVars($questions);
+  protected function generate() :void {
+    $vars = &$this->collectDefault();
+    $vars['class'] = $this->ask('Class', '{machine_name|camelize}');
 
     // @DCG The template should be located under directory specified in
-    // $self::templatePath property.
+    // $this->templatePath variable.
     $this->addFile()
       ->path('src/{class}.php')
-      ->template('example.twig');
+      ->template('example');
   }
 
 }

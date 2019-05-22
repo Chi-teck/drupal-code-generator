@@ -4,18 +4,14 @@
 
 namespace {{ namespace }};
 
-use DrupalCodeGenerator\Command\Generator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
- * Implements {{ name }} command.
+ * Implements {{ command_name }} command.
  */
-class {{ class }} extends Generator {
+class {{ class }} extends ModuleGenerator {
 
-  protected $name = '{{ name }}';
+  protected $name = '{{ command_name }}';
   protected $description = '{{ description }}';
   protected $alias = '{{ alias }}';
   protected $templatePath = __DIR__;
@@ -23,18 +19,12 @@ class {{ class }} extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function interact(InputInterface $input, OutputInterface $output) {
-    // Ask the user some questions.
-    $questions = Utils::defaultQuestions();
-    $default_class = function ($vars) {
-      return Utils::camelize($vars['name']) . 'Example';
-    };
-    $questions['class'] = new Question('Class', $default_class);
-
-    $this->collectVars($questions);
+  protected function generate() :void {
+    $vars = &$this->collectDefault();
+    $vars['class'] = $this->ask('Class', '{machine_name|camelize}');
 
     // @DCG The template should be located under directory specified in
-    // $self::templatePath property.
+    // $this->templatePath variable.
     $this->addFile()
       ->path('src/{class}.php')
       ->template('{{ template_name }}');

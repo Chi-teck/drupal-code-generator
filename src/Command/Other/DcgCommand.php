@@ -21,15 +21,24 @@ class DcgCommand extends Generator {
   protected function generate() :void {
     $vars = &$this->vars;
 
-    $vars['name'] = $this->ask('Command name', 'custom:example');
-    $vars['description'] = $this->ask('Command description', 'Some description');
-    $vars['alias'] = $this->ask('Command alias', 'example');
+    $command_name_validator = function (?string $value) :?string {
+      return static::validate($value, '^[a-z][a-z0-9-_:]*[a-z0-9]$', 'The value is not correct command name.');
+    };
+    $vars['command_name'] = $this->ask('Command name', 'custom:example', $command_name_validator);
 
-    $sub_names = explode(':', $vars['name']);
-    $last_sub_name = array_pop($sub_names);
-    $vars['class'] = Utils::camelize($last_sub_name);
+    $vars['description'] = $this->ask('Command description');
+
+    $sub_names = explode(':', $vars['command_name']);
+    $short_name = array_pop($sub_names);
+
+    $alias_validator = function (?string $value) :?string {
+      return static::validate($value, '^[a-z0-9][a-z0-9_]+$', 'The value is not correct alias name.');
+    };
+    $vars['alias'] = $this->ask('Command alias', $short_name, $alias_validator);
+
+    $vars['class'] = Utils::camelize($short_name);
     $vars['namespace'] = 'DrupalCodeGenerator\Command';
-    $vars['template_name'] = $last_sub_name . '.twig';
+    $vars['template_name'] = $short_name;
 
     $vars['path'] = '';
     $file_path = '';
@@ -40,7 +49,7 @@ class DcgCommand extends Generator {
     }
 
     $this->addFile($file_path . '/{class}.php', 'other/dcg-command');
-    $this->addFile($file_path . '/{template_name}', 'other/dcg-command-template');
+    $this->addFile($file_path . '/{template_name}.twig', 'other/dcg-command-template');
   }
 
 }
