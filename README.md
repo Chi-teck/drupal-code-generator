@@ -37,10 +37,10 @@ dcg d8:plugin:field:widget
 dcg config-form -a Example -a example -a SettingsForm -a No
 ```
 ## Extending
-All custom generators should be placed to _$HOME/.dcg/Command_ directory. The following command will help you to get started with creating own generators.
+All custom generators should be placed to _$HOME/.dcg directory. The following command will help you to get started with creating own generators.
 ```bash
 # Create custom DCG command.
-dcg dcg-command -d $HOME/.dcg/Command
+dcg dcg-command -d $HOME/.dcg
 ```
 ## License
 GNU General Public License, version 2 or later.

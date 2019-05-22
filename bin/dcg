@@ -18,13 +18,16 @@ $application = Application::create();
 
 // Discover generators.
 $discovery = new GeneratorDiscovery(new Filesystem());
-$commands_directories[] = Application::getRoot() . '/src/Command';
-$home = Utils::getHomeDirectory();
-if (file_exists($home . '/.dcg/Command')) {
-  $commands_directories[] = $home . '/.dcg/Command';
-  $autoloader->addPsr4('DrupalCodeGenerator\\', $home . '/.dcg');
+$default_generators = $discovery->getGenerators([Application::getRoot() . '/src/Command']);
+$custom_generators = [];
+
+$command_directory = getenv('DCG_COMMAND_DIRECTORY') ?: Utils::getHomeDirectory() . '/.dcg';
+if (is_dir($command_directory)) {
+  $autoloader->addPsr4('DrupalCodeGenerator\\', $command_directory);
+  $custom_generators = $discovery->getGenerators([$command_directory], '\DrupalCodeGenerator');
 }
-$generators = $discovery->getGenerators($commands_directories);
+
+$generators = array_merge($default_generators, $custom_generators);
 $application->addCommands($generators);
 
 // Add the navigation command.
@@ -33,3 +36,6 @@ $application->setDefaultCommand('navigation');
 
 // Run.
 $application->run();
+
+$q = [];
+each($q);

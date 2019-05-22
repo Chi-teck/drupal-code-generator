@@ -37,7 +37,7 @@ class DcgCommand extends Generator {
     $vars['alias'] = $this->ask('Command alias', $short_name, $alias_validator);
 
     $vars['class'] = Utils::camelize($short_name);
-    $vars['namespace'] = 'DrupalCodeGenerator\Command';
+    $vars['namespace'] = 'DrupalCodeGenerator';
     $vars['template_name'] = $short_name;
 
     $vars['path'] = '';
