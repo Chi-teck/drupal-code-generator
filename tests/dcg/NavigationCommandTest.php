@@ -16,9 +16,8 @@ class NavigationCommandTest extends BaseTestCase {
   /**
    * Test callback.
    */
-  public function testExecute() {
+  public function testNavigation() {
 
-    // Create navigation command.
     $discovery = new GeneratorDiscovery(new Filesystem());
     $generators = $discovery->getGenerators([Application::getRoot() . '/src/Command']);
 
@@ -28,7 +27,7 @@ class NavigationCommandTest extends BaseTestCase {
 
     $application->addCommands($generators);
 
-    $navigation = new Navigation($generators);
+    $navigation = new Navigation();
     $application->add($navigation);
 
     $command_tester = new CommandTester($navigation);
@@ -39,16 +38,23 @@ class NavigationCommandTest extends BaseTestCase {
     preg_match_all('/\s([^\s]+)⏎/', $fixture, $matches);
     $command_tester->setInputs($matches[1]);
 
-    $input = ['command' => $navigation->getName(), '--directory' => $this->directory];
+    $input = ['--directory' => $this->directory];
     $command_tester->execute($input);
 
     $expected_output = rtrim(preg_replace('/[^\s]+⏎/', '', $fixture));
     $output = rtrim($command_tester->getDisplay());
-    static::assertEquals($expected_output, $output);
+    self::assertEquals($expected_output, $output);
 
-    // Make sure it does not fail when starting with default alias.
-    $command_tester->setInputs([0, 0, 0]);
-    $command_tester->execute(['command' => 'yml']);
+    /** @var \Symfony\Component\Console\Command\HelpCommand $help */
+    $help = $application->find('help');
+    $help->setCommand($navigation);
+    $command_tester = new CommandTester($help);
+    $command_tester->execute([]);
+    $display = $command_tester->getDisplay();
+    self::assertContains('Command line code generator', $display);
+    self::assertContains('dcg [options] <generator>', $display);
+    self::assertContains('Display navigation', $display);
+    self::assertContains('List all available generators', $display);
   }
 
 }

@@ -1,10 +1,10 @@
- Select generator: 
+ Select generator 
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
   ➤➤➤ 1⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Ctools plugin
   [ 2] Views plugin
@@ -20,13 +20,13 @@
   [12] settings.php
   [13] template.php
   ➤➤➤➤ 1⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Access
   [2] Content type
   [3] Relationship
   ➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Ctools plugin
   [ 2] Views plugin
@@ -42,11 +42,11 @@
   [12] settings.php
   [13] template.php
   ➤➤➤➤ 2⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Argument default
   ➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Ctools plugin
   [ 2] Views plugin
@@ -62,13 +62,13 @@
   [12] settings.php
   [13] template.php
   ➤➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
   ➤➤➤ 2⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Form
   [ 2] Module
@@ -94,13 +94,13 @@
   [22] Theme settings
   [23] composer.json
   ➤➤➤➤ 1⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Config
   [2] Confirm
   [3] Simple
   ➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Form
   [ 2] Module
@@ -126,13 +126,13 @@
   [22] Theme settings
   [23] composer.json
   ➤➤➤➤ 2⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Configuration entity
   [2] Content entity
   [3] Standard
   ➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Form
   [ 2] Module
@@ -158,7 +158,7 @@
   [22] Theme settings
   [23] composer.json
   ➤➤➤➤ 3⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Field
   [ 2] Migrate
@@ -174,7 +174,7 @@
   [12] Queue worker
   [13] REST resource
   ➤➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Form
   [ 2] Module
@@ -200,7 +200,7 @@
   [22] Theme settings
   [23] composer.json
   ➤➤➤➤ 4⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Access checker
   [ 2] Breadcrumb builder
@@ -218,7 +218,7 @@
   [14] Twig extension
   [15] Uninstall validator
   ➤➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Form
   [ 2] Module
@@ -244,7 +244,7 @@
   [22] Theme settings
   [23] composer.json
   ➤➤➤➤ 5⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Browser
   [2] Kernel
@@ -252,7 +252,7 @@
   [4] Unit
   [5] WebDriver
   ➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Form
   [ 2] Module
@@ -278,7 +278,7 @@
   [22] Theme settings
   [23] composer.json
   ➤➤➤➤ 6⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Links
   [2] Breakpoints
@@ -290,14 +290,14 @@
   [8] Routing
   [9] Services
   ➤➤➤ 1⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Action
   [2] Contextual
   [3] Menu
   [4] Task
   ➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Links
   [2] Breakpoints
@@ -309,7 +309,7 @@
   [8] Routing
   [9] Services
   ➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Form
   [ 2] Module
@@ -335,13 +335,13 @@
   [22] Theme settings
   [23] composer.json
   ➤➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
   ➤➤➤ 3⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Apache virtual host
   [2] DCG command
@@ -350,13 +350,13 @@
   [5] HTML page
   [6] Nginx virtual host
   ➤➤➤ 0⏎
- Select generator: 
+ Select generator 
   [0] ..
   [1] Drupal 7
   [2] Drupal 8
   [3] Other
   ➤➤➤ 2⏎
- Select generator: 
+ Select generator 
   [ 0] ..
   [ 1] Form
   [ 2] Module

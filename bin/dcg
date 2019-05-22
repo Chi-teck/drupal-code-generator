@@ -16,22 +16,21 @@ $autoloader = file_exists(__DIR__ . '/../vendor/autoload.php')
 // Create an application.
 $application = Application::create();
 
-// Discover generators.
+// Add default generators.
 $discovery = new GeneratorDiscovery(new Filesystem());
 $default_generators = $discovery->getGenerators([Application::getRoot() . '/src/Command']);
-$custom_generators = [];
+$application->addCommands($default_generators);
 
+// Add custom generators.
 $command_directory = getenv('DCG_COMMAND_DIRECTORY') ?: Utils::getHomeDirectory() . '/.dcg';
 if (is_dir($command_directory)) {
   $autoloader->addPsr4('DrupalCodeGenerator\\', $command_directory);
   $custom_generators = $discovery->getGenerators([$command_directory], '\DrupalCodeGenerator');
+  $application->addCommands($custom_generators);
 }
 
-$generators = array_merge($default_generators, $custom_generators);
-$application->addCommands($generators);
-
 // Add the navigation command.
-$application->add(new Navigation($generators));
+$application->add(new Navigation());
 $application->setDefaultCommand('navigation');
 
 // Run.
