@@ -9,7 +9,7 @@ class Simple extends FormGenerator {
 
   protected $name = 'form:simple';
   protected $description = 'Generates simple form';
-  protected $alias = 'form-simple';
+  protected $alias = 'form';
   protected $defaultPermission = 'access content';
   protected $defaultClass = 'ExampleForm';
 
