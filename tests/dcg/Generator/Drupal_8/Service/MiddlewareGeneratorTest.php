@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:middleware command.
+ * Test for service:middleware command.
  */
 class MiddlewareGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\Middleware';
+  protected $class = 'Service\Middleware';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

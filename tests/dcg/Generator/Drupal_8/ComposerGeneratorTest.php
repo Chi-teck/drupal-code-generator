@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:composer command.
+ * Test for composer command.
  */
 class ComposerGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Composer';
+  protected $class = 'Composer';
 
   protected $interaction = [
     'Project machine name [%default_machine_name%]:' => 'example',

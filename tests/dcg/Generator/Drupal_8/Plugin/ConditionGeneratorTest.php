@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:condition command.
+ * Test for plugin:condition command.
  */
 class ConditionGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Condition';
+  protected $class = 'Plugin\Condition';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

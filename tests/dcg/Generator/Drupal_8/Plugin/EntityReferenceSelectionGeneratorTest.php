@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:entity-reference-selection command.
+ * Test for plugin:entity-reference-selection command.
  */
 class EntityReferenceSelectionGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\EntityReferenceSelection';
+  protected $class = 'Plugin\EntityReferenceSelection';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

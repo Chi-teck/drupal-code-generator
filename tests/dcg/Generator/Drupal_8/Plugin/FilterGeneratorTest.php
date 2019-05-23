@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:filter command.
+ * Test for plugin:filter command.
  */
 class FilterGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Filter';
+  protected $class = 'Plugin\Filter';
 
   protected $fixtures = [
     'config/schema/foo.schema.yml' => __DIR__ . '/_filter_schema.yml',

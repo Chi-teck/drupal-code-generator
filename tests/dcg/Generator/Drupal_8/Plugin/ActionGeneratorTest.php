@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:action command.
+ * Test for plugin:action command.
  */
 class ActionGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Action';
+  protected $class = 'Plugin\Action';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

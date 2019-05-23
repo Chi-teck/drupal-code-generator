@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:hook command.
+ * Test for hook command.
  */
 class HookGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Hook';
+  protected $class = 'Hook';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

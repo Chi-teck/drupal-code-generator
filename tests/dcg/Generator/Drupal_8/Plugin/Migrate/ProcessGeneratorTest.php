@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Migrate;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:migrate:process command.
+ * Test for plugin:migrate:process command.
  */
 class ProcessGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Migrate\Process';
+  protected $class = 'Plugin\Migrate\Process';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

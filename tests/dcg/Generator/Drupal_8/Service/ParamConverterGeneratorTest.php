@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:param-converter command.
+ * Test for service:param-converter command.
  */
 class ParamConverterGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\ParamConverter';
+  protected $class = 'Service\ParamConverter';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

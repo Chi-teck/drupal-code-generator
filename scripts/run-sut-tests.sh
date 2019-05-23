@@ -102,9 +102,9 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = form ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:form:simple -d $MODULE_DIR -a Foo -a foo -a SimpleForm -a Yes -a foo.simple_form -a /admin/config/foo/simple -a Example -a 'access administration pages'
-  $DCG d8:form:config -d $MODULE_DIR -a Foo -a foo -a SettingsForm -a Yes -a foo.config_form -a /admin/config/foo/settings -a Example -a 'access administration pages' -a No
-  $DCG d8:form:confirm -d $MODULE_DIR -a Foo -a foo -a ConfirmForm -a Yes -a foo.confirm_form -a /admin/config/foo/confirm -a Example -a 'access administration pages'
+  $DCG form:simple -d $MODULE_DIR -a Foo -a foo -a SimpleForm -a Yes -a foo.simple_form -a /admin/config/foo/simple -a Example -a 'access administration pages'
+  $DCG form:config -d $MODULE_DIR -a Foo -a foo -a SettingsForm -a Yes -a foo.config_form -a /admin/config/foo/settings -a Example -a 'access administration pages' -a No
+  $DCG form:confirm -d $MODULE_DIR -a Foo -a foo -a ConfirmForm -a Yes -a foo.confirm_form -a /admin/config/foo/confirm -a Example -a 'access administration pages'
 
   dcg_phpcs --exclude=DrupalPractice.Yaml.RoutingAccess $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -121,18 +121,18 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:composer -d $MODULE_DIR -a bar -a 'Bar project' -a 'drupal-module' -a Yes
-  $DCG d8:controller -d $MODULE_DIR -a Bar -a bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
-  $DCG d8:install -d $MODULE_DIR -a Bar -a bar
-  $DCG d8:javascript -d $MODULE_DIR -a Bar -a bar
-  $DCG d8:module-file -d $MODULE_DIR -a Bar -a bar
-  $DCG d8:service-provider -d $MODULE_DIR  -a Bar -a bar
-  $DCG d8:template -d $MODULE_DIR -a Bar -a bar -a example -a Yes -a Yes
-  $DCG d8:layout -d $MODULE_DIR -a bar -a Foo -a foo -a my -a Yes -a Yes
+  $DCG composer -d $MODULE_DIR -a bar -a 'Bar project' -a 'drupal-module' -a Yes
+  $DCG controller -d $MODULE_DIR -a Bar -a bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
+  $DCG install -d $MODULE_DIR -a Bar -a bar
+  $DCG javascript -d $MODULE_DIR -a Bar -a bar
+  $DCG module-file -d $MODULE_DIR -a Bar -a bar
+  $DCG service-provider -d $MODULE_DIR  -a Bar -a bar
+  $DCG template -d $MODULE_DIR -a Bar -a bar -a example -a Yes -a Yes
+  $DCG layout -d $MODULE_DIR -a bar -a Foo -a foo -a my -a Yes -a Yes
 
-  $DCG d8:render-element -d $MODULE_DIR -a bar
+  $DCG render-element -d $MODULE_DIR -a bar
 
-  $DCG d8:field -d $MODULE_DIR \
+  $DCG field -d $MODULE_DIR \
     -a Bar -a bar -a 'Example 1' -a bar_example_1 -a 10 \
     -a 'Value 1' -a value_1 -a Boolean -a No \
     -a 'Value 2' -a value_2 -a Text -a No -a No \
@@ -146,7 +146,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
     -a 'Value 10' -a value_10 -a Date -a 'Date only' -a No -a No \
     -a No -a No -a No -a No -a No -a No
 
-  $DCG d8:field -d $MODULE_DIR \
+  $DCG field -d $MODULE_DIR \
     -a Bar -a bar -a 'Example 2' -a bar_example_2 -a 10 \
     -a 'Value 1' -a value_1 -a Boolean -a Yes \
     -a 'Value 2' -a value_2 -a Text -a Yes -a Yes \
@@ -160,7 +160,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module_component ]; then
     -a 'Value 10' -a value_10 -a Date -a 'Date and time' -a Yes -a No \
     -a No -a No -a No -a No -a No -a No
 
-  $DCG d8:field -d $MODULE_DIR \
+  $DCG field -d $MODULE_DIR \
     -a Bar -a bar -a 'Example 3' -a bar_example_3 -a 5 \
     -a 'Value 1' -a value_1 -a Boolean -a No \
     -a 'Value 2' -a value_2 -a Text -a No -a No \
@@ -184,25 +184,25 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:plugin:field:formatter -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleFormatter -a Yes
-  $DCG d8:plugin:field:type -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleItem -a Yes -a Yes
-  $DCG d8:plugin:field:widget -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleWidget -a Yes
+  $DCG plugin:field:formatter -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleFormatter -a Yes
+  $DCG plugin:field:type -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleItem -a Yes -a Yes
+  $DCG plugin:field:widget -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleWidget -a Yes
 
-  $DCG d8:plugin:migrate:process -d $MODULE_DIR -a Qux -a qux -a example -a Example
+  $DCG plugin:migrate:process -d $MODULE_DIR -a Qux -a qux -a example -a Example
 
-  $DCG d8:plugin:views:argument-default -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
-  $DCG d8:plugin:views:field -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
-  $DCG d8:plugin:views:style -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
+  $DCG plugin:views:argument-default -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
+  $DCG plugin:views:field -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
+  $DCG plugin:views:style -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example -a Yes -a No
 
-  $DCG d8:plugin:action -d $MODULE_DIR -a Qux -a qux -a 'Update node title' -a qux_update_node_title -a UpdateNodeTitle -a DCG -a Yes
-  $DCG d8:plugin:block -d $MODULE_DIR -a Qux -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
-  $DCG d8:plugin:ckeditor -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example
-  $DCG d8:plugin:condition -d $MODULE_DIR -a Qux -a qux -a Example -a example -a Example
-  $DCG d8:plugin:entity-reference-selection -d $MODULE_DIR -a Qux -a qux -a node -a Example -a qux_example -a Example -a Yes
-  $DCG d8:plugin:filter -d $MODULE_DIR -a Qux -a qux -a Example -a example -a Example -a 'HTML restrictor'
-  $DCG d8:plugin:menu-link -d $MODULE_DIR -a Qux -a qux -a FooExampleLink
-  $DCG d8:plugin:queue-worker -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example
-  $DCG d8:plugin:rest-resource -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleResource
+  $DCG plugin:action -d $MODULE_DIR -a Qux -a qux -a 'Update node title' -a qux_update_node_title -a UpdateNodeTitle -a DCG -a Yes
+  $DCG plugin:block -d $MODULE_DIR -a Qux -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
+  $DCG plugin:ckeditor -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example
+  $DCG plugin:condition -d $MODULE_DIR -a Qux -a qux -a Example -a example -a Example
+  $DCG plugin:entity-reference-selection -d $MODULE_DIR -a Qux -a qux -a node -a Example -a qux_example -a Example -a Yes
+  $DCG plugin:filter -d $MODULE_DIR -a Qux -a qux -a Example -a example -a Example -a 'HTML restrictor'
+  $DCG plugin:menu-link -d $MODULE_DIR -a Qux -a qux -a FooExampleLink
+  $DCG plugin:queue-worker -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a Example
+  $DCG plugin:rest-resource -d $MODULE_DIR -a Qux -a qux -a Example -a qux_example -a ExampleResource
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -219,21 +219,21 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:service:access-checker -d $MODULE_DIR -a Zippo -a zippo -a _zippo -a ZippoAccessChecker
-  $DCG d8:service:breadcrumb-builder -d $MODULE_DIR -a Zippo -a zippo -a ZippoBreadcrumbBuilder
-  $DCG d8:service:custom -d $MODULE_DIR -a Zippo -a zippo -a zippo.foo -a Foo -a Y -a entity_type.manager -a
-  $DCG d8:service:event-subscriber -d $MODULE_DIR -a Zippo -a zippo
-  $DCG d8:service:logger -d $MODULE_DIR -a Zippo -a zippo -a FileLog
-  $DCG d8:service:middleware -d $MODULE_DIR -a Zippo -a zippo
-  $DCG d8:service:param-converter -d $MODULE_DIR -a Zippo -a zippo -a example -a ExampleParamConverter
-  $DCG d8:service:route-subscriber -d $MODULE_DIR -a Zippo -a zippo
-  $DCG d8:service:theme-negotiator -d $MODULE_DIR -a Zippo -a zippo -a ZippoThemeNegotiator
-  $DCG d8:service:twig-extension -d $MODULE_DIR -a Zippo -a zippo -a ZippoTwigExtension -a No
-  $DCG d8:service:path-processor -d $MODULE_DIR -a Zippo -a zippo -a PathProcessorZippo
-  $DCG d8:service:request-policy -d $MODULE_DIR -a Zippo -a zippo -a Example
-  $DCG d8:service:response-policy -d $MODULE_DIR -a Zippo -a zippo -a ExampleResponsePolicy
-  $DCG d8:service:uninstall-validator -d $MODULE_DIR -a Zippo -a zippo -a ExampleUninstallValidator
-  $DCG d8:service:cache-context -d $MODULE_DIR -a Zippo -a zippo -a example -a ExampleCacheContext -a UserCacheContextBase -a Yes
+  $DCG service:access-checker -d $MODULE_DIR -a Zippo -a zippo -a _zippo -a ZippoAccessChecker
+  $DCG service:breadcrumb-builder -d $MODULE_DIR -a Zippo -a zippo -a ZippoBreadcrumbBuilder
+  $DCG service:custom -d $MODULE_DIR -a Zippo -a zippo -a zippo.foo -a Foo -a Y -a entity_type.manager -a
+  $DCG service:event-subscriber -d $MODULE_DIR -a Zippo -a zippo
+  $DCG service:logger -d $MODULE_DIR -a Zippo -a zippo -a FileLog
+  $DCG service:middleware -d $MODULE_DIR -a Zippo -a zippo
+  $DCG service:param-converter -d $MODULE_DIR -a Zippo -a zippo -a example -a ExampleParamConverter
+  $DCG service:route-subscriber -d $MODULE_DIR -a Zippo -a zippo
+  $DCG service:theme-negotiator -d $MODULE_DIR -a Zippo -a zippo -a ZippoThemeNegotiator
+  $DCG service:twig-extension -d $MODULE_DIR -a Zippo -a zippo -a ZippoTwigExtension -a No
+  $DCG service:path-processor -d $MODULE_DIR -a Zippo -a zippo -a PathProcessorZippo
+  $DCG service:request-policy -d $MODULE_DIR -a Zippo -a zippo -a Example
+  $DCG service:response-policy -d $MODULE_DIR -a Zippo -a zippo -a ExampleResponsePolicy
+  $DCG service:uninstall-validator -d $MODULE_DIR -a Zippo -a zippo -a ExampleUninstallValidator
+  $DCG service:cache-context -d $MODULE_DIR -a Zippo -a zippo -a example -a ExampleCacheContext -a UserCacheContextBase -a Yes
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -250,15 +250,15 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = yml ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:yml:links:action -d $MODULE_DIR -a yety
-  $DCG d8:yml:links:contextual -d $MODULE_DIR -a yety
-  $DCG d8:yml:links:menu -d $MODULE_DIR -a yety
-  $DCG d8:yml:links:task -d $MODULE_DIR -a yet
-  $DCG d8:yml:module-info -d $MODULE_DIR -a Yety -a yety -a 'Helper module for testing generated YML files' -a DCG -a -a drupal:system,drupal:node,drupal:user
-  $DCG d8:yml:module-libraries -d $MODULE_DIR -a yety
-  $DCG d8:yml:permissions -d $MODULE_DIR -a yety
-  $DCG d8:yml:routing -d $MODULE_DIR -a Yety -a yety
-  $DCG d8:yml:services -d $MODULE_DIR -a Yety -a yety
+  $DCG yml:links:action -d $MODULE_DIR -a yety
+  $DCG yml:links:contextual -d $MODULE_DIR -a yety
+  $DCG yml:links:menu -d $MODULE_DIR -a yety
+  $DCG yml:links:task -d $MODULE_DIR -a yet
+  $DCG yml:module-info -d $MODULE_DIR -a Yety -a yety -a 'Helper module for testing generated YML files' -a DCG -a -a drupal:system,drupal:node,drupal:user
+  $DCG yml:module-libraries -d $MODULE_DIR -a yety
+  $DCG yml:permissions -d $MODULE_DIR -a yety
+  $DCG yml:routing -d $MODULE_DIR -a Yety -a yety
+  $DCG yml:services -d $MODULE_DIR -a Yety -a yety
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -275,10 +275,10 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = test ]; then
 
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:test:browser -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
-  $DCG d8:test:webdriver -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
-  $DCG d8:test:kernel -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
-  $DCG d8:test:unit -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
+  $DCG test:browser -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
+  $DCG test:webdriver -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
+  $DCG test:kernel -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
+  $DCG test:unit -d $MODULE_DIR -a Xerox -a xerox -a ExampleTest
 
   dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -295,11 +295,11 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = theme_component ]; then
 
   mkdir $THEME_DIR
 
-  $DCG d8:theme-file -d $THEME_DIR -a Shreya -a shreya
-  $DCG d8:yml:breakpoints -d $THEME_DIR -a shreya
-  $DCG d8:theme-settings -d $THEME_DIR -a Shreya -a shreya
-  $DCG d8:yml:theme-libraries -d $THEME_DIR -a shreya
-  $DCG d8:yml:theme-info -d $THEME_DIR -a Shreya -a shreya -a bartik -a 'Helper theme for testing DCG components.' -a DCG
+  $DCG theme-file -d $THEME_DIR -a Shreya -a shreya
+  $DCG yml:breakpoints -d $THEME_DIR -a shreya
+  $DCG theme-settings -d $THEME_DIR -a Shreya -a shreya
+  $DCG yml:theme-libraries -d $THEME_DIR -a shreya
+  $DCG yml:theme-info -d $THEME_DIR -a Shreya -a shreya -a bartik -a 'Helper theme for testing DCG components.' -a DCG
 
   dcg_phpcs $THEME_DIR
 fi
@@ -312,9 +312,9 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = plugin_manager ]; then
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG d8:plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a alpha -a Annotation
-  $DCG d8:plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a beta -a YAML
-  $DCG d8:plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a gamma -a Hook
+  $DCG plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a alpha -a Annotation
+  $DCG plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a beta -a YAML
+  $DCG plugin-manager -d $MODULE_DIR -a Lamda -a lamda -a gamma -a Hook
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -329,7 +329,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = configuration_entity ]; then
   MODULE_MACHINE_NAME=wine
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:configuration-entity -d $DRUPAL_DIR/modules -a Wine -a wine -a DCG -a drupal:user -a Example -a example
+  $DCG module:configuration-entity -d $DRUPAL_DIR/modules -a Wine -a wine -a DCG -a drupal:user -a Example -a example
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
   dcg_phpcs $MODULE_DIR
@@ -345,7 +345,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
   MODULE_MACHINE_NAME=nigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:content-entity -d $DRUPAL_DIR/modules \
+  $DCG module:content-entity -d $DRUPAL_DIR/modules \
     -a Nigma -a nigma -a DCG -a drupal:user -a Example -a example -a /admin/content/example \
     -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
@@ -361,7 +361,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
   MODULE_MACHINE_NAME=sigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:content-entity -d $DRUPAL_DIR/modules \
+  $DCG module:content-entity -d $DRUPAL_DIR/modules \
     -a Sigma -a sigma -a DCG -a drupal:system -a Example -a example -a /example \
     -a Yes -a No -a No -a No -a No -a No -a Yes -a No -a No -a No -a No -a No -a No
 
@@ -380,7 +380,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = module ]; then
   MODULE_MACHINE_NAME=peach
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  $DCG d8:module:standard -d $DRUPAL_DIR/modules -a Peach -a peach -a 'Simple module generated by DCG.' \
+  $DCG module:standard -d $DRUPAL_DIR/modules -a Peach -a peach -a 'Simple module generated by DCG.' \
     -a DCG -a 'drupal:views, drupal:node, drupal:action' -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
   dcg_phpcs $MODULE_DIR
@@ -396,7 +396,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = theme ]; then
   THEME_MACHINE_NAME=azalea
   THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
 
-  $DCG d8:theme -d $DRUPAL_DIR/themes -a Azalea -a azalea -a bartik -a 'Simple responsive theme generated by DCG.' \
+  $DCG theme -d $DRUPAL_DIR/themes -a Azalea -a azalea -a bartik -a 'Simple responsive theme generated by DCG.' \
     -a DCG -a Yes -a Yes -a Yes
 
   # Code sniffer does not like empty files.

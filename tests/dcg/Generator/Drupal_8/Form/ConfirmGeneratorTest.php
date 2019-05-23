@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Form;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:form:confirm command.
+ * Test for form:confirm command.
  */
 class ConfirmGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Form\Confirm';
+  protected $class = 'Form\Confirm';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Form;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:form:simple command.
+ * Test for form:simple command.
  */
 class SimpleGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Form\Simple';
+  protected $class = 'Form\Simple';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

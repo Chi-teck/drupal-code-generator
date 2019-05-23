@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 
 /**
- * Implements generate command.
+ * Implements navigation command.
  */
 class Navigation extends Command {
 
@@ -28,7 +28,6 @@ class Navigation extends Command {
    */
   protected $labels = [
     'd7' => 'Drupal 7',
-    'd8' => 'Drupal 8',
   ];
 
   /**

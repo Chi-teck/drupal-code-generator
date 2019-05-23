@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:twig-extension command.
+ * Test for service:twig-extension command.
  */
 class TwigExtensionGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\TwigExtension';
+  protected $class = 'Service\TwigExtension';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

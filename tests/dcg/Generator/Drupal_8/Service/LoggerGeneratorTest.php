@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:logger command.
+ * Test for service:logger command.
  */
 class LoggerGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\Logger';
+  protected $class = 'Service\Logger';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

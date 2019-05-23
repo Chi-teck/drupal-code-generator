@@ -9,6 +9,5 @@ abstract class ThemeGenerator extends DrupalGenerator {
 
   protected $nameQuestion = 'Theme name';
   protected $machineNameQuestion = 'Theme machine name';
-  protected $extensionType = 'theme';
 
 }

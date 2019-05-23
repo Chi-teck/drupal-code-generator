@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service/event-subscriber command.
+ * Test for service/event-subscriber command.
  */
 class EventSubscriberGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\EventSubscriber';
+  protected $class = 'Service\EventSubscriber';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

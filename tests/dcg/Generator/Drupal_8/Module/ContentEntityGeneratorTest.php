@@ -5,13 +5,13 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Module;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:module:content-entity command.
+ * Test for module:content-entity command.
  *
  * @TODO: Create fixtures for this test.
  */
 class ContentEntityGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Module\ContentEntity';
+  protected $class = 'Module\ContentEntity';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

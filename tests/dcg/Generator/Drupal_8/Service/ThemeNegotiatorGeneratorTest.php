@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:theme-negotiator command.
+ * Test for service:theme-negotiator command.
  */
 class ThemeNegotiatorGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\ThemeNegotiator';
+  protected $class = 'Service\ThemeNegotiator';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

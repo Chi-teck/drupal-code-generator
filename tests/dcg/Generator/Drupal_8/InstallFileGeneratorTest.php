@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:install-file command.
+ * Test for install-file command.
  */
 class InstallFileGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\InstallFile';
+  protected $class = 'InstallFile';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

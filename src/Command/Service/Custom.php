@@ -1,0 +1,35 @@
+<?php
+
+namespace DrupalCodeGenerator\Command\Service;
+
+use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Utils;
+
+/**
+ * Implements service:custom command.
+ */
+class Custom extends ModuleGenerator {
+
+  protected $name = 'service:custom';
+  protected $description = 'Generates a custom Drupal service';
+  protected $alias = 'custom-service';
+  protected $label = 'Custom service';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function generate() :void {
+    $vars = &$this->collectDefault();
+    $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', '::validateRequiredServiceName');
+
+    $service = preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
+    $vars['class'] = $this->ask('Class', Utils::camelize($service), '::validateRequiredClassName');
+
+    $this->collectServices();
+
+    $this->addFile('src/{class}.php', 'service/custom');
+    $this->addServicesFile()
+      ->template('service/custom.services');
+  }
+
+}

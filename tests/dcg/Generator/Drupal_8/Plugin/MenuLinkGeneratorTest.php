@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:menu-link command.
+ * Test for plugin:menu-link command.
  */
 class MenuLinkGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\MenuLink';
+  protected $class = 'Plugin\MenuLink';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

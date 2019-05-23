@@ -5,13 +5,13 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Module;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:module:configuration-entity command.
+ * Test for module:configuration-entity command.
  *
  * @TODO: Create fixtures for this test.
  */
 class ConfigurationEntityGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Module\ConfigurationEntity';
+  protected $class = 'Module\ConfigurationEntity';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

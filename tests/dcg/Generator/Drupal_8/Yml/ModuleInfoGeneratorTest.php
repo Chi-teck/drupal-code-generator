@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:yml:module-info command.
+ * Test for yml:module-info command.
  */
 class ModuleInfoGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Yml\ModuleInfo';
+  protected $class = 'Yml\ModuleInfo';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

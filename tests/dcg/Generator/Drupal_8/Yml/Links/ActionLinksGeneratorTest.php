@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml\Links;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:yml:links:action command.
+ * Test for yml:links:action command.
  */
 class ActionLinksGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Yml\Links\Action';
+  protected $class = 'Yml\Links\Action';
 
   protected $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',

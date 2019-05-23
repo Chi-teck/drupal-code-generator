@@ -1,0 +1,23 @@
+<?php
+
+namespace DrupalCodeGenerator\Command\Plugin;
+
+/**
+ * Implements plugin:condition command.
+ */
+class Condition extends PluginGenerator {
+
+  protected $name = 'plugin:condition';
+  protected $description = 'Generates condition plugin';
+  protected $alias = 'condition';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function generate() :void {
+    $this->collectDefault();
+    $this->addFile('src/Plugin/Condition/{class}.php', 'plugin/condition');
+    $this->addSchemaFile()->template('plugin/condition-schema');
+  }
+
+}

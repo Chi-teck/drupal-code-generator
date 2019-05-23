@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:block command.
+ * Test for plugin:block command.
  */
 class BlockGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Block';
+  protected $class = 'Plugin\Block';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

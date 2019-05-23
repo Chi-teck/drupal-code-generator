@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:yml:services command.
+ * Test for yml:services command.
  */
 class ServicesGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Yml\Services';
+  protected $class = 'Yml\Services';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

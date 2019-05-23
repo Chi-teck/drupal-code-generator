@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:custom command.
+ * Test for service:custom command.
  */
 class CustomGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\Custom';
+  protected $class = 'Service\Custom';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

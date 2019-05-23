@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:field command.
+ * Test for field command.
  */
 class FieldGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Field';
+  protected $class = 'Field';
 
   protected $fixtures = [
     'example.libraries.yml' => __DIR__ . '/_field/_libraries.yml',

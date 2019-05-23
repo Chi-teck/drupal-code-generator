@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:yml:theme-info command.
+ * Test for yml:theme-info command.
  */
 class ThemeInfoGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Yml\ThemeInfo';
+  protected $class = 'Yml\ThemeInfo';
 
   protected $interaction = [
     'Theme name [%default_name%]:' => 'Example',

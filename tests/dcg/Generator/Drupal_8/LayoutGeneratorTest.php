@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:layout command.
+ * Test for layout command.
  */
 class LayoutGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Layout';
+  protected $class = 'Layout';
 
   protected $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',

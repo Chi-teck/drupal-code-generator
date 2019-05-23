@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:ckeditor command.
+ * Test for plugin:ckeditor command.
  */
 class CKEditorGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\CKEditor';
+  protected $class = 'Plugin\CKEditor';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

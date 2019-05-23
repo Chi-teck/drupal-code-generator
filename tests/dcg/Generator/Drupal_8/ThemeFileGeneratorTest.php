@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:theme-file command.
+ * Test for theme-file command.
  */
 class ThemeFileGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\ThemeFile';
+  protected $class = 'ThemeFile';
 
   protected $interaction = [
     'Theme name [%default_name%]:' => 'Foo',

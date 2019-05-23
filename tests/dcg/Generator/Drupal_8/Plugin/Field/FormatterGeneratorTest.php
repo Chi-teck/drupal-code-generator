@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Field;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:field:formatter command.
+ * Test for plugin:field:formatter command.
  */
 class FormatterGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Field\Formatter';
+  protected $class = 'Plugin\Field\Formatter';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

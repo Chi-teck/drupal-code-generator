@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:access-checker command.
+ * Test for service:access-checker command.
  */
 class AccessCheckerGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\AccessChecker';
+  protected $class = 'Service\AccessChecker';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:path-processor command.
+ * Test for service:path-processor command.
  */
 class PathProcessorGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\PathProcessor';
+  protected $class = 'Service\PathProcessor';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

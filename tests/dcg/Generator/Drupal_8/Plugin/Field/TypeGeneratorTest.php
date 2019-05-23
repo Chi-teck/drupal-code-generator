@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Field;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:field:type command.
+ * Test for plugin:field:type command.
  */
 class TypeGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Field\Type';
+  protected $class = 'Plugin\Field\Type';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

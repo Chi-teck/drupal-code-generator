@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:rest-resource command.
+ * Test for plugin:rest-resource command.
  */
 class RestResourceGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\RestResource';
+  protected $class = 'Plugin\RestResource';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

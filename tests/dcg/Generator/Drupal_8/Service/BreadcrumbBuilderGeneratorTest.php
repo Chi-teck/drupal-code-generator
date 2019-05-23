@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:breadcrumb-builder command.
+ * Test for service:breadcrumb-builder command.
  */
 class BreadcrumbBuilderGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\BreadcrumbBuilder';
+  protected $class = 'Service\BreadcrumbBuilder';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

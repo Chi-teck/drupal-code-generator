@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:constraint command (entity type).
+ * Test for plugin:constraint command (entity type).
  */
 class ConstraintGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Constraint';
+  protected $class = 'Plugin\Constraint';
 
   /**
    * Test callback.

@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:uninstall-validator command.
+ * Test for service:uninstall-validator command.
  */
 class UninstallValidatorGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\UninstallValidator';
+  protected $class = 'Service\UninstallValidator';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

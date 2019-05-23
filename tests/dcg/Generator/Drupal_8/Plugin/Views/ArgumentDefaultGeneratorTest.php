@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Views;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:views:argument-default command.
+ * Test for plugin:views:argument-default command.
  */
 class ArgumentDefaultGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Views\ArgumentDefault';
+  protected $class = 'Plugin\Views\ArgumentDefault';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

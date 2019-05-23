@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:project command.
+ * Test for project command.
  */
 class ProjectGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Project';
+  protected $class = 'Project';
 
   /**
    * Test callback.

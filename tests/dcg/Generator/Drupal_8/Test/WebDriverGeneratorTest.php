@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Test;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:test:webdriver command.
+ * Test for test:webdriver command.
  */
 class WebDriverGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Test\WebDriver';
+  protected $class = 'Test\WebDriver';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Migrate;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:migrate:source command.
+ * Test for plugin:migrate:source command.
  */
 class SourceGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Migrate\Source';
+  protected $class = 'Plugin\Migrate\Source';
 
   /**
    * {@inheritdoc}

@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Service;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:service:response-policy command.
+ * Test for service:response-policy command.
  */
 class ResponsePolicyGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Service\ResponsePolicy';
+  protected $class = 'Service\ResponsePolicy';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

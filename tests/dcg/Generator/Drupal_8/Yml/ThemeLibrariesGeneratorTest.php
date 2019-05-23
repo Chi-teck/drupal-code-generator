@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:yml:theme-libraries command.
+ * Test for yml:theme-libraries command.
  */
 class ThemeLibrariesGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Yml\ThemeLibraries';
+  protected $class = 'Yml\ThemeLibraries';
 
   protected $interaction = [
     'Theme machine name [%default_machine_name%]:' => 'example',

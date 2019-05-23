@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:template command.
+ * Test for template command.
  */
 class TemplateGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Template';
+  protected $class = 'Template';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

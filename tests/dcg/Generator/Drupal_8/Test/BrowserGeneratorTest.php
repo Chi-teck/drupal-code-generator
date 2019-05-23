@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Test;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:test:browser command.
+ * Test for test:browser command.
  */
 class BrowserGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Test\Browser';
+  protected $class = 'Test\Browser';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

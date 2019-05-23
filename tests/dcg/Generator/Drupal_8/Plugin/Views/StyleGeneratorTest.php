@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Views;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:views:style command.
+ * Test for plugin:views:style command.
  */
 class StyleGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Views\Style';
+  protected $class = 'Plugin\Views\Style';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

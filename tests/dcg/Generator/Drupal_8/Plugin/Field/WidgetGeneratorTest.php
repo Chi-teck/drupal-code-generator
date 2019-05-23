@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Field;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:field:widget command.
+ * Test for plugin:field:widget command.
  */
 class WidgetGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Field\Widget';
+  protected $class = 'Plugin\Field\Widget';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

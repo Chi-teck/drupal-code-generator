@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:settings-local command.
+ * Test for settings-local command.
  */
 class SettingsLocalGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\SettingsLocal';
+  protected $class = 'SettingsLocal';
 
   protected  $interaction = [
     'Override database configuration? [No]:' => 'Yes',

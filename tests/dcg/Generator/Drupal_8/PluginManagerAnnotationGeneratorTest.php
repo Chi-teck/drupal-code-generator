@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin-manager command (annotation discovery).
+ * Test for plugin-manager command (annotation discovery).
  */
 class PluginManagerAnnotationGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\PluginManager';
+  protected $class = 'PluginManager';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',

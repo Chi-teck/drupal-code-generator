@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Yml\Links;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:yml:links:task command.
+ * Test for yml:links:task command.
  */
 class TaskLinksGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Yml\Links\Task';
+  protected $class = 'Yml\Links\Task';
 
   protected $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',

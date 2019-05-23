@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:queue-worker command.
+ * Test for plugin:queue-worker command.
  */
 class QueueWorkerGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\QueueWorker';
+  protected $class = 'Plugin\QueueWorker';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Example',

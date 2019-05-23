@@ -19,8 +19,8 @@ class ApplicationTest extends BaseTestCase {
 
     $expected_output = [
       '',
-      ' Welcome to d8:install-file generator!',
-      '–––––––––––––––––––––––––––––––––––––––',
+      ' Welcome to install-file generator!',
+      '––––––––––––––––––––––––––––––––––––',
       '',
       ' Module name [Dcg sandbox]:',
       ' ➤ Foo',

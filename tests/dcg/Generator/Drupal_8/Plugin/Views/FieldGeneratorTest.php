@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Drupal_8\Plugin\Views;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for d8:plugin:views:field command.
+ * Test for plugin:views:field command.
  */
 class FieldGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Drupal_8\Plugin\Views\Field';
+  protected $class = 'Plugin\Views\Field';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
