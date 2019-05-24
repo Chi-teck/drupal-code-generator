@@ -1,15 +1,15 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Other;
+namespace DrupalCodeGenerator\Tests\Generator\console;
 
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for other:drush-command command.
+ * Test for console:drush-command command.
  */
 class DrushCommandGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Other\DrushCommand';
+  protected $class = 'Console\DrushCommand';
 
   protected $interaction = [
     'Command name:' => 'yo-yo',

@@ -1,16 +1,16 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Other;
+namespace DrupalCodeGenerator\Command\Console;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 
 /**
- * Implements other:drupal-console-command command.
+ * Implements console:drupal-console-command command.
  */
 class DrupalConsoleCommand extends ModuleGenerator {
 
-  protected $name = 'other:drupal-console-command';
+  protected $name = 'console:drupal-console-command';
   protected $description = 'Generates Drupal Console command';
   protected $alias = 'drupal-console-command';
 
@@ -27,7 +27,7 @@ class DrupalConsoleCommand extends ModuleGenerator {
     $vars['class'] = Utils::camelize(str_replace(':', '_', $vars['command_name'])) . 'Command';
     $vars['command_trait'] = $vars['container_aware'] ? 'ContainerAwareCommandTrait' : 'CommandTrait';
 
-    $this->addFile('src/Command/{class}.php', 'other/drupal-console-command');
+    $this->addFile('src/Command/{class}.php', 'console/drupal-console-command');
   }
 
 }

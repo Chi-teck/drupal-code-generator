@@ -1,15 +1,15 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Other;
+namespace DrupalCodeGenerator\Command\Console;
 
 use DrupalCodeGenerator\Command\Generator;
 
 /**
- * Implements other:drush-command command.
+ * Implements console:drush-command command.
  */
 class DrushCommand extends Generator {
 
-  protected $name = 'other:drush-command';
+  protected $name = 'console:drush-command';
   protected $description = 'Generates Drush command';
   protected $alias = 'drush-command';
 
@@ -40,7 +40,7 @@ class DrushCommand extends Generator {
       ? $vars['command_file_prefix']
       : $vars['command_file_prefix'] . '_' . $vars['command_name'];
 
-    $this->addFile('{command_file}', 'other/drush-command');
+    $this->addFile('{command_file}', 'console/drush-command');
   }
 
 }

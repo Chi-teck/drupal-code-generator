@@ -1,31 +1,67 @@
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
   ➤➤➤➤ 1⏎
+ Select generator 
+  [0] ..
+  [1] DCG command
+  [2] Drupal console command
+  [3] Drush command
+  ➤➤➤ 0⏎
+ Select generator 
+  [ 0] ..
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
+  ➤➤➤➤ 2⏎
  Select generator 
   [ 0] ..
   [ 1] Ctools plugin
@@ -86,32 +122,33 @@
   ➤➤➤➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
-  ➤➤➤➤ 2⏎
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
+  ➤➤➤➤ 3⏎
  Select generator 
   [0] ..
   [1] Config
@@ -120,32 +157,33 @@
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
-  ➤➤➤➤ 3⏎
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
+  ➤➤➤➤ 4⏎
  Select generator 
   [0] ..
   [1] Configuration entity
@@ -154,69 +192,68 @@
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
-  ➤➤➤➤ 4⏎
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
+  ➤➤➤➤ 5⏎
  Select generator 
   [0] ..
   [1] Apache virtual host
-  [2] DCG command
-  [3] Drupal console command
-  [4] Drush command
-  [5] HTML page
-  [6] Nginx virtual host
+  [2] HTML page
+  [3] Nginx virtual host
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
-  ➤➤➤➤ 5⏎
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
+  ➤➤➤➤ 6⏎
  Select generator 
   [ 0] ..
   [ 1] Field
@@ -235,32 +272,33 @@
   ➤➤➤➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
-  ➤➤➤➤ 6⏎
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
+  ➤➤➤➤ 7⏎
  Select generator 
   [ 0] ..
   [ 1] Access checker
@@ -281,32 +319,33 @@
   ➤➤➤➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
-  ➤➤➤➤ 7⏎
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
+  ➤➤➤➤ 8⏎
  Select generator 
   [0] ..
   [1] Browser
@@ -317,32 +356,33 @@
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
-  ➤➤➤➤ 8⏎
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
+  ➤➤➤➤ 9⏎
  Select generator 
   [0] ..
   [1] Links
@@ -357,29 +397,30 @@
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Drupal 7
-  [ 2] Form
-  [ 3] Module
-  [ 4] Other
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] Controller
-  [10] Field
-  [11] Hook
-  [12] Install file
-  [13] Javascript
-  [14] Layout
-  [15] Module file
-  [16] Plugin manager
-  [17] Project
-  [18] Render element
-  [19] Service provider
-  [20] Settings local
-  [21] Template
-  [22] Theme
-  [23] Theme file
-  [24] Theme settings
-  [25] composer.json
+  [ 1] Console
+  [ 2] Drupal 7
+  [ 3] Form
+  [ 4] Module
+  [ 5] Other
+  [ 6] Plugin
+  [ 7] Service
+  [ 8] Test
+  [ 9] Yaml
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module file
+  [17] Plugin manager
+  [18] Project
+  [19] Render element
+  [20] Service provider
+  [21] Settings local
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+  [26] composer.json
   ➤➤➤➤ 0⏎

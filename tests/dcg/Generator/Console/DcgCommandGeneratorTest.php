@@ -1,15 +1,15 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Other;
+namespace DrupalCodeGenerator\Tests\Generator\Console;
 
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for other:dcg-command command.
+ * Test for console:dcg-command command.
  */
 class DcgCommandGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Other\DcgCommand';
+  protected $class = 'Console\DcgCommand';
 
   protected $interaction = [
     'Command name [custom:example]:' => 'custom:example',

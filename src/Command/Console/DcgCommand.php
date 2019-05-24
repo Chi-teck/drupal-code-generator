@@ -1,16 +1,16 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Other;
+namespace DrupalCodeGenerator\Command\Console;
 
 use DrupalCodeGenerator\Command\Generator;
 use DrupalCodeGenerator\Utils;
 
 /**
- * Implements other:dcg-command command.
+ * Implements console:dcg-command command.
  */
 class DcgCommand extends Generator {
 
-  protected $name = 'other:dcg-command';
+  protected $name = 'console:dcg-command';
   protected $description = 'Generates DCG command';
   protected $alias = 'dcg-command';
   protected $label = 'DCG command';
@@ -48,8 +48,8 @@ class DcgCommand extends Generator {
       $vars['path'] = '/' . $file_path;
     }
 
-    $this->addFile($file_path . '/{class}.php', 'other/dcg-command');
-    $this->addFile($file_path . '/{template_name}.twig', 'other/dcg-command-template');
+    $this->addFile($file_path . '/{class}.php', 'console/dcg-command');
+    $this->addFile($file_path . '/{template_name}.twig', 'console/dcg-command-template');
   }
 
 }

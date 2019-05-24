@@ -1,15 +1,15 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Other;
+namespace DrupalCodeGenerator\Tests\Generator\Console;
 
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for other:drupal-console-command command.
+ * Test for console:drupal-console-command command.
  */
 class DrupalConsoleCommandGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Other\DrupalConsoleCommand';
+  protected $class = 'Console\DrupalConsoleCommand';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
