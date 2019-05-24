@@ -28,6 +28,7 @@ class Navigation extends Command {
    */
   protected $labels = [
     'd7' => 'Drupal 7',
+    'yml' => 'Yaml',
   ];
 
   /**
