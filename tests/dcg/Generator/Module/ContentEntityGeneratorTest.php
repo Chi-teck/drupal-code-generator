@@ -6,8 +6,6 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
  * Test for module:content-entity command.
- *
- * @TODO: Create fixtures for this test.
  */
 class ContentEntityGeneratorTest extends BaseGeneratorTest {
 

@@ -6,8 +6,6 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
  * Test for module:configuration-entity command.
- *
- * @TODO: Create fixtures for this test.
  */
 class ConfigurationEntityGeneratorTest extends BaseGeneratorTest {
 
