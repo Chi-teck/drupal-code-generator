@@ -1,15 +1,15 @@
 <?php
 
-namespace DrupalCodeGenerator\Command\Other;
+namespace DrupalCodeGenerator\Command\Misc;
 
 use DrupalCodeGenerator\Command\Generator;
 
 /**
- * Implements other:nginx-virtual-host command.
+ * Implements misc:nginx-virtual-host command.
  */
 class NginxVirtualHost extends Generator {
 
-  protected $name = 'other:nginx-virtual-host';
+  protected $name = 'misc:nginx-virtual-host';
   protected $description = 'Generates an Nginx site configuration file';
   protected $alias = 'nginx-virtual-host';
   protected $destination = '/etc/nginx/sites-available';
@@ -33,7 +33,7 @@ class NginxVirtualHost extends Generator {
     $vars['file_public_path'] = trim($vars['file_public_path'], '/');
     $vars['file_private_path'] = trim($vars['file_private_path'], '/');
 
-    $this->addFile('{server_name}', 'other/nginx-virtual-host.twig');
+    $this->addFile('{server_name}', 'misc/nginx-virtual-host.twig');
   }
 
 }

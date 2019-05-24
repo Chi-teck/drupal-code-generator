@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Other;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for other:html-page command.
+ * Test for Misc:html-page command.
  */
 class HtmlPageGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Other\HtmlPage';
+  protected $class = 'Misc\HtmlPage';
 
   protected $answers = [
     'example.html',

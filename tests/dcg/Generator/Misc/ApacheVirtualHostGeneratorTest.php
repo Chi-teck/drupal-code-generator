@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Other;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for other:apache-virtual-host command.
+ * Test for misc:apache-virtual-host command.
  */
 class ApacheVirtualHostGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Other\ApacheVirtualHost';
+  protected $class = 'Misc\ApacheVirtualHost';
 
   protected $interaction = [
     'Host name [example.com]:' => 'site.com',

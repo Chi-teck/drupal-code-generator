@@ -3,8 +3,8 @@
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -38,8 +38,8 @@
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -125,8 +125,8 @@
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -160,8 +160,8 @@
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -186,17 +186,17 @@
   ➤➤➤➤ 4⏎
  Select generator 
   [0] ..
-  [1] Configuration entity
-  [2] Content entity
-  [3] Standard
+  [1] Apache virtual host
+  [2] HTML page
+  [3] Nginx virtual host
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -221,17 +221,17 @@
   ➤➤➤➤ 5⏎
  Select generator 
   [0] ..
-  [1] Apache virtual host
-  [2] HTML page
-  [3] Nginx virtual host
+  [1] Configuration entity
+  [2] Content entity
+  [3] Standard
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -275,8 +275,8 @@
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -322,8 +322,8 @@
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -359,8 +359,8 @@
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test
@@ -400,8 +400,8 @@
   [ 1] Console
   [ 2] Drupal 7
   [ 3] Form
-  [ 4] Module
-  [ 5] Other
+  [ 4] Miscellaneous
+  [ 5] Module
   [ 6] Plugin
   [ 7] Service
   [ 8] Test

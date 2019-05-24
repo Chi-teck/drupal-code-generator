@@ -5,11 +5,11 @@ namespace DrupalCodeGenerator\Tests\Generator\Other;
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for other:nginx-virtual-host command.
+ * Test for misc:nginx-virtual-host command.
  */
 class NginxVirtualHostGeneratorTest extends BaseGeneratorTest {
 
-  protected $class = 'Other\NginxVirtualHost';
+  protected $class = 'Misc\NginxVirtualHost';
 
   protected $interaction = [
     'Server name [example.com]:' => 'example.local',
