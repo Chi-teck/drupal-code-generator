@@ -139,8 +139,8 @@ class Navigation extends Command {
         $command_labels[$menu_item] = $this->createMenuItemLabel($command_name, FALSE);
       }
     }
-    asort($sub_menu_labels);
-    asort($command_labels);
+    natcasesort($sub_menu_labels);
+    natcasesort($command_labels);
 
     // Generally the choices array consists of the following parts:
     // - Reference to the parent menu level.
