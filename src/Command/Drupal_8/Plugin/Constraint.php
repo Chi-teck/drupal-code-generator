@@ -26,7 +26,7 @@ class Constraint extends BaseGenerator {
 
     $default_plugin_id = function (array $vars) {
       // Unlike other plugin types. Constraint IDs use camel case.
-      return Utils::camelize($vars['name'] . $vars['plugin_label']);
+      return Utils::camelize($vars['machine_name'] . $vars['plugin_label']);
     };
     $questions['plugin_id'] = new Question('Constraint ID', $default_plugin_id);
     $plugin_id_validator = function ($value) {

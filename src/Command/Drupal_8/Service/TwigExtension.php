@@ -24,7 +24,7 @@ class TwigExtension extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::moduleQuestions();
     $default_class = function ($vars) {
-      return Utils::camelize($vars['name']) . 'TwigExtension';
+      return Utils::camelize($vars['machine_name']) . 'TwigExtension';
     };
     $questions['class'] = new Question('Class', $default_class);
     $this->collectVars($input, $output, $questions);

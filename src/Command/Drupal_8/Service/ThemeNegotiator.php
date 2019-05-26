@@ -23,7 +23,7 @@ class ThemeNegotiator extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $default_class = function ($vars) {
-      return Utils::camelize($vars['name']) . 'Negotiator';
+      return Utils::camelize($vars['machine_name']) . 'Negotiator';
     };
     $questions['class'] = new Question('Class', $default_class);
 

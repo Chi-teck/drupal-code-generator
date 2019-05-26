@@ -44,7 +44,7 @@ class Standard extends BaseGenerator {
       ->path($prefix . '.module')
       ->template('d8/module.twig');
 
-    $class_prefix = Utils::camelize($vars['name']);
+    $class_prefix = Utils::camelize($vars['machine_name']);
 
     // Additional files.
     $option_questions['install_file'] = new ConfirmationQuestion('Would you like to create install file?', TRUE);

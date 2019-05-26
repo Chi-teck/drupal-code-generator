@@ -23,7 +23,7 @@ class EventSubscriber extends BaseGenerator {
     $questions = Utils::defaultQuestions();
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['name']) . 'Subscriber';
+    $vars['class'] = Utils::camelize($vars['machine_name']) . 'Subscriber';
 
     $this->addFile()
       ->path('src/EventSubscriber/{class}.php')
