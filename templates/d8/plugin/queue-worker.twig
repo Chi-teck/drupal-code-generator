@@ -1,0 +1,25 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\QueueWorker;
+
+use Drupal\Core\Queue\QueueWorkerBase;
+
+/**
+ * Defines '{{ plugin_id }}' queue worker.
+ *
+ * @QueueWorker(
+ *   id = "{{ plugin_id }}",
+ *   title = @Translation("{{ plugin_label }}"),
+ *   cron = {"time" = 60}
+ * )
+ */
+class {{ class }} extends QueueWorkerBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function processItem($data) {
+    // @todo Process data here.
+  }
+
+}
