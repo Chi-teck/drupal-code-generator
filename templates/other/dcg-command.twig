@@ -25,7 +25,7 @@ class {{ class }} extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
     // Ask the user some questions.
-    $questions = Utils::defaultQuestions();
+    $questions = Utils::moduleQuestions();
     $default_class = function ($vars) {
       return Utils::camelize($vars['machine_name']) . 'Example';
     };
