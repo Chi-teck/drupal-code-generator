@@ -393,4 +393,17 @@
   [23] Theme
   [24] Theme file
   [25] Theme settings
-  ➤➤➤➤ 0⏎
+  ➤➤➤➤ 13⏎
+
+ Welcome to install-file generator!
+––––––––––––––––––––––––––––––––––––
+
+ Module name [Dcg sandbox]:
+ ➤ Foo⏎
+
+ Module machine name [foo]:
+ ➤ foo⏎
+
+ The following directories and files have been created or updated:
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ • foo.install
