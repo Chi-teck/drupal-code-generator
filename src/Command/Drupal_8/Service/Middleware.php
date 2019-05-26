@@ -22,7 +22,7 @@ class Middleware extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['name']) . 'Middleware';
+    $vars['class'] = Utils::camelize($vars['machine_name']) . 'Middleware';
 
     $this->addFile()
       ->path('src/{class}.php')

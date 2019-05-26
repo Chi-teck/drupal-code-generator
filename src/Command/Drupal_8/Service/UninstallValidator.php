@@ -23,7 +23,7 @@ class UninstallValidator extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $default_class = function ($vars) {
-      return Utils::camelize($vars['name']) . 'UninstallValidator';
+      return Utils::camelize($vars['machine_name']) . 'UninstallValidator';
     };
     $questions['class'] = new Question('Class', $default_class);
     $this->collectVars($input, $output, $questions);

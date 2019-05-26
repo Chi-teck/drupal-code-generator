@@ -23,7 +23,7 @@ class PathProcessor extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
     $default_class = function ($vars) {
-      return 'PathProcessor' . Utils::camelize($vars['name']);
+      return 'PathProcessor' . Utils::camelize($vars['machine_name']);
     };
     $questions['class'] = new Question('Class', $default_class);
 

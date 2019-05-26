@@ -23,7 +23,7 @@ class RouteSubscriber extends BaseGenerator {
     $questions = Utils::defaultQuestions();
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['name']) . 'RouteSubscriber';
+    $vars['class'] = Utils::camelize($vars['machine_name']) . 'RouteSubscriber';
 
     $this->addFile()
       ->path('src/EventSubscriber/{class}.php')

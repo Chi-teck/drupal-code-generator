@@ -23,7 +23,7 @@ class Services extends BaseGenerator {
     $questions = Utils::defaultQuestions();
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['name']);
+    $vars['class'] = Utils::camelize($vars['machine_name']);
 
     $this->addFile()
       ->path('{machine_name}.services.yml')
