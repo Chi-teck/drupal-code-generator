@@ -20,8 +20,8 @@ class GeneratorDiscoveryTest extends TestCase {
   public function testExecute() {
     $discovery = new GeneratorDiscovery(new Filesystem());
     $generators = $discovery->getGenerators(
-      [Application::getRoot() . '/src/Command/Drupal_7'],
-      '\DrupalCodeGenerator\Command\Drupal_7'
+      [Application::getRoot() . '/src/Command/Misc/Drupal_7'],
+      '\DrupalCodeGenerator\Command\Misc\Drupal_7'
     );
     foreach ($generators as $generator) {
       static::assertInstanceOf('DrupalCodeGenerator\Command\Generator', $generator);

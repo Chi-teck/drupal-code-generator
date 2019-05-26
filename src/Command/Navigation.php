@@ -27,7 +27,7 @@ class Navigation extends Command {
    * @var array
    */
   protected $labels = [
-    'd7' => 'Drupal 7',
+    'misc:d7' => 'Drupal 7',
     'yml' => 'Yaml',
     'misc' => 'Miscellaneous',
   ];
