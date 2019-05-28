@@ -65,13 +65,6 @@ class Utils {
   }
 
   /**
-   * Removes a given number of lines from the beginning of the string.
-   */
-  public static function removeHeader(string $content, int $header_size) :string {
-    return implode("\n", array_slice(explode("\n", $content), $header_size));
-  }
-
-  /**
    * Return the user's home directory.
    *
    * @return string|bool

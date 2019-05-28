@@ -5,7 +5,6 @@ namespace DrupalCodeGenerator\Helper;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
-use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -91,10 +90,7 @@ class Dumper extends Helper implements IOAwareInterface {
         }
         $existing_content = file_get_contents($file_path);
         if ($action == Asset::APPEND) {
-          if ($asset->getHeaderSize() > 0) {
-            $content = Utils::removeHeader($content, $asset->getHeaderSize());
-          }
-          $content = $existing_content . "\n" . $content;
+          $content = static::appendContent($existing_content, $content, $asset->getHeaderSize());
         }
         elseif (is_callable($action)) {
           $content = $action($existing_content, $content);
@@ -151,6 +147,19 @@ class Dumper extends Helper implements IOAwareInterface {
       return $this->io->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?");
     }
     return $this->replace;
+  }
+
+  /**
+   * Appends generated content to the end of existing one.
+   */
+  protected static function appendContent(string $existing_content, ?string $new_content, int $header_size) :string {
+    if ($new_content === NULL) {
+      return $existing_content;
+    }
+    if ($header_size > 0) {
+      $new_content = implode("\n", array_slice(explode("\n", $new_content), $header_size));
+    }
+    return $existing_content . "\n" . $new_content;
   }
 
 }
