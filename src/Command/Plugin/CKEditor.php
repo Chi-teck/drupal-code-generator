@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
+use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -37,7 +38,7 @@ class CKEditor extends PluginGenerator {
 
     $this->addFile('js/plugins/{short_plugin_id}/icons/{short_plugin_id}.png')
       ->content(file_get_contents($this->templatePath . '/plugin/_ckeditor/icon.png'))
-      ->action('replace');
+      ->action(Asset::APPEND);
   }
 
 }

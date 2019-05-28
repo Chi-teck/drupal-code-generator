@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command\Form;
 
+use DrupalCodeGenerator\Asset;
+
 /**
  * Implements form:config command.
  */
@@ -33,7 +35,7 @@ class Config extends FormGenerator {
 
         $this->addFile('{machine_name}.links.menu.yml')
           ->template('form/links.menu')
-          ->action('append');
+          ->action(Asset::APPEND);
       }
     }
 

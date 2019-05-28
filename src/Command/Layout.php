@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Asset;
+
 /**
  * Implements layout command.
  */
@@ -26,11 +28,11 @@ class Layout extends ModuleGenerator {
     $vars['css'] = $this->confirm('Would you like to create CSS file for this layout?', FALSE);
 
     $this->addFile('{machine_name}.layouts.yml', '_layout/layouts')
-      ->action('append');
+      ->action(Asset::APPEND);
 
     if ($vars['js'] || $vars['css']) {
       $this->addFile('{machine_name}.libraries.yml', '_layout/libraries')
-        ->action('append');
+        ->action(Asset::APPEND);
     }
 
     $vars['layout_asset_name'] = '{layout_machine_name|u2h}';

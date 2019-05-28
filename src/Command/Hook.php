@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Asset;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -104,7 +105,7 @@ class Hook extends ModuleGenerator {
       ->path('{machine_name}.{file_type}')
       ->headerTemplate('file-docs/{file_type}')
       ->template('hook/{hook_name}')
-      ->action('append')
+      ->action(Asset::APPEND)
       ->headerSize(7);
   }
 

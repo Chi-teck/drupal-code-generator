@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7\ViewsPlugin;
 
+use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -22,12 +23,12 @@ class ArgumentDefault extends ModuleGenerator {
 
     $this->addFile('{machine_name}.module')
       ->template('misc/d7/views-plugin/argument-default.module')
-      ->action('append')
+      ->action(Asset::APPEND)
       ->headerSize(7);
 
     $this->addFile('views/{machine_name}.views.inc')
       ->template('misc/d7/views-plugin/argument-default-views.inc')
-      ->action('append')
+      ->action(Asset::APPEND)
       ->headerSize(7);
 
     $this->addFile('views/views_plugin_argument_{plugin_machine_name}.inc')

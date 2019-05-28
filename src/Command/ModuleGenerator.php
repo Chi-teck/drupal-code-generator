@@ -27,7 +27,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
   protected function addServicesFile(string $path = '{machine_name}.services.yml') :Asset {
     return $this->addFile()
       ->path($path)
-      ->action('append')
+      ->action(Asset::APPEND)
       ->headerSize(1);
   }
 
@@ -43,7 +43,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
   protected function addSchemaFile(string $path = 'config/schema/{machine_name}.schema.yml') :Asset {
     return $this->addFile()
       ->path($path)
-      ->action('append');
+      ->action(Asset::APPEND);
   }
 
   /**

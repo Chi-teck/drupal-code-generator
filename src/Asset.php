@@ -5,72 +5,76 @@ namespace DrupalCodeGenerator;
 /**
  * Simple data structure to represent an asset being generated.
  */
-class Asset {
+final class Asset {
+
+  const REPLACE = 1;
+  const APPEND = 2;
+  const PRESERVE = 3;
 
   /**
    * Asset path.
    *
    * @var string|null
    */
-  protected $path;
+  private $path;
 
   /**
    * Asset content.
    *
    * @var string|null
    */
-  protected $content;
+  private $content;
 
   /**
    * Twig template to render header.
    *
    * @var string|null
    */
-  protected $headerTemplate;
+  private $headerTemplate;
 
   /**
    * Twig template to render main content.
    *
    * @var string|null
    */
-  protected $template;
+  private $template;
 
   /**
    * Template variables.
    *
    * @var array
    */
-  protected $vars = [];
+  private $vars = [];
 
   /**
    * Action.
    *
    * An action to take if specified file already exists.
    *
-   * @var string
+   * @var string|callable
    */
-  protected $action = 'replace';
+  private $action = self::REPLACE;
 
   /**
    * Header size.
    *
    * @var int|null
    */
-  protected $headerSize = 0;
+  private $headerSize = 0;
 
   /**
    * Asset mode.
    *
    * @var int|null
    */
-  protected $mode;
+  private $mode;
 
   /**
    * Asset type (file or directory).
    *
    * @var string
    */
-  protected $type = 'file';
+  private $type = 'file';
 
   /**
    * Getter for asset path.
@@ -125,10 +129,10 @@ class Asset {
   /**
    * Getter for asset action.
    *
-   * @return string
+   * @return string|callable
    *   Asset action.
    */
-  public function getAction() :?string {
+  public function getAction() {
     return $this->action;
   }
 
@@ -235,13 +239,13 @@ class Asset {
   /**
    * Setter for asset action.
    *
-   * @param string $action
+   * @param string|callable $action
    *   Asset action.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function action(string $action) :Asset {
+  public function action($action) :Asset {
     $this->action = $action;
     return $this;
   }

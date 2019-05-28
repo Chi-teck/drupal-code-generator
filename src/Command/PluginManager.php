@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -83,11 +84,11 @@ class PluginManager extends ModuleGenerator {
         ->path(str_replace($path_placeholders, $path_replacements, $file))
         ->template($templates_path . $file);
       if ($file === 'model.services.yml') {
-        $asset->action('append')->headerSize(1);
+        $asset->action(Asset::APPEND)->headerSize(1);
       }
       elseif ($file == 'model.module') {
         $asset
-          ->action('append')
+          ->action(Asset::APPEND)
           ->headerTemplate('file-docs/module')
           ->headerSize(7);
       }

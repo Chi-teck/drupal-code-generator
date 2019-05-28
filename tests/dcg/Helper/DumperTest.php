@@ -172,8 +172,8 @@ class DumperTest extends BaseTestCase {
     // -- Append file content.
     $this->filesystem->dumpFile($this->directory . '/log.txt', "File header");
     $assets = [
-      (new Asset())->path('log.txt')->content("redundant line\nRecord 1")->action('append')->headerSize(1),
-      (new Asset())->path('log.txt')->content('Record 2')->action('append'),
+      (new Asset())->path('log.txt')->content("redundant line\nRecord 1")->action(Asset::APPEND)->headerSize(1),
+      (new Asset())->path('log.txt')->content('Record 2')->action(Asset::APPEND),
     ];
     $dumped_assets = $this->dump($assets, TRUE);
 
