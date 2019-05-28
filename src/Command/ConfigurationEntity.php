@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 
 /**
@@ -12,6 +13,7 @@ class ConfigurationEntity extends ModuleGenerator {
   protected $name = 'configuration-entity';
   protected $description = 'Generates configuration entity module';
   protected $alias = 'config-entity';
+  protected $templatePath = Application::TEMPLATE_PATH . '_configuration-entity/';
 
   /**
    * {@inheritdoc}
@@ -23,19 +25,19 @@ class ConfigurationEntity extends ModuleGenerator {
     $vars['entity_type_id'] = $this->ask('Entity type ID', '{entity_type_label|h2m}');
     $vars['class_prefix'] = '{entity_type_id|camelize}';
 
-    $this->addFile('src/{class_prefix}ListBuilder.php', '_configuration-entity/src/ExampleListBuilder.php');
-    $this->addFile('src/Form/{class_prefix}Form.php', '_configuration-entity/src/Form/ExampleForm.php');
-    $this->addFile('src/{class_prefix}Interface.php', '_configuration-entity/src/ExampleInterface.php');
-    $this->addFile('src/Entity/{class_prefix}.php', '_configuration-entity/src/Entity/Example.php');
-    $this->addFile('{machine_name}.routing.yml', '_configuration-entity/model.routing.yml')
+    $this->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php');
+    $this->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php');
+    $this->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
+    $this->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
+    $this->addFile('{machine_name}.routing.yml', 'model.routing.yml')
       ->action(Asset::APPEND);
-    $this->addFile('{machine_name}.links.action.yml', '_configuration-entity/model.links.action.yml')
+    $this->addFile('{machine_name}.links.action.yml', 'model.links.action.yml')
       ->action(Asset::APPEND);
-    $this->addFile('{machine_name}.links.menu.yml', '_configuration-entity/model.links.menu.yml')
+    $this->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml')
       ->action(Asset::APPEND);
-    $this->addFile('{machine_name}.permissions.yml', '_configuration-entity/model.permissions.yml')
+    $this->addFile('{machine_name}.permissions.yml', 'model.permissions.yml')
       ->action(Asset::APPEND);
-    $this->addFile('config/schema/{machine_name}.schema.yml', '_configuration-entity/config/schema/model.schema.yml')
+    $this->addFile('config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml')
       ->action(Asset::APPEND);
 
     // Add 'configure' link to the info file if it exists.

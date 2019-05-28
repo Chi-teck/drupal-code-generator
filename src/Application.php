@@ -24,6 +24,11 @@ class Application extends BaseApplication {
   const ROOT = __DIR__ . '/..';
 
   /**
+   * Path to templates directory.
+   */
+  const TEMPLATE_PATH = Application::ROOT . '/templates/';
+
+  /**
    * Creates the application.
    */
   public static function create() :Application {

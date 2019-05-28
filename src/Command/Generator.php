@@ -60,7 +60,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *
    * @var string
    */
-  protected $templatePath;
+  protected $templatePath = Application::TEMPLATE_PATH;
 
   /**
    * The working directory.
@@ -114,10 +114,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     if ($this->alias) {
       $this->setAliases([$this->alias]);
-    }
-
-    if (!$this->templatePath) {
-      $this->templatePath = Application::ROOT . '/templates';
     }
   }
 
