@@ -328,9 +328,9 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = configuration_entity ]; then
 
   MODULE_MACHINE_NAME=wine
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG module:configuration-entity -d $DRUPAL_DIR/modules -a Wine -a wine -a DCG -a drupal:user -a Example -a example
-  cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
+  $DCG configuration-entity -d $MODULE_DIR -a Wine -a wine -a Example -a example
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME

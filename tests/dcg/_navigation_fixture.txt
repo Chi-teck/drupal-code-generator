@@ -9,22 +9,23 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 1⏎
  Select generator 
   [0] ..
@@ -43,22 +44,23 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 2⏎
  Select generator 
   [0] ..
@@ -77,22 +79,23 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 3⏎
  Select generator 
   [0] ..
@@ -177,28 +180,28 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 4⏎
  Select generator 
   [0] ..
-  [1] Configuration entity
-  [2] Content entity
-  [3] Standard
+  [1] Content entity
+  [2] Standard
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
@@ -211,22 +214,23 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 5⏎
  Select generator 
   [ 0] ..
@@ -255,22 +259,23 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 6⏎
  Select generator 
   [ 0] ..
@@ -301,22 +306,23 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 7⏎
  Select generator 
   [0] ..
@@ -337,22 +343,23 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 8⏎
  Select generator 
   [0] ..
@@ -377,23 +384,24 @@
   [ 7] Test
   [ 8] Yaml
   [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module file
-  [17] Plugin manager
-  [18] Project
-  [19] Render element
-  [20] Service provider
-  [21] Settings local
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
-  ➤➤➤➤ 13⏎
+  [10] Configuration entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module file
+  [18] Plugin manager
+  [19] Project
+  [20] Render element
+  [21] Service provider
+  [22] Settings local
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
+  ➤➤➤➤ 14⏎
 
  Welcome to install-file generator!
 ––––––––––––––––––––––––––––––––––––

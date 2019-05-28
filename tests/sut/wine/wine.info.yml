@@ -1,0 +1,5 @@
+name: Wine
+type: module
+description: Helper module for testing generated configuration entity.
+package: DCG
+core: 8.x
