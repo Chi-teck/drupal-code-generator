@@ -103,7 +103,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    *   List of service definitions keyed by service ID.
    */
   protected static function getServiceDefinitions() :array {
-    $data_encoded = file_get_contents(Application::getRoot() . '/resources/service-definitions.json');
+    $data_encoded = file_get_contents(Application::ROOT . '/resources/service-definitions.json');
     return json_decode($data_encoded, TRUE);
   }
 

@@ -19,14 +19,9 @@ use Symfony\Component\Filesystem\Filesystem;
 class Application extends BaseApplication {
 
   /**
-   * Determines path to DCG root directory.
-   *
-   * @return string
-   *   Path to DCG root directory.
+   * Path to DCG root directory.
    */
-  public static function getRoot() :string {
-    return dirname(__DIR__);
-  }
+  const ROOT = __DIR__ . '/..';
 
   /**
    * Creates the application.

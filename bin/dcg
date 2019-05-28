@@ -18,7 +18,7 @@ $application = Application::create();
 
 // Add default generators.
 $discovery = new GeneratorDiscovery(new Filesystem());
-$default_generators = $discovery->getGenerators([Application::getRoot() . '/src/Command']);
+$default_generators = $discovery->getGenerators([Application::ROOT . '/src/Command']);
 $application->addCommands($default_generators);
 
 // Add custom generators.

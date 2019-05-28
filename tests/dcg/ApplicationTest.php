@@ -14,7 +14,7 @@ class ApplicationTest extends BaseTestCase {
    */
   public function testApplication() {
 
-    $cmd = sprintf('%s/bin/dcg install -d %s -a Foo -a foo 2>&1', Application::getRoot(), $this->directory);
+    $cmd = sprintf('%s/bin/dcg install -d %s -a Foo -a foo 2>&1', Application::ROOT, $this->directory);
     exec($cmd, $output, $return);
 
     $expected_output = [

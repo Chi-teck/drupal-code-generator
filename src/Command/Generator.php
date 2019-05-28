@@ -117,7 +117,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     }
 
     if (!$this->templatePath) {
-      $this->templatePath = Application::getRoot() . '/templates';
+      $this->templatePath = Application::ROOT . '/templates';
     }
   }
 
@@ -139,17 +139,17 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->setLogger($this->getHelper('logger_factory')->getLogger());
 
-    $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
-
-    $this->io->title(sprintf('Welcome to %s generator!', $this->getName()));
-
     $this->directory = $input->getOption('directory') ?: getcwd();
+
+    $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
   }
 
   /**
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) :int {
+
+    $this->io->title(sprintf('Welcome to %s generator!', $this->getName()));
 
     $this->generate();
 

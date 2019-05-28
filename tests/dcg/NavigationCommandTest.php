@@ -19,7 +19,7 @@ class NavigationCommandTest extends BaseTestCase {
   public function testNavigation() {
 
     $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators([Application::getRoot() . '/src/Command']);
+    $generators = $discovery->getGenerators([Application::ROOT . '/src/Command']);
 
     $application = Application::create();
     $helper_set = $application->getHelperSet();
