@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Asset;
 use Symfony\Component\Console\Helper\Helper;
-use Twig_Environment;
+use Twig\Environment;
 
 /**
  * Output dumper form generators.
@@ -14,17 +14,17 @@ class Renderer extends Helper {
   /**
    * The twig environment.
    *
-   * @var \Twig_Environment
+   * @var \Twig\Environment
    */
   protected $twig;
 
   /**
    * Constructs the Renderer object.
    *
-   * @param \Twig_Environment $twig
+   * @param \Twig\Environment $twig
    *   The twig environment.
    */
-  public function __construct(Twig_Environment $twig) {
+  public function __construct(Environment $twig) {
     $this->twig = $twig;
   }
 
@@ -74,7 +74,9 @@ class Renderer extends Helper {
    *   A path where to look for templates.
    */
   public function addPath(string $path) :void {
-    $this->twig->getLoader()->addPath($path);
+    /** @var \Twig\Loader\FilesystemLoader $loader */
+    $loader = $this->twig->getLoader();
+    $loader->addPath($path);
   }
 
 }

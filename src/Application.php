@@ -12,6 +12,7 @@ use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Filesystem\Filesystem;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * Console application.
@@ -43,7 +44,7 @@ class Application extends BaseApplication {
     $helper_set = new HelperSet([
       new QuestionHelper(),
       new Dumper(new Filesystem()),
-      new Renderer(new TwigEnvironment(new \Twig_Loader_Filesystem())),
+      new Renderer(new TwigEnvironment(new FilesystemLoader())),
       new ResultPrinter(),
       new LoggerFactory(),
     ]);
