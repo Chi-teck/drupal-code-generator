@@ -1,0 +1,7 @@
+name: Nigma
+type: module
+description: Helper module for testing generated conent entity.
+package: DCG
+core: 8.x
+dependencies:
+  - drupal:text

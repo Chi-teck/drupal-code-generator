@@ -1,0 +1,5 @@
+name: Sigma
+type: module
+description: Helper module for testing generated content entity.
+package: DCG
+core: 8.x

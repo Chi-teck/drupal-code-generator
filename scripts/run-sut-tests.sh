@@ -344,12 +344,11 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
 
   MODULE_MACHINE_NAME=nigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG module:content-entity -d $DRUPAL_DIR/modules \
-    -a Nigma -a nigma -a DCG -a drupal:user -a Example -a example -a /admin/content/example \
+  $DCG content-entity -d $MODULE_DIR \
+    -a Nigma -a nigma -a Example -a example -a /admin/content/example \
     -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
-
-  cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
@@ -360,12 +359,11 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = content_entity ]; then
 
   MODULE_MACHINE_NAME=sigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
 
-  $DCG module:content-entity -d $DRUPAL_DIR/modules \
-    -a Sigma -a sigma -a DCG -a drupal:system -a Example -a example -a /example \
+  $DCG content-entity -d $MODULE_DIR \
+    -a Sigma -a sigma -a Example -a example -a /example \
     -a Yes -a No -a No -a No -a No -a No -a Yes -a No -a No -a No -a No -a No -a No
-
-  cp -R $SELF_PATH/$MODULE_MACHINE_NAME/* $MODULE_DIR
 
   dcg_phpcs $MODULE_DIR
   dcg_drush en $MODULE_MACHINE_NAME
