@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\bar\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use TestBase\BrowserTestBase;
@@ -49,7 +50,7 @@ class FieldTest extends BrowserTestBase {
     $this->drupalPostForm('admin/structure/types/manage/page/fields/add-field', $edit, 'Save and continue');
     $this->drupalPostForm(NULL, [], 'Save field settings');
     $this->drupalPostForm(NULL, [], 'Save settings');
-    $this->assertStatusMessage(t('Saved %label configuration.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
 
     // -- Test widget form elements.
     $this->drupalGet('node/add/page');
@@ -94,19 +95,19 @@ class FieldTest extends BrowserTestBase {
       '%limit' => '128',
       '%value' => '129',
     ];
-    $message = t('@label cannot be longer than %limit characters but is currently %value characters long.', $arguments);
+    $message = new FormattableMarkup('@label cannot be longer than %limit characters but is currently %value characters long.', $arguments);
     $this->assertErrorMessage($message);
 
-    $message = t('%label must be a number.', ['%label' => 'Value 4']);
+    $message = new FormattableMarkup('%label must be a number.', ['%label' => 'Value 4']);
     $this->assertErrorMessage($message);
 
-    $message = t('%label must be a number.', ['%label' => 'Value 5']);
+    $message = new FormattableMarkup('%label must be a number.', ['%label' => 'Value 5']);
     $this->assertErrorMessage($message);
 
-    $message = t('%label must be a number.', ['%label' => 'Value 6']);
+    $message = new FormattableMarkup('%label must be a number.', ['%label' => 'Value 6']);
     $this->assertErrorMessage($message);
 
-    $message = t('The email address %value is not valid.', ['%value' => 'wrong email']);
+    $message = new FormattableMarkup('The email address %value is not valid.', ['%value' => 'wrong email']);
     $this->assertErrorMessage($message);
 
     $arguments = [
@@ -114,17 +115,17 @@ class FieldTest extends BrowserTestBase {
       '%limit' => '128',
       '%value' => '129',
     ];
-    $message = t('@label cannot be longer than %limit characters but is currently %value characters long.', $arguments);
+    $message = new FormattableMarkup('@label cannot be longer than %limit characters but is currently %value characters long.', $arguments);
     $this->assertErrorMessage($message);
 
-    $message = t('The URL %value is not valid.', ['%value' => 'wrong URL']);
+    $message = new FormattableMarkup('The URL %value is not valid.', ['%value' => 'wrong URL']);
     $this->assertErrorMessage($message);
 
     $arguments = [
       '%label' => 'Value 10',
       '%format' => (new DrupalDateTime())->format('Y-m-d'),
     ];
-    $message = t('The %label date is invalid. Please enter a date in the format %format.', $arguments);
+    $message = new FormattableMarkup('The %label date is invalid. Please enter a date in the format %format.', $arguments);
     $this->assertErrorMessage($message);
 
     // Submit the form with correct values and test formatter output.
@@ -168,7 +169,7 @@ class FieldTest extends BrowserTestBase {
     $this->drupalPostForm('admin/structure/types/manage/page/fields/add-field', $edit, 'Save and continue');
     $this->drupalPostForm(NULL, [], 'Save field settings');
     $this->drupalPostForm(NULL, [], 'Save settings');
-    $this->assertStatusMessage(t('Saved %label configuration.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
 
     // -- Test widget form elements.
     $this->drupalGet('node/add/page');
@@ -330,7 +331,7 @@ class FieldTest extends BrowserTestBase {
     ];
     $this->drupalPostForm(NULL, $edit, 'Save settings');
 
-    $this->assertStatusMessage(t('Saved %label configuration.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
 
     // Make sure the settings are saved.
     $this->drupalGet('admin/structure/types/manage/page/fields/node.page.field_foo/storage');

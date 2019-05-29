@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\wine\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use TestBase\BrowserTestBase;
 
 /**
@@ -44,7 +45,7 @@ class ConfigurationEntityTest extends BrowserTestBase {
       'description' => 'The entity description.',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertStatusMessage(t('Created new example %label.', ['%label' => 'Test']));
+    $this->assertStatusMessage(new FormattableMarkup('Created new example %label.', ['%label' => 'Test']));
 
     $this->assertXpath('//tbody//td[text() = "Test"]/following::td[text() = "test"]/following::td[text() = "Enabled"]/following::td//ul[@class = "dropbutton"]');
 
@@ -59,13 +60,13 @@ class ConfigurationEntityTest extends BrowserTestBase {
       'label' => 'Updated test',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertStatusMessage(t('Updated example %label.', ['%label' => 'Updated test']));
+    $this->assertStatusMessage(new FormattableMarkup('Updated example %label.', ['%label' => 'Updated test']));
 
     $this->click('//ul[@class = "dropbutton"]//a[text() = "Delete"]');
-    $this->assertPageTitle(t('Are you sure you want to delete the example %label?', ['%label' => 'Updated test']));
+    $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Updated test']));
 
     $this->drupalPostForm(NULL, [], 'Delete');
-    $this->assertStatusMessage(t('The example %label has been deleted.', ['%label' => 'Updated test']));
+    $this->assertStatusMessage(new FormattableMarkup('The example %label has been deleted.', ['%label' => 'Updated test']));
     $this->assertXpath('//td[@class = "empty message" and text() = "There are no examples yet."]');
   }
 

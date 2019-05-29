@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\sigma\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\sigma\Entity\Example;
 use TestBase\BrowserTestBase;
 
@@ -46,7 +47,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->drupalPostForm('admin/structure/example/fields/add-field', $edit, 'Save');
     $this->drupalPostForm(NULL, [], 'Save field settings');
     $this->drupalPostForm(NULL, [], 'Save settings');
-    $this->assertStatusMessage(t('Saved %label configuration.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
 
     /** @var \Drupal\Core\Entity\ContentEntityTypeInterface $entity_type */
     $entity_type = \Drupal::entityTypeManager()->getDefinition('example');
@@ -112,7 +113,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->drupalPostForm(NULL, $edit, 'Save');
 
     // -- Test entity view builder.
-    $this->assertStatusMessage(t('New example %label has been created.', ['%label' => 'Beer']));
+    $this->assertStatusMessage(new FormattableMarkup('New example %label has been created.', ['%label' => 'Beer']));
     $this->assertPageTitle('Beer');
     $this->assertXpath('//div[text() = "Foo"]/following-sibling::div[text() = "Dark"]');
 
@@ -134,7 +135,7 @@ class ContentEntityTest extends BrowserTestBase {
       'field_foo[0][value]' => 'White',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertStatusMessage(t('The example %label has been updated.', ['%label' => 'Wine']));
+    $this->assertStatusMessage(new FormattableMarkup('The example %label has been updated.', ['%label' => 'Wine']));
     $this->assertPageTitle('Wine');
 
     // -- Test entity list builder.
@@ -156,11 +157,11 @@ class ContentEntityTest extends BrowserTestBase {
 
     // -- Test entity deletion.
     $this->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
-    $this->assertPageTitle(t('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
+    $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 
     $this->drupalPostForm(NULL, [], 'Delete');
-    $this->assertStatusMessage(t('The example %label has been deleted.', ['%label' => 'Wine']));
+    $this->assertStatusMessage(new FormattableMarkup('The example %label has been deleted.', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('There are no example entities yet.');
     $this->assertSession()->pageTextContains('Total examples: 0');
   }
