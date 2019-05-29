@@ -3,54 +3,54 @@
 namespace DrupalCodeGenerator\Twig;
 
 use DrupalCodeGenerator\Utils;
-use Twig_Environment;
-use Twig_LoaderInterface;
-use Twig_SimpleFilter;
+use Twig\Source;
+use Twig\TwigFilter;
+use Twig\Loader\LoaderInterface;
+use Twig\Environment;
 
 /**
  * Stores the Twig configuration.
  */
-class TwigEnvironment extends Twig_Environment {
+class Twig2Environment extends Environment {
 
   /**
    * Constructs Twig environment object.
    *
-   * @param \Twig_LoaderInterface $loader
+   * @param \Twig\Loader\LoaderInterface $loader
    *   The Twig loader.
    */
-  public function __construct(Twig_LoaderInterface $loader) {
+  public function __construct(LoaderInterface $loader) {
     parent::__construct($loader);
 
-    $this->addFilter(new Twig_SimpleFilter('plural', [Utils::class, 'pluralize']), ['deprecated' => TRUE]);
+    $this->addFilter(new TwigFilter('plural', [Utils::class, 'pluralize'], ['deprecated' => TRUE]));
+    $this->addFilter(new TwigFilter('pluralize', [Utils::class, 'pluralize']));
 
-    $this->addFilter(new Twig_SimpleFilter('pluralize', [Utils::class, 'pluralize']));
-
-    $this->addFilter(new Twig_SimpleFilter('article', function ($string) {
+    $this->addFilter(new TwigFilter('article', function ($string) {
       $article = in_array(strtolower($string[0]), ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
       return $article . ' ' . $string;
     }));
 
-    $this->addFilter(new Twig_SimpleFilter('underscore2hyphen', function ($string) {
+    $this->addFilter(new TwigFilter('underscore2hyphen', function ($string) {
       // @codeCoverageIgnoreStart
       return str_replace('_', '-', $string);
       // @codeCoverageIgnoreEnd
     }, ['deprecated' => TRUE]));
 
-    $this->addFilter(new Twig_SimpleFilter('hyphen2underscore', function ($string) {
+    $this->addFilter(new TwigFilter('hyphen2underscore', function ($string) {
       // @codeCoverageIgnoreStart
       return str_replace('-', '_', $string);
       // @codeCoverageIgnoreEnd
     }, ['deprecated' => TRUE]));
 
-    $this->addFilter(new Twig_SimpleFilter('u2h', function ($string) {
+    $this->addFilter(new TwigFilter('u2h', function ($string) {
       return str_replace('_', '-', $string);
     }));
 
-    $this->addFilter(new Twig_SimpleFilter('h2u', function ($string) {
+    $this->addFilter(new TwigFilter('h2u', function ($string) {
       return str_replace('-', '_', $string);
     }));
 
-    $this->addFilter(new Twig_SimpleFilter('camelize', function ($string, $upper_mode = TRUE) {
+    $this->addFilter(new TwigFilter('camelize', function ($string, $upper_mode = TRUE) {
       return Utils::camelize($string, $upper_mode);
     }));
 
@@ -60,10 +60,7 @@ class TwigEnvironment extends Twig_Environment {
   /**
    * {@inheritdoc}
    */
-  public function tokenize($source, $name = NULL) {
-    if (!$source instanceof \Twig_Source) {
-      $source = new \Twig_Source($source, $name);
-    }
+  public function tokenize(Source $source) {
     // Remove leading whitespaces to preserve indentation.
     // @see https://github.com/twigphp/Twig/issues/1423
     $code = $source->getCode();
@@ -71,8 +68,8 @@ class TwigEnvironment extends Twig_Environment {
       $code = preg_replace("/\n +\{%/", "\n{%", $source->getCode());
     }
     // Twig source has no setters.
-    $source = new \Twig_Source($code, $source->getName(), $source->getPath());
-    return parent::tokenize($source, $name);
+    $source = new Source($code, $source->getName(), $source->getPath());
+    return parent::tokenize($source);
   }
 
 }

@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator;
 
-use DrupalCodeGenerator\Twig\TwigEnvironment as BaseTwigEnvironment;
+use DrupalCodeGenerator\Twig\Twig1Environment as BaseTwigEnvironment;
 
 /**
  * Stores the Twig configuration.
@@ -12,6 +12,6 @@ use DrupalCodeGenerator\Twig\TwigEnvironment as BaseTwigEnvironment;
  *
  * @codeCoverageIgnore
  */
-class TwigEnvironment extends BaseTwigEnvironment {
+class Twig1Environment extends BaseTwigEnvironment {
 
 }
