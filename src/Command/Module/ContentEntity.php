@@ -2,8 +2,8 @@
 
 namespace DrupalCodeGenerator\Command\Module;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements module:content-entity command.
@@ -15,6 +15,7 @@ class ContentEntity extends ModuleGenerator {
   protected $alias = 'content-entity';
   protected $destination = 'modules';
   protected $isNewExtension = TRUE;
+  protected $templatePath = Application::TEMPLATE_PATH . 'module/content-entity';
 
   /**
    * {@inheritdoc}
@@ -50,81 +51,57 @@ class ContentEntity extends ModuleGenerator {
     }
 
     if ($vars['entity_base_path'][0] != '/') {
-      $vars['entity_base_path'] = '/' . $vars['entity_base_path'];
+      $vars['entity_base_path'] = '/{entity_base_path}';
     }
 
     if (($vars['fieldable_no_bundle'] = $vars['fieldable'] && !$vars['bundle'])) {
-      $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '.settings';
+      $vars['configure'] = 'entity.{entity_type_id}.settings';
     }
     elseif ($vars['bundle']) {
-      $vars['configure'] = 'entity.' . $vars['entity_type_id'] . '_type.collection';
+      $vars['configure'] = 'entity.{entity_type_id}_type.collection';
     }
 
-    $vars['class_prefix'] = Utils::camelize($vars['entity_type_id']);
+    $vars['class_prefix'] = '{entity_type_id|camelize}';
+    $vars['template_name'] = '{entity_type_id|u2h}.html.twig';
 
-    $files = [
-      'model.info.yml',
-      'model.links.action.yml',
-      'model.links.menu.yml',
-      'model.links.task.yml',
-      'model.permissions.yml',
-      'src/Entity/Example.php',
-      'src/ExampleInterface.php',
-      'src/ExampleListBuilder.php',
-      'src/Form/ExampleForm.php',
-    ];
+    $this->addFile('{machine_name}/{machine_name}.info.yml', 'model.info.yml');
+    $this->addFile('{machine_name}/{machine_name}.links.action.yml', 'model.links.action.yml');
+    $this->addFile('{machine_name}/{machine_name}.links.menu.yml', 'model.links.menu.yml');
+    $this->addFile('{machine_name}/{machine_name}.links.task.yml', 'model.links.task.yml');
+    $this->addFile('{machine_name}/{machine_name}.permissions.yml', 'model.permissions.yml');
+    $this->addFile('{machine_name}/src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
+    $this->addFile('{machine_name}/src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
+    $this->addFile('{machine_name}/src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php');
+    $this->addFile('{machine_name}/src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php');
 
     if ($vars['fieldable_no_bundle']) {
-      $files[] = 'model.routing.yml';
-      $files[] = 'src/Form/ExampleSettingsForm.php';
+      $this->addFile('{machine_name}/{machine_name}.routing.yml', 'model.routing.yml');
+      $this->addFile('{machine_name}/src/Form/{class_prefix}SettingsForm.php', 'src/Form/ExampleSettingsForm.php');
     }
 
     if ($vars['template']) {
-      $files[] = 'templates/model-example.html.twig';
-      $files[] = 'model.module';
+      $this->addFile('{machine_name}/templates/{entity_type_id|u2h}.html.twig', 'templates/model-example.html.twig');
+      $this->addFile('{machine_name}/{machine_name}.module', 'model.module');
     }
     else {
-      $files[] = 'src/ExampleViewBuilder.php';
+      $this->addFile('{machine_name}/src/{class_prefix}ViewBuilder.php', 'src/ExampleViewBuilder.php');
     }
 
     if ($vars['access_controller']) {
-      $files[] = 'src/ExampleAccessControlHandler.php';
+      $this->addFile('{machine_name}/src/{class_prefix}AccessControlHandler.php', 'src/ExampleAccessControlHandler.php');
     }
 
     if ($vars['rest_configuration']) {
-      $files[] = 'config/optional/rest.resource.entity.example.yml';
+      $this->addFile('{machine_name}/config/optional/rest.resource.entity.{entity_type_id}', 'config/optional/rest.resource.entity.example.yml');
     }
 
     if ($vars['bundle']) {
-      $files[] = 'config/schema/model.entity_type.schema.yml';
-      $files[] = 'src/ExampleTypeListBuilder.php';
-      $files[] = 'src/Entity/ExampleType.php';
-      $files[] = 'src/Form/ExampleTypeForm.php';
+      $this->addFile('{machine_name}/config/schema/{machine_name}.entity_type.schema.yml', 'config/schema/model.entity_type.schema.yml');
+      $this->addFile('{machine_name}/src/{class_prefix}TypeListBuilder.php', 'src/ExampleTypeListBuilder.php');
+      $this->addFile('{machine_name}/src/Entity/{class_prefix}Type.php', 'src/Entity/ExampleType.php');
+      $this->addFile('{machine_name}/src/Form/{class_prefix}TypeForm.php', 'src/Form/ExampleTypeForm.php');
     }
 
-    $vars['template_name'] = str_replace('_', '-', $vars['entity_type_id']) . '.html.twig';
-
-    $path_placeholders = [
-      'model-example.html.twig',
-      'model',
-      'Example',
-      'rest.resource.entity.example',
-    ];
-    $path_replacements = [
-      $vars['template_name'],
-      $vars['machine_name'],
-      $vars['class_prefix'],
-      'rest.resource.entity.' . $vars['entity_type_id'],
-    ];
-
-    foreach ($files as $file) {
-      $path = $vars['machine_name'] . '/' . str_replace($path_placeholders, $path_replacements, $file);
-      $template = 'module/content-entity/' . $file;
-      if ($file == 'templates/model-example.html.twig') {
-        $template .= '.twig';
-      }
-      $this->addFile($path, $template);
-    }
   }
 
 }
