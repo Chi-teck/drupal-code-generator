@@ -147,9 +147,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->io->title(sprintf('Welcome to %s generator!', $this->getName()));
 
-    $this->generate();
-
     $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
+
+    $this->generate();
 
     // Render all assets.
     $renderer = $this->getHelper('renderer');
@@ -168,14 +168,12 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       $this->logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
     }
 
-    $destination = $this->getDestination();
-    $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
-    $dumped_assets = $this->getHelper('dumper')
-      ->dump($this->assets, $destination, $input->getOption('dry-run'));
+    $dumped_assets = $this->dump($input->getOption('dry-run'));
 
     $this->getHelper('result_printer')->printResult($dumped_assets);
 
     $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
+
     return 0;
   }
 
@@ -183,6 +181,15 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Generates assets.
    */
   abstract protected function generate() :void;
+
+  /**
+   * Dumps assets.
+   */
+  protected function dump(bool $dry_run) :array {
+    $destination = $this->getDestination();
+    $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
+    return $this->getHelper('dumper')->dump($this->assets, $destination, $dry_run);
+  }
 
   /**
    * {@inheritdoc}
