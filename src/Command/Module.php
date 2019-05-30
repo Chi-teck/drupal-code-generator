@@ -1,0 +1,82 @@
+<?php
+
+namespace DrupalCodeGenerator\Command;
+
+use DrupalCodeGenerator\Application;
+
+/**
+ * Implements module command.
+ */
+class Module extends ModuleGenerator {
+
+  protected $name = 'module';
+  protected $description = 'Generates Drupal 8 module';
+  protected $isNewExtension = TRUE;
+  protected $templatePath = Application::TEMPLATE_PATH . '_module/';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function generate() :void {
+    $vars = &$this->collectDefault();
+
+    $vars['description'] = $this->ask('Module description');
+    $vars['package'] = $this->ask('Package', 'Custom');
+
+    $dependencies = $this->ask('Dependencies (comma separated)');
+    $vars['dependencies'] = $dependencies ?
+      array_map('trim', explode(',', strtolower($dependencies))) : [];
+
+    $vars['class_prefix'] = '{machine_name|camelize}';
+
+    $this->addFile('{machine_name}/{machine_name}.info.yml', 'model.info.yml');
+
+    if ($this->confirm('Would you like to create module file?')) {
+      $this->addFile('{machine_name}/{machine_name}.module', 'model.module');
+    }
+
+    if ($this->confirm('Would you like to create install file?')) {
+      $this->addFile('{machine_name}/{machine_name}.install', 'model.install');
+    }
+
+    if ($this->confirm('Would you like to create libraries.yml file?')) {
+      $this->addFile('{machine_name}/{machine_name}.libraries.yml', 'model.libraries.yml');
+    }
+
+    if ($this->confirm('Would you like to create permissions.yml file?')) {
+      $this->addFile('{machine_name}/{machine_name}.permissions.yml', 'model.permissions.yml');
+    }
+
+    if ($this->confirm('Would you like to create event subscriber?')) {
+      $this->addFile("{machine_name}/src/EventSubscriber/{class_prefix}Subscriber.php")
+        ->template('src/EventSubscriber/ExampleSubscriber.php');
+      $this->addFile('{machine_name}/{machine_name}.services.yml', 'model.services.yml');
+    }
+
+    if ($this->confirm('Would you like to create block plugin?')) {
+      $this->addFile('{machine_name}/src/Plugin/Block/ExampleBlock.php')
+        ->template('src/Plugin/Block/ExampleBlock.php');
+    }
+
+    if ($vars['controller'] = $this->confirm('Would you like to create a controller?')) {
+      $this->addFile("{machine_name}/src/Controller/{class_prefix}Controller.php")
+        ->template('src/Controller/ExampleController.php');
+    }
+
+    if ($vars['form']  = $this->confirm('Would you like to create settings form?')) {
+      $this->addFile('{machine_name}/src/Form/SettingsForm.php')
+        ->template('src/Form/SettingsForm.php');
+      $this->addFile('{machine_name}/config/schema/{machine_name}.schema.yml')
+        ->template('config/schema/model.schema.yml');
+      $this->addFile('{machine_name}/{machine_name}.links.menu.yml')
+        ->template('model.links.menu');
+    }
+
+    if ($vars['controller'] || $vars['form']) {
+      $this->addFile('{machine_name}/{machine_name}.routing.yml')
+        ->template('model.routing.yml');
+    }
+
+  }
+
+}

@@ -3,20 +3,20 @@
   [ 1] Console
   [ 2] Form
   [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Configuration entity
+  [10] Content entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module
   [18] Module file
   [19] Plugin manager
   [20] Project
@@ -39,20 +39,20 @@
   [ 1] Console
   [ 2] Form
   [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Configuration entity
+  [10] Content entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module
   [18] Module file
   [19] Plugin manager
   [20] Project
@@ -75,20 +75,20 @@
   [ 1] Console
   [ 2] Form
   [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Configuration entity
+  [10] Content entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module
   [18] Module file
   [19] Plugin manager
   [20] Project
@@ -177,20 +177,20 @@
   [ 1] Console
   [ 2] Form
   [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Configuration entity
+  [10] Content entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module
   [18] Module file
   [19] Plugin manager
   [20] Project
@@ -202,40 +202,6 @@
   [26] Theme file
   [27] Theme settings
   ➤➤➤➤ 4⏎
- Select generator 
-  [0] ..
-  [1] Standard
-  ➤➤➤ 0⏎
- Select generator 
-  [ 0] ..
-  [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module file
-  [19] Plugin manager
-  [20] Project
-  [21] Render element
-  [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
-  ➤➤➤➤ 5⏎
  Select generator 
   [ 0] ..
   [ 1] Field
@@ -257,20 +223,20 @@
   [ 1] Console
   [ 2] Form
   [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Configuration entity
+  [10] Content entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module
   [18] Module file
   [19] Plugin manager
   [20] Project
@@ -281,7 +247,7 @@
   [25] Theme
   [26] Theme file
   [27] Theme settings
-  ➤➤➤➤ 6⏎
+  ➤➤➤➤ 5⏎
  Select generator 
   [ 0] ..
   [ 1] Access checker
@@ -305,20 +271,20 @@
   [ 1] Console
   [ 2] Form
   [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Configuration entity
+  [10] Content entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module
   [18] Module file
   [19] Plugin manager
   [20] Project
@@ -329,7 +295,7 @@
   [25] Theme
   [26] Theme file
   [27] Theme settings
-  ➤➤➤➤ 7⏎
+  ➤➤➤➤ 6⏎
  Select generator 
   [0] ..
   [1] Browser
@@ -343,20 +309,20 @@
   [ 1] Console
   [ 2] Form
   [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Configuration entity
+  [10] Content entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module
   [18] Module file
   [19] Plugin manager
   [20] Project
@@ -367,7 +333,7 @@
   [25] Theme
   [26] Theme file
   [27] Theme settings
-  ➤➤➤➤ 8⏎
+  ➤➤➤➤ 7⏎
  Select generator 
   [0] ..
   [1] Links
@@ -385,20 +351,20 @@
   [ 1] Console
   [ 2] Form
   [ 3] Miscellaneous
-  [ 4] Module
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Configuration entity
-  [11] Content entity
-  [12] Controller
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Configuration entity
+  [10] Content entity
+  [11] Controller
+  [12] Field
+  [13] Hook
+  [14] Install file
+  [15] Javascript
+  [16] Layout
+  [17] Module
   [18] Module file
   [19] Plugin manager
   [20] Project
@@ -409,7 +375,7 @@
   [25] Theme
   [26] Theme file
   [27] Theme settings
-  ➤➤➤➤ 15⏎
+  ➤➤➤➤ 14⏎
 
  Welcome to install-file generator!
 ––––––––––––––––––––––––––––––––––––
