@@ -137,7 +137,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->directory = $input->getOption('directory') ?: getcwd();
 
-    $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
+    $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
   }
 
   /**
@@ -145,13 +145,32 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function execute(InputInterface $input, OutputInterface $output) :int {
 
-    $this->io->title(sprintf('Welcome to %s generator!', $this->getName()));
+    $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
 
-    $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
+    $this->io->title(sprintf('Welcome to %s generator!', $this->getName()));
 
     $this->generate();
 
-    // Render all assets.
+    $this->render();
+
+    $dumped_assets = $this->dump($input->getOption('dry-run'));
+
+    $this->getHelper('result_printer')->printResult($dumped_assets);
+
+    $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
+
+    return 0;
+  }
+
+  /**
+   * Generates assets.
+   */
+  abstract protected function generate() :void;
+
+  /**
+   * Render assets.
+   */
+  protected function render() {
     $renderer = $this->getHelper('renderer');
 
     $this->processVars();
@@ -167,20 +186,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       $renderer->renderAsset($asset);
       $this->logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
     }
-
-    $dumped_assets = $this->dump($input->getOption('dry-run'));
-
-    $this->getHelper('result_printer')->printResult($dumped_assets);
-
-    $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
-
-    return 0;
   }
-
-  /**
-   * Generates assets.
-   */
-  abstract protected function generate() :void;
 
   /**
    * Dumps assets.
