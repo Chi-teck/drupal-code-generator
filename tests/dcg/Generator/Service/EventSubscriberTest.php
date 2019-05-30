@@ -17,8 +17,8 @@ class EventSubscriberTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_event_subscriber.services.yml',
-    'src/EventSubscriber/FooSubscriber.php' => __DIR__ . '/_event_subscriber.php',
+    'foo.services.yml' => '/_event_subscriber.services.yml',
+    'src/EventSubscriber/FooSubscriber.php' => '/_event_subscriber.php',
   ];
 
 }

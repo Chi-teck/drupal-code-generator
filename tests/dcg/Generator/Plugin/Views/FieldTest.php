@@ -24,8 +24,8 @@ class FieldTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'config/schema/foo.views.schema.yml' => __DIR__ . '/_field_schema.yml',
-    'src/Plugin/views/field/Example.php' => __DIR__ . '/_field.php',
+    'config/schema/foo.views.schema.yml' => '/_field_schema.yml',
+    'src/Plugin/views/field/Example.php' => '/_field.php',
   ];
 
 }

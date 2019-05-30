@@ -19,7 +19,7 @@ class DestinationTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'src/Plugin/migrate/destination/Bar.php' => __DIR__ . '/_destination.php',
+    'src/Plugin/migrate/destination/Bar.php' => '/_destination.php',
   ];
 
 }

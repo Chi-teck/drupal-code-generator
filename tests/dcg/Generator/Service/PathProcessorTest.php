@@ -18,8 +18,8 @@ class PathProcessorTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.services.yml' => __DIR__ . '/_path_processor.services.yml',
-    'src/PathProcessor/PathProcessorExample.php' => __DIR__ . '/_path_processor.php',
+    'example.services.yml' => '/_path_processor.services.yml',
+    'src/PathProcessor/PathProcessorExample.php' => '/_path_processor.php',
   ];
 
 }

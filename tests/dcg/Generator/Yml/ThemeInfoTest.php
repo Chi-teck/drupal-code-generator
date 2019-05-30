@@ -20,7 +20,7 @@ class ThemeInfoTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.info.yml' => __DIR__ . '/_theme_info.yml',
+    'example.info.yml' => '/_theme_info.yml',
   ];
 
 }

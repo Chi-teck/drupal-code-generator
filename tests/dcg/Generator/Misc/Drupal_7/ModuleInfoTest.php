@@ -19,7 +19,7 @@ class ModuleInfoTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.info' => __DIR__ . '/_module.info',
+    'example.info' => '/_module.info',
   ];
 
 }

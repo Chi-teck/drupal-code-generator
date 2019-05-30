@@ -15,7 +15,7 @@ class ThemeFileTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.theme' => __DIR__ . '/_.theme',
+    'foo.theme' => '/_.theme',
   ];
 
 }

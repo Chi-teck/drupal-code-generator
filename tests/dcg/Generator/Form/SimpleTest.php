@@ -23,8 +23,8 @@ class SimpleTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.routing.yml' => __DIR__ . '/_simple_routing.yml',
-    'src/Form/ExampleForm.php' => __DIR__ . '/_simple.php',
+    'foo.routing.yml' => '/_simple_routing.yml',
+    'src/Form/ExampleForm.php' => '/_simple.php',
   ];
 
 }

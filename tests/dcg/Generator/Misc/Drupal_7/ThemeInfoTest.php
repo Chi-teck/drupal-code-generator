@@ -19,7 +19,7 @@ class ThemeInfoTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'bar.info' => __DIR__ . '/_theme.info',
+    'bar.info' => '/_theme.info',
   ];
 
 }

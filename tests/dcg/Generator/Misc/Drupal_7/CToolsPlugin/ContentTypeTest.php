@@ -22,7 +22,7 @@ class ContentTypeTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'plugins/content_types/example.inc' => __DIR__ . '/_content_type.inc',
+    'plugins/content_types/example.inc' => '/_content_type.inc',
   ];
 
 }

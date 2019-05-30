@@ -18,8 +18,8 @@ class UninstallValidatorTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_uninstall_validator.services.yml',
-    'src/ExampleUninstallValidator.php' => __DIR__ . '/_uninstall_validator.php',
+    'foo.services.yml' => '/_uninstall_validator.services.yml',
+    'src/ExampleUninstallValidator.php' => '/_uninstall_validator.php',
   ];
 
 }

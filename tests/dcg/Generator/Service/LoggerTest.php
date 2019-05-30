@@ -18,8 +18,8 @@ class LoggerTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_logger.services.yml',
-    'src/Logger/FileLog.php' => __DIR__ . '/_logger.php',
+    'foo.services.yml' => '/_logger.services.yml',
+    'src/Logger/FileLog.php' => '/_logger.php',
   ];
 
 }

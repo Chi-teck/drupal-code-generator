@@ -22,7 +22,7 @@ class AccessTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'plugins/access/example.inc' => __DIR__ . '/_access.inc',
+    'plugins/access/example.inc' => '/_access.inc',
   ];
 
 }

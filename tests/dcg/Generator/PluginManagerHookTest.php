@@ -17,11 +17,11 @@ class PluginManagerHookTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.module' => __DIR__ . '/_plugin_manager_hook/foo.module',
-    'foo.services.yml' => __DIR__ . '/_plugin_manager_hook/foo.services.yml',
-    'src/BarDefault.php' => __DIR__ . '/_plugin_manager_hook/src/BarDefault.php',
-    'src/BarInterface.php' => __DIR__ . '/_plugin_manager_hook/src/BarInterface.php',
-    'src/BarPluginManager.php' => __DIR__ . '/_plugin_manager_hook/src/BarPluginManager.php',
+    'foo.module' => '/_plugin_manager_hook/foo.module',
+    'foo.services.yml' => '/_plugin_manager_hook/foo.services.yml',
+    'src/BarDefault.php' => '/_plugin_manager_hook/src/BarDefault.php',
+    'src/BarInterface.php' => '/_plugin_manager_hook/src/BarInterface.php',
+    'src/BarPluginManager.php' => '/_plugin_manager_hook/src/BarPluginManager.php',
   ];
 
 }

@@ -16,7 +16,7 @@ class ThemeLibrariesTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.libraries.yml' => __DIR__ . '/_theme_libraries.yml',
+    'example.libraries.yml' => '/_theme_libraries.yml',
   ];
 
 }

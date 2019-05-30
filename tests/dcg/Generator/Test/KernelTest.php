@@ -18,7 +18,7 @@ class KernelTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'tests/src/Kernel/ExampleTest.php' => __DIR__ . '/_kernel.php',
+    'tests/src/Kernel/ExampleTest.php' => '/_kernel.php',
   ];
 
 }

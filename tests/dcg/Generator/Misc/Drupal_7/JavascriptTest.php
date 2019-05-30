@@ -17,7 +17,7 @@ class JavascriptTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'another-example.js' => __DIR__ . '/_javascript.js',
+    'another-example.js' => '/_javascript.js',
   ];
 
 }

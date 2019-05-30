@@ -17,7 +17,7 @@ class ComposerTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'composer.json' => __DIR__ . '/_composer.json',
+    'composer.json' => '/_composer.json',
   ];
 
 }

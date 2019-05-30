@@ -15,7 +15,7 @@ class ModuleFileTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.module' => __DIR__ . '/_module_file.module',
+    'foo.module' => '/_module_file.module',
   ];
 
 }

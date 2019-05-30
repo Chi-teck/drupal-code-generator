@@ -32,7 +32,7 @@ class ProjectTest extends BaseGeneratorTest {
       'Would you like to add asset-packagist repository? [No]:' => 'No',
     ];
 
-    $path = __DIR__ . '/_project/_light/';
+    $path = '/_project/_light/';
     $fixtures = [
       '.gitignore' => $path . 'gitignore',
       'composer.json' => $path . 'composer.json',
@@ -72,7 +72,7 @@ class ProjectTest extends BaseGeneratorTest {
       'Would you like to add asset-packagist repository? [No]:' => 'Yes',
     ];
 
-    $path = __DIR__ . '/_project/_full/';
+    $path = '/_project/_full/';
     $fixtures = [
       '.env.example' => $path . 'env.example',
       '.gitignore' => $path . 'gitignore',

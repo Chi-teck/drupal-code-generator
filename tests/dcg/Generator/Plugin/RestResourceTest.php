@@ -20,7 +20,7 @@ class RestResourceTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'src/Plugin/rest/resource/FooResource.php' => __DIR__ . '/_rest_resource.php',
+    'src/Plugin/rest/resource/FooResource.php' => '/_rest_resource.php',
   ];
 
 }

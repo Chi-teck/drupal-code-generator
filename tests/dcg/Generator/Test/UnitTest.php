@@ -18,7 +18,7 @@ class UnitTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'tests/src/Unit/ExampleTest.php' => __DIR__ . '/_unit.php',
+    'tests/src/Unit/ExampleTest.php' => '/_unit.php',
   ];
 
 }

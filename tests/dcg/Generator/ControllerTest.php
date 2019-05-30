@@ -24,8 +24,8 @@ class ControllerTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.routing.yml' => __DIR__ . '/_controller_routing.yml',
-    'src/Controller/FooController.php' => __DIR__ . '/_controller.php',
+    'foo.routing.yml' => '/_controller_routing.yml',
+    'src/Controller/FooController.php' => '/_controller.php',
   ];
 
 }

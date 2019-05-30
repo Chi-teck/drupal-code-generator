@@ -22,8 +22,8 @@ class ActionTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'config/schema/example.schema.yml' => __DIR__ . '/_action_schema.yml',
-    'src/Plugin/Action/Foo.php' => __DIR__ . '/_action.php',
+    'config/schema/example.schema.yml' => '/_action_schema.yml',
+    'src/Plugin/Action/Foo.php' => '/_action.php',
   ];
 
 }

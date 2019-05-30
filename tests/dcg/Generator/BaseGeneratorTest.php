@@ -42,6 +42,13 @@ abstract class BaseGeneratorTest extends BaseTestCase {
   protected $command;
 
   /**
+   * Path to fixtures.
+   *
+   * @var string
+   */
+  protected $fixturePath = '';
+
+  /**
    * Test callback.
    */
   public function testGenerator() {
@@ -72,13 +79,19 @@ abstract class BaseGeneratorTest extends BaseTestCase {
     $expected_display = $this->processExpectedDisplay($tester->getExpectedDisplay());
     static::assertEquals($expected_display, $tester->getDisplay());
 
+    if (!$fixture_path = $this->fixturePath) {
+      $reflector = new \ReflectionClass(get_class($this));
+      $filename = $reflector->getFileName();
+      $fixture_path = dirname($filename) . '/';
+    }
+
     foreach ($tester->getFixtures() as $target => $fixture) {
       $path = $tester->getDirectory() . '/' . $target;
       if (is_array($fixture)) {
         self::assertDirectoryExists($path);
       }
       elseif ($fixture !== NULL) {
-        self::assertFileEquals($fixture, $path, $fixture);
+        self::assertFileEquals($fixture_path . $fixture, $path, $fixture);
       }
       else {
         self::markTestIncomplete();

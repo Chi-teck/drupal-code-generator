@@ -16,7 +16,7 @@ class ActionLinksTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.links.action.yml' => __DIR__ . '/_links.action.yml',
+    'example.links.action.yml' => '/_links.action.yml',
   ];
 
 }

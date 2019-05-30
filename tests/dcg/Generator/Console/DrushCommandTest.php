@@ -21,7 +21,7 @@ class DrushCommandTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'yo_yo.drush.inc' => __DIR__ . '/_drush_command.inc',
+    'yo_yo.drush.inc' => '/_drush_command.inc',
   ];
 
 }

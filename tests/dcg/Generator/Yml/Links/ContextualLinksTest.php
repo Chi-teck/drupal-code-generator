@@ -16,7 +16,7 @@ class ContextualLinksTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.links.contextual.yml' => __DIR__ . '/_links.contextual.yml',
+    'example.links.contextual.yml' => '/_links.contextual.yml',
   ];
 
 }

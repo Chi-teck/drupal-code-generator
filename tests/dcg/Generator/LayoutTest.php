@@ -19,11 +19,11 @@ class LayoutTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.layouts.yml' => __DIR__ . '/_layout/_layouts.yml',
-    'example.libraries.yml' => __DIR__ . '/_layout/_libraries.yml',
-    'layouts/foo_bar/foo-bar.css' => __DIR__ . '/_layout/_styles.css',
-    'layouts/foo_bar/foo-bar.html.twig' => __DIR__ . '/_layout/_template.html.twig',
-    'layouts/foo_bar/foo-bar.js' => __DIR__ . '/_layout/_javascript.js',
+    'example.layouts.yml' => '/_layout/_layouts.yml',
+    'example.libraries.yml' => '/_layout/_libraries.yml',
+    'layouts/foo_bar/foo-bar.css' => '/_layout/_styles.css',
+    'layouts/foo_bar/foo-bar.html.twig' => '/_layout/_template.html.twig',
+    'layouts/foo_bar/foo-bar.js' => '/_layout/_javascript.js',
   ];
 
 }

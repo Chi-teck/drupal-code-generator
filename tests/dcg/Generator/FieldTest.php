@@ -10,14 +10,14 @@ class FieldTest extends BaseGeneratorTest {
   protected $class = 'Field';
 
   protected $fixtures = [
-    'example.libraries.yml' => __DIR__ . '/_field/_libraries.yml',
-    'css/example-foo-widget.css' => __DIR__ . '/_field/_widget.css',
-    'config/schema/example.schema.yml' => __DIR__ . '/_field/_schema.yml',
-    'src/Plugin/Field/FieldFormatter/FooDefaultFormatter.php' => __DIR__ . '/_field/_default_formatter.php',
-    'src/Plugin/Field/FieldFormatter/FooKeyValueFormatter.php' => __DIR__ . '/_field/_key_value_formatter.php',
-    'src/Plugin/Field/FieldFormatter/FooTableFormatter.php' => __DIR__ . '/_field/_table_formatter.php',
-    'src/Plugin/Field/FieldType/FooItem.php' => __DIR__ . '/_field/_type.php',
-    'src/Plugin/Field/FieldWidget/FooWidget.php' => __DIR__ . '/_field/_widget.php',
+    'example.libraries.yml' => '/_field/_libraries.yml',
+    'css/example-foo-widget.css' => '/_field/_widget.css',
+    'config/schema/example.schema.yml' => '/_field/_schema.yml',
+    'src/Plugin/Field/FieldFormatter/FooDefaultFormatter.php' => '/_field/_default_formatter.php',
+    'src/Plugin/Field/FieldFormatter/FooKeyValueFormatter.php' => '/_field/_key_value_formatter.php',
+    'src/Plugin/Field/FieldFormatter/FooTableFormatter.php' => '/_field/_table_formatter.php',
+    'src/Plugin/Field/FieldType/FooItem.php' => '/_field/_type.php',
+    'src/Plugin/Field/FieldWidget/FooWidget.php' => '/_field/_widget.php',
   ];
 
   /**

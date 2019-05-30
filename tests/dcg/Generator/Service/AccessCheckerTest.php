@@ -19,8 +19,8 @@ class AccessCheckerTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.services.yml' => __DIR__ . '/_access_checker.services.yml',
-    'src/Access/FooAccessChecker.php' => __DIR__ . '/_access_checker.php',
+    'example.services.yml' => '/_access_checker.services.yml',
+    'src/Access/FooAccessChecker.php' => '/_access_checker.php',
   ];
 
 }

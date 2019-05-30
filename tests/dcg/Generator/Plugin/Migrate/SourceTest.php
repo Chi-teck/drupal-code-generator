@@ -31,7 +31,7 @@ class SourceTest extends BaseGeneratorTest {
       $data_type_output => '2',
     ];
     $fixtures = [
-      'src/Plugin/migrate/source/Foo.php' => __DIR__ . '/_source_sql.php',
+      'src/Plugin/migrate/source/Foo.php' => '/_source_sql.php',
     ];
     parent::doTest($interaction, $fixtures);
 
@@ -44,7 +44,7 @@ class SourceTest extends BaseGeneratorTest {
       $data_type_output => 2,
     ];
     $fixtures = [
-      'src/Plugin/migrate/source/Bar.php' => __DIR__ . '/_source_other.php',
+      'src/Plugin/migrate/source/Bar.php' => '/_source_other.php',
     ];
     parent::doTest($interaction, $fixtures);
   }

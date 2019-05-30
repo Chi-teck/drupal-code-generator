@@ -20,9 +20,9 @@ class HtmlPageTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.html' => __DIR__ . '/_html_page.html',
-    'css/main.css' => __DIR__ . '/_html_page.css',
-    'js/main.js' => __DIR__ . '/_html_page.js',
+    'example.html' => '/_html_page.html',
+    'css/main.css' => '/_html_page.css',
+    'js/main.js' => '/_html_page.js',
   ];
 
 }

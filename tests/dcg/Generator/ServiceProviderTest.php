@@ -15,7 +15,7 @@ class ServiceProviderTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'src/ExampleServiceProvider.php' => __DIR__ . '/_service_provider.php',
+    'src/ExampleServiceProvider.php' => '/_service_provider.php',
   ];
 
 }

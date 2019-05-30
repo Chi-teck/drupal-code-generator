@@ -15,9 +15,9 @@ class ThemeSettingsTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'theme-settings.php' => __DIR__ . '/_theme_settings_form.php',
-    'config/install/foo.settings.yml' => __DIR__ . '/_theme_settings_config.yml',
-    'config/schema/foo.schema.yml' => __DIR__ . '/_theme_settings_schema.yml',
+    'theme-settings.php' => '/_theme_settings_form.php',
+    'config/install/foo.settings.yml' => '/_theme_settings_config.yml',
+    'config/schema/foo.schema.yml' => '/_theme_settings_schema.yml',
   ];
 
 }

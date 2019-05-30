@@ -21,8 +21,8 @@ class TwigExtensionTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.services.yml' => __DIR__ . '/_twig_extension.services.yml',
-    'src/ExampleTwigExtension.php' => __DIR__ . '/_twig_extension.php',
+    'example.services.yml' => '/_twig_extension.services.yml',
+    'src/ExampleTwigExtension.php' => '/_twig_extension.php',
   ];
 
 }

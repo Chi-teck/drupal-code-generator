@@ -18,8 +18,8 @@ class TemplateTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.module' => __DIR__ . '/_template.module',
-    'templates/foo.html.twig' => __DIR__ . '/_template.twig',
+    'example.module' => '/_template.module',
+    'templates/foo.html.twig' => '/_template.twig',
   ];
 
 }

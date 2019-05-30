@@ -21,7 +21,7 @@ class ModuleInfoTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.info.yml' => __DIR__ . '/_module_info.yml',
+    'example.info.yml' => '/_module_info.yml',
   ];
 
 }

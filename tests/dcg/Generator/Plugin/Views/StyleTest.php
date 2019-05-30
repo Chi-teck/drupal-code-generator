@@ -21,10 +21,10 @@ class StyleTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.module' => __DIR__ . '/_style.module',
-    'templates/views-style-example-foo.html.twig' => __DIR__ . '/_style.twig',
-    'config/schema/example.schema.yml' => __DIR__ . '/_style_schema.yml',
-    'src/Plugin/views/style/Foo.php' => __DIR__ . '/_style.php',
+    'example.module' => '/_style.module',
+    'templates/views-style-example-foo.html.twig' => '/_style.twig',
+    'config/schema/example.schema.yml' => '/_style_schema.yml',
+    'src/Plugin/views/style/Foo.php' => '/_style.php',
   ];
 
 }

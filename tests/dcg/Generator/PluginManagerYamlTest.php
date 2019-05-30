@@ -17,11 +17,11 @@ class PluginManagerYamlTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.bars.yml' => __DIR__ . '/_plugin_manager_yaml/foo.bars.yml',
-    'foo.services.yml' => __DIR__ . '/_plugin_manager_yaml/foo.services.yml',
-    'src/BarDefault.php' => __DIR__ . '/_plugin_manager_yaml/src/BarDefault.php',
-    'src/BarInterface.php' => __DIR__ . '/_plugin_manager_yaml/src/BarInterface.php',
-    'src/BarPluginManager.php' => __DIR__ . '/_plugin_manager_yaml/src/BarPluginManager.php',
+    'foo.bars.yml' => '/_plugin_manager_yaml/foo.bars.yml',
+    'foo.services.yml' => '/_plugin_manager_yaml/foo.services.yml',
+    'src/BarDefault.php' => '/_plugin_manager_yaml/src/BarDefault.php',
+    'src/BarInterface.php' => '/_plugin_manager_yaml/src/BarInterface.php',
+    'src/BarPluginManager.php' => '/_plugin_manager_yaml/src/BarPluginManager.php',
   ];
 
 }

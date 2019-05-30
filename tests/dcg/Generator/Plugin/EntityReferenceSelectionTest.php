@@ -22,8 +22,8 @@ class EntityReferenceSelectionTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'config/schema/example.schema.yml' => __DIR__ . '/_entity_reference_selection_schema.yml',
-    'src/Plugin/EntityReferenceSelection/ExampleNodeSelection.php' => __DIR__ . '/_entity_reference_selection.php',
+    'config/schema/example.schema.yml' => '/_entity_reference_selection_schema.yml',
+    'src/Plugin/EntityReferenceSelection/ExampleNodeSelection.php' => '/_entity_reference_selection.php',
   ];
 
 }

@@ -18,7 +18,7 @@ class WebDriverTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'tests/src/FunctionalJavascript/ExampleTest.php' => __DIR__ . '/_webdriver.php',
+    'tests/src/FunctionalJavascript/ExampleTest.php' => '/_webdriver.php',
   ];
 
 }

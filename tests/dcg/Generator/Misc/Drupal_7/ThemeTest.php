@@ -19,12 +19,12 @@ class ThemeTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example/example.info' => __DIR__ . '/_theme/example.info',
+    'example/example.info' => '/_theme/example.info',
     'example/images' => [],
-    'example/template.php' => __DIR__ . '/_theme/template.php',
+    'example/template.php' => '/_theme/template.php',
     'example/templates' => [],
-    'example/css/example.css' => __DIR__ . '/_theme/css/example.css',
-    'example/js/example.js' => __DIR__ . '/_theme/js/example.js',
+    'example/css/example.css' => '/_theme/css/example.css',
+    'example/js/example.js' => '/_theme/js/example.js',
   ];
 
 }

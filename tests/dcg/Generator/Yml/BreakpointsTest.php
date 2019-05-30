@@ -16,7 +16,7 @@ class BreakpointsTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.breakpoints.yml' => __DIR__ . '/_breakpoints.yml',
+    'example.breakpoints.yml' => '/_breakpoints.yml',
   ];
 
 }

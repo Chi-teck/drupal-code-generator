@@ -29,7 +29,7 @@ class CacheContextTest extends BaseGeneratorTest {
    * Returns test fixtures.
    */
   protected static function getFixtures($calculated) {
-    $dir = __DIR__ . '/_cache_context_calculated_' . $calculated;
+    $dir = '/_cache_context_calculated_' . $calculated;
     return [
       'foo.services.yml' => $dir . '/_cache_context.services.yml',
       'src/Cache/Context/ExampleCacheContext.php' => $dir . '/_cache_context.php',

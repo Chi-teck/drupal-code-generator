@@ -20,8 +20,8 @@ class ConditionTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'config/schema/foo.schema.yml' => __DIR__ . '/_condition_schema.yml',
-    'src/Plugin/Condition/Example.php' => __DIR__ . '/_condition.php',
+    'config/schema/foo.schema.yml' => '/_condition_schema.yml',
+    'src/Plugin/Condition/Example.php' => '/_condition.php',
   ];
 
 }

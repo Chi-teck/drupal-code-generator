@@ -20,7 +20,7 @@ class QueueWorkerTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'src/Plugin/QueueWorker/FooBar.php' => __DIR__ . '/_queue_worker.php',
+    'src/Plugin/QueueWorker/FooBar.php' => '/_queue_worker.php',
   ];
 
 }

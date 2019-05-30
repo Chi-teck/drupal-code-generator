@@ -31,18 +31,18 @@ class ContentEntityTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.links.action.yml' => __DIR__ . '/_content_entity/foo.links.action.yml',
-    'foo.links.menu.yml' => __DIR__ . '/_content_entity/foo.links.menu.yml',
-    'foo.links.task.yml' => __DIR__ . '/_content_entity/foo.links.task.yml',
-    'foo.module' => __DIR__ . '/_content_entity/foo.module',
-    'foo.permissions.yml' => __DIR__ . '/_content_entity/foo.permissions.yml',
-    'foo.routing.yml' => __DIR__ . '/_content_entity/foo.routing.yml',
-    'src/FooExampleInterface.php' => __DIR__ . '/_content_entity/src/ExampleInterface.php',
-    'src/FooExampleListBuilder.php' => __DIR__ . '/_content_entity/src/ExampleListBuilder.php',
-    'templates/foo-example.html.twig' => __DIR__ . '/_content_entity/templates/foo-example.html.twig',
-    'src/Entity/FooExample.php' => __DIR__ . '/_content_entity/src/Entity/Example.php',
-    'src/Form/FooExampleForm.php' => __DIR__ . '/_content_entity/src/Form/ExampleForm.php',
-    'src/Form/FooExampleSettingsForm.php' => __DIR__ . '/_content_entity/src/Form/ExampleSettingsForm.php',
+    'foo.links.action.yml' => '/_content_entity/foo.links.action.yml',
+    'foo.links.menu.yml' => '/_content_entity/foo.links.menu.yml',
+    'foo.links.task.yml' => '/_content_entity/foo.links.task.yml',
+    'foo.module' => '/_content_entity/foo.module',
+    'foo.permissions.yml' => '/_content_entity/foo.permissions.yml',
+    'foo.routing.yml' => '/_content_entity/foo.routing.yml',
+    'src/FooExampleInterface.php' => '/_content_entity/src/ExampleInterface.php',
+    'src/FooExampleListBuilder.php' => '/_content_entity/src/ExampleListBuilder.php',
+    'templates/foo-example.html.twig' => '/_content_entity/templates/foo-example.html.twig',
+    'src/Entity/FooExample.php' => '/_content_entity/src/Entity/Example.php',
+    'src/Form/FooExampleForm.php' => '/_content_entity/src/Form/ExampleForm.php',
+    'src/Form/FooExampleSettingsForm.php' => '/_content_entity/src/Form/ExampleSettingsForm.php',
   ];
 
 }

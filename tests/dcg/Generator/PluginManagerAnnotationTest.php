@@ -17,12 +17,12 @@ class PluginManagerAnnotationTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_plugin_manager_annotation/foo.services.yml',
-    'src/BarInterface.php' => __DIR__ . '/_plugin_manager_annotation/src/BarInterface.php',
-    'src/BarPluginBase.php' => __DIR__ . '/_plugin_manager_annotation/src/BarPluginBase.php',
-    'src/BarPluginManager.php' => __DIR__ . '/_plugin_manager_annotation/src/BarPluginManager.php',
-    'src/Annotation/Bar.php' => __DIR__ . '/_plugin_manager_annotation/src/Annotation/Bar.php',
-    'src/Plugin/Bar/Foo.php' => __DIR__ . '/_plugin_manager_annotation/src/Plugin/Bar/Foo.php',
+    'foo.services.yml' => '/_plugin_manager_annotation/foo.services.yml',
+    'src/BarInterface.php' => '/_plugin_manager_annotation/src/BarInterface.php',
+    'src/BarPluginBase.php' => '/_plugin_manager_annotation/src/BarPluginBase.php',
+    'src/BarPluginManager.php' => '/_plugin_manager_annotation/src/BarPluginManager.php',
+    'src/Annotation/Bar.php' => '/_plugin_manager_annotation/src/Annotation/Bar.php',
+    'src/Plugin/Bar/Foo.php' => '/_plugin_manager_annotation/src/Plugin/Bar/Foo.php',
   ];
 
 }

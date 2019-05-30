@@ -16,7 +16,7 @@ class HookTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.module' => __DIR__ . '/_hook.module',
+    'example.module' => '/_hook.module',
   ];
 
 }

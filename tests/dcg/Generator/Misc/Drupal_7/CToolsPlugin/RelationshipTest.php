@@ -22,7 +22,7 @@ class RelationshipTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'plugins/relationships/example.inc' => __DIR__ . '/_relationship.inc',
+    'plugins/relationships/example.inc' => '/_relationship.inc',
   ];
 
 }

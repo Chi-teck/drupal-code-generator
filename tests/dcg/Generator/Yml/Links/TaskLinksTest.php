@@ -16,7 +16,7 @@ class TaskLinksTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.links.task.yml' => __DIR__ . '/_links.task.yml',
+    'example.links.task.yml' => '/_links.task.yml',
   ];
 
 }

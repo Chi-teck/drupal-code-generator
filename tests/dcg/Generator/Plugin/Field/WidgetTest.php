@@ -21,8 +21,8 @@ class WidgetTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'config/schema/foo.schema.yml' => __DIR__ . '/_widget_schema.yml',
-    'src/Plugin/Field/FieldWidget/ExampleWidget.php' => __DIR__ . '/_widget.php',
+    'config/schema/foo.schema.yml' => '/_widget_schema.yml',
+    'src/Plugin/Field/FieldWidget/ExampleWidget.php' => '/_widget.php',
   ];
 
 }

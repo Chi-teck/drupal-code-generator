@@ -20,7 +20,7 @@ class NginxVirtualHostTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.local' => __DIR__ . '/_nginx_virtual_host',
+    'example.local' => '/_nginx_virtual_host',
   ];
 
   /**

@@ -18,8 +18,8 @@ class RequestPolicyTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_request_policy.services.yml',
-    'src/PageCache/Example.php' => __DIR__ . '/_request_policy.php',
+    'foo.services.yml' => '/_request_policy.services.yml',
+    'src/PageCache/Example.php' => '/_request_policy.php',
   ];
 
 }

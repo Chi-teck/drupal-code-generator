@@ -18,7 +18,7 @@ class NightwatchTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'tests/src/Nightwatch/exampleTest.js' => __DIR__ . '/_nightwatch.js',
+    'tests/src/Nightwatch/exampleTest.js' => '/_nightwatch.js',
   ];
 
 }

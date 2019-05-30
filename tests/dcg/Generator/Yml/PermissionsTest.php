@@ -16,7 +16,7 @@ class PermissionsTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.permissions.yml' => __DIR__ . '/_permissions.yml',
+    'example.permissions.yml' => '/_permissions.yml',
   ];
 
 }

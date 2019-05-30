@@ -34,8 +34,8 @@ class ConstraintTest extends BaseGeneratorTest {
       $data_type_output => 1,
     ];
     $fixtures = [
-      'src/Plugin/Validation/Constraint/AlphaConstraint.php' => __DIR__ . '/_constraint/entity/_constraint.php',
-      'src/Plugin/Validation/Constraint/AlphaConstraintValidator.php' => __DIR__ . '/_constraint/entity/_constraint_validator.php',
+      'src/Plugin/Validation/Constraint/AlphaConstraint.php' => '/_constraint/entity/_constraint.php',
+      'src/Plugin/Validation/Constraint/AlphaConstraintValidator.php' => '/_constraint/entity/_constraint_validator.php',
     ];
     parent::doTest($interaction, $fixtures);
 
@@ -49,8 +49,8 @@ class ConstraintTest extends BaseGeneratorTest {
       $data_type_output => 2,
     ];
     $fixtures = [
-      'src/Plugin/Validation/Constraint/BetaConstraint.php' => __DIR__ . '/_constraint/item_list/_constraint.php',
-      'src/Plugin/Validation/Constraint/BetaConstraintValidator.php' => __DIR__ . '/_constraint/item_list/_constraint_validator.php',
+      'src/Plugin/Validation/Constraint/BetaConstraint.php' => '/_constraint/item_list/_constraint.php',
+      'src/Plugin/Validation/Constraint/BetaConstraintValidator.php' => '/_constraint/item_list/_constraint_validator.php',
     ];
     parent::doTest($interaction, $fixtures);
 
@@ -64,8 +64,8 @@ class ConstraintTest extends BaseGeneratorTest {
       $data_type_output => 3,
     ];
     $fixtures = [
-      'src/Plugin/Validation/Constraint/GammaConstraint.php' => __DIR__ . '/_constraint/item/_constraint.php',
-      'src/Plugin/Validation/Constraint/GammaConstraintValidator.php' => __DIR__ . '/_constraint/item/_constraint_validator.php',
+      'src/Plugin/Validation/Constraint/GammaConstraint.php' => '/_constraint/item/_constraint.php',
+      'src/Plugin/Validation/Constraint/GammaConstraintValidator.php' => '/_constraint/item/_constraint_validator.php',
     ];
     parent::doTest($interaction, $fixtures);
 
@@ -79,8 +79,8 @@ class ConstraintTest extends BaseGeneratorTest {
       $data_type_output => 4,
     ];
     $fixtures = [
-      'src/Plugin/Validation/Constraint/DeltaConstraint.php' => __DIR__ . '/_constraint/raw_value/_constraint.php',
-      'src/Plugin/Validation/Constraint/DeltaConstraintValidator.php' => __DIR__ . '/_constraint/raw_value/_constraint_validator.php',
+      'src/Plugin/Validation/Constraint/DeltaConstraint.php' => '/_constraint/raw_value/_constraint.php',
+      'src/Plugin/Validation/Constraint/DeltaConstraintValidator.php' => '/_constraint/raw_value/_constraint_validator.php',
     ];
     parent::doTest($interaction, $fixtures);
 

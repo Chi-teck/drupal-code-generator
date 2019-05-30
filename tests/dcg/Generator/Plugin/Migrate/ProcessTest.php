@@ -19,7 +19,7 @@ class ProcessTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'src/Plugin/migrate/process/Qux.php' => __DIR__ . '/_process.php',
+    'src/Plugin/migrate/process/Qux.php' => '/_process.php',
   ];
 
 }

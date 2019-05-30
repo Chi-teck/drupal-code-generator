@@ -17,7 +17,7 @@ class TemplatePhpTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'template.php' => __DIR__ . '/_template.php',
+    'template.php' => '/_template.php',
   ];
 
 }

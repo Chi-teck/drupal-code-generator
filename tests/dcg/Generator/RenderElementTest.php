@@ -14,7 +14,7 @@ class RenderElementTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'src/Element/Entity.php' => __DIR__ . '/_render_element.php',
+    'src/Element/Entity.php' => '/_render_element.php',
   ];
 
 }

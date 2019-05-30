@@ -19,8 +19,8 @@ class ParamConverterTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.services.yml' => __DIR__ . '/_param_converter.services.yml',
-    'src/FooParamConverter.php' => __DIR__ . '/_param_converter.php',
+    'example.services.yml' => '/_param_converter.services.yml',
+    'src/FooParamConverter.php' => '/_param_converter.php',
   ];
 
 }

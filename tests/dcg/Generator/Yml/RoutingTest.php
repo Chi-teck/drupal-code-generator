@@ -17,7 +17,7 @@ class RoutingTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.routing.yml' => __DIR__ . '/_routing.yml',
+    'example.routing.yml' => '/_routing.yml',
   ];
 
 }

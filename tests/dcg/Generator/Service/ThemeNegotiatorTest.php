@@ -18,8 +18,8 @@ class ThemeNegotiatorTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_theme_negotiator.services.yml',
-    'src/Theme/FooNegotiator.php' => __DIR__ . '/_theme_negotiator.php',
+    'foo.services.yml' => '/_theme_negotiator.services.yml',
+    'src/Theme/FooNegotiator.php' => '/_theme_negotiator.php',
   ];
 
 }

@@ -8,6 +8,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 class ModuleTest extends BaseGeneratorTest {
 
   protected $class = 'Module';
+  protected $fixturePath = __DIR__ . '/_module/';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
@@ -26,19 +27,19 @@ class ModuleTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo/foo.info.yml' => __DIR__ . '/_module/foo.info.yml',
-    'foo/foo.install' => __DIR__ . '/_module/foo.install',
-    'foo/foo.libraries.yml' => __DIR__ . '/_module/foo.libraries.yml',
-    'foo/foo.links.menu.yml' => __DIR__ . '/_module/foo.links.menu.yml',
-    'foo/foo.module' => __DIR__ . '/_module/foo.module',
-    'foo/foo.permissions.yml' => __DIR__ . '/_module/foo.permissions.yml',
-    'foo/foo.routing.yml' => __DIR__ . '/_module/foo.routing.yml',
-    'foo/foo.services.yml' => __DIR__ . '/_module/foo.services.yml',
-    'foo/config/schema/foo.schema.yml' => __DIR__ . '/_module/config/schema/foo.schema.yml',
-    'foo/src/Controller/FooController.php' => __DIR__ . '/_module/src/Controller/FooController.php',
-    'foo/src/EventSubscriber/FooSubscriber.php' => __DIR__ . '/_module/src/EventSubscriber/FooSubscriber.php',
-    'foo/src/Form/SettingsForm.php' => __DIR__ . '/_module/src/Form/SettingsForm.php',
-    'foo/src/Plugin/Block/ExampleBlock.php' => __DIR__ . '/_module/src/Plugin/Block/ExampleBlock.php',
+    'foo/foo.info.yml' => 'foo.info.yml',
+    'foo/foo.install' => 'foo.install',
+    'foo/foo.libraries.yml' => 'foo.libraries.yml',
+    'foo/foo.links.menu.yml' => 'foo.links.menu.yml',
+    'foo/foo.module' => 'foo.module',
+    'foo/foo.permissions.yml' => 'foo.permissions.yml',
+    'foo/foo.routing.yml' => 'foo.routing.yml',
+    'foo/foo.services.yml' => 'foo.services.yml',
+    'foo/config/schema/foo.schema.yml' => 'config/schema/foo.schema.yml',
+    'foo/src/Controller/FooController.php' => 'src/Controller/FooController.php',
+    'foo/src/EventSubscriber/FooSubscriber.php' => 'src/EventSubscriber/FooSubscriber.php',
+    'foo/src/Form/SettingsForm.php' => 'src/Form/SettingsForm.php',
+    'foo/src/Plugin/Block/ExampleBlock.php' => 'src/Plugin/Block/ExampleBlock.php',
   ];
 
 }

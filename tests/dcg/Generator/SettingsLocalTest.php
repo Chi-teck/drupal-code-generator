@@ -19,7 +19,7 @@ class SettingsLocalTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'settings.local.php' => __DIR__ . '/_settings.local.php',
+    'settings.local.php' => '/_settings.local.php',
   ];
 
 }

@@ -18,7 +18,7 @@ class MenuLinkTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'src/Plugin/Menu/FooMenuLink.php' => __DIR__ . '/_menu_link.php',
+    'src/Plugin/Menu/FooMenuLink.php' => '/_menu_link.php',
   ];
 
 }

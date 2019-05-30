@@ -20,7 +20,7 @@ class DrupalConsoleCommandTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'src/Command/FooExampleCommand.php' => __DIR__ . '/_drupal_console_command.php',
+    'src/Command/FooExampleCommand.php' => '/_drupal_console_command.php',
   ];
 
 }

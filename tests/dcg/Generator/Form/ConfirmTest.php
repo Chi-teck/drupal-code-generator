@@ -23,8 +23,8 @@ class ConfirmTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.routing.yml' => __DIR__ . '/_confirm_routing.yml',
-    'src/Form/ExampleConfirmForm.php' => __DIR__ . '/_confirm.php',
+    'foo.routing.yml' => '/_confirm_routing.yml',
+    'src/Form/ExampleConfirmForm.php' => '/_confirm.php',
   ];
 
 }

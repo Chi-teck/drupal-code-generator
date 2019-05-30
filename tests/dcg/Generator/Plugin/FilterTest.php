@@ -12,8 +12,8 @@ class FilterTest extends BaseGeneratorTest {
   protected $class = 'Plugin\Filter';
 
   protected $fixtures = [
-    'config/schema/foo.schema.yml' => __DIR__ . '/_filter_schema.yml',
-    'src/Plugin/Filter/Example.php' => __DIR__ . '/_filter.php',
+    'config/schema/foo.schema.yml' => '/_filter_schema.yml',
+    'src/Plugin/Filter/Example.php' => '/_filter.php',
   ];
 
   /**

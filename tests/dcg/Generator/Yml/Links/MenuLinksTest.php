@@ -16,7 +16,7 @@ class MenuLinksTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.links.menu.yml' => __DIR__ . '/_links.menu.yml',
+    'example.links.menu.yml' => '/_links.menu.yml',
   ];
 
 }

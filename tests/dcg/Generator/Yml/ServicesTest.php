@@ -16,7 +16,7 @@ class ServicesTest extends BaseGeneratorTest {
     'Module machine name [foo]:' => 'foo',
   ];
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_services.yml',
+    'foo.services.yml' => '/_services.yml',
   ];
 
 }

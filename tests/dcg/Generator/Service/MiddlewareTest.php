@@ -17,8 +17,8 @@ class MiddlewareTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_middleware.services.yml',
-    'src/FooMiddleware.php' => __DIR__ . '/_middleware.php',
+    'foo.services.yml' => '/_middleware.services.yml',
+    'src/FooMiddleware.php' => '/_middleware.php',
   ];
 
 }

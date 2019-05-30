@@ -18,7 +18,7 @@ class BrowserTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'tests/src/Functional/ExampleTest.php' => __DIR__ . '/_browser.php',
+    'tests/src/Functional/ExampleTest.php' => '/_browser.php',
   ];
 
 }

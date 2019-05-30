@@ -15,7 +15,7 @@ class InstallFileTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.install' => __DIR__ . '/_.install',
+    'foo.install' => '/_.install',
   ];
 
 }

@@ -18,7 +18,7 @@ class TestTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.test' => __DIR__ . '/_.test',
+    'example.test' => '/_.test',
   ];
 
 }

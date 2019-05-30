@@ -17,7 +17,7 @@ class ApacheVirtualHostTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'site.com.conf' => __DIR__ . '/_apache_virtual_host.conf',
+    'site.com.conf' => '/_apache_virtual_host.conf',
   ];
 
 }

@@ -24,8 +24,8 @@ class CustomTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'foo.services.yml' => __DIR__ . '/_custom.services.yml',
-    'src/Example.php' => __DIR__ . '/_custom.php',
+    'foo.services.yml' => '/_custom.services.yml',
+    'src/Example.php' => '/_custom.php',
   ];
 
 }

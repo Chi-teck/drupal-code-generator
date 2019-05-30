@@ -16,7 +16,7 @@ class ModuleLibrariesTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example.libraries.yml' => __DIR__ . '/_module_libraries.yml',
+    'example.libraries.yml' => '/_module_libraries.yml',
   ];
 
 }

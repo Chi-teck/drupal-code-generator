@@ -24,8 +24,8 @@ class ArgumentDefaultTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'config/schema/foo.views.schema.yml' => __DIR__ . '/_argument_default_schema.yml',
-    'src/Plugin/views/argument_default/Example.php' => __DIR__ . '/_argument_default.php',
+    'config/schema/foo.views.schema.yml' => '/_argument_default_schema.yml',
+    'src/Plugin/views/argument_default/Example.php' => '/_argument_default.php',
   ];
 
 }

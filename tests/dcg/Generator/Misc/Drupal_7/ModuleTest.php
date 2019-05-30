@@ -19,12 +19,12 @@ class ModuleTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example/example.admin.inc' => __DIR__ . '/_module/example.admin.inc',
-    'example/example.info' => __DIR__ . '/_module/example.info',
-    'example/example.install' => __DIR__ . '/_module/example.install',
-    'example/example.js' => __DIR__ . '/_module/example.js',
-    'example/example.module' => __DIR__ . '/_module/example.module',
-    'example/example.pages.inc' => __DIR__ . '/_module/example.pages.inc',
+    'example/example.admin.inc' => '/_module/example.admin.inc',
+    'example/example.info' => '/_module/example.info',
+    'example/example.install' => '/_module/example.install',
+    'example/example.js' => '/_module/example.js',
+    'example/example.module' => '/_module/example.module',
+    'example/example.pages.inc' => '/_module/example.pages.inc',
   ];
 
 }
