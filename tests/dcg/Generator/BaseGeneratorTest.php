@@ -77,12 +77,12 @@ abstract class BaseGeneratorTest extends BaseTestCase {
     $tester->execute();
 
     $expected_display = $this->processExpectedDisplay($tester->getExpectedDisplay());
-    static::assertEquals($expected_display, $tester->getDisplay());
+    self::assertEquals($expected_display, $tester->getDisplay());
 
+    // Default fixture path is the directory where the test is located.
     if (!$fixture_path = $this->fixturePath) {
       $reflector = new \ReflectionClass(get_class($this));
-      $filename = $reflector->getFileName();
-      $fixture_path = dirname($filename) . '/';
+      $fixture_path = dirname($reflector->getFileName()) . '/';
     }
 
     foreach ($tester->getFixtures() as $target => $fixture) {
