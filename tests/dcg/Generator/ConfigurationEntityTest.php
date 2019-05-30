@@ -1,8 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Module;
-
-use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
+namespace DrupalCodeGenerator\Tests\Generator;
 
 /**
  * Test for configuration-entity command.
