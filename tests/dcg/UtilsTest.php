@@ -214,6 +214,7 @@ class UtilsTest extends BaseTestCase {
     static::assertEquals('cats', Utils::pluralize('cat'));
     static::assertEquals('flies', Utils::pluralize('fly'));
     static::assertEquals('bosses', Utils::pluralize('boss'));
+    static::assertEquals('mice', Utils::pluralize('mouse'));
   }
 
 }
