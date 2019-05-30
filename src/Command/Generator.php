@@ -155,7 +155,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $dumped_assets = $this->dump($input->getOption('dry-run'));
 
-    $this->getHelper('result_printer')->printResult($dumped_assets);
+    $this->printSummary($dumped_assets);
 
     $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
 
@@ -170,7 +170,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Render assets.
    */
-  protected function render() {
+  protected function render() :void {
     $renderer = $this->getHelper('renderer');
 
     $this->processVars();
@@ -195,6 +195,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $destination = $this->getDestination();
     $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
     return $this->getHelper('dumper')->dump($this->assets, $destination, $dry_run);
+  }
+
+  /**
+   * Prints summary.
+   */
+  protected function printSummary(array $dumped_assets) :void {
+    $this->getHelper('result_printer')->printResult($dumped_assets);
   }
 
   /**

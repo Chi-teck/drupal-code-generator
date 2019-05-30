@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -149,20 +147,18 @@ class Project extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function execute(InputInterface $input, OutputInterface $output) :int {
-    $result = parent::execute($input, $output);
-    if ($result === 0) {
-      $message = [
-        'Next steps:',
-        '–––––––––––',
-        '1. Review generated files',
-        '2. Run <comment>composer install</comment> command',
-        '3. Install Drupal',
-      ];
-      $this->io->text($message);
-      $this->io->newLine();
-    }
-    return $result;
+  protected function printSummary(array $dumped_assets): void {
+    parent::printSummary($dumped_assets);
+
+    $message = [
+      'Next steps:',
+      '–––––––––––',
+      '1. Review generated files',
+      '2. Run <comment>composer install</comment> command',
+      '3. Install Drupal',
+    ];
+    $this->io->text($message);
+    $this->io->newLine();
   }
 
   /**
