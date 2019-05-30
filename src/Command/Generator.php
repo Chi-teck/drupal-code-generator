@@ -89,32 +89,14 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * {@inheritdoc}
    */
-  protected function configure():void {
+  protected function configure() :void {
     $this
       ->setName($this->name)
       ->setDescription($this->description)
-      ->addOption(
-        'directory',
-        '-d',
-        InputOption::VALUE_OPTIONAL,
-        'Working directory'
-      )
-      ->addOption(
-        'answer',
-        '-a',
-        InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL,
-        'Answer to generator question'
-      )
-      ->addOption(
-        'dry-run',
-        NULL,
-        InputOption::VALUE_NONE,
-        'Output the generated code but not save it to file system'
-      );
-
-    if ($this->alias) {
-      $this->setAliases([$this->alias]);
-    }
+      ->addOption('directory', '-d', InputOption::VALUE_OPTIONAL, 'Working directory')
+      ->addOption('answer', '-a', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Answer to generator question')
+      ->addOption('dry-run', NULL, InputOption::VALUE_NONE, 'Output the generated code but not save it to file system')
+      ->setAliases($this->alias ? [$this->alias] : []);
   }
 
   /**
@@ -221,7 +203,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     // Allow the validators to be referenced in a short form like
     // '::validateMachineName'.
     if (is_string($validator) && substr($validator, 0, 2) == '::') {
-      $validator = [__CLASS__, substr($validator, 2)];
+      $validator = [get_class($this), substr($validator, 2)];
     }
     return $this->io->ask($question, $default, $validator);
   }
