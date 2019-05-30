@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator;
 
+use Symfony\Component\Inflector\Inflector;
+
 /**
  * Helper methods for code generators.
  */
@@ -138,23 +140,17 @@ class Utils {
   /**
    * Pluralizes a noun.
    *
-   * @param string $string
-   *   A noun to pluralize.
+   * @param string $input
+   *   A word in singular form.
    *
    * @return string
-   *   The pluralized noun.
+   *   The pluralized word.
    */
-  public static function pluralize(string $string) :string {
-    switch (substr($string, -1)) {
-      case 'y':
-        return substr($string, 0, -1) . 'ies';
-
-      case 's':
-        return $string . 'es';
-
-      default:
-        return $string . 's';
-    }
+  public static function pluralize(string $input) :string {
+    $result = Inflector::pluralize($input);
+    // The inflector may return an array if the world has more than one possible
+    // plural forms. In this case, just pick the first one.
+    return is_array($result) ? $result[0] : $result;
   }
 
 }
