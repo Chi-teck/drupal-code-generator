@@ -1,13 +1,15 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Generator\Misc;
+
+use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for project command.
+ * Test for misc:project command.
  */
 class ProjectTest extends BaseGeneratorTest {
 
-  protected $class = 'Project';
+  protected $class = 'Misc\Project';
 
   /**
    * Test callback.
