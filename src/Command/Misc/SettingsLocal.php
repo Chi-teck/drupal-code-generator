@@ -1,16 +1,18 @@
 <?php
 
-namespace DrupalCodeGenerator\Command;
+namespace DrupalCodeGenerator\Command\Misc;
+
+use DrupalCodeGenerator\Command\Generator;
 
 /**
- * Implements settings-local command.
+ * Implements misc:settings-local command.
  */
 class SettingsLocal extends Generator {
 
-  protected $name = 'settings-local';
+  protected $name = 'misc:settings-local';
   protected $description = 'Generates Drupal 8 settings.local.php file';
   protected $alias = 'settings.local.php';
-  protected $destination = 'sites/default';
+  protected $label = 'settings.local.php';
 
   /**
    * {@inheritdoc}
@@ -29,7 +31,7 @@ class SettingsLocal extends Generator {
       ];
     }
 
-    $this->addFile('settings.local.php', 'settings.local');
+    $this->addFile('settings.local.php', 'misc/settings.local');
   }
 
 }

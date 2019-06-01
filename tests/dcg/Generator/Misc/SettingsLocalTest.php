@@ -1,13 +1,15 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Generator\Misc;
+
+use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
- * Test for settings-local command.
+ * Test for misc:settings-local command.
  */
 class SettingsLocalTest extends BaseGeneratorTest {
 
-  protected $class = 'SettingsLocal';
+  protected $class = 'Misc\SettingsLocal';
 
   protected  $interaction = [
     'Override database configuration? [No]:' => 'Yes',

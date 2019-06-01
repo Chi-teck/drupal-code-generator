@@ -22,11 +22,10 @@
   [20] Project
   [21] Render element
   [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 1⏎
  Select generator 
   [0] ..
@@ -58,11 +57,10 @@
   [20] Project
   [21] Render element
   [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 2⏎
  Select generator 
   [0] ..
@@ -94,11 +92,10 @@
   [20] Project
   [21] Render element
   [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 3⏎
  Select generator 
   [0] ..
@@ -106,6 +103,7 @@
   [2] Apache virtual host
   [3] HTML page
   [4] Nginx virtual host
+  [5] settings.local.php
   ➤➤➤ 1⏎
  Select generator 
   [ 0] ..
@@ -171,6 +169,7 @@
   [2] Apache virtual host
   [3] HTML page
   [4] Nginx virtual host
+  [5] settings.local.php
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..
@@ -196,11 +195,10 @@
   [20] Project
   [21] Render element
   [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 4⏎
  Select generator 
   [ 0] ..
@@ -242,11 +240,10 @@
   [20] Project
   [21] Render element
   [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 5⏎
  Select generator 
   [ 0] ..
@@ -290,11 +287,10 @@
   [20] Project
   [21] Render element
   [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 6⏎
  Select generator 
   [0] ..
@@ -328,11 +324,10 @@
   [20] Project
   [21] Render element
   [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 7⏎
  Select generator 
   [0] ..
@@ -370,11 +365,10 @@
   [20] Project
   [21] Render element
   [22] Service provider
-  [23] Settings local
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 14⏎
 
  Welcome to install-file generator!
