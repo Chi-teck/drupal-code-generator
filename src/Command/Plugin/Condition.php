@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command\Plugin;
 /**
  * Implements plugin:condition command.
  */
-class Condition extends PluginGenerator {
+final class Condition extends PluginGenerator {
 
   protected $name = 'plugin:condition';
   protected $description = 'Generates condition plugin';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Generator;
 /**
  * Implements console:drush-command command.
  */
-class DrushCommand extends Generator {
+final class DrushCommand extends Generator {
 
   protected $name = 'console:drush-command';
   protected $description = 'Generates Drush command';

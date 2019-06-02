@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements plugin:ckeditor command.
  */
-class CKEditor extends PluginGenerator {
+final class CKEditor extends PluginGenerator {
 
   protected $name = 'plugin:ckeditor';
   protected $description = 'Generates CKEditor plugin';

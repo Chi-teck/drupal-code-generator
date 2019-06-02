@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:theme-negotiator command.
  */
-class ThemeNegotiator extends ModuleGenerator {
+final class ThemeNegotiator extends ModuleGenerator {
 
   protected $name = 'service:theme-negotiator';
   protected $description = 'Generates a theme negotiator';

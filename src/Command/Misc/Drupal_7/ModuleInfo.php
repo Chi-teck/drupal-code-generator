@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements misc:d7:module-info command.
  */
-class ModuleInfo extends ModuleGenerator {
+final class ModuleInfo extends ModuleGenerator {
 
   protected $name = 'misc:d7:module-info';
   protected $description = 'Generates Drupal 7 info file for a module';

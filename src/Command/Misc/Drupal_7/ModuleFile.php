@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements misc:d7:module-file command.
  */
-class ModuleFile extends ModuleGenerator {
+final class ModuleFile extends ModuleGenerator {
 
   protected $name = 'misc:d7:module-file';
   protected $description = 'Generates Drupal 7 module file';

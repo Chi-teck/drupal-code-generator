@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements test:unit command.
  */
-class Unit extends ModuleGenerator {
+final class Unit extends ModuleGenerator {
 
   protected $name = 'test:unit';
   protected $description = 'Generates a unit test';

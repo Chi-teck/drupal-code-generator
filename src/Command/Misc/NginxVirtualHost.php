@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Generator;
 /**
  * Implements misc:nginx-virtual-host command.
  */
-class NginxVirtualHost extends Generator {
+final class NginxVirtualHost extends Generator {
 
   protected $name = 'misc:nginx-virtual-host';
   protected $description = 'Generates an Nginx site configuration file';

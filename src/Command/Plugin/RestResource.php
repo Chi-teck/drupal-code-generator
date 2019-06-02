@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command\Plugin;
 /**
  * Implements plugin:rest-resource command.
  */
-class RestResource extends PluginGenerator {
+final class RestResource extends PluginGenerator {
 
   protected $name = 'plugin:rest-resource';
   protected $description = 'Generates rest resource plugin';

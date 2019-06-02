@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command;
 /**
  * Implements theme-settings command.
  */
-class ThemeSettings extends ThemeGenerator {
+final class ThemeSettings extends ThemeGenerator {
 
   protected $name = 'theme-settings';
   protected $description = 'Generates Drupal 8 theme-settings.php file';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
 /**
  * Implements misc:d7:theme command.
  */
-class Theme extends ThemeGenerator {
+final class Theme extends ThemeGenerator {
 
   protected $name = 'misc:d7:theme';
   protected $description = 'Generates Drupal 7 theme';

@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements test:nightwatch command.
  */
-class Nightwatch extends ModuleGenerator {
+final class Nightwatch extends ModuleGenerator {
 
   protected $name = 'test:nightwatch';
   protected $description = 'Generates a nightwatch test';

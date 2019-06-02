@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 /**
  * Implements plugin:field:type command.
  */
-class Type extends PluginGenerator {
+final class Type extends PluginGenerator {
 
   protected $name = 'plugin:field:type';
   protected $description = 'Generates field type plugin';

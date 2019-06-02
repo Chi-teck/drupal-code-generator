@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Asset;
 /**
  * Implements controller command.
  */
-class Controller extends ModuleGenerator {
+final class Controller extends ModuleGenerator {
 
   protected $name = 'controller';
   protected $description = 'Generates a controller';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:links:menu command.
  */
-class Menu extends ModuleGenerator {
+final class Menu extends ModuleGenerator {
 
   protected $name = 'yml:links:menu';
   protected $description = 'Generates a links.menu yml file';

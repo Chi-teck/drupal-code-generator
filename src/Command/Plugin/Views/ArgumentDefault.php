@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 /**
  * Implements plugin:views:argument-default command.
  */
-class ArgumentDefault extends PluginGenerator {
+final class ArgumentDefault extends PluginGenerator {
 
   protected $name = 'plugin:views:argument-default';
   protected $description = 'Generates views default argument plugin';

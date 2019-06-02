@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command;
 /**
  * Implements service-provider command.
  */
-class ServiceProvider extends ModuleGenerator {
+final class ServiceProvider extends ModuleGenerator {
 
   protected $name = 'service-provider';
   protected $description = 'Generates a service provider';

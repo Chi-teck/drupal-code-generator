@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Asset;
 /**
  * Implements template command.
  */
-class Template extends ModuleGenerator {
+final class Template extends ModuleGenerator {
 
   protected $name = 'template';
   protected $description = 'Generates a template';

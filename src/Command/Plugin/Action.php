@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command\Plugin;
 /**
  * Implements plugin:action command.
  */
-class Action extends PluginGenerator {
+final class Action extends PluginGenerator {
 
   protected $name = 'plugin:action';
   protected $description = 'Generates action plugin';

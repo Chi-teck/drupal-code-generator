@@ -7,7 +7,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements plugin:entity-reference-selection command.
  */
-class EntityReferenceSelection extends PluginGenerator {
+final class EntityReferenceSelection extends PluginGenerator {
 
   protected $name = 'plugin:entity-reference-selection';
   protected $description = 'Generates entity reference selection plugin';

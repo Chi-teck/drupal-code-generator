@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
 /**
  * Implements misc:d7:template.php command.
  */
-class TemplatePhp extends ThemeGenerator {
+final class TemplatePhp extends ThemeGenerator {
 
   protected $name = 'misc:d7:template.php';
   protected $description = 'Generates Drupal 7 template.php file';

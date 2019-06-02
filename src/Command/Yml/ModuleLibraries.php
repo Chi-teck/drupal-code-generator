@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:module-libraries command.
  */
-class ModuleLibraries extends ModuleGenerator {
+final class ModuleLibraries extends ModuleGenerator {
 
   protected $name = 'yml:module-libraries';
   protected $description = 'Generates module libraries yml file';

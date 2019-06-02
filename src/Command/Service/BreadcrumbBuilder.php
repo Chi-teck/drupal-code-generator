@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:breadcrumb-builder command.
  */
-class BreadcrumbBuilder extends ModuleGenerator {
+final class BreadcrumbBuilder extends ModuleGenerator {
 
   protected $name = 'service:breadcrumb-builder';
   protected $description = 'Generates a breadcrumb builder service';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:logger command.
  */
-class Logger extends ModuleGenerator {
+final class Logger extends ModuleGenerator {
 
   protected $name = 'service:logger';
   protected $description = 'Generates a logger service';

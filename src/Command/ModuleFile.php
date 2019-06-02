@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command;
 /**
  * Implements module-file command.
  */
-class ModuleFile extends ModuleGenerator {
+final class ModuleFile extends ModuleGenerator {
 
   protected $name = 'module-file';
   protected $description = 'Generates a module file';

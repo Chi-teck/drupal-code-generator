@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:twig-extension command.
  */
-class TwigExtension extends ModuleGenerator {
+final class TwigExtension extends ModuleGenerator {
 
   protected $name = 'service:twig-extension';
   protected $description = 'Generates Twig extension service';

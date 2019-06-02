@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
 /**
  * Implements yml:breakpoints command.
  */
-class Breakpoints extends ThemeGenerator {
+final class Breakpoints extends ThemeGenerator {
 
   protected $name = 'yml:breakpoints';
   protected $description = 'Generates a breakpoints yml file';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Asset;
 /**
  * Implements form:config command.
  */
-class Config extends FormGenerator {
+final class Config extends FormGenerator {
 
   protected $name = 'form:config';
   protected $description = 'Generates a configuration form';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Asset;
 /**
  * Implements layout command.
  */
-class Layout extends ModuleGenerator {
+final class Layout extends ModuleGenerator {
 
   protected $name = 'layout';
   protected $description = 'Generates a layout';

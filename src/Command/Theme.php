@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Utils;
  *
  * @TODO: Create a SUT test for this.
  */
-class Theme extends ThemeGenerator {
+final class Theme extends ThemeGenerator {
 
   protected $name = 'theme';
   protected $description = 'Generates Drupal 8 theme';

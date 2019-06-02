@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:uninstall-validator command.
  */
-class UninstallValidator extends ModuleGenerator {
+final class UninstallValidator extends ModuleGenerator {
 
   protected $name = 'service:uninstall-validator';
   protected $description = 'Generates a uninstall validator service';

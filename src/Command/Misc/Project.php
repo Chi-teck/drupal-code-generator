@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\Question;
  *
  * Inspired by drupal-composer/drupal-project.
  */
-class Project extends Generator {
+final class Project extends Generator {
 
   protected $name = 'misc:project';
   protected $description = 'Generates a composer project';

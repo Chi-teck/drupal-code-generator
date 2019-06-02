@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:module-info command.
  */
-class ModuleInfo extends ModuleGenerator {
+final class ModuleInfo extends ModuleGenerator {
 
   protected $name = 'yml:module-info';
   protected $description = 'Generates a module info yml file';

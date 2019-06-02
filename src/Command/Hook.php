@@ -8,7 +8,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements hook command.
  */
-class Hook extends ModuleGenerator {
+final class Hook extends ModuleGenerator {
 
   protected $name = 'hook';
   protected $description = 'Generates a hook';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 /**
  * Implements plugin:views:field command.
  */
-class Field extends PluginGenerator {
+final class Field extends PluginGenerator {
 
   protected $name = 'plugin:views:field';
   protected $description = 'Generates views field plugin';

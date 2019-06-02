@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 /**
  * Implements plugin:migrate:process command.
  */
-class Process extends PluginGenerator {
+final class Process extends PluginGenerator {
 
   protected $name = 'plugin:migrate:process';
   protected $description = 'Generates migrate process plugin';

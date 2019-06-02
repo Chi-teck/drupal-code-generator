@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Generator;
 /**
  * Implements misc:settings-local command.
  */
-class SettingsLocal extends Generator {
+final class SettingsLocal extends Generator {
 
   protected $name = 'misc:settings-local';
   protected $description = 'Generates Drupal 8 settings.local.php file';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
 /**
  * Implements yml:theme-info command.
  */
-class ThemeInfo extends ThemeGenerator {
+final class ThemeInfo extends ThemeGenerator {
 
   protected $name = 'yml:theme-info';
   protected $description = 'Generates a theme info yml file';

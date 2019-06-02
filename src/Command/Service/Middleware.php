@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:middleware command.
  */
-class Middleware extends ModuleGenerator {
+final class Middleware extends ModuleGenerator {
 
   protected $name = 'service:middleware';
   protected $description = 'Generates a middleware';

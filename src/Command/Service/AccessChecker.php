@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:access-checker command.
  */
-class AccessChecker extends ModuleGenerator {
+final class AccessChecker extends ModuleGenerator {
 
   protected $name = 'service:access-checker';
   protected $description = 'Generates an access checker service';

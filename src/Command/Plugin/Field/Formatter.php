@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 /**
  * Implements plugin:field:formatter command.
  */
-class Formatter extends PluginGenerator {
+final class Formatter extends PluginGenerator {
 
   protected $name = 'plugin:field:formatter';
   protected $description = 'Generates field formatter plugin';

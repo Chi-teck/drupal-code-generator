@@ -9,7 +9,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements misc:d7:hook command.
  */
-class Hook extends ModuleGenerator {
+final class Hook extends ModuleGenerator {
 
   protected $name = 'misc:d7:hook';
   protected $description = 'Generates a hook';

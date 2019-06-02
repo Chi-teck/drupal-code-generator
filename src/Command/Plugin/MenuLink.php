@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command\Plugin;
 /**
  * Implements plugin:menu-link command.
  */
-class MenuLink extends PluginGenerator {
+final class MenuLink extends PluginGenerator {
 
   protected $name = 'plugin:menu-link';
   protected $description = 'Generates menu-link plugin';

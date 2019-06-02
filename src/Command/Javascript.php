@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command;
 /**
  * Implements javascript command.
  */
-class Javascript extends ModuleGenerator {
+final class Javascript extends ModuleGenerator {
 
   protected $name = 'javascript';
   protected $description = 'Generates Drupal 8 JavaScript file';

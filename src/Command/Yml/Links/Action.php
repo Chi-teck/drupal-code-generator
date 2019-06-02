@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:links:action command.
  */
-class Action extends ModuleGenerator {
+final class Action extends ModuleGenerator {
 
   protected $name = 'yml:links:action';
   protected $description = 'Generates a links.action yml file';

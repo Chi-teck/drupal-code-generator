@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements misc:d7:test command.
  */
-class Test extends ModuleGenerator {
+final class Test extends ModuleGenerator {
 
   protected $name = 'misc:d7:test';
   protected $description = 'Generates Drupal 7 test case';

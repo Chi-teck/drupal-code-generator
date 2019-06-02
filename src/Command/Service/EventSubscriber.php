@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:event-subscriber command.
  */
-class EventSubscriber extends ModuleGenerator {
+final class EventSubscriber extends ModuleGenerator {
 
   protected $name = 'service:event-subscriber';
   protected $description = 'Generates an event subscriber';

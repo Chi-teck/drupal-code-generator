@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:response-policy command.
  */
-class ResponsePolicy extends ModuleGenerator {
+final class ResponsePolicy extends ModuleGenerator {
 
   protected $name = 'service:response-policy';
   protected $description = 'Generates a response policy service';

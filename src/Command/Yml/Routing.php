@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:routing command.
  */
-class Routing extends ModuleGenerator {
+final class Routing extends ModuleGenerator {
 
   protected $name = 'yml:routing';
   protected $description = 'Generates a routing yml file';

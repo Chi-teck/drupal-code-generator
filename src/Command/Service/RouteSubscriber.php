@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:route-subscriber command.
  */
-class RouteSubscriber extends ModuleGenerator {
+final class RouteSubscriber extends ModuleGenerator {
 
   protected $name = 'service:route-subscriber';
   protected $description = 'Generates a route subscriber';

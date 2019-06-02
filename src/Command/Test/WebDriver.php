@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements test:webdriver command.
  */
-class WebDriver extends ModuleGenerator {
+final class WebDriver extends ModuleGenerator {
 
   protected $name = 'test:webdriver';
   protected $description = 'Generates a test that supports JavaScript';

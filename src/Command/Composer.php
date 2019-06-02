@@ -7,7 +7,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Implements composer command.
  */
-class Composer extends DrupalGenerator {
+final class Composer extends DrupalGenerator {
 
   protected $name = 'composer';
   protected $description = 'Generates a composer.json file';

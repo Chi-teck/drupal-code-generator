@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 /**
  * Implements plugin:migrate:source command.
  */
-class Source extends PluginGenerator {
+final class Source extends PluginGenerator {
 
   protected $name = 'plugin:migrate:source';
   protected $description = 'Generates migrate source plugin';

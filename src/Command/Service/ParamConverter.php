@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:param-converter command.
  */
-class ParamConverter extends ModuleGenerator {
+final class ParamConverter extends ModuleGenerator {
 
   protected $name = 'service:param-converter';
   protected $description = 'Generates a param converter service';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:path-processor command.
  */
-class PathProcessor extends ModuleGenerator {
+final class PathProcessor extends ModuleGenerator {
 
   protected $name = 'service:path-processor';
   protected $description = 'Generates a path processor service';

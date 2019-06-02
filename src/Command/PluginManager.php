@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements plugin-manager command.
  */
-class PluginManager extends ModuleGenerator {
+final class PluginManager extends ModuleGenerator {
 
   protected $name = 'plugin-manager';
   protected $description = 'Generates plugin manager';

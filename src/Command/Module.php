@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Application;
 /**
  * Implements module command.
  */
-class Module extends ModuleGenerator {
+final class Module extends ModuleGenerator {
 
   protected $name = 'module';
   protected $description = 'Generates Drupal 8 module';

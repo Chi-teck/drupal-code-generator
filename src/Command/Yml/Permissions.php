@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:permissions command.
  */
-class Permissions extends ModuleGenerator {
+final class Permissions extends ModuleGenerator {
 
   protected $name = 'yml:permissions';
   protected $description = 'Generates a permissions yml file';

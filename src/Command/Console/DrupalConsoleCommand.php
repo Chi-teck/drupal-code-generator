@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements console:drupal-console-command command.
  */
-class DrupalConsoleCommand extends ModuleGenerator {
+final class DrupalConsoleCommand extends ModuleGenerator {
 
   protected $name = 'console:drupal-console-command';
   protected $description = 'Generates Drupal Console command';

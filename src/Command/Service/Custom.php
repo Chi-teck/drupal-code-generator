@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements service:custom command.
  */
-class Custom extends ModuleGenerator {
+final class Custom extends ModuleGenerator {
 
   protected $name = 'service:custom';
   protected $description = 'Generates a custom Drupal service';

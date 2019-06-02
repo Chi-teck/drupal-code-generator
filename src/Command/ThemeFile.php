@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command;
 /**
  * Implements theme-file command.
  */
-class ThemeFile extends ThemeGenerator {
+final class ThemeFile extends ThemeGenerator {
 
   protected $name = 'theme-file';
   protected $description = 'Generates a theme file';

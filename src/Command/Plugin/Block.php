@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command\Plugin;
 /**
  * Implements plugin:block command.
  */
-class Block extends PluginGenerator {
+final class Block extends PluginGenerator {
 
   protected $name = 'plugin:block';
   protected $description = 'Generates block plugin';

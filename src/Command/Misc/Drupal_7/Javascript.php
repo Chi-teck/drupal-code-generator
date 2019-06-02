@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements misc:d7:javascript command.
  */
-class Javascript extends ModuleGenerator {
+final class Javascript extends ModuleGenerator {
 
   protected $name = 'misc:d7:javascript';
   protected $description = 'Generates Drupal 7 JavaScript file';

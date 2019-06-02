@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements plugin:constraint command.
  */
-class Constraint extends PluginGenerator {
+final class Constraint extends PluginGenerator {
 
   protected $name = 'plugin:constraint';
   protected $description = 'Generates constraint plugin';

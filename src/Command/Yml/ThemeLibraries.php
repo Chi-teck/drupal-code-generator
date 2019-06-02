@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
 /**
  * Implements yml:theme-libraries command.
  */
-class ThemeLibraries extends ThemeGenerator {
+final class ThemeLibraries extends ThemeGenerator {
 
   protected $name = 'yml:theme-libraries';
   protected $description = 'Generates theme libraries yml file';

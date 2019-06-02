@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:links:contextual command.
  */
-class Contextual extends ModuleGenerator {
+final class Contextual extends ModuleGenerator {
 
   protected $name = 'yml:links:contextual';
   protected $description = 'Generates links.contextual yml file';

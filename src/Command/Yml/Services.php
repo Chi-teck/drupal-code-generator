@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:services command.
  */
-class Services extends ModuleGenerator {
+final class Services extends ModuleGenerator {
 
   protected $name = 'yml:services';
   protected $description = 'Generates a services yml file';

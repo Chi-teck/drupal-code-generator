@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 /**
  * Implements plugin:field:widget command.
  */
-class Widget extends PluginGenerator {
+final class Widget extends PluginGenerator {
 
   protected $name = 'plugin:field:widget';
   protected $description = 'Generates field widget plugin';

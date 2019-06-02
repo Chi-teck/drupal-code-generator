@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 /**
  * Implements plugin:views:style command.
  */
-class Style extends PluginGenerator {
+final class Style extends PluginGenerator {
 
   protected $name = 'plugin:views:style';
   protected $description = 'Generates views style plugin';

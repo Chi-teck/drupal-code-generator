@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Asset;
 /**
  * Implements content-entity command.
  */
-class ContentEntity extends ModuleGenerator {
+final class ContentEntity extends ModuleGenerator {
 
   protected $name = 'content-entity';
   protected $description = 'Generates content entity module';

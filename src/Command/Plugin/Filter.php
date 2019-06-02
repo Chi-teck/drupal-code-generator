@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command\Plugin;
 /**
  * Implements plugin:filter command.
  */
-class Filter extends PluginGenerator {
+final class Filter extends PluginGenerator {
 
   protected $name = 'plugin:filter';
   protected $description = 'Generates filter plugin';

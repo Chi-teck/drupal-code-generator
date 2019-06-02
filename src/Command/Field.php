@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements field command.
  */
-class Field extends ModuleGenerator {
+final class Field extends ModuleGenerator {
 
   protected $name = 'field';
   protected $description = 'Generates a field';

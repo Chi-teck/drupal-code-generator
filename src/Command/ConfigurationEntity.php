@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Asset;
 /**
  * Implements configuration-entity command.
  */
-class ConfigurationEntity extends ModuleGenerator {
+final class ConfigurationEntity extends ModuleGenerator {
 
   protected $name = 'configuration-entity';
   protected $description = 'Generates configuration entity module';

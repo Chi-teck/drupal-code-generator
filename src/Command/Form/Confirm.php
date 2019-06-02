@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command\Form;
 /**
  * Implements form:confirm command.
  */
-class Confirm extends FormGenerator {
+final class Confirm extends FormGenerator {
 
   protected $name = 'form:confirm';
   protected $description = 'Generates a confirmation form';

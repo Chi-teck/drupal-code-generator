@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Command\Form;
 /**
  * Implements form:simple command.
  */
-class Simple extends FormGenerator {
+final class Simple extends FormGenerator {
 
   protected $name = 'form:simple';
   protected $description = 'Generates simple form';

@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements console:dcg-command command.
  */
-class DcgCommand extends Generator {
+final class DcgCommand extends Generator {
 
   protected $name = 'console:dcg-command';
   protected $description = 'Generates DCG command';

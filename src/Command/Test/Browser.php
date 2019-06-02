@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements test:browser command.
  */
-class Browser extends ModuleGenerator {
+final class Browser extends ModuleGenerator {
 
   protected $name = 'test:browser';
   protected $description = 'Generates a browser based test';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:request-policy command.
  */
-class RequestPolicy extends ModuleGenerator {
+final class RequestPolicy extends ModuleGenerator {
 
   protected $name = 'service:request-policy';
   protected $description = 'Generates a request policy service';

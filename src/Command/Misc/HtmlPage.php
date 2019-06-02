@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Generator;
 /**
  * Implements misc:html-page command.
  */
-class HtmlPage extends Generator {
+final class HtmlPage extends Generator {
 
   protected $name = 'misc:html-page';
   protected $description = 'Generates a simple html page';

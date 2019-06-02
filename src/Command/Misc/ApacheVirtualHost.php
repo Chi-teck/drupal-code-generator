@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\Generator;
 /**
  * Implements misc:apache-virtual-host command.
  */
-class ApacheVirtualHost extends Generator {
+final class ApacheVirtualHost extends Generator {
 
   protected $name = 'misc:apache-virtual-host';
   protected $description = 'Generates an Apache site configuration file';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements service:cache-context command.
  */
-class CacheContext extends ModuleGenerator {
+final class CacheContext extends ModuleGenerator {
 
   protected $name = 'service:cache-context';
   protected $description = 'Generates a cache context service';

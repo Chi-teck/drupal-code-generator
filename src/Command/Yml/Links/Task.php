@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
 /**
  * Implements yml:links:task command.
  */
-class Task extends ModuleGenerator {
+final class Task extends ModuleGenerator {
 
   protected $name = 'yml:links:task';
   protected $description = 'Generates a links.task yml file';
