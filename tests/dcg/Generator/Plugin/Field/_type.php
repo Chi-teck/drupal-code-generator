@@ -66,7 +66,7 @@ class FooItem extends FieldItemBase {
 
     $element['bar'] = [
       '#type' => 'textfield',
-      '#title' => t('Bar'),
+      '#title' => $this->t('Bar'),
       '#default_value' => $this->getSetting('bar'),
     ];
 
