@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Utils;
 
@@ -12,6 +13,7 @@ final class PluginManager extends ModuleGenerator {
 
   protected $name = 'plugin-manager';
   protected $description = 'Generates plugin manager';
+  protected $templatePath = Application::TEMPLATE_PATH;
 
   /**
    * {@inheritdoc}

@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 use Symfony\Component\Console\Question\Question;
 
@@ -12,6 +13,7 @@ final class Hook extends ModuleGenerator {
 
   protected $name = 'hook';
   protected $description = 'Generates a hook';
+  protected $templatePath = Application::TEMPLATE_PATH;
 
   /**
    * {@inheritdoc}
