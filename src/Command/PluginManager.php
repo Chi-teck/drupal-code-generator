@@ -87,7 +87,7 @@ final class PluginManager extends ModuleGenerator {
       elseif ($file == 'model.module') {
         $asset
           ->action(Asset::APPEND)
-          ->headerTemplate('lib/file-docs/module')
+          ->headerTemplate('_lib/file-docs/module')
           ->headerSize(7);
       }
     }

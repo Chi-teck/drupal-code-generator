@@ -29,7 +29,7 @@ final class Style extends PluginGenerator {
       ->template('template');
 
     $this->addFile('{machine_name}.module')
-      ->headerTemplate('lib/file-docs/module')
+      ->headerTemplate('_lib/file-docs/module')
       ->template('preprocess')
       ->action(Asset::APPEND)
       ->headerSize(7);
