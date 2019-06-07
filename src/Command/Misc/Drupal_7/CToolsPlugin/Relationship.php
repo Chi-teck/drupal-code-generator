@@ -9,7 +9,7 @@ final class Relationship extends BasePlugin {
 
   protected $name = 'misc:d7:ctools-plugin:relationship';
   protected $description = 'Generates CTools relationship plugin';
-  protected $template = 'misc/d7/ctools-plugin/relationship';
+  protected $template = 'relationship';
   protected $subDirectory = 'plugins/relationships';
 
 }

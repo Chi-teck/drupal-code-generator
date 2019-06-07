@@ -22,17 +22,17 @@ final class ArgumentDefault extends ModuleGenerator {
     $vars['plugin_machine_name'] = $this->ask('Plugin machine name', '{plugin_name|h2m}');
 
     $this->addFile('{machine_name}.module')
-      ->template('misc/d7/views-plugin/argument-default.module')
+      ->template('module')
       ->action(Asset::APPEND)
       ->headerSize(7);
 
     $this->addFile('views/{machine_name}.views.inc')
-      ->template('misc/d7/views-plugin/argument-default-views.inc')
+      ->template('views.inc')
       ->action(Asset::APPEND)
       ->headerSize(7);
 
     $this->addFile('views/views_plugin_argument_{plugin_machine_name}.inc')
-      ->template('misc/d7/views-plugin/argument-default');
+      ->template('argument-default');
   }
 
 }

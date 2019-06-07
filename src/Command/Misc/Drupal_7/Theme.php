@@ -23,9 +23,9 @@ final class Theme extends ThemeGenerator {
     $vars['base_theme'] = $this->ask('Base theme');
     $vars['asset_name'] = '{machine_name|u2h}';
 
-    $this->addFile('{machine_name}/{machine_name}.info', 'misc/d7/theme-info');
-    $this->addFile('{machine_name}/template.php', 'misc/d7/template.php');
-    $this->addFile('{machine_name}/js/{asset_name}.js', 'misc/d7/javascript');
+    $this->addFile('{machine_name}/{machine_name}.info', 'misc/d7/theme-info/theme-info');
+    $this->addFile('{machine_name}/template.php', 'misc/d7/template.php/template.php');
+    $this->addFile('{machine_name}/js/{asset_name}.js', 'misc/d7/javascript/javascript');
     $this->addFile('{machine_name}/css/{asset_name}.css', 'misc/d7/theme-css');
     $this->addDirectory('{machine_name}/templates');
     $this->addDirectory('{machine_name}/images');

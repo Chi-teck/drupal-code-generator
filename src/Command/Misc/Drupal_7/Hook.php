@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7;
 
-use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use Symfony\Component\Console\Question\Question;
@@ -14,7 +13,6 @@ final class Hook extends ModuleGenerator {
 
   protected $name = 'misc:d7:hook';
   protected $description = 'Generates a hook';
-  protected $templatePath = Application::TEMPLATE_PATH;
 
   /**
    * {@inheritdoc}
@@ -66,7 +64,7 @@ final class Hook extends ModuleGenerator {
 
     $this->addFile("{machine_name}.$file_type")
       ->headerTemplate("misc/d7/file-docs/$file_type")
-      ->template('misc/d7/hook/{hook_name}')
+      ->template('{hook_name}')
       ->action(Asset::APPEND)
       ->headerSize(7);
   }

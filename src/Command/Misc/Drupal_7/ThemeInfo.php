@@ -20,7 +20,7 @@ final class ThemeInfo extends ThemeGenerator {
     $vars = &$this->collectDefault();
     $vars['description'] = $this->ask('Theme description', 'A simple Drupal 7 theme.');
     $vars['base_theme'] = $this->ask('Base theme');
-    $this->addFile('{machine_name}.info', 'misc/d7/theme-info');
+    $this->addFile('{machine_name}.info', 'theme-info');
   }
 
 }

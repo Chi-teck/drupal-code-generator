@@ -19,7 +19,7 @@ final class TemplatePhp extends ThemeGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('template.php', 'misc/d7/template.php');
+    $this->addFile('template.php', 'template.php');
   }
 
 }

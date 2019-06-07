@@ -17,7 +17,7 @@ final class ModuleFile extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.module', 'misc/d7/module');
+    $this->addFile('{machine_name}.module', 'module');
   }
 
 }

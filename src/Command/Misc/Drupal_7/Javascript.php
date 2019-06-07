@@ -17,7 +17,7 @@ final class Javascript extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name|u2h}.js', 'misc/d7/javascript');
+    $this->addFile('{machine_name|u2h}.js', 'javascript');
   }
 
 }

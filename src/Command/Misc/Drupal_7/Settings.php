@@ -29,7 +29,7 @@ final class Settings extends Generator {
     // @see: drupal_get_hash_salt()
     $vars['hash_salt'] = hash('sha256', serialize($vars));
 
-    $this->addFile('settings.php', 'misc/d7/settings');
+    $this->addFile('settings.php', 'settings');
   }
 
 }

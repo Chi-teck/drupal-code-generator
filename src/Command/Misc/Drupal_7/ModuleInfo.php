@@ -20,7 +20,7 @@ final class ModuleInfo extends ModuleGenerator {
     $vars = &$this->collectDefault();
     $vars['description'] = $this->ask('Module description', 'Module description.');
     $vars['package'] = $this->ask('Package', 'Custom');
-    $this->addFile('{machine_name}.info', 'misc/d7/module-info');
+    $this->addFile('{machine_name}.info', 'module-info');
   }
 
 }

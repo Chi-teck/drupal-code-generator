@@ -9,7 +9,7 @@ final class ContentType extends BasePlugin {
 
   protected $name = 'misc:d7:ctools-plugin:content-type';
   protected $description = 'Generates CTools content type plugin';
-  protected $template = 'misc/d7/ctools-plugin/content-type';
+  protected $template = 'content-type';
   protected $subDirectory = 'plugins/content_types';
 
 }

@@ -17,7 +17,7 @@ final class InstallFile extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.install', 'misc/d7/install');
+    $this->addFile('{machine_name}.install', 'install');
   }
 
 }
