@@ -105,7 +105,7 @@ final class Hook extends ModuleGenerator {
 
     $this->addFile()
       ->path('{machine_name}.{file_type}')
-      ->headerTemplate('file-docs/{file_type}')
+      ->headerTemplate('lib/file-docs/{file_type}')
       ->template('hook/{hook_name}')
       ->action(Asset::APPEND)
       ->headerSize(7);
