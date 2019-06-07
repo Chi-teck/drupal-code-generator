@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Utils;
 
@@ -13,7 +12,6 @@ final class PluginManager extends ModuleGenerator {
 
   protected $name = 'plugin-manager';
   protected $description = 'Generates plugin manager';
-  protected $templatePath = Application::TEMPLATE_PATH;
 
   /**
    * {@inheritdoc}
@@ -72,8 +70,6 @@ final class PluginManager extends ModuleGenerator {
 
     $files = array_merge($common_files, $files);
 
-    $templates_path = 'plugin-manager/{discovery}/';
-
     $path_placeholders = ['model', 'Example', 'examples'];
     $path_replacements = [
       $vars['machine_name'],
@@ -84,7 +80,7 @@ final class PluginManager extends ModuleGenerator {
     foreach ($files as $file) {
       $asset = $this->addFile()
         ->path(str_replace($path_placeholders, $path_replacements, $file))
-        ->template($templates_path . $file);
+        ->template('{discovery}/' . $file);
       if ($file === 'model.services.yml') {
         $asset->action(Asset::APPEND)->headerSize(1);
       }
