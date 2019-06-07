@@ -26,10 +26,10 @@ final class Block extends PluginGenerator {
 
     $vars['access'] = $this->confirm('Create access callback?', FALSE);
 
-    $this->addFile('src/Plugin/Block/{class}.php', 'plugin/block');
+    $this->addFile('src/Plugin/Block/{class}.php', 'block');
 
     if ($vars['configurable']) {
-      $this->addSchemaFile()->template('plugin/block-schema');
+      $this->addSchemaFile()->template('schema');
     }
   }
 

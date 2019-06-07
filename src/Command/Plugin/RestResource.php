@@ -18,7 +18,7 @@ final class RestResource extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Plugin/rest/resource/{class}.php', 'plugin/rest-resource');
+    $this->addFile('src/Plugin/rest/resource/{class}.php', 'rest-resource');
   }
 
 }

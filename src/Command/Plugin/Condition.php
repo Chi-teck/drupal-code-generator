@@ -16,8 +16,8 @@ final class Condition extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Plugin/Condition/{class}.php', 'plugin/condition');
-    $this->addSchemaFile()->template('plugin/condition-schema');
+    $this->addFile('src/Plugin/Condition/{class}.php', 'condition');
+    $this->addSchemaFile()->template('schema');
   }
 
 }

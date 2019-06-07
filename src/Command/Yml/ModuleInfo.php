@@ -26,7 +26,7 @@ final class ModuleInfo extends ModuleGenerator {
     if ($vars['dependencies']) {
       $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
     }
-    $this->addFile('{machine_name}.info.yml', 'yml/module-info');
+    $this->addFile('{machine_name}.info.yml', 'module-info');
   }
 
 }

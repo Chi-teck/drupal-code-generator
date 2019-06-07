@@ -28,10 +28,10 @@ final class Constraint extends PluginGenerator {
     $vars['input_type'] = $this->choice('Type of data to validate', $input_types, 'Item list');
 
     $this->addFile('src/Plugin/Validation/Constraint/{class}.php')
-      ->template('plugin/constraint');
+      ->template('constraint');
 
     $this->addFile('src/Plugin/Validation/Constraint/{class}Validator.php')
-      ->template('plugin/constraint-validator');
+      ->template('validator');
   }
 
   /**

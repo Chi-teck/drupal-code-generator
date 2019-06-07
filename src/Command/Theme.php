@@ -28,22 +28,22 @@ final class Theme extends ThemeGenerator {
     $vars['breakpoints'] = $this->confirm('Would you like to create breakpoints?', FALSE);
     $vars['theme_settings'] = $this->confirm('Would you like to create theme settings form?', FALSE);
 
-    $this->addFile('{machine_name}/{machine_name}.info.yml', 'yml/theme-info');
-    $this->addFile('{machine_name}/{machine_name}.libraries.yml', 'yml/theme-libraries');
-    $this->addFile('{machine_name}/{machine_name}.theme', 'theme');
-    $this->addFile('{machine_name}/js/{machine_name|u2h}.js', 'javascript');
+    $this->addFile('{machine_name}/{machine_name}.info.yml', 'yml/theme-info/theme-info');
+    $this->addFile('{machine_name}/{machine_name}.libraries.yml', 'yml/theme-libraries/theme-libraries');
+    $this->addFile('{machine_name}/{machine_name}.theme', 'theme-file/theme');
+    $this->addFile('{machine_name}/js/{machine_name|u2h}.js', 'javascript/javascript');
 
     if ($vars['breakpoints']) {
-      $this->addFile('{machine_name}/{machine_name}.breakpoints.yml', 'yml/breakpoints');
+      $this->addFile('{machine_name}/{machine_name}.breakpoints.yml', 'yml/breakpoints/breakpoints');
     }
 
     if ($vars['theme_settings']) {
-      $this->addFile('{machine_name}/theme-settings.php', 'theme-settings-form');
-      $this->addFile('{machine_name}/config/install/{machine_name}.settings.yml', 'theme-settings-config');
-      $this->addFile('{machine_name}/config/schema/{machine_name}.schema.yml', 'theme-settings-schema');
+      $this->addFile('{machine_name}/theme-settings.php', 'theme-settings/form');
+      $this->addFile('{machine_name}/config/install/{machine_name}.settings.yml', 'theme-settings/config');
+      $this->addFile('{machine_name}/config/schema/{machine_name}.schema.yml', 'theme-settings/schema');
     }
 
-    $this->addFile('{machine_name}/logo.svg', 'theme-logo');
+    $this->addFile('{machine_name}/logo.svg', 'theme/logo');
 
     // Templates directory structure.
     $this->addDirectory('{machine_name}/templates/page');
@@ -54,7 +54,7 @@ final class Theme extends ThemeGenerator {
     $this->addDirectory('{machine_name}/templates/menu');
     $this->addDirectory('{machine_name}/images');
 
-    $this->addFile('{machine_name}/package.json', 'theme-package.json');
+    $this->addFile('{machine_name}/package.json', 'theme/package.json');
 
     // Style sheets directory structure.
     $this->addDirectory('{machine_name}/css');

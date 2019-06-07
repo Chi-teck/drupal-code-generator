@@ -28,7 +28,7 @@ final class Source extends PluginGenerator {
     $vars['source_type'] = $this->choice('Source type', $choices);
     $vars['base_class'] = $vars['source_type'] == 'sql' ? 'SqlBase' : 'SourcePluginBase';
 
-    $this->addFile('src/Plugin/migrate/source/{class}.php', 'plugin/migrate/source');
+    $this->addFile('src/Plugin/migrate/source/{class}.php', 'source');
   }
 
 }

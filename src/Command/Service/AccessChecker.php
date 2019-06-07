@@ -29,9 +29,8 @@ final class AccessChecker extends ModuleGenerator {
     $vars['applies_to'] = $this->ask('Applies to', '_foo', $validator);
     $vars['class'] = $this->ask('Class', '{applies_to|camelize}AccessChecker');
 
-    $this->addFile('src/Access/{class}.php', 'service/access-checker');
-    $this->addServicesFile()
-      ->template('service/access-checker.services');
+    $this->addFile('src/Access/{class}.php', 'access-checker');
+    $this->addServicesFile()->template('services');
   }
 
 }

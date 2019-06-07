@@ -20,7 +20,7 @@ final class ThemeLibraries extends ThemeGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.libraries.yml', 'yml/theme-libraries');
+    $this->addFile('{machine_name}.libraries.yml', 'theme-libraries');
   }
 
 }

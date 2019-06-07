@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Utils;
 
@@ -27,17 +28,12 @@ final class CKEditor extends PluginGenerator {
     $vars['short_plugin_id'] = str_replace('_', '-', $unprefixed_plugin_id);
     $vars['command_name'] = Utils::camelize($unprefixed_plugin_id, FALSE);
 
-    $this->addFile('src/Plugin/CKEditorPlugin/{class}.php')
-      ->template('plugin/_ckeditor/ckeditor');
-
-    $this->addFile('js/plugins/{short_plugin_id}/plugin.js')
-      ->template('plugin/_ckeditor/plugin');
-
-    $this->addFile('js/plugins/{short_plugin_id}/dialogs/{short_plugin_id}.js')
-      ->template('plugin/_ckeditor/dialog');
+    $this->addFile('src/Plugin/CKEditorPlugin/{class}.php', 'ckeditor');
+    $this->addFile('js/plugins/{short_plugin_id}/plugin.js', 'plugin');
+    $this->addFile('js/plugins/{short_plugin_id}/dialogs/{short_plugin_id}.js', 'dialog');
 
     $this->addFile('js/plugins/{short_plugin_id}/icons/{short_plugin_id}.png')
-      ->content(file_get_contents($this->templatePath . '/plugin/_ckeditor/icon.png'))
+      ->content(file_get_contents(Application::TEMPLATE_PATH . 'plugin/ckeditor/icon.png'))
       ->action(Asset::APPEND);
   }
 

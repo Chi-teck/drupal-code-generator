@@ -21,8 +21,8 @@ final class Type extends PluginGenerator {
     $vars = &$this->collectDefault();
     $vars['configurable_storage'] = $this->confirm('Make the field storage configurable?', FALSE);
     $vars['configurable_instance'] = $this->confirm('Make the field instance configurable?', FALSE);
-    $this->addFile('src/Plugin/Field/FieldType/{class}.php', 'plugin/field/type');
-    $this->addSchemaFile()->template('plugin/field/type-schema');
+    $this->addFile('src/Plugin/Field/FieldType/{class}.php', 'type');
+    $this->addSchemaFile()->template('schema');
   }
 
 }

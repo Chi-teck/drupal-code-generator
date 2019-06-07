@@ -19,9 +19,8 @@ final class RequestPolicy extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', 'Example');
-    $this->addFile('src/PageCache/{class}.php', 'service/request-policy');
-    $this->addServicesFile()
-      ->template('service/request-policy.services');
+    $this->addFile('src/PageCache/{class}.php', 'request-policy');
+    $this->addServicesFile()->template('services');
   }
 
 }

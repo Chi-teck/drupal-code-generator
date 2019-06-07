@@ -19,7 +19,7 @@ final class Routing extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = '{machine_name|camelize}Controller';
-    $this->addFile('{machine_name}.routing.yml', 'yml/routing');
+    $this->addFile('{machine_name}.routing.yml', 'routing');
   }
 
 }

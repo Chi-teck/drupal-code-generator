@@ -19,7 +19,7 @@ final class Unit extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', 'ExampleTest', '::validateRequiredClassName');
-    $this->addFile('tests/src/Unit/{class}.php', 'test/unit');
+    $this->addFile('tests/src/Unit/{class}.php', 'unit');
   }
 
 }

@@ -60,7 +60,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *
    * @var string
    */
-  protected $templatePath = NULL;
+  protected $templatePath;
 
   /**
    * The working directory.
@@ -114,18 +114,17 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $this->getHelperSet()->setCommand($this);
 
     if ($this->templatePath === NULL) {
-      // This is specific to DCG core generators. Third party generators should
-      // define template path explicitly.
+      // This is specific to DCG core generators. Third-party generators should
+      // always define template path.
       $template_path = Application::TEMPLATE_PATH . str_replace(':', '/', $this->getName());
       if (file_exists($template_path) && is_dir($template_path)) {
-        $this->templatePath = $template_path;
+        $this->getHelper('renderer')->addPath($template_path);
+        $this->getHelper('renderer')->addPath(Application::TEMPLATE_PATH);
       }
-      // @todo Remove this once template directory structure is updated.
-      else {
-        $this->templatePath = Application::TEMPLATE_PATH;
-      }
+      // @todo Replace this with an exception once template directory structure
+      // is updated.
+      $this->templatePath = Application::TEMPLATE_PATH;
     }
-
     $this->getHelper('renderer')->addPath($this->templatePath);
 
     $this->setLogger($this->getHelper('logger_factory')->getLogger());

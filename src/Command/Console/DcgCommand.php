@@ -48,8 +48,8 @@ final class DcgCommand extends Generator {
       $vars['path'] = '/' . $file_path;
     }
 
-    $this->addFile($file_path . '/{class}.php', 'console/dcg-command');
-    $this->addFile($file_path . '/{template_name}.twig', 'console/dcg-command-template');
+    $this->addFile($file_path . '/{class}.php', 'command');
+    $this->addFile($file_path . '/{template_name}.twig', 'template');
   }
 
 }

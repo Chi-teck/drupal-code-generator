@@ -38,9 +38,8 @@ final class CacheContext extends ModuleGenerator {
     $vars['interface'] = $vars['calculated'] ?
       'CalculatedCacheContextInterface' : 'CacheContextInterface';
 
-    $this->addFile('src/Cache/Context/{class}.php', 'service/cache-context');
-    $this->addServicesFile()
-      ->template('service/cache-context.services');
+    $this->addFile('src/Cache/Context/{class}.php', 'cache-context');
+    $this->addServicesFile()->template('services');
   }
 
 }

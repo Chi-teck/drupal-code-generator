@@ -22,10 +22,10 @@ final class Action extends PluginGenerator {
     $vars['category'] = $this->ask('Action category', 'Custom');
     $vars['configurable'] = $this->confirm('Make the action configurable?', FALSE);
 
-    $this->addFile('src/Plugin/Action/{class}.php', 'plugin/action');
+    $this->addFile('src/Plugin/Action/{class}.php', 'action');
 
     if ($vars['configurable']) {
-      $this->addSchemaFile()->template('plugin/action-schema');
+      $this->addSchemaFile()->template('schema');
     }
   }
 

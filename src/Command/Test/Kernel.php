@@ -19,7 +19,7 @@ final class Kernel extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', 'ExampleTest', '::validateRequiredClassName');
-    $this->addFile('tests/src/Kernel/{class}.php', 'test/kernel');
+    $this->addFile('tests/src/Kernel/{class}.php', 'kernel');
   }
 
 }

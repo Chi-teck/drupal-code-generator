@@ -20,7 +20,7 @@ final class WebDriver extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', 'ExampleTest', '::validateRequiredClassName');
-    $this->addFile('tests/src/FunctionalJavascript/{class}.php', 'test/webdriver');
+    $this->addFile('tests/src/FunctionalJavascript/{class}.php', 'webdriver');
   }
 
 }

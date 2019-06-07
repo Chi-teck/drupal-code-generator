@@ -19,7 +19,7 @@ final class Task extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.links.task.yml', 'yml/links.task');
+    $this->addFile('{machine_name}.links.task.yml', 'links.task');
   }
 
 }

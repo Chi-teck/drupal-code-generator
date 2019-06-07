@@ -20,9 +20,8 @@ final class PathProcessor extends ModuleGenerator {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', 'PathProcessor{machine_name|camelize}');
 
-    $this->addFile('src/PathProcessor/{class}.php', 'service/path-processor');
-    $this->addServicesFile()
-      ->template('service/path-processor.services');
+    $this->addFile('src/PathProcessor/{class}.php', 'path-processor');
+    $this->addServicesFile()->template('services');
   }
 
 }

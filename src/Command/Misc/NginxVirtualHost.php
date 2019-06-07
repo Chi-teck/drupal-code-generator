@@ -12,7 +12,6 @@ final class NginxVirtualHost extends Generator {
   protected $name = 'misc:nginx-virtual-host';
   protected $description = 'Generates an Nginx site configuration file';
   protected $alias = 'nginx-virtual-host';
-  protected $destination = '/etc/nginx/sites-available';
 
   /**
    * {@inheritdoc}
@@ -33,7 +32,7 @@ final class NginxVirtualHost extends Generator {
     $vars['file_public_path'] = trim($vars['file_public_path'], '/');
     $vars['file_private_path'] = trim($vars['file_private_path'], '/');
 
-    $this->addFile('{server_name}', 'misc/nginx-virtual-host.twig');
+    $this->addFile('{server_name}', 'host.twig');
   }
 
 }

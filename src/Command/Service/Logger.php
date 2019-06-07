@@ -19,9 +19,8 @@ final class Logger extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', 'FileLog');
-    $this->addFile('src/Logger/{class}.php', 'service/logger');
-    $this->addServicesFile()
-      ->template('service/logger.services');
+    $this->addFile('src/Logger/{class}.php', 'logger');
+    $this->addServicesFile()->template('services');
   }
 
 }

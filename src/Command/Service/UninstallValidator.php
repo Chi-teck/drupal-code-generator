@@ -19,9 +19,8 @@ final class UninstallValidator extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', '{name|camelize}UninstallValidator');
-    $this->addFile('src/{class}.php', 'service/uninstall-validator');
-    $this->addServicesFile()
-      ->template('service/uninstall-validator.services');
+    $this->addFile('src/{class}.php', 'uninstall-validator');
+    $this->addServicesFile()->template('services');
   }
 
 }

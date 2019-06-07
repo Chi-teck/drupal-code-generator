@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 
 /**
@@ -12,7 +11,6 @@ final class ContentEntity extends ModuleGenerator {
 
   protected $name = 'content-entity';
   protected $description = 'Generates content entity module';
-  protected $templatePath = Application::TEMPLATE_PATH . '_content-entity';
 
   /**
    * {@inheritdoc}

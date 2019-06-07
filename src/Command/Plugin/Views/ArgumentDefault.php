@@ -23,11 +23,11 @@ final class ArgumentDefault extends PluginGenerator {
     $this->collectServices(FALSE);
 
     $this->addFile('src/Plugin/views/argument_default/{class}.php')
-      ->template('plugin/views/argument-default');
+      ->template('argument-default');
 
     if ($vars['configurable']) {
       $this->addSchemaFile('config/schema/{machine_name}.views.schema.yml')
-        ->template('plugin/views/argument-default-schema');
+        ->template('argument-default-schema');
     }
   }
 

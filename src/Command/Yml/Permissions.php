@@ -19,7 +19,7 @@ final class Permissions extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.permissions.yml', 'yml/permissions');
+    $this->addFile('{machine_name}.permissions.yml', 'permissions');
   }
 
 }

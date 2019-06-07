@@ -23,10 +23,8 @@ final class ParamConverter extends ModuleGenerator {
     $vars['class'] = $this->ask('Class', '{parameter_type|camelize}ParamConverter');
     $vars['controller_class'] = '{machine_name|camelize}Controller';
 
-    $this->addFile('src/{class}.php', 'service/param-converter');
-    $this->addServicesFile()
-      ->path('{machine_name}.services.yml')
-      ->template('service/param-converter.services');
+    $this->addFile('src/{class}.php', 'param-converter');
+    $this->addServicesFile()->template('services');
   }
 
 }

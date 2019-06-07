@@ -19,9 +19,8 @@ final class RouteSubscriber extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = '{machine_name|camelize}RouteSubscriber';
-    $this->addFile('src/EventSubscriber/{class}.php', 'service/route-subscriber');
-    $this->addServicesFile()
-      ->template('service/route-subscriber.services');
+    $this->addFile('src/EventSubscriber/{class}.php', 'route-subscriber');
+    $this->addServicesFile()->template('services');
   }
 
 }

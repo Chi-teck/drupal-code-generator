@@ -29,8 +29,8 @@ final class EntityReferenceSelection extends PluginGenerator {
     $vars['base_class'] = explode('EntityReferenceSelection\\', $vars['base_class_full'])[1];
 
     $this->addFile('src/Plugin/EntityReferenceSelection/{class}.php')
-      ->template('plugin/entity-reference-selection');
-    $this->addSchemaFile()->template('plugin/entity-reference-selection-schema');
+      ->template('entity-reference-selection');
+    $this->addSchemaFile()->template('schema');
   }
 
   /**

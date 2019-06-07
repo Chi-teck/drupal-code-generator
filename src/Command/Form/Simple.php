@@ -19,7 +19,7 @@ final class Simple extends FormGenerator {
   protected function generate() :void {
     $this->collectDefault();
     $this->generateRoute();
-    $this->addFile('src/Form/{class}.php', 'form/simple');
+    $this->addFile('src/Form/{class}.php', 'form');
   }
 
 }

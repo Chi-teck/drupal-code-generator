@@ -19,7 +19,7 @@ final class Contextual extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.links.contextual.yml', 'yml/links.contextual');
+    $this->addFile('{machine_name}.links.contextual.yml', 'links.contextual');
   }
 
 }

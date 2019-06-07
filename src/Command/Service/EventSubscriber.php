@@ -19,9 +19,8 @@ final class EventSubscriber extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = '{machine_name|camelize}Subscriber';
-    $this->addFile('src/EventSubscriber/{class}.php', 'service/event-subscriber');
-    $this->addServicesFile()
-      ->template('service/event-subscriber.services');
+    $this->addFile('src/EventSubscriber/{class}.php', 'event-subscriber');
+    $this->addServicesFile()->template('services');
   }
 
 }

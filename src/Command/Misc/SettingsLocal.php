@@ -31,7 +31,7 @@ final class SettingsLocal extends Generator {
       ];
     }
 
-    $this->addFile('settings.local.php', 'misc/settings.local');
+    $this->addFile('settings.local.php', 'settings.local');
   }
 
 }

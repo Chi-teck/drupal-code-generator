@@ -239,27 +239,27 @@ final class Field extends ModuleGenerator {
     $vars['table_formatter'] = $this->confirm('Would you like to create table formatter?', FALSE);
     $vars['key_value_formatter'] = $this->confirm('Would you like to create key-value formatter?', FALSE);
 
-    $this->addFile('src/Plugin/Field/FieldType/{type_class}.php', '_field/type');
+    $this->addFile('src/Plugin/Field/FieldType/{type_class}.php', 'type');
 
-    $this->addFile('src/Plugin/Field/FieldWidget/{widget_class}.php', '_field/widget');
+    $this->addFile('src/Plugin/Field/FieldWidget/{widget_class}.php', 'widget');
 
-    $this->addFile('src/Plugin/Field/FieldFormatter/{formatter_class}.php', '_field/default-formatter');
+    $this->addFile('src/Plugin/Field/FieldFormatter/{formatter_class}.php', 'default-formatter');
 
-    $this->addSchemaFile()->template('_field/schema');
+    $this->addSchemaFile()->template('schema');
 
-    $this->addFile('{machine_name}.libraries.yml', '_field/libraries')
+    $this->addFile('{machine_name}.libraries.yml', 'libraries')
       ->action(Asset::APPEND);
 
-    $this->addFile('css/{field_id|u2h}-widget.css', '_field/widget-css');
+    $this->addFile('css/{field_id|u2h}-widget.css', 'widget-css');
 
     if ($vars['table_formatter']) {
       $vars['table_formatter_class'] = '{field_label|camelize}TableFormatter';
-      $this->addFile('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php', '_field/table-formatter');
+      $this->addFile('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php', '/table-formatter');
     }
 
     if ($vars['key_value_formatter']) {
       $vars['key_value_formatter_class'] = '{field_label|camelize}KeyValueFormatter';
-      $this->addFile('src/Plugin/Field/FieldFormatter/{key_value_formatter_class}.php', '_field/key-value-formatter');
+      $this->addFile('src/Plugin/Field/FieldFormatter/{key_value_formatter_class}.php', 'key-value-formatter');
     }
 
   }

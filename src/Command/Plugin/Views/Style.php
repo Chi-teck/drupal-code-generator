@@ -23,19 +23,19 @@ final class Style extends PluginGenerator {
 
     $this->addFile('src/Plugin/views/style/{class}.php')
       ->path('src/Plugin/views/style/{class}.php')
-      ->template('plugin/views/style-plugin');
+      ->template('style');
 
     $this->addFile('templates/views-style-{plugin_id|u2h}.html.twig')
-      ->template('plugin/views/style-template');
+      ->template('template');
 
     $this->addFile('{machine_name}.module')
       ->headerTemplate('file-docs/module')
-      ->template('plugin/views/style-preprocess')
+      ->template('preprocess')
       ->action(Asset::APPEND)
       ->headerSize(7);
 
     if ($vars['configurable']) {
-      $this->addSchemaFile()->template('plugin/views/style-schema');
+      $this->addSchemaFile()->template('schema');
     }
 
   }

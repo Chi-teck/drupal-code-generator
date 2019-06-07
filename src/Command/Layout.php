@@ -27,22 +27,22 @@ final class Layout extends ModuleGenerator {
     $vars['js'] = $this->confirm('Would you like to create JavaScript file for this layout?', FALSE);
     $vars['css'] = $this->confirm('Would you like to create CSS file for this layout?', FALSE);
 
-    $this->addFile('{machine_name}.layouts.yml', '_layout/layouts')
+    $this->addFile('{machine_name}.layouts.yml', 'layouts')
       ->action(Asset::APPEND);
 
     if ($vars['js'] || $vars['css']) {
-      $this->addFile('{machine_name}.libraries.yml', '_layout/libraries')
+      $this->addFile('{machine_name}.libraries.yml', 'libraries')
         ->action(Asset::APPEND);
     }
 
     $vars['layout_asset_name'] = '{layout_machine_name|u2h}';
 
-    $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.html.twig', '_layout/template');
+    $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.html.twig', 'template');
     if ($vars['js']) {
-      $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.js', '_layout/javascript');
+      $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.js', 'javascript');
     }
     if ($vars['css']) {
-      $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.css', '_layout/styles');
+      $this->addFile('layouts/{layout_machine_name}/{layout_asset_name}.css', 'styles');
     }
 
   }

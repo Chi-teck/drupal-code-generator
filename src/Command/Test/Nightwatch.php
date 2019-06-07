@@ -20,7 +20,7 @@ final class Nightwatch extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['test_name'] = Utils::camelize($this->ask('Test name', 'example'), FALSE);
-    $this->addFile('tests/src/Nightwatch/{test_name}Test.js', 'test/nightwatch');
+    $this->addFile('tests/src/Nightwatch/{test_name}Test.js', 'nightwatch');
   }
 
 }

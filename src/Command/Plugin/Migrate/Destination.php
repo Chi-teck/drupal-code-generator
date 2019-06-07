@@ -20,7 +20,7 @@ final class Destination extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Plugin/migrate/destination/{class}.php', 'plugin/migrate/destination');
+    $this->addFile('src/Plugin/migrate/destination/{class}.php', 'destination');
   }
 
 }

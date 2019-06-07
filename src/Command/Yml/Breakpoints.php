@@ -19,7 +19,7 @@ final class Breakpoints extends ThemeGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.breakpoints.yml', 'yml/breakpoints');
+    $this->addFile('{machine_name}.breakpoints.yml', 'breakpoints');
   }
 
 }

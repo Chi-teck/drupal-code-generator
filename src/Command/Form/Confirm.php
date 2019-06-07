@@ -19,7 +19,7 @@ final class Confirm extends FormGenerator {
   protected function generate() :void {
     $this->collectDefault();
     $this->generateRoute();
-    $this->addFile('src/Form/{class}.php', 'form/confirm');
+    $this->addFile('src/Form/{class}.php', 'form');
   }
 
 }

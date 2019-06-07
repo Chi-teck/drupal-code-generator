@@ -19,7 +19,7 @@ final class Action extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.links.action.yml', 'yml/links.action');
+    $this->addFile('{machine_name}.links.action.yml', 'links.action');
   }
 
 }

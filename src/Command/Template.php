@@ -23,11 +23,11 @@ final class Template extends ModuleGenerator {
     $vars['create_theme'] = $this->confirm('Create theme hook?');
     $vars['create_preprocess'] = $this->confirm('Create preprocess hook?');
 
-    $this->addFile('templates/{template_name}.html.twig', 'template-template');
+    $this->addFile('templates/{template_name}.html.twig', 'template');
 
     if ($vars['create_theme'] || $vars['create_preprocess']) {
       $this->addFile('{machine_name}.module')
-        ->template('template-module')
+        ->template('module')
         ->action(Asset::APPEND)
         ->headerSize(7);
     }

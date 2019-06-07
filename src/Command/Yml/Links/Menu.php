@@ -19,7 +19,7 @@ final class Menu extends ModuleGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('{machine_name}.links.menu.yml', 'yml/links.menu');
+    $this->addFile('{machine_name}.links.menu.yml', 'links.menu');
   }
 
 }

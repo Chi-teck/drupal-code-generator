@@ -27,9 +27,8 @@ final class Custom extends ModuleGenerator {
 
     $this->collectServices();
 
-    $this->addFile('src/{class}.php', 'service/custom');
-    $this->addServicesFile()
-      ->template('service/custom.services');
+    $this->addFile('src/{class}.php', 'custom');
+    $this->addServicesFile()->template('services');
   }
 
 }

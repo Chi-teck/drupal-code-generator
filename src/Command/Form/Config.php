@@ -34,13 +34,13 @@ final class Config extends FormGenerator {
         }
 
         $this->addFile('{machine_name}.links.menu.yml')
-          ->template('form/links.menu')
+          ->template('links.menu')
           ->action(Asset::APPEND);
       }
     }
 
-    $this->addFile('src/Form/{class}.php', 'form/config');
-    $this->addSchemaFile()->template('form/config-schema');
+    $this->addFile('src/Form/{class}.php', 'form');
+    $this->addSchemaFile()->template('schema');
   }
 
 }

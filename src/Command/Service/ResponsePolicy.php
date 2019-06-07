@@ -19,9 +19,8 @@ final class ResponsePolicy extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', 'Example');
-    $this->addFile('src/PageCache/{class}.php', 'service/response-policy');
-    $this->addServicesFile()
-      ->template('service/response-policy.services');
+    $this->addFile('src/PageCache/{class}.php', 'response-policy');
+    $this->addServicesFile()->template('services');
   }
 
 }

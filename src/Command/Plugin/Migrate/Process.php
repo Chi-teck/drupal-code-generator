@@ -20,7 +20,7 @@ final class Process extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Plugin/migrate/process/{class}.php', 'plugin/migrate/process');
+    $this->addFile('src/Plugin/migrate/process/{class}.php', 'process');
   }
 
 }

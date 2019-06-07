@@ -27,7 +27,7 @@ final class DrupalConsoleCommand extends ModuleGenerator {
     $vars['class'] = Utils::camelize(str_replace(':', '_', $vars['command_name'])) . 'Command';
     $vars['command_trait'] = $vars['container_aware'] ? 'ContainerAwareCommandTrait' : 'CommandTrait';
 
-    $this->addFile('src/Command/{class}.php', 'console/drupal-console-command');
+    $this->addFile('src/Command/{class}.php', 'command');
   }
 
 }

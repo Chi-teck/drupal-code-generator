@@ -25,10 +25,8 @@ final class Filter extends PluginGenerator {
     ];
     $vars['filter_type'] = $this->choice('Filter type', $filter_types);
 
-    $this->addFile('src/Plugin/Filter/{class}.php')
-      ->template('plugin/filter');
-
-    $this->addSchemaFile()->template('plugin/filter-schema');
+    $this->addFile('src/Plugin/Filter/{class}.php', 'filter');
+    $this->addSchemaFile()->template('schema');
   }
 
 }

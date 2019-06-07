@@ -20,9 +20,9 @@ final class Widget extends PluginGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['configurable'] = $this->confirm('Make the widget configurable?', FALSE);
-    $this->addFile('src/Plugin/Field/FieldWidget/{class}.php', 'plugin/field/widget');
+    $this->addFile('src/Plugin/Field/FieldWidget/{class}.php', 'widget');
     if ($vars['configurable']) {
-      $this->addSchemaFile()->template('plugin/field/widget-schema');
+      $this->addSchemaFile()->template('schema');
     }
   }
 

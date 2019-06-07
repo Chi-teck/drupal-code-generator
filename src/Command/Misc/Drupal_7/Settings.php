@@ -12,7 +12,6 @@ final class Settings extends Generator {
 
   protected $name = 'misc:d7:settings.php';
   protected $description = 'Generates Drupal 7 settings.php file';
-  protected $destination = 'sites/default';
   protected $label = 'settings.php';
 
   /**

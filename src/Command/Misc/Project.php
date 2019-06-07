@@ -111,21 +111,21 @@ final class Project extends Generator {
 
     $this->addFile('composer.json')->content(self::buildComposerJson($vars));
 
-    $this->addFile('.gitignore', 'misc/_project/gitignore');
-    $this->addFile('phpcs.xml', 'misc/_project/phpcs.xml');
-    $this->addFile('scripts/composer/create_required_files.php', 'misc/_project/scripts/composer/create_required_files.php');
+    $this->addFile('.gitignore', 'gitignore');
+    $this->addFile('phpcs.xml', 'phpcs.xml');
+    $this->addFile('scripts/composer/create_required_files.php', 'scripts/composer/create_required_files.php');
 
     if ($vars['behat']) {
-      $this->addFile('tests/behat/behat.yml', 'misc/_project/tests/behat/behat.yml');
-      $this->addFile('tests/behat/local.behat.yml', 'misc/_project/tests/behat/local.behat.yml');
-      $this->addFile('tests/behat/bootstrap/BaseContext.php', 'misc/_project/tests/behat/bootstrap/BaseContext.php');
-      $this->addFile('tests/behat/bootstrap/ExampleContext.php', 'misc/_project/tests/behat/bootstrap/ExampleContext.php');
-      $this->addFile('tests/behat/features/example/user_forms.feature', 'misc/_project/tests/behat/features/example/user_forms.feature');
+      $this->addFile('tests/behat/behat.yml', 'tests/behat/behat.yml');
+      $this->addFile('tests/behat/local.behat.yml', 'tests/behat/local.behat.yml');
+      $this->addFile('tests/behat/bootstrap/BaseContext.php', 'tests/behat/bootstrap/BaseContext.php');
+      $this->addFile('tests/behat/bootstrap/ExampleContext.php', 'tests/behat/bootstrap/ExampleContext.php');
+      $this->addFile('tests/behat/features/example/user_forms.feature', 'tests/behat/features/example/user_forms.feature');
     }
 
     if ($vars['env']) {
-      $this->addFile('.env.example', 'misc/_project/env.example');
-      $this->addFile('load.environment.php', 'misc/_project/load.environment.php');
+      $this->addFile('.env.example', 'env.example');
+      $this->addFile('load.environment.php', 'load.environment.php');
     }
 
     if ($vars['document_root']) {
@@ -133,10 +133,10 @@ final class Project extends Generator {
     }
 
     if ($vars['drush']) {
-      $this->addFile('drush/drush.yml', 'misc/_project/drush/drush.yml');
-      $this->addFile('drush/Commands/PolicyCommands.php', 'misc/_project/drush/Commands/PolicyCommands.php');
-      $this->addFile('drush/sites/self.site.yml', 'misc/_project/drush/sites/self.site.yml');
-      $this->addFile('scripts/sync-site.sh', 'misc/_project/scripts/sync-site.sh')->mode(0544);
+      $this->addFile('drush/drush.yml', 'drush/drush.yml');
+      $this->addFile('drush/Commands/PolicyCommands.php', 'drush/Commands/PolicyCommands.php');
+      $this->addFile('drush/sites/self.site.yml', 'drush/sites/self.site.yml');
+      $this->addFile('scripts/sync-site.sh', 'scripts/sync-site.sh')->mode(0544);
     }
 
     $this->addFile('patches/.keep')->content('');

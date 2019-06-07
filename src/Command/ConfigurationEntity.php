@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset;
 
 /**
@@ -13,7 +12,6 @@ final class ConfigurationEntity extends ModuleGenerator {
   protected $name = 'configuration-entity';
   protected $description = 'Generates configuration entity module';
   protected $alias = 'config-entity';
-  protected $templatePath = Application::TEMPLATE_PATH . '_configuration-entity/';
 
   /**
    * {@inheritdoc}

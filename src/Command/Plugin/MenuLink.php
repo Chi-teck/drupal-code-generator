@@ -20,7 +20,7 @@ final class MenuLink extends PluginGenerator {
    */
   protected function generate() :void {
     $this->collectDefault();
-    $this->addFile('src/Plugin/Menu/{class}.php', 'plugin/menu-link');
+    $this->addFile('src/Plugin/Menu/{class}.php', 'menu-link');
   }
 
 }

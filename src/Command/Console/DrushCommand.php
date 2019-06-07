@@ -40,7 +40,7 @@ final class DrushCommand extends Generator {
       ? $vars['command_file_prefix']
       : $vars['command_file_prefix'] . '_' . $vars['command_name'];
 
-    $this->addFile('{command_file}', 'console/drush-command');
+    $this->addFile('{command_file}', 'command');
   }
 
 }

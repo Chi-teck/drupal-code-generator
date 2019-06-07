@@ -19,7 +19,7 @@ final class Services extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['class'] = '{machine_name|camelize}';
-    $this->addFile('{machine_name}.services.yml', 'yml/services');
+    $this->addFile('{machine_name}.services.yml', 'services');
   }
 
 }

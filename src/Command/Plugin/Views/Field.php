@@ -22,11 +22,11 @@ final class Field extends PluginGenerator {
 
     $this->collectServices(FALSE);
 
-    $this->addFile('src/Plugin/views/field/{class}.php', 'plugin/views/field');
+    $this->addFile('src/Plugin/views/field/{class}.php', 'field');
 
     if ($vars['configurable']) {
       $this->addSchemaFile('config/schema/{machine_name}.views.schema.yml')
-        ->template('plugin/views/field-schema');
+        ->template('schema');
     }
 
   }

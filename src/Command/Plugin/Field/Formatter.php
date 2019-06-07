@@ -12,7 +12,6 @@ final class Formatter extends PluginGenerator {
   protected $name = 'plugin:field:formatter';
   protected $description = 'Generates field formatter plugin';
   protected $alias = 'field-formatter';
-
   protected $pluginClassSuffix = 'Formatter';
 
   /**
@@ -21,9 +20,9 @@ final class Formatter extends PluginGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
     $vars['configurable'] = $this->confirm('Make the formatter configurable?', FALSE);
-    $this->addFile('src/Plugin/Field/FieldFormatter/{class}.php', 'plugin/field/formatter');
+    $this->addFile('src/Plugin/Field/FieldFormatter/{class}.php', 'formatter');
     if ($vars['configurable']) {
-      $this->addSchemaFile()->template('plugin/field/formatter-schema');
+      $this->addSchemaFile()->template('schema');
     }
 
   }
