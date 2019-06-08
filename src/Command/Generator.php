@@ -113,7 +113,10 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->getHelperSet()->setCommand($this);
 
-    if ($this->templatePath === NULL) {
+    if ($this->templatePath) {
+      $this->getHelper('renderer')->addPath($this->templatePath);
+    }
+    else {
       // This is specific to DCG core generators. Third-party generators should
       // always define template path.
       $template_path = Application::TEMPLATE_PATH . str_replace(':', '/', $this->getName());
@@ -121,11 +124,10 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
         $this->getHelper('renderer')->addPath($template_path);
         $this->getHelper('renderer')->addPath(Application::TEMPLATE_PATH);
       }
-      // @todo Replace this with an exception once template directory structure
-      // is updated.
-      $this->templatePath = Application::TEMPLATE_PATH;
+      else {
+        throw new \LogicException('Template path is not specified.');
+      }
     }
-    $this->getHelper('renderer')->addPath($this->templatePath);
 
     $this->setLogger($this->getHelper('logger_factory')->getLogger());
 
