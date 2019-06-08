@@ -122,6 +122,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       $template_path = Application::TEMPLATE_PATH . str_replace(':', '/', $this->getName());
       if (file_exists($template_path) && is_dir($template_path)) {
         $this->getHelper('renderer')->addPath($template_path);
+        // Also add default template path as some generators may share their
+        // templates.
         $this->getHelper('renderer')->addPath(Application::TEMPLATE_PATH);
       }
       else {
