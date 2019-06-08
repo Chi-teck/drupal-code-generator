@@ -123,6 +123,10 @@ class Utils {
             $result = self::camelize($result);
             break;
 
+          case 'pluralize':
+            $result = self::pluralize($result);
+            break;
+
           case 'c2m':
             $result = self::camel2machine($result);
             break;
