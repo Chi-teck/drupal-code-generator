@@ -153,7 +153,7 @@ class GeneratorTester {
     $default_name = Utils::machine2human(basename($this->directory));
 
     $expected_display = "\n";
-    $name = $this->command->getName();
+    $name = $this->command->getAliases()[0] ?? $this->command->getName();
     $title = "Welcome to $name generator!";
     $expected_display .= " $title\n";
     $expected_display .= str_repeat('–', strlen($title) + 2) . "\n";

@@ -145,7 +145,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
 
-    $this->io->title(sprintf('Welcome to %s generator!', $this->getName()));
+    $this->io->title(sprintf('Welcome to %s generator!', $this->getAliases()[0] ?? $this->getName()));
 
     $this->generate();
 
