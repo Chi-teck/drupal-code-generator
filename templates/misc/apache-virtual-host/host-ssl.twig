@@ -1,0 +1,23 @@
+<IfModule mod_ssl.c>
+  <VirtualHost *:443>
+
+  ServerName {{ hostname }}
+  ServerAlias www.{{ hostname }}
+  DocumentRoot {{ docroot }}
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <Directory {{ docroot }}>
+      Options Indexes FollowSymLinks MultiViews
+      AllowOverride All
+      Order allow,deny
+      allow from all
+    </Directory>
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/localhost.crt
+    SSLCertificateKeyFile /etc/ssl/private/localhost.key
+
+  </VirtualHost>
+</IfModule>

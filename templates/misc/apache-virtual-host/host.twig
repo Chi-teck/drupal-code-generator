@@ -1,7 +1,6 @@
 <VirtualHost *:80>
   ServerName {{ hostname }}
   ServerAlias www.{{ hostname }}
-  ServerAlias m.{{ hostname }}
   DocumentRoot {{ docroot }}
 
   <Directory {{ docroot }}>

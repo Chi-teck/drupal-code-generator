@@ -17,9 +17,17 @@ final class ApacheVirtualHost extends Generator {
    * {@inheritdoc}
    */
   protected function generate() :void {
-    $this->vars['hostname'] = $this->ask('Host name', 'example.com');
+    $validator = function (?string $value):string {
+      $value = self::validateRequired($value);
+      if (!filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
+        throw new \UnexpectedValueException('The value is not correct domain name.');
+      }
+      return $value;
+    };
+    $this->vars['hostname'] = $this->ask('Host name', 'example.local', $validator);
     $this->vars['docroot'] = $this->ask('Document root', '/var/www/{hostname}/public');
     $this->addFile('{hostname}.conf', 'host');
+    $this->addFile('{hostname}-ssl.conf', 'host-ssl');
   }
 
 }
