@@ -2,9 +2,12 @@
 
 namespace DrupalCodeGenerator;
 
+use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Tests\QuestionHelper;
+use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * Eases the testing of generator commands.
@@ -54,8 +57,16 @@ class GeneratorTester {
     $this->commandTester = new CommandTester($this->command);
 
     $application = Application::create();
+
     $helper_set = $application->getHelperSet();
+
+    // Replace default question helper to ease parsing output.
     $helper_set->set(new QuestionHelper());
+
+    // Replace default renderer to support 'strict_variables' in tests.
+    $twig_environment = new TwigEnvironment(new FilesystemLoader(), ['strict_variables' => TRUE]);
+    $helper_set->set(new Renderer($twig_environment));
+
     $application->add($this->command);
 
     $this->setDirectory(sys_get_temp_dir() . '/dcg_' . uniqid());

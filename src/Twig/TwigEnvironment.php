@@ -19,9 +19,11 @@ class TwigEnvironment extends Environment {
    *
    * @param \Twig_LoaderInterface $loader
    *   The Twig loader.
+   * @param array $options
+   *   (Optional) Environment options.
    */
-  public function __construct(Twig_LoaderInterface $loader) {
-    parent::__construct($loader);
+  public function __construct(Twig_LoaderInterface $loader, array $options = []) {
+    parent::__construct($loader, $options);
 
     $this->addTokenParser(new TwigSortTokenParser());
 
