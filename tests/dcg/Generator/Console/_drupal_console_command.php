@@ -2,18 +2,19 @@
 
 namespace Drupal\foo\Command;
 
-use Drupal\Console\Command\Shared\CommandTrait;
-use Drupal\Console\Style\DrupalStyle;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Drupal\Console\Core\Command\Command;
 
 /**
- * Implements foo:example command.
+ * Class FooExampleCommand.
+ *
+ * Drupal\Console\Annotations\DrupalCommand (
+ *     extension="foo",
+ *     extensionType="module"
+ * )
  */
 class FooExampleCommand extends Command {
-
-  use CommandTrait;
 
   /**
    * {@inheritdoc}
@@ -28,9 +29,7 @@ class FooExampleCommand extends Command {
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-    $io = new DrupalStyle($input, $output);
-
-    $io->info('It works!');
+    $this->getIo()->info('It works!');
   }
 
 }

@@ -16,10 +16,11 @@ class DrupalConsoleCommandTest extends BaseGeneratorTest {
     'Module machine name [foo]:' => 'foo',
     'Command name [foo:example]:' => 'foo:example',
     'Command description [Command description.]:' => 'Command description.',
-    'Make the command aware of the drupal site installation? [Yes]:' => 'no',
+    'Make the command aware of the Drupal site installation? [Yes]:' => 'no',
   ];
 
   protected $fixtures = [
+    'console.services.yml' => '/_drupal_console_command_services.yml',
     'src/Command/FooExampleCommand.php' => '/_drupal_console_command.php',
   ];
 

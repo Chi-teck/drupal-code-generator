@@ -1,0 +1,5 @@
+services:
+  {{ service_name }}:
+    class: Drupal\{{ machine_name }}\Command\{{ class }}
+    tags:
+      - { name: drupal.command }

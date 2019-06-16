@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command\Console;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Utils;
 
 /**
  * Implements console:drupal-console-command command.
@@ -22,12 +21,15 @@ final class DrupalConsoleCommand extends ModuleGenerator {
 
     $vars['command_name'] = $this->ask('Command name', '{machine_name}:example');
     $vars['description'] = $this->ask('Command description', 'Command description.');
-    $vars['container_aware'] = $this->confirm('Make the command aware of the drupal site installation?');
+    $vars['drupal_aware'] = $this->confirm('Make the command aware of the Drupal site installation?');
 
-    $vars['class'] = Utils::camelize(str_replace(':', '_', $vars['command_name'])) . 'Command';
-    $vars['command_trait'] = $vars['container_aware'] ? 'ContainerAwareCommandTrait' : 'CommandTrait';
+    $vars['service_short_name'] = str_replace(':', '_', $vars['command_name']);
+    $vars['service_name'] = '{machine_name}.{service_short_name}';
+    $vars['class'] = '{service_short_name|camelize}Command';
+    $vars['base_class'] = $vars['drupal_aware'] ? 'ContainerAwareCommand' : 'Command';
 
     $this->addFile('src/Command/{class}.php', 'command');
+    $this->addServicesFile('console.services.yml')->template('services');
   }
 
 }

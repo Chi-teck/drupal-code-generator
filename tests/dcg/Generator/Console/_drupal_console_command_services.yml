@@ -1,0 +1,5 @@
+services:
+  foo.foo_example:
+    class: Drupal\foo\Command\FooExampleCommand
+    tags:
+      - { name: drupal.command }
