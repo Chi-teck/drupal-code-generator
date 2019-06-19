@@ -23,19 +23,24 @@ class DrupalConsoleCommand extends BaseGenerator {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
 
-    $questions = Utils::defaultQuestions() + [
+    $questions = Utils::moduleQuestions() + [
       'command_name' => new Question('Command name', '{machine_name}:example'),
       'description' => new Question('Command description', 'Command description.'),
-      'container_aware' => new ConfirmationQuestion('Make the command aware of the drupal site installation?', TRUE),
+      'drupal_aware' => new ConfirmationQuestion('Make the command aware of the drupal site installation?', TRUE),
     ];
 
     $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize(str_replace(':', '_', $vars['command_name'])) . 'Command';
-    $vars['command_trait'] = $vars['container_aware'] ? 'ContainerAwareCommandTrait' : 'CommandTrait';
 
-    $this->addFile()
-      ->path('src/Command/{class}.php')
+    $service_short_name = str_replace(':', '_', $vars['command_name']);
+    $vars['service_name'] = $vars['machine_name'] . '.' . $service_short_name;
+    $vars['class'] = Utils::camelize($service_short_name) . 'Command';
+    $vars['base_class'] = $vars['drupal_aware'] ? 'ContainerAwareCommand' : 'Command';
+
+    $this->addFile('src/Command/{class}.php')
       ->template('other/drupal-console-command.twig');
+
+    $this->addServicesFile('console.services.yml')
+      ->template('other/drupal-console-command-services.twig');
   }
 
 }

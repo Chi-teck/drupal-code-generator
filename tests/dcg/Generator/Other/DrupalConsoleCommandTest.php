@@ -20,6 +20,7 @@ class DrupalConsoleCommandTest extends GeneratorBaseTest {
   ];
 
   protected $fixtures = [
+    'console.services.yml' => __DIR__ . '/_drupal_console_command_services.yml',
     'src/Command/FooExampleCommand.php' => __DIR__ . '/_drupal_console_command.php',
   ];
 

@@ -2,18 +2,19 @@
 
 namespace Drupal\{{ machine_name }}\Command;
 
-use Drupal\Console\Command\Shared\{{ command_trait }};
-use Drupal\Console\Style\DrupalStyle;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Drupal\Console\Core\Command\{{ base_class }};
 
 /**
- * Implements {{ command_name }} command.
+ * Class {{ class }}.
+ *
+ * Drupal\Console\Annotations\DrupalCommand (
+ *     extension="{{ machine_name }}",
+ *     extensionType="module"
+ * )
  */
-class {{ class }} extends Command {
-
-  use {{ command_trait }};
+class {{ class }} extends {{ base_class }} {
 
   /**
    * {@inheritdoc}
@@ -28,9 +29,7 @@ class {{ class }} extends Command {
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-    $io = new DrupalStyle($input, $output);
-
-    $io->info('It works!');
+    $this->getIo()->info('It works!');
   }
 
 }
