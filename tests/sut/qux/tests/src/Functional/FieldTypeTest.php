@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\qux\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use TestBase\BrowserTestBase;
 
 /**
@@ -68,7 +69,7 @@ class FieldTypeTest extends BrowserTestBase {
       'field_foo[0][value]' => 'Hello word!',
     ];
     $this->drupalPostForm('node/add/test', $edit, 'Save');
-    $this->assertErrorMessage(t('This value is too long. It should have %limit characters or less.', ['%limit' => 10]));
+    $this->assertErrorMessage(new FormattableMarkup('This value is too long. It should have %limit characters or less.', ['%limit' => 10]));
 
     // Remove the exclamation sign to get in the limit.
     $edit = [

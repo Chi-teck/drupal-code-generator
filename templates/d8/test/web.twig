@@ -43,8 +43,8 @@ class {{ class }} extends WebTestBase {
       'site_mail' => 'admin@example.local',
       'site_frontpage' => '/user',
     ];
-    $this->drupalPostForm('admin/config/system/site-information', $edit, t('Save configuration'));
-    $this->assertText(t('The configuration options have been saved.'), 'Configuration options have been saved');
+    $this->drupalPostForm('admin/config/system/site-information', $edit, 'Save configuration');
+    $this->assertText('The configuration options have been saved.', 'Configuration options have been saved');
   }
 
 }

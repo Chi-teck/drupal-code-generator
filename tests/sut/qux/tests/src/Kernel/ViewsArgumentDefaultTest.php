@@ -30,7 +30,7 @@ class ViewsArgumentDefaultTest extends KernelTestBase {
 
     $expected_form['example'] = [
       '#type' => 'textfield',
-      '#title' => t('Example'),
+      '#title' => 'Example',
       '#default_value' => 'abc',
     ];
     $form = [];

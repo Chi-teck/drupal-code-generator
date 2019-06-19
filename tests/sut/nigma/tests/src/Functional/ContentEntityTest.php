@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\nigma\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\nigma\Entity\Example;
 use TestBase\BrowserTestBase;
 
@@ -46,10 +47,10 @@ class ContentEntityTest extends BrowserTestBase {
       'id' => 'foo',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save example type');
-    $this->assertStatusMessage(t('The example type %label has been added.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FormattableMarkup('The example type %label has been added.', ['%label' => 'Foo']));
 
     $this->click('//td[text() = "Foo"]/following-sibling::td//a[text() = "Edit"]');
-    $this->assertPageTitle(t('Edit %label example type', ['%label' => 'Foo']));
+    $this->assertPageTitle(new FormattableMarkup('Edit %label example type', ['%label' => 'Foo']));
     $this->assertXpath('//label[text() = "Label"]/following-sibling::input[@name = "label" and @value="Foo"]');
 
     $edit = [
@@ -57,7 +58,7 @@ class ContentEntityTest extends BrowserTestBase {
       'id' => 'bar',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save example type');
-    $this->assertStatusMessage(t('The example type %label has been updated.', ['%label' => 'Bar']));
+    $this->assertStatusMessage(new FormattableMarkup('The example type %label has been updated.', ['%label' => 'Bar']));
 
     // Make sure the entity type is fieldable.
     $this->click('//td[text() = "Bar"]/following-sibling::td//a[text() = "Manage fields"]');
@@ -129,7 +130,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->drupalPostForm(NULL, $edit, 'Save');
 
     // -- Test entity view builder.
-    $this->assertStatusMessage(t('New example %label has been created.', ['%label' => 'Beer']));
+    $this->assertStatusMessage(new FormattableMarkup('New example %label has been created.', ['%label' => 'Beer']));
     $this->assertPageTitle('Beer');
     $this->assertXpath('//div[text() = "Status"]/following-sibling::div[text() = "Enabled"]');
     $this->assertXpath('//div[text() = "Description"]/following-sibling::div/p[text() = "Dark"]');
@@ -160,7 +161,7 @@ class ContentEntityTest extends BrowserTestBase {
       'description[0][value]' => 'White',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertStatusMessage(t('The example %label has been updated.', ['%label' => 'Wine']));
+    $this->assertStatusMessage(new FormattableMarkup('The example %label has been updated.', ['%label' => 'Wine']));
     $this->assertPageTitle('Wine');
 
     // -- Test entity list builder.
@@ -188,11 +189,11 @@ class ContentEntityTest extends BrowserTestBase {
 
     // -- Test entity deletion.
     $this->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
-    $this->assertPageTitle(t('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
+    $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 
     $this->drupalPostForm(NULL, [], 'Delete');
-    $this->assertStatusMessage(t('The example %label has been deleted.', ['%label' => 'Wine']));
+    $this->assertStatusMessage(new FormattableMarkup('The example %label has been deleted.', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('There are no example entities yet.');
     $this->assertSession()->pageTextContains('Total examples: 0');
   }

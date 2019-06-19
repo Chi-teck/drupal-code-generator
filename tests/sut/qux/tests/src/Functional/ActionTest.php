@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\qux\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use TestBase\BrowserTestBase;
 
 /**
@@ -52,7 +53,7 @@ class ActionTest extends BrowserTestBase {
       '%action_label' => 'Update node title',
       '%node_label' => $node->label(),
     ];
-    $this->assertErrorMessage(t('No access to execute %action_label on the Content %node_label.', $message_arguments));
+    $this->assertErrorMessage(new FormattableMarkup('No access to execute %action_label on the Content %node_label.', $message_arguments));
 
     // Create another user with permission to edit articles.
     $content_manager = $this->drupalCreateUser(['access content overview', 'edit any article content']);
@@ -65,7 +66,7 @@ class ActionTest extends BrowserTestBase {
     $message_arguments = [
       '%action_label' => 'Update node title',
     ];
-    $this->assertStatusMessage(t('%action_label was applied to 1 item.', $message_arguments));
+    $this->assertStatusMessage(new FormattableMarkup('%action_label was applied to 1 item.', $message_arguments));
     $this->assertXpath('//table//td[@class = "views-field views-field-title"]/a[text() = "Example"]');
   }
 
