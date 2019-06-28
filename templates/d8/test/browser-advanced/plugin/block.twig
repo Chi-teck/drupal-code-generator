@@ -1,0 +1,69 @@
+<?php
+
+namespace Drupal\Tests\{{ machine_name }}\Functional;
+
+use Drupal\Tests\BrowserTestBase;
+use Drupal\block\Entity\Block;
+
+/**
+ * Test description.
+ *
+ * @group {{ machine_name }}
+ */
+class {{ class }} extends BrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static $modules = ['{{ machine_name }}', 'block'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+    // Set up the test here.
+  }
+
+  /**
+   * Test configuring and moving a module-define block to specific regions.
+   */
+  public function testBlock() {
+    // Place MyBockTest block to test error messages.
+    $this->drupalPlaceBlock('{{ block }}');
+
+    // Disable the block.
+    $this->drupalGet('admin/structure/block');
+    $this->clickLink('Disable');
+
+    // Select the MyBockTest block to be configured and moved.
+    $block = [];
+    $block['id'] = '{{ block }}';
+    $block['settings[label]'] = $this->randomMachineName(8);
+    $block['settings[label_display]'] = TRUE;
+    $block['theme'] = $this->config('system.theme')->get('default');
+    $block['region'] = 'header';
+
+    // Set block title to confirm that interface works and override any custom titles.
+    $this->drupalPostForm('admin/structure/block/add/' . $block['id'] . '/' . $block['theme'], ['settings[label]' => $block['settings[label]'], 'settings[label_display]' => $block['settings[label_display]'], 'id' => $block['id'], 'region' => $block['region']], t('Save block'));
+    $this->assertText(t('The block configuration has been saved.'), 'Block title set.');
+    // Check to see if the block was created by checking its configuration.
+    $instance = Block::load($block['id']);
+
+    $this->assertEqual($instance->label(), $block['settings[label]'], 'Stored block title found.');
+  }
+
+  /**
+   * Tests block visibility.
+   */
+  public function testBlockVisibility() {
+    // Test Block visibility.
+  }
+
+  /**
+   * Tests the block access.
+   */
+  public function testBlockAccess() {
+    // Test Block visibility.
+  }
+}

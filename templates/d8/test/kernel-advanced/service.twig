@@ -1,0 +1,35 @@
+<?php
+
+namespace Drupal\Tests\{{ machine_name }}\Kernel;
+
+use Drupal\Tests\KernelTestBase;
+
+/**
+ * Test description.
+ *
+ * @group {{ machine_name }}
+ */
+class {{ class }} extends KernelTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static $modules = ['{{ machine_name }}'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+    // Set up the test here.
+  }
+
+  /**
+   * Test service exists.
+   */
+  public function testService() {
+
+    $service = \Drupal::srvice('{{ service }}');
+    $this->assertNotEmpty($service, 'Service is available');
+   }
+}

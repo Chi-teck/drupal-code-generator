@@ -1,0 +1,44 @@
+<?php
+
+namespace Drupal\Tests\{{ machine_name }}\Functional;
+
+use Drupal\KernelTests\BrowserTestBase;
+
+/**
+ * Test description.
+ *
+ * @group {{ machine_name }}
+ */
+class {{ class }} extends BrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static $modules = ['{{ machine_name }}'];
+
+  /**
+   * A user with permission to access controller.
+   *
+   * @var object
+   */
+  protected $webUser;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+    $this->webUser = $this->drupalCreateUser(['{{ route_permission }}']);
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testController() {
+    $this->drupalLogin($this->webUser);
+
+    // Validate route.
+    $this->drupalGet('{{ route_path }}');
+    $this->assertSession()->statusCodeEquals(200);
+  }
+}
