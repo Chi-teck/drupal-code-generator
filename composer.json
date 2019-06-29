@@ -6,7 +6,7 @@
     "ext-json": "*",
     "symfony/console": "^3.4 || ^4.0",
     "symfony/filesystem": "^2.7 || ^3.4 || ^4.0",
-    "twig/twig": "^1.35 || ^2.10"
+    "twig/twig": "^1.39 || ^2.10"
   },
   "bin": [
     "bin/dcg"
