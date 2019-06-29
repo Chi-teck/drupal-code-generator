@@ -70,6 +70,18 @@ $skipped_services = [
   'session_configuration',
   // This does not define type for 'session_handler' argument.
   'session_manager',
+  // This does not define type for $entity_repository parameter.
+  'paramconverter.entity',
+  // This does not define type for $entity_repository parameter.
+  'paramconverter.latest_revision',
+  // This does not define type for $entity_repository parameter.
+  'paramconverter.jsonapi.entity_uuid',
+  // This does not define type for $entity_repository parameter.
+  'content_translation.manager',
+  // This does not define type for $entity_repository parameter.
+  'drupal.proxy_original_service.paramconverter.configentity_admin',
+  // This does not define type for $entity_repository parameter.
+  'drupal.proxy_original_service.paramconverter.views_ui',
   // This has unused arguments in its definition.
   'toolbar.menu_tree',
   // This does not define type hint for $options parameter.
@@ -78,6 +90,8 @@ $skipped_services = [
   'app.root',
   'site.path',
   'update.root',
+  // @todo Resolve this.
+  'test_discovery',
 ];
 
 foreach ($services as $service_id => $service) {
