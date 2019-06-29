@@ -58,7 +58,6 @@ class ZooFormatter extends FormatterBase {
 
     foreach ($items as $delta => $item) {
       $element[$delta] = [
-        '#type' => 'item',
         '#markup' => $item->value,
       ];
     }
