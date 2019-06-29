@@ -8,7 +8,9 @@
   <file>./src</file>
   <file>./tests</file>
   <rule ref="Drupal"/>
-  <rule ref="DrupalPractice"/>
+  <rule ref="DrupalPractice">
+    <exclude name="Drupal.Commenting.VariableComment.Missing"/>
+  </rule>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>
