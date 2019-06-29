@@ -8,7 +8,10 @@
   <file>./tests</file>
   <rule ref="Drupal"/>
   <rule ref="DrupalPractice">
+    <exclude name="Drupal.Commenting.Deprecated.DeprecatedMissingSeeTag"/>
+    <exclude name="Drupal.Commenting.Deprecated.IncorrectTextLayout"/>
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
+    <exclude name="Drupal.Semantics.FunctionTriggerError.TriggerErrorTextLayoutStrict"/>
   </rule>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
