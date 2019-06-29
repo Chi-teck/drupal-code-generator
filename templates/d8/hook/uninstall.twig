@@ -3,5 +3,5 @@
  */
 function {{ machine_name }}_uninstall() {
   // Remove the styles directory and generated images.
-  file_unmanaged_delete_recursive(file_default_scheme() . '://styles');
+  \Drupal::service('file_system')->deleteRecursive(\Drupal::config('system.file')->get('default_scheme') . '://styles');
 }

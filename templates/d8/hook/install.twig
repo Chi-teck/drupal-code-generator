@@ -3,6 +3,6 @@
  */
 function {{ machine_name }}_install() {
   // Create the styles directory and ensure it's writable.
-  $directory = file_default_scheme() . '://styles';
-  file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+  $directory = \Drupal::config('system.file')->get('default_scheme') . '://styles';
+  \Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
 }

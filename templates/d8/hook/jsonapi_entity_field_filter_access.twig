@@ -1,0 +1,13 @@
+/**
+ * Implements hook_jsonapi_entity_field_filter_access().
+ */
+function {{ machine_name }}_jsonapi_entity_field_filter_access(\Drupal\Core\Field\FieldDefinitionInterface $field_definition, \Drupal\Core\Session\AccountInterface $account) {
+  if ($field_definition->getTargetEntityTypeId() === 'node' && $field_definition->getName() === 'field_sensitive_data') {
+    $has_sufficient_access = FALSE;
+    foreach (['administer nodes', 'view all sensitive field data'] as $permission) {
+      $has_sufficient_access = $has_sufficient_access ?: $account->hasPermission($permission);
+    }
+    return AccessResult::forbiddenIf(!$has_sufficient_access)->cachePerPermissions();
+  }
+  return AccessResult::neutral();
+}

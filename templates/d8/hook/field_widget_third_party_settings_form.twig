@@ -1,7 +1,7 @@
 /**
  * Implements hook_field_widget_third_party_settings_form().
  */
-function {{ machine_name }}_field_widget_third_party_settings_form(\Drupal\Core\Field\WidgetInterface $plugin, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $form_mode, $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function {{ machine_name }}_field_widget_third_party_settings_form(\Drupal\Core\Field\WidgetInterface $plugin, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $form_mode, array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $element = [];
   // Add a 'my_setting' checkbox to the settings form for 'foo_widget' field
   // widgets.
