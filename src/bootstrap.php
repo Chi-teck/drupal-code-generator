@@ -35,3 +35,6 @@ function dcg_create_application() {
 // Twig versions.
 $twig_environment_class = sprintf('DrupalCodeGenerator\Twig\Twig%dEnvironment', Twig_Environment::MAJOR_VERSION);
 class_alias($twig_environment_class, 'DrupalCodeGenerator\Twig\TwigEnvironment');
+
+// Legacy TwigEnvironment class is still used in Drush.
+class_alias($twig_environment_class, 'DrupalCodeGenerator\TwigEnvironment');
