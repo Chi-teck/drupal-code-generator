@@ -44,7 +44,7 @@ class FieldFormatterTest extends FieldBaseTest {
       'field_wine[0][value]' => 'foo',
     ];
     $this->drupalPostForm('node/add/test', $edit, 'Save');
-    $xpath = '//div[contains(@class, "field--name-field-wine")]/div[@class="field__item"]/div[normalize-space(text()) = "foo"]';
+    $xpath = '//div[contains(@class, "field--name-field-wine")]/div[@class="field__item" and normalize-space(text()) = "foo"]';
     $assert_session->elementExists('xpath', $xpath);
   }
 
