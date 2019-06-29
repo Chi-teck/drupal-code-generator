@@ -19,7 +19,7 @@ final class ModuleInfo extends ModuleGenerator {
    */
   protected function generate() :void {
     $vars = &$this->collectDefault();
-    $vars['description'] = $this->ask('Description', 'Module description.');
+    $vars['description'] = $this->ask('Description', 'Module description.', '::validateRequired');
     $vars['package'] = $this->ask('Package', 'Custom');
     $vars['configure'] = $this->ask('Configuration page (route name)');
     $vars['dependencies'] = $this->ask('Dependencies (comma separated)');

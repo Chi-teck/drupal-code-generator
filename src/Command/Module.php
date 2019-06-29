@@ -17,7 +17,7 @@ final class Module extends ModuleGenerator {
   protected function generate() :void {
     $vars = &$this->collectDefault();
 
-    $vars['description'] = $this->ask('Module description');
+    $vars['description'] = $this->ask('Module description', 'Provides additional functionality for the site.', '::validateRequired');
     $vars['package'] = $this->ask('Package', 'Custom');
 
     $dependencies = $this->ask('Dependencies (comma separated)');

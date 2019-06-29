@@ -13,7 +13,7 @@ class ModuleTest extends BaseGeneratorTest {
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
-    'Module description:' => 'Some description.',
+    'Module description [Provides additional functionality for the site.]:' => 'Some description.',
     'Package [Custom]:' => 'Custom',
     'Dependencies (comma separated):' => 'drupal:views',
     'Would you like to create module file? [No]:' => 'Yes',
