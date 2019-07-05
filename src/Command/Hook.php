@@ -24,7 +24,7 @@ final class Hook extends ModuleGenerator {
     $hook_question = new Question('Hook name');
     $hook_question->setValidator(function ($value) {
       if (!in_array($value, $this->supportedHooks())) {
-        throw new \UnexpectedValueException('The value is not correct class name.');
+        throw new \UnexpectedValueException('The value is not correct hook name.');
       }
       return $value;
     });
