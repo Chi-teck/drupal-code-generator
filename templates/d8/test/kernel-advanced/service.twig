@@ -29,7 +29,7 @@ class {{ class }} extends KernelTestBase {
    */
   public function testService() {
 
-    $service = \Drupal::srvice('{{ service }}');
+    $service = \Drupal::service('{{ service }}');
     $this->assertNotEmpty($service, 'Service is available');
    }
 }
