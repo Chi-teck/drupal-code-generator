@@ -34,7 +34,7 @@ class GeneratorDiscovery {
   /**
    * Finds and instantiates generator commands.
    *
-   * @param array $command_directories
+   * @param array $directories
    *   Directories to look up for commands.
    * @param string $namespace
    *   (Optional) The namespace to filter out commands.
@@ -42,17 +42,18 @@ class GeneratorDiscovery {
    * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
-  public function getGenerators(array $command_directories, $namespace = '\DrupalCodeGenerator\Command') :array {
+  public function getGenerators(array $directories, $namespace = '\DrupalCodeGenerator\Command') :array {
     $commands = [];
 
-    foreach ($command_directories as $directory) {
+    foreach ($directories as $directory) {
       $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS)
       );
-      foreach ($iterator as $path => $file) {
+      foreach ($iterator as $file) {
         if ($file->getExtension() == 'php') {
-          $relative_path = $this->filesystem->makePathRelative($path, $directory);
-          $class = $namespace . '\\' . str_replace('/', '\\', preg_replace('#\.php/$#', '', $relative_path));
+          $sub_path = $iterator->getInnerIterator()->getSubPath();
+          $sub_namespace = $sub_path ? str_replace(DIRECTORY_SEPARATOR, '\\', $sub_path) . '\\' : '';
+          $class = $namespace . '\\' . $sub_namespace . $file->getBasename('.php');
           if (class_exists($class)) {
             $reflected_class = new ReflectionClass($class);
             if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {
