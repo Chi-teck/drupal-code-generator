@@ -2,6 +2,7 @@
 <?php
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\BootstrapHandler;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorDiscovery;
 use DrupalCodeGenerator\Utils;
@@ -9,29 +10,27 @@ use Symfony\Component\Filesystem\Filesystem;
 
 // The autoloader may have a different location if DCG is installed as a local
 // Composer package.
-$autoloader = file_exists(__DIR__ . '/../vendor/autoload.php')
+$class_loader = file_exists(__DIR__ . '/../vendor/autoload.php')
   ? require __DIR__ . '/../vendor/autoload.php'
   : require __DIR__ . '/../../../autoload.php';
 
-// Create an application.
-$application = Application::create();
+$bootstrap_handler = new BootstrapHandler($class_loader);
+$container = $bootstrap_handler->bootstrap();
 
-// Add default generators.
+$application = Application::create($container);
+
 $discovery = new GeneratorDiscovery(new Filesystem());
 $default_generators = $discovery->getGenerators([Application::ROOT . '/src/Command']);
 $application->addCommands($default_generators);
 
-// Add custom generators.
 $command_directory = getenv('DCG_COMMAND_DIRECTORY') ?: Utils::getHomeDirectory() . '/.dcg';
 if (is_dir($command_directory)) {
-  $autoloader->addPsr4('DrupalCodeGenerator\\', $command_directory);
+  $class_loader->addPsr4('DrupalCodeGenerator\\', $command_directory);
   $custom_generators = $discovery->getGenerators([$command_directory], '\DrupalCodeGenerator');
   $application->addCommands($custom_generators);
 }
 
-// Add the navigation command.
 $application->add(new Navigation());
 $application->setDefaultCommand('navigation');
 
-// Run.
 $application->run();

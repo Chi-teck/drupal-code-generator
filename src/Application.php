@@ -11,6 +11,7 @@ use DrupalCodeGenerator\Helper\ResultPrinter;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Loader\FilesystemLoader;
 
@@ -32,7 +33,7 @@ class Application extends BaseApplication {
   /**
    * Creates the application.
    */
-  public static function create(): Application {
+  public static function create(?ContainerInterface $container = NULL): Application {
     // This gets substituted with git version when DCG is packaged to PHAR file.
     $version = '@git-version@';
     // Fallback for composer installation.
@@ -49,8 +50,8 @@ class Application extends BaseApplication {
       new LoggerFactory(),
     ]);
 
-    if (class_exists('Drupal')) {
-      $helper_set->set(new DrupalContext(\Drupal::getContainer()));
+    if ($container) {
+      $helper_set->set(new DrupalContext($container));
     }
     $application->setHelperSet($helper_set);
 
