@@ -16,7 +16,7 @@ final class AccessChecker extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $validator = function ($value) {

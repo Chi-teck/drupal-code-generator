@@ -17,7 +17,7 @@ final class Module extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['description'] = $this->ask('Module description', 'Module description.');

@@ -16,7 +16,7 @@ final class ArgumentDefault extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['plugin_name'] = $this->ask('Plugin name', 'Example');
     $vars['plugin_machine_name'] = $this->ask('Plugin machine name', '{plugin_name|h2m}');

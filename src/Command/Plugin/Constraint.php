@@ -16,7 +16,7 @@ final class Constraint extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $input_types = [

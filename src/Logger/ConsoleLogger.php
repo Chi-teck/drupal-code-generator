@@ -46,7 +46,7 @@ class ConsoleLogger extends AbstractLogger {
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = []) :void {
+  public function log($level, $message, array $context = []): void {
 
     if (!isset($this->verbosityLevelMap[$level])) {
       throw new InvalidArgumentException("The log level \"$level\" does not exist.");
@@ -105,7 +105,7 @@ class ConsoleLogger extends AbstractLogger {
    *
    * @see \Symfony\Component\Console\Logger::interpolate()
    */
-  private function interpolate(string $message, array $context) :string {
+  private function interpolate(string $message, array $context): string {
     if (FALSE === strpos($message, '{')) {
       return $message;
     }

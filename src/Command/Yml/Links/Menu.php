@@ -17,7 +17,7 @@ final class Menu extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('{machine_name}.links.menu.yml', 'links.menu');
   }

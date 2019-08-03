@@ -16,7 +16,7 @@ final class BreadcrumbBuilder extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}BreadcrumbBuilder');
     $this->addFile('src/{class}.php', 'breadcrumb-builder');

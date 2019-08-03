@@ -17,7 +17,7 @@ final class Settings extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->vars;
     $db_driver_question = new Question('Database driver', 'mysql');
     $db_driver_question->setAutocompleterValues(['mysql', 'pgsql', 'sqlite']);

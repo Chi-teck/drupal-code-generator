@@ -16,7 +16,7 @@ final class ArgumentDefault extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['configurable'] = $this->confirm('Make the plugin configurable?', FALSE);
 

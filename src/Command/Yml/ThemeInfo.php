@@ -17,7 +17,7 @@ final class ThemeInfo extends ThemeGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['base_theme'] = $this->ask('Base theme', 'classy', '::validateRequiredMachineName');
     $vars['description'] = $this->ask('Description', 'A flexible theme with a responsive, mobile-first layout.', '::validateRequired');

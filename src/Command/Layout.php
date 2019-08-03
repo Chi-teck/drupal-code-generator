@@ -16,7 +16,7 @@ final class Layout extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
 
     $vars = &$this->collectDefault();
 

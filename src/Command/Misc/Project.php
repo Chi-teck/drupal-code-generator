@@ -21,11 +21,11 @@ final class Project extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
 
     $vars = &$this->vars;
 
-    $name_validator = function (?string $value) :?string {
+    $name_validator = function (?string $value): ?string {
       $value = self::validateRequired($value);
       if (!preg_match('#[^/]+/[^/]+$#i', $value)) {
         throw new \UnexpectedValueException('The value is not correct project name.');
@@ -69,7 +69,7 @@ final class Project extends Generator {
       'html',
     ];
     $document_root_question = new Question('Document root directory, type single dot to use Composer root', 'docroot');
-    $document_root_normalizer = function (string $value) :string {
+    $document_root_normalizer = function (string $value): string {
       return $value == '.' ? '' : rtrim($value, '/');
     };
     $document_root_question->setNormalizer($document_root_normalizer);
@@ -172,7 +172,7 @@ final class Project extends Generator {
    * @return string
    *   Encoded JSON content.
    */
-  protected static function buildComposerJson(array $vars) :string {
+  protected static function buildComposerJson(array $vars): string {
 
     $document_root_path = $vars['document_root_path'];
 
@@ -343,7 +343,7 @@ final class Project extends Generator {
    *
    * @todo Find a way to track versions automatically.
    */
-  protected static function addPackage(array &$section, $package) :void {
+  protected static function addPackage(array &$section, $package): void {
     $versions = [
       'composer/installers' => '^1.4',
       'cweagans/composer-patches' => '^1.6',
@@ -365,7 +365,7 @@ final class Project extends Generator {
   /**
    * Validates require/require-dev answer.
    */
-  public static function validateSection(?string $value) :?string {
+  public static function validateSection(?string $value): ?string {
     if ($value != 'require' && $value != 'require-dev') {
       throw new \UnexpectedValueException('The value should be either "require" or "require-dev".');
     }

@@ -16,7 +16,7 @@ final class Services extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['class'] = '{machine_name|camelize}';
     $this->addFile('{machine_name}.services.yml', 'services');

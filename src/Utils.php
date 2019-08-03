@@ -12,14 +12,14 @@ class Utils {
   /**
    * Transforms a machine name to human name.
    */
-  public static function machine2human(string $machine_name) :string {
+  public static function machine2human(string $machine_name): string {
     return ucfirst(trim(str_replace('_', ' ', $machine_name)));
   }
 
   /**
    * Transforms a human name to machine name.
    */
-  public static function human2machine(string $human_name) :string {
+  public static function human2machine(string $human_name): string {
     return trim(preg_replace(
       ['/^[0-9]+/', '/[^a-z0-9_]+/'],
       '_',
@@ -30,14 +30,14 @@ class Utils {
   /**
    * Transforms a camelized sting to machine name.
    */
-  public static function camel2machine(string $input) :string {
+  public static function camel2machine(string $input): string {
     return self::human2machine(preg_replace('/[A-Z]/', ' \0', $input));
   }
 
   /**
    * Camelize a string.
    */
-  public static function camelize(string $input, $upper_camel = TRUE) :string {
+  public static function camelize(string $input, $upper_camel = TRUE): string {
     $output = preg_replace('/([^A-Z])([A-Z])/', '$1 $2', $input);
     $output = strtolower($output);
     $output = preg_replace('/[^a-z0-9]/', ' ', $output);
@@ -53,7 +53,7 @@ class Utils {
    * @return string|null
    *   Extension root directory or NULL if it was not found.
    */
-  public static function getExtensionRoot(string $directory) :?string {
+  public static function getExtensionRoot(string $directory): ?string {
     $extension_root = NULL;
     for ($i = 1; $i <= 5; $i++) {
       $info_file = $directory . '/' . basename($directory) . '.info';
@@ -87,13 +87,13 @@ class Utils {
    * @return string|null
    *   Text with tokens replaced.
    */
-  public static function replaceTokens(?string $text, array $data) :?string {
+  public static function replaceTokens(?string $text, array $data): ?string {
 
     if (!$text || !$data) {
       return $text;
     }
 
-    $process_token = function (array $matches) use ($data) :string {
+    $process_token = function (array $matches) use ($data): string {
       list($name, $filter) = array_pad(explode('|', $matches[1], 2), 2, NULL);
 
       if (!array_key_exists($name, $data)) {
@@ -150,7 +150,7 @@ class Utils {
    * @return string
    *   The pluralized word.
    */
-  public static function pluralize(string $input) :string {
+  public static function pluralize(string $input): string {
     $result = Inflector::pluralize($input);
     // The inflector may return an array if the world has more than one possible
     // plural forms. In this case, just pick the first one.

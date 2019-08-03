@@ -15,7 +15,7 @@ final class Test extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}TestCase');
     $this->addFile('{machine_name}.test', 'test');

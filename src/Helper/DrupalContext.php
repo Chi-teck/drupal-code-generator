@@ -41,7 +41,7 @@ class DrupalContext extends Helper {
   /**
    * {@inheritdoc}
    */
-  public function getName() :string {
+  public function getName(): string {
     return 'drupal_context';
   }
 
@@ -55,7 +55,7 @@ class DrupalContext extends Helper {
    *   An associative array whose keys are the machine names of the extensions
    *   and whose values are extension names.
    */
-  public function getExtensionList(string $extension_type) :array {
+  public function getExtensionList(string $extension_type): array {
     switch ($extension_type) {
       case 'module':
         if (!$this->modules) {
@@ -99,7 +99,7 @@ class DrupalContext extends Helper {
    * @return string|null
    *   The destination.
    */
-  public function getDestination(string $extension_type, bool $is_new, ?string $machine_name) :?string {
+  public function getDestination(string $extension_type, bool $is_new, ?string $machine_name): ?string {
     $destination = NULL;
 
     switch ($extension_type) {

@@ -18,7 +18,7 @@ final class Destination extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('src/Plugin/migrate/destination/{class}.php', 'destination');
   }

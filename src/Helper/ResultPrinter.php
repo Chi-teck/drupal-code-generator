@@ -19,7 +19,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
   /**
    * {@inheritdoc}
    */
-  public function getName() :string {
+  public function getName(): string {
     return 'result_printer';
   }
 
@@ -31,7 +31,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
    * @param string $base_path
    *   (Optional) Base path.
    */
-  public function printResult(array $assets, string $base_path = '') :void {
+  public function printResult(array $assets, string $base_path = ''): void {
 
     if (count($assets) == 0) {
       return;
@@ -39,7 +39,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
 
     $assets = array_unique($assets);
 
-    usort($assets, function (Asset $a, Asset $b) :int {
+    usort($assets, function (Asset $a, Asset $b): int {
       $depth_a = substr_count($a, '/');
       $depth_b = substr_count($b, '/');
       // Top level files should be printed first.

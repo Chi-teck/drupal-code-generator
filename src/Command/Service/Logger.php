@@ -16,7 +16,7 @@ final class Logger extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', 'FileLog');
     $this->addFile('src/Logger/{class}.php', 'logger');

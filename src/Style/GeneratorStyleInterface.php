@@ -20,6 +20,6 @@ interface GeneratorStyleInterface extends SymfonyStyleInterface, OutputInterface
   /**
    * Builds console table.
    */
-  public function buildTable(array $headers, array $rows) :Table;
+  public function buildTable(array $headers, array $rows): Table;
 
 }

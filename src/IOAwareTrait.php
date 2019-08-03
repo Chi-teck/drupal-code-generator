@@ -19,7 +19,7 @@ trait IOAwareTrait {
   /**
    * Sets the console IO.
    */
-  public function io(GeneratorStyleInterface $io = NULL) :GeneratorStyleInterface {
+  public function io(GeneratorStyleInterface $io = NULL): GeneratorStyleInterface {
     if ($io) {
       $this->io = $io;
     }

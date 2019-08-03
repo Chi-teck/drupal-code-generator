@@ -17,7 +17,7 @@ final class Type extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['configurable_storage'] = $this->confirm('Make the field storage configurable?', FALSE);
     $vars['configurable_instance'] = $this->confirm('Make the field instance configurable?', FALSE);

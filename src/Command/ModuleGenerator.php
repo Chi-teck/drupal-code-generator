@@ -24,7 +24,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addServicesFile(string $path = '{machine_name}.services.yml') :Asset {
+  protected function addServicesFile(string $path = '{machine_name}.services.yml'): Asset {
     return $this->addFile()
       ->path($path)
       ->action(Asset::APPEND)
@@ -40,7 +40,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addSchemaFile(string $path = 'config/schema/{machine_name}.schema.yml') :Asset {
+  protected function addSchemaFile(string $path = 'config/schema/{machine_name}.schema.yml'): Asset {
     return $this->addFile()
       ->path($path)
       ->action(Asset::APPEND);
@@ -55,7 +55,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    * @return array
    *   List of collected services.
    */
-  protected function collectServices(bool $default = TRUE) :array {
+  protected function collectServices(bool $default = TRUE): array {
 
     if (!$this->confirm('Would you like to inject dependencies?', $default)) {
       return $this->vars['services'] = [];
@@ -102,7 +102,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    * @return array
    *   List of service definitions keyed by service ID.
    */
-  protected static function getServiceDefinitions() :array {
+  protected static function getServiceDefinitions(): array {
     $data_encoded = file_get_contents(Application::ROOT . '/resources/service-definitions.json');
     return json_decode($data_encoded, TRUE);
   }

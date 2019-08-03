@@ -13,7 +13,7 @@ final class Javascript extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('js/{machine_name|u2h}.js', 'javascript');
   }

@@ -17,7 +17,7 @@ final class HtmlPage extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->vars['file_name'] = $this->ask('File name', 'index.html');
     $this->addFile('{file_name}', 'index');
     $this->addFile('css/main.css')

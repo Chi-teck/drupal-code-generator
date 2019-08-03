@@ -67,7 +67,7 @@ class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
    * {@inheritdoc}
    */
   public function listing(array $elements) {
-    $build_item = function (string $element) :string {
+    $build_item = function (string $element): string {
       return sprintf(' • %s', $element);
     };
     $elements = array_map($build_item, $elements);
@@ -88,7 +88,7 @@ class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
   /**
    * {@inheritdoc}
    */
-  public function buildTable(array $headers, array $rows) :Table {
+  public function buildTable(array $headers, array $rows): Table {
     $style = clone Table::getStyleDefinition('symfony-style-guide');
     $style->setCellHeaderFormat('<info>%s</info>');
 

@@ -78,7 +78,7 @@ class GeneratorTester {
    * @return string
    *   The directory.
    */
-  public function getDirectory() :string {
+  public function getDirectory(): string {
     return $this->directory;
   }
 
@@ -88,7 +88,7 @@ class GeneratorTester {
    * @param string $directory
    *   The directory.
    */
-  public function setDirectory(string $directory) :void {
+  public function setDirectory(string $directory): void {
     $this->directory = $directory;
   }
 
@@ -98,7 +98,7 @@ class GeneratorTester {
    * @return array
    *   The interaction.
    */
-  public function getInteraction() :array {
+  public function getInteraction(): array {
     return $this->interaction;
   }
 
@@ -108,7 +108,7 @@ class GeneratorTester {
    * @param array $interaction
    *   The interaction.
    */
-  public function setInteraction(array $interaction) :void {
+  public function setInteraction(array $interaction): void {
     $this->interaction = $interaction;
   }
 
@@ -118,7 +118,7 @@ class GeneratorTester {
    * @return array
    *   The fixtures.
    */
-  public function getFixtures() :array {
+  public function getFixtures(): array {
     return $this->fixtures;
   }
 
@@ -128,7 +128,7 @@ class GeneratorTester {
    * @param array $fixtures
    *   The fixtures.
    */
-  public function setFixtures(array $fixtures) :void {
+  public function setFixtures(array $fixtures): void {
     $this->fixtures = $fixtures;
   }
 
@@ -138,7 +138,7 @@ class GeneratorTester {
    * @return int
    *   The command exit code
    */
-  public function execute() :int {
+  public function execute(): int {
     return $this->commandTester
       ->setInputs(array_values($this->interaction))
       ->execute(['--directory' => $this->getDirectory()]);
@@ -150,7 +150,7 @@ class GeneratorTester {
    * @return string
    *   The display.
    */
-  public function getDisplay() :string {
+  public function getDisplay(): string {
     return $this->commandTester->getDisplay();
   }
 
@@ -160,7 +160,7 @@ class GeneratorTester {
    * @return string
    *   Expected display.
    */
-  public function getExpectedDisplay() :string {
+  public function getExpectedDisplay(): string {
     $default_name = Utils::machine2human(basename($this->directory));
 
     $expected_display = "\n";

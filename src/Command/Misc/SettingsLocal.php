@@ -17,7 +17,7 @@ final class SettingsLocal extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->vars;
     $vars['db_override'] = $this->confirm('Override database configuration?', FALSE);
 

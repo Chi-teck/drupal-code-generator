@@ -16,7 +16,7 @@ final class Action extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['category'] = $this->ask('Action category', 'Custom');

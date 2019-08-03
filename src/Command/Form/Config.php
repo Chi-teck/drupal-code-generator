@@ -19,7 +19,7 @@ final class Config extends FormGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $this->generateRoute();
 

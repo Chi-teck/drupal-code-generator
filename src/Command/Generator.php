@@ -89,7 +89,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * {@inheritdoc}
    */
-  protected function configure() :void {
+  protected function configure(): void {
     $this
       ->setName($this->name)
       ->setDescription($this->description)
@@ -102,7 +102,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * {@inheritdoc}
    */
-  protected function initialize(InputInterface $input, OutputInterface $output) :void {
+  protected function initialize(InputInterface $input, OutputInterface $output): void {
 
     $this->io = new GeneratorStyle($input, $output, $this->getHelper('question'));
     foreach ($this->getHelperSet() as $helper) {
@@ -141,7 +141,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * {@inheritdoc}
    */
-  protected function execute(InputInterface $input, OutputInterface $output) :int {
+  protected function execute(InputInterface $input, OutputInterface $output): int {
 
     $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
 
@@ -163,12 +163,12 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Generates assets.
    */
-  abstract protected function generate() :void;
+  abstract protected function generate(): void;
 
   /**
    * Render assets.
    */
-  protected function render() :void {
+  protected function render(): void {
     $renderer = $this->getHelper('renderer');
 
     $this->processVars();
@@ -189,7 +189,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Dumps assets.
    */
-  protected function dump(bool $dry_run) :array {
+  protected function dump(bool $dry_run): array {
     $destination = $this->getDestination();
     $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
     return $this->getHelper('dumper')->dump($this->assets, $destination, $dry_run);
@@ -198,14 +198,14 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Prints summary.
    */
-  protected function printSummary(array $dumped_assets) :void {
+  protected function printSummary(array $dumped_assets): void {
     $this->getHelper('result_printer')->printResult($dumped_assets);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getLabel() :?string {
+  public function getLabel(): ?string {
     return $this->label;
   }
 
@@ -227,7 +227,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Asks for confirmation.
    */
-  protected function confirm(string $question, bool $default = TRUE) :bool {
+  protected function confirm(string $question, bool $default = TRUE): bool {
     $this->processVars();
     $question = Utils::replaceTokens($question, $this->vars);
     return $this->io->confirm($question, $default);
@@ -261,7 +261,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addAsset(string $type) :Asset {
+  protected function addAsset(string $type): Asset {
     $asset = (new Asset())->type($type);
     $this->assets[] = $asset;
     return $asset;
@@ -278,7 +278,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addFile(string $path = NULL, string $template = NULL) :Asset {
+  protected function addFile(string $path = NULL, string $template = NULL): Asset {
     return $this->addAsset('file')
       ->path($path)
       ->template($template);
@@ -293,15 +293,15 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addDirectory(string $path = NULL) :Asset {
+  protected function addDirectory(string $path = NULL): Asset {
     return $this->addAsset('directory')->path($path);
   }
 
   /**
    * Processes collected variables.
    */
-  protected function processVars() :void {
-    array_walk_recursive($this->vars, function (&$var, string $key, array $vars) :void {
+  protected function processVars(): void {
+    array_walk_recursive($this->vars, function (&$var, string $key, array $vars): void {
       if (is_string($var)) {
         $var = Utils::replaceTokens($var, $vars);
       }
@@ -311,7 +311,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Returns destination for generated files.
    */
-  protected function getDestination() :?string {
+  protected function getDestination(): ?string {
     return $this->directory;
   }
 

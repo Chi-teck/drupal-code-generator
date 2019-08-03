@@ -15,7 +15,7 @@ abstract class BasePlugin extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['plugin_name'] = $this->ask('Plugin name', 'Example', '::validateRequired');

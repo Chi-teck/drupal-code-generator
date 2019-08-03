@@ -16,7 +16,7 @@ final class NginxVirtualHost extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->vars;
 
     $socket = PHP_MAJOR_VERSION == 5

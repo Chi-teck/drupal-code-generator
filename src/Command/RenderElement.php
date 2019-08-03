@@ -14,7 +14,7 @@ final class RenderElement extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('src/Element/Entity.php', 'render-element');
   }

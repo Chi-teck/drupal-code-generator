@@ -13,7 +13,7 @@ final class ThemeSettings extends ThemeGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('theme-settings.php', 'form');
     $this->addFile('config/install/{machine_name}.settings.yml', 'config');

@@ -17,7 +17,7 @@ final class Breakpoints extends ThemeGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('{machine_name}.breakpoints.yml', 'breakpoints');
   }

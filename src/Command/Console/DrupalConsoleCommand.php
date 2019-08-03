@@ -16,7 +16,7 @@ final class DrupalConsoleCommand extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['command_name'] = $this->ask('Command name', '{machine_name}:example');

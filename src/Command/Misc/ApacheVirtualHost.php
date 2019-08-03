@@ -16,7 +16,7 @@ final class ApacheVirtualHost extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $validator = function (?string $value):string {
       $value = self::validateRequired($value);
       if (!filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {

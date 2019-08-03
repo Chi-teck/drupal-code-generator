@@ -15,12 +15,12 @@ final class PluginManager extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     // self::validateMachineName() does not allow dots, but they can appear
     // in some plugin types (field.widget, views.argument, etc).
-    $plugin_type_validator = function (string $value) :string {
+    $plugin_type_validator = function (string $value): string {
       $value = self::validateRequired($value);
       if (!preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
         throw new \UnexpectedValueException('The value is not correct machine name.');

@@ -16,7 +16,7 @@ final class TwigExtension extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}TwigExtension');
     $this->collectServices();

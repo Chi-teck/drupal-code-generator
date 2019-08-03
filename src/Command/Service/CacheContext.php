@@ -16,7 +16,7 @@ final class CacheContext extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['context_id'] = $this->ask('Context ID', 'example');

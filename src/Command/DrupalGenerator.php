@@ -59,7 +59,7 @@ abstract class DrupalGenerator extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function initialize(InputInterface $input, OutputInterface $output) :void {
+  protected function initialize(InputInterface $input, OutputInterface $output): void {
     parent::initialize($input, $output);
 
     if ($this->getHelperSet()->has('drupal_context')) {
@@ -75,7 +75,7 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Collects default variables.
    */
-  protected function &collectDefault() :array {
+  protected function &collectDefault(): array {
     // If both name and machine_name questions are defined it is quite possible
     // that we can provide the extension name without interacting with a user.
     if (!$this->isNewExtension && $this->drupalContext && $this->nameQuestion && $this->machineNameQuestion) {
@@ -97,7 +97,7 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Asks name question.
    */
-  protected function askNameQuestion() :string {
+  protected function askNameQuestion(): string {
     $root_directory = basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
     $default_value = Utils::machine2human($root_directory);
     $name_question = new Question($this->nameQuestion, $default_value);
@@ -111,7 +111,7 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Asks machine name question.
    */
-  protected function askMachineNameQuestion() :string {
+  protected function askMachineNameQuestion(): string {
     $default_value = Utils::human2machine($this->vars['name'] ?? basename($this->directory));
     $machine_name_question = new Question($this->machineNameQuestion, $default_value);
     $machine_name_question->setValidator([get_class($this), 'validateRequiredMachineName']);
@@ -128,14 +128,14 @@ abstract class DrupalGenerator extends Generator {
    *   An associative array whose keys are the machine names of the extensions
    *   and whose values are extension names.
    */
-  protected function getExtensionList() :array {
+  protected function getExtensionList(): array {
     return $this->drupalContext ? $this->drupalContext->getExtensionList($this->extensionType) : [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getDestination() :?string {
+  protected function getDestination(): ?string {
     if ($this->drupalContext && $this->extensionType) {
       $destination = $this->drupalContext->getDestination(
         $this->extensionType,

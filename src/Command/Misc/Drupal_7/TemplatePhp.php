@@ -17,7 +17,7 @@ final class TemplatePhp extends ThemeGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('template.php', 'template.php');
   }

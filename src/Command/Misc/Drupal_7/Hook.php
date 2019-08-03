@@ -18,11 +18,11 @@ final class Hook extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $question = new Question('Hook name');
-    $question->setValidator(function (?string $value) :?string {
+    $question->setValidator(function (?string $value): ?string {
       if (!in_array($value, $this->getSupportedHooks())) {
         throw new \UnexpectedValueException('The value is not correct hook name.');
       }
@@ -76,8 +76,8 @@ final class Hook extends ModuleGenerator {
    * @return array
    *   List of supported hooks.
    */
-  protected function getSupportedHooks() :array {
-    return array_map(function (string $file) :string {
+  protected function getSupportedHooks(): array {
+    return array_map(function (string $file): string {
       return pathinfo($file, PATHINFO_FILENAME);
     }, array_diff(scandir(Application::TEMPLATE_PATH . '/misc/d7/hook'), ['.', '..']));
   }

@@ -21,7 +21,7 @@ abstract class PluginGenerator extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function &collectDefault() :array {
+  protected function &collectDefault(): array {
     parent::collectDefault();
     if ($this->pluginLabelQuestion) {
       $this->vars['plugin_label'] = $this->askPluginLabelQuestion();
@@ -38,21 +38,21 @@ abstract class PluginGenerator extends ModuleGenerator {
   /**
    * Asks plugin label question.
    */
-  protected function askPluginLabelQuestion() :string {
+  protected function askPluginLabelQuestion(): string {
     return $this->ask($this->pluginLabelQuestion, $this->pluginLabelDefault, '::validateRequired');
   }
 
   /**
    * Asks plugin ID question.
    */
-  protected function askPluginIdQuestion() :string {
+  protected function askPluginIdQuestion(): string {
     return $this->ask($this->pluginIdQuestion, $this->pluginIdDefault, '::validateRequiredMachineName');
   }
 
   /**
    * Asks plugin class question.
    */
-  protected function askPluginClassQuestion() :string {
+  protected function askPluginClassQuestion(): string {
     if (!$this->pluginClassDefault) {
       $unprefixed_plugin_id = preg_replace('/^' . $this->vars['machine_name'] . '_/', '', $this->vars['plugin_id']);
       $this->pluginClassDefault = Utils::camelize($unprefixed_plugin_id) . $this->pluginClassSuffix;

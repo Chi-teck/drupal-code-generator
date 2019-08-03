@@ -13,7 +13,7 @@ class TwigSortTokenParser extends AbstractTokenParser {
   /**
    * {@inheritdoc}
    */
-  public function parse(Token $token) :TwigSortSetNode {
+  public function parse(Token $token): TwigSortSetNode {
 
     $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
     $body = $this->parser->subparse(
@@ -30,7 +30,7 @@ class TwigSortTokenParser extends AbstractTokenParser {
   /**
    * {@inheritdoc}
    */
-  public function getTag() :string {
+  public function getTag(): string {
     return 'sort';
   }
 

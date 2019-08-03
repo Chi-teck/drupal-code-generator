@@ -18,7 +18,7 @@ final class MenuLink extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('src/Plugin/Menu/{class}.php', 'menu-link');
   }

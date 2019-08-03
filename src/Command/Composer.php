@@ -19,7 +19,7 @@ final class Composer extends DrupalGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['description'] = $this->ask('Description');
 

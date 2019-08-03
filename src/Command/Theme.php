@@ -18,7 +18,7 @@ final class Theme extends ThemeGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['base_theme'] = Utils::human2machine($this->ask('Base theme', 'classy'));

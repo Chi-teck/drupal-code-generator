@@ -12,6 +12,6 @@ interface IOAwareInterface {
   /**
    * Sets the console IO.
    */
-  public function io(GeneratorStyleInterface $io) :GeneratorStyleInterface;
+  public function io(GeneratorStyleInterface $io): GeneratorStyleInterface;
 
 }

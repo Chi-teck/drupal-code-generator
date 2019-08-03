@@ -16,7 +16,7 @@ final class Template extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['template_name'] = $this->ask('Template name', 'example');

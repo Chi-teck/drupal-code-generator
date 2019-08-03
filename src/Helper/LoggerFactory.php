@@ -21,7 +21,7 @@ class LoggerFactory extends Helper implements IOAwareInterface, LoggerAwareInter
   /**
    * {@inheritdoc}
    */
-  public function getName() :string {
+  public function getName(): string {
     return 'logger_factory';
   }
 
@@ -31,7 +31,7 @@ class LoggerFactory extends Helper implements IOAwareInterface, LoggerAwareInter
    * @return \Psr\Log\LoggerInterface
    *   Console logger.
    */
-  public function getLogger() :LoggerInterface {
+  public function getLogger(): LoggerInterface {
     if (!$this->logger) {
       $this->logger = new ConsoleLogger($this->io);
     }

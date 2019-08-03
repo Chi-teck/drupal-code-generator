@@ -18,7 +18,7 @@ final class EntityReferenceSelection extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['configurable'] = $this->confirm('Provide additional plugin configuration?', FALSE);
@@ -54,7 +54,7 @@ final class EntityReferenceSelection extends PluginGenerator {
   /**
    * Base classes for the plugin.
    */
-  private static function baseClasses() :array {
+  private static function baseClasses(): array {
     return [
       'comment' => 'Drupal\comment\Plugin\EntityReferenceSelection\CommentSelection',
       'file' => 'Drupal\file\Plugin\EntityReferenceSelection\FileSelection',

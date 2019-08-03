@@ -18,7 +18,7 @@ final class ThemeLibraries extends ThemeGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $this->collectDefault();
     $this->addFile('{machine_name}.libraries.yml', 'theme-libraries');
   }

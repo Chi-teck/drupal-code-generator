@@ -48,7 +48,7 @@ class Dumper extends Helper implements IOAwareInterface {
   /**
    * {@inheritdoc}
    */
-  public function getName() :string {
+  public function getName(): string {
     return 'dumper';
   }
 
@@ -65,7 +65,7 @@ class Dumper extends Helper implements IOAwareInterface {
    * @return \DrupalCodeGenerator\Asset[]
    *   A list of created or updated assets.
    */
-  public function dump(array $assets, string $directory, bool $dry_run = FALSE) :array {
+  public function dump(array $assets, string $directory, bool $dry_run = FALSE): array {
 
     $dumped_assets = [];
 
@@ -144,7 +144,7 @@ class Dumper extends Helper implements IOAwareInterface {
   /**
    * Confirms file replace.
    */
-  protected function confirmReplace(string $file_path) :bool {
+  protected function confirmReplace(string $file_path): bool {
     if ($this->replace === NULL) {
       return $this->io->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?");
     }
@@ -154,7 +154,7 @@ class Dumper extends Helper implements IOAwareInterface {
   /**
    * Appends generated content to the end of existing one.
    */
-  protected static function appendContent(string $existing_content, ?string $new_content, int $header_size) :string {
+  protected static function appendContent(string $existing_content, ?string $new_content, int $header_size): string {
     if ($new_content === NULL) {
       return $existing_content;
     }

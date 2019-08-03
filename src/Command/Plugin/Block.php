@@ -16,7 +16,7 @@ final class Block extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['category'] = $this->ask('Block category', 'Custom');

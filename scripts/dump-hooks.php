@@ -23,7 +23,7 @@ require __DIR__ . '/../vendor/autoload.php';
  * @param \Symfony\Component\Console\Output\OutputInterface $output
  *   Output instance.
  */
-function dump_hooks(InputInterface $input, OutputInterface $output) :void {
+function dump_hooks(InputInterface $input, OutputInterface $output): void {
 
   $input_directory = $input->getArgument('input_directory');
   $output_directory = $input->getArgument('output_directory');
@@ -62,7 +62,7 @@ function dump_hooks(InputInterface $input, OutputInterface $output) :void {
  *
  * @throws \Symfony\Component\Console\Exception\RuntimeException
  */
-function check_directories(string $input_directory, string $output_directory) :void {
+function check_directories(string $input_directory, string $output_directory): void {
   $file_system = new Filesystem();
   if (!$file_system->exists($input_directory)) {
     throw new RuntimeException('Input directory does not exist.');

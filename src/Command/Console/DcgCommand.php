@@ -18,10 +18,10 @@ final class DcgCommand extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->vars;
 
-    $command_name_validator = function (?string $value) :?string {
+    $command_name_validator = function (?string $value): ?string {
       return static::validate($value, '^[a-z][a-z0-9-_:]*[a-z0-9]$', 'The value is not correct command name.');
     };
     $vars['command_name'] = $this->ask('Command name', 'custom:example', $command_name_validator);
@@ -31,7 +31,7 @@ final class DcgCommand extends Generator {
     $sub_names = explode(':', $vars['command_name']);
     $short_name = array_pop($sub_names);
 
-    $alias_validator = function (?string $value) :?string {
+    $alias_validator = function (?string $value): ?string {
       return static::validate($value, '^[a-z0-9][a-z0-9_]+$', 'The value is not correct alias name.');
     };
     $vars['alias'] = $this->ask('Command alias', $short_name, $alias_validator);

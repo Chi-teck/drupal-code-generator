@@ -13,6 +13,6 @@ interface GeneratorInterface {
    * @return string|null
    *   A label suitable for navigation command.
    */
-  public function getLabel() :?string;
+  public function getLabel(): ?string;
 
 }

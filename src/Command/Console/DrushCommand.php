@@ -16,7 +16,7 @@ final class DrushCommand extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->vars;
 
     $vars['command_name'] = $this->ask('Command name', '');

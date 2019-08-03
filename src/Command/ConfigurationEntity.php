@@ -16,7 +16,7 @@ final class ConfigurationEntity extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
 
     $vars['entity_type_label'] = $this->ask('Entity type label', '{name}');

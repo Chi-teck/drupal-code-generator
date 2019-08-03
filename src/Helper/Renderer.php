@@ -31,7 +31,7 @@ class Renderer extends Helper {
   /**
    * {@inheritdoc}
    */
-  public function getName() :string {
+  public function getName(): string {
     return 'renderer';
   }
 
@@ -46,7 +46,7 @@ class Renderer extends Helper {
    * @return string
    *   A string representing the rendered output.
    */
-  public function render(string $template, array $vars) :string {
+  public function render(string $template, array $vars): string {
     return $this->twig->render($template, $vars);
   }
 
@@ -56,7 +56,7 @@ class Renderer extends Helper {
    * @param \DrupalCodeGenerator\Asset $asset
    *   Asset to render.
    */
-  public function renderAsset(Asset $asset) :void {
+  public function renderAsset(Asset $asset): void {
     if (!$asset->isDirectory() && $asset->getTemplate()) {
       $content = '';
       if ($header_template = $asset->getHeaderTemplate()) {
@@ -73,7 +73,7 @@ class Renderer extends Helper {
    * @param string $path
    *   A path where to look for templates.
    */
-  public function addPath(string $path) :void {
+  public function addPath(string $path): void {
     /** @var \Twig\Loader\FilesystemLoader $loader */
     $loader = $this->twig->getLoader();
     $loader->addPath($path);

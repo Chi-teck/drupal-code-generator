@@ -208,7 +208,7 @@ print "-----------------------\n";
  *
  * @throws \UnexpectedValueException
  */
-function process_class(array &$raw_definitions, string $service_id, $class, array $dependencies) :void {
+function process_class(array &$raw_definitions, string $service_id, $class, array $dependencies): void {
 
   if (!class_exists($class) && !interface_exists($class)) {
     throw new UnexpectedValueException("The service class $class does not exit.");

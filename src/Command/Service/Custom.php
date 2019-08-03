@@ -18,7 +18,7 @@ final class Custom extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', '::validateRequiredServiceName');
 

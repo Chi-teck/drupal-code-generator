@@ -13,7 +13,7 @@ class TwigSortSetNode extends Node {
   /**
    * {@inheritdoc}
    */
-  public function compile(Compiler $compiler) :void {
+  public function compile(Compiler $compiler): void {
     $compiler
       ->addDebugInfo($this)
       ->write("ob_start();\n")

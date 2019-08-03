@@ -61,14 +61,14 @@ class Navigation extends Command {
   /**
    * {@inheritdoc}
    */
-  public function getSynopsis($short = FALSE) :string {
+  public function getSynopsis($short = FALSE): string {
     return 'dcg [options] <generator>';
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function initialize(InputInterface $input, OutputInterface $output) :void {
+  protected function initialize(InputInterface $input, OutputInterface $output): void {
     parent::initialize($input, $output);
 
     // Initialize the menu structure.
@@ -93,7 +93,7 @@ class Navigation extends Command {
   /**
    * {@inheritdoc}
    */
-  protected function execute(InputInterface $input, OutputInterface $output) :?int {
+  protected function execute(InputInterface $input, OutputInterface $output): ?int {
     if ($command_name = $this->selectGenerator($input, $output)) {
       return $this->getApplication()
         ->find($command_name)
@@ -115,7 +115,7 @@ class Navigation extends Command {
    * @return string|null
    *   Generator name or null if user decided to exit the navigation.
    */
-  protected function selectGenerator(InputInterface $input, OutputInterface $output, array $menu_trail = []) :?string {
+  protected function selectGenerator(InputInterface $input, OutputInterface $output, array $menu_trail = []): ?string {
 
     // Narrow down menu tree.
     $active_menu_tree = $this->menuTree;
@@ -179,7 +179,7 @@ class Navigation extends Command {
    * @return string
    *   The menu item label.
    */
-  protected function createMenuItemLabel(string $command_name, bool $nested) :string {
+  protected function createMenuItemLabel(string $command_name, bool $nested): string {
 
     if (isset($this->labels[$command_name])) {
       $label = $this->labels[$command_name];
@@ -199,7 +199,7 @@ class Navigation extends Command {
    * @param array $array
    *   An array being sorted.
    */
-  protected static function recursiveKsort(array &$array) :void {
+  protected static function recursiveKsort(array &$array): void {
     foreach ($array as &$value) {
       if (is_array($value)) {
         static::recursiveKsort($value);
@@ -220,7 +220,7 @@ class Navigation extends Command {
    *
    * @see https://api.drupal.org/api/drupal/includes!common.inc/function/drupal_array_set_nested_value/7
    */
-  protected static function arraySetNestedValue(array &$array, array $parents, $value) :void {
+  protected static function arraySetNestedValue(array &$array, array $parents, $value): void {
     $ref = &$array;
     foreach ($parents as $parent) {
       if (isset($ref) && !is_array($ref)) {

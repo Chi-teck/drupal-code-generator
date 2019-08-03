@@ -16,7 +16,7 @@ final class ThemeNegotiator extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
+  protected function generate(): void {
     $vars = &$this->collectDefault();
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}Negotiator');
     $this->addFile('src/Theme/{class}.php', 'theme-negotiator');
