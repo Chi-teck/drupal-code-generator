@@ -40,6 +40,13 @@ final class Asset {
   private $template;
 
   /**
+   * The template string to render.
+   *
+   * @var string|null
+   */
+  private $inlineTemplate;
+
+  /**
    * Template variables.
    *
    * @var array
@@ -114,6 +121,16 @@ final class Asset {
    */
   public function getTemplate(): ?string {
     return Utils::replaceTokens($this->template, $this->getVars());
+  }
+
+  /**
+   * Getter for inline template.
+   *
+   * @return string
+   *   Asset template.
+   */
+  public function getInlineTemplate(): ?string {
+    return $this->inlineTemplate;
   }
 
   /**
@@ -219,6 +236,20 @@ final class Asset {
    */
   public function template(?string $template): Asset {
     $this->template = self::addTwigExtension($template);
+    return $this;
+  }
+
+  /**
+   * Setter for asset template.
+   *
+   * @param string|null $inline_template
+   *   The template string to render.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  public function inlineTemplate(?string $inline_template): Asset {
+    $this->inlineTemplate = $inline_template;
     return $this;
   }
 

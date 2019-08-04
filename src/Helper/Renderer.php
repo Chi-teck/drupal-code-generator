@@ -51,20 +51,51 @@ class Renderer extends Helper {
   }
 
   /**
+   * Renders a Twig string directly.
+   *
+   * @param string $inline_template
+   *   The template string to render.
+   * @param array $vars
+   *   (Optional) Template variables.
+   *
+   * @return string
+   *   A string representing the rendered output.
+   */
+  public function renderInline(string $inline_template, array $vars): string {
+    return $this->twig->createTemplate($inline_template)->render($vars);
+  }
+
+  /**
    * Renders an asset.
    *
    * @param \DrupalCodeGenerator\Asset $asset
    *   Asset to render.
    */
   public function renderAsset(Asset $asset): void {
-    if (!$asset->isDirectory() && $asset->getTemplate()) {
-      $content = '';
-      if ($header_template = $asset->getHeaderTemplate()) {
-        $content .= $this->render($header_template, $asset->getVars()) . "\n";
-      }
-      $content .= $this->render($asset->getTemplate(), $asset->getVars());
-      $asset->content($content);
+    if ($asset->isDirectory()) {
+      return;
     }
+
+    $template = $asset->getTemplate();
+    $inline_template = $asset->getInlineTemplate();
+    // A generator may set content directly.
+    if (!$template && !$inline_template) {
+      return;
+    }
+
+    $content = '';
+    if ($header_template = $asset->getHeaderTemplate()) {
+      $content .= $this->render($header_template, $asset->getVars()) . "\n";
+    }
+
+    if ($template) {
+      $content .= $this->render($template, $asset->getVars());
+    }
+    elseif ($inline_template) {
+      $content .= $this->renderInline($inline_template, $asset->getVars());
+    }
+
+    $asset->content($content);
   }
 
   /**
