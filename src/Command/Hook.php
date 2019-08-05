@@ -22,17 +22,61 @@ final class Hook extends ModuleGenerator {
     $vars = &$this->collectDefault();
 
     $hook_question = new Question('Hook name');
-    $hook_question->setValidator(function ($value) {
-      if (!in_array($value, $this->supportedHooks())) {
+    $supported_hooks = $this->getSupportedHooks();
+    $hook_question->setValidator(function ($value) use ($supported_hooks) {
+      if (!in_array($value, $supported_hooks)) {
         throw new \UnexpectedValueException('The value is not correct hook name.');
       }
       return $value;
     });
-    $hook_question->setAutocompleterValues($this->supportedHooks());
+    $hook_question->setAutocompleterValues($supported_hooks);
 
     $vars['hook_name'] = $this->io->askQuestion($hook_question);
+    $vars['file_type'] = self::getFileType($vars['hook_name']);
 
-    // Most Drupal hooks are situated in a module file but some are not.
+    $file = $this->addFile()
+      ->path('{machine_name}.{file_type}')
+      ->headerTemplate('_lib/file-docs/{file_type}')
+      ->action(Asset::APPEND)
+      ->headerSize(7);
+
+    /** @var \DrupalCodeGenerator\Helper\DrupalContext $drupal_context */
+    if ($this->drupalContext) {
+      $hook_template = $this->drupalContext->getHooks()[$vars['hook_name']];
+      $file->inlineTemplate($hook_template);
+    }
+    else {
+      $file->template('hook/{hook_name}');
+    }
+  }
+
+  /**
+   * Returns list of supported hooks.
+   */
+  private function getSupportedHooks(): array {
+    $hook_names = [];
+    if ($this->drupalContext) {
+      $hook_names = array_keys($this->drupalContext->getHooks());
+    }
+    // When Drupal context is not provided build list of supported hooks from
+    // hook template names.
+    else {
+      $iterator = new \DirectoryIterator($this->templatePath . '/hook');
+      foreach ($iterator as $file_info) {
+        if (!$file_info->isDot()) {
+          $hook_names[] = $file_info->getBasename('.twig');
+        }
+      }
+    }
+    return $hook_names;
+  }
+
+  /**
+   * Returns file type of the hook.
+   */
+  private static function getFileType(string $hook_name): string {
+
+    // Drupal hooks that are not situated in MODULE_NAME.module file.
     $special_hooks = [
       'install' => [
         'install',
@@ -95,29 +139,13 @@ final class Hook extends ModuleGenerator {
       ],
     ];
 
-    $vars['file_type'] = 'module';
     foreach ($special_hooks as $group => $hooks) {
-      if (in_array($vars['hook_name'], $hooks)) {
-        $vars['file_type'] = $group;
-        break;
+      if (in_array($hook_name, $hooks)) {
+        return $group;
       }
     }
 
-    $this->addFile()
-      ->path('{machine_name}.{file_type}')
-      ->headerTemplate('_lib/file-docs/{file_type}')
-      ->template('hook/{hook_name}')
-      ->action(Asset::APPEND)
-      ->headerSize(7);
-  }
-
-  /**
-   * Returns list of supported hooks.
-   */
-  protected function supportedHooks() {
-    return array_map(function ($file) {
-      return pathinfo($file, PATHINFO_FILENAME);
-    }, array_diff(scandir($this->templatePath . '/hook'), ['.', '..']));
+    return 'module';
   }
 
 }

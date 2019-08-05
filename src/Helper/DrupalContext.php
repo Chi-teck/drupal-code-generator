@@ -6,7 +6,7 @@ use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Drupal context.
+ * A helper that provides a bridge between generators and Drupal installation.
  */
 class DrupalContext extends Helper {
 
@@ -32,10 +32,18 @@ class DrupalContext extends Helper {
   protected $themes = [];
 
   /**
+   * Defines the root directory of the Drupal installation.
+   *
+   * @var string
+   */
+  protected $drupalRoot;
+
+  /**
    * DrupalContext constructor.
    */
-  public function __construct(ContainerInterface $container) {
+  public function __construct(ContainerInterface $container, string $drupal_root = DRUPAL_ROOT) {
     $this->container = $container;
+    $this->drupalRoot = $drupal_root;
   }
 
   /**
@@ -104,7 +112,7 @@ class DrupalContext extends Helper {
 
     switch ($extension_type) {
       case 'module':
-        $modules_dir = is_dir(DRUPAL_ROOT . '/modules/custom') ?
+        $modules_dir = is_dir($this->getDrupalRoot() . '/modules/custom') ?
           'modules/custom' : 'modules';
 
         if ($is_new) {
@@ -142,7 +150,75 @@ class DrupalContext extends Helper {
 
     }
 
+    if ($destination) {
+      $destination = $this->getDrupalRoot() . '/' . $destination;
+    }
+
     return $destination;
+  }
+
+  /**
+   * Gets defined hooks.
+   *
+   * @return array
+   *   An associative array of hook templates keyed by hook name.
+   */
+  public function getHooks(): array {
+
+    static $hooks;
+    if ($hooks) {
+      return $hooks;
+    }
+
+    $hooks = self::parseHooks($this->getDrupalRoot() . '/core/core.api.php');
+
+    $api_files = glob($this->getDrupalRoot() . '/core/lib/Drupal/Core/*/*.api.php');
+    foreach ($api_files as $api_file) {
+      if (file_exists($api_file)) {
+        $hooks = array_merge($hooks, self::parseHooks($api_file));
+      }
+    }
+
+    $module_handler = $this->container->get('module_handler');
+    foreach ($module_handler->getModuleList() as $machine_name => $module) {
+      $api_file = $this->getDrupalRoot() . '/' . $module->getPath() . '/' . $machine_name . '.api.php';
+      if (file_exists($api_file)) {
+        $hooks = array_merge($hooks, self::parseHooks($api_file));
+      }
+    }
+
+    return $hooks;
+  }
+
+  /**
+   * Returns the root directory of the Drupal installation.
+   */
+  public function getDrupalRoot(): string {
+    return $this->drupalRoot;
+  }
+
+  /**
+   * Extracts hooks from PHP file.
+   *
+   * @param string $file
+   *   File to parse.
+   *
+   * @return array
+   *   Array of parsed hooks keyed by hook name.
+   */
+  protected static function parseHooks(string $file): array {
+    $code = file_get_contents($file);
+    preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);
+
+    $results = [];
+    foreach ($matches[0] as $index => $hook) {
+      $hook_name = $matches[1][$index];
+      $output = "/**\n * Implements hook_$hook_name().\n */\n";
+      $output .= str_replace('function hook_', 'function {{ machine_name }}_', $hook);
+      $results[$hook_name] = $output;
+    }
+
+    return $results;
   }
 
 }
