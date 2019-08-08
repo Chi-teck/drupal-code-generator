@@ -13,7 +13,7 @@ class DrupalContext extends Helper {
   /**
    * Drupal container.
    *
-   * @var \Symfony\Component\DependencyInjection\ContainerInterface
+   * @var \Drupal\Component\DependencyInjection\Container
    */
   protected $container;
 
@@ -219,6 +219,30 @@ class DrupalContext extends Helper {
     }
 
     return $results;
+  }
+
+  /**
+   * Gets all defined service IDs.
+   *
+   * @return array
+   *   An array of all defined service IDs.
+   */
+  public function getServicesIds(): array {
+    return $this->container->getServiceIds();
+  }
+
+  /**
+   * Gets all defined services.
+   *
+   * @return array
+   *   Compiled service definition.
+   */
+  public function getServiceDefinition(string $service_id): ?array {
+    $services = \Drupal::getContainer()
+      ->get('kernel')
+      ->getCachedContainerDefinition();
+    return isset($services['services'][$service_id]) ?
+      unserialize($services['services'][$service_id]) : NULL;
   }
 
 }
