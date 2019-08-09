@@ -399,17 +399,3 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = theme ]; then
   # Code sniffer does not like empty files.
   dcg_phpcs --ignore='\.css' $THEME_DIR
 fi
-
-# --- Test Drupal context --- #
-if [ $TARGET_TEST = all -o $TARGET_TEST = drupal_context ]; then
-  dcg_label Drupal Context
-
-  MODULE_MACHINE_NAME=plazma
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
-
-  dcg_drush en $MODULE_MACHINE_NAME
-  dcg_phpunit $MODULE_DIR/tests
-  dcg_drush pmu $MODULE_MACHINE_NAME
-  dcg_phpcs $MODULE_DIR
-fi
