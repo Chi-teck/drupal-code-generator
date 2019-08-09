@@ -24,7 +24,7 @@ Simply repeat installation commands.
 
 ## Usage
 ```shell
-# Display main menu.
+# Display navigation.
 dcg
 
 # Call generator directly.
