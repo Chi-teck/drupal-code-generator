@@ -1,0 +1,5 @@
+name: Plazma
+type: module
+description: Helper module to test Drupal context helper.
+package: DCG
+core: 8.x
