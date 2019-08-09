@@ -238,7 +238,7 @@ class DrupalContext extends Helper {
    *   Compiled service definition.
    */
   public function getServiceDefinition(string $service_id): ?array {
-    $services = \Drupal::getContainer()
+    $services = $this->container
       ->get('kernel')
       ->getCachedContainerDefinition();
     return isset($services['services'][$service_id]) ?
