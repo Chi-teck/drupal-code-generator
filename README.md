@@ -27,9 +27,6 @@ Simply repeat installation commands.
 # Display main menu.
 dcg
 
-# Display Drupal 8 submenu.
-dcg d8
-
 # Call generator directly.
 dcg plugin:field:widget
 
