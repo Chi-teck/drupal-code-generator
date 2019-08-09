@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Navigation;
-use DrupalCodeGenerator\GeneratorDiscovery;
+use DrupalCodeGenerator\GeneratorFactory;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -18,8 +18,8 @@ class NavigationCommandTest extends BaseTestCase {
    */
   public function testNavigation() {
 
-    $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators([Application::ROOT . '/src/Command']);
+    $factory = new GeneratorFactory(new Filesystem());
+    $generators = $factory->getGenerators([Application::ROOT . '/src/Command']);
 
     $application = Application::create();
     $helper_set = $application->getHelperSet();

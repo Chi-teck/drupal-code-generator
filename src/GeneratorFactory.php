@@ -8,9 +8,9 @@ use ReflectionClass;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Discovery of generator commands.
+ * Defines generator factory.
  */
-class GeneratorDiscovery {
+class GeneratorFactory {
 
   const COMMAND_INTERFACE = '\DrupalCodeGenerator\Command\GeneratorInterface';
 

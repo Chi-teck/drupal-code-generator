@@ -4,7 +4,7 @@
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
 use DrupalCodeGenerator\Command\Navigation;
-use DrupalCodeGenerator\GeneratorDiscovery;
+use DrupalCodeGenerator\GeneratorFactory;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -19,14 +19,14 @@ $container = $bootstrap_handler->bootstrap();
 
 $application = Application::create($container);
 
-$discovery = new GeneratorDiscovery(new Filesystem());
-$default_generators = $discovery->getGenerators([Application::ROOT . '/src/Command']);
+$factory = new GeneratorFactory(new Filesystem());
+$default_generators = $factory->getGenerators([Application::ROOT . '/src/Command']);
 $application->addCommands($default_generators);
 
 $command_directory = getenv('DCG_COMMAND_DIRECTORY') ?: Utils::getHomeDirectory() . '/.dcg';
 if (is_dir($command_directory)) {
   $class_loader->addPsr4('DrupalCodeGenerator\\', $command_directory);
-  $custom_generators = $discovery->getGenerators([$command_directory], '\DrupalCodeGenerator');
+  $custom_generators = $factory->getGenerators([$command_directory], '\DrupalCodeGenerator');
   $application->addCommands($custom_generators);
 }
 

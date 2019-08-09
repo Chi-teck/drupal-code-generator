@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\GeneratorDiscovery;
+use DrupalCodeGenerator\GeneratorFactory;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -18,8 +18,8 @@ class GeneratorDiscoveryTest extends TestCase {
    * Test callback.
    */
   public function testExecute() {
-    $discovery = new GeneratorDiscovery(new Filesystem());
-    $generators = $discovery->getGenerators(
+    $factory = new GeneratorFactory(new Filesystem());
+    $generators = $factory->getGenerators(
       [Application::ROOT . '/src/Command/Misc/Drupal_7'],
       '\DrupalCodeGenerator\Command\Misc\Drupal_7'
     );
