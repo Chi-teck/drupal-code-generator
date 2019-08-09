@@ -31,7 +31,7 @@ dcg
 dcg d8
 
 # Call generator directly.
-dcg d8:plugin:field:widget
+dcg plugin:field:widget
 
 # Generate code non-interactively.
 dcg config-form -a Example -a example -a SettingsForm -a No
