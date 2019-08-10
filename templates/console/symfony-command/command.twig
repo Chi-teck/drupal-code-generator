@@ -1,0 +1,31 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Command;
+
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+/**
+ * Implements {{ command.name }} console command.
+ */
+class {{ class }} extends Command {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function configure() {
+    $this
+      ->setName('{{ command.name }}')
+      ->setDescription('{{ command.description }}')
+      ->setAliases(['{{ command.alias }}']);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function execute(InputInterface $input, OutputInterface $output) {
+    $output->writeln('<info>It works!</info>');
+  }
+
+}

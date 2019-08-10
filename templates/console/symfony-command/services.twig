@@ -1,0 +1,5 @@
+services:
+  {{ machine_name }}.{{ command.name|replace({':': '_'}) }}:
+    class: Drupal\{{ machine_name }}\Command\{{ class }}
+    tags:
+      - { name: console.command }
