@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -114,7 +115,7 @@ class Dumper extends Helper implements IOAwareInterface {
         $this->io->title($title);
 
         if ($content !== NULL) {
-          $this->io->writeln($content);
+          $this->io->writeln($content, OutputInterface::OUTPUT_RAW);
         }
 
         continue;
