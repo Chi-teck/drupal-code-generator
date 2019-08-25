@@ -73,7 +73,9 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   admin_permission = "administer {{ entity_type_label|lower }} types",
 {% elseif fieldable %}
  *   admin_permission = "administer {{ entity_type_label|lower }}",
- {% endif %}
+{% else %}
+ *   admin_permission = "access {{ entity_type_label|lower }} overview",
+{% endif %}
  *   entity_keys = {
  *     "id" = "id",
 {% if revisionable %}
