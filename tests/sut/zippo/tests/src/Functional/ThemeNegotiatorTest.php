@@ -20,7 +20,7 @@ class ThemeNegotiatorTest extends BrowserTestBase {
    * Test callback.
    */
   public function testThemeNegotiator() {
-    \Drupal::service('theme_handler')->install(['bartik']);
+    \Drupal::service('theme_installer')->install(['bartik']);
 
     $options = ['query' => ['theme' => 'bartik']];
     $pattern = '#/core/themes/bartik/#';
