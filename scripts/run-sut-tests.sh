@@ -75,6 +75,7 @@ else
   composer -d$DRUPAL_DIR require drush/drush chi-teck/web-server chi-teck/test-base
   composer -d$DRUPAL_DIR update squizlabs/php_codesniffer drupal/coder
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
+  composer -d$DRUPAL_DIR run-script drupal-phpunit-upgrade
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite --sites-subdir=default
