@@ -73,11 +73,7 @@ class {{ class }} implements LoggerInterface {
       'uid' => $context['uid'],
     ];
 
-    file_put_contents(
-      $this->config->get('path.temporary') . '/drupal.log',
-      print_r($entry, TRUE),
-      FILE_APPEND
-    );
+    file_put_contents('temporary://drupal.log', print_r($entry, TRUE), FILE_APPEND);
   }
 
 }
