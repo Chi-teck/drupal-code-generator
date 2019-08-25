@@ -10,7 +10,7 @@ use Drupal\views\ResultRow;
  *
  * @group DCG
  */
-class ExampleTest extends KernelTestBase {
+class ViewsFieldTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
