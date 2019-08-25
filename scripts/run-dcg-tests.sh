@@ -8,4 +8,3 @@ phpunit -c $DCG_DIR
 echo -e "\n\e[104m ◂ Code sniffer ▸ \e[0m"
 phpcs -p --standard=$DCG_DIR/phpcs.xml
 echo -e "\e[104m ◂ Twig linter ▸ \e[0m"
-twigcs lint $DCG_DIR/templates
