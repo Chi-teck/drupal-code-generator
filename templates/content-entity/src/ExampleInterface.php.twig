@@ -15,46 +15,4 @@ use Drupal\user\EntityOwnerInterface;
  */
 interface {{ class_prefix }}Interface extends ContentEntityInterface{% if author_base_field %}, EntityOwnerInterface{% endif %}{% if changed_base_field %}, EntityChangedInterface{% endif %} {
 
-{% if created_base_field %}
-  /**
-   * Gets the {{ entity_type_label|lower }} creation timestamp.
-   *
-   * @return int
-   *   Creation timestamp of the {{ entity_type_label|lower }}.
-   */
-  public function getCreatedTime();
-
-  /**
-   * Sets the {{ entity_type_label|lower }} creation timestamp.
-   *
-   * @param int $timestamp
-   *   The {{ entity_type_label|lower }} creation timestamp.
-   *
-   * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
-   *   The called {{ entity_type_label|lower }} entity.
-   */
-  public function setCreatedTime($timestamp);
-
-{% endif %}
-{% if status_base_field %}
-  /**
-   * Returns the {{ entity_type_label|lower }} status.
-   *
-   * @return bool
-   *   TRUE if the {{ entity_type_label|lower }} is enabled, FALSE otherwise.
-   */
-  public function isEnabled();
-
-  /**
-   * Sets the {{ entity_type_label|lower }} status.
-   *
-   * @param bool $status
-   *   TRUE to enable this {{ entity_type_label|lower }}, FALSE to disable.
-   *
-   * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
-   *   The called {{ entity_type_label|lower }} entity.
-   */
-  public function setStatus($status);
-
-{% endif %}
 }

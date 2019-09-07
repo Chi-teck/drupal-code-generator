@@ -27,12 +27,17 @@ final class ContentEntity extends ModuleGenerator {
     $vars['bundle'] = $this->confirm('The entity type has bundle?', FALSE);
     $vars['template'] = $this->confirm('Create entity template?');
     $vars['access_controller'] = $this->confirm('Create CRUD permissions?', FALSE);
+
     $vars['label_base_field'] = $this->confirm('Add "label" base field?');
     $vars['status_base_field'] = $this->confirm('Add "status" base field?');
     $vars['created_base_field'] = $this->confirm('Add "created" base field?');
     $vars['changed_base_field'] = $this->confirm('Add "changed" base field?');
     $vars['author_base_field'] = $this->confirm('Add "author" base field?');
     $vars['description_base_field'] = $this->confirm('Add "description" base field?');
+    $vars['has_base_fields'] = $vars['label_base_field'] || $vars['status_base_field'] ||
+                               $vars['created_base_field'] || $vars['changed_base_field'] ||
+                               $vars['author_base_field'] || $vars['description_base_field'];
+
     $vars['rest_configuration'] = $this->confirm('Create REST configuration for the entity?', FALSE);
 
     if ($vars['entity_base_path'][0] != '/') {

@@ -2,32 +2,29 @@
 
 namespace Drupal\{{ machine_name }};
 
+{% sort %}
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
-use Drupal\Core\Datetime\DateFormatterInterface;
+  {% if created_base_field or changed_base_field %}
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Routing\RedirectDestinationInterface;
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+  {% endif %}
+{% endsort %}
 
 /**
  * Provides a list controller for the {{ entity_type_label|lower }} entity type.
  */
 class {{ class_prefix }}ListBuilder extends EntityListBuilder {
 
+{% if created_base_field or changed_base_field %}
   /**
    * The date formatter service.
    *
    * @var \Drupal\Core\Datetime\DateFormatterInterface
    */
   protected $dateFormatter;
-
-  /**
-   * The redirect destination service.
-   *
-   * @var \Drupal\Core\Routing\RedirectDestinationInterface
-   */
-  protected $redirectDestination;
 
   /**
    * Constructs a new {{ class_prefix }}ListBuilder object.
@@ -38,13 +35,10 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    *   The entity storage class.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
-   * @param \Drupal\Core\Routing\RedirectDestinationInterface $redirect_destination
-   *   The redirect destination service.
    */
-  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, DateFormatterInterface $date_formatter, RedirectDestinationInterface $redirect_destination) {
+  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, DateFormatterInterface $date_formatter) {
     parent::__construct($entity_type, $storage);
     $this->dateFormatter = $date_formatter;
-    $this->redirectDestination = $redirect_destination;
   }
 
   /**
@@ -54,11 +48,11 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
     return new static(
       $entity_type,
       $container->get('entity_type.manager')->getStorage($entity_type->id()),
-      $container->get('date.formatter'),
-      $container->get('redirect.destination')
+      $container->get('date.formatter')
     );
   }
 
+{% endif %}
   /**
    * {@inheritdoc}
    */
@@ -102,12 +96,12 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\{{ machine_name }}\{{ class_prefix }}Interface */
-    $row['id'] = $entity->{{ label_base_field ? 'id' : 'link' }}();
+    $row['id'] = $entity->{{ label_base_field ? 'id' : 'toLink' }}();
 {% if label_base_field %}
     $row['label'] = $entity->toLink();
 {% endif %}
 {% if status_base_field %}
-    $row['status'] = $entity->isEnabled() ? $this->t('Enabled') : $this->t('Disabled');
+    $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
 {% endif %}
 {% if author_base_field %}
     $row['uid']['data'] = [
@@ -116,24 +110,12 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
     ];
 {% endif %}
 {% if created_base_field %}
-    $row['created'] = $this->dateFormatter->format($entity->getCreatedTime());
+    $row['created'] = $this->dateFormatter->format($entity->get('created')->value);
 {% endif %}
 {% if changed_base_field %}
     $row['changed'] = $this->dateFormatter->format($entity->getChangedTime());
 {% endif %}
     return $row + parent::buildRow($entity);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getDefaultOperations(EntityInterface $entity) {
-    $operations = parent::getDefaultOperations($entity);
-    $destination = $this->redirectDestination->getAsArray();
-    foreach ($operations as $key => $operation) {
-      $operations[$key]['query'] = $destination;
-    }
-    return $operations;
   }
 
 }

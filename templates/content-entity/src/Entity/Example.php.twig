@@ -3,24 +3,26 @@
 namespace Drupal\{{ machine_name }}\Entity;
 
 {% sort %}
-{% if not revisionable %}
+  {% if not revisionable %}
 use Drupal\Core\Entity\ContentEntityBase;
-{% endif %}
-{% if author_base_field %}
+  {% endif %}
+  {% if author_base_field %}
 use Drupal\Core\Entity\EntityStorageInterface;
-{% endif %}
+  {% endif %}
+  {% if has_base_fields %}
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-{% if revisionable %}
+  {% endif %}
+  {% if revisionable %}
 use Drupal\Core\Entity\RevisionableContentEntityBase;
-{% endif %}
+  {% endif %}
 use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
-{% if author_base_field %}
+  {% if author_base_field %}
 use Drupal\user\EntityOwnerTrait;
-{% endif %}
-{% if changed_base_field %}
+  {% endif %}
+  {% if changed_base_field %}
 use Drupal\Core\Entity\EntityChangedTrait;
-{% endif %}
+  {% endif %}
 {% endsort %}
 
 /**
@@ -132,6 +134,8 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   {% if changed_base_field %}
   use EntityChangedTrait;
   {% endif %}
+{# use EntityCreatedTrait once it is added to Drupal core  #}
+{# @see https://www.drupal.org/node/2833378 #}
   {% if author_base_field %}
   use EntityOwnerTrait;
   {% endif %}
@@ -150,40 +154,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   }
 
 {% endif %}
-{% if status_base_field %}
-  /**
-   * {@inheritdoc}
-   */
-  public function isEnabled() {
-    return (bool) $this->get('status')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setStatus($status) {
-    $this->set('status', $status);
-    return $this;
-  }
-
-{% endif %}
-{% if created_base_field %}
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setCreatedTime($timestamp) {
-    $this->set('created', $timestamp);
-    return $this;
-  }
-
-{% endif %}
+{% if has_base_fields %}
   /**
    * {@inheritdoc}
    */
@@ -191,14 +162,14 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
 
     $fields = parent::baseFieldDefinitions($entity_type);
 
-{% if label_base_field %}
+  {% if label_base_field %}
     $fields['label'] = BaseFieldDefinition::create('string')
-{% if revisionable %}
+    {% if revisionable %}
       ->setRevisionable(TRUE)
-{% endif %}
-{% if translatable %}
+    {% endif %}
+    {% if translatable %}
       ->setTranslatable(TRUE)
-{% endif %}
+    {% endif %}
       ->setLabel(t('Label'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
@@ -214,12 +185,12 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-{% endif %}
-{% if status_base_field %}
+  {% endif %}
+  {% if status_base_field %}
     $fields['status'] = BaseFieldDefinition::create('boolean')
-{% if revisionable %}
+    {% if revisionable %}
       ->setRevisionable(TRUE)
-{% endif %}
+    {% endif %}
       ->setLabel(t('Status'))
       ->setDefaultValue(TRUE)
       ->setSetting('on_label', 'Enabled')
@@ -241,15 +212,15 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-{% endif %}
-{% if description_base_field %}
+  {% endif %}
+  {% if description_base_field %}
     $fields['description'] = BaseFieldDefinition::create('text_long')
-{% if revisionable %}
+    {% if revisionable %}
       ->setRevisionable(TRUE)
-{% endif %}
-{% if translatable %}
+    {% endif %}
+    {% if translatable %}
       ->setTranslatable(TRUE)
-{% endif %}
+    {% endif %}
       ->setLabel(t('Description'))
       ->setDisplayOptions('form', [
         'type' => 'text_textarea',
@@ -263,15 +234,15 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-{% endif %}
-{% if author_base_field %}
+  {% endif %}
+  {% if author_base_field %}
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
-{% if revisionable %}
+    {% if revisionable %}
       ->setRevisionable(TRUE)
-{% endif %}
-{% if translatable %}
+    {% endif %}
+    {% if translatable %}
       ->setTranslatable(TRUE)
-{% endif %}
+    {% endif %}
       ->setLabel(t('Author'))
       ->setSetting('target_type', 'user')
       ->setDefaultValueCallback(static::class . '::getDefaultEntityOwner')
@@ -292,13 +263,13 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-{% endif %}
-{% if created_base_field %}
+  {% endif %}
+  {% if created_base_field %}
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
-{% if translatable %}
+    {% if translatable %}
       ->setTranslatable(TRUE)
-{% endif %}
+    {% endif %}
       ->setDescription(t('The time that the {{ entity_type_label|lower }} was created.'))
       ->setDisplayOptions('view', [
         'label' => 'above',
@@ -312,17 +283,18 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-{% endif %}
-{% if changed_base_field %}
+  {% endif %}
+  {% if changed_base_field %}
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
-{% if translatable %}
+    {% if translatable %}
       ->setTranslatable(TRUE)
-{% endif %}
+    {% endif %}
       ->setDescription(t('The time that the {{ entity_type_label|lower }} was last edited.'));
 
-{% endif %}
+  {% endif %}
     return $fields;
   }
 
+{% endif %}
 }

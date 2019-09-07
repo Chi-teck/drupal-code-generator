@@ -2,12 +2,11 @@
 
 namespace Drupal\foo;
 
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
-use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Routing\RedirectDestinationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -23,13 +22,6 @@ class FooExampleListBuilder extends EntityListBuilder {
   protected $dateFormatter;
 
   /**
-   * The redirect destination service.
-   *
-   * @var \Drupal\Core\Routing\RedirectDestinationInterface
-   */
-  protected $redirectDestination;
-
-  /**
    * Constructs a new FooExampleListBuilder object.
    *
    * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
@@ -38,13 +30,10 @@ class FooExampleListBuilder extends EntityListBuilder {
    *   The entity storage class.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
-   * @param \Drupal\Core\Routing\RedirectDestinationInterface $redirect_destination
-   *   The redirect destination service.
    */
-  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, DateFormatterInterface $date_formatter, RedirectDestinationInterface $redirect_destination) {
+  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, DateFormatterInterface $date_formatter) {
     parent::__construct($entity_type, $storage);
     $this->dateFormatter = $date_formatter;
-    $this->redirectDestination = $redirect_destination;
   }
 
   /**
@@ -54,8 +43,7 @@ class FooExampleListBuilder extends EntityListBuilder {
     return new static(
       $entity_type,
       $container->get('entity_type.manager')->getStorage($entity_type->id()),
-      $container->get('date.formatter'),
-      $container->get('redirect.destination')
+      $container->get('date.formatter')
     );
   }
 
@@ -94,26 +82,14 @@ class FooExampleListBuilder extends EntityListBuilder {
     /* @var $entity \Drupal\foo\FooExampleInterface */
     $row['id'] = $entity->id();
     $row['label'] = $entity->toLink();
-    $row['status'] = $entity->isEnabled() ? $this->t('Enabled') : $this->t('Disabled');
+    $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
     $row['uid']['data'] = [
       '#theme' => 'username',
       '#account' => $entity->getOwner(),
     ];
-    $row['created'] = $this->dateFormatter->format($entity->getCreatedTime());
+    $row['created'] = $this->dateFormatter->format($entity->get('created')->value);
     $row['changed'] = $this->dateFormatter->format($entity->getChangedTime());
     return $row + parent::buildRow($entity);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getDefaultOperations(EntityInterface $entity) {
-    $operations = parent::getDefaultOperations($entity);
-    $destination = $this->redirectDestination->getAsArray();
-    foreach ($operations as $key => $operation) {
-      $operations[$key]['query'] = $destination;
-    }
-    return $operations;
   }
 
 }
