@@ -95,7 +95,7 @@ class ContentEntityTest extends BrowserTestBase {
       'revision' => '',
       'langcode' => '',
       'bundle' => '',
-      'label' => 'title',
+      'label' => 'label',
       'uuid' => 'uuid',
       'default_langcode' => 'default_langcode',
       'revision_translation_affected' => 'revision_translation_affected',
@@ -107,7 +107,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->assertPageTitle('Add example');
 
     $edit = [
-      'title[0][value]' => 'Beer',
+      'label[0][value]' => 'Beer',
       'field_foo[0][value]' => 'Dark',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
@@ -120,18 +120,18 @@ class ContentEntityTest extends BrowserTestBase {
     // -- Test entity form.
     $this->drupalGet('/example/1/edit');
 
-    $this->assertXpath('//label[text() = "Title"]/following-sibling::input[@name = "title[0][value]" and @value = "Beer"]');
+    $this->assertXpath('//label[text() = "Label"]/following-sibling::input[@name = "label[0][value]" and @value = "Beer"]');
     $this->assertXpath('//label[text() = "Foo"]/following-sibling::input[@name = "field_foo[0][value]" and @value = "Dark"]');
 
     // -- Test entity values.
     $entity = Example::load(1);
     self::assertEquals(1, $entity->id());
-    self::assertEquals('Beer', $entity->getTitle());
+    self::assertEquals('Beer', $entity->label());
     drupal_flush_all_caches();
     self::assertEquals('Dark', $entity->get('field_foo')->getString());
 
     $edit = [
-      'title[0][value]' => 'Wine',
+      'label[0][value]' => 'Wine',
       'field_foo[0][value]' => 'White',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
@@ -144,7 +144,7 @@ class ContentEntityTest extends BrowserTestBase {
 
     $xpath = '//table/thead/tr[1]';
     $xpath .= '//th[text() = "ID"]';
-    $xpath .= '/next::th[text() = "Title"]';
+    $xpath .= '/next::th[text() = "Label"]';
     $xpath .= '/next::th[text() = "Operations"]';
     $this->assertXpath($xpath);
 

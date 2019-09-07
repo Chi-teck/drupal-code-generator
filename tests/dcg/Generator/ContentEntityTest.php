@@ -21,7 +21,7 @@ class ContentEntityTest extends BaseGeneratorTest {
     'The entity type has bundle? [No]:' => 'No',
     'Create entity template? [Yes]:' => 'Yes',
     'Create CRUD permissions? [No]:' => 'No',
-    'Add "title" base field? [Yes]:' => 'Yes',
+    'Add "label" base field? [Yes]:' => 'Yes',
     'Add "status" base field? [Yes]:' => 'Yes',
     'Add "created" base field? [Yes]:' => 'Yes',
     'Add "changed" base field? [Yes]:' => 'Yes',

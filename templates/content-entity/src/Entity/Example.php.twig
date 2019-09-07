@@ -87,7 +87,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% if bundle %}
  *     "bundle" = "bundle",
 {% endif %}
- *     "label" = "{{ title_base_field ? 'title' : 'id' }}",
+ *     "label" = "{{ label_base_field ? 'label' : 'id' }}",
 {% if author_base_field %}
  *     "uuid" = "uuid",
  *     "owner" = "uid"
@@ -150,23 +150,6 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   }
 
 {% endif %}
-{% if title_base_field %}
-  /**
-   * {@inheritdoc}
-   */
-  public function getTitle() {
-    return $this->get('title')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setTitle($title) {
-    $this->set('title', $title);
-    return $this;
-  }
-
-{% endif %}
 {% if status_base_field %}
   /**
    * {@inheritdoc}
@@ -208,16 +191,15 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
 
     $fields = parent::baseFieldDefinitions($entity_type);
 
-{% if title_base_field %}
-    $fields['title'] = BaseFieldDefinition::create('string')
+{% if label_base_field %}
+    $fields['label'] = BaseFieldDefinition::create('string')
 {% if revisionable %}
       ->setRevisionable(TRUE)
 {% endif %}
 {% if translatable %}
       ->setTranslatable(TRUE)
 {% endif %}
-      ->setLabel(t('Title'))
-      ->setDescription(t('The title of the {{ entity_type_label|lower }} entity.'))
+      ->setLabel(t('Label'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
@@ -239,7 +221,6 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ->setRevisionable(TRUE)
 {% endif %}
       ->setLabel(t('Status'))
-      ->setDescription(t('A boolean indicating whether the {{ entity_type_label|lower }} is enabled.'))
       ->setDefaultValue(TRUE)
       ->setSetting('on_label', 'Enabled')
       ->setDisplayOptions('form', [
@@ -270,7 +251,6 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ->setTranslatable(TRUE)
 {% endif %}
       ->setLabel(t('Description'))
-      ->setDescription(t('A description of the {{ entity_type_label|lower }}.'))
       ->setDisplayOptions('form', [
         'type' => 'text_textarea',
         'weight' => 10,
@@ -293,7 +273,6 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ->setTranslatable(TRUE)
 {% endif %}
       ->setLabel(t('Author'))
-      ->setDescription(t('The user ID of the {{ entity_type_label|lower }} author.'))
       ->setSetting('target_type', 'user')
       ->setDefaultValueCallback(static::class . '::getDefaultEntityOwner')
       ->setDisplayOptions('form', [

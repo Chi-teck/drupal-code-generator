@@ -27,7 +27,7 @@ final class ContentEntity extends ModuleGenerator {
     $vars['bundle'] = $this->confirm('The entity type has bundle?', FALSE);
     $vars['template'] = $this->confirm('Create entity template?');
     $vars['access_controller'] = $this->confirm('Create CRUD permissions?', FALSE);
-    $vars['title_base_field'] = $this->confirm('Add "title" base field?');
+    $vars['label_base_field'] = $this->confirm('Add "label" base field?');
     $vars['status_base_field'] = $this->confirm('Add "status" base field?');
     $vars['created_base_field'] = $this->confirm('Add "created" base field?');
     $vars['changed_base_field'] = $this->confirm('Add "changed" base field?');

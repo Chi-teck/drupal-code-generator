@@ -12,25 +12,6 @@ use Drupal\user\EntityOwnerInterface;
 interface FooExampleInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface {
 
   /**
-   * Gets the example title.
-   *
-   * @return string
-   *   Title of the example.
-   */
-  public function getTitle();
-
-  /**
-   * Sets the example title.
-   *
-   * @param string $title
-   *   The example title.
-   *
-   * @return \Drupal\foo\FooExampleInterface
-   *   The called example entity.
-   */
-  public function setTitle($title);
-
-  /**
    * Gets the example creation timestamp.
    *
    * @return int

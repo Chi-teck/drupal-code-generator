@@ -79,7 +79,7 @@ class FooExampleListBuilder extends EntityListBuilder {
    */
   public function buildHeader() {
     $header['id'] = $this->t('ID');
-    $header['title'] = $this->t('Title');
+    $header['label'] = $this->t('Label');
     $header['status'] = $this->t('Status');
     $header['uid'] = $this->t('Author');
     $header['created'] = $this->t('Created');
@@ -93,7 +93,7 @@ class FooExampleListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\foo\FooExampleInterface */
     $row['id'] = $entity->id();
-    $row['title'] = $entity->toLink();
+    $row['label'] = $entity->toLink();
     $row['status'] = $entity->isEnabled() ? $this->t('Enabled') : $this->t('Disabled');
     $row['uid']['data'] = [
       '#theme' => 'username',

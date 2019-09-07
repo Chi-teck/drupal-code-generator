@@ -111,7 +111,7 @@ class ContentEntityTest extends BrowserTestBase {
       'revision' => 'revision_id',
       'langcode' => 'langcode',
       'bundle' => 'bundle',
-      'label' => 'title',
+      'label' => 'label',
       'uuid' => 'uuid',
       'owner' => 'uid',
       'default_langcode' => 'default_langcode',
@@ -124,7 +124,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->assertPageTitle('Add example');
 
     $edit = [
-      'title[0][value]' => 'Beer',
+      'label[0][value]' => 'Beer',
       'description[0][value]' => 'Dark',
       'revision_log[0][value]' => 'New revision',
     ];
@@ -141,7 +141,7 @@ class ContentEntityTest extends BrowserTestBase {
     // -- Test entity form.
     $this->drupalGet('/admin/content/example/1/edit');
 
-    $this->assertXpath('//label[text() = "Title"]/following-sibling::input[@name = "title[0][value]" and @value = "Beer"]');
+    $this->assertXpath('//label[text() = "Label"]/following-sibling::input[@name = "label[0][value]" and @value = "Beer"]');
     $this->assertXpath('//input[@name = "status[value]" and @value="1"]/following-sibling::label[text() = "Enabled"]');
     $this->assertXpath('//label[text() = "Description"]/following-sibling::div/textarea[@name = "description[0][value]"]');
     $this->assertXpath('//label[text() = "Author"]/following-sibling::input[@name = "uid[0][target_id]"]');
@@ -152,13 +152,13 @@ class ContentEntityTest extends BrowserTestBase {
     // -- Test entity values.
     $entity = Example::load(1);
     self::assertEquals(1, $entity->id());
-    self::assertEquals('Beer', $entity->getTitle());
+    self::assertEquals('Beer', $entity->label());
     self::assertEquals('foo', $entity->bundle());
     self::assertEquals('Dark, plain_text', $entity->get('description')->getString());
     self::assertEquals('New revision', $entity->getRevisionLogMessage());
 
     $edit = [
-      'title[0][value]' => 'Wine',
+      'label[0][value]' => 'Wine',
       'description[0][value]' => 'White',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
@@ -171,7 +171,7 @@ class ContentEntityTest extends BrowserTestBase {
 
     $xpath = '//table/thead/tr[1]';
     $xpath .= '//th[text() = "ID"]';
-    $xpath .= '/next::th[text() = "Title"]';
+    $xpath .= '/next::th[text() = "Label"]';
     $xpath .= '/next::th[text() = "Status"]';
     $xpath .= '/next::th[text() = "Author"]';
     $xpath .= '/next::th[text() = "Created"]';

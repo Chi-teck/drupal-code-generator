@@ -37,7 +37,7 @@ use Drupal\user\EntityOwnerTrait;
  *   entity_keys = {
  *     "id" = "id",
  *     "revision" = "revision_id",
- *     "label" = "title",
+ *     "label" = "label",
  *     "uuid" = "uuid",
  *     "owner" = "uid"
  *   },
@@ -70,21 +70,6 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
       // If no owner has been set explicitly, make the anonymous user the owner.
       $this->setOwnerId(0);
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getTitle() {
-    return $this->get('title')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setTitle($title) {
-    $this->set('title', $title);
-    return $this;
   }
 
   /**
@@ -124,10 +109,9 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
 
     $fields = parent::baseFieldDefinitions($entity_type);
 
-    $fields['title'] = BaseFieldDefinition::create('string')
+    $fields['label'] = BaseFieldDefinition::create('string')
       ->setRevisionable(TRUE)
-      ->setLabel(t('Title'))
-      ->setDescription(t('The title of the example entity.'))
+      ->setLabel(t('Label'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
@@ -145,7 +129,6 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setRevisionable(TRUE)
       ->setLabel(t('Status'))
-      ->setDescription(t('A boolean indicating whether the example is enabled.'))
       ->setDefaultValue(TRUE)
       ->setSetting('on_label', 'Enabled')
       ->setDisplayOptions('form', [
@@ -169,7 +152,6 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
     $fields['description'] = BaseFieldDefinition::create('text_long')
       ->setRevisionable(TRUE)
       ->setLabel(t('Description'))
-      ->setDescription(t('A description of the example.'))
       ->setDisplayOptions('form', [
         'type' => 'text_textarea',
         'weight' => 10,
@@ -185,7 +167,6 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setRevisionable(TRUE)
       ->setLabel(t('Author'))
-      ->setDescription(t('The user ID of the example author.'))
       ->setSetting('target_type', 'user')
       ->setDefaultValueCallback(static::class . '::getDefaultEntityOwner')
       ->setDisplayOptions('form', [

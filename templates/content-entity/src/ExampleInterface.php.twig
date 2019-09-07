@@ -15,27 +15,6 @@ use Drupal\user\EntityOwnerInterface;
  */
 interface {{ class_prefix }}Interface extends ContentEntityInterface{% if author_base_field %}, EntityOwnerInterface{% endif %}{% if changed_base_field %}, EntityChangedInterface{% endif %} {
 
-{% if title_base_field %}
-  /**
-   * Gets the {{ entity_type_label|lower }} title.
-   *
-   * @return string
-   *   Title of the {{ entity_type_label|lower }}.
-   */
-  public function getTitle();
-
-  /**
-   * Sets the {{ entity_type_label|lower }} title.
-   *
-   * @param string $title
-   *   The {{ entity_type_label|lower }} title.
-   *
-   * @return \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
-   *   The called {{ entity_type_label|lower }} entity.
-   */
-  public function setTitle($title);
-
-{% endif %}
 {% if created_base_field %}
   /**
    * Gets the {{ entity_type_label|lower }} creation timestamp.
