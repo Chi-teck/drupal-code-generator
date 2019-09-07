@@ -3,11 +3,11 @@
 namespace Drupal\{{ machine_name }};
 
 use Drupal\Core\Entity\ContentEntityInterface;
-{% if author_base_field %}
-use Drupal\user\EntityOwnerInterface;
-{% endif %}
 {% if changed_base_field %}
 use Drupal\Core\Entity\EntityChangedInterface;
+{% endif %}
+{% if author_base_field %}
+use Drupal\user\EntityOwnerInterface;
 {% endif %}
 
 /**

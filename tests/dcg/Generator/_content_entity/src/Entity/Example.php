@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\RevisionableContentEntityBase;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\foo\FooExampleInterface;
-use Drupal\user\UserInterface;
+use Drupal\user\EntityOwnerTrait;
 
 /**
  * Defines the example entity class.
@@ -38,7 +38,8 @@ use Drupal\user\UserInterface;
  *     "id" = "id",
  *     "revision" = "revision_id",
  *     "label" = "title",
- *     "uuid" = "uuid"
+ *     "uuid" = "uuid",
+ *     "owner" = "uid"
  *   },
  *   revision_metadata_keys = {
  *     "revision_user" = "revision_uid",
@@ -58,16 +59,17 @@ use Drupal\user\UserInterface;
 class FooExample extends RevisionableContentEntityBase implements FooExampleInterface {
 
   use EntityChangedTrait;
+  use EntityOwnerTrait;
 
   /**
    * {@inheritdoc}
-   *
-   * When a new example entity is created, set the uid entity reference to
-   * the current user as the creator of the entity.
    */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
-    $values += ['uid' => \Drupal::currentUser()->id()];
+  public function preSave(EntityStorageInterface $storage) {
+    parent::preSave($storage);
+    if (!$this->getOwnerId()) {
+      // If no owner has been set explicitly, make the anonymous user the owner.
+      $this->setOwnerId(0);
+    }
   }
 
   /**
@@ -112,36 +114,6 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
    */
   public function setCreatedTime($timestamp) {
     $this->set('created', $timestamp);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('uid')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('uid')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('uid', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('uid', $account->id());
     return $this;
   }
 
@@ -215,6 +187,7 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
       ->setLabel(t('Author'))
       ->setDescription(t('The user ID of the example author.'))
       ->setSetting('target_type', 'user')
+      ->setDefaultValueCallback(static::class . '::getDefaultEntityOwner')
       ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
         'settings' => [

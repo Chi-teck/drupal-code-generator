@@ -16,7 +16,7 @@ use Drupal\Core\Entity\RevisionableContentEntityBase;
 {% endif %}
 use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
 {% if author_base_field %}
-use Drupal\user\UserInterface;
+use Drupal\user\EntityOwnerTrait;
 {% endif %}
 {% if changed_base_field %}
 use Drupal\Core\Entity\EntityChangedTrait;
@@ -88,16 +88,21 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "bundle" = "bundle",
 {% endif %}
  *     "label" = "{{ title_base_field ? 'title' : 'id' }}",
+{% if author_base_field %}
+ *     "uuid" = "uuid",
+ *     "owner" = "uid"
+{% else %}
  *     "uuid" = "uuid"
+{% endif %}
  *   },
 {% if revisionable %}
  *   revision_metadata_keys = {
-{% if author_base_field %}
+  {% if author_base_field %}
  *     "revision_user" = "revision_uid",
-{% endif %}
-{% if created_base_field %}
+  {% endif %}
+  {% if created_base_field %}
  *     "revision_created" = "revision_timestamp",
-{% endif %}
+  {% endif %}
  *     "revision_log_message" = "revision_log"
  *   },
 {% endif %}
@@ -123,20 +128,25 @@ use Drupal\Core\Entity\EntityChangedTrait;
  */
 class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}ContentEntityBase implements {{ class_prefix }}Interface {
 
-{% if changed_base_field %}
+{% if changed_base_field or author_base_field %}
+  {% if changed_base_field %}
   use EntityChangedTrait;
+  {% endif %}
+  {% if author_base_field %}
+  use EntityOwnerTrait;
+  {% endif %}
 
 {% endif %}
 {% if author_base_field %}
   /**
    * {@inheritdoc}
-   *
-   * When a new {{ entity_type_label|lower }} entity is created, set the uid entity reference to
-   * the current user as the creator of the entity.
    */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
-    $values += ['uid' => \Drupal::currentUser()->id()];
+  public function preSave(EntityStorageInterface $storage) {
+    parent::preSave($storage);
+    if (!$this->getOwnerId()) {
+      // If no owner has been set explicitly, make the anonymous user the owner.
+      $this->setOwnerId(0);
+    }
   }
 
 {% endif %}
@@ -187,38 +197,6 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
    */
   public function setCreatedTime($timestamp) {
     $this->set('created', $timestamp);
-    return $this;
-  }
-
-{% endif %}
-{% if author_base_field %}
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('uid')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('uid')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('uid', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('uid', $account->id());
     return $this;
   }
 
@@ -317,6 +295,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
       ->setLabel(t('Author'))
       ->setDescription(t('The user ID of the {{ entity_type_label|lower }} author.'))
       ->setSetting('target_type', 'user')
+      ->setDefaultValueCallback(static::class . '::getDefaultEntityOwner')
       ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
         'settings' => [

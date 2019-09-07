@@ -113,6 +113,7 @@ class ContentEntityTest extends BrowserTestBase {
       'bundle' => 'bundle',
       'label' => 'title',
       'uuid' => 'uuid',
+      'owner' => 'uid',
       'default_langcode' => 'default_langcode',
       'revision_translation_affected' => 'revision_translation_affected',
     ];
