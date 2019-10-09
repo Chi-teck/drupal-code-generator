@@ -301,11 +301,12 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Processes collected variables.
    */
   protected function processVars(): void {
-    array_walk_recursive($this->vars, function (&$var, string $key, array $vars): void {
+    $process_vars = function (&$var, string $key, array $vars): void {
       if (is_string($var)) {
         $var = Utils::replaceTokens($var, $vars);
       }
-    }, $this->vars);
+    };
+    array_walk_recursive($this->vars, $process_vars, $this->vars);
   }
 
   /**
