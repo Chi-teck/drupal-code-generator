@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Style;
 
 use DrupalCodeGenerator\Helper\QuestionHelper;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -60,7 +61,8 @@ class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
    * {@inheritdoc}
    */
   public function askQuestion(Question $question) {
-    return $this->questionHelper->ask($this->input, $this, $question);
+    $answer = $this->questionHelper->ask($this->input, $this, $question);
+    return Utils::addSlashes($answer);
   }
 
   /**

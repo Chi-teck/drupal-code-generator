@@ -138,7 +138,38 @@ class Utils {
       return $result;
     };
 
-    return preg_replace_callback('/{(.+?)\}/', $process_token, $text);
+    $escaped_brackets = ['\\{', '\\}'];
+    $tmp_replacement = ['DCG-open-bracket', 'DCG-close-bracket'];
+    $text = str_replace($escaped_brackets, $tmp_replacement, $text);
+    $text = preg_replace_callback('/{(.+?)}/', $process_token, $text);
+    $text = str_replace($tmp_replacement, $escaped_brackets, $text);
+    return $text;
+  }
+
+  /**
+   * Quote curly brackets with slashes.
+   *
+   * @param string|null $input
+   *   The input string.
+   *
+   * @return string
+   *   The escaped string.
+   */
+  public static function addSlashes(?string $input): string {
+    return addcslashes($input, '{}');
+  }
+
+  /**
+   * Un-quotes a quoted string.
+   *
+   * @param string|null $input
+   *   The input string.
+   *
+   * @return string
+   *   The un-escaped string.
+   */
+  public static function stripSlashes(?string $input): string {
+    return str_replace(['\{', '\}'], ['{', '}'], $input);
   }
 
   /**

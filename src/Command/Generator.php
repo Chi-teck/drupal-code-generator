@@ -213,9 +213,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Asks a question.
    */
   protected function ask(string $question, $default = NULL, $validator = NULL) {
-    $this->processVars();
-    $question = Utils::replaceTokens($question, $this->vars);
-    $default = Utils::replaceTokens($default, $this->vars);
+    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
+    $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
+
     // Allow the validators to be referenced in a short form like
     // '::validateMachineName'.
     if (is_string($validator) && substr($validator, 0, 2) == '::') {
@@ -228,8 +228,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Asks for confirmation.
    */
   protected function confirm(string $question, bool $default = TRUE): bool {
-    $this->processVars();
-    $question = Utils::replaceTokens($question, $this->vars);
+    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
     return $this->io->confirm($question, $default);
   }
 
@@ -237,8 +236,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Asks a choice question.
    */
   protected function choice(string $question, array $choices, $default = NULL) {
-    $this->processVars();
-    $question = Utils::replaceTokens($question, $this->vars);
+    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
 
     // The choices can be an associative array.
     $choice_labels = array_values($choices);
@@ -303,7 +301,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   protected function processVars(): void {
     $process_vars = function (&$var, string $key, array $vars): void {
       if (is_string($var)) {
-        $var = Utils::replaceTokens($var, $vars);
+        $var = Utils::stripSlashes(Utils::replaceTokens($var, $vars));
       }
     };
     array_walk_recursive($this->vars, $process_vars, $this->vars);
