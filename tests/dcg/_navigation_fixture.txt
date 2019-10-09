@@ -102,7 +102,6 @@
   [3] HTML page
   [4] Nginx virtual host
   [5] Project
-  [6] settings.local.php
   ➤➤➤ 1⏎
  Select generator 
   [ 0] ..
@@ -169,7 +168,6 @@
   [3] HTML page
   [4] Nginx virtual host
   [5] Project
-  [6] settings.local.php
   ➤➤➤ 0⏎
  Select generator 
   [ 0] ..

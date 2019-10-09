@@ -113,19 +113,17 @@ $settings['rebuild_access'] = TRUE;
  * directory.
  */
 $settings['skip_permissions_hardening'] = TRUE;
-{% if db_override %}
 
 /**
  * Database settings.
  */
 $databases['default']['default'] = [
-  'database' => '{{ database }}',
-  'username' => '{{ username }}',
-  'password' => '{{ password }}',
+  'database' => 'drupal_local',
+  'username' => 'root',
+  'password' => '123',
   'prefix' => '',
-  'host' => '{{ host }}',
+  'host' => 'localhost',
   'port' => '',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\{{ driver }}',
-  'driver' => '{{ driver }}',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
 ];
-{% endif %}
