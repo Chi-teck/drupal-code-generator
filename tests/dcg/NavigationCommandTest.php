@@ -16,7 +16,7 @@ class NavigationCommandTest extends BaseTestCase {
   /**
    * Test callback.
    */
-  public function testNavigation() {
+  public function testNavigation(): void {
 
     $factory = new GeneratorFactory(new Filesystem());
     $generators = $factory->getGenerators([Application::ROOT . '/src/Command']);

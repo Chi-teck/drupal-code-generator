@@ -14,7 +14,7 @@ class ConstraintTest extends BaseGeneratorTest {
   /**
    * Test callback.
    */
-  public function testGenerator() {
+  public function testGenerator(): void {
 
     $data_type_output = implode("\n", [
       'Type of data to validate [Item list]:',

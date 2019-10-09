@@ -17,7 +17,7 @@ class GeneratorDiscoveryTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testExecute() {
+  public function testExecute(): void {
     $factory = new GeneratorFactory(new Filesystem());
     $generators = $factory->getGenerators(
       [Application::ROOT . '/src/Command/Misc/Drupal_7'],

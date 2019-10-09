@@ -22,14 +22,14 @@ abstract class BaseTestCase extends TestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $this->directory = sys_get_temp_dir() . '/dcg_sandbox';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function tearDown() {
+  public function tearDown(): void {
     (new Filesystem())->remove($this->directory);
   }
 

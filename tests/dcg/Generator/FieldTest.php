@@ -23,7 +23,7 @@ class FieldTest extends BaseGeneratorTest {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
 
     $type_options = [
       '  [ 1] Boolean',
@@ -185,7 +185,7 @@ class FieldTest extends BaseGeneratorTest {
   /**
    * {@inheritdoc}
    */
-  protected function processExpectedDisplay($display) {
+  protected function processExpectedDisplay(string $display): string {
     $display = self::insertRule($display, 'Label for sub-field');
     $display = self::insertRule($display, 'Would you like to create field storage settings form');
     return $display;
@@ -194,7 +194,7 @@ class FieldTest extends BaseGeneratorTest {
   /**
    * Inserts header line into display.
    */
-  protected static function insertRule($display, $text) {
+  protected static function insertRule(string $display, string $text): string {
     $line = "––––––––––––––––––––––––––––––––––––––––––––––––––\n\n";
     return preg_replace("/\n $text/", $line . " $text", $display);
   }

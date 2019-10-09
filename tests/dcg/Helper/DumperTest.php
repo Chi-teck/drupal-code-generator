@@ -41,7 +41,7 @@ class DumperTest extends BaseTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->input = new ArrayInput([]);
     $this->output = new BufferedOutput();
@@ -51,7 +51,7 @@ class DumperTest extends BaseTestCase {
   /**
    * Test callback.
    */
-  public function testDumper() {
+  public function testDumper(): void {
 
     // -- Default case.
     $assets = [
@@ -203,7 +203,7 @@ class DumperTest extends BaseTestCase {
   /**
    * Asserts dumper output.
    */
-  protected function assertOutput(string $expected_output) :void {
+  protected function assertOutput(string $expected_output): void {
     $expected_output = str_replace('{dir}', $this->directory, $expected_output);
     static::assertEquals($expected_output, $this->output->fetch());
   }
@@ -211,7 +211,7 @@ class DumperTest extends BaseTestCase {
   /**
    * Asserts contents of dumped assets.
    */
-  protected function assertFiles(array $assets) :void {
+  protected function assertFiles(array $assets): void {
     foreach ($assets as $asset) {
       static::assertStringEqualsFile($this->directory . '/' . $asset->getPath(), $asset->getContent());
     }
@@ -220,7 +220,7 @@ class DumperTest extends BaseTestCase {
   /**
    * Dumps assets into file system.
    */
-  protected function dump(array $assets, ?bool $replace = NULL, bool $dry_run = FALSE) :array {
+  protected function dump(array $assets, ?bool $replace = NULL, bool $dry_run = FALSE): array {
     $question_helper = new QuestionHelper();
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
@@ -237,7 +237,7 @@ class DumperTest extends BaseTestCase {
    * @param string $input
    *   Input that is to be written.
    */
-  protected function setStream(string $input) :void {
+  protected function setStream(string $input): void {
     $stream = fopen('php://memory', 'r+', FALSE);
     fwrite($stream, $input);
     rewind($stream);
@@ -247,7 +247,7 @@ class DumperTest extends BaseTestCase {
   /**
    * Creates a file.
    */
-  protected function createFile(string $file_name) :void {
+  protected function createFile(string $file_name): void {
     $this->filesystem->dumpFile($this->directory . '/' . $file_name, mt_rand());
   }
 

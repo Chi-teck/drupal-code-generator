@@ -20,7 +20,7 @@ class ValidatorTraitTest extends TestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $this->validator = new class() {
       use ValidatorTrait;
     };
@@ -36,7 +36,7 @@ class ValidatorTraitTest extends TestCase {
    *
    * @dataProvider validateMachineNameProvider()
    */
-  public function testValidateMachineName($machine_name, bool $exception) :void {
+  public function testValidateMachineName(string $machine_name, bool $exception): void {
     if ($exception) {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage('The value is not correct machine name.');
@@ -50,7 +50,7 @@ class ValidatorTraitTest extends TestCase {
    * @return array
    *   Array of arguments of test callback.
    */
-  public function validateMachineNameProvider() :array {
+  public function validateMachineNameProvider(): array {
     return [
       ['snake_case_here', FALSE],
       ['snake_case_here123', FALSE],
@@ -72,7 +72,7 @@ class ValidatorTraitTest extends TestCase {
    *
    * @dataProvider validateClassNameProvider()
    */
-  public function testValidateClassName($class_name, bool $exception) :void {
+  public function testValidateClassName(string $class_name, bool $exception): void {
     if ($exception) {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage('The value is not correct class name.');
@@ -86,7 +86,7 @@ class ValidatorTraitTest extends TestCase {
    * @return array
    *   Array of arguments of test callback.
    */
-  public function validateClassNameProvider() :array {
+  public function validateClassNameProvider(): array {
     return [
       ['GoodClassName', FALSE],
       ['snake_case_here', TRUE],
@@ -106,7 +106,7 @@ class ValidatorTraitTest extends TestCase {
    *
    * @dataProvider validateServiceNameProvider()
    */
-  public function testValidateServiceName($service_name, bool $exception) :void {
+  public function testValidateServiceName(string $service_name, bool $exception): void {
     if ($exception) {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage('The value is not correct service name.');
@@ -120,7 +120,7 @@ class ValidatorTraitTest extends TestCase {
    * @return array
    *   Array of arguments of test callback.
    */
-  public function validateServiceNameProvider() :array {
+  public function validateServiceNameProvider(): array {
     return [
       ['CamelCaseHere', TRUE],
       ['snake_case_here', FALSE],
@@ -142,7 +142,7 @@ class ValidatorTraitTest extends TestCase {
    *
    * @dataProvider validateRequiredProvider()
    */
-  public function testValidateRequired($value, bool $exception) :void {
+  public function testValidateRequired($value, bool $exception): void {
     if ($exception) {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage('The value is required.');
@@ -156,7 +156,7 @@ class ValidatorTraitTest extends TestCase {
    * @return array
    *   Array of arguments of test callback.
    */
-  public function validateRequiredProvider() :array {
+  public function validateRequiredProvider(): array {
     return [
       ['yes', FALSE],
       ['0', FALSE],
@@ -176,7 +176,7 @@ class ValidatorTraitTest extends TestCase {
    *
    * @dataProvider validateRequiredMachineNameProvider()
    */
-  public function testValidateRequiredMachineName($value, bool $exception) :void {
+  public function testValidateRequiredMachineName($value, bool $exception): void {
     if ($exception) {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage($value ? 'The value is not correct machine name.' : 'The value is required.');
@@ -190,7 +190,7 @@ class ValidatorTraitTest extends TestCase {
    * @return array
    *   Array of arguments of test callback.
    */
-  public function validateRequiredMachineNameProvider() :array {
+  public function validateRequiredMachineNameProvider(): array {
     return [
       ['test', FALSE],
       ['wrong machine name', TRUE],
@@ -209,7 +209,7 @@ class ValidatorTraitTest extends TestCase {
    *
    * @dataProvider validateRequiredClassNameProvider()
    */
-  public function testValidateRequiredClassName($value, bool $exception) :void {
+  public function testValidateRequiredClassName($value, bool $exception): void {
     if ($exception) {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage($value ? 'The value is not correct class name.' : 'The value is required.');
@@ -223,7 +223,7 @@ class ValidatorTraitTest extends TestCase {
    * @return array
    *   Array of arguments of test callback.
    */
-  public function validateRequiredClassNameProvider() :array {
+  public function validateRequiredClassNameProvider(): array {
     return [
       ['GoodClassName', FALSE],
       ['wrong class name', TRUE],
@@ -242,7 +242,7 @@ class ValidatorTraitTest extends TestCase {
    *
    * @dataProvider validateRequiredServiceNameProvider()
    */
-  public function testValidateRequiredServiceName($value, bool $exception) :void {
+  public function testValidateRequiredServiceName($value, bool $exception): void {
     if ($exception) {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage($value ? 'The value is not correct service name.' : 'The value is required.');
@@ -256,7 +256,7 @@ class ValidatorTraitTest extends TestCase {
    * @return array
    *   Array of arguments of test callback.
    */
-  public function validateRequiredServiceNameProvider() :array {
+  public function validateRequiredServiceNameProvider(): array {
     return [
       ['good.service_name', FALSE],
       ['wrong class name', TRUE],

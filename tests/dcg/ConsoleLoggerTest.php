@@ -17,7 +17,7 @@ class ConsoleLoggerTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testLogger() {
+  public function testLogger(): void {
 
     $output = new BufferedOutput(OutputInterface::VERBOSITY_NORMAL, TRUE);
     $logger = new ConsoleLogger($output);

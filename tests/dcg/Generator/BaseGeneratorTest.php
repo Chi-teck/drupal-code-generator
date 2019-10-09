@@ -51,7 +51,7 @@ abstract class BaseGeneratorTest extends BaseTestCase {
   /**
    * Test callback.
    */
-  public function testGenerator() {
+  public function testGenerator(): void {
     if ($this->interaction || $this->fixtures) {
       $this->doTest($this->interaction, $this->fixtures);
     }
@@ -66,7 +66,7 @@ abstract class BaseGeneratorTest extends BaseTestCase {
   /**
    * Executes tests using provided interaction and fixtures.
    */
-  public function doTest(array $interaction, array $fixtures) {
+  public function doTest(array $interaction, array $fixtures): void {
 
     $command_class = 'DrupalCodeGenerator\Command\\' . $this->class;
 
@@ -108,7 +108,7 @@ abstract class BaseGeneratorTest extends BaseTestCase {
    * @return string
    *   The processed display.
    */
-  protected function processExpectedDisplay($display) {
+  protected function processExpectedDisplay(string $display): string {
     return $display;
   }
 

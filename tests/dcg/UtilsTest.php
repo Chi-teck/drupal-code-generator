@@ -13,7 +13,7 @@ class UtilsTest extends BaseTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     (new Filesystem())->dumpFile($this->directory . '/foo/foo.info.yml', 'Content.');
   }
@@ -29,14 +29,14 @@ class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::machine2human
    * @dataProvider machineToHumanProvider
    */
-  public function testMachineToHuman($machine_name, $expected_human_name) {
+  public function testMachineToHuman(string $machine_name, string $expected_human_name): void {
     static::assertEquals($expected_human_name, Utils::machine2human($machine_name));
   }
 
   /**
    * Data provider callback for testMachineToHuman().
    */
-  public function machineToHumanProvider() {
+  public function machineToHumanProvider(): array {
     return [
       ['hello_world', 'Hello world'],
       ['_hello_world_', 'Hello world'],
@@ -55,14 +55,14 @@ class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::human2machine
    * @dataProvider human2machineProvider
    */
-  public function testHumanToMachine($human_name, $expected_machine_name) {
+  public function testHumanToMachine(string $human_name, string $expected_machine_name): void {
     static::assertEquals($expected_machine_name, Utils::human2machine($human_name));
   }
 
   /**
    * Data provider callback for testMachineToHuman().
    */
-  public function human2machineProvider() {
+  public function human2machineProvider(): array {
     return [
       ['Hello world!', 'hello_world'],
       ['Camel Case Here', 'camel_case_here'],
@@ -83,14 +83,14 @@ class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::camel2machine
    * @dataProvider camel2machineProvider
    */
-  public function testCamelToMachine($camel_input, $expected_machine_name) {
+  public function testCamelToMachine(string $camel_input, string $expected_machine_name): void {
     static::assertEquals($expected_machine_name, Utils::camel2machine($camel_input));
   }
 
   /**
    * Data provider callback for testCamelToMachine().
    */
-  public function camel2machineProvider() {
+  public function camel2machineProvider(): array {
     return [
       ['HelloWorld!', 'hello_world'],
       ['lowerCamel', 'lower_camel'],
@@ -103,7 +103,7 @@ class UtilsTest extends BaseTestCase {
    *
    * @param string $text
    *   Text to camelize.
-   * @param string $upper_camel
+   * @param bool $upper_camel
    *   Indicates if the first letter should be in upper case.
    * @param string $expected
    *   Expected result.
@@ -111,7 +111,7 @@ class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::camelize
    * @dataProvider camelizeProvider
    */
-  public function testCamelize($text, $upper_camel, $expected) {
+  public function testCamelize(string $text, bool $upper_camel, string $expected): void {
     static::assertEquals($expected, Utils::camelize($text, $upper_camel));
   }
 
@@ -142,7 +142,7 @@ class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
    * @dataProvider getExtensionRootProvider
    */
-  public function testGetExtensionRoot($target_directory, $expected_extension_root) {
+  public function testGetExtensionRoot(string $target_directory, $expected_extension_root): void {
     $extension_root = Utils::getExtensionRoot($target_directory);
     self::assertEquals($expected_extension_root, $extension_root);
   }
@@ -150,7 +150,7 @@ class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testGetExtensionRoot().
    */
-  public function getExtensionRootProvider() {
+  public function getExtensionRootProvider(): array {
     $extension_root = sys_get_temp_dir() . '/dcg_sandbox/foo';
     return [
       ['/tmp', FALSE],
@@ -167,7 +167,7 @@ class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::replaceTokens()
    * @dataProvider replaceTokensProvider
    */
-  public function testReplaceTokens($input, $vars, $expected_output, bool $exception = FALSE) :void {
+  public function testReplaceTokens(string $input, array $vars, string $expected_output, bool $exception = FALSE): void {
     if ($exception) {
       self::expectException(\UnexpectedValueException::class);
       self::expectExceptionMessage($expected_output);
@@ -229,7 +229,7 @@ class UtilsTest extends BaseTestCase {
    *
    * @covers \DrupalCodeGenerator\Utils::pluralize()
    */
-  public function testPluralize() {
+  public function testPluralize(): void {
     static::assertEquals('cats', Utils::pluralize('cat'));
     static::assertEquals('flies', Utils::pluralize('fly'));
     static::assertEquals('bosses', Utils::pluralize('boss'));

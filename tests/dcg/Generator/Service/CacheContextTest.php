@@ -14,21 +14,21 @@ class CacheContextTest extends BaseGeneratorTest {
   /**
    * Test callback.
    */
-  public function testCalculatedNo() {
+  public function testCalculatedNo(): void {
     parent::doTest(self::getInteraction('no'), self::getFixtures('no'));
   }
 
   /**
    * Test callback.
    */
-  public function testCalculatedYes() {
+  public function testCalculatedYes(): void {
     parent::doTest(self::getInteraction('yes'), self::getFixtures('yes'));
   }
 
   /**
    * Returns test fixtures.
    */
-  protected static function getFixtures($calculated) {
+  protected static function getFixtures(string $calculated): array {
     $dir = '/_cache_context_calculated_' . $calculated;
     return [
       'foo.services.yml' => $dir . '/_cache_context.services.yml',
@@ -39,7 +39,7 @@ class CacheContextTest extends BaseGeneratorTest {
   /**
    * Returns command interaction.
    */
-  protected static function getInteraction($calculated) {
+  protected static function getInteraction(string $calculated): array {
     return [
       'Module name [%default_name%]:' => 'Foo',
       'Module machine name [foo]:' => 'foo',

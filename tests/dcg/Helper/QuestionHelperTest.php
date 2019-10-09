@@ -18,7 +18,7 @@ class QuestionHelperTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testAsk() :void {
+  public function testAsk(): void {
 
     // -- Question with default value.
     $output = $this->createOutput();
@@ -137,7 +137,7 @@ class QuestionHelperTest extends TestCase {
   /**
    * Creates input mock.
    */
-  protected function createInput(string $answers, array $answer_options = NULL) :StreamableInputInterface {
+  protected function createInput(string $answers, array $answer_options = NULL): StreamableInputInterface {
 
     $stream = fopen('php://memory', 'r+', FALSE);
     fwrite($stream, $answers);
@@ -169,14 +169,14 @@ class QuestionHelperTest extends TestCase {
   /**
    * Creates stream output.
    */
-  protected function createOutput() :StreamOutput {
+  protected function createOutput(): StreamOutput {
     return new StreamOutput(fopen('php://memory', 'r+', FALSE));
   }
 
   /**
    * Returns output display.
    */
-  protected function getDisplay(StreamOutput $output) :string {
+  protected function getDisplay(StreamOutput $output): string {
     rewind($output->getStream());
     return stream_get_contents($output->getStream());
   }

@@ -13,7 +13,7 @@ class CompactorTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testCompactor() {
+  public function testCompactor(): void {
     // Define base class for PhpCompactor as it may not exist.
     if (!class_exists('Herrera\Box\Compactor\Compactor')) {
       // @codingStandardsIgnoreLine

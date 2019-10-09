@@ -13,7 +13,7 @@ class AssetTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testGetPath() {
+  public function testGetPath(): void {
     $asset = new Asset();
 
     $asset->path('aaa/{foo}/bbb');
@@ -26,7 +26,7 @@ class AssetTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testGetMode() {
+  public function testGetMode(): void {
     $asset = new Asset();
 
     self::assertEquals(0644, $asset->getMode());
@@ -41,7 +41,7 @@ class AssetTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testIsDirectory() {
+  public function testIsDirectory(): void {
     $asset = new Asset();
 
     self::assertFalse($asset->isDirectory());
@@ -53,7 +53,7 @@ class AssetTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testTemplate() {
+  public function testTemplate(): void {
     $asset = new Asset();
 
     $asset->template('foo');
@@ -66,7 +66,7 @@ class AssetTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testHeaderTemplate() {
+  public function testHeaderTemplate(): void {
     $asset = new Asset();
 
     $asset->headerTemplate('foo');

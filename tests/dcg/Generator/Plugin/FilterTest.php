@@ -19,7 +19,7 @@ class FilterTest extends BaseGeneratorTest {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $filter_type_output = implode("\n", [
       'Filter type:',
       '  [1] HTML restrictor',

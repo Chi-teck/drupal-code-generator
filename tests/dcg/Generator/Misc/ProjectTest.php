@@ -14,7 +14,7 @@ class ProjectTest extends BaseGeneratorTest {
   /**
    * Test callback.
    */
-  public function testLight() {
+  public function testLight(): void {
 
     $default_php_version = '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
     $interaction = [
@@ -52,7 +52,7 @@ class ProjectTest extends BaseGeneratorTest {
   /**
    * Test callback.
    */
-  public function testFull() {
+  public function testFull(): void {
 
     $default_php_version = '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
     $interaction = [
@@ -104,7 +104,7 @@ class ProjectTest extends BaseGeneratorTest {
   /**
    * {@inheritdoc}
    */
-  protected function processExpectedDisplay($display) {
+  protected function processExpectedDisplay(string $display): string {
     $display .= " Next steps:\n";
     $display .= " –––––––––––\n";
     $display .= " 1. Review generated files\n";
