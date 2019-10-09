@@ -184,6 +184,7 @@ class UtilsTest extends BaseTestCase {
   public function replaceTokensProvider() :array {
     return [
       ['-={foo}=-', ['foo' => 'bar'], '-=bar=-'],
+      ['-=\{foo\}=-', ['foo' => 'bar'], '-=\{foo\}=-'],
       ['-={foo|camelize}=-', ['foo' => 'bar'], '-=Bar=-'],
       ['-={foo|u2h}=-', ['foo' => 'alpha_beta'], '-=alpha-beta=-'],
       ['-={foo|h2u}=-', ['foo' => 'alpha-beta'], '-=alpha_beta=-'],
@@ -203,6 +204,24 @@ class UtilsTest extends BaseTestCase {
         TRUE,
       ],
     ];
+  }
+
+  /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Utils::testAddSlashes()
+   */
+  public function testAddSlashes(): void {
+    self::assertEquals('foo \{node\} bar', Utils::addSlashes('foo {node} bar'));
+  }
+
+  /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Utils::testAddSlashes()
+   */
+  public function testStripSlashes(): void {
+    self::assertEquals('foo {node} bar', Utils::stripSlashes('foo \{node\} bar'));
   }
 
   /**
