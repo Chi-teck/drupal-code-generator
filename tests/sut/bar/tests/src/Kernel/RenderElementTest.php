@@ -23,7 +23,7 @@ class RenderElementTest extends KernelTestBase {
     parent::setUp();
 
     \Drupal::service('theme_installer')->install(['stark']);
-    \Drupal::service('theme_handler')->setDefault('stark');
+    \Drupal::configFactory()->getEditable('system.theme')->set('default', 'stark')->save();
 
     $this->container
       ->get('entity_type.manager')
