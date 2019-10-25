@@ -12,8 +12,9 @@ class Utils {
   /**
    * Transforms a machine name to human name.
    */
-  public static function machine2human(string $machine_name): string {
-    return ucfirst(trim(str_replace('_', ' ', $machine_name)));
+  public static function machine2human(string $machine_name, bool $title_case = FALSE): string {
+    $output = trim(str_replace('_', ' ', $machine_name));
+    return $title_case ? ucwords($output) : ucfirst($output);
   }
 
   /**

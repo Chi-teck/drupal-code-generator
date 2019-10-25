@@ -21,16 +21,11 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @param string $machine_name
-   *   Machine name to process.
-   * @param string $expected_human_name
-   *   Expected human name.
-   *
    * @covers \DrupalCodeGenerator\Utils::machine2human
    * @dataProvider machineToHumanProvider
    */
-  public function testMachineToHuman(string $machine_name, string $expected_human_name): void {
-    static::assertEquals($expected_human_name, Utils::machine2human($machine_name));
+  public function testMachineToHuman(string $machine_name, string $expected_human_name, bool $title_case): void {
+    static::assertEquals($expected_human_name, Utils::machine2human($machine_name, $title_case));
   }
 
   /**
@@ -38,19 +33,14 @@ class UtilsTest extends BaseTestCase {
    */
   public function machineToHumanProvider(): array {
     return [
-      ['hello_world', 'Hello world'],
-      ['_hello_world_', 'Hello world'],
-      ['__123', '123'],
+      ['hello_world', 'Hello world', FALSE],
+      ['_hello_world_', 'Hello World', TRUE],
+      ['__123', '123', TRUE],
     ];
   }
 
   /**
    * Test callback.
-   *
-   * @param string $human_name
-   *   Human name to process.
-   * @param string $expected_machine_name
-   *   Expected machine name.
    *
    * @covers \DrupalCodeGenerator\Utils::human2machine
    * @dataProvider human2machineProvider
@@ -75,11 +65,6 @@ class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @param string $camel_input
-   *   Camel string to process.
-   * @param string $expected_machine_name
-   *   Expected machine name.
-   *
    * @covers \DrupalCodeGenerator\Utils::camel2machine
    * @dataProvider camel2machineProvider
    */
@@ -100,13 +85,6 @@ class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @param string $text
-   *   Text to camelize.
-   * @param bool $upper_camel
-   *   Indicates if the first letter should be in upper case.
-   * @param string $expected
-   *   Expected result.
    *
    * @covers \DrupalCodeGenerator\Utils::camelize
    * @dataProvider camelizeProvider
@@ -133,11 +111,6 @@ class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @param string $target_directory
-   *   Directory for which the extension root is checked.
-   * @param string|bool $expected_extension_root
-   *   Expected extension root or FALSE if root directory should not be found.
    *
    * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
    * @dataProvider getExtensionRootProvider

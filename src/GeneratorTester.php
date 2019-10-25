@@ -161,7 +161,7 @@ class GeneratorTester {
    *   Expected display.
    */
   public function getExpectedDisplay(): string {
-    $default_name = Utils::machine2human(basename($this->directory));
+    $default_name = Utils::machine2human(basename($this->directory), TRUE);
 
     $expected_display = "\n";
     $name = $this->command->getAliases()[0] ?? $this->command->getName();

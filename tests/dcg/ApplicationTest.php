@@ -22,7 +22,7 @@ class ApplicationTest extends BaseTestCase {
       ' Welcome to install-file generator!',
       '––––––––––––––––––––––––––––––––––––',
       '',
-      ' Module name [Dcg sandbox]:',
+      ' Module name [Dcg Sandbox]:',
       ' ➤ Foo',
       '',
       ' Module machine name [foo]:',

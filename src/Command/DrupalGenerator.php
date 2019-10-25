@@ -99,7 +99,7 @@ abstract class DrupalGenerator extends Generator {
    */
   protected function askNameQuestion(): string {
     $root_directory = basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
-    $default_value = Utils::machine2human($root_directory);
+    $default_value = Utils::machine2human($root_directory, TRUE);
     $name_question = new Question($this->nameQuestion, $default_value);
     $name_question->setValidator([get_class($this), 'validateRequired']);
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
