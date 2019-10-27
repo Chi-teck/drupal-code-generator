@@ -23,6 +23,8 @@ class LoggerTest extends KernelTestBase {
 
     $this->installConfig('system');
 
+    \Drupal::logger('zippo')->notice('foo');
+
     $logged_data = file_get_contents('temporary://drupal.log');
 
     self::assertRegExp('/\[message\] => foo\n/', $logged_data);
