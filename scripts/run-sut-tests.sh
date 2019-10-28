@@ -18,8 +18,8 @@ SELF_PATH=$(dirname $0)/../tests/sut
 if [ -z $DRUPAL_VERSION ]; then
   DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '8\..\.x' | tail -n1)'-dev'
 fi
-DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
-DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
+DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut/build}
+DRUPAL_CACHE_DIR=${DRUPAL_CACHE_DIR:-/tmp/dcg_sut/cache/$DRUPAL_VERSION}
 DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
 DRUPAL_PORT=${DRUPAL_PORT:-8085}
 DEFAULT_DCG=$(realpath $(dirname $0)/../bin/dcg)
@@ -67,8 +67,8 @@ else
   mkdir -p $DRUPAL_DIR
 fi
 
-if [ -d $DRUPAL_CACHED_DIR ]; then
-  cp -r $DRUPAL_CACHED_DIR/* $DRUPAL_DIR
+if [ -d $DRUPAL_CACHE_DIR ]; then
+  cp -r $DRUPAL_CACHE_DIR/* $DRUPAL_DIR
 else
   export COMPOSER_PROCESS_TIMEOUT=1900
   composer -d$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
@@ -78,8 +78,8 @@ else
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   dcg_drush si minimal --db-url=sqlite://sites/default/files/.db.sqlite --sites-subdir=default
-  mkdir -p $DRUPAL_CACHED_DIR
-  cp -r $DRUPAL_DIR/. $DRUPAL_CACHED_DIR
+  mkdir -p $DRUPAL_CACHE_DIR
+  cp -r $DRUPAL_DIR/. $DRUPAL_CACHE_DIR
 fi
 
 # Start server.
