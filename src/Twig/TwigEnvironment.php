@@ -4,10 +4,10 @@ namespace DrupalCodeGenerator\Twig;
 
 use DrupalCodeGenerator\Utils;
 use Twig\Environment;
+use Twig\Loader\LoaderInterface;
 use Twig\Source;
 use Twig\TokenStream;
 use Twig\TwigFilter;
-use Twig_LoaderInterface;
 
 /**
  * Stores the Twig configuration.
@@ -17,12 +17,12 @@ class TwigEnvironment extends Environment {
   /**
    * Constructs Twig environment object.
    *
-   * @param \Twig_LoaderInterface $loader
+   * @param \Twig\Loader\LoaderInterface $loader
    *   The Twig loader.
    * @param array $options
    *   (Optional) Environment options.
    */
-  public function __construct(Twig_LoaderInterface $loader, array $options = []) {
+  public function __construct(LoaderInterface $loader, array $options = []) {
     parent::__construct($loader, $options);
 
     $this->addTokenParser(new TwigSortTokenParser());

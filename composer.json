@@ -30,7 +30,7 @@
         "symfony/console": "^4.2.0",
         "symfony/filesystem": "^4.2.0",
         "symfony/inflector": "^4.3",
-        "twig/twig": "^2.10"
+        "twig/twig": "^2.10 || ^3.0"
     },
     "require-dev": {
         "drupal/coder": "^8.3.3",
