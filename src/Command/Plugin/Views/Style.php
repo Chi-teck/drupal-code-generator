@@ -22,7 +22,6 @@ final class Style extends PluginGenerator {
     $vars['configurable'] = $this->confirm('Make the plugin configurable?');
 
     $this->addFile('src/Plugin/views/style/{class}.php')
-      ->path('src/Plugin/views/style/{class}.php')
       ->template('style');
 
     $this->addFile('templates/views-style-{plugin_id|u2h}.html.twig')

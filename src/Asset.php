@@ -87,7 +87,7 @@ final class Asset {
   /**
    * Asset constructor.
    */
-  private function __construct(string $path = NULL, bool $is_directory = NULL) {
+  private function __construct(string $path, bool $is_directory) {
     $this->path = $path;
     $this->isDirectory = $is_directory;
   }
@@ -96,15 +96,15 @@ final class Asset {
   /**
    * Directory asset constructor.
    */
-  public static function createDirectory(string $path = NULL): self {
-    return new static($path, TRUE);
+  public static function createDirectory(string $path): self {
+    return new self($path, TRUE);
   }
 
   /**
    * File asset constructor.
    */
-  public static function createFile(string $path = NULL): self {
-    return new static($path, FALSE);
+  public static function createFile(string $path): self {
+    return new self($path, FALSE);
   }
 
   /**
@@ -195,20 +195,6 @@ final class Asset {
    */
   public function getMode(): int {
     return $this->mode ?: ($this->isDirectory() ? 0755 : 0644);
-  }
-
-  /**
-   * Setter for asset path.
-   *
-   * @param string|null $path
-   *   Asset path.
-   *
-   * @return \DrupalCodeGenerator\Asset
-   *   The asset.
-   */
-  public function path(?string $path): Asset {
-    $this->path = $path;
-    return $this;
   }
 
   /**

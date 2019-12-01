@@ -78,8 +78,7 @@ final class Theme extends ThemeGenerator {
     ];
 
     foreach ($style_sheets as $file) {
-      $this->addFile()
-        ->path('{machine_name}/' . ($vars['sass'] ? "scss/$file.scss" : "css/$file.css"))
+      $this->addFile('{machine_name}/' . ($vars['sass'] ? "scss/$file.scss" : "css/$file.css"))
         ->content('');
     }
 

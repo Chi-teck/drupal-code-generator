@@ -261,12 +261,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addFile(string $path = NULL, string $template = NULL): Asset {
-    $asset = Asset::createFile()
-      ->path($path)
-      ->template($template);
-    $this->assets[] = $asset;
-    return $asset;
+  protected function addFile(string $path, string $template = NULL): Asset {
+    return $this->assets[] = Asset::createFile($path)->template($template);
   }
 
   /**
@@ -278,11 +274,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  protected function addDirectory(string $path = NULL): Asset {
-    $asset = Asset::createDirectory()
-      ->path($path);
-    $this->assets[] = $asset;
-    return $asset;
+  protected function addDirectory(string $path): Asset {
+    return $this->assets[] = Asset::createDirectory($path);
   }
 
   /**

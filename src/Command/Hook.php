@@ -34,8 +34,7 @@ final class Hook extends ModuleGenerator {
     $vars['hook_name'] = $this->io->askQuestion($hook_question);
     $vars['file_type'] = self::getFileType($vars['hook_name']);
 
-    $file = $this->addFile()
-      ->path('{machine_name}.{file_type}')
+    $file = $this->addFile('{machine_name}.{file_type}')
       ->headerTemplate('_lib/file-docs/{file_type}')
       ->action(Asset::ACTION_APPEND)
       ->headerSize(7);

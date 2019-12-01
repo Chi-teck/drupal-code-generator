@@ -55,9 +55,9 @@ class DumperTest extends BaseTestCase {
 
     // -- Default case.
     $assets = [
-      Asset::createFile()->path('alpha.txt')->content('alpha'),
-      Asset::createFile()->path('beta.txt')->content('beta'),
-      Asset::createFile()->path('gamma.txt')->content('gamma'),
+      Asset::createFile('alpha.txt')->content('alpha'),
+      Asset::createFile('beta.txt')->content('beta'),
+      Asset::createFile('gamma.txt')->content('gamma'),
     ];
     $dumped_assets = $this->dump($assets);
 
@@ -69,7 +69,7 @@ class DumperTest extends BaseTestCase {
     $this->filesystem->dumpFile($this->directory . '/foo.txt', 'old foo');
     $this->createFile('foo.txt');
     $assets = [
-      Asset::createFile()->path('foo.txt')->content('foo'),
+      Asset::createFile('foo.txt')->content('foo'),
     ];
     $this->setStream("\n");
 
@@ -85,7 +85,7 @@ class DumperTest extends BaseTestCase {
     // -- File exists and user confirms replacing.
     $this->createFile('bar.txt');
     $assets = [
-      Asset::createFile()->path('bar.txt')->content('bar'),
+      Asset::createFile('bar.txt')->content('bar'),
     ];
     $this->setStream("Yes\n");
     $dumped_assets = $this->dump($assets);
@@ -100,7 +100,7 @@ class DumperTest extends BaseTestCase {
     // -- File exists and user cancels replacing.
     $this->createFile('example.txt');
     $assets = [
-      Asset::createFile()->path('example.txt')->content('example'),
+      Asset::createFile('example.txt')->content('example'),
     ];
     $this->setStream("No\n");
     $dumped_assets = $this->dump($assets);
@@ -115,7 +115,7 @@ class DumperTest extends BaseTestCase {
     // -- Dumper with enabled replace option (always yes).
     $this->createFile('wine.txt');
     $assets = [
-      Asset::createFile()->path('wine.txt')->content('wine'),
+      Asset::createFile('wine.txt')->content('wine'),
     ];
     $dumped_assets = $this->dump($assets, TRUE);
 
@@ -126,7 +126,7 @@ class DumperTest extends BaseTestCase {
     // -- Dumper with enabled replace option (always no).
     $this->createFile('beer.txt');
     $assets = [
-      Asset::createFile()->path('beer.txt')->content('beer'),
+      Asset::createFile('beer.txt')->content('beer'),
     ];
     $dumped_assets = $this->dump($assets, FALSE);
 
@@ -136,7 +136,7 @@ class DumperTest extends BaseTestCase {
 
     // -- File with special permissions.
     $assets = [
-      Asset::createFile()->path('prize.txt')->content('prize')->mode(0757),
+      Asset::createFile('prize.txt')->content('prize')->mode(0757),
     ];
     $dumped_assets = $this->dump($assets);
 
@@ -148,7 +148,7 @@ class DumperTest extends BaseTestCase {
 
     // -- Directory.
     $assets = [
-      Asset::createDirectory()->path('includes'),
+      Asset::createDirectory('includes'),
     ];
     $dumped_assets = $this->dump($assets);
 
@@ -159,7 +159,7 @@ class DumperTest extends BaseTestCase {
     // -- Existing directory.
     $this->filesystem->dumpFile($this->directory . '/core/readme.txt', 'old readme');
     $assets = [
-      Asset::createDirectory()->path('core'),
+      Asset::createDirectory('core'),
     ];
     $dumped_assets = $this->dump($assets);
 
@@ -172,8 +172,8 @@ class DumperTest extends BaseTestCase {
     // -- Append file content.
     $this->filesystem->dumpFile($this->directory . '/log.txt', "File header");
     $assets = [
-      Asset::createFile()->path('log.txt')->content("redundant line\nRecord 1")->action(Asset::ACTION_APPEND)->headerSize(1),
-      Asset::createFile()->path('log.txt')->content('Record 2')->action(Asset::ACTION_APPEND),
+      Asset::createFile('log.txt')->content("redundant line\nRecord 1")->action(Asset::ACTION_APPEND)->headerSize(1),
+      Asset::createFile('log.txt')->content('Record 2')->action(Asset::ACTION_APPEND),
     ];
     $dumped_assets = $this->dump($assets, TRUE);
 
@@ -184,8 +184,8 @@ class DumperTest extends BaseTestCase {
 
     // -- Dry dump.
     $assets = [
-      Asset::createFile()->path('example.txt')->content('Example'),
-      Asset::createDirectory()->path('foo'),
+      Asset::createFile('example.txt')->content('Example'),
+      Asset::createDirectory('foo'),
     ];
     $dumped_assets = $this->dump($assets, NULL, TRUE);
 
