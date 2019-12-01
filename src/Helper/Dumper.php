@@ -102,7 +102,7 @@ class Dumper extends Helper implements IOAwareInterface {
       }
 
       // Nothing to dump.
-      if ($content === NULL && !$asset->isDirectory()) {
+      if ($asset->isFile() && $content === NULL) {
         continue;
       }
 

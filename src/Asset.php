@@ -14,7 +14,7 @@ final class Asset {
   /**
    * Asset path.
    *
-   * @var string|null
+   * @var string
    */
   private $path;
 
@@ -65,14 +65,14 @@ final class Asset {
   /**
    * Header size.
    *
-   * @var int|null
+   * @var int
    */
   private $headerSize = 0;
 
   /**
    * Asset mode.
    *
-   * @var int|null
+   * @var int
    */
   private $mode;
 
@@ -90,6 +90,7 @@ final class Asset {
   private function __construct(string $path, bool $is_directory) {
     $this->path = $path;
     $this->isDirectory = $is_directory;
+    $this->mode = $this->isDirectory ? 0755 : 0644;
   }
   // phpcs:enable
 
@@ -120,7 +121,7 @@ final class Asset {
   /**
    * Getter for asset content.
    *
-   * @return string
+   * @return string|null
    *   Asset content.
    */
   public function getContent(): ?string {
@@ -140,7 +141,7 @@ final class Asset {
   /**
    * Getter for template.
    *
-   * @return string
+   * @return string|null
    *   Asset template.
    */
   public function getTemplate(): ?string {
@@ -150,7 +151,7 @@ final class Asset {
   /**
    * Getter for inline template.
    *
-   * @return string
+   * @return string|null
    *   Asset template.
    */
   public function getInlineTemplate(): ?string {
@@ -180,10 +181,10 @@ final class Asset {
   /**
    * Getter for asset header size.
    *
-   * @return int|null
+   * @return int
    *   Asset header size.
    */
-  public function getHeaderSize(): ?int {
+  public function getHeaderSize(): int {
     return $this->headerSize;
   }
 
@@ -194,7 +195,7 @@ final class Asset {
    *   Asset file mode.
    */
   public function getMode(): int {
-    return $this->mode ?: ($this->isDirectory() ? 0755 : 0644);
+    return $this->mode;
   }
 
   /**
@@ -324,13 +325,13 @@ final class Asset {
   /**
    * Setter for asset header size.
    *
-   * @param int|null $header_size
+   * @param int $header_size
    *   Asset header size.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function headerSize(?int $header_size): Asset {
+  public function headerSize(int $header_size): Asset {
     if ($header_size <= 0) {
       throw new \InvalidArgumentException("Header size must be greater than or equal to 0. ");
     }
@@ -341,13 +342,13 @@ final class Asset {
   /**
    * Setter for asset mode.
    *
-   * @param int|null $mode
+   * @param int $mode
    *   Asset mode.
    *
    * @return \DrupalCodeGenerator\Asset
    *   The asset.
    */
-  public function mode(?int $mode): Asset {
+  public function mode(int $mode): Asset {
     if ($mode < 0000 || $mode > 0777) {
       throw new \InvalidArgumentException("Incorrect mode value $mode.");
     }
