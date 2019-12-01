@@ -30,8 +30,7 @@ class RendererTest extends TestCase {
 
     $asset = Asset::createDirectory()
       ->template('_template.twig')
-      ->vars(['value' => 'foo'])
-      ->type(Asset::TYPE_DIRECTORY);
+      ->vars(['value' => 'foo']);
     $renderer->renderAsset($asset);
     self::assertNull($asset->getContent());
 

@@ -11,9 +11,6 @@ final class Asset {
   const ACTION_APPEND = 2;
   const ACTION_SKIP = 3;
 
-  const TYPE_FILE = 1;
-  const TYPE_DIRECTORY = 2;
-
   /**
    * Asset path.
    *
@@ -80,13 +77,6 @@ final class Asset {
   private $mode;
 
   /**
-   * Asset type (file or directory).
-   *
-   * @var string
-   */
-  private $type = self::TYPE_FILE;
-
-  /**
    * Indicates whether the asset is a directory.
    *
    * @var bool
@@ -97,27 +87,24 @@ final class Asset {
   /**
    * Asset constructor.
    */
-  private function __construct() {
-
+  private function __construct(string $path = NULL, bool $is_directory = NULL) {
+    $this->path = $path;
+    $this->isDirectory = $is_directory;
   }
   // phpcs:enable
 
   /**
    * Directory asset constructor.
    */
-  public static function createDirectory() {
-    $asset = new static();
-    $asset->isDirectory = TRUE;
-    return $asset;
+  public static function createDirectory(string $path = NULL): self {
+    return new static($path, TRUE);
   }
 
   /**
    * File asset constructor.
    */
-  public static function createFile() {
-    $asset = new static();
-    $asset->isDirectory = FALSE;
-    return $asset;
+  public static function createFile(string $path = NULL): self {
+    return new static($path, FALSE);
   }
 
   /**
@@ -379,25 +366,6 @@ final class Asset {
       throw new \InvalidArgumentException("Incorrect mode value $mode.");
     }
     $this->mode = $mode;
-    return $this;
-  }
-
-  /**
-   * Setter for asset type.
-   *
-   * @param string $type
-   *   Asset type.
-   *
-   * @return \DrupalCodeGenerator\Asset
-   *   The asset.
-   */
-  public function type(string $type): Asset {
-    if ($type != self::TYPE_FILE && $type != self::TYPE_DIRECTORY) {
-      throw new \InvalidArgumentException("Unsupported assert type $type.");
-    }
-
-    $this->isDirectory = $type == self::TYPE_DIRECTORY;
-    $this->type = $type;
     return $this;
   }
 

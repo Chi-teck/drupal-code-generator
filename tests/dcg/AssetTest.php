@@ -28,10 +28,9 @@ class AssetTest extends TestCase {
    */
   public function testGetMode(): void {
     $asset = Asset::createFile();
-
     self::assertEquals(0644, $asset->getMode());
 
-    $asset->type(Asset::TYPE_DIRECTORY);
+    $asset = Asset::createDirectory();
     self::assertEquals(0755, $asset->getMode());
 
     $asset->mode(0444);
