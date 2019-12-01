@@ -87,6 +87,40 @@ final class Asset {
   private $type = self::TYPE_FILE;
 
   /**
+   * Indicates whether the asset is a directory.
+   *
+   * @var bool
+   */
+  private $isDirectory;
+
+  // phpcs:disable
+  /**
+   * Asset constructor.
+   */
+  private function __construct() {
+
+  }
+  // phpcs:enable
+
+  /**
+   * Directory asset constructor.
+   */
+  public static function createDirectory() {
+    $asset = new static();
+    $asset->isDirectory = TRUE;
+    return $asset;
+  }
+
+  /**
+   * File asset constructor.
+   */
+  public static function createFile() {
+    $asset = new static();
+    $asset->isDirectory = FALSE;
+    return $asset;
+  }
+
+  /**
    * Getter for asset path.
    *
    * @return string
@@ -174,16 +208,6 @@ final class Asset {
    */
   public function getMode(): int {
     return $this->mode ?: ($this->isDirectory() ? 0755 : 0644);
-  }
-
-  /**
-   * Getter for asset type.
-   *
-   * @return string|null
-   *   Asset type.
-   */
-  public function getType(): ?string {
-    return $this->type;
   }
 
   /**
@@ -371,8 +395,20 @@ final class Asset {
     if ($type != self::TYPE_FILE && $type != self::TYPE_DIRECTORY) {
       throw new \InvalidArgumentException("Unsupported assert type $type.");
     }
+
+    $this->isDirectory = $type == self::TYPE_DIRECTORY;
     $this->type = $type;
     return $this;
+  }
+
+  /**
+   * Determines if the asset is a regular file.
+   *
+   * @return bool
+   *   True if the asset is not a directory, false otherwise.
+   */
+  public function isFile(): bool {
+    return !$this->isDirectory;
   }
 
   /**
@@ -382,7 +418,7 @@ final class Asset {
    *   True if the asset is a directory, false otherwise.
    */
   public function isDirectory(): bool {
-    return $this->getType() == self::TYPE_DIRECTORY;
+    return $this->isDirectory;
   }
 
   /**

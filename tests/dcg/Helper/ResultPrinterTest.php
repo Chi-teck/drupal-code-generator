@@ -38,11 +38,11 @@ class ResultPrinterTest extends TestCase {
 
     $printer->io($io);
 
-    $assets[] = (new Asset())->path('bbb/eee/ggg.php');
-    $assets[] = (new Asset())->path('aaa/ddd.txt')->content('123');
-    $assets[] = (new Asset())->path('ccc')->content("123\n456\789");
-    $assets[] = (new Asset())->path('aaa')->content('123');
-    $assets[] = (new Asset())->path('bbb/fff.module');
+    $assets[] = Asset::createFile()->path('bbb/eee/ggg.php');
+    $assets[] = Asset::createFile()->path('aaa/ddd.txt')->content('123');
+    $assets[] = Asset::createFile()->path('ccc')->content("123\n456\789");
+    $assets[] = Asset::createFile()->path('aaa')->content('123');
+    $assets[] = Asset::createFile()->path('bbb/fff.module');
 
     // -- Default output.
     $printer->printResult($assets);

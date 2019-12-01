@@ -14,7 +14,7 @@ class AssetTest extends TestCase {
    * Test callback.
    */
   public function testGetPath(): void {
-    $asset = new Asset();
+    $asset = Asset::createFile();
 
     $asset->path('aaa/{foo}/bbb');
     self::assertEquals('aaa/{foo}/bbb', $asset->getPath());
@@ -27,7 +27,7 @@ class AssetTest extends TestCase {
    * Test callback.
    */
   public function testGetMode(): void {
-    $asset = new Asset();
+    $asset = Asset::createFile();
 
     self::assertEquals(0644, $asset->getMode());
 
@@ -41,12 +41,13 @@ class AssetTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testIsDirectory(): void {
-    $asset = new Asset();
-
+  public function testType(): void {
+    $asset = Asset::createFile();
+    self::assertTrue($asset->isFile());
     self::assertFalse($asset->isDirectory());
 
-    $asset->type(Asset::TYPE_DIRECTORY);
+    $asset = Asset::createDirectory();
+    self::assertFalse($asset->isFile());
     self::assertTrue($asset->isDirectory());
   }
 
@@ -54,7 +55,7 @@ class AssetTest extends TestCase {
    * Test callback.
    */
   public function testTemplate(): void {
-    $asset = new Asset();
+    $asset = Asset::createFile();
 
     $asset->template('foo');
     self::assertEquals('foo.twig', $asset->getTemplate());
@@ -67,7 +68,7 @@ class AssetTest extends TestCase {
    * Test callback.
    */
   public function testHeaderTemplate(): void {
-    $asset = new Asset();
+    $asset = Asset::createFile();
 
     $asset->headerTemplate('foo');
     self::assertEquals('foo.twig', $asset->getHeaderTemplate());
