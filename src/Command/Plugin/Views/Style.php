@@ -31,7 +31,7 @@ final class Style extends PluginGenerator {
     $this->addFile('{machine_name}.module')
       ->headerTemplate('_lib/file-docs/module')
       ->template('preprocess')
-      ->action(Asset::APPEND)
+      ->action(Asset::ACTION_APPEND)
       ->headerSize(7);
 
     if ($vars['configurable']) {

@@ -34,7 +34,7 @@ final class CKEditor extends PluginGenerator {
 
     $this->addFile('js/plugins/{short_plugin_id}/icons/{short_plugin_id}.png')
       ->content(file_get_contents(Application::TEMPLATE_PATH . 'plugin/ckeditor/icon.png'))
-      ->action(Asset::APPEND);
+      ->action(Asset::ACTION_APPEND);
   }
 
 }

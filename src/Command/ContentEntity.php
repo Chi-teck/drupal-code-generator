@@ -55,13 +55,13 @@ final class ContentEntity extends ModuleGenerator {
     $vars['template_name'] = '{entity_type_id|u2h}.html.twig';
 
     $this->addFile('{machine_name}.links.action.yml', 'model.links.action.yml')
-      ->action(Asset::APPEND);
+      ->action(Asset::ACTION_APPEND);
     $this->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml')
-      ->action(Asset::APPEND);
+      ->action(Asset::ACTION_APPEND);
     $this->addFile('{machine_name}.links.task.yml', 'model.links.task.yml')
-      ->action(Asset::APPEND);
+      ->action(Asset::ACTION_APPEND);
     $this->addFile('{machine_name}.permissions.yml', 'model.permissions.yml')
-      ->action(Asset::APPEND);
+      ->action(Asset::ACTION_APPEND);
     $this->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
     $this->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
     $this->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php');
@@ -69,14 +69,14 @@ final class ContentEntity extends ModuleGenerator {
 
     if ($vars['fieldable_no_bundle']) {
       $this->addFile('{machine_name}.routing.yml', 'model.routing.yml')
-        ->action(Asset::APPEND);
+        ->action(Asset::ACTION_APPEND);
       $this->addFile('src/Form/{class_prefix}SettingsForm.php', 'src/Form/ExampleSettingsForm.php');
     }
 
     if ($vars['template']) {
       $this->addFile('templates/{entity_type_id|u2h}.html.twig', 'templates/model-example.html.twig');
       $this->addFile('{machine_name}.module', 'model.module')
-        ->action(Asset::APPEND)
+        ->action(Asset::ACTION_APPEND)
         ->headerSize(7);
     }
     else {
@@ -93,7 +93,7 @@ final class ContentEntity extends ModuleGenerator {
 
     if ($vars['bundle']) {
       $this->addFile('config/schema/{machine_name}.entity_type.schema.yml', 'config/schema/model.entity_type.schema.yml')
-        ->action(Asset::APPEND);
+        ->action(Asset::ACTION_APPEND);
       $this->addFile('src/{class_prefix}TypeListBuilder.php', 'src/ExampleTypeListBuilder.php');
       $this->addFile('src/Entity/{class_prefix}Type.php', 'src/Entity/ExampleType.php');
       $this->addFile('src/Form/{class_prefix}TypeForm.php', 'src/Form/ExampleTypeForm.php');

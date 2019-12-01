@@ -27,7 +27,7 @@ final class Controller extends ModuleGenerator {
       $vars['route_title'] = $this->ask('Route title', 'Example');
       $vars['route_permission'] = $this->ask('Route permission', 'access content');
       $this->addFile('{machine_name}.routing.yml', 'route')
-        ->action(Asset::APPEND);
+        ->action(Asset::ACTION_APPEND);
     }
 
     $this->addFile('src/Controller/{class}.php', 'controller');

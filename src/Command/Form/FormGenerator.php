@@ -60,7 +60,7 @@ abstract class FormGenerator extends ModuleGenerator {
 
       $this->addFile('{machine_name}.routing.yml')
         ->template('form/routing')
-        ->action(Asset::APPEND);
+        ->action(Asset::ACTION_APPEND);
     }
 
   }

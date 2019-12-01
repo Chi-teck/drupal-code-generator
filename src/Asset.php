@@ -7,9 +7,12 @@ namespace DrupalCodeGenerator;
  */
 final class Asset {
 
-  const REPLACE = 1;
-  const APPEND = 2;
-  const PRESERVE = 3;
+  const ACTION_REPLACE = 1;
+  const ACTION_APPEND = 2;
+  const ACTION_SKIP = 3;
+
+  const TYPE_FILE = 1;
+  const TYPE_DIRECTORY = 2;
 
   /**
    * Asset path.
@@ -60,7 +63,7 @@ final class Asset {
    *
    * @var string|callable
    */
-  private $action = self::REPLACE;
+  private $action = self::ACTION_REPLACE;
 
   /**
    * Header size.
@@ -81,7 +84,7 @@ final class Asset {
    *
    * @var string
    */
-  private $type = 'file';
+  private $type = self::TYPE_FILE;
 
   /**
    * Getter for asset path.
@@ -221,7 +224,7 @@ final class Asset {
    *   The asset.
    */
   public function headerTemplate(?string $header_template): Asset {
-    $this->headerTemplate = self::addTwigExtension($header_template);
+    $this->headerTemplate = self::addTwigFileExtension($header_template);
     return $this;
   }
 
@@ -235,7 +238,7 @@ final class Asset {
    *   The asset.
    */
   public function template(?string $template): Asset {
-    $this->template = self::addTwigExtension($template);
+    $this->template = self::addTwigFileExtension($template);
     return $this;
   }
 
@@ -277,8 +280,48 @@ final class Asset {
    *   The asset.
    */
   public function action($action): Asset {
+    if (!is_callable($action)) {
+      $supported_actions = [
+        self::ACTION_REPLACE,
+        self::ACTION_APPEND,
+        self::ACTION_SKIP,
+      ];
+      if (!in_array($action, $supported_actions)) {
+        throw new \InvalidArgumentException("Unsupported assert action $action.");
+      }
+    }
     $this->action = $action;
     return $this;
+  }
+
+  /**
+   * Sets "replace" action.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  public function replaceIfExists() {
+    return $this->action(self::ACTION_REPLACE);
+  }
+
+  /**
+   * Sets "append" action.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  public function appendIfExists() {
+    return $this->action(self::ACTION_APPEND);
+  }
+
+  /**
+   * Sets "skip" action.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  public function skipIfExists() {
+    return $this->action(self::ACTION_SKIP);
   }
 
   /**
@@ -291,6 +334,9 @@ final class Asset {
    *   The asset.
    */
   public function headerSize(?int $header_size): Asset {
+    if ($header_size <= 0) {
+      throw new \InvalidArgumentException("Header size must be greater than or equal to 0. ");
+    }
     $this->headerSize = $header_size;
     return $this;
   }
@@ -305,6 +351,9 @@ final class Asset {
    *   The asset.
    */
   public function mode(?int $mode): Asset {
+    if ($mode < 0000 || $mode > 0777) {
+      throw new \InvalidArgumentException("Incorrect mode value $mode.");
+    }
     $this->mode = $mode;
     return $this;
   }
@@ -319,6 +368,9 @@ final class Asset {
    *   The asset.
    */
   public function type(string $type): Asset {
+    if ($type != self::TYPE_FILE && $type != self::TYPE_DIRECTORY) {
+      throw new \InvalidArgumentException("Unsupported assert type $type.");
+    }
     $this->type = $type;
     return $this;
   }
@@ -330,7 +382,7 @@ final class Asset {
    *   True if the asset is a directory, false otherwise.
    */
   public function isDirectory(): bool {
-    return $this->getType() == 'directory';
+    return $this->getType() == self::TYPE_DIRECTORY;
   }
 
   /**
@@ -341,9 +393,9 @@ final class Asset {
   }
 
   /**
-   * Adds twig extension if needed.
+   * Adds Twig extension if needed.
    */
-  private static function addTwigExtension(?string $template) {
+  private static function addTwigFileExtension(?string $template) {
     if ($template && pathinfo($template, PATHINFO_EXTENSION) != 'twig') {
       $template .= '.twig';
     }

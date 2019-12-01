@@ -23,12 +23,12 @@ final class ArgumentDefault extends ModuleGenerator {
 
     $this->addFile('{machine_name}.module')
       ->template('module')
-      ->action(Asset::APPEND)
+      ->action(Asset::ACTION_APPEND)
       ->headerSize(7);
 
     $this->addFile('views/{machine_name}.views.inc')
       ->template('views.inc')
-      ->action(Asset::APPEND)
+      ->action(Asset::ACTION_APPEND)
       ->headerSize(7);
 
     $this->addFile('views/views_plugin_argument_{plugin_machine_name}.inc')

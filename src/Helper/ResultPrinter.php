@@ -62,7 +62,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
         $lines = $asset->getContent() === NULL ? 0 : substr_count($asset->getContent(), "\n") + 1;
         $total_lines += $lines;
         $rows[] = [
-          $asset->getType(),
+          $asset->isDirectory() ? 'directory' : 'file',
           $base_path . $asset->getPath(),
           $lines,
           $size,

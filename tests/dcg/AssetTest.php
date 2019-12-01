@@ -31,7 +31,7 @@ class AssetTest extends TestCase {
 
     self::assertEquals(0644, $asset->getMode());
 
-    $asset->type('directory');
+    $asset->type(Asset::TYPE_DIRECTORY);
     self::assertEquals(0755, $asset->getMode());
 
     $asset->mode(0444);
@@ -46,7 +46,7 @@ class AssetTest extends TestCase {
 
     self::assertFalse($asset->isDirectory());
 
-    $asset->type('directory');
+    $asset->type(Asset::TYPE_DIRECTORY);
     self::assertTrue($asset->isDirectory());
   }
 

@@ -248,7 +248,7 @@ final class Field extends ModuleGenerator {
     $this->addSchemaFile()->template('schema');
 
     $this->addFile('{machine_name}.libraries.yml', 'libraries')
-      ->action(Asset::APPEND);
+      ->action(Asset::ACTION_APPEND);
 
     $this->addFile('css/{field_id|u2h}-widget.css', 'widget-css');
 

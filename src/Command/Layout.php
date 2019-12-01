@@ -28,11 +28,11 @@ final class Layout extends ModuleGenerator {
     $vars['css'] = $this->confirm('Would you like to create CSS file for this layout?', FALSE);
 
     $this->addFile('{machine_name}.layouts.yml', 'layouts')
-      ->action(Asset::APPEND);
+      ->action(Asset::ACTION_APPEND);
 
     if ($vars['js'] || $vars['css']) {
       $this->addFile('{machine_name}.libraries.yml', 'libraries')
-        ->action(Asset::APPEND);
+        ->action(Asset::ACTION_APPEND);
     }
 
     $vars['layout_asset_name'] = '{layout_machine_name|u2h}';

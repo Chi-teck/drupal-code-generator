@@ -148,7 +148,7 @@ class DumperTest extends BaseTestCase {
 
     // -- Directory.
     $assets = [
-      (new Asset())->path('includes')->type('directory'),
+      (new Asset())->path('includes')->type(Asset::TYPE_DIRECTORY),
     ];
     $dumped_assets = $this->dump($assets);
 
@@ -159,7 +159,7 @@ class DumperTest extends BaseTestCase {
     // -- Existing directory.
     $this->filesystem->dumpFile($this->directory . '/core/readme.txt', 'old readme');
     $assets = [
-      (new Asset())->path('core')->type('directory'),
+      (new Asset())->path('core')->type(Asset::TYPE_DIRECTORY),
     ];
     $dumped_assets = $this->dump($assets);
 
@@ -172,8 +172,8 @@ class DumperTest extends BaseTestCase {
     // -- Append file content.
     $this->filesystem->dumpFile($this->directory . '/log.txt', "File header");
     $assets = [
-      (new Asset())->path('log.txt')->content("redundant line\nRecord 1")->action(Asset::APPEND)->headerSize(1),
-      (new Asset())->path('log.txt')->content('Record 2')->action(Asset::APPEND),
+      (new Asset())->path('log.txt')->content("redundant line\nRecord 1")->action(Asset::ACTION_APPEND)->headerSize(1),
+      (new Asset())->path('log.txt')->content('Record 2')->action(Asset::ACTION_APPEND),
     ];
     $dumped_assets = $this->dump($assets, TRUE);
 
@@ -185,7 +185,7 @@ class DumperTest extends BaseTestCase {
     // -- Dry dump.
     $assets = [
       (new Asset())->path('example.txt')->content('Example'),
-      (new Asset())->path('foo')->type('directory'),
+      (new Asset())->path('foo')->type(Asset::TYPE_DIRECTORY),
     ];
     $dumped_assets = $this->dump($assets, NULL, TRUE);
 

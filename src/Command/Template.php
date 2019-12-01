@@ -28,7 +28,7 @@ final class Template extends ModuleGenerator {
     if ($vars['create_theme'] || $vars['create_preprocess']) {
       $this->addFile('{machine_name}.module')
         ->template('module')
-        ->action(Asset::APPEND)
+        ->action(Asset::ACTION_APPEND)
         ->headerSize(7);
     }
   }

@@ -277,7 +277,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *   The asset.
    */
   protected function addFile(string $path = NULL, string $template = NULL): Asset {
-    return $this->addAsset('file')
+    return $this->addAsset(Asset::TYPE_FILE)
       ->path($path)
       ->template($template);
   }
@@ -292,7 +292,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *   The asset.
    */
   protected function addDirectory(string $path = NULL): Asset {
-    return $this->addAsset('directory')->path($path);
+    return $this->addAsset(Asset::TYPE_DIRECTORY)->path($path);
   }
 
   /**

@@ -37,7 +37,7 @@ final class Hook extends ModuleGenerator {
     $file = $this->addFile()
       ->path('{machine_name}.{file_type}')
       ->headerTemplate('_lib/file-docs/{file_type}')
-      ->action(Asset::APPEND)
+      ->action(Asset::ACTION_APPEND)
       ->headerSize(7);
 
     /** @var \DrupalCodeGenerator\Helper\DrupalContext $drupal_context */

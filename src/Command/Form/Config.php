@@ -35,7 +35,7 @@ final class Config extends FormGenerator {
 
         $this->addFile('{machine_name}.links.menu.yml')
           ->template('links.menu')
-          ->action(Asset::APPEND);
+          ->action(Asset::ACTION_APPEND);
       }
     }
 

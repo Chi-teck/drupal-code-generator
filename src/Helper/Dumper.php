@@ -88,13 +88,13 @@ class Dumper extends Helper implements IOAwareInterface {
           $content = $action($existing_content, $content);
         }
         else {
-          if ($action == Asset::PRESERVE) {
+          if ($action == Asset::ACTION_SKIP) {
             continue;
           }
-          elseif ($action == Asset::REPLACE && !$dry_run && !$this->confirmReplace($file_path)) {
+          elseif ($action == Asset::ACTION_REPLACE && !$dry_run && !$this->confirmReplace($file_path)) {
             continue;
           }
-          elseif ($action == Asset::APPEND) {
+          elseif ($action == Asset::ACTION_APPEND) {
             $content = static::appendContent($existing_content, $content, $asset->getHeaderSize());
           }
         }
