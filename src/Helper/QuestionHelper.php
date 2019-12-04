@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
+use function var_dump;
 
 /**
  * The QuestionHelper class provides helpers to interact with the user.
@@ -68,7 +69,7 @@ class QuestionHelper extends BaseQuestionHelper {
           // @todo Support multiselect.
         }
         else {
-          $answer = $choices[$answer] ?? $choices[$answer];
+          $answer = $choices[$answer] ?? NULL;
         }
       }
 
