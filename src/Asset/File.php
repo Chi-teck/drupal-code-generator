@@ -190,7 +190,9 @@ final class File extends Asset {
    *   The asset.
    */
   public function template(?string $template): Asset {
-    $this->template = self::addTwigFileExtension($template);
+    if ($template !== NULL) {
+      $this->template = self::addTwigFileExtension($template);
+    }
     return $this;
   }
 
@@ -284,7 +286,7 @@ final class File extends Asset {
    * @param int $header_size
    *   Asset header size.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return \DrupalCodeGenerator\Asset\Asset
    *   The asset.
    */
   public function headerSize(int $header_size): Asset {
@@ -298,7 +300,7 @@ final class File extends Asset {
   /**
    * Adds Twig extension if needed.
    */
-  private static function addTwigFileExtension(?string $template) {
+  private static function addTwigFileExtension(string $template): string {
     if ($template && pathinfo($template, PATHINFO_EXTENSION) != 'twig') {
       $template .= '.twig';
     }

@@ -53,28 +53,28 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   /**
    * {@inheritdoc}
    */
-  public function offsetUnset($key) {
+  public function offsetUnset($key): void {
     unset($this->assets[$key]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function offsetExists($key) {
+  public function offsetExists($key): bool {
     return isset($this->assets[$key]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getIterator() {
+  public function getIterator(): \ArrayIterator {
     return new \ArrayIterator($this->assets);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function count() {
+  public function count(): int {
     return count($this->assets);
   }
 

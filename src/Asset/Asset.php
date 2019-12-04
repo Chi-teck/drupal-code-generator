@@ -54,7 +54,7 @@ abstract class Asset {
    * @param int $mode
    *   Asset mode.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return \DrupalCodeGenerator\Asset\Asset
    *   The asset.
    */
   public function mode(int $mode): Asset {

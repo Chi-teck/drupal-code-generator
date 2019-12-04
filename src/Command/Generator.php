@@ -267,7 +267,11 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function addFile(string $path, string $template = NULL): File {
     $path = Utils::replaceTokens($path, $this->vars);
-    return $this->assets[] = (new File($path))->template($template);
+    $asset = new File($path);
+    if ($template !== NULL) {
+      $asset->template($template);
+    }
+    return $this->assets[] = $asset;
   }
 
   /**
