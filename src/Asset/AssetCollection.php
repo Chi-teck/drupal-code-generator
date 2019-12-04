@@ -2,11 +2,6 @@
 
 namespace DrupalCodeGenerator\Asset;
 
-use function array_filter;
-use function strcmp;
-use function substr_count;
-use function usort;
-
 /**
  * Asset collection.
  */
