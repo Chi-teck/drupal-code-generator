@@ -36,12 +36,12 @@ class ProjectTest extends BaseGeneratorTest {
 
     $path = '/_project/_light/';
     $fixtures = [
-      '.gitignore' => $path . 'gitignore',
-      'composer.json' => $path . 'composer.json',
       'libraries' => [],
-      'phpcs.xml' => $path . 'phpcs.xml',
       'modules/contrib' => [],
       'modules/custom' => [],
+      '.gitignore' => $path . 'gitignore',
+      'composer.json' => $path . 'composer.json',
+      'phpcs.xml' => $path . 'phpcs.xml',
       'patches/.keep' => $path . 'patches/keep',
       'scripts/composer/create_required_files.php' => $path . 'scripts/composer/create_required_files.php',
     ];
@@ -76,16 +76,18 @@ class ProjectTest extends BaseGeneratorTest {
 
     $path = '/_project/_full/';
     $fixtures = [
+      'config/sync' => [],
+      'web/libraries' => [],
+      'web/modules/contrib' => [],
+      'web/modules/custom' => [],
       '.env.example' => $path . 'env.example',
       '.gitignore' => $path . 'gitignore',
       'composer.json' => $path . 'composer.json',
       'load.environment.php' => $path . 'load.environment.php',
       'phpcs.xml' => $path . 'phpcs.xml',
-      'config/sync' => [],
       'drush/drush.yml' => $path . 'drush/drush.yml',
       'patches/.keep' => $path . 'patches/keep',
       'scripts/sync-site.sh' => $path . 'scripts/sync-site.sh',
-      'web/libraries' => [],
       'drush/Commands/PolicyCommands.php' => $path . 'drush/Commands/PolicyCommands.php',
       'drush/sites/self.site.yml' => $path . 'drush/sites/self.site.yml',
       'scripts/composer/create_required_files.php' => $path . 'scripts/composer/create_required_files.php',
@@ -94,8 +96,6 @@ class ProjectTest extends BaseGeneratorTest {
       'tests/behat/bootstrap/ExampleContext.php' => $path . 'tests/behat/bootstrap/ExampleContext.php',
       'tests/behat/features/example/user_forms.feature' => $path . 'tests/behat/features/example/user_forms.feature',
       'tests/behat/local.behat.yml' => $path . 'tests/behat/local.behat.yml',
-      'web/modules/contrib' => [],
-      'web/modules/custom' => [],
     ];
 
     parent::doTest($interaction, $fixtures);

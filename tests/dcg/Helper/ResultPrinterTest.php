@@ -100,8 +100,7 @@ class ResultPrinterTest extends TestCase {
       " ------ ----------------- ------- ------ \n",
       "\n",
     ]);
-    self::markTestSkipped('TODO: Figure out appropriate sort order first');
-    // self::assertEquals($expected_output, $output->fetch());
+    self::assertEquals($expected_output, $output->fetch());
   }
 
 }

@@ -81,45 +81,47 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   /**
    * Returns file assets.
    *
-   * @return \DrupalCodeGenerator\Asset\File[]
-   *   Array of file assets.
+   * @return self
+   *   Collection of file assets.
    */
-  public function getFiles(): array {
-    return array_filter(
+  public function getFiles(): self {
+    $assets = array_filter(
       $this->assets,
       function ($asset): bool {
         return $asset instanceof File;
       }
     );
+    return new self($assets);
   }
 
   /**
    * Returns directory assets.
    *
-   * @return \DrupalCodeGenerator\Asset\Directory[]
-   *   Array of directory assets.
+   * @return self
+   *   Collection of directory assets.
    */
-  public function getDirectories(): array {
-    return array_filter(
+  public function getDirectories(): self {
+    $assets = array_filter(
       $this->assets,
       function ($asset): bool {
         return $asset instanceof Directory;
       }
     );
+    return new self($assets);
   }
 
   /**
    * Returns directory assets.
    *
-   * @return \DrupalCodeGenerator\Asset\Asset[]
-   *   Array of directory assets.
+   * @return self
+   *   Collection of sorted assets.
    */
   public function getSorted(): self {
     $assets = $this->assets;
     usort($assets, function (Asset $a, Asset $b): int {
       $depth_a = substr_count($a, '/');
       $depth_b = substr_count($b, '/');
-      // Top level files should be printed first.
+      // Top level assets should be printed first.
       return $depth_a == $depth_b || ($depth_a > 1 && $depth_b > 1) ?
         strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
     });

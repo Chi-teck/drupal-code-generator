@@ -19,10 +19,10 @@ class ThemeTest extends BaseGeneratorTest {
   ];
 
   protected $fixtures = [
-    'example/example.info' => '/_theme/example.info',
     'example/images' => [],
-    'example/template.php' => '/_theme/template.php',
     'example/templates' => [],
+    'example/example.info' => '/_theme/example.info',
+    'example/template.php' => '/_theme/template.php',
     'example/css/example.css' => '/_theme/css/example.css',
     'example/js/example.js' => '/_theme/js/example.js',
   ];

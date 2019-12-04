@@ -183,14 +183,13 @@ class DumperTest extends BaseTestCase {
 
     self::assertEquals(new AssetCollection(), $dumped_assets);
     $expected_output = "\n";
+    $expected_output .= " /tmp/dcg_sandbox/foo (empty directory)\n";
+    $expected_output .= "––––––––––––––––––––––––––––––––––––––––\n";
+    $expected_output .= "\n";
     $expected_output .= " /tmp/dcg_sandbox/example.txt\n";
     $expected_output .= "––––––––––––––––––––––––––––––\n";
     $expected_output .= "Example\n";
-    $expected_output .= "\n";
-    $expected_output .= " /tmp/dcg_sandbox/foo (empty directory)\n";
-    $expected_output .= "––––––––––––––––––––––––––––––––––––––––\n";
-    self::markTestSkipped('TODO: Figure out appropriate sort order first');
-    // self::assertOutput($expected_output);
+    self::assertOutput($expected_output);
   }
 
   /**

@@ -7,26 +7,19 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 class ThemeTest extends BaseGeneratorTest {
 
-  protected $class = 'Theme';
-
-  protected $interaction = [
-    'Theme name [%default_name%]:' => 'Foo',
-    'Theme machine name [foo]:' => 'foo',
-    'Base theme [classy]:' => 'bartik',
-    'Description [A flexible theme with a responsive, mobile-first layout.]:' => 'Some description.',
-    'Package [Custom]:' => 'Custom',
-    'Would you like to use SASS to compile style sheets? [No]:' => 'Yes',
-    'Would you like to create breakpoints? [No]:' => 'Yes',
-    'Would you like to create theme settings form? [No]:' => 'Yes',
-  ];
-
   protected $fixtures = [
     'foo/css' => [],
+    'foo/images' => [],
+    'foo/templates/block' => [],
+    'foo/templates/field' => [],
+    'foo/templates/menu' => [],
+    'foo/templates/node' => [],
+    'foo/templates/page' => [],
+    'foo/templates/view' => [],
     'foo/foo.breakpoints.yml' => '/_theme/foo.breakpoints.yml',
     'foo/foo.info.yml' => '/_theme/foo.info.yml',
     'foo/foo.libraries.yml' => '/_theme/foo.libraries.yml',
     'foo/foo.theme' => '/_theme/foo.theme',
-    'foo/images' => [],
     'foo/logo.svg' => '/_theme/logo.svg',
     'foo/package.json' => '/_theme/package.json',
     'foo/theme-settings.php' => '/_theme/theme-settings.php',
@@ -48,12 +41,19 @@ class ThemeTest extends BaseGeneratorTest {
     'foo/scss/components/tabs.scss' => '/_theme/scss/components/tabs.scss',
     'foo/scss/layouts/layout.scss' => '/_theme/scss/layouts/layout.scss',
     'foo/scss/theme/print.scss' => '/_theme/scss/theme/print.scss',
-    'foo/templates/block' => [],
-    'foo/templates/field' => [],
-    'foo/templates/menu' => [],
-    'foo/templates/node' => [],
-    'foo/templates/page' => [],
-    'foo/templates/view' => [],
+  ];
+
+  protected $class = 'Theme';
+
+  protected $interaction = [
+    'Theme name [%default_name%]:' => 'Foo',
+    'Theme machine name [foo]:' => 'foo',
+    'Base theme [classy]:' => 'bartik',
+    'Description [A flexible theme with a responsive, mobile-first layout.]:' => 'Some description.',
+    'Package [Custom]:' => 'Custom',
+    'Would you like to use SASS to compile style sheets? [No]:' => 'Yes',
+    'Would you like to create breakpoints? [No]:' => 'Yes',
+    'Would you like to create theme settings form? [No]:' => 'Yes',
   ];
 
 }

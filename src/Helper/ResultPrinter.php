@@ -45,30 +45,22 @@ class ResultPrinter extends Helper implements IOAwareInterface {
       $headers[] = ['Type', 'Path', 'Lines', 'Size'];
 
       $rows = [];
+
+      foreach ($assets->getDirectories()->getSorted() as $asset) {
+        $rows[] = ['directory', $base_path . $asset->getPath(), '-', '-'];
+      }
+
       $total_size = 0;
       $total_lines = 0;
 
-      foreach ($assets->getDirectories() as $asset) {
-        $rows[] = [
-          'directory',
-          $base_path . $asset->getPath(),
-          '-',
-          '-',
-        ];
-      }
-
-      foreach ($assets->getFiles() as $asset) {
+      foreach ($assets->getFiles()->getSorted() as $asset) {
         $size = mb_strlen($asset->getContent());
         $total_size += $size;
-        $lines = $asset->getContent() === NULL ? 0 : substr_count($asset->getContent(), "\n") + 1;
+        $lines = $size == 0 ? 0 : substr_count($asset->getContent(), "\n") + 1;
         $total_lines += $lines;
-        $rows[] = [
-          'file',
-          $base_path . $asset->getPath(),
-          $lines,
-          $size,
-        ];
+        $rows[] = ['file', $base_path . $asset->getPath(), $lines, $size];
       }
+
       $rows[] = new TableSeparator();
 
       // Summary.
@@ -92,7 +84,10 @@ class ResultPrinter extends Helper implements IOAwareInterface {
     // Bulleted list.
     else {
       $dumped_files = [];
-      foreach ($assets->getSorted() as $asset) {
+      foreach ($assets->getDirectories()->getSorted() as $asset) {
+        $dumped_files[] = $base_path . $asset->getPath();
+      }
+      foreach ($assets->getFiles()->getSorted() as $asset) {
         $dumped_files[] = $base_path . $asset->getPath();
       }
       $this->io->listing($dumped_files);
