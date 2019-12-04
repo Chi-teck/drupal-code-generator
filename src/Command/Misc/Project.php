@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc;
 
+use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Command\Generator;
 use Symfony\Component\Console\Question\Question;
 
@@ -149,7 +150,7 @@ final class Project extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function printSummary(array $dumped_assets): void {
+  protected function printSummary(AssetCollection $dumped_assets): void {
     parent::printSummary($dumped_assets);
 
     $message = [

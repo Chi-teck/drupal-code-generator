@@ -2,12 +2,13 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableStyle;
+use function substr_count;
 
 /**
  * Output printer for generators.
@@ -26,26 +27,16 @@ class ResultPrinter extends Helper implements IOAwareInterface {
   /**
    * Prints summary.
    *
-   * @param \DrupalCodeGenerator\Asset[] $assets
+   * @param \DrupalCodeGenerator\Asset\AssetCollection $assets
    *   List of created or updated assets.
    * @param string $base_path
    *   (Optional) Base path.
    */
-  public function printResult(array $assets, string $base_path = ''): void {
+  public function printResult(AssetCollection $assets, string $base_path = ''): void {
 
     if (count($assets) == 0) {
       return;
     }
-
-    $assets = array_unique($assets);
-
-    usort($assets, function (Asset $a, Asset $b): int {
-      $depth_a = substr_count($a, '/');
-      $depth_b = substr_count($b, '/');
-      // Top level files should be printed first.
-      return $depth_a == $depth_b || ($depth_a > 1 && $depth_b > 1) ?
-        strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
-    });
 
     $this->io->title('The following directories and files have been created or updated:');
 
@@ -56,13 +47,23 @@ class ResultPrinter extends Helper implements IOAwareInterface {
       $rows = [];
       $total_size = 0;
       $total_lines = 0;
-      foreach ($assets as $asset) {
+
+      foreach ($assets->getDirectories() as $asset) {
+        $rows[] = [
+          'directory',
+          $base_path . $asset->getPath(),
+          '-',
+          '-',
+        ];
+      }
+
+      foreach ($assets->getFiles() as $asset) {
         $size = mb_strlen($asset->getContent());
         $total_size += $size;
         $lines = $asset->getContent() === NULL ? 0 : substr_count($asset->getContent(), "\n") + 1;
         $total_lines += $lines;
         $rows[] = [
-          $asset->isDirectory() ? 'directory' : 'file',
+          'file',
           $base_path . $asset->getPath(),
           $lines,
           $size,
@@ -91,7 +92,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
     // Bulleted list.
     else {
       $dumped_files = [];
-      foreach ($assets as $asset) {
+      foreach ($assets->getSorted() as $asset) {
         $dumped_files[] = $base_path . $asset->getPath();
       }
       $this->io->listing($dumped_files);

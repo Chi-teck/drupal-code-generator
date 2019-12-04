@@ -1,22 +1,17 @@
 <?php
 
-namespace DrupalCodeGenerator;
+namespace DrupalCodeGenerator\Asset;
+
+use DrupalCodeGenerator\Utils;
 
 /**
- * Simple data structure to represent an asset being generated.
+ * Simple data structure to represent a file being generated.
  */
-final class Asset {
+final class File extends Asset {
 
   const ACTION_REPLACE = 1;
   const ACTION_APPEND = 2;
   const ACTION_SKIP = 3;
-
-  /**
-   * Asset path.
-   *
-   * @var string
-   */
-  private $path;
 
   /**
    * Asset content.
@@ -70,42 +65,11 @@ final class Asset {
   private $headerSize = 0;
 
   /**
-   * Asset mode.
-   *
-   * @var int
+   * {@inheritdoc}
    */
-  private $mode;
-
-  /**
-   * Indicates whether the asset is a directory.
-   *
-   * @var bool
-   */
-  private $isDirectory;
-
-  // phpcs:disable
-  /**
-   * Asset constructor.
-   */
-  private function __construct(string $path, bool $is_directory) {
-    $this->path = $path;
-    $this->isDirectory = $is_directory;
-    $this->mode = $this->isDirectory ? 0755 : 0644;
-  }
-  // phpcs:enable
-
-  /**
-   * Directory asset constructor.
-   */
-  public static function createDirectory(string $path): self {
-    return new self($path, TRUE);
-  }
-
-  /**
-   * File asset constructor.
-   */
-  public static function createFile(string $path): self {
-    return new self($path, FALSE);
+  public function __construct(string $path) {
+    parent::__construct($path);
+    $this->mode(0644);
   }
 
   /**
@@ -115,7 +79,7 @@ final class Asset {
    *   Asset path.
    */
   public function getPath(): ?string {
-    return Utils::replaceTokens($this->path, $this->getVars());
+    return Utils::replaceTokens(parent::getPath(), $this->getVars());
   }
 
   /**
@@ -189,22 +153,12 @@ final class Asset {
   }
 
   /**
-   * Getter for asset mode.
-   *
-   * @return int
-   *   Asset file mode.
-   */
-  public function getMode(): int {
-    return $this->mode;
-  }
-
-  /**
    * Setter for asset content.
    *
    * @param string|null $content
    *   Asset content.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
    */
   public function content(?string $content): Asset {
@@ -218,7 +172,7 @@ final class Asset {
    * @param string|null $header_template
    *   Asset template.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
    */
   public function headerTemplate(?string $header_template): Asset {
@@ -232,7 +186,7 @@ final class Asset {
    * @param string|null $template
    *   Asset template.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
    */
   public function template(?string $template): Asset {
@@ -246,7 +200,7 @@ final class Asset {
    * @param string|null $inline_template
    *   The template string to render.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
    */
   public function inlineTemplate(?string $inline_template): Asset {
@@ -260,7 +214,7 @@ final class Asset {
    * @param array $vars
    *   Asset template variables.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
    */
   public function vars(array $vars): Asset {
@@ -274,8 +228,10 @@ final class Asset {
    * @param string|callable $action
    *   Asset action.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
+   *
+   * @todo remove
    */
   public function action($action): Asset {
     if (!is_callable($action)) {
@@ -295,7 +251,7 @@ final class Asset {
   /**
    * Sets "replace" action.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
    */
   public function replaceIfExists() {
@@ -305,7 +261,7 @@ final class Asset {
   /**
    * Sets "append" action.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
    */
   public function appendIfExists() {
@@ -315,7 +271,7 @@ final class Asset {
   /**
    * Sets "skip" action.
    *
-   * @return \DrupalCodeGenerator\Asset
+   * @return self
    *   The asset.
    */
   public function skipIfExists() {
@@ -337,50 +293,6 @@ final class Asset {
     }
     $this->headerSize = $header_size;
     return $this;
-  }
-
-  /**
-   * Setter for asset mode.
-   *
-   * @param int $mode
-   *   Asset mode.
-   *
-   * @return \DrupalCodeGenerator\Asset
-   *   The asset.
-   */
-  public function mode(int $mode): Asset {
-    if ($mode < 0000 || $mode > 0777) {
-      throw new \InvalidArgumentException("Incorrect mode value $mode.");
-    }
-    $this->mode = $mode;
-    return $this;
-  }
-
-  /**
-   * Determines if the asset is a regular file.
-   *
-   * @return bool
-   *   True if the asset is not a directory, false otherwise.
-   */
-  public function isFile(): bool {
-    return !$this->isDirectory;
-  }
-
-  /**
-   * Determines if the asset is a directory.
-   *
-   * @return bool
-   *   True if the asset is a directory, false otherwise.
-   */
-  public function isDirectory(): bool {
-    return $this->isDirectory;
-  }
-
-  /**
-   * Implements the magic __toString() method.
-   */
-  public function __toString(): string {
-    return $this->getPath() ?: '';
   }
 
   /**

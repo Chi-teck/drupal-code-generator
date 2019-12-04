@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\File;
 use Symfony\Component\Console\Helper\Helper;
 use Twig\Environment;
 
@@ -68,13 +68,10 @@ class Renderer extends Helper {
   /**
    * Renders an asset.
    *
-   * @param \DrupalCodeGenerator\Asset $asset
+   * @param \DrupalCodeGenerator\Asset\File $asset
    *   Asset to render.
    */
-  public function renderAsset(Asset $asset): void {
-    if ($asset->isDirectory()) {
-      return;
-    }
+  public function renderAsset(File $asset): void {
 
     $template = $asset->getTemplate();
     $inline_template = $asset->getInlineTemplate();

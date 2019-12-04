@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Form;
 
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 
@@ -60,7 +60,7 @@ abstract class FormGenerator extends ModuleGenerator {
 
       $this->addFile('{machine_name}.routing.yml')
         ->template('form/routing')
-        ->action(Asset::ACTION_APPEND);
+        ->action(File::ACTION_APPEND);
     }
 
   }
