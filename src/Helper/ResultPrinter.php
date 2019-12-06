@@ -8,7 +8,6 @@ use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableStyle;
-use function substr_count;
 
 /**
  * Output printer for generators.
