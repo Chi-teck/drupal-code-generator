@@ -65,6 +65,13 @@ final class File extends Asset {
   private $headerSize = 0;
 
   /**
+   * Content resolver.
+   *
+   * @var callable|null
+   */
+  private $resolver;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(string $path) {
@@ -143,6 +150,16 @@ final class File extends Asset {
   }
 
   /**
+   * Getter asset resolver.
+   *
+   * @return callable|null
+   *   Asset resolver.
+   */
+  public function getResolver(): ?callable {
+    return $this->resolver;
+  }
+
+  /**
    * Setter for asset content.
    *
    * @param string|null $content
@@ -151,7 +168,7 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function content(?string $content): Asset {
+  public function content(?string $content): self {
     $this->content = $content;
     return $this;
   }
@@ -165,7 +182,7 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function headerTemplate(?string $header_template): Asset {
+  public function headerTemplate(?string $header_template): self {
     $this->headerTemplate = self::addTwigFileExtension($header_template);
     return $this;
   }
@@ -179,7 +196,7 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function template(?string $template): Asset {
+  public function template(?string $template): self {
     if ($template !== NULL) {
       $this->template = self::addTwigFileExtension($template);
     }
@@ -195,7 +212,7 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function inlineTemplate(?string $inline_template): Asset {
+  public function inlineTemplate(?string $inline_template): self {
     $this->inlineTemplate = $inline_template;
     return $this;
   }
@@ -209,34 +226,8 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function vars(array $vars): Asset {
+  public function vars(array $vars): self {
     $this->vars = $vars;
-    return $this;
-  }
-
-  /**
-   * Setter for asset action.
-   *
-   * @param string|callable $action
-   *   Asset action.
-   *
-   * @return self
-   *   The asset.
-   *
-   * @todo remove
-   */
-  public function action($action): Asset {
-    if (!is_callable($action)) {
-      $supported_actions = [
-        self::ACTION_REPLACE,
-        self::ACTION_APPEND,
-        self::ACTION_SKIP,
-      ];
-      if (!in_array($action, $supported_actions)) {
-        throw new \InvalidArgumentException("Unsupported assert action $action.");
-      }
-    }
-    $this->action = $action;
     return $this;
   }
 
@@ -279,14 +270,36 @@ final class File extends Asset {
    * @param int $header_size
    *   Asset header size.
    *
-   * @return \DrupalCodeGenerator\Asset\Asset
+   * @return self
    *   The asset.
    */
-  public function headerSize(int $header_size): Asset {
+  public function headerSize(int $header_size): self {
     if ($header_size <= 0) {
       throw new \InvalidArgumentException("Header size must be greater than or equal to 0. ");
     }
     $this->headerSize = $header_size;
+    return $this;
+  }
+
+  /**
+   * Setter for asset resolver.
+   *
+   * @param callable|null $resolver
+   *   A callable responsible for resolving content.
+   *   @code
+   *     $resolver = function (?string $existing_content, ?string $generated_content) ?string {
+   *       if ($existing_content !== NULL) {
+   *         return $generated_content . "\n" . $existing_content;
+   *       }
+   *       return $generated_content;
+   *     }
+   *   @endcode
+   *
+   * @return \DrupalCodeGenerator\Asset\Asset
+   *   The asset.
+   */
+  public function resolver(?callable $resolver): self {
+    $this->resolver = $resolver;
     return $this;
   }
 

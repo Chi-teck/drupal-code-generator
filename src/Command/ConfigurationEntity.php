@@ -43,7 +43,7 @@ final class ConfigurationEntity extends ModuleGenerator {
       }
     };
     $this->addFile('{machine_name}.info.yml')
-      ->action($update_info);
+      ->resolver($update_info);
   }
 
 }

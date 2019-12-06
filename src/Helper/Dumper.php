@@ -10,7 +10,7 @@ use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use function file_get_contents;
-use function is_callable;
+use function sprintf;
 
 /**
  * Asset dumper form generators.
@@ -100,22 +100,29 @@ class Dumper extends Helper implements IOAwareInterface {
       $content = $asset->getContent();
 
       if ($this->filesystem->exists($file_path)) {
-
-        // Apply the action.
-        $action = $asset->getAction();
-        $existing_content = file_get_contents($file_path);
-        if (is_callable($action)) {
-          $content = $action($existing_content, $content);
+        // Resolve content.
+        if ($resolver = $asset->getResolver()) {
+          $existing_content = file_get_contents($file_path);
+          $content = $resolver($existing_content, $content);
         }
         else {
-          if ($action == File::ACTION_SKIP) {
-            continue;
-          }
-          elseif ($action == File::ACTION_REPLACE && !$dry_run && !$this->confirmReplace($file_path)) {
-            continue;
-          }
-          elseif ($action == File::ACTION_APPEND) {
-            $content = static::appendContent($existing_content, $content, $asset->getHeaderSize());
+          switch ($action = $asset->getAction()) {
+            case File::ACTION_SKIP:
+              continue 2;
+
+            case File::ACTION_REPLACE:
+              if (!$dry_run && !$this->confirmReplace($file_path)) {
+                continue 2;
+              }
+              break;
+
+            case File::ACTION_APPEND:
+              $existing_content = file_get_contents($file_path);
+              $content = static::appendContent($existing_content, $content, $asset->getHeaderSize());
+              break;
+
+            default:
+              throw new \LogicException(sprintf('Unsupported action %s.', $action));
           }
         }
 
@@ -128,9 +135,7 @@ class Dumper extends Helper implements IOAwareInterface {
 
       if ($dry_run) {
         $this->io->title($file_path);
-        if ($content !== NULL) {
-          $this->io->writeln($content, OutputInterface::OUTPUT_RAW);
-        }
+        $this->io->writeln($content, OutputInterface::OUTPUT_RAW);
       }
       else {
         $this->filesystem->dumpFile($file_path, $content);
