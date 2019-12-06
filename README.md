@@ -26,11 +26,6 @@ dcg plugin:field:widget
 # Generate code non-interactively.
 dcg config-form -a Example -a example -a SettingsForm -a No
 ```
-## Extending
-All custom generators should be placed to _$HOME/.dcg_ directory. The following command can help you to get started with creating own generators.
-```bash
-# Create custom DCG command.
-dcg dcg-command -d $HOME/.dcg
-```
+
 ## License
 GNU General Public License, version 2 or later.

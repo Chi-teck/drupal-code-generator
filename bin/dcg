@@ -19,16 +19,9 @@ $container = $bootstrap_handler->bootstrap();
 
 $application = Application::create($container);
 
-$factory = new GeneratorFactory(new Filesystem());
-$default_generators = $factory->getGenerators([Application::ROOT . '/src/Command']);
-$application->addCommands($default_generators);
-
-$command_directory = getenv('DCG_COMMAND_DIRECTORY') ?: Utils::getHomeDirectory() . '/.dcg';
-if (is_dir($command_directory)) {
-  $class_loader->addPsr4('DrupalCodeGenerator\\', $command_directory);
-  $custom_generators = $factory->getGenerators([$command_directory], '\DrupalCodeGenerator');
-  $application->addCommands($custom_generators);
-}
+$generator_factory = new GeneratorFactory(new Filesystem());
+$generators = $generator_factory->getGenerators([Application::ROOT . '/src/Command']);
+$application->addCommands($generators);
 
 $application->add(new Navigation());
 $application->setDefaultCommand('navigation');

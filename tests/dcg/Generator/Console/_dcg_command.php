@@ -1,7 +1,5 @@
 <?php
 
-// @DCG Place this file to $HOME/.dcg/custom directory.
-
 namespace DrupalCodeGenerator\custom;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
