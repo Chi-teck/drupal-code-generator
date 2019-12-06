@@ -9,8 +9,6 @@ use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use function file_get_contents;
-use function sprintf;
 
 /**
  * Asset dumper form generators.
