@@ -36,7 +36,7 @@ abstract class Asset {
    * @return string
    *   Asset path.
    */
-  public function getPath(): ?string {
+  public function getPath(): string {
     return $this->path;
   }
 
@@ -78,7 +78,7 @@ abstract class Asset {
    * Implements the magic __toString() method.
    */
   public function __toString(): string {
-    return $this->path ?: '';
+    return $this->path;
   }
 
 }
