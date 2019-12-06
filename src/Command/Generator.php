@@ -19,6 +19,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use function array_walk_recursive;
+use function is_string;
 
 /**
  * Base class for code generators.
@@ -153,6 +155,10 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->generate();
 
+    $this->processVars();
+
+    $this->processAssets();
+
     $this->render();
 
     $dumped_assets = $this->dump($input->getOption('dry-run'));
@@ -174,8 +180,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function render(): void {
     $renderer = $this->getHelper('renderer');
-
-    $this->processVars();
 
     $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
     $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
@@ -266,7 +270,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *   The file asset.
    */
   protected function addFile(string $path, string $template = NULL): File {
-    $path = Utils::replaceTokens($path, $this->vars);
     $asset = new File($path);
     if ($template !== NULL) {
       $asset->template($template);
@@ -298,6 +301,15 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       }
     };
     array_walk_recursive($this->vars, $process_vars, $this->vars);
+  }
+
+  /**
+   * Processes collected assets.
+   */
+  protected function processAssets(): void {
+    foreach ($this->assets as $asset) {
+      $asset->replaceTokens($this->vars);
+    }
   }
 
   /**

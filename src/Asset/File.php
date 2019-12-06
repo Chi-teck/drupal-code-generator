@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Asset;
 
 use DrupalCodeGenerator\Utils;
+use function parent;
 
 /**
  * Simple data structure to represent a file being generated.
@@ -73,16 +74,6 @@ final class File extends Asset {
   }
 
   /**
-   * Getter for asset path.
-   *
-   * @return string
-   *   Asset path.
-   */
-  public function getPath(): ?string {
-    return Utils::replaceTokens(parent::getPath(), $this->getVars());
-  }
-
-  /**
    * Getter for asset content.
    *
    * @return string|null
@@ -99,7 +90,7 @@ final class File extends Asset {
    *   Asset header template.
    */
   public function getHeaderTemplate(): ?string {
-    return Utils::replaceTokens($this->headerTemplate, $this->getVars());
+    return $this->headerTemplate;
   }
 
   /**
@@ -109,7 +100,7 @@ final class File extends Asset {
    *   Asset template.
    */
   public function getTemplate(): ?string {
-    return Utils::replaceTokens($this->template, $this->getVars());
+    return $this->template;
   }
 
   /**
@@ -305,6 +296,19 @@ final class File extends Asset {
       $template .= '.twig';
     }
     return $template;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function replaceTokens(array $vars): void {
+    parent::replaceTokens($vars);
+    if ($this->template) {
+      $this->template = Utils::replaceTokens($this->template, $vars);
+    }
+    if ($this->headerTemplate) {
+      $this->headerTemplate = Utils::replaceTokens($this->headerTemplate, $vars);
+    }
   }
 
 }

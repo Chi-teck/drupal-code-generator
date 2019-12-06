@@ -74,6 +74,7 @@ class Dumper extends Helper implements IOAwareInterface {
     $dumped_assets = new AssetCollection();
 
     // -- Directories.
+    /** @var \DrupalCodeGenerator\Asset\Directory $asset */
     foreach ($assets->getDirectories() as $asset) {
 
       $file_path = $directory . '/' . $asset->getPath();
@@ -92,6 +93,7 @@ class Dumper extends Helper implements IOAwareInterface {
     }
 
     // -- Files.
+    /** @var \DrupalCodeGenerator\Asset\File $asset */
     foreach ($assets->getFiles() as $asset) {
 
       $file_path = $directory . '/' . $asset->getPath();

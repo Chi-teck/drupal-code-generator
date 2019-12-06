@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Asset;
 
+use DrupalCodeGenerator\Utils;
+
 /**
  * Base class for assets.
  */
@@ -66,10 +68,17 @@ abstract class Asset {
   }
 
   /**
+   * Replaces tokens in asset properties.
+   */
+  public function replaceTokens(array $vars): void {
+    $this->path = Utils::replaceTokens($this->path, $vars);
+  }
+
+  /**
    * Implements the magic __toString() method.
    */
   public function __toString(): string {
-    return $this->getPath() ?: '';
+    return $this->path ?: '';
   }
 
 }
