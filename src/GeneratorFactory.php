@@ -2,15 +2,12 @@
 
 namespace DrupalCodeGenerator;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use ReflectionClass;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Defines generator factory.
  */
-class GeneratorFactory {
+final class GeneratorFactory {
 
   const COMMAND_INTERFACE = '\DrupalCodeGenerator\Command\GeneratorInterface';
 
@@ -19,7 +16,7 @@ class GeneratorFactory {
    *
    * @var \Symfony\Component\Filesystem\Filesystem
    */
-  protected $filesystem;
+  private $filesystem;
 
   /**
    * Constructs discovery object.
@@ -46,8 +43,8 @@ class GeneratorFactory {
     $commands = [];
 
     foreach ($directories as $directory) {
-      $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS)
+      $iterator = new \RecursiveIteratorIterator(
+        new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS)
       );
       foreach ($iterator as $file) {
         if ($file->getExtension() == 'php') {
@@ -55,7 +52,7 @@ class GeneratorFactory {
           $sub_namespace = $sub_path ? str_replace(DIRECTORY_SEPARATOR, '\\', $sub_path) . '\\' : '';
           $class = $namespace . '\\' . $sub_namespace . $file->getBasename('.php');
           if (class_exists($class)) {
-            $reflected_class = new ReflectionClass($class);
+            $reflected_class = new \ReflectionClass($class);
             if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {
               $commands[] = new $class();
             }
