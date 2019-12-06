@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use Symfony\Component\Console\Question\Question;
 
@@ -66,7 +66,7 @@ final class Hook extends ModuleGenerator {
     $this->addFile("{machine_name}.$file_type")
       ->headerTemplate("misc/d7/_lib/file-docs/$file_type")
       ->template('{hook_name}')
-      ->action(Asset::ACTION_APPEND)
+      ->action(File::ACTION_APPEND)
       ->headerSize(7);
   }
 

@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\File;
 
 /**
  * Implements template command.
@@ -28,7 +28,7 @@ final class Template extends ModuleGenerator {
     if ($vars['create_theme'] || $vars['create_preprocess']) {
       $this->addFile('{machine_name}.module')
         ->template('module')
-        ->action(Asset::ACTION_APPEND)
+        ->action(File::ACTION_APPEND)
         ->headerSize(7);
     }
   }

@@ -3,7 +3,9 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\Directory;
+use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Style\GeneratorStyle;
@@ -17,6 +19,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use function array_walk_recursive;
+use function is_string;
 
 /**
  * Base class for code generators.
@@ -75,9 +79,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Assets to create.
    *
-   * @var \DrupalCodeGenerator\Asset[]
+   * @var \DrupalCodeGenerator\Asset\AssetCollection
    */
-  protected $assets = [];
+  protected $assets;
 
   /**
    * Twig template variables.
@@ -103,6 +107,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * {@inheritdoc}
    */
   protected function initialize(InputInterface $input, OutputInterface $output): void {
+
+    $this->assets = new AssetCollection();
 
     $this->io = new GeneratorStyle($input, $output, $this->getHelper('question'));
     foreach ($this->getHelperSet() as $helper) {
@@ -149,6 +155,10 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->generate();
 
+    $this->processVars();
+
+    $this->processAssets();
+
     $this->render();
 
     $dumped_assets = $this->dump($input->getOption('dry-run'));
@@ -171,12 +181,10 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   protected function render(): void {
     $renderer = $this->getHelper('renderer');
 
-    $this->processVars();
-
     $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
     $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
 
-    foreach ($this->assets as $asset) {
+    foreach ($this->assets->getFiles() as $asset) {
       // Supply the asset with all collected variables if it has no local ones.
       if (!$asset->getVars()) {
         $asset->vars($this->vars);
@@ -189,7 +197,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Dumps assets.
    */
-  protected function dump(bool $dry_run): array {
+  protected function dump(bool $dry_run): AssetCollection {
     $destination = $this->getDestination();
     $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
     return $this->getHelper('dumper')->dump($this->assets, $destination, $dry_run);
@@ -198,7 +206,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Prints summary.
    */
-  protected function printSummary(array $dumped_assets): void {
+  protected function printSummary(AssetCollection $dumped_assets): void {
     $this->getHelper('result_printer')->printResult($dumped_assets);
   }
 
@@ -258,11 +266,15 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @param string $template
    *   (Optional) Template.
    *
-   * @return \DrupalCodeGenerator\Asset
-   *   The asset.
+   * @return \DrupalCodeGenerator\Asset\File
+   *   The file asset.
    */
-  protected function addFile(string $path, string $template = NULL): Asset {
-    return $this->assets[] = Asset::createFile($path)->template($template);
+  protected function addFile(string $path, string $template = NULL): File {
+    $asset = new File($path);
+    if ($template !== NULL) {
+      $asset->template($template);
+    }
+    return $this->assets[] = $asset;
   }
 
   /**
@@ -271,11 +283,12 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @param string $path
    *   (Optional) Directory path.
    *
-   * @return \DrupalCodeGenerator\Asset
-   *   The asset.
+   * @return \DrupalCodeGenerator\Asset\Directory
+   *   The directory asset.
    */
-  protected function addDirectory(string $path): Asset {
-    return $this->assets[] = Asset::createDirectory($path);
+  protected function addDirectory(string $path): Directory {
+    $path = Utils::replaceTokens($path, $this->vars);
+    return $this->assets[] = new Directory($path);
   }
 
   /**
@@ -288,6 +301,15 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       }
     };
     array_walk_recursive($this->vars, $process_vars, $this->vars);
+  }
+
+  /**
+   * Processes collected assets.
+   */
+  protected function processAssets(): void {
+    foreach ($this->assets as $asset) {
+      $asset->replaceTokens($this->vars);
+    }
   }
 
   /**

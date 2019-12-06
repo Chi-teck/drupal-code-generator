@@ -3,7 +3,8 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\Asset;
+use DrupalCodeGenerator\Asset\File;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -26,7 +27,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    */
   protected function addServicesFile(string $path = '{machine_name}.services.yml'): Asset {
     return $this->addFile($path)
-      ->action(Asset::ACTION_APPEND)
+      ->action(File::ACTION_APPEND)
       ->headerSize(1);
   }
 
@@ -41,7 +42,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    */
   protected function addSchemaFile(string $path = 'config/schema/{machine_name}.schema.yml'): Asset {
     return $this->addFile($path)
-      ->action(Asset::ACTION_APPEND);
+      ->action(File::ACTION_APPEND);
   }
 
   /**

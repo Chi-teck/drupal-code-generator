@@ -2,7 +2,8 @@
 
 namespace DrupalCodeGenerator\Tests\Helper;
 
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Helper\ResultPrinter;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Tests\QuestionHelper;
@@ -38,11 +39,12 @@ class ResultPrinterTest extends TestCase {
 
     $printer->io($io);
 
-    $assets[] = Asset::createFile('bbb/eee/ggg.php');
-    $assets[] = Asset::createFile('aaa/ddd.txt')->content('123');
-    $assets[] = Asset::createFile('ccc')->content("123\n456\789");
-    $assets[] = Asset::createFile('aaa')->content('123');
-    $assets[] = Asset::createFile('bbb/fff.module');
+    $assets = new AssetCollection();
+    $assets[] = (new File('bbb/eee/ggg.php'));
+    $assets[] = (new File('aaa/ddd.txt'))->content('123');
+    $assets[] = (new File('ccc'))->content("123\n456\789");
+    $assets[] = (new File('aaa'))->content('123');
+    $assets[] = (new File('bbb/fff.module'));
 
     // -- Default output.
     $printer->printResult($assets);
@@ -75,7 +77,7 @@ class ResultPrinterTest extends TestCase {
     self::assertEquals($expected_output, $output->fetch());
 
     // Empty output.
-    $printer->printResult([]);
+    $printer->printResult(new AssetCollection());
     self::assertEquals('', $output->fetch());
 
     // Verbose output.

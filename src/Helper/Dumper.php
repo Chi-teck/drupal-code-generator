@@ -2,12 +2,15 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\Asset;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use function file_get_contents;
+use function is_callable;
 
 /**
  * Asset dumper form generators.
@@ -56,30 +59,47 @@ class Dumper extends Helper implements IOAwareInterface {
   /**
    * Dumps the generated code to file system.
    *
-   * @param \DrupalCodeGenerator\Asset[] $assets
+   * @param \DrupalCodeGenerator\Asset\AssetCollection $assets
    *   Assets to be dumped.
    * @param string $directory
    *   The destination directory.
    * @param bool $dry_run
    *   Do not dump the files.
    *
-   * @return \DrupalCodeGenerator\Asset[]
+   * @return \DrupalCodeGenerator\Asset\AssetCollection
    *   A list of created or updated assets.
    */
-  public function dump(array $assets, string $directory, bool $dry_run = FALSE): array {
+  public function dump(AssetCollection $assets, string $directory, bool $dry_run = FALSE): AssetCollection {
 
-    $dumped_assets = [];
+    $dumped_assets = new AssetCollection();
 
-    foreach ($assets as $asset) {
+    // -- Directories.
+    /** @var \DrupalCodeGenerator\Asset\Directory $asset */
+    foreach ($assets->getDirectories() as $asset) {
+
+      $file_path = $directory . '/' . $asset->getPath();
+
+      // Recreating directories makes no sense.
+      if (!$this->filesystem->exists($file_path)) {
+        if ($dry_run) {
+          $this->io->title($file_path . ' (empty directory)');
+        }
+        else {
+          $this->filesystem->mkdir($file_path, $asset->getMode());
+          $dumped_assets[] = $asset;
+        }
+      }
+
+    }
+
+    // -- Files.
+    /** @var \DrupalCodeGenerator\Asset\File $asset */
+    foreach ($assets->getFiles() as $asset) {
 
       $file_path = $directory . '/' . $asset->getPath();
       $content = $asset->getContent();
 
       if ($this->filesystem->exists($file_path)) {
-        // Recreating directories makes no sense.
-        if ($asset->isDirectory()) {
-          continue;
-        }
 
         // Apply the action.
         $action = $asset->getAction();
@@ -88,13 +108,13 @@ class Dumper extends Helper implements IOAwareInterface {
           $content = $action($existing_content, $content);
         }
         else {
-          if ($action == Asset::ACTION_SKIP) {
+          if ($action == File::ACTION_SKIP) {
             continue;
           }
-          elseif ($action == Asset::ACTION_REPLACE && !$dry_run && !$this->confirmReplace($file_path)) {
+          elseif ($action == File::ACTION_REPLACE && !$dry_run && !$this->confirmReplace($file_path)) {
             continue;
           }
-          elseif ($action == Asset::ACTION_APPEND) {
+          elseif ($action == File::ACTION_APPEND) {
             $content = static::appendContent($existing_content, $content, $asset->getHeaderSize());
           }
         }
@@ -102,38 +122,19 @@ class Dumper extends Helper implements IOAwareInterface {
       }
 
       // Nothing to dump.
-      if ($asset->isFile() && $content === NULL) {
+      if ($content === NULL) {
         continue;
       }
 
-      // Print data to output stream.
       if ($dry_run) {
-        $title = $file_path;
-        if ($asset->isDirectory()) {
-          $title .= ' (empty directory)';
-        }
-        $this->io->title($title);
-
+        $this->io->title($file_path);
         if ($content !== NULL) {
           $this->io->writeln($content, OutputInterface::OUTPUT_RAW);
         }
-
-        continue;
       }
-      // Save data to file system.
       else {
-        // Default mode of all parent directories is 0777. It can be modified by
-        // changing umask.
-        $mode = $asset->getMode();
-
-        if ($asset->isDirectory()) {
-          $this->filesystem->mkdir([$file_path], $mode);
-        }
-        else {
-          $this->filesystem->dumpFile($file_path, $content);
-          $this->filesystem->chmod($file_path, $mode);
-        }
-
+        $this->filesystem->dumpFile($file_path, $content);
+        $this->filesystem->chmod($file_path, $asset->getMode());
         $dumped_assets[] = $asset;
       }
 
