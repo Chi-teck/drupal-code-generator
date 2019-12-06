@@ -275,7 +275,7 @@ final class File extends Asset {
    */
   public function headerSize(int $header_size): self {
     if ($header_size <= 0) {
-      throw new \InvalidArgumentException("Header size must be greater than or equal to 0. ");
+      throw new \InvalidArgumentException('Header size must be greater than or equal to 0.');
     }
     $this->headerSize = $header_size;
     return $this;
