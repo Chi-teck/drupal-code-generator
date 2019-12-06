@@ -64,7 +64,7 @@ abstract class DrupalGenerator extends Generator {
 
     if ($this->getHelperSet()->has('drupal_context')) {
       $this->drupalContext = $this->getHelper('drupal_context');
-    };
+    }
 
     // Set working directory to extension root.
     if (!$this->isNewExtension) {

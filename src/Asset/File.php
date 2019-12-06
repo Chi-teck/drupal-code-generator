@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Asset;
 
 use DrupalCodeGenerator\Utils;
-use function parent;
 
 /**
  * Simple data structure to represent a file being generated.

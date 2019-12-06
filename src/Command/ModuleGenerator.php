@@ -144,8 +144,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    */
   private static function getDumpedServiceDefinitions(): array {
     $data_encoded = file_get_contents(Application::ROOT . '/resources/service-definitions.json');
-    $data = json_decode($data_encoded, TRUE);
-    return $data;
+    return json_decode($data_encoded, TRUE);
   }
 
 }

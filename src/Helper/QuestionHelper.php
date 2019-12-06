@@ -115,7 +115,7 @@ class QuestionHelper extends BaseQuestionHelper {
       $messages = [];
       $choices = $question->getChoices();
       foreach ($choices as $key => $value) {
-        $width = $max_width - $this->strlen($key);
+        $width = $max_width - static::strlen($key);
         $messages[] = '  [<info>' . str_repeat(' ', $width) . $key . '</info>] ' . $value;
       }
       $output->writeln($messages);
