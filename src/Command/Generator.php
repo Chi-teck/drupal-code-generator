@@ -21,6 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use function array_walk_recursive;
 use function is_string;
+use function sprintf;
 
 /**
  * Base class for code generators.
@@ -151,7 +152,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
 
-    $this->io->title(sprintf('Welcome to %s generator!', $this->getAliases()[0] ?? $this->getName()));
+    $this->printHeader();
 
     $this->generate();
 
@@ -201,6 +202,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $destination = $this->getDestination();
     $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
     return $this->getHelper('dumper')->dump($this->assets, $destination, $dry_run);
+  }
+
+  /**
+   * Prints header.
+   */
+  protected function printHeader(): void {
+    $this->io->title(sprintf('Welcome to %s generator!', $this->getAliases()[0] ?? $this->getName()));
   }
 
   /**
