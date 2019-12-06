@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Asset\File;
-
 /**
  * Implements controller command.
  */
@@ -27,7 +25,7 @@ final class Controller extends ModuleGenerator {
       $vars['route_title'] = $this->ask('Route title', 'Example');
       $vars['route_permission'] = $this->ask('Route permission', 'access content');
       $this->addFile('{machine_name}.routing.yml', 'route')
-        ->action(File::ACTION_APPEND);
+        ->appendIfExists();
     }
 
     $this->addFile('src/Controller/{class}.php', 'controller');

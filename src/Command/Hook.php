@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset\File;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -36,7 +35,7 @@ final class Hook extends ModuleGenerator {
 
     $file = $this->addFile('{machine_name}.{file_type}')
       ->headerTemplate('_lib/file-docs/{file_type}')
-      ->action(File::ACTION_APPEND)
+      ->appendIfExists()
       ->headerSize(7);
 
     /** @var \DrupalCodeGenerator\Helper\DrupalContext $drupal_context */

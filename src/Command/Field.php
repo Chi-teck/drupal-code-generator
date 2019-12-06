@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -248,7 +247,7 @@ final class Field extends ModuleGenerator {
     $this->addSchemaFile()->template('schema');
 
     $this->addFile('{machine_name}.libraries.yml', 'libraries')
-      ->action(File::ACTION_APPEND);
+      ->appendIfExists();
 
     $this->addFile('css/{field_id|u2h}-widget.css', 'widget-css');
 

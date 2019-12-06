@@ -166,8 +166,8 @@ class DumperTest extends BaseTestCase {
     $this->filesystem->dumpFile($this->directory . '/log.txt', "File header");
 
     $assets = new AssetCollection();
-    $assets[] = (new File('log.txt'))->content("redundant line\nRecord 1")->action(File::ACTION_APPEND)->headerSize(1);
-    $assets[] = (new File('log.txt'))->content('Record 2')->action(File::ACTION_APPEND);
+    $assets[] = (new File('log.txt'))->content("redundant line\nRecord 1")->appendIfExists()->headerSize(1);
+    $assets[] = (new File('log.txt'))->content('Record 2')->appendIfExists();
     $dumped_assets = $this->dump($assets, TRUE);
 
     self::assertEquals($assets, $dumped_assets);

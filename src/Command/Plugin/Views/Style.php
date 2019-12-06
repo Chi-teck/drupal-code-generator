@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command\Plugin\Views;
 
-use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 
 /**
@@ -30,7 +29,7 @@ final class Style extends PluginGenerator {
     $this->addFile('{machine_name}.module')
       ->headerTemplate('_lib/file-docs/module')
       ->template('preprocess')
-      ->action(File::ACTION_APPEND)
+      ->appendIfExists()
       ->headerSize(7);
 
     if ($vars['configurable']) {

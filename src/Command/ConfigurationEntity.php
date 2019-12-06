@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Asset\File;
-
 /**
  * Implements configuration-entity command.
  */
@@ -28,15 +26,15 @@ final class ConfigurationEntity extends ModuleGenerator {
     $this->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
     $this->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
     $this->addFile('{machine_name}.routing.yml', 'model.routing.yml')
-      ->action(File::ACTION_APPEND);
+      ->appendIfExists();
     $this->addFile('{machine_name}.links.action.yml', 'model.links.action.yml')
-      ->action(File::ACTION_APPEND);
+      ->appendIfExists();
     $this->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml')
-      ->action(File::ACTION_APPEND);
+      ->appendIfExists();
     $this->addFile('{machine_name}.permissions.yml', 'model.permissions.yml')
-      ->action(File::ACTION_APPEND);
+      ->appendIfExists();
     $this->addFile('config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml')
-      ->action(File::ACTION_APPEND);
+      ->appendIfExists();
 
     // Add 'configure' link to the info file if it exists.
     $update_info = function (?string $existing_content) use ($vars) {
