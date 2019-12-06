@@ -68,16 +68,6 @@ class Utils {
   }
 
   /**
-   * Return the user's home directory.
-   *
-   * @return string|bool
-   *   User's home directory or FALSE.
-   */
-  public static function getHomeDirectory() {
-    return isset($_SERVER['HOME']) ? $_SERVER['HOME'] : getenv('HOME');
-  }
-
-  /**
    * Replaces all tokens in a given string with appropriate values.
    *
    * @param string|null $text
