@@ -51,10 +51,10 @@ class NavigationCommandTest extends BaseTestCase {
     $command_tester = new CommandTester($help);
     $command_tester->execute([]);
     $display = $command_tester->getDisplay();
-    self::assertContains('Command line code generator', $display);
-    self::assertContains('dcg [options] <generator>', $display);
-    self::assertContains('Display navigation', $display);
-    self::assertContains('List all available generators', $display);
+    self::assertStringContainsString('Command line code generator', $display);
+    self::assertStringContainsString('dcg [options] <generator>', $display);
+    self::assertStringContainsString('Display navigation', $display);
+    self::assertStringContainsString('List all available generators', $display);
   }
 
 }

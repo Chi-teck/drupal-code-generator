@@ -3,3 +3,4 @@
 /.idea/
 /coverage
 *.phar
+/.phpunit.result.cache
