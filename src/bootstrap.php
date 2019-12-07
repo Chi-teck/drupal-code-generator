@@ -6,6 +6,7 @@
  */
 
 use DrupalCodeGenerator\ApplicationFactory;
+use Twig\Environment;
 
 /**
  * DCG root.
@@ -31,13 +32,13 @@ function dcg_create_application() {
 }
 
 // Determine major Twig version.
-// Twig_Environment::MAJOR_VERSION is not suitable here because of
+// \Twig\Environment::MAJOR_VERSION is not suitable here because of
 // https://github.com/twigphp/Twig/pull/2945
 // Use this workaround as drupal/drupal is locked on Twig 1.38.
-list($twig_major_version) = sscanf(Twig_Environment::VERSION, '%d.%d.%d');
+list($twig_major_version) = sscanf(Environment::VERSION, '%d.%d.%d');
 
-// Twig_Environment::tokenize() signature has been changed in Twig 2, so that
-// it is not possible to maintain the same Twig_Environment sub-class for both
+// \Twig\Environment::tokenize() signature has been changed in Twig 2, so that
+// it is not possible to maintain the same \Twig\Environment sub-class for both
 // Twig versions.
 $twig_environment_class = sprintf('DrupalCodeGenerator\Twig\Twig%dEnvironment', $twig_major_version);
 class_alias($twig_environment_class, 'DrupalCodeGenerator\Twig\TwigEnvironment');
