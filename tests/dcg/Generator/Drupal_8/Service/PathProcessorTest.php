@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\GeneratorBaseTest;
 /**
  * Test for d8:service:path-processor command.
  */
-class PathProcessorTestTest extends GeneratorBaseTest {
+class PathProcessorTest extends GeneratorBaseTest {
 
   protected $class = 'Drupal_8\Service\PathProcessor';
 

@@ -10,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Test for GeneratorsDiscovery.
  */
-class GeneratorsDiscoveryTest extends TestCase {
+class GeneratorDiscoveryTest extends TestCase {
 
   const TOTAL_GENERATORS = 15;
 
