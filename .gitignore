@@ -3,3 +3,5 @@
 /.idea/
 /coverage
 *.phar
+/.php_cs.cache
+/.phpunit.result.cache
