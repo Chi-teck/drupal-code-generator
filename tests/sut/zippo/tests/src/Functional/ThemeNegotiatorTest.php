@@ -14,6 +14,11 @@ class ThemeNegotiatorTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'classy';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['zippo'];
 
   /**

@@ -21,6 +21,11 @@ class RestResourceTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'classy';
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $resourceConfigId = 'qux_example';
 
   /**
