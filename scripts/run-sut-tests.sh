@@ -16,7 +16,9 @@ trap dcg_on_exit EXIT
 
 SELF_PATH=$(dirname $0)/../tests/sut
 if [ -z $DRUPAL_VERSION ]; then
-  DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '8\..\.x' | tail -n1)'-dev'
+   # Determine version dynamically once Drupal 9 is released.
+   # DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '9\..\.x' | tail -n1)'-dev'
+   DRUPAL_VERSION=9.0.x-dev
 fi
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut/build}
 DRUPAL_CACHE_DIR=${DRUPAL_CACHE_DIR:-/tmp/dcg_sut/cache/$DRUPAL_VERSION}
@@ -73,7 +75,6 @@ else
   export COMPOSER_PROCESS_TIMEOUT=1900
   composer -d$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
   composer -d$DRUPAL_DIR require drush/drush chi-teck/web-server chi-teck/test-base
-  composer -d$DRUPAL_DIR update squizlabs/php_codesniffer drupal/coder
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
