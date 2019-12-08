@@ -1,7 +1,7 @@
 services:
   {{ machine_name }}.example:
     class: Drupal\{{ machine_name }}\{{ class }}Example
-    arguments: ['@entity.query', '@entity_type.manager']
+    arguments: ['@entity_type.manager']
   {{ machine_name }}.middleware:
     class: Drupal\{{ machine_name }}\{{ class }}Middleware
     tags:
