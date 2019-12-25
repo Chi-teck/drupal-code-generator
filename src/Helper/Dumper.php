@@ -114,6 +114,11 @@ class Dumper extends Helper implements IOAwareInterface {
               }
               break;
 
+            case File::ACTION_PREPEND:
+              $existing_content = file_get_contents($file_path);
+              $content = static::prependContent($existing_content, $content);
+              break;
+
             case File::ACTION_APPEND:
               $existing_content = file_get_contents($file_path);
               $content = static::appendContent($existing_content, $content, $asset->getHeaderSize());
@@ -154,6 +159,16 @@ class Dumper extends Helper implements IOAwareInterface {
       return $this->io->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?");
     }
     return $this->replace;
+  }
+
+  /**
+   * Prepends generated content to the existing one.
+   */
+  protected static function prependContent(string $existing_content, ?string $new_content): string {
+    if ($new_content === NULL) {
+      return $existing_content;
+    }
+    return $new_content . "\n" . $existing_content;
   }
 
   /**

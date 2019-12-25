@@ -12,6 +12,7 @@ final class File extends Asset {
   const ACTION_REPLACE = 1;
   const ACTION_APPEND = 2;
   const ACTION_SKIP = 3;
+  const ACTION_PREPEND = 4;
 
   /**
    * Asset content.
@@ -239,6 +240,17 @@ final class File extends Asset {
    */
   public function replaceIfExists() {
     $this->action = self::ACTION_REPLACE;
+    return $this;
+  }
+
+  /**
+   * Sets "prepend" action.
+   *
+   * @return self
+   *   The asset.
+   */
+  public function prependIfExists() {
+    $this->action = self::ACTION_PREPEND;
     return $this;
   }
 

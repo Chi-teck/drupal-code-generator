@@ -162,6 +162,18 @@ class DumperTest extends BaseTestCase {
     static::assertFileExists($this->directory . '/core/readme.txt');
     self::assertOutput('');
 
+    // -- Prepend file content.
+    $this->filesystem->dumpFile($this->directory . '/log.txt', "File header");
+
+    $assets = new AssetCollection();
+    $assets[] = (new File('log.txt'))->content('Record 1')->prependIfExists();
+    $dumped_assets = $this->dump($assets, TRUE);
+
+    self::assertEquals($assets, $dumped_assets);
+    $content = "Record 1\nFile header";
+    self::assertStringEqualsFile($this->directory . '/log.txt', $content);
+    self::assertOutput('');
+
     // -- Append file content.
     $this->filesystem->dumpFile($this->directory . '/log.txt', "File header");
 
