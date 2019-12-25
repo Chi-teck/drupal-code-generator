@@ -1,0 +1,7 @@
+/**
+ * Implements hook_help_topics_info_alter().
+ */
+function {{ machine_name }}_help_topics_info_alter(array &$info) {
+  // Alter the help topic to be displayed on admin/help.
+  $info['example.help_topic']['top_level'] = TRUE;
+}

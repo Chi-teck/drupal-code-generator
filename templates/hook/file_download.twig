@@ -3,8 +3,8 @@
  */
 function {{ machine_name }}_file_download($uri) {
   // Check to see if this is a config download.
-  $scheme = file_uri_scheme($uri);
-  $target = file_uri_target($uri);
+  $scheme = StreamWrapperManager::getScheme($uri);
+  $target = StreamWrapperManager::getTarget($uri);
   if ($scheme == 'temporary' && $target == 'config.tar.gz') {
     return [
       'Content-disposition' => 'attachment; filename="config.tar.gz"',

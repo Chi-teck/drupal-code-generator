@@ -3,7 +3,7 @@
  */
 function {{ machine_name }}_node_update_index(\Drupal\node\NodeInterface $node) {
   $text = '';
-  $ratings = db_query('SELECT title, description FROM {my_ratings} WHERE nid = :nid', [':nid' => $node->id()]);
+  $ratings = \Drupal::database()->query('SELECT title, description FROM {my_ratings} WHERE nid = :nid', [':nid' => $node->id()]);
   foreach ($ratings as $rating) {
     $text .= '<h2>' . Html::escape($rating->title) . '</h2>' . Xss::filter($rating->description);
   }

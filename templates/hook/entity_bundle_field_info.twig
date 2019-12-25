@@ -5,10 +5,10 @@ function {{ machine_name }}_entity_bundle_field_info(\Drupal\Core\Entity\EntityT
   // Add a property only to nodes of the 'article' bundle.
   if ($entity_type->id() == 'node' && $bundle == 'article') {
     $fields = [];
-    $fields['mymodule_text_more'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('More text'))
-      ->setComputed(TRUE)
-      ->setClass('\Drupal\mymodule\EntityComputedMoreText');
+    $storage_definitions = mymodule_entity_field_storage_info($entity_type);
+    $fields['mymodule_bundle_field'] = FieldDefinition::createFromFieldStorageDefinition($storage_definitions['mymodule_bundle_field'])
+      ->setLabel(t('Bundle Field'));
     return $fields;
   }
+
 }

@@ -19,7 +19,7 @@ function {{ machine_name }}_tokens_alter(array &$replacements, array $context, \
     // of a field (field_title).
     if (isset($context['tokens']['title'])) {
       $title = $node->field_title->view('default');
-      $replacements[$context['tokens']['title']] = drupal_render($title);
+      $replacements[$context['tokens']['title']] = \Drupal::service('renderer')->render($title);
     }
   }
 }

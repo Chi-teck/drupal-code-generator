@@ -1,0 +1,6 @@
+/**
+ * Implements hook_views_ui_display_top_alter().
+ */
+function {{ machine_name }}_views_ui_display_top_alter(&$build, \Drupal\views_ui\ViewUI $view, $display_id) {
+  $build['custom']['#markup'] = 'This text should always appear';
+}

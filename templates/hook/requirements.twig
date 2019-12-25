@@ -16,7 +16,7 @@ function {{ machine_name }}_requirements($phase) {
   // Test PHP version
   $requirements['php'] = [
     'title' => t('PHP'),
-    'value' => ($phase == 'runtime') ? \Drupal::l(phpversion(), new Url('system.php')) : phpversion(),
+    'value' => ($phase == 'runtime') ? Link::fromTextAndUrl(phpversion(), Url::fromRoute('system.php'))->toString() : phpversion(),
   ];
   if (version_compare(phpversion(), DRUPAL_MINIMUM_PHP) < 0) {
     $requirements['php']['description'] = t('Your PHP installation is too old. Drupal requires at least PHP %version.', ['%version' => DRUPAL_MINIMUM_PHP]);
@@ -38,7 +38,7 @@ function {{ machine_name }}_requirements($phase) {
       ];
     }
 
-    $requirements['cron']['description'] .= ' ' . t('You can <a href=":cron">run cron manually</a>.', [':cron' => \Drupal::url('system.run_cron')]);
+    $requirements['cron']['description'] .= ' ' . t('You can <a href=":cron">run cron manually</a>.', [':cron' => Url::fromRoute('system.run_cron')->toString()]);
 
     $requirements['cron']['title'] = t('Cron maintenance tasks');
   }

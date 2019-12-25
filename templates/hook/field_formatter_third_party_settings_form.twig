@@ -1,7 +1,7 @@
 /**
  * Implements hook_field_formatter_third_party_settings_form().
  */
-function {{ machine_name }}_field_formatter_third_party_settings_form(\Drupal\Core\Field\FormatterInterface $plugin, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $view_mode, $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function {{ machine_name }}_field_formatter_third_party_settings_form(\Drupal\Core\Field\FormatterInterface $plugin, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $view_mode, array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $element = [];
   // Add a 'my_setting' checkbox to the settings form for 'foo_formatter' field
   // formatters.
