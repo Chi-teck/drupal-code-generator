@@ -24,7 +24,7 @@ final class Controller extends ModuleGenerator {
       $vars['route_path'] = $this->ask('Route path', '/{machine_name|u2h}/example');
       $vars['route_title'] = $this->ask('Route title', 'Example');
       $vars['route_permission'] = $this->ask('Route permission', 'access content');
-      $this->addFile('{machine_name}.routing.yml', 'route')->prependIfExists();
+      $this->addFile('{machine_name}.routing.yml', 'route')->appendIfExists();
     }
 
     $this->addFile('src/Controller/{class}.php', 'controller');
