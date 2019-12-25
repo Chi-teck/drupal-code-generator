@@ -3,7 +3,8 @@
 namespace Drupal\Tests\wine\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
-use TestBase\BrowserTestBase;
+use Drupal\Tests\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
 
 /**
  * Test configuration entity.
@@ -12,10 +13,17 @@ use TestBase\BrowserTestBase;
  */
 class ConfigurationEntityTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['wine'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
@@ -33,7 +41,7 @@ class ConfigurationEntityTest extends BrowserTestBase {
 
     $this->drupalGet('admin/structure/example');
     $this->assertPageTitle('Example configuration');
-    $this->assertXpath('//td[@class = "empty message" and text() = "There are no examples yet."]');
+    $this->assertXpath('//td[@colspan = "4" and text() = "There are no examples yet."]');
 
     $this->drupalGet('admin/structure/example/add');
     $this->assertPageTitle('Add an example');
@@ -49,7 +57,7 @@ class ConfigurationEntityTest extends BrowserTestBase {
 
     $this->assertXpath('//tbody//td[text() = "Test"]/following::td[text() = "test"]/following::td[text() = "Enabled"]/following::td//ul[@class = "dropbutton"]');
 
-    $this->click('//ul[@class = "dropbutton"]//a[text() = "Edit"]');
+    $this->getSession()->getDriver()->click('//ul[@class = "dropbutton"]//a[text() = "Edit"]');
 
     $this->assertPageTitle('Edit an example');
     $this->assertXpath('//input[@name = "label" and @value = "Test"]');
@@ -62,12 +70,12 @@ class ConfigurationEntityTest extends BrowserTestBase {
     $this->drupalPostForm(NULL, $edit, 'Save');
     $this->assertStatusMessage(new FormattableMarkup('Updated example %label.', ['%label' => 'Updated test']));
 
-    $this->click('//ul[@class = "dropbutton"]//a[text() = "Delete"]');
+    $this->getSession()->getDriver()->click('//ul[@class = "dropbutton"]//a[text() = "Delete"]');
     $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Updated test']));
 
     $this->drupalPostForm(NULL, [], 'Delete');
     $this->assertStatusMessage(new FormattableMarkup('The example %label has been deleted.', ['%label' => 'Updated test']));
-    $this->assertXpath('//td[@class = "empty message" and text() = "There are no examples yet."]');
+    $this->assertXpath('//td[@colspan = "4" and text() = "There are no examples yet."]');
   }
 
 }

@@ -2,7 +2,8 @@
 
 namespace Drupal\Tests\bar\Functional;
 
-use TestBase\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Test install file.
@@ -10,6 +11,13 @@ use TestBase\BrowserTestBase;
  * @group DCG
  */
 class InstallTest extends BrowserTestBase {
+
+  use TestTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.

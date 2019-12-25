@@ -3,7 +3,8 @@
 namespace Drupal\Tests\qux\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
-use TestBase\BrowserTestBase;
+use Drupal\Tests\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
 
 /**
  * Test field type.
@@ -12,10 +13,17 @@ use TestBase\BrowserTestBase;
  */
 class FieldTypeTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['qux', 'node', 'field_ui'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.
@@ -76,7 +84,7 @@ class FieldTypeTest extends BrowserTestBase {
       'field_foo[0][value]' => 'Hello word',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertXpath('//div[@class = "field__item" and text() = "Hello word"]');
+    $this->assertXpath('//div[text() = "Foo"]/following-sibling::div[text() = "Hello word"]');
   }
 
 }

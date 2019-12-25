@@ -2,7 +2,8 @@
 
 namespace Drupal\Tests\bar\Functional;
 
-use TestBase\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Controller test.
@@ -11,10 +12,17 @@ use TestBase\BrowserTestBase;
  */
 class ControllerTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['bar', 'node'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.

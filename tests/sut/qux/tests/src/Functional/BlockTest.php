@@ -2,7 +2,8 @@
 
 namespace Drupal\Tests\qux\Functional;
 
-use TestBase\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Block plugin test.
@@ -11,21 +12,29 @@ use TestBase\BrowserTestBase;
  */
 class BlockTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['qux', 'block'];
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Test callback.
    */
-  public function testAction() {
+  public function testBlock() {
     $admin_user = $this->drupalCreateUser(['administer blocks', 'administer themes']);
     $this->drupalLogin($admin_user);
-    $this->drupalGet('admin/structure/block/library/classy');
+    $this->drupalGet('admin/structure/block/library/stark');
     $link_xpath = '//td[. = "Example"]/following-sibling::td[text() = "DCG"]';
     $link_xpath .= '/following-sibling::td//a[text() = "Place block"]';
-    $this->click($link_xpath);
+
+    $this->getSession()->getDriver()->click($link_xpath);
 
     // Check default configuration.
     $this->assertXpath('//input[@name = "settings[label]" and @value = "Example"]');

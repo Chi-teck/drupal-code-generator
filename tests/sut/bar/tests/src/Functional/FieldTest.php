@@ -4,8 +4,9 @@ namespace Drupal\Tests\bar\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
-use TestBase\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
 
 /**
  * Field test.
@@ -15,11 +16,17 @@ use TestBase\BrowserTestBase;
 class FieldTest extends BrowserTestBase {
 
   use NodeCreationTrait;
+  use TestTrait;
 
   /**
    * {@inheritdoc}
    */
   public static $modules = ['bar', 'node', 'field_ui'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'classy';
 
   /**
    * {@inheritdoc}

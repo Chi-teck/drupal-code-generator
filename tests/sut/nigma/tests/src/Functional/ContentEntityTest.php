@@ -4,7 +4,8 @@ namespace Drupal\Tests\nigma\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\nigma\Entity\Example;
-use TestBase\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Test example entity type.
@@ -13,10 +14,17 @@ use TestBase\BrowserTestBase;
  */
 class ContentEntityTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['nigma', 'field_ui', 'text'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'classy';
 
   /**
    * Test callback.
@@ -40,6 +48,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->assertXpath('//td[@class = "empty message" and contains(text(), "No example types available.")]');
 
     $this->clickLink('Add example type');
+
     $this->assertPageTitle('Add example type');
 
     $edit = [
@@ -49,7 +58,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->drupalPostForm(NULL, $edit, 'Save example type');
     $this->assertStatusMessage(new FormattableMarkup('The example type %label has been added.', ['%label' => 'Foo']));
 
-    $this->click('//td[text() = "Foo"]/following-sibling::td//a[text() = "Edit"]');
+    $this->getSession()->getDriver()->click('//td[text() = "Foo"]/following-sibling::td//a[text() = "Edit"]');
     $this->assertPageTitle(new FormattableMarkup('Edit %label example type', ['%label' => 'Foo']));
     $this->assertXpath('//label[text() = "Label"]/following-sibling::input[@name = "label" and @value="Foo"]');
 
@@ -61,7 +70,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->assertStatusMessage(new FormattableMarkup('The example type %label has been updated.', ['%label' => 'Bar']));
 
     // Make sure the entity type is fieldable.
-    $this->click('//td[text() = "Bar"]/following-sibling::td//a[text() = "Manage fields"]');
+    $this->getSession()->getDriver()->click('//td[text() = "Bar"]/following-sibling::td//a[text() = "Manage fields"]');
     $this->assertPageTitle('Manage fields');
 
     /** @var \Drupal\Core\Entity\ContentEntityTypeInterface $entity_type */
@@ -189,7 +198,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('Total examples: 1');
 
     // -- Test entity deletion.
-    $this->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
+    $this->getSession()->getDriver()->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
     $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 

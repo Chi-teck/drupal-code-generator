@@ -5,6 +5,7 @@ namespace Drupal\Tests\qux\Functional;
 use Drupal\Core\Url;
 use Drupal\Tests\rest\Functional\CookieResourceTestTrait;
 use Drupal\Tests\rest\Functional\ResourceTestBase;
+use Drupal\dcg_test\TestTrait;
 use Drupal\user\Entity\Role;
 use Drupal\user\RoleInterface;
 use GuzzleHttp\RequestOptions;
@@ -17,11 +18,12 @@ use GuzzleHttp\RequestOptions;
 class RestResourceTest extends ResourceTestBase {
 
   use CookieResourceTestTrait;
+  use TestTrait;
 
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}

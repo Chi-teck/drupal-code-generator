@@ -4,7 +4,8 @@ namespace Drupal\Tests\sigma\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\sigma\Entity\Example;
-use TestBase\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Test example entity type.
@@ -13,10 +14,17 @@ use TestBase\BrowserTestBase;
  */
 class ContentEntityTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['sigma', 'field_ui'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.
@@ -156,7 +164,7 @@ class ContentEntityTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('Total examples: 1');
 
     // -- Test entity deletion.
-    $this->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
+    $this->getSession()->getDriver()->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
     $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 

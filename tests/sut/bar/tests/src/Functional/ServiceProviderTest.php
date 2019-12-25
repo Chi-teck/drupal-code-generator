@@ -2,7 +2,8 @@
 
 namespace Drupal\Tests\bar\Functional;
 
-use TestBase\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Service provider test.
@@ -11,10 +12,17 @@ use TestBase\BrowserTestBase;
  */
 class ServiceProviderTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['bar', 'dblog'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.

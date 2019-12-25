@@ -3,7 +3,8 @@
 namespace Drupal\Tests\qux\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
-use TestBase\BrowserTestBase;
+use Drupal\Tests\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
 
 /**
  * Action plugin test.
@@ -12,10 +13,17 @@ use TestBase\BrowserTestBase;
  */
 class ActionTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['qux', 'node', 'action', 'views'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.

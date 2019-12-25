@@ -2,7 +2,8 @@
 
 namespace Drupal\Tests\zippo\Functional;
 
-use TestBase\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Event subscriber test.
@@ -11,10 +12,17 @@ use TestBase\BrowserTestBase;
  */
 class EventSubscriberTest extends BrowserTestBase {
 
+  use TestTrait;
+
   /**
    * {@inheritdoc}
    */
   public static $modules = ['zippo'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.

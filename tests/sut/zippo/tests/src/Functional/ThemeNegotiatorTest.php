@@ -14,12 +14,12 @@ class ThemeNegotiatorTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  public static $modules = ['zippo'];
 
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['zippo'];
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.
