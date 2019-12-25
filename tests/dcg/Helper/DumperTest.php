@@ -187,6 +187,17 @@ class DumperTest extends BaseTestCase {
     self::assertStringEqualsFile($this->directory . '/log.txt', $content);
     self::assertOutput('');
 
+    // -- Skip file.
+    $this->filesystem->dumpFile($this->directory . '/log.txt', 'Existing record');
+
+    $assets = new AssetCollection();
+    $assets[] = (new File('log.txt'))->content('New Record')->skipIfExists();
+    $dumped_assets = $this->dump($assets, TRUE);
+
+    self::assertEquals(new AssetCollection(), $dumped_assets);
+    self::assertStringEqualsFile($this->directory . '/log.txt', 'Existing record');
+    self::assertOutput('');
+
     // -- Dry dump.
     $assets = new AssetCollection();
     $assets[] = (new File('example.txt'))->content('Example');
