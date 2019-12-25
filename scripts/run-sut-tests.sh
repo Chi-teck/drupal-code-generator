@@ -50,7 +50,7 @@ function dcg_phpcs {
 function dcg_phpunit {
   SIMPLETEST_BASE_URL=http://$DRUPAL_HOST:$DRUPAL_PORT \
   SIMPLETEST_DB=sqlite://localhost//dev/shm/dcg_test.sqlite \
-  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chromeOptions": {"w3c": false}}, "'$WD_URL'"]' \
+  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chromeOptions": {"w3c": false, "args": ["--headless"]}}, "'$WD_URL'"]' \
   $DRUPAL_DIR/vendor/bin/phpunit \
   -c $DRUPAL_DIR/core \
   $@
@@ -93,6 +93,7 @@ $DRUPAL_DIR/vendor/bin/web.server \
   $DRUPAL_HOST:$DRUPAL_PORT \
   --docroot=$DRUPAL_DIR \
   --router=$DRUPAL_DIR/vendor/drush/drush/misc/d8-rs-router.php
+
 # === Tests === #
 
 # --- Test forms --- #
