@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Utils;
  */
 final class File extends Asset {
 
-  const ACTION_REPLACE = 1;
-  const ACTION_APPEND = 2;
-  const ACTION_SKIP = 3;
-  const ACTION_PREPEND = 4;
+  const ACTION_REPLACE = 0x01;
+  const ACTION_PREPEND = 0x02;
+  const ACTION_APPEND = 0x03;
+  const ACTION_SKIP = 0x04;
 
   /**
    * Asset content.
