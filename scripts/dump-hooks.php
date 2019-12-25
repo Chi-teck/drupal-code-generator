@@ -22,13 +22,23 @@ require __DIR__ . '/../vendor/autoload.php';
  *   Input instance.
  * @param \Symfony\Component\Console\Output\OutputInterface $output
  *   Output instance.
+ *
+ * @return int
+ *   Exit code.
  */
-function dump_hooks(InputInterface $input, OutputInterface $output): void {
+function dump_hooks(InputInterface $input, OutputInterface $output): int {
+
+  $file_system = new Filesystem();
 
   $input_directory = $input->getArgument('input_directory');
-  $output_directory = $input->getArgument('output_directory');
+  if (!$file_system->exists($input_directory)) {
+    throw new RuntimeException('Input directory does not exist.');
+  }
 
-  check_directories($input_directory, $output_directory);
+  $output_directory = $input->getArgument('output_directory');
+  if (!$file_system->exists($output_directory)) {
+    throw new RuntimeException('Output directory does not exist.');
+  }
 
   $iterator = new RecursiveIteratorIterator(
     new RecursiveDirectoryIterator($input_directory, RecursiveDirectoryIterator::SKIP_DOTS)
@@ -50,26 +60,8 @@ function dump_hooks(InputInterface $input, OutputInterface $output): void {
 
   $output->writeln('-----------------');
   $output->writeln('Dumped hooks: ' . $total);
-}
 
-/**
- * Checks if target directories exist.
- *
- * @param string $input_directory
- *   Directory to search for hooks.
- * @param string $output_directory
- *   Directory where hook templates should be dumped.
- *
- * @throws \Symfony\Component\Console\Exception\RuntimeException
- */
-function check_directories(string $input_directory, string $output_directory): void {
-  $file_system = new Filesystem();
-  if (!$file_system->exists($input_directory)) {
-    throw new RuntimeException('Input directory does not exist.');
-  }
-  if (!$file_system->exists($output_directory)) {
-    throw new RuntimeException('Output directory does not exist.');
-  }
+  return 0;
 }
 
 /**
