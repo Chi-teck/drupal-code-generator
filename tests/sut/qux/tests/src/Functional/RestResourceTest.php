@@ -175,17 +175,6 @@ class RestResourceTest extends ResourceTestBase {
     $expected_body = '{"id":"1","title":"Alpha patched","description":"Some description","price":"10"}';
     self::assertEquals($expected_body, $response->getBody());
 
-    // -- Test PUT method.
-    $method = 'PUT';
-    $record_encoded = '{"title":"Alpha updated"}';
-    $request_options[RequestOptions::BODY] = $record_encoded;
-    $url = Url::fromRoute($route_prefix . $method, ['id' => 1, '_format' => self::$format]);
-    $response = $this->request($method, $url, $request_options);
-
-    self::assertEquals(200, $response->getStatusCode());
-    $expected_body = '{"id":"1","title":"Alpha updated","description":"","price":"0"}';
-    self::assertEquals($expected_body, $response->getBody());
-
     // -- Test DELETE method.
     $method = 'DELETE';
     $url = Url::fromRoute($route_prefix . $method, ['id' => 1]);

@@ -136,31 +136,6 @@ class {{ class }} extends ResourceBase implements DependentPluginInterface {
   }
 
   /**
-   * Responds to entity PUT requests.
-   *
-   * @param int $id
-   *   The ID of the record.
-   * @param mixed $data
-   *   Data to write into the database.
-   *
-   * @return \Drupal\rest\ModifiedResourceResponse
-   *   The HTTP response object.
-   */
-  public function put($id, $data) {
-
-    $this->validate($data);
-
-    // Provide default values to make sure the record is completely replaced.
-    $data += [
-      'title' => '',
-      'description' => '',
-      'price' => 0,
-    ];
-
-    return $this->updateRecord($id, $data);
-  }
-
-  /**
    * Responds to entity DELETE requests.
    *
    * @param int $id
@@ -212,13 +187,6 @@ class {{ class }} extends ResourceBase implements DependentPluginInterface {
    */
   public function routes() {
     $collection = parent::routes();
-
-    // ResourceBase class does not support PUT method by some reason.
-    $definition = $this->getPluginDefinition();
-    $canonical_path = $definition['uri_paths']['canonical'];
-    $route = $this->getBaseRoute($canonical_path, 'PUT');
-    $route->addRequirements(['_content_type_format' => implode('|', $this->serializerFormats)]);
-    $collection->add('{{ plugin_id }}.PUT', $route);
 
     // Take out BC routes added in base class.
     // @see https://www.drupal.org/node/2865645
