@@ -97,18 +97,18 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
   /**
    * Responds to POST requests and saves the new record.
    *
-   * @param mixed $record
+   * @param mixed $data
    *   Data to write into the database.
    *
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  public function post($record) {
+  public function post($data) {
 
-    $this->validate($record);
+    $this->validate($data);
 
     $id = $this->dbConnection->insert('example_foo')
-      ->fields($record)
+      ->fields($data)
       ->execute();
 
     $this->logger->notice('New foo record has been created.');
@@ -124,15 +124,15 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
    *
    * @param int $id
    *   The ID of the record.
-   * @param mixed $record
+   * @param mixed $data
    *   Data to write into the database.
    *
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  public function patch($id, $record) {
-    $this->validate($record);
-    return $this->updateRecord($id, $record);
+  public function patch($id, $data) {
+    $this->validate($data);
+    return $this->updateRecord($id, $data);
   }
 
   /**
@@ -140,24 +140,24 @@ class FooResource extends ResourceBase implements DependentPluginInterface {
    *
    * @param int $id
    *   The ID of the record.
-   * @param mixed $record
+   * @param mixed $data
    *   Data to write into the database.
    *
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  public function put($id, $record) {
+  public function put($id, $data) {
 
-    $this->validate($record);
+    $this->validate($data);
 
     // Provide default values to make sure the record is completely replaced.
-    $record += [
+    $data += [
       'title' => '',
       'description' => '',
       'price' => 0,
     ];
 
-    return $this->updateRecord($id, $record);
+    return $this->updateRecord($id, $data);
   }
 
   /**
