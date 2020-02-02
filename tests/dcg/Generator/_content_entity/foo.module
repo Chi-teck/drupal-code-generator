@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Render\Element;
+use Drupal\foo\Entity\FooExample;
+use Drupal\user\UserInterface;
 
 /**
  * Implements hook_theme().
@@ -32,5 +34,58 @@ function foo_theme() {
 function template_preprocess_foo_example(array &$variables) {
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function foo_user_cancel($edit, UserInterface $account, $method) {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish examples.
+      $storage = \Drupal::entityTypeManager()->getStorage('foo_example');
+      $foo_example_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->execute();
+      foreach ($storage->loadMultiple($foo_example_ids) as $foo_example) {
+        $foo_example->set('status', FALSE);
+        $foo_example->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize examples.
+      $storage = \Drupal::entityTypeManager()->getStorage('foo_example');
+      $foo_example_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->execute();
+      foreach ($storage->loadMultiple($foo_example_ids) as $foo_example) {
+        $foo_example->setOwnerId(0);
+        $foo_example->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function foo_user_predelete(UserInterface $account) {
+  // Delete examples.
+  $storage = \Drupal::entityTypeManager()->getStorage('foo_example');
+  $foo_example_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  $foo_examples = $storage->loadMultiple($foo_example_ids);
+  $storage->delete($foo_examples);
+  // Delete old revisions.
+  $foo_example_ids = $storage->getQuery()
+    ->allRevisions()
+    ->condition('uid', $account->id())
+    ->execute();
+  foreach (array_keys($foo_example_ids) as $revision_id) {
+    $storage->deleteRevision($revision_id);
   }
 }

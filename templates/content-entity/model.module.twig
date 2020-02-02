@@ -5,7 +5,13 @@
  * Provides {{ entity_type_label|article|lower }} entity type.
  */
 
+{% sort %}
 use Drupal\Core\Render\Element;
+  {% if author_base_field %}
+use Drupal\{{ machine_name }}\Entity\{{ class_prefix }};
+use Drupal\user\UserInterface;
+  {% endif %}
+{% endsort %}
 
 /**
  * Implements hook_theme().
@@ -34,3 +40,62 @@ function template_preprocess_{{ entity_type_id }}(array &$variables) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
 }
+
+{% if author_base_field %}
+/**
+ * Implements hook_user_cancel().
+ */
+function {{ machine_name }}_user_cancel($edit, UserInterface $account, $method) {
+  switch ($method) {
+  {% if status_base_field %}
+    case 'user_cancel_block_unpublish':
+      // Unpublish {{ entity_type_label|lower|pluralize }}.
+      $storage = \Drupal::entityTypeManager()->getStorage('{{ entity_type_id }}');
+      ${{ entity_type_id }}_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->execute();
+      foreach ($storage->loadMultiple(${{ entity_type_id }}_ids) as ${{ entity_type_id }}) {
+        ${{ entity_type_id }}->set('status', FALSE);
+        ${{ entity_type_id }}->save();
+      }
+      break;
+
+    {% endif %}
+    case 'user_cancel_reassign':
+      // Anonymize {{ entity_type_label|lower|pluralize }}.
+      $storage = \Drupal::entityTypeManager()->getStorage('{{ entity_type_id }}');
+      ${{ entity_type_id }}_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->execute();
+      foreach ($storage->loadMultiple(${{ entity_type_id }}_ids) as ${{ entity_type_id }}) {
+        ${{ entity_type_id }}->setOwnerId(0);
+        ${{ entity_type_id }}->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function {{ machine_name }}_user_predelete(UserInterface $account) {
+  // Delete {{ entity_type_label|lower|pluralize }}.
+  $storage = \Drupal::entityTypeManager()->getStorage('{{ entity_type_id }}');
+  ${{ entity_type_id }}_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  ${{ entity_type_id|pluralize }} = $storage->loadMultiple(${{ entity_type_id }}_ids);
+  $storage->delete(${{ entity_type_id|pluralize }});
+  {% if revisionable %}
+  // Delete old revisions.
+  ${{ entity_type_id }}_ids = $storage->getQuery()
+    ->allRevisions()
+    ->condition('uid', $account->id())
+    ->execute();
+  foreach (array_keys(${{ entity_type_id }}_ids) as $revision_id) {
+    $storage->deleteRevision($revision_id);
+  }
+  {% endif %}
+}
+{% endif %}
