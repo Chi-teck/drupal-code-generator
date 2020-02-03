@@ -127,7 +127,7 @@ final class Field extends ModuleGenerator {
       return $value;
     };
 
-    $vars['subfield_count'] = $this->ask('How many sub-fields would you like to create?', 3, $subfield_count_validator);
+    $vars['subfield_count'] = $this->ask('How many sub-fields would you like to create?', '3', $subfield_count_validator);
 
     $type_choice_keys = array_keys($this->subTypes);
     $type_choice_labels = array_column($this->subTypes, 'label');

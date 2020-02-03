@@ -242,7 +242,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function confirm(string $question, bool $default = TRUE): bool {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
-    return $this->io->confirm($question, $default);
+    return (bool) $this->io->confirm($question, $default);
   }
 
   /**

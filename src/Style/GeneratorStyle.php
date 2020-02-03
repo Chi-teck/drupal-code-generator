@@ -62,7 +62,10 @@ class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
    */
   public function askQuestion(Question $question) {
     $answer = $this->questionHelper->ask($this->input, $this, $question);
-    return Utils::addSlashes($answer);
+    if (is_string($answer)) {
+      $answer = Utils::addSlashes($answer);
+    }
+    return $answer;
   }
 
   /**
