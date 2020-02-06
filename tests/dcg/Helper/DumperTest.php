@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\Tests\Helper;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
+use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Style\GeneratorStyle;
@@ -163,7 +164,7 @@ final class DumperTest extends BaseTestCase {
     self::assertOutput('');
 
     // -- Prepend file content.
-    $this->filesystem->dumpFile($this->directory . '/log.txt', "File header");
+    $this->filesystem->dumpFile($this->directory . '/log.txt', 'File header');
 
     $assets = new AssetCollection();
     $assets[] = (new File('log.txt'))->content('Record 1')->prependIfExists();
@@ -175,7 +176,7 @@ final class DumperTest extends BaseTestCase {
     self::assertOutput('');
 
     // -- Append file content.
-    $this->filesystem->dumpFile($this->directory . '/log.txt', "File header");
+    $this->filesystem->dumpFile($this->directory . '/log.txt', 'File header');
 
     $assets = new AssetCollection();
     $assets[] = (new File('log.txt'))->content("redundant line\nRecord 1")->appendIfExists()->headerSize(1);
@@ -196,6 +197,28 @@ final class DumperTest extends BaseTestCase {
 
     self::assertEquals(new AssetCollection(), $dumped_assets);
     self::assertStringEqualsFile($this->directory . '/log.txt', 'Existing record');
+    self::assertOutput('');
+
+    // -- Symlink
+    $assets = new AssetCollection();
+    $assets[] = new Directory('Alpha/Beta/Gamma');
+    $assets[] = (new File('foo.txt'))->content('bar');
+    $assets[] = new Symlink('foo.link', 'foo.txt');
+    $assets[] = new Symlink('abg.link', 'Alpha/Beta/Gamma');
+    $dumped_assets = $this->dump($assets, TRUE);
+    self::assertEquals($assets, $dumped_assets);
+    self::assertStringEqualsFile($this->directory . '/foo.link', 'bar');
+    self::assertDirectoryExists($this->directory . '/abg.link');
+    self::assertOutput('');
+
+    // -- Existing symlink.
+    $assets = new AssetCollection();
+    $assets[] = (new File('bar.txt'))->content('foo');
+    $assets[] = (new Symlink('foo.link', 'foo.txt'))->skipIfExists();
+    $dumped_assets = $this->dump($assets, TRUE);
+    unset($assets[1]);
+    self::assertEquals($assets, $dumped_assets);
+    self::assertStringEqualsFile($this->directory . '/foo.link', 'bar');
     self::assertOutput('');
 
     // -- Dry dump.
