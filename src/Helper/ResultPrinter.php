@@ -45,19 +45,23 @@ class ResultPrinter extends Helper implements IOAwareInterface {
 
       $rows = [];
 
-      foreach ($assets->getDirectories()->getSorted() as $asset) {
-        $rows[] = ['directory', $base_path . $asset->getPath(), '-', '-'];
+      foreach ($assets->getDirectories()->getSorted() as $directory) {
+        $rows[] = ['directory', $base_path . $directory->getPath(), '-', '-'];
       }
 
       $total_size = 0;
       $total_lines = 0;
 
-      foreach ($assets->getFiles()->getSorted() as $asset) {
-        $size = mb_strlen($asset->getContent());
+      foreach ($assets->getFiles()->getSorted() as $file) {
+        $size = mb_strlen($file->getContent());
         $total_size += $size;
-        $lines = $size == 0 ? 0 : substr_count($asset->getContent(), "\n") + 1;
+        $lines = $size == 0 ? 0 : substr_count($file->getContent(), "\n") + 1;
         $total_lines += $lines;
-        $rows[] = ['file', $base_path . $asset->getPath(), $lines, $size];
+        $rows[] = ['file', $base_path . $file->getPath(), $lines, $size];
+      }
+
+      foreach ($assets->getSymlinks()->getSorted() as $symlink) {
+        $rows[] = ['symlink', $base_path . $symlink->getPath(), '-', '-'];
       }
 
       $rows[] = new TableSeparator();
@@ -83,11 +87,16 @@ class ResultPrinter extends Helper implements IOAwareInterface {
     // Bulleted list.
     else {
       $dumped_files = [];
-      foreach ($assets->getDirectories()->getSorted() as $asset) {
-        $dumped_files[] = $base_path . $asset->getPath();
+      // Group results by asset type.
+      $assets = $assets->getSorted();
+      foreach ($assets->getDirectories() as $directory) {
+        $dumped_files[] = $base_path . $directory->getPath();
       }
-      foreach ($assets->getFiles()->getSorted() as $asset) {
-        $dumped_files[] = $base_path . $asset->getPath();
+      foreach ($assets->getFiles() as $file) {
+        $dumped_files[] = $base_path . $file->getPath();
+      }
+      foreach ($assets->getSymlinks() as $symlink) {
+        $dumped_files[] = $base_path . $symlink->getPath();
       }
       $this->io->listing($dumped_files);
     }

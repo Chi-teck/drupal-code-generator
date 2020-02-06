@@ -74,6 +74,22 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
   /**
+   * Returns directory assets.
+   *
+   * @return self
+   *   Collection of directory assets.
+   */
+  public function getDirectories(): self {
+    $assets = array_filter(
+      $this->assets,
+      function ($asset): bool {
+        return $asset instanceof Directory;
+      }
+    );
+    return new self($assets);
+  }
+
+  /**
    * Returns file assets.
    *
    * @return self
@@ -90,16 +106,16 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
   /**
-   * Returns directory assets.
+   * Returns symlink assets.
    *
    * @return self
-   *   Collection of directory assets.
+   *   Collection of symlink assets.
    */
-  public function getDirectories(): self {
+  public function getSymlinks(): self {
     $assets = array_filter(
       $this->assets,
       function ($asset): bool {
-        return $asset instanceof Directory;
+        return $asset instanceof Symlink;
       }
     );
     return new self($assets);

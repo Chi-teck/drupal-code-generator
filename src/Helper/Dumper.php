@@ -4,8 +4,10 @@ namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\File;
+use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
+use RuntimeException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -59,7 +61,7 @@ class Dumper extends Helper implements IOAwareInterface {
    *
    * @param \DrupalCodeGenerator\Asset\AssetCollection $assets
    *   Assets to be dumped.
-   * @param string $directory
+   * @param string $destination
    *   The destination directory.
    * @param bool $dry_run
    *   Do not dump the files.
@@ -67,15 +69,15 @@ class Dumper extends Helper implements IOAwareInterface {
    * @return \DrupalCodeGenerator\Asset\AssetCollection
    *   A list of created or updated assets.
    */
-  public function dump(AssetCollection $assets, string $directory, bool $dry_run = FALSE): AssetCollection {
+  public function dump(AssetCollection $assets, string $destination, bool $dry_run = FALSE): AssetCollection {
 
     $dumped_assets = new AssetCollection();
 
     // -- Directories.
     /** @var \DrupalCodeGenerator\Asset\Directory $asset */
-    foreach ($assets->getDirectories() as $asset) {
+    foreach ($assets->getDirectories() as $directory) {
 
-      $file_path = $directory . '/' . $asset->getPath();
+      $file_path = $destination . '/' . $directory->getPath();
 
       // Recreating directories makes no sense.
       if (!$this->filesystem->exists($file_path)) {
@@ -83,8 +85,8 @@ class Dumper extends Helper implements IOAwareInterface {
           $this->io->title($file_path . ' (empty directory)');
         }
         else {
-          $this->filesystem->mkdir($file_path, $asset->getMode());
-          $dumped_assets[] = $asset;
+          $this->filesystem->mkdir($file_path, $directory->getMode());
+          $dumped_assets[] = $directory;
         }
       }
 
@@ -92,19 +94,19 @@ class Dumper extends Helper implements IOAwareInterface {
 
     // -- Files.
     /** @var \DrupalCodeGenerator\Asset\File $asset */
-    foreach ($assets->getFiles() as $asset) {
+    foreach ($assets->getFiles() as $file) {
 
-      $file_path = $directory . '/' . $asset->getPath();
-      $content = $asset->getContent();
+      $file_path = $destination . '/' . $file->getPath();
+      $content = $file->getContent();
 
       if ($this->filesystem->exists($file_path)) {
-        // Resolve content.
-        if ($resolver = $asset->getResolver()) {
+        // Resolve $file.
+        if ($resolver = $file->getResolver()) {
           $existing_content = file_get_contents($file_path);
           $content = $resolver($existing_content, $content);
         }
         else {
-          switch ($action = $asset->getAction()) {
+          switch ($file->getAction()) {
             case File::ACTION_SKIP:
               continue 2;
 
@@ -121,11 +123,8 @@ class Dumper extends Helper implements IOAwareInterface {
 
             case File::ACTION_APPEND:
               $existing_content = file_get_contents($file_path);
-              $content = static::appendContent($existing_content, $content, $asset->getHeaderSize());
+              $content = static::appendContent($existing_content, $content, $file->getHeaderSize());
               break;
-
-            default:
-              throw new \LogicException(sprintf('Unsupported action %s.', $action));
           }
         }
 
@@ -142,8 +141,46 @@ class Dumper extends Helper implements IOAwareInterface {
       }
       else {
         $this->filesystem->dumpFile($file_path, $content);
-        $this->filesystem->chmod($file_path, $asset->getMode());
-        $dumped_assets[] = $asset;
+        $this->filesystem->chmod($file_path, $file->getMode());
+        $dumped_assets[] = $file;
+      }
+
+    }
+
+    // -- Symlinks.
+    /** @var \DrupalCodeGenerator\Asset\Symlink $asset */
+    foreach ($assets->getSymlinks() as $symlink) {
+
+      $file_path = $destination . '/' . $symlink->getPath();
+
+      if ($file_exists = $this->filesystem->exists($file_path)) {
+        switch ($symlink->getAction()) {
+          case Symlink::ACTION_SKIP:
+            continue 2;
+
+          case Symlink::ACTION_REPLACE:
+            if (!$dry_run && !$this->confirmReplace($file_path)) {
+              continue 2;
+            }
+            break;
+        }
+      }
+
+      $target = $symlink->getTarget();
+
+      if ($dry_run) {
+        $this->io->title($file_path);
+        $this->io->writeln('Symlink to ' . $target, OutputInterface::OUTPUT_RAW);
+      }
+      else {
+        if ($file_exists) {
+          $this->filesystem->remove($file_path);
+        }
+        if (!@symlink($target, $file_path)) {
+          throw new RuntimeException('Could not create a symlink to ' . $target);
+        }
+        $this->filesystem->chmod($file_path, $symlink->getMode());
+        $dumped_assets[] = $symlink;
       }
 
     }

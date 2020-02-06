@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
+use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Style\GeneratorStyle;
@@ -264,7 +265,21 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   }
 
   /**
-   * Creates file asset.
+   * Creates a directory asset.
+   *
+   * @param string $path
+   *   (Optional) Directory path.
+   *
+   * @return \DrupalCodeGenerator\Asset\Directory
+   *   The directory asset.
+   */
+  protected function addDirectory(string $path): Directory {
+    $path = Utils::replaceTokens($path, $this->vars);
+    return $this->assets[] = new Directory($path);
+  }
+
+  /**
+   * Creates a file asset.
    *
    * @param string $path
    *   (Optional) File path.
@@ -283,17 +298,21 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   }
 
   /**
-   * Creates directory asset.
+   * Creates a symlink asset.
    *
    * @param string $path
-   *   (Optional) Directory path.
+   *   Symlink path.
+   * @param string $target
+   *   Symlink target.
    *
-   * @return \DrupalCodeGenerator\Asset\Directory
-   *   The directory asset.
+   * @return \DrupalCodeGenerator\Asset\File
+   *   The file asset.
    */
-  protected function addDirectory(string $path): Directory {
+  protected function addSymlink(string $path, string $target): Symlink {
     $path = Utils::replaceTokens($path, $this->vars);
-    return $this->assets[] = new Directory($path);
+    $target = Utils::replaceTokens($target, $this->vars);
+    $asset = new Symlink($path, $target);
+    return $this->assets[] = $asset;
   }
 
   /**

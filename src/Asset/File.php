@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Utils;
  */
 final class File extends Asset {
 
-  const ACTION_REPLACE = 0x01;
-  const ACTION_PREPEND = 0x02;
-  const ACTION_APPEND = 0x03;
-  const ACTION_SKIP = 0x04;
+  public const ACTION_REPLACE = 0x01;
+  public const ACTION_PREPEND = 0x02;
+  public const ACTION_APPEND = 0x03;
+  public const ACTION_SKIP = 0x04;
 
   /**
    * Asset content.
@@ -54,7 +54,7 @@ final class File extends Asset {
    *
    * An action to take if specified file already exists.
    *
-   * @var string|callable
+   * @var string
    */
   private $action = self::ACTION_REPLACE;
 
