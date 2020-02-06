@@ -274,7 +274,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *   The directory asset.
    */
   protected function addDirectory(string $path): Directory {
-    $path = Utils::replaceTokens($path, $this->vars);
     return $this->assets[] = new Directory($path);
   }
 
@@ -291,9 +290,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function addFile(string $path, string $template = NULL): File {
     $asset = new File($path);
-    if ($template !== NULL) {
-      $asset->template($template);
-    }
+    $asset->template($template);
     return $this->assets[] = $asset;
   }
 
@@ -309,8 +306,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *   The file asset.
    */
   protected function addSymlink(string $path, string $target): Symlink {
-    $path = Utils::replaceTokens($path, $this->vars);
-    $target = Utils::replaceTokens($target, $this->vars);
     $asset = new Symlink($path, $target);
     return $this->assets[] = $asset;
   }
