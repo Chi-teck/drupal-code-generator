@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for yml:theme-info command.
  */
-class ThemeInfoTest extends BaseGeneratorTest {
+final class ThemeInfoTest extends BaseGeneratorTest {
 
   protected $class = 'Yml\ThemeInfo';
 

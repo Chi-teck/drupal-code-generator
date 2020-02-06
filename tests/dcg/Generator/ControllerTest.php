@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for controller command.
  */
-class ControllerTest extends BaseGeneratorTest {
+final class ControllerTest extends BaseGeneratorTest {
 
   protected $class = 'Controller';
 

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for console:dcg-command command.
  */
-class DcgCommandTest extends BaseGeneratorTest {
+final class DcgCommandTest extends BaseGeneratorTest {
 
   protected $class = 'Console\DcgCommand';
 

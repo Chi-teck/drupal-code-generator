@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:views:style command.
  */
-class StyleTest extends BaseGeneratorTest {
+final class StyleTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Views\Style';
 

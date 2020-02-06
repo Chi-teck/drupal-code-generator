@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:nginx-virtual-host command.
  */
-class NginxVirtualHostTest extends BaseGeneratorTest {
+final class NginxVirtualHostTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\NginxVirtualHost';
 

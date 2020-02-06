@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:module-info command.
  */
-class ModuleInfoTest extends BaseGeneratorTest {
+final class ModuleInfoTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\ModuleInfo';
 

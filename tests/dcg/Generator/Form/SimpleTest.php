@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for form:simple command.
  */
-class SimpleTest extends BaseGeneratorTest {
+final class SimpleTest extends BaseGeneratorTest {
 
   protected $class = 'Form\Simple';
 

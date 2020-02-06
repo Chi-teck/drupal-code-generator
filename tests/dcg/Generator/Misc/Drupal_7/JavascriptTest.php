@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:javascript-file command.
  */
-class JavascriptTest extends BaseGeneratorTest {
+final class JavascriptTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\Javascript';
 

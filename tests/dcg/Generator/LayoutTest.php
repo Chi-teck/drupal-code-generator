@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for layout command.
  */
-class LayoutTest extends BaseGeneratorTest {
+final class LayoutTest extends BaseGeneratorTest {
 
   protected $class = 'Layout';
 

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:custom command.
  */
-class CustomTest extends BaseGeneratorTest {
+final class CustomTest extends BaseGeneratorTest {
 
   protected $class = 'Service\Custom';
 

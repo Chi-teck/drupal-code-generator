@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for yml:services command.
  */
-class ServicesTest extends BaseGeneratorTest {
+final class ServicesTest extends BaseGeneratorTest {
 
   protected $class = 'Yml\Services';
 

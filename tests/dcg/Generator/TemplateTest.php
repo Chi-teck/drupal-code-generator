@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for template command.
  */
-class TemplateTest extends BaseGeneratorTest {
+final class TemplateTest extends BaseGeneratorTest {
 
   protected $class = 'Template';
 

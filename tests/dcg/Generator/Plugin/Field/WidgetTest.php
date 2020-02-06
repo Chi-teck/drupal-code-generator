@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:field:widget command.
  */
-class WidgetTest extends BaseGeneratorTest {
+final class WidgetTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Field\Widget';
 

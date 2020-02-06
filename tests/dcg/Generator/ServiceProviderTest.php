@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for service:middleware command.
  */
-class ServiceProviderTest extends BaseGeneratorTest {
+final class ServiceProviderTest extends BaseGeneratorTest {
 
   protected $class = 'ServiceProvider';
 

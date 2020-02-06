@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for test:unit command.
  */
-class UnitTest extends BaseGeneratorTest {
+final class UnitTest extends BaseGeneratorTest {
 
   protected $class = 'Test\Unit';
 

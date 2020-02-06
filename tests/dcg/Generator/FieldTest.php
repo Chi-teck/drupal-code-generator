@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for field command.
  */
-class FieldTest extends BaseGeneratorTest {
+final class FieldTest extends BaseGeneratorTest {
 
   protected $class = 'Field';
 

@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for theme-settings command.
  */
-class ThemeSettingsTest extends BaseGeneratorTest {
+final class ThemeSettingsTest extends BaseGeneratorTest {
 
   protected $class = 'ThemeSettings';
 

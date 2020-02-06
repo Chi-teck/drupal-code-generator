@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service/event-subscriber command.
  */
-class EventSubscriberTest extends BaseGeneratorTest {
+final class EventSubscriberTest extends BaseGeneratorTest {
 
   protected $class = 'Service\EventSubscriber';
 

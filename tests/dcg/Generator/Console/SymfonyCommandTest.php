@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for console:symfony-command command.
  */
-class SymfonyCommandTest extends BaseGeneratorTest {
+final class SymfonyCommandTest extends BaseGeneratorTest {
 
   protected $class = 'Console\SymfonyCommand';
 

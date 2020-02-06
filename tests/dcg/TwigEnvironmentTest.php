@@ -9,7 +9,7 @@ use Twig\Loader\FilesystemLoader;
 /**
  * A test for Twig environment.
  */
-class TwigEnvironmentTest extends TestCase {
+final class TwigEnvironmentTest extends TestCase {
 
   /**
    * Test callback.

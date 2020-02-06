@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * A test for PHP compactor.
  */
-class CompactorTest extends TestCase {
+final class CompactorTest extends TestCase {
 
   /**
    * Test callback.

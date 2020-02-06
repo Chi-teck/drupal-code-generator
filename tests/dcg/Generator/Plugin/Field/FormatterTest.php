@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:field:formatter command.
  */
-class FormatterTest extends BaseGeneratorTest {
+final class FormatterTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Field\Formatter';
 

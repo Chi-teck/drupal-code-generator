@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for render-element command.
  */
-class RenderElementTest extends BaseGeneratorTest {
+final class RenderElementTest extends BaseGeneratorTest {
 
   protected $class = 'RenderElement';
 

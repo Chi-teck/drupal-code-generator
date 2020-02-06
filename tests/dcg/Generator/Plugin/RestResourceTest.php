@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:rest-resource command.
  */
-class RestResourceTest extends BaseGeneratorTest {
+final class RestResourceTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\RestResource';
 

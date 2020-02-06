@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for form:config command.
  */
-class ConfigTest extends BaseGeneratorTest {
+final class ConfigTest extends BaseGeneratorTest {
 
   protected $class = 'Form\Config';
 

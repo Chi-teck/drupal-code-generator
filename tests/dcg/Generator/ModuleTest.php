@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for module command.
  */
-class ModuleTest extends BaseGeneratorTest {
+final class ModuleTest extends BaseGeneratorTest {
 
   protected $class = 'Module';
   protected $fixturePath = __DIR__ . '/_module/';

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:route-subscriber command.
  */
-class RouteSubscriberTest extends BaseGeneratorTest {
+final class RouteSubscriberTest extends BaseGeneratorTest {
 
   protected $class = 'Service\RouteSubscriber';
 

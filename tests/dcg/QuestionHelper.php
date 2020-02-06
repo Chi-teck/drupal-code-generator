@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Question helper without autocomplete.
  */
-class QuestionHelper extends BaseHelper {
+final class QuestionHelper extends BaseHelper {
 
   /**
    * {@inheritdoc}

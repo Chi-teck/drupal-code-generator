@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:uninstall-validator command.
  */
-class UninstallValidatorTest extends BaseGeneratorTest {
+final class UninstallValidatorTest extends BaseGeneratorTest {
 
   protected $class = 'Service\UninstallValidator';
 

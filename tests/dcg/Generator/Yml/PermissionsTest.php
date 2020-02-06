@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for yml:permissions command.
  */
-class PermissionsTest extends BaseGeneratorTest {
+final class PermissionsTest extends BaseGeneratorTest {
 
   protected $class = 'Yml\Permissions';
 

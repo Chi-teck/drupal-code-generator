@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for yml:module-info command.
  */
-class ModuleInfoTest extends BaseGeneratorTest {
+final class ModuleInfoTest extends BaseGeneratorTest {
 
   protected $class = 'Yml\ModuleInfo';
 

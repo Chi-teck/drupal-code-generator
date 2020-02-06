@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:action command.
  */
-class ActionTest extends BaseGeneratorTest {
+final class ActionTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Action';
 

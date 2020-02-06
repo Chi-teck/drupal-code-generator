@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:module command.
  */
-class ModuleTest extends BaseGeneratorTest {
+final class ModuleTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\Module';
 

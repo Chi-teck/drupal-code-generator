@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:hook command.
  */
-class HookTest extends BaseGeneratorTest {
+final class HookTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\Hook';
 

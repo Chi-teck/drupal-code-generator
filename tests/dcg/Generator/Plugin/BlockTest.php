@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:block command.
  */
-class BlockTest extends BaseGeneratorTest {
+final class BlockTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Block';
 

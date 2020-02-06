@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:param-converter command.
  */
-class ParamConverterTest extends BaseGeneratorTest {
+final class ParamConverterTest extends BaseGeneratorTest {
 
   protected $class = 'Service\ParamConverter';
 

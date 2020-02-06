@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for module-file command.
  */
-class ModuleFileTest extends BaseGeneratorTest {
+final class ModuleFileTest extends BaseGeneratorTest {
 
   protected $class = 'ModuleFile';
 

@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for configuration-entity command.
  */
-class ConfigurationEntityTest extends BaseGeneratorTest {
+final class ConfigurationEntityTest extends BaseGeneratorTest {
 
   protected $class = 'ConfigurationEntity';
 

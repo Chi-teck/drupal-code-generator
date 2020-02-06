@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:template.php command.
  */
-class TemplatePhpTest extends BaseGeneratorTest {
+final class TemplatePhpTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\TemplatePhp';
 

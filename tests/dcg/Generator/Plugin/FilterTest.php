@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:filter command.
  */
-class FilterTest extends BaseGeneratorTest {
+final class FilterTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Filter';
 

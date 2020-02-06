@@ -11,7 +11,7 @@ use Twig\Loader\FilesystemLoader;
 /**
  * A test for renderer helper.
  */
-class RendererTest extends TestCase {
+final class RendererTest extends TestCase {
 
   /**
    * Test callback.

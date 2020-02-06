@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:views:field command.
  */
-class FieldTest extends BaseGeneratorTest {
+final class FieldTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Views\Field';
 

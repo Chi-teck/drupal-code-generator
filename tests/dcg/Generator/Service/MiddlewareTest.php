@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:middleware command.
  */
-class MiddlewareTest extends BaseGeneratorTest {
+final class MiddlewareTest extends BaseGeneratorTest {
 
   protected $class = 'Service\Middleware';
 

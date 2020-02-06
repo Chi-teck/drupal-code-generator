@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:ctools-plugin:relationship command.
  */
-class RelationshipTest extends BaseGeneratorTest {
+final class RelationshipTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\CToolsPlugin\Relationship';
 

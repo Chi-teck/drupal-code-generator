@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for console:drupal-console-command command.
  */
-class DrupalConsoleCommandTest extends BaseGeneratorTest {
+final class DrupalConsoleCommandTest extends BaseGeneratorTest {
 
   protected $class = 'Console\DrupalConsoleCommand';
 

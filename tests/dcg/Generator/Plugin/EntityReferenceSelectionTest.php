@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:entity-reference-selection command.
  */
-class EntityReferenceSelectionTest extends BaseGeneratorTest {
+final class EntityReferenceSelectionTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\EntityReferenceSelection';
 

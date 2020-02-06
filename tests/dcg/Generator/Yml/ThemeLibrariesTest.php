@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for yml:theme-libraries command.
  */
-class ThemeLibrariesTest extends BaseGeneratorTest {
+final class ThemeLibrariesTest extends BaseGeneratorTest {
 
   protected $class = 'Yml\ThemeLibraries';
 

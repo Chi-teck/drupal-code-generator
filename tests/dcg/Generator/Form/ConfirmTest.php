@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for form:confirm command.
  */
-class ConfirmTest extends BaseGeneratorTest {
+final class ConfirmTest extends BaseGeneratorTest {
 
   protected $class = 'Form\Confirm';
 

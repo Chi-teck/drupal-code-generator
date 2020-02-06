@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for Misc:html-page command.
  */
-class HtmlPageTest extends BaseGeneratorTest {
+final class HtmlPageTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\HtmlPage';
 

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:apache-virtual-host command.
  */
-class ApacheVirtualHostTest extends BaseGeneratorTest {
+final class ApacheVirtualHostTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\ApacheVirtualHost';
 

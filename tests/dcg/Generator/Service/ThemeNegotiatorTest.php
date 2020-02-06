@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:theme-negotiator command.
  */
-class ThemeNegotiatorTest extends BaseGeneratorTest {
+final class ThemeNegotiatorTest extends BaseGeneratorTest {
 
   protected $class = 'Service\ThemeNegotiator';
 

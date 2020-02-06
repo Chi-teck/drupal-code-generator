@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * A test for console logger.
  */
-class ConsoleLoggerTest extends TestCase {
+final class ConsoleLoggerTest extends TestCase {
 
   /**
    * Test callback.

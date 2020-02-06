@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for test:kernel command.
  */
-class KernelTest extends BaseGeneratorTest {
+final class KernelTest extends BaseGeneratorTest {
 
   protected $class = 'Test\Kernel';
 

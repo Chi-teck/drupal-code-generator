@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:views-plugin:argument-default command.
  */
-class ArgumentDefaultTest extends BaseGeneratorTest {
+final class ArgumentDefaultTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\ViewsPlugin\ArgumentDefault';
 

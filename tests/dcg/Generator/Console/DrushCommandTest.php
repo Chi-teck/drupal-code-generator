@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for console:drush-command command.
  */
-class DrushCommandTest extends BaseGeneratorTest {
+final class DrushCommandTest extends BaseGeneratorTest {
 
   protected $class = 'Console\DrushCommand';
 

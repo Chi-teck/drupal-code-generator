@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * A test for output handler.
  */
-class ResultPrinterTest extends TestCase {
+final class ResultPrinterTest extends TestCase {
 
   /**
    * Test callback.

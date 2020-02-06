@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:settings.php command.
  */
-class SettingsTest extends BaseGeneratorTest {
+final class SettingsTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\Settings';
 

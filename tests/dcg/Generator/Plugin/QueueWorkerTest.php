@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:queue-worker command.
  */
-class QueueWorkerTest extends BaseGeneratorTest {
+final class QueueWorkerTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\QueueWorker';
 

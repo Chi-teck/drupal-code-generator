@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:menu-link command.
  */
-class MenuLinkTest extends BaseGeneratorTest {
+final class MenuLinkTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\MenuLink';
 

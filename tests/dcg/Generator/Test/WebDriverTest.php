@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for test:webdriver command.
  */
-class WebDriverTest extends BaseGeneratorTest {
+final class WebDriverTest extends BaseGeneratorTest {
 
   protected $class = 'Test\WebDriver';
 

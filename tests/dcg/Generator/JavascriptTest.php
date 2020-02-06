@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for javascript command.
  */
-class JavascriptTest extends BaseGeneratorTest {
+final class JavascriptTest extends BaseGeneratorTest {
 
   protected $class = 'Javascript';
 

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:ctools-plugin:access command.
  */
-class AccessTest extends BaseGeneratorTest {
+final class AccessTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\CToolsPlugin\Access';
 

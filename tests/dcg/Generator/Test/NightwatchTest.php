@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for test:nightwatch command.
  */
-class NightwatchTest extends BaseGeneratorTest {
+final class NightwatchTest extends BaseGeneratorTest {
 
   protected $class = 'Test\Nightwatch';
 

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:cache-context command.
  */
-class CacheContextTest extends BaseGeneratorTest {
+final class CacheContextTest extends BaseGeneratorTest {
 
   protected $class = 'Service\CacheContext';
 

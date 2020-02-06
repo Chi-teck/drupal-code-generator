@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for hook command.
  */
-class HookTest extends BaseGeneratorTest {
+final class HookTest extends BaseGeneratorTest {
 
   protected $class = 'Hook';
 

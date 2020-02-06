@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:migrate:destination command.
  */
-class DestinationTest extends BaseGeneratorTest {
+final class DestinationTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Migrate\Destination';
 

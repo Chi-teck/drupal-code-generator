@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:ckeditor command.
  */
-class CKEditorTest extends BaseGeneratorTest {
+final class CKEditorTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\CKEditor';
 

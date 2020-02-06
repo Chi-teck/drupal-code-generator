@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for yml:module-libraries command.
  */
-class ModuleLibrariesTest extends BaseGeneratorTest {
+final class ModuleLibrariesTest extends BaseGeneratorTest {
 
   protected $class = 'Yml\ModuleLibraries';
 

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:access-checker command.
  */
-class AccessCheckerTest extends BaseGeneratorTest {
+final class AccessCheckerTest extends BaseGeneratorTest {
 
   protected $class = 'Service\AccessChecker';
 

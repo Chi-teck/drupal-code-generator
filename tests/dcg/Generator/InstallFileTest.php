@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for install-file command.
  */
-class InstallFileTest extends BaseGeneratorTest {
+final class InstallFileTest extends BaseGeneratorTest {
 
   protected $class = 'InstallFile';
 

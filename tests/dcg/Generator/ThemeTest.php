@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for theme command.
  */
-class ThemeTest extends BaseGeneratorTest {
+final class ThemeTest extends BaseGeneratorTest {
 
   protected $fixtures = [
     'foo/css' => [],

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:theme command.
  */
-class ThemeTest extends BaseGeneratorTest {
+final class ThemeTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\Theme';
 

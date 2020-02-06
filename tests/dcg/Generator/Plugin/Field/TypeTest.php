@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:field:type command.
  */
-class TypeTest extends BaseGeneratorTest {
+final class TypeTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Field\Type';
 

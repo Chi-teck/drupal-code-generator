@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * A test for Drupal context helper.
  */
-class DrupalContextTest extends TestCase {
+final class DrupalContextTest extends TestCase {
 
   /**
    * Mocked container.

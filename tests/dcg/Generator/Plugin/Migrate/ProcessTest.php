@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:migrate:process command.
  */
-class ProcessTest extends BaseGeneratorTest {
+final class ProcessTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Migrate\Process';
 

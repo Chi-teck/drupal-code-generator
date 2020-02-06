@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for plugin-manager command (YAML discovery).
  */
-class PluginManagerYamlTest extends BaseGeneratorTest {
+final class PluginManagerYamlTest extends BaseGeneratorTest {
 
   protected $class = 'PluginManager';
 

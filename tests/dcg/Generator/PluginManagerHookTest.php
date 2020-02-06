@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for plugin-manager command (hook discovery).
  */
-class PluginManagerHookTest extends BaseGeneratorTest {
+final class PluginManagerHookTest extends BaseGeneratorTest {
 
   protected $class = 'PluginManager';
 

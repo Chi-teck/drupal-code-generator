@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:response-policy command.
  */
-class ResponsePolicyTest extends BaseGeneratorTest {
+final class ResponsePolicyTest extends BaseGeneratorTest {
 
   protected $class = 'Service\ResponsePolicy';
 

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:condition command.
  */
-class ConditionTest extends BaseGeneratorTest {
+final class ConditionTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Condition';
 

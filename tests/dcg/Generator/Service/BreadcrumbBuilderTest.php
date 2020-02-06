@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:breadcrumb-builder command.
  */
-class BreadcrumbBuilderTest extends BaseGeneratorTest {
+final class BreadcrumbBuilderTest extends BaseGeneratorTest {
 
   protected $class = 'Service\BreadcrumbBuilder';
 

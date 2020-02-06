@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for plugin:constraint command (entity type).
  */
-class ConstraintTest extends BaseGeneratorTest {
+final class ConstraintTest extends BaseGeneratorTest {
 
   protected $class = 'Plugin\Constraint';
 

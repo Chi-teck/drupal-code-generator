@@ -1,6 +1,0 @@
-services:
-  cache_context.example:
-    class: Drupal\foo\Cache\Context\ExampleCacheContext
-    arguments: ['@request_stack']
-    tags:
-      - { name: cache.context}

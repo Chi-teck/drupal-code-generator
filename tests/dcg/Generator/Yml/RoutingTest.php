@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for yml:routing command.
  */
-class RoutingTest extends BaseGeneratorTest {
+final class RoutingTest extends BaseGeneratorTest {
 
   protected $class = 'Yml\Routing';
 

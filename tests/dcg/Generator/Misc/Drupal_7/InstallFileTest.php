@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:install-file command.
  */
-class InstallFileTest extends BaseGeneratorTest {
+final class InstallFileTest extends BaseGeneratorTest {
 
   protected $class = 'Misc\Drupal_7\InstallFile';
 

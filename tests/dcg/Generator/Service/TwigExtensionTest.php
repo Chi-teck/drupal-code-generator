@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:twig-extension command.
  */
-class TwigExtensionTest extends BaseGeneratorTest {
+final class TwigExtensionTest extends BaseGeneratorTest {
 
   protected $class = 'Service\TwigExtension';
 

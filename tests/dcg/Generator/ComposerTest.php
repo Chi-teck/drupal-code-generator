@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for composer command.
  */
-class ComposerTest extends BaseGeneratorTest {
+final class ComposerTest extends BaseGeneratorTest {
 
   protected $class = 'Composer';
 

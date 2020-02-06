@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for yml:breakpoints command.
  */
-class BreakpointsTest extends BaseGeneratorTest {
+final class BreakpointsTest extends BaseGeneratorTest {
 
   protected $class = 'Yml\Breakpoints';
 

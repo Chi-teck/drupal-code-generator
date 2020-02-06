@@ -17,7 +17,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * A test for Dumper helper.
  */
-class DumperTest extends BaseTestCase {
+final class DumperTest extends BaseTestCase {
 
   /**
    * Console input.

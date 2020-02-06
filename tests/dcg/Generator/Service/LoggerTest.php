@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for service:logger command.
  */
-class LoggerTest extends BaseGeneratorTest {
+final class LoggerTest extends BaseGeneratorTest {
 
   protected $class = 'Service\Logger';
 

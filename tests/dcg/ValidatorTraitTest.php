@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for a Validator class.
  */
-class ValidatorTraitTest extends TestCase {
+final class ValidatorTraitTest extends TestCase {
 
   /**
    * Validator instance.

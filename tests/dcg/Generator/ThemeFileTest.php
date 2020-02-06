@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for theme-file command.
  */
-class ThemeFileTest extends BaseGeneratorTest {
+final class ThemeFileTest extends BaseGeneratorTest {
 
   protected $class = 'ThemeFile';
 

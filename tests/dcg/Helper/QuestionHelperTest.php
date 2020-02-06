@@ -13,7 +13,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * A test for input handler.
  */
-class QuestionHelperTest extends TestCase {
+final class QuestionHelperTest extends TestCase {
 
   /**
    * Test callback.
