@@ -17,7 +17,7 @@ final class Project extends Generator {
   protected $description = 'Generates a composer project';
   protected $alias = 'project';
 
-  const DRUPAL_DEFAULT_VERSION = '~8.7.0';
+  private const DRUPAL_DEFAULT_VERSION = '~8.7.0';
 
   /**
    * {@inheritdoc}

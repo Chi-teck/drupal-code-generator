@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class GeneratorDiscoveryTest extends TestCase {
 
-  const TOTAL_GENERATORS = 15;
+  private const TOTAL_GENERATORS = 15;
 
   /**
    * Test callback.

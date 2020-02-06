@@ -238,7 +238,7 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function replaceIfExists() {
+  public function replaceIfExists(): self {
     $this->action = self::ACTION_REPLACE;
     return $this;
   }
@@ -249,7 +249,7 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function prependIfExists() {
+  public function prependIfExists(): self {
     $this->action = self::ACTION_PREPEND;
     return $this;
   }
@@ -260,7 +260,7 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function appendIfExists() {
+  public function appendIfExists(): self {
     $this->action = self::ACTION_APPEND;
     return $this;
   }
@@ -271,7 +271,7 @@ final class File extends Asset {
    * @return self
    *   The asset.
    */
-  public function skipIfExists() {
+  public function skipIfExists(): self {
     $this->action = self::ACTION_SKIP;
     return $this;
   }

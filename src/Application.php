@@ -23,12 +23,12 @@ class Application extends BaseApplication {
   /**
    * Path to DCG root directory.
    */
-  const ROOT = __DIR__ . '/..';
+  public const ROOT = __DIR__ . '/..';
 
   /**
    * Path to templates directory.
    */
-  const TEMPLATE_PATH = Application::ROOT . '/templates/';
+  public const TEMPLATE_PATH = Application::ROOT . '/templates/';
 
   /**
    * Creates the application.

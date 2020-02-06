@@ -9,7 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 final class GeneratorFactory {
 
-  const COMMAND_INTERFACE = '\DrupalCodeGenerator\Command\GeneratorInterface';
+  private const COMMAND_INTERFACE = '\DrupalCodeGenerator\Command\GeneratorInterface';
 
   /**
    * The file system utility.
