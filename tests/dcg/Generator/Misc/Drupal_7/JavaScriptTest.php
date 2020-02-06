@@ -7,9 +7,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 /**
  * Test for misc:d7:javascript-file command.
  */
-final class JavascriptTest extends BaseGeneratorTest {
+final class JavaScriptTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\Javascript';
+  protected $class = 'Misc\Drupal_7\JavaScript';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Another example',

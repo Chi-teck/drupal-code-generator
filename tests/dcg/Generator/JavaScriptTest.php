@@ -5,9 +5,9 @@ namespace DrupalCodeGenerator\Tests\Generator;
 /**
  * Test for javascript command.
  */
-final class JavascriptTest extends BaseGeneratorTest {
+final class JavaScriptTest extends BaseGeneratorTest {
 
-  protected $class = 'Javascript';
+  protected $class = 'JavaScript';
 
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo bar',
