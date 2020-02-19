@@ -21,7 +21,7 @@ class BarSubscriber implements EventSubscriberInterface {
   protected $messenger;
 
   /**
-   * Constructs event subscriber.
+   * Constructs a BarSubscriber object.
    *
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger.
@@ -37,7 +37,7 @@ class BarSubscriber implements EventSubscriberInterface {
    *   Response event.
    */
   public function onKernelRequest(GetResponseEvent $event) {
-    $this->messenger->addStatus(__FUNCTION__);
+    // @todo Place code here.
   }
 
   /**
@@ -47,7 +47,7 @@ class BarSubscriber implements EventSubscriberInterface {
    *   Response event.
    */
   public function onKernelResponse(FilterResponseEvent $event) {
-    $this->messenger->addStatus(__FUNCTION__);
+    // @todo Place code here.
   }
 
   /**

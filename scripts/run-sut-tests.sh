@@ -235,7 +235,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = service ]]; then
   $DCG service:access-checker -a Zippo -a zippo -a _zippo -a ZippoAccessChecker
   $DCG service:breadcrumb-builder -a Zippo -a zippo -a ZippoBreadcrumbBuilder
   $DCG service:custom -a Zippo -a zippo -a zippo.foo -a Foo -a Y -a entity_type.manager -a
-  $DCG service:event-subscriber -a Zippo -a zippo -a FooSubscriber
+  $DCG service:event-subscriber -a Zippo -a zippo -a FooSubscriber -a Yes -a messenger -a
   $DCG service:logger -a Zippo -a zippo -a FileLog
   $DCG service:middleware -a Zippo -a zippo -a BarMiddelware
   $DCG service:param-converter -a Zippo -a zippo -a example -a ExampleParamConverter

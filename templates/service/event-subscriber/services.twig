@@ -1,6 +1,9 @@
+{% import '_lib/di.twig' as di %}
 services:
   {{ machine_name }}.event_subscriber:
     class: Drupal\{{ machine_name }}\EventSubscriber\{{ class }}
-    arguments: ['@messenger']
+{% if services %}
+    arguments: [{{ di.arguments(services) }}]
+{% endif %}
     tags:
       - { name: event_subscriber }
