@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * FooMiddleware middleware.
+ * BarMiddleware middleware.
  */
-class FooMiddleware implements HttpKernelInterface {
+class BarMiddleware implements HttpKernelInterface {
 
   use StringTranslationTrait;
 
@@ -22,7 +22,7 @@ class FooMiddleware implements HttpKernelInterface {
   protected $httpKernel;
 
   /**
-   * Constructs the FooMiddleware object.
+   * Constructs the BarMiddleware object.
    *
    * @param \Symfony\Component\HttpKernel\HttpKernelInterface $http_kernel
    *   The decorated kernel.

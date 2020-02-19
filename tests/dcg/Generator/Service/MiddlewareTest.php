@@ -14,11 +14,12 @@ final class MiddlewareTest extends BaseGeneratorTest {
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
+    'Class [FooMiddleware]:' => 'BarMiddleware',
   ];
 
   protected $fixtures = [
     'foo.services.yml' => '/_middleware.services.yml',
-    'src/FooMiddleware.php' => '/_middleware.php',
+    'src/BarMiddleware.php' => '/_middleware.php',
   ];
 
 }

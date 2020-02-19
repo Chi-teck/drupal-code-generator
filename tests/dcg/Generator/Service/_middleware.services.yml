@@ -1,5 +1,5 @@
 services:
   foo.middleware:
-    class: Drupal\foo\FooMiddleware
+    class: Drupal\foo\BarMiddleware
     tags:
       - { name: http_middleware, priority: 1000 }
