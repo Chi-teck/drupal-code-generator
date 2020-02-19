@@ -227,7 +227,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
   $DCG service:custom -d $MODULE_DIR -a Zippo -a zippo -a zippo.foo -a Foo -a Y -a entity_type.manager -a
   $DCG service:event-subscriber -d $MODULE_DIR -a Zippo -a zippo -a FooSubscriber
   $DCG service:logger -d $MODULE_DIR -a Zippo -a zippo -a FileLog
-  $DCG service:middleware -d $MODULE_DIR -a Zippo -a zippo
+  $DCG service:middleware -d $MODULE_DIR -a Zippo -a zippo -a BarMiddelware
   $DCG service:param-converter -d $MODULE_DIR -a Zippo -a zippo -a example -a ExampleParamConverter
   $DCG service:route-subscriber -d $MODULE_DIR -a Zippo -a zippo
   $DCG service:theme-negotiator -d $MODULE_DIR -a Zippo -a zippo -a ZippoThemeNegotiator
