@@ -194,7 +194,7 @@ final class FieldTest extends BaseGeneratorTest {
   /**
    * Inserts header line into display.
    */
-  protected static function insertRule(string $display, string $text): string {
+  private static function insertRule(string $display, string $text): string {
     $line = "––––––––––––––––––––––––––––––––––––––––––––––––––\n\n";
     return preg_replace("/\n $text/", $line . " $text", $display);
   }

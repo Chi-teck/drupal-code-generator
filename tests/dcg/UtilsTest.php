@@ -25,7 +25,7 @@ final class UtilsTest extends BaseTestCase {
    * @dataProvider machineToHumanProvider
    */
   public function testMachineToHuman(string $machine_name, string $expected_human_name, bool $title_case): void {
-    static::assertEquals($expected_human_name, Utils::machine2human($machine_name, $title_case));
+    self::assertEquals($expected_human_name, Utils::machine2human($machine_name, $title_case));
   }
 
   /**
@@ -46,7 +46,7 @@ final class UtilsTest extends BaseTestCase {
    * @dataProvider human2machineProvider
    */
   public function testHumanToMachine(string $human_name, string $expected_machine_name): void {
-    static::assertEquals($expected_machine_name, Utils::human2machine($human_name));
+    self::assertEquals($expected_machine_name, Utils::human2machine($human_name));
   }
 
   /**
@@ -69,7 +69,7 @@ final class UtilsTest extends BaseTestCase {
    * @dataProvider camel2machineProvider
    */
   public function testCamelToMachine(string $camel_input, string $expected_machine_name): void {
-    static::assertEquals($expected_machine_name, Utils::camel2machine($camel_input));
+    self::assertEquals($expected_machine_name, Utils::camel2machine($camel_input));
   }
 
   /**
@@ -90,7 +90,7 @@ final class UtilsTest extends BaseTestCase {
    * @dataProvider camelizeProvider
    */
   public function testCamelize(string $text, bool $upper_camel, string $expected): void {
-    static::assertEquals($expected, Utils::camelize($text, $upper_camel));
+    self::assertEquals($expected, Utils::camelize($text, $upper_camel));
   }
 
   /**
@@ -203,10 +203,10 @@ final class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::pluralize()
    */
   public function testPluralize(): void {
-    static::assertEquals('cats', Utils::pluralize('cat'));
-    static::assertEquals('flies', Utils::pluralize('fly'));
-    static::assertEquals('bosses', Utils::pluralize('boss'));
-    static::assertEquals('mice', Utils::pluralize('mouse'));
+    self::assertEquals('cats', Utils::pluralize('cat'));
+    self::assertEquals('flies', Utils::pluralize('fly'));
+    self::assertEquals('bosses', Utils::pluralize('boss'));
+    self::assertEquals('mice', Utils::pluralize('mouse'));
   }
 
 }

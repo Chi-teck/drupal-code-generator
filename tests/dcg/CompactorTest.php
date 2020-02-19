@@ -20,7 +20,7 @@ final class CompactorTest extends TestCase {
       eval('namespace Herrera\Box\Compactor; class Compactor {}');
     }
     $code = "<?php\n// Comment.\nif (TRUE) {\n  echo 'bar';\n}\n";
-    static::assertEquals(
+    self::assertEquals(
       "<?php\nif (TRUE) { echo 'bar'; } ",
       (new PhpCompactor())->compact($code)
     );
