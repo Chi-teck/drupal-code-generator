@@ -33,9 +33,9 @@ final class ApplicationTest extends BaseTestCase {
       ' • foo.install',
       '',
     ];
-    static::assertEquals($expected_output, $output);
-    static::assertEquals(0, $return);
-    static::assertFileExists($this->directory . '/foo.install');
+    self::assertEquals($expected_output, $output);
+    self::assertEquals(0, $return);
+    self::assertFileExists($this->directory . '/foo.install');
   }
 
 }
