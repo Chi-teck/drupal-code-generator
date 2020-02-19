@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
-DCG_DIR=$(dirname $(readlink -f $0))'/..'
+set -o errexit
+set -o nounset
 
 composer install --no-dev
 
