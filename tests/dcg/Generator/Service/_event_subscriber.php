@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Foo event subscriber.
  */
-class FooSubscriber implements EventSubscriberInterface {
+class BarSubscriber implements EventSubscriberInterface {
 
   /**
    * The messenger.

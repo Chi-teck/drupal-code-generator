@@ -14,11 +14,12 @@ final class EventSubscriberTest extends BaseGeneratorTest {
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
+    'Class [FooSubscriber]:' => 'BarSubscriber',
   ];
 
   protected $fixtures = [
     'foo.services.yml' => '/_event_subscriber.services.yml',
-    'src/EventSubscriber/FooSubscriber.php' => '/_event_subscriber.php',
+    'src/EventSubscriber/BarSubscriber.php' => '/_event_subscriber.php',
   ];
 
 }
