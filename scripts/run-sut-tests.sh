@@ -225,7 +225,7 @@ if [ $TARGET_TEST = all -o $TARGET_TEST = service ]; then
   $DCG service:access-checker -d $MODULE_DIR -a Zippo -a zippo -a _zippo -a ZippoAccessChecker
   $DCG service:breadcrumb-builder -d $MODULE_DIR -a Zippo -a zippo -a ZippoBreadcrumbBuilder
   $DCG service:custom -d $MODULE_DIR -a Zippo -a zippo -a zippo.foo -a Foo -a Y -a entity_type.manager -a
-  $DCG service:event-subscriber -d $MODULE_DIR -a Zippo -a zippo
+  $DCG service:event-subscriber -d $MODULE_DIR -a Zippo -a zippo -a FooSubscriber
   $DCG service:logger -d $MODULE_DIR -a Zippo -a zippo -a FileLog
   $DCG service:middleware -d $MODULE_DIR -a Zippo -a zippo
   $DCG service:param-converter -d $MODULE_DIR -a Zippo -a zippo -a example -a ExampleParamConverter
