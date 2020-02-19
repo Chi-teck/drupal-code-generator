@@ -46,6 +46,8 @@ class TwigEnvironment extends Environment {
       return str_replace('-', '_', $input);
     };
     $this->addFilter(new TwigFilter('h2u', $h2u));
+
+    $this->addGlobal('SUT_TEST', getenv('SUT_TEST'));
   }
 
   /**
