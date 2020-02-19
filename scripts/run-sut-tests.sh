@@ -100,6 +100,7 @@ $DRUPAL_DIR/vendor/bin/web.server \
   --router=$DRUPAL_DIR/vendor/drush/drush/misc/d8-rs-router.php \
   --pidfile=/tmp/dcg-ws-pid
 
+export SUT_TEST=1
 # === Tests === #
 
 # --- Test forms --- #
