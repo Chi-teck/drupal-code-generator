@@ -3,6 +3,7 @@
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
+use DrupalCodeGenerator\Command\GenerateCompletion;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
 use DrupalCodeGenerator\Utils;
@@ -23,6 +24,7 @@ $generator_factory = new GeneratorFactory(new Filesystem());
 $generators = $generator_factory->getGenerators([Application::ROOT . '/src/Command']);
 $application->addCommands($generators);
 
+$application->add(new GenerateCompletion());
 $application->add(new Navigation());
 $application->setDefaultCommand('navigation');
 

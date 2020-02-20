@@ -1,0 +1,443 @@
+_dcg()
+{
+    local cur script coms opts com
+    COMPREPLY=()
+    _get_comp_words_by_ref -n : cur words
+
+    # for an alias, get the real script behind it
+    if [[ $(type -t ${words[0]}) == "alias" ]]; then
+        script=$(alias ${words[0]} | sed -E "s/alias ${words[0]}='(.*)'/\1/")
+    else
+        script=${words[0]}
+    fi
+
+    # lookup for command
+    for word in ${words[@]:1}; do
+        if [[ $word != -* ]]; then
+            com=$word
+            break
+        fi
+    done
+
+    # completing for an option
+    if [[ ${cur} == --* ]] ; then
+        opts="--help --quiet --verbose --version --ansi --no-ansi --no-interaction"
+
+        case "$com" in
+
+            composer)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            configuration-entity)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            content-entity)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            controller)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            field)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            generate-completion)
+            opts="${opts} --shell"
+            ;;
+
+            help)
+            opts="${opts} --format --raw"
+            ;;
+
+            hook)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            install-file)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            javascript)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            layout)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            list)
+            opts="${opts} --raw --format"
+            ;;
+
+            module)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            module-file)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            navigation)
+            opts="${opts} --directory"
+            ;;
+
+            plugin-manager)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            render-element)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service-provider)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            template)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            theme)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            theme-file)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            theme-settings)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            console:dcg-command)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            console:drupal-console-command)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            console:drush-command)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            console:symfony-command)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            form:config)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            form:confirm)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            form:simple)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:apache-virtual-host)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:ctools-plugin:access)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:ctools-plugin:content-type)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:ctools-plugin:relationship)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:hook)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:install-file)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:javascript)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:module)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:module-file)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:module-info)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:settings.php)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:template.php)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:test)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:theme)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:theme-info)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:d7:views-plugin:argument-default)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:html-page)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:nginx-virtual-host)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            misc:project)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:action)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:block)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:ckeditor)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:condition)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:constraint)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:entity-reference-selection)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:field:formatter)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:field:type)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:field:widget)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:filter)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:menu-link)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:migrate:destination)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:migrate:process)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:migrate:source)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:queue-worker)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:rest-resource)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:views:argument-default)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:views:field)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            plugin:views:style)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:access-checker)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:breadcrumb-builder)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:cache-context)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:custom)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:event-subscriber)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:logger)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:middleware)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:param-converter)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:path-processor)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:request-policy)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:response-policy)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:route-subscriber)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:theme-negotiator)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:twig-extension)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            service:uninstall-validator)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            test:browser)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            test:kernel)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            test:nightwatch)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            test:unit)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            test:webdriver)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:breakpoints)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:links:action)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:links:contextual)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:links:menu)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:links:task)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:module-info)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:module-libraries)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:permissions)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:routing)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:services)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:theme-info)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+            yml:theme-libraries)
+            opts="${opts} --directory --answer --dry-run"
+            ;;
+
+        esac
+
+        COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+        __ltrim_colon_completions "$cur"
+
+        return 0;
+    fi
+
+    # completing for a command
+    if [[ $cur == $com ]]; then
+        coms="composer configuration-entity content-entity controller field generate-completion help hook install-file javascript layout list module module-file navigation plugin-manager render-element service-provider template theme theme-file theme-settings console:dcg-command console:drupal-console-command console:drush-command console:symfony-command form:config form:confirm form:simple misc:apache-virtual-host misc:d7:ctools-plugin:access misc:d7:ctools-plugin:content-type misc:d7:ctools-plugin:relationship misc:d7:hook misc:d7:install-file misc:d7:javascript misc:d7:module misc:d7:module-file misc:d7:module-info misc:d7:settings.php misc:d7:template.php misc:d7:test misc:d7:theme misc:d7:theme-info misc:d7:views-plugin:argument-default misc:html-page misc:nginx-virtual-host misc:project plugin:action plugin:block plugin:ckeditor plugin:condition plugin:constraint plugin:entity-reference-selection plugin:field:formatter plugin:field:type plugin:field:widget plugin:filter plugin:menu-link plugin:migrate:destination plugin:migrate:process plugin:migrate:source plugin:queue-worker plugin:rest-resource plugin:views:argument-default plugin:views:field plugin:views:style service:access-checker service:breadcrumb-builder service:cache-context service:custom service:event-subscriber service:logger service:middleware service:param-converter service:path-processor service:request-policy service:response-policy service:route-subscriber service:theme-negotiator service:twig-extension service:uninstall-validator test:browser test:kernel test:nightwatch test:unit test:webdriver yml:breakpoints yml:links:action yml:links:contextual yml:links:menu yml:links:task yml:module-info yml:module-libraries yml:permissions yml:routing yml:services yml:theme-info yml:theme-libraries"
+
+        COMPREPLY=($(compgen -W "${coms}" -- ${cur}))
+        __ltrim_colon_completions "$cur"
+
+        return 0
+    fi
+}
+
+complete -o default -F _dcg dcg
