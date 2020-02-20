@@ -1,0 +1,609 @@
+function __fish_dcg_no_subcommand
+    for i in (commandline -opc)
+        if contains -- $i composer configuration-entity content-entity controller field generate-completion help hook install-file javascript layout list module module-file navigation plugin-manager render-element service-provider template theme theme-file theme-settings console:dcg-command console:drupal-console-command console:drush-command console:symfony-command form:config form:confirm form:simple misc:apache-virtual-host misc:d7:ctools-plugin:access misc:d7:ctools-plugin:content-type misc:d7:ctools-plugin:relationship misc:d7:hook misc:d7:install-file misc:d7:javascript misc:d7:module misc:d7:module-file misc:d7:module-info misc:d7:settings.php misc:d7:template.php misc:d7:test misc:d7:theme misc:d7:theme-info misc:d7:views-plugin:argument-default misc:html-page misc:nginx-virtual-host misc:project plugin:action plugin:block plugin:ckeditor plugin:condition plugin:constraint plugin:entity-reference-selection plugin:field:formatter plugin:field:type plugin:field:widget plugin:filter plugin:menu-link plugin:migrate:destination plugin:migrate:process plugin:migrate:source plugin:queue-worker plugin:rest-resource plugin:views:argument-default plugin:views:field plugin:views:style service:access-checker service:breadcrumb-builder service:cache-context service:custom service:event-subscriber service:logger service:middleware service:param-converter service:path-processor service:request-policy service:response-policy service:route-subscriber service:theme-negotiator service:twig-extension service:uninstall-validator test:browser test:kernel test:nightwatch test:unit test:webdriver yml:breakpoints yml:links:action yml:links:contextual yml:links:menu yml:links:task yml:module-info yml:module-libraries yml:permissions yml:routing yml:services yml:theme-info yml:theme-libraries
+            return 1
+        end
+    end
+    return 0
+end
+
+# global options
+complete -c dcg -n '__fish_dcg_no_subcommand' -l help -d 'Display this help message'
+complete -c dcg -n '__fish_dcg_no_subcommand' -l quiet -d 'Do not output any message'
+complete -c dcg -n '__fish_dcg_no_subcommand' -l verbose -d 'Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug'
+complete -c dcg -n '__fish_dcg_no_subcommand' -l version -d 'Display this application version'
+complete -c dcg -n '__fish_dcg_no_subcommand' -l ansi -d 'Force ANSI output'
+complete -c dcg -n '__fish_dcg_no_subcommand' -l no-ansi -d 'Disable ANSI output'
+complete -c dcg -n '__fish_dcg_no_subcommand' -l no-interaction -d 'Do not ask any interactive question'
+
+# commands
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a composer -d 'Generates a composer.json file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a configuration-entity -d 'Generates configuration entity module'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a content-entity -d 'Generates content entity module'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a controller -d 'Generates a controller'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a field -d 'Generates a field'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a generate-completion -d 'Generates shell completion'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a help -d 'Displays help for a command'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a hook -d 'Generates a hook'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a install-file -d 'Generates an install file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a javascript -d 'Generates Drupal 8 JavaScript file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a layout -d 'Generates a layout'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a list -d 'Lists commands'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a module -d 'Generates Drupal 8 module'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a module-file -d 'Generates a module file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a navigation -d 'Command line code generator'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin-manager -d 'Generates plugin manager'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a render-element -d 'Generates Drupal 8 render element'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service-provider -d 'Generates a service provider'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a template -d 'Generates a template'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a theme -d 'Generates Drupal 8 theme'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a theme-file -d 'Generates a theme file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a theme-settings -d 'Generates Drupal 8 theme-settings.php file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a console:dcg-command -d 'Generates DCG command'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a console:drupal-console-command -d 'Generates Drupal Console command'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a console:drush-command -d 'Generates Drush command'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a console:symfony-command -d 'Generates Symfony console command'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a form:config -d 'Generates a configuration form'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a form:confirm -d 'Generates a confirmation form'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a form:simple -d 'Generates simple form'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:apache-virtual-host -d 'Generates an Apache site configuration file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:ctools-plugin:access -d 'Generates CTools access plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:ctools-plugin:content-type -d 'Generates CTools content type plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:ctools-plugin:relationship -d 'Generates CTools relationship plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:hook -d 'Generates a hook'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:install-file -d 'Generates Drupal 7 install file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:javascript -d 'Generates Drupal 7 JavaScript file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:module -d 'Generates Drupal 7 module'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:module-file -d 'Generates Drupal 7 module file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:module-info -d 'Generates Drupal 7 info file for a module'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:settings.php -d 'Generates Drupal 7 settings.php file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:template.php -d 'Generates Drupal 7 template.php file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:test -d 'Generates Drupal 7 test case'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:theme -d 'Generates Drupal 7 theme'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:theme-info -d 'Generates info file for a Drupal 7 theme'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:d7:views-plugin:argument-default -d 'Generates Drupal 7 argument default views plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:html-page -d 'Generates a simple html page'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:nginx-virtual-host -d 'Generates an Nginx site configuration file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a misc:project -d 'Generates a composer project'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:action -d 'Generates action plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:block -d 'Generates block plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:ckeditor -d 'Generates CKEditor plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:condition -d 'Generates condition plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:constraint -d 'Generates constraint plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:entity-reference-selection -d 'Generates entity reference selection plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:field:formatter -d 'Generates field formatter plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:field:type -d 'Generates field type plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:field:widget -d 'Generates field widget plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:filter -d 'Generates filter plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:menu-link -d 'Generates menu-link plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:migrate:destination -d 'Generates migrate destination plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:migrate:process -d 'Generates migrate process plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:migrate:source -d 'Generates migrate source plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:queue-worker -d 'Generates queue worker plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:rest-resource -d 'Generates rest resource plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:views:argument-default -d 'Generates views default argument plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:views:field -d 'Generates views field plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a plugin:views:style -d 'Generates views style plugin'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:access-checker -d 'Generates an access checker service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:breadcrumb-builder -d 'Generates a breadcrumb builder service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:cache-context -d 'Generates a cache context service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:custom -d 'Generates a custom Drupal service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:event-subscriber -d 'Generates an event subscriber'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:logger -d 'Generates a logger service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:middleware -d 'Generates a middleware'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:param-converter -d 'Generates a param converter service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:path-processor -d 'Generates a path processor service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:request-policy -d 'Generates a request policy service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:response-policy -d 'Generates a response policy service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:route-subscriber -d 'Generates a route subscriber'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:theme-negotiator -d 'Generates a theme negotiator'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:twig-extension -d 'Generates Twig extension service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a service:uninstall-validator -d 'Generates a uninstall validator service'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a test:browser -d 'Generates a browser based test'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a test:kernel -d 'Generates a kernel based test'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a test:nightwatch -d 'Generates a nightwatch test'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a test:unit -d 'Generates a unit test'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a test:webdriver -d 'Generates a test that supports JavaScript'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:breakpoints -d 'Generates a breakpoints yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:links:action -d 'Generates a links.action yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:links:contextual -d 'Generates links.contextual yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:links:menu -d 'Generates a links.menu yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:links:task -d 'Generates a links.task yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:module-info -d 'Generates a module info yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:module-libraries -d 'Generates module libraries yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:permissions -d 'Generates a permissions yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:routing -d 'Generates a routing yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:services -d 'Generates a services yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:theme-info -d 'Generates a theme info yml file'
+complete -c dcg -f -n '__fish_dcg_no_subcommand' -a yml:theme-libraries -d 'Generates theme libraries yml file'
+
+# command options
+
+# composer
+complete -c dcg -A -n '__fish_seen_subcommand_from composer' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from composer' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from composer' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# configuration-entity
+complete -c dcg -A -n '__fish_seen_subcommand_from configuration-entity' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from configuration-entity' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from configuration-entity' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# content-entity
+complete -c dcg -A -n '__fish_seen_subcommand_from content-entity' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from content-entity' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from content-entity' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# controller
+complete -c dcg -A -n '__fish_seen_subcommand_from controller' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from controller' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from controller' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# field
+complete -c dcg -A -n '__fish_seen_subcommand_from field' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from field' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from field' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# generate-completion
+complete -c dcg -A -n '__fish_seen_subcommand_from generate-completion' -l shell -d 'Shell type'
+
+# help
+complete -c dcg -A -n '__fish_seen_subcommand_from help' -l format -d 'The output format (txt, xml, json, or md)'
+complete -c dcg -A -n '__fish_seen_subcommand_from help' -l raw -d 'To output raw command help'
+
+# hook
+complete -c dcg -A -n '__fish_seen_subcommand_from hook' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from hook' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from hook' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# install-file
+complete -c dcg -A -n '__fish_seen_subcommand_from install-file' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from install-file' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from install-file' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# javascript
+complete -c dcg -A -n '__fish_seen_subcommand_from javascript' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from javascript' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from javascript' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# layout
+complete -c dcg -A -n '__fish_seen_subcommand_from layout' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from layout' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from layout' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# list
+complete -c dcg -A -n '__fish_seen_subcommand_from list' -l raw -d 'To output raw command list'
+complete -c dcg -A -n '__fish_seen_subcommand_from list' -l format -d 'The output format (txt, xml, json, or md)'
+
+# module
+complete -c dcg -A -n '__fish_seen_subcommand_from module' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from module' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from module' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# module-file
+complete -c dcg -A -n '__fish_seen_subcommand_from module-file' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from module-file' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from module-file' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# navigation
+complete -c dcg -A -n '__fish_seen_subcommand_from navigation' -l directory -d 'Working directory'
+
+# plugin-manager
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin-manager' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin-manager' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin-manager' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# render-element
+complete -c dcg -A -n '__fish_seen_subcommand_from render-element' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from render-element' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from render-element' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service-provider
+complete -c dcg -A -n '__fish_seen_subcommand_from service-provider' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service-provider' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service-provider' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# template
+complete -c dcg -A -n '__fish_seen_subcommand_from template' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from template' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from template' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# theme
+complete -c dcg -A -n '__fish_seen_subcommand_from theme' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from theme' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from theme' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# theme-file
+complete -c dcg -A -n '__fish_seen_subcommand_from theme-file' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from theme-file' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from theme-file' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# theme-settings
+complete -c dcg -A -n '__fish_seen_subcommand_from theme-settings' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from theme-settings' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from theme-settings' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# console:dcg-command
+complete -c dcg -A -n '__fish_seen_subcommand_from console:dcg-command' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from console:dcg-command' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from console:dcg-command' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# console:drupal-console-command
+complete -c dcg -A -n '__fish_seen_subcommand_from console:drupal-console-command' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from console:drupal-console-command' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from console:drupal-console-command' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# console:drush-command
+complete -c dcg -A -n '__fish_seen_subcommand_from console:drush-command' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from console:drush-command' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from console:drush-command' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# console:symfony-command
+complete -c dcg -A -n '__fish_seen_subcommand_from console:symfony-command' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from console:symfony-command' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from console:symfony-command' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# form:config
+complete -c dcg -A -n '__fish_seen_subcommand_from form:config' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from form:config' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from form:config' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# form:confirm
+complete -c dcg -A -n '__fish_seen_subcommand_from form:confirm' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from form:confirm' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from form:confirm' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# form:simple
+complete -c dcg -A -n '__fish_seen_subcommand_from form:simple' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from form:simple' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from form:simple' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:apache-virtual-host
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:apache-virtual-host' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:apache-virtual-host' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:apache-virtual-host' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:ctools-plugin:access
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:access' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:access' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:access' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:ctools-plugin:content-type
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:content-type' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:content-type' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:content-type' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:ctools-plugin:relationship
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:relationship' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:relationship' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:ctools-plugin:relationship' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:hook
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:hook' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:hook' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:hook' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:install-file
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:install-file' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:install-file' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:install-file' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:javascript
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:javascript' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:javascript' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:javascript' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:module
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:module-file
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module-file' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module-file' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module-file' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:module-info
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module-info' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module-info' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:module-info' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:settings.php
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:settings.php' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:settings.php' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:settings.php' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:template.php
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:template.php' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:template.php' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:template.php' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:test
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:test' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:test' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:test' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:theme
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:theme' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:theme' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:theme' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:theme-info
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:theme-info' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:theme-info' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:theme-info' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:d7:views-plugin:argument-default
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:views-plugin:argument-default' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:views-plugin:argument-default' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:d7:views-plugin:argument-default' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:html-page
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:html-page' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:html-page' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:html-page' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:nginx-virtual-host
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:nginx-virtual-host' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:nginx-virtual-host' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:nginx-virtual-host' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# misc:project
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:project' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:project' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from misc:project' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:action
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:action' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:action' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:action' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:block
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:block' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:block' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:block' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:ckeditor
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:ckeditor' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:ckeditor' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:ckeditor' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:condition
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:condition' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:condition' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:condition' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:constraint
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:constraint' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:constraint' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:constraint' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:entity-reference-selection
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:entity-reference-selection' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:entity-reference-selection' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:entity-reference-selection' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:field:formatter
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:formatter' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:formatter' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:formatter' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:field:type
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:type' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:type' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:type' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:field:widget
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:widget' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:widget' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:field:widget' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:filter
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:filter' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:filter' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:filter' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:menu-link
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:menu-link' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:menu-link' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:menu-link' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:migrate:destination
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:destination' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:destination' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:destination' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:migrate:process
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:process' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:process' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:process' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:migrate:source
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:source' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:source' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:migrate:source' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:queue-worker
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:queue-worker' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:queue-worker' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:queue-worker' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:rest-resource
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:rest-resource' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:rest-resource' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:rest-resource' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:views:argument-default
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:argument-default' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:argument-default' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:argument-default' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:views:field
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:field' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:field' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:field' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# plugin:views:style
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:style' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:style' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from plugin:views:style' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:access-checker
+complete -c dcg -A -n '__fish_seen_subcommand_from service:access-checker' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:access-checker' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:access-checker' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:breadcrumb-builder
+complete -c dcg -A -n '__fish_seen_subcommand_from service:breadcrumb-builder' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:breadcrumb-builder' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:breadcrumb-builder' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:cache-context
+complete -c dcg -A -n '__fish_seen_subcommand_from service:cache-context' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:cache-context' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:cache-context' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:custom
+complete -c dcg -A -n '__fish_seen_subcommand_from service:custom' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:custom' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:custom' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:event-subscriber
+complete -c dcg -A -n '__fish_seen_subcommand_from service:event-subscriber' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:event-subscriber' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:event-subscriber' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:logger
+complete -c dcg -A -n '__fish_seen_subcommand_from service:logger' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:logger' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:logger' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:middleware
+complete -c dcg -A -n '__fish_seen_subcommand_from service:middleware' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:middleware' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:middleware' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:param-converter
+complete -c dcg -A -n '__fish_seen_subcommand_from service:param-converter' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:param-converter' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:param-converter' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:path-processor
+complete -c dcg -A -n '__fish_seen_subcommand_from service:path-processor' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:path-processor' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:path-processor' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:request-policy
+complete -c dcg -A -n '__fish_seen_subcommand_from service:request-policy' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:request-policy' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:request-policy' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:response-policy
+complete -c dcg -A -n '__fish_seen_subcommand_from service:response-policy' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:response-policy' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:response-policy' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:route-subscriber
+complete -c dcg -A -n '__fish_seen_subcommand_from service:route-subscriber' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:route-subscriber' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:route-subscriber' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:theme-negotiator
+complete -c dcg -A -n '__fish_seen_subcommand_from service:theme-negotiator' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:theme-negotiator' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:theme-negotiator' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:twig-extension
+complete -c dcg -A -n '__fish_seen_subcommand_from service:twig-extension' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:twig-extension' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:twig-extension' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# service:uninstall-validator
+complete -c dcg -A -n '__fish_seen_subcommand_from service:uninstall-validator' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:uninstall-validator' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from service:uninstall-validator' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# test:browser
+complete -c dcg -A -n '__fish_seen_subcommand_from test:browser' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:browser' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:browser' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# test:kernel
+complete -c dcg -A -n '__fish_seen_subcommand_from test:kernel' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:kernel' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:kernel' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# test:nightwatch
+complete -c dcg -A -n '__fish_seen_subcommand_from test:nightwatch' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:nightwatch' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:nightwatch' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# test:unit
+complete -c dcg -A -n '__fish_seen_subcommand_from test:unit' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:unit' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:unit' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# test:webdriver
+complete -c dcg -A -n '__fish_seen_subcommand_from test:webdriver' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:webdriver' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from test:webdriver' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:breakpoints
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:breakpoints' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:breakpoints' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:breakpoints' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:links:action
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:action' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:action' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:action' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:links:contextual
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:contextual' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:contextual' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:contextual' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:links:menu
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:menu' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:menu' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:menu' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:links:task
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:task' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:task' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:links:task' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:module-info
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:module-info' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:module-info' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:module-info' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:module-libraries
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:module-libraries' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:module-libraries' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:module-libraries' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:permissions
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:permissions' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:permissions' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:permissions' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:routing
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:routing' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:routing' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:routing' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:services
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:services' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:services' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:services' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:theme-info
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:theme-info' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:theme-info' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:theme-info' -l dry-run -d 'Output the generated code but not save it to file system'
+
+# yml:theme-libraries
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:theme-libraries' -l directory -d 'Working directory'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:theme-libraries' -l answer -d 'Answer to generator question'
+complete -c dcg -A -n '__fish_seen_subcommand_from yml:theme-libraries' -l dry-run -d 'Output the generated code but not save it to file system'
