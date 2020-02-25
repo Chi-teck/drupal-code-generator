@@ -18,7 +18,6 @@ use Drupal\user\EntityOwnerTrait;
  *   label = @Translation("Example"),
  *   label_collection = @Translation("Examples"),
  *   handlers = {
- *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\foo\FooExampleListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {

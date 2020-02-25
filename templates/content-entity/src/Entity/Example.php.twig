@@ -36,11 +36,6 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   bundle_label = @Translation("{{ entity_type_label }} type"),
 {% endif %}
  *   handlers = {
-{% if template %}
- *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
-{% else %}
- *     "view_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}ViewBuilder",
-{% endif %}
  *     "list_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}ListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
 {% if access_controller %}
