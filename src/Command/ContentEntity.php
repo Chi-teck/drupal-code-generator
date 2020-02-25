@@ -77,9 +77,6 @@ final class ContentEntity extends ModuleGenerator {
         ->appendIfExists()
         ->headerSize(7);
     }
-    else {
-      $this->addFile('src/{class_prefix}ViewBuilder.php', 'src/ExampleViewBuilder.php');
-    }
 
     if ($vars['access_controller']) {
       $this->addFile('src/{class_prefix}AccessControlHandler.php', 'src/ExampleAccessControlHandler.php');

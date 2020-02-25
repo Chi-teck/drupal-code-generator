@@ -6,7 +6,6 @@ use DrupalCodeGenerator\BootstrapHandler;
 use DrupalCodeGenerator\Command\GenerateCompletion;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
-use DrupalCodeGenerator\Utils;
 use Symfony\Component\Filesystem\Filesystem;
 
 // The autoloader may have a different location if DCG is installed as a local

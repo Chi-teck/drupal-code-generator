@@ -70,7 +70,7 @@ class ContentEntityTest extends BrowserTestBase {
     self::assertNull($entity_type->getDataTable());
 
     $handlers = [
-      'view_builder' => 'Drupal\sigma\ExampleViewBuilder',
+      'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',
       'list_builder' => 'Drupal\sigma\ExampleListBuilder',
       'views_data' => 'Drupal\views\EntityViewsData',
       'access' => 'Drupal\Core\Entity\EntityAccessControlHandler',
