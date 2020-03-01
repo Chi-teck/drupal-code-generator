@@ -22,4 +22,12 @@ interface GeneratorStyleInterface extends SymfonyStyleInterface, OutputInterface
    */
   public function buildTable(array $headers, array $rows): Table;
 
+  /**
+   * Returns a new instance which makes use of stderr if available.
+   *
+   * @return self
+   *   New instance of output.
+   */
+  public function getErrorStyle();
+
 }

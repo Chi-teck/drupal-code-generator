@@ -4,6 +4,9 @@ namespace DrupalCodeGenerator\Command\Misc;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Command\Generator;
+use DrupalCodeGenerator\Exception\RuntimeException;
+use DrupalCodeGenerator\Utils;
+use InvalidArgumentException;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -17,12 +20,38 @@ final class Project extends Generator {
   protected $description = 'Generates a composer project';
   protected $alias = 'project';
 
-  private const DRUPAL_DEFAULT_VERSION = '~8.7.0';
+  /**
+   * Array of packages to check versions for.
+   *
+   * The key is package name and the value is allowable major version.
+   */
+  private const PACKAGES = [
+    'composer/installers' => 1,
+    'cweagans/composer-patches' => 1,
+    'drupal/core' => 8,
+    'drupal/core-composer-scaffold' => 'drupal/core',
+    'drush/drush' => 10,
+    'oomphinc/composer-installers-extender' => 1,
+    'symfony/dotenv' => 4,
+    'drupal/core-recommended' => 'drupal/core',
+    'drupal/core-dev' => 'drupal/core',
+    'zaporylie/composer-drupal-optimizations' => 1,
+    'weitzman/drupal-test-traits' => 1,
+  ];
+
+  /**
+   * Versions of used packages.
+   *
+   * @var array
+   */
+  private $versions = [];
 
   /**
    * {@inheritdoc}
    */
   protected function generate(): void {
+
+    $this->loadPackages();
 
     $vars = &$this->vars;
 
@@ -69,60 +98,34 @@ final class Project extends Generator {
       'httpdocs',
       'html',
     ];
-    $document_root_question = new Question('Document root directory, type single dot to use Composer root', 'docroot');
-    $document_root_normalizer = function (string $value): string {
-      return $value == '.' ? '' : rtrim($value, '/');
-    };
-    $document_root_question->setNormalizer($document_root_normalizer);
+    $document_root_question = new Question('Document root directory', 'docroot');
     $document_root_question->setAutocompleterValues($document_roots);
     $vars['document_root'] = $this->io->askQuestion($document_root_question);
+    $vars['document_root_path'] = $vars['document_root'] . '/';
 
     $vars['php'] = $this->ask('PHP version', '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION);
-    $vars['drupal'] = $this->ask('Drupal version', self::DRUPAL_DEFAULT_VERSION);
-    $vars['drupal_core_strict'] = $this->confirm('Would you like to get the same versions of Drupal core\'s dependencies as in Drupal core\'s composer.lock file?', FALSE);
 
-    $sections = ['require', 'require-dev'];
+    $vars['drupal_core_recommended'] = $this->confirm('Would you like to install recommended Drupal core dependencies?', FALSE);
+    $vars['drupal_core_dev'] = $this->confirm('Would you like to install Drupal core development dependencies?', FALSE);
 
-    $vars['drush'] = NULL;
-    if ($vars['drush'] = $this->confirm('Would you like to install Drush?')) {
-      $drush_question = new Question('Drush installation (require|require-dev)', 'require');
-      $drush_question->setValidator([__CLASS__, 'validateSection']);
-      $drush_question->setAutocompleterValues($sections);
-      $vars['drush'] = $this->io->askQuestion($drush_question);
-    }
-
-    $vars['drupal_console'] = NULL;
-    if ($this->confirm('Would you like to install Drupal Console?', !$vars['drush'])) {
-      $dc_question = new Question('Drupal Console installation (require|require-dev)', 'require-dev');
-      $dc_question->setValidator([__CLASS__, 'validateSection']);
-      $dc_question->setAutocompleterValues($sections);
-      $vars['drupal_console'] = $this->io->askQuestion($dc_question);
-    }
+    $vars['drush'] = $this->confirm('Would you like to install Drush?');
 
     $vars['composer_patches'] = $this->confirm('Would you like to install Composer patches plugin?');
-    $vars['composer_merge'] = $this->confirm('Would you like to install Composer merge plugin?', FALSE);
-    $vars['behat'] = $this->confirm('Would you like to create Behat tests?', FALSE);
     $vars['env'] = $this->confirm('Would you like to load environment variables from .env files?', FALSE);
     $vars['asset_packagist'] = $this->confirm('Would you like to add asset-packagist repository?', FALSE);
 
-    // Add ending slash if the path is not empty.
-    if ($vars['document_root_path'] = $vars['document_root']) {
-      $vars['document_root_path'] .= '/';
+    $vars['tests'] = $this->confirm('Would you like to create tests?', FALSE);
+    if ($vars['tests']) {
+      // @codingStandardsIgnoreStart
+      [$vendor, $short_name] = explode('/', $vars['name']);
+      $vars['namespace'] = Utils::camelize($vendor == $short_name ? $vendor : $vars['name']);
+      // @codingStandardsIgnoreEnd
     }
 
-    $this->addFile('composer.json')->content(self::buildComposerJson($vars));
+    $this->addFile('composer.json')->content($this->buildComposerJson($vars));
 
     $this->addFile('.gitignore', 'gitignore');
     $this->addFile('phpcs.xml', 'phpcs.xml');
-    $this->addFile('scripts/composer/create_required_files.php', 'scripts/composer/create_required_files.php');
-
-    if ($vars['behat']) {
-      $this->addFile('tests/behat/behat.yml', 'tests/behat/behat.yml');
-      $this->addFile('tests/behat/local.behat.yml', 'tests/behat/local.behat.yml');
-      $this->addFile('tests/behat/bootstrap/BaseContext.php', 'tests/behat/bootstrap/BaseContext.php');
-      $this->addFile('tests/behat/bootstrap/ExampleContext.php', 'tests/behat/bootstrap/ExampleContext.php');
-      $this->addFile('tests/behat/features/example/user_forms.feature', 'tests/behat/features/example/user_forms.feature');
-    }
 
     if ($vars['env']) {
       $this->addFile('.env.example', 'env.example');
@@ -134,17 +137,21 @@ final class Project extends Generator {
     }
 
     if ($vars['drush']) {
-      $this->addFile('drush/drush.yml', 'drush/drush.yml');
       $this->addFile('drush/Commands/PolicyCommands.php', 'drush/Commands/PolicyCommands.php');
       $this->addFile('drush/sites/self.site.yml', 'drush/sites/self.site.yml');
       $this->addFile('scripts/sync-site.sh', 'scripts/sync-site.sh')->mode(0544);
     }
 
+    if ($vars['tests']) {
+      $this->addFile('phpunit.xml', 'phpunit.xml');
+      $this->addFile('tests/src/HomePageTest.php', 'tests/src/HomePageTest.php');
+    }
+
     $this->addFile('patches/.keep')->content('');
-    $this->addDirectory('{document_root_path}modules/contrib');
-    $this->addDirectory('{document_root_path}modules/custom');
-    $this->addDirectory('{document_root_path}modules/custom');
-    $this->addDirectory('{document_root_path}libraries');
+    $this->addDirectory('{document_root}/modules/contrib');
+    $this->addDirectory('{document_root}/modules/custom');
+    $this->addDirectory('{document_root}/themes/custom');
+    $this->addDirectory('{document_root}/libraries');
   }
 
   /**
@@ -173,7 +180,7 @@ final class Project extends Generator {
    * @return string
    *   Encoded JSON content.
    */
-  protected static function buildComposerJson(array $vars): string {
+  private function buildComposerJson(array $vars): string {
 
     $document_root_path = $vars['document_root_path'];
 
@@ -198,48 +205,40 @@ final class Project extends Generator {
     $require = [];
     $require_dev = [];
 
-    self::addPackage($require, 'drupal/core');
-    $require['drupal/core'] = $vars['drupal'];
-    self::addPackage($require, 'composer/installers');
-    self::addPackage($require, 'drupal-composer/drupal-scaffold');
-    self::addPackage($require, 'zaporylie/composer-drupal-optimizations');
-    $require_dev['webflo/drupal-core-require-dev'] = $vars['drupal'];
+    $this->addPackage($require, 'drupal/core-composer-scaffold');
+    $this->addPackage($require, 'zaporylie/composer-drupal-optimizations');
 
     if ($vars['asset_packagist']) {
-      self::addPackage($require, 'oomphinc/composer-installers-extender');
+      $this->addPackage($require, 'oomphinc/composer-installers-extender');
     }
 
-    if ($vars['drupal_core_strict']) {
-      $require['webflo/drupal-core-strict'] = $vars['drupal'];
+    if ($vars['drupal_core_recommended']) {
+      $this->addPackage($require, 'drupal/core-recommended');
+    }
+    else {
+      $this->addPackage($require, 'drupal/core');
+      $this->addPackage($require, 'composer/installers');
+    }
+
+    if ($vars['drupal_core_dev']) {
+      $this->addPackage($require_dev, 'drupal/core-dev');
     }
 
     if ($vars['drush']) {
-      $vars['drush'] == 'require'
-        ? self::addPackage($require, 'drush/drush')
-        : self::addPackage($require_dev, 'drush/drush');
-    }
-
-    if ($vars['drupal_console']) {
-      $vars['drupal_console'] == 'require'
-        ? self::addPackage($require, 'drupal/console')
-        : self::addPackage($require_dev, 'drupal/console');
+      $this->addPackage($require, 'drush/drush');
     }
 
     if ($vars['composer_patches']) {
-      self::addPackage($require, 'cweagans/composer-patches');
-    }
-
-    if ($vars['composer_merge']) {
-      self::addPackage($require, 'wikimedia/composer-merge-plugin');
-    }
-
-    if ($vars['behat']) {
-      // Behat and Mink drivers are Drupal core dev dependencies.
-      self::addPackage($require_dev, 'drupal/drupal-extension');
+      $this->addPackage($require, 'cweagans/composer-patches');
     }
 
     if ($vars['env']) {
-      self::addPackage($require, 'symfony/dotenv');
+      $this->addPackage($require, 'symfony/dotenv');
+    }
+
+    if ($vars['tests']) {
+      $this->addPackage($require_dev, 'weitzman/drupal-test-traits');
+      $composer_json['autoload-dev']['psr-4'][$vars['namespace'] . '\\Tests\\'] = 'tests/src';
     }
 
     $composer_json['require'] = [
@@ -252,17 +251,9 @@ final class Project extends Generator {
     $composer_json['require'] += $require;
 
     ksort($require_dev);
-    $composer_json['require-dev'] = $require_dev;
+    $composer_json['require-dev'] = (object) $require_dev;
 
-    // PHPUnit is core dev dependency.
-    $composer_json['scripts']['phpunit'] = 'phpunit --colors=always --configuration ' . $document_root_path . 'core ' . $document_root_path . 'modules/custom';
-    if ($vars['behat']) {
-      $composer_json['scripts']['behat'] = 'behat --colors --config=tests/behat/local.behat.yml';
-    }
     $composer_json['scripts']['phpcs'] = 'phpcs --standard=phpcs.xml';
-    $composer_json['scripts']['post-install-cmd'][] = '@php ./scripts/composer/create_required_files.php';
-    $composer_json['scripts']['post-update-cmd'][] = '@php ./scripts/composer/create_required_files.php';
-
     $composer_json['minimum-stability'] = 'dev';
     $composer_json['prefer-stable'] = TRUE;
 
@@ -279,6 +270,8 @@ final class Project extends Generator {
       $composer_json['extra']['composer-exit-on-patch-failure'] = TRUE;
     }
 
+    $composer_json['extra']['drupal-scaffold']['locations']['web-root'] = $vars['document_root_path'];
+
     if ($vars['asset_packagist']) {
       $composer_json['extra']['installer-types'] = [
         'bower-asset',
@@ -292,43 +285,10 @@ final class Project extends Generator {
       $document_root_path . 'themes/{$name}' => ['type:drupal-theme'],
       'drush/{$name}' => ['type:drupal-drush'],
     ];
+
     if ($vars['asset_packagist']) {
       $composer_json['extra']['installer-paths'][$document_root_path . 'libraries/{$name}'][] = 'type:bower-asset';
       $composer_json['extra']['installer-paths'][$document_root_path . 'libraries/{$name}'][] = 'type:npm-asset';
-    }
-
-    $composer_json['extra']['drupal-scaffold']['excludes'] = [
-      '.csslintrc',
-      '.editorconfig',
-      '.eslintignore',
-      '.eslintrc.json',
-      '.gitattributes',
-      '.ht.router.php',
-      '.htaccess',
-      'robots.txt',
-      'update.php',
-      'web.config',
-    ];
-    // Initial files are created but never updated.
-    $composer_json['extra']['drupal-scaffold']['initial'] = [
-      '.htaccess' => '.htaccess',
-      'robots.txt' => 'robots.txt',
-    ];
-
-    // Move these files to Composer root.
-    if ($vars['document_root']) {
-      $composer_json['extra']['drupal-scaffold']['initial']['.editorconfig'] = '../.editorconfig';
-      $composer_json['extra']['drupal-scaffold']['initial']['.gitattributes'] = '../.gitattributes';
-    }
-    ksort($composer_json['extra']['drupal-scaffold']['initial']);
-
-    if ($vars['composer_merge']) {
-      $composer_json['extra']['merge-plugin'] = [
-        'include' => [
-          $document_root_path . 'modules/custom/*/composer.json',
-        ],
-        'recurse' => TRUE,
-      ];
     }
 
     return json_encode($composer_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
@@ -341,36 +301,50 @@ final class Project extends Generator {
    *   Section for the package (require|require-dev)
    * @param string $package
    *   A package to be added.
-   *
-   * @todo Find a way to track versions automatically.
    */
-  protected static function addPackage(array &$section, $package): void {
-    $versions = [
-      'composer/installers' => '^1.4',
-      'cweagans/composer-patches' => '^1.6',
-      'drupal-composer/drupal-scaffold' => '^2.5',
-      'drupal/console' => '^1.0',
-      'drupal/core' => self::DRUPAL_DEFAULT_VERSION,
-      'drupal/drupal-extension' => '^3.4',
-      'drush/drush' => '^9.6',
-      'oomphinc/composer-installers-extender' => '^1.1',
-      'symfony/dotenv' => '^3.4',
-      'webflo/drupal-core-require-dev' => self::DRUPAL_DEFAULT_VERSION,
-      'webflo/drupal-core-strict' => self::DRUPAL_DEFAULT_VERSION,
-      'wikimedia/composer-merge-plugin' => '^1.4',
-      'zaporylie/composer-drupal-optimizations' => '^1.1',
-    ];
-    $section[$package] = $versions[$package];
+  private function addPackage(array &$section, $package): void {
+    if (!array_key_exists($package, $this->versions)) {
+      throw new InvalidArgumentException("Package $package is unknown.");
+    }
+    $section[$package] = $this->versions[$package];
   }
 
   /**
-   * Validates require/require-dev answer.
+   * Loads composer packages.
    */
-  public static function validateSection(?string $value): ?string {
-    if ($value != 'require' && $value != 'require-dev') {
-      throw new \UnexpectedValueException('The value should be either "require" or "require-dev".');
+  private function loadPackages(): void {
+    $this->io->getErrorStyle()->write(' <comment>Checking packages</comment>');
+    foreach (self::PACKAGES as $package => $major_version) {
+      if ($major_version == 'drupal/core') {
+        $this->versions[$package] = $this->versions[$major_version];
+        continue;
+      }
+      $this->versions[$package] = self::getPackageVersion($package, $major_version);
+      $this->io->getErrorStyle()->write('<comment>.</comment>');
     }
-    return $value;
+    $this->io->getErrorStyle()->write("\x1B[2K");
+  }
+
+  /**
+   * Returns the highest stable version of a given package.
+   */
+  private static function getPackageVersion(string $package, int $major_version): string {
+    $url = "https://packagist.org/packages/$package.json";
+    if (!$data_encoded = @file_get_contents($url)) {
+      throw new RuntimeException(sprintf('Could not load package information from %s.', $url));
+    }
+    $data = @json_decode($data_encoded, JSON_OBJECT_AS_ARRAY);
+    if (!isset($data['package']['versions'])) {
+      throw new RuntimeException(sprintf('Could not decode JSON from %s.', $url));
+    }
+    // Some packages have versions prefixed with 'v'.
+    $all_versions = preg_replace('/^v?/', '', array_keys($data['package']['versions']));
+    $stable_versions = preg_grep(sprintf('/^%d\.\d+\.\d+$/', $major_version), $all_versions);
+    if (count($stable_versions) == 0) {
+      throw new RuntimeException(sprintf('Could not find an appropriate version of %s package.', $package));
+    }
+    usort($stable_versions, 'version_compare');
+    return '^' . preg_replace('/\.\d+$/', '', end($stable_versions));
   }
 
 }
