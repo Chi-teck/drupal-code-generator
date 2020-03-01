@@ -12,21 +12,21 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 /**
  * Implements navigation command.
  */
-class Navigation extends Command {
+final class Navigation extends Command {
 
   /**
    * Menu tree.
    *
    * @var array
    */
-  protected $menuTree = [];
+  private $menuTree = [];
 
   /**
-   * Command labels.
+   * Menu labels.
    *
    * @var array
    */
-  protected $labels = [
+  private $labels = [
     'misc:d7' => 'Drupal 7',
     'yml' => 'Yaml',
     'misc' => 'Miscellaneous',
@@ -39,23 +39,19 @@ class Navigation extends Command {
 
     // As the navigation is default command the help should be relevant to the
     // entire DCG application.
-    $help = [
-      '<info>dcg</info>                          Display navigation',
-      '<info>dcg d8:plugin:field:widget</info>   Run a specific generator',
-      '<info>dcg list</info>                     List all available generators',
-    ];
+    $help = <<<'EOT'
+      <info>dcg</info>                          Display navigation
+      <info>dcg plugin:field:widget</info>      Run a specific generator
+      <info>dcg list</info>                     List all available generators
+
+    EOT;
 
     $this
       ->setName('navigation')
       ->setDescription('Command line code generator')
-      ->setHelp(implode("\n", $help) . "\n")
+      ->setHelp($help)
       ->setHidden(TRUE)
-      ->addOption(
-        'directory',
-        '-d',
-        InputOption::VALUE_OPTIONAL,
-        'Working directory'
-      );
+      ->addOption('directory', '-d', InputOption::VALUE_OPTIONAL, 'Working directory');
   }
 
   /**
@@ -71,20 +67,18 @@ class Navigation extends Command {
   protected function initialize(InputInterface $input, OutputInterface $output): void {
     parent::initialize($input, $output);
 
-    // Initialize the menu structure.
+    // Build the menu structure.
     $this->menuTree = [];
     foreach ($this->getApplication()->all() as $command) {
-      if (!$command instanceof GeneratorInterface) {
-        continue;
-      }
-      $command_name = $command->getName();
-      static::arraySetNestedValue($this->menuTree, explode(':', $command_name), TRUE);
-      // Collect command labels.
-      if ($label = $command->getLabel()) {
-        $this->labels[$command_name] = $label;
+      if ($command instanceof GeneratorInterface && !$command->isHidden()) {
+        self::arraySetNestedValue($this->menuTree, explode(':', $command->getName()));
+        // Collect command labels.
+        if ($label = $command->getLabel()) {
+          $this->labels[$command->getName()] = $label;
+        }
       }
     }
-    static::recursiveKsort($this->menuTree);
+    self::recursiveKsort($this->menuTree);
 
     $style = new OutputFormatterStyle('white', 'blue', ['bold']);
     $output->getFormatter()->setStyle('title', $style);
@@ -93,7 +87,7 @@ class Navigation extends Command {
   /**
    * {@inheritdoc}
    */
-  protected function execute(InputInterface $input, OutputInterface $output): ?int {
+  protected function execute(InputInterface $input, OutputInterface $output): int {
     if ($command_name = $this->selectGenerator($input, $output)) {
       return $this->getApplication()
         ->find($command_name)
@@ -115,16 +109,16 @@ class Navigation extends Command {
    * @return string|null
    *   Generator name or null if user decided to exit the navigation.
    */
-  protected function selectGenerator(InputInterface $input, OutputInterface $output, array $menu_trail = []): ?string {
+  private function selectGenerator(InputInterface $input, OutputInterface $output, array $menu_trail = []): ?string {
 
-    // Narrow down menu tree.
+    // Narrow down the menu tree using menu trail.
     $active_menu_tree = $this->menuTree;
     foreach ($menu_trail as $active_menu_item) {
       $active_menu_tree = $active_menu_tree[$active_menu_item];
     }
 
     // The $active_menu_tree can be either an array of menu items or TRUE if the
-    // user reached the final menu point.
+    // user has reached the final menu point.
     if ($active_menu_tree === TRUE) {
       return implode(':', $menu_trail);
     }
@@ -132,20 +126,18 @@ class Navigation extends Command {
     $sub_menu_labels = $command_labels = [];
     foreach ($active_menu_tree as $menu_item => $subtree) {
       $command_name = $menu_trail ? (implode(':', $menu_trail) . ':' . $menu_item) : $menu_item;
-      if (is_array($subtree)) {
-        $sub_menu_labels[$menu_item] = $this->createMenuItemLabel($command_name, TRUE);
-      }
-      else {
-        $command_labels[$menu_item] = $this->createMenuItemLabel($command_name, FALSE);
-      }
+      $label = $this->labels[$command_name] ?? str_replace(['-', '_'], ' ', ucfirst($menu_item));
+      is_array($subtree)
+        ? $sub_menu_labels[$menu_item] = "<comment>$label</comment>"
+        : $command_labels[$menu_item] = $label;
     }
-    natcasesort($sub_menu_labels);
-    natcasesort($command_labels);
 
     // Generally the choices array consists of the following parts:
     // - Reference to the parent menu level.
     // - Sorted list of nested menu levels.
     // - Sorted list of commands.
+    natcasesort($sub_menu_labels);
+    natcasesort($command_labels);
     $choices = ['..' => '..'] + $sub_menu_labels + $command_labels;
     $question = new ChoiceQuestion('<title> Select generator </title>', array_values($choices));
 
@@ -153,44 +145,19 @@ class Navigation extends Command {
     $answer = array_search($answer_label, $choices);
 
     if ($answer == '..') {
-      // Exit the application if the user selected zero on the top menu level.
+      // Exit the application if a user selected zero on the top menu level.
       if (count($menu_trail) == 0) {
         return NULL;
       }
-      // Decrease menu level.
+      // Level up.
       array_pop($menu_trail);
     }
     else {
-      // Increase menu level.
+      // Level down.
       $menu_trail[] = $answer;
     }
 
     return $this->selectGenerator($input, $output, $menu_trail);
-  }
-
-  /**
-   * Creates a human readable label for a given menu item.
-   *
-   * @param string $command_name
-   *   Command name.
-   * @param bool $nested
-   *   A boolean indicating that the menu item has sub-items.
-   *
-   * @return string
-   *   The menu item label.
-   */
-  protected function createMenuItemLabel(string $command_name, bool $nested): string {
-
-    if (isset($this->labels[$command_name])) {
-      $label = $this->labels[$command_name];
-    }
-    else {
-      $sub_names = explode(':', $command_name);
-      $last_sub_name = array_pop($sub_names);
-      $label = str_replace(['-', '_'], ' ', ucfirst($last_sub_name));
-    }
-
-    return $nested ? "<comment>$label</comment>" : $label;
   }
 
   /**
@@ -199,28 +166,26 @@ class Navigation extends Command {
    * @param array $array
    *   An array being sorted.
    */
-  protected static function recursiveKsort(array &$array): void {
+  private static function recursiveKsort(array &$array): void {
     foreach ($array as &$value) {
       if (is_array($value)) {
-        static::recursiveKsort($value);
+        self::recursiveKsort($value);
       }
     }
     ksort($array);
   }
 
   /**
-   * Sets a value in a nested array with variable depth.
+   * Sets the property to true in nested array.
    *
    * @param array $array
    *   A reference to the array to modify.
    * @param array $parents
    *   An array of parent keys, starting with the outermost key.
-   * @param mixed $value
-   *   The value to set.
    *
    * @see https://api.drupal.org/api/drupal/includes!common.inc/function/drupal_array_set_nested_value/7
    */
-  protected static function arraySetNestedValue(array &$array, array $parents, $value): void {
+  private static function arraySetNestedValue(array &$array, array $parents): void {
     $ref = &$array;
     foreach ($parents as $parent) {
       if (isset($ref) && !is_array($ref)) {
@@ -228,9 +193,7 @@ class Navigation extends Command {
       }
       $ref = &$ref[$parent];
     }
-    if (!isset($ref)) {
-      $ref = $value;
-    }
+    $ref = $ref ?? TRUE;
   }
 
 }
