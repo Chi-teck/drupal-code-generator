@@ -3,6 +3,7 @@
   <testsuites>
     <testsuite name="Drupal Code Generator Test Suite">
       <directory suffix="Test.php">./tests/dcg</directory>
+      <exclude>./tests/dcg/Generator/Misc/_project/_full/tests/src/HomePageTest.php</exclude>
     </testsuite>
   </testsuites>
   <filter>
