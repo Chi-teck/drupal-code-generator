@@ -77,8 +77,6 @@ abstract class BaseGeneratorTest extends BaseTestCase {
     $tester->execute();
 
     $expected_display = $this->processExpectedDisplay($tester->getExpectedDisplay());
-    file_put_contents('/mnt/host/downloads/actual-display.txt', $tester->getDisplay());
-    file_put_contents('/mnt/host/downloads/expected-display.txt', $expected_display);
     self::assertEquals($expected_display, $tester->getDisplay());
 
     // Default fixture path is the directory where the test is located.
