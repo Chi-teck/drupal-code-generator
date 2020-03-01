@@ -235,7 +235,7 @@ class FooItem extends FieldItemBase {
 
     $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
     $constraints[] = $constraint_manager->create('ComplexData', $options);
-    // @todo Add more constrains here.
+    // @todo Add more constraints here.
     return $constraints;
   }
 
