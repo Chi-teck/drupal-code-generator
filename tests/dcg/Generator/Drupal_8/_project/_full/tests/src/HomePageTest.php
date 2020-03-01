@@ -1,0 +1,20 @@
+<?php
+
+namespace ExampleFoo\Tests;
+
+use weitzman\DrupalTestTraits\ExistingSiteBase;
+
+/**
+ * A test for home page.
+ */
+class HomePageTest extends ExistingSiteBase {
+
+  /**
+   * Test callback.
+   */
+  public function testHomePage() {
+    $this->drupalGet('');
+    $this->assertSession()->pageTextContains('Welcome');
+  }
+
+}

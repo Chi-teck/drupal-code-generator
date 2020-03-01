@@ -13,37 +13,35 @@
             "url": "https://asset-packagist.org"
         }
     ],
+    "autoload": {
+        "files": [
+            "load.environment.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ExampleFoo\\Tests\\": "tests/src"
+        }
+    },
     "require": {
         "php": ">=7.3",
         "ext-curl": "*",
         "ext-gd": "*",
         "ext-json": "*",
-        "composer/installers": "^1.4",
         "cweagans/composer-patches": "^1.6",
-        "drupal-composer/drupal-scaffold": "^2.5",
-        "drupal/core": "^8.6.5",
+        "drupal/core-composer-scaffold": "^8.8",
+        "drupal/core-recommended": "^8.8",
+        "drush/drush": "^10.2",
         "oomphinc/composer-installers-extender": "^1.1",
-        "symfony/dotenv": "^3.4",
-        "webflo/drupal-core-strict": "^8.6.5",
-        "wikimedia/composer-merge-plugin": "^1.4",
+        "symfony/dotenv": "^4.4",
         "zaporylie/composer-drupal-optimizations": "^1.1"
     },
     "require-dev": {
-        "drupal/console": "^1.0",
-        "drupal/drupal-extension": "^3.4",
-        "drush/drush": "^9.6",
-        "webflo/drupal-core-require-dev": "^8.6.5"
+        "drupal/core-dev": "^8.8",
+        "weitzman/drupal-test-traits": "^1.3"
     },
     "scripts": {
-        "phpunit": "phpunit --colors=always --configuration web/core web/modules/custom",
-        "behat": "behat --colors --config=tests/behat/local.behat.yml",
-        "phpcs": "phpcs --standard=phpcs.xml",
-        "post-install-cmd": [
-            "@php ./scripts/composer/create_required_files.php"
-        ],
-        "post-update-cmd": [
-            "@php ./scripts/composer/create_required_files.php"
-        ]
+        "phpcs": "phpcs --standard=phpcs.xml"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -51,13 +49,13 @@
         "sort-packages": true,
         "bin-dir": "bin"
     },
-    "autoload": {
-        "files": [
-            "load.environment.php"
-        ]
-    },
     "extra": {
         "composer-exit-on-patch-failure": true,
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            }
+        },
         "installer-types": [
             "bower-asset",
             "npm-asset"
@@ -80,32 +78,6 @@
             "drush/{$name}": [
                 "type:drupal-drush"
             ]
-        },
-        "drupal-scaffold": {
-            "excludes": [
-                ".csslintrc",
-                ".editorconfig",
-                ".eslintignore",
-                ".eslintrc.json",
-                ".gitattributes",
-                ".ht.router.php",
-                ".htaccess",
-                "robots.txt",
-                "update.php",
-                "web.config"
-            ],
-            "initial": {
-                ".editorconfig": "../.editorconfig",
-                ".gitattributes": "../.gitattributes",
-                ".htaccess": ".htaccess",
-                "robots.txt": "robots.txt"
-            }
-        },
-        "merge-plugin": {
-            "include": [
-                "web/modules/custom/*/composer.json"
-            ],
-            "recurse": true
         }
     }
 }

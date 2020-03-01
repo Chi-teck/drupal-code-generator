@@ -14,23 +14,14 @@
         "ext-curl": "*",
         "ext-gd": "*",
         "ext-json": "*",
-        "composer/installers": "^1.4",
-        "drupal-composer/drupal-scaffold": "^2.5",
-        "drupal/core": "^8.6.5",
+        "composer/installers": "^1.8",
+        "drupal/core": "^8.8",
+        "drupal/core-composer-scaffold": "^8.8",
         "zaporylie/composer-drupal-optimizations": "^1.1"
     },
-    "require-dev": {
-        "webflo/drupal-core-require-dev": "^8.6.5"
-    },
+    "require-dev": {},
     "scripts": {
-        "phpunit": "phpunit --colors=always --configuration core modules/custom",
-        "phpcs": "phpcs --standard=phpcs.xml",
-        "post-install-cmd": [
-            "@php ./scripts/composer/create_required_files.php"
-        ],
-        "post-update-cmd": [
-            "@php ./scripts/composer/create_required_files.php"
-        ]
+        "phpcs": "phpcs --standard=phpcs.xml"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -39,40 +30,27 @@
         "bin-dir": "bin"
     },
     "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "docroot/"
+            }
+        },
         "installer-paths": {
-            "core": [
+            "docroot/core": [
                 "type:drupal-core"
             ],
-            "libraries/{$name}": [
+            "docroot/libraries/{$name}": [
                 "type:drupal-library"
             ],
-            "modules/contrib/{$name}": [
+            "docroot/modules/contrib/{$name}": [
                 "type:drupal-module"
             ],
-            "themes/{$name}": [
+            "docroot/themes/{$name}": [
                 "type:drupal-theme"
             ],
             "drush/{$name}": [
                 "type:drupal-drush"
             ]
-        },
-        "drupal-scaffold": {
-            "excludes": [
-                ".csslintrc",
-                ".editorconfig",
-                ".eslintignore",
-                ".eslintrc.json",
-                ".gitattributes",
-                ".ht.router.php",
-                ".htaccess",
-                "robots.txt",
-                "update.php",
-                "web.config"
-            ],
-            "initial": {
-                ".htaccess": ".htaccess",
-                "robots.txt": "robots.txt"
-            }
         }
     }
 }

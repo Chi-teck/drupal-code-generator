@@ -8,6 +8,15 @@ $settings_file = './web/sites/default/settings.php';
 if (!file_exists($settings_file) && file_exists($default_settings_file)) {
   $content = file_get_contents($default_settings_file);
 
+  // Specify a directory for configuration data.
+  $current_code = '$config_directories = [];';
+  $new_code = <<<'EOS'
+$config_directories = [
+  CONFIG_SYNC_DIRECTORY => DRUPAL_ROOT . '/../config/sync',
+];
+EOS;
+  $content = str_replace($current_code, $new_code, $content);
+
   // Allow local development configuration.
   $current_code = <<<'EOS'
 #

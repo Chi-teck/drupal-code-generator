@@ -4,7 +4,7 @@
   <config name="installed_paths" value="vendor/drupal/coder/coder_sniffer"/>
   <arg name="colors"/>
   <arg value="p"/>
-  <file>./modules/custom</file>
+  <file>./docroot/modules/custom</file>
   <rule ref="Drupal"/>
   <rule ref="DrupalPractice"/>
 </ruleset>
