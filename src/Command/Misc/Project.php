@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Command\Misc;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Command\Generator;
-use DrupalCodeGenerator\Exception\RuntimeException;
 use DrupalCodeGenerator\Utils;
 use InvalidArgumentException;
 use Symfony\Component\Console\Question\Question;
@@ -26,32 +25,23 @@ final class Project extends Generator {
    * The key is package name and the value is allowable major version.
    */
   private const PACKAGES = [
-    'composer/installers' => 1,
-    'cweagans/composer-patches' => 1,
-    'drupal/core' => 8,
-    'drupal/core-composer-scaffold' => 'drupal/core',
-    'drush/drush' => 10,
-    'oomphinc/composer-installers-extender' => 1,
-    'symfony/dotenv' => 4,
-    'drupal/core-recommended' => 'drupal/core',
-    'drupal/core-dev' => 'drupal/core',
-    'zaporylie/composer-drupal-optimizations' => 1,
-    'weitzman/drupal-test-traits' => 1,
+    'composer/installers' => '^1.8',
+    'cweagans/composer-patches' => '^1.6',
+    'drupal/core' => '^8.8',
+    'drupal/core-composer-scaffold' => '^8.8',
+    'drush/drush' => '^10.2',
+    'oomphinc/composer-installers-extender' => '^1.1',
+    'symfony/dotenv' => '^4.4',
+    'drupal/core-recommended' => '^8.8',
+    'drupal/core-dev' => '^8.8',
+    'zaporylie/composer-drupal-optimizations' => '^1.1',
+    'weitzman/drupal-test-traits' => '^1.3',
   ];
-
-  /**
-   * Versions of used packages.
-   *
-   * @var array
-   */
-  private $versions = [];
 
   /**
    * {@inheritdoc}
    */
   protected function generate(): void {
-
-    $this->loadPackages();
 
     $vars = &$this->vars;
 
@@ -234,6 +224,7 @@ final class Project extends Generator {
 
     if ($vars['env']) {
       $this->addPackage($require, 'symfony/dotenv');
+      $composer_json['autoload']['files'][] = 'load.environment.php';
     }
 
     if ($vars['tests']) {
@@ -261,10 +252,6 @@ final class Project extends Generator {
       'sort-packages' => TRUE,
       'bin-dir' => 'bin',
     ];
-
-    if ($vars['env']) {
-      $composer_json['autoload']['files'][] = 'load.environment.php';
-    }
 
     if ($vars['composer_patches']) {
       $composer_json['extra']['composer-exit-on-patch-failure'] = TRUE;
@@ -303,48 +290,10 @@ final class Project extends Generator {
    *   A package to be added.
    */
   private function addPackage(array &$section, $package): void {
-    if (!array_key_exists($package, $this->versions)) {
+    if (!array_key_exists($package, self::PACKAGES)) {
       throw new InvalidArgumentException("Package $package is unknown.");
     }
-    $section[$package] = $this->versions[$package];
-  }
-
-  /**
-   * Loads composer packages.
-   */
-  private function loadPackages(): void {
-    $this->io->getErrorStyle()->write(' <comment>Checking packages</comment>');
-    foreach (self::PACKAGES as $package => $major_version) {
-      if ($major_version == 'drupal/core') {
-        $this->versions[$package] = $this->versions[$major_version];
-        continue;
-      }
-      $this->versions[$package] = self::getPackageVersion($package, $major_version);
-      $this->io->getErrorStyle()->write('<comment>.</comment>');
-    }
-    $this->io->getErrorStyle()->write("\x1B[2K");
-  }
-
-  /**
-   * Returns the highest stable version of a given package.
-   */
-  private static function getPackageVersion(string $package, int $major_version): string {
-    $url = "https://packagist.org/packages/$package.json";
-    if (!$data_encoded = @file_get_contents($url)) {
-      throw new RuntimeException(sprintf('Could not load package information from %s.', $url));
-    }
-    $data = @json_decode($data_encoded, JSON_OBJECT_AS_ARRAY);
-    if (!isset($data['package']['versions'])) {
-      throw new RuntimeException(sprintf('Could not decode JSON from %s.', $url));
-    }
-    // Some packages have versions prefixed with 'v'.
-    $all_versions = preg_replace('/^v?/', '', array_keys($data['package']['versions']));
-    $stable_versions = preg_grep(sprintf('/^%d\.\d+\.\d+$/', $major_version), $all_versions);
-    if (count($stable_versions) == 0) {
-      throw new RuntimeException(sprintf('Could not find an appropriate version of %s package.', $package));
-    }
-    usort($stable_versions, 'version_compare');
-    return '^' . preg_replace('/\.\d+$/', '', end($stable_versions));
+    $section[$package] = self::PACKAGES[$package];
   }
 
 }

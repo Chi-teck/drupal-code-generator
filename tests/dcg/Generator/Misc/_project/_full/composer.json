@@ -13,6 +13,11 @@
             "url": "https://asset-packagist.org"
         }
     ],
+    "autoload": {
+        "files": [
+            "load.environment.php"
+        ]
+    },
     "autoload-dev": {
         "psr-4": {
             "ExampleFoo\\Tests\\": "tests/src"
@@ -43,11 +48,6 @@
     "config": {
         "sort-packages": true,
         "bin-dir": "bin"
-    },
-    "autoload": {
-        "files": [
-            "load.environment.php"
-        ]
     },
     "extra": {
         "composer-exit-on-patch-failure": true,

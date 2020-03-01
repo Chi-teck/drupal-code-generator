@@ -96,9 +96,6 @@ final class ProjectTest extends BaseGeneratorTest {
    * {@inheritdoc}
    */
   protected function processExpectedDisplay(string $display): string {
-    $first_question = ' Project name (vendor/name):';
-    $progress = " Checking packages........\e[2K\n";
-    $display = str_replace("\n" . $first_question, $progress . $first_question, $display);
     $display .= " Next steps:\n";
     $display .= " –––––––––––\n";
     $display .= " 1. Review generated files\n";
