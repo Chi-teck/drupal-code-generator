@@ -7,9 +7,9 @@ use Drupal\Core\Routing\RoutingEvents;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
- * Foo route subscriber.
+ * Route subscriber.
  */
-class FooRouteSubscriber extends RouteSubscriberBase {
+class BarRouteSubscriber extends RouteSubscriberBase {
 
   /**
    * {@inheritdoc}

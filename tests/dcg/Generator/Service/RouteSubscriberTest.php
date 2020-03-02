@@ -14,11 +14,13 @@ final class RouteSubscriberTest extends BaseGeneratorTest {
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
+    'Class [FooRouteSubscriber]:' => 'BarRouteSubscriber',
+    'Would you like to inject dependencies? [No]:' => 'No',
   ];
 
   protected $fixtures = [
     'foo.services.yml' => '/_route_subscriber.services.yml',
-    'src/EventSubscriber/FooRouteSubscriber.php' => '/_route_subscriber.php',
+    'src/EventSubscriber/BarRouteSubscriber.php' => '/_route_subscriber.php',
   ];
 
 }

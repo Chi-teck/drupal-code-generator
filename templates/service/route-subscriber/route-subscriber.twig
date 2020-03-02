@@ -1,16 +1,35 @@
+{% import '_lib/di.twig' as di %}
 <?php
 
 namespace Drupal\{{ machine_name }}\EventSubscriber;
 
+{% sort %}
+  {% if services %}
+{{ di.use(services) }}
+  {% endif %}
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Drupal\Core\Routing\RoutingEvents;
 use Symfony\Component\Routing\RouteCollection;
+{% endsort %}
 
 /**
- * {{ name }} route subscriber.
+ * Route subscriber.
  */
 class {{ class }} extends RouteSubscriberBase {
 
+{% if services %}
+{{ di.properties(services) }}
+
+  /**
+   * Constructs {{ class|article }} object.
+   *
+{{ di.annotation(services) }}
+   */
+  public function __construct({{ di.signature(services) }}) {
+{{ di.assignment(services) }}
+  }
+
+{% endif %}
   /**
    * {@inheritdoc}
    */

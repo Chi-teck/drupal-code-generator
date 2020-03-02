@@ -1,5 +1,5 @@
 services:
   foo.route_subscriber:
-    class: Drupal\foo\EventSubscriber\FooRouteSubscriber
+    class: Drupal\foo\EventSubscriber\BarRouteSubscriber
     tags:
       - { name: event_subscriber }

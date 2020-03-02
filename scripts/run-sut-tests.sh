@@ -239,7 +239,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = service ]]; then
   $DCG service:logger -a Zippo -a zippo -a FileLog
   $DCG service:middleware -a Zippo -a zippo -a BarMiddelware
   $DCG service:param-converter -a Zippo -a zippo -a example -a ExampleParamConverter
-  $DCG service:route-subscriber -a Zippo -a zippo
+  $DCG service:route-subscriber -a Zippo -a zippo -a ZippoRouterSubscibre -a Not
   $DCG service:theme-negotiator -a Zippo -a zippo -a ZippoThemeNegotiator
   $DCG service:twig-extension -a Zippo -a zippo -a ZippoTwigExtension -a No
   $DCG service:path-processor -a Zippo -a zippo -a PathProcessorZippo
