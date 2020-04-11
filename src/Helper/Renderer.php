@@ -3,13 +3,17 @@
 namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Asset\File;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
 use Twig\Environment;
 
 /**
  * Output dumper form generators.
  */
-class Renderer extends Helper {
+class Renderer extends Helper implements LoggerAwareInterface {
+
+  use LoggerAwareTrait;
 
   /**
    * The twig environment.
@@ -91,6 +95,7 @@ class Renderer extends Helper {
     elseif ($inline_template) {
       $content .= $this->renderInline($inline_template, $asset->getVars());
     }
+    $this->logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
 
     $asset->content($content);
   }

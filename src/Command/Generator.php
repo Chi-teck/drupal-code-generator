@@ -110,9 +110,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $this->assets = new AssetCollection();
 
     $this->io = new GeneratorStyle($input, $output, $this->getHelper('question'));
+    $this->logger = $this->getHelper('logger_factory')->getLogger($this->io);
     foreach ($this->getHelperSet() as $helper) {
       if ($helper instanceof IOAwareInterface) {
         $helper->io($this->io);
+      }
+      if ($helper instanceof LoggerAwareInterface) {
+        $helper->setLogger($this->logger);
       }
     }
 
@@ -135,8 +139,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
         throw new \LogicException('Template path is not specified.');
       }
     }
-
-    $this->setLogger($this->getHelper('logger_factory')->getLogger());
 
     $this->directory = $input->getOption('directory') ?: getcwd();
 
@@ -192,7 +194,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
         $asset->vars($this->vars);
       }
       $renderer->renderAsset($asset);
-      $this->logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
     }
   }
 

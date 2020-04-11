@@ -4,8 +4,10 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Helper\Renderer;
+use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Output\NullOutput;
 use Twig\Loader\FilesystemLoader;
 
 /**
@@ -22,6 +24,8 @@ final class RendererTest extends TestCase {
     $twig = new TwigEnvironment($twig_loader);
     $renderer = new Renderer($twig);
     $renderer->addPath(__DIR__);
+    $logger = new ConsoleLogger(new NullOutput());
+    $renderer->setLogger($logger);
 
     self::assertEquals($renderer->getName(), 'renderer');
 
