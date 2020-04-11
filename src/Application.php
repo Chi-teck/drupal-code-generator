@@ -10,7 +10,9 @@ use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\ResultPrinter;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Loader\FilesystemLoader;
@@ -56,6 +58,16 @@ class Application extends BaseApplication {
     $application->setHelperSet($helper_set);
 
     return $application;
+  }
+
+  /**
+   * Adds default DCG options to the command.
+   */
+  public static function addDefaultOptions(Command $command): void {
+    $command
+      ->addOption('working-dir', '-d', InputOption::VALUE_OPTIONAL, 'Working directory')
+      ->addOption('answer', '-a', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Answer to generator question')
+      ->addOption('dry-run', NULL, InputOption::VALUE_NONE, 'Output the generated code but not save it to file system');
   }
 
 }

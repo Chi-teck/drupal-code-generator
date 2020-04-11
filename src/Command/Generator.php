@@ -17,7 +17,6 @@ use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 
@@ -96,10 +95,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $this
       ->setName($this->name)
       ->setDescription($this->description)
-      ->addOption('working-dir', '-d', InputOption::VALUE_OPTIONAL, 'Working directory')
-      ->addOption('answer', '-a', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Answer to generator question')
-      ->addOption('dry-run', NULL, InputOption::VALUE_NONE, 'Output the generated code but not save it to file system')
       ->setAliases($this->alias ? [$this->alias] : []);
+    Application::addDefaultOptions($this);
   }
 
   /**
