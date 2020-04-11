@@ -70,10 +70,8 @@ class ContentEntityTest extends BrowserTestBase {
     self::assertNull($entity_type->getDataTable());
 
     $handlers = [
-      'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',
       'list_builder' => 'Drupal\sigma\ExampleListBuilder',
       'views_data' => 'Drupal\views\EntityViewsData',
-      'access' => 'Drupal\Core\Entity\EntityAccessControlHandler',
       'form' => [
         'add' => 'Drupal\sigma\Form\ExampleForm',
         'edit' => 'Drupal\sigma\Form\ExampleForm',
@@ -82,7 +80,9 @@ class ContentEntityTest extends BrowserTestBase {
       'route_provider' => [
         'html' => 'Drupal\Core\Entity\Routing\AdminHtmlRouteProvider',
       ],
+      'access' => 'Drupal\Core\Entity\EntityAccessControlHandler',
       'storage' => 'Drupal\Core\Entity\Sql\SqlContentEntityStorage',
+      'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',
     ];
 
     self::assertSame($handlers, $entity_type->getHandlerClasses());
@@ -100,11 +100,11 @@ class ContentEntityTest extends BrowserTestBase {
 
     $keys = [
       'id' => 'id',
-      'revision' => '',
-      'langcode' => '',
-      'bundle' => '',
       'label' => 'label',
       'uuid' => 'uuid',
+      'revision' => '',
+      'bundle' => '',
+      'langcode' => '',
       'default_langcode' => 'default_langcode',
       'revision_translation_affected' => 'revision_translation_affected',
     ];
@@ -133,7 +133,7 @@ class ContentEntityTest extends BrowserTestBase {
 
     // -- Test entity values.
     $entity = Example::load(1);
-    self::assertSame(1, $entity->id());
+    self::assertSame('1', $entity->id());
     self::assertSame('Beer', $entity->label());
     drupal_flush_all_caches();
     self::assertSame('Dark', $entity->get('field_foo')->getString());

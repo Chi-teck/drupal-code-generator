@@ -106,7 +106,7 @@ class RestResourceTest extends ResourceTestBase {
 
     self::assertSame(200, $response->getStatusCode());
     $expected_body = '{"id":"1","title":"Alpha","description":"Some description","price":"10"}';
-    self::assertSame($expected_body, $response->getBody());
+    self::assertEquals($expected_body, $response->getBody());
 
     // Request for non existing record should return 404.
     $url = Url::fromRoute($route_prefix . $method, ['id' => 100, '_format' => self::$format]);
@@ -125,7 +125,7 @@ class RestResourceTest extends ResourceTestBase {
 
     self::assertSame(201, $response->getStatusCode());
     $expected_body = '{"id":"2","title":"Beta","description":"Some description","price":"125"}';
-    self::assertSame($expected_body, $response->getBody());
+    self::assertEquals($expected_body, $response->getBody());
 
     // -- Test data validation.
     // Wrong data type.
@@ -135,7 +135,7 @@ class RestResourceTest extends ResourceTestBase {
 
     self::assertSame(400, $response->getStatusCode());
     $expected_body = '{"message":"No record content received."}';
-    self::assertSame($expected_body, $response->getBody());
+    self::assertEquals($expected_body, $response->getBody());
 
     // Unexpected property.
     $request_options[RequestOptions::BODY] = '{"foo": "bar"}';
@@ -144,7 +144,7 @@ class RestResourceTest extends ResourceTestBase {
 
     self::assertSame(400, $response->getStatusCode());
     $expected_body = '{"message":"Record structure is not correct."}';
-    self::assertSame($expected_body, $response->getBody());
+    self::assertEquals($expected_body, $response->getBody());
 
     // Missing title.
     $request_options[RequestOptions::BODY] = '{"description": "Some description"}';
@@ -153,7 +153,7 @@ class RestResourceTest extends ResourceTestBase {
 
     self::assertSame(400, $response->getStatusCode());
     $expected_body = '{"message":"Title is required."}';
-    self::assertSame($expected_body, $response->getBody());
+    self::assertEquals($expected_body, $response->getBody());
 
     // Too big title.
     $request_options[RequestOptions::BODY] = json_encode(['title' => str_repeat('x', 256)]);
@@ -162,7 +162,7 @@ class RestResourceTest extends ResourceTestBase {
 
     self::assertSame(400, $response->getStatusCode());
     $expected_body = '{"message":"Title is too big."}';
-    self::assertSame($expected_body, $response->getBody());
+    self::assertEquals($expected_body, $response->getBody());
 
     // -- Test PATCH method.
     $method = 'PATCH';
@@ -173,7 +173,7 @@ class RestResourceTest extends ResourceTestBase {
 
     self::assertSame(200, $response->getStatusCode());
     $expected_body = '{"id":"1","title":"Alpha patched","description":"Some description","price":"10"}';
-    self::assertSame($expected_body, $response->getBody());
+    self::assertEquals($expected_body, $response->getBody());
 
     // -- Test DELETE method.
     $method = 'DELETE';
@@ -181,7 +181,7 @@ class RestResourceTest extends ResourceTestBase {
     $response = $this->request($method, $url, []);
 
     self::assertSame(204, $response->getStatusCode());
-    self::assertSame('', $response->getBody());
+    self::assertEquals('', $response->getBody());
   }
 
   /**

@@ -86,7 +86,6 @@ class ContentEntityTest extends BrowserTestBase {
     self::assertSame('example_field_data', $entity_type->getDataTable());
 
     $handlers = [
-      'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',
       'list_builder' => 'Drupal\nigma\ExampleListBuilder',
       'views_data' => 'Drupal\views\EntityViewsData',
       'access' => 'Drupal\nigma\ExampleAccessControlHandler',
@@ -99,6 +98,7 @@ class ContentEntityTest extends BrowserTestBase {
         'html' => 'Drupal\Core\Entity\Routing\AdminHtmlRouteProvider',
       ],
       'storage' => 'Drupal\Core\Entity\Sql\SqlContentEntityStorage',
+      'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',
     ];
 
     self::assertSame($handlers, $entity_type->getHandlerClasses());
@@ -160,7 +160,7 @@ class ContentEntityTest extends BrowserTestBase {
 
     // -- Test entity values.
     $entity = Example::load(1);
-    self::assertSame(1, $entity->id());
+    self::assertSame('1', $entity->id());
     self::assertSame('Beer', $entity->label());
     self::assertSame('foo', $entity->bundle());
     self::assertSame('Dark, plain_text', $entity->get('description')->getString());

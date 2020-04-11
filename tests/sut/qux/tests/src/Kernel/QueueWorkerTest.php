@@ -25,8 +25,8 @@ class QueueWorkerTest extends KernelTestBase {
       ->createInstance('qux_example');
 
     // Check plugin definition.
-    self::assertSame('qux_example', $plugin->getPluginId());
-    self::assertSame('Example', $plugin->getPluginDefinition()['title']);
+    self::assertEquals('qux_example', $plugin->getPluginId());
+    self::assertEquals('Example', $plugin->getPluginDefinition()['title']);
     self::assertSame(['time' => 60], $plugin->getPluginDefinition()['cron']);
 
     // As the plugin does nothing just make sure it can process items without

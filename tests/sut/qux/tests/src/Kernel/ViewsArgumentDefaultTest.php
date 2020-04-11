@@ -35,9 +35,9 @@ class ViewsArgumentDefaultTest extends KernelTestBase {
     ];
     $form = [];
     $plugin->buildOptionsForm($form, new FormState());
-    self::assertSame($expected_form, $form);
+    self::assertEquals($expected_form, $form);
 
-    self::assertSame('123', $plugin->getArgument());
+    self::assertEquals('123', $plugin->getArgument());
     self::assertSame(Cache::PERMANENT, $plugin->getCacheMaxAge());
     self::assertSame([], $plugin->getCacheContexts());
   }

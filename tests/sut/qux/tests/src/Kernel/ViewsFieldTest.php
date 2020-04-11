@@ -28,7 +28,7 @@ class ViewsFieldTest extends KernelTestBase {
     $plugin->options['example'] = 'bar';
 
     $output = $plugin->render(new ResultRow(['unknown' => 'foo']));
-    self::assertSame('foo', $output);
+    self::assertEquals('foo', $output);
   }
 
 }
