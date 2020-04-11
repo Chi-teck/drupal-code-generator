@@ -19,11 +19,21 @@ final class CompactorTest extends TestCase {
       // @codingStandardsIgnoreLine
       eval('namespace Herrera\Box\Compactor; class Compactor {}');
     }
-    $code = "<?php\n// Comment.\nif (TRUE) {\n  echo 'bar';\n}\n";
-    self::assertSame(
-      "<?php\nif (TRUE) { echo 'bar'; } ",
-      (new PhpCompactor())->compact($code)
-    );
+    $code_before = <<< 'EOT'
+      <?php
+      // Comment.
+      if (TRUE) {
+        echo 'bar';
+      }
+
+      EOT;
+
+    $code_after = <<< 'EOT'
+      <?php
+      if (TRUE) { echo 'bar'; } 
+      EOT;
+
+    self::assertSame($code_after, (new PhpCompactor())->compact($code_before));
   }
 
 }
