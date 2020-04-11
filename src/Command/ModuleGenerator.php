@@ -13,7 +13,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
 
   protected $nameQuestion = 'Module name';
   protected $machineNameQuestion = 'Module machine name';
-  protected $extensionType = 'module';
+  protected $extensionType = self::EXTENSION_TYPE_MODULE;
 
   /**
    * Adds an asset for service file.

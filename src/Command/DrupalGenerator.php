@@ -12,6 +12,10 @@ use Symfony\Component\Console\Question\Question;
  */
 abstract class DrupalGenerator extends Generator {
 
+  public const EXTENSION_TYPE_MODULE = 0x01;
+  public const EXTENSION_TYPE_THEME = 0x02;
+  public const EXTENSION_TYPE_PROFILE = 0x03;
+
   /**
    * Name question.
    *
