@@ -96,7 +96,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $this
       ->setName($this->name)
       ->setDescription($this->description)
-      ->addOption('directory', '-d', InputOption::VALUE_OPTIONAL, 'Working directory')
+      ->addOption('working-dir', '-d', InputOption::VALUE_OPTIONAL, 'Working directory')
       ->addOption('answer', '-a', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Answer to generator question')
       ->addOption('dry-run', NULL, InputOption::VALUE_NONE, 'Output the generated code but not save it to file system')
       ->setAliases($this->alias ? [$this->alias] : []);
@@ -140,7 +140,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       }
     }
 
-    $this->directory = $input->getOption('directory') ?: getcwd();
+    $this->directory = $input->getOption('working-dir') ?: getcwd();
 
     $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
   }

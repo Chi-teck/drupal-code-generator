@@ -141,7 +141,7 @@ class GeneratorTester {
   public function execute(): int {
     return $this->commandTester
       ->setInputs(array_values($this->interaction))
-      ->execute(['--directory' => $this->getDirectory()]);
+      ->execute(['--working-dir' => $this->getDirectory()]);
   }
 
   /**

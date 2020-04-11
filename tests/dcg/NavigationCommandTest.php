@@ -38,7 +38,7 @@ final class NavigationCommandTest extends BaseTestCase {
     preg_match_all('/\s([^\s]+)⏎/', $fixture, $matches);
     $command_tester->setInputs($matches[1]);
 
-    $input = ['--directory' => $this->directory];
+    $input = ['--working-dir' => $this->directory];
     $command_tester->execute($input);
 
     $expected_output = rtrim(preg_replace('/[^\s]+⏎/', '', $fixture));

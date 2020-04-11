@@ -51,7 +51,7 @@ final class Navigation extends Command {
       ->setDescription('Command line code generator')
       ->setHelp($help)
       ->setHidden(TRUE)
-      ->addOption('directory', '-d', InputOption::VALUE_OPTIONAL, 'Working directory');
+      ->addOption('working-dir', '-d', InputOption::VALUE_OPTIONAL, 'Working directory');
   }
 
   /**
