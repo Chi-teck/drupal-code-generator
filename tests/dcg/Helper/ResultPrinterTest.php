@@ -32,7 +32,7 @@ final class ResultPrinterTest extends TestCase {
     $question_helper = new QuestionHelper();
     $io = new GeneratorStyle($input, $output, $question_helper);
 
-    $printer = new ResultPrinter();
+    $printer = new ResultPrinter(TRUE);
     $printer->setHelperSet($helper_set);
 
     self::assertEquals('result_printer', $printer->getName());

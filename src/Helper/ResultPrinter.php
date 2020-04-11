@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
@@ -15,6 +16,20 @@ use Symfony\Component\Console\Helper\TableStyle;
 class ResultPrinter extends Helper implements IOAwareInterface {
 
   use IOAwareTrait;
+
+  /**
+   * Always print full path.
+   *
+   * @var bool
+   */
+  private $fullPath;
+
+  /**
+   * ResultPrinter constructor.
+   */
+  public function __construct(bool $full_path) {
+    $this->fullPath = $full_path;
+  }
 
   /**
    * {@inheritdoc}
@@ -32,21 +47,21 @@ class ResultPrinter extends Helper implements IOAwareInterface {
    *   (Optional) Base path.
    */
   public function printResult(AssetCollection $assets, string $base_path = ''): void {
-
     if (count($assets) == 0) {
       return;
     }
 
     $this->io->title('The following directories and files have been created or updated:');
 
-    // Table.
+    // -- Table.
     if ($this->io->isVerbose()) {
       $headers[] = ['Type', 'Path', 'Lines', 'Size'];
 
       $rows = [];
 
       foreach ($assets->getDirectories()->getSorted() as $directory) {
-        $rows[] = ['directory', $base_path . $directory->getPath(), '-', '-'];
+        // phpcs:ignore Drupal.Arrays.Array.LongLineDeclaration
+        $rows[] = ['directory', $this->formatPath($base_path, $directory), '-', '-'];
       }
 
       $total_size = 0;
@@ -57,11 +72,11 @@ class ResultPrinter extends Helper implements IOAwareInterface {
         $total_size += $size;
         $lines = $size == 0 ? 0 : substr_count($file->getContent(), "\n") + 1;
         $total_lines += $lines;
-        $rows[] = ['file', $base_path . $file->getPath(), $lines, $size];
+        $rows[] = ['file', $this->formatPath($base_path, $file), $lines, $size];
       }
 
       foreach ($assets->getSymlinks()->getSorted() as $symlink) {
-        $rows[] = ['symlink', $base_path . $symlink->getPath(), '-', '-'];
+        $rows[] = ['symlink', $this->formatPath($base_path, $symlink), '-', '-'];
       }
 
       $rows[] = new TableSeparator();
@@ -84,23 +99,34 @@ class ResultPrinter extends Helper implements IOAwareInterface {
 
       $this->io->newLine();
     }
-    // Bulleted list.
+    // -- Bulleted list.
     else {
       $dumped_files = [];
       // Group results by asset type.
       $assets = $assets->getSorted();
       foreach ($assets->getDirectories() as $directory) {
-        $dumped_files[] = $base_path . $directory->getPath();
+        $dumped_files[] = $this->formatPath($base_path, $directory);
       }
       foreach ($assets->getFiles() as $file) {
-        $dumped_files[] = $base_path . $file->getPath();
+        $dumped_files[] = $this->formatPath($base_path, $file);
       }
       foreach ($assets->getSymlinks() as $symlink) {
-        $dumped_files[] = $base_path . $symlink->getPath();
+        $dumped_files[] = $this->formatPath($base_path, $symlink);
       }
       $this->io->listing($dumped_files);
     }
 
+  }
+
+  /**
+   * Returns formatted path of a given asset.
+   */
+  protected function formatPath(string $base_path, Asset $asset): string {
+    $path = $asset->getPath();
+    if ($this->fullPath && $path[0] != '/') {
+      $path = $base_path . $path;
+    }
+    return $path;
   }
 
 }

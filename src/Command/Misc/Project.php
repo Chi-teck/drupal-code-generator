@@ -147,8 +147,8 @@ final class Project extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function printSummary(AssetCollection $dumped_assets): void {
-    parent::printSummary($dumped_assets);
+  protected function printSummary(AssetCollection $dumped_assets, string $base_path): void {
+    parent::printSummary($dumped_assets, $base_path);
 
     $message = [
       'Next steps:',

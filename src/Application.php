@@ -46,7 +46,7 @@ class Application extends BaseApplication {
       new QuestionHelper(),
       new Dumper(new Filesystem()),
       new Renderer(new TwigEnvironment(new FilesystemLoader())),
-      new ResultPrinter(),
+      new ResultPrinter(FALSE),
       new LoggerFactory(),
     ]);
 
