@@ -61,12 +61,12 @@ class ContentEntityTest extends BrowserTestBase {
     $entity_type = \Drupal::entityTypeManager()->getDefinition('example');
 
     // -- Test bundle properties.
-    self::assertEquals('example', $entity_type->getBaseTable());
-    self::assertEquals('Drupal\sigma\Entity\Example', $entity_type->getClass());
-    self::assertEquals('Drupal\Core\Entity\EntityAccessControlHandler', $entity_type->getAccessControlClass());
-    self::assertEquals('administer example', $entity_type->getAdminPermission());
+    self::assertSame('example', $entity_type->getBaseTable());
+    self::assertSame('Drupal\sigma\Entity\Example', $entity_type->getClass());
+    self::assertSame('Drupal\Core\Entity\EntityAccessControlHandler', $entity_type->getAccessControlClass());
+    self::assertSame('administer example', $entity_type->getAdminPermission());
     self::assertNull($entity_type->getBundleEntityType());
-    self::assertEquals('Example bundle', $entity_type->getBundleLabel());
+    self::assertSame('Example bundle', $entity_type->getBundleLabel());
     self::assertNull($entity_type->getDataTable());
 
     $handlers = [
@@ -85,7 +85,7 @@ class ContentEntityTest extends BrowserTestBase {
       'storage' => 'Drupal\Core\Entity\Sql\SqlContentEntityStorage',
     ];
 
-    self::assertEquals($handlers, $entity_type->getHandlerClasses());
+    self::assertSame($handlers, $entity_type->getHandlerClasses());
     self::assertFalse($entity_type->isRevisionable());
     self::assertFalse($entity_type->isTranslatable());
 
@@ -96,7 +96,7 @@ class ContentEntityTest extends BrowserTestBase {
       'delete-form' => '/example/{example}/delete',
       'collection' => '/admin/content/example',
     ];
-    self::assertEquals($link_templates, $entity_type->getLinkTemplates());
+    self::assertSame($link_templates, $entity_type->getLinkTemplates());
 
     $keys = [
       'id' => 'id',
@@ -108,7 +108,7 @@ class ContentEntityTest extends BrowserTestBase {
       'default_langcode' => 'default_langcode',
       'revision_translation_affected' => 'revision_translation_affected',
     ];
-    self::assertEquals($keys, $entity_type->getKeys());
+    self::assertSame($keys, $entity_type->getKeys());
 
     // -- Create a new entity.
     $this->drupalGet('/example/add');
@@ -133,10 +133,10 @@ class ContentEntityTest extends BrowserTestBase {
 
     // -- Test entity values.
     $entity = Example::load(1);
-    self::assertEquals(1, $entity->id());
-    self::assertEquals('Beer', $entity->label());
+    self::assertSame(1, $entity->id());
+    self::assertSame('Beer', $entity->label());
     drupal_flush_all_caches();
-    self::assertEquals('Dark', $entity->get('field_foo')->getString());
+    self::assertSame('Dark', $entity->get('field_foo')->getString());
 
     $edit = [
       'label[0][value]' => 'Wine',

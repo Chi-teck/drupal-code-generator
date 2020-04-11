@@ -29,7 +29,7 @@ class ResponsePolicyTest extends KernelTestBase {
     $request = new Request();
     self::assertNull($request_policy->check($response, $request));
     $request->cookies->set('foo', 'bar');
-    self::assertEquals('deny', $request_policy->check($response, $request));
+    self::assertSame('deny', $request_policy->check($response, $request));
   }
 
 }

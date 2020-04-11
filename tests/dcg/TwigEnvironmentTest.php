@@ -19,7 +19,7 @@ final class TwigEnvironmentTest extends TestCase {
     $twig = new TwigEnvironment($twig_loader);
     $expected = file_get_contents(__DIR__ . '/_twig_environment_fixture.txt');
     $result = $twig->render('twig-environment-template.twig', []);
-    self::assertEquals($expected, $result);
+    self::assertSame($expected, $result);
   }
 
 }

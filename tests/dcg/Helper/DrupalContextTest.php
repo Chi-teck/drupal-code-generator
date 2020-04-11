@@ -51,14 +51,14 @@ final class DrupalContextTest extends TestCase {
       'bar' => 'Bar',
       'qux' => 'Qux',
     ];
-    self::assertEquals($modules, $drupal_context->getExtensionList('module'));
+    self::assertSame($modules, $drupal_context->getExtensionList('module'));
 
     $themes = [
       'alpha' => 'Alpha',
       'beta' => 'Beta',
       'gamma' => 'Gamma',
     ];
-    self::assertEquals($themes, $drupal_context->getExtensionList('theme'));
+    self::assertSame($themes, $drupal_context->getExtensionList('theme'));
 
     self::expectException(\UnexpectedValueException::class);
     self::expectExceptionMessage('Unsupported extension type "wrong"');
@@ -72,15 +72,15 @@ final class DrupalContextTest extends TestCase {
     $drupal_context = new DrupalContext($this->container, '/path');
 
     // New module.
-    self::assertEquals('/path/modules', $drupal_context->getDestination('module', TRUE, 'does not matter'));
+    self::assertSame('/path/modules', $drupal_context->getDestination('module', TRUE, 'does not matter'));
     // Existing module.
-    self::assertEquals('/path/modules/custom/bar', $drupal_context->getDestination('module', FALSE, 'bar'));
+    self::assertSame('/path/modules/custom/bar', $drupal_context->getDestination('module', FALSE, 'bar'));
     // Existing module which is not really exists.
-    self::assertEquals('/path/modules/fake', $drupal_context->getDestination('module', FALSE, 'fake'));
+    self::assertSame('/path/modules/fake', $drupal_context->getDestination('module', FALSE, 'fake'));
     // New theme.
-    self::assertEquals('/path/themes', $drupal_context->getDestination('theme', TRUE, 'does not matter'));
+    self::assertSame('/path/themes', $drupal_context->getDestination('theme', TRUE, 'does not matter'));
     // Existing theme.
-    self::assertEquals('/path/themes/gamma', $drupal_context->getDestination('theme', FALSE, 'gamma'));
+    self::assertSame('/path/themes/gamma', $drupal_context->getDestination('theme', FALSE, 'gamma'));
 
     self::expectException(\UnexpectedValueException::class);
     self::expectExceptionMessage('Unsupported extension type "wrong"');

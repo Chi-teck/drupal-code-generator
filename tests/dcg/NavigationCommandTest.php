@@ -43,7 +43,7 @@ final class NavigationCommandTest extends BaseTestCase {
 
     $expected_output = rtrim(preg_replace('/[^\s]+⏎/', '', $fixture));
     $output = rtrim($command_tester->getDisplay());
-    self::assertEquals($expected_output, $output);
+    self::assertSame($expected_output, $output);
 
     /** @var \Symfony\Component\Console\Command\HelpCommand $help */
     $help = $application->find('help');

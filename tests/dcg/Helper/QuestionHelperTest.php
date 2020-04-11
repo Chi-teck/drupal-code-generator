@@ -26,12 +26,12 @@ final class QuestionHelperTest extends TestCase {
 
     $question = new Question('What time is it?', '3:00');
     $answer = (new QuestionHelper())->ask($input, $output, $question);
-    self::assertEquals('3:00', $answer);
+    self::assertSame('3:00', $answer);
 
     $expected_display = "\n";
     $expected_display .= " What time is it? [3:00]:\n";
     $expected_display .= ' ➤ ';
-    self::assertEquals($expected_display, $this->getDisplay($output));
+    self::assertSame($expected_display, $this->getDisplay($output));
 
     // -- Question without default value.
     $output = $this->createOutput();
@@ -39,12 +39,12 @@ final class QuestionHelperTest extends TestCase {
 
     $question = new Question('What time is it?');
     $answer = (new QuestionHelper())->ask($input, $output, $question);
-    self::assertEquals('4:00', $answer);
+    self::assertSame('4:00', $answer);
 
     $expected_display = "\n";
     $expected_display .= " What time is it?\n";
     $expected_display .= ' ➤ ';
-    self::assertEquals($expected_display, $this->getDisplay($output));
+    self::assertSame($expected_display, $this->getDisplay($output));
 
     // -- Question with validator.
     $output = $this->createOutput();
@@ -59,7 +59,7 @@ final class QuestionHelperTest extends TestCase {
     };
     $question->setValidator($validator);
     $answer = (new QuestionHelper())->ask($input, $output, $question);
-    self::assertEquals('5:00', $answer);
+    self::assertSame('5:00', $answer);
 
     $expected_display = "\n";
     $expected_display .= " What time is it?\n";
@@ -67,7 +67,7 @@ final class QuestionHelperTest extends TestCase {
     $expected_display .= "\n";
     $expected_display .= " What time is it?\n";
     $expected_display .= ' ➤ ';
-    self::assertEquals($expected_display, $this->getDisplay($output));
+    self::assertSame($expected_display, $this->getDisplay($output));
 
     // -- Confirmation question.
     $output = $this->createOutput();
@@ -80,7 +80,7 @@ final class QuestionHelperTest extends TestCase {
     $expected_display = "\n";
     $expected_display .= " Are you ready? [Yes]:\n";
     $expected_display .= ' ➤ ';
-    self::assertEquals($expected_display, $this->getDisplay($output));
+    self::assertSame($expected_display, $this->getDisplay($output));
 
     // -- Choice question.
     $output = $this->createOutput();
@@ -94,7 +94,7 @@ final class QuestionHelperTest extends TestCase {
     $question = new ChoiceQuestion('What time is it?', $choices);
     $question->setAutocompleterValues(NULL);
     $answer = (new QuestionHelper())->ask($input, $output, $question);
-    self::assertEquals('5:00', $answer);
+    self::assertSame('5:00', $answer);
 
     $expected_display = "\n";
     $expected_display .= " What time is it?\n";
@@ -102,7 +102,7 @@ final class QuestionHelperTest extends TestCase {
     $expected_display .= "  [1] 4:00\n";
     $expected_display .= "  [2] 5:00\n";
     $expected_display .= "  ➤➤➤ ";
-    self::assertEquals($expected_display, $this->getDisplay($output));
+    self::assertSame($expected_display, $this->getDisplay($output));
 
     // -- Question answer option.
     $output = $this->createOutput();
@@ -111,15 +111,15 @@ final class QuestionHelperTest extends TestCase {
     $dialog = new QuestionHelper();
     $question = new Question('What time is it?');
     $answer = $dialog->ask($input, $output, $question);
-    self::assertEquals('5:00', $answer);
+    self::assertSame('5:00', $answer);
 
     $question = new Question('What time is it?', '3:00');
     $answer = $dialog->ask($input, $output, $question);
-    self::assertEquals('3:00', $answer);
+    self::assertSame('3:00', $answer);
 
     $question = new Question('What time is it?');
     $answer = $dialog->ask($input, $output, $question);
-    self::assertEquals('4:00', $answer);
+    self::assertSame('4:00', $answer);
 
     $expected_display = "\n";
     $expected_display .= " What time is it?\n";
@@ -130,7 +130,7 @@ final class QuestionHelperTest extends TestCase {
     $expected_display .= "\n";
     $expected_display .= " What time is it?\n";
     $expected_display .= " ➤ 4:00\n";
-    self::assertEquals($expected_display, $this->getDisplay($output));
+    self::assertSame($expected_display, $this->getDisplay($output));
 
   }
 

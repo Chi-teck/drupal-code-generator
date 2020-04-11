@@ -67,7 +67,7 @@ class CkePluginTest extends WebDriverTestBase {
     $dialog = $this->assertSession()->waitForElementVisible('xpath', '//div[contains(@class, "cke_editor_edit-body-0-value_dialog")]');
     self::assertNotNull($dialog);
     $title = $dialog->find('xpath', '//div[@class = "cke_dialog_title"]');
-    self::assertEquals('Abbreviation properties', $title->getHtml());
+    self::assertSame('Abbreviation properties', $title->getHtml());
 
     $dialog->fillField('Abbreviation', 'foo');
     $dialog->fillField('Explanation', 'bar');

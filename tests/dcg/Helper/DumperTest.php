@@ -202,7 +202,7 @@ final class DumperTest extends BaseTestCase {
     $this->assertContent($expected_content);
 
     $permissions = decoct(fileperms($this->directory . '/prize.txt'));
-    self::assertEquals($permissions, '100757');
+    self::assertSame($permissions, '100757');
 
     $this->assertEmptyOutput();
   }
@@ -370,7 +370,7 @@ final class DumperTest extends BaseTestCase {
    */
   private function assertOutput(string $expected_output): void {
     $expected_output = str_replace('{dir}', $this->directory, $expected_output);
-    self::assertEquals($expected_output, $this->output->fetch());
+    self::assertSame($expected_output, $this->output->fetch());
   }
 
   /**

@@ -23,7 +23,7 @@ class RequestPolicyTest extends KernelTestBase {
   public function testRequestPolicy() {
     $request_policy = \Drupal::service('zippo.page_cache_request_policy.example');
     self::assertNull($request_policy->check(new Request()));
-    self::assertEquals('deny', $request_policy->check(new Request(['no-cache' => 1])));
+    self::assertSame('deny', $request_policy->check(new Request(['no-cache' => 1])));
   }
 
 }

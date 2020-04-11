@@ -25,7 +25,7 @@ final class UtilsTest extends BaseTestCase {
    * @dataProvider machineToHumanProvider
    */
   public function testMachineToHuman(string $machine_name, string $expected_human_name, bool $title_case): void {
-    self::assertEquals($expected_human_name, Utils::machine2human($machine_name, $title_case));
+    self::assertSame($expected_human_name, Utils::machine2human($machine_name, $title_case));
   }
 
   /**
@@ -46,7 +46,7 @@ final class UtilsTest extends BaseTestCase {
    * @dataProvider human2machineProvider
    */
   public function testHumanToMachine(string $human_name, string $expected_machine_name): void {
-    self::assertEquals($expected_machine_name, Utils::human2machine($human_name));
+    self::assertSame($expected_machine_name, Utils::human2machine($human_name));
   }
 
   /**
@@ -69,7 +69,7 @@ final class UtilsTest extends BaseTestCase {
    * @dataProvider camel2machineProvider
    */
   public function testCamelToMachine(string $camel_input, string $expected_machine_name): void {
-    self::assertEquals($expected_machine_name, Utils::camel2machine($camel_input));
+    self::assertSame($expected_machine_name, Utils::camel2machine($camel_input));
   }
 
   /**
@@ -90,7 +90,7 @@ final class UtilsTest extends BaseTestCase {
    * @dataProvider camelizeProvider
    */
   public function testCamelize(string $text, bool $upper_camel, string $expected): void {
-    self::assertEquals($expected, Utils::camelize($text, $upper_camel));
+    self::assertSame($expected, Utils::camelize($text, $upper_camel));
   }
 
   /**
@@ -117,7 +117,7 @@ final class UtilsTest extends BaseTestCase {
    */
   public function testGetExtensionRoot(string $target_directory, $expected_extension_root): void {
     $extension_root = Utils::getExtensionRoot($target_directory);
-    self::assertEquals($expected_extension_root, $extension_root);
+    self::assertSame($expected_extension_root, $extension_root);
   }
 
   /**
@@ -126,7 +126,7 @@ final class UtilsTest extends BaseTestCase {
   public function getExtensionRootProvider(): array {
     $extension_root = sys_get_temp_dir() . '/dcg_sandbox/foo';
     return [
-      ['/tmp', FALSE],
+      ['/tmp', NULL],
       [$extension_root, $extension_root],
       [$extension_root . '/src', $extension_root],
       [$extension_root . '/src/Plugin', $extension_root],
@@ -147,7 +147,7 @@ final class UtilsTest extends BaseTestCase {
       Utils::replaceTokens($input, $vars);
     }
     else {
-      self::assertEquals($expected_output, Utils::replaceTokens($input, $vars));
+      self::assertSame($expected_output, Utils::replaceTokens($input, $vars));
     }
   }
 
@@ -185,7 +185,7 @@ final class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::testAddSlashes()
    */
   public function testAddSlashes(): void {
-    self::assertEquals('foo \{node\} bar', Utils::addSlashes('foo {node} bar'));
+    self::assertSame('foo \{node\} bar', Utils::addSlashes('foo {node} bar'));
   }
 
   /**
@@ -194,7 +194,7 @@ final class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::testAddSlashes()
    */
   public function testStripSlashes(): void {
-    self::assertEquals('foo {node} bar', Utils::stripSlashes('foo \{node\} bar'));
+    self::assertSame('foo {node} bar', Utils::stripSlashes('foo \{node\} bar'));
   }
 
   /**
@@ -203,10 +203,10 @@ final class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::pluralize()
    */
   public function testPluralize(): void {
-    self::assertEquals('cats', Utils::pluralize('cat'));
-    self::assertEquals('flies', Utils::pluralize('fly'));
-    self::assertEquals('bosses', Utils::pluralize('boss'));
-    self::assertEquals('mice', Utils::pluralize('mouse'));
+    self::assertSame('cats', Utils::pluralize('cat'));
+    self::assertSame('flies', Utils::pluralize('fly'));
+    self::assertSame('bosses', Utils::pluralize('boss'));
+    self::assertSame('mice', Utils::pluralize('mouse'));
   }
 
 }

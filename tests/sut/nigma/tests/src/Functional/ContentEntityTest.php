@@ -77,13 +77,13 @@ class ContentEntityTest extends BrowserTestBase {
     $entity_type = \Drupal::entityTypeManager()->getDefinition('example');
 
     // -- Test bundle properties.
-    self::assertEquals('example', $entity_type->getBaseTable());
-    self::assertEquals('Drupal\nigma\Entity\Example', $entity_type->getClass());
-    self::assertEquals('Drupal\nigma\ExampleAccessControlHandler', $entity_type->getAccessControlClass());
-    self::assertEquals('administer example types', $entity_type->getAdminPermission());
-    self::assertEquals('example_type', $entity_type->getBundleEntityType());
-    self::assertEquals('Example type', $entity_type->getBundleLabel());
-    self::assertEquals('example_field_data', $entity_type->getDataTable());
+    self::assertSame('example', $entity_type->getBaseTable());
+    self::assertSame('Drupal\nigma\Entity\Example', $entity_type->getClass());
+    self::assertSame('Drupal\nigma\ExampleAccessControlHandler', $entity_type->getAccessControlClass());
+    self::assertSame('administer example types', $entity_type->getAdminPermission());
+    self::assertSame('example_type', $entity_type->getBundleEntityType());
+    self::assertSame('Example type', $entity_type->getBundleLabel());
+    self::assertSame('example_field_data', $entity_type->getDataTable());
 
     $handlers = [
       'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',
@@ -101,7 +101,7 @@ class ContentEntityTest extends BrowserTestBase {
       'storage' => 'Drupal\Core\Entity\Sql\SqlContentEntityStorage',
     ];
 
-    self::assertEquals($handlers, $entity_type->getHandlerClasses());
+    self::assertSame($handlers, $entity_type->getHandlerClasses());
     self::assertTrue($entity_type->isRevisionable());
     self::assertTrue($entity_type->isTranslatable());
 
@@ -113,7 +113,7 @@ class ContentEntityTest extends BrowserTestBase {
       'delete-form' => '/admin/content/example/{example}/delete',
       'collection' => '/admin/content/example',
     ];
-    self::assertEquals($link_templates, $entity_type->getLinkTemplates());
+    self::assertSame($link_templates, $entity_type->getLinkTemplates());
 
     $keys = [
       'id' => 'id',
@@ -126,7 +126,7 @@ class ContentEntityTest extends BrowserTestBase {
       'default_langcode' => 'default_langcode',
       'revision_translation_affected' => 'revision_translation_affected',
     ];
-    self::assertEquals($keys, $entity_type->getKeys());
+    self::assertSame($keys, $entity_type->getKeys());
 
     // -- Create a new entity.
     $this->drupalGet('/admin/content/example/add');
@@ -160,11 +160,11 @@ class ContentEntityTest extends BrowserTestBase {
 
     // -- Test entity values.
     $entity = Example::load(1);
-    self::assertEquals(1, $entity->id());
-    self::assertEquals('Beer', $entity->label());
-    self::assertEquals('foo', $entity->bundle());
-    self::assertEquals('Dark, plain_text', $entity->get('description')->getString());
-    self::assertEquals('New revision', $entity->getRevisionLogMessage());
+    self::assertSame(1, $entity->id());
+    self::assertSame('Beer', $entity->label());
+    self::assertSame('foo', $entity->bundle());
+    self::assertSame('Dark, plain_text', $entity->get('description')->getString());
+    self::assertSame('New revision', $entity->getRevisionLogMessage());
 
     $edit = [
       'label[0][value]' => 'Wine',

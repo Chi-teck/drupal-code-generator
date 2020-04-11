@@ -27,19 +27,19 @@ final class RendererTest extends TestCase {
     $logger = new ConsoleLogger(new NullOutput());
     $renderer->setLogger($logger);
 
-    self::assertEquals($renderer->getName(), 'renderer');
+    self::assertSame($renderer->getName(), 'renderer');
 
     $content = $renderer->render('_template.twig', ['value' => 'example']);
-    self::assertEquals($content, "The value is example.\n");
+    self::assertSame($content, "The value is example.\n");
 
     $asset = (new File('foo'))
       ->template('_template.twig')
       ->vars(['value' => 'foo']);
     $renderer->renderAsset($asset);
-    self::assertEquals("The value is foo.\n", $asset->getContent());
+    self::assertSame("The value is foo.\n", $asset->getContent());
     $asset->vars(['value' => 'bar']);
     $renderer->renderAsset($asset);
-    self::assertEquals("The value is bar.\n", $asset->getContent());
+    self::assertSame("The value is bar.\n", $asset->getContent());
 
     $asset = (new File('foo'))
       ->template('_template.twig')
@@ -47,19 +47,19 @@ final class RendererTest extends TestCase {
       ->headerTemplate('_header_template.twig');
     $renderer->renderAsset($asset);
     $expected_content = "The name is foo.\n\nThe value is bar.\n";
-    self::assertEquals($expected_content, $asset->getContent());
+    self::assertSame($expected_content, $asset->getContent());
 
     $asset = (new File('foo'))
       ->content('example')
       ->template(NULL);
     $renderer->renderAsset($asset);
-    self::assertEquals('example', $asset->getContent());
+    self::assertSame('example', $asset->getContent());
 
     $asset = (new File('foo'))
       ->inlineTemplate('{{ a }} + {{ b }} = {{ a + b }}')
       ->vars(['a' => '2', 'b' => '3']);
     $renderer->renderAsset($asset);
-    self::assertEquals('2 + 3 = 5', $asset->getContent());
+    self::assertSame('2 + 3 = 5', $asset->getContent());
   }
 
 }

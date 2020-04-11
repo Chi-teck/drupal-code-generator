@@ -33,8 +33,8 @@ final class ApplicationTest extends BaseTestCase {
       ' • foo.install',
       '',
     ];
-    self::assertEquals($expected_output, $output);
-    self::assertEquals(0, $return);
+    self::assertSame($expected_output, $output);
+    self::assertSame(0, $return);
     self::assertFileExists($this->directory . '/foo.install');
   }
 

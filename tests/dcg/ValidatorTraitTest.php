@@ -41,7 +41,7 @@ final class ValidatorTraitTest extends TestCase {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage('The value is not correct machine name.');
     }
-    self::assertEquals($machine_name, $this->validator::validateMachineName($machine_name));
+    self::assertSame($machine_name, $this->validator::validateMachineName($machine_name));
   }
 
   /**
@@ -77,7 +77,7 @@ final class ValidatorTraitTest extends TestCase {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage('The value is not correct class name.');
     }
-    self::assertEquals($class_name, $this->validator::validateClassName($class_name));
+    self::assertSame($class_name, $this->validator::validateClassName($class_name));
   }
 
   /**
@@ -111,7 +111,7 @@ final class ValidatorTraitTest extends TestCase {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage('The value is not correct service name.');
     }
-    self::assertEquals($service_name, $this->validator::validateServiceName($service_name));
+    self::assertSame($service_name, $this->validator::validateServiceName($service_name));
   }
 
   /**
@@ -181,7 +181,7 @@ final class ValidatorTraitTest extends TestCase {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage($value ? 'The value is not correct machine name.' : 'The value is required.');
     }
-    self::assertEquals($value, $this->validator::validateRequiredMachineName($value));
+    self::assertSame($value, $this->validator::validateRequiredMachineName($value));
   }
 
   /**
@@ -214,7 +214,7 @@ final class ValidatorTraitTest extends TestCase {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage($value ? 'The value is not correct class name.' : 'The value is required.');
     }
-    self::assertEquals($value, $this->validator::validateRequiredClassName($value));
+    self::assertSame($value, $this->validator::validateRequiredClassName($value));
   }
 
   /**
@@ -247,7 +247,7 @@ final class ValidatorTraitTest extends TestCase {
       $this->expectException(\UnexpectedValueException::class);
       $this->expectExceptionMessage($value ? 'The value is not correct service name.' : 'The value is required.');
     }
-    self::assertEquals($value, $this->validator::validateRequiredServiceName($value));
+    self::assertSame($value, $this->validator::validateRequiredServiceName($value));
   }
 
   /**

@@ -104,14 +104,14 @@ class RestResourceTest extends ResourceTestBase {
     $url = Url::fromRoute($route_prefix . $method, ['id' => 1, '_format' => self::$format]);
     $response = $this->request($method, $url, []);
 
-    self::assertEquals(200, $response->getStatusCode());
+    self::assertSame(200, $response->getStatusCode());
     $expected_body = '{"id":"1","title":"Alpha","description":"Some description","price":"10"}';
-    self::assertEquals($expected_body, $response->getBody());
+    self::assertSame($expected_body, $response->getBody());
 
     // Request for non existing record should return 404.
     $url = Url::fromRoute($route_prefix . $method, ['id' => 100, '_format' => self::$format]);
     $response = $this->request($method, $url, []);
-    self::assertEquals(404, $response->getStatusCode());
+    self::assertSame(404, $response->getStatusCode());
 
     // -- Test POST method.
     $method = 'POST';
@@ -123,9 +123,9 @@ class RestResourceTest extends ResourceTestBase {
     $url = Url::fromRoute($route_prefix . $method, ['_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
-    self::assertEquals(201, $response->getStatusCode());
+    self::assertSame(201, $response->getStatusCode());
     $expected_body = '{"id":"2","title":"Beta","description":"Some description","price":"125"}';
-    self::assertEquals($expected_body, $response->getBody());
+    self::assertSame($expected_body, $response->getBody());
 
     // -- Test data validation.
     // Wrong data type.
@@ -133,36 +133,36 @@ class RestResourceTest extends ResourceTestBase {
     $url = Url::fromRoute($route_prefix . $method, ['_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
-    self::assertEquals(400, $response->getStatusCode());
+    self::assertSame(400, $response->getStatusCode());
     $expected_body = '{"message":"No record content received."}';
-    self::assertEquals($expected_body, $response->getBody());
+    self::assertSame($expected_body, $response->getBody());
 
     // Unexpected property.
     $request_options[RequestOptions::BODY] = '{"foo": "bar"}';
     $url = Url::fromRoute($route_prefix . $method, ['_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
-    self::assertEquals(400, $response->getStatusCode());
+    self::assertSame(400, $response->getStatusCode());
     $expected_body = '{"message":"Record structure is not correct."}';
-    self::assertEquals($expected_body, $response->getBody());
+    self::assertSame($expected_body, $response->getBody());
 
     // Missing title.
     $request_options[RequestOptions::BODY] = '{"description": "Some description"}';
     $url = Url::fromRoute($route_prefix . $method, ['_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
-    self::assertEquals(400, $response->getStatusCode());
+    self::assertSame(400, $response->getStatusCode());
     $expected_body = '{"message":"Title is required."}';
-    self::assertEquals($expected_body, $response->getBody());
+    self::assertSame($expected_body, $response->getBody());
 
     // Too big title.
     $request_options[RequestOptions::BODY] = json_encode(['title' => str_repeat('x', 256)]);
     $url = Url::fromRoute($route_prefix . $method, ['_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
-    self::assertEquals(400, $response->getStatusCode());
+    self::assertSame(400, $response->getStatusCode());
     $expected_body = '{"message":"Title is too big."}';
-    self::assertEquals($expected_body, $response->getBody());
+    self::assertSame($expected_body, $response->getBody());
 
     // -- Test PATCH method.
     $method = 'PATCH';
@@ -171,17 +171,17 @@ class RestResourceTest extends ResourceTestBase {
     $url = Url::fromRoute($route_prefix . $method, ['id' => 1, '_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
-    self::assertEquals(200, $response->getStatusCode());
+    self::assertSame(200, $response->getStatusCode());
     $expected_body = '{"id":"1","title":"Alpha patched","description":"Some description","price":"10"}';
-    self::assertEquals($expected_body, $response->getBody());
+    self::assertSame($expected_body, $response->getBody());
 
     // -- Test DELETE method.
     $method = 'DELETE';
     $url = Url::fromRoute($route_prefix . $method, ['id' => 1]);
     $response = $this->request($method, $url, []);
 
-    self::assertEquals(204, $response->getStatusCode());
-    self::assertEquals('', $response->getBody());
+    self::assertSame(204, $response->getStatusCode());
+    self::assertSame('', $response->getBody());
   }
 
   /**
