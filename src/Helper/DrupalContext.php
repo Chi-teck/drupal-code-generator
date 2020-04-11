@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\Command\DrupalGenerator;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -65,7 +66,7 @@ class DrupalContext extends Helper {
    */
   public function getExtensionList(string $extension_type): array {
     switch ($extension_type) {
-      case 'module':
+      case DrupalGenerator::EXTENSION_TYPE_MODULE:
         if (!$this->modules) {
           /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
           $module_handler = $this->container->get('module_handler');
@@ -75,7 +76,7 @@ class DrupalContext extends Helper {
         }
         return $this->modules;
 
-      case 'theme':
+      case DrupalGenerator::EXTENSION_TYPE_THEME:
         if (!$this->themes) {
           /** @var \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler */
           $theme_handler = $this->container->get('theme_handler');
@@ -85,7 +86,7 @@ class DrupalContext extends Helper {
         }
         return $this->themes;
 
-      case 'profile':
+      case DrupalGenerator::EXTENSION_TYPE_PROFILE:
         // @todo Support profiles.
         return [];
 
@@ -111,7 +112,7 @@ class DrupalContext extends Helper {
     $destination = NULL;
 
     switch ($extension_type) {
-      case 'module':
+      case DrupalGenerator::EXTENSION_TYPE_MODULE:
         $modules_dir = is_dir($this->getDrupalRoot() . '/modules/custom') ?
           'modules/custom' : 'modules';
 
@@ -120,13 +121,13 @@ class DrupalContext extends Helper {
         }
         elseif ($machine_name) {
           $module_handler = $this->container->get('module_handler');
-          $destination = isset($this->getExtensionList('module')[$machine_name])
+          $destination = isset($this->getExtensionList(DrupalGenerator::EXTENSION_TYPE_MODULE)[$machine_name])
             ? $module_handler->getModule($machine_name)->getPath()
             : $modules_dir . '/' . $machine_name;
         }
         break;
 
-      case 'theme':
+      case DrupalGenerator::EXTENSION_TYPE_THEME:
         $themes_dir = is_dir(DRUPAL_ROOT . '/themes/custom') ?
           'themes/custom' : 'themes';
 
@@ -135,13 +136,13 @@ class DrupalContext extends Helper {
         }
         elseif ($machine_name) {
           $theme_handler = $this->container->get('theme_handler');
-          $destination = isset($this->getExtensionList('theme')[$machine_name])
+          $destination = isset($this->getExtensionList(DrupalGenerator::EXTENSION_TYPE_THEME)[$machine_name])
             ? $theme_handler->getTheme($machine_name)->getPath()
             : $themes_dir . '/' . $machine_name;
         }
         break;
 
-      case 'profile':
+      case DrupalGenerator::EXTENSION_TYPE_PROFILE:
         // @todo Support profiles.
         break;
 
