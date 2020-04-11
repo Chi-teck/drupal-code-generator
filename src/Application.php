@@ -67,7 +67,8 @@ class Application extends BaseApplication {
     $command
       ->addOption('working-dir', '-d', InputOption::VALUE_OPTIONAL, 'Working directory')
       ->addOption('answer', '-a', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Answer to generator question')
-      ->addOption('dry-run', NULL, InputOption::VALUE_NONE, 'Output the generated code but not save it to file system');
+      ->addOption('dry-run', NULL, InputOption::VALUE_NONE, 'Output the generated code but not save it to file system')
+      ->addOption('destination', NULL, InputOption::VALUE_OPTIONAL, 'Path to a base directory for file writing');
   }
 
 }

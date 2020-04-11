@@ -159,7 +159,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $this->render();
 
-    $destination = $this->getDestination();
+    // Destination passed through command line option takes precedence over
+    // destination defined in a generator.
+    $destination = $input->getOption('destination') ?: $this->getDestination();
     $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
 
     $dumped_assets = $this->dump($destination, $input->getOption('dry-run'));
