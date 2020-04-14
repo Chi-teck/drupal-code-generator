@@ -18,13 +18,14 @@
   [16] Layout
   [17] Module
   [18] Module file
-  [19] Plugin manager
-  [20] Render element
-  [21] Service provider
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [19] PhpStorm metadata
+  [20] Plugin manager
+  [21] Render element
+  [22] Service provider
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 1⏎
  Select generator 
   [0] ..
@@ -53,13 +54,14 @@
   [16] Layout
   [17] Module
   [18] Module file
-  [19] Plugin manager
-  [20] Render element
-  [21] Service provider
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [19] PhpStorm metadata
+  [20] Plugin manager
+  [21] Render element
+  [22] Service provider
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 2⏎
  Select generator 
   [0] ..
@@ -87,13 +89,14 @@
   [16] Layout
   [17] Module
   [18] Module file
-  [19] Plugin manager
-  [20] Render element
-  [21] Service provider
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [19] PhpStorm metadata
+  [20] Plugin manager
+  [21] Render element
+  [22] Service provider
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 3⏎
  Select generator 
   [0] ..
@@ -189,13 +192,14 @@
   [16] Layout
   [17] Module
   [18] Module file
-  [19] Plugin manager
-  [20] Render element
-  [21] Service provider
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [19] PhpStorm metadata
+  [20] Plugin manager
+  [21] Render element
+  [22] Service provider
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 4⏎
  Select generator 
   [ 0] ..
@@ -233,13 +237,14 @@
   [16] Layout
   [17] Module
   [18] Module file
-  [19] Plugin manager
-  [20] Render element
-  [21] Service provider
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [19] PhpStorm metadata
+  [20] Plugin manager
+  [21] Render element
+  [22] Service provider
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 5⏎
  Select generator 
   [ 0] ..
@@ -279,13 +284,14 @@
   [16] Layout
   [17] Module
   [18] Module file
-  [19] Plugin manager
-  [20] Render element
-  [21] Service provider
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [19] PhpStorm metadata
+  [20] Plugin manager
+  [21] Render element
+  [22] Service provider
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 6⏎
  Select generator 
   [0] ..
@@ -315,13 +321,14 @@
   [16] Layout
   [17] Module
   [18] Module file
-  [19] Plugin manager
-  [20] Render element
-  [21] Service provider
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [19] PhpStorm metadata
+  [20] Plugin manager
+  [21] Render element
+  [22] Service provider
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 7⏎
  Select generator 
   [0] ..
@@ -355,13 +362,14 @@
   [16] Layout
   [17] Module
   [18] Module file
-  [19] Plugin manager
-  [20] Render element
-  [21] Service provider
-  [22] Template
-  [23] Theme
-  [24] Theme file
-  [25] Theme settings
+  [19] PhpStorm metadata
+  [20] Plugin manager
+  [21] Render element
+  [22] Service provider
+  [23] Template
+  [24] Theme
+  [25] Theme file
+  [26] Theme settings
   ➤➤➤➤ 14⏎
 
  Welcome to install-file generator!

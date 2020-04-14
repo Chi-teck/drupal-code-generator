@@ -48,6 +48,13 @@ class DrupalContext extends Helper {
   }
 
   /**
+   * Return Drupal container.
+   */
+  public function getContainer(): ContainerInterface {
+    return $this->container;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getName(): string {
