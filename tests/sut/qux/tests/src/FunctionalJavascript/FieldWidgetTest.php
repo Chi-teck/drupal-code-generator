@@ -25,6 +25,7 @@ class FieldWidgetTest extends FieldBaseTest {
     $page->pressButton('Save');
 
     // Check widget summary.
+    sleep(1);
     $xpath = '//tr[@id = "field-wine"]/td/div[@class = "field-plugin-summary" and text() = "Foo: bar"]';
     $assert_session->elementExists('xpath', $xpath);
 

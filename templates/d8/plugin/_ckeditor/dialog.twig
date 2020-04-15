@@ -2,12 +2,13 @@
  * @file
  * Defines dialog for {{ plugin_label }} CKEditor plugin.
  */
+
 (function (Drupal) {
 
   'use strict';
 
   // Dialog definition.
-  CKEDITOR.dialog.add('{{ command_name }}Dialog', function(editor) {
+  CKEDITOR.dialog.add('{{ command_name }}Dialog', function (editor) {
 
     return {
 
@@ -47,7 +48,7 @@
 
       // This method is invoked once a user clicks the OK button, confirming the
       // dialog.
-      onOk: function() {
+      onOk: function () {
 
         // The context of this function is the dialog object itself.
         // See http://docs.ckeditor.com/#!/api/CKEDITOR.dialog.
@@ -58,7 +59,7 @@
 
         // Set element attribute and text by getting the defined field values.
         abbr.setAttribute('title', dialog.getValueOf('tab-settings', 'title'));
-        abbr.setText( dialog.getValueOf('tab-settings', 'abbr'));
+        abbr.setText(dialog.getValueOf('tab-settings', 'abbr'));
 
         // Finally, insert the element into the editor at the caret position.
         editor.insertElement(abbr);

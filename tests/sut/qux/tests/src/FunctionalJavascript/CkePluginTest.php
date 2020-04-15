@@ -14,6 +14,11 @@ class CkePluginTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'classy';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['qux', 'node', 'ckeditor'];
 
   /**
@@ -38,9 +43,12 @@ class CkePluginTest extends WebDriverTestBase {
   public function testDialog() {
     $this->drupalGet('admin/config/content/formats/manage/test');
 
-    $button = $this->getSession()->getPage()->find('xpath', '//a[@title = "Example"]');
-    $group = $this->getSession()->getPage()->find('xpath', '//li[@data-drupal-ckeditor-toolbar-group-name = "Media"]');
-    $button->dragTo($group);
+    // NodeElement::dragTo() does not work in the latest Chrome.
+    $textarea_id = 'edit-editor-settings-toolbar-button-groups';
+    $textarea_value = '[[{"name":"Formatting","items":["Bold","Italic"]},{"name":"Linking","items":["DrupalLink","DrupalUnlink"]},{"name":"Lists","items":["BulletedList","NumberedList"]},{"name":"Media","items":["Blockquote","DrupalImage", "example"]},{"name":"Block Formatting","items":["Format"]}]]';
+    $script = sprintf('document.getElementById("%s").value = \'%s\'', $textarea_id, $textarea_value);
+    $this->getSession()->executeScript($script);
+
     $this->submitForm([], 'Save configuration');
 
     $this->drupalGet('node/add/test');

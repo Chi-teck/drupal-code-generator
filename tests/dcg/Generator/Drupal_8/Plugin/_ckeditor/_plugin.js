@@ -8,6 +8,7 @@
  *
  * @see http://docs.ckeditor.com/#!/guide/plugin_sdk_sample_1
  */
+
 (function (Drupal) {
 
   'use strict';
@@ -18,7 +19,7 @@
     icons: 'example',
 
     // The plugin initialization logic goes inside this method.
-    init: function(editor) {
+    init: function (editor) {
 
       // Define an editor command that opens our dialog window.
       editor.addCommand('example', new CKEDITOR.dialogCommand('exampleDialog'));
