@@ -14,6 +14,11 @@ class ExampleTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stable';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['foo'];
 
   /**
