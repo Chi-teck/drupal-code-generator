@@ -1,0 +1,81 @@
+<?php
+
+namespace PHPSTORM_META {
+
+  override(
+    \Drupal::service(0),
+    map([
+{% for service_id, class in services %}
+      '{{ service_id }}' => '{{ class }}',
+{% endfor %}
+    ])
+  );
+
+  override(
+    \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
+    map([
+{% for entity_type_id, class in storages %}
+      '{{ entity_type_id }}' => '{{ class }}',
+{% endfor %}
+    ])
+  );
+
+  override(
+    \Drupal\Core\Entity\EntityTypeManagerInterface::getViewBuilder(0),
+    map([
+{% for entity_type_id, class in view_builders %}
+      '{{ entity_type_id }}' => '{{ class }}',
+{% endfor %}
+    ])
+  );
+
+  override(
+    \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
+    map([
+{% for entity_type_id, class in list_builders %}
+      '{{ entity_type_id }}' => '{{ class }}',
+{% endfor %}
+    ])
+  );
+
+  override(
+    \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
+    map([
+{% for entity_type_id, class in access_controls %}
+     '{{ entity_type_id }}' => '{{ class }}',
+{% endfor %}
+    ])
+  );
+
+{% for class in entity_classes %}
+{# Using map() to work around PhpStorm bug. #}
+{# @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001516519 #}
+  override({{ class }}::loadMultiple(), map(['' => '{{ class }}[]']));
+  override({{ class }}::load(), map(['' => '{{ class }}']));
+  override({{ class }}::create(), map(['' => '{{ class }}']));
+
+{% endfor %}
+  expectedReturnValues(
+    \Drupal\Core\Entity\EntityInterface::save(),
+    \SAVED_NEW,
+    \SAVED_UPDATED
+  );
+
+  expectedArguments(
+    \Drupal\Core\Entity\EntityViewBuilderInterface::view(),
+    2,
+    \Drupal\Core\Language\LanguageInterface::LANGCODE_NOT_SPECIFIED,
+    \Drupal\Core\Language\LanguageInterface::LANGCODE_NOT_APPLICABLE,
+    \Drupal\Core\Language\LanguageInterface::LANGCODE_DEFAULT,
+    \Drupal\Core\Language\LanguageInterface::LANGCODE_SITE_DEFAULT
+  );
+
+  expectedArguments(
+    \Drupal\Core\Messenger\MessengerInterface::addMessage(),
+    1,
+    \Drupal\Core\Messenger\MessengerInterface::TYPE_STATUS,
+    \Drupal\Core\Messenger\MessengerInterface::TYPE_WARNING,
+    \Drupal\Core\Messenger\MessengerInterface::TYPE_ERROR
+  );
+
+}

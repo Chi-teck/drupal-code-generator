@@ -83,16 +83,17 @@
   [11] Javascript
   [12] Layout
   [13] Module file
-  [14] Plugin manager
-  [15] Project
-  [16] Render element
-  [17] Service provider
-  [18] Settings local
-  [19] Template
-  [20] Theme
-  [21] Theme file
-  [22] Theme settings
-  [23] composer.json
+  [14] PhpStorm metadata
+  [15] Plugin manager
+  [16] Project
+  [17] Render element
+  [18] Service provider
+  [19] Settings local
+  [20] Template
+  [21] Theme
+  [22] Theme file
+  [23] Theme settings
+  [24] composer.json
   ➤➤➤➤ 1⏎
  Select generator: 
   [0] ..
@@ -115,16 +116,17 @@
   [11] Javascript
   [12] Layout
   [13] Module file
-  [14] Plugin manager
-  [15] Project
-  [16] Render element
-  [17] Service provider
-  [18] Settings local
-  [19] Template
-  [20] Theme
-  [21] Theme file
-  [22] Theme settings
-  [23] composer.json
+  [14] PhpStorm metadata
+  [15] Plugin manager
+  [16] Project
+  [17] Render element
+  [18] Service provider
+  [19] Settings local
+  [20] Template
+  [21] Theme
+  [22] Theme file
+  [23] Theme settings
+  [24] composer.json
   ➤➤➤➤ 2⏎
  Select generator: 
   [0] ..
@@ -147,16 +149,17 @@
   [11] Javascript
   [12] Layout
   [13] Module file
-  [14] Plugin manager
-  [15] Project
-  [16] Render element
-  [17] Service provider
-  [18] Settings local
-  [19] Template
-  [20] Theme
-  [21] Theme file
-  [22] Theme settings
-  [23] composer.json
+  [14] PhpStorm metadata
+  [15] Plugin manager
+  [16] Project
+  [17] Render element
+  [18] Service provider
+  [19] Settings local
+  [20] Template
+  [21] Theme
+  [22] Theme file
+  [23] Theme settings
+  [24] composer.json
   ➤➤➤➤ 3⏎
  Select generator: 
   [0 ] ..
@@ -189,16 +192,17 @@
   [11] Javascript
   [12] Layout
   [13] Module file
-  [14] Plugin manager
-  [15] Project
-  [16] Render element
-  [17] Service provider
-  [18] Settings local
-  [19] Template
-  [20] Theme
-  [21] Theme file
-  [22] Theme settings
-  [23] composer.json
+  [14] PhpStorm metadata
+  [15] Plugin manager
+  [16] Project
+  [17] Render element
+  [18] Service provider
+  [19] Settings local
+  [20] Template
+  [21] Theme
+  [22] Theme file
+  [23] Theme settings
+  [24] composer.json
   ➤➤➤➤ 4⏎
  Select generator: 
   [0 ] ..
@@ -233,16 +237,17 @@
   [11] Javascript
   [12] Layout
   [13] Module file
-  [14] Plugin manager
-  [15] Project
-  [16] Render element
-  [17] Service provider
-  [18] Settings local
-  [19] Template
-  [20] Theme
-  [21] Theme file
-  [22] Theme settings
-  [23] composer.json
+  [14] PhpStorm metadata
+  [15] Plugin manager
+  [16] Project
+  [17] Render element
+  [18] Service provider
+  [19] Settings local
+  [20] Template
+  [21] Theme
+  [22] Theme file
+  [23] Theme settings
+  [24] composer.json
   ➤➤➤➤ 5⏎
  Select generator: 
   [0] ..
@@ -268,16 +273,17 @@
   [11] Javascript
   [12] Layout
   [13] Module file
-  [14] Plugin manager
-  [15] Project
-  [16] Render element
-  [17] Service provider
-  [18] Settings local
-  [19] Template
-  [20] Theme
-  [21] Theme file
-  [22] Theme settings
-  [23] composer.json
+  [14] PhpStorm metadata
+  [15] Plugin manager
+  [16] Project
+  [17] Render element
+  [18] Service provider
+  [19] Settings local
+  [20] Template
+  [21] Theme
+  [22] Theme file
+  [23] Theme settings
+  [24] composer.json
   ➤➤➤➤ 6⏎
  Select generator: 
   [0] ..
@@ -325,16 +331,17 @@
   [11] Javascript
   [12] Layout
   [13] Module file
-  [14] Plugin manager
-  [15] Project
-  [16] Render element
-  [17] Service provider
-  [18] Settings local
-  [19] Template
-  [20] Theme
-  [21] Theme file
-  [22] Theme settings
-  [23] composer.json
+  [14] PhpStorm metadata
+  [15] Plugin manager
+  [16] Project
+  [17] Render element
+  [18] Service provider
+  [19] Settings local
+  [20] Template
+  [21] Theme
+  [22] Theme file
+  [23] Theme settings
+  [24] composer.json
   ➤➤➤➤ 0⏎
  Select generator: 
   [0] ..
@@ -372,16 +379,17 @@
   [11] Javascript
   [12] Layout
   [13] Module file
-  [14] Plugin manager
-  [15] Project
-  [16] Render element
-  [17] Service provider
-  [18] Settings local
-  [19] Template
-  [20] Theme
-  [21] Theme file
-  [22] Theme settings
-  [23] composer.json
+  [14] PhpStorm metadata
+  [15] Plugin manager
+  [16] Project
+  [17] Render element
+  [18] Service provider
+  [19] Settings local
+  [20] Template
+  [21] Theme
+  [22] Theme file
+  [23] Theme settings
+  [24] composer.json
   ➤➤➤➤ 10⏎
 
  Welcome to d8:install-file generator!
