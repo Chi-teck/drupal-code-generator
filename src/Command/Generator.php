@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
+use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Style\GeneratorStyle;
@@ -28,6 +29,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   use IOAwareTrait;
   use LoggerAwareTrait;
   use ValidatorTrait;
+
+  public const SUCCESS = 0;
+  public const FAILURE = 1;
 
   /**
    * The command name.
@@ -147,31 +151,40 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
 
+    $exit_status = self::SUCCESS;
+
     $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
 
-    $this->printHeader();
+    try {
+      $this->printHeader();
 
-    $this->generate();
+      $this->generate();
 
-    $this->processVars();
+      $this->processVars();
 
-    $this->processAssets();
+      $this->processAssets();
 
-    $this->render();
+      $this->render();
 
-    // Destination passed through command line option takes precedence over
-    // destination defined in a generator.
-    $destination = $input->getOption('destination') ?: $this->getDestination();
-    $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
+      // Destination passed through command line option takes precedence over
+      // destination defined in a generator.
+      $destination = $input->getOption('destination') ?: $this->getDestination();
+      $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
 
-    $dumped_assets = $this->dump($destination, $input->getOption('dry-run'), $input->getOption('full-path'));
+      $full_path = $input->getOption('full-path');
+      $dry_run = $input->getOption('dry-run');
+      $dumped_assets = $this->dump($destination, $dry_run, $full_path);
 
-    $base_path = $input->getOption('full-path') ? $destination . '/' : '';
-    $this->printSummary($dumped_assets, $base_path);
+      $this->printSummary($dumped_assets, $full_path ? $destination . '/' : '');
+    }
+    catch (ExceptionInterface $exception) {
+      $this->io()->error($exception->getMessage());
+      $exit_status = self::FAILURE;
+    }
 
     $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
 
-    return 0;
+    return $exit_status;
   }
 
   /**

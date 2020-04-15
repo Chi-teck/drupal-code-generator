@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Exception\RuntimeException;
 use DrupalCodeGenerator\Helper\DrupalContext;
 
 /**
@@ -19,8 +20,7 @@ final class PhpStormMetadata extends DrupalGenerator {
   protected function generate(): void {
 
     if (!$this->drupalContext) {
-      $this->io()->error('Could not bootstrap Drupal to fetch metadata.');
-      return;
+      throw new RuntimeException('Could not bootstrap Drupal to fetch metadata.');
     }
 
     $container = $this->drupalContext->getContainer();
