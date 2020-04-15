@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Implements d8:service:event-subscriber command.
@@ -22,8 +23,13 @@ class EventSubscriber extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::defaultQuestions();
 
-    $vars = &$this->collectVars($input, $output, $questions);
-    $vars['class'] = Utils::camelize($vars['machine_name']) . 'Subscriber';
+    $default_class = function ($vars) {
+      return Utils::camelize($vars['machine_name']) . 'Subscriber';
+    };
+    $questions['class'] = new Question('Class', $default_class);
+    $questions['class']->setValidator([Utils::class, 'validateClassName']);
+
+    $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('src/EventSubscriber/{class}.php')
