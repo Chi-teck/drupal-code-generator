@@ -65,11 +65,13 @@ class Dumper extends Helper implements IOAwareInterface {
    *   The destination directory.
    * @param bool $dry_run
    *   Do not dump the files.
+   * @param bool $full_path
+   *   Print full path to dumped assets.
    *
    * @return \DrupalCodeGenerator\Asset\AssetCollection
    *   A list of created or updated assets.
    */
-  public function dump(AssetCollection $assets, string $destination, bool $dry_run = FALSE): AssetCollection {
+  public function dump(AssetCollection $assets, string $destination, bool $dry_run = FALSE, bool $full_path = FALSE): AssetCollection {
 
     $dumped_assets = new AssetCollection();
 
@@ -77,15 +79,15 @@ class Dumper extends Helper implements IOAwareInterface {
     /** @var \DrupalCodeGenerator\Asset\Directory $asset */
     foreach ($assets->getDirectories() as $directory) {
 
-      $file_path = $destination . '/' . $directory->getPath();
+      $directory_path = $destination . '/' . $directory->getPath();
 
       // Recreating directories makes no sense.
-      if (!$this->filesystem->exists($file_path)) {
+      if (!$this->filesystem->exists($directory_path)) {
         if ($dry_run) {
-          $this->io->title($file_path . ' (empty directory)');
+          $this->io->title(($full_path ? $directory_path : $directory->getPath()) . ' (empty directory)');
         }
         else {
-          $this->filesystem->mkdir($file_path, $directory->getMode());
+          $this->filesystem->mkdir($directory_path, $directory->getMode());
           $dumped_assets[] = $directory;
         }
       }
@@ -136,7 +138,7 @@ class Dumper extends Helper implements IOAwareInterface {
       }
 
       if ($dry_run) {
-        $this->io->title($file_path);
+        $this->io->title($full_path ? $file_path : $file->getPath());
         $this->io->writeln($content, OutputInterface::OUTPUT_RAW);
       }
       else {
@@ -151,15 +153,15 @@ class Dumper extends Helper implements IOAwareInterface {
     /** @var \DrupalCodeGenerator\Asset\Symlink $asset */
     foreach ($assets->getSymlinks() as $symlink) {
 
-      $file_path = $destination . '/' . $symlink->getPath();
+      $link_path = $destination . '/' . $symlink->getPath();
 
-      if ($file_exists = $this->filesystem->exists($file_path)) {
+      if ($file_exists = $this->filesystem->exists($link_path)) {
         switch ($symlink->getAction()) {
           case Symlink::ACTION_SKIP:
             continue 2;
 
           case Symlink::ACTION_REPLACE:
-            if (!$dry_run && !$this->confirmReplace($file_path)) {
+            if (!$dry_run && !$this->confirmReplace($link_path)) {
               continue 2;
             }
             break;
@@ -169,17 +171,17 @@ class Dumper extends Helper implements IOAwareInterface {
       $target = $symlink->getTarget();
 
       if ($dry_run) {
-        $this->io->title($file_path);
+        $this->io->title($full_path ? $link_path : $symlink->getPath());
         $this->io->writeln('Symlink to ' . $target, OutputInterface::OUTPUT_RAW);
       }
       else {
         if ($file_exists) {
-          $this->filesystem->remove($file_path);
+          $this->filesystem->remove($link_path);
         }
-        if (!@symlink($target, $file_path)) {
+        if (!@symlink($target, $link_path)) {
           throw new RuntimeException('Could not create a symlink to ' . $target);
         }
-        $this->filesystem->chmod($file_path, $symlink->getMode());
+        $this->filesystem->chmod($link_path, $symlink->getMode());
         $dumped_assets[] = $symlink;
       }
 

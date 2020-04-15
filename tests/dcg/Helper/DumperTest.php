@@ -91,11 +91,12 @@ final class DumperTest extends BaseTestCase {
     ];
     $this->assertContent($expected_content);
 
-    $expected_output = "\n";
-    $expected_output .= " The file {dir}/foo.txt already exists. Would you like to replace it? [Yes]:\n";
-    $expected_output .= ' ➤ ';
-    $expected_output = str_replace('{dir}', $this->directory, $expected_output);
-    $this->assertOutput($expected_output);
+    $expected_output = <<< TEXT
+
+     The file {$this->directory}/foo.txt already exists. Would you like to replace it? [Yes]:
+     ➤ 
+    TEXT;
+    self::assertSame($expected_output, $this->output->fetch());
   }
 
   /**
@@ -116,10 +117,12 @@ final class DumperTest extends BaseTestCase {
     ];
     $this->assertContent($expected_content);
 
-    $expected_output = "\n";
-    $expected_output .= " The file {dir}/bar.txt already exists. Would you like to replace it? [Yes]:\n";
-    $expected_output .= ' ➤ ';
-    $this->assertOutput($expected_output);
+    $expected_output = <<< TEXT
+
+     The file {$this->directory}/bar.txt already exists. Would you like to replace it? [Yes]:
+     ➤ 
+    TEXT;
+    self::assertSame($expected_output, $this->output->fetch());
   }
 
   /**
@@ -140,10 +143,12 @@ final class DumperTest extends BaseTestCase {
     ];
     $this->assertContent($expected_content);
 
-    $expected_output = "\n";
-    $expected_output .= " The file {dir}/example.txt already exists. Would you like to replace it? [Yes]:\n";
-    $expected_output .= ' ➤ ';
-    $this->assertOutput($expected_output);
+    $expected_output = <<< TEXT
+
+     The file {$this->directory}/example.txt already exists. Would you like to replace it? [Yes]:
+     ➤ 
+    TEXT;
+    self::assertSame($expected_output, $this->output->fetch());
   }
 
   /**
@@ -351,25 +356,20 @@ final class DumperTest extends BaseTestCase {
 
     self::assertDirectoryNotExists($this->directory);
 
-    $expected_output = "\n";
-    $expected_output .= " {$this->directory}/foo (empty directory)\n";
-    $expected_output .= "––––––––––––––––––––––––––––––––––––––––\n";
-    $expected_output .= "\n";
-    $expected_output .= " {$this->directory}/example.txt\n";
-    $expected_output .= "––––––––––––––––––––––––––––––\n";
-    $expected_output .= "Example\n";
-    $expected_output .= "\n";
-    $expected_output .= " {$this->directory}/foo.link\n";
-    $expected_output .= "–––––––––––––––––––––––––––\n";
-    $expected_output .= "Symlink to example.txt\n";
-    $this->assertOutput($expected_output);
-  }
+    $expected_output = <<< 'TEXT'
 
-  /**
-   * Asserts dumper output.
-   */
-  private function assertOutput(string $expected_output): void {
-    $expected_output = str_replace('{dir}', $this->directory, $expected_output);
+     foo (empty directory)
+    –––––––––––––––––––––––
+
+     example.txt
+    –––––––––––––
+    Example
+
+     foo.link
+    ––––––––––
+    Symlink to example.txt
+
+    TEXT;
     self::assertSame($expected_output, $this->output->fetch());
   }
 
@@ -377,7 +377,7 @@ final class DumperTest extends BaseTestCase {
    * Asserts empty dumper output.
    */
   private function assertEmptyOutput(): void {
-    self::assertOutput('');
+    self::assertSame('', $this->output->fetch());
   }
 
   /**

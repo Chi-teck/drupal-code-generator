@@ -164,9 +164,10 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $destination = $input->getOption('destination') ?: $this->getDestination();
     $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
 
-    $dumped_assets = $this->dump($destination, $input->getOption('dry-run'));
+    $dumped_assets = $this->dump($destination, $input->getOption('dry-run'), $input->getOption('full-path'));
 
-    $this->printSummary($dumped_assets, $destination . '/');
+    $base_path = $input->getOption('full-path') ? $destination . '/' : '';
+    $this->printSummary($dumped_assets, $base_path);
 
     $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
 
@@ -199,8 +200,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Dumps assets.
    */
-  protected function dump(string $destination, bool $dry_run): AssetCollection {
-    return $this->getHelper('dumper')->dump($this->assets, $destination, $dry_run);
+  protected function dump(string $destination, bool $dry_run, bool $full_path): AssetCollection {
+    return $this->getHelper('dumper')->dump($this->assets, $destination, $dry_run, $full_path);
   }
 
   /**

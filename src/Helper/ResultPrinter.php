@@ -18,20 +18,6 @@ class ResultPrinter extends Helper implements IOAwareInterface {
   use IOAwareTrait;
 
   /**
-   * Always print full path.
-   *
-   * @var bool
-   */
-  private $fullPath;
-
-  /**
-   * ResultPrinter constructor.
-   */
-  public function __construct(bool $full_path) {
-    $this->fullPath = $full_path;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getName(): string {
@@ -123,7 +109,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
    */
   protected function formatPath(string $base_path, Asset $asset): string {
     $path = $asset->getPath();
-    if ($this->fullPath && $path[0] != '/') {
+    if ($path[0] != '/') {
       $path = $base_path . $path;
     }
     return $path;

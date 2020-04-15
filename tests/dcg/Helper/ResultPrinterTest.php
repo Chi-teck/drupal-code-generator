@@ -28,7 +28,7 @@ final class ResultPrinterTest extends TestCase {
     $question_helper = new QuestionHelper();
     $io = new GeneratorStyle($input, $output, $question_helper);
 
-    $printer = self::getPrinter($io, TRUE);
+    $printer = self::getPrinter($io);
     self::assertSame('result_printer', $printer->getName());
 
     $assets = new AssetCollection();
@@ -39,7 +39,7 @@ final class ResultPrinterTest extends TestCase {
     $assets[] = (new File('bbb/fff.module'));
 
     // -- Default output.
-    self::getPrinter($io, FALSE)->printResult($assets);
+    self::getPrinter($io)->printResult($assets);
     $expected_output = <<< 'TEXT'
 
      The following directories and files have been created or updated:
@@ -55,7 +55,7 @@ final class ResultPrinterTest extends TestCase {
     self::assertSame($expected_output, $output->fetch());
 
     // -- Output with base path.
-    self::getPrinter($io, TRUE)->printResult($assets, '/project/root/');
+    self::getPrinter($io)->printResult($assets, '/project/root/');
     $expected_output = <<< 'TEXT'
 
      The following directories and files have been created or updated:
@@ -71,12 +71,12 @@ final class ResultPrinterTest extends TestCase {
     self::assertSame($expected_output, $output->fetch());
 
     // -- Empty output.
-    self::getPrinter($io, FALSE)->printResult(new AssetCollection());
+    self::getPrinter($io)->printResult(new AssetCollection());
     self::assertSame('', $output->fetch());
 
     // -- Verbose output.
     $output->setVerbosity(OutputInterface::VERBOSITY_VERBOSE);
-    self::getPrinter($io, FALSE)->printResult($assets);
+    self::getPrinter($io)->printResult($assets);
     $expected_output = <<< 'TEXT'
 
      The following directories and files have been created or updated:
@@ -101,8 +101,8 @@ final class ResultPrinterTest extends TestCase {
   /**
    * Returns result printer.
    */
-  private static function getPrinter(GeneratorStyle $io, bool $full_path): ResultPrinter {
-    $printer = new ResultPrinter($full_path);
+  private static function getPrinter(GeneratorStyle $io): ResultPrinter {
+    $printer = new ResultPrinter();
     $printer->io($io);
     return $printer;
   }
