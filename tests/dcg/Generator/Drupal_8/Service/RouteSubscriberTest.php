@@ -14,6 +14,7 @@ class RouteSubscriberTest extends GeneratorBaseTest {
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
+    'Class [FooRouteSubscriber]:' => 'FooRouteSubscriber',
   ];
 
   protected $fixtures = [
