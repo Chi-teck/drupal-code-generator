@@ -14,6 +14,7 @@ class MiddlewareTest extends GeneratorBaseTest {
   protected $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
+    'Class [FooMiddleware]:' => 'FooMiddleware',
   ];
 
   protected $fixtures = [
