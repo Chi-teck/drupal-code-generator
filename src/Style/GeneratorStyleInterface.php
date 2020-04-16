@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Style;
 
 use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\StyleInterface as SymfonyStyleInterface;
@@ -23,11 +24,18 @@ interface GeneratorStyleInterface extends SymfonyStyleInterface, OutputInterface
   public function buildTable(array $headers, array $rows): Table;
 
   /**
-   * Returns a new instance which makes use of stderr if available.
-   *
-   * @return self
-   *   New instance of output.
+   * Input getter.
    */
-  public function getErrorStyle();
+  public function getInput(): InputInterface;
+
+  /**
+   * Output getter.
+   */
+  public function getOutput(): OutputInterface;
+
+  /**
+   * Returns a new instance which makes use of stderr if available.
+   */
+  public function getErrorStyle(): self;
 
 }

@@ -178,7 +178,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       $this->printSummary($dumped_assets, $full_path ? $destination . '/' : '');
     }
     catch (ExceptionInterface $exception) {
-      $this->io()->error($exception->getMessage());
+      $this->io()->getErrorStyle()->error($exception->getMessage());
       $exit_status = self::FAILURE;
     }
 

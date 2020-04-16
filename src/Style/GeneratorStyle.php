@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Output decorator for the DCG style guide.
  */
-class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
+final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
 
   /**
    * Console input.
@@ -103,6 +103,27 @@ class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
     $table->setStyle($style);
 
     return $table;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getInput(): InputInterface {
+    return $this->input;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOutput(): OutputInterface {
+    return $this->output;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getErrorStyle(): GeneratorStyleInterface {
+    return new self($this->input, $this->getErrorOutput(), $this->questionHelper);
   }
 
 }
