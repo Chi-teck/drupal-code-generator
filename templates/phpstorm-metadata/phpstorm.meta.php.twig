@@ -78,4 +78,43 @@ namespace PHPSTORM_META {
     \Drupal\Core\Messenger\MessengerInterface::TYPE_ERROR
   );
 
+  expectedArguments(
+    \Drupal\Core\File\FileSystemInterface::prepareDirectory(),
+    1,
+    \Drupal\Core\File\FileSystemInterface::CREATE_DIRECTORY,
+    \Drupal\Core\File\FileSystemInterface::MODIFY_PERMISSIONS
+  );
+
+  expectedArguments(
+    \Drupal\Core\File\FileSystemInterface::copy(),
+    2,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_ERROR
+  );
+
+  expectedArguments(
+    \Drupal\Core\File\FileSystemInterface::move(),
+    2,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_ERROR
+  );
+
+  expectedArguments(
+    \Drupal\Core\File\FileSystemInterface::saveData(),
+    2,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_ERROR
+  );
+
+  expectedArguments(
+    \Drupal\Core\File\FileSystemInterface::getDestinationFilename(),
+    1,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE,
+    \Drupal\Core\File\FileSystemInterface::EXISTS_ERROR
+  );
+
 }
