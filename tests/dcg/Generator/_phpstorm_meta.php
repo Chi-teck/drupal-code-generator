@@ -71,36 +71,20 @@ namespace PHPSTORM_META {
     \Drupal\Core\File\FileSystemInterface::MODIFY_PERMISSIONS
   );
 
-  expectedArguments(
-    \Drupal\Core\File\FileSystemInterface::copy(),
-    2,
+  registerArgumentsSet('file_system_exists_behaviour',
     \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME,
     \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE,
     \Drupal\Core\File\FileSystemInterface::EXISTS_ERROR
   );
 
-  expectedArguments(
-    \Drupal\Core\File\FileSystemInterface::move(),
-    2,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_ERROR
-  );
-
-  expectedArguments(
-    \Drupal\Core\File\FileSystemInterface::saveData(),
-    2,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_ERROR
-  );
-
-  expectedArguments(
-    \Drupal\Core\File\FileSystemInterface::getDestinationFilename(),
-    1,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE,
-    \Drupal\Core\File\FileSystemInterface::EXISTS_ERROR
-  );
+  expectedArguments(\Drupal\Core\File\FileSystemInterface::copy(), 2, argumentsSet('file_system_exists_behaviour'));
+  expectedArguments(\Drupal\Core\File\FileSystemInterface::move(), 2, argumentsSet('file_system_exists_behaviour'));
+  expectedArguments(\Drupal\Core\File\FileSystemInterface::saveData(), 2, argumentsSet('file_system_exists_behaviour'));
+  expectedArguments(\Drupal\Core\File\FileSystemInterface::getDestinationFilename(), 1, argumentsSet('file_system_exists_behaviour'));
+  expectedArguments(\file_copy(), 2, argumentsSet('file_system_exists_behaviour'));
+  expectedArguments(\file_move(), 2, argumentsSet('file_system_exists_behaviour'));
+  expectedArguments(\file_save_data(), 2, argumentsSet('file_system_exists_behaviour'));
+  expectedArguments(\file_save_upload(), 4, argumentsSet('file_system_exists_behaviour'));
+  expectedArguments(\system_retrieve_file(), 3, argumentsSet('file_system_exists_behaviour'));
 
 }
