@@ -21,7 +21,7 @@ final class PhpStormMetadataTest extends BaseGeneratorTest {
   /**
    * {@inheritdoc}
    */
-  public function setUp() : void {
+  public function setUp(): void {
 
     parent::setUp();
 

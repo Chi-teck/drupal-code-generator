@@ -51,7 +51,7 @@ final class QuestionHelperTest extends TestCase {
     $input = $this->createInput("4:00\n5:00\n");
 
     $question = new Question('What time is it?');
-    $validator = static function (string $value) :string {
+    $validator = static function (string $value): string {
       if ($value != '5:00') {
         throw new \UnexpectedValueException('The time is not correct!');
       }
@@ -137,7 +137,7 @@ final class QuestionHelperTest extends TestCase {
   /**
    * Creates input mock.
    */
-  private function createInput(string $answers, array $answer_options = NULL): StreamableInputInterface {
+  private function createInput(string $answers, ?array $answer_options = NULL): StreamableInputInterface {
 
     $stream = \fopen('php://memory', 'r+', FALSE);
     \fwrite($stream, $answers);

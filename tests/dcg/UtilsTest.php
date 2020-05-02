@@ -154,7 +154,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testReplaceTokens().
    */
-  public function replaceTokensProvider() :array {
+  public function replaceTokensProvider(): array {
     return [
       ['-={foo}=-', ['foo' => 'bar'], '-=bar=-'],
       ['-=\{foo\}=-', ['foo' => 'bar'], '-=\{foo\}=-'],

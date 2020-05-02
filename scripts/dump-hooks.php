@@ -73,7 +73,7 @@ function dump_hooks(InputInterface $input, OutputInterface $output): int {
  * @return array
  *   Array of parsed hooks keyed by hook name.
  */
-function parse_hooks(string $file) :array {
+function parse_hooks(string $file): array {
   $code = file_get_contents($file);
 
   preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);

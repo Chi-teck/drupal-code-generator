@@ -317,13 +317,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *
    * @param string $path
    *   (Optional) File path.
-   * @param string $template
+   * @param string|null $template
    *   (Optional) Template.
    *
    * @return \DrupalCodeGenerator\Asset\File
    *   The file asset.
    */
-  protected function addFile(string $path, string $template = NULL): File {
+  protected function addFile(string $path, ?string $template = NULL): File {
     $asset = new File($path);
     $asset->template($template);
     return $this->assets[] = $asset;

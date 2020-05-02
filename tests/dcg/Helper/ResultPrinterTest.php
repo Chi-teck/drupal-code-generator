@@ -20,7 +20,7 @@ final class ResultPrinterTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testResultPrinter() :void {
+  public function testResultPrinter(): void {
 
     $input = new ArgvInput();
     $output = new BufferedOutput();
