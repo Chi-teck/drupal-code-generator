@@ -37,13 +37,13 @@ final class FieldTest extends BaseGeneratorTest {
       '  [ 9] Url',
       '  [10] Date',
     ];
-    $type_options = "\n" . implode("\n", $type_options);
+    $type_options = "\n" . \implode("\n", $type_options);
 
     $date_options = [
       '  [1] Date only',
       '  [2] Date and time',
     ];
-    $date_options = "\n" . implode("\n", $date_options);
+    $date_options = "\n" . \implode("\n", $date_options);
 
     $this->interaction = [
       // General questions.
@@ -196,7 +196,7 @@ final class FieldTest extends BaseGeneratorTest {
    */
   private static function insertRule(string $display, string $text): string {
     $line = "––––––––––––––––––––––––––––––––––––––––––––––––––\n\n";
-    return preg_replace("/\n $text/", $line . " $text", $display);
+    return \preg_replace("/\n $text/", $line . " $text", $display);
   }
 
 }

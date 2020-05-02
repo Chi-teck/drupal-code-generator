@@ -47,7 +47,7 @@ final class Project extends Generator {
 
     $name_validator = function (?string $value): ?string {
       $value = self::validateRequired($value);
-      if (!preg_match('#[^/]+/[^/]+$#i', $value)) {
+      if (!\preg_match('#[^/]+/[^/]+$#i', $value)) {
         throw new \UnexpectedValueException('The value is not correct project name.');
       }
       return $value;
@@ -238,10 +238,10 @@ final class Project extends Generator {
       'ext-gd' => '*',
       'ext-json' => '*',
     ];
-    ksort($require);
+    \ksort($require);
     $composer_json['require'] += $require;
 
-    ksort($require_dev);
+    \ksort($require_dev);
     $composer_json['require-dev'] = (object) $require_dev;
 
     $composer_json['scripts']['phpcs'] = 'phpcs --standard=phpcs.xml';
@@ -278,7 +278,7 @@ final class Project extends Generator {
       $composer_json['extra']['installer-paths'][$document_root_path . 'libraries/{$name}'][] = 'type:npm-asset';
     }
 
-    return json_encode($composer_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
+    return \json_encode($composer_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
   }
 
   /**
@@ -290,7 +290,7 @@ final class Project extends Generator {
    *   A package to be added.
    */
   private function addPackage(array &$section, $package): void {
-    if (!array_key_exists($package, self::PACKAGES)) {
+    if (!\array_key_exists($package, self::PACKAGES)) {
       throw new InvalidArgumentException("Package $package is unknown.");
     }
     $section[$package] = self::PACKAGES[$package];

@@ -54,7 +54,7 @@ abstract class PluginGenerator extends ModuleGenerator {
    */
   protected function askPluginClassQuestion(): string {
     if (!$this->pluginClassDefault) {
-      $unprefixed_plugin_id = preg_replace('/^' . $this->vars['machine_name'] . '_/', '', $this->vars['plugin_id']);
+      $unprefixed_plugin_id = \preg_replace('/^' . $this->vars['machine_name'] . '_/', '', $this->vars['plugin_id']);
       $this->pluginClassDefault = Utils::camelize($unprefixed_plugin_id) . $this->pluginClassSuffix;
     }
     return $this->ask($this->pluginClassQuestion, $this->pluginClassDefault);

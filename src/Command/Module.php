@@ -22,7 +22,7 @@ final class Module extends ModuleGenerator {
 
     $dependencies = $this->ask('Dependencies (comma separated)');
     $vars['dependencies'] = $dependencies ?
-      array_map('trim', explode(',', strtolower($dependencies))) : [];
+      \array_map('trim', \explode(',', \strtolower($dependencies))) : [];
 
     $vars['class_prefix'] = '{machine_name|camelize}';
 

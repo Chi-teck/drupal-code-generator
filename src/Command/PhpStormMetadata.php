@@ -31,7 +31,7 @@ final class PhpStormMetadata extends DrupalGenerator {
       ->getContainer()
       ->get('kernel')
       ->getCachedContainerDefinition()['services'];
-    $service_definitions = array_map('unserialize', $service_definitions);
+    $service_definitions = \array_map('unserialize', $service_definitions);
 
     foreach ($service_definitions as $service_id => $service_definition) {
       if ($service_definition['class']) {
@@ -59,7 +59,7 @@ final class PhpStormMetadata extends DrupalGenerator {
     }
 
     // Some classes does not have leading slash.
-    array_walk_recursive($vars, function (string &$class): void {
+    \array_walk_recursive($vars, function (string &$class): void {
       if ($class[0] != '\\') {
         $class = '\\' . $class;
       }

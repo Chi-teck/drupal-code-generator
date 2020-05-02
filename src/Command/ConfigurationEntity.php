@@ -38,7 +38,7 @@ final class ConfigurationEntity extends ModuleGenerator {
 
     // Add 'configure' link to the info file if it exists.
     $update_info = function (?string $existing_content) use ($vars) {
-      if ($existing_content && !preg_match('/^configure: /m', $existing_content)) {
+      if ($existing_content && !\preg_match('/^configure: /m', $existing_content)) {
         return "{$existing_content}configure: entity.{$vars['entity_type_id']}.collection\n";
       }
     };

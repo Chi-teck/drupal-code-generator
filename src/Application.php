@@ -39,7 +39,7 @@ class Application extends BaseApplication {
     // This gets substituted with git version when DCG is packaged to PHAR file.
     $version = '@git-version@';
     // Fallback for composer installation.
-    if (!is_numeric($version[0])) {
+    if (!\is_numeric($version[0])) {
       $version = 'UNKNOWN';
     }
     $application = new static('Drupal Code Generator', $version);

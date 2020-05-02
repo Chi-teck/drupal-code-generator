@@ -49,9 +49,9 @@ final class GeneratorFactory {
       foreach ($iterator as $file) {
         if ($file->getExtension() == 'php') {
           $sub_path = $iterator->getInnerIterator()->getSubPath();
-          $sub_namespace = $sub_path ? str_replace(DIRECTORY_SEPARATOR, '\\', $sub_path) . '\\' : '';
+          $sub_namespace = $sub_path ? \str_replace(DIRECTORY_SEPARATOR, '\\', $sub_path) . '\\' : '';
           $class = $namespace . '\\' . $sub_namespace . $file->getBasename('.php');
-          if (class_exists($class)) {
+          if (\class_exists($class)) {
             $reflected_class = new \ReflectionClass($class);
             if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {
               $commands[] = new $class();

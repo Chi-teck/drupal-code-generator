@@ -21,7 +21,7 @@ class TwigExtensionTest extends KernelTestBase {
    */
   public function testTwigExtension() {
 
-    $template = implode([
+    $template = \implode([
       '{{ foo("example") }}',
       '{{ "-=bar=-"|bar }}',
       '{{ "#123" is color }}',

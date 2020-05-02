@@ -14,8 +14,8 @@ final class ApplicationTest extends BaseTestCase {
    */
   public function testApplication(): void {
 
-    $cmd = sprintf('%s/bin/dcg install -d %s -a Foo -a foo 2>&1', Application::ROOT, $this->directory);
-    exec($cmd, $output, $return);
+    $cmd = \sprintf('%s/bin/dcg install -d %s -a Foo -a foo 2>&1', Application::ROOT, $this->directory);
+    \exec($cmd, $output, $return);
 
     $expected_output = <<< 'TEXT'
     
@@ -34,7 +34,7 @@ final class ApplicationTest extends BaseTestCase {
 
     TEXT;
 
-    self::assertSame($expected_output, implode("\n", $output));
+    self::assertSame($expected_output, \implode("\n", $output));
     self::assertSame(0, $return);
     self::assertFileExists($this->directory . '/foo.install');
   }

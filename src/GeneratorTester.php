@@ -69,7 +69,7 @@ class GeneratorTester {
 
     $application->add($this->command);
 
-    $this->setDirectory(sys_get_temp_dir() . '/dcg_' . uniqid());
+    $this->setDirectory(\sys_get_temp_dir() . '/dcg_' . \uniqid());
   }
 
   /**
@@ -140,7 +140,7 @@ class GeneratorTester {
    */
   public function execute(): int {
     return $this->commandTester
-      ->setInputs(array_values($this->interaction))
+      ->setInputs(\array_values($this->interaction))
       ->execute(['--working-dir' => $this->getDirectory()]);
   }
 
@@ -161,20 +161,20 @@ class GeneratorTester {
    *   Expected display.
    */
   public function getExpectedDisplay(): string {
-    $default_name = Utils::machine2human(basename($this->directory), TRUE);
+    $default_name = Utils::machine2human(\basename($this->directory), TRUE);
 
     $expected_display = "\n";
     $name = $this->command->getAliases()[0] ?? $this->command->getName();
     $title = "Welcome to $name generator!";
     $expected_display .= " $title\n";
-    $expected_display .= str_repeat('–', strlen($title) + 2) . "\n";
+    $expected_display .= \str_repeat('–', \strlen($title) + 2) . "\n";
 
     foreach ($this->interaction as $question => $answer) {
-      $question = preg_replace('/^<\d*> /', '', $question);
+      $question = \preg_replace('/^<\d*> /', '', $question);
       $expected_display .= "\n";
       $expected_display .= " $question\n";
       // Regular question.
-      if (strpos($question, "\n") === FALSE) {
+      if (\strpos($question, "\n") === FALSE) {
         $expected_display .= " ➤ \n";
       }
       // Choice question.
@@ -183,11 +183,11 @@ class GeneratorTester {
       }
     }
 
-    $expected_display = str_replace('%default_name%', $default_name, $expected_display);
-    $default_machine_name = Utils::human2machine(basename($this->directory));
-    $expected_display = str_replace('%default_machine_name%', $default_machine_name, $expected_display);
+    $expected_display = \str_replace('%default_name%', $default_name, $expected_display);
+    $default_machine_name = Utils::human2machine(\basename($this->directory));
+    $expected_display = \str_replace('%default_machine_name%', $default_machine_name, $expected_display);
 
-    $targets = implode("\n • ", array_keys($this->fixtures));
+    $targets = \implode("\n • ", \array_keys($this->fixtures));
     $expected_display .= "\n";
     $expected_display .= " The following directories and files have been created or updated:\n";
     $expected_display .= "–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n";

@@ -32,17 +32,17 @@ final class NavigationCommandTest extends BaseTestCase {
 
     $command_tester = new CommandTester($navigation);
 
-    $fixture = file_get_contents(__DIR__ . '/_navigation_fixture.txt');
+    $fixture = \file_get_contents(__DIR__ . '/_navigation_fixture.txt');
 
     // The return symbol is used to identify user input in fixture.
-    preg_match_all('/\s([^\s]+)⏎/', $fixture, $matches);
+    \preg_match_all('/\s([^\s]+)⏎/', $fixture, $matches);
     $command_tester->setInputs($matches[1]);
 
     $input = ['--working-dir' => $this->directory];
     $command_tester->execute($input);
 
-    $expected_output = rtrim(preg_replace('/[^\s]+⏎/', '', $fixture));
-    $output = rtrim($command_tester->getDisplay());
+    $expected_output = \rtrim(\preg_replace('/[^\s]+⏎/', '', $fixture));
+    $output = \rtrim($command_tester->getDisplay());
     self::assertSame($expected_output, $output);
 
     /** @var \Symfony\Component\Console\Command\HelpCommand $help */

@@ -15,7 +15,7 @@ final class CompactorTest extends TestCase {
    */
   public function testCompactor(): void {
     // Define base class for PhpCompactor as it may not exist.
-    if (!class_exists('Herrera\Box\Compactor\Compactor')) {
+    if (!\class_exists('Herrera\Box\Compactor\Compactor')) {
       // phpcs:ignore Drupal.Functions.DiscouragedFunctions.Discouraged
       eval('namespace Herrera\Box\Compactor; class Compactor {}');
     }

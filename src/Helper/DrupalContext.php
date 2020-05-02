@@ -98,7 +98,7 @@ class DrupalContext extends Helper {
         return [];
 
       default:
-        throw new \UnexpectedValueException(sprintf('Unsupported extension type "%s".', $extension_type));
+        throw new \UnexpectedValueException(\sprintf('Unsupported extension type "%s".', $extension_type));
     }
   }
 
@@ -120,7 +120,7 @@ class DrupalContext extends Helper {
 
     switch ($extension_type) {
       case DrupalGenerator::EXTENSION_TYPE_MODULE:
-        $modules_dir = is_dir($this->getDrupalRoot() . '/modules/custom') ?
+        $modules_dir = \is_dir($this->getDrupalRoot() . '/modules/custom') ?
           'modules/custom' : 'modules';
 
         if ($is_new) {
@@ -135,7 +135,7 @@ class DrupalContext extends Helper {
         break;
 
       case DrupalGenerator::EXTENSION_TYPE_THEME:
-        $themes_dir = is_dir(DRUPAL_ROOT . '/themes/custom') ?
+        $themes_dir = \is_dir(DRUPAL_ROOT . '/themes/custom') ?
           'themes/custom' : 'themes';
 
         if ($is_new) {
@@ -154,7 +154,7 @@ class DrupalContext extends Helper {
         break;
 
       default:
-        throw new \UnexpectedValueException(sprintf('Unsupported extension type "%s".', $extension_type));
+        throw new \UnexpectedValueException(\sprintf('Unsupported extension type "%s".', $extension_type));
 
     }
 
@@ -180,18 +180,18 @@ class DrupalContext extends Helper {
 
     $hooks = self::parseHooks($this->getDrupalRoot() . '/core/core.api.php');
 
-    $api_files = glob($this->getDrupalRoot() . '/core/lib/Drupal/Core/*/*.api.php');
+    $api_files = \glob($this->getDrupalRoot() . '/core/lib/Drupal/Core/*/*.api.php');
     foreach ($api_files as $api_file) {
-      if (file_exists($api_file)) {
-        $hooks = array_merge($hooks, self::parseHooks($api_file));
+      if (\file_exists($api_file)) {
+        $hooks = \array_merge($hooks, self::parseHooks($api_file));
       }
     }
 
     $module_handler = $this->container->get('module_handler');
     foreach ($module_handler->getModuleList() as $machine_name => $module) {
       $api_file = $this->getDrupalRoot() . '/' . $module->getPath() . '/' . $machine_name . '.api.php';
-      if (file_exists($api_file)) {
-        $hooks = array_merge($hooks, self::parseHooks($api_file));
+      if (\file_exists($api_file)) {
+        $hooks = \array_merge($hooks, self::parseHooks($api_file));
       }
     }
 
@@ -215,14 +215,14 @@ class DrupalContext extends Helper {
    *   Array of parsed hooks keyed by hook name.
    */
   protected static function parseHooks(string $file): array {
-    $code = file_get_contents($file);
-    preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);
+    $code = \file_get_contents($file);
+    \preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);
 
     $results = [];
     foreach ($matches[0] as $index => $hook) {
       $hook_name = $matches[1][$index];
       $output = "/**\n * Implements hook_$hook_name().\n */\n";
-      $output .= str_replace('function hook_', 'function {{ machine_name }}_', $hook);
+      $output .= \str_replace('function hook_', 'function {{ machine_name }}_', $hook);
       $results[$hook_name] = $output;
     }
 
@@ -250,7 +250,7 @@ class DrupalContext extends Helper {
       ->get('kernel')
       ->getCachedContainerDefinition();
     return isset($services['services'][$service_id]) ?
-      unserialize($services['services'][$service_id]) : NULL;
+      \unserialize($services['services'][$service_id]) : NULL;
   }
 
 }

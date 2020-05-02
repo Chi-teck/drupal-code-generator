@@ -13,18 +13,18 @@ class Utils {
    * Transforms a machine name to human name.
    */
   public static function machine2human(string $machine_name, bool $title_case = FALSE): string {
-    $output = trim(str_replace('_', ' ', $machine_name));
-    return $title_case ? ucwords($output) : ucfirst($output);
+    $output = \trim(\str_replace('_', ' ', $machine_name));
+    return $title_case ? \ucwords($output) : \ucfirst($output);
   }
 
   /**
    * Transforms a human name to machine name.
    */
   public static function human2machine(string $human_name): string {
-    return trim(preg_replace(
+    return \trim(\preg_replace(
       ['/^[0-9]+/', '/[^a-z0-9_]+/'],
       '_',
-      strtolower($human_name)
+      \strtolower($human_name)
     ), '_');
   }
 
@@ -32,20 +32,20 @@ class Utils {
    * Transforms a camelized sting to machine name.
    */
   public static function camel2machine(string $input): string {
-    return self::human2machine(preg_replace('/[A-Z]/', ' \0', $input));
+    return self::human2machine(\preg_replace('/[A-Z]/', ' \0', $input));
   }
 
   /**
    * Camelize a string.
    */
   public static function camelize(string $input, $upper_camel = TRUE): string {
-    $output = preg_replace('/([^A-Z])([A-Z])/', '$1 $2', $input);
-    $output = strtolower($output);
-    $output = preg_replace('/[^a-z0-9]/', ' ', $output);
-    $output = trim($output);
-    $output = ucwords($output);
-    $output = str_replace(' ', '', $output);
-    return $upper_camel ? $output : lcfirst($output);
+    $output = \preg_replace('/([^A-Z])([A-Z])/', '$1 $2', $input);
+    $output = \strtolower($output);
+    $output = \preg_replace('/[^a-z0-9]/', ' ', $output);
+    $output = \trim($output);
+    $output = \ucwords($output);
+    $output = \str_replace(' ', '', $output);
+    return $upper_camel ? $output : \lcfirst($output);
   }
 
   /**
@@ -57,12 +57,12 @@ class Utils {
   public static function getExtensionRoot(string $directory): ?string {
     $extension_root = NULL;
     for ($i = 1; $i <= 5; $i++) {
-      $info_file = $directory . '/' . basename($directory) . '.info';
-      if ((file_exists($info_file) && basename($directory) !== 'drush') || file_exists($info_file . '.yml')) {
+      $info_file = $directory . '/' . \basename($directory) . '.info';
+      if ((\file_exists($info_file) && \basename($directory) !== 'drush') || \file_exists($info_file . '.yml')) {
         $extension_root = $directory;
         break;
       }
-      $directory = dirname($directory);
+      $directory = \dirname($directory);
     }
     return $extension_root;
   }
@@ -85,21 +85,21 @@ class Utils {
     }
 
     $process_token = function (array $matches) use ($data): string {
-      list($name, $filter) = array_pad(explode('|', $matches[1], 2), 2, NULL);
+      list($name, $filter) = \array_pad(\explode('|', $matches[1], 2), 2, NULL);
 
-      if (!array_key_exists($name, $data)) {
-        throw new \UnexpectedValueException(sprintf('Variable "%s" is not defined', $name));
+      if (!\array_key_exists($name, $data)) {
+        throw new \UnexpectedValueException(\sprintf('Variable "%s" is not defined', $name));
       }
       $result = (string) $data[$name];
 
       if ($filter) {
         switch ($filter) {
           case 'u2h';
-            $result = str_replace('_', '-', $result);
+            $result = \str_replace('_', '-', $result);
             break;
 
           case 'h2u';
-            $result = str_replace('-', '_', $result);
+            $result = \str_replace('-', '_', $result);
             break;
 
           case 'h2m';
@@ -123,7 +123,7 @@ class Utils {
             break;
 
           default;
-            throw new \UnexpectedValueException(sprintf('Filter "%s" is not defined', $filter));
+            throw new \UnexpectedValueException(\sprintf('Filter "%s" is not defined', $filter));
         }
       }
       return $result;
@@ -131,9 +131,9 @@ class Utils {
 
     $escaped_brackets = ['\\{', '\\}'];
     $tmp_replacement = ['DCG-open-bracket', 'DCG-close-bracket'];
-    $text = str_replace($escaped_brackets, $tmp_replacement, $text);
-    $text = preg_replace_callback('/{(.+?)}/', $process_token, $text);
-    $text = str_replace($tmp_replacement, $escaped_brackets, $text);
+    $text = \str_replace($escaped_brackets, $tmp_replacement, $text);
+    $text = \preg_replace_callback('/{(.+?)}/', $process_token, $text);
+    $text = \str_replace($tmp_replacement, $escaped_brackets, $text);
     return $text;
   }
 
@@ -147,7 +147,7 @@ class Utils {
    *   The escaped string.
    */
   public static function addSlashes(?string $input): string {
-    return addcslashes($input, '{}');
+    return \addcslashes($input, '{}');
   }
 
   /**
@@ -160,7 +160,7 @@ class Utils {
    *   The un-escaped string.
    */
   public static function stripSlashes(?string $input): string {
-    return str_replace(['\{', '\}'], ['{', '}'], $input);
+    return \str_replace(['\{', '\}'], ['{', '}'], $input);
   }
 
   /**
@@ -176,7 +176,7 @@ class Utils {
     $result = Inflector::pluralize($input);
     // The inflector may return an array if the world has more than one possible
     // plural forms. In this case, just pick the first one.
-    return is_array($result) ? $result[0] : $result;
+    return \is_array($result) ? $result[0] : $result;
   }
 
 }

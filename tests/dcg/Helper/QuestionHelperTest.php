@@ -139,9 +139,9 @@ final class QuestionHelperTest extends TestCase {
    */
   private function createInput(string $answers, array $answer_options = NULL): StreamableInputInterface {
 
-    $stream = fopen('php://memory', 'r+', FALSE);
-    fwrite($stream, $answers);
-    rewind($stream);
+    $stream = \fopen('php://memory', 'r+', FALSE);
+    \fwrite($stream, $answers);
+    \rewind($stream);
 
     $mock = $this->getMockBuilder(StreamableInputInterface::class)->getMock();
     $mock->expects($this->any())
@@ -170,15 +170,15 @@ final class QuestionHelperTest extends TestCase {
    * Creates stream output.
    */
   private function createOutput(): StreamOutput {
-    return new StreamOutput(fopen('php://memory', 'r+', FALSE));
+    return new StreamOutput(\fopen('php://memory', 'r+', FALSE));
   }
 
   /**
    * Returns output display.
    */
   private function getDisplay(StreamOutput $output): string {
-    rewind($output->getStream());
-    return stream_get_contents($output->getStream());
+    \rewind($output->getStream());
+    return \stream_get_contents($output->getStream());
   }
 
 }

@@ -31,7 +31,7 @@ class QuestionHelper extends BaseQuestionHelper {
     // from the Navigation command.
     $answers = $input->hasOption('answer') ? $input->getOption('answer') : FALSE;
 
-    if ($answers && array_key_exists($this->counter, $answers)) {
+    if ($answers && \array_key_exists($this->counter, $answers)) {
 
       if ($output instanceof ConsoleOutputInterface) {
         $output = $output->getErrorOutput();
@@ -47,7 +47,7 @@ class QuestionHelper extends BaseQuestionHelper {
         $answer = $question->getDefault();
       }
       elseif ($question instanceof ConfirmationQuestion) {
-        $answer = preg_match('/^Ye?s?$/i', $answer);
+        $answer = \preg_match('/^Ye?s?$/i', $answer);
       }
 
       if ($validator = $question->getValidator()) {
@@ -90,18 +90,18 @@ class QuestionHelper extends BaseQuestionHelper {
     $default_value = $question->getDefault();
 
     // Do not change formatted title.
-    if (strpos($question_text, '<title>') === FALSE) {
+    if (\strpos($question_text, '<title>') === FALSE) {
       $question_text = "\n <info>$question_text</info>";
 
-      if ($question instanceof ConfirmationQuestion && is_bool($default_value)) {
+      if ($question instanceof ConfirmationQuestion && \is_bool($default_value)) {
         $default_value = $default_value ? 'Yes' : 'No';
       }
-      if (strlen($default_value)) {
+      if (\strlen($default_value)) {
         $question_text .= " [<comment>$default_value</comment>]";
       }
 
       // No need to append colon if the text ends with a question mark.
-      if (strlen($default_value) || $question->getQuestion()[-1] != '?') {
+      if (\strlen($default_value) || $question->getQuestion()[-1] != '?') {
         $question_text .= ':';
       }
     }
@@ -109,18 +109,18 @@ class QuestionHelper extends BaseQuestionHelper {
     $output->write($question_text);
 
     if ($question instanceof ChoiceQuestion) {
-      $max_width = max(array_map([$this, 'strlen'], array_keys($question->getChoices())));
+      $max_width = \max(\array_map([$this, 'strlen'], \array_keys($question->getChoices())));
 
       $output->writeln('');
       $messages = [];
       $choices = $question->getChoices();
       foreach ($choices as $key => $value) {
         $width = $max_width - static::strlen($key);
-        $messages[] = '  [<info>' . str_repeat(' ', $width) . $key . '</info>] ' . $value;
+        $messages[] = '  [<info>' . \str_repeat(' ', $width) . $key . '</info>] ' . $value;
       }
       $output->writeln($messages);
 
-      $output->write(count($choices) <= 10 ? '  ➤➤➤ ' : '  ➤➤➤➤ ');
+      $output->write(\count($choices) <= 10 ? '  ➤➤➤ ' : '  ➤➤➤➤ ');
     }
     else {
       $output->write("\n ➤ ");

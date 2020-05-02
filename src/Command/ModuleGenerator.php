@@ -74,7 +74,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
     }
 
     $this->vars['services'] = [];
-    foreach (array_unique($services) as $service_id) {
+    foreach (\array_unique($services) as $service_id) {
       $this->vars['services'][$service_id] = $this->getServiceDefinition($service_id);
     }
     return $this->vars['services'];
@@ -92,7 +92,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
     }
     else {
       $service_definitions = self::getDumpedServiceDefinitions();
-      $data = array_keys($service_definitions);
+      $data = \array_keys($service_definitions);
     }
     return $data;
   }
@@ -113,9 +113,9 @@ abstract class ModuleGenerator extends DrupalGenerator {
     }
     else {
       // Make up service definition.
-      $name_parts = explode('.', $service_id);
+      $name_parts = \explode('.', $service_id);
       $definition = [
-        'name' => end($name_parts),
+        'name' => \end($name_parts),
         'type' => 'Drupal\example\ExampleInterface',
         'description' => "The $service_id service.",
       ];
@@ -125,13 +125,13 @@ abstract class ModuleGenerator extends DrupalGenerator {
         $compiled_definition = $this->drupalContext->getServiceDefinition($service_id);
         if ($compiled_definition && isset($compiled_definition['class'])) {
           $interface = $compiled_definition['class'] . 'Interface';
-          $definition['type'] = interface_exists($interface) ? $interface : $compiled_definition['class'];
+          $definition['type'] = \interface_exists($interface) ? $interface : $compiled_definition['class'];
         }
       }
     }
 
-    $type_parts = explode('\\', $definition['type']);
-    $definition['short_type'] = end($type_parts);
+    $type_parts = \explode('\\', $definition['type']);
+    $definition['short_type'] = \end($type_parts);
 
     return $definition;
   }
@@ -143,8 +143,8 @@ abstract class ModuleGenerator extends DrupalGenerator {
    *   List of service definitions keyed by service ID.
    */
   private static function getDumpedServiceDefinitions(): array {
-    $data_encoded = file_get_contents(Application::ROOT . '/resources/service-definitions.json');
-    return json_decode($data_encoded, TRUE);
+    $data_encoded = \file_get_contents(Application::ROOT . '/resources/service-definitions.json');
+    return \json_decode($data_encoded, TRUE);
   }
 
 }

@@ -61,7 +61,7 @@ class ConsoleLogger extends AbstractLogger {
       LogLevel::CRITICAL,
       LogLevel::ERROR,
     ];
-    if (in_array($level, $error_levels)) {
+    if (\in_array($level, $error_levels)) {
       if ($output instanceof ConsoleOutputInterface) {
         /** @var \Symfony\Component\Console\Output\ConsoleOutputInterface $output */
         $output = $output->getErrorOutput();
@@ -95,7 +95,7 @@ class ConsoleLogger extends AbstractLogger {
           break;
       }
 
-      $formatted_message = sprintf('[%s] %s', $label, $this->interpolate($message, $context));
+      $formatted_message = \sprintf('[%s] %s', $label, $this->interpolate($message, $context));
       $output->writeln($formatted_message, $this->verbosityLevelMap[$level]);
     }
   }
@@ -106,13 +106,13 @@ class ConsoleLogger extends AbstractLogger {
    * @see \Symfony\Component\Console\Logger::interpolate()
    */
   private function interpolate(string $message, array $context): string {
-    if (FALSE === strpos($message, '{')) {
+    if (FALSE === \strpos($message, '{')) {
       return $message;
     }
 
     $replacements = [];
     foreach ($context as $key => $value) {
-      if (NULL === $value || is_scalar($value) || (\is_object($value) && method_exists($value, '__toString'))) {
+      if (NULL === $value || \is_scalar($value) || (\is_object($value) && \method_exists($value, '__toString'))) {
         $replacements["{{$key}}"] = $value;
       }
       elseif ($value instanceof \DateTimeInterface) {
@@ -126,7 +126,7 @@ class ConsoleLogger extends AbstractLogger {
       }
     }
 
-    return strtr($message, $replacements);
+    return \strtr($message, $replacements);
   }
 
 }

@@ -22,7 +22,7 @@ final class Hook extends ModuleGenerator {
 
     $question = new Question('Hook name');
     $question->setValidator(function (?string $value): ?string {
-      if (!in_array($value, $this->getSupportedHooks())) {
+      if (!\in_array($value, $this->getSupportedHooks())) {
         throw new \UnexpectedValueException('The value is not correct hook name.');
       }
       return $value;
@@ -56,7 +56,7 @@ final class Hook extends ModuleGenerator {
 
     $file_type = 'module';
     foreach ($special_hooks as $group => $hooks) {
-      if (in_array($vars['hook_name'], $hooks)) {
+      if (\in_array($vars['hook_name'], $hooks)) {
         $file_type = $group;
         break;
       }
@@ -76,9 +76,9 @@ final class Hook extends ModuleGenerator {
    *   List of supported hooks.
    */
   protected function getSupportedHooks(): array {
-    return array_map(function (string $file): string {
-      return pathinfo($file, PATHINFO_FILENAME);
-    }, array_diff(scandir(Application::TEMPLATE_PATH . '/misc/d7/hook'), ['.', '..']));
+    return \array_map(function (string $file): string {
+      return \pathinfo($file, PATHINFO_FILENAME);
+    }, \array_diff(\scandir(Application::TEMPLATE_PATH . '/misc/d7/hook'), ['.', '..']));
   }
 
 }

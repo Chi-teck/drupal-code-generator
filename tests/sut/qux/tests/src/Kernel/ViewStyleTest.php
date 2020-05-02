@@ -62,10 +62,10 @@ class ViewStyleTest extends KernelTestBase {
    * Asserts that the view output has correct wrapper class.
    */
   protected static function assertWrapperClass($wrapper_class) {
-    $build = views_embed_view('qux_example');
+    $build = \views_embed_view('qux_example');
     $output = \Drupal::service('renderer')->renderRoot($build);
     $xml = new \SimpleXMLElement($output);
-    $xpath = sprintf('//div/div[@class = "%s"]/div//a[text() = "Hello world!"]', $wrapper_class);
+    $xpath = \sprintf('//div/div[@class = "%s"]/div//a[text() = "Hello world!"]', $wrapper_class);
     self::assertCount(1, $xml->xpath($xpath));
   }
 

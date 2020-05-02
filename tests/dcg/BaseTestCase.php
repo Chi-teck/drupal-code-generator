@@ -23,7 +23,7 @@ abstract class BaseTestCase extends TestCase {
    * {@inheritdoc}
    */
   public function setUp(): void {
-    $this->directory = sys_get_temp_dir() . '/dcg_sandbox';
+    $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
   }
 
   /**

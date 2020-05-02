@@ -70,7 +70,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    * {@inheritdoc}
    */
   public function count(): int {
-    return count($this->assets);
+    return \count($this->assets);
   }
 
   /**
@@ -80,7 +80,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    *   Collection of directory assets.
    */
   public function getDirectories(): self {
-    $assets = array_filter(
+    $assets = \array_filter(
       $this->assets,
       function ($asset): bool {
         return $asset instanceof Directory;
@@ -96,7 +96,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    *   Collection of file assets.
    */
   public function getFiles(): self {
-    $assets = array_filter(
+    $assets = \array_filter(
       $this->assets,
       function ($asset): bool {
         return $asset instanceof File;
@@ -112,7 +112,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    *   Collection of symlink assets.
    */
   public function getSymlinks(): self {
-    $assets = array_filter(
+    $assets = \array_filter(
       $this->assets,
       function ($asset): bool {
         return $asset instanceof Symlink;
@@ -129,12 +129,12 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    */
   public function getSorted(): self {
     $assets = $this->assets;
-    usort($assets, function (Asset $a, Asset $b): int {
-      $depth_a = substr_count($a, '/');
-      $depth_b = substr_count($b, '/');
+    \usort($assets, function (Asset $a, Asset $b): int {
+      $depth_a = \substr_count($a, '/');
+      $depth_b = \substr_count($b, '/');
       // Top level assets should be printed first.
       return $depth_a == $depth_b || ($depth_a > 1 && $depth_b > 1) ?
-        strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
+        \strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
     });
     return new self($assets);
   }

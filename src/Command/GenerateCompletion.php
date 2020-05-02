@@ -29,13 +29,13 @@ class GenerateCompletion extends Command {
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
     $shell = $input->getOption('shell');
-    if (!in_array($shell, ['bash', 'fish', 'zsh'])) {
-      $message = sprintf('<error>%s shell is not supported.</error>', strip_tags($shell));
+    if (!\in_array($shell, ['bash', 'fish', 'zsh'])) {
+      $message = \sprintf('<error>%s shell is not supported.</error>', \strip_tags($shell));
       /** @var \Symfony\Component\Console\Output\ConsoleOutput $output */
       $output->getErrorOutput()->writeLn($message);
       return 1;
     }
-    $content = file_get_contents(Application::ROOT . "/resources/$shell-completion");
+    $content = \file_get_contents(Application::ROOT . "/resources/$shell-completion");
     $output->writeln($content, OutputInterface::OUTPUT_RAW);
     return 0;
   }

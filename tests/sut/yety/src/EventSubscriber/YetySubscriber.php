@@ -18,7 +18,7 @@ class YetySubscriber implements EventSubscriberInterface {
    *   Response event.
    */
   public function onKernelRequest(GetResponseEvent $event) {
-    drupal_set_message(__FUNCTION__);
+    \drupal_set_message(__FUNCTION__);
   }
 
   /**

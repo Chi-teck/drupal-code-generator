@@ -16,7 +16,7 @@ final class ConstraintTest extends BaseGeneratorTest {
    */
   public function testGenerator(): void {
 
-    $data_type_output = implode("\n", [
+    $data_type_output = \implode("\n", [
       'Type of data to validate [Item list]:',
       '  [1] Entity',
       '  [2] Item list',

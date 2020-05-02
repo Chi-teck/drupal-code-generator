@@ -20,7 +20,7 @@ final class PluginManager extends ModuleGenerator {
     // in some plugin types (field.widget, views.argument, etc).
     $plugin_type_validator = function (string $value): string {
       $value = self::validateRequired($value);
-      if (!preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
+      if (!\preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
         throw new \UnexpectedValueException('The value is not correct machine name.');
       }
       return $value;

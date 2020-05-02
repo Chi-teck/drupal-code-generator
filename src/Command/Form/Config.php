@@ -27,7 +27,7 @@ final class Config extends FormGenerator {
         $vars['link_title'] = $this->ask('Link title', $vars['route_title']);
         $vars['link_description'] = $this->ask('Link description');
         // Try to guess parent menu item using route path.
-        if (preg_match('#^/admin/config/([^/]+)/[^/]+$#', $vars['route_path'], $matches)) {
+        if (\preg_match('#^/admin/config/([^/]+)/[^/]+$#', $vars['route_path'], $matches)) {
           $vars['link_parent'] = $this->ask('Parent menu item', 'system.admin_config_' . $matches[1]);
         }
 

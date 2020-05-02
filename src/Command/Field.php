@@ -121,7 +121,7 @@ final class Field extends ModuleGenerator {
     $vars['field_id'] = $this->ask('Field ID', '{machine_name}_{field_label|h2m}', '::validateRequiredMachineName');
 
     $subfield_count_validator = function ($value) {
-      if (!is_numeric($value) || intval($value) != $value || $value <= 0) {
+      if (!\is_numeric($value) || \intval($value) != $value || $value <= 0) {
         throw new \UnexpectedValueException('The value should be greater than zero.');
       }
       return $value;
@@ -129,9 +129,9 @@ final class Field extends ModuleGenerator {
 
     $vars['subfield_count'] = $this->ask('How many sub-fields would you like to create?', '3', $subfield_count_validator);
 
-    $type_choice_keys = array_keys($this->subTypes);
-    $type_choice_labels = array_column($this->subTypes, 'label');
-    $type_choices = array_combine($type_choice_keys, $type_choice_labels);
+    $type_choice_keys = \array_keys($this->subTypes);
+    $type_choice_labels = \array_column($this->subTypes, 'label');
+    $type_choices = \array_combine($type_choice_keys, $type_choice_labels);
 
     // Indicates that at least one of sub-fields needs Random component.
     $vars['random'] = FALSE;
@@ -155,7 +155,7 @@ final class Field extends ModuleGenerator {
     $vars['datetime'] = FALSE;
 
     for ($i = 1; $i <= $vars['subfield_count']; $i++) {
-      $this->io->writeln(sprintf('<fg=green>%s</>', str_repeat('–', 50)));
+      $this->io->writeln(\sprintf('<fg=green>%s</>', \str_repeat('–', 50)));
 
       $vars['name_' . $i] = $this->ask("Label for sub-field #$i", "Value $i");
       $default_machine_name = Utils::human2machine($vars['name_' . $i]);
@@ -229,7 +229,7 @@ final class Field extends ModuleGenerator {
 
     }
 
-    $this->io->writeln(sprintf('<fg=green>%s</>', str_repeat('–', 50)));
+    $this->io->writeln(\sprintf('<fg=green>%s</>', \str_repeat('–', 50)));
 
     $vars['storage_settings'] = $this->confirm('Would you like to create field storage settings form?', FALSE);
     $vars['instance_settings'] = $this->confirm('Would you like to create field instance settings form?', FALSE);

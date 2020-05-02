@@ -156,7 +156,7 @@ class RestResourceTest extends ResourceTestBase {
     self::assertEquals($expected_body, $response->getBody());
 
     // Too big title.
-    $request_options[RequestOptions::BODY] = json_encode(['title' => str_repeat('x', 256)]);
+    $request_options[RequestOptions::BODY] = \json_encode(['title' => \str_repeat('x', 256)]);
     $url = Url::fromRoute($route_prefix . $method, ['_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 

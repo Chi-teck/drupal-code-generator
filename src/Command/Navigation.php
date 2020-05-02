@@ -72,7 +72,7 @@ final class Navigation extends Command {
     $this->menuTree = [];
     foreach ($this->getApplication()->all() as $command) {
       if ($command instanceof GeneratorInterface && !$command->isHidden()) {
-        self::arraySetNestedValue($this->menuTree, explode(':', $command->getName()));
+        self::arraySetNestedValue($this->menuTree, \explode(':', $command->getName()));
         // Collect command labels.
         if ($label = $command->getLabel()) {
           $this->labels[$command->getName()] = $label;
@@ -121,14 +121,14 @@ final class Navigation extends Command {
     // The $active_menu_tree can be either an array of menu items or TRUE if the
     // user has reached the final menu point.
     if ($active_menu_tree === TRUE) {
-      return implode(':', $menu_trail);
+      return \implode(':', $menu_trail);
     }
 
     $sub_menu_labels = $command_labels = [];
     foreach ($active_menu_tree as $menu_item => $subtree) {
-      $command_name = $menu_trail ? (implode(':', $menu_trail) . ':' . $menu_item) : $menu_item;
-      $label = $this->labels[$command_name] ?? str_replace(['-', '_'], ' ', ucfirst($menu_item));
-      is_array($subtree)
+      $command_name = $menu_trail ? (\implode(':', $menu_trail) . ':' . $menu_item) : $menu_item;
+      $label = $this->labels[$command_name] ?? \str_replace(['-', '_'], ' ', \ucfirst($menu_item));
+      \is_array($subtree)
         ? $sub_menu_labels[$menu_item] = "<comment>$label</comment>"
         : $command_labels[$menu_item] = $label;
     }
@@ -137,21 +137,21 @@ final class Navigation extends Command {
     // - Reference to the parent menu level.
     // - Sorted list of nested menu levels.
     // - Sorted list of commands.
-    natcasesort($sub_menu_labels);
-    natcasesort($command_labels);
+    \natcasesort($sub_menu_labels);
+    \natcasesort($command_labels);
     $choices = ['..' => '..'] + $sub_menu_labels + $command_labels;
-    $question = new ChoiceQuestion('<title> Select generator </title>', array_values($choices));
+    $question = new ChoiceQuestion('<title> Select generator </title>', \array_values($choices));
 
     $answer_label = $this->getHelper('question')->ask($input, $output, $question);
-    $answer = array_search($answer_label, $choices);
+    $answer = \array_search($answer_label, $choices);
 
     if ($answer == '..') {
       // Exit the application if a user selected zero on the top menu level.
-      if (count($menu_trail) == 0) {
+      if (\count($menu_trail) == 0) {
         return NULL;
       }
       // Level up.
-      array_pop($menu_trail);
+      \array_pop($menu_trail);
     }
     else {
       // Level down.
@@ -169,11 +169,11 @@ final class Navigation extends Command {
    */
   private static function recursiveKsort(array &$array): void {
     foreach ($array as &$value) {
-      if (is_array($value)) {
+      if (\is_array($value)) {
         self::recursiveKsort($value);
       }
     }
-    ksort($array);
+    \ksort($array);
   }
 
   /**
@@ -189,7 +189,7 @@ final class Navigation extends Command {
   private static function arraySetNestedValue(array &$array, array $parents): void {
     $ref = &$array;
     foreach ($parents as $parent) {
-      if (isset($ref) && !is_array($ref)) {
+      if (isset($ref) && !\is_array($ref)) {
         $ref = [];
       }
       $ref = &$ref[$parent];

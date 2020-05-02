@@ -36,8 +36,8 @@ final class DrupalContextTest extends TestCase {
       ->method('get')
       ->will($this->returnValueMap($handler_map));
 
-    if (!defined('DRUPAL_ROOT')) {
-      define('DRUPAL_ROOT', '/tmp/drupal');
+    if (!\defined('DRUPAL_ROOT')) {
+      \define('DRUPAL_ROOT', '/tmp/drupal');
     }
   }
 

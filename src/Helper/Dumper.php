@@ -104,7 +104,7 @@ class Dumper extends Helper implements IOAwareInterface {
       if ($this->filesystem->exists($file_path)) {
         // Resolve $file.
         if ($resolver = $file->getResolver()) {
-          $existing_content = file_get_contents($file_path);
+          $existing_content = \file_get_contents($file_path);
           $content = $resolver($existing_content, $content);
         }
         else {
@@ -119,12 +119,12 @@ class Dumper extends Helper implements IOAwareInterface {
               break;
 
             case File::ACTION_PREPEND:
-              $existing_content = file_get_contents($file_path);
+              $existing_content = \file_get_contents($file_path);
               $content = static::prependContent($existing_content, $content);
               break;
 
             case File::ACTION_APPEND:
-              $existing_content = file_get_contents($file_path);
+              $existing_content = \file_get_contents($file_path);
               $content = static::appendContent($existing_content, $content, $file->getHeaderSize());
               break;
           }
@@ -178,7 +178,7 @@ class Dumper extends Helper implements IOAwareInterface {
         if ($file_exists) {
           $this->filesystem->remove($link_path);
         }
-        if (!@symlink($target, $link_path)) {
+        if (!@\symlink($target, $link_path)) {
           throw new RuntimeException('Could not create a symlink to ' . $target);
         }
         $this->filesystem->chmod($link_path, $symlink->getMode());
@@ -218,7 +218,7 @@ class Dumper extends Helper implements IOAwareInterface {
       return $existing_content;
     }
     if ($header_size > 0) {
-      $new_content = implode("\n", array_slice(explode("\n", $new_content), $header_size));
+      $new_content = \implode("\n", \array_slice(\explode("\n", $new_content), $header_size));
     }
     return $existing_content . "\n" . $new_content;
   }

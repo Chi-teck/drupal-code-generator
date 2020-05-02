@@ -33,7 +33,7 @@ class LayoutTest extends KernelTestBase {
 
     $this->assertEquals($build['#attached']['library'], ['bar/foo']);
 
-    $expected_output = implode("\n", [
+    $expected_output = \implode("\n", [
       '',
       '  <div class="layout layout--foo">',
       '',

@@ -39,7 +39,7 @@ final class PhpStormMetadataTest extends BaseGeneratorTest {
 
       public function getCachedContainerDefinition() {
         $definitions['foo'] = ['class' => '\Foo'];
-        return ['services' => array_map('serialize', $definitions)];
+        return ['services' => \array_map('serialize', $definitions)];
       }
 
     };

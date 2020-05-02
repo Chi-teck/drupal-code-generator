@@ -31,23 +31,23 @@ class TwigEnvironment extends Environment {
     $this->addFilter(new TwigFilter('camelize', [Utils::class, 'camelize']));
 
     $article = function (string $input): string {
-      $first_char = strtolower($input[0]);
-      $article = in_array($first_char, ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
+      $first_char = \strtolower($input[0]);
+      $article = \in_array($first_char, ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
       return $article . ' ' . $input;
     };
     $this->addFilter(new TwigFilter('article', $article));
 
     $u2h = function (string $input): string {
-      return str_replace('_', '-', $input);
+      return \str_replace('_', '-', $input);
     };
     $this->addFilter(new TwigFilter('u2h', $u2h));
 
     $h2u = function (string $input): string {
-      return str_replace('-', '_', $input);
+      return \str_replace('-', '_', $input);
     };
     $this->addFilter(new TwigFilter('h2u', $h2u));
 
-    $this->addGlobal('SUT_TEST', getenv('SUT_TEST'));
+    $this->addGlobal('SUT_TEST', \getenv('SUT_TEST'));
   }
 
   /**
@@ -59,8 +59,8 @@ class TwigEnvironment extends Environment {
     // Twig Code sniffer supports this yet.
     // @see https://github.com/twigphp/Twig/issues/1423
     $code = $source->getCode();
-    if (strpos($code, '{% verbatim %}') === FALSE) {
-      $code = preg_replace("/\n +\{%/", "\n{%", $source->getCode());
+    if (\strpos($code, '{% verbatim %}') === FALSE) {
+      $code = \preg_replace("/\n +\{%/", "\n{%", $source->getCode());
     }
     // Twig source has no setters.
     $source = new Source($code, $source->getName(), $source->getPath());

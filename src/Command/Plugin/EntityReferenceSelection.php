@@ -26,7 +26,7 @@ final class EntityReferenceSelection extends PluginGenerator {
     $vars['base_class_full'] = self::baseClasses()[$vars['entity_type']] ??
       'Drupal\Core\Entity\Plugin\EntityReferenceSelection\DefaultSelection';
 
-    $vars['base_class'] = explode('EntityReferenceSelection\\', $vars['base_class_full'])[1];
+    $vars['base_class'] = \explode('EntityReferenceSelection\\', $vars['base_class_full'])[1];
 
     $this->addFile('src/Plugin/EntityReferenceSelection/{class}.php')
       ->template('entity-reference-selection');
@@ -42,7 +42,7 @@ final class EntityReferenceSelection extends PluginGenerator {
 
     $entity_type_question = new Question('Entity type that can be referenced by this plugin', 'node');
     $entity_type_question->setValidator([__CLASS__, 'validateRequiredMachineName']);
-    $entity_type_question->setAutocompleterValues(array_keys(self::baseClasses()));
+    $entity_type_question->setAutocompleterValues(\array_keys(self::baseClasses()));
     $this->vars['entity_type'] = $this->io->askQuestion($entity_type_question);
 
     $this->vars['plugin_label'] = $this->askPluginLabelQuestion();

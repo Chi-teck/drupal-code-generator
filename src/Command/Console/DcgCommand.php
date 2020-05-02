@@ -28,8 +28,8 @@ final class DcgCommand extends Generator {
 
     $vars['description'] = $this->ask('Command description');
 
-    $sub_names = explode(':', $vars['command_name']);
-    $short_name = array_pop($sub_names);
+    $sub_names = \explode(':', $vars['command_name']);
+    $short_name = \array_pop($sub_names);
 
     $alias_validator = function (?string $value): ?string {
       return static::validate($value, '^[a-z0-9][a-z0-9_]+$', 'The value is not correct alias name.');
@@ -43,8 +43,8 @@ final class DcgCommand extends Generator {
     $vars['path'] = '';
     $file_path = '';
     if ($sub_names) {
-      $vars['namespace'] .= '\\' . implode('\\', $sub_names);
-      $file_path = implode(DIRECTORY_SEPARATOR, $sub_names);
+      $vars['namespace'] .= '\\' . \implode('\\', $sub_names);
+      $file_path = \implode(DIRECTORY_SEPARATOR, $sub_names);
       $vars['path'] = '/' . $file_path;
     }
 

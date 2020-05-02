@@ -41,7 +41,7 @@ final class Constraint extends PluginGenerator {
     // Unlike other plugin types. Constraint IDs use camel case.
     $default_plugin_id = '{name|camelize}{plugin_label|camelize}';
     $plugin_id_validator = function ($value) {
-      if (!preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/i', $value)) {
+      if (!\preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/i', $value)) {
         throw new \UnexpectedValueException('The value is not correct constraint ID.');
       }
       return $value;
@@ -53,7 +53,7 @@ final class Constraint extends PluginGenerator {
    * {@inheritdoc}
    */
   protected function askPluginClassQuestion(): string {
-    $unprefixed_plugin_id = preg_replace('/^' . Utils::camelize($this->vars['machine_name']) . '/', '', $this->vars['plugin_id']);
+    $unprefixed_plugin_id = \preg_replace('/^' . Utils::camelize($this->vars['machine_name']) . '/', '', $this->vars['plugin_id']);
     $default_class = Utils::camelize($unprefixed_plugin_id) . 'Constraint';
     return $this->ask('Plugin class', $default_class);
   }

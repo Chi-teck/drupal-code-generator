@@ -15,7 +15,7 @@ trait TestTrait {
    */
   protected function assertXpath($selector) {
     // Add some syntactic sugar.
-    $selector = preg_replace('/next::([a-z]+)/', 'following-sibling::\1[1]', $selector);
+    $selector = \preg_replace('/next::([a-z]+)/', 'following-sibling::\1[1]', $selector);
     $this->assertSession()->elementExists('xpath', $selector);
   }
 
@@ -42,11 +42,11 @@ trait TestTrait {
     $messages = [];
     $get_message = function ($element) {
       // Remove hidden heading.
-      $message = preg_replace('#<h2[^>]*>.*</h2>#', '', $element->getHtml());
-      $message = strip_tags($message, '<em>');
-      return trim(preg_replace('#\s+#', ' ', $message));
+      $message = \preg_replace('#<h2[^>]*>.*</h2>#', '', $element->getHtml());
+      $message = \strip_tags($message, '<em>');
+      return \trim(\preg_replace('#\s+#', ' ', $message));
     };
-    $xpath = '//div[@aria-label="' . ucfirst($type) . ' message"]';
+    $xpath = '//div[@aria-label="' . \ucfirst($type) . ' message"]';
     // Error messages have one more wrapper.
     if ($type == 'error') {
       $xpath .= '/div[@role="alert"]';
@@ -73,7 +73,7 @@ trait TestTrait {
    */
   protected function assertErrorMessage($message) {
     $messages = $this->getMessages('error');
-    $this->assertTrue(in_array($message, $messages), 'Error message was found.');
+    $this->assertTrue(\in_array($message, $messages), 'Error message was found.');
   }
 
   /**
@@ -81,7 +81,7 @@ trait TestTrait {
    */
   protected function assertWarningMessage($message) {
     $messages = $this->getMessages('warning');
-    $this->assertTrue(in_array($message, $messages), 'Warning message was found.');
+    $this->assertTrue(\in_array($message, $messages), 'Warning message was found.');
   }
 
   /**
@@ -89,7 +89,7 @@ trait TestTrait {
    */
   protected function assertStatusMessage($message) {
     $messages = $this->getMessages('status');
-    $this->assertTrue(in_array($message, $messages), 'Status message was found.');
+    $this->assertTrue(\in_array($message, $messages), 'Status message was found.');
   }
 
   /**
@@ -98,7 +98,7 @@ trait TestTrait {
   protected function assertPageTitle($title) {
     $title_element = $this->xpath('//h1');
     if (isset($title_element[0])) {
-      $this->assertEquals($title, trim(strip_tags($title_element[0]->getHtml(), '<em>')));
+      $this->assertEquals($title, \trim(\strip_tags($title_element[0]->getHtml(), '<em>')));
     }
     else {
       $this->fail('Page title was not found.');

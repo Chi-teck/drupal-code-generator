@@ -53,7 +53,7 @@ class RenderElementTest extends KernelTestBase {
     $result = (new \SimpleXMLElement($content))
       ->xpath('//div[@id = "block-test-block"]/span/a[text() = "Drupal"]');
 
-    $this->assertTrue(count($result) == 1);
+    $this->assertTrue(\count($result) == 1);
   }
 
 }

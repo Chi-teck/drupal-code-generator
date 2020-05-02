@@ -19,7 +19,7 @@ final class ApacheVirtualHost extends Generator {
   protected function generate(): void {
     $validator = function (?string $value):string {
       $value = self::validateRequired($value);
-      if (!filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
+      if (!\filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
         throw new \UnexpectedValueException('The value is not correct domain name.');
       }
       return $value;

@@ -22,7 +22,7 @@ final class Custom extends ModuleGenerator {
     $vars = &$this->collectDefault();
     $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', '::validateRequiredServiceName');
 
-    $service = preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
+    $service = \preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
     $vars['class'] = $this->ask('Class', Utils::camelize($service), '::validateRequiredClassName');
 
     $this->collectServices();

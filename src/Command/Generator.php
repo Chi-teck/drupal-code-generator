@@ -129,8 +129,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     else {
       // This is specific to DCG core generators. Third-party generators should
       // always define template path.
-      $template_path = Application::TEMPLATE_PATH . str_replace(':', '/', $this->getName());
-      if (file_exists($template_path) && is_dir($template_path)) {
+      $template_path = Application::TEMPLATE_PATH . \str_replace(':', '/', $this->getName());
+      if (\file_exists($template_path) && \is_dir($template_path)) {
         $this->getHelper('renderer')->addPath($template_path);
         // Also add default template path as some generators may share their
         // templates.
@@ -141,7 +141,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       }
     }
 
-    $this->directory = $input->getOption('working-dir') ?: getcwd();
+    $this->directory = $input->getOption('working-dir') ?: \getcwd();
 
     $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
   }
@@ -153,7 +153,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $exit_status = self::SUCCESS;
 
-    $this->logger->debug('Command: {command}', ['command' => get_class($this)]);
+    $this->logger->debug('Command: {command}', ['command' => \get_class($this)]);
 
     try {
       $this->printHeader();
@@ -182,7 +182,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       $exit_status = self::FAILURE;
     }
 
-    $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(memory_get_peak_usage())]);
+    $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(\memory_get_peak_usage())]);
 
     return $exit_status;
   }
@@ -198,7 +198,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   protected function render(): void {
     $renderer = $this->getHelper('renderer');
 
-    $collected_vars = preg_replace('/^Array/', '', print_r($this->vars, TRUE));
+    $collected_vars = \preg_replace('/^Array/', '', \print_r($this->vars, TRUE));
     $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
 
     foreach ($this->assets->getFiles() as $asset) {
@@ -221,7 +221,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Prints header.
    */
   protected function printHeader(): void {
-    $this->io->title(sprintf('Welcome to %s generator!', $this->getAliases()[0] ?? $this->getName()));
+    $this->io->title(\sprintf('Welcome to %s generator!', $this->getAliases()[0] ?? $this->getName()));
   }
 
   /**
@@ -247,8 +247,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     // Allow the validators to be referenced in a short form like
     // '::validateMachineName'.
-    if (is_string($validator) && substr($validator, 0, 2) == '::') {
-      $validator = [get_class($this), substr($validator, 2)];
+    if (\is_string($validator) && \substr($validator, 0, 2) == '::') {
+      $validator = [\get_class($this), \substr($validator, 2)];
     }
     return $this->io->ask($question, $default, $validator);
   }
@@ -268,15 +268,15 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
 
     // The choices can be an associative array.
-    $choice_labels = array_values($choices);
+    $choice_labels = \array_values($choices);
     // Start choices list form '1'.
-    array_unshift($choice_labels, NULL);
+    \array_unshift($choice_labels, NULL);
     unset($choice_labels[0]);
 
     // Do not use IO choice here as it prints choice key as default value.
     // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
     $answer = $this->io->askQuestion(new ChoiceQuestion($question, $choice_labels, $default));
-    return array_search($answer, $choices);
+    return \array_search($answer, $choices);
   }
 
   /**
@@ -330,11 +330,11 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function processVars(): void {
     $process_vars = function (&$var, string $key, array $vars): void {
-      if (is_string($var)) {
+      if (\is_string($var)) {
         $var = Utils::stripSlashes(Utils::replaceTokens($var, $vars));
       }
     };
-    array_walk_recursive($this->vars, $process_vars, $this->vars);
+    \array_walk_recursive($this->vars, $process_vars, $this->vars);
   }
 
   /**

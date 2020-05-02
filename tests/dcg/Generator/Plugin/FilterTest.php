@@ -20,7 +20,7 @@ final class FilterTest extends BaseGeneratorTest {
    * {@inheritdoc}
    */
   public function setUp(): void {
-    $filter_type_output = implode("\n", [
+    $filter_type_output = \implode("\n", [
       'Filter type:',
       '  [1] HTML restrictor',
       '  [2] Markup language',

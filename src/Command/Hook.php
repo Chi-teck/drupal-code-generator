@@ -23,7 +23,7 @@ final class Hook extends ModuleGenerator {
     $hook_question = new Question('Hook name');
     $supported_hooks = $this->getSupportedHooks();
     $hook_question->setValidator(function ($value) use ($supported_hooks) {
-      if (!in_array($value, $supported_hooks)) {
+      if (!\in_array($value, $supported_hooks)) {
         throw new \UnexpectedValueException('The value is not correct hook name.');
       }
       return $value;
@@ -54,7 +54,7 @@ final class Hook extends ModuleGenerator {
   private function getSupportedHooks(): array {
     $hook_names = [];
     if ($this->drupalContext) {
-      $hook_names = array_keys($this->drupalContext->getHooks());
+      $hook_names = \array_keys($this->drupalContext->getHooks());
     }
     // When Drupal context is not provided build list of supported hooks from
     // hook template names.
@@ -138,7 +138,7 @@ final class Hook extends ModuleGenerator {
     ];
 
     foreach ($special_hooks as $group => $hooks) {
-      if (in_array($hook_name, $hooks)) {
+      if (\in_array($hook_name, $hooks)) {
         return $group;
       }
     }

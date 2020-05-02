@@ -16,7 +16,7 @@ final class SourceTest extends BaseGeneratorTest {
    */
   public function testGenerator(): void {
 
-    $data_type_output = implode("\n", [
+    $data_type_output = \implode("\n", [
       'Source type:',
       '  [1] SQL',
       '  [2] Other',

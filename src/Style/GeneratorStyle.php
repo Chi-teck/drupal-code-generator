@@ -54,7 +54,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
     $this->writeln('');
     $this->writeln(' ' . $message);
     $length = Helper::strlenWithoutDecoration($this->getFormatter(), $message);
-    $this->writeln(sprintf('<fg=cyan;options=bold>%s</>', str_repeat('–', $length + 2)));
+    $this->writeln(\sprintf('<fg=cyan;options=bold>%s</>', \str_repeat('–', $length + 2)));
   }
 
   /**
@@ -62,7 +62,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
    */
   public function askQuestion(Question $question) {
     $answer = $this->questionHelper->ask($this->input, $this, $question);
-    if (is_string($answer)) {
+    if (\is_string($answer)) {
       $answer = Utils::addSlashes($answer);
     }
     return $answer;
@@ -73,9 +73,9 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
    */
   public function listing(array $elements) {
     $build_item = function (string $element): string {
-      return sprintf(' • %s', $element);
+      return \sprintf(' • %s', $element);
     };
-    $elements = array_map($build_item, $elements);
+    $elements = \array_map($build_item, $elements);
     $this->writeln($elements);
     $this->newLine();
   }
@@ -84,9 +84,9 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
    * {@inheritdoc}
    */
   public function text($message) {
-    $messages = is_array($message) ? array_values($message) : [$message];
+    $messages = \is_array($message) ? \array_values($message) : [$message];
     foreach ($messages as $message) {
-      $this->writeln(sprintf(' <info>%s</info>', $message));
+      $this->writeln(\sprintf(' <info>%s</info>', $message));
     }
   }
 

@@ -33,7 +33,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
    *   (Optional) Base path.
    */
   public function printResult(AssetCollection $assets, string $base_path = ''): void {
-    if (count($assets) == 0) {
+    if (\count($assets) == 0) {
       return;
     }
 
@@ -54,9 +54,9 @@ class ResultPrinter extends Helper implements IOAwareInterface {
       $total_lines = 0;
 
       foreach ($assets->getFiles()->getSorted() as $file) {
-        $size = mb_strlen($file->getContent());
+        $size = \mb_strlen($file->getContent());
         $total_size += $size;
-        $lines = $size == 0 ? 0 : substr_count($file->getContent(), "\n") + 1;
+        $lines = $size == 0 ? 0 : \substr_count($file->getContent(), "\n") + 1;
         $total_lines += $lines;
         $rows[] = ['file', $this->formatPath($base_path, $file), $lines, $size];
       }
@@ -68,10 +68,10 @@ class ResultPrinter extends Helper implements IOAwareInterface {
       $rows[] = new TableSeparator();
 
       // Summary.
-      $total_assets = count($assets);
+      $total_assets = \count($assets);
       $rows[] = [
         NULL,
-        sprintf('Total: %d %s', $total_assets, $total_assets == 1 ? 'asset' : 'assets'),
+        \sprintf('Total: %d %s', $total_assets, $total_assets == 1 ? 'asset' : 'assets'),
         $total_lines,
         self::formatMemory($total_size),
       ];

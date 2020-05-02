@@ -206,7 +206,7 @@ final class DumperTest extends BaseTestCase {
     ];
     $this->assertContent($expected_content);
 
-    $permissions = decoct(fileperms($this->directory . '/prize.txt'));
+    $permissions = \decoct(\fileperms($this->directory . '/prize.txt'));
     self::assertSame($permissions, '100757');
 
     $this->assertEmptyOutput();
@@ -408,9 +408,9 @@ final class DumperTest extends BaseTestCase {
    *   Input that is to be written.
    */
   private function setStream(string $input): void {
-    $stream = fopen('php://memory', 'r+', FALSE);
-    fwrite($stream, $input);
-    rewind($stream);
+    $stream = \fopen('php://memory', 'r+', FALSE);
+    \fwrite($stream, $input);
+    \rewind($stream);
     $this->input->setStream($stream);
   }
 
@@ -426,19 +426,19 @@ final class DumperTest extends BaseTestCase {
    */
   private function readAssets(string $directory): array {
     $results = [];
-    foreach (scandir($directory) as $file) {
+    foreach (\scandir($directory) as $file) {
       if ($file != '.' && $file != '..') {
         $path = $directory . DIRECTORY_SEPARATOR . $file;
-        $relative_path = rtrim($this->filesystem->makePathRelative($path, $this->directory), '/');
-        if (is_link($path)) {
-          $relative_path .= ' (' . readlink($path) . ')';
+        $relative_path = \rtrim($this->filesystem->makePathRelative($path, $this->directory), '/');
+        if (\is_link($path)) {
+          $relative_path .= ' (' . \readlink($path) . ')';
         }
-        if (is_dir($path)) {
+        if (\is_dir($path)) {
           $results += self::readAssets($path);
           $results[$relative_path] = [];
         }
         else {
-          $results[$relative_path] = file_get_contents($path);
+          $results[$relative_path] = \file_get_contents($path);
         }
       }
     }

@@ -24,7 +24,7 @@ final class ModuleInfo extends ModuleGenerator {
     $vars['configure'] = $this->ask('Configuration page (route name)');
     $vars['dependencies'] = $this->ask('Dependencies (comma separated)');
     if ($vars['dependencies']) {
-      $vars['dependencies'] = array_map('trim', explode(',', strtolower($vars['dependencies'])));
+      $vars['dependencies'] = \array_map('trim', \explode(',', \strtolower($vars['dependencies'])));
     }
     $this->addFile('{machine_name}.info.yml', 'module-info');
   }

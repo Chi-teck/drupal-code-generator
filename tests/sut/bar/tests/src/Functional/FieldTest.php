@@ -85,13 +85,13 @@ class FieldTest extends BrowserTestBase {
     $edit = [
       'title[0][value]' => 'Test',
       'field_foo[0][value_1]' => TRUE,
-      'field_foo[0][value_2]' => str_repeat('x', 129),
+      'field_foo[0][value_2]' => \str_repeat('x', 129),
       'field_foo[0][value_3]' => 'value_3_content',
       'field_foo[0][value_4]' => 'wrong integer',
       'field_foo[0][value_5]' => 'wrong float',
       'field_foo[0][value_6]' => 'wrong decimal',
       'field_foo[0][value_7]' => 'wrong email',
-      'field_foo[0][value_8]' => str_repeat('x', 129),
+      'field_foo[0][value_8]' => \str_repeat('x', 129),
       'field_foo[0][value_9]' => 'wrong URL',
       'field_foo[0][value_10][date]' => 'wrong date',
     ];
@@ -412,16 +412,16 @@ class FieldTest extends BrowserTestBase {
    */
   protected function assertFormatterItem($prefix, $label, $value) {
     $xpath = '/label[text() = "%s" and normalize-space(following::text()[1]) = "%s"]';
-    $this->assertXpath($prefix . sprintf($xpath, $label, $value));
+    $this->assertXpath($prefix . \sprintf($xpath, $label, $value));
   }
 
   /**
    * Builds options xpath.
    */
   protected static function buildOptionsXpath(array $options, $selected_option) {
-    $xpath = sprintf('/option[text() = "%s"%s]', array_shift($options), $selected_option == 0 ? ' and @selected' : '');
+    $xpath = \sprintf('/option[text() = "%s"%s]', \array_shift($options), $selected_option == 0 ? ' and @selected' : '');
     foreach ($options as $index => $option) {
-      $xpath .= sprintf('/following::option[text() = "%s"%s][1]', $option, $selected_option == $index + 1 ? ' and @selected' : '');
+      $xpath .= \sprintf('/following::option[text() = "%s"%s][1]', $option, $selected_option == $index + 1 ? ' and @selected' : '');
     }
     return $xpath;
   }

@@ -51,7 +51,7 @@ class CkePluginTest extends WebDriverTestBase {
     // @codingStandardsIgnoreEnd
     $textarea_id = 'edit-editor-settings-toolbar-button-groups';
     $textarea_value = '[[{"name":"Formatting","items":["Bold","Italic"]},{"name":"Linking","items":["DrupalLink","DrupalUnlink"]},{"name":"Lists","items":["BulletedList","NumberedList"]},{"name":"Media","items":["Blockquote","DrupalImage", "example"]},{"name":"Block Formatting","items":["Format"]}]]';
-    $script = sprintf('document.getElementById("%s").value = \'%s\'', $textarea_id, $textarea_value);
+    $script = \sprintf('document.getElementById("%s").value = \'%s\'', $textarea_id, $textarea_value);
     $this->getSession()->executeScript($script);
 
     $this->submitForm([], 'Save configuration');

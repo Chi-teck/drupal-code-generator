@@ -126,7 +126,7 @@ trait ValidatorTrait {
    *   The validated value.
    */
   public static function validate(?string $value, string $pattern, string $message): ?string {
-    if ($value !== '' && $value !== NULL && !preg_match("/$pattern/", $value)) {
+    if ($value !== '' && $value !== NULL && !\preg_match("/$pattern/", $value)) {
       throw new \UnexpectedValueException($message);
     }
     return $value;

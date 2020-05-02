@@ -124,7 +124,7 @@ final class UtilsTest extends BaseTestCase {
    * Data provider callback for testGetExtensionRoot().
    */
   public function getExtensionRootProvider(): array {
-    $extension_root = sys_get_temp_dir() . '/dcg_sandbox/foo';
+    $extension_root = \sys_get_temp_dir() . '/dcg_sandbox/foo';
     return [
       ['/tmp', NULL],
       [$extension_root, $extension_root],

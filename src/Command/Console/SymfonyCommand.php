@@ -26,8 +26,8 @@ final class SymfonyCommand extends ModuleGenerator {
 
     $vars['command']['description'] = $this->ask('Command description');
 
-    $sub_names = explode(':', $vars['command']['name']);
-    $short_name = array_pop($sub_names);
+    $sub_names = \explode(':', $vars['command']['name']);
+    $short_name = \array_pop($sub_names);
 
     $alias_validator = function (?string $value): ?string {
       return static::validate($value, '^[a-z0-9][a-z0-9_]+$', 'The value is not correct alias name.');

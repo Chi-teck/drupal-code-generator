@@ -23,7 +23,7 @@ final class DrupalConsoleCommand extends ModuleGenerator {
     $vars['description'] = $this->ask('Command description', 'Command description.');
     $vars['drupal_aware'] = $this->confirm('Make the command aware of the Drupal site installation?');
 
-    $vars['service_short_name'] = str_replace(':', '_', $vars['command_name']);
+    $vars['service_short_name'] = \str_replace(':', '_', $vars['command_name']);
     $vars['service_name'] = '{machine_name}.{service_short_name}';
     $vars['class'] = '{service_short_name|camelize}Command';
     $vars['base_class'] = $vars['drupal_aware'] ? 'ContainerAwareCommand' : 'Command';

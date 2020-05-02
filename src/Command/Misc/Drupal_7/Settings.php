@@ -27,7 +27,7 @@ final class Settings extends Generator {
     $vars['db_password'] = $this->ask('Database password', '123');
 
     // @see: drupal_get_hash_salt()
-    $vars['hash_salt'] = hash('sha256', serialize($vars));
+    $vars['hash_salt'] = \hash('sha256', \serialize($vars));
 
     $this->addFile('settings.php', 'settings');
   }
