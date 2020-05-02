@@ -48,6 +48,11 @@
   <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
   <rule ref="SlevomatCodingStandard.PHP.ShortList"/>
   <rule ref="SlevomatCodingStandard.PHP.TypeCast"/>
+  <rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces">
+    <properties>
+      <property name="ignoreSpacesInAnnotation" value="true"/>
+    </properties>
+  </rule>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

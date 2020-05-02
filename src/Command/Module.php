@@ -60,7 +60,7 @@ final class Module extends ModuleGenerator {
         ->template('src/Controller/ExampleController.php');
     }
 
-    if ($vars['form']  = $this->confirm('Would you like to create settings form?', FALSE)) {
+    if ($vars['form'] = $this->confirm('Would you like to create settings form?', FALSE)) {
       $this->addFile('{machine_name}/src/Form/SettingsForm.php')
         ->template('src/Form/SettingsForm.php');
       $this->addFile('{machine_name}/config/schema/{machine_name}.schema.yml')

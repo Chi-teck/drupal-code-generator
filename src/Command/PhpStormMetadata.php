@@ -46,7 +46,7 @@ final class PhpStormMetadata extends DrupalGenerator {
     $vars['access_controls'] = [];
     $vars['entity_classes'] = [];
     foreach ($entity_type_manager->getDefinitions() as $type => $definition) {
-      /** @var \Drupal\Core\Entity\EntityTypeInterface $definition  */
+      /** @var \Drupal\Core\Entity\EntityTypeInterface $definition */
       $vars['entity_classes'][] = $definition->getClass();
       $vars['storages'][$type] = $definition->getStorageClass();
       $vars['access_controls'][$type] = $definition->getAccessControlClass();
