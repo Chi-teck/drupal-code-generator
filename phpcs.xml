@@ -17,6 +17,7 @@
   <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
     <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
   </rule>
+  <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>
