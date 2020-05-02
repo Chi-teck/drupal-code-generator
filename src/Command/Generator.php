@@ -241,10 +241,17 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Asks a question.
    *
+   * @param string $question
+   *   A question to ask.
+   * @param string|null $default
+   *   The default answer to return if the user enters nothing.
+   * @param mixed $validator
+   *   A validator for the question.
+   *
    * @return mixed
    *   The user answer
    */
-  protected function ask(string $question, $default = NULL, $validator = NULL) {
+  protected function ask(string $question, ?string $default = NULL, $validator = NULL) {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
     $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
 
@@ -267,10 +274,17 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Asks a choice question.
    *
+   * @param string $question
+   *   A question to ask.
+   * @param array $choices
+   *   The list of available choices.
+   * @param string|null $default
+   *   The default answer to return if the user enters nothing.
+   *
    * @return mixed
    *   The user answer
    */
-  protected function choice(string $question, array $choices, $default = NULL) {
+  protected function choice(string $question, array $choices, ?string $default = NULL) {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
 
     // The choices can be an associative array.

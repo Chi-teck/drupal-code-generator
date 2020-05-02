@@ -38,7 +38,7 @@ class Utils {
   /**
    * Camelize a string.
    */
-  public static function camelize(string $input, $upper_camel = TRUE): string {
+  public static function camelize(string $input, bool $upper_camel = TRUE): string {
     $output = \preg_replace('/([^A-Z])([A-Z])/', '$1 $2', $input);
     $output = \strtolower($output);
     $output = \preg_replace('/[^a-z0-9]/', ' ', $output);

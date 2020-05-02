@@ -115,7 +115,7 @@ final class UtilsTest extends BaseTestCase {
    * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
    * @dataProvider getExtensionRootProvider
    */
-  public function testGetExtensionRoot(string $target_directory, $expected_extension_root): void {
+  public function testGetExtensionRoot(string $target_directory, ?string $expected_extension_root): void {
     $extension_root = Utils::getExtensionRoot($target_directory);
     self::assertSame($expected_extension_root, $extension_root);
   }

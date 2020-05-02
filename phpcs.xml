@@ -11,6 +11,9 @@
   <rule ref="DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
   </rule>
+  <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
+    <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification"/>
+  </rule>
   <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
     <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
   </rule>
