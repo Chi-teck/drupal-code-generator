@@ -19,6 +19,7 @@
   </rule>
   <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
   <rule ref="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
+  <rule ref="SlevomatCodingStandard.Classes.UselessLateStaticBinding"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

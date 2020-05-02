@@ -41,7 +41,7 @@ final class RestResourceTest extends ResourceTestBase {
   public function setUp(): void {
     parent::setUp();
 
-    $this->provisionResource([static::$format], ['cookie']);
+    $this->provisionResource([self::$format], ['cookie']);
 
     $user_role = Role::load(RoleInterface::ANONYMOUS_ID);
     $permissions = [
