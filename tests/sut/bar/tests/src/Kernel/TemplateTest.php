@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class TemplateTest extends KernelTestBase {
+final class TemplateTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class TemplateTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testTemplateRendering() {
+  public function testTemplateRendering(): void {
     $build = ['#theme' => 'example'];
     $this->assertEquals(
       "<div class=\"wrapper-class\">\n  bar\n</div>\n",

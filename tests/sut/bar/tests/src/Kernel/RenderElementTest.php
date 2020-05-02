@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class RenderElementTest extends KernelTestBase {
+final class RenderElementTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class RenderElementTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     \Drupal::service('theme_installer')->install(['stark']);
@@ -40,7 +40,7 @@ class RenderElementTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testBlockRendering() {
+  public function testBlockRendering(): void {
 
     $build = [
       '#type' => 'entity',
@@ -53,7 +53,7 @@ class RenderElementTest extends KernelTestBase {
     $result = (new \SimpleXMLElement($content))
       ->xpath('//div[@id = "block-test-block"]/span/a[text() = "Drupal"]');
 
-    $this->assertTrue(\count($result) == 1);
+    self::assertCount(1, $result);
   }
 
 }

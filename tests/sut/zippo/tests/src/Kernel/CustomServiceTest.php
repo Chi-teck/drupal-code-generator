@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class CustomServiceTest extends KernelTestBase {
+final class CustomServiceTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class CustomServiceTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testService() {
+  public function testService(): void {
     $foo = \Drupal::service('zippo.foo');
     self::assertInstanceOf('Drupal\zippo\Foo', $foo);
     self::assertNull($foo->doSomething());

@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class TwigExtensionTest extends KernelTestBase {
+final class TwigExtensionTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class TwigExtensionTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testTwigExtension() {
+  public function testTwigExtension(): void {
 
     $template = \implode([
       '{{ foo("example") }}',
@@ -38,7 +38,7 @@ class TwigExtensionTest extends KernelTestBase {
       ->get('renderer')
       ->renderRoot($build);
 
-    static::assertEquals('Foo: example-=BAR=-10', $output);
+    self::assertEquals('Foo: example-=BAR=-10', $output);
   }
 
 }

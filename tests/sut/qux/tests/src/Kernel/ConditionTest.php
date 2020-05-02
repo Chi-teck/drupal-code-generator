@@ -10,7 +10,7 @@ use Drupal\node\Entity\Node;
  *
  * @group DCG
  */
-class ConditionTest extends KernelTestBase {
+final class ConditionTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class ConditionTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testCondition() {
+  public function testCondition(): void {
 
     $node = Node::create(['type' => 'page']);
     $time = \Drupal::time()->getRequestTime();

@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class LayoutTest extends KernelTestBase {
+final class LayoutTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class LayoutTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testTemplateRendering() {
+  public function testTemplateRendering(): void {
 
     /** @var \Drupal\Core\Layout\LayoutInterface $layout */
     $layout = \Drupal::service('plugin.manager.core.layout')

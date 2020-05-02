@@ -13,7 +13,7 @@ trait TestTrait {
    * @param string $selector
    *   The XPath identifying the element to check.
    */
-  protected function assertXpath($selector) {
+  protected function assertXpath(string $selector): void {
     // Add some syntactic sugar.
     $selector = \preg_replace('/next::([a-z]+)/', 'following-sibling::\1[1]', $selector);
     $this->assertSession()->elementExists('xpath', $selector);
@@ -25,7 +25,7 @@ trait TestTrait {
    * @param string $selector
    *   The XPath identifying the element to check.
    */
-  protected function assertNoXpath($selector) {
+  protected function assertNoXpath(string $selector): void {
     $this->assertSession()->elementNotExists('xpath', $selector);
   }
 
@@ -35,12 +35,12 @@ trait TestTrait {
    * @param string $type
    *   A message type (e.g. status, warning, error).
    *
-   * @return array
+   * @return string[]
    *   List of found messages.
    */
-  protected function getMessages($type) {
+  protected function getMessages(string $type): array {
     $messages = [];
-    $get_message = function ($element) {
+    $get_message = function ($element): string {
       // Remove hidden heading.
       $message = \preg_replace('#<h2[^>]*>.*</h2>#', '', $element->getHtml());
       $message = \strip_tags($message, '<em>');
@@ -71,37 +71,37 @@ trait TestTrait {
   /**
    * Passes if a given error message was found on the page.
    */
-  protected function assertErrorMessage($message) {
+  protected function assertErrorMessage(string $message): void {
     $messages = $this->getMessages('error');
-    $this->assertTrue(\in_array($message, $messages), 'Error message was found.');
+    self::assertContains($message, $messages, 'Error message was found.');
   }
 
   /**
    * Passes if a given warning message was found on the page.
    */
-  protected function assertWarningMessage($message) {
+  protected function assertWarningMessage(string $message): void {
     $messages = $this->getMessages('warning');
-    $this->assertTrue(\in_array($message, $messages), 'Warning message was found.');
+    self::assertContains($message, $messages, 'Warning message was found.');
   }
 
   /**
    * Passes if a given status message was found on the page.
    */
-  protected function assertStatusMessage($message) {
+  protected function assertStatusMessage(string $message): void {
     $messages = $this->getMessages('status');
-    $this->assertTrue(\in_array($message, $messages), 'Status message was found.');
+    self::assertContains($message, $messages, 'Status message was found.');
   }
 
   /**
    * Passes if expected page title was found.
    */
-  protected function assertPageTitle($title) {
+  protected function assertPageTitle(string $title): void {
     $title_element = $this->xpath('//h1');
     if (isset($title_element[0])) {
-      $this->assertEquals($title, \trim(\strip_tags($title_element[0]->getHtml(), '<em>')));
+      self::assertSame($title, \trim(\strip_tags($title_element[0]->getHtml(), '<em>')));
     }
     else {
-      $this->fail('Page title was not found.');
+      self::fail('Page title was not found.');
     }
   }
 

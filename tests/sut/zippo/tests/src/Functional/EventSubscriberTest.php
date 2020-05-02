@@ -10,7 +10,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-class EventSubscriberTest extends BrowserTestBase {
+final class EventSubscriberTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -27,7 +27,7 @@ class EventSubscriberTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testEventSubscriber() {
+  public function testEventSubscriber(): void {
     $this->drupalGet('<front>');
     $this->assertStatusMessage('onKernelResponse');
     $this->assertStatusMessage('onKernelRequest');

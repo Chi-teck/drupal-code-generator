@@ -11,7 +11,7 @@ use Drupal\dcg_test\TestTrait;
  *
  * @group DCG
  */
-class ConfigurationEntityTest extends BrowserTestBase {
+final class ConfigurationEntityTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -28,7 +28,7 @@ class ConfigurationEntityTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $user = $this->drupalCreateUser(['administer example']);
     $this->drupalLogin($user);
@@ -37,7 +37,7 @@ class ConfigurationEntityTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testConfigurationEntity() {
+  public function testConfigurationEntity(): void {
 
     $this->drupalGet('admin/structure/example');
     $this->assertPageTitle('Example configuration');

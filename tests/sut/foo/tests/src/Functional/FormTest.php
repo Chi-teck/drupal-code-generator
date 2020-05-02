@@ -10,7 +10,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-class FormTest extends BrowserTestBase {
+final class FormTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -27,7 +27,7 @@ class FormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $admin_user = $this->drupalCreateUser(['access administration pages']);
     $this->drupalLogin($admin_user);
@@ -36,7 +36,7 @@ class FormTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testSimpleForm() {
+  public function testSimpleForm(): void {
     $this->drupalGet('admin/config/foo/simple');
     $prefix = '//form[@id="foo-simple"]';
     $this->assertXpath($prefix . '//label[text() = "Message"]');
@@ -59,7 +59,7 @@ class FormTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testConfigForm() {
+  public function testConfigForm(): void {
     $this->drupalGet('admin/config/foo/settings');
     $prefix = '//form[@id="foo-settings"]';
     $this->assertXpath($prefix . '//label[text() = "Example"]');
@@ -82,7 +82,7 @@ class FormTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testConfirmForm() {
+  public function testConfirmForm(): void {
     $this->drupalGet('admin/config/foo/confirm');
     $this->assertPageTitle('Are you sure you want to do this?');
     $this->assertXpath('//form[@id="foo-confirm" and contains(., "This action cannot be undone.")]');

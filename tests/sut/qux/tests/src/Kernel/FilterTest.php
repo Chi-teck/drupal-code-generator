@@ -11,7 +11,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class FilterTest extends KernelTestBase {
+final class FilterTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -21,18 +21,18 @@ class FilterTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testFilter() {
+  public function testFilter(): void {
 
     $plugin_manager = \Drupal::service('plugin.manager.filter');
 
     $filter_collection = new FilterPluginCollection($plugin_manager);
     $filter = $filter_collection->get('example');
 
-    $this->assertEquals('123 <b>foo</b> 456', (string) $filter->process('123 foo 456', 'en'));
-    $this->assertEquals('Some filter tips here.', $filter->tips());
+    self::assertSame('123 <b>foo</b> 456', (string) $filter->process('123 foo 456', 'en'));
+    self::assertEquals('Some filter tips here.', $filter->tips());
 
     $settings_form = $filter->settingsForm([], new FormState());
-    $this->assertEquals('foo', $settings_form['example']['#default_value']);
+    self::assertSame('foo', $settings_form['example']['#default_value']);
   }
 
 }

@@ -10,7 +10,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-class BlockTest extends BrowserTestBase {
+final class BlockTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -27,7 +27,7 @@ class BlockTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testBlock() {
+  public function testBlock(): void {
     $admin_user = $this->drupalCreateUser(['administer blocks', 'administer themes']);
     $this->drupalLogin($admin_user);
     $this->drupalGet('admin/structure/block/library/stark');

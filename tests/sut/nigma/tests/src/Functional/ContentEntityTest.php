@@ -12,7 +12,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-class ContentEntityTest extends BrowserTestBase {
+final class ContentEntityTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -29,7 +29,7 @@ class ContentEntityTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testEntityTypeUi() {
+  public function testEntityTypeUi(): void {
 
     $permissions = [
       'administer example types',

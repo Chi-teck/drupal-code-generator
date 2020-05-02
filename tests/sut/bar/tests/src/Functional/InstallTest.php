@@ -10,7 +10,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-class InstallTest extends BrowserTestBase {
+final class InstallTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -22,7 +22,7 @@ class InstallTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testInstall() {
+  public function testInstall(): void {
     $user = $this->drupalCreateUser(['administer modules', 'administer site configuration']);
     $this->drupalLogin($user);
 

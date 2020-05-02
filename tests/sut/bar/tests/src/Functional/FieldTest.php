@@ -13,7 +13,7 @@ use Drupal\dcg_test\TestTrait;
  *
  * @group DCG
  */
-class FieldTest extends BrowserTestBase {
+final class FieldTest extends BrowserTestBase {
 
   use NodeCreationTrait;
   use TestTrait;
@@ -31,7 +31,7 @@ class FieldTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->createContentType(['type' => 'page', 'name' => 'Page']);
     $permissions = [
@@ -48,7 +48,7 @@ class FieldTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testFieldExample1() {
+  public function testFieldExample1(): void {
     $edit = [
       'new_storage_type' => 'bar_example_1',
       'label' => 'Foo',
@@ -167,7 +167,7 @@ class FieldTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testFieldExample2() {
+  public function testFieldExample2(): void {
     $edit = [
       'new_storage_type' => 'bar_example_2',
       'label' => 'Foo',
@@ -318,7 +318,7 @@ class FieldTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testFieldExample3() {
+  public function testFieldExample3(): void {
     $edit = [
       'new_storage_type' => 'bar_example_3',
       'label' => 'Foo',
@@ -410,7 +410,7 @@ class FieldTest extends BrowserTestBase {
   /**
    * Asserts formatter item.
    */
-  protected function assertFormatterItem($prefix, $label, $value) {
+  protected function assertFormatterItem(string $prefix, string $label, string $value): void {
     $xpath = '/label[text() = "%s" and normalize-space(following::text()[1]) = "%s"]';
     $this->assertXpath($prefix . \sprintf($xpath, $label, $value));
   }
@@ -418,7 +418,7 @@ class FieldTest extends BrowserTestBase {
   /**
    * Builds options xpath.
    */
-  protected static function buildOptionsXpath(array $options, $selected_option) {
+  protected static function buildOptionsXpath(array $options, string $selected_option): string {
     $xpath = \sprintf('/option[text() = "%s"%s]', \array_shift($options), $selected_option == 0 ? ' and @selected' : '');
     foreach ($options as $index => $option) {
       $xpath .= \sprintf('/following::option[text() = "%s"%s][1]', $option, $selected_option == $index + 1 ? ' and @selected' : '');

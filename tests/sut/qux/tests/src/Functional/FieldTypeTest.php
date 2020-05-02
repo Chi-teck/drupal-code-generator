@@ -11,7 +11,7 @@ use Drupal\dcg_test\TestTrait;
  *
  * @group DCG
  */
-class FieldTypeTest extends BrowserTestBase {
+final class FieldTypeTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -28,7 +28,7 @@ class FieldTypeTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testFieldType() {
+  public function testFieldType(): void {
 
     $this->drupalCreateContentType(['type' => 'test']);
 

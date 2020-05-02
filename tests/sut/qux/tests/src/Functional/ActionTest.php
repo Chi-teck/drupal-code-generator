@@ -11,7 +11,7 @@ use Drupal\dcg_test\TestTrait;
  *
  * @group DCG
  */
-class ActionTest extends BrowserTestBase {
+final class ActionTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -28,7 +28,7 @@ class ActionTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testAction() {
+  public function testAction(): void {
 
     $this->createContentType(['type' => 'article']);
     $node = $this->createNode(['type' => 'article']);

@@ -14,7 +14,7 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
  *
  * @group DCG
  */
-class EntityReferenceSelectionTest extends KernelTestBase {
+final class EntityReferenceSelectionTest extends KernelTestBase {
 
   use NodeCreationTrait;
   use ContentTypeCreationTrait;
@@ -35,7 +35,7 @@ class EntityReferenceSelectionTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->installSchema('node', 'node_access');
     $this->installEntitySchema('user');
@@ -62,7 +62,7 @@ class EntityReferenceSelectionTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testEntityReferenceSelection() {
+  public function testEntityReferenceSelection(): void {
 
     $node_1 = $this->createNode(['title' => 'Example 1']);
     $node_1->set('field_example', '123');

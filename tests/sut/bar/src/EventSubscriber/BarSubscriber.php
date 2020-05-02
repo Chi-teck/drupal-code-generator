@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Foo event subscriber.
  */
-class BarSubscriber implements EventSubscriberInterface {
+final class BarSubscriber implements EventSubscriberInterface {
 
   use StringTranslationTrait;
 
@@ -34,14 +34,14 @@ class BarSubscriber implements EventSubscriberInterface {
   /**
    * Kernel request event handler.
    */
-  public function onKernelRequest() {
+  public function onKernelRequest(): void {
     \Drupal::messenger()->addStatus($this->t('Bar subscriber is active.'));
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       KernelEvents::REQUEST => ['onKernelRequest'],
     ];

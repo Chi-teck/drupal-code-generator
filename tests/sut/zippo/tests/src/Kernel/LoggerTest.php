@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class LoggerTest extends KernelTestBase {
+final class LoggerTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class LoggerTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testLogger() {
+  public function testLogger(): void {
 
     $this->installConfig('system');
 

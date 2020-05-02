@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @group DCG
  */
-class PathProcessorTest extends KernelTestBase {
+final class PathProcessorTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -20,15 +20,15 @@ class PathProcessorTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testPathProcessor() {
+  public function testPathProcessor(): void {
     $manager = \Drupal::service('path_processor_manager');
 
     $request = Request::create('/content/1');
     $path = $manager->processInbound('/content/1', $request);
-    $this->assertEquals('/node/1', $path);
+    self::assertSame('/node/1', $path);
 
     $path = $manager->processOutbound('/node/1');
-    $this->assertEquals('/content/1', $path);
+    self::assertSame('/content/1', $path);
   }
 
 }

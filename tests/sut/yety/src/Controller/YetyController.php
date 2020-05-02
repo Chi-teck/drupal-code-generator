@@ -7,12 +7,12 @@ use Drupal\Core\Controller\ControllerBase;
 /**
  * Controller for generated routing.yml file.
  */
-class YetyController extends ControllerBase {
+final class YetyController extends ControllerBase {
 
   /**
    * Builds the response.
    */
-  public function build() {
+  public function build(): array {
 
     $build['content'] = [
       '#type' => 'item',

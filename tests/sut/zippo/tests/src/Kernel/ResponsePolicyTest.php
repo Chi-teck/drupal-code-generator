@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @group DCG
  */
-class ResponsePolicyTest extends KernelTestBase {
+final class ResponsePolicyTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -21,7 +21,7 @@ class ResponsePolicyTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testResponsePolicy() {
+  public function testResponsePolicy(): void {
     // The service is private so we have to test it implicitly through service
     // collector.
     $request_policy = \Drupal::service('page_cache_response_policy');

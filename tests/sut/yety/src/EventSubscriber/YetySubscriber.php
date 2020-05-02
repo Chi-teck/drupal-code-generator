@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Event subscriber.
  */
-class YetySubscriber implements EventSubscriberInterface {
+final class YetySubscriber implements EventSubscriberInterface {
 
   /**
    * Kernel request event handler.
@@ -17,14 +17,14 @@ class YetySubscriber implements EventSubscriberInterface {
    * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
    *   Response event.
    */
-  public function onKernelRequest(GetResponseEvent $event) {
+  public function onKernelRequest(GetResponseEvent $event): void {
     \drupal_set_message(__FUNCTION__);
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       KernelEvents::REQUEST => ['onKernelRequest'],
     ];

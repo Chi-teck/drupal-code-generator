@@ -8,7 +8,7 @@ use Drupal\dblog\Logger\DbLog;
 /**
  * Logs events in the watchdog database table.
  */
-class BarLog extends DbLog {
+final class BarLog extends DbLog {
 
   use StringTranslationTrait;
 

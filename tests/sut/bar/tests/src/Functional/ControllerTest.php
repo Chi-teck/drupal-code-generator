@@ -10,7 +10,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-class ControllerTest extends BrowserTestBase {
+final class ControllerTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -27,7 +27,7 @@ class ControllerTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testController() {
+  public function testController(): void {
     $user = $this->drupalCreateUser(['access content']);
     $this->drupalLogin($user);
     $this->drupalGet('bar/example');

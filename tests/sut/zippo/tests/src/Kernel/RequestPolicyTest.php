@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @group DCG
  */
-class RequestPolicyTest extends KernelTestBase {
+final class RequestPolicyTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class RequestPolicyTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testRequestPolicy() {
+  public function testRequestPolicy(): void {
     $request_policy = \Drupal::service('zippo.page_cache_request_policy.example');
     self::assertNull($request_policy->check(new Request()));
     self::assertSame('deny', $request_policy->check(new Request(['no-cache' => 1])));

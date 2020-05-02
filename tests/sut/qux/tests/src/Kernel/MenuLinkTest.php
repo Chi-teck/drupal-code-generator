@@ -10,7 +10,7 @@ use Drupal\Core\Database\Database;
  *
  * @group DCG
  */
-class MenuLinkTest extends KernelTestBase {
+final class MenuLinkTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class MenuLinkTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testMenuLink() {
+  public function testMenuLink(): void {
 
     /** @var \Drupal\Core\Menu\MenuLinkManagerInterface $plugin_manager */
     $plugin_manager = \Drupal::service('plugin.manager.menu.link');
@@ -34,13 +34,13 @@ class MenuLinkTest extends KernelTestBase {
     $table['fields']['id']['type'] = 'int';
     $db_connection->schema()->createTable('messages', $table);
 
-    $this->assertEquals('Messages (0)', $plugin->getTitle());
+    self::assertEquals('Messages (0)', $plugin->getTitle());
     $db_connection->insert('messages')->fields(['id' => 1])->execute();
 
-    $this->assertEquals('Messages (1)', $plugin->getTitle());
-    $this->assertEquals('qux.messages', $plugin->getRouteName());
+    self::assertEquals('Messages (1)', $plugin->getTitle());
+    self::assertSame('qux.messages', $plugin->getRouteName());
 
-    $this->assertEquals(['qux.messages_count'], $plugin->getCacheTags());
+    self::assertSame(['qux.messages_count'], $plugin->getCacheTags());
   }
 
 }

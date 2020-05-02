@@ -5,6 +5,6 @@ namespace Drupal\example;
 /**
  * Example service.
  */
-class Example implements ExampleInterface {
+final class Example implements ExampleInterface {
 
 }

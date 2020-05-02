@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * The middleware.
  */
-class YetyMiddleware implements HttpKernelInterface {
+final class YetyMiddleware implements HttpKernelInterface {
 
   /**
    * The kernel.

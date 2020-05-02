@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class PluginManagerTest extends KernelTestBase {
+final class PluginManagerTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class PluginManagerTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testPluginManagerAnnotation() {
+  public function testPluginManagerAnnotation(): void {
     $plugin_manager = \Drupal::service('plugin.manager.alpha');
 
     $definition = $plugin_manager->getDefinition('foo');
@@ -35,7 +35,7 @@ class PluginManagerTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testPluginManagerYaml() {
+  public function testPluginManagerYaml(): void {
     $plugin_manager = \Drupal::service('plugin.manager.beta');
     for ($i = 1; $i <= 3; $i++) {
       $plugin_id = 'foo_' . $i;
@@ -54,7 +54,7 @@ class PluginManagerTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testPluginManagerHook() {
+  public function testPluginManagerHook(): void {
     $plugin_manager = \Drupal::service('plugin.manager.gamma');
 
     // Foo plugin.

@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class UninstallValidatorTest extends KernelTestBase {
+final class UninstallValidatorTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class UninstallValidatorTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testUninstallValidator() {
+  public function testUninstallValidator(): void {
 
     $this->container
       ->get('entity_type.manager')

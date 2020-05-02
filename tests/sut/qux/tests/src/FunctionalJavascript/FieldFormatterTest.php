@@ -7,12 +7,12 @@ namespace Drupal\Tests\qux\FunctionalJavascript;
  *
  * @group DCG
  */
-class FieldFormatterTest extends FieldBaseTest {
+final class FieldFormatterTest extends FieldBaseTest {
 
   /**
    * Test callback.
    */
-  public function testFieldFormatter() {
+  public function testFieldFormatter(): void {
 
     $this->drupalGet('admin/structure/types/manage/test/display');
 

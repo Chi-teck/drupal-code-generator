@@ -15,7 +15,7 @@ use GuzzleHttp\RequestOptions;
  *
  * @group DCG
  */
-class RestResourceTest extends ResourceTestBase {
+final class RestResourceTest extends ResourceTestBase {
 
   use CookieResourceTestTrait;
   use TestTrait;
@@ -38,7 +38,7 @@ class RestResourceTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->provisionResource([static::$format], ['cookie']);
@@ -95,7 +95,7 @@ class RestResourceTest extends ResourceTestBase {
   /**
    * Test callback.
    */
-  public function testResource() {
+  public function testResource(): void {
 
     $route_prefix = 'rest.' . self::$resourceConfigId . '.';
 

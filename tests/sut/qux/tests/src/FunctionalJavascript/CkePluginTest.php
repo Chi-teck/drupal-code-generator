@@ -9,7 +9,7 @@ use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
  *
  * @group DCG
  */
-class CkePluginTest extends WebDriverTestBase {
+final class CkePluginTest extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}
@@ -40,7 +40,7 @@ class CkePluginTest extends WebDriverTestBase {
   /**
    * Test callback.
    */
-  public function testDialog() {
+  public function testDialog(): void {
     $this->drupalGet('admin/config/content/formats/manage/test');
 
     // @codingStandardsIgnoreStart

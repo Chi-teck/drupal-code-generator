@@ -10,7 +10,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class CacheContextTest extends KernelTestBase {
+final class CacheContextTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -20,11 +20,11 @@ class CacheContextTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testCacheContext() {
+  public function testCacheContext(): void {
     $cache_context = \Drupal::service('cache_context.example');
-    $this->assertEquals('Example', $cache_context->getLabel());
-    $this->assertEquals('some_string_value', $cache_context->getContext());
-    $this->assertEquals(new CacheableMetadata(), $cache_context->getCacheableMetadata());
+    self::assertEquals('Example', $cache_context->getLabel());
+    self::assertSame('some_string_value', $cache_context->getContext());
+    self::assertEquals(new CacheableMetadata(), $cache_context->getCacheableMetadata());
   }
 
 }

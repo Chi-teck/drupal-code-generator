@@ -27,7 +27,7 @@ abstract class FieldBaseTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->createContentType(['type' => 'test']);
@@ -54,7 +54,7 @@ abstract class FieldBaseTest extends WebDriverTestBase {
   /**
    * Waits for Ajax request to be finished.
    */
-  protected function waitForAjax() {
+  protected function waitForAjax(): void {
     $page = $this->getSession()->getPage();
     $page->waitFor(10, function () use ($page) {
       $element = $page->find('css', '.throbber');

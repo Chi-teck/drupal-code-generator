@@ -10,7 +10,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-class ServiceProviderTest extends BrowserTestBase {
+final class ServiceProviderTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -27,7 +27,7 @@ class ServiceProviderTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testProvidedServices() {
+  public function testProvidedServices(): void {
     $user = $this->drupalCreateUser();
     $this->drupalLogin($user);
     $this->assertStatusMessage('Bar subscriber is active.');

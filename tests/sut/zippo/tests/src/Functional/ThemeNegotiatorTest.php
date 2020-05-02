@@ -9,7 +9,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-class ThemeNegotiatorTest extends BrowserTestBase {
+final class ThemeNegotiatorTest extends BrowserTestBase {
 
   /**
    * {@inheritdoc}
@@ -24,7 +24,7 @@ class ThemeNegotiatorTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testThemeNegotiator() {
+  public function testThemeNegotiator(): void {
     \Drupal::service('theme_installer')->install(['bartik']);
 
     $options = ['query' => ['theme' => 'bartik']];
