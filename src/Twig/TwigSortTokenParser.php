@@ -20,7 +20,7 @@ class TwigSortTokenParser extends AbstractTokenParser {
       static function (Token $token): bool {
         return $token->test('endsort');
       },
-      TRUE
+      TRUE,
     );
     $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
 

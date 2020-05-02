@@ -20,7 +20,7 @@ final class GeneratorDiscoveryTest extends TestCase {
     $factory = new GeneratorFactory();
     $generators = $factory->getGenerators(
       [Application::ROOT . '/src/Command/Misc/Drupal_7'],
-      '\DrupalCodeGenerator\Command\Misc\Drupal_7'
+      '\DrupalCodeGenerator\Command\Misc\Drupal_7',
     );
     foreach ($generators as $generator) {
       self::assertInstanceOf('DrupalCodeGenerator\Command\Generator', $generator);

@@ -276,7 +276,7 @@ function process_class(array &$raw_definitions, string $service_id, string $clas
           "Annotated type '%s' does match the real type '%s' in '%s' service'.",
           $annotated_type,
           $real_type,
-          $service_id
+          $service_id,
         );
         throw new UnexpectedValueException($message);
       }
@@ -287,7 +287,7 @@ function process_class(array &$raw_definitions, string $service_id, string $clas
         "Annotated name '%s' does match the real name '%s' in '%s' service'.",
         $annotated_name,
         $real_name,
-        $service_id
+        $service_id,
       );
       throw new UnexpectedValueException($message);
     }

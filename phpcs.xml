@@ -40,6 +40,7 @@
   <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses"/>
   <rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
   <rule ref="SlevomatCodingStandard.Functions.DisallowEmptyFunction"/>
+  <rule ref="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

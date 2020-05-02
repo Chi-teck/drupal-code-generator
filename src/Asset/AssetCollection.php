@@ -84,7 +84,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
       $this->assets,
       static function ($asset): bool {
         return $asset instanceof Directory;
-      }
+      },
     );
     return new self($assets);
   }
@@ -100,7 +100,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
       $this->assets,
       static function ($asset): bool {
         return $asset instanceof File;
-      }
+      },
     );
     return new self($assets);
   }
@@ -116,7 +116,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
       $this->assets,
       static function ($asset): bool {
         return $asset instanceof Symlink;
-      }
+      },
     );
     return new self($assets);
   }

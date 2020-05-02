@@ -23,7 +23,7 @@ final class TemplateTest extends KernelTestBase {
     $build = ['#theme' => 'example'];
     self::assertEquals(
       "<div class=\"wrapper-class\">\n  bar\n</div>\n",
-      $this->container->get('renderer')->renderRoot($build)
+      $this->container->get('renderer')->renderRoot($build),
     );
   }
 

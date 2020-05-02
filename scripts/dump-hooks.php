@@ -41,7 +41,7 @@ function dump_hooks(InputInterface $input, OutputInterface $output): int {
   }
 
   $iterator = new RecursiveIteratorIterator(
-    new RecursiveDirectoryIterator($input_directory, RecursiveDirectoryIterator::SKIP_DOTS)
+    new RecursiveDirectoryIterator($input_directory, RecursiveDirectoryIterator::SKIP_DOTS),
   );
 
   $total = 0;

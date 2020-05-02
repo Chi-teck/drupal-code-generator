@@ -144,7 +144,7 @@ abstract class DrupalGenerator extends Generator {
       $destination = $this->drupalContext->getDestination(
         $this->extensionType,
         $this->isNewExtension,
-        $this->vars['machine_name'] ?? NULL
+        $this->vars['machine_name'] ?? NULL,
       );
     }
     return $destination ?? parent::getDestination();

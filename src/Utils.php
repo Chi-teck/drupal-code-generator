@@ -24,7 +24,7 @@ class Utils {
     return \trim(\preg_replace(
       ['/^[0-9]+/', '/[^a-z0-9_]+/'],
       '_',
-      \strtolower($human_name)
+      \strtolower($human_name),
     ), '_');
   }
 
