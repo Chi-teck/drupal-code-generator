@@ -187,21 +187,29 @@ final class RestResourceTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method) {}
+  protected function setUpAuthorization($method) {
+    // Intentionally empty.
+  }
 
   /**
    * {@inheritdoc}
    */
-  protected function assertNormalizationEdgeCases($method, Url $url, array $request_options) {}
+  protected function assertNormalizationEdgeCases($method, Url $url, array $request_options) {
+    // Intentionally empty.
+  }
 
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedUnauthorizedAccessMessage($method) {}
+  protected function getExpectedUnauthorizedAccessMessage($method) {
+    // Intentionally empty.
+  }
 
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedUnauthorizedAccessCacheability() {}
+  protected function getExpectedUnauthorizedAccessCacheability() {
+    // Intentionally empty.
+  }
 
 }

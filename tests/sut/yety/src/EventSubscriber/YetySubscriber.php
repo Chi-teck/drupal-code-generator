@@ -15,7 +15,7 @@ final class YetySubscriber implements EventSubscriberInterface {
    * Kernel request event handler.
    */
   public function onKernelRequest(GetResponseEvent $event): void {
-
+    // Intentionally empty.
   }
 
   /**
