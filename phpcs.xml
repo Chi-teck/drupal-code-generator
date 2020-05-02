@@ -24,6 +24,7 @@
   <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator"/>
   <rule ref="SlevomatCodingStandard.Functions.StaticClosure"/>
   <rule ref="SlevomatCodingStandard.Operators.RequireCombinedAssignmentOperator"/>
+  <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

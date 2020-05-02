@@ -2,31 +2,12 @@
 
 namespace DrupalCodeGenerator;
 
-use Symfony\Component\Filesystem\Filesystem;
-
 /**
  * Defines generator factory.
  */
 final class GeneratorFactory {
 
   private const COMMAND_INTERFACE = '\DrupalCodeGenerator\Command\GeneratorInterface';
-
-  /**
-   * The file system utility.
-   *
-   * @var \Symfony\Component\Filesystem\Filesystem
-   */
-  private $filesystem;
-
-  /**
-   * Constructs discovery object.
-   *
-   * @param \Symfony\Component\Filesystem\Filesystem $filesystem
-   *   The file system utility.
-   */
-  public function __construct(Filesystem $filesystem) {
-    $this->filesystem = $filesystem;
-  }
 
   /**
    * Finds and instantiates generator commands.
