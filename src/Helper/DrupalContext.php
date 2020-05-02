@@ -42,7 +42,7 @@ class DrupalContext extends Helper {
   /**
    * DrupalContext constructor.
    */
-  public function __construct(ContainerInterface $container, string $drupal_root = DRUPAL_ROOT) {
+  public function __construct(ContainerInterface $container, string $drupal_root = \DRUPAL_ROOT) {
     $this->container = $container;
     $this->drupalRoot = $drupal_root;
   }
@@ -135,7 +135,7 @@ class DrupalContext extends Helper {
         break;
 
       case DrupalGenerator::EXTENSION_TYPE_THEME:
-        $themes_dir = \is_dir(DRUPAL_ROOT . '/themes/custom') ?
+        $themes_dir = \is_dir($this->drupalRoot . '/themes/custom') ?
           'themes/custom' : 'themes';
 
         if ($is_new) {

@@ -76,7 +76,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
         self::formatMemory($total_size),
       ];
 
-      $right_aligned = (new TableStyle())->setPadType(STR_PAD_LEFT);
+      $right_aligned = (new TableStyle())->setPadType(\STR_PAD_LEFT);
       $this->io
         ->buildTable($headers, $rows)
         ->setColumnStyle(2, $right_aligned)

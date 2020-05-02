@@ -16,7 +16,7 @@ final class ProjectTest extends BaseGeneratorTest {
    */
   public function testLight(): void {
 
-    $default_php_version = '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
+    $default_php_version = '>=' . \PHP_MAJOR_VERSION . '.' . \PHP_MINOR_VERSION;
     $interaction = [
       'Project name (vendor/name):' => 'example/foo',
       'Description:' => '',
@@ -53,7 +53,7 @@ final class ProjectTest extends BaseGeneratorTest {
    */
   public function testFull(): void {
 
-    $default_php_version = '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
+    $default_php_version = '>=' . \PHP_MAJOR_VERSION . '.' . \PHP_MINOR_VERSION;
     $interaction = [
       'Project name (vendor/name):' => 'example/foo',
       'Description:' => '',

@@ -44,7 +44,7 @@ final class DcgCommand extends Generator {
     $file_path = '';
     if ($sub_names) {
       $vars['namespace'] .= '\\' . \implode('\\', $sub_names);
-      $file_path = \implode(DIRECTORY_SEPARATOR, $sub_names);
+      $file_path = \implode(\DIRECTORY_SEPARATOR, $sub_names);
       $vars['path'] = '/' . $file_path;
     }
 

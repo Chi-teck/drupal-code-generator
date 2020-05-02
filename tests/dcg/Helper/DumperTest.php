@@ -428,7 +428,7 @@ final class DumperTest extends BaseTestCase {
     $results = [];
     foreach (\scandir($directory) as $file) {
       if ($file != '.' && $file != '..') {
-        $path = $directory . DIRECTORY_SEPARATOR . $file;
+        $path = $directory . \DIRECTORY_SEPARATOR . $file;
         $relative_path = \rtrim($this->filesystem->makePathRelative($path, $this->directory), '/');
         if (\is_link($path)) {
           $relative_path .= ' (' . \readlink($path) . ')';

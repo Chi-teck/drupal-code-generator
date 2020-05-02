@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Other;
+namespace DrupalCodeGenerator\Tests\Generator\Misc;
 
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 

@@ -93,7 +93,7 @@ final class Project extends Generator {
     $vars['document_root'] = $this->io->askQuestion($document_root_question);
     $vars['document_root_path'] = $vars['document_root'] . '/';
 
-    $vars['php'] = $this->ask('PHP version', '>=' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION);
+    $vars['php'] = $this->ask('PHP version', '>=' . \PHP_MAJOR_VERSION . '.' . \PHP_MINOR_VERSION);
 
     $vars['drupal_core_recommended'] = $this->confirm('Would you like to install recommended Drupal core dependencies?', FALSE);
     $vars['drupal_core_dev'] = $this->confirm('Would you like to install Drupal core development dependencies?', FALSE);
@@ -278,7 +278,7 @@ final class Project extends Generator {
       $composer_json['extra']['installer-paths'][$document_root_path . 'libraries/{$name}'][] = 'type:npm-asset';
     }
 
-    return \json_encode($composer_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
+    return \json_encode($composer_json, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES) . "\n";
   }
 
   /**

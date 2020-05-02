@@ -1,6 +1,6 @@
 <?php
 
-namespace DrupalCodeGenerator\Tests\Generator\Other;
+namespace DrupalCodeGenerator\Tests\Generator\Misc;
 
 use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
@@ -27,9 +27,9 @@ final class NginxVirtualHostTest extends BaseGeneratorTest {
    * {@inheritdoc}
    */
   protected function processExpectedDisplay(string $display): string {
-    $socket = PHP_MAJOR_VERSION == 5
+    $socket = \PHP_MAJOR_VERSION == 5
       ? '/run/php5-fpm.sock'
-      : \sprintf('/run/php/php%s.%s-fpm.sock', PHP_MAJOR_VERSION, PHP_MINOR_VERSION);
+      : \sprintf('/run/php/php%s.%s-fpm.sock', \PHP_MAJOR_VERSION, \PHP_MINOR_VERSION);
     return \str_replace('%socket%', $socket, $display);
   }
 

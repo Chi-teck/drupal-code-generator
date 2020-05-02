@@ -44,6 +44,7 @@
   <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
   <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
+  <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalConstants"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>
