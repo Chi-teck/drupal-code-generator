@@ -81,7 +81,7 @@ abstract class BaseGeneratorTest extends BaseTestCase {
 
     // Default fixture path is the directory where the test is located.
     if (!$fixture_path = $this->fixturePath) {
-      $reflector = new \ReflectionClass(\get_class($this));
+      $reflector = new \ReflectionClass(static::class);
       $fixture_path = \dirname($reflector->getFileName()) . '/';
     }
 

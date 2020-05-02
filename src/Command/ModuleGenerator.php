@@ -64,7 +64,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
     $services = [];
     while (TRUE) {
       $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
-      $question->setValidator([__CLASS__, 'validateServiceName']);
+      $question->setValidator([static::class, 'validateServiceName']);
       $question->setAutocompleterValues($service_ids);
       $service = $this->io()->askQuestion($question);
       if (!$service) {

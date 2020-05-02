@@ -105,7 +105,7 @@ abstract class DrupalGenerator extends Generator {
     $root_directory = \basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
     $default_value = Utils::machine2human($root_directory, TRUE);
     $name_question = new Question($this->nameQuestion, $default_value);
-    $name_question->setValidator([\get_class($this), 'validateRequired']);
+    $name_question->setValidator([static::class, 'validateRequired']);
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
       $name_question->setAutocompleterValues($extensions);
     }
@@ -118,7 +118,7 @@ abstract class DrupalGenerator extends Generator {
   protected function askMachineNameQuestion(): string {
     $default_value = Utils::human2machine($this->vars['name'] ?? \basename($this->directory));
     $machine_name_question = new Question($this->machineNameQuestion, $default_value);
-    $machine_name_question->setValidator([\get_class($this), 'validateRequiredMachineName']);
+    $machine_name_question->setValidator([static::class, 'validateRequiredMachineName']);
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
       $machine_name_question->setAutocompleterValues(\array_keys($extensions));
     }

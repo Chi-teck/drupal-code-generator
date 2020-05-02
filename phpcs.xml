@@ -36,6 +36,7 @@
       <property name="ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach" value="true"/>
     </properties>
   </rule>
+  <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

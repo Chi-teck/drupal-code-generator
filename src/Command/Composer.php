@@ -24,7 +24,7 @@ final class Composer extends DrupalGenerator {
     $vars['description'] = $this->ask('Description');
 
     $type_question = new Question('Type', 'drupal-module');
-    $type_question->setValidator([__CLASS__, 'validateRequired']);
+    $type_question->setValidator([self::class, 'validateRequired']);
     $type_question->setAutocompleterValues([
       'drupal-module',
       'drupal-theme',

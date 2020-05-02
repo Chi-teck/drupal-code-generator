@@ -153,7 +153,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     $exit_status = self::SUCCESS;
 
-    $this->logger->debug('Command: {command}', ['command' => \get_class($this)]);
+    $this->logger->debug('Command: {command}', ['command' => static::class]);
 
     try {
       $this->printHeader();
@@ -258,7 +258,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     // Allow the validators to be referenced in a short form like
     // '::validateMachineName'.
     if (\is_string($validator) && \substr($validator, 0, 2) == '::') {
-      $validator = [\get_class($this), \substr($validator, 2)];
+      $validator = [static::class, \substr($validator, 2)];
     }
     return $this->io->ask($question, $default, $validator);
   }
