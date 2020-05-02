@@ -32,7 +32,7 @@ final class DrushCommand extends Generator {
     $default_command_file = \str_replace('-', '_', $prefix) . '.drush.inc';
     $vars['command_file'] = $this->ask('Command file', $default_command_file);
 
-    list($vars['command_file_prefix']) = \explode('.drush.inc', $vars['command_file']);
+    [$vars['command_file_prefix']] = \explode('.drush.inc', $vars['command_file']);
 
     // Command callback name pattern gets shorter if command file name matches
     // command name.
