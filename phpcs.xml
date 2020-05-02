@@ -1,74 +1,16 @@
 <?xml version="1.0"?>
 <ruleset name="Drupal Code Generator">
   <description>Drupal Code Generator coding standard</description>
-  <config name="installed_paths" value="vendor/drupal/coder/coder_sniffer,vendor/slevomat/coding-standard"/>
   <arg name="colors"/>
   <file>./scripts/dump-hooks.php</file>
   <file>./scripts/dump-services.php</file>
   <file>./src</file>
   <file>./tests</file>
-  <rule ref="Drupal"/>
-  <rule ref="DrupalPractice">
+  <rule ref="vendor/drupal/coder/coder_sniffer/Drupal"/>
+  <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
   </rule>
-  <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
-    <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification"/>
-  </rule>
-  <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
-    <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
-  </rule>
-  <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
-  <rule ref="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
-  <rule ref="SlevomatCodingStandard.Classes.UselessLateStaticBinding"/>
-  <rule ref="SlevomatCodingStandard.ControlStructures.DisallowContinueWithoutIntegerOperandInSwitch"/>
-  <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator"/>
-  <rule ref="SlevomatCodingStandard.Functions.StaticClosure"/>
-  <rule ref="SlevomatCodingStandard.Operators.RequireCombinedAssignmentOperator"/>
-  <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements"/>
-  <rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.UselessAlias"/>
-  <rule ref="SlevomatCodingStandard.PHP.RequireNowdoc"/>
-  <rule ref="SlevomatCodingStandard.PHP.UselessParentheses"/>
-  <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
-  <rule ref="SlevomatCodingStandard.Variables.UnusedVariable">
-    <properties>
-      <property name="ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach" value="true"/>
-    </properties>
-  </rule>
-  <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference"/>
-  <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses"/>
-  <rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
-  <rule ref="SlevomatCodingStandard.Functions.DisallowEmptyFunction"/>
-  <rule ref="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration"/>
-  <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalConstants"/>
-  <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
-  <rule ref="SlevomatCodingStandard.PHP.ShortList"/>
-  <rule ref="SlevomatCodingStandard.PHP.TypeCast"/>
-  <rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces">
-    <properties>
-      <property name="ignoreSpacesInAnnotation" value="true"/>
-    </properties>
-  </rule>
-  <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility"/>
-  <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing">
-    <properties>
-      <property name="spacesCountBeforeColon" value="0"/>
-    </properties>
-  </rule>
-  <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalConstants"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation"/>
-  <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
-  <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
-  <rule ref="SlevomatCodingStandard.Commenting.UselessFunctionDocComment"/>
-  <rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn"/>
-  <rule ref="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator"/>
+  <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended73"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

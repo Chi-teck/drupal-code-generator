@@ -26,6 +26,7 @@
     "require": {
         "php": ">=7.3",
         "ext-json": "*",
+        "chi-teck/drupal-coder-extension": "dev-master",
         "psr/log": "^1.1",
         "symfony/console": "^4.4 || ^5.0",
         "symfony/filesystem": "^4.4 || ^5.0",
@@ -36,7 +37,6 @@
         "drupal/coder": "^8.3.6",
         "friendsoftwig/twigcs": "^3.2",
         "phpunit/phpunit": "^8.5",
-        "slevomat/coding-standard": "^6.3",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/var-dumper": "^5.0",
         "symfony/yaml": "^5.0"
