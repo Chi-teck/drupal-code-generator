@@ -30,6 +30,7 @@
   <rule ref="SlevomatCodingStandard.Namespaces.UselessAlias"/>
   <rule ref="SlevomatCodingStandard.PHP.RequireNowdoc"/>
   <rule ref="SlevomatCodingStandard.PHP.UselessParentheses"/>
+  <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>
