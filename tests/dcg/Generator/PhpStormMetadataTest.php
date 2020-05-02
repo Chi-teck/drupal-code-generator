@@ -37,7 +37,7 @@ final class PhpStormMetadataTest extends BaseGeneratorTest {
     // phpcs:disable Drupal.Commenting.FunctionComment.Missing
     $kernel = new class {
 
-      public function getCachedContainerDefinition() {
+      public function getCachedContainerDefinition(): array {
         $definitions['foo'] = ['class' => '\Foo'];
         return ['services' => \array_map('serialize', $definitions)];
       }
@@ -46,35 +46,35 @@ final class PhpStormMetadataTest extends BaseGeneratorTest {
 
     $entity_type_manager = new class {
 
-      public function getDefinitions() {
+      public function getDefinitions(): array {
         $definition = new class {
 
-          public function getClass() {
+          public function getClass(): string {
             return '\EntityTypeExample';
           }
 
-          public function getStorageClass() {
+          public function getStorageClass(): string {
             // Define it without leading slash to test if it'll be normalized.
             return 'StorageExample';
           }
 
-          public function getAccessControlClass() {
+          public function getAccessControlClass(): string {
             return '\AccessControlExample';
           }
 
-          public function hasViewBuilderClass() {
+          public function hasViewBuilderClass(): bool {
             return TRUE;
           }
 
-          public function getViewBuilderClass() {
+          public function getViewBuilderClass(): string {
             return '\Foo\BarViewBuilder';
           }
 
-          public function hasListBuilderClass() {
+          public function hasListBuilderClass(): bool {
             return TRUE;
           }
 
-          public function getListBuilderClass() {
+          public function getListBuilderClass(): string {
             return '\Bar\FooListBuilder';
           }
 

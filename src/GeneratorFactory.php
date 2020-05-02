@@ -31,7 +31,7 @@ final class GeneratorFactory {
   /**
    * Finds and instantiates generator commands.
    *
-   * @param array $directories
+   * @param string[] $directories
    *   Directories to look up for commands.
    * @param string $namespace
    *   (Optional) The namespace to filter out commands.
@@ -39,7 +39,7 @@ final class GeneratorFactory {
    * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
-  public function getGenerators(array $directories, $namespace = '\DrupalCodeGenerator\Command'): array {
+  public function getGenerators(array $directories, string $namespace = '\DrupalCodeGenerator\Command'): array {
     $commands = [];
 
     foreach ($directories as $directory) {

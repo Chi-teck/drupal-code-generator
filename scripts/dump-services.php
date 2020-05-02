@@ -33,7 +33,7 @@ $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 
 // Override Drupal exception handler.
-set_exception_handler(function ($exception) {
+set_exception_handler(function (\Exception $exception): void {
   fwrite(STDERR, $exception->getMessage() . "\n");
   exit(1);
 });
@@ -208,7 +208,7 @@ print "-----------------------\n";
  *
  * @throws \UnexpectedValueException
  */
-function process_class(array &$raw_definitions, string $service_id, $class, array $dependencies): void {
+function process_class(array &$raw_definitions, string $service_id, string $class, array $dependencies): void {
 
   if (!class_exists($class) && !interface_exists($class)) {
     throw new UnexpectedValueException("The service class $class does not exit.");

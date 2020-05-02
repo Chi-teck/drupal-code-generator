@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class QueueWorkerTest extends KernelTestBase {
+final class QueueWorkerTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class QueueWorkerTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testPlugin() {
+  public function testPlugin(): void {
     /** @var \Drupal\Core\Queue\QueueWorkerInterface $plugin */
     $plugin = \Drupal::service('plugin.manager.queue_worker')
       ->createInstance('qux_example');

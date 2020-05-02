@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class MigrateProcessTest extends KernelTestBase {
+final class MigrateProcessTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -19,7 +19,7 @@ class MigrateProcessTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testBlockRendering() {
+  public function testBlockRendering(): void {
 
     $row = $this->getMockBuilder('Drupal\migrate\Row')
       ->getMock();

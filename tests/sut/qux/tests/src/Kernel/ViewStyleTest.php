@@ -11,7 +11,7 @@ use Drupal\views\Entity\View;
  *
  * @group DCG
  */
-class ViewStyleTest extends KernelTestBase {
+final class ViewStyleTest extends KernelTestBase {
 
   use NodeCreationTrait;
 
@@ -32,7 +32,7 @@ class ViewStyleTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');

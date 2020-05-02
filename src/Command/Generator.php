@@ -240,6 +240,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * Asks a question.
+   *
+   * @return mixed
+   *   The user answer
    */
   protected function ask(string $question, $default = NULL, $validator = NULL) {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
@@ -263,6 +266,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * Asks a choice question.
+   *
+   * @return mixed
+   *   The user answer
    */
   protected function choice(string $question, array $choices, $default = NULL) {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));

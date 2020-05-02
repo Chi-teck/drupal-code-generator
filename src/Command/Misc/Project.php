@@ -289,7 +289,7 @@ final class Project extends Generator {
    * @param string $package
    *   A package to be added.
    */
-  private function addPackage(array &$section, $package): void {
+  private function addPackage(array &$section, string $package): void {
     if (!\array_key_exists($package, self::PACKAGES)) {
       throw new InvalidArgumentException("Package $package is unknown.");
     }

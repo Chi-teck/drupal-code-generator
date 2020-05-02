@@ -10,7 +10,7 @@ use Drupal\views\ResultRow;
  *
  * @group DCG
  */
-class ViewsFieldTest extends KernelTestBase {
+final class ViewsFieldTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class ViewsFieldTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testPlugin() {
+  public function testPlugin(): void {
     $plugin = \Drupal::service('plugin.manager.views.field')
       ->createInstance('qux_example');
 

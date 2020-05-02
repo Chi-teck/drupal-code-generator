@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Tests\Helper;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Extension\ThemeHandlerInterface;
 use DrupalCodeGenerator\Command\DrupalGenerator;
 use DrupalCodeGenerator\Helper\DrupalContext;
 use PHPUnit\Framework\TestCase;
@@ -91,8 +93,8 @@ final class DrupalContextTest extends TestCase {
   /**
    * Mocks module handler.
    */
-  private function getModuleHandler() {
-    $module_handler = $this->getMockBuilder('\Drupal\Core\Extension\ModuleHandlerInterface')
+  private function getModuleHandler(): ModuleHandlerInterface {
+    $module_handler = $this->getMockBuilder(ModuleHandlerInterface::class)
       ->setMethods(['getModuleList', 'getModule', 'getName'])
       ->getMock();
 
@@ -134,10 +136,10 @@ final class DrupalContextTest extends TestCase {
   /**
    * Mocks theme handler.
    */
-  private function getThemeHandler() {
+  private function getThemeHandler(): ThemeHandlerInterface {
 
     // -- Theme handler.
-    $theme_handler = $this->getMockBuilder('\Drupal\Core\Extension\ThemeHandlerInterface')
+    $theme_handler = $this->getMockBuilder(ThemeHandlerInterface::class)
       ->setMethods(['listInfo', 'getTheme', 'getName'])
       ->getMock();
 

@@ -43,7 +43,7 @@ final class Symlink extends Asset {
    * @return string
    *   Asset action.
    */
-  public function getTarget() {
+  public function getTarget(): string {
     return $this->target;
   }
 
@@ -59,22 +59,16 @@ final class Symlink extends Asset {
 
   /**
    * Sets "replace" action.
-   *
-   * @return self
-   *   The asset.
    */
-  public function replaceIfExists() {
+  public function replaceIfExists(): self {
     $this->action = self::ACTION_REPLACE;
     return $this;
   }
 
   /**
    * Sets "skip" action.
-   *
-   * @return self
-   *   The asset.
    */
-  public function skipIfExists() {
+  public function skipIfExists(): self {
     $this->action = self::ACTION_SKIP;
     return $this;
   }

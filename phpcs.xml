@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="Drupal Code Generator">
   <description>Drupal Code Generator coding standard</description>
-  <config name="installed_paths" value="vendor/drupal/coder/coder_sniffer"/>
+  <config name="installed_paths" value="vendor/drupal/coder/coder_sniffer,vendor/slevomat/coding-standard"/>
   <arg name="colors"/>
   <file>./scripts/dump-hooks.php</file>
   <file>./scripts/dump-services.php</file>
@@ -10,6 +10,9 @@
   <rule ref="Drupal"/>
   <rule ref="DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
+  </rule>
+  <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
+    <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
   </rule>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>

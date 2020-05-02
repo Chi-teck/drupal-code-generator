@@ -11,7 +11,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group DCG
  */
-class ViewsArgumentDefaultTest extends KernelTestBase {
+final class ViewsArgumentDefaultTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -21,7 +21,7 @@ class ViewsArgumentDefaultTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testPlugin() {
+  public function testPlugin(): void {
 
     $plugin_manager = \Drupal::service('plugin.manager.views.argument_default');
 

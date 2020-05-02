@@ -96,7 +96,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testHuman2class().
    */
-  public function camelizeProvider() {
+  public function camelizeProvider(): array {
     return [
       ['Hello world!', TRUE, 'HelloWorld'],
       ['snake_case_here', TRUE, 'SnakeCaseHere'],
