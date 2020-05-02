@@ -24,12 +24,12 @@ final class PluginManagerTest extends KernelTestBase {
 
     $definition = $plugin_manager->getDefinition('foo');
 
-    $this->assertEquals($definition['id'], 'foo');
-    $this->assertEquals($definition['label'], 'Foo');
-    $this->assertEquals($definition['description'], 'Foo description.');
+    self::assertEquals($definition['id'], 'foo');
+    self::assertEquals($definition['label'], 'Foo');
+    self::assertEquals($definition['description'], 'Foo description.');
 
     $plugin = $plugin_manager->createInstance('foo');
-    $this->assertEquals($plugin->label(), 'Foo');
+    self::assertEquals($plugin->label(), 'Foo');
   }
 
   /**
@@ -42,12 +42,12 @@ final class PluginManagerTest extends KernelTestBase {
       $plugin_label = 'Foo ' . $i;
       $definition = $plugin_manager->getDefinition($plugin_id);
 
-      $this->assertEquals($definition['id'], $plugin_id);
-      $this->assertEquals($definition['label'], $plugin_label);
-      $this->assertEquals($definition['description'], 'Plugin description.');
+      self::assertEquals($definition['id'], $plugin_id);
+      self::assertEquals($definition['label'], $plugin_label);
+      self::assertEquals($definition['description'], 'Plugin description.');
 
       $plugin = $plugin_manager->createInstance($plugin_id);
-      $this->assertEquals($plugin->label(), $plugin_label);
+      self::assertEquals($plugin->label(), $plugin_label);
     }
   }
 
@@ -60,22 +60,22 @@ final class PluginManagerTest extends KernelTestBase {
     // Foo plugin.
     $definition = $plugin_manager->getDefinition('foo');
 
-    $this->assertEquals($definition['id'], 'foo');
-    $this->assertEquals($definition['label'], 'Foo');
-    $this->assertEquals($definition['description'], 'Foo description.');
+    self::assertEquals($definition['id'], 'foo');
+    self::assertEquals($definition['label'], 'Foo');
+    self::assertEquals($definition['description'], 'Foo description.');
 
     $plugin = $plugin_manager->createInstance('foo');
-    $this->assertEquals($plugin->label(), 'Foo');
+    self::assertEquals($plugin->label(), 'Foo');
 
     // Bar plugin.
     $definition = $plugin_manager->getDefinition('bar');
 
-    $this->assertEquals($definition['id'], 'bar');
-    $this->assertEquals($definition['label'], 'Bar');
-    $this->assertEquals($definition['description'], 'Bar description.');
+    self::assertEquals($definition['id'], 'bar');
+    self::assertEquals($definition['label'], 'Bar');
+    self::assertEquals($definition['description'], 'Bar description.');
 
     $plugin = $plugin_manager->createInstance('bar');
-    $this->assertEquals($plugin->label(), 'Bar');
+    self::assertEquals($plugin->label(), 'Bar');
   }
 
 }

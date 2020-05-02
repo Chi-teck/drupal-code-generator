@@ -19,7 +19,7 @@ class ExampleTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     // Mock required services here.
   }
@@ -29,7 +29,7 @@ class ExampleTest extends KernelTestBase {
    */
   public function testSomething() {
     $result = $this->container->get('transliteration')->transliterate('Друпал');
-    $this->assertEquals('Drupal', $result);
+    self::assertSame('Drupal', $result);
   }
 
 }

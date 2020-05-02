@@ -49,7 +49,7 @@ final class InstallTest extends BrowserTestBase {
     $database = \Drupal::database();
     $database->insert('bar_example')->fields($fields)->execute();
     $data = $database->query('SELECT * FROM {bar_example}')->fetchAssoc();
-    $this->assertEquals(['id' => 1] + $fields, $data);
+    self::assertEquals(['id' => 1] + $fields, $data);
 
     // Test hook_uninstall().
     $edit = [

@@ -32,7 +32,7 @@ final class MigrateProcessTest extends KernelTestBase {
       ->createInstance('example')
       ->transform('бумеранг', $migrate_executable, $row, NULL);
 
-    $this->assertEquals('bumerang', $result);
+    self::assertEquals('bumerang', $result);
   }
 
 }

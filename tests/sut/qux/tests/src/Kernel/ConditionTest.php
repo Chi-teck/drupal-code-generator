@@ -32,24 +32,24 @@ final class ConditionTest extends KernelTestBase {
       ->setConfig('age', 50)
       ->setContextValue('node', $node);
 
-    $this->assertEquals('Node age: 50 sec', $condition->summary());
+    self::assertEquals('Node age: 50 sec', $condition->summary());
 
     // By default created time is set to request time. So that the node age is
     // equal to zero.
-    $this->assertTrue($condition->execute());
+    self::assertTrue($condition->execute());
 
     $node->setCreatedTime($time - 45);
-    $this->assertTrue($condition->execute());
+    self::assertTrue($condition->execute());
 
     $node->setCreatedTime($time - 55);
-    $this->assertFalse($condition->execute());
+    self::assertFalse($condition->execute());
 
     /* @var $condition \Drupal\Core\Executable\ExecutablePluginBase */
     $condition->setConfig('age', NULL);
-    $this->assertTrue($condition->execute());
+    self::assertTrue($condition->execute());
 
     $condition->setConfig('negate', TRUE);
-    $this->assertTrue($condition->execute());
+    self::assertTrue($condition->execute());
   }
 
 }

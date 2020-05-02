@@ -31,7 +31,7 @@ final class LayoutTest extends KernelTestBase {
     ];
     $build = $layout->build($regions);
 
-    $this->assertEquals($build['#attached']['library'], ['bar/foo']);
+    self::assertEquals($build['#attached']['library'], ['bar/foo']);
 
     $expected_output = \implode("\n", [
       '',
@@ -50,7 +50,7 @@ final class LayoutTest extends KernelTestBase {
       '',
     ]);
     $output = (string) $this->container->get('renderer')->renderRoot($build);
-    $this->assertEquals($expected_output, $output);
+    self::assertEquals($expected_output, $output);
 
     $expected_definition = [
       'js' => [
@@ -80,7 +80,7 @@ final class LayoutTest extends KernelTestBase {
     ];
     $definition = \Drupal::service('library.discovery')
       ->getLibraryByName('bar', 'foo');
-    $this->assertEquals($expected_definition, $definition);
+    self::assertEquals($expected_definition, $definition);
   }
 
 }

@@ -14,7 +14,7 @@ class ExampleTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     // @TODO: Mock required classes here.
   }
@@ -23,7 +23,7 @@ class ExampleTest extends UnitTestCase {
    * Tests something.
    */
   public function testSomething() {
-    $this->assertTrue(TRUE, 'This is TRUE!');
+    self::assertTrue(TRUE, 'This is TRUE!');
   }
 
 }

@@ -79,12 +79,12 @@ final class EntityReferenceSelectionTest extends KernelTestBase {
 
     // Check default value in configuration form.
     $form = $plugin->buildConfigurationForm([], new FormState());
-    $this->assertEquals('bar', $form['foo']['#default_value']);
+    self::assertEquals('bar', $form['foo']['#default_value']);
 
     // Make sure that only first node is referenceable.
     $labels = $plugin->getReferenceableEntities('example')['page'];
-    $this->assertCount(1, $labels);
-    $this->assertEquals('Example 1', $labels[1]);
+    self::assertCount(1, $labels);
+    self::assertEquals('Example 1', $labels[1]);
   }
 
 }
