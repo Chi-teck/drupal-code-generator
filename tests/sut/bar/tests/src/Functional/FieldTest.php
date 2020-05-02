@@ -4,9 +4,9 @@ namespace Drupal\Tests\bar\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
-use Drupal\dcg_test\TestTrait;
 
 /**
  * Field test.

@@ -2,8 +2,8 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
-use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Utils;
 
 /**
  * Base class for plugin generators.

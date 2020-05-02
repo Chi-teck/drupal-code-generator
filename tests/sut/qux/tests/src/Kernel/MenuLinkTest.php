@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\qux\Kernel;
 
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\Core\Database\Database;
+use Drupal\KernelTests\KernelTestBase;
 
 /**
  * Test for menu link plugin.

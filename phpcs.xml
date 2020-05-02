@@ -41,6 +41,7 @@
   <rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
   <rule ref="SlevomatCodingStandard.Functions.DisallowEmptyFunction"/>
   <rule ref="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>
+  <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

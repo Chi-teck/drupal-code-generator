@@ -3,8 +3,8 @@
 namespace Drupal\Tests\nigma\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
-use Drupal\nigma\Entity\Example;
 use Drupal\dcg_test\TestTrait;
+use Drupal\nigma\Entity\Example;
 use Drupal\Tests\BrowserTestBase;
 
 /**
