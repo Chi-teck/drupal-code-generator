@@ -42,6 +42,7 @@
   <rule ref="SlevomatCodingStandard.Functions.DisallowEmptyFunction"/>
   <rule ref="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>
   <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
+  <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>
