@@ -10,7 +10,7 @@ interface GeneratorInterface {
   /**
    * Returns command label.
    *
-   * @return null|string
+   * @return string|null
    *   A label suitable for navigation command.
    */
   public function getLabel(): ?string;

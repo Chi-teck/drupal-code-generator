@@ -45,6 +45,7 @@
   <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
   <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalConstants"/>
+  <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>
