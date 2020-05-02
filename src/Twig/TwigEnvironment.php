@@ -30,19 +30,19 @@ class TwigEnvironment extends Environment {
     $this->addFilter(new TwigFilter('pluralize', [Utils::class, 'pluralize']));
     $this->addFilter(new TwigFilter('camelize', [Utils::class, 'camelize']));
 
-    $article = function (string $input): string {
+    $article = static function (string $input): string {
       $first_char = \strtolower($input[0]);
       $article = \in_array($first_char, ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
       return $article . ' ' . $input;
     };
     $this->addFilter(new TwigFilter('article', $article));
 
-    $u2h = function (string $input): string {
+    $u2h = static function (string $input): string {
       return \str_replace('_', '-', $input);
     };
     $this->addFilter(new TwigFilter('u2h', $u2h));
 
-    $h2u = function (string $input): string {
+    $h2u = static function (string $input): string {
       return \str_replace('-', '_', $input);
     };
     $this->addFilter(new TwigFilter('h2u', $h2u));

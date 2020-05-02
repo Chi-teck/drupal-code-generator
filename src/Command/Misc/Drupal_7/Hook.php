@@ -76,7 +76,7 @@ final class Hook extends ModuleGenerator {
    *   List of supported hooks.
    */
   protected function getSupportedHooks(): array {
-    return \array_map(function (string $file): string {
+    return \array_map(static function (string $file): string {
       return \pathinfo($file, PATHINFO_FILENAME);
     }, \array_diff(\scandir(Application::TEMPLATE_PATH . '/misc/d7/hook'), ['.', '..']));
   }

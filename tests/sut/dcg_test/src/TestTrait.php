@@ -40,7 +40,7 @@ trait TestTrait {
    */
   protected function getMessages(string $type): array {
     $messages = [];
-    $get_message = function ($element): string {
+    $get_message = static function ($element): string {
       // Remove hidden heading.
       $message = \preg_replace('#<h2[^>]*>.*</h2>#', '', $element->getHtml());
       $message = \strip_tags($message, '<em>');

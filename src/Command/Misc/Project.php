@@ -45,7 +45,7 @@ final class Project extends Generator {
 
     $vars = &$this->vars;
 
-    $name_validator = function (?string $value): ?string {
+    $name_validator = static function (?string $value): ?string {
       $value = self::validateRequired($value);
       if (!\preg_match('#[^/]+/[^/]+$#i', $value)) {
         throw new \UnexpectedValueException('The value is not correct project name.');

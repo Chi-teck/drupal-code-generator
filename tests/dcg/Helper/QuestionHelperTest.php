@@ -51,7 +51,7 @@ final class QuestionHelperTest extends TestCase {
     $input = $this->createInput("4:00\n5:00\n");
 
     $question = new Question('What time is it?');
-    $validator = function (string $value) :string {
+    $validator = static function (string $value) :string {
       if ($value != '5:00') {
         throw new \UnexpectedValueException('The time is not correct!');
       }

@@ -120,7 +120,7 @@ final class Field extends ModuleGenerator {
     $vars['field_label'] = $this->ask('Field label', 'Example', '::validateRequired');
     $vars['field_id'] = $this->ask('Field ID', '{machine_name}_{field_label|h2m}', '::validateRequiredMachineName');
 
-    $subfield_count_validator = function ($value) {
+    $subfield_count_validator = static function ($value) {
       if (!\is_numeric($value) || \intval($value) != $value || $value <= 0) {
         throw new \UnexpectedValueException('The value should be greater than zero.');
       }

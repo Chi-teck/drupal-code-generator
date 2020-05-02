@@ -19,7 +19,7 @@ final class AccessChecker extends ModuleGenerator {
   protected function generate(): void {
     $vars = &$this->collectDefault();
 
-    $validator = function ($value) {
+    $validator = static function ($value) {
       if (!\preg_match('/^_[a-z0-9_]*[a-z0-9]$/', $value)) {
         throw new \UnexpectedValueException('The value is not correct name for "applies_to" property.');
       }

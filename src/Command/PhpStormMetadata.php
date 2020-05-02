@@ -59,7 +59,7 @@ final class PhpStormMetadata extends DrupalGenerator {
     }
 
     // Some classes does not have leading slash.
-    \array_walk_recursive($vars, function (string &$class): void {
+    \array_walk_recursive($vars, static function (string &$class): void {
       if ($class[0] != '\\') {
         $class = '\\' . $class;
       }

@@ -72,7 +72,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
    * {@inheritdoc}
    */
   public function listing(array $elements) {
-    $build_item = function (string $element): string {
+    $build_item = static function (string $element): string {
       return \sprintf(' • %s', $element);
     };
     $elements = \array_map($build_item, $elements);

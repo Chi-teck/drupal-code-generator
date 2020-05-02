@@ -33,7 +33,7 @@ $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 
 // Override Drupal exception handler.
-set_exception_handler(function (\Exception $exception): void {
+set_exception_handler(static function (\Exception $exception): void {
   fwrite(STDERR, $exception->getMessage() . "\n");
   exit(1);
 });

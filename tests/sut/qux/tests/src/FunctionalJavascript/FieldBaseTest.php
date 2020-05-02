@@ -56,7 +56,7 @@ abstract class FieldBaseTest extends WebDriverTestBase {
    */
   protected function waitForAjax(): void {
     $page = $this->getSession()->getPage();
-    $page->waitFor(10, function () use ($page) {
+    $page->waitFor(10, static function () use ($page): bool {
       $element = $page->find('css', '.throbber');
       return empty($element);
     });

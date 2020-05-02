@@ -40,7 +40,7 @@ final class Constraint extends PluginGenerator {
   protected function askPluginIdQuestion(): string {
     // Unlike other plugin types. Constraint IDs use camel case.
     $default_plugin_id = '{name|camelize}{plugin_label|camelize}';
-    $plugin_id_validator = function ($value) {
+    $plugin_id_validator = static function ($value) {
       if (!\preg_match('/^[a-z][a-z0-9_]*[a-z0-9]$/i', $value)) {
         throw new \UnexpectedValueException('The value is not correct constraint ID.');
       }

@@ -84,7 +84,7 @@ class Utils {
       return $text;
     }
 
-    $process_token = function (array $matches) use ($data): string {
+    $process_token = static function (array $matches) use ($data): string {
       list($name, $filter) = \array_pad(\explode('|', $matches[1], 2), 2, NULL);
 
       if (!\array_key_exists($name, $data)) {

@@ -19,7 +19,7 @@ final class SymfonyCommand extends ModuleGenerator {
    */
   protected function generate(): void {
     $vars = &$this->collectDefault();
-    $command_name_validator = function (?string $value): ?string {
+    $command_name_validator = static function (?string $value): ?string {
       return self::validate($value, '^[a-z][a-z0-9-_:]*[a-z0-9]$', 'The value is not correct command name.');
     };
     $vars['command']['name'] = $this->ask('Command name', '{machine_name}:example', $command_name_validator);
@@ -29,7 +29,7 @@ final class SymfonyCommand extends ModuleGenerator {
     $sub_names = \explode(':', $vars['command']['name']);
     $short_name = \array_pop($sub_names);
 
-    $alias_validator = function (?string $value): ?string {
+    $alias_validator = static function (?string $value): ?string {
       return self::validate($value, '^[a-z0-9][a-z0-9_]+$', 'The value is not correct alias name.');
     };
     $vars['command']['alias'] = $this->ask('Command alias', $short_name, $alias_validator);

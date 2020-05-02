@@ -22,12 +22,13 @@ final class Hook extends ModuleGenerator {
 
     $hook_question = new Question('Hook name');
     $supported_hooks = $this->getSupportedHooks();
-    $hook_question->setValidator(function ($value) use ($supported_hooks) {
+    $hook_validator = static function ($value) use ($supported_hooks) {
       if (!\in_array($value, $supported_hooks)) {
         throw new \UnexpectedValueException('The value is not correct hook name.');
       }
       return $value;
-    });
+    };
+    $hook_question->setValidator($hook_validator);
     $hook_question->setAutocompleterValues($supported_hooks);
 
     $vars['hook_name'] = $this->io->askQuestion($hook_question);

@@ -349,7 +349,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Processes collected variables.
    */
   protected function processVars(): void {
-    $process_vars = function (&$var, string $key, array $vars): void {
+    $process_vars = static function (&$var, string $key, array $vars): void {
       if (\is_string($var)) {
         $var = Utils::stripSlashes(Utils::replaceTokens($var, $vars));
       }
