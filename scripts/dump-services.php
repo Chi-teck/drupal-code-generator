@@ -30,7 +30,7 @@ chdir($argv[1]);
 $autoloader = require_once $autoload;
 $kernel = new DrupalKernel('prod', $autoloader);
 $request = Request::createFromGlobals();
-$response = $kernel->handle($request);
+$kernel->handle($request);
 
 // Override Drupal exception handler.
 set_exception_handler(static function (\Exception $exception): void {
