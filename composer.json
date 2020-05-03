@@ -34,7 +34,7 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "require-dev": {
-        "drupal/coder": "^8.3.6",
+        "drupal/coder": "^8.3.8",
         "friendsoftwig/twigcs": "^3.2",
         "phpunit/phpunit": "^8.5",
         "squizlabs/php_codesniffer": "^3.5",
