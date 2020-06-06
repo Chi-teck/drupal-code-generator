@@ -21,9 +21,8 @@ SELF_PATH=$(dirname "$(readlink -f "$0")")/../tests/sut
 
 DRUPAL_VERSION=${DRUPAL_VERSION:-}
 if [[ -z $DRUPAL_VERSION ]]; then
-   # Determine version dynamically once Drupal 9 is released.
-   # DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '9\..\.x' | tail -n1)'-dev'
-   DRUPAL_VERSION=9.0.x-dev
+  # Determine version dynamically once Drupal 9 is released.
+  DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '9\..\.x' | tail -n1)'-dev'
 fi
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut/build}
 DRUPAL_CACHE_DIR=${DRUPAL_CACHE_DIR:-/tmp/dcg_sut/cache/$DRUPAL_VERSION}
