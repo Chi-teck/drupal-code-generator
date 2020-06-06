@@ -58,6 +58,9 @@ final class QuestionHelperTest extends TestCase {
       return $value;
     };
     $question->setValidator($validator);
+    // Symfony\Component\Console\Helper\QuestionHelper::validateAttempts()
+    // only allows one attempt when running without TTY.
+    $question->setMaxAttempts(2);
     $answer = (new QuestionHelper())->ask($input, $output, $question);
     self::assertSame('5:00', $answer);
 
