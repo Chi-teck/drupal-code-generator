@@ -1,22 +1,22 @@
 entity.foo_example.settings:
-  title: Settings
+  title: 'Settings'
   route_name: entity.foo_example.settings
   base_route: entity.foo_example.settings
 entity.foo_example.view:
-  title: View
+  title: 'View'
   route_name: entity.foo_example.canonical
   base_route: entity.foo_example.canonical
 entity.foo_example.edit_form:
-  title: Edit
+  title: 'Edit'
   route_name: entity.foo_example.edit_form
   base_route: entity.foo_example.canonical
 entity.foo_example.delete_form:
-  title: Delete
+  title: 'Delete'
   route_name: entity.foo_example.delete_form
   base_route: entity.foo_example.canonical
   weight: 10
 entity.foo_example.collection:
-  title: Example
+  title: 'Examples'
   route_name: entity.foo_example.collection
   base_route: system.admin_content
   weight: 10
