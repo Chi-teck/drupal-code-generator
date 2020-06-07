@@ -32,7 +32,7 @@ use Drupal\user\EntityOwnerTrait;
  *   base_table = "foo_example",
  *   revision_table = "foo_example_revision",
  *   show_revision_ui = TRUE,
- *   admin_permission = "administer example",
+ *   admin_permission = "administer foo example",
  *   entity_keys = {
  *     "id" = "id",
  *     "revision" = "revision_id",
