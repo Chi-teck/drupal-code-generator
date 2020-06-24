@@ -17,21 +17,30 @@ class {{ class_prefix }}Form extends ContentEntityForm {
 
     $entity = $this->getEntity();
     $result = $entity->save();
-    $link = $entity->toLink($this->t('View'))->toRenderable();
 
-    $message_arguments = ['%label' => $this->entity->label()];
-    $logger_arguments = $message_arguments + ['link' => render($link)];
+    $message_arguments = ['%label' => $this->entity->toLink()->toString()];
+    $logger_arguments = [
+      '%label' => $this->entity->label(),
+      'link' => $entity->toLink($this->t('View'))->toString(),
+    ];
 
-    if ($result == SAVED_NEW) {
-      $this->messenger()->addStatus($this->t('New {{ entity_type_label|lower }} %label has been created.', $message_arguments));
-      $this->logger('{{ machine_name }}')->notice('Created new {{ entity_type_label|lower }} %label', $logger_arguments);
+    switch ($result) {
+      case SAVED_NEW:
+        $this->messenger()->addStatus($this->t('New {{ entity_type_label|lower }} %label has been created.', $message_arguments));
+        $this->logger('{{ machine_name }}')->notice('Created new {{ entity_type_label|lower }} %label', $logger_arguments);
+        break;
+
+      case SAVED_UPDATED:
+        $this->messenger()->addStatus($this->t('The {{ entity_type_label|lower }} %label has been updated.', $message_arguments));
+        $this->logger('{{ machine_name }}')->notice('Updated {{ entity_type_label|lower }} %label.', $logger_arguments);
+        break;
     }
-    else {
-      $this->messenger()->addStatus($this->t('The {{ entity_type_label|lower }} %label has been updated.', $message_arguments));
-      $this->logger('{{ machine_name }}')->notice('Updated new {{ entity_type_label|lower }} %label.', $logger_arguments);
-    }
 
+{% if canonical %}
     $form_state->setRedirect('entity.{{ entity_type_id }}.canonical', ['{{ entity_type_id }}' => $entity->id()]);
+{% else %}
+    $form_state->setRedirect('entity.{{ entity_type_id }}.collection');
+{% endif %}
   }
 
 }

@@ -366,7 +366,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
 
   $DCG content-entity \
     -a Nigma -a nigma -a Example -a example -a /admin/content/example \
-    -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
+    -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
   dcg_phpcs .
   dcg_drush en $MODULE_MACHINE_NAME
@@ -382,7 +382,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
 
   $DCG content-entity \
     -a Sigma -a sigma -a Example -a example -a /example \
-    -a Yes -a No -a No -a No -a No -a No -a Yes -a No -a No -a No -a No -a No -a No
+    -a Yes -a No -a No -a No -a Yes -a No -a No -a Yes -a No -a No -a No -a No -a No -a No
 
   dcg_phpcs .
   dcg_drush en $MODULE_MACHINE_NAME

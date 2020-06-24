@@ -4,6 +4,8 @@ entity.{{ entity_type_id }}.settings:
   route_name: entity.{{ entity_type_id }}.settings
   base_route: entity.{{ entity_type_id }}.settings
 {% endif %}
+{# Tabs are not needed when there is no canonical view page. #}
+{% if canonical %}
 entity.{{ entity_type_id }}.view:
   title: 'View'
   route_name: entity.{{ entity_type_id }}.canonical
@@ -17,6 +19,7 @@ entity.{{ entity_type_id }}.delete_form:
   route_name: entity.{{ entity_type_id }}.delete_form
   base_route: entity.{{ entity_type_id }}.canonical
   weight: 10
+{% endif %}
 entity.{{ entity_type_id }}.collection:
   title: '{{ entity_type_label|pluralize }}'
   route_name: entity.{{ entity_type_id }}.collection

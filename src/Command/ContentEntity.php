@@ -18,12 +18,13 @@ final class ContentEntity extends ModuleGenerator {
 
     $vars['entity_type_label'] = $this->ask('Entity type label', '{name}');
     $vars['entity_type_id'] = $this->ask('Entity type ID', '{entity_type_label|h2m}');
-    $vars['entity_base_path'] = $this->ask('Entity base path', '/admin/content/{entity_type_id|u2h}');
+    $vars['entity_base_path'] = $this->ask('Entity base path', '/{entity_type_id|u2h}');
     $vars['fieldable'] = $this->confirm('Make the entity type fieldable?');
     $vars['revisionable'] = $this->confirm('Make the entity type revisionable?', FALSE);
     $vars['translatable'] = $this->confirm('Make the entity type translatable?', FALSE);
     $vars['bundle'] = $this->confirm('The entity type has bundle?', FALSE);
-    $vars['template'] = $this->confirm('Create entity template?');
+    $vars['canonical'] = $this->confirm('Create canonical page?');
+    $vars['template'] = $vars['canonical'] ? $this->confirm('Create entity template?') : FALSE;
     $vars['access_controller'] = $this->confirm('Create CRUD permissions?', FALSE);
 
     $vars['label_base_field'] = $this->confirm('Add "label" base field?');
@@ -39,7 +40,7 @@ final class ContentEntity extends ModuleGenerator {
     $vars['rest_configuration'] = $this->confirm('Create REST configuration for the entity?', FALSE);
 
     if ($vars['entity_base_path'][0] != '/') {
-      $vars['entity_base_path'] = '/{entity_base_path}';
+      $vars['entity_base_path'] = '/' . $vars['entity_base_path'];
     }
 
     if (($vars['fieldable_no_bundle'] = $vars['fieldable'] && !$vars['bundle'])) {
@@ -62,6 +63,11 @@ final class ContentEntity extends ModuleGenerator {
       ->appendIfExists();
     $this->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
     $this->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
+
+    if (!$vars['canonical']) {
+      $this->addFile('src/Routing/{class_prefix}HtmlRouteProvider.php', 'src/Routing/ExampleHtmlRouteProvider.php');
+    }
+
     $this->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php');
     $this->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php');
 

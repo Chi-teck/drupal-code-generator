@@ -46,11 +46,11 @@ use Drupal\user\EntityOwnerTrait;
  *     "revision_log_message" = "revision_log"
  *   },
  *   links = {
+ *     "collection" = "/admin/content/foo-example",
  *     "add-form" = "/example/add",
- *     "canonical" = "/foo_example/{foo_example}",
+ *     "canonical" = "/example/{foo_example}",
  *     "edit-form" = "/example/{foo_example}/edit",
- *     "delete-form" = "/example/{foo_example}/delete",
- *     "collection" = "/admin/content/foo-example"
+ *     "delete-form" = "/example/{foo_example}/delete"
  *   },
  *   field_ui_base_route = "entity.foo_example.settings"
  * )

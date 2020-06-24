@@ -90,11 +90,11 @@ final class ContentEntityTest extends BrowserTestBase {
     self::assertFalse($entity_type->isTranslatable());
 
     $link_templates = [
+      'collection' => '/admin/content/example',
       'add-form' => '/example/add',
       'canonical' => '/example/{example}',
       'edit-form' => '/example/{example}/edit',
       'delete-form' => '/example/{example}/delete',
-      'collection' => '/admin/content/example',
     ];
     self::assertSame($link_templates, $entity_type->getLinkTemplates());
 
