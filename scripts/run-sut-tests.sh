@@ -357,7 +357,7 @@ fi
 
 # --- Test content entity --- #
 if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
-  dcg_label 'Content entity (full)'
+  dcg_label 'Content entity (with bundles and fields)'
 
   MODULE_MACHINE_NAME=nigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
@@ -373,7 +373,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
   dcg_phpunit tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 
-  dcg_label 'Content entity (medium)'
+  dcg_label 'Content entity (with fields)'
 
   MODULE_MACHINE_NAME=sigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
@@ -389,7 +389,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
   dcg_phpunit tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 
-  dcg_label 'Content entity (light)'
+  dcg_label 'Content entity (without bundles, fields and canonical page)'
 
   MODULE_MACHINE_NAME=figma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
@@ -398,7 +398,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
 
   $DCG content-entity \
     -a Figma -a figma -a Example -a example -a /example \
-    -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No
+    -a No -a No -a No -a No -a No -a No -a No -a Yes -a No -a No -a No -a No -a No
 
   dcg_phpcs .
   dcg_drush en $MODULE_MACHINE_NAME
