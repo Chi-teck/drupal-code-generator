@@ -373,7 +373,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
   dcg_phpunit tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 
-  dcg_label 'Content entity (light)'
+  dcg_label 'Content entity (medium)'
 
   MODULE_MACHINE_NAME=sigma
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
@@ -387,6 +387,22 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
   dcg_phpcs .
   dcg_drush en $MODULE_MACHINE_NAME
   dcg_phpunit tests
+  dcg_drush pmu $MODULE_MACHINE_NAME
+
+  dcg_label 'Content entity (light)'
+
+  MODULE_MACHINE_NAME=figma
+  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
+  cd $MODULE_DIR
+
+  $DCG content-entity \
+    -a Figma -a figma -a Example -a example -a /example \
+    -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No -a No
+
+  dcg_phpcs .
+  dcg_drush en $MODULE_MACHINE_NAME
+#  dcg_phpunit tests
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi
 

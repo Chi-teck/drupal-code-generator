@@ -1,5 +1,3 @@
 administer example:
   title: 'Administer example settings'
   restrict access: true
-access example overview:
-  title: 'Access example overview page'
