@@ -1,7 +1,7 @@
 # Drupal Code Generator
 
 [![Build Status](https://travis-ci.org/Chi-teck/drupal-code-generator.svg?branch=master)](https://travis-ci.org/Chi-teck/drupal-code-generator)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat)](https://php.net/)
 [![Total Downloads](https://poser.pugx.org/chi-teck/drupal-code-generator/downloads)](//packagist.org/packages/chi-teck/drupal-code-generator)
 
 
