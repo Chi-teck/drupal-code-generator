@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\nigma\Functional;
 
-use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Component\Render\FormattableMarkup as FM;
 use Drupal\dcg_test\TestTrait;
 use Drupal\nigma\Entity\Example;
 use Drupal\Tests\BrowserTestBase;
@@ -44,7 +44,7 @@ final class ContentEntityTest extends BrowserTestBase {
 
     // -- Create a new bundle.
     $this->drupalGet('admin/structure/example_types');
-    $this->assertPageTitle('Example type entities');
+    $this->assertPageTitle('Example types');
     $this->assertXpath('//td[@class = "empty message" and contains(text(), "No example types available.")]');
 
     $this->clickLink('Add example type');
@@ -56,10 +56,10 @@ final class ContentEntityTest extends BrowserTestBase {
       'id' => 'foo',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save example type');
-    $this->assertStatusMessage(new FormattableMarkup('The example type %label has been added.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FM('The example type %label has been added.', ['%label' => 'Foo']));
 
     $this->getSession()->getDriver()->click('//td[text() = "Foo"]/following-sibling::td//a[text() = "Edit"]');
-    $this->assertPageTitle(new FormattableMarkup('Edit %label example type', ['%label' => 'Foo']));
+    $this->assertPageTitle(new FM('Edit %label example type', ['%label' => 'Foo']));
     $this->assertXpath('//label[text() = "Label"]/following-sibling::input[@name = "label" and @value="Foo"]');
 
     $edit = [
@@ -67,7 +67,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'id' => 'bar',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save example type');
-    $this->assertStatusMessage(new FormattableMarkup('The example type %label has been updated.', ['%label' => 'Bar']));
+    $this->assertStatusMessage(new FM('The example type %label has been updated.', ['%label' => 'Bar']));
 
     // Make sure the entity type is fieldable.
     $this->getSession()->getDriver()->click('//td[text() = "Bar"]/following-sibling::td//a[text() = "Manage fields"]');
@@ -140,7 +140,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->drupalPostForm(NULL, $edit, 'Save');
 
     // -- Test entity view builder.
-    $this->assertStatusMessage(new FormattableMarkup('New example %label has been created.', ['%label' => 'Beer']));
+    $this->assertStatusMessage(new FM('New example %label has been created.', ['%label' => 'Beer']));
     $this->assertPageTitle('Beer');
     $this->assertXpath('//div[text() = "Status"]/following-sibling::div[text() = "Enabled"]');
     $this->assertXpath('//div[text() = "Description"]/following-sibling::div/p[text() = "Dark"]');
@@ -171,7 +171,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'description[0][value]' => 'White',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertStatusMessage(new FormattableMarkup('The example %label has been updated.', ['%label' => 'Wine']));
+    $this->assertStatusMessage(new FM('The example %label has been updated.', ['%label' => 'Wine']));
     $this->assertPageTitle('Wine');
 
     // -- Test entity list builder.
@@ -199,12 +199,12 @@ final class ContentEntityTest extends BrowserTestBase {
 
     // -- Test entity deletion.
     $this->getSession()->getDriver()->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
-    $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
+    $this->assertPageTitle(new FM('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 
     $this->drupalPostForm(NULL, [], 'Delete');
-    $this->assertStatusMessage(new FormattableMarkup('The example %label has been deleted.', ['%label' => 'Wine']));
-    $this->assertSession()->pageTextContains('There are no example entities yet.');
+    $this->assertStatusMessage(new FM('The example %label has been deleted.', ['%label' => 'Wine']));
+    $this->assertSession()->pageTextContains('There are no examples yet.');
     $this->assertSession()->pageTextContains('Total examples: 0');
   }
 

@@ -10,6 +10,13 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  * @ConfigEntityType(
  *   id = "{{ entity_type_id }}_type",
  *   label = @Translation("{{ entity_type_label }} type"),
+ *   label_collection = @Translation("{{ entity_type_label }} types"),
+ *   label_singular = @Translation("{{ entity_type_label|lower }} type"),
+ *   label_plural = @Translation("{{ entity_type_label|pluralize|lower }} types"),
+ *   label_count = @PluralTranslation(
+ *     singular = "@count {{ entity_type_label|pluralize|lower }} type",
+ *     plural = "@count {{ entity_type_label|pluralize|lower }} types",
+ *   ),
  *   handlers = {
  *     "form" = {
  *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}TypeForm",

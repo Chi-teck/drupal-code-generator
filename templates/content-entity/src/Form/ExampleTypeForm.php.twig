@@ -18,14 +18,8 @@ class {{ class_prefix }}TypeForm extends BundleEntityFormBase {
     $form = parent::form($form, $form_state);
 
     $entity_type = $this->entity;
-    if ($this->operation == 'add') {
-      $form['#title'] = $this->t('Add {{ entity_type_label|lower }} type');
-    }
-    else {
-      $form['#title'] = $this->t(
-        'Edit %label {{ entity_type_label|lower }} type',
-        ['%label' => $entity_type->label()]
-      );
+    if ($this->operation == 'edit') {
+      $form['#title'] = $this->t('Edit %label {{ entity_type_label|lower }} type', ['%label' => $entity_type->label()]);
     }
 
     $form['label'] = [

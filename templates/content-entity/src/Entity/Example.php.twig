@@ -32,6 +32,12 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   id = "{{ entity_type_id }}",
  *   label = @Translation("{{ entity_type_label }}"),
  *   label_collection = @Translation("{{ entity_type_label|pluralize }}"),
+ *   label_singular = @Translation("{{ entity_type_label|lower }}"),
+ *   label_plural = @Translation("{{ entity_type_label|pluralize|lower }}"),
+ *   label_count = @PluralTranslation(
+ *     singular = "@count {{ entity_type_label|pluralize|lower }}",
+ *     plural = "@count {{ entity_type_label|pluralize|lower }}",
+ *   ),
 {% if bundle %}
  *   bundle_label = @Translation("{{ entity_type_label }} type"),
 {% endif %}
@@ -44,7 +50,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "form" = {
  *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
  *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
- *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm"
+ *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
 {% if canonical %}
@@ -89,9 +95,9 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "label" = "{{ label_base_field ? 'label' : 'id' }}",
 {% if author_base_field %}
  *     "uuid" = "uuid",
- *     "owner" = "uid"
+ *     "owner" = "uid",
 {% else %}
- *     "uuid" = "uuid"
+ *     "uuid" = "uuid",
 {% endif %}
  *   },
 {% if revisionable %}
@@ -102,7 +108,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
   {% if created_base_field %}
  *     "revision_created" = "revision_timestamp",
   {% endif %}
- *     "revision_log_message" = "revision_log"
+ *     "revision_log_message" = "revision_log",
  *   },
 {% endif %}
  *   links = {
@@ -119,13 +125,13 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% else %}
  *     "edit-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
 {% endif %}
- *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete"
+ *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
  *   },
 {% if bundle %}
  *   bundle_entity_type = "{{ entity_type_id }}_type",
- *   field_ui_base_route = "entity.{{ entity_type_id }}_type.edit_form"
+ *   field_ui_base_route = "entity.{{ entity_type_id }}_type.edit_form",
 {% elseif fieldable %}
- *   field_ui_base_route = "entity.{{ entity_type_id }}.settings"
+ *   field_ui_base_route = "entity.{{ entity_type_id }}.settings",
 {% endif %}
  * )
  */

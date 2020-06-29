@@ -17,13 +17,19 @@ use Drupal\user\EntityOwnerTrait;
  *   id = "foo_example",
  *   label = @Translation("Example"),
  *   label_collection = @Translation("Examples"),
+ *   label_singular = @Translation("example"),
+ *   label_plural = @Translation("examples"),
+ *   label_count = @PluralTranslation(
+ *     singular = "@count examples",
+ *     plural = "@count examples",
+ *   ),
  *   handlers = {
  *     "list_builder" = "Drupal\foo\FooExampleListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {
  *       "add" = "Drupal\foo\Form\FooExampleForm",
  *       "edit" = "Drupal\foo\Form\FooExampleForm",
- *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm"
+ *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
@@ -38,21 +44,21 @@ use Drupal\user\EntityOwnerTrait;
  *     "revision" = "revision_id",
  *     "label" = "label",
  *     "uuid" = "uuid",
- *     "owner" = "uid"
+ *     "owner" = "uid",
  *   },
  *   revision_metadata_keys = {
  *     "revision_user" = "revision_uid",
  *     "revision_created" = "revision_timestamp",
- *     "revision_log_message" = "revision_log"
+ *     "revision_log_message" = "revision_log",
  *   },
  *   links = {
  *     "collection" = "/admin/content/foo-example",
  *     "add-form" = "/example/add",
  *     "canonical" = "/example/{foo_example}",
  *     "edit-form" = "/example/{foo_example}/edit",
- *     "delete-form" = "/example/{foo_example}/delete"
+ *     "delete-form" = "/example/{foo_example}/delete",
  *   },
- *   field_ui_base_route = "entity.foo_example.settings"
+ *   field_ui_base_route = "entity.foo_example.settings",
  * )
  */
 class FooExample extends RevisionableContentEntityBase implements FooExampleInterface {
