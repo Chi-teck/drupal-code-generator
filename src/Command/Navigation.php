@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputInterface;
@@ -51,8 +50,6 @@ final class Navigation extends Command {
       ->setDescription('Command line code generator')
       ->setHelp($help)
       ->setHidden(TRUE);
-
-    Application::addDefaultOptions($this);
   }
 
   /**

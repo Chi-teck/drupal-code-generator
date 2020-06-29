@@ -100,7 +100,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       ->setName($this->name)
       ->setDescription($this->description)
       ->setAliases($this->alias ? [$this->alias] : []);
-    Application::addDefaultOptions($this);
   }
 
   /**
