@@ -3,11 +3,15 @@
 namespace Drupal\example;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+use Twig\TwigTest;
 
 /**
  * Twig extension.
  */
-class ExampleTwigExtension extends \Twig_Extension {
+class ExampleTwigExtension extends AbstractExtension {
 
   /**
    * The entity type manager.
@@ -31,7 +35,7 @@ class ExampleTwigExtension extends \Twig_Extension {
    */
   public function getFunctions() {
     return [
-      new \Twig_SimpleFunction('foo', function ($argument = NULL) {
+      new TwigFunction('foo', function ($argument = NULL) {
         return 'Foo: ' . $argument;
       }),
     ];
@@ -42,7 +46,7 @@ class ExampleTwigExtension extends \Twig_Extension {
    */
   public function getFilters() {
     return [
-      new \Twig_SimpleFilter('bar', function ($text) {
+      new TwigFilter('bar', function ($text) {
         return str_replace('bar', 'BAR', $text);
       }),
     ];
@@ -53,7 +57,7 @@ class ExampleTwigExtension extends \Twig_Extension {
    */
   public function getTests() {
     return [
-      new \Twig_SimpleTest('color', function ($text) {
+      new TwigTest('color', function ($text) {
         return preg_match('/^#(?:[0-9a-f]{3}){1,2}$/i', $text);
       }),
     ];
