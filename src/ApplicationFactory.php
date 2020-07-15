@@ -44,12 +44,7 @@ class ApplicationFactory {
     $helper_set = new HelperSet([
       new QuestionHelper(),
       new Dumper(new Filesystem()),
-      // We cannot reference the TwigEnvironment class with use statement
-      // because of a PHP bug.
-      // @see https://bugs.php.net/bug.php?id=66773
-      // @codingStandardsIgnoreStart
-      new Renderer(new \DrupalCodeGenerator\Twig\TwigEnvironment(new \Twig_Loader_Filesystem())),
-      // @codingStandardsIgnoreEnd
+      new Renderer(dcg_get_twig_environment(new \Twig_Loader_Filesystem())),
       new InputHandler(),
       new OutputHandler(),
     ]);

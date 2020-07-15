@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Helper;
 
 use DrupalCodeGenerator\Helper\Renderer;
-use DrupalCodeGenerator\Twig\TwigEnvironment;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,8 +14,7 @@ class RendererTest extends TestCase {
    * Test callback.
    */
   public function testRenderer() {
-    $twig_loader = new \Twig_Loader_Filesystem();
-    $twig = new TwigEnvironment($twig_loader);
+    $twig = dcg_get_twig_environment(new \Twig_Loader_Filesystem());
     $renderer = new Renderer($twig);
     static::assertEquals($renderer->getName(), 'dcg_renderer');
     $renderer->addPath(__DIR__);
