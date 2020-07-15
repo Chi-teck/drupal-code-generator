@@ -162,10 +162,13 @@ class InputHandlerTest extends TestCase {
     $questions = [];
     $questions['machine_name'] = new Question('Machine name');
     $questions['machine_name']->setValidator([Utils::class, 'validateMachineName']);
+    $questions['machine_name']->setMaxAttempts(2);
     $questions['class'] = new Question('Class');
     $questions['class']->setValidator([Utils::class, 'validateClassName']);
+    $questions['class']->setMaxAttempts(2);
     $questions['foo'] = new Question('Foo');
     $questions['foo']->setValidator([Utils::class, 'validateRequired']);
+    $questions['foo']->setMaxAttempts(2);
 
     $row[] = $questions;
     $row[] = "%wrong%\nexample\nb%ar\nBar\n\nexample";
