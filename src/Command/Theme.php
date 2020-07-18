@@ -18,8 +18,8 @@ final class Theme extends ThemeGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $vars['base_theme'] = Utils::human2machine($this->ask('Base theme', 'classy'));
     $vars['description'] = $this->ask('Description', 'A flexible theme with a responsive, mobile-first layout.');

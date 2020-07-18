@@ -13,8 +13,8 @@ final class ServiceProvider extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['class'] = '{machine_name|camelize}ServiceProvider';
     $this->addFile('src/{class}.php', 'service-provider');
   }

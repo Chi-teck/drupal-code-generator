@@ -34,20 +34,17 @@ abstract class FormGenerator extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function &collectDefault(): array {
-    $vars = &parent::collectDefault();
+  protected function collectDefault(array &$vars): void {
+    parent::collectDefault($vars);
     $vars['class'] = $this->ask('Class', $this->defaultClass);
     $vars['raw_form_id'] = \preg_replace('/_form/', '', Utils::camel2machine($vars['class']));
     $vars['form_id'] = '{machine_name}_{raw_form_id}';
-    return $vars;
   }
 
   /**
    * Interacts with the user and builds route variables.
    */
-  protected function generateRoute(): void {
-    $vars = &$this->vars;
-
+  protected function generateRoute(array &$vars): void {
     $vars['route'] = $this->confirm('Would you like to create a route for this form?');
     if ($vars['route']) {
       $this->defaultPathPrefix = $this->defaultPathPrefix ?: '/' . $vars['machine_name'];
@@ -61,7 +58,6 @@ abstract class FormGenerator extends ModuleGenerator {
         ->template('form/routing')
         ->appendIfExists();
     }
-
   }
 
 }

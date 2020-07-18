@@ -16,8 +16,8 @@ final class ModuleInfo extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['description'] = $this->ask('Module description', 'Module description.');
     $vars['package'] = $this->ask('Package', 'Custom');
     $this->addFile('{machine_name}.info', 'module-info');

@@ -90,7 +90,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *
    * @var array
    */
-  protected $vars = [];
+  private $vars;
 
   /**
    * {@inheritdoc}
@@ -157,17 +157,22 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     try {
       $this->printHeader();
 
-      $this->generate();
+      $vars = $this->getDefaultVars();
+      // Use class property to make vars available for IO helpers.
+      $this->vars = &$vars;
+      $this->generate($vars);
 
-      $this->processVars();
+      $vars = self::processVars($vars);
+      $collected_vars = \preg_replace('/^Array/', '', \print_r($vars, TRUE));
+      $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
 
-      $this->processAssets();
+      $this->processAssets($vars);
 
       $this->render();
 
       // Destination passed through command line option takes precedence over
       // destination defined in a generator.
-      $destination = $input->getOption('destination') ?: $this->getDestination();
+      $destination = $input->getOption('destination') ?: $this->getDestination($vars);
       $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
 
       $full_path = $input->getOption('full-path');
@@ -189,17 +194,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Generates assets.
    */
-  abstract protected function generate(): void;
+  abstract protected function generate(array &$vars): void;
 
   /**
    * Render assets.
    */
   protected function render(): void {
     $renderer = $this->getHelper('renderer');
-
-    $collected_vars = \preg_replace('/^Array/', '', \print_r($this->vars, TRUE));
-    $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
-
     foreach ($this->assets->getFiles() as $asset) {
       // Supply the asset with all collected variables if it has no local ones.
       if (!$asset->getVars()) {
@@ -347,29 +348,41 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Processes collected variables.
    */
-  protected function processVars(): void {
+  private static function processVars(array $vars): array {
     $process_vars = static function (&$var, string $key, array $vars): void {
       if (\is_string($var)) {
         $var = Utils::stripSlashes(Utils::replaceTokens($var, $vars));
       }
     };
-    \array_walk_recursive($this->vars, $process_vars, $this->vars);
+    \array_walk_recursive($vars, $process_vars, $vars);
+    return $vars;
   }
 
   /**
    * Processes collected assets.
    */
-  protected function processAssets(): void {
+  private function processAssets(array $vars): void {
     foreach ($this->assets as $asset) {
-      $asset->replaceTokens($this->vars);
+      $asset->replaceTokens($vars);
+      if ($asset instanceof File) {
+        // Local asset variables take precedence over global ones.
+        $asset->vars(\array_merge($vars, $asset->getVars()));
+      }
     }
   }
 
   /**
    * Returns destination for generated files.
    */
-  protected function getDestination(): ?string {
+  protected function getDestination(array $vars): ?string {
     return $this->directory;
+  }
+
+  /**
+   * Returns default template variables.
+   */
+  protected function getDefaultVars(): array {
+    return [];
   }
 
 }

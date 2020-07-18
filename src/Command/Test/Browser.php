@@ -16,8 +16,8 @@ final class Browser extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['class'] = $this->ask('Class', 'ExampleTest', '::validateRequiredClassName');
     $this->addFile('tests/src/Functional/{class}.php', 'browser');
   }

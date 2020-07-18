@@ -16,8 +16,8 @@ final class Middleware extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}Middleware');
     $this->addFile('src/{class}.php', 'middleware');
     $this->addServicesFile()->template('services');

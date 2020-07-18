@@ -17,8 +17,8 @@ final class Type extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['configurable_storage'] = $this->confirm('Make the field storage configurable?', FALSE);
     $vars['configurable_instance'] = $this->confirm('Make the field instance configurable?', FALSE);
     $this->addFile('src/Plugin/Field/FieldType/{class}.php', 'type');

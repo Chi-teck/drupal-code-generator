@@ -16,8 +16,8 @@ final class Constraint extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $input_types = [
       'entity' => 'Entity',
@@ -52,8 +52,8 @@ final class Constraint extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function askPluginClassQuestion(): string {
-    $unprefixed_plugin_id = \preg_replace('/^' . Utils::camelize($this->vars['machine_name']) . '/', '', $this->vars['plugin_id']);
+  protected function askPluginClassQuestion(array $vars): string {
+    $unprefixed_plugin_id = \preg_replace('/^' . Utils::camelize($vars['machine_name']) . '/', '', $vars['plugin_id']);
     $default_class = Utils::camelize($unprefixed_plugin_id) . 'Constraint';
     return $this->ask('Plugin class', $default_class);
   }

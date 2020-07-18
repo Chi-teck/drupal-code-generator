@@ -41,9 +41,7 @@ final class Project extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-
-    $vars = &$this->vars;
+  protected function generate(array &$vars): void {
 
     $name_validator = static function (?string $value): ?string {
       $value = self::validateRequired($value);

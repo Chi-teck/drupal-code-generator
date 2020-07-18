@@ -47,16 +47,18 @@ abstract class ModuleGenerator extends DrupalGenerator {
   /**
    * Collects services.
    *
+   * @param array $vars
+   *   Template variables.
    * @param bool $default
    *   (Optional) Default value for the confirmation question.
    *
    * @return array
    *   List of collected services.
    */
-  protected function collectServices(bool $default = TRUE): array {
+  protected function collectServices(array &$vars, bool $default = TRUE): array {
 
     if (!$this->confirm('Would you like to inject dependencies?', $default)) {
-      return $this->vars['services'] = [];
+      return $vars['services'] = [];
     }
 
     $service_ids = $this->getServiceIds();
@@ -73,11 +75,11 @@ abstract class ModuleGenerator extends DrupalGenerator {
       $services[] = $service;
     }
 
-    $this->vars['services'] = [];
+    $vars['services'] = [];
     foreach (\array_unique($services) as $service_id) {
-      $this->vars['services'][$service_id] = $this->getServiceDefinition($service_id);
+      $vars['services'][$service_id] = $this->getServiceDefinition($service_id);
     }
-    return $this->vars['services'];
+    return $vars['services'];
   }
 
   /**

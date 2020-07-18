@@ -21,18 +21,17 @@ abstract class PluginGenerator extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function &collectDefault(): array {
-    parent::collectDefault();
+  protected function collectDefault(array &$vars): void {
+    parent::collectDefault($vars);
     if ($this->pluginLabelQuestion) {
-      $this->vars['plugin_label'] = $this->askPluginLabelQuestion();
+      $vars['plugin_label'] = $this->askPluginLabelQuestion();
     }
     if ($this->pluginIdQuestion) {
-      $this->vars['plugin_id'] = $this->askPluginIdQuestion();
+      $vars['plugin_id'] = $this->askPluginIdQuestion();
     }
     if ($this->pluginClassQuestion) {
-      $this->vars['class'] = $this->askPluginClassQuestion();
+      $vars['class'] = $this->askPluginClassQuestion($vars);
     }
-    return $this->vars;
   }
 
   /**
@@ -52,9 +51,9 @@ abstract class PluginGenerator extends ModuleGenerator {
   /**
    * Asks plugin class question.
    */
-  protected function askPluginClassQuestion(): string {
+  protected function askPluginClassQuestion(array $vars): string {
     if (!$this->pluginClassDefault) {
-      $unprefixed_plugin_id = \preg_replace('/^' . $this->vars['machine_name'] . '_/', '', $this->vars['plugin_id']);
+      $unprefixed_plugin_id = \preg_replace('/^' . $vars['machine_name'] . '_/', '', $vars['plugin_id']);
       $this->pluginClassDefault = Utils::camelize($unprefixed_plugin_id) . $this->pluginClassSuffix;
     }
     return $this->ask($this->pluginClassQuestion, $this->pluginClassDefault);

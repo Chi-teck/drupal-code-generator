@@ -16,10 +16,10 @@ final class TwigExtension extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}TwigExtension');
-    $this->collectServices();
+    $this->collectServices($vars);
     $this->addFile('src/{class}.php', 'twig-extension');
     $this->addServicesFile()->template('services');
   }

@@ -18,14 +18,14 @@ final class Custom extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', '::validateRequiredServiceName');
 
     $service = \preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
     $vars['class'] = $this->ask('Class', Utils::camelize($service), '::validateRequiredClassName');
 
-    $this->collectServices();
+    $this->collectServices($vars);
 
     $this->addFile('src/{class}.php', 'custom');
     $this->addServicesFile()->template('services');

@@ -18,8 +18,8 @@ final class ModuleLibraries extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $this->addFile('{machine_name}.libraries.yml', 'module-libraries');
   }
 

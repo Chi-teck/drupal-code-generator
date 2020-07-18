@@ -79,23 +79,22 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Collects default variables.
    */
-  protected function &collectDefault(): array {
+  protected function collectDefault(array &$vars): void {
     // If both name and machine_name questions are defined it is quite possible
     // that we can provide the extension name without interacting with a user.
     if (!$this->isNewExtension && $this->drupalContext && $this->nameQuestion && $this->machineNameQuestion) {
       $extensions = $this->getExtensionList();
-      $this->vars['machine_name'] = $this->askMachineNameQuestion();
-      $this->vars['name'] = $extensions[$this->vars['machine_name']] ?? Utils::machine2human($this->vars['machine_name']);
+      $vars['machine_name'] = $this->askMachineNameQuestion($vars);
+      $vars['name'] = $extensions[$vars['machine_name']] ?? Utils::machine2human($vars['machine_name']);
     }
     else {
       if ($this->nameQuestion) {
-        $this->vars['name'] = $this->askNameQuestion();
+        $vars['name'] = $this->askNameQuestion();
       }
       if ($this->machineNameQuestion) {
-        $this->vars['machine_name'] = $this->askMachineNameQuestion();
+        $vars['machine_name'] = $this->askMachineNameQuestion($vars);
       }
     }
-    return $this->vars;
   }
 
   /**
@@ -115,8 +114,8 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Asks machine name question.
    */
-  protected function askMachineNameQuestion(): string {
-    $default_value = Utils::human2machine($this->vars['name'] ?? \basename($this->directory));
+  protected function askMachineNameQuestion(array $vars): string {
+    $default_value = Utils::human2machine($vars['name'] ?? \basename($this->directory));
     $machine_name_question = new Question($this->machineNameQuestion, $default_value);
     $machine_name_question->setValidator([static::class, 'validateRequiredMachineName']);
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
@@ -139,15 +138,15 @@ abstract class DrupalGenerator extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function getDestination(): ?string {
+  protected function getDestination(array $vars): ?string {
     if ($this->drupalContext && $this->extensionType) {
       $destination = $this->drupalContext->getDestination(
         $this->extensionType,
         $this->isNewExtension,
-        $this->vars['machine_name'] ?? NULL,
+        $vars['machine_name'] ?? NULL,
       );
     }
-    return $destination ?? parent::getDestination();
+    return $destination ?? parent::getDestination($vars);
   }
 
 }

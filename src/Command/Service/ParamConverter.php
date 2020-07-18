@@ -16,8 +16,8 @@ final class ParamConverter extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $vars['parameter_type'] = $this->ask('Parameter type', 'example');
     $vars['class'] = $this->ask('Class', '{parameter_type|camelize}ParamConverter');

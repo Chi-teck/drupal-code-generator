@@ -16,9 +16,7 @@ final class NginxVirtualHost extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->vars;
-
+  protected function generate(array &$vars): void {
     $socket = \PHP_MAJOR_VERSION == 5
       ? '/run/php5-fpm.sock'
       : \sprintf('/run/php/php%s.%s-fpm.sock', \PHP_MAJOR_VERSION, \PHP_MINOR_VERSION);

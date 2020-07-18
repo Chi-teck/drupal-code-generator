@@ -16,11 +16,11 @@ final class ArgumentDefault extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['configurable'] = $this->confirm('Make the plugin configurable?', FALSE);
 
-    $this->collectServices(FALSE);
+    $this->collectServices($vars, FALSE);
 
     $this->addFile('src/Plugin/views/argument_default/{class}.php')
       ->template('argument-default');

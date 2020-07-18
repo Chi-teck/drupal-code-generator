@@ -16,10 +16,10 @@ final class EventSubscriber extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}Subscriber');
-    $this->collectServices(FALSE);
+    $this->collectServices($vars, FALSE);
     $this->addFile('src/EventSubscriber/{class}.php', 'event-subscriber');
     $this->addServicesFile()->template('services');
   }

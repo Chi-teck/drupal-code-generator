@@ -17,8 +17,8 @@ final class SymfonyCommand extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $command_name_validator = static function (?string $value): ?string {
       return self::validate($value, '^[a-z][a-z0-9-_:]*[a-z0-9]$', 'The value is not correct command name.');
     };

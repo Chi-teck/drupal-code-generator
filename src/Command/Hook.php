@@ -17,8 +17,8 @@ final class Hook extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $hook_question = new Question('Hook name');
     $supported_hooks = $this->getSupportedHooks();

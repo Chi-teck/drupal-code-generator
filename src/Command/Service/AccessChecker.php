@@ -16,8 +16,8 @@ final class AccessChecker extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $validator = static function ($value) {
       if (!\preg_match('/^_[a-z0-9_]*[a-z0-9]$/', $value)) {

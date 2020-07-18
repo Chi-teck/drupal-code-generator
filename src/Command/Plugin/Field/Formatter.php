@@ -17,8 +17,8 @@ final class Formatter extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['configurable'] = $this->confirm('Make the formatter configurable?', FALSE);
     $this->addFile('src/Plugin/Field/FieldFormatter/{class}.php', 'formatter');
     if ($vars['configurable']) {

@@ -17,8 +17,8 @@ final class Theme extends ThemeGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $vars['description'] = $this->ask('Theme description', 'A simple Drupal 7 theme.');
     $vars['base_theme'] = $this->ask('Base theme');

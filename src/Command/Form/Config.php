@@ -17,9 +17,9 @@ final class Config extends FormGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
-    $this->generateRoute();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
+    $this->generateRoute($vars);
 
     if ($vars['route']) {
       if ($vars['link'] = $this->confirm('Would you like to create a menu link for this route?')) {

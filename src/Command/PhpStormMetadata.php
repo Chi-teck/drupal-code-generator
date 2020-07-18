@@ -17,15 +17,13 @@ final class PhpStormMetadata extends DrupalGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
+  protected function generate(array &$vars): void {
 
     if (!$this->drupalContext) {
       throw new RuntimeException('Could not bootstrap Drupal to fetch metadata.');
     }
 
     $container = $this->drupalContext->getContainer();
-
-    $vars = &$this->vars;
 
     $service_definitions = $this->drupalContext
       ->getContainer()

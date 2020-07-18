@@ -14,8 +14,8 @@ final class Filter extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $filter_types = [
       'TYPE_HTML_RESTRICTOR' => 'HTML restrictor',

@@ -17,8 +17,8 @@ final class Contextual extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $this->addFile('{machine_name}.links.contextual.yml', 'links.contextual');
   }
 

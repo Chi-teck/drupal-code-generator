@@ -14,9 +14,9 @@ final class Layout extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
+  protected function generate(array &$vars): void {
 
-    $vars = &$this->collectDefault();
+    $this->collectDefault($vars);
 
     $vars['layout_name'] = $this->ask('Layout name', 'Example');
     $vars['layout_machine_name'] = $this->ask('Layout machine name', '{layout_name|h2m}');

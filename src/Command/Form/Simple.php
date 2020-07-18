@@ -16,9 +16,9 @@ final class Simple extends FormGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $this->collectDefault();
-    $this->generateRoute();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
+    $this->generateRoute($vars);
     $this->addFile('src/Form/{class}.php', 'form');
   }
 

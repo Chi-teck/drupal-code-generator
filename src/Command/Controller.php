@@ -13,11 +13,11 @@ final class Controller extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}Controller');
 
-    $this->collectServices(FALSE);
+    $this->collectServices($vars, FALSE);
 
     if ($this->confirm('Would you like to create a route for this controller?')) {
       $vars['route_name'] = $this->ask('Route name', '{machine_name}.example');

@@ -16,10 +16,10 @@ final class RouteSubscriber extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}RouteSubscriber');
-    $this->collectServices(FALSE);
+    $this->collectServices($vars, FALSE);
     $this->addFile('src/EventSubscriber/{class}.php', 'route-subscriber');
     $this->addServicesFile()->template('services');
   }

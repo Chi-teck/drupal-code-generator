@@ -16,8 +16,8 @@ final class Style extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['configurable'] = $this->confirm('Make the plugin configurable?');
 
     $this->addFile('src/Plugin/views/style/{class}.php')

@@ -18,8 +18,8 @@ final class EntityReferenceSelection extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $vars['configurable'] = $this->confirm('Provide additional plugin configuration?', FALSE);
 
@@ -36,19 +36,18 @@ final class EntityReferenceSelection extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function &collectDefault(): array {
-    $this->vars['name'] = $this->askNameQuestion();
-    $this->vars['machine_name'] = $this->askMachineNameQuestion();
+  protected function collectDefault(array &$vars): void {
+    $vars['name'] = $this->askNameQuestion();
+    $vars['machine_name'] = $this->askMachineNameQuestion($vars);
 
     $entity_type_question = new Question('Entity type that can be referenced by this plugin', 'node');
     $entity_type_question->setValidator([self::class, 'validateRequiredMachineName']);
     $entity_type_question->setAutocompleterValues(\array_keys(self::baseClasses()));
-    $this->vars['entity_type'] = $this->io->askQuestion($entity_type_question);
+    $vars['entity_type'] = $this->io->askQuestion($entity_type_question);
 
-    $this->vars['plugin_label'] = $this->askPluginLabelQuestion();
-    $this->vars['plugin_id'] = $this->askPluginIdQuestion();
-    $this->vars['class'] = $this->askPluginClassQuestion();
-    return $this->vars;
+    $vars['plugin_label'] = $this->askPluginLabelQuestion();
+    $vars['plugin_id'] = $this->askPluginIdQuestion();
+    $vars['class'] = $this->askPluginClassQuestion($vars);
   }
 
   /**

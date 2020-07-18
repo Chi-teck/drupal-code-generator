@@ -14,8 +14,8 @@ final class QueueWorker extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $this->addFile('src/Plugin/QueueWorker/{class}.php', 'queue-worker');
   }
 

@@ -113,9 +113,9 @@ final class Field extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
+  protected function generate(array &$vars): void {
 
-    $vars = &$this->collectDefault();
+    $this->collectDefault($vars);
 
     $vars['field_label'] = $this->ask('Field label', 'Example', '::validateRequired');
     $vars['field_id'] = $this->ask('Field ID', '{machine_name}_{field_label|h2m}', '::validateRequiredMachineName');

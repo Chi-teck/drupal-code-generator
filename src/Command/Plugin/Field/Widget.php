@@ -17,8 +17,8 @@ final class Widget extends PluginGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
     $vars['configurable'] = $this->confirm('Make the widget configurable?', FALSE);
     $this->addFile('src/Plugin/Field/FieldWidget/{class}.php', 'widget');
     if ($vars['configurable']) {

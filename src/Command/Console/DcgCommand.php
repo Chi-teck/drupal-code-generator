@@ -18,9 +18,7 @@ final class DcgCommand extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->vars;
-
+  protected function generate(array &$vars): void {
     $command_name_validator = static function (?string $value): ?string {
       return self::validate($value, '^[a-z][a-z0-9-_:]*[a-z0-9]$', 'The value is not correct command name.');
     };

@@ -13,8 +13,8 @@ final class ContentEntity extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(): void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars): void {
+    $this->collectDefault($vars);
 
     $vars['entity_type_label'] = $this->ask('Entity type label', '{name}');
     $vars['entity_type_id'] = $this->ask('Entity type ID', '{entity_type_label|h2m}');
