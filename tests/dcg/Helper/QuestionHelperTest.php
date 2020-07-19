@@ -104,7 +104,7 @@ final class QuestionHelperTest extends TestCase {
     $expected_display .= "  [0] 3:00\n";
     $expected_display .= "  [1] 4:00\n";
     $expected_display .= "  [2] 5:00\n";
-    $expected_display .= "  ➤➤➤ ";
+    $expected_display .= " ➤ ";
     self::assertSame($expected_display, $this->getDisplay($output));
 
     // -- Question answer option.

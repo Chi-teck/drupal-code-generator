@@ -26,14 +26,14 @@
   [24] Theme
   [25] Theme file
   [26] Theme settings
-  ➤➤➤➤ 1⏎
+ ➤ 1⏎
  Select generator 
   [0] ..
   [1] DCG command
   [2] Drupal console command
   [3] Drush command
   [4] Symfony command
-  ➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
@@ -62,13 +62,13 @@
   [24] Theme
   [25] Theme file
   [26] Theme settings
-  ➤➤➤➤ 2⏎
+ ➤ 2⏎
  Select generator 
   [0] ..
   [1] Config
   [2] Confirm
   [3] Simple
-  ➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
@@ -97,7 +97,7 @@
   [24] Theme
   [25] Theme file
   [26] Theme settings
-  ➤➤➤➤ 3⏎
+ ➤ 3⏎
  Select generator 
   [0] ..
   [1] Drupal 7
@@ -105,7 +105,7 @@
   [3] HTML page
   [4] Nginx virtual host
   [5] Project
-  ➤➤➤ 1⏎
+ ➤ 1⏎
  Select generator 
   [ 0] ..
   [ 1] Ctools plugin
@@ -121,13 +121,13 @@
   [11] template.php
   [12] Test
   [13] Theme
-  ➤➤➤➤ 1⏎
+ ➤ 1⏎
  Select generator 
   [0] ..
   [1] Access
   [2] Content type
   [3] Relationship
-  ➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Ctools plugin
@@ -143,11 +143,11 @@
   [11] template.php
   [12] Test
   [13] Theme
-  ➤➤➤➤ 2⏎
+ ➤ 2⏎
  Select generator 
   [0] ..
   [1] Argument default
-  ➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Ctools plugin
@@ -163,7 +163,7 @@
   [11] template.php
   [12] Test
   [13] Theme
-  ➤➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [0] ..
   [1] Drupal 7
@@ -171,7 +171,7 @@
   [3] HTML page
   [4] Nginx virtual host
   [5] Project
-  ➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
@@ -200,7 +200,7 @@
   [24] Theme
   [25] Theme file
   [26] Theme settings
-  ➤➤➤➤ 4⏎
+ ➤ 4⏎
  Select generator 
   [ 0] ..
   [ 1] Field
@@ -216,7 +216,7 @@
   [11] Menu link
   [12] Queue worker
   [13] REST resource
-  ➤➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
@@ -245,7 +245,7 @@
   [24] Theme
   [25] Theme file
   [26] Theme settings
-  ➤➤➤➤ 5⏎
+ ➤ 5⏎
  Select generator 
   [ 0] ..
   [ 1] Access checker
@@ -263,7 +263,7 @@
   [13] Theme negotiator
   [14] Twig extension
   [15] Uninstall validator
-  ➤➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
@@ -292,7 +292,7 @@
   [24] Theme
   [25] Theme file
   [26] Theme settings
-  ➤➤➤➤ 6⏎
+ ➤ 6⏎
  Select generator 
   [0] ..
   [1] Browser
@@ -300,7 +300,7 @@
   [3] Nightwatch
   [4] Unit
   [5] WebDriver
-  ➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
@@ -329,7 +329,7 @@
   [24] Theme
   [25] Theme file
   [26] Theme settings
-  ➤➤➤➤ 7⏎
+ ➤ 7⏎
  Select generator 
   [0] ..
   [1] Links
@@ -341,7 +341,7 @@
   [7] Permissions
   [8] Routing
   [9] Services
-  ➤➤➤ 0⏎
+ ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Console
@@ -370,7 +370,7 @@
   [24] Theme
   [25] Theme file
   [26] Theme settings
-  ➤➤➤➤ 14⏎
+ ➤ 14⏎
 
  Welcome to install-file generator!
 ––––––––––––––––––––––––––––––––––––

@@ -119,8 +119,7 @@ class QuestionHelper extends BaseQuestionHelper {
         $messages[] = '  [<info>' . \str_repeat(' ', $width) . $key . '</info>] ' . $value;
       }
       $output->writeln($messages);
-
-      $output->write(\count($choices) <= 10 ? '  ➤➤➤ ' : '  ➤➤➤➤ ');
+      $output->write(' ➤ ');
     }
     else {
       $output->write("\n ➤ ");
