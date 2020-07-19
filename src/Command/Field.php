@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Utils;
+use stdClass;
 
 /**
  * Implements field command.
@@ -17,7 +18,7 @@ final class Field extends ModuleGenerator {
    *
    * @var array
    */
-  protected $subTypes = [
+  private $subTypes = [
     'boolean' => [
       'label' => 'Boolean',
       'list' => FALSE,
@@ -154,50 +155,45 @@ final class Field extends ModuleGenerator {
     // Indicates that at least one of sub-fields is of datetime type.
     $vars['datetime'] = FALSE;
 
+    $vars['type_class'] = '{field_label|camelize}Item';
+    $vars['widget_class'] = '{field_label|camelize}Widget';
+    $vars['formatter_class'] = '{field_label|camelize}DefaultFormatter';
+
     for ($i = 1; $i <= $vars['subfield_count']; $i++) {
       $this->io->writeln(\sprintf('<fg=green>%s</>', \str_repeat('–', 50)));
 
-      $vars['name_' . $i] = $this->ask("Label for sub-field #$i", "Value $i");
-      $default_machine_name = Utils::human2machine($vars['name_' . $i]);
-      $vars['machine_name_' . $i] = $this->ask("Machine name for sub-field #$i", $default_machine_name);
+      $subfield = new stdClass();
+
+      $subfield->name = $this->ask("Label for sub-field #$i", "Value $i");
+      $subfield->machineName = $this->ask("Machine name for sub-field #$i", Utils::human2machine($subfield->name));
       $type = $this->choice("Type of sub-field #$i", $type_choices, 'Text');
 
-      $vars['type_class'] = '{field_label|camelize}Item';
-      $vars['widget_class'] = '{field_label|camelize}Widget';
-      $vars['formatter_class'] = '{field_label|camelize}DefaultFormatter';
+      if ($type == 'datetime') {
+        $subfield->dateType = $this->choice("Date type for sub-field #$i", $this->dateTypes, 'Date only');
+      }
 
       $definition = $this->subTypes[$type];
-      $vars['type_' . $i] = $definition['label'];
-
-      if ($type == 'datetime') {
-        $vars['date_type_' . $i] = $this->choice("Date type for sub-field #$i", $this->dateTypes, 'Date only');
-      }
-
       if ($definition['list']) {
-        $vars['list_' . $i] = $this->confirm("Limit allowed values for sub-field #$i?", FALSE);
+        $subfield->list = $this->confirm("Limit allowed values for sub-field #$i?", FALSE);
       }
-      $vars['required_' . $i] = $this->confirm("Make sub-field #$i required?", FALSE);
+      $subfield->required = $this->confirm("Make sub-field #$i required?", FALSE);
 
-      $machine_name = $vars['machine_name_' . $i];
-
-      // Group sub-field vars.
+      // Build sub-field vars.
       $vars['subfields'][$i] = [
-        'name' => $vars['name_' . $i],
-        'machine_name' => $machine_name,
+        'name' => $subfield->name,
+        'machine_name' => $subfield->machineName,
         'type' => $type,
         'data_type' => $definition['data_type'],
-        'list' => !empty($vars['list_' . $i]),
-        'allowed_values_method' => 'allowed' . Utils::camelize($vars['name_' . $i], TRUE) . 'Values',
-        'required' => $vars['required_' . $i],
+        'list' => !empty($subfield->list),
+        'allowed_values_method' => 'allowed' . Utils::camelize($subfield->name, TRUE) . 'Values',
+        'required' => $subfield->required,
         'link' => $definition['link'],
       ];
-      if (isset($vars['date_type_' . $i])) {
-        $date_type = $vars['date_type_' . $i];
-        $vars['subfields'][$i]['date_type'] = $date_type;
+      if (isset($subfield->dateType)) {
+        $vars['subfields'][$i]['date_type'] = $subfield->dateType;
         // Back to date type ID.
-        $vars['subfields'][$i]['date_storage_format'] = $date_type == 'date' ? 'Y-m-d' : 'Y-m-d\TH:i:s';
+        $vars['subfields'][$i]['date_storage_format'] = $subfield->dateType == 'date' ? 'Y-m-d' : 'Y-m-d\TH:i:s';
       }
-      unset($vars['name_' . $i], $vars['machine_name_' . $i], $vars['type_' . $i], $vars['list_' . $i], $vars['required_' . $i], $vars['date_type_' . $i]);
 
       if ($definition['random']) {
         $vars['random'] = TRUE;

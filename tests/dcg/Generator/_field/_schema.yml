@@ -6,6 +6,7 @@ field.storage_settings.example_foo:
     foo:
       type: string
       label: Foo
+
 # Field instance.
 field.field_settings.example_foo:
   type: mapping
@@ -14,6 +15,7 @@ field.field_settings.example_foo:
     bar:
       type: string
       label: Bar
+
 # Default value.
 field.value.example_foo:
   type: mapping
@@ -79,6 +81,7 @@ field.value.example_foo:
     value_20:
       type: datetime
       label: Value 20
+
 # Field widget.
 field.widget.settings.example_foo:
   type: mapping
@@ -87,6 +90,7 @@ field.widget.settings.example_foo:
     foo:
       type: string
       label: Foo
+
 # Field formatter.
 field.formatter.settings.example_foo_default:
   type: mapping

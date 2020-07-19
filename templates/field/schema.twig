@@ -9,6 +9,7 @@ field.storage_settings.{{ field_id }}:
       label: Foo
 {% endif %}
 {% if instance_settings %}
+
 # Field instance.
 field.field_settings.{{ field_id }}:
   type: mapping
@@ -18,6 +19,7 @@ field.field_settings.{{ field_id }}:
       type: string
       label: Bar
 {% endif %}
+
 # Default value.
 field.value.{{ field_id }}:
   type: mapping
@@ -29,6 +31,7 @@ field.value.{{ field_id }}:
       label: {{ subfield.name }}
 {% endfor %}
 {% if widget_settings %}
+
 # Field widget.
 field.widget.settings.{{ field_id }}:
   type: mapping
@@ -39,6 +42,7 @@ field.widget.settings.{{ field_id }}:
       label: Foo
 {% endif %}
 {% if formatter_settings %}
+
 # Field formatter.
 field.formatter.settings.{{ field_id }}_default:
   type: mapping
