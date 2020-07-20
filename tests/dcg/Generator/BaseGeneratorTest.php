@@ -2,11 +2,12 @@
 
 namespace DrupalCodeGenerator\Tests\Generator;
 
-use DrupalCodeGenerator\GeneratorTester;
 use DrupalCodeGenerator\Tests\BaseTestCase;
 
 /**
  * Base class for generators tests.
+ *
+ * @todo Replace with \DrupalCodeGenerator\Test\BaseGeneratorTest
  */
 abstract class BaseGeneratorTest extends BaseTestCase {
 

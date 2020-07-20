@@ -1,10 +1,12 @@
 <?php
 
-namespace DrupalCodeGenerator;
+namespace DrupalCodeGenerator\Tests\Generator;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Tests\QuestionHelper;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Twig\Loader\FilesystemLoader;

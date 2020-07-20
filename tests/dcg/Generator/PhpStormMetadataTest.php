@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Command\PhpStormMetadata;
-use DrupalCodeGenerator\GeneratorTester;
 use DrupalCodeGenerator\Helper\DrupalContext;
 
 /**
