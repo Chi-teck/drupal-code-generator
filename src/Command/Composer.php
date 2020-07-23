@@ -37,7 +37,12 @@ final class Composer extends DrupalGenerator {
     ]);
     $vars['type'] = $this->io->askQuestion($type_question);
 
-    if (!in_array($vars['type'], ['drupal-custom-module', 'drupal-custom-theme', 'drupal-custom-profile'])) {
+    $custom_types = [
+      'drupal-custom-module',
+      'drupal-custom-theme',
+      'drupal-custom-profile',
+    ];
+    if (!\in_array($vars['type'], $custom_types)) {
       // If project type is custom, there is no reason to ask this.
       $vars['drupal_org'] = $this->confirm('Is this project hosted on drupal.org?', FALSE);
     }
