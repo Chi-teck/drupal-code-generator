@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Utils;
 final class Theme extends ThemeGenerator {
 
   protected $name = 'theme';
-  protected $description = 'Generates Drupal 8 theme';
+  protected $description = 'Generates Drupal theme';
   protected $isNewExtension = TRUE;
 
   /**

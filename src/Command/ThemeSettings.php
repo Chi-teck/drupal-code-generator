@@ -8,7 +8,7 @@ namespace DrupalCodeGenerator\Command;
 final class ThemeSettings extends ThemeGenerator {
 
   protected $name = 'theme-settings';
-  protected $description = 'Generates Drupal 8 theme-settings.php file';
+  protected $description = 'Generates Drupal theme-settings.php file';
 
   /**
    * {@inheritdoc}

@@ -8,7 +8,7 @@ namespace DrupalCodeGenerator\Command;
 final class RenderElement extends ModuleGenerator {
 
   protected $name = 'render-element';
-  protected $description = 'Generates Drupal 8 render element';
+  protected $description = 'Generates Drupal render element';
   protected $nameQuestion = NULL;
 
   /**

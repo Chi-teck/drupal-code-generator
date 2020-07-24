@@ -8,7 +8,7 @@ namespace DrupalCodeGenerator\Command;
 final class JavaScript extends ModuleGenerator {
 
   protected $name = 'javascript';
-  protected $description = 'Generates Drupal 8 JavaScript file';
+  protected $description = 'Generates Drupal JavaScript file';
 
   /**
    * {@inheritdoc}

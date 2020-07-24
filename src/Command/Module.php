@@ -8,7 +8,7 @@ namespace DrupalCodeGenerator\Command;
 final class Module extends ModuleGenerator {
 
   protected $name = 'module';
-  protected $description = 'Generates Drupal 8 module';
+  protected $description = 'Generates Drupal module';
   protected $isNewExtension = TRUE;
 
   /**
