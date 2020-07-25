@@ -28,6 +28,11 @@ class Application extends BaseApplication {
   public const ROOT = __DIR__ . '/..';
 
   /**
+   * DCG version
+   */
+  public const VERSION = '2.0.0-dev';
+
+  /**
    * Path to templates directory.
    */
   public const TEMPLATE_PATH = Application::ROOT . '/templates/';
@@ -36,13 +41,7 @@ class Application extends BaseApplication {
    * Creates the application.
    */
   public static function create(?ContainerInterface $container = NULL): Application {
-    // This gets substituted with git version when DCG is packaged to PHAR file.
-    $version = '@git-version@';
-    // Fallback for composer installation.
-    if (!\is_numeric($version[0])) {
-      $version = 'UNKNOWN';
-    }
-    $application = new static('Drupal Code Generator', $version);
+    $application = new static('Drupal Code Generator', self::VERSION);
 
     $helper_set = new HelperSet([
       new QuestionHelper(),

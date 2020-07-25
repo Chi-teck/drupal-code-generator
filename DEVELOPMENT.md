@@ -34,6 +34,6 @@ Then after you have logged out and in the _dcg_ development version will be acce
 
 ## Building PHAR executable
 
-1. Install [Box 2](https://github.com/box-project/box2).
-2. Run `scripts/buld.sh` script.
+1. Install dependencies without dev packages `composer install --no-dev`.
+2. Run `scripts/compile.sh` script.
 3. Test the generated archive: `php dcg.phar --version`.
