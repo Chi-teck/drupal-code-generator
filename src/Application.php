@@ -28,9 +28,9 @@ class Application extends BaseApplication {
   public const ROOT = __DIR__ . '/..';
 
   /**
-   * DCG version
+   * DCG version.
    */
-  public const VERSION = '2.0.0-dev';
+  public const VERSION = '2.0.0-RC2';
 
   /**
    * Path to templates directory.
