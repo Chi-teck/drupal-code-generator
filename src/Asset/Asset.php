@@ -14,14 +14,21 @@ abstract class Asset {
    *
    * @var string
    */
-  private $path;
+  protected $path;
 
   /**
    * Asset mode.
    *
    * @var int
    */
-  private $mode;
+  protected $mode;
+
+  /**
+   * Template variables.
+   *
+   * @var array
+   */
+  protected $vars = [];
 
   /**
    * Asset constructor.
@@ -37,7 +44,7 @@ abstract class Asset {
    *   Asset path.
    */
   public function getPath(): string {
-    return $this->path;
+    return $this->replaceTokens($this->path);
   }
 
   /**
@@ -48,6 +55,16 @@ abstract class Asset {
    */
   public function getMode(): int {
     return $this->mode;
+  }
+
+  /**
+   * Getter for asset vars.
+   *
+   * @return array
+   *   Asset variables.
+   */
+  public function getVars(): array {
+    return $this->vars;
   }
 
   /**
@@ -68,17 +85,31 @@ abstract class Asset {
   }
 
   /**
-   * Replaces tokens in asset properties.
+   * Setter for asset vars.
+   *
+   * @param array $vars
+   *   Asset template variables.
+   *
+   * @return self
+   *   The asset.
    */
-  public function replaceTokens(array $vars): void {
-    $this->path = Utils::replaceTokens($this->path, $vars);
+  public function vars(array $vars): self {
+    $this->vars = $vars;
+    return $this;
   }
 
   /**
    * Implements the magic __toString() method.
    */
   public function __toString(): string {
-    return $this->path;
+    return $this->getPath();
+  }
+
+  /**
+   * Replaces all tokens in a given string with appropriate values.
+   */
+  protected function replaceTokens(?string $text): ?string {
+    return Utils::replaceTokens($text, $this->vars);
   }
 
 }

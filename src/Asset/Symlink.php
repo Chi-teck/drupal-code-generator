@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Asset;
 
-use DrupalCodeGenerator\Utils;
-
 /**
  * Simple data structure to represent a symlink being generated.
  */
@@ -44,7 +42,7 @@ final class Symlink extends Asset {
    *   Asset action.
    */
   public function getTarget(): string {
-    return $this->target;
+    return $this->replaceTokens($this->target);
   }
 
   /**
@@ -71,14 +69,6 @@ final class Symlink extends Asset {
   public function skipIfExists(): self {
     $this->action = self::ACTION_SKIP;
     return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function replaceTokens(array $vars): void {
-    parent::replaceTokens($vars);
-    $this->target = Utils::replaceTokens($this->target, $vars);
   }
 
 }

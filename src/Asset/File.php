@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Asset;
 
-use DrupalCodeGenerator\Utils;
-
 /**
  * Simple data structure to represent a file being generated.
  */
@@ -41,13 +39,6 @@ final class File extends Asset {
    * @var string|null
    */
   private $inlineTemplate;
-
-  /**
-   * Template variables.
-   *
-   * @var array
-   */
-  private $vars = [];
 
   /**
    * Action.
@@ -97,7 +88,8 @@ final class File extends Asset {
    *   Asset header template.
    */
   public function getHeaderTemplate(): ?string {
-    return $this->headerTemplate;
+    return $this->replaceTokens($this->headerTemplate);
+
   }
 
   /**
@@ -107,7 +99,7 @@ final class File extends Asset {
    *   Asset template.
    */
   public function getTemplate(): ?string {
-    return $this->template;
+    return $this->replaceTokens($this->template);
   }
 
   /**
@@ -118,16 +110,6 @@ final class File extends Asset {
    */
   public function getInlineTemplate(): ?string {
     return $this->inlineTemplate;
-  }
-
-  /**
-   * Getter for asset vars.
-   *
-   * @return array
-   *   Asset template variables.
-   */
-  public function getVars(): array {
-    return $this->vars;
   }
 
   /**
@@ -215,20 +197,6 @@ final class File extends Asset {
    */
   public function inlineTemplate(?string $inline_template): self {
     $this->inlineTemplate = $inline_template;
-    return $this;
-  }
-
-  /**
-   * Setter for asset vars.
-   *
-   * @param array $vars
-   *   Asset template variables.
-   *
-   * @return self
-   *   The asset.
-   */
-  public function vars(array $vars): self {
-    $this->vars = $vars;
     return $this;
   }
 
@@ -323,19 +291,6 @@ final class File extends Asset {
       $template .= '.twig';
     }
     return $template;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function replaceTokens(array $vars): void {
-    parent::replaceTokens($vars);
-    if ($this->template) {
-      $this->template = Utils::replaceTokens($this->template, $vars);
-    }
-    if ($this->headerTemplate) {
-      $this->headerTemplate = Utils::replaceTokens($this->headerTemplate, $vars);
-    }
   }
 
 }

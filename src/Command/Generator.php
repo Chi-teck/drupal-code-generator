@@ -363,11 +363,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   private function processAssets(array $vars): void {
     foreach ($this->assets as $asset) {
-      $asset->replaceTokens($vars);
-      if ($asset instanceof File) {
-        // Local asset variables take precedence over global ones.
-        $asset->vars(\array_merge($vars, $asset->getVars()));
-      }
+      // Local asset variables take precedence over global ones.
+      $asset->vars(\array_merge($vars, $asset->getVars()));
     }
   }
 
