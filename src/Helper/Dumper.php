@@ -7,7 +7,6 @@ use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
-use RuntimeException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -179,7 +178,7 @@ class Dumper extends Helper implements IOAwareInterface {
           $this->filesystem->remove($link_path);
         }
         if (!@\symlink($target, $link_path)) {
-          throw new RuntimeException('Could not create a symlink to ' . $target);
+          throw new \RuntimeException('Could not create a symlink to ' . $target);
         }
         $this->filesystem->chmod($link_path, $symlink->getMode());
         $dumped_assets[] = $symlink;

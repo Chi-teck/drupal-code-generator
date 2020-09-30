@@ -25,7 +25,7 @@ final class ConditionTest extends KernelTestBase {
     $node = Node::create(['type' => 'page']);
     $time = \Drupal::time()->getRequestTime();
 
-    /* @var $condition \Drupal\Core\Condition\ConditionInterface */
+    /** @var \Drupal\Core\Condition\ConditionInterface $condition */
     $condition = $this->container
       ->get('plugin.manager.condition')
       ->createInstance('example')
@@ -44,7 +44,7 @@ final class ConditionTest extends KernelTestBase {
     $node->setCreatedTime($time - 55);
     self::assertFalse($condition->execute());
 
-    /* @var $condition \Drupal\Core\Executable\ExecutablePluginBase */
+    /** @var \Drupal\Core\Executable\ExecutablePluginBase $condition */
     $condition->setConfig('age', NULL);
     self::assertTrue($condition->execute());
 

@@ -3,7 +3,7 @@
 namespace Drupal\example;
 
 /**
- * Example service.
+ * A dummy service to test services.
  */
 final class Example implements ExampleInterface {
 

@@ -5,7 +5,6 @@ namespace DrupalCodeGenerator\Command\Misc;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Command\Generator;
 use DrupalCodeGenerator\Utils;
-use InvalidArgumentException;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -289,7 +288,7 @@ final class Project extends Generator {
    */
   private function addPackage(array &$section, string $package): void {
     if (!\array_key_exists($package, self::PACKAGES)) {
-      throw new InvalidArgumentException("Package $package is unknown.");
+      throw new \InvalidArgumentException("Package $package is unknown.");
     }
     $section[$package] = self::PACKAGES[$package];
   }

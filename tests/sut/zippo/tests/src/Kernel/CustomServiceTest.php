@@ -5,7 +5,7 @@ namespace Drupal\Tests\zippo\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
- * CustomServiceTest test.
+ * A test form custom service generator.
  *
  * @group DCG
  */

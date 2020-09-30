@@ -3,7 +3,7 @@
 namespace Drupal\example;
 
 /**
- * Interface ExampleInterface.
+ * An interface for Example service.
  */
 interface ExampleInterface {
 

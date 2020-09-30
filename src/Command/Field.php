@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Utils;
-use stdClass;
 
 /**
  * Implements field command.
@@ -162,7 +161,7 @@ final class Field extends ModuleGenerator {
     for ($i = 1; $i <= $vars['subfield_count']; $i++) {
       $this->io->writeln(\sprintf('<fg=green>%s</>', \str_repeat('–', 50)));
 
-      $subfield = new stdClass();
+      $subfield = new \stdClass();
 
       $subfield->name = $this->ask("Label for sub-field #$i", "Value $i");
       $subfield->machineName = $this->ask("Machine name for sub-field #$i", Utils::human2machine($subfield->name));

@@ -9,6 +9,7 @@
   <rule ref="vendor/drupal/coder/coder_sniffer/Drupal"/>
   <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
+    <exclude name="Drupal.Arrays.Array.LongLineDeclaration"/>
   </rule>
   <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended73"/>
   <!-- Exclude fixtures. -->
