@@ -14,9 +14,7 @@ class {{ class_prefix }}Form extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-
-    $entity = $this->getEntity();
-    $result = $entity->save();
+    $result = parent::save($form, $form_state);
 
     $message_arguments = ['%label' => $this->entity->toLink()->toString()];
     $logger_arguments = [
