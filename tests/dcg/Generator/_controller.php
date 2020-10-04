@@ -3,7 +3,6 @@
 namespace Drupal\foo\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Database\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -19,22 +18,12 @@ class FooController extends ControllerBase {
   protected $connection;
 
   /**
-   * The controller constructor.
-   *
-   * @param \Drupal\Core\Database\Connection $connection
-   *   The database connection.
-   */
-  public function __construct(Connection $connection) {
-    $this->connection = $connection;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('database')
-    );
+    $instance = parent::create($container);
+    $instance->connection = $container->get('database');
+    return $instance;
   }
 
   /**

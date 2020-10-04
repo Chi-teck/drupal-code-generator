@@ -4,7 +4,6 @@ namespace Drupal\foo\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\CronInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -29,35 +28,12 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
   protected $cron;
 
   /**
-   * Constructs a new ExampleBlock instance.
-   *
-   * @param array $configuration
-   *   The plugin configuration, i.e. an array with configuration values keyed
-   *   by configuration option name. The special key 'context' may be used to
-   *   initialize the defined contexts by setting it to an array of context
-   *   values keyed by context names.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\CronInterface $cron
-   *   The cron service.
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CronInterface $cron) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->cron = $cron;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('cron')
-    );
+    $instance = new static($configuration, $plugin_id, $plugin_definition);
+    $instance->cron = $container->get('cron');
+    return $instance;
   }
 
   /**
