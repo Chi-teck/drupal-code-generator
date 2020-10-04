@@ -40,7 +40,7 @@ use {{ service.type }};
 
 {% macro container(services) %}
   {% for service_id, service in services %}
-      $container->get('{{ service_id }}'){{ loop.last ? '' : ",\n" }}
+    $instance->{{ service.name|camelize(false) }} = $container->get('{{ service_id }}');{{ loop.last ? '' : "\n" }}
   {%- endfor %}
 {% endmacro %}
 
