@@ -16,7 +16,7 @@ trap dcg_on_exit EXIT
 
 SELF_PATH=$(dirname $0)/../tests/sut
 if [ -z $DRUPAL_VERSION ]; then
-  DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '8\..\.x' | tail -n1)'-dev'
+  DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '9\..\.x' | tail -n1)'-dev'
 fi
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut}
 DRUPAL_CACHED_DIR=${DRUPAL_CACHED_DIR:-/tmp/dcg_sut_cached/$DRUPAL_VERSION}
@@ -48,6 +48,7 @@ function dcg_phpcs {
 function dcg_phpunit {
   SIMPLETEST_BASE_URL=http://$DRUPAL_HOST:$DRUPAL_PORT \
   SIMPLETEST_DB=sqlite://localhost//dev/shm/dcg_test.sqlite \
+  SYMFONY_DEPRECATIONS_HELPER='max[self]=10' \
   MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chromeOptions": {"w3c": false, "args": ["--headless"]}}, "'$WD_URL'"]' \
   $DRUPAL_DIR/vendor/bin/phpunit \
   -c $DRUPAL_DIR/core \
