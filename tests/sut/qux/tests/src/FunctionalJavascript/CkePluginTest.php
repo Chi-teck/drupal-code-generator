@@ -55,7 +55,7 @@ class CkePluginTest extends WebDriverTestBase {
 
     $button = $this->xpath('//a[contains(@class, "cke_button__example") and @title = "Insert abbreviation"]')[0];
     $icon = $button->find('xpath', '//span[contains(@class, cke_button_icon)]');
-    self::assertContains('/modules/qux/js/plugins/example/icons/example.png', $icon->getAttribute('style'));
+    self::assertStringContainsString('/modules/qux/js/plugins/example/icons/example.png', $icon->getAttribute('style'));
 
     $button->click();
 
