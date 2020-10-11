@@ -30,6 +30,7 @@ class StandardTest extends GeneratorBaseTest {
     'foo/foo.info.yml' => __DIR__ . '/_standard/foo.info.yml',
     'foo/foo.install' => __DIR__ . '/_standard/foo.install',
     'foo/foo.libraries.yml' => __DIR__ . '/_standard/foo.libraries.yml',
+    'foo/foo.links.menu.yml' => __DIR__ . '/_standard/foo.links.menu.yml',
     'foo/foo.module' => __DIR__ . '/_standard/foo.module',
     'foo/foo.permissions.yml' => __DIR__ . '/_standard/foo.permissions.yml',
     'foo/foo.routing.yml' => __DIR__ . '/_standard/foo.routing.yml',

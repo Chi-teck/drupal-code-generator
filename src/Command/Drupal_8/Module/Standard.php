@@ -153,6 +153,18 @@ class Standard extends BaseGenerator {
         ->template('d8/form/routing.twig')
         ->vars($routing_vars + $vars)
         ->action('append');
+
+      $link_vars = [
+        'route_name' => $routing_vars['route_name'],
+        'link_title' => $vars['name'],
+        'link_description' => 'Configure ' . $vars['name'] . '.',
+        'link_parent' => 'system.admin_config_system',
+      ];
+      $this->addFile()
+        ->path($prefix . '.links.menu.yml')
+        ->template('d8/form/links.menu.twig')
+        ->vars($link_vars)
+        ->action('append');
     }
 
   }
