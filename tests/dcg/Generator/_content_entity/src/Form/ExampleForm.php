@@ -16,9 +16,11 @@ class FooExampleForm extends ContentEntityForm {
   public function save(array $form, FormStateInterface $form_state) {
     $result = parent::save($form, $form_state);
 
-    $message_arguments = ['%label' => $this->entity->toLink()->toString()];
+    $entity = $this->getEntity();
+
+    $message_arguments = ['%label' => $entity->toLink()->toString()];
     $logger_arguments = [
-      '%label' => $this->entity->label(),
+      '%label' => $entity->label(),
       'link' => $entity->toLink($this->t('View'))->toString(),
     ];
 
