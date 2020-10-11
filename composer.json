@@ -1,26 +1,26 @@
 {
-  "name": "chi-teck/drupal-code-generator",
-  "description": "Drupal code generator",
-  "require": {
-    "php": ">=5.5.9",
-    "ext-json": "*",
-    "symfony/console": "^3.4 || ^4.0",
-    "symfony/filesystem": "^2.7 || ^3.4 || ^4.0",
-    "twig/twig": "^1.41 || ^2.12"
-  },
-  "bin": [
-    "bin/dcg"
-  ],
-  "autoload": {
-    "files": ["src/bootstrap.php"],
-    "psr-4": {
-      "DrupalCodeGenerator\\": "src"
+    "name": "chi-teck/drupal-code-generator",
+    "description": "Drupal code generator",
+    "require": {
+        "php": ">=5.5.9",
+        "ext-json": "*",
+        "symfony/console": "^3.4 || ^4.0",
+        "symfony/filesystem": "^2.7 || ^3.4 || ^4.0",
+        "twig/twig": "^1.41 || ^2.12"
+    },
+    "bin": [
+        "bin/dcg"
+    ],
+    "autoload": {
+        "files": ["src/bootstrap.php"],
+        "psr-4": {
+            "DrupalCodeGenerator\\": "src"
+        }
+    },
+    "license": "GPL-2.0-or-later",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
     }
-  },
-  "license": "GPL-2.0-or-later",
-  "extra": {
-    "branch-alias": {
-        "dev-master": "1.x-dev"
-    }
-  }
 }
