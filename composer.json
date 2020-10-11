@@ -8,6 +8,9 @@
         "symfony/filesystem": "^2.7 || ^3.4 || ^4.0",
         "twig/twig": "^1.41 || ^2.12"
     },
+    "conflict": {
+        "drush/drush": "< 10.3.2"
+    },
     "bin": [
         "bin/dcg"
     ],

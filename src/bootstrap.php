@@ -51,22 +51,3 @@ function dcg_get_twig_environment($loader) {
   }
   return $environment;
 }
-
-// Determine major Twig version.
-// \Twig\Environment::MAJOR_VERSION is not suitable here because of
-// https://github.com/twigphp/Twig/pull/2945
-// Use this workaround as drupal/drupal is locked on Twig 1.38.
-list($twig_major_version) = sscanf(Environment::VERSION, '%d.%d.%d');
-
-// \Twig\Environment::tokenize() signature has been changed in Twig 2, so that
-// it is not possible to maintain the same \Twig\Environment sub-class for both
-// Twig versions.
-$twig_environment_class = sprintf('DrupalCodeGenerator\Twig\Twig%dEnvironment', $twig_major_version);
-if (!class_exists('DrupalCodeGenerator\Twig\TwigEnvironment')) {
-  class_alias($twig_environment_class, 'DrupalCodeGenerator\Twig\TwigEnvironment');
-}
-
-// Legacy TwigEnvironment class is still used in Drush.
-if (!class_exists('DrupalCodeGenerator\TwigEnvironment')) {
-  class_alias($twig_environment_class, 'DrupalCodeGenerator\TwigEnvironment');
-}
