@@ -15,13 +15,13 @@ use Symfony\Component\HttpFoundation\Request;
 $start = microtime(TRUE);
 
 if (empty($argv[1])) {
-  fwrite(STDERR, "Usage: {$argv[0]} path/to/drupal\n");
+  \fwrite(STDERR, "Usage: {$argv[0]} path/to/drupal\n");
   exit(1);
 }
 
 $autoload = $argv[1] . '/autoload.php';
 if (!file_exists($autoload)) {
-  fwrite(STDERR, "$autoload does not exist\n");
+  \fwrite(STDERR, "$autoload does not exist\n");
   exit(1);
 }
 
@@ -33,17 +33,17 @@ $request = Request::createFromGlobals();
 $kernel->handle($request);
 
 // Override Drupal exception handler.
-set_exception_handler(static function (\Exception $exception): void {
-  fwrite(STDERR, $exception->getMessage() . "\n");
+\set_exception_handler(static function (\Exception $exception): void {
+  \fwrite(STDERR, $exception->getMessage() . "\n");
   exit(1);
 });
-restore_error_handler();
+\restore_error_handler();
 
 // STEP 2. Load and process available service definitions.
 $services = \Drupal::getContainer()
   ->get('kernel')
   ->getCachedContainerDefinition()['services'];
-$services = array_map('unserialize', $services);
+$services = \array_map('unserialize', $services);
 
 // A storage for raw service definitions.
 $raw_definitions = [];
@@ -67,8 +67,12 @@ $skipped_services = [
   'module_installer',
   // This annotates parameter type in a short form.
   'router.matcher',
+  // This does not define type hint for $alias_repository parameter.
+  'path_alias.manager',
   // This does not define type hint for $options parameter.
   'session_configuration',
+  // This does not define type hint for $entity_repository parameter.
+  'drupal.proxy_original_service.paramconverter.configentity_admin',
   // This does not define type for 'session_handler' argument.
   'session_manager',
   // This has unused arguments in its definition.
@@ -83,11 +87,11 @@ $skipped_services = [
 
 foreach ($services as $service_id => $service) {
 
-  if (strpos($service_id, 'drush') !== FALSE) {
-    throw new UnexpectedValueException('Drush services are not supported.');
+  if (\strpos($service_id, 'drush') !== FALSE) {
+    throw new \UnexpectedValueException('Drush services are not supported.');
   }
 
-  if (in_array($service_id, $skipped_services)) {
+  if (\in_array($service_id, $skipped_services)) {
     continue;
   }
 
@@ -104,7 +108,7 @@ foreach ($services as $service_id => $service) {
     }
   }
 
-  process_class($raw_definitions, $service_id, $service['class'], $dependencies);
+  \process_class($raw_definitions, $service_id, $service['class'], $dependencies);
 }
 
 // STEP 3. Normalize definitions and dump them to a file.
@@ -126,27 +130,29 @@ foreach ($raw_definitions as $service_id => $raw_definition) {
       'router.no_access_checks',
       'router.route_provider',
       'url_generator',
+      'extension.list.profile',
+      'session',
     ];
     $unique_types = array_unique($raw_definition['references']['real']['type']);
-    if (count($unique_types) != 1 && !in_array($service_id, $multi_type_services)) {
-      throw new UnexpectedValueException("The $service_id service has more than one type.");
+    if (\count($unique_types) != 1 && !\in_array($service_id, $multi_type_services)) {
+      throw new \UnexpectedValueException("The $service_id service has more than one type.");
     }
 
     // Pick up the most used type.
-    $types = array_count_values($raw_definition['references']['real']['type']);
-    arsort($types);
-    $type = key($types);
+    $types = \array_count_values($raw_definition['references']['real']['type']);
+    \arsort($types);
+    $type = \key($types);
 
     // Pick up the most used name.
-    $names = array_count_values($raw_definition['references']['real']['name']);
-    arsort($names);
-    $name = key($names);
+    $names = \array_count_values($raw_definition['references']['real']['name']);
+    \arsort($names);
+    $name = \key($names);
 
     // Pick up the most used description.
-    $descriptions = array_count_values($raw_definition['references']['annotation']['description']);
-    arsort($descriptions);
+    $descriptions = \array_count_values($raw_definition['references']['annotation']['description']);
+    \arsort($descriptions);
     // The description in annotation it may not exist.
-    $description = key($descriptions) ?: "The $service_id service.";
+    $description = \key($descriptions) ?: "The $service_id service.";
 
     $definitions[$service_id] = [
       'type' => $type,
@@ -159,39 +165,39 @@ foreach ($raw_definitions as $service_id => $raw_definition) {
     if (isset($raw_definition['type'][0])) {
       $type = $raw_definition['type'][0];
     }
-    elseif (in_array($service_id, $skipped_services)) {
+    elseif (\in_array($service_id, $skipped_services)) {
       // Skipped services might get to the definitions through references.
       unset($definitions[$service_id]);
       continue;
     }
     else {
-      throw new UnexpectedValueException("No type declared for service $service_id.");
+      throw new \UnexpectedValueException("No type declared for service $service_id.");
     }
     $definitions[$service_id] = [
       'type' => $type,
-      'name' => str_replace('.', '_', $service_id),
+      'name' => \str_replace('.', '_', $service_id),
       'description' => "The $service_id service.",
     ];
   }
 
 }
 
-ksort($definitions);
+\ksort($definitions);
 $encoded_data = json_encode($definitions);
-$size = file_put_contents(__DIR__ . '/../resources/service-definitions.json', $encoded_data);
+$size = \file_put_contents(__DIR__ . '/../resources/service-definitions.json', $encoded_data);
 if ($size === FALSE) {
-  fwrite(STDERR, "Could not save data to a file.\n");
+  \fwrite(STDERR, "Could not save data to a file.\n");
   exit(1);
 }
 
-$finish = microtime(TRUE);
+$finish = \microtime(TRUE);
 
 print "-----------------------\n";
-printf("Services: %s\n", count($services));
-printf("Raw definitions: %s\n", count($raw_definitions));
-printf("Normalized definitions: %s\n", count($definitions));
-printf("File size: %s\n", format_size($size));
-printf("Time: %s ms\n", round(1000 * ($finish - $start)));
+\printf("Services: %s\n", count($services));
+\printf("Raw definitions: %s\n", count($raw_definitions));
+\printf("Normalized definitions: %s\n", count($definitions));
+\printf("File size: %s\n", format_size($size));
+\printf("Time: %s ms\n", round(1000 * ($finish - $start)));
 print "-----------------------\n";
 
 /**
@@ -206,20 +212,20 @@ print "-----------------------\n";
  * @param array $dependencies
  *   Service dependencies.
  *
- * @throws \UnexpectedValueException
+ * @throws \\UnexpectedValueException
  */
 function process_class(array &$raw_definitions, string $service_id, string $class, array $dependencies): void {
 
-  if (!class_exists($class) && !interface_exists($class)) {
-    throw new UnexpectedValueException("The service class $class does not exit.");
+  if (!\class_exists($class) && !\interface_exists($class)) {
+    throw new \UnexpectedValueException("The service class $class does not exit.");
   }
 
-  $reflection_class = new ReflectionClass($class);
+  $reflection_class = new \ReflectionClass($class);
   $raw_definitions[$service_id]['type'] = $reflection_class->getInterfaceNames();
   $raw_definitions[$service_id]['type'][] = $class;
 
-  if (count($dependencies) && !$reflection_class->hasMethod('__construct')) {
-    throw new UnexpectedValueException("The service class $class does not have a constructor.");
+  if (\count($dependencies) && !$reflection_class->hasMethod('__construct')) {
+    throw new \UnexpectedValueException("The service class $class does not have a constructor.");
   }
 
   // -- Process service dependencies.
@@ -236,7 +242,7 @@ function process_class(array &$raw_definitions, string $service_id, string $clas
 
   // Parse constructor annotation.
   $doc = $reflection_constructor->getDocComment();
-  preg_match_all('/@param (.*) \$(.*)\n\s*\*\s\s\s([^s].*)\n/Us', $doc, $annotations);
+  \preg_match_all('/@param (.*) \$(.*)\n\s*\*\s\s\s([^s].*)\n/Us', $doc, $annotations);
 
   $parameters = $reflection_constructor->getParameters();
   foreach ($dependencies as $position => $dependency_id) {
@@ -249,16 +255,16 @@ function process_class(array &$raw_definitions, string $service_id, string $clas
     $parameter = $parameters[$position];
     if (!$parameter) {
       $message = sprintf('Could not find a parameter at position %d in %s class.', $position, $class);
-      throw new UnexpectedValueException($message);
+      throw new \UnexpectedValueException($message);
     }
 
     // The annotation for the parameter was missing or incorrect.
     if (!isset($annotations[1][$position])) {
       continue;
     }
-    $annotated_type = ltrim($annotations[1][$position], '\\');
+    $annotated_type = \ltrim($annotations[1][$position], '\\');
     // Normalize array type.
-    if ($annotated_type == 'array' || preg_match('/.+\[\]$/', $annotated_type)) {
+    if ($annotated_type == 'array' || \preg_match('/.+\[\]$/', $annotated_type)) {
       $annotated_type = '\\array';
     }
     $annotated_name = $annotations[2][$position];
@@ -268,28 +274,28 @@ function process_class(array &$raw_definitions, string $service_id, string $clas
     $real_name = $parameter->getName();
 
     // Do some basic validation.
-    $annotated_type = str_replace('|null', '', $annotated_type);
+    $annotated_type = \str_replace('|null', '', $annotated_type);
     $scalar_types = ['string', 'bool', 'int'];
-    if ($annotated_type && !in_array($annotated_type, $scalar_types) && !preg_match('/\|/', $annotated_type)) {
+    if ($annotated_type && !\in_array($annotated_type, $scalar_types) && !\preg_match('/\|/', $annotated_type)) {
       if ($annotated_type != $real_type) {
-        $message = sprintf(
+        $message = \sprintf(
           "Annotated type '%s' does match the real type '%s' in '%s' service'.",
           $annotated_type,
           $real_type,
           $service_id,
         );
-        throw new UnexpectedValueException($message);
+        throw new \UnexpectedValueException($message);
       }
     }
 
     if ($annotated_name && $annotated_name != $real_name) {
-      $message = sprintf(
+      $message = \sprintf(
         "Annotated name '%s' does match the real name '%s' in '%s' service'.",
         $annotated_name,
         $real_name,
         $service_id,
       );
-      throw new UnexpectedValueException($message);
+      throw new \UnexpectedValueException($message);
     }
 
     $raw_definitions[$dependency_id]['references']['annotation']['type'][] = $annotated_type;
