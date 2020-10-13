@@ -29,9 +29,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   use LoggerAwareTrait;
   use ValidatorTrait;
 
-  public const SUCCESS = 0;
-  public const FAILURE = 1;
-
   /**
    * The command name.
    *
@@ -135,9 +132,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
-
-    $exit_status = self::SUCCESS;
-
     $this->logger->debug('Command: {command}', ['command' => static::class]);
 
     try {
@@ -169,12 +163,12 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     }
     catch (ExceptionInterface $exception) {
       $this->io()->getErrorStyle()->error($exception->getMessage());
-      $exit_status = self::FAILURE;
+      return 1;
     }
 
     $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(\memory_get_peak_usage())]);
 
-    return $exit_status;
+    return 0;
   }
 
   /**
