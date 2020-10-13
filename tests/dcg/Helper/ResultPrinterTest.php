@@ -125,7 +125,7 @@ final class ResultPrinterTest extends TestCase {
     $assets[] = (new File('ccc'))->content("123\n456\789");
     $assets[] = (new File('/tmp/aaa'))->content('123');
     $assets[] = new File('bbb/fff.module');
-    $assets[] = new Symlink('bbb/fff.module', 'bbb/fff.module.link');
+    $assets[] = new Symlink('bbb/fff.module.link', 'bbb/fff.module');
     $assets[] = new Directory('ddd');
 
     $this->printer->printResult($assets);
@@ -134,19 +134,19 @@ final class ResultPrinterTest extends TestCase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     ----------- ----------------- ------- ------ 
-      Type        Path              Lines   Size  
-     ----------- ----------------- ------- ------ 
-      directory   ddd                   -      -  
-      file        ccc                   2     10  
-      file        aaa/ddd.txt           1      3  
-      file        bbb/fff.module        0      0  
-      file        /tmp/aaa              1      3  
-      file        bbb/eee/ggg.php       0      0  
-      symlink     bbb/fff.module        -      -  
-     ----------- ----------------- ------- ------ 
-                  Total: 7 assets       4   16 B  
-     ----------- ----------------- ------- ------ 
+     ----------- --------------------- ------- ------ 
+      Type        Path                  Lines   Size  
+     ----------- --------------------- ------- ------ 
+      directory   ddd                       -      -  
+      file        ccc                       2     10  
+      file        aaa/ddd.txt               1      3  
+      file        bbb/fff.module            0      0  
+      file        /tmp/aaa                  1      3  
+      file        bbb/eee/ggg.php           0      0  
+      symlink     bbb/fff.module.link       -      -  
+     ----------- --------------------- ------- ------ 
+                  Total: 7 assets           4   16 B  
+     ----------- --------------------- ------- ------ 
 
 
     TEXT;
