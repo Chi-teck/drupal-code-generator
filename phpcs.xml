@@ -10,6 +10,9 @@
   <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
     <exclude name="Drupal.Arrays.Array.LongLineDeclaration"/>
+    <!-- The package does not provide change records. -->
+    <exclude name="Drupal.Commenting.Deprecated.IncorrectTextLayout"/>
+    <exclude name="Drupal.Commenting.Deprecated.DeprecatedMissingSeeTag"/>
   </rule>
   <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended73"/>
   <!-- Exclude fixtures. -->

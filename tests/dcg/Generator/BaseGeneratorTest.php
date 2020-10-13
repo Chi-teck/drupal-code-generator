@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Tests\BaseTestCase;
 /**
  * Base class for generators tests.
  *
- * @todo Replace with \DrupalCodeGenerator\Test\BaseGeneratorTest
+ * @deprecated Use \DrupalCodeGenerator\Test\BaseGeneratorTest instead.
  */
 abstract class BaseGeneratorTest extends BaseTestCase {
 

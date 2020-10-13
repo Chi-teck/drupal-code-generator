@@ -10,7 +10,6 @@ use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
-use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\ValidatorTrait;
 use Psr\Log\LoggerAwareInterface;
@@ -108,19 +107,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   protected function initialize(InputInterface $input, OutputInterface $output): void {
 
     $this->assets = new AssetCollection();
-
-    $this->io = new GeneratorStyle($input, $output, $this->getHelper('question'));
-    $this->logger = $this->getHelper('logger_factory')->getLogger($this->io);
-    foreach ($this->getHelperSet() as $helper) {
-      if ($helper instanceof IOAwareInterface) {
-        $helper->io($this->io);
-      }
-      if ($helper instanceof LoggerAwareInterface) {
-        $helper->setLogger($this->logger);
-      }
-    }
-
-    $this->getHelperSet()->setCommand($this);
 
     if ($this->templatePath) {
       $this->getHelper('renderer')->addPath($this->templatePath);

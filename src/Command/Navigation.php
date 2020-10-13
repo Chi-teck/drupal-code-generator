@@ -2,6 +2,10 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\IOAwareInterface;
+use DrupalCodeGenerator\IOAwareTrait;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +15,10 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 /**
  * Implements navigation command.
  */
-final class Navigation extends Command {
+final class Navigation extends Command implements IOAwareInterface, LoggerAwareInterface {
+
+  use IOAwareTrait;
+  use LoggerAwareTrait;
 
   /**
    * Menu tree.
@@ -87,9 +94,15 @@ final class Navigation extends Command {
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
     if ($command_name = $this->selectGenerator($input, $output)) {
-      return $this->getApplication()
-        ->find($command_name)
-        ->run($input, $output);
+      $command = $this->getApplication()
+        ->find($command_name);
+      if ($command instanceof IOAwareInterface) {
+        $command->io($this->io);
+      }
+      if ($command instanceof LoggerAwareInterface) {
+        $command->setLogger($this->logger);
+      }
+      $command->run($input, $output);
     }
     return 0;
   }

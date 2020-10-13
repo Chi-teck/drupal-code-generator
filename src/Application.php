@@ -8,11 +8,18 @@ use DrupalCodeGenerator\Helper\LoggerFactory;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\ResultPrinter;
+use DrupalCodeGenerator\Style\GeneratorStyle;
+use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Loader\FilesystemLoader;
@@ -76,6 +83,38 @@ class Application extends BaseApplication {
     $definition->addOption(new InputOption('full-path', NULL, InputOption::VALUE_NONE, 'Print full path to generated assets'));
     $definition->addOption(new InputOption('destination', NULL, InputOption::VALUE_OPTIONAL, 'Path to a base directory for file writing'));
     return $definition;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output) {
+    $helper_set = $this->getHelperSet();
+
+    /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
+    $question_helper = $helper_set->get('question');
+    $io = new GeneratorStyle($input, $output, $question_helper);
+
+    $logger = $helper_set->get('logger_factory')->getLogger($io);
+
+    foreach ($this->getHelperSet() as $helper) {
+      self::initObject($helper, $logger, $io);
+    }
+    self::initObject($command, $logger, $io);
+
+    return parent::doRunCommand($command, $input, $output);
+  }
+
+  /**
+   * Sets objects dependencies.
+   */
+  private static function initObject(Object $object, LoggerInterface $logger, GeneratorStyleInterface $io): void {
+    if ($object instanceof IOAwareInterface) {
+      $object->io($io);
+    }
+    if ($object instanceof LoggerAwareInterface) {
+      $object->setLogger($logger);
+    }
   }
 
 }

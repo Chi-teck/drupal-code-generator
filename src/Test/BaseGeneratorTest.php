@@ -9,7 +9,9 @@ use DrupalCodeGenerator\Twig\TwigEnvironment;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\Console\Tester\TesterTrait;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Loader\FilesystemLoader;
 
@@ -18,7 +20,8 @@ use Twig\Loader\FilesystemLoader;
  */
 abstract class BaseGeneratorTest extends TestCase {
 
-  protected $display;
+  use TesterTrait;
+
   protected $fixtureDir;
   private $directory;
 
@@ -41,24 +44,25 @@ abstract class BaseGeneratorTest extends TestCase {
    *
    * @param \Symfony\Component\Console\Command\Command $command
    *   A command to execute.
-   * @param array $input
+   * @param array $user_input
    *   An array of strings representing each input passed to the command input
    *   stream.
-   *
-   * @return int
-   *   The command exit code
    */
-  protected function execute(Command $command, array $input): int {
-    $this->createApplication()->add($command);
+  protected function execute(Command $command, array $user_input): void {
 
-    $command_tester = new CommandTester($command);
-    $result = $command_tester
-      ->setInputs(\array_values($input))
-      ->execute(['--destination' => $this->directory, '--working-dir' => $this->directory]);
+    $input = [
+      'command' => $command->getName(),
+      '--destination' => $this->directory,
+      '--working-dir' => $this->directory,
+    ];
 
-    $this->display = $command_tester->getDisplay();
+    $this->input = new ArrayInput($input);
+    $this->input->setStream(self::createStream($user_input));
+    $this->output = new StreamOutput(\fopen('php://memory', 'w'));
 
-    return $result;
+    $application = $this->createApplication();
+    $application->add($command);
+    $application->run($this->input, $this->output);
   }
 
   /**
@@ -67,7 +71,7 @@ abstract class BaseGeneratorTest extends TestCase {
   protected function assertDisplay(string $expected_display): void {
     $default_name = Utils::machine2human(\basename($this->directory), TRUE);
     $expected_display = \str_replace('%default_name%', $default_name, $expected_display);
-    self::assertEquals($expected_display, $this->display);
+    self::assertEquals($expected_display, $this->getDisplay());
   }
 
   /**
@@ -82,6 +86,7 @@ abstract class BaseGeneratorTest extends TestCase {
    */
   private function createApplication(): Application {
     $application = Application::create();
+    $application->setAutoExit(FALSE);
 
     $helper_set = $application->getHelperSet();
 
