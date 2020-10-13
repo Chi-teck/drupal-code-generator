@@ -4,10 +4,10 @@ namespace DrupalCodeGenerator;
 
 use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Helper\Dumper;
-use DrupalCodeGenerator\Helper\LoggerFactory;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\ResultPrinter;
+use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
@@ -55,7 +55,6 @@ class Application extends BaseApplication {
       new Dumper(new Filesystem()),
       new Renderer(new TwigEnvironment(new FilesystemLoader())),
       new ResultPrinter(),
-      new LoggerFactory(),
     ]);
 
     if ($container) {
@@ -92,16 +91,14 @@ class Application extends BaseApplication {
     $helper_set = $this->getHelperSet();
 
     /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
+    $logger = new ConsoleLogger($output);
     $question_helper = $helper_set->get('question');
     $io = new GeneratorStyle($input, $output, $question_helper);
-
-    $logger = $helper_set->get('logger_factory')->getLogger($io);
 
     foreach ($this->getHelperSet() as $helper) {
       self::initObject($helper, $logger, $io);
     }
     self::initObject($command, $logger, $io);
-
     return parent::doRunCommand($command, $input, $output);
   }
 
