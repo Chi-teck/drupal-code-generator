@@ -9,10 +9,8 @@ use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\ResultPrinter;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Style\GeneratorStyle;
-use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -87,7 +85,7 @@ class Application extends BaseApplication {
   /**
    * {@inheritdoc}
    */
-  protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output) {
+  protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output): int {
     $helper_set = $this->getHelperSet();
 
     /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
@@ -95,23 +93,18 @@ class Application extends BaseApplication {
     $question_helper = $helper_set->get('question');
     $io = new GeneratorStyle($input, $output, $question_helper);
 
-    foreach ($this->getHelperSet() as $helper) {
-      self::initObject($helper, $logger, $io);
+    $items = \iterator_to_array($this->getHelperSet());
+    $items[] = $command;
+    foreach ($items as $item) {
+      if ($item instanceof IOAwareInterface) {
+        $item->io($io);
+      }
+      if ($item instanceof LoggerAwareInterface) {
+        $item->setLogger($logger);
+      }
     }
-    self::initObject($command, $logger, $io);
-    return parent::doRunCommand($command, $input, $output);
-  }
 
-  /**
-   * Sets objects dependencies.
-   */
-  private static function initObject(Object $object, LoggerInterface $logger, GeneratorStyleInterface $io): void {
-    if ($object instanceof IOAwareInterface) {
-      $object->io($io);
-    }
-    if ($object instanceof LoggerAwareInterface) {
-      $object->setLogger($logger);
-    }
+    return parent::doRunCommand($command, $input, $output);
   }
 
 }
