@@ -2,11 +2,6 @@
  * Implements hook_install().
  */
 function {{ machine_name }}_install($is_syncing) {
-  // Create the styles directory and ensure it's writable.
-  $directory = \Drupal::config('system.file')->get('default_scheme') . '://styles';
-  \Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
-  if (!$is_syncing) {
-    // Modify a configuration value because we're not syncing.
-    \Drupal::configFactory()->getEditable('system.file')->set('default_scheme', 'private')->save();
-  }
+  // Set general module variables.
+  \Drupal::state()->set('mymodule.foo', 'bar');
 }

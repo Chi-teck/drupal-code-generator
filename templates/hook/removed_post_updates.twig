@@ -1,0 +1,10 @@
+/**
+ * Implements hook_removed_post_updates().
+ */
+function {{ machine_name }}_removed_post_updates() {
+  return [
+    'mymodule_post_update_foo' => '8.x-2.0',
+    'mymodule_post_update_bar' => '8.x-3.0',
+    'mymodule_post_update_baz' => '8.x-3.0',
+  ];
+}
