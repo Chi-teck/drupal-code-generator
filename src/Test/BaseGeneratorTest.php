@@ -66,7 +66,7 @@ abstract class BaseGeneratorTest extends TestCase {
   }
 
   /**
-   * Asserts generat display.
+   * Asserts generated display.
    */
   protected function assertDisplay(string $expected_display): void {
     $default_name = Utils::machine2human(\basename($this->directory), TRUE);
