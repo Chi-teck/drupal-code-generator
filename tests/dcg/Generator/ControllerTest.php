@@ -3,12 +3,12 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Command\Controller;
-use DrupalCodeGenerator\Test\BaseGeneratorTest;
+use DrupalCodeGenerator\Test\GeneratorTest;
 
 /**
  * Test for controller command.
  */
-final class ControllerTest extends BaseGeneratorTest {
+final class ControllerTest extends GeneratorTest {
 
   protected $fixtureDir = __DIR__;
 

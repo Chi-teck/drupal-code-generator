@@ -16,7 +16,7 @@ use Twig\Loader\FilesystemLoader;
 /**
  * Base class for generator tests.
  */
-abstract class BaseGeneratorTest extends TestCase {
+abstract class GeneratorTest extends TestCase {
 
   protected $display;
 
