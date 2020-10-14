@@ -19,8 +19,8 @@ use Twig\Loader\FilesystemLoader;
 abstract class GeneratorTest extends TestCase {
 
   protected $display;
-
   protected $fixtureDir;
+
   private $directory;
 
   /**
@@ -80,7 +80,6 @@ abstract class GeneratorTest extends TestCase {
    */
   private function createApplication(): Application {
     $application = Application::create();
-    $application->setAutoExit(FALSE);
 
     $helper_set = $application->getHelperSet();
 
