@@ -29,55 +29,65 @@ class QuestionHelper extends BaseQuestionHelper {
 
     // Input is not supplied with 'answer' option when the generator was started
     // from the Navigation command.
-    $answers = $input->hasOption('answer') ? $input->getOption('answer') : FALSE;
+    $answers = $input->hasOption('answer') ? $input->getOption('answer') : NULL;
 
     if ($answers && \array_key_exists($this->counter, $answers)) {
-
-      if ($output instanceof ConsoleOutputInterface) {
-        $output = $output->getErrorOutput();
-      }
-
-      $answer = $answers[$this->counter];
-
-      $this->writePrompt($output, $question);
-
-      $output->write("$answer\n");
-
-      if ($answer === NULL) {
-        $answer = $question->getDefault();
-      }
-      elseif ($question instanceof ConfirmationQuestion) {
-        $answer = \preg_match('/^Ye?s?$/i', $answer);
-      }
-
-      if ($validator = $question->getValidator()) {
-        try {
-          $answer = $validator($answer);
-        }
-        catch (\UnexpectedValueException $exception) {
-          // UnexpectedValueException can be a result of wrong user input. So
-          // no need to render the exception in details as
-          // Application::renderException() does.
-          $this->writeError($output, $exception);
-          exit(1);
-        }
-      }
-      elseif ($question instanceof ChoiceQuestion) {
-        $choices = $question->getChoices();
-        if ($question->isMultiselect()) {
-          // @todo Support multiselect.
-        }
-        else {
-          $answer = $choices[$answer] ?? NULL;
-        }
-      }
-
+      $answer = $this->doAsk($output, $question, $answers);
     }
     else {
       $answer = parent::ask($input, $output, $question);
     }
 
     $this->counter++;
+    return $answer;
+  }
+
+  /**
+   * Asks a question to the user.
+   *
+   * @return mixed
+   *   The user answer.
+   */
+  protected function doAsk(OutputInterface $output, Question $question, array $answers) {
+
+    if ($output instanceof ConsoleOutputInterface) {
+      $output = $output->getErrorOutput();
+    }
+
+    $answer = $answers[$this->counter];
+
+    $this->writePrompt($output, $question);
+
+    $output->write("$answer\n");
+
+    if ($answer === NULL) {
+      $answer = $question->getDefault();
+    }
+    elseif ($question instanceof ConfirmationQuestion) {
+      $answer = \preg_match('/^Ye?s?$/i', $answer);
+    }
+
+    if ($validator = $question->getValidator()) {
+      try {
+        $answer = $validator($answer);
+      }
+      catch (\UnexpectedValueException $exception) {
+        // UnexpectedValueException can be a result of wrong user input. So
+        // no need to render the exception in details as
+        // Application::renderException() does.
+        $this->writeError($output, $exception);
+        exit(1);
+      }
+    }
+    elseif ($question instanceof ChoiceQuestion) {
+      $choices = $question->getChoices();
+      if ($question->isMultiselect()) {
+        // @todo Support multiselect.
+      }
+      else {
+        $answer = $choices[$answer] ?? NULL;
+      }
+    }
     return $answer;
   }
 
