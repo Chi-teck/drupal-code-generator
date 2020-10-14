@@ -5,8 +5,6 @@ namespace DrupalCodeGenerator\Tests;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Tester\TesterTrait;
 
@@ -28,7 +26,6 @@ final class NavigationCommandTest extends BaseTestCase {
     $generators = $factory->getGenerators([Application::ROOT . '/src/Command']);
 
     $application = Application::create();
-    $application->setAutoExit(FALSE);
 
     $helper_set = $application->getHelperSet();
     $helper_set->set(new QuestionHelper());
@@ -37,19 +34,20 @@ final class NavigationCommandTest extends BaseTestCase {
     $navigation = new Navigation();
     $application->add($navigation);
 
+    $command_tester = new CommandTester($navigation);
+
     $fixture = \file_get_contents(__DIR__ . '/_navigation_fixture.txt');
 
     // The return symbol is used to identify user input in fixture.
     \preg_match_all('/\s([^\s]+)⏎/', $fixture, $matches);
 
-    $this->input = new ArrayInput(['command' => 'navigation', '--working-dir' => $this->directory]);
-    $this->input->setStream(self::createStream($matches[1]));
-    $this->output = new StreamOutput(\fopen('php://memory', 'w'));
+    $command_tester->setInputs($matches[1]);
+    $input = ['--working-dir' => $this->directory];
 
-    $application->run($this->input, $this->output);
+    $command_tester->execute($input);
 
     $expected_output = \rtrim(\preg_replace('/[^\s]+⏎/', '', $fixture));
-    $output = \rtrim($this->getDisplay());
+    $output = \rtrim($command_tester->getDisplay());
 
     self::assertSame($expected_output, $output);
 

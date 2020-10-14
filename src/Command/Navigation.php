@@ -94,15 +94,9 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
     if ($command_name = $this->selectGenerator($input, $output)) {
-      $command = $this->getApplication()
-        ->find($command_name);
-      if ($command instanceof IOAwareInterface) {
-        $command->io($this->io);
-      }
-      if ($command instanceof LoggerAwareInterface) {
-        $command->setLogger($this->logger);
-      }
-      $command->run($input, $output);
+      return $this->getApplication()
+        ->find($command_name)
+        ->run($input, $output);
     }
     return 0;
   }

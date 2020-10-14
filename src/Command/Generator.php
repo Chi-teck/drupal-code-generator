@@ -10,6 +10,8 @@ use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
+use DrupalCodeGenerator\Logger\ConsoleLogger;
+use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\ValidatorTrait;
 use Psr\Log\LoggerAwareInterface;
@@ -104,6 +106,24 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   protected function initialize(InputInterface $input, OutputInterface $output): void {
 
     $this->assets = new AssetCollection();
+
+    $helper_set = $this->getHelperSet();
+
+    /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
+    $logger = new ConsoleLogger($output);
+    $question_helper = $helper_set->get('question');
+    $io = new GeneratorStyle($input, $output, $question_helper);
+
+    $items = \iterator_to_array($this->getHelperSet());
+    $items[] = $this;
+    foreach ($items as $item) {
+      if ($item instanceof IOAwareInterface) {
+        $item->io($io);
+      }
+      if ($item instanceof LoggerAwareInterface) {
+        $item->setLogger($logger);
+      }
+    }
 
     if ($this->templatePath) {
       $this->getHelper('renderer')->addPath($this->templatePath);

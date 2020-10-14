@@ -8,9 +8,7 @@ use DrupalCodeGenerator\Tests\QuestionHelper;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Tester\TesterTrait;
+use Symfony\Component\Console\Tester\CommandTester;
 use Twig\Loader\FilesystemLoader;
 
 /**
@@ -19,8 +17,6 @@ use Twig\Loader\FilesystemLoader;
  * @deprecated
  */
 final class GeneratorTester {
-
-  use TesterTrait;
 
   /**
    * Command to test.
@@ -62,6 +58,7 @@ final class GeneratorTester {
    */
   public function __construct(Command $command) {
     $this->command = $command;
+    $this->commandTester = new CommandTester($this->command);
 
     $application = Application::create();
 
@@ -146,20 +143,19 @@ final class GeneratorTester {
    *   The command exit code
    */
   public function execute(): int {
+    return $this->commandTester
+      ->setInputs(\array_values($this->interaction))
+      ->execute(['--working-dir' => $this->getDirectory()]);
+  }
 
-    $input = [
-      'command' => $this->command->getName(),
-      '--destination' => $this->directory,
-      '--working-dir' => $this->directory,
-    ];
-
-    $this->input = new ArrayInput($input);
-    $this->input->setStream(self::createStream($this->interaction));
-    $this->output = new StreamOutput(\fopen('php://memory', 'w'));
-
-    $application = self::createApplication();
-    $application->add($this->command);
-    return $application->run($this->input, $this->output);
+  /**
+   * Gets the display returned by the last execution of the command.
+   *
+   * @return string
+   *   The display.
+   */
+  public function getDisplay(): string {
+    return $this->commandTester->getDisplay();
   }
 
   /**
@@ -195,24 +191,6 @@ final class GeneratorTester {
     $expected_display .= " • $targets\n";
     $expected_display .= "\n";
     return $expected_display;
-  }
-
-  /**
-   * Creates DCG application.
-   */
-  private static function createApplication(): Application {
-    $application = Application::create();
-    $application->setAutoExit(FALSE);
-
-    $helper_set = $application->getHelperSet();
-
-    // Replace default question helper to ease parsing output.
-    $helper_set->set(new QuestionHelper());
-
-    // Replace default renderer to support 'strict_variables' in tests.
-    $twig_environment = new TwigEnvironment(new FilesystemLoader(), ['strict_variables' => TRUE]);
-    $helper_set->set(new Renderer($twig_environment));
-    return $application;
   }
 
 }
