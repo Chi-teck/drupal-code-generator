@@ -78,7 +78,7 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
       if ($command instanceof GeneratorInterface && !$command->isHidden()) {
         self::arraySetNestedValue($this->menuTree, \explode(':', $command->getName()));
         // Collect command labels.
-        if ($label = $command->getLabel()) {
+        if ($command instanceof LabelInterface && ($label = $command->getLabel())) {
           $this->labels[$command->getName()] = $label;
         }
       }
