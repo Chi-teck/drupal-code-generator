@@ -76,6 +76,13 @@ abstract class GeneratorTest extends TestCase {
   }
 
   /**
+   * Asserts generated file.
+   */
+  protected function assertGeneratedDirectory(string $directory): void {
+    self::assertDirectoryExists($this->directory . '/' . $directory);
+  }
+
+  /**
    * Creates DCG application.
    */
   private function createApplication(): Application {
