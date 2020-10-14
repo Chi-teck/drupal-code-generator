@@ -1,7 +1,8 @@
-/vendor/
-/composer.lock
-/.idea/
-/coverage
 *.phar
-/.phpunit.result.cache
+/.idea/
 /.php_cs.cache
+/.phpunit.result.cache
+/composer.lock
+/coverage
+/sandbox/
+/vendor/
