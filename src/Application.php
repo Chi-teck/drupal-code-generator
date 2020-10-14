@@ -29,7 +29,7 @@ class Application extends BaseApplication {
   /**
    * DCG version.
    */
-  public const VERSION = '2.0.0-RC3';
+  public const VERSION = '2.0.0-dev';
 
   /**
    * Path to templates directory.
