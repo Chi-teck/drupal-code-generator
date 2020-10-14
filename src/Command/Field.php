@@ -139,7 +139,7 @@ final class Field extends ModuleGenerator {
     // Indicates that all sub-fields can be rendered inline.
     $vars['inline'] = TRUE;
 
-    // Indicates that at least one of sub-files has limited allowed values.
+    // Indicates that at least one of sub-fields has limited allowed values.
     $vars['list'] = FALSE;
 
     // Indicates that at least one of sub-fields is required.
