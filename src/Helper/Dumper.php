@@ -26,26 +26,13 @@ class Dumper extends Helper implements IOAwareInterface {
   public $filesystem;
 
   /**
-   * Replace flag.
-   *
-   * A flag indicating whether or not the files can be replaced. If not set the
-   * user will be prompted to confirm replacing of each existing file.
-   *
-   * @var bool|null
-   */
-  protected $replace;
-
-  /**
    * Constructs a generator command.
    *
    * @param \Symfony\Component\Filesystem\Filesystem $filesystem
    *   The file system utility.
-   * @param bool|null $replace
-   *   (optional) Indicates weather or not existing files can be replaced.
    */
-  public function __construct(Filesystem $filesystem, ?bool $replace = NULL) {
+  public function __construct(Filesystem $filesystem) {
     $this->filesystem = $filesystem;
-    $this->replace = $replace;
   }
 
   /**
@@ -62,15 +49,13 @@ class Dumper extends Helper implements IOAwareInterface {
    *   Assets to be dumped.
    * @param string $destination
    *   The destination directory.
-   * @param bool $dry_run
-   *   Do not dump the files.
-   * @param bool $full_path
-   *   Print full path to dumped assets.
+   * @param \DrupalCodeGenerator\Helper\DumperOptions $options
+   *   Dumper options.
    *
    * @return \DrupalCodeGenerator\Asset\AssetCollection
    *   A list of created or updated assets.
    */
-  public function dump(AssetCollection $assets, string $destination, bool $dry_run = FALSE, bool $full_path = FALSE): AssetCollection {
+  public function dump(AssetCollection $assets, string $destination, DumperOptions $options): AssetCollection {
 
     $dumped_assets = new AssetCollection();
 
@@ -82,8 +67,8 @@ class Dumper extends Helper implements IOAwareInterface {
 
       // Recreating directories makes no sense.
       if (!$this->filesystem->exists($directory_path)) {
-        if ($dry_run) {
-          $this->io->title(($full_path ? $directory_path : $directory->getPath()) . ' (empty directory)');
+        if ($options->dryRun) {
+          $this->io->title(($options->fullPath ? $directory_path : $directory->getPath()) . ' (empty directory)');
         }
         else {
           $this->filesystem->mkdir($directory_path, $directory->getMode());
@@ -112,7 +97,7 @@ class Dumper extends Helper implements IOAwareInterface {
               continue 2;
 
             case File::ACTION_REPLACE:
-              if (!$dry_run && !$this->confirmReplace($file_path)) {
+              if (!$options->dryRun && !$this->confirmReplace($file_path, $options->replace)) {
                 continue 2;
               }
               break;
@@ -136,8 +121,8 @@ class Dumper extends Helper implements IOAwareInterface {
         continue;
       }
 
-      if ($dry_run) {
-        $this->io->title($full_path ? $file_path : $file->getPath());
+      if ($options->dryRun) {
+        $this->io->title($options->fullPath ? $file_path : $file->getPath());
         $this->io->writeln($content, OutputInterface::OUTPUT_RAW);
       }
       else {
@@ -160,7 +145,7 @@ class Dumper extends Helper implements IOAwareInterface {
             continue 2;
 
           case Symlink::ACTION_REPLACE:
-            if (!$dry_run && !$this->confirmReplace($link_path)) {
+            if (!$options->dryRun && !$this->confirmReplace($link_path, $options->replace)) {
               continue 2;
             }
             break;
@@ -169,8 +154,8 @@ class Dumper extends Helper implements IOAwareInterface {
 
       $target = $symlink->getTarget();
 
-      if ($dry_run) {
-        $this->io->title($full_path ? $link_path : $symlink->getPath());
+      if ($options->dryRun) {
+        $this->io->title($options->fullPath ? $link_path : $symlink->getPath());
         $this->io->writeln('Symlink to ' . $target, OutputInterface::OUTPUT_RAW);
       }
       else {
@@ -192,11 +177,11 @@ class Dumper extends Helper implements IOAwareInterface {
   /**
    * Confirms file replace.
    */
-  protected function confirmReplace(string $file_path): bool {
-    if ($this->replace === NULL) {
+  protected function confirmReplace(string $file_path, ?bool $replace): bool {
+    if ($replace === NULL) {
       return $this->io->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?");
     }
-    return $this->replace;
+    return $replace;
   }
 
   /**

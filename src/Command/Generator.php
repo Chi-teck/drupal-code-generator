@@ -8,6 +8,7 @@ use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
+use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
@@ -214,7 +215,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Dumps assets.
    */
   protected function dump(string $destination, bool $dry_run, bool $full_path): AssetCollection {
-    return $this->getHelper('dumper')->dump($this->assets, $destination, $dry_run, $full_path);
+    $options = new DumperOptions(TRUE, $dry_run, $full_path);
+    return $this->getHelper('dumper')->dump($this->assets, $destination, $options);
   }
 
   /**

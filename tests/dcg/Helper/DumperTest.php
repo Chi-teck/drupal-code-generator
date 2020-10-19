@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\Dumper;
+use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Tests\BaseTestCase;
@@ -398,7 +399,9 @@ final class DumperTest extends BaseTestCase {
     $dumper = new Dumper($this->filesystem, $replace);
     $dumper->io($io);
     $dumper->setHelperSet($helper_set);
-    return $dumper->dump($assets, $this->directory, $dry_run);
+
+    $options = new DumperOptions($replace, $dry_run, FALSE);
+    return $dumper->dump($assets, $this->directory, $options);
   }
 
   /**
