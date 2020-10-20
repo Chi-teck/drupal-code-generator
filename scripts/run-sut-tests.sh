@@ -21,8 +21,7 @@ SELF_PATH=$(dirname "$(readlink -f "$0")")/../tests/sut
 
 DRUPAL_VERSION=${DRUPAL_VERSION:-}
 if [[ -z $DRUPAL_VERSION ]]; then
-  # Determine version dynamically once Drupal 9 is released.
-  DRUPAL_VERSION=$(git ls-remote -h https://git.drupal.org/project/drupal.git | grep -o '9\..\.x' | tail -n1)'-dev'
+  DRUPAL_VERSION=$(git ls-remote -h https://git.drupalcode.org/project/drupal.git | grep -o '9\..\.x' | tail -n1)
 fi
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut/build}
 DRUPAL_CACHE_DIR=${DRUPAL_CACHE_DIR:-/tmp/dcg_sut/cache/$DRUPAL_VERSION}
@@ -77,7 +76,8 @@ if [[ -d $DRUPAL_CACHE_DIR ]]; then
   cp -r $DRUPAL_CACHE_DIR/* $DRUPAL_DIR
 else
   export COMPOSER_PROCESS_TIMEOUT=1900
-  composer -d$DRUPAL_DIR -n create-project drupal/drupal $DRUPAL_DIR $DRUPAL_VERSION
+  git clone --depth 1 --branch $DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR
+  composer -d$DRUPAL_DIR install
   composer -d$DRUPAL_DIR require drush/drush chi-teck/web-server
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules
@@ -90,13 +90,13 @@ else
 fi
 
 # Start server.
-# Use Drush router because PHP built-in server cannot handle routers with dots.
+# Use Drupal router because PHP built-in server cannot handle routers with dots.
 # See https://bugs.php.net/bug.php?id=61286.
 $DRUPAL_DIR/vendor/bin/web.server \
   start \
   $DRUPAL_HOST:$DRUPAL_PORT \
   --docroot=$DRUPAL_DIR \
-  --router=$DRUPAL_DIR/vendor/drush/drush/misc/d8-rs-router.php \
+  --router=$DRUPAL_DIR/.ht.router.php \
   --pidfile=/tmp/dcg-ws-pid
 
 export SUT_TEST=1
