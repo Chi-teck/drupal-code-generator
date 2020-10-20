@@ -22,7 +22,7 @@ final class EntityReferenceSelectionTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
     'user',
     'system',

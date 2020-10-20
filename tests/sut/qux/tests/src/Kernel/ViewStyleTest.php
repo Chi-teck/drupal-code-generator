@@ -18,7 +18,7 @@ final class ViewStyleTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'qux',
     'system',
     'user',

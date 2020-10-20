@@ -16,7 +16,7 @@ final class ViewsArgumentDefaultTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['views', 'qux'];
+  protected static $modules = ['views', 'qux'];
 
   /**
    * Test callback.

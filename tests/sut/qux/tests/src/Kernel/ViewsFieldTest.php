@@ -15,7 +15,7 @@ final class ViewsFieldTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['qux', 'views'];
+  protected static $modules = ['qux', 'views'];
 
   /**
    * Test callback.

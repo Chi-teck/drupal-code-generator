@@ -14,7 +14,7 @@ final class RenderElementTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['block', 'system', 'user', 'bar'];
+  protected static $modules = ['block', 'system', 'user', 'bar'];
 
   /**
    * {@inheritdoc}

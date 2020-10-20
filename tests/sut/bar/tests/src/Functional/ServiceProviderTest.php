@@ -17,7 +17,7 @@ final class ServiceProviderTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['bar', 'dblog'];
+  protected static $modules = ['bar', 'dblog'];
 
   /**
    * {@inheritdoc}

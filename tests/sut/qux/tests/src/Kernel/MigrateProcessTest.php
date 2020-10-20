@@ -14,7 +14,7 @@ final class MigrateProcessTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['migrate', 'qux'];
+  protected static $modules = ['migrate', 'qux'];
 
   /**
    * Test callback.

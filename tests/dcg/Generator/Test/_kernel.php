@@ -14,7 +14,7 @@ class ExampleTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['foo'];
+  protected static $modules = ['foo'];
 
   /**
    * {@inheritdoc}

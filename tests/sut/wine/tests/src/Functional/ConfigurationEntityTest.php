@@ -18,7 +18,7 @@ final class ConfigurationEntityTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['wine'];
+  protected static $modules = ['wine'];
 
   /**
    * {@inheritdoc}

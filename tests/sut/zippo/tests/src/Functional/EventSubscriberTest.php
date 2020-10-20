@@ -17,7 +17,7 @@ final class EventSubscriberTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['zippo'];
+  protected static $modules = ['zippo'];
 
   /**
    * {@inheritdoc}

@@ -19,7 +19,7 @@ final class CkePluginTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['qux', 'node', 'ckeditor'];
+  protected static $modules = ['qux', 'node', 'ckeditor'];
 
   /**
    * {@inheritdoc}

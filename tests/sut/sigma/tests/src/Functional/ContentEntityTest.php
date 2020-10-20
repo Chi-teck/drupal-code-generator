@@ -19,7 +19,7 @@ final class ContentEntityTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['sigma', 'field_ui'];
+  protected static $modules = ['sigma', 'field_ui'];
 
   /**
    * {@inheritdoc}

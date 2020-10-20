@@ -19,7 +19,7 @@ final class ContentEntityTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['figma'];
+  protected static $modules = ['figma'];
 
   /**
    * {@inheritdoc}

@@ -95,7 +95,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\{{ machine_name }}\{{ class_prefix }}Interface */
+    /** @var \Drupal\{{ machine_name }}\{{ class_prefix }}Interface $entity */
     $row['id'] = $entity->{{ label_base_field or not canonical ? 'id' : 'toLink' }}();
 {% if label_base_field %}
     $row['label'] = $entity->{{ canonical ? 'toLink' : 'label' }}();

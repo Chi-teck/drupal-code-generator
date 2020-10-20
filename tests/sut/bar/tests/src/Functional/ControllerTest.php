@@ -17,7 +17,7 @@ final class ControllerTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['bar', 'node'];
+  protected static $modules = ['bar', 'node'];
 
   /**
    * {@inheritdoc}

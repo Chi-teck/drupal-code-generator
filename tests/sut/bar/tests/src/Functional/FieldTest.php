@@ -21,7 +21,7 @@ final class FieldTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['bar', 'node', 'field_ui'];
+  protected static $modules = ['bar', 'node', 'field_ui'];
 
   /**
    * {@inheritdoc}

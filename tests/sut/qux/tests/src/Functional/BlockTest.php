@@ -17,7 +17,7 @@ final class BlockTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['qux', 'block'];
+  protected static $modules = ['qux', 'block'];
 
   /**
    * {@inheritdoc}
@@ -28,7 +28,8 @@ final class BlockTest extends BrowserTestBase {
    * Test callback.
    */
   public function testBlock(): void {
-    $admin_user = $this->drupalCreateUser(['administer blocks', 'administer themes']);
+    $permissions = ['administer blocks', 'administer themes'];
+    $admin_user = $this->drupalCreateUser($permissions);
     $this->drupalLogin($admin_user);
     $this->drupalGet('admin/structure/block/library/stark');
     $link_xpath = '//td[. = "Example"]/following-sibling::td[text() = "DCG"]';

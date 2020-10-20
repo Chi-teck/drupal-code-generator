@@ -7,7 +7,7 @@ use Drupal\Core\CronInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
- * Example service.
+ * Service description.
  */
 class Example {
 

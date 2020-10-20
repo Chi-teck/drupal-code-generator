@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * BarMiddleware middleware.
+ * Provides a middleware to implement IP based banning.
  */
 class BarMiddleware implements HttpKernelInterface {
 

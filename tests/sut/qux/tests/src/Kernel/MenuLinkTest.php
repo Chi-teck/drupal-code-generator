@@ -15,7 +15,7 @@ final class MenuLinkTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['qux'];
+  protected static $modules = ['qux'];
 
   /**
    * Test callback.

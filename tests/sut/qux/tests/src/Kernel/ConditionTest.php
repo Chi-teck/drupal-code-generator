@@ -15,7 +15,7 @@ final class ConditionTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['node', 'user', 'qux'];
+  protected static $modules = ['node', 'user', 'qux'];
 
   /**
    * Test callback.

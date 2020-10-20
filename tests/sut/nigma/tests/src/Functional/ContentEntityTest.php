@@ -19,7 +19,7 @@ final class ContentEntityTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['nigma', 'field_ui', 'text'];
+  protected static $modules = ['nigma', 'field_ui', 'text'];
 
   /**
    * {@inheritdoc}

@@ -17,7 +17,7 @@ final class FormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['foo'];
+  protected static $modules = ['foo'];
 
   /**
    * {@inheritdoc}

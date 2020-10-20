@@ -33,7 +33,7 @@ final class RestResourceTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['rest', 'qux'];
+  protected static $modules = ['rest', 'qux'];
 
   /**
    * {@inheritdoc}
@@ -101,7 +101,10 @@ final class RestResourceTest extends ResourceTestBase {
 
     // -- Test GET method.
     $method = 'GET';
-    $url = Url::fromRoute($route_prefix . $method, ['id' => 1, '_format' => self::$format]);
+    $url = Url::fromRoute(
+      $route_prefix . $method,
+      ['id' => 1, '_format' => self::$format],
+    );
     $response = $this->request($method, $url, []);
 
     self::assertSame(200, $response->getStatusCode());
@@ -109,7 +112,10 @@ final class RestResourceTest extends ResourceTestBase {
     self::assertEquals($expected_body, $response->getBody());
 
     // Request for non existing record should return 404.
-    $url = Url::fromRoute($route_prefix . $method, ['id' => 100, '_format' => self::$format]);
+    $url = Url::fromRoute(
+      $route_prefix . $method,
+      ['id' => 100, '_format' => self::$format],
+    );
     $response = $this->request($method, $url, []);
     self::assertSame(404, $response->getStatusCode());
 
@@ -156,7 +162,8 @@ final class RestResourceTest extends ResourceTestBase {
     self::assertEquals($expected_body, $response->getBody());
 
     // Too big title.
-    $request_options[RequestOptions::BODY] = \json_encode(['title' => \str_repeat('x', 256)]);
+    $body = ['title' => \str_repeat('x', 256)];
+    $request_options[RequestOptions::BODY] = \json_encode($body);
     $url = Url::fromRoute($route_prefix . $method, ['_format' => self::$format]);
     $response = $this->request($method, $url, $request_options);
 
@@ -168,7 +175,10 @@ final class RestResourceTest extends ResourceTestBase {
     $method = 'PATCH';
     $record_encoded = '{"title":"Alpha patched"}';
     $request_options[RequestOptions::BODY] = $record_encoded;
-    $url = Url::fromRoute($route_prefix . $method, ['id' => 1, '_format' => self::$format]);
+    $url = Url::fromRoute(
+      $route_prefix . $method,
+      ['id' => 1, '_format' => self::$format],
+    );
     $response = $this->request($method, $url, $request_options);
 
     self::assertSame(200, $response->getStatusCode());

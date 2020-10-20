@@ -14,7 +14,7 @@ final class PluginManagerTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['lamda'];
+  protected static $modules = ['lamda'];
 
   /**
    * Test callback.

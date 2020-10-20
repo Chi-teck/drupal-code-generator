@@ -14,7 +14,7 @@ final class LoggerTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['system', 'zippo', 'example'];
+  protected static $modules = ['system', 'zippo', 'example'];
 
   /**
    * Test callback.

@@ -14,7 +14,7 @@ final class QueueWorkerTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['qux'];
+  protected static $modules = ['qux'];
 
   /**
    * Test callback.

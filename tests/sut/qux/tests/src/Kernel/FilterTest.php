@@ -16,7 +16,7 @@ final class FilterTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['filter', 'qux'];
+  protected static $modules = ['filter', 'qux'];
 
   /**
    * Test callback.

@@ -19,7 +19,7 @@ class ExampleTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['foo'];
+  protected static $modules = ['foo'];
 
   /**
    * {@inheritdoc}

@@ -14,7 +14,7 @@ final class TemplateTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['system', 'bar'];
+  protected static $modules = ['system', 'bar'];
 
   /**
    * Test callback.

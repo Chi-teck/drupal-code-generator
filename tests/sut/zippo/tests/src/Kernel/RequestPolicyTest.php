@@ -15,7 +15,7 @@ final class RequestPolicyTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['zippo', 'example'];
+  protected static $modules = ['zippo', 'example'];
 
   /**
    * Test callback.

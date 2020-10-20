@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\qux\Functional;
 
-use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Component\Render\FormattableMarkup as FM;
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
 
@@ -18,7 +18,7 @@ final class ActionTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['qux', 'node', 'action', 'views'];
+  protected static $modules = ['qux', 'node', 'action', 'views'];
 
   /**
    * {@inheritdoc}
@@ -33,7 +33,8 @@ final class ActionTest extends BrowserTestBase {
     $this->createContentType(['type' => 'article']);
     $node = $this->createNode(['type' => 'article']);
 
-    $user = $this->drupalCreateUser(['access content overview', 'administer actions']);
+    $permissions = ['access content overview', 'administer actions'];
+    $user = $this->drupalCreateUser($permissions);
     $this->drupalLogin($user);
 
     $edit = [
@@ -61,10 +62,11 @@ final class ActionTest extends BrowserTestBase {
       '%action_label' => 'Update node title',
       '%node_label' => $node->label(),
     ];
-    $this->assertErrorMessage(new FormattableMarkup('No access to execute %action_label on the Content %node_label.', $message_arguments));
+    $this->assertErrorMessage(new FM('No access to execute %action_label on the Content %node_label.', $message_arguments));
 
     // Create another user with permission to edit articles.
-    $content_manager = $this->drupalCreateUser(['access content overview', 'edit any article content']);
+    $permissions = ['access content overview', 'edit any article content'];
+    $content_manager = $this->drupalCreateUser($permissions);
     $this->drupalLogin($content_manager);
     $edit = [
       'action' => 'update_node_title',
@@ -74,7 +76,7 @@ final class ActionTest extends BrowserTestBase {
     $message_arguments = [
       '%action_label' => 'Update node title',
     ];
-    $this->assertStatusMessage(new FormattableMarkup('%action_label was applied to 1 item.', $message_arguments));
+    $this->assertStatusMessage(new FM('%action_label was applied to 1 item.', $message_arguments));
     $this->assertXpath('//table//td[@class = "views-field views-field-title"]/a[text() = "Example"]');
   }
 

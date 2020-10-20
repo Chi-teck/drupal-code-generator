@@ -23,7 +23,8 @@ final class InstallTest extends BrowserTestBase {
    * Test callback.
    */
   public function testInstall(): void {
-    $user = $this->drupalCreateUser(['administer modules', 'administer site configuration']);
+    $permissions = ['administer modules', 'administer site configuration'];
+    $user = $this->drupalCreateUser($permissions);
     $this->drupalLogin($user);
 
     // Test hook_install().

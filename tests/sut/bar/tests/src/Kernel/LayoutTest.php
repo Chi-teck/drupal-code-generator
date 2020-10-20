@@ -14,7 +14,7 @@ final class LayoutTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['bar', 'layout_discovery'];
+  protected static $modules = ['bar', 'layout_discovery'];
 
   /**
    * Test callback.
@@ -33,22 +33,23 @@ final class LayoutTest extends KernelTestBase {
 
     self::assertEquals($build['#attached']['library'], ['bar/foo']);
 
-    $expected_output = \implode("\n", [
-      '',
-      '  <div class="layout layout--foo">',
-      '',
-      '          <div  class="layout__region layout__region--main">',
-      '        Main content',
-      '      </div>',
-      '    ',
-      '          <div  class="layout__region layout__region--sidebar">',
-      '        Sidebar content',
-      '      </div>',
-      '    ',
-      '  </div>',
-      '',
-      '',
-    ]);
+    $expected_output = <<< 'HTML'
+    
+      <div class="layout layout--foo">
+
+              <div  class="layout__region layout__region--main">
+            Main content
+          </div>
+        
+              <div  class="layout__region layout__region--sidebar">
+            Sidebar content
+          </div>
+        
+      </div>
+
+
+    HTML;
+
     $output = (string) $this->container->get('renderer')->renderRoot($build);
     self::assertEquals($expected_output, $output);
 

@@ -22,7 +22,7 @@ abstract class FieldBaseTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['qux', 'node', 'field_ui'];
+  protected static $modules = ['qux', 'node', 'field_ui'];
 
   /**
    * {@inheritdoc}
