@@ -13,6 +13,7 @@
     <!-- The package does not provide change records. -->
     <exclude name="Drupal.Commenting.Deprecated.IncorrectTextLayout"/>
     <exclude name="Drupal.Commenting.Deprecated.DeprecatedMissingSeeTag"/>
+    <exclude name="Drupal.Commenting.TodoComment.TodoFormat"/>
   </rule>
   <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended73"/>
   <!-- Exclude fixtures. -->

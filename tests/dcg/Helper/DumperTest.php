@@ -355,7 +355,7 @@ final class DumperTest extends BaseTestCase {
     $dumped_assets = $this->dump($assets, NULL, TRUE);
     self::assertEquals(new AssetCollection(), $dumped_assets);
 
-    self::assertDirectoryNotExists($this->directory);
+    self::assertDirectoryDoesNotExist($this->directory);
 
     $expected_output = <<< 'TEXT'
 

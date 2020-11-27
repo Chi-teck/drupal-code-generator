@@ -4,11 +4,14 @@ namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Command\PhpStormMetadata;
 use DrupalCodeGenerator\Helper\DrupalContext;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * Test for phpstorm-metadata command.
  */
 final class PhpStormMetadataTest extends BaseGeneratorTest {
+
+  use ProphecyTrait;
 
   /**
    * A generator to be tested.
