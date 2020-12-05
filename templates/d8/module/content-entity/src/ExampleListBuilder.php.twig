@@ -102,7 +102,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\{{ machine_name }}\{{ class_prefix }}Interface */
-    $row['id'] = $entity->{{ title_base_field ? 'id' : 'link' }}();
+    $row['id'] = $entity->{{ title_base_field ? 'id' : 'toLink' }}();
 {% if title_base_field %}
     $row['title'] = $entity->toLink();
 {% endif %}
