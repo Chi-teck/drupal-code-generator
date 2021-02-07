@@ -28,7 +28,7 @@ jobs:
                   tools: composer:v2
 
             - name: Install dependencies
-              run: composer install
+              run: composer install --ansi
 
             - name: Run Twig linter
               run: ./vendor/bin/twigcs ./templates
@@ -37,4 +37,4 @@ jobs:
               run: vendor/bin/phpcs -p --colors
 
             - name: Run tests
-              run: ./vendor/bin/phpunit
+              run: ./vendor/bin/phpunit --colors=always
