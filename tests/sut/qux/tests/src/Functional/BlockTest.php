@@ -47,7 +47,7 @@ final class BlockTest extends BrowserTestBase {
       'settings[foo]' => 'Wine',
       'region' => 'sidebar_first',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save block');
+    $this->submitForm($edit, 'Save block');
     $this->assertSession()->responseContains('The block configuration has been saved.');
 
     // Make sure the configuration has been persisted.

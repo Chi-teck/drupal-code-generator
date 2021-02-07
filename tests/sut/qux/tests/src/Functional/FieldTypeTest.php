@@ -43,26 +43,27 @@ final class FieldTypeTest extends BrowserTestBase {
     $this->drupalLogin($admin_user);
 
     // Create new field.
+    $this->drupalGet('admin/structure/types/manage/test/fields/add-field');
     $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
       'new_storage_type' => 'qux_example',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/test/fields/add-field', $edit, 'Save and continue');
+    $this->submitForm($edit, 'Save and continue');
 
     // Update storage settings.
     $this->assertXpath('//input[@name = "settings[foo]" and @value = "wine"]');
     $edit = [
       'settings[foo]' => 'Hi!',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save field settings');
+    $this->submitForm($edit, 'Save field settings');
 
     // Update instance settings.
     $this->assertXpath('//input[@name = "settings[bar]" and @value = "beer"]');
     $edit = [
       'settings[bar]' => 'Yo!',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save settings');
+    $this->submitForm($edit, 'Save settings');
 
     // Make sure field settings have been persisted correctly.
     $field_settings_url = 'admin/structure/types/manage/test/fields/node.test.field_foo';
@@ -72,18 +73,19 @@ final class FieldTypeTest extends BrowserTestBase {
     $this->assertXpath('//input[@name = "settings[foo]" and @value = "Hi!"]');
 
     // Check the field length constraint.
+    $this->drupalGet('node/add/test');
     $edit = [
       'title[0][value]' => 'Alpha',
       'field_foo[0][value]' => 'Hello word!',
     ];
-    $this->drupalPostForm('node/add/test', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertErrorMessage(new FormattableMarkup('This value is too long. It should have %limit characters or less.', ['%limit' => 10]));
 
     // Remove the exclamation sign to get in the limit.
     $edit = [
       'field_foo[0][value]' => 'Hello word',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertXpath('//div[text() = "Foo"]/following-sibling::div[text() = "Hello word"]');
   }
 

@@ -49,14 +49,15 @@ final class FieldTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldExample1(): void {
+    $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
     $edit = [
       'new_storage_type' => 'bar_example_1',
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/page/fields/add-field', $edit, 'Save and continue');
-    $this->drupalPostForm(NULL, [], 'Save field settings');
-    $this->drupalPostForm(NULL, [], 'Save settings');
+    $this->submitForm($edit, 'Save and continue');
+    $this->submitForm([], 'Save field settings');
+    $this->submitForm([], 'Save settings');
     $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
 
     // -- Test widget form elements.
@@ -77,11 +78,12 @@ final class FieldTest extends BrowserTestBase {
       'title[0][value]' => 'Test',
       'field_foo[0][value_1]' => TRUE,
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     // Make sure that none of the other fields are required.
     $this->assertSession()->pageTextContains('Page Test has been created.');
 
     // Test validation.
+    $this->drupalGet('node/1/edit');
     $edit = [
       'title[0][value]' => 'Test',
       'field_foo[0][value_1]' => TRUE,
@@ -95,7 +97,7 @@ final class FieldTest extends BrowserTestBase {
       'field_foo[0][value_9]' => 'wrong URL',
       'field_foo[0][value_10][date]' => 'wrong date',
     ];
-    $this->drupalPostForm('node/1/edit', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
 
     $arguments = [
       '@label' => 'Value 2',
@@ -136,6 +138,7 @@ final class FieldTest extends BrowserTestBase {
     $this->assertErrorMessage($message);
 
     // Submit the form with correct values and test formatter output.
+    $this->drupalGet('node/1/edit');
     $edit = [
       'title[0][value]' => 'Test',
       'field_foo[0][value_1]' => FALSE,
@@ -149,7 +152,7 @@ final class FieldTest extends BrowserTestBase {
       'field_foo[0][value_9]' => 'https://example.com',
       'field_foo[0][value_10][date]' => '2018-08-06',
     ];
-    $this->drupalPostForm('node/1/edit', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertSession()->pageTextContains('Page Test has been updated.');
 
     $prefix = '//div[contains(@class, "field--name-field-foo")]/div[@class = "field__item"]/div';
@@ -168,14 +171,15 @@ final class FieldTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldExample2(): void {
+    $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
     $edit = [
       'new_storage_type' => 'bar_example_2',
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/page/fields/add-field', $edit, 'Save and continue');
-    $this->drupalPostForm(NULL, [], 'Save field settings');
-    $this->drupalPostForm(NULL, [], 'Save settings');
+    $this->submitForm($edit, 'Save and continue');
+    $this->submitForm([], 'Save field settings');
+    $this->submitForm([], 'Save settings');
     $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
 
     // -- Test widget form elements.
@@ -262,15 +266,16 @@ final class FieldTest extends BrowserTestBase {
     $edit = [
       'title[0][value]' => 'Test',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     // Make sure that all fields pass validation.
     $this->assertSession()->pageTextContains('Page Test has been created.');
 
+    $this->drupalGet('node/1/edit');
     $edit = [
       'title[0][value]' => 'Test',
       'field_foo[0][value_4]' => '123',
     ];
-    $this->drupalPostForm('node/1/edit', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
 
     $this->assertErrorMessage('This value should not be blank.');
 
@@ -286,6 +291,7 @@ final class FieldTest extends BrowserTestBase {
     $this->assertXpath($prefix . '/select[@name = "field_foo[0][value_10]" and not(contains(@class, "error"))]');
 
     // Submit the form with correct values and test formatter output.
+    $this->drupalGet('node/1/edit');
     $edit = [
       'title[0][value]' => 'Test',
       'field_foo[0][value_1]' => TRUE,
@@ -299,7 +305,7 @@ final class FieldTest extends BrowserTestBase {
       'field_foo[0][value_9]' => 'https://example.com',
       'field_foo[0][value_10]' => '2018-01-01T00:10:10',
     ];
-    $this->drupalPostForm('node/1/edit', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertSession()->pageTextContains('Page Test has been updated.');
 
     $prefix = '//div[contains(@class, "field--name-field-foo")]/div[@class = "field__item"]/div';
@@ -319,24 +325,25 @@ final class FieldTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldExample3(): void {
+    $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
     $edit = [
       'new_storage_type' => 'bar_example_3',
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/page/fields/add-field', $edit, 'Save and continue');
+    $this->submitForm($edit, 'Save and continue');
 
     $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "settings[foo]" and @value = "example"][1]');
     $edit = [
       'settings[foo]' => 'test 1',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save field settings');
+    $this->submitForm($edit, 'Save field settings');
 
     $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "settings[bar]" and @value = "example"][1]');
     $edit = [
       'settings[bar]' => 'test 2',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save settings');
+    $this->submitForm($edit, 'Save settings');
 
     $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
 
@@ -352,6 +359,7 @@ final class FieldTest extends BrowserTestBase {
     $this->drupalGet('admin/structure/types/manage/page/display');
     $this->assertXpath('//tr[@id = "field-foo"]/td/div[text() = "Foo: bar"]');
 
+    $this->drupalGet('node/add/page');
     $edit = [
       'title[0][value]' => 'Test',
       'field_foo[0][value_1]' => TRUE,
@@ -360,7 +368,7 @@ final class FieldTest extends BrowserTestBase {
       'field_foo[0][value_4]' => 'beta@example.com',
       'field_foo[0][value_5]' => 'https://www.drupal.org',
     ];
-    $this->drupalPostForm('node/add/page', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertSession()->pageTextContains('Page Test has been created.');
 
     // Default formatter.
@@ -372,10 +380,11 @@ final class FieldTest extends BrowserTestBase {
     $this->assertXpath($prefix . '/label[text() = "Value 5"]/following::a[@href = "https://www.drupal.org" and text() = "https://www.drupal.org"][1]');
 
     // Key-value formatter.
+    $this->drupalGet('admin/structure/types/manage/page/display');
     $edit = [
       'fields[field_foo][type]' => 'bar_example_3_key_value',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/page/display', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->drupalGet('node/1');
 
     $prefix = '//div[contains(@class, "field--name-field-foo")]//table/tbody/tr';
@@ -385,10 +394,11 @@ final class FieldTest extends BrowserTestBase {
     $this->assertXpath($prefix . '/th[text() = "Value 5"]/following::td[text() = "https://www.drupal.org"]');
 
     // Table formatter.
+    $this->drupalGet('admin/structure/types/manage/page/display');
     $edit = [
       'fields[field_foo][type]' => 'bar_example_3_table',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/page/display', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->drupalGet('node/1');
     $prefix = '//div[contains(@class, "field--name-field-foo")]//table';
     $xpath = $prefix . '/thead/tr/th[text() = "#"]';

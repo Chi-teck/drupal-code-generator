@@ -37,27 +37,29 @@ final class ActionTest extends BrowserTestBase {
     $user = $this->drupalCreateUser($permissions);
     $this->drupalLogin($user);
 
+    $this->drupalGet('admin/config/system/actions');
     $edit = [
       'action' => 'qux_update_node_title',
     ];
-    $this->drupalPostForm('admin/config/system/actions', $edit, 'Create');
+    $this->submitForm($edit, 'Create');
 
     $edit = [
       'id' => 'update_node_title',
       'title' => 'Example',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertStatusMessage('The action has been successfully saved.');
 
     $this->drupalGet('admin/config/system/actions/configure/update_node_title');
     $this->assertXpath('//input[@name = "label" and @value = "Update node title"]');
     $this->assertXpath('//input[@name = "title" and @value = "Example"]');
 
+    $this->drupalGet('admin/content');
     $edit = [
       'action' => 'update_node_title',
       'node_bulk_form[0]' => TRUE,
     ];
-    $this->drupalPostForm('admin/content', $edit, 'Apply to selected items');
+    $this->submitForm($edit, 'Apply to selected items');
     $message_arguments = [
       '%action_label' => 'Update node title',
       '%node_label' => $node->label(),
@@ -68,11 +70,12 @@ final class ActionTest extends BrowserTestBase {
     $permissions = ['access content overview', 'edit any article content'];
     $content_manager = $this->drupalCreateUser($permissions);
     $this->drupalLogin($content_manager);
+    $this->drupalGet('admin/content');
     $edit = [
       'action' => 'update_node_title',
       'node_bulk_form[0]' => TRUE,
     ];
-    $this->drupalPostForm('admin/content', $edit, 'Apply to selected items');
+    $this->submitForm($edit, 'Apply to selected items');
     $message_arguments = [
       '%action_label' => 'Update node title',
     ];

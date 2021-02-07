@@ -43,16 +43,10 @@ final class FormTest extends BrowserTestBase {
     $this->assertXpath($prefix . '//textarea[@name = "message"]');
     $this->assertXpath($prefix . '//input[@type = "submit" and @value = "Send"]');
 
-    $edit = [
-      'message' => 123456789,
-    ];
-    $this->drupalPostForm(NULL, $edit, 'Send');
+    $this->submitForm(['message' => 123456789], 'Send');
     $this->assertErrorMessage('Message should be at least 10 characters.');
 
-    $edit = [
-      'message' => 1234567890,
-    ];
-    $this->drupalPostForm(NULL, $edit, 'Send');
+    $this->submitForm(['message' => 1234567890], 'Send');
     $this->assertStatusMessage('The message has been sent.');
   }
 
@@ -65,16 +59,10 @@ final class FormTest extends BrowserTestBase {
     $this->assertXpath($prefix . '//label[text() = "Example"]');
     $this->assertXpath($prefix . '//input[@name = "example" and @value="none"]');
     $this->assertXpath($prefix . '//input[@type = "submit" and @value = "Save configuration"]');
-    $edit = [
-      'example' => 'Some text.',
-    ];
-    $this->drupalPostForm(NULL, $edit, 'Save configuration');
+    $this->submitForm(['example' => 'Some text.'], 'Save configuration');
     $this->assertErrorMessage('The value is not correct.');
 
-    $edit = [
-      'example' => 'example',
-    ];
-    $this->drupalPostForm(NULL, $edit, 'Save configuration');
+    $this->submitForm(['example' => 'example'], 'Save configuration');
     $this->assertStatusMessage('The configuration options have been saved.');
     $this->assertXpath($prefix . '//input[@name = "example" and @value="example"]');
   }
@@ -88,7 +76,8 @@ final class FormTest extends BrowserTestBase {
     $this->assertXpath('//form[@id="foo-confirm" and contains(., "This action cannot be undone.")]');
     $this->clickLink('Cancel');
     $this->assertSession()->addressEquals('/admin/config');
-    $this->drupalPostForm('admin/config/foo/confirm', [], 'Confirm');
+    $this->drupalGet('admin/config/foo/confirm');
+    $this->submitForm([], 'Confirm');
     $this->assertStatusMessage('Done!');
   }
 

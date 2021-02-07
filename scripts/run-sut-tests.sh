@@ -73,7 +73,8 @@ else
 fi
 
 if [[ -d $DRUPAL_CACHE_DIR ]]; then
-  cp -r $DRUPAL_CACHE_DIR/* $DRUPAL_DIR
+  rm -r $DRUPAL_DIR
+  cp -r $DRUPAL_CACHE_DIR $DRUPAL_DIR
 else
   export COMPOSER_PROCESS_TIMEOUT=1900
   git clone --depth 1 --branch $DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR

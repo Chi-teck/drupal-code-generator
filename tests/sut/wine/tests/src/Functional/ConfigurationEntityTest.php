@@ -52,7 +52,7 @@ final class ConfigurationEntityTest extends BrowserTestBase {
       'status' => TRUE,
       'description' => 'The entity description.',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertStatusMessage(new FormattableMarkup('Created new example %label.', ['%label' => 'Test']));
 
     $this->assertXpath('//tbody//td[text() = "Test"]/following::td[text() = "test"]/following::td[text() = "Enabled"]/following::td//ul[@class = "dropbutton"]');
@@ -67,13 +67,13 @@ final class ConfigurationEntityTest extends BrowserTestBase {
     $edit = [
       'label' => 'Updated test',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertStatusMessage(new FormattableMarkup('Updated example %label.', ['%label' => 'Updated test']));
 
     $this->getSession()->getDriver()->click('//ul[@class = "dropbutton"]//a[text() = "Delete"]');
     $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Updated test']));
 
-    $this->drupalPostForm(NULL, [], 'Delete');
+    $this->submitForm([], 'Delete');
     $this->assertStatusMessage(new FormattableMarkup('The example %label has been deleted.', ['%label' => 'Updated test']));
     $this->assertXpath('//td[@colspan = "4" and text() = "There are no examples yet."]');
   }

@@ -55,7 +55,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'label' => 'Foo',
       'id' => 'foo',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save example type');
+    $this->submitForm($edit, 'Save example type');
     $this->assertStatusMessage(new FM('The example type %label has been added.', ['%label' => 'Foo']));
 
     $this->getSession()->getDriver()->click('//td[text() = "Foo"]/following-sibling::td//a[text() = "Edit"]');
@@ -66,7 +66,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'label' => 'Bar',
       'id' => 'bar',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save example type');
+    $this->submitForm($edit, 'Save example type');
     $this->assertStatusMessage(new FM('The example type %label has been updated.', ['%label' => 'Bar']));
 
     // Make sure the entity type is fieldable.
@@ -137,7 +137,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'description[0][value]' => 'Dark',
       'revision_log[0][value]' => 'New revision',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
 
     // -- Test entity view builder.
     $this->assertStatusMessage(new FM('New example %label has been created.', ['%label' => 'Beer']));
@@ -170,7 +170,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'label[0][value]' => 'Wine',
       'description[0][value]' => 'White',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertStatusMessage(new FM('The example %label has been updated.', ['%label' => 'Wine']));
     $this->assertPageTitle('Wine');
 
@@ -202,7 +202,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->assertPageTitle(new FM('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 
-    $this->drupalPostForm(NULL, [], 'Delete');
+    $this->submitForm([], 'Delete');
     $this->assertStatusMessage(new FM('The example %label has been deleted.', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('There are no examples yet.');
     $this->assertSession()->pageTextContains('Total examples: 0');

@@ -28,11 +28,12 @@ final class InstallTest extends BrowserTestBase {
     $this->drupalLogin($user);
 
     // Test hook_install().
+    $this->drupalGet('admin/modules');
     $edit = [
       'modules[example][enable]' => TRUE,
       'modules[bar][enable]' => TRUE,
     ];
-    $this->drupalPostForm('admin/modules', $edit, 'Install');
+    $this->submitForm($edit, 'Install');
     $this->assertStatusMessage('bar_install');
 
     // Test hook_requirements().
@@ -53,11 +54,12 @@ final class InstallTest extends BrowserTestBase {
     self::assertEquals(['id' => 1] + $fields, $data);
 
     // Test hook_uninstall().
+    $this->drupalGet('admin/modules/uninstall');
     $edit = [
       'uninstall[bar]' => TRUE,
     ];
-    $this->drupalPostForm('admin/modules/uninstall', $edit, 'Uninstall');
-    $this->drupalPostForm(NULL, [], 'Uninstall');
+    $this->submitForm($edit, 'Uninstall');
+    $this->submitForm([], 'Uninstall');
     $this->assertStatusMessage('bar_uninstall');
   }
 

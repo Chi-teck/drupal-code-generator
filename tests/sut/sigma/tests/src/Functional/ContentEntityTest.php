@@ -42,19 +42,19 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->drupalGet('admin/structure/example');
     $this->assertPageTitle('Example');
     $this->assertSession()->pageTextContains('Settings form for an example entity type.');
-    $this->drupalPostForm(NULL, [], 'Save');
+    $this->submitForm([], 'Save');
     $this->assertStatusMessage('The configuration has been updated.');
 
     // -- Add a new field to make sure the entity type is truly fieldable.
+    $this->drupalGet('admin/structure/example/fields/add-field');
     $edit = [
       'new_storage_type' => 'string',
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
-
-    $this->drupalPostForm('admin/structure/example/fields/add-field', $edit, 'Save');
-    $this->drupalPostForm(NULL, [], 'Save field settings');
-    $this->drupalPostForm(NULL, [], 'Save settings');
+    $this->submitForm($edit, 'Save');
+    $this->submitForm([], 'Save field settings');
+    $this->submitForm([], 'Save settings');
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     /** @var \Drupal\Core\Entity\ContentEntityTypeInterface $entity_type */
@@ -118,7 +118,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'label[0][value]' => 'Beer',
       'field_foo[0][value]' => 'Dark',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
 
     // -- Test entity view builder.
     $this->assertStatusMessage(new FM('New example %label has been created.', ['%label' => 'Beer']));
@@ -142,7 +142,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'label[0][value]' => 'Wine',
       'field_foo[0][value]' => 'White',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertStatusMessage(new FM('The example %label has been updated.', ['%label' => 'Wine']));
     $this->assertPageTitle('Wine');
 
@@ -168,7 +168,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->assertPageTitle(new FM('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 
-    $this->drupalPostForm(NULL, [], 'Delete');
+    $this->submitForm([], 'Delete');
     $this->assertStatusMessage(new FM('The example %label has been deleted.', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('There are no examples yet.');
     $this->assertSession()->pageTextContains('Total examples: 0');

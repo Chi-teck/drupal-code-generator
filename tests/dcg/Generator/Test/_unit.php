@@ -16,7 +16,7 @@ class ExampleTest extends UnitTestCase {
    */
   protected function setUp(): void {
     parent::setUp();
-    // @TODO: Mock required classes here.
+    // @todo Mock required classes here.
   }
 
   /**
