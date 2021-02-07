@@ -13,7 +13,7 @@ $plugin = array(
   'description' => t('{{ description }}'),
 {% if context == 'Node' or context == 'User' %}
   'required context' => new ctools_context_required(t('{{ context }}'), '{{ context|lower }}'),
-{% elseif  context == 'Term' %}
+{% elseif context == 'Term' %}
   'required context' => new ctools_context_required(t('{{ context }}'), array('term', 'taxonomy_term')),
 {% endif %}
   'context' => '{{ machine_name }}_{{ plugin_machine_name }}_context',
@@ -33,7 +33,7 @@ function {{ machine_name }}_{{ plugin_machine_name }}_context($context, $conf) {
 {% if context == 'Node' or context == 'Term' %}
   ${{ context|lower }} = clone $context->data;
 
-{% elseif  context == 'User' %}
+{% elseif context == 'User' %}
 {# Use $account variable avoid confusion with the global $user object #}
   $account = clone $context->data;
 
