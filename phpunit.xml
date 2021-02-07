@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+    <exclude>
+      <directory>./tests</directory>
+    </exclude>
+  </coverage>
   <testsuites>
     <testsuite name="Drupal Code Generator Test Suite">
       <directory suffix="Test.php">./tests/dcg</directory>
       <exclude>./tests/dcg/Generator/Misc/_project/_full/tests/src/HomePageTest.php</exclude>
     </testsuite>
   </testsuites>
-  <filter>
-    <whitelist processUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">./src</directory>
-      <exclude>
-        <directory>./tests</directory>
-      </exclude>
-    </whitelist>
-  </filter>
 </phpunit>
