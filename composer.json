@@ -34,7 +34,7 @@
     },
     "require-dev": {
         "chi-teck/drupal-coder-extension": "^1.0",
-        "drupal/coder": "^8.3.11",
+        "drupal/coder": "^8.3.12",
         "friendsoftwig/twigcs": "^5.0",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.4",
