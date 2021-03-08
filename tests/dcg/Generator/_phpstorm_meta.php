@@ -87,4 +87,12 @@ namespace PHPSTORM_META {
   expectedArguments(\file_save_upload(), 4, argumentsSet('file_system_exists_behaviour'));
   expectedArguments(\system_retrieve_file(), 3, argumentsSet('file_system_exists_behaviour'));
 
+  // Virtual function to indicate that all SQL
+  // injections will have the following replacement rules.
+  sql_injection_subst(),
+  map([
+    '{' => "drupal_",
+    '}' => '',
+  ]));
+
 }

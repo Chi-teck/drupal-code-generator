@@ -63,6 +63,16 @@ final class PhpStormMetadata extends DrupalGenerator {
       }
     });
 
+    $vars['database_prefix'] = NULL;
+    /** @var \Drupal\Core\Database\Connection $database */
+    if ($database = $this->drupalContext->getContainer()->get('database')) {
+      $connection_options = $database->getConnectionOptions();
+      // Only add prefix info if it's set.
+      if (!empty($connection_options['prefix'])) {
+        $vars['database_prefix'] = $connection_options['prefix'];
+      }
+    }
+
     $this->addFile('.phpstorm.meta.php', 'phpstorm.meta.php');
   }
 
