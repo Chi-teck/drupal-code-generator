@@ -7,7 +7,6 @@ set -o nounset
 
 function dcg_on_exit {
   local STATUS=$?
-  cd /var/www/dcg
   $DRUPAL_DIR/vendor/bin/web.server stop --pidfile=/tmp/dcg-ws-pid
   if [[ $STATUS == 0 ]] ; then
     echo -e "\n\e[0;42m SUCCESS \e[0m"
