@@ -10,7 +10,6 @@ use Drupal\views\ResultRow;
 use Drupal\Core\Form\FormStateInterface;
   {% endif %}
   {% if services %}
-{{ di.use(services) }}
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
 {% endsort %}
@@ -32,34 +31,12 @@ class {{ class }} extends FieldPluginBase {
 {{ di.properties(services) }}
 
   /**
-   * Constructs a new {{ class }} instance.
-   *
-   * @param array $configuration
-   *   The plugin configuration, i.e. an array with configuration values keyed
-   *   by configuration option name. The special key 'context' may be used to
-   *   initialize the defined contexts by setting it to an array of context
-   *   values keyed by context names.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-{{ di.annotation(services) }}
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, {{ di.signature(services) }}) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-{{ di.assignment(services) }}
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
 {{ di.container(services) }}
-    );
+    return $instance;
   }
 
 {% endif %}
