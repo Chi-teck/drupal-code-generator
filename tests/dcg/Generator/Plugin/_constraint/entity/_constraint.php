@@ -13,8 +13,7 @@ use Symfony\Component\Validator\Constraint;
  * )
  *
  * @DCG
- * To apply this constraint on a particular field implement
- * hook_entity_type_build().
+ * To apply this constraint, see https://www.drupal.org/docs/drupal-apis/entity-api/entity-validation-api/providing-a-custom-validation-constraint.
  */
 class AlphaConstraint extends Constraint {
 
