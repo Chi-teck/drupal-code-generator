@@ -32,6 +32,7 @@ class {{ class_prefix }}Form extends ContentEntityForm {
     }
 
     $form_state->setRedirect('entity.{{ entity_type_id }}.canonical', ['{{ entity_type_id }}' => $entity->id()]);
+    return $result;
   }
 
 }
