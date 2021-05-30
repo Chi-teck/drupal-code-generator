@@ -41,6 +41,8 @@ class {{ class_prefix }}Form extends ContentEntityForm {
 {% else %}
     $form_state->setRedirect('entity.{{ entity_type_id }}.collection');
 {% endif %}
+
+    return $result;
   }
 
 }
