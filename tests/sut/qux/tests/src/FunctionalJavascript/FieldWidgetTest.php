@@ -45,11 +45,12 @@ final class FieldWidgetTest extends FieldBaseTest {
     $assert_session->elementExists('xpath', $xpath);
 
     // Make sure field data is saved correctly.
+    $this->drupalGet('node/add/test');
     $edit = [
       'title[0][value]' => 'Test #1',
       'field_wine[0][value]' => 'foo',
     ];
-    $this->drupalPostForm('node/add/test', $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $xpath = '//div[contains(@class, "field--name-field-wine")]/div[@class="field__item" and text() = "foo"]';
     $assert_session->elementExists('xpath', $xpath);
 

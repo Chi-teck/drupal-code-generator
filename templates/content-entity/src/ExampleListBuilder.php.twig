@@ -61,6 +61,7 @@ class {{ class_prefix }}ListBuilder extends EntityListBuilder {
 
     $total = $this->getStorage()
       ->getQuery()
+      ->accessCheck(FALSE)
       ->count()
       ->execute();
 
