@@ -14,8 +14,10 @@
  */
 {{ '#}' }}{% verbatim %}
 <article{{ attributes }}>
-  {{ title_prefix }}
-  {{ title_suffix }}
+  {% if view_mode != 'full' %}
+    {{ title_prefix }}
+    {{ title_suffix }}
+  {% endif %}
   {% if content %}
     {{- content -}}
   {% endif %}

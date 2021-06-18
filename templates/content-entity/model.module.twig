@@ -36,6 +36,7 @@ function {{ machine_name }}_theme() {
  *   - attributes: HTML attributes for the containing element.
  */
 function template_preprocess_{{ entity_type_id }}(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
