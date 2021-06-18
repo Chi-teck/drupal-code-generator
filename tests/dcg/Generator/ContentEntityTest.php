@@ -33,6 +33,7 @@ final class ContentEntityTest extends BaseGeneratorTest {
 
   protected $fixtures = [
     'foo.links.action.yml' => '/_content_entity/foo.links.action.yml',
+    'foo.links.contextual.yml' => '/_content_entity/foo.links.contextual.yml',
     'foo.links.menu.yml' => '/_content_entity/foo.links.menu.yml',
     'foo.links.task.yml' => '/_content_entity/foo.links.task.yml',
     'foo.module' => '/_content_entity/foo.module',

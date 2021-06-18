@@ -53,6 +53,11 @@ final class ContentEntity extends ModuleGenerator {
     $vars['class_prefix'] = '{entity_type_id|camelize}';
     $vars['template_name'] = '{entity_type_id|u2h}.html.twig';
 
+    // Contextual links need title suffix to be added to entity template.
+    if ($vars['template']) {
+      $this->addFile('{machine_name}.links.contextual.yml', 'model.links.contextual.yml')
+        ->appendIfExists();
+    }
     $this->addFile('{machine_name}.links.action.yml', 'model.links.action.yml')
       ->appendIfExists();
     $this->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml')
