@@ -86,11 +86,22 @@ final class PhpStormMetadataTest extends BaseGeneratorTest {
       }
 
     };
+
+    $connection = new class {
+
+      public function getConnectionOptions(): array {
+        return [
+          'prefix' => 'drupal_',
+        ];
+      }
+
+    };
     // phpcs:enable
 
     $container = $this->prophesize('\Symfony\Component\DependencyInjection\ContainerInterface');
     $container->get('kernel')->willReturn($kernel);
     $container->get('entity_type.manager')->willReturn($entity_type_manager);
+    $container->get('database')->willReturn($connection);
     $this->generator = new PhpStormMetadata();
     $this->generator->setDrupalContext(new DrupalContext($container->reveal(), ''));
   }
