@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\QuestionHelper as BaseQuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
@@ -80,6 +81,7 @@ class QuestionHelper extends BaseQuestionHelper {
       }
     }
     elseif ($question instanceof ChoiceQuestion) {
+
       $choices = $question->getChoices();
       if ($question->isMultiselect()) {
         // @todo Support multiselect.
@@ -95,6 +97,10 @@ class QuestionHelper extends BaseQuestionHelper {
    * {@inheritdoc}
    */
   protected function writePrompt(OutputInterface $output, Question $question) {
+    // @todo Remove this once Symfony fixes the following bug.
+    // @see https://github.com/symfony/symfony/issues/39946
+    $style = new OutputFormatterStyle('white', 'blue', ['bold']);
+    $output->getFormatter()->setStyle('title', $style);
 
     $question_text = $question->getQuestion();
     $default_value = $question->getDefault();
