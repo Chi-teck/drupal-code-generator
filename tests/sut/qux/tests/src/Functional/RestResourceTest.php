@@ -48,7 +48,6 @@ final class RestResourceTest extends ResourceTestBase {
       'restful get qux_example',
       'restful post qux_example',
       'restful patch qux_example',
-      'restful put qux_example',
       'restful delete qux_example',
     ];
     $user_role->set('permissions', $permissions);

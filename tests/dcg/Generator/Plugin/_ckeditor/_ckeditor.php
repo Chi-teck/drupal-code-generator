@@ -20,7 +20,7 @@ class Example extends CKEditorPluginBase {
    * {@inheritdoc}
    */
   public function getFile() {
-    return drupal_get_path('module', 'foo') . '/js/plugins/example/plugin.js';
+    return $this->getModulePath('foo') . '/js/plugins/example/plugin.js';
   }
 
   /**
@@ -34,11 +34,10 @@ class Example extends CKEditorPluginBase {
    * {@inheritdoc}
    */
   public function getButtons() {
-    $module_path = drupal_get_path('module', 'foo');
     return [
       'example' => [
         'label' => $this->t('Example'),
-        'image' => $module_path . '/js/plugins/example/icons/example.png',
+        'image' => $this->getModulePath('foo') . '/js/plugins/example/icons/example.png',
       ],
     ];
   }
