@@ -35,7 +35,7 @@ $request = Request::createFromGlobals();
 $kernel->handle($request);
 
 // Override Drupal exception handler.
-\set_exception_handler(static function (\Exception $exception): void {
+\set_exception_handler(static function (\Throwable $exception): void {
   \fwrite(STDERR, $exception->getMessage() . "\n");
   exit(1);
 });
@@ -71,6 +71,8 @@ $skipped_services = [
   'router.matcher',
   // This does not define type hint for $alias_repository parameter.
   'path_alias.manager',
+  // This does not define type hint for $current_user parameter.
+  'tempstore.shared',
   // This does not define type hint for $options parameter.
   'session_configuration',
   // This does not define type hint for $entity_repository parameter.
@@ -89,7 +91,7 @@ $skipped_services = [
 
 foreach ($services as $service_id => $service) {
 
-  if (!\str_contains($service_id, 'drush')) {
+  if (\str_contains($service_id, 'drush')) {
     throw new \UnexpectedValueException('Drush services are not supported.');
   }
 
@@ -243,7 +245,7 @@ function process_class(array &$raw_definitions, string $service_id, string $clas
   $reflection_constructor = $reflection_class->getMethod('__construct');
 
   // Parse constructor annotation.
-  $doc = $reflection_constructor->getDocComment();
+  $doc = (string) $reflection_constructor->getDocComment();
   \preg_match_all('/@param (.*) \$(.*)\n\s*\*\s\s\s([^s].*)\n/Us', $doc, $annotations);
 
   $parameters = $reflection_constructor->getParameters();
