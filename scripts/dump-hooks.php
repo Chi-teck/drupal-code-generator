@@ -1,9 +1,11 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
 
 /**
  * @file
  * Generates hook templates from API documentation.
+ *
+ * phpcs:ignoreFile Drupal.Commenting.FileComment.Missing
  */
 
 use Symfony\Component\Console\Application;

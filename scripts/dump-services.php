@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
 
 /**
  * @file
@@ -7,6 +7,8 @@
  *
  * Before running this script make sure that all core modules are installed on
  * target Drupal installation.
+ *
+ * phpcs:ignoreFile Drupal.Commenting.FileComment.Missing
  */
 
 use Drupal\Core\DrupalKernel;

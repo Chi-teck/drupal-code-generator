@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Helper;
 
@@ -55,7 +55,8 @@ class ResultPrinter extends Helper implements IOAwareInterface {
 
     $total_size = $total_lines = 0;
     foreach ($assets->getFiles()->getSorted() as $file) {
-      $size = \mb_strlen($file->getContent());
+      $file_content = $file->getContent();
+      $size = $file_content === NULL ? 0 : \mb_strlen($file_content);
       $total_size += $size;
       $lines = $size == 0 ? 0 : \substr_count($file->getContent(), "\n") + 1;
       $total_lines += $lines;

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Helper;
 
@@ -64,14 +64,14 @@ class DrupalContext extends Helper {
   /**
    * Returns a list of currently installed extensions.
    *
-   * @param string $extension_type
+   * @param int $extension_type
    *   Extension type (module|theme|profile).
    *
    * @return \Drupal\Core\Extension\Extension[]
    *   An associative array whose keys are the machine names of the extensions
    *   and whose values are extension names.
    */
-  public function getExtensionList(string $extension_type): array {
+  public function getExtensionList(int $extension_type): array {
     switch ($extension_type) {
       case DrupalGenerator::EXTENSION_TYPE_MODULE:
         if (!$this->modules) {
@@ -105,7 +105,7 @@ class DrupalContext extends Helper {
   /**
    * Returns destination for generated code.
    *
-   * @param string $extension_type
+   * @param int $extension_type
    *   Extension type.
    * @param bool $is_new
    *   Indicates that generated code is a new Drupal extension.
@@ -115,7 +115,7 @@ class DrupalContext extends Helper {
    * @return string|null
    *   The destination.
    */
-  public function getDestination(string $extension_type, bool $is_new, ?string $machine_name): ?string {
+  public function getDestination(int $extension_type, bool $is_new, ?string $machine_name): ?string {
     $destination = NULL;
 
     switch ($extension_type) {

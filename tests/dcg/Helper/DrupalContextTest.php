@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Tests\Helper;
 
@@ -64,8 +64,8 @@ final class DrupalContextTest extends TestCase {
     self::assertSame($themes, $drupal_context->getExtensionList(DrupalGenerator::EXTENSION_TYPE_THEME));
 
     self::expectException(\UnexpectedValueException::class);
-    self::expectExceptionMessage('Unsupported extension type "wrong"');
-    $drupal_context->getExtensionList('wrong');
+    self::expectExceptionMessage('Unsupported extension type "123"');
+    $drupal_context->getExtensionList(123);
   }
 
   /**
@@ -86,8 +86,8 @@ final class DrupalContextTest extends TestCase {
     self::assertSame('/path/themes/gamma', $drupal_context->getDestination(DrupalGenerator::EXTENSION_TYPE_THEME, FALSE, 'gamma'));
 
     self::expectException(\UnexpectedValueException::class);
-    self::expectExceptionMessage('Unsupported extension type "wrong"');
-    $drupal_context->getDestination('wrong', TRUE, NULL);
+    self::expectExceptionMessage('Unsupported extension type "123"');
+    $drupal_context->getDestination(123, TRUE, NULL);
   }
 
   /**

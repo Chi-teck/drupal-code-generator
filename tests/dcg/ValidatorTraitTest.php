@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Tests;
 
@@ -160,7 +160,6 @@ final class ValidatorTraitTest extends TestCase {
     return [
       ['yes', FALSE],
       ['0', FALSE],
-      [0, FALSE],
       ['', TRUE],
       [NULL, TRUE],
     ];

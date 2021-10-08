@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Helper;
 
@@ -112,12 +112,12 @@ class QuestionHelper extends BaseQuestionHelper {
       if ($question instanceof ConfirmationQuestion && \is_bool($default_value)) {
         $default_value = $default_value ? 'Yes' : 'No';
       }
-      if (\strlen($default_value)) {
+      if ($default_value !== NULL && $default_value) {
         $question_text .= " [<comment>$default_value</comment>]";
       }
 
       // No need to append colon if the text ends with a question mark.
-      if (\strlen($default_value) || $question->getQuestion()[-1] != '?') {
+      if ($default_value !== NULL || $question->getQuestion()[-1] != '?') {
         $question_text .= ':';
       }
     }
@@ -131,7 +131,7 @@ class QuestionHelper extends BaseQuestionHelper {
       $messages = [];
       $choices = $question->getChoices();
       foreach ($choices as $key => $value) {
-        $width = $max_width - static::strlen($key);
+        $width = $max_width - static::width((string) $key);
         $messages[] = '  [<info>' . \str_repeat(' ', $width) . $key . '</info>] ' . $value;
       }
       $output->writeln($messages);

@@ -1,12 +1,14 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
 
 /**
  * @file
  * Compiles DCG into a PHAR file.
+ *
+ * phpcs:ignoreFile Drupal.Commenting.FileComment.Missing
  */
 
-set_error_handler(function ($errno, $errstr, $errfile, $errline): void {
+set_error_handler(static function ($errno, $errstr, $errfile, $errline): void {
   fprintf(STDERR, "Error: %s on %s: %s\n", $errstr, $errfile, $errline);
   exit(1);
 });
@@ -53,13 +55,13 @@ $phar->setMetadata($meta_data);
 
 $phar->stopBuffering();
 print "---------------------------------\n";
-printf("Total added: %s\n" , count($files));
+printf("Total added: %s\n", count($files));
 printf("PHAR file: %s\n", $phar->getPath());
 
 /**
  * Recursively scans directory.
  */
-function dcg_scan_dir(string $path, string $extension = NULL): array {
+function dcg_scan_dir(string $path, ?string $extension = NULL): array {
   $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
   $files = [];
   foreach ($iterator as $file) {

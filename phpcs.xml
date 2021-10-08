@@ -2,8 +2,7 @@
 <ruleset name="Drupal Code Generator">
   <description>Drupal Code Generator coding standard</description>
   <arg name="colors"/>
-  <file>./scripts/dump-hooks.php</file>
-  <file>./scripts/dump-services.php</file>
+  <file>./scripts</file>
   <file>./src</file>
   <file>./tests</file>
   <rule ref="vendor/drupal/coder/coder_sniffer/Drupal"/>
@@ -14,8 +13,16 @@
     <exclude name="Drupal.Commenting.Deprecated.IncorrectTextLayout"/>
     <exclude name="Drupal.Commenting.Deprecated.DeprecatedMissingSeeTag"/>
     <exclude name="Drupal.Commenting.TodoComment.TodoFormat"/>
+    <exclude name="Drupal.WhiteSpace.OpenTagNewline.BlankLine"/>
   </rule>
   <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended73"/>
+  <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+    <properties>
+      <property name="declareOnFirstLine"/>
+      <property name="spacesCountAroundEqualsSign" value="0"/>
+    </properties>
+    <exclude-pattern>./tests/sut</exclude-pattern>
+  </rule>
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

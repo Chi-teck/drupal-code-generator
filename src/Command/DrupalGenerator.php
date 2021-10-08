@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Command;
 
@@ -47,7 +47,7 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Extension type (module, theme, profile).
    *
-   * @var string|null
+   * @var int|null
    */
   protected $extensionType;
 

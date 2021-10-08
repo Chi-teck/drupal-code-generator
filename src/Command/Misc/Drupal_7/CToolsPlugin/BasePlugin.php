@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7\CToolsPlugin;
 

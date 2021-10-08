@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Tests\Generator\Misc\Drupal_7\ViewsPlugin;
 

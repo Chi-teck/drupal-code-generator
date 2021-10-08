@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DrupalCodeGenerator\Asset;
 
@@ -130,11 +130,13 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   public function getSorted(): self {
     $assets = $this->assets;
     \usort($assets, static function (Asset $a, Asset $b): int {
-      $depth_a = \substr_count($a, '/');
-      $depth_b = \substr_count($b, '/');
+      $name_a = (string) $a;
+      $name_b = (string) $b;
+      $depth_a = \substr_count($name_a, '/');
+      $depth_b = \substr_count($name_b, '/');
       // Top level assets should be printed first.
       return $depth_a == $depth_b || ($depth_a > 1 && $depth_b > 1) ?
-        \strcmp($a, $b) : ($depth_a > $depth_b ? 1 : -1);
+        \strcmp($name_a, $name_b) : ($depth_a > $depth_b ? 1 : -1);
     });
     return new self($assets);
   }
