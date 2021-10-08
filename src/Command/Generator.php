@@ -255,7 +255,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function ask(string $question, ?string $default = NULL, $validator = NULL) {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
-    $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
+    if ($default) {
+      $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
+    }
 
     // Allow the validators to be referenced in a short form like
     // '::validateMachineName'.

@@ -108,7 +108,7 @@ abstract class Asset {
   /**
    * Replaces all tokens in a given string with appropriate values.
    */
-  protected function replaceTokens(?string $text): ?string {
+  protected function replaceTokens(string $text): ?string {
     return Utils::replaceTokens($text, $this->vars);
   }
 

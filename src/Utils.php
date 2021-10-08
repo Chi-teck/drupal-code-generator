@@ -70,7 +70,7 @@ class Utils {
   /**
    * Replaces all tokens in a given string with appropriate values.
    *
-   * @param string|null $text
+   * @param string $text
    *   A string potentially containing replaceable tokens.
    * @param array $data
    *   An array where keys are token names and values are replacements.
@@ -78,9 +78,9 @@ class Utils {
    * @return string|null
    *   Text with tokens replaced.
    */
-  public static function replaceTokens(?string $text, array $data): ?string {
+  public static function replaceTokens(string $text, array $data): ?string {
 
-    if (!$text || !$data) {
+    if (\count($data) === 0) {
       return $text;
     }
 
@@ -140,26 +140,26 @@ class Utils {
   /**
    * Quote curly brackets with slashes.
    *
-   * @param string|null $input
+   * @param string $input
    *   The input string.
    *
    * @return string
    *   The escaped string.
    */
-  public static function addSlashes(?string $input): string {
+  public static function addSlashes(string $input): string {
     return \addcslashes($input, '{}');
   }
 
   /**
    * Un-quotes a quoted string.
    *
-   * @param string|null $input
+   * @param string $input
    *   The input string.
    *
    * @return string
    *   The un-escaped string.
    */
-  public static function stripSlashes(?string $input): string {
+  public static function stripSlashes(string $input): string {
     return \str_replace(['\{', '\}'], ['{', '}'], $input);
   }
 

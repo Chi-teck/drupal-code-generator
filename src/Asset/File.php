@@ -88,8 +88,7 @@ final class File extends Asset {
    *   Asset header template.
    */
   public function getHeaderTemplate(): ?string {
-    return $this->replaceTokens($this->headerTemplate);
-
+    return $this->headerTemplate ? $this->replaceTokens($this->headerTemplate) : $this->headerTemplate;
   }
 
   /**
@@ -99,7 +98,7 @@ final class File extends Asset {
    *   Asset template.
    */
   public function getTemplate(): ?string {
-    return $this->replaceTokens($this->template);
+    return $this->template ? $this->replaceTokens($this->template) : $this->template;
   }
 
   /**
