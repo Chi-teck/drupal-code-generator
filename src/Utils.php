@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator;
 
+use Symfony\Component\String\ByteString;
 use Symfony\Component\String\Inflector\EnglishInflector;
 
 /**
@@ -39,13 +40,9 @@ class Utils {
    * Camelize a string.
    */
   public static function camelize(string $input, bool $upper_camel = TRUE): string {
-    $output = \preg_replace('/([^A-Z])([A-Z])/', '$1 $2', $input);
-    $output = \strtolower($output);
-    $output = \preg_replace('/[^a-z0-9]/', ' ', $output);
-    $output = \trim($output);
-    $output = \ucwords($output);
-    $output = \str_replace(' ', '', $output);
-    return $upper_camel ? $output : \lcfirst($output);
+    $output = \preg_replace('/[^a-z0-9]/i', ' ', $input);
+    $output = (string) (new ByteString($output))->camel();
+    return $upper_camel ? \ucfirst($output) : $output;
   }
 
   /**

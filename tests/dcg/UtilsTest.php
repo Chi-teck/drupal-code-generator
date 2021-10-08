@@ -105,7 +105,7 @@ final class UtilsTest extends BaseTestCase {
       ['dot.case.here', FALSE, 'dotCaseHere'],
       ['foo', TRUE, 'Foo'],
       [' &*^*()@#a*&)(&*0b@#$$() c  ! ', TRUE, 'A0bC'],
-      ['Zx%ABcDDD123 ', FALSE, 'zxAbcDdd123'],
+      ['Zx%ABcDDD123 ', FALSE, 'zxABcDDD123'],
     ];
   }
 
