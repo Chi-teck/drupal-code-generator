@@ -1,0 +1,11 @@
+/**
+ * Implements hook_block_alter().
+ */
+function {{ machine_name }}_block_alter(&$definitions) {
+  foreach ($definitions as $id => $definition) {
+    if (strpos($id, 'system_menu_block:') === 0) {
+      // Replace $definition properties: id, deriver, class, provider to ones
+      // provided by this custom module.
+    }
+  }
+}

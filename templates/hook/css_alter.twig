@@ -3,5 +3,6 @@
  */
 function {{ machine_name }}_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
   // Remove defaults.css file.
-  unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
+  $file_path = \Drupal::service('extension.list.module')->getPath('system') . '/defaults.css';
+  unset($css[$file_path]);
 }

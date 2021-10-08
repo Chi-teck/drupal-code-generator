@@ -22,6 +22,7 @@ function {{ machine_name }}_cron() {
     }
   }
   $ids = \Drupal::entityQuery('aggregator_feed')
+    ->accessCheck(FALSE)
     ->condition('queued', REQUEST_TIME - (3600 * 6), '<')
     ->execute();
   if ($ids) {

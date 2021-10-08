@@ -1,7 +1,7 @@
 /**
  * Implements hook_views_analyze().
  */
-function {{ machine_name }}_views_analyze(Drupal\views\ViewExecutable $view) {
+function {{ machine_name }}_views_analyze(\Drupal\views\ViewExecutable $view) {
   $messages = [];
 
   if ($view->display_handler->options['pager']['type'] == 'none') {

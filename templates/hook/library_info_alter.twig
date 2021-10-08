@@ -14,7 +14,7 @@ function {{ machine_name }}_library_info_alter(&$libraries, $extension) {
       // Since the replaced library files are no longer located in a directory
       // relative to the original extension, specify an absolute path (relative
       // to DRUPAL_ROOT / base_path()) to the new location.
-      $new_path = '/' . drupal_get_path('module', 'farbtastic_update') . '/js';
+      $new_path = '/' . \Drupal::service('extension.list.module')->getPath('farbtastic_update') . '/js';
       $new_js = [];
       $replacements = [
         $old_path . '/farbtastic.js' => $new_path . '/farbtastic-2.0.js',

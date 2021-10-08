@@ -1,7 +1,7 @@
 /**
  * Implements hook_file_validate().
  */
-function {{ machine_name }}_file_validate(Drupal\file\FileInterface $file) {
+function {{ machine_name }}_file_validate(\Drupal\file\FileInterface $file) {
   $errors = [];
 
   if (!$file->getFilename()) {

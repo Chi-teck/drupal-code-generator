@@ -1,0 +1,9 @@
+/**
+ * Implements hook_entity_form_mode_alter().
+ */
+function {{ machine_name }}_entity_form_mode_alter(&$form_mode, \Drupal\Core\Entity\EntityInterface $entity) {
+  // Change the form mode for users with Administrator role.
+  if ($entity->getEntityTypeId() == 'user' && $entity->hasRole('administrator')) {
+    $form_mode = 'my_custom_form_mode';
+  }
+}

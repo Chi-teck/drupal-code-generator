@@ -1,7 +1,7 @@
 /**
  * Implements hook_entity_predelete().
  */
-function {{ machine_name }}_entity_predelete(Drupal\Core\Entity\EntityInterface $entity) {
+function {{ machine_name }}_entity_predelete(\Drupal\Core\Entity\EntityInterface $entity) {
   $connection = \Drupal::database();
   // Count references to this entity in a custom table before they are removed
   // upon entity deletion.

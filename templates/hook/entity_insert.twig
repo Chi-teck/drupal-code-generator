@@ -1,7 +1,7 @@
 /**
  * Implements hook_entity_insert().
  */
-function {{ machine_name }}_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+function {{ machine_name }}_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
   // Insert the new entity into a fictional table of all entities.
   \Drupal::database()->insert('example_entity')
     ->fields([

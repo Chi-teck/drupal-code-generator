@@ -14,7 +14,7 @@ function {{ machine_name }}_update_N(&$sandbox) {
     'not null' => FALSE,
   ];
   $schema = Database::getConnection()->schema();
-  $schema->addField('mytable1', 'newcol', $spec);
+  $schema->addField('my_table', 'newcol', $spec);
 
   // Example of what to do if there is an error during your update.
   if ($some_error_condition_met) {
@@ -27,26 +27,26 @@ function {{ machine_name }}_update_N(&$sandbox) {
     // This must be the first run. Initialize the sandbox.
     $sandbox['progress'] = 0;
     $sandbox['current_pk'] = 0;
-    $sandbox['max'] = Database::getConnection()->query('SELECT COUNT(myprimarykey) FROM {mytable1}')->fetchField();
+    $sandbox['max'] = Database::getConnection()->query('SELECT COUNT([my_primary_key]) FROM {my_table}')->fetchField();
   }
 
   // Update in chunks of 20.
-  $records = Database::getConnection()->select('mytable1', 'm')
-    ->fields('m', ['myprimarykey', 'otherfield'])
-    ->condition('myprimarykey', $sandbox['current_pk'], '>')
+  $records = Database::getConnection()->select('my_table', 'm')
+    ->fields('m', ['my_primary_key', 'other_field'])
+    ->condition('my_primary_key', $sandbox['current_pk'], '>')
     ->range(0, 20)
-    ->orderBy('myprimarykey', 'ASC')
+    ->orderBy('my_primary_key', 'ASC')
     ->execute();
   foreach ($records as $record) {
     // Here, you would make an update something related to this record. In this
     // example, some text is added to the other field.
-    Database::getConnection()->update('mytable1')
-      ->fields(['otherfield' => $record->otherfield . '-suffix'])
-      ->condition('myprimarykey', $record->myprimarykey)
+    Database::getConnection()->update('my_table')
+      ->fields(['other_field' => $record->other_field . '-suffix'])
+      ->condition('my_primary_key', $record->my_primary_key)
       ->execute();
 
     $sandbox['progress']++;
-    $sandbox['current_pk'] = $record->myprimarykey;
+    $sandbox['current_pk'] = $record->my_primary_key;
   }
 
   $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
