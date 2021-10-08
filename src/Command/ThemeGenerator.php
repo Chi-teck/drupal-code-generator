@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command;
  */
 abstract class ThemeGenerator extends DrupalGenerator {
 
-  protected $nameQuestion = 'Theme name';
-  protected $machineNameQuestion = 'Theme machine name';
-  protected $extensionType = self::EXTENSION_TYPE_THEME;
+  protected ?string $nameQuestion = 'Theme name';
+  protected ?string $machineNameQuestion = 'Theme machine name';
+  protected ?int $extensionType = self::EXTENSION_TYPE_THEME;
 
 }

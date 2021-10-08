@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command\Plugin;
  */
 final class QueueWorker extends PluginGenerator {
 
-  protected $name = 'plugin:queue-worker';
-  protected $description = 'Generates queue worker plugin';
-  protected $alias = 'queue-worker';
+  protected string $name = 'plugin:queue-worker';
+  protected string $description = 'Generates queue worker plugin';
+  protected string $alias = 'queue-worker';
 
   /**
    * {@inheritdoc}

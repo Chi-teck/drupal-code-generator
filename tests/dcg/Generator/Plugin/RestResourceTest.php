@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class RestResourceTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\RestResource';
+  protected string $class = 'Plugin\RestResource';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Plugin label [Example]:' => 'Foo',
@@ -19,7 +19,7 @@ final class RestResourceTest extends BaseGeneratorTest {
     'Plugin class [FooResource]:' => 'FooResource',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'src/Plugin/rest/resource/FooResource.php' => '/_rest_resource.php',
   ];
 

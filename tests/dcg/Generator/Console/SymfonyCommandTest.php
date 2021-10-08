@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class SymfonyCommandTest extends BaseGeneratorTest {
 
-  protected $class = 'Console\SymfonyCommand';
+  protected string $class = 'Console\SymfonyCommand';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Command name [foo:example]:' => 'foo:bar',
@@ -21,7 +21,7 @@ final class SymfonyCommandTest extends BaseGeneratorTest {
     'Would you like to run the command with Drush [Yes]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'drush.services.yml' => '/_symfony_command_services.yml',
     'src/Command/BarCommand.php' => '/_symfony_command.php',
   ];

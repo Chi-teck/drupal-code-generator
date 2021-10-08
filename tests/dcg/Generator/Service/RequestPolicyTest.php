@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class RequestPolicyTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\RequestPolicy';
+  protected string $class = 'Service\RequestPolicy';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [Example]:' => 'Example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_request_policy.services.yml',
     'src/PageCache/Example.php' => '/_request_policy.php',
   ];

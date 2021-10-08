@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ProcessTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Migrate\Process';
+  protected string $class = 'Plugin\Migrate\Process';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Plugin ID [example_example]:' => 'example_qux',
     'Plugin class [Qux]:' => 'Qux',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'src/Plugin/migrate/process/Qux.php' => '/_process.php',
   ];
 

@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class ModuleInfo extends ModuleGenerator {
 
-  protected $name = 'yml:module-info';
-  protected $description = 'Generates a module info yml file';
-  protected $alias = 'module-info';
-  protected $label = 'Info (module)';
+  protected string $name = 'yml:module-info';
+  protected string $description = 'Generates a module info yml file';
+  protected string $alias = 'module-info';
+  protected string $label = 'Info (module)';
 
   /**
    * {@inheritdoc}

@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 class {{ class }} extends ModuleGenerator {
 
-  protected $name = '{{ command_name }}';
-  protected $description = '{{ description }}';
-  protected $alias = '{{ alias }}';
-  protected $templatePath = __DIR__;
+  protected string $name = '{{ command_name }}';
+  protected string $description = '{{ description }}';
+  protected string $alias = '{{ alias }}';
+  protected string $templatePath = __DIR__;
 
   /**
    * {@inheritdoc}
    */
-  protected function generate() :void {
-    $vars = &$this->collectDefault();
+  protected function generate(array &$vars) :void {
+    $this->collectDefault($vars);
     $vars['class'] = $this->ask('Class', '{machine_name|camelize}');
 
     // @DCG The template should be located under directory specified in

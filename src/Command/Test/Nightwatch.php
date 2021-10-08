@@ -10,9 +10,9 @@ use DrupalCodeGenerator\Utils;
  */
 final class Nightwatch extends ModuleGenerator {
 
-  protected $name = 'test:nightwatch';
-  protected $description = 'Generates a nightwatch test';
-  protected $alias = 'nightwatch-test';
+  protected string $name = 'test:nightwatch';
+  protected string $description = 'Generates a nightwatch test';
+  protected string $alias = 'nightwatch-test';
 
   /**
    * {@inheritdoc}

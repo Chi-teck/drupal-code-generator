@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
  */
 final class Field extends PluginGenerator {
 
-  protected $name = 'plugin:views:field';
-  protected $description = 'Generates views field plugin';
-  protected $alias = 'views-field';
+  protected string $name = 'plugin:views:field';
+  protected string $description = 'Generates views field plugin';
+  protected string $alias = 'views-field';
 
   /**
    * {@inheritdoc}

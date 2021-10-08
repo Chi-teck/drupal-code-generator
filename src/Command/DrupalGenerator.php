@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,14 +22,14 @@ abstract class DrupalGenerator extends Generator {
    *
    * @var string|null
    */
-  protected $nameQuestion = 'Extension name';
+  protected ?string $nameQuestion = 'Extension name';
 
   /**
    * Machine name question.
    *
    * @var string|null
    */
-  protected $machineNameQuestion = 'Extension machine name';
+  protected ?string $machineNameQuestion = 'Extension machine name';
 
   /**
    * Indicates that generated code is a new Drupal extension.
@@ -42,14 +43,14 @@ abstract class DrupalGenerator extends Generator {
    *
    * @var bool
    */
-  protected $isNewExtension = FALSE;
+  protected bool $isNewExtension = FALSE;
 
   /**
    * Extension type (module, theme, profile).
    *
    * @var int|null
    */
-  protected $extensionType;
+  protected ?int $extensionType = NULL;
 
   /**
    * Drupal context.
@@ -58,7 +59,7 @@ abstract class DrupalGenerator extends Generator {
    *
    * @var \DrupalCodeGenerator\Helper\DrupalContext|null
    */
-  protected $drupalContext;
+  protected ?DrupalContext $drupalContext = NULL;
 
   /**
    * {@inheritdoc}

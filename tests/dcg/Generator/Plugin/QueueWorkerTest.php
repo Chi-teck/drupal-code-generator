@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class QueueWorkerTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\QueueWorker';
+  protected string $class = 'Plugin\QueueWorker';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Plugin label [Example]:' => 'Test',
@@ -19,7 +19,7 @@ final class QueueWorkerTest extends BaseGeneratorTest {
     'Plugin class [FooBar]:' => 'FooBar',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'src/Plugin/QueueWorker/FooBar.php' => '/_queue_worker.php',
   ];
 

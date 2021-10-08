@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class BrowserTest extends BaseGeneratorTest {
 
-  protected $class = 'Test\Browser';
+  protected string $class = 'Test\Browser';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [ExampleTest]:' => 'ExampleTest',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'tests/src/Functional/ExampleTest.php' => '/_browser.php',
   ];
 

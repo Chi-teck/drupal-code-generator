@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class TwigExtensionTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\TwigExtension';
+  protected string $class = 'Service\TwigExtension';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Class [ExampleTwigExtension]:' => 'ExampleTwigExtension',
@@ -20,7 +20,7 @@ final class TwigExtensionTest extends BaseGeneratorTest {
     '<2> Type the service name or use arrows up/down. Press enter to continue:' => "\n",
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.services.yml' => '/_twig_extension.services.yml',
     'src/ExampleTwigExtension.php' => '/_twig_extension.php',
   ];

@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class WebDriverTest extends BaseGeneratorTest {
 
-  protected $class = 'Test\WebDriver';
+  protected string $class = 'Test\WebDriver';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [ExampleTest]:' => 'ExampleTest',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'tests/src/FunctionalJavascript/ExampleTest.php' => '/_webdriver.php',
   ];
 

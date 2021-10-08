@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Generator;
  */
 final class DrushCommand extends Generator {
 
-  protected $name = 'console:drush-command';
-  protected $description = 'Generates Drush command';
-  protected $alias = 'drush-command';
+  protected string $name = 'console:drush-command';
+  protected string $description = 'Generates Drush command';
+  protected string $alias = 'drush-command';
 
   /**
    * {@inheritdoc}

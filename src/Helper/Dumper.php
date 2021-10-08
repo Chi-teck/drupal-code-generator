@@ -23,7 +23,7 @@ class Dumper extends Helper implements IOAwareInterface {
    *
    * @var \Symfony\Component\Filesystem\Filesystem
    */
-  public $filesystem;
+  public Filesystem $filesystem;
 
   /**
    * Constructs a generator command.

@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class HookTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\Hook';
+  protected string $class = 'Misc\Drupal_7\Hook';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Hook name:' => 'init',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.module' => '/_hook.module',
   ];
 

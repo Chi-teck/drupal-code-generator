@@ -9,11 +9,11 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
  */
 final class ThemeLibraries extends ThemeGenerator {
 
-  protected $name = 'yml:theme-libraries';
-  protected $description = 'Generates theme libraries yml file';
-  protected $alias = 'theme-libraries';
-  protected $label = 'Libraries (theme)';
-  protected $nameQuestion = NULL;
+  protected string $name = 'yml:theme-libraries';
+  protected string $description = 'Generates theme libraries yml file';
+  protected string $alias = 'theme-libraries';
+  protected string $label = 'Libraries (theme)';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

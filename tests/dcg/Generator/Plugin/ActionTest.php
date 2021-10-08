@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ActionTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Action';
+  protected string $class = 'Plugin\Action';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Action label [Update node title]:' => 'Foo',
@@ -21,7 +21,7 @@ final class ActionTest extends BaseGeneratorTest {
     'Make the action configurable? [No]:' => 'yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/example.schema.yml' => '/_action_schema.yml',
     'src/Plugin/Action/Foo.php' => '/_action.php',
   ];

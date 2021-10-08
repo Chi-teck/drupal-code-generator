@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class UninstallValidatorTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\UninstallValidator';
+  protected string $class = 'Service\UninstallValidator';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [FooUninstallValidator]:' => 'ExampleUninstallValidator',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_uninstall_validator.services.yml',
     'src/ExampleUninstallValidator.php' => '/_uninstall_validator.php',
   ];

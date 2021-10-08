@@ -7,13 +7,13 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class RenderElementTest extends BaseGeneratorTest {
 
-  protected $class = 'RenderElement';
+  protected string $class = 'RenderElement';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module machine name [%default_machine_name%]:' => 'foo',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'src/Element/Entity.php' => '/_render_element.php',
   ];
 

@@ -7,14 +7,14 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class ServiceProviderTest extends BaseGeneratorTest {
 
-  protected $class = 'ServiceProvider';
+  protected string $class = 'ServiceProvider';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'src/ExampleServiceProvider.php' => '/_service_provider.php',
   ];
 

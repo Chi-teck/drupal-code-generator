@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class EventSubscriber extends ModuleGenerator {
 
-  protected $name = 'service:event-subscriber';
-  protected $description = 'Generates an event subscriber';
-  protected $alias = 'event-subscriber';
+  protected string $name = 'service:event-subscriber';
+  protected string $description = 'Generates an event subscriber';
+  protected string $alias = 'event-subscriber';
 
   /**
    * {@inheritdoc}

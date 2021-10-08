@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command;
  */
 final class PluginManager extends ModuleGenerator {
 
-  protected $name = 'plugin-manager';
-  protected $description = 'Generates plugin manager';
+  protected string $name = 'plugin-manager';
+  protected string $description = 'Generates plugin manager';
 
   /**
    * {@inheritdoc}

@@ -9,11 +9,11 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class ModuleLibraries extends ModuleGenerator {
 
-  protected $name = 'yml:module-libraries';
-  protected $description = 'Generates module libraries yml file';
-  protected $alias = 'module-libraries';
-  protected $label = 'Libraries (module)';
-  protected $nameQuestion = NULL;
+  protected string $name = 'yml:module-libraries';
+  protected string $description = 'Generates module libraries yml file';
+  protected string $alias = 'module-libraries';
+  protected string $label = 'Libraries (module)';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

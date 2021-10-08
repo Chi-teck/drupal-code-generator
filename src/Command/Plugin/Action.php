@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command\Plugin;
  */
 final class Action extends PluginGenerator {
 
-  protected $name = 'plugin:action';
-  protected $description = 'Generates action plugin';
-  protected $alias = 'action';
+  protected string $name = 'plugin:action';
+  protected string $description = 'Generates action plugin';
+  protected string $alias = 'action';
   protected $pluginLabelQuestion = 'Action label';
   protected $pluginLabelDefault = 'Update node title';
 

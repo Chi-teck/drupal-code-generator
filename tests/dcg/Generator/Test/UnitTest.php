@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class UnitTest extends BaseGeneratorTest {
 
-  protected $class = 'Test\Unit';
+  protected string $class = 'Test\Unit';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [ExampleTest]:' => 'ExampleTest',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'tests/src/Unit/ExampleTest.php' => '/_unit.php',
   ];
 

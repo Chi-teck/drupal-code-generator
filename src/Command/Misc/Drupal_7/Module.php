@@ -10,9 +10,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Module extends ModuleGenerator {
 
-  protected $name = 'misc:d7:module';
-  protected $description = 'Generates Drupal 7 module';
-  protected $templatePath = Application::TEMPLATE_PATH . 'misc/d7';
+  protected string $name = 'misc:d7:module';
+  protected string $description = 'Generates Drupal 7 module';
+  protected string $templatePath = Application::TEMPLATE_PATH . 'misc/d7';
 
   /**
    * {@inheritdoc}

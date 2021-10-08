@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ConditionTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Condition';
+  protected string $class = 'Plugin\Condition';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Example',
@@ -19,7 +19,7 @@ final class ConditionTest extends BaseGeneratorTest {
     'Plugin class [Example]:' => 'Example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/foo.schema.yml' => '/_condition_schema.yml',
     'src/Plugin/Condition/Example.php' => '/_condition.php',
   ];

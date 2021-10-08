@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command\Misc\Drupal_7\CToolsPlugin;
  */
 final class Relationship extends BasePlugin {
 
-  protected $name = 'misc:d7:ctools-plugin:relationship';
-  protected $description = 'Generates CTools relationship plugin';
+  protected string $name = 'misc:d7:ctools-plugin:relationship';
+  protected string $description = 'Generates CTools relationship plugin';
   protected $template = 'relationship';
   protected $subDirectory = 'plugins/relationships';
 

@@ -7,16 +7,16 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class ComposerTest extends BaseGeneratorTest {
 
-  protected $class = 'Composer';
+  protected string $class = 'Composer';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Project machine name [%default_machine_name%]:' => 'example',
     'Description:' => 'Example description.',
     'Type [drupal-module]:' => 'drupal-module',
     'Is this project hosted on drupal.org? [No]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'composer.json' => '/_composer.json',
   ];
 

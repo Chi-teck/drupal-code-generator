@@ -12,7 +12,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    *
    * @var \DrupalCodeGenerator\Asset\Asset[]
    */
-  private $assets;
+  private array $assets;
 
   /**
    * AssetCollection constructor.

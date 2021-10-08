@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Kernel extends ModuleGenerator {
 
-  protected $name = 'test:kernel';
-  protected $description = 'Generates a kernel based test';
-  protected $alias = 'kernel-test';
+  protected string $name = 'test:kernel';
+  protected string $description = 'Generates a kernel based test';
+  protected string $alias = 'kernel-test';
 
   /**
    * {@inheritdoc}

@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Middleware extends ModuleGenerator {
 
-  protected $name = 'service:middleware';
-  protected $description = 'Generates a middleware';
-  protected $alias = 'middleware';
+  protected string $name = 'service:middleware';
+  protected string $description = 'Generates a middleware';
+  protected string $alias = 'middleware';
 
   /**
    * {@inheritdoc}

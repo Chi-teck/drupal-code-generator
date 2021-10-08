@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ProjectTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Project';
+  protected string $class = 'Misc\Project';
 
   /**
    * Test callback.

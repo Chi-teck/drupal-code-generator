@@ -10,9 +10,9 @@ use DrupalCodeGenerator\Helper\DrupalContext;
  */
 final class PhpStormMetadata extends DrupalGenerator {
 
-  protected $name = 'phpstorm-metadata';
-  protected $description = 'Generates PhpStorm metadata';
-  protected $label = 'PhpStorm metadata';
+  protected string $name = 'phpstorm-metadata';
+  protected string $description = 'Generates PhpStorm metadata';
+  protected string $label = 'PhpStorm metadata';
 
   /**
    * {@inheritdoc}

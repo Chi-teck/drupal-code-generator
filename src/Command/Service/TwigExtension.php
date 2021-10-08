@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class TwigExtension extends ModuleGenerator {
 
-  protected $name = 'service:twig-extension';
-  protected $description = 'Generates Twig extension service';
-  protected $alias = 'twig-extension';
+  protected string $name = 'service:twig-extension';
+  protected string $description = 'Generates Twig extension service';
+  protected string $alias = 'twig-extension';
 
   /**
    * {@inheritdoc}

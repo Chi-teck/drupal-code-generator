@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
  */
 final class Type extends PluginGenerator {
 
-  protected $name = 'plugin:field:type';
-  protected $description = 'Generates field type plugin';
-  protected $alias = 'field-type';
+  protected string $name = 'plugin:field:type';
+  protected string $description = 'Generates field type plugin';
+  protected string $alias = 'field-type';
   protected $pluginClassSuffix = 'Item';
 
   /**

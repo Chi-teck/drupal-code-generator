@@ -9,13 +9,13 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ModuleLibrariesTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\ModuleLibraries';
+  protected string $class = 'Yml\ModuleLibraries';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.libraries.yml' => '/_module_libraries.yml',
   ];
 

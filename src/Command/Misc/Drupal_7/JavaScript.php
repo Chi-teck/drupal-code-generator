@@ -9,8 +9,8 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class JavaScript extends ModuleGenerator {
 
-  protected $name = 'misc:d7:javascript';
-  protected $description = 'Generates Drupal 7 JavaScript file';
+  protected string $name = 'misc:d7:javascript';
+  protected string $description = 'Generates Drupal 7 JavaScript file';
 
   /**
    * {@inheritdoc}

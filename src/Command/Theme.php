@@ -11,9 +11,9 @@ use DrupalCodeGenerator\Utils;
  */
 final class Theme extends ThemeGenerator {
 
-  protected $name = 'theme';
-  protected $description = 'Generates Drupal theme';
-  protected $isNewExtension = TRUE;
+  protected string $name = 'theme';
+  protected string $description = 'Generates Drupal theme';
+  protected bool $isNewExtension = TRUE;
 
   /**
    * {@inheritdoc}

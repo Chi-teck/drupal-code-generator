@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Action extends ModuleGenerator {
 
-  protected $name = 'yml:links:action';
-  protected $description = 'Generates a links.action yml file';
-  protected $alias = 'action-links';
-  protected $nameQuestion = NULL;
+  protected string $name = 'yml:links:action';
+  protected string $description = 'Generates a links.action yml file';
+  protected string $alias = 'action-links';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class BreadcrumbBuilderTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\BreadcrumbBuilder';
+  protected string $class = 'Service\BreadcrumbBuilder';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Class [ExampleBreadcrumbBuilder]:' => 'ExampleBreadcrumbBuilder',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.services.yml' => '/_breadcrumb.services.yml',
     'src/ExampleBreadcrumbBuilder.php' => '/_breadcrumb_builder.php',
   ];

@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Permissions extends ModuleGenerator {
 
-  protected $name = 'yml:permissions';
-  protected $description = 'Generates a permissions yml file';
-  protected $alias = 'permissions';
-  protected $nameQuestion = NULL;
+  protected string $name = 'yml:permissions';
+  protected string $description = 'Generates a permissions yml file';
+  protected string $alias = 'permissions';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

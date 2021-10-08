@@ -7,12 +7,12 @@ namespace DrupalCodeGenerator\Command\Form;
  */
 final class Config extends FormGenerator {
 
-  protected $name = 'form:config';
-  protected $description = 'Generates a configuration form';
-  protected $alias = 'config-form';
-  protected $defaultPathPrefix = '/admin/config/system';
-  protected $defaultPermission = 'administer site configuration';
-  protected $defaultClass = 'SettingsForm';
+  protected string $name = 'form:config';
+  protected string $description = 'Generates a configuration form';
+  protected string $alias = 'config-form';
+  protected ?string $defaultPathPrefix = '/admin/config/system';
+  protected string $defaultPermission = 'administer site configuration';
+  protected string $defaultClass = 'SettingsForm';
 
   /**
    * {@inheritdoc}

@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class RouteSubscriberTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\RouteSubscriber';
+  protected string $class = 'Service\RouteSubscriber';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [FooRouteSubscriber]:' => 'BarRouteSubscriber',
     'Would you like to inject dependencies? [No]:' => 'No',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_route_subscriber.services.yml',
     'src/EventSubscriber/BarRouteSubscriber.php' => '/_route_subscriber.php',
   ];

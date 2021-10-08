@@ -9,14 +9,14 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class InstallFileTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\InstallFile';
+  protected string $class = 'Misc\Drupal_7\InstallFile';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.install' => '/_.install',
   ];
 

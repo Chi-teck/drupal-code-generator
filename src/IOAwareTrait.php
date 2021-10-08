@@ -14,7 +14,7 @@ trait IOAwareTrait {
    *
    * @var \DrupalCodeGenerator\Style\GeneratorStyleInterface
    */
-  protected $io;
+  protected GeneratorStyleInterface $io;
 
   /**
    * Sets the console IO.

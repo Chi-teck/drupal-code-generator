@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class LayoutTest extends BaseGeneratorTest {
 
-  protected $class = 'Layout';
+  protected string $class = 'Layout';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',
     'Layout name [Example]:' => 'Foo bar',
     'Layout machine name [foo_bar]:' => 'foo_bar',
@@ -18,7 +18,7 @@ final class LayoutTest extends BaseGeneratorTest {
     'Would you like to create CSS file for this layout? [No]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.layouts.yml' => '/_layout/_layouts.yml',
     'example.libraries.yml' => '/_layout/_libraries.yml',
     'layouts/foo_bar/foo-bar.css' => '/_layout/_styles.css',

@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class LoggerTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\Logger';
+  protected string $class = 'Service\Logger';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [FileLog]:' => 'FileLog',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_logger.services.yml',
     'src/Logger/FileLog.php' => '/_logger.php',
   ];

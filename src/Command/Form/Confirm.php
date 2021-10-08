@@ -7,11 +7,11 @@ namespace DrupalCodeGenerator\Command\Form;
  */
 final class Confirm extends FormGenerator {
 
-  protected $name = 'form:confirm';
-  protected $description = 'Generates a confirmation form';
-  protected $alias = 'confirm-form';
-  protected $defaultPermission = 'administer site configuration';
-  protected $defaultClass = 'ExampleConfirmForm';
+  protected string $name = 'form:confirm';
+  protected string $description = 'Generates a confirmation form';
+  protected string $alias = 'confirm-form';
+  protected string $defaultPermission = 'administer site configuration';
+  protected string $defaultClass = 'ExampleConfirmForm';
 
   /**
    * {@inheritdoc}

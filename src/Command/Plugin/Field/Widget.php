@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
  */
 final class Widget extends PluginGenerator {
 
-  protected $name = 'plugin:field:widget';
-  protected $description = 'Generates field widget plugin';
-  protected $alias = 'field-widget';
+  protected string $name = 'plugin:field:widget';
+  protected string $description = 'Generates field widget plugin';
+  protected string $alias = 'field-widget';
   protected $pluginClassSuffix = 'Widget';
 
   /**

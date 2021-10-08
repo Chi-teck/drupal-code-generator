@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class ContentEntityTest extends BaseGeneratorTest {
 
-  protected $class = 'ContentEntity';
+  protected string $class = 'ContentEntity';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Entity type label [Foo]:' => 'Example',
@@ -31,7 +31,7 @@ final class ContentEntityTest extends BaseGeneratorTest {
     'Create REST configuration for the entity? [No]:' => 'No',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.links.action.yml' => '/_content_entity/foo.links.action.yml',
     'foo.links.contextual.yml' => '/_content_entity/foo.links.contextual.yml',
     'foo.links.menu.yml' => '/_content_entity/foo.links.menu.yml',

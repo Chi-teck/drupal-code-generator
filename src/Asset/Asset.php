@@ -14,21 +14,21 @@ abstract class Asset {
    *
    * @var string
    */
-  protected $path;
+  protected string $path;
 
   /**
    * Asset mode.
    *
    * @var int
    */
-  protected $mode;
+  protected int $mode;
 
   /**
    * Template variables.
    *
    * @var array
    */
-  protected $vars = [];
+  protected array $vars = [];
 
   /**
    * Asset constructor.

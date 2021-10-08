@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class CacheContextTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\CacheContext';
+  protected string $class = 'Service\CacheContext';
 
   /**
    * Test callback.

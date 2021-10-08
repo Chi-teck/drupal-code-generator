@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Browser extends ModuleGenerator {
 
-  protected $name = 'test:browser';
-  protected $description = 'Generates a browser based test';
-  protected $alias = 'browser-test';
+  protected string $name = 'test:browser';
+  protected string $description = 'Generates a browser based test';
+  protected string $alias = 'browser-test';
 
   /**
    * {@inheritdoc}

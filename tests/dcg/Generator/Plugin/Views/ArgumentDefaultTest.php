@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ArgumentDefaultTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Views\ArgumentDefault';
+  protected string $class = 'Plugin\Views\ArgumentDefault';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Example',
@@ -23,7 +23,7 @@ final class ArgumentDefaultTest extends BaseGeneratorTest {
     '<2> Type the service name or use arrows up/down. Press enter to continue:' => "\n",
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/foo.views.schema.yml' => '/_argument_default_schema.yml',
     'src/Plugin/views/argument_default/Example.php' => '/_argument_default.php',
   ];

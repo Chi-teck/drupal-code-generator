@@ -9,14 +9,14 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class RoutingTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\Routing';
+  protected string $class = 'Yml\Routing';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.routing.yml' => '/_routing.yml',
   ];
 

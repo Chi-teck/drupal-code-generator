@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
  */
 final class ArgumentDefault extends PluginGenerator {
 
-  protected $name = 'plugin:views:argument-default';
-  protected $description = 'Generates views default argument plugin';
-  protected $alias = 'views-argument-default';
+  protected string $name = 'plugin:views:argument-default';
+  protected string $description = 'Generates views default argument plugin';
+  protected string $alias = 'views-argument-default';
 
   /**
    * {@inheritdoc}

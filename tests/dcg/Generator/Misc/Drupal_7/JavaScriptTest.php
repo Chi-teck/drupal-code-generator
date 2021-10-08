@@ -9,14 +9,14 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class JavaScriptTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\JavaScript';
+  protected string $class = 'Misc\Drupal_7\JavaScript';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Another example',
     'Module machine name [another_example]:' => 'another_example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'another-example.js' => '/_javascript.js',
   ];
 

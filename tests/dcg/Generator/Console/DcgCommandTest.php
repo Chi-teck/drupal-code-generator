@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class DcgCommandTest extends BaseGeneratorTest {
 
-  protected $class = 'Console\DcgCommand';
+  protected string $class = 'Console\DcgCommand';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Command name [custom:example]:' => 'custom:example',
     'Command description:' => 'Some description',
     'Command alias [example]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'custom/Example.php' => '/_dcg_command.php',
     'custom/example.twig' => '/_dcg_command_template.twig',
   ];

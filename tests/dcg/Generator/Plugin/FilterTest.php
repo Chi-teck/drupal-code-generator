@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class FilterTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Filter';
+  protected string $class = 'Plugin\Filter';
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/foo.schema.yml' => '/_filter_schema.yml',
     'src/Plugin/Filter/Example.php' => '/_filter.php',
   ];

@@ -7,14 +7,14 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class ModuleFileTest extends BaseGeneratorTest {
 
-  protected $class = 'ModuleFile';
+  protected string $class = 'ModuleFile';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.module' => '/_module_file.module',
   ];
 

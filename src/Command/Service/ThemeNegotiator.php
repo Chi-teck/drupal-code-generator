@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class ThemeNegotiator extends ModuleGenerator {
 
-  protected $name = 'service:theme-negotiator';
-  protected $description = 'Generates a theme negotiator';
-  protected $alias = 'theme-negotiator';
+  protected string $name = 'service:theme-negotiator';
+  protected string $description = 'Generates a theme negotiator';
+  protected string $alias = 'theme-negotiator';
 
   /**
    * {@inheritdoc}

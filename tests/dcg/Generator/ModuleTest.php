@@ -7,10 +7,10 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class ModuleTest extends BaseGeneratorTest {
 
-  protected $class = 'Module';
-  protected $fixturePath = __DIR__ . '/_module/';
+  protected string $class = 'Module';
+  protected string $fixturePath = __DIR__ . '/_module/';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Module description [Provides additional functionality for the site.]:' => 'Some description.',
@@ -26,7 +26,7 @@ final class ModuleTest extends BaseGeneratorTest {
     'Would you like to create settings form? [No]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo/foo.info.yml' => 'foo.info.yml',
     'foo/foo.install' => 'foo.install',
     'foo/foo.libraries.yml' => 'foo.libraries.yml',

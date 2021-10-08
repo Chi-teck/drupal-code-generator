@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command;
  */
 final class ModuleFile extends ModuleGenerator {
 
-  protected $name = 'module-file';
-  protected $description = 'Generates a module file';
+  protected string $name = 'module-file';
+  protected string $description = 'Generates a module file';
 
   /**
    * {@inheritdoc}

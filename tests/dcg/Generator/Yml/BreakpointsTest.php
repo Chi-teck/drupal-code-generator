@@ -9,13 +9,13 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class BreakpointsTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\Breakpoints';
+  protected string $class = 'Yml\Breakpoints';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Theme machine name [%default_machine_name%]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.breakpoints.yml' => '/_breakpoints.yml',
   ];
 

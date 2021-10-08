@@ -9,14 +9,14 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ModuleFileTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\ModuleFile';
+  protected string $class = 'Misc\Drupal_7\ModuleFile';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.module' => '/_.module',
   ];
 

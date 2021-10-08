@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ConfigTest extends BaseGeneratorTest {
 
-  protected $class = 'Form\Config';
+  protected string $class = 'Form\Config';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [SettingsForm]:' => 'SettingsForm',
@@ -26,7 +26,7 @@ final class ConfigTest extends BaseGeneratorTest {
     'Parent menu item [system.admin_config_content]:' => 'system.admin_config_content',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.links.menu.yml' => '/_config_menu.links.yml',
     'foo.routing.yml' => '/_config_routing.yml',
     'config/schema/foo.schema.yml' => '/_config-schema.yml',

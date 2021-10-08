@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Tests\BaseTestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Base class for generators tests.
@@ -16,7 +17,7 @@ abstract class BaseGeneratorTest extends BaseTestCase {
    *
    * @var string
    */
-  protected $class;
+  protected string $class;
 
   /**
    * The interaction.
@@ -26,28 +27,28 @@ abstract class BaseGeneratorTest extends BaseTestCase {
    *
    * @var array
    */
-  protected $interaction = [];
+  protected array $interaction = [];
 
   /**
    * The fixtures.
    *
    * @var array
    */
-  protected $fixtures = [];
+  protected array $fixtures = [];
 
   /**
    * Command to test.
    *
    * @var \Symfony\Component\Console\Command\Command
    */
-  protected $command;
+  protected Command $command;
 
   /**
    * Path to fixtures.
    *
    * @var string
    */
-  protected $fixturePath = '';
+  protected string $fixturePath = '';
 
   /**
    * Test callback.

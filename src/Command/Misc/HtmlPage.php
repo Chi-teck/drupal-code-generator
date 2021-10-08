@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\Generator;
  */
 final class HtmlPage extends Generator {
 
-  protected $name = 'misc:html-page';
-  protected $description = 'Generates a simple html page';
-  protected $alias = 'html-page';
-  protected $label = 'HTML page';
+  protected string $name = 'misc:html-page';
+  protected string $description = 'Generates a simple html page';
+  protected string $alias = 'html-page';
+  protected string $label = 'HTML page';
 
   /**
    * {@inheritdoc}

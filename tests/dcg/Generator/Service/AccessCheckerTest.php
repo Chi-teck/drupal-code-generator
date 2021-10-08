@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class AccessCheckerTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\AccessChecker';
+  protected string $class = 'Service\AccessChecker';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Applies to [_foo]:' => '_foo',
     'Class [FooAccessChecker]:' => 'FooAccessChecker',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.services.yml' => '/_access_checker.services.yml',
     'src/Access/FooAccessChecker.php' => '/_access_checker.php',
   ];

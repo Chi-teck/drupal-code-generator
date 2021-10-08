@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command;
  */
 final class Module extends ModuleGenerator {
 
-  protected $name = 'module';
-  protected $description = 'Generates Drupal module';
-  protected $isNewExtension = TRUE;
+  protected string $name = 'module';
+  protected string $description = 'Generates Drupal module';
+  protected bool $isNewExtension = TRUE;
 
   /**
    * {@inheritdoc}

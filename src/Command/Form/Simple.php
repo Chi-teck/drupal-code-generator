@@ -7,11 +7,11 @@ namespace DrupalCodeGenerator\Command\Form;
  */
 final class Simple extends FormGenerator {
 
-  protected $name = 'form:simple';
-  protected $description = 'Generates simple form';
-  protected $alias = 'form';
-  protected $defaultPermission = 'access content';
-  protected $defaultClass = 'ExampleForm';
+  protected string $name = 'form:simple';
+  protected string $description = 'Generates simple form';
+  protected string $alias = 'form';
+  protected string $defaultPermission = 'access content';
+  protected string $defaultClass = 'ExampleForm';
 
   /**
    * {@inheritdoc}

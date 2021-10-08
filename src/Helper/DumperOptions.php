@@ -24,20 +24,20 @@ final class DumperOptions {
    *
    * @var bool|null
    */
-  public $replace;
+  public ?bool $replace;
 
   /**
    * Print assets to stdout instead of dumping them to file system.
    *
    * @var bool
    */
-  public $dryRun;
+  public bool $dryRun;
 
   /**
    * Print full path to dumped assets.
    *
    * @var bool
    */
-  public $fullPath;
+  public bool $fullPath;
 
 }

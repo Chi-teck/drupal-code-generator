@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Utils;
  */
 final class Constraint extends PluginGenerator {
 
-  protected $name = 'plugin:constraint';
-  protected $description = 'Generates constraint plugin';
-  protected $alias = 'constraint';
+  protected string $name = 'plugin:constraint';
+  protected string $description = 'Generates constraint plugin';
+  protected string $alias = 'constraint';
 
   /**
    * {@inheritdoc}

@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Unit extends ModuleGenerator {
 
-  protected $name = 'test:unit';
-  protected $description = 'Generates a unit test';
-  protected $alias = 'unit-test';
+  protected string $name = 'test:unit';
+  protected string $description = 'Generates a unit test';
+  protected string $alias = 'unit-test';
 
   /**
    * {@inheritdoc}

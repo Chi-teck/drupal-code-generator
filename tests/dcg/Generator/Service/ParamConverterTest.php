@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ParamConverterTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\ParamConverter';
+  protected string $class = 'Service\ParamConverter';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Parameter type [example]:' => 'foo',
     'Class [FooParamConverter]:' => 'FooParamConverter',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.services.yml' => '/_param_converter.services.yml',
     'src/FooParamConverter.php' => '/_param_converter.php',
   ];

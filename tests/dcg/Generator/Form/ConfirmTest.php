@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ConfirmTest extends BaseGeneratorTest {
 
-  protected $class = 'Form\Confirm';
+  protected string $class = 'Form\Confirm';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [ExampleConfirmForm]:' => 'ExampleConfirmForm',
@@ -22,7 +22,7 @@ final class ConfirmTest extends BaseGeneratorTest {
     'Route permission [administer site configuration]:' => 'administer site configuration',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.routing.yml' => '/_confirm_routing.yml',
     'src/Form/ExampleConfirmForm.php' => '/_confirm.php',
   ];

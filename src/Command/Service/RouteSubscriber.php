@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class RouteSubscriber extends ModuleGenerator {
 
-  protected $name = 'service:route-subscriber';
-  protected $description = 'Generates a route subscriber';
-  protected $alias = 'route-subscriber';
+  protected string $name = 'service:route-subscriber';
+  protected string $description = 'Generates a route subscriber';
+  protected string $alias = 'route-subscriber';
 
   /**
    * {@inheritdoc}

@@ -7,15 +7,15 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class HookTest extends BaseGeneratorTest {
 
-  protected $class = 'Hook';
+  protected string $class = 'Hook';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Hook name:' => 'theme',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.module' => '/_hook.module',
   ];
 

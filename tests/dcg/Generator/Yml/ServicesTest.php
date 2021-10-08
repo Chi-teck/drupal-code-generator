@@ -9,13 +9,13 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ServicesTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\Services';
+  protected string $class = 'Yml\Services';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
   ];
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_services.yml',
   ];
 

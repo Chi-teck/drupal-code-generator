@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class SimpleTest extends BaseGeneratorTest {
 
-  protected $class = 'Form\Simple';
+  protected string $class = 'Form\Simple';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [ExampleForm]:' => 'ExampleForm',
@@ -22,7 +22,7 @@ final class SimpleTest extends BaseGeneratorTest {
     'Route permission [access content]:' => 'access content',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.routing.yml' => '/_simple_routing.yml',
     'src/Form/ExampleForm.php' => '/_simple.php',
   ];

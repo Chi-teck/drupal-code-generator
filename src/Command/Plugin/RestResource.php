@@ -7,10 +7,10 @@ namespace DrupalCodeGenerator\Command\Plugin;
  */
 final class RestResource extends PluginGenerator {
 
-  protected $name = 'plugin:rest-resource';
-  protected $description = 'Generates rest resource plugin';
-  protected $alias = 'rest-resource';
-  protected $label = 'REST resource';
+  protected string $name = 'plugin:rest-resource';
+  protected string $description = 'Generates rest resource plugin';
+  protected string $alias = 'rest-resource';
+  protected string $label = 'REST resource';
   protected $pluginClassSuffix = 'Resource';
 
   /**

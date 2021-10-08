@@ -10,9 +10,9 @@ use DrupalCodeGenerator\Utils;
  */
 final class SymfonyCommand extends ModuleGenerator {
 
-  protected $name = 'console:symfony-command';
-  protected $description = 'Generates Symfony console command';
-  protected $alias = 'symfony-command';
+  protected string $name = 'console:symfony-command';
+  protected string $description = 'Generates Symfony console command';
+  protected string $alias = 'symfony-command';
 
   /**
    * {@inheritdoc}

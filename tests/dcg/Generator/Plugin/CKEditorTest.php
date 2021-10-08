@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class CKEditorTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\CKEditor';
+  protected string $class = 'Plugin\CKEditor';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Example',
@@ -19,7 +19,7 @@ final class CKEditorTest extends BaseGeneratorTest {
     'Plugin class [Example]:' => 'Example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'js/plugins/example/dialogs/example.js' => '/_ckeditor/_dialog.js',
     'js/plugins/example/icons/example.png' => '/_ckeditor/_icon.png',
     'js/plugins/example/plugin.js' => '/_ckeditor/_plugin.js',

@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class DrushCommandTest extends BaseGeneratorTest {
 
-  protected $class = 'Console\DrushCommand';
+  protected string $class = 'Console\DrushCommand';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Command name:' => 'yo-yo',
     'Command alias [yo-]:' => 'yy',
     'Command description [Command description.]:' => 'Description.',
@@ -20,7 +20,7 @@ final class DrushCommandTest extends BaseGeneratorTest {
     'Command file [%default_machine_name%.drush.inc]:' => 'yo_yo.drush.inc',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'yo_yo.drush.inc' => '/_drush_command.inc',
   ];
 

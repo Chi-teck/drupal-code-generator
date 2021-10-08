@@ -9,13 +9,13 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 class ContextualLinksTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\Links\Contextual';
+  protected string $class = 'Yml\Links\Contextual';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.links.contextual.yml' => '/_links.contextual.yml',
   ];
 

@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class BreadcrumbBuilder extends ModuleGenerator {
 
-  protected $name = 'service:breadcrumb-builder';
-  protected $description = 'Generates a breadcrumb builder service';
-  protected $alias = 'breadcrumb-builder';
+  protected string $name = 'service:breadcrumb-builder';
+  protected string $description = 'Generates a breadcrumb builder service';
+  protected string $alias = 'breadcrumb-builder';
 
   /**
    * {@inheritdoc}

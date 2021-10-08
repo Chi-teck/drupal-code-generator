@@ -21,7 +21,7 @@ class QuestionHelper extends BaseQuestionHelper {
    *
    * @var int
    */
-  private $counter = 0;
+  private int $counter = 0;
 
   /**
    * {@inheritdoc}

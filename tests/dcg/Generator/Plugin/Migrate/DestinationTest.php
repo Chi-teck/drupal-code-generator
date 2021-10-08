@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class DestinationTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Migrate\Destination';
+  protected string $class = 'Plugin\Migrate\Destination';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Plugin ID [example_example]:' => 'example_bar',
     'Plugin class [Bar]:' => 'Bar',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'src/Plugin/migrate/destination/Bar.php' => '/_destination.php',
   ];
 

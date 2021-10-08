@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ContentTypeTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\CToolsPlugin\ContentType';
+  protected string $class = 'Misc\Drupal_7\CToolsPlugin\ContentType';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin name [Example]:' => 'Example',
@@ -21,7 +21,7 @@ final class ContentTypeTest extends BaseGeneratorTest {
     "Required context:\n  [0] -\n  [1] Node\n  [2] User\n  [3] Term" => 'Node',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'plugins/content_types/example.inc' => '/_content_type.inc',
   ];
 

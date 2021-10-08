@@ -23,35 +23,35 @@ final class GeneratorTester {
    *
    * @var \Symfony\Component\Console\Command\Command
    */
-  protected $command;
+  protected Command $command;
 
   /**
    * Command tester.
    *
    * @var \Symfony\Component\Console\Tester\CommandTester
    */
-  protected $commandTester;
+  protected CommandTester $commandTester;
 
   /**
    * Working directory.
    *
    * @var string
    */
-  protected $directory;
+  protected string $directory;
 
   /**
    * An associative array representing an interaction with the generator.
    *
    * @var array
    */
-  protected $interaction = [];
+  protected array $interaction = [];
 
   /**
    * The fixtures.
    *
    * @var array
    */
-  protected $fixtures = [];
+  protected array $fixtures = [];
 
   /**
    * GeneratorTester constructor.

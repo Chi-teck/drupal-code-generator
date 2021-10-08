@@ -9,13 +9,13 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 class ActionLinksTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\Links\Action';
+  protected string $class = 'Yml\Links\Action';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.links.action.yml' => '/_links.action.yml',
   ];
 

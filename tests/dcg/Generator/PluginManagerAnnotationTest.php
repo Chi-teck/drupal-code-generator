@@ -7,16 +7,16 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class PluginManagerAnnotationTest extends BaseGeneratorTest {
 
-  protected $class = 'PluginManager';
+  protected string $class = 'PluginManager';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin type [foo]:' => 'bar',
     "Discovery type [Annotation]:\n  [1] Annotation\n  [2] YAML\n  [3] Hook" => 'Annotation',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_plugin_manager_annotation/foo.services.yml',
     'src/BarInterface.php' => '/_plugin_manager_annotation/src/BarInterface.php',
     'src/BarPluginBase.php' => '/_plugin_manager_annotation/src/BarPluginBase.php',

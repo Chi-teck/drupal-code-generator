@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command;
  */
 final class Controller extends ModuleGenerator {
 
-  protected $name = 'controller';
-  protected $description = 'Generates a controller';
+  protected string $name = 'controller';
+  protected string $description = 'Generates a controller';
 
   /**
    * {@inheritdoc}

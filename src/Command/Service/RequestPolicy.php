@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class RequestPolicy extends ModuleGenerator {
 
-  protected $name = 'service:request-policy';
-  protected $description = 'Generates a request policy service';
-  protected $alias = 'request-policy';
+  protected string $name = 'service:request-policy';
+  protected string $description = 'Generates a request policy service';
+  protected string $alias = 'request-policy';
 
   /**
    * {@inheritdoc}

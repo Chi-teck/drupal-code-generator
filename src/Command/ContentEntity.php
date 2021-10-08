@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command;
  */
 final class ContentEntity extends ModuleGenerator {
 
-  protected $name = 'content-entity';
-  protected $description = 'Generates content entity module';
+  protected string $name = 'content-entity';
+  protected string $description = 'Generates content entity module';
 
   /**
    * {@inheritdoc}

@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command;
  */
 final class ConfigurationEntity extends ModuleGenerator {
 
-  protected $name = 'configuration-entity';
-  protected $description = 'Generates configuration entity module';
-  protected $alias = 'config-entity';
+  protected string $name = 'configuration-entity';
+  protected string $description = 'Generates configuration entity module';
+  protected string $alias = 'config-entity';
 
   /**
    * {@inheritdoc}

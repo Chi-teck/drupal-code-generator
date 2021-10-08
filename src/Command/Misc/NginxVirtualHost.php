@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Generator;
  */
 final class NginxVirtualHost extends Generator {
 
-  protected $name = 'misc:nginx-virtual-host';
-  protected $description = 'Generates an Nginx site configuration file';
-  protected $alias = 'nginx-virtual-host';
+  protected string $name = 'misc:nginx-virtual-host';
+  protected string $description = 'Generates an Nginx site configuration file';
+  protected string $alias = 'nginx-virtual-host';
 
   /**
    * {@inheritdoc}

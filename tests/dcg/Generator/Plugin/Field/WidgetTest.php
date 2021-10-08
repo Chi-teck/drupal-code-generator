@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class WidgetTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Field\Widget';
+  protected string $class = 'Plugin\Field\Widget';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Example',
@@ -20,7 +20,7 @@ final class WidgetTest extends BaseGeneratorTest {
     'Make the widget configurable? [No]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/foo.schema.yml' => '/_widget_schema.yml',
     'src/Plugin/Field/FieldWidget/ExampleWidget.php' => '/_widget.php',
   ];

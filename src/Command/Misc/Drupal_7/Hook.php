@@ -11,8 +11,8 @@ use Symfony\Component\Console\Question\Question;
  */
 final class Hook extends ModuleGenerator {
 
-  protected $name = 'misc:d7:hook';
-  protected $description = 'Generates a hook';
+  protected string $name = 'misc:d7:hook';
+  protected string $description = 'Generates a hook';
 
   /**
    * {@inheritdoc}

@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command;
  */
 final class InstallFile extends ModuleGenerator {
 
-  protected $name = 'install-file';
-  protected $description = 'Generates an install file';
+  protected string $name = 'install-file';
+  protected string $description = 'Generates an install file';
 
   /**
    * {@inheritdoc}

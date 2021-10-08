@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command\Plugin;
  */
 final class Block extends PluginGenerator {
 
-  protected $name = 'plugin:block';
-  protected $description = 'Generates block plugin';
-  protected $alias = 'block';
+  protected string $name = 'plugin:block';
+  protected string $description = 'Generates block plugin';
+  protected string $alias = 'block';
   protected $pluginClassSuffix = 'Block';
   protected $pluginLabelQuestion = 'Block admin label';
 

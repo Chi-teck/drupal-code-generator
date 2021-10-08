@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
  */
 final class Source extends PluginGenerator {
 
-  protected $name = 'plugin:migrate:source';
-  protected $description = 'Generates migrate source plugin';
-  protected $alias = 'migrate-source';
+  protected string $name = 'plugin:migrate:source';
+  protected string $description = 'Generates migrate source plugin';
+  protected string $alias = 'migrate-source';
   protected $pluginLabelQuestion = FALSE;
   protected $pluginIdDefault = '{machine_name}_example';
 

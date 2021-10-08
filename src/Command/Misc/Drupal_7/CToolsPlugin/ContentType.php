@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command\Misc\Drupal_7\CToolsPlugin;
  */
 final class ContentType extends BasePlugin {
 
-  protected $name = 'misc:d7:ctools-plugin:content-type';
-  protected $description = 'Generates CTools content type plugin';
+  protected string $name = 'misc:d7:ctools-plugin:content-type';
+  protected string $description = 'Generates CTools content type plugin';
   protected $template = 'content-type';
   protected $subDirectory = 'plugins/content_types';
 

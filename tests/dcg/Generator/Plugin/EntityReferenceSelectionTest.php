@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class EntityReferenceSelectionTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\EntityReferenceSelection';
+  protected string $class = 'Plugin\EntityReferenceSelection';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Entity type that can be referenced by this plugin [node]:' => 'node',
@@ -21,7 +21,7 @@ final class EntityReferenceSelectionTest extends BaseGeneratorTest {
     'Provide additional plugin configuration? [No]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/example.schema.yml' => '/_entity_reference_selection_schema.yml',
     'src/Plugin/EntityReferenceSelection/ExampleNodeSelection.php' => '/_entity_reference_selection.php',
   ];

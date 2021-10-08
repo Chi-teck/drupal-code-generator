@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Task extends ModuleGenerator {
 
-  protected $name = 'yml:links:task';
-  protected $description = 'Generates a links.task yml file';
-  protected $alias = 'task-links';
-  protected $nameQuestion = NULL;
+  protected string $name = 'yml:links:task';
+  protected string $description = 'Generates a links.task yml file';
+  protected string $alias = 'task-links';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

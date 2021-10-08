@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class NginxVirtualHostTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\NginxVirtualHost';
+  protected string $class = 'Misc\NginxVirtualHost';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Server name [example.com]:' => 'example.local',
     'Document root [/var/www/example.local/docroot]:' => '/var/www/example.local/docroot',
     'Public file system path [sites/default/files]:' => 'files',
@@ -19,7 +19,7 @@ final class NginxVirtualHostTest extends BaseGeneratorTest {
     'Address of a FastCGI server [unix:%socket%]:' => 'unix:/run/php/php7.0-fpm.sock',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.local' => '/_nginx_virtual_host',
   ];
 

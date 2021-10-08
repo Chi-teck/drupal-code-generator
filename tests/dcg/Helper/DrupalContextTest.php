@@ -7,6 +7,7 @@ use Drupal\Core\Extension\ThemeHandlerInterface;
 use DrupalCodeGenerator\Command\DrupalGenerator;
 use DrupalCodeGenerator\Helper\DrupalContext;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * A test for Drupal context helper.
@@ -18,7 +19,7 @@ final class DrupalContextTest extends TestCase {
    *
    * @var \Symfony\Component\DependencyInjection\ContainerInterface
    */
-  private $container;
+  private ContainerInterface $container;
 
   /**
    * {@inheritdoc}

@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class DrupalConsoleCommandTest extends BaseGeneratorTest {
 
-  protected $class = 'Console\DrupalConsoleCommand';
+  protected string $class = 'Console\DrupalConsoleCommand';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Command name [foo:example]:' => 'foo:example',
@@ -19,7 +19,7 @@ final class DrupalConsoleCommandTest extends BaseGeneratorTest {
     'Make the command aware of the Drupal site installation? [Yes]:' => 'no',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'console.services.yml' => '/_drupal_console_command_services.yml',
     'src/Command/FooExampleCommand.php' => '/_drupal_console_command.php',
   ];

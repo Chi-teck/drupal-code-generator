@@ -21,21 +21,21 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
    *
    * @var \Symfony\Component\Console\Input\InputInterface
    */
-  private $input;
+  private InputInterface $input;
 
   /**
    * Console output.
    *
    * @var \Symfony\Component\Console\Output\OutputInterface
    */
-  private $output;
+  private OutputInterface $output;
 
   /**
    * Question helper.
    *
    * @var \DrupalCodeGenerator\Helper\QuestionHelper
    */
-  private $questionHelper;
+  private QuestionHelper $questionHelper;
 
   /**
    * OutputStyle constructor.

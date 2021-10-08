@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class ModuleInfo extends ModuleGenerator {
 
-  protected $name = 'misc:d7:module-info';
-  protected $description = 'Generates Drupal 7 info file for a module';
-  protected $label = 'Info (module)';
+  protected string $name = 'misc:d7:module-info';
+  protected string $description = 'Generates Drupal 7 info file for a module';
+  protected string $label = 'Info (module)';
 
   /**
    * {@inheritdoc}

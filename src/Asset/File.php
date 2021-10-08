@@ -17,51 +17,51 @@ final class File extends Asset {
    *
    * @var string|null
    */
-  private $content;
+  private ?string $content = NULL;
 
   /**
    * Twig template to render header.
    *
    * @var string|null
    */
-  private $headerTemplate;
+  private ?string $headerTemplate = NULL;
 
   /**
    * Twig template to render main content.
    *
    * @var string|null
    */
-  private $template;
+  private ?string $template = NULL;
 
   /**
    * The template string to render.
    *
    * @var string|null
    */
-  private $inlineTemplate;
+  private ?string $inlineTemplate = NULL;
 
   /**
    * Action.
    *
    * An action to take if specified file already exists.
    *
-   * @var string
+   * @var int
    */
-  private $action = self::ACTION_REPLACE;
+  private int $action = self::ACTION_REPLACE;
 
   /**
    * Header size.
    *
    * @var int
    */
-  private $headerSize = 0;
+  private int $headerSize = 0;
 
   /**
    * Content resolver.
    *
    * @var callable|null
    */
-  private $resolver;
+  private $resolver = NULL;
 
   /**
    * {@inheritdoc}

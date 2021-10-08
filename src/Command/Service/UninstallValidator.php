@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class UninstallValidator extends ModuleGenerator {
 
-  protected $name = 'service:uninstall-validator';
-  protected $description = 'Generates a uninstall validator service';
-  protected $alias = 'uninstall-validator';
+  protected string $name = 'service:uninstall-validator';
+  protected string $description = 'Generates a uninstall validator service';
+  protected string $alias = 'uninstall-validator';
 
   /**
    * {@inheritdoc}

@@ -10,10 +10,10 @@ use DrupalCodeGenerator\Utils;
  */
 final class CKEditor extends PluginGenerator {
 
-  protected $name = 'plugin:ckeditor';
-  protected $description = 'Generates CKEditor plugin';
-  protected $alias = 'ckeditor';
-  protected $label = 'CKEditor';
+  protected string $name = 'plugin:ckeditor';
+  protected string $description = 'Generates CKEditor plugin';
+  protected string $alias = 'ckeditor';
+  protected string $label = 'CKEditor';
 
   /**
    * {@inheritdoc}

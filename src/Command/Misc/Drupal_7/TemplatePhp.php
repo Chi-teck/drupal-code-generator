@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
  */
 final class TemplatePhp extends ThemeGenerator {
 
-  protected $name = 'misc:d7:template.php';
-  protected $description = 'Generates Drupal 7 template.php file';
-  protected $alias = 'template.php';
-  protected $label = 'template.php';
+  protected string $name = 'misc:d7:template.php';
+  protected string $description = 'Generates Drupal 7 template.php file';
+  protected string $alias = 'template.php';
+  protected string $label = 'template.php';
 
   /**
    * {@inheritdoc}

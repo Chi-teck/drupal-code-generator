@@ -9,8 +9,8 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class ModuleFile extends ModuleGenerator {
 
-  protected $name = 'misc:d7:module-file';
-  protected $description = 'Generates Drupal 7 module file';
+  protected string $name = 'misc:d7:module-file';
+  protected string $description = 'Generates Drupal 7 module file';
 
   /**
    * {@inheritdoc}

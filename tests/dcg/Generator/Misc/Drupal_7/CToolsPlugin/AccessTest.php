@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class AccessTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\CToolsPlugin\Access';
+  protected string $class = 'Misc\Drupal_7\CToolsPlugin\Access';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin name [Example]:' => 'Example',
@@ -21,7 +21,7 @@ final class AccessTest extends BaseGeneratorTest {
     "Required context:\n  [0] -\n  [1] Node\n  [2] User\n  [3] Term" => 'User',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'plugins/access/example.inc' => '/_access.inc',
   ];
 

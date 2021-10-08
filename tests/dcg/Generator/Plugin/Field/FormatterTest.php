@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class FormatterTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Field\Formatter';
+  protected string $class = 'Plugin\Field\Formatter';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Zoo',
@@ -20,7 +20,7 @@ final class FormatterTest extends BaseGeneratorTest {
     'Make the formatter configurable? [No]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/foo.schema.yml' => '/_formatter_schema.yml',
     'src/Plugin/Field/FieldFormatter/ZooFormatter.php' => '/_formatter.php',
   ];

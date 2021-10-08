@@ -9,8 +9,8 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Test extends ModuleGenerator {
 
-  protected $name = 'misc:d7:test';
-  protected $description = 'Generates Drupal 7 test case';
+  protected string $name = 'misc:d7:test';
+  protected string $description = 'Generates Drupal 7 test case';
 
   /**
    * {@inheritdoc}

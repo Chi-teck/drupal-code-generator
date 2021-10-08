@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class KernelTest extends BaseGeneratorTest {
 
-  protected $class = 'Test\Kernel';
+  protected string $class = 'Test\Kernel';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [ExampleTest]:' => 'ExampleTest',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'tests/src/Kernel/ExampleTest.php' => '/_kernel.php',
   ];
 

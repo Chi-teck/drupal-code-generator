@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
  */
 final class Formatter extends PluginGenerator {
 
-  protected $name = 'plugin:field:formatter';
-  protected $description = 'Generates field formatter plugin';
-  protected $alias = 'field-formatter';
+  protected string $name = 'plugin:field:formatter';
+  protected string $description = 'Generates field formatter plugin';
+  protected string $alias = 'field-formatter';
   protected $pluginClassSuffix = 'Formatter';
 
   /**

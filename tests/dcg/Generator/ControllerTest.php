@@ -10,7 +10,7 @@ use DrupalCodeGenerator\Test\GeneratorTest;
  */
 final class ControllerTest extends GeneratorTest {
 
-  protected $fixtureDir = __DIR__;
+  protected string $fixtureDir = __DIR__;
 
   /**
    * Test callback.

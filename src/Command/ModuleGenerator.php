@@ -11,9 +11,9 @@ use Symfony\Component\Console\Question\Question;
  */
 abstract class ModuleGenerator extends DrupalGenerator {
 
-  protected $nameQuestion = 'Module name';
-  protected $machineNameQuestion = 'Module machine name';
-  protected $extensionType = self::EXTENSION_TYPE_MODULE;
+  protected ?string $nameQuestion = 'Module name';
+  protected ?string $machineNameQuestion = 'Module machine name';
+  protected ?int $extensionType = self::EXTENSION_TYPE_MODULE;
 
   /**
    * Adds an asset for service file.

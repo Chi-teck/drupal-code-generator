@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class StyleTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Views\Style';
+  protected string $class = 'Plugin\Views\Style';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Plugin label [Example]:' => 'Foo',
@@ -20,7 +20,7 @@ final class StyleTest extends BaseGeneratorTest {
     'Make the plugin configurable? [Yes]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.module' => '/_style.module',
     'templates/views-style-example-foo.html.twig' => '/_style.twig',
     'config/schema/example.schema.yml' => '/_style_schema.yml',

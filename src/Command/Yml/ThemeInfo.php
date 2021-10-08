@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
  */
 final class ThemeInfo extends ThemeGenerator {
 
-  protected $name = 'yml:theme-info';
-  protected $description = 'Generates a theme info yml file';
-  protected $alias = 'theme-info';
-  protected $label = 'Info (theme)';
+  protected string $name = 'yml:theme-info';
+  protected string $description = 'Generates a theme info yml file';
+  protected string $alias = 'theme-info';
+  protected string $label = 'Info (theme)';
 
   /**
    * {@inheritdoc}

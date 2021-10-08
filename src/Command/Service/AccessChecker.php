@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class AccessChecker extends ModuleGenerator {
 
-  protected $name = 'service:access-checker';
-  protected $description = 'Generates an access checker service';
-  protected $alias = 'access-checker';
+  protected string $name = 'service:access-checker';
+  protected string $description = 'Generates an access checker service';
+  protected string $alias = 'access-checker';
 
   /**
    * {@inheritdoc}

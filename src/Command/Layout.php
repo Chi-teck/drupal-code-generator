@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command;
  */
 final class Layout extends ModuleGenerator {
 
-  protected $name = 'layout';
-  protected $description = 'Generates a layout';
-  protected $nameQuestion = NULL;
+  protected string $name = 'layout';
+  protected string $description = 'Generates a layout';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

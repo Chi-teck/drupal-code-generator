@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class CustomTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\Custom';
+  protected string $class = 'Service\Custom';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Service name [foo.example]:' => 'foo.example',
@@ -23,7 +23,7 @@ final class CustomTest extends BaseGeneratorTest {
     '<4> Type the service name or use arrows up/down. Press enter to continue:' => "\n",
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_custom.services.yml',
     'src/Example.php' => '/_custom.php',
   ];

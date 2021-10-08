@@ -7,13 +7,15 @@ use DrupalCodeGenerator\Utils;
 
 /**
  * Implements console:dcg-command command.
+ *
+ * @todo Test this manually.
  */
 final class DcgCommand extends Generator {
 
-  protected $name = 'console:dcg-command';
-  protected $description = 'Generates DCG command';
-  protected $alias = 'dcg-command';
-  protected $label = 'DCG command';
+  protected string $name = 'console:dcg-command';
+  protected string $description = 'Generates DCG command';
+  protected string $alias = 'dcg-command';
+  protected string $label = 'DCG command';
 
   /**
    * {@inheritdoc}

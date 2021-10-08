@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class SettingsTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\Settings';
+  protected string $class = 'Misc\Drupal_7\Settings';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Database driver [mysql]:' => 'mysql',
     'Database name [drupal]:' => 'drupal',
     'Database user [root]:' => 'root',
     'Database password [123]:' => '123',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'settings.php' => '/_settings.php',
   ];
 

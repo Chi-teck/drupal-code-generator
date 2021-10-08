@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class MenuLinkTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\MenuLink';
+  protected string $class = 'Plugin\MenuLink';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Class [ExampleMenuLink]:' => 'FooMenuLink',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'src/Plugin/Menu/FooMenuLink.php' => '/_menu_link.php',
   ];
 

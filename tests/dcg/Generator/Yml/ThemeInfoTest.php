@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ThemeInfoTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\ThemeInfo';
+  protected string $class = 'Yml\ThemeInfo';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Theme name [%default_name%]:' => 'Example',
     'Theme machine name [example]:' => 'example',
     'Base theme [classy]:' => 'garland',
@@ -19,7 +19,7 @@ final class ThemeInfoTest extends BaseGeneratorTest {
     'Package [Custom]:' => 'Custom',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.info.yml' => '/_theme_info.yml',
   ];
 

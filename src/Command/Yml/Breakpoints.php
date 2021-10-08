@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
  */
 final class Breakpoints extends ThemeGenerator {
 
-  protected $name = 'yml:breakpoints';
-  protected $description = 'Generates a breakpoints yml file';
-  protected $alias = 'breakpoints';
-  protected $nameQuestion = NULL;
+  protected string $name = 'yml:breakpoints';
+  protected string $description = 'Generates a breakpoints yml file';
+  protected string $alias = 'breakpoints';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

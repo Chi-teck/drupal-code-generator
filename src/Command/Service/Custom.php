@@ -10,10 +10,10 @@ use DrupalCodeGenerator\Utils;
  */
 final class Custom extends ModuleGenerator {
 
-  protected $name = 'service:custom';
-  protected $description = 'Generates a custom Drupal service';
-  protected $alias = 'custom-service';
-  protected $label = 'Custom service';
+  protected string $name = 'service:custom';
+  protected string $description = 'Generates a custom Drupal service';
+  protected string $alias = 'custom-service';
+  protected string $label = 'Custom service';
 
   /**
    * {@inheritdoc}

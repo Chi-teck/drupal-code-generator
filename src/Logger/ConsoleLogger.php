@@ -18,14 +18,14 @@ class ConsoleLogger extends AbstractLogger {
    *
    * @var \Symfony\Component\Console\Output\OutputInterface
    */
-  protected $output;
+  protected OutputInterface $output;
 
   /**
    * Verbosity level map.
    *
    * @var array
    */
-  private $verbosityLevelMap = [
+  private array $verbosityLevelMap = [
     LogLevel::EMERGENCY => OutputInterface::VERBOSITY_NORMAL,
     LogLevel::ALERT => OutputInterface::VERBOSITY_NORMAL,
     LogLevel::CRITICAL => OutputInterface::VERBOSITY_NORMAL,

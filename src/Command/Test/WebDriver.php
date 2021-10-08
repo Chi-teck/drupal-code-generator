@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class WebDriver extends ModuleGenerator {
 
-  protected $name = 'test:webdriver';
-  protected $description = 'Generates a test that supports JavaScript';
-  protected $alias = 'webdriver-test';
-  protected $label = 'WebDriver';
+  protected string $name = 'test:webdriver';
+  protected string $description = 'Generates a test that supports JavaScript';
+  protected string $alias = 'webdriver-test';
+  protected string $label = 'WebDriver';
 
   /**
    * {@inheritdoc}

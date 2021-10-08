@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Menu extends ModuleGenerator {
 
-  protected $name = 'yml:links:menu';
-  protected $description = 'Generates a links.menu yml file';
-  protected $alias = 'menu-links';
-  protected $nameQuestion = NULL;
+  protected string $name = 'yml:links:menu';
+  protected string $description = 'Generates a links.menu yml file';
+  protected string $alias = 'menu-links';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

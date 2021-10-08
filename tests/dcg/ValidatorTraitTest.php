@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests;
 
+use DrupalCodeGenerator\Command\GeneratorInterface;
 use DrupalCodeGenerator\ValidatorTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -15,13 +16,13 @@ final class ValidatorTraitTest extends TestCase {
    *
    * @var \DrupalCodeGenerator\Command\Generator
    */
-  private $validator;
+  private GeneratorInterface $validator;
 
   /**
    * {@inheritdoc}
    */
   public function setUp(): void {
-    $this->validator = new class() {
+    $this->validator = new class() implements GeneratorInterface {
       use ValidatorTrait;
     };
   }

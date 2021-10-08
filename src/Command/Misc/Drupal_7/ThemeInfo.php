@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
  */
 final class ThemeInfo extends ThemeGenerator {
 
-  protected $name = 'misc:d7:theme-info';
-  protected $description = 'Generates info file for a Drupal 7 theme';
-  protected $label = 'Info (theme)';
+  protected string $name = 'misc:d7:theme-info';
+  protected string $description = 'Generates info file for a Drupal 7 theme';
+  protected string $label = 'Info (theme)';
 
   /**
    * {@inheritdoc}

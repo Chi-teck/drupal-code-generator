@@ -10,9 +10,9 @@ use DrupalCodeGenerator\Command\ThemeGenerator;
  */
 final class Theme extends ThemeGenerator {
 
-  protected $name = 'misc:d7:theme';
-  protected $description = 'Generates Drupal 7 theme';
-  protected $templatePath = Application::TEMPLATE_PATH . 'misc/d7';
+  protected string $name = 'misc:d7:theme';
+  protected string $description = 'Generates Drupal 7 theme';
+  protected string $templatePath = Application::TEMPLATE_PATH . 'misc/d7';
 
   /**
    * {@inheritdoc}

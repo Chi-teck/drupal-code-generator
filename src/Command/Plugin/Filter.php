@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command\Plugin;
  */
 final class Filter extends PluginGenerator {
 
-  protected $name = 'plugin:filter';
-  protected $description = 'Generates filter plugin';
-  protected $alias = 'filter';
+  protected string $name = 'plugin:filter';
+  protected string $description = 'Generates filter plugin';
+  protected string $alias = 'filter';
 
   /**
    * {@inheritdoc}

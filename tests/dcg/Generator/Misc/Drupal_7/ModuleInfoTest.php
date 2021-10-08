@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ModuleInfoTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\ModuleInfo';
+  protected string $class = 'Misc\Drupal_7\ModuleInfo';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Module description [Module description.]:' => 'Some description.',
     'Package [Custom]:' => 'Custom',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.info' => '/_module.info',
   ];
 

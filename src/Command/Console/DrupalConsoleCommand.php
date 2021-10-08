@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class DrupalConsoleCommand extends ModuleGenerator {
 
-  protected $name = 'console:drupal-console-command';
-  protected $description = 'Generates Drupal Console command';
-  protected $alias = 'drupal-console-command';
+  protected string $name = 'console:drupal-console-command';
+  protected string $description = 'Generates Drupal Console command';
+  protected string $alias = 'drupal-console-command';
 
   /**
    * {@inheritdoc}

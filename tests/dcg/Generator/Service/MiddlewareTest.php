@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class MiddlewareTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\Middleware';
+  protected string $class = 'Service\Middleware';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [FooMiddleware]:' => 'BarMiddleware',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_middleware.services.yml',
     'src/BarMiddleware.php' => '/_middleware.php',
   ];

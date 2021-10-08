@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class CacheContext extends ModuleGenerator {
 
-  protected $name = 'service:cache-context';
-  protected $description = 'Generates a cache context service';
-  protected $alias = 'cache-context';
+  protected string $name = 'service:cache-context';
+  protected string $description = 'Generates a cache context service';
+  protected string $alias = 'cache-context';
 
   /**
    * {@inheritdoc}

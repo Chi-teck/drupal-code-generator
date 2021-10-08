@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command\Plugin;
  */
 final class Condition extends PluginGenerator {
 
-  protected $name = 'plugin:condition';
-  protected $description = 'Generates condition plugin';
-  protected $alias = 'condition';
+  protected string $name = 'plugin:condition';
+  protected string $description = 'Generates condition plugin';
+  protected string $alias = 'condition';
 
   /**
    * {@inheritdoc}

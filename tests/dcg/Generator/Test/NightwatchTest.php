@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class NightwatchTest extends BaseGeneratorTest {
 
-  protected $class = 'Test\Nightwatch';
+  protected string $class = 'Test\Nightwatch';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Test name [example]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'tests/src/Nightwatch/exampleTest.js' => '/_nightwatch.js',
   ];
 

@@ -19,7 +19,7 @@ use Twig\Loader\FilesystemLoader;
 abstract class GeneratorTest extends TestCase {
 
   protected $display;
-  protected $fixtureDir;
+  protected string $fixtureDir;
 
   private $directory;
 

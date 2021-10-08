@@ -9,13 +9,13 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ThemeLibrariesTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\ThemeLibraries';
+  protected string $class = 'Yml\ThemeLibraries';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Theme machine name [%default_machine_name%]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.libraries.yml' => '/_theme_libraries.yml',
   ];
 

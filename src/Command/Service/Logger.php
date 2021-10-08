@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Logger extends ModuleGenerator {
 
-  protected $name = 'service:logger';
-  protected $description = 'Generates a logger service';
-  protected $alias = 'logger';
+  protected string $name = 'service:logger';
+  protected string $description = 'Generates a logger service';
+  protected string $alias = 'logger';
 
   /**
    * {@inheritdoc}

@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Services extends ModuleGenerator {
 
-  protected $name = 'yml:services';
-  protected $description = 'Generates a services yml file';
-  protected $alias = 'services';
+  protected string $name = 'yml:services';
+  protected string $description = 'Generates a services yml file';
+  protected string $alias = 'services';
 
   /**
    * {@inheritdoc}

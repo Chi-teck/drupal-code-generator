@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class ResponsePolicy extends ModuleGenerator {
 
-  protected $name = 'service:response-policy';
-  protected $description = 'Generates a response policy service';
-  protected $alias = 'response-policy';
+  protected string $name = 'service:response-policy';
+  protected string $description = 'Generates a response policy service';
+  protected string $alias = 'response-policy';
 
   /**
    * {@inheritdoc}

@@ -14,30 +14,30 @@ class DrupalContext extends Helper {
   /**
    * Drupal container.
    *
-   * @var \Drupal\Component\DependencyInjection\Container
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface
    */
-  protected $container;
+  protected ContainerInterface $container;
 
   /**
    * List of currently installed modules.
    *
    * @var \Drupal\Core\Extension\Extension[]
    */
-  protected $modules = [];
+  protected array $modules = [];
 
   /**
    * List of currently installed themes.
    *
    * @var \Drupal\Core\Extension\Extension[]
    */
-  protected $themes = [];
+  protected array $themes = [];
 
   /**
    * Defines the root directory of the Drupal installation.
    *
    * @var string
    */
-  protected $drupalRoot;
+  protected string $drupalRoot;
 
   /**
    * DrupalContext constructor.

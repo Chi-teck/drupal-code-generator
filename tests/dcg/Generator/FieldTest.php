@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Tests\Generator;
  */
 final class FieldTest extends BaseGeneratorTest {
 
-  protected $class = 'Field';
+  protected string $class = 'Field';
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.libraries.yml' => '/_field/_libraries.yml',
     'css/example-foo-widget.css' => '/_field/_widget.css',
     'config/schema/example.schema.yml' => '/_field/_schema.yml',

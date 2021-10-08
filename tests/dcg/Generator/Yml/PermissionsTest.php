@@ -9,13 +9,13 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class PermissionsTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\Permissions';
+  protected string $class = 'Yml\Permissions';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.permissions.yml' => '/_permissions.yml',
   ];
 

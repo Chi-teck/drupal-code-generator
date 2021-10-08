@@ -9,17 +9,17 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class HtmlPageTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\HtmlPage';
+  protected string $class = 'Misc\HtmlPage';
 
   protected $answers = [
     'example.html',
   ];
 
-  protected $interaction = [
+  protected array $interaction = [
     'File name [index.html]:' => 'example.html',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.html' => '/_html_page.html',
     'css/main.css' => '/_html_page.css',
     'js/main.js' => '/_html_page.js',

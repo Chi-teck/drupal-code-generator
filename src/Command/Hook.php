@@ -10,9 +10,9 @@ use Symfony\Component\Console\Question\Question;
  */
 final class Hook extends ModuleGenerator {
 
-  protected $name = 'hook';
-  protected $description = 'Generates a hook';
-  protected $templatePath = Application::TEMPLATE_PATH;
+  protected string $name = 'hook';
+  protected string $description = 'Generates a hook';
+  protected string $templatePath = Application::TEMPLATE_PATH;
 
   /**
    * {@inheritdoc}

@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ThemeNegotiatorTest extends BaseGeneratorTest {
 
-  protected $class = 'Service\ThemeNegotiator';
+  protected string $class = 'Service\ThemeNegotiator';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Class [FooNegotiator]:' => 'FooNegotiator',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'foo.services.yml' => '/_theme_negotiator.services.yml',
     'src/Theme/FooNegotiator.php' => '/_theme_negotiator.php',
   ];

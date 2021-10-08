@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class FieldTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Views\Field';
+  protected string $class = 'Plugin\Views\Field';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin label [Example]:' => 'Example',
@@ -23,7 +23,7 @@ final class FieldTest extends BaseGeneratorTest {
     '<2> Type the service name or use arrows up/down. Press enter to continue:' => "\n",
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/foo.views.schema.yml' => '/_field_schema.yml',
     'src/Plugin/views/field/Example.php' => '/_field.php',
   ];

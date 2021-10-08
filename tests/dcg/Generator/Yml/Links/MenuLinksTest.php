@@ -9,13 +9,13 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 class MenuLinksTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\Links\Menu';
+  protected string $class = 'Yml\Links\Menu';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module machine name [%default_machine_name%]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.links.menu.yml' => '/_links.menu.yml',
   ];
 

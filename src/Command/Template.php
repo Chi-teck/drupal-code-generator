@@ -7,9 +7,9 @@ namespace DrupalCodeGenerator\Command;
  */
 final class Template extends ModuleGenerator {
 
-  protected $name = 'template';
-  protected $description = 'Generates a template';
-  protected $alias = 'template';
+  protected string $name = 'template';
+  protected string $description = 'Generates a template';
+  protected string $alias = 'template';
 
   /**
    * {@inheritdoc}

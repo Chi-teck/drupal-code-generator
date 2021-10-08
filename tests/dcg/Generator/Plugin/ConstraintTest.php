@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ConstraintTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Constraint';
+  protected string $class = 'Plugin\Constraint';
 
   /**
    * Test callback.

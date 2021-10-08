@@ -9,16 +9,16 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ThemeInfoTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\ThemeInfo';
+  protected string $class = 'Misc\Drupal_7\ThemeInfo';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Theme name [%default_name%]:' => 'Bar',
     'Theme machine name [bar]:' => 'bar',
     'Theme description [A simple Drupal 7 theme.]:' => 'Theme description',
     'Base theme:' => 'omega',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'bar.info' => '/_theme.info',
   ];
 

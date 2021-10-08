@@ -9,9 +9,9 @@ use Symfony\Component\Console\Question\Question;
  */
 final class EntityReferenceSelection extends PluginGenerator {
 
-  protected $name = 'plugin:entity-reference-selection';
-  protected $description = 'Generates entity reference selection plugin';
-  protected $alias = 'entity-reference-selection';
+  protected string $name = 'plugin:entity-reference-selection';
+  protected string $description = 'Generates entity reference selection plugin';
+  protected string $alias = 'entity-reference-selection';
   protected $pluginLabelDefault = 'Advanced {entity_type} selection';
   protected $pluginClassDefault = '{entity_type|camelize}Selection';
 

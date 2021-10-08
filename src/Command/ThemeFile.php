@@ -7,8 +7,8 @@ namespace DrupalCodeGenerator\Command;
  */
 final class ThemeFile extends ThemeGenerator {
 
-  protected $name = 'theme-file';
-  protected $description = 'Generates a theme file';
+  protected string $name = 'theme-file';
+  protected string $description = 'Generates a theme file';
 
   /**
    * {@inheritdoc}

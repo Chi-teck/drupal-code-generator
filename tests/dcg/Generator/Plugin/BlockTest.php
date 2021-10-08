@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class BlockTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Block';
+  protected string $class = 'Plugin\Block';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Block admin label [Example]:' => 'Example',
@@ -25,7 +25,7 @@ final class BlockTest extends BaseGeneratorTest {
     'Create access callback? [No]:' => 'Yes',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'config/schema/foo.schema.yml' => '/_block_schema.yml',
     'src/Plugin/Block/ExampleBlock.php' => '/_block.php',
   ];

@@ -9,14 +9,14 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class TemplatePhpTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\TemplatePhp';
+  protected string $class = 'Misc\Drupal_7\TemplatePhp';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Theme name [%default_name%]:' => 'Example',
     'Theme machine name [example]:' => 'example',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'template.php' => '/_template.php',
   ];
 

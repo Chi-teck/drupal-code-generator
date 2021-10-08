@@ -9,7 +9,7 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class SourceTest extends BaseGeneratorTest {
 
-  protected $class = 'Plugin\Migrate\Source';
+  protected string $class = 'Plugin\Migrate\Source';
 
   /**
    * {@inheritdoc}

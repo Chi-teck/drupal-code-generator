@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Generator;
  */
 final class ApacheVirtualHost extends Generator {
 
-  protected $name = 'misc:apache-virtual-host';
-  protected $description = 'Generates an Apache site configuration file';
-  protected $alias = 'apache-virtual-host';
+  protected string $name = 'misc:apache-virtual-host';
+  protected string $description = 'Generates an Apache site configuration file';
+  protected string $alias = 'apache-virtual-host';
 
   /**
    * {@inheritdoc}

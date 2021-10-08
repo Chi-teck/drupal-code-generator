@@ -37,35 +37,35 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *
    * @var string
    */
-  protected $name;
+  protected string $name;
 
   /**
    * The command description.
    *
    * @var string
    */
-  protected $description;
+  protected string $description;
 
   /**
    * The command alias.
    *
    * @var string
    */
-  protected $alias;
+  protected string $alias = '';
 
   /**
    * Command label.
    *
    * @var string
    */
-  protected $label;
+  protected string $label = '';
 
   /**
    * A path where templates are stored.
    *
    * @var string
    */
-  protected $templatePath;
+  protected string $templatePath = '';
 
   /**
    * The working directory.
@@ -75,21 +75,21 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *
    * @var string
    */
-  protected $directory;
+  protected string $directory;
 
   /**
    * Assets to create.
    *
    * @var \DrupalCodeGenerator\Asset\AssetCollection
    */
-  protected $assets;
+  protected AssetCollection $assets;
 
   /**
    * Twig template variables.
    *
    * @var array
    */
-  private $vars;
+  private array $vars;
 
   /**
    * {@inheritdoc}

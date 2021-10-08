@@ -9,10 +9,10 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Contextual extends ModuleGenerator {
 
-  protected $name = 'yml:links:contextual';
-  protected $description = 'Generates links.contextual yml file';
-  protected $alias = 'contextual-links';
-  protected $nameQuestion = NULL;
+  protected string $name = 'yml:links:contextual';
+  protected string $description = 'Generates links.contextual yml file';
+  protected string $alias = 'contextual-links';
+  protected ?string $nameQuestion = NULL;
 
   /**
    * {@inheritdoc}

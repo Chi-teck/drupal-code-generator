@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class Routing extends ModuleGenerator {
 
-  protected $name = 'yml:routing';
-  protected $description = 'Generates a routing yml file';
-  protected $alias = 'routing';
+  protected string $name = 'yml:routing';
+  protected string $description = 'Generates a routing yml file';
+  protected string $alias = 'routing';
 
   /**
    * {@inheritdoc}

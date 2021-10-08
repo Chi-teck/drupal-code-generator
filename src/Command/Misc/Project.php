@@ -14,9 +14,9 @@ use Symfony\Component\Console\Question\Question;
  */
 final class Project extends Generator {
 
-  protected $name = 'misc:project';
-  protected $description = 'Generates a composer project';
-  protected $alias = 'project';
+  protected string $name = 'misc:project';
+  protected string $description = 'Generates a composer project';
+  protected string $alias = 'project';
 
   /**
    * Array of packages to check versions for.

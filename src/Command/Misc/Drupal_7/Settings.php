@@ -10,9 +10,9 @@ use Symfony\Component\Console\Question\Question;
  */
 final class Settings extends Generator {
 
-  protected $name = 'misc:d7:settings.php';
-  protected $description = 'Generates Drupal 7 settings.php file';
-  protected $label = 'settings.php';
+  protected string $name = 'misc:d7:settings.php';
+  protected string $description = 'Generates Drupal 7 settings.php file';
+  protected string $label = 'settings.php';
 
   /**
    * {@inheritdoc}

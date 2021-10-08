@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class ModuleInfoTest extends BaseGeneratorTest {
 
-  protected $class = 'Yml\ModuleInfo';
+  protected string $class = 'Yml\ModuleInfo';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Example',
     'Module machine name [example]:' => 'example',
     'Description [Module description.]:' => 'Example description.',
@@ -20,7 +20,7 @@ final class ModuleInfoTest extends BaseGeneratorTest {
     'Dependencies (comma separated):' => 'views, node, fields',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'example.info.yml' => '/_module_info.yml',
   ];
 

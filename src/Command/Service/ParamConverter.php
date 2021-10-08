@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 final class ParamConverter extends ModuleGenerator {
 
-  protected $name = 'service:param-converter';
-  protected $description = 'Generates a param converter service';
-  protected $alias = 'param-converter';
+  protected string $name = 'service:param-converter';
+  protected string $description = 'Generates a param converter service';
+  protected string $alias = 'param-converter';
 
   /**
    * {@inheritdoc}

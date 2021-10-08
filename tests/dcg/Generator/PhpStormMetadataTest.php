@@ -18,7 +18,7 @@ final class PhpStormMetadataTest extends BaseGeneratorTest {
    *
    * @var \DrupalCodeGenerator\Command\PhpStormMetadata
    */
-  private $generator;
+  private PhpStormMetadata $generator;
 
   /**
    * {@inheritdoc}

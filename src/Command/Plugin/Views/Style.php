@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
  */
 final class Style extends PluginGenerator {
 
-  protected $name = 'plugin:views:style';
-  protected $description = 'Generates views style plugin';
-  protected $alias = 'views-style';
+  protected string $name = 'plugin:views:style';
+  protected string $description = 'Generates views style plugin';
+  protected string $alias = 'views-style';
 
   /**
    * {@inheritdoc}

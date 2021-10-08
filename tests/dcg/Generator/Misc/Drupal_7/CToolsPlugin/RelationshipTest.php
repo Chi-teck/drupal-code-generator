@@ -9,9 +9,9 @@ use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
  */
 final class RelationshipTest extends BaseGeneratorTest {
 
-  protected $class = 'Misc\Drupal_7\CToolsPlugin\Relationship';
+  protected string $class = 'Misc\Drupal_7\CToolsPlugin\Relationship';
 
-  protected $interaction = [
+  protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',
     'Module machine name [foo]:' => 'foo',
     'Plugin name [Example]:' => 'Example',
@@ -21,7 +21,7 @@ final class RelationshipTest extends BaseGeneratorTest {
     "Required context:\n  [0] -\n  [1] Node\n  [2] User\n  [3] Term" => 'Term',
   ];
 
-  protected $fixtures = [
+  protected array $fixtures = [
     'plugins/relationships/example.inc' => '/_relationship.inc',
   ];
 

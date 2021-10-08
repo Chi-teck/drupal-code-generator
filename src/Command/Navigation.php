@@ -25,14 +25,14 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
    *
    * @var array
    */
-  private $menuTree = [];
+  private array $menuTree = [];
 
   /**
    * Menu labels.
    *
    * @var array
    */
-  private $labels = [
+  private array $labels = [
     'misc:d7' => 'Drupal 7',
     'yml' => 'Yaml',
     'misc' => 'Miscellaneous',

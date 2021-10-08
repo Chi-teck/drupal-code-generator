@@ -9,15 +9,15 @@ use DrupalCodeGenerator\Utils;
  */
 final class Field extends ModuleGenerator {
 
-  protected $name = 'field';
-  protected $description = 'Generates a field';
+  protected string $name = 'field';
+  protected string $description = 'Generates a field';
 
   /**
    * Field sub-types.
    *
    * @var array
    */
-  private $subTypes = [
+  private array $subTypes = [
     'boolean' => [
       'label' => 'Boolean',
       'list' => FALSE,
@@ -105,7 +105,7 @@ final class Field extends ModuleGenerator {
    *
    * @var array
    */
-  protected $dateTypes = [
+  protected array $dateTypes = [
     'date' => 'Date only',
     'datetime' => 'Date and time',
   ];
