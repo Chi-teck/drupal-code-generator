@@ -59,7 +59,7 @@ class TwigEnvironment extends Environment {
     // Twig Code sniffer supports this yet.
     // @see https://github.com/twigphp/Twig/issues/1423
     $code = $source->getCode();
-    if (\strpos($code, '{% verbatim %}') === FALSE) {
+    if (!\str_contains($code, '{% verbatim %}')) {
       $code = \preg_replace("/\n +\{%/", "\n{%", $source->getCode());
     }
     // Twig source has no setters.

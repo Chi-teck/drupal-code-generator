@@ -106,7 +106,7 @@ class QuestionHelper extends BaseQuestionHelper {
     $default_value = $question->getDefault();
 
     // Do not change formatted title.
-    if (\strpos($question_text, '<title>') === FALSE) {
+    if (!\str_starts_with($question_text, '<title>')) {
       $question_text = "\n <info>$question_text</info>";
 
       if ($question instanceof ConfirmationQuestion && \is_bool($default_value)) {

@@ -87,7 +87,7 @@ $skipped_services = [
 
 foreach ($services as $service_id => $service) {
 
-  if (\strpos($service_id, 'drush') !== FALSE) {
+  if (!\str_contains($service_id, 'drush')) {
     throw new \UnexpectedValueException('Drush services are not supported.');
   }
 
@@ -234,7 +234,7 @@ function process_class(array &$raw_definitions, string $service_id, string $clas
   }
 
   // Symfony annotations are not properly formatted.
-  if (strpos($class, 'Symfony') === 0) {
+  if (\str_starts_with($class, 'Symfony')) {
     return;
   }
 

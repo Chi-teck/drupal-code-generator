@@ -106,7 +106,7 @@ class ConsoleLogger extends AbstractLogger {
    * @see \Symfony\Component\Console\Logger::interpolate()
    */
   private function interpolate(string $message, array $context): string {
-    if (FALSE === \strpos($message, '{')) {
+    if (!\str_contains($message, '{')) {
       return $message;
     }
 
