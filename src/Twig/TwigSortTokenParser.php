@@ -17,9 +17,7 @@ class TwigSortTokenParser extends AbstractTokenParser {
 
     $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
     $body = $this->parser->subparse(
-      static function (Token $token): bool {
-        return $token->test('endsort');
-      },
+      static fn (Token $token): bool => $token->test('endsort'),
       TRUE,
     );
     $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);

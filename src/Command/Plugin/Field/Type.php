@@ -12,7 +12,7 @@ final class Type extends PluginGenerator {
   protected string $name = 'plugin:field:type';
   protected string $description = 'Generates field type plugin';
   protected string $alias = 'field-type';
-  protected $pluginClassSuffix = 'Item';
+  protected string $pluginClassSuffix = 'Item';
 
   /**
    * {@inheritdoc}

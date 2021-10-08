@@ -12,8 +12,8 @@ final class Source extends PluginGenerator {
   protected string $name = 'plugin:migrate:source';
   protected string $description = 'Generates migrate source plugin';
   protected string $alias = 'migrate-source';
-  protected $pluginLabelQuestion = FALSE;
-  protected $pluginIdDefault = '{machine_name}_example';
+  protected ?string $pluginLabelQuestion = NULL;
+  protected string $pluginIdDefault = '{machine_name}_example';
 
   /**
    * {@inheritdoc}

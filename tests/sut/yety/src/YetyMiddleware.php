@@ -15,7 +15,7 @@ final class YetyMiddleware implements HttpKernelInterface {
    *
    * @var \Symfony\Component\HttpKernel\HttpKernelInterface
    */
-  protected $httpKernel;
+  protected HttpKernelInterface $httpKernel;
 
   /**
    * Constructs the YetyMiddleware object.

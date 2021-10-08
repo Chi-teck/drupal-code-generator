@@ -17,8 +17,6 @@ class Renderer extends Helper implements LoggerAwareInterface {
 
   /**
    * The twig environment.
-   *
-   * @var \Twig\Environment
    */
   protected Environment $twig;
 

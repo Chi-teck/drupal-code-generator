@@ -18,8 +18,6 @@ class QuestionHelper extends BaseQuestionHelper {
 
   /**
    * Counter to match questions and answers.
-   *
-   * @var int
    */
   private int $counter = 0;
 

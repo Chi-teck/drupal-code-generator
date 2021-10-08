@@ -23,22 +23,16 @@ final class DumperTest extends BaseTestCase {
 
   /**
    * Console input.
-   *
-   * @var \Symfony\Component\Console\Input\ArrayInput
    */
   private ArrayInput $input;
 
   /**
    * Console output.
-   *
-   * @var \Symfony\Component\Console\Output\BufferedOutput
    */
   private BufferedOutput $output;
 
   /**
    * The file system component.
-   *
-   * @var \Symfony\Component\Filesystem\Filesystem
    */
   private Filesystem $filesystem;
 

@@ -21,22 +21,16 @@ final class DumperOptions {
    *
    * A flag indicating whether or not the files can be replaced. If not set the
    * user will be prompted to confirm replacing of each existing file.
-   *
-   * @var bool|null
    */
   public ?bool $replace;
 
   /**
    * Print assets to stdout instead of dumping them to file system.
-   *
-   * @var bool
    */
   public bool $dryRun;
 
   /**
    * Print full path to dumped assets.
-   *
-   * @var bool
    */
   public bool $fullPath;
 

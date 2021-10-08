@@ -14,29 +14,21 @@ final class File extends Asset {
 
   /**
    * Asset content.
-   *
-   * @var string|null
    */
   private ?string $content = NULL;
 
   /**
    * Twig template to render header.
-   *
-   * @var string|null
    */
   private ?string $headerTemplate = NULL;
 
   /**
    * Twig template to render main content.
-   *
-   * @var string|null
    */
   private ?string $template = NULL;
 
   /**
    * The template string to render.
-   *
-   * @var string|null
    */
   private ?string $inlineTemplate = NULL;
 
@@ -44,15 +36,11 @@ final class File extends Asset {
    * Action.
    *
    * An action to take if specified file already exists.
-   *
-   * @var int
    */
   private int $action = self::ACTION_REPLACE;
 
   /**
    * Header size.
-   *
-   * @var int
    */
   private int $headerSize = 0;
 

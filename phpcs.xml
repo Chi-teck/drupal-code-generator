@@ -14,8 +14,11 @@
     <exclude name="Drupal.Commenting.Deprecated.DeprecatedMissingSeeTag"/>
     <exclude name="Drupal.Commenting.TodoComment.TodoFormat"/>
     <exclude name="Drupal.WhiteSpace.OpenTagNewline.BlankLine"/>
+    <exclude name="Drupal.Commenting.VariableComment.MissingVar"/>
   </rule>
-  <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended73"/>
+  <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended74">
+    <exclude-pattern>./tests/sut</exclude-pattern>
+  </rule>
   <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
     <properties>
       <property name="declareOnFirstLine"/>

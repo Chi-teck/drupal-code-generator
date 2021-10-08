@@ -12,22 +12,16 @@ abstract class FormGenerator extends ModuleGenerator {
 
   /**
    * Default form class.
-   *
-   * @var string
    */
   protected string $defaultClass;
 
   /**
    * Default path prefix.
-   *
-   * @var string|null
    */
   protected ?string $defaultPathPrefix = NULL;
 
   /**
    * Default permission.
-   *
-   * @var string
    */
   protected string $defaultPermission;
 

@@ -34,36 +34,26 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * The command name.
-   *
-   * @var string
    */
   protected string $name;
 
   /**
    * The command description.
-   *
-   * @var string
    */
   protected string $description;
 
   /**
    * The command alias.
-   *
-   * @var string
    */
   protected string $alias = '';
 
   /**
    * Command label.
-   *
-   * @var string
    */
   protected string $label = '';
 
   /**
    * A path where templates are stored.
-   *
-   * @var string
    */
   protected string $templatePath = '';
 
@@ -72,15 +62,11 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *
    * This is used to supply generators with some context. For instance, the
    * directory name can be used to set default extension name.
-   *
-   * @var string
    */
   protected string $directory;
 
   /**
    * Assets to create.
-   *
-   * @var \DrupalCodeGenerator\Asset\AssetCollection
    */
   protected AssetCollection $assets;
 

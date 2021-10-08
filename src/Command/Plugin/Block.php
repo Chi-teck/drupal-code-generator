@@ -10,8 +10,8 @@ final class Block extends PluginGenerator {
   protected string $name = 'plugin:block';
   protected string $description = 'Generates block plugin';
   protected string $alias = 'block';
-  protected $pluginClassSuffix = 'Block';
-  protected $pluginLabelQuestion = 'Block admin label';
+  protected string $pluginClassSuffix = 'Block';
+  protected ?string $pluginLabelQuestion = 'Block admin label';
 
   /**
    * {@inheritdoc}

@@ -13,8 +13,6 @@ class DrupalContext extends Helper {
 
   /**
    * Drupal container.
-   *
-   * @var \Symfony\Component\DependencyInjection\ContainerInterface
    */
   protected ContainerInterface $container;
 
@@ -34,8 +32,6 @@ class DrupalContext extends Helper {
 
   /**
    * Defines the root directory of the Drupal installation.
-   *
-   * @var string
    */
   protected string $drupalRoot;
 

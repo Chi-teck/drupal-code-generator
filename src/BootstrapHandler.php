@@ -14,8 +14,6 @@ class BootstrapHandler {
 
   /**
    * The class loader.
-   *
-   * @var \Composer\Autoload\ClassLoader
    */
   private ClassLoader $classLoader;
 

@@ -15,8 +15,6 @@ final class PhpStormMetadataTest extends BaseGeneratorTest {
 
   /**
    * A generator to be tested.
-   *
-   * @var \DrupalCodeGenerator\Command\PhpStormMetadata
    */
   private PhpStormMetadata $generator;
 

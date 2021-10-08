@@ -9,7 +9,7 @@ final class Access extends BasePlugin {
 
   protected string $name = 'misc:d7:ctools-plugin:access';
   protected string $description = 'Generates CTools access plugin';
-  protected $template = 'access';
-  protected $subDirectory = 'plugins/access';
+  protected string $template = 'access';
+  protected string $subDirectory = 'plugins/access';
 
 }

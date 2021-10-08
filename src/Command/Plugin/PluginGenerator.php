@@ -10,13 +10,34 @@ use DrupalCodeGenerator\Utils;
  */
 abstract class PluginGenerator extends ModuleGenerator {
 
-  protected $pluginClassSuffix = '';
-  protected $pluginLabelQuestion = 'Plugin label';
-  protected $pluginLabelDefault = 'Example';
-  protected $pluginIdQuestion = 'Plugin ID';
-  protected $pluginIdDefault = '{machine_name}_{plugin_label|h2m}';
-  protected $pluginClassQuestion = 'Plugin class';
-  protected $pluginClassDefault;
+  protected string $pluginClassSuffix = '';
+
+  /**
+   * Plugin label question.
+   *
+   * @todo remove this.
+   */
+  protected ?string $pluginLabelQuestion = 'Plugin label';
+
+  protected string $pluginLabelDefault = 'Example';
+
+  /**
+   * Plugin ID question.
+   *
+   * @todo remove this.
+   */
+  protected ?string $pluginIdQuestion = 'Plugin ID';
+
+  protected string $pluginIdDefault = '{machine_name}_{plugin_label|h2m}';
+
+  /**
+   * Plugin class question.
+   *
+   * @todo remove this.
+   */
+  protected string $pluginClassQuestion = 'Plugin class';
+
+  protected ?string $pluginClassDefault = NULL;
 
   /**
    * {@inheritdoc}

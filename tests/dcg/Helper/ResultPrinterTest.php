@@ -21,15 +21,11 @@ final class ResultPrinterTest extends TestCase {
 
   /**
    * Console Output.
-   *
-   * @var \Symfony\Component\Console\Output\BufferedOutput
    */
   private BufferedOutput $output;
 
   /**
    * Result printer.
-   *
-   * @var \DrupalCodeGenerator\Helper\ResultPrinter
    */
   private ResultPrinter $printer;
 

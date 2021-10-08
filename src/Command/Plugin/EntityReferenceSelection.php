@@ -12,8 +12,8 @@ final class EntityReferenceSelection extends PluginGenerator {
   protected string $name = 'plugin:entity-reference-selection';
   protected string $description = 'Generates entity reference selection plugin';
   protected string $alias = 'entity-reference-selection';
-  protected $pluginLabelDefault = 'Advanced {entity_type} selection';
-  protected $pluginClassDefault = '{entity_type|camelize}Selection';
+  protected string $pluginLabelDefault = 'Advanced {entity_type} selection';
+  protected ?string $pluginClassDefault = '{entity_type|camelize}Selection';
 
   /**
    * {@inheritdoc}

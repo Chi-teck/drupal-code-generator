@@ -12,7 +12,7 @@ final class Widget extends PluginGenerator {
   protected string $name = 'plugin:field:widget';
   protected string $description = 'Generates field widget plugin';
   protected string $alias = 'field-widget';
-  protected $pluginClassSuffix = 'Widget';
+  protected string $pluginClassSuffix = 'Widget';
 
   /**
    * {@inheritdoc}

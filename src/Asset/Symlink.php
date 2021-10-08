@@ -14,15 +14,11 @@ final class Symlink extends Asset {
    * Action.
    *
    * An action to take if specified symlink already exists.
-   *
-   * @var int
    */
   private int $action = self::ACTION_REPLACE;
 
   /**
    * Symlink target.
-   *
-   * @var string
    */
   private string $target;
 

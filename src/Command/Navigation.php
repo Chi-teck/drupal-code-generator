@@ -198,7 +198,7 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
       }
       $ref = &$ref[$parent];
     }
-    $ref = $ref ?? TRUE;
+    $ref ??= TRUE;
   }
 
 }

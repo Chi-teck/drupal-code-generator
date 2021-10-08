@@ -82,9 +82,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   public function getDirectories(): self {
     $assets = \array_filter(
       $this->assets,
-      static function ($asset): bool {
-        return $asset instanceof Directory;
-      },
+      static fn ($asset): bool => $asset instanceof Directory,
     );
     return new self($assets);
   }
@@ -98,9 +96,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   public function getFiles(): self {
     $assets = \array_filter(
       $this->assets,
-      static function ($asset): bool {
-        return $asset instanceof File;
-      },
+      static fn ($asset): bool => $asset instanceof File,
     );
     return new self($assets);
   }
@@ -114,9 +110,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   public function getSymlinks(): self {
     $assets = \array_filter(
       $this->assets,
-      static function ($asset): bool {
-        return $asset instanceof Symlink;
-      },
+      static fn ($asset): bool => $asset instanceof Symlink,
     );
     return new self($assets);
   }
@@ -135,8 +129,8 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
       $depth_a = \substr_count($name_a, '/');
       $depth_b = \substr_count($name_b, '/');
       // Top level assets should be printed first.
-      return $depth_a == $depth_b || ($depth_a > 1 && $depth_b > 1) ?
-        \strcmp($name_a, $name_b) : ($depth_a > $depth_b ? 1 : -1);
+      return $depth_a === $depth_b || \min($depth_a, $depth_b) > 1 ?
+        \strcmp($name_a, $name_b) : $depth_a <=> $depth_b;
     });
     return new self($assets);
   }

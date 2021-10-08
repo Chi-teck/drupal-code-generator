@@ -18,10 +18,10 @@ use Twig\Loader\FilesystemLoader;
  */
 abstract class GeneratorTest extends TestCase {
 
-  protected $display;
+  protected string $display;
   protected string $fixtureDir;
 
-  private $directory;
+  private string $directory;
 
   /**
    * {@inheritdoc}

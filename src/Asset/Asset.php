@@ -11,15 +11,11 @@ abstract class Asset {
 
   /**
    * Asset path.
-   *
-   * @var string
    */
   protected string $path;
 
   /**
    * Asset mode.
-   *
-   * @var int
    */
   protected int $mode;
 

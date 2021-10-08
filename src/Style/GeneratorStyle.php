@@ -18,22 +18,16 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
 
   /**
    * Console input.
-   *
-   * @var \Symfony\Component\Console\Input\InputInterface
    */
   private InputInterface $input;
 
   /**
    * Console output.
-   *
-   * @var \Symfony\Component\Console\Output\OutputInterface
    */
   private OutputInterface $output;
 
   /**
    * Question helper.
-   *
-   * @var \DrupalCodeGenerator\Helper\QuestionHelper
    */
   private QuestionHelper $questionHelper;
 
@@ -72,9 +66,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
    * {@inheritdoc}
    */
   public function listing(array $elements) {
-    $build_item = static function (string $element): string {
-      return \sprintf(' • %s', $element);
-    };
+    $build_item = static fn (string $element): string => \sprintf(' • %s', $element);
     $elements = \array_map($build_item, $elements);
     $this->writeln($elements);
     $this->newLine();

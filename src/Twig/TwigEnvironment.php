@@ -37,14 +37,10 @@ class TwigEnvironment extends Environment {
     };
     $this->addFilter(new TwigFilter('article', $article));
 
-    $u2h = static function (string $input): string {
-      return \str_replace('_', '-', $input);
-    };
+    $u2h = static fn (string $input): string => \str_replace('_', '-', $input);
     $this->addFilter(new TwigFilter('u2h', $u2h));
 
-    $h2u = static function (string $input): string {
-      return \str_replace('-', '_', $input);
-    };
+    $h2u = static fn (string $input): string => \str_replace('-', '_', $input);
     $this->addFilter(new TwigFilter('h2u', $h2u));
 
     $this->addGlobal('SUT_TEST', \getenv('SUT_TEST'));

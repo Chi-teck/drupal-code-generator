@@ -11,8 +11,6 @@ trait IOAwareTrait {
 
   /**
    * Console input.
-   *
-   * @var \DrupalCodeGenerator\Style\GeneratorStyleInterface
    */
   protected GeneratorStyleInterface $io;
 

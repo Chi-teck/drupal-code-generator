@@ -20,8 +20,6 @@ class Dumper extends Helper implements IOAwareInterface {
 
   /**
    * The file system utility.
-   *
-   * @var \Symfony\Component\Filesystem\Filesystem
    */
   public Filesystem $filesystem;
 

@@ -11,10 +11,6 @@ final class HtmlPageTest extends BaseGeneratorTest {
 
   protected string $class = 'Misc\HtmlPage';
 
-  protected $answers = [
-    'example.html',
-  ];
-
   protected array $interaction = [
     'File name [index.html]:' => 'example.html',
   ];

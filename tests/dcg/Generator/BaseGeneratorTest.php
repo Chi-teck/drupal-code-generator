@@ -14,8 +14,6 @@ abstract class BaseGeneratorTest extends BaseTestCase {
 
   /**
    * Command class to be tested.
-   *
-   * @var string
    */
   protected string $class;
 
@@ -38,15 +36,11 @@ abstract class BaseGeneratorTest extends BaseTestCase {
 
   /**
    * Command to test.
-   *
-   * @var \Symfony\Component\Console\Command\Command
    */
   protected Command $command;
 
   /**
    * Path to fixtures.
-   *
-   * @var string
    */
   protected string $fixturePath = '';
 

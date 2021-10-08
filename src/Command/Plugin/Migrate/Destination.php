@@ -12,8 +12,8 @@ final class Destination extends PluginGenerator {
   protected string $name = 'plugin:migrate:destination';
   protected string $description = 'Generates migrate destination plugin';
   protected string $alias = 'migrate-destination';
-  protected $pluginLabelQuestion = FALSE;
-  protected $pluginIdDefault = '{machine_name}_example';
+  protected ?string $pluginLabelQuestion = NULL;
+  protected string $pluginIdDefault = '{machine_name}_example';
 
   /**
    * {@inheritdoc}

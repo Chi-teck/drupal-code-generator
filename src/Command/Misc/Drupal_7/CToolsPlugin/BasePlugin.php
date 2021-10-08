@@ -9,8 +9,8 @@ use DrupalCodeGenerator\Command\ModuleGenerator;
  */
 abstract class BasePlugin extends ModuleGenerator {
 
-  protected $template;
-  protected $subDirectory;
+  protected string $template;
+  protected string $subDirectory;
 
   /**
    * {@inheritdoc}

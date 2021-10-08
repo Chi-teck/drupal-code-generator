@@ -17,8 +17,6 @@ final class RendererTest extends TestCase {
 
   /**
    * The renderer to test.
-   *
-   * @var \DrupalCodeGenerator\Helper\Renderer
    */
   private Renderer $renderer;
 

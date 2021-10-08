@@ -16,8 +16,6 @@ final class DrupalContextTest extends TestCase {
 
   /**
    * Mocked container.
-   *
-   * @var \Symfony\Component\DependencyInjection\ContainerInterface
    */
   private ContainerInterface $container;
 

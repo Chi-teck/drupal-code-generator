@@ -19,7 +19,7 @@ final class BarSubscriber implements EventSubscriberInterface {
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * Constructs event subscriber.

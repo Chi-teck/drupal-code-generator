@@ -14,8 +14,6 @@ abstract class BaseTestCase extends TestCase {
 
   /**
    * Working directory.
-   *
-   * @var string
    */
   protected string $directory;
 

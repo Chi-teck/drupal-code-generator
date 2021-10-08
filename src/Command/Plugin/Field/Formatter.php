@@ -12,7 +12,7 @@ final class Formatter extends PluginGenerator {
   protected string $name = 'plugin:field:formatter';
   protected string $description = 'Generates field formatter plugin';
   protected string $alias = 'field-formatter';
-  protected $pluginClassSuffix = 'Formatter';
+  protected string $pluginClassSuffix = 'Formatter';
 
   /**
    * {@inheritdoc}

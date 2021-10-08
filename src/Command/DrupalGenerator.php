@@ -19,15 +19,11 @@ abstract class DrupalGenerator extends Generator {
 
   /**
    * Name question.
-   *
-   * @var string|null
    */
   protected ?string $nameQuestion = 'Extension name';
 
   /**
    * Machine name question.
-   *
-   * @var string|null
    */
   protected ?string $machineNameQuestion = 'Extension machine name';
 
@@ -40,15 +36,11 @@ abstract class DrupalGenerator extends Generator {
    * This flag makes the distinction. It is used for setting autocompleter
    * values for the extension name and defining correct destination for
    * generated code.
-   *
-   * @var bool
    */
   protected bool $isNewExtension = FALSE;
 
   /**
    * Extension type (module, theme, profile).
-   *
-   * @var int|null
    */
   protected ?int $extensionType = NULL;
 
@@ -56,8 +48,6 @@ abstract class DrupalGenerator extends Generator {
    * Drupal context.
    *
    * This helper is set if Drupal is fully bootstrapped.
-   *
-   * @var \DrupalCodeGenerator\Helper\DrupalContext|null
    */
   protected ?DrupalContext $drupalContext = NULL;
 

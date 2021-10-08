@@ -10,10 +10,10 @@ final class MenuLink extends PluginGenerator {
   protected string $name = 'plugin:menu-link';
   protected string $description = 'Generates menu-link plugin';
   protected string $alias = 'menu-link';
-  protected $pluginLabelQuestion = FALSE;
-  protected $pluginIdQuestion = FALSE;
-  protected $pluginClassQuestion = 'Class';
-  protected $pluginClassDefault = '{machine_name|camelize}MenuLink';
+  protected ?string $pluginLabelQuestion = NULL;
+  protected ?string $pluginIdQuestion = NULL;
+  protected string $pluginClassQuestion = 'Class';
+  protected ?string $pluginClassDefault = '{machine_name|camelize}MenuLink';
 
   /**
    * {@inheritdoc}

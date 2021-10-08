@@ -10,8 +10,8 @@ final class Action extends PluginGenerator {
   protected string $name = 'plugin:action';
   protected string $description = 'Generates action plugin';
   protected string $alias = 'action';
-  protected $pluginLabelQuestion = 'Action label';
-  protected $pluginLabelDefault = 'Update node title';
+  protected ?string $pluginLabelQuestion = 'Action label';
+  protected string $pluginLabelDefault = 'Update node title';
 
   /**
    * {@inheritdoc}
