@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator;
 
-use Symfony\Component\Inflector\Inflector;
+use Symfony\Component\String\Inflector\EnglishInflector;
 
 /**
  * Helper methods for code generators.
@@ -173,10 +173,7 @@ class Utils {
    *   The pluralized word.
    */
   public static function pluralize(string $input): string {
-    $result = Inflector::pluralize($input);
-    // The inflector may return an array if the world has more than one possible
-    // plural forms. In this case, just pick the first one.
-    return \is_array($result) ? $result[0] : $result;
+    return (new EnglishInflector())->pluralize($input)[0];
   }
 
 }
