@@ -49,7 +49,7 @@ function dump_hooks(InputInterface $input, OutputInterface $output): int {
   $total = 0;
   foreach ($iterator as $path => $file) {
     $file_name = $file->getFileName();
-    if (substr($file_name, -7) == 'api.php') {
+    if (\str_ends_with($file_name, 'api.php')) {
       $output->writeln("<comment>$file_name</comment>");
       $hooks = parse_hooks($path);
       foreach ($hooks as $hook_name => $hook) {

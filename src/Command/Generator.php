@@ -247,7 +247,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
     // Allow the validators to be referenced in a short form like
     // '::validateMachineName'.
-    if (\is_string($validator) && \substr($validator, 0, 2) == '::') {
+    if (\is_string($validator) && \str_starts_with($validator, '::')) {
       $validator = [static::class, \substr($validator, 2)];
     }
     return $this->io->ask($question, $default, $validator);
