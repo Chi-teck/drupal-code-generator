@@ -134,8 +134,8 @@ final class ResultPrinterTest extends TestCase {
       Type        Path                  Lines   Size  
      ----------- --------------------- ------- ------ 
       directory   ddd                       -      -  
-      file        ccc                       2     10
-      file        /tmp/aaa                  1      3
+      file        ccc                       2     10  
+      file        /tmp/aaa                  1      3  
       file        aaa/ddd.txt               1      3  
       file        bbb/fff.module            0      0  
       file        bbb/eee/ggg.php           0      0  
