@@ -10,7 +10,6 @@ final class Action extends PluginGenerator {
   protected string $name = 'plugin:action';
   protected string $description = 'Generates action plugin';
   protected string $alias = 'action';
-  protected ?string $pluginLabelQuestion = 'Action label';
   protected string $pluginLabelDefault = 'Update node title';
 
   /**
@@ -27,6 +26,13 @@ final class Action extends PluginGenerator {
     if ($vars['configurable']) {
       $this->addSchemaFile()->template('schema');
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function askPluginLabelQuestion(): ?string {
+    return $this->ask('Action label', $this->pluginLabelDefault, '::validateRequired');
   }
 
 }

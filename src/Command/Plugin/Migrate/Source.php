@@ -12,8 +12,6 @@ final class Source extends PluginGenerator {
   protected string $name = 'plugin:migrate:source';
   protected string $description = 'Generates migrate source plugin';
   protected string $alias = 'migrate-source';
-  protected ?string $pluginLabelQuestion = NULL;
-  protected string $pluginIdDefault = '{machine_name}_example';
 
   /**
    * {@inheritdoc}
@@ -29,6 +27,20 @@ final class Source extends PluginGenerator {
     $vars['base_class'] = $vars['source_type'] == 'sql' ? 'SqlBase' : 'SourcePluginBase';
 
     $this->addFile('src/Plugin/migrate/source/{class}.php', 'source');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function askPluginLabelQuestion(): ?string {
+    return NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function askPluginIdQuestion(): ?string {
+    return $this->ask('Plugin ID', '{machine_name}_example', '::validateRequiredMachineName');
   }
 
 }

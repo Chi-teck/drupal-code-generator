@@ -12,8 +12,6 @@ final class EntityReferenceSelection extends PluginGenerator {
   protected string $name = 'plugin:entity-reference-selection';
   protected string $description = 'Generates entity reference selection plugin';
   protected string $alias = 'entity-reference-selection';
-  protected string $pluginLabelDefault = 'Advanced {entity_type} selection';
-  protected ?string $pluginClassDefault = '{entity_type|camelize}Selection';
 
   /**
    * {@inheritdoc}
@@ -48,6 +46,20 @@ final class EntityReferenceSelection extends PluginGenerator {
     $vars['plugin_label'] = $this->askPluginLabelQuestion();
     $vars['plugin_id'] = $this->askPluginIdQuestion();
     $vars['class'] = $this->askPluginClassQuestion($vars);
+  }
+
+  /**
+   * Asks plugin label question.
+   */
+  protected function askPluginLabelQuestion(): ?string {
+    return $this->ask('Plugin label', 'Advanced {entity_type} selection', '::validateRequired');
+  }
+
+  /**
+   * Asks plugin class question.
+   */
+  protected function askPluginClassQuestion(array $vars): string {
+    return $this->ask('Plugin class', '{entity_type|camelize}Selection');
   }
 
   /**

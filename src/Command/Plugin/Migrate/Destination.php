@@ -12,8 +12,6 @@ final class Destination extends PluginGenerator {
   protected string $name = 'plugin:migrate:destination';
   protected string $description = 'Generates migrate destination plugin';
   protected string $alias = 'migrate-destination';
-  protected ?string $pluginLabelQuestion = NULL;
-  protected string $pluginIdDefault = '{machine_name}_example';
 
   /**
    * {@inheritdoc}
@@ -21,6 +19,20 @@ final class Destination extends PluginGenerator {
   protected function generate(array &$vars): void {
     $this->collectDefault($vars);
     $this->addFile('src/Plugin/migrate/destination/{class}.php', 'destination');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function askPluginLabelQuestion(): ?string {
+    return NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function askPluginIdQuestion(): ?string {
+    return $this->ask('Plugin ID', '{machine_name}_example', '::validateRequiredMachineName');
   }
 
 }

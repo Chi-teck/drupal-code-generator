@@ -11,7 +11,6 @@ final class Block extends PluginGenerator {
   protected string $description = 'Generates block plugin';
   protected string $alias = 'block';
   protected string $pluginClassSuffix = 'Block';
-  protected ?string $pluginLabelQuestion = 'Block admin label';
 
   /**
    * {@inheritdoc}
@@ -31,6 +30,13 @@ final class Block extends PluginGenerator {
     if ($vars['configurable']) {
       $this->addSchemaFile()->template('schema');
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function askPluginLabelQuestion(): ?string {
+    return $this->ask('Block admin label', 'Example', '::validateRequired');
   }
 
 }
