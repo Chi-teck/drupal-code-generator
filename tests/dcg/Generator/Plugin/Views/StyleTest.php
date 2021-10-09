@@ -22,9 +22,9 @@ final class StyleTest extends BaseGeneratorTest {
 
   protected array $fixtures = [
     'example.module' => '/_style.module',
-    'templates/views-style-example-foo.html.twig' => '/_style.twig',
     'config/schema/example.schema.yml' => '/_style_schema.yml',
     'src/Plugin/views/style/Foo.php' => '/_style.php',
+    'templates/views-style-example-foo.html.twig' => '/_style.twig',
   ];
 
 }

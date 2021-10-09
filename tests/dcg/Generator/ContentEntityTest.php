@@ -41,10 +41,10 @@ final class ContentEntityTest extends BaseGeneratorTest {
     'foo.routing.yml' => '/_content_entity/foo.routing.yml',
     'src/FooExampleInterface.php' => '/_content_entity/src/ExampleInterface.php',
     'src/FooExampleListBuilder.php' => '/_content_entity/src/ExampleListBuilder.php',
-    'templates/foo-example.html.twig' => '/_content_entity/templates/foo-example.html.twig',
     'src/Entity/FooExample.php' => '/_content_entity/src/Entity/Example.php',
     'src/Form/FooExampleForm.php' => '/_content_entity/src/Form/ExampleForm.php',
     'src/Form/FooExampleSettingsForm.php' => '/_content_entity/src/Form/ExampleSettingsForm.php',
+    'templates/foo-example.html.twig' => '/_content_entity/templates/foo-example.html.twig',
   ];
 
 }

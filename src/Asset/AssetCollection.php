@@ -116,22 +116,23 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
   /**
-   * Returns directory assets.
-   *
-   * @return self
-   *   Collection of sorted assets.
+   * Returns a collection of sorted assets.
    */
   public function getSorted(): self {
-    $assets = $this->assets;
-    \usort($assets, static function (Asset $a, Asset $b): int {
+    $sorter = static function (Asset $a, Asset $b): int {
       $name_a = (string) $a;
       $name_b = (string) $b;
-      $depth_a = \substr_count($name_a, '/');
-      $depth_b = \substr_count($name_b, '/');
-      // Top level assets should be printed first.
-      return $depth_a === $depth_b || \min($depth_a, $depth_b) > 1 ?
-        \strcmp($name_a, $name_b) : $depth_a <=> $depth_b;
-    });
+
+      // Top level assets should go first.
+      $result = \strcasecmp(\dirname($name_a), \dirname($name_b));
+      if ($result === 0) {
+        $result = \strcasecmp($name_a, $name_b);
+      }
+      return $result;
+    };
+
+    $assets = $this->assets;
+    \usort($assets, $sorter);
     return new self($assets);
   }
 

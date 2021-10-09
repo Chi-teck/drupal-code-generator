@@ -63,9 +63,9 @@ final class ResultPrinterTest extends TestCase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • ccc
+     • /tmp/aaa
      • aaa/ddd.txt
      • bbb/fff.module
-     • /tmp/aaa
      • bbb/eee/ggg.php
 
 
@@ -91,9 +91,9 @@ final class ResultPrinterTest extends TestCase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • /project/root/ccc
+     • /tmp/aaa
      • /project/root/aaa/ddd.txt
      • /project/root/bbb/fff.module
-     • /tmp/aaa
      • /project/root/bbb/eee/ggg.php
 
 
@@ -134,10 +134,10 @@ final class ResultPrinterTest extends TestCase {
       Type        Path                  Lines   Size  
      ----------- --------------------- ------- ------ 
       directory   ddd                       -      -  
-      file        ccc                       2     10  
+      file        ccc                       2     10
+      file        /tmp/aaa                  1      3
       file        aaa/ddd.txt               1      3  
       file        bbb/fff.module            0      0  
-      file        /tmp/aaa                  1      3  
       file        bbb/eee/ggg.php           0      0  
       symlink     bbb/fff.module.link       -      -  
      ----------- --------------------- ------- ------ 

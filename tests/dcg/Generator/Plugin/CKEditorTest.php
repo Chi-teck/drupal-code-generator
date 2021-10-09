@@ -20,9 +20,9 @@ final class CKEditorTest extends BaseGeneratorTest {
   ];
 
   protected array $fixtures = [
+    'js/plugins/example/plugin.js' => '/_ckeditor/_plugin.js',
     'js/plugins/example/dialogs/example.js' => '/_ckeditor/_dialog.js',
     'js/plugins/example/icons/example.png' => '/_ckeditor/_icon.png',
-    'js/plugins/example/plugin.js' => '/_ckeditor/_plugin.js',
     'src/Plugin/CKEditorPlugin/Example.php' => '/_ckeditor/_ckeditor.php',
   ];
 

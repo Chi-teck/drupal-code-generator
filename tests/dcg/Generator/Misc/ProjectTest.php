@@ -82,10 +82,10 @@ final class ProjectTest extends BaseGeneratorTest {
       'load.environment.php' => $path . 'load.environment.php',
       'phpcs.xml' => $path . 'phpcs.xml',
       'phpunit.xml' => $path . 'phpunit.xml',
-      'patches/.keep' => $path . 'patches/keep',
-      'scripts/sync-site.sh' => $path . 'scripts/sync-site.sh',
       'drush/Commands/PolicyCommands.php' => $path . 'drush/Commands/PolicyCommands.php',
       'drush/sites/self.site.yml' => $path . 'drush/sites/self.site.yml',
+      'patches/.keep' => $path . 'patches/keep',
+      'scripts/sync-site.sh' => $path . 'scripts/sync-site.sh',
       'tests/src/HomePageTest.php' => $path . 'tests/src/HomePageTest.php',
     ];
 

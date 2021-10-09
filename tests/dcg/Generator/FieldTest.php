@@ -11,8 +11,8 @@ final class FieldTest extends BaseGeneratorTest {
 
   protected array $fixtures = [
     'example.libraries.yml' => '/_field/_libraries.yml',
-    'css/example-foo-widget.css' => '/_field/_widget.css',
     'config/schema/example.schema.yml' => '/_field/_schema.yml',
+    'css/example-foo-widget.css' => '/_field/_widget.css',
     'src/Plugin/Field/FieldFormatter/FooDefaultFormatter.php' => '/_field/_default_formatter.php',
     'src/Plugin/Field/FieldFormatter/FooKeyValueFormatter.php' => '/_field/_key_value_formatter.php',
     'src/Plugin/Field/FieldFormatter/FooTableFormatter.php' => '/_field/_table_formatter.php',
