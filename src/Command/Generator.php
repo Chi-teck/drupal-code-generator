@@ -48,7 +48,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   protected string $alias = '';
 
   /**
-   * Command label.
+   * A human-readable name of the generator.
    */
   protected string $label = '';
 
