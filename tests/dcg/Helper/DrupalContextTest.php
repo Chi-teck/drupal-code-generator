@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Tests\Helper;
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
-use DrupalCodeGenerator\Command\DrupalGenerator;
 use DrupalCodeGenerator\Helper\DrupalContext;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -25,7 +24,7 @@ final class DrupalContextTest extends TestCase {
   public function setUp(): void {
     parent::setUp();
 
-    $this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
+    $this->container = $this->getMockBuilder(ContainerInterface::class)
       ->setMethods(['get'])
       ->getMock();
 
@@ -45,48 +44,51 @@ final class DrupalContextTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testGetExtensionList(): void {
+  public function testGetModules(): void {
     $drupal_context = new DrupalContext($this->container);
-
     $modules = [
       'foo' => 'Foo',
       'bar' => 'Bar',
       'qux' => 'Qux',
     ];
-    self::assertSame($modules, $drupal_context->getExtensionList(DrupalGenerator::EXTENSION_TYPE_MODULE));
-
-    $themes = [
-      'alpha' => 'Alpha',
-      'beta' => 'Beta',
-      'gamma' => 'Gamma',
-    ];
-    self::assertSame($themes, $drupal_context->getExtensionList(DrupalGenerator::EXTENSION_TYPE_THEME));
-
-    self::expectException(\UnexpectedValueException::class);
-    self::expectExceptionMessage('Unsupported extension type "123"');
-    $drupal_context->getExtensionList(123);
+    self::assertSame($modules, $drupal_context->getModules());
   }
 
   /**
    * Test callback.
    */
-  public function testGetDestination(): void {
+  public function testGetThemes(): void {
+    $drupal_context = new DrupalContext($this->container);
+    $modules = [
+      'foo' => 'Foo',
+      'bar' => 'Bar',
+      'qux' => 'Qux',
+    ];
+    self::assertSame($modules, $drupal_context->getModules());
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testGetModuleDestination(): void {
     $drupal_context = new DrupalContext($this->container, '/path');
-
     // New module.
-    self::assertSame('/path/modules', $drupal_context->getDestination(DrupalGenerator::EXTENSION_TYPE_MODULE, TRUE, 'does not matter'));
+    self::assertSame('/path/modules', $drupal_context->getModuleDestination(TRUE, 'does not matter'));
     // Existing module.
-    self::assertSame('/path/modules/custom/bar', $drupal_context->getDestination(DrupalGenerator::EXTENSION_TYPE_MODULE, FALSE, 'bar'));
+    self::assertSame('/path/modules/custom/bar', $drupal_context->getModuleDestination(FALSE, 'bar'));
     // Existing module which is not really exists.
-    self::assertSame('/path/modules/fake', $drupal_context->getDestination(DrupalGenerator::EXTENSION_TYPE_MODULE, FALSE, 'fake'));
-    // New theme.
-    self::assertSame('/path/themes', $drupal_context->getDestination(DrupalGenerator::EXTENSION_TYPE_THEME, TRUE, 'does not matter'));
-    // Existing theme.
-    self::assertSame('/path/themes/gamma', $drupal_context->getDestination(DrupalGenerator::EXTENSION_TYPE_THEME, FALSE, 'gamma'));
+    self::assertSame('/path/modules/fake', $drupal_context->getModuleDestination(FALSE, 'fake'));
+  }
 
-    self::expectException(\UnexpectedValueException::class);
-    self::expectExceptionMessage('Unsupported extension type "123"');
-    $drupal_context->getDestination(123, TRUE, NULL);
+  /**
+   * Test callback.
+   */
+  public function testGetThemeDestination(): void {
+    $drupal_context = new DrupalContext($this->container, '/path');
+    // New theme.
+    self::assertSame('/path/themes', $drupal_context->getThemeDestination(TRUE, 'does not matter'));
+    // Existing theme.
+    self::assertSame('/path/themes/gamma', $drupal_context->getThemeDestination(FALSE, 'gamma'));
   }
 
   /**

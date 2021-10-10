@@ -8,6 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * A helper that provides a bridge between generators and Drupal installation.
+ *
+ * @todo Support installation profiles.
  */
 class DrupalContext extends Helper {
 
@@ -58,40 +60,95 @@ class DrupalContext extends Helper {
   }
 
   /**
+   * Returns a list of currently installed modules.
+   */
+  public function getModules(): array {
+    if (!$this->modules) {
+      /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
+      $module_handler = $this->container->get('module_handler');
+      foreach ($module_handler->getModuleList() as $machine_name => $module) {
+        $this->modules[$machine_name] = $module_handler->getName($machine_name);
+      }
+    }
+    return $this->modules;
+  }
+
+  /**
+   * Returns destination for generated module code.
+   */
+  public function getModuleDestination(bool $is_new, ?string $machine_name): ?string {
+    $destination = NULL;
+
+    $modules_dir = \is_dir($this->getDrupalRoot() . '/modules/custom') ?
+      'modules/custom' : 'modules';
+
+    if ($is_new) {
+      $destination = $modules_dir;
+    }
+    elseif ($machine_name) {
+      $destination = \array_key_exists($machine_name, $this->getModules())
+        ? $this->container->get('module_handler')->getModule($machine_name)->getPath()
+        : $modules_dir . '/' . $machine_name;
+    }
+
+    if ($destination) {
+      $destination = $this->getDrupalRoot() . '/' . $destination;
+    }
+
+    return $destination;
+  }
+
+  /**
+   * Returns destination for generated module code.
+   */
+  public function getThemeDestination(bool $is_new, ?string $machine_name): ?string {
+    $destination = NULL;
+
+    $themes_dir = \is_dir($this->drupalRoot . '/themes/custom') ?
+      'themes/custom' : 'themes';
+
+    if ($is_new) {
+      $destination = $themes_dir;
+    }
+    elseif ($machine_name) {
+      $destination = \array_key_exists($machine_name, $this->getThemes())
+        ? $this->container->get('theme_handler')->getTheme($machine_name)->getPath()
+        : $themes_dir . '/' . $machine_name;
+    }
+
+    if ($destination) {
+      $destination = $this->getDrupalRoot() . '/' . $destination;
+    }
+
+    return $destination;
+  }
+
+  /**
+   * Returns a list of currently installed modules.
+   */
+  public function getThemes(): array {
+    if (!$this->themes) {
+      /** @var \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler */
+      $theme_handler = $this->container->get('theme_handler');
+      foreach ($theme_handler->listInfo() as $machine_name => $theme) {
+        $this->themes[$machine_name] = $theme->info['name'];
+      }
+    }
+    return $this->themes;
+  }
+
+  /**
    * Returns a list of currently installed extensions.
    *
-   * @param int $extension_type
-   *   Extension type (module|theme|profile).
-   *
-   * @return \Drupal\Core\Extension\Extension[]
-   *   An associative array whose keys are the machine names of the extensions
-   *   and whose values are extension names.
+   * @deprecated Use ::getModules() or getThemes() instead.
    */
   public function getExtensionList(int $extension_type): array {
     switch ($extension_type) {
       case DrupalGenerator::EXTENSION_TYPE_MODULE:
-        if (!$this->modules) {
-          /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
-          $module_handler = $this->container->get('module_handler');
-          foreach ($module_handler->getModuleList() as $machine_name => $module) {
-            $this->modules[$machine_name] = $module_handler->getName($machine_name);
-          }
-        }
-        return $this->modules;
+        return $this->getModules();
 
       case DrupalGenerator::EXTENSION_TYPE_THEME:
-        if (!$this->themes) {
-          /** @var \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler */
-          $theme_handler = $this->container->get('theme_handler');
-          foreach ($theme_handler->listInfo() as $machine_name => $theme) {
-            $this->themes[$machine_name] = $theme->info['name'];
-          }
-        }
-        return $this->themes;
-
-      case DrupalGenerator::EXTENSION_TYPE_PROFILE:
-        // @todo Support profiles.
-        return [];
+        return $this->getThemes();
 
       default:
         throw new \UnexpectedValueException(\sprintf('Unsupported extension type "%s".', $extension_type));
@@ -101,63 +158,19 @@ class DrupalContext extends Helper {
   /**
    * Returns destination for generated code.
    *
-   * @param int $extension_type
-   *   Extension type.
-   * @param bool $is_new
-   *   Indicates that generated code is a new Drupal extension.
-   * @param string|null $machine_name
-   *   Machine mane of the extension.
-   *
-   * @return string|null
-   *   The destination.
+   * @deprecated Use ::getModuleDestination() or getThemeDestination() instead.
    */
   public function getDestination(int $extension_type, bool $is_new, ?string $machine_name): ?string {
-    $destination = NULL;
-
     switch ($extension_type) {
       case DrupalGenerator::EXTENSION_TYPE_MODULE:
-        $modules_dir = \is_dir($this->getDrupalRoot() . '/modules/custom') ?
-          'modules/custom' : 'modules';
-
-        if ($is_new) {
-          $destination = $modules_dir;
-        }
-        elseif ($machine_name) {
-          $module_handler = $this->container->get('module_handler');
-          $destination = isset($this->getExtensionList(DrupalGenerator::EXTENSION_TYPE_MODULE)[$machine_name])
-            ? $module_handler->getModule($machine_name)->getPath()
-            : $modules_dir . '/' . $machine_name;
-        }
-        break;
+        return $this->getModuleDestination($is_new, $machine_name);
 
       case DrupalGenerator::EXTENSION_TYPE_THEME:
-        $themes_dir = \is_dir($this->drupalRoot . '/themes/custom') ?
-          'themes/custom' : 'themes';
-
-        if ($is_new) {
-          $destination = $themes_dir;
-        }
-        elseif ($machine_name) {
-          $theme_handler = $this->container->get('theme_handler');
-          $destination = isset($this->getExtensionList(DrupalGenerator::EXTENSION_TYPE_THEME)[$machine_name])
-            ? $theme_handler->getTheme($machine_name)->getPath()
-            : $themes_dir . '/' . $machine_name;
-        }
-        break;
-
-      case DrupalGenerator::EXTENSION_TYPE_PROFILE:
-        // @todo Support profiles.
-        break;
+        return $this->getThemeDestination($is_new, $machine_name);
 
       default:
         throw new \UnexpectedValueException(\sprintf('Unsupported extension type "%s".', $extension_type));
-
     }
-
-    if ($destination) {
-      $destination = $this->getDrupalRoot() . '/' . $destination;
-    }
-
     return $destination;
   }
 
