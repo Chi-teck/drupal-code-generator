@@ -8,7 +8,7 @@ use Twig\Node\Node;
 /**
  * A class that defines the compiler for 'sort' token.
  */
-class TwigSortSetNode extends Node {
+final class TwigSortSetNode extends Node {
 
   /**
    * {@inheritdoc}

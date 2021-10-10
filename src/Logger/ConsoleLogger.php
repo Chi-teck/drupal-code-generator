@@ -110,7 +110,7 @@ class ConsoleLogger extends AbstractLogger {
 
     $replacements = [];
     foreach ($context as $key => $value) {
-      if (NULL === $value || \is_scalar($value) || (\is_object($value) && \method_exists($value, '__toString'))) {
+      if ($value === NULL || \is_scalar($value) || (\is_object($value) && \method_exists($value, '__toString'))) {
         $replacements["{{$key}}"] = $value;
       }
       elseif ($value instanceof \DateTimeInterface) {

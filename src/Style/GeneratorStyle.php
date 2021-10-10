@@ -44,7 +44,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
   /**
    * {@inheritdoc}
    */
-  public function title($message) {
+  public function title($message): void {
     $this->writeln('');
     $this->writeln(' ' . $message);
     $length = Helper::strlenWithoutDecoration($this->getFormatter(), $message);
@@ -65,7 +65,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
   /**
    * {@inheritdoc}
    */
-  public function listing(array $elements) {
+  public function listing(array $elements): void {
     $build_item = static fn (string $element): string => \sprintf(' • %s', $element);
     $elements = \array_map($build_item, $elements);
     $this->writeln($elements);
@@ -75,7 +75,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
   /**
    * {@inheritdoc}
    */
-  public function text($message) {
+  public function text($message): void {
     $messages = \is_array($message) ? \array_values($message) : [$message];
     foreach ($messages as $message) {
       $this->writeln(\sprintf(' <info>%s</info>', $message));

@@ -19,7 +19,7 @@ final class DumperOptions {
   /**
    * Replace flag.
    *
-   * A flag indicating whether or not the files can be replaced. If not set the
+   * A flag indicating whether the files can be replaced. If not set the
    * user will be prompted to confirm replacing of each existing file.
    */
   public ?bool $replace;

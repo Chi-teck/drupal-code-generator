@@ -22,9 +22,6 @@ class Renderer extends Helper implements LoggerAwareInterface {
 
   /**
    * Constructs the Renderer object.
-   *
-   * @param \Twig\Environment $twig
-   *   The twig environment.
    */
   public function __construct(Environment $twig) {
     $this->twig = $twig;

@@ -17,7 +17,7 @@ interface GeneratorStyleInterface extends SymfonyStyleInterface, OutputInterface
    * Asks a question to the user.
    *
    * @return mixed
-   *   The user answer
+   *   The answer.
    */
   public function askQuestion(Question $question);
 

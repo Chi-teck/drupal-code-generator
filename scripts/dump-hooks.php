@@ -19,14 +19,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 /**
  * Dumps hooks.
- *
- * @param \Symfony\Component\Console\Input\InputInterface $input
- *   Input instance.
- * @param \Symfony\Component\Console\Output\OutputInterface $output
- *   Output instance.
- *
- * @return int
- *   Exit code.
  */
 function dump_hooks(InputInterface $input, OutputInterface $output): int {
 
@@ -51,10 +43,10 @@ function dump_hooks(InputInterface $input, OutputInterface $output): int {
     $file_name = $file->getFileName();
     if (\str_ends_with($file_name, 'api.php')) {
       $output->writeln("<comment>$file_name</comment>");
-      $hooks = parse_hooks($path);
+      $hooks = \parse_hooks($path);
       foreach ($hooks as $hook_name => $hook) {
         $output->writeln('  - ' . $hook_name);
-        file_put_contents("$output_directory/$hook_name.twig", $hook);
+        \file_put_contents("$output_directory/$hook_name.twig", $hook);
         $total++;
       }
     }
@@ -78,13 +70,13 @@ function dump_hooks(InputInterface $input, OutputInterface $output): int {
 function parse_hooks(string $file): array {
   $code = file_get_contents($file);
 
-  preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);
+  \preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);
 
   $results = [];
   foreach ($matches[0] as $index => $hook) {
     $hook_name = $matches[1][$index];
     $output = "/**\n * Implements hook_$hook_name().\n */\n";
-    $output .= str_replace('function hook_', 'function {{ machine_name }}_', $hook);
+    $output .= \str_replace('function hook_', 'function {{ machine_name }}_', $hook);
     $results[$hook_name] = $output;
   }
 

@@ -34,30 +34,21 @@ abstract class Asset {
   }
 
   /**
-   * Getter for asset path.
-   *
-   * @return string
-   *   Asset path.
+   * Getter for the asset path.
    */
   public function getPath(): string {
     return $this->replaceTokens($this->path);
   }
 
   /**
-   * Getter for asset mode.
-   *
-   * @return int
-   *   Asset file mode.
+   * Getter for the asset mode.
    */
   public function getMode(): int {
     return $this->mode;
   }
 
   /**
-   * Getter for asset vars.
-   *
-   * @return array
-   *   Asset variables.
+   * Getter for the asset vars.
    */
   public function getVars(): array {
     return $this->vars;
@@ -65,12 +56,6 @@ abstract class Asset {
 
   /**
    * Setter for asset mode.
-   *
-   * @param int $mode
-   *   Asset mode.
-   *
-   * @return \DrupalCodeGenerator\Asset\Asset
-   *   The asset.
    */
   public function mode(int $mode): Asset {
     if ($mode < 0000 || $mode > 0777) {
@@ -81,13 +66,7 @@ abstract class Asset {
   }
 
   /**
-   * Setter for asset vars.
-   *
-   * @param array $vars
-   *   Asset template variables.
-   *
-   * @return self
-   *   The asset.
+   * Setter for the asset vars.
    */
   public function vars(array $vars): self {
     $this->vars = $vars;

@@ -28,7 +28,7 @@ if (!file_exists($autoload)) {
 }
 
 // STEP 1. Bootstrap Drupal.
-chdir($argv[1]);
+\chdir($argv[1]);
 $autoloader = require_once $autoload;
 $kernel = new DrupalKernel('prod', $autoloader);
 $request = Request::createFromGlobals();
@@ -197,11 +197,11 @@ if ($size === FALSE) {
 $finish = \microtime(TRUE);
 
 print "-----------------------\n";
-\printf("Services: %s\n", count($services));
-\printf("Raw definitions: %s\n", count($raw_definitions));
-\printf("Normalized definitions: %s\n", count($definitions));
-\printf("File size: %s\n", format_size($size));
-\printf("Time: %s ms\n", round(1000 * ($finish - $start)));
+\printf("Services: %s\n", \count($services));
+\printf("Raw definitions: %s\n", \count($raw_definitions));
+\printf("Normalized definitions: %s\n", \count($definitions));
+\printf("File size: %s\n", \format_size($size));
+\printf("Time: %s ms\n", \round(1000 * ($finish - $start)));
 print "-----------------------\n";
 
 /**

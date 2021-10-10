@@ -42,7 +42,7 @@ class QuestionHelper extends BaseQuestionHelper {
   }
 
   /**
-   * Asks a question to the user.
+   * Asks a question to the user and returns the answer.
    *
    * @return mixed
    *   The user answer.
@@ -63,7 +63,7 @@ class QuestionHelper extends BaseQuestionHelper {
       $answer = $question->getDefault();
     }
     elseif ($question instanceof ConfirmationQuestion) {
-      $answer = \preg_match('/^Ye?s?$/i', $answer);
+      $answer = (bool) \preg_match('/^Ye?s?$/i', $answer);
     }
 
     if ($validator = $question->getValidator()) {
@@ -94,7 +94,7 @@ class QuestionHelper extends BaseQuestionHelper {
   /**
    * {@inheritdoc}
    */
-  protected function writePrompt(OutputInterface $output, Question $question) {
+  protected function writePrompt(OutputInterface $output, Question $question): void {
     // @todo Remove this once Symfony fixes the following bug.
     // @see https://github.com/symfony/symfony/issues/39946
     $style = new OutputFormatterStyle('white', 'blue', ['bold']);
@@ -138,13 +138,12 @@ class QuestionHelper extends BaseQuestionHelper {
     else {
       $output->write("\n ➤ ");
     }
-
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function writeError(OutputInterface $output, \Exception $error) {
+  protected function writeError(OutputInterface $output, \Exception $error): void {
     // Add one-space indentation to comply with DCG output style.
     $output->writeln(' <error>' . $error->getMessage() . '</error>');
   }

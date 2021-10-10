@@ -52,7 +52,7 @@ final class Symlink extends Asset {
   }
 
   /**
-   * Sets "replace" action.
+   * Sets the "replace" action.
    */
   public function replaceIfExists(): self {
     $this->action = self::ACTION_REPLACE;
@@ -60,7 +60,7 @@ final class Symlink extends Asset {
   }
 
   /**
-   * Sets "skip" action.
+   * Sets the "skip" action.
    */
   public function skipIfExists(): self {
     $this->action = self::ACTION_SKIP;

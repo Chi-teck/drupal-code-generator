@@ -8,7 +8,7 @@ use Twig\TokenParser\AbstractTokenParser;
 /**
  * A class that defines the Twig 'sort' token parser.
  */
-class TwigSortTokenParser extends AbstractTokenParser {
+final class TwigSortTokenParser extends AbstractTokenParser {
 
   /**
    * {@inheritdoc}

@@ -20,7 +20,6 @@ abstract class GeneratorTest extends TestCase {
 
   protected string $display;
   protected string $fixtureDir;
-
   private string $directory;
 
   /**
@@ -93,7 +92,7 @@ abstract class GeneratorTest extends TestCase {
     // Replace default question helper to ease parsing output.
     $helper_set->set(new QuestionHelper());
 
-    // Replace default renderer to support 'strict_variables' in tests.
+    // Replace default renderer to enable 'strict_variables' in tests.
     $twig_environment = new TwigEnvironment(new FilesystemLoader(), ['strict_variables' => TRUE]);
     $helper_set->set(new Renderer($twig_environment));
     return $application;

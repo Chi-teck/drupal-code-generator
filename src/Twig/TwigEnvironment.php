@@ -12,15 +12,10 @@ use Twig\TwigFilter;
 /**
  * Stores the Twig configuration.
  */
-class TwigEnvironment extends Environment {
+final class TwigEnvironment extends Environment {
 
   /**
    * Constructs Twig environment object.
-   *
-   * @param \Twig\Loader\LoaderInterface $loader
-   *   The Twig loader.
-   * @param array $options
-   *   (Optional) Environment options.
    */
   public function __construct(LoaderInterface $loader, array $options = []) {
     parent::__construct($loader, $options);

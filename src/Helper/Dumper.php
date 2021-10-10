@@ -25,9 +25,6 @@ class Dumper extends Helper implements IOAwareInterface {
 
   /**
    * Constructs a generator command.
-   *
-   * @param \Symfony\Component\Filesystem\Filesystem $filesystem
-   *   The file system utility.
    */
   public function __construct(Filesystem $filesystem) {
     $this->filesystem = $filesystem;
@@ -42,16 +39,6 @@ class Dumper extends Helper implements IOAwareInterface {
 
   /**
    * Dumps the generated code to file system.
-   *
-   * @param \DrupalCodeGenerator\Asset\AssetCollection $assets
-   *   Assets to be dumped.
-   * @param string $destination
-   *   The destination directory.
-   * @param \DrupalCodeGenerator\Helper\DumperOptions $options
-   *   Dumper options.
-   *
-   * @return \DrupalCodeGenerator\Asset\AssetCollection
-   *   A list of created or updated assets.
    */
   public function dump(AssetCollection $assets, string $destination, DumperOptions $options): AssetCollection {
 

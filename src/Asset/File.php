@@ -60,83 +60,56 @@ final class File extends Asset {
   }
 
   /**
-   * Getter for asset content.
-   *
-   * @return string|null
-   *   Asset content.
+   * Returns the asset content.
    */
   public function getContent(): ?string {
     return $this->content;
   }
 
   /**
-   * Getter for header template.
-   *
-   * @return string|null
-   *   Asset header template.
+   * Returns the header template.
    */
   public function getHeaderTemplate(): ?string {
     return $this->headerTemplate ? $this->replaceTokens($this->headerTemplate) : $this->headerTemplate;
   }
 
   /**
-   * Getter for template.
-   *
-   * @return string|null
-   *   Asset template.
+   * Returns the asset template.
    */
   public function getTemplate(): ?string {
     return $this->template ? $this->replaceTokens($this->template) : $this->template;
   }
 
   /**
-   * Getter for inline template.
-   *
-   * @return string|null
-   *   Asset template.
+   * Returns the asset inline template.
    */
   public function getInlineTemplate(): ?string {
     return $this->inlineTemplate;
   }
 
   /**
-   * Getter for asset action.
-   *
-   * @return string|callable
-   *   Asset action.
+   * Returns the asset action.
    */
-  public function getAction() {
+  public function getAction(): int {
     return $this->action;
   }
 
   /**
-   * Getter for asset header size.
-   *
-   * @return int
-   *   Asset header size.
+   * Returns the asset header size (number of lines).
    */
   public function getHeaderSize(): int {
     return $this->headerSize;
   }
 
   /**
-   * Getter asset resolver.
-   *
-   * @return callable|null
-   *   Asset resolver.
+   * Returns the asset resolver.
    */
   public function getResolver(): ?callable {
     return $this->resolver;
   }
 
   /**
-   * Setter for asset content.
-   *
-   * @param string|null $content
-   *   Asset content.
-   *
-   * @return self
-   *   The asset.
+   * Sets the asset content.
    */
   public function content(?string $content): self {
     $this->content = $content;
@@ -144,13 +117,7 @@ final class File extends Asset {
   }
 
   /**
-   * Setter for asset header template.
-   *
-   * @param string|null $header_template
-   *   Asset template.
-   *
-   * @return self
-   *   The asset.
+   * Sets the asset header template.
    */
   public function headerTemplate(?string $header_template): self {
     $this->headerTemplate = self::addTwigFileExtension($header_template);
@@ -158,13 +125,7 @@ final class File extends Asset {
   }
 
   /**
-   * Setter for asset template.
-   *
-   * @param string|null $template
-   *   Asset template.
-   *
-   * @return self
-   *   The asset.
+   * Returns the asset template.
    */
   public function template(?string $template): self {
     if ($template !== NULL) {
@@ -174,13 +135,7 @@ final class File extends Asset {
   }
 
   /**
-   * Setter for asset template.
-   *
-   * @param string|null $inline_template
-   *   The template string to render.
-   *
-   * @return self
-   *   The asset.
+   * Returns the asset inline template.
    */
   public function inlineTemplate(?string $inline_template): self {
     $this->inlineTemplate = $inline_template;
@@ -188,10 +143,7 @@ final class File extends Asset {
   }
 
   /**
-   * Sets "replace" action.
-   *
-   * @return self
-   *   The asset.
+   * Sets the "replace" action.
    */
   public function replaceIfExists(): self {
     $this->action = self::ACTION_REPLACE;
@@ -199,10 +151,7 @@ final class File extends Asset {
   }
 
   /**
-   * Sets "prepend" action.
-   *
-   * @return self
-   *   The asset.
+   * Sets the "prepend" action.
    */
   public function prependIfExists(): self {
     $this->action = self::ACTION_PREPEND;
@@ -210,10 +159,7 @@ final class File extends Asset {
   }
 
   /**
-   * Sets "append" action.
-   *
-   * @return self
-   *   The asset.
+   * Sets the "append" action.
    */
   public function appendIfExists(): self {
     $this->action = self::ACTION_APPEND;
@@ -221,10 +167,7 @@ final class File extends Asset {
   }
 
   /**
-   * Sets "skip" action.
-   *
-   * @return self
-   *   The asset.
+   * Sets the "skip" action.
    */
   public function skipIfExists(): self {
     $this->action = self::ACTION_SKIP;
@@ -232,13 +175,7 @@ final class File extends Asset {
   }
 
   /**
-   * Setter for asset header size.
-   *
-   * @param int $header_size
-   *   Asset header size.
-   *
-   * @return self
-   *   The asset.
+   * Set the asset header size.
    */
   public function headerSize(int $header_size): self {
     if ($header_size <= 0) {
@@ -254,16 +191,13 @@ final class File extends Asset {
    * @param callable|null $resolver
    *   A callable responsible for resolving content.
    *   @code
-   *     $resolver = function (?string $existing_content, ?string $generated_content) ?string {
+   *     $resolver = static function (?string $existing_content, ?string $generated_content): ?string {
    *       if ($existing_content !== NULL) {
    *         return $generated_content . "\n" . $existing_content;
    *       }
    *       return $generated_content;
    *     }
    *   @endcode
-   *
-   * @return \DrupalCodeGenerator\Asset\Asset
-   *   The asset.
    */
   public function resolver(?callable $resolver): self {
     $this->resolver = $resolver;
@@ -271,7 +205,7 @@ final class File extends Asset {
   }
 
   /**
-   * Adds Twig extension if needed.
+   * Adds the Twig file extension if needed.
    */
   private static function addTwigFileExtension(string $template): string {
     if ($template && \pathinfo($template, \PATHINFO_EXTENSION) != 'twig') {

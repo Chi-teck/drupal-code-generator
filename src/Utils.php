@@ -47,9 +47,6 @@ class Utils {
 
   /**
    * Returns extension root.
-   *
-   * @return string|null
-   *   Extension root directory or NULL if it was not found.
    */
   public static function getExtensionRoot(string $directory): ?string {
     $extension_root = NULL;
@@ -136,12 +133,6 @@ class Utils {
 
   /**
    * Quote curly brackets with slashes.
-   *
-   * @param string $input
-   *   The input string.
-   *
-   * @return string
-   *   The escaped string.
    */
   public static function addSlashes(string $input): string {
     return \addcslashes($input, '{}');
@@ -149,12 +140,6 @@ class Utils {
 
   /**
    * Un-quotes a quoted string.
-   *
-   * @param string $input
-   *   The input string.
-   *
-   * @return string
-   *   The un-escaped string.
    */
   public static function stripSlashes(string $input): string {
     return \str_replace(['\{', '\}'], ['{', '}'], $input);
@@ -162,12 +147,6 @@ class Utils {
 
   /**
    * Pluralizes a noun.
-   *
-   * @param string $input
-   *   A word in singular form.
-   *
-   * @return string
-   *   The pluralized word.
    */
   public static function pluralize(string $input): string {
     return (new EnglishInflector())->pluralize($input)[0];
