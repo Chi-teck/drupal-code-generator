@@ -2,20 +2,43 @@
 
 namespace DrupalCodeGenerator\Tests\Generator;
 
+use DrupalCodeGenerator\Command\ModuleFile;
+use DrupalCodeGenerator\Test\GeneratorTest;
+
 /**
  * Test for module-file command.
  */
-final class ModuleFileTest extends BaseGeneratorTest {
+final class ModuleFileTest extends GeneratorTest {
 
-  protected string $class = 'ModuleFile';
+  protected string $fixtureDir = __DIR__;
 
-  protected array $interaction = [
-    'Module name [%default_name%]:' => 'Foo',
-    'Module machine name [foo]:' => 'foo',
-  ];
+  /**
+   * Test callback.
+   */
+  public function testGenerator(): void {
 
-  protected array $fixtures = [
-    'foo.module' => '/_module_file.module',
-  ];
+    $this->execute(new ModuleFile(), ['Foo', 'foo']);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to module-file generator!
+    –––––––––––––––––––––––––––––––––––
+
+     Module name [%default_name%]:
+     ➤ 
+
+     Module machine name [foo]:
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.module
+
+
+    TXT;
+    $this->assertDisplay($expected_display);
+
+    $this->assertGeneratedFile('foo.module', '_module_file.module');
+  }
 
 }
