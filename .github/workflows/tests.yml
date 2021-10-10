@@ -17,6 +17,9 @@ jobs:
                     - "7.4"
                     - "8.0"
                     - "8.1"
+                dependency-mode:
+                  - prefer-stable
+                  - prefer-lowest
         steps:
             - name: Checkout
               uses: actions/checkout@v2
@@ -29,6 +32,9 @@ jobs:
 
             - name: Install dependencies
               run: composer install --ansi
+
+            - name: Update  dependencies
+              run: composer update --${{ matrix.dependency-mode }} --ansi
 
             - name: Run Twig linter
               run: ./vendor/bin/twigcs ./templates
