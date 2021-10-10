@@ -45,5 +45,8 @@
     },
     "conflict": {
         "squizlabs/php_codesniffer": "<3.6"
+    },
+    "replace": {
+        "symfony/polyfill-php73": "*"
     }
 }
