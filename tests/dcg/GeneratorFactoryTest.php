@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test for GeneratorsDiscovery.
  */
-final class GeneratorDiscoveryTest extends TestCase {
+final class GeneratorFactoryTest extends TestCase {
 
   private const TOTAL_GENERATORS = 15;
 
