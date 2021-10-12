@@ -3,6 +3,7 @@
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
+use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\GenerateCompletion;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
@@ -16,7 +17,8 @@ $class_loader = file_exists(__DIR__ . '/../vendor/autoload.php')
 $bootstrap_handler = new BootstrapHandler($class_loader);
 $container = $bootstrap_handler->bootstrap();
 
-$generators = (new GeneratorFactory())->getGenerators([Application::ROOT . '/src/Command']);
+$generator_factory = new GeneratorFactory(new SimpleClassResolver());
+$generators = $generator_factory->getGenerators([Application::ROOT . '/src/Command']);
 
 $application = Application::create($container);
 $application->addCommands($generators);

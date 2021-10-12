@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\GeneratorFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +18,7 @@ final class GeneratorDiscoveryTest extends TestCase {
    * Test callback.
    */
   public function testExecute(): void {
-    $factory = new GeneratorFactory();
+    $factory = new GeneratorFactory(new SimpleClassResolver());
     $generators = $factory->getGenerators(
       [Application::ROOT . '/src/Command/Misc/Drupal_7'],
       '\DrupalCodeGenerator\Command\Misc\Drupal_7',

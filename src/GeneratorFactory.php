@@ -2,12 +2,23 @@
 
 namespace DrupalCodeGenerator;
 
+use DrupalCodeGenerator\ClassResolver\ClassResolverInterface;
+
 /**
  * Defines generator factory.
  */
 final class GeneratorFactory {
 
   private const COMMAND_INTERFACE = '\DrupalCodeGenerator\Command\GeneratorInterface';
+
+  private ClassResolverInterface $classResolver;
+
+  /**
+   * The object constructor.
+   */
+  public function __construct(ClassResolverInterface $class_resolver) {
+    $this->classResolver = $class_resolver;
+  }
 
   /**
    * Finds and instantiates generator commands.
@@ -35,7 +46,7 @@ final class GeneratorFactory {
           if (\class_exists($class)) {
             $reflected_class = new \ReflectionClass($class);
             if (!$reflected_class->isInterface() && !$reflected_class->isAbstract() && $reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {
-              $commands[] = new $class();
+              $commands[] = $this->classResolver->getInstance($class);
             }
           }
         }

@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Tests;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -22,7 +23,7 @@ final class NavigationCommandTest extends BaseTestCase {
    */
   public function testNavigation(): void {
 
-    $factory = new GeneratorFactory();
+    $factory = new GeneratorFactory(new SimpleClassResolver());
     $generators = $factory->getGenerators([Application::ROOT . '/src/Command']);
 
     $application = Application::create();
