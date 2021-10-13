@@ -8,11 +8,13 @@ namespace DrupalCodeGenerator\Command;
 interface GeneratorInterface {
 
   /**
-   * Returns command label.
-   *
-   * @return string
-   *   The human-readable command label.
+   * Returns the human-readable command label.
    */
   public function getLabel(): string;
+
+  /**
+   * Returns supported API version.
+   */
+  public static function getApi(): int;
 
 }

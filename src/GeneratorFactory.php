@@ -68,7 +68,8 @@ final class GeneratorFactory {
           continue;
         }
 
-        if ($required_api && $reflected_class->getConstant('API') !== $required_api) {
+        /* @noinspection PhpUndefinedMethodInspection */
+        if ($required_api && $class::getApi() !== $required_api) {
           $this->logger->notice(
             'Class {class} does not support required API version {required_api}.',
             ['class' => $class, 'required_api' => $required_api],

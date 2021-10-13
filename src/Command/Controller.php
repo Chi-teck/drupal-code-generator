@@ -7,7 +7,6 @@ namespace DrupalCodeGenerator\Command;
  */
 final class Controller extends ModuleGenerator {
 
-  public const API = 2;
   protected string $name = 'controller';
   protected string $description = 'Generates a controller';
 

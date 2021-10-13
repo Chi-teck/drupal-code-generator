@@ -33,6 +33,11 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   use ValidatorTrait;
 
   /**
+   * The API version.
+   */
+  protected static int $api;
+
+  /**
    * The command name.
    */
   protected string $name;
@@ -224,6 +229,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   public function getLabel(): string {
     return $this->label;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getApi(): int {
+    return static::$api ?? 1;
   }
 
   /**
