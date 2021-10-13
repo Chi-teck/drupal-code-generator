@@ -56,7 +56,7 @@ final class GeneratorFactory {
         try {
           $reflected_class = new \ReflectionClass($class);
         }
-        catch (\Error $exception) {
+        catch (\ReflectionException $exception) {
           $this->logger->notice(
             'Could not load generator {class}.' . \PHP_EOL . '{error}',
             ['class' => $class, 'error' => $exception->getMessage()],
