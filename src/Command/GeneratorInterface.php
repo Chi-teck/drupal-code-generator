@@ -7,4 +7,12 @@ namespace DrupalCodeGenerator\Command;
  */
 interface GeneratorInterface {
 
+  /**
+   * Returns command label.
+   *
+   * @return string
+   *   The human-readable command label.
+   */
+  public function getLabel(): string;
+
 }

@@ -24,6 +24,14 @@ final class ValidatorTraitTest extends TestCase {
   public function setUp(): void {
     $this->validator = new class() implements GeneratorInterface {
       use ValidatorTrait;
+
+      /**
+       * {@inheritdoc}
+       */
+      public function getLabel(): string {
+        return '';
+      }
+
     };
   }
 

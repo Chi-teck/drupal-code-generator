@@ -26,7 +26,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 /**
  * Base class for code generators.
  */
-abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface, LabelInterface {
+abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
 
   use IOAwareTrait;
   use LoggerAwareTrait;
@@ -222,7 +222,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * {@inheritdoc}
    */
-  public function getLabel(): ?string {
+  public function getLabel(): string {
     return $this->label;
   }
 
