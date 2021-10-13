@@ -7,6 +7,7 @@ use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\GenerateCompletion;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
+use Psr\Log\NullLogger;
 
 // The autoloader may have a different location if DCG is installed as a local
 // Composer package.
@@ -17,8 +18,8 @@ $class_loader = file_exists(__DIR__ . '/../vendor/autoload.php')
 $bootstrap_handler = new BootstrapHandler($class_loader);
 $container = $bootstrap_handler->bootstrap();
 
-$generator_factory = new GeneratorFactory(new SimpleClassResolver());
-$generators = $generator_factory->getGenerators([Application::ROOT . '/src/Command']);
+$generator_factory = new GeneratorFactory(new SimpleClassResolver(), new NullLogger());
+$generators = $generator_factory->getGenerators([Application::ROOT . '/src/Command'], Application::GENERATOR_NAMESPACE);
 
 $application = Application::create($container);
 $application->addCommands($generators);

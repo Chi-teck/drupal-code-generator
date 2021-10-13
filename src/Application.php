@@ -32,9 +32,19 @@ class Application extends BaseApplication {
   public const VERSION = '2.1.0-dev';
 
   /**
+   * DCG API version.
+   */
+  public const API = 2;
+
+  /**
    * Path to templates directory.
    */
   public const TEMPLATE_PATH = Application::ROOT . '/templates/';
+
+  /**
+   * Namespace of core DCG generators.
+   */
+  public const GENERATOR_NAMESPACE = '\DrupalCodeGenerator\Command';
 
   /**
    * Creates the application.

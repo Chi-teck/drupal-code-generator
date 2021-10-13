@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
+use Psr\Log\NullLogger;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Tester\TesterTrait;
 
@@ -23,8 +24,8 @@ final class NavigationCommandTest extends BaseTestCase {
    */
   public function testNavigation(): void {
 
-    $factory = new GeneratorFactory(new SimpleClassResolver());
-    $generators = $factory->getGenerators([Application::ROOT . '/src/Command']);
+    $factory = new GeneratorFactory(new SimpleClassResolver(), new NullLogger());
+    $generators = $factory->getGenerators([Application::ROOT . '/src/Command'], Application::GENERATOR_NAMESPACE);
 
     $application = Application::create();
 

@@ -6,9 +6,12 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\GeneratorFactory;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\Test\TestLogger;
 
 /**
  * Test for GeneratorsDiscovery.
+ *
+ * @todo Test required API version and fatal errors.
  */
 final class GeneratorFactoryTest extends TestCase {
 
@@ -17,8 +20,9 @@ final class GeneratorFactoryTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testExecute(): void {
-    $factory = new GeneratorFactory(new SimpleClassResolver());
+  public function testGetGenerators(): void {
+    $logger = new TestLogger();
+    $factory = new GeneratorFactory(new SimpleClassResolver(), $logger);
     $generators = $factory->getGenerators(
       [Application::ROOT . '/src/Command/Misc/Drupal_7'],
       '\DrupalCodeGenerator\Command\Misc\Drupal_7',
@@ -27,6 +31,8 @@ final class GeneratorFactoryTest extends TestCase {
       self::assertInstanceOf('DrupalCodeGenerator\Command\Generator', $generator);
     }
     self::assertCount(self::TOTAL_GENERATORS, $generators);
+
+    self::assertTrue($logger->hasDebugThatMatches('/^Total generators: {total}/'));
   }
 
 }
