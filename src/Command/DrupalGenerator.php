@@ -71,19 +71,19 @@ abstract class DrupalGenerator extends Generator {
    * Collects default variables.
    */
   protected function collectDefault(array &$vars): void {
-    // If both name and machine_name questions are defined it is quite possible
-    // that we can provide the extension name without interacting with a user.
-    if (!$this->isNewExtension && $this->drupalContext && $this->nameQuestion && $this->machineNameQuestion) {
+    // If Drupal context is available it is quite possible that we can provide
+    // the extension name without interacting with a user.
+    if (!$this->isNewExtension && $this->drupalContext) {
       $extensions = $this->getExtensionList();
-      $vars['machine_name'] = $this->askMachineNameQuestion($vars);
+      $vars['machine_name'] = $this->askMachineName($vars);
       $vars['name'] = $extensions[$vars['machine_name']] ?? Utils::machine2human($vars['machine_name']);
     }
     else {
       if ($this->nameQuestion) {
-        $vars['name'] = $this->askNameQuestion();
+        $vars['name'] = $this->askName();
       }
       if ($this->machineNameQuestion) {
-        $vars['machine_name'] = $this->askMachineNameQuestion($vars);
+        $vars['machine_name'] = $this->askMachineName($vars);
       }
     }
   }
@@ -91,7 +91,7 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Asks name question.
    */
-  protected function askNameQuestion(): string {
+  protected function askName(): string {
     $root_directory = \basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
     $default_value = Utils::machine2human($root_directory, TRUE);
     $name_question = new Question($this->nameQuestion, $default_value);
@@ -105,7 +105,7 @@ abstract class DrupalGenerator extends Generator {
   /**
    * Asks machine name question.
    */
-  protected function askMachineNameQuestion(array $vars): string {
+  protected function askMachineName(array $vars): string {
     $default_value = Utils::human2machine($vars['name'] ?? \basename($this->directory));
     $machine_name_question = new Question($this->machineNameQuestion, $default_value);
     $machine_name_question->setValidator([static::class, 'validateRequiredMachineName']);

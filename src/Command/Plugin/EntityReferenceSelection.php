@@ -37,8 +37,8 @@ final class EntityReferenceSelection extends PluginGenerator {
    * {@inheritdoc}
    */
   protected function collectDefault(array &$vars): void {
-    $vars['name'] = $this->askNameQuestion();
-    $vars['machine_name'] = $this->askMachineNameQuestion($vars);
+    $vars['name'] = $this->askName();
+    $vars['machine_name'] = $this->askMachineName($vars);
 
     $entity_type_question = new Question('Entity type that can be referenced by this plugin', 'node');
     $entity_type_question->setValidator([self::class, 'validateRequiredMachineName']);
