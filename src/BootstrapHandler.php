@@ -31,7 +31,7 @@ class BootstrapHandler {
    *   Current service container or null if bootstrap failed.
    */
   public function bootstrap(): ?ContainerInterface {
-    if (!\defined('Drupal::VERSION') || \version_compare(\Drupal::VERSION, '8.7.0', '<')) {
+    if (!\defined('Drupal::VERSION') || \version_compare(\Drupal::VERSION, '9.0.0', '<')) {
       return NULL;
     }
     try {
