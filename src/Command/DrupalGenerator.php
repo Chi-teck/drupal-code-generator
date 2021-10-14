@@ -74,9 +74,9 @@ abstract class DrupalGenerator extends Generator {
     // If Drupal context is available it is quite possible that we can provide
     // the extension name without interacting with a user.
     if (!$this->isNewExtension && $this->drupalContext) {
-      $extensions = $this->getExtensionList();
       $vars['machine_name'] = $this->askMachineName($vars);
-      $vars['name'] = $extensions[$vars['machine_name']] ?? Utils::machine2human($vars['machine_name']);
+      $vars['name'] = $this->getExtensionList()[$vars['machine_name']]
+        ?? Utils::machine2human($vars['machine_name']);
     }
     else {
       if ($this->nameQuestion) {
