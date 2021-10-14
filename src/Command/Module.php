@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements module command.
  */
@@ -10,6 +12,7 @@ final class Module extends ModuleGenerator {
   protected string $name = 'module';
   protected string $description = 'Generates Drupal module';
   protected bool $isNewExtension = TRUE;
+  protected string $templatePath = Application::TEMPLATE_PATH . '/module';
 
   /**
    * {@inheritdoc}

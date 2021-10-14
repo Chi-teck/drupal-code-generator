@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements template command.
  */
@@ -10,6 +12,7 @@ final class Template extends ModuleGenerator {
   protected string $name = 'template';
   protected string $description = 'Generates a template';
   protected string $alias = 'template';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/template';
 
   /**
    * {@inheritdoc}

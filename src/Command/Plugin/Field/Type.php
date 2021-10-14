@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin\Field;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Type extends PluginGenerator {
   protected string $name = 'plugin:field:type';
   protected string $description = 'Generates field type plugin';
   protected string $alias = 'field-type';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/field/type';
   protected string $pluginClassSuffix = 'Item';
 
   /**

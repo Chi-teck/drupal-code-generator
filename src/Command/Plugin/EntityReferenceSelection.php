@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
+use DrupalCodeGenerator\Application;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -12,6 +13,7 @@ final class EntityReferenceSelection extends PluginGenerator {
   protected string $name = 'plugin:entity-reference-selection';
   protected string $description = 'Generates entity reference selection plugin';
   protected string $alias = 'entity-reference-selection';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/entity-reference-selection';
 
   /**
    * {@inheritdoc}

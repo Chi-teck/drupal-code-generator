@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Exception\RuntimeException;
 use DrupalCodeGenerator\Helper\DrupalContext;
 
@@ -13,6 +14,7 @@ final class PhpStormMetadata extends DrupalGenerator {
   protected string $name = 'phpstorm-metadata';
   protected string $description = 'Generates PhpStorm metadata';
   protected string $label = 'PhpStorm metadata';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/phpstorm-metadata';
 
   /**
    * {@inheritdoc}

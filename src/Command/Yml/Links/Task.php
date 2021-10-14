@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml\Links;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Task extends ModuleGenerator {
   protected string $name = 'yml:links:task';
   protected string $description = 'Generates a links.task yml file';
   protected string $alias = 'task-links';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/links/task';
   protected ?string $nameQuestion = NULL;
 
   /**

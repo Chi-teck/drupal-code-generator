@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin\Views;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Field extends PluginGenerator {
   protected string $name = 'plugin:views:field';
   protected string $description = 'Generates views field plugin';
   protected string $alias = 'views-field';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/views/field';
 
   /**
    * {@inheritdoc}

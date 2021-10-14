@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Console;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Generator;
 
 /**
@@ -12,6 +13,7 @@ final class DrushCommand extends Generator {
   protected string $name = 'console:drush-command';
   protected string $description = 'Generates Drush command';
   protected string $alias = 'drush-command';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/console/drush-command';
 
   /**
    * {@inheritdoc}

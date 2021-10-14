@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -12,6 +13,7 @@ final class Constraint extends PluginGenerator {
   protected string $name = 'plugin:constraint';
   protected string $description = 'Generates constraint plugin';
   protected string $alias = 'constraint';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/constraint';
 
   /**
    * {@inheritdoc}

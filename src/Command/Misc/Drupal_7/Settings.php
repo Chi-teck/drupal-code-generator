@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Generator;
 use Symfony\Component\Console\Question\Question;
 
@@ -13,6 +14,7 @@ final class Settings extends Generator {
   protected string $name = 'misc:d7:settings.php';
   protected string $description = 'Generates Drupal 7 settings.php file';
   protected string $label = 'settings.php';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/d7/settings.php';
 
   /**
    * {@inheritdoc}

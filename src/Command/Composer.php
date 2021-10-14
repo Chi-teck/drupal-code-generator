@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -13,6 +14,7 @@ final class Composer extends DrupalGenerator {
   protected string $description = 'Generates a composer.json file';
   protected string $alias = 'composer.json';
   protected string $label = 'composer.json';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/composer';
   protected ?string $nameQuestion = NULL;
   protected ?string $machineNameQuestion = 'Project machine name';
 

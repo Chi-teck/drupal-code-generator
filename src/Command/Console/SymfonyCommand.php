@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Console;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 
@@ -13,6 +14,7 @@ final class SymfonyCommand extends ModuleGenerator {
   protected string $name = 'console:symfony-command';
   protected string $description = 'Generates Symfony console command';
   protected string $alias = 'symfony-command';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/console/symfony-command';
 
   /**
    * {@inheritdoc}

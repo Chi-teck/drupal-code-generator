@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Command\Generator;
 use DrupalCodeGenerator\Utils;
@@ -17,6 +18,7 @@ final class Project extends Generator {
   protected string $name = 'misc:project';
   protected string $description = 'Generates a composer project';
   protected string $alias = 'project';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/project';
 
   /**
    * Array of packages to check versions for.

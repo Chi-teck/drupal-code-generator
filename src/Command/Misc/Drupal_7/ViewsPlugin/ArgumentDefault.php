@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7\ViewsPlugin;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -11,6 +12,7 @@ final class ArgumentDefault extends ModuleGenerator {
 
   protected string $name = 'misc:d7:views-plugin:argument-default';
   protected string $description = 'Generates Drupal 7 argument default views plugin';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/d7/views-plugin/argument-default';
 
   /**
    * {@inheritdoc}

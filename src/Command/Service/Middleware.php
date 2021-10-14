@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Middleware extends ModuleGenerator {
   protected string $name = 'service:middleware';
   protected string $description = 'Generates a middleware';
   protected string $alias = 'middleware';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/middleware';
 
   /**
    * {@inheritdoc}

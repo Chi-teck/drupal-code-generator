@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin\Views;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Style extends PluginGenerator {
   protected string $name = 'plugin:views:style';
   protected string $description = 'Generates views style plugin';
   protected string $alias = 'views-style';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/views/style';
 
   /**
    * {@inheritdoc}

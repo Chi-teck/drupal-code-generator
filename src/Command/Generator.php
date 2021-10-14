@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
@@ -118,21 +117,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     }
 
     if ($this->templatePath) {
-      $this->getHelper('renderer')->addPath($this->templatePath);
-    }
-    else {
-      // This is specific to DCG core generators. Third-party generators should
-      // always define template path.
-      $template_path = Application::TEMPLATE_PATH . \str_replace(':', '/', $this->getName());
-      if (\file_exists($template_path) && \is_dir($template_path)) {
-        $this->getHelper('renderer')->addPath($template_path);
-        // Also add default template path as some generators may share their
-        // templates.
-        $this->getHelper('renderer')->addPath(Application::TEMPLATE_PATH);
-      }
-      else {
-        throw new \LogicException('Template path is not specified.');
-      }
+      $this->getHelper('renderer')->prependPath($this->templatePath);
     }
 
     $this->directory = $input->getOption('working-dir') ?: \getcwd();

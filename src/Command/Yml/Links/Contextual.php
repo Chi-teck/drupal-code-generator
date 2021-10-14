@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml\Links;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Contextual extends ModuleGenerator {
   protected string $name = 'yml:links:contextual';
   protected string $description = 'Generates links.contextual yml file';
   protected string $alias = 'contextual-links';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/links/contextual';
   protected ?string $nameQuestion = NULL;
 
   /**

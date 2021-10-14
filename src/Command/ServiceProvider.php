@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements service-provider command.
  */
@@ -9,6 +11,7 @@ final class ServiceProvider extends ModuleGenerator {
 
   protected string $name = 'service-provider';
   protected string $description = 'Generates a service provider';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service-provider';
 
   /**
    * {@inheritdoc}

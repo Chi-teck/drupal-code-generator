@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements plugin:filter command.
  */
@@ -10,6 +12,7 @@ final class Filter extends PluginGenerator {
   protected string $name = 'plugin:filter';
   protected string $description = 'Generates filter plugin';
   protected string $alias = 'filter';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/filter';
 
   /**
    * {@inheritdoc}

@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
@@ -13,6 +14,7 @@ final class ThemeLibraries extends ThemeGenerator {
   protected string $description = 'Generates theme libraries yml file';
   protected string $alias = 'theme-libraries';
   protected string $label = 'Libraries (theme)';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/theme-libraries';
   protected ?string $nameQuestion = NULL;
 
   /**

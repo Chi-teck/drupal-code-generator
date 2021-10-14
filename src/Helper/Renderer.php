@@ -101,10 +101,10 @@ class Renderer extends Helper implements LoggerAwareInterface {
    * @param string $path
    *   A path where to look for templates.
    */
-  public function addPath(string $path): void {
+  public function prependPath(string $path): void {
     /** @var \Twig\Loader\FilesystemLoader $loader */
     $loader = $this->twig->getLoader();
-    $loader->addPath($path);
+    $loader->prependPath($path);
   }
 
 }

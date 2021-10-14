@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements plugin:action command.
  */
@@ -11,6 +13,7 @@ final class Action extends PluginGenerator {
   protected string $description = 'Generates action plugin';
   protected string $alias = 'action';
   protected string $pluginLabelDefault = 'Update node title';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/action';
 
   /**
    * {@inheritdoc}

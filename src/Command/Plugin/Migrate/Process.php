@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin\Migrate;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Process extends PluginGenerator {
   protected string $name = 'plugin:migrate:process';
   protected string $description = 'Generates migrate process plugin';
   protected string $alias = 'migrate-process';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/migrate/process';
 
   /**
    * {@inheritdoc}

@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements theme-settings command.
  */
@@ -9,6 +11,7 @@ final class ThemeSettings extends ThemeGenerator {
 
   protected string $name = 'theme-settings';
   protected string $description = 'Generates Drupal theme-settings.php file';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/theme-settings';
 
   /**
    * {@inheritdoc}

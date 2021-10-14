@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements layout command.
  */
@@ -10,6 +12,7 @@ final class Layout extends ModuleGenerator {
   protected string $name = 'layout';
   protected string $description = 'Generates a layout';
   protected ?string $nameQuestion = NULL;
+  protected string $templatePath = Application::TEMPLATE_PATH . '/layout';
 
   /**
    * {@inheritdoc}

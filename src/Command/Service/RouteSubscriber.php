@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class RouteSubscriber extends ModuleGenerator {
   protected string $name = 'service:route-subscriber';
   protected string $description = 'Generates a route subscriber';
   protected string $alias = 'route-subscriber';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/route-subscriber';
 
   /**
    * {@inheritdoc}

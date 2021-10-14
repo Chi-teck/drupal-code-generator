@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Test;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Kernel extends ModuleGenerator {
   protected string $name = 'test:kernel';
   protected string $description = 'Generates a kernel based test';
   protected string $alias = 'kernel-test';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/test/kernel';
 
   /**
    * {@inheritdoc}

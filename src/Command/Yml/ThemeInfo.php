@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
@@ -13,6 +14,7 @@ final class ThemeInfo extends ThemeGenerator {
   protected string $description = 'Generates a theme info yml file';
   protected string $alias = 'theme-info';
   protected string $label = 'Info (theme)';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/theme-info';
 
   /**
    * {@inheritdoc}

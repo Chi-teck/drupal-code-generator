@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class RequestPolicy extends ModuleGenerator {
   protected string $name = 'service:request-policy';
   protected string $description = 'Generates a request policy service';
   protected string $alias = 'request-policy';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/request-policy';
 
   /**
    * {@inheritdoc}

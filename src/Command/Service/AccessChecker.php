@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class AccessChecker extends ModuleGenerator {
   protected string $name = 'service:access-checker';
   protected string $description = 'Generates an access checker service';
   protected string $alias = 'access-checker';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/access-checker';
 
   /**
    * {@inheritdoc}

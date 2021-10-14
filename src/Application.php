@@ -29,7 +29,7 @@ class Application extends BaseApplication {
   /**
    * DCG version.
    */
-  public const VERSION = '2.1.0-dev';
+  public const VERSION = '2.2.0-dev';
 
   /**
    * DCG API version.
@@ -39,7 +39,7 @@ class Application extends BaseApplication {
   /**
    * Path to templates directory.
    */
-  public const TEMPLATE_PATH = Application::ROOT . '/templates/';
+  public const TEMPLATE_PATH = Application::ROOT . '/templates';
 
   /**
    * Namespace of core DCG generators.
@@ -55,7 +55,7 @@ class Application extends BaseApplication {
     $helper_set = new HelperSet([
       new QuestionHelper(),
       new Dumper(new Filesystem()),
-      new Renderer(new TwigEnvironment(new FilesystemLoader())),
+      new Renderer(new TwigEnvironment(new FilesystemLoader([Application::TEMPLATE_PATH]))),
       new ResultPrinter(),
     ]);
 

@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class UninstallValidator extends ModuleGenerator {
   protected string $name = 'service:uninstall-validator';
   protected string $description = 'Generates a uninstall validator service';
   protected string $alias = 'uninstall-validator';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/uninstall-validator';
 
   /**
    * {@inheritdoc}

@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements plugin:block command.
  */
@@ -11,6 +13,7 @@ final class Block extends PluginGenerator {
   protected string $description = 'Generates block plugin';
   protected string $alias = 'block';
   protected string $pluginClassSuffix = 'Block';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/block';
 
   /**
    * {@inheritdoc}

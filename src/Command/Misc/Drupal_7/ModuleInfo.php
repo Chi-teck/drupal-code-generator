@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class ModuleInfo extends ModuleGenerator {
   protected string $name = 'misc:d7:module-info';
   protected string $description = 'Generates Drupal 7 info file for a module';
   protected string $label = 'Info (module)';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/d7/module-info';
 
   /**
    * {@inheritdoc}

@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class BreadcrumbBuilder extends ModuleGenerator {
   protected string $name = 'service:breadcrumb-builder';
   protected string $description = 'Generates a breadcrumb builder service';
   protected string $alias = 'breadcrumb-builder';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/breadcrumb-builder';
 
   /**
    * {@inheritdoc}

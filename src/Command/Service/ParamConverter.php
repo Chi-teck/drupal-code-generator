@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class ParamConverter extends ModuleGenerator {
   protected string $name = 'service:param-converter';
   protected string $description = 'Generates a param converter service';
   protected string $alias = 'param-converter';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/param-converter';
 
   /**
    * {@inheritdoc}

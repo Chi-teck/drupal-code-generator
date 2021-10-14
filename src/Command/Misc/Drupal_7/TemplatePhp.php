@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
@@ -13,6 +14,7 @@ final class TemplatePhp extends ThemeGenerator {
   protected string $description = 'Generates Drupal 7 template.php file';
   protected string $alias = 'template.php';
   protected string $label = 'template.php';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/d7/template.php';
 
   /**
    * {@inheritdoc}

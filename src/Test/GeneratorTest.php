@@ -93,7 +93,7 @@ abstract class GeneratorTest extends TestCase {
     $helper_set->set(new QuestionHelper());
 
     // Replace default renderer to enable 'strict_variables' in tests.
-    $twig_environment = new TwigEnvironment(new FilesystemLoader(), ['strict_variables' => TRUE]);
+    $twig_environment = new TwigEnvironment(new FilesystemLoader([Application::TEMPLATE_PATH]), ['strict_variables' => TRUE]);
     $helper_set->set(new Renderer($twig_environment));
     return $application;
   }

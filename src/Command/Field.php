@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -11,6 +12,7 @@ final class Field extends ModuleGenerator {
 
   protected string $name = 'field';
   protected string $description = 'Generates a field';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/field';
 
   /**
    * Field sub-types.

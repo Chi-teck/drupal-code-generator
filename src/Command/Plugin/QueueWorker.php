@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements plugin:queue-worker command.
  */
@@ -10,6 +12,7 @@ final class QueueWorker extends PluginGenerator {
   protected string $name = 'plugin:queue-worker';
   protected string $description = 'Generates queue worker plugin';
   protected string $alias = 'queue-worker';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/queue-worker';
 
   /**
    * {@inheritdoc}

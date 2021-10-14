@@ -29,7 +29,7 @@ final class RendererTest extends TestCase {
     $twig_loader = new FilesystemLoader();
     $twig = new TwigEnvironment($twig_loader);
     $this->renderer = new Renderer($twig);
-    $this->renderer->addPath(__DIR__);
+    $this->renderer->prependPath(__DIR__);
     $logger = new ConsoleLogger(new NullOutput());
     $this->renderer->setLogger($logger);
   }

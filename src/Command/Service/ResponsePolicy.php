@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class ResponsePolicy extends ModuleGenerator {
   protected string $name = 'service:response-policy';
   protected string $description = 'Generates a response policy service';
   protected string $alias = 'response-policy';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/response-policy';
 
   /**
    * {@inheritdoc}

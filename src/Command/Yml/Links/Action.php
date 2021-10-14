@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml\Links;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Action extends ModuleGenerator {
   protected string $name = 'yml:links:action';
   protected string $description = 'Generates a links.action yml file';
   protected string $alias = 'action-links';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/links/action';
   protected ?string $nameQuestion = NULL;
 
   /**

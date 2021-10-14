@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin\Field;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Formatter extends PluginGenerator {
   protected string $name = 'plugin:field:formatter';
   protected string $description = 'Generates field formatter plugin';
   protected string $alias = 'field-formatter';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/field/formatter';
   protected string $pluginClassSuffix = 'Formatter';
 
   /**

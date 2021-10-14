@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Logger extends ModuleGenerator {
   protected string $name = 'service:logger';
   protected string $description = 'Generates a logger service';
   protected string $alias = 'logger';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/logger';
 
   /**
    * {@inheritdoc}

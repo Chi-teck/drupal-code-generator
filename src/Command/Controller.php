@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements controller command.
  */
@@ -9,6 +11,7 @@ final class Controller extends ModuleGenerator {
 
   protected string $name = 'controller';
   protected string $description = 'Generates a controller';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/controller';
 
   /**
    * {@inheritdoc}

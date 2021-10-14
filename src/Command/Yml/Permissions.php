@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Permissions extends ModuleGenerator {
   protected string $name = 'yml:permissions';
   protected string $description = 'Generates a permissions yml file';
   protected string $alias = 'permissions';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/permissions';
   protected ?string $nameQuestion = NULL;
 
   /**

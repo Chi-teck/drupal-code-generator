@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Test;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Browser extends ModuleGenerator {
   protected string $name = 'test:browser';
   protected string $description = 'Generates a browser based test';
   protected string $alias = 'browser-test';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/test/browser';
 
   /**
    * {@inheritdoc}

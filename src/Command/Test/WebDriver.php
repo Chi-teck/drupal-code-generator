@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Test;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -13,6 +14,7 @@ final class WebDriver extends ModuleGenerator {
   protected string $description = 'Generates a test that supports JavaScript';
   protected string $alias = 'webdriver-test';
   protected string $label = 'WebDriver';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/test/webdriver';
 
   /**
    * {@inheritdoc}

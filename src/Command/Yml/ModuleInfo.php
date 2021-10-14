@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -13,6 +14,7 @@ final class ModuleInfo extends ModuleGenerator {
   protected string $description = 'Generates a module info yml file';
   protected string $alias = 'module-info';
   protected string $label = 'Info (module)';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/module-info';
 
   /**
    * {@inheritdoc}

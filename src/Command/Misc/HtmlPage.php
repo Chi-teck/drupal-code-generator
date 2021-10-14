@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Generator;
 
 /**
@@ -13,6 +14,7 @@ final class HtmlPage extends Generator {
   protected string $description = 'Generates a simple html page';
   protected string $alias = 'html-page';
   protected string $label = 'HTML page';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/html-page';
 
   /**
    * {@inheritdoc}

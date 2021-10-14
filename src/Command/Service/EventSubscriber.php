@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class EventSubscriber extends ModuleGenerator {
   protected string $name = 'service:event-subscriber';
   protected string $description = 'Generates an event subscriber';
   protected string $alias = 'event-subscriber';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/event-subscriber';
 
   /**
    * {@inheritdoc}

@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -14,6 +15,7 @@ final class Theme extends ThemeGenerator {
   protected string $name = 'theme';
   protected string $description = 'Generates Drupal theme';
   protected bool $isNewExtension = TRUE;
+  protected string $templatePath = Application::TEMPLATE_PATH . '/theme';
 
   /**
    * {@inheritdoc}

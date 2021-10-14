@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Generator;
 
 /**
@@ -12,6 +13,7 @@ final class ApacheVirtualHost extends Generator {
   protected string $name = 'misc:apache-virtual-host';
   protected string $description = 'Generates an Apache site configuration file';
   protected string $alias = 'apache-virtual-host';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/apache-virtual-host';
 
   /**
    * {@inheritdoc}

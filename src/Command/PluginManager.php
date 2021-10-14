@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements plugin-manager command.
  */
@@ -9,6 +11,7 @@ final class PluginManager extends ModuleGenerator {
 
   protected string $name = 'plugin-manager';
   protected string $description = 'Generates plugin manager';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin-manager';
 
   /**
    * {@inheritdoc}

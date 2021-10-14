@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 
@@ -13,6 +14,7 @@ final class Custom extends ModuleGenerator {
   protected string $name = 'service:custom';
   protected string $description = 'Generates a custom Drupal service';
   protected string $alias = 'custom-service';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/custom';
   protected string $label = 'Custom service';
 
   /**

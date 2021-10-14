@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Test;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Unit extends ModuleGenerator {
   protected string $name = 'test:unit';
   protected string $description = 'Generates a unit test';
   protected string $alias = 'unit-test';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/test/unit';
 
   /**
    * {@inheritdoc}

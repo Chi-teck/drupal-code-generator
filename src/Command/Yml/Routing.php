@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Routing extends ModuleGenerator {
   protected string $name = 'yml:routing';
   protected string $description = 'Generates a routing yml file';
   protected string $alias = 'routing';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/routing';
 
   /**
    * {@inheritdoc}

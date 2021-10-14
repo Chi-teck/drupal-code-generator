@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Services extends ModuleGenerator {
   protected string $name = 'yml:services';
   protected string $description = 'Generates a services yml file';
   protected string $alias = 'services';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/services';
 
   /**
    * {@inheritdoc}

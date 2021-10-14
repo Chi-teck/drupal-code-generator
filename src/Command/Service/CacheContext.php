@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class CacheContext extends ModuleGenerator {
   protected string $name = 'service:cache-context';
   protected string $description = 'Generates a cache context service';
   protected string $alias = 'cache-context';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/cache-context';
 
   /**
    * {@inheritdoc}

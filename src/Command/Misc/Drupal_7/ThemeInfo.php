@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class ThemeInfo extends ThemeGenerator {
   protected string $name = 'misc:d7:theme-info';
   protected string $description = 'Generates info file for a Drupal 7 theme';
   protected string $label = 'Info (theme)';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/d7/theme-info';
 
   /**
    * {@inheritdoc}

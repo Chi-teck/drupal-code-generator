@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ThemeGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Breakpoints extends ThemeGenerator {
   protected string $name = 'yml:breakpoints';
   protected string $description = 'Generates a breakpoints yml file';
   protected string $alias = 'breakpoints';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/breakpoints';
   protected ?string $nameQuestion = NULL;
 
   /**

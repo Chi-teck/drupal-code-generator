@@ -13,6 +13,7 @@ final class Hook extends ModuleGenerator {
 
   protected string $name = 'misc:d7:hook';
   protected string $description = 'Generates a hook';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/d7/hook';
 
   /**
    * {@inheritdoc}

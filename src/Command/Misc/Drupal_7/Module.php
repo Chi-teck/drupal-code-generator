@@ -12,7 +12,7 @@ final class Module extends ModuleGenerator {
 
   protected string $name = 'misc:d7:module';
   protected string $description = 'Generates Drupal 7 module';
-  protected string $templatePath = Application::TEMPLATE_PATH . 'misc/d7';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/d7';
 
   /**
    * {@inheritdoc}

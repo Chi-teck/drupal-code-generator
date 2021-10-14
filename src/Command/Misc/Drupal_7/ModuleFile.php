@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Misc\Drupal_7;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -11,6 +12,7 @@ final class ModuleFile extends ModuleGenerator {
 
   protected string $name = 'misc:d7:module-file';
   protected string $description = 'Generates Drupal 7 module file';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/d7/module-file';
 
   /**
    * {@inheritdoc}

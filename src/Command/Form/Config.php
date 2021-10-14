@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Command\Form;
 
+use DrupalCodeGenerator\Application;
+
 /**
  * Implements form:config command.
  */
@@ -10,6 +12,7 @@ final class Config extends FormGenerator {
   protected string $name = 'form:config';
   protected string $description = 'Generates a configuration form';
   protected string $alias = 'config-form';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/form/config';
   protected ?string $defaultPathPrefix = '/admin/config/system';
   protected string $defaultPermission = 'administer site configuration';
   protected string $defaultClass = 'SettingsForm';

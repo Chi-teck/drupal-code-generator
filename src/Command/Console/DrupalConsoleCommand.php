@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Console;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class DrupalConsoleCommand extends ModuleGenerator {
   protected string $name = 'console:drupal-console-command';
   protected string $description = 'Generates Drupal Console command';
   protected string $alias = 'drupal-console-command';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/console/drupal-console-command';
 
   /**
    * {@inheritdoc}

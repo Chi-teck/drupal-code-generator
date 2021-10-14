@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Yml;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -13,6 +14,7 @@ final class ModuleLibraries extends ModuleGenerator {
   protected string $description = 'Generates module libraries yml file';
   protected string $alias = 'module-libraries';
   protected string $label = 'Libraries (module)';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/module-libraries';
   protected ?string $nameQuestion = NULL;
 
   /**

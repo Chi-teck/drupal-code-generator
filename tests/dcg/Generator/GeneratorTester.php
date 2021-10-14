@@ -58,7 +58,7 @@ final class GeneratorTester {
     $helper_set->set(new QuestionHelper());
 
     // Replace default renderer to support 'strict_variables' in tests.
-    $twig_environment = new TwigEnvironment(new FilesystemLoader(), ['strict_variables' => TRUE]);
+    $twig_environment = new TwigEnvironment(new FilesystemLoader([Application::TEMPLATE_PATH]), ['strict_variables' => TRUE]);
     $helper_set->set(new Renderer($twig_environment));
 
     $application->add($this->command);

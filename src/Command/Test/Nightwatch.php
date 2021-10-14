@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Test;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
 
@@ -13,6 +14,7 @@ final class Nightwatch extends ModuleGenerator {
   protected string $name = 'test:nightwatch';
   protected string $description = 'Generates a nightwatch test';
   protected string $alias = 'nightwatch-test';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/test/nightwatch';
 
   /**
    * {@inheritdoc}

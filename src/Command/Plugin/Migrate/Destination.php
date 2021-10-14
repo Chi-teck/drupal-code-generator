@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Plugin\Migrate;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class Destination extends PluginGenerator {
   protected string $name = 'plugin:migrate:destination';
   protected string $description = 'Generates migrate destination plugin';
   protected string $alias = 'migrate-destination';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/migrate/destination';
 
   /**
    * {@inheritdoc}

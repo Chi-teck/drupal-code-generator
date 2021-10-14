@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -12,6 +13,7 @@ final class TwigExtension extends ModuleGenerator {
   protected string $name = 'service:twig-extension';
   protected string $description = 'Generates Twig extension service';
   protected string $alias = 'twig-extension';
+  protected string $templatePath = Application::TEMPLATE_PATH . '/service/twig-extension';
 
   /**
    * {@inheritdoc}
