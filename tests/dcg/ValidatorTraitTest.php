@@ -32,13 +32,6 @@ final class ValidatorTraitTest extends TestCase {
         return '';
       }
 
-      /**
-       * {@inheritdoc}
-       */
-      public static function getApi(): int {
-        return 2;
-      }
-
     };
   }
 

@@ -217,13 +217,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public static function getApi(): int {
-    return static::$api ?? 1;
-  }
-
-  /**
    * Asks a question.
    *
    * @param string $question

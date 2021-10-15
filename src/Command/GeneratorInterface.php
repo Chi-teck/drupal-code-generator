@@ -12,9 +12,4 @@ interface GeneratorInterface {
    */
   public function getLabel(): string;
 
-  /**
-   * Returns supported API version.
-   */
-  public static function getApi(): int;
-
 }

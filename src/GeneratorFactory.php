@@ -30,13 +30,11 @@ final class GeneratorFactory {
    *   Directories to look up for commands.
    * @param string $namespace
    *   The namespace to filter out commands.
-   * @param int|null $required_api
-   *   (Optional) API version to check.
    *
    * @return \Symfony\Component\Console\Command\Command[]
    *   Array of generators.
    */
-  public function getGenerators(array $directories, string $namespace, ?int $required_api = NULL): array {
+  public function getGenerators(array $directories, string $namespace): array {
     $commands = [];
 
     foreach ($directories as $directory) {
@@ -65,15 +63,6 @@ final class GeneratorFactory {
         }
 
         if ($reflected_class->isInterface() || $reflected_class->isAbstract() || $reflected_class->isTrait() || !$reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {
-          continue;
-        }
-
-        /* @noinspection PhpUndefinedMethodInspection */
-        if ($required_api && $class::getApi() !== $required_api) {
-          $this->logger->notice(
-            'Class {class} does not support required API version {required_api}.',
-            ['class' => $class, 'required_api' => $required_api],
-          );
           continue;
         }
 
