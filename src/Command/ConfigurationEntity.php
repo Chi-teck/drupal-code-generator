@@ -10,7 +10,7 @@ use DrupalCodeGenerator\Application;
 final class ConfigurationEntity extends ModuleGenerator {
 
   protected string $name = 'configuration-entity';
-  protected string $description = 'Generates configuration entity module';
+  protected string $description = 'Generates configuration entity';
   protected string $alias = 'config-entity';
   protected string $templatePath = Application::TEMPLATE_PATH . '/configuration-entity';
 

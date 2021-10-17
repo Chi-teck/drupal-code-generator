@@ -10,7 +10,7 @@ use DrupalCodeGenerator\Application;
 final class ContentEntity extends ModuleGenerator {
 
   protected string $name = 'content-entity';
-  protected string $description = 'Generates content entity module';
+  protected string $description = 'Generates content entity';
   protected string $templatePath = Application::TEMPLATE_PATH . '/content-entity';
 
   /**
