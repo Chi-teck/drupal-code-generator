@@ -44,6 +44,7 @@ final class ConfigurationEntity extends ModuleGenerator {
       if ($existing_content && !\preg_match('/^configure: /m', $existing_content)) {
         return "{$existing_content}configure: entity.{$vars['entity_type_id']}.collection\n";
       }
+      return NULL;
     };
     $this->addFile('{machine_name}.info.yml')
       ->resolver($update_info);
