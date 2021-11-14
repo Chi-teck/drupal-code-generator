@@ -33,10 +33,10 @@ abstract class FieldBaseTest extends WebDriverTestBase {
     $this->createContentType(['type' => 'test']);
 
     $permissions = [
-      'administer content types',
       'administer node fields',
       'administer node form display',
       'administer node display',
+      'create test content',
       'edit own test content',
     ];
     $user = $this->createUser($permissions);
