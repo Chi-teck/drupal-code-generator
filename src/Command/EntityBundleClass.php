@@ -64,7 +64,7 @@ final class EntityBundleClass extends ModuleGenerator {
     $vars['class'] = $this->ask('Class', '{bundle_id|camelize}Bundle');
     $vars['class_fqn'] = '\\' . $vars['namespace'] . '\\' . $vars['class'];
 
-    if ($this->confirm('Would you like to generate a base class?', FALSE)) {
+    if ($this->confirm('Use a base class?', FALSE)) {
       $vars['base_class'] = $this->ask('Base class', '{entity_type_id|camelize}Bundle');
       $this->addFile('src/Entity/Bundle/{base_class}.php', 'bundle-base-class');
     }
