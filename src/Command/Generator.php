@@ -191,7 +191,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Dumps assets.
    */
   protected function dump(string $destination, bool $dry_run, bool $full_path): AssetCollection {
-    $options = new DumperOptions(TRUE, $dry_run, $full_path);
+    $options = new DumperOptions(NULL, $dry_run, $full_path);
     return $this->getHelper('dumper')->dump($this->assets, $destination, $options);
   }
 

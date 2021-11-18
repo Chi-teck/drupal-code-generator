@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for {{ name }} module.
+ */
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function {{ machine_name }}_entity_bundle_info_alter(array &$bundles): void {
+  $bundles['{{ entity_type_id }}']['{{ bundle_id }}']['class'] = {{ class_fqn }}::class;
+}

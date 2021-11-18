@@ -1,0 +1,14 @@
+<?php
+
+namespace {{ namespace }};
+{% if not base_class %}
+
+use {{ entity_class_fqn }};
+{% endif %}
+
+/**
+ * A bundle class for {{ entity_type_id }} entities.
+ */
+class {{ class }} extends {{ base_class ?? entity_class }} {
+
+}
