@@ -9,5 +9,7 @@
  * Implements hook_entity_bundle_info_alter().
  */
 function {{ machine_name }}_entity_bundle_info_alter(array &$bundles): void {
+  {% for bundle_id, class_fqn in classes_fqn %}
   $bundles['{{ entity_type_id }}']['{{ bundle_id }}']['class'] = {{ class_fqn }}::class;
+  {% endfor %}
 }

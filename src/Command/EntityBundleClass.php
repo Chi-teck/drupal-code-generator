@@ -59,17 +59,27 @@ final class EntityBundleClass extends ModuleGenerator {
       static fn (array $bundle): string => (string) $bundle['label'],
       $bundle_info->getBundleInfo($vars['entity_type_id']),
     );
-    $vars['bundle_id'] = $this->choice('Bundle', $bundle_choices);
+    $vars['bundle_ids'] = $this->choice('Bundles, comma separated', $bundle_choices, NULL, TRUE);
 
-    $vars['class'] = $this->ask('Class', '{bundle_id|camelize}Bundle');
-    $vars['class_fqn'] = '\\' . $vars['namespace'] . '\\' . $vars['class'];
+    $vars['classes'] = [];
+    $vars['classes_fqn'] = [];
+    foreach ($vars['bundle_ids'] as $bundle_id) {
+      $vars['bundle_id'] = $bundle_id;
+      $vars['class'] = $this->ask(
+        \sprintf('Class for %s bundle', $bundle_choices[$bundle_id]),
+        '{bundle_id|camelize}Bundle',
+      );
+      $vars['class_fqn'] = '\\' . $vars['namespace'] . '\\' . $vars['class'];
+      $this->addFile('src/Entity/Bundle/{class}.php', 'bundle-class')->vars($vars);
+      // Track all bundle classes to generate hook_entity_bundle_info_alter().
+      $vars['classes'][$bundle_id] = $vars['class'];
+      $vars['classes_fqn'][$bundle_id] = $vars['class_fqn'];
+    }
 
     if ($this->confirm('Use a base class?', FALSE)) {
       $vars['base_class'] = $this->ask('Base class', '{entity_type_id|camelize}Bundle');
       $this->addFile('src/Entity/Bundle/{base_class}.php', 'bundle-base-class');
     }
-
-    $this->addFile('src/Entity/Bundle/{class}.php', 'bundle-class');
 
     // @todo Handle duplicated hooks.
     $this->addFile('{machine_name}.module', 'module.twig')

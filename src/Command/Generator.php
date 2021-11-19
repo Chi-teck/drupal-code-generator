@@ -260,11 +260,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    *   The list of available choices.
    * @param string|null $default
    *   The default answer to return if the user enters nothing.
+   * @param bool $multiselect
+   *   Indicates that multiple choices can be answered.
    *
    * @return mixed
    *   The user answer
    */
-  protected function choice(string $question, array $choices, ?string $default = NULL) {
+  protected function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE) {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
 
     // The choices can be an associative array.
@@ -273,10 +275,16 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     \array_unshift($choice_labels, NULL);
     unset($choice_labels[0]);
 
+    $question = new ChoiceQuestion($question, $choice_labels, $default);
+    $question->setMultiselect($multiselect);
+
     // Do not use IO choice here as it prints choice key as default value.
     // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
-    $answer = $this->io->askQuestion(new ChoiceQuestion($question, $choice_labels, $default));
-    return \array_search($answer, $choices);
+    $answer = $this->io->askQuestion($question);
+
+    // @todo Create a test for this.
+    $get_key = static fn (string $answer): string => \array_search($answer, $choices);
+    return \is_array($answer) ? \array_map($get_key, $answer) : $get_key($answer);
   }
 
   /**
