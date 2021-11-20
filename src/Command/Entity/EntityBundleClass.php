@@ -33,6 +33,7 @@ final class EntityBundleClass extends ModuleGenerator {
       $this->io->getErrorStyle()->error('This command requires a fully bootstrapped Drupal instance.');
       return 1;
     }
+    return parent::execute($input, $output);
   }
 
   /**
