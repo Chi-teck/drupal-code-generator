@@ -64,7 +64,7 @@ class Dumper extends Helper implements IOAwareInterface {
     }
 
     // -- Files.
-    /** @var \DrupalCodeGenerator\Asset\File $asset */
+    /** @var \DrupalCodeGenerator\Asset\File $file */
     foreach ($assets->getFiles() as $file) {
 
       $file_path = $destination . '/' . $file->getPath();

@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Resolver\VoidHookResolver;
 
 /**
  * Implements template command.
@@ -29,6 +30,7 @@ final class Template extends ModuleGenerator {
     if ($vars['create_theme'] || $vars['create_preprocess']) {
       $this->addFile('{machine_name}.module')
         ->template('module')
+        ->resolver(new VoidHookResolver('template_preprocess_example'))
         ->appendIfExists()
         ->headerSize(7);
     }
