@@ -347,7 +347,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = configuration_entity ]]; then
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG configuration-entity -a Wine -a wine -a Example -a example
+  $DCG entity:configuration -a Wine -a wine -a Example -a example
 
   dcg_phpcs .
   dcg_drush en $MODULE_MACHINE_NAME
@@ -364,7 +364,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG content-entity \
+  $DCG entity:content \
     -a Nigma -a nigma -a Example -a example -a /admin/content/example \
     -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
@@ -380,7 +380,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG content-entity \
+  $DCG entity:content \
     -a Sigma -a sigma -a Example -a example -a /example \
     -a Yes -a No -a No -a No -a Yes -a No -a No -a Yes -a No -a No -a No -a No -a No -a No
 
@@ -396,7 +396,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
   cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG content-entity \
+  $DCG entity:content \
     -a Figma -a figma -a Example -a example -a /example \
     -a No -a No -a No -a No -a No -a No -a No -a Yes -a No -a No -a No -a No -a No
 

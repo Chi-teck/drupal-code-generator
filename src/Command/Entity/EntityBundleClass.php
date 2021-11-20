@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Command;
+namespace DrupalCodeGenerator\Command\Entity;
 
 use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Implements entity-bundle-class command.
@@ -15,12 +16,11 @@ final class EntityBundleClass extends ModuleGenerator {
 
   /**
    * {@inheritdoc}
-   *
-   * @todo Move under 'entity' namespace?
    */
-  protected string $name = 'entity-bundle-class';
+  protected string $name = 'entity:bundle-class';
   protected string $description = 'Generate a bundle class for a content entity.';
   protected string $templatePath = Application::TEMPLATE_PATH . '/entity-bundle-class';
+  protected string $alias = 'entity-bundle-class';
 
   /**
    * {@inheritdoc}

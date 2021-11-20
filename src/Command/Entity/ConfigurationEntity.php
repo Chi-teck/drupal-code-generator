@@ -1,15 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Command;
+namespace DrupalCodeGenerator\Command\Entity;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Implements configuration-entity command.
  */
 final class ConfigurationEntity extends ModuleGenerator {
 
-  protected string $name = 'configuration-entity';
+  protected string $name = 'entity:configuration';
   protected string $description = 'Generates configuration entity';
   protected string $alias = 'config-entity';
   protected string $templatePath = Application::TEMPLATE_PATH . '/configuration-entity';

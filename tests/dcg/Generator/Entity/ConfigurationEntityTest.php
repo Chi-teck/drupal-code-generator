@@ -1,13 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Generator\Entity;
+
+use DrupalCodeGenerator\Tests\Generator\BaseGeneratorTest;
 
 /**
  * Test for configuration-entity command.
  */
 final class ConfigurationEntityTest extends BaseGeneratorTest {
 
-  protected string $class = 'ConfigurationEntity';
+  protected string $class = 'Entity\ConfigurationEntity';
 
   protected array $interaction = [
     'Module name [%default_name%]:' => 'Foo',

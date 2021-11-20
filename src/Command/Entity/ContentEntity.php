@@ -1,16 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Command;
+namespace DrupalCodeGenerator\Command\Entity;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
  * Implements content-entity command.
  */
 final class ContentEntity extends ModuleGenerator {
 
-  protected string $name = 'content-entity';
+  protected string $name = 'entity:content';
   protected string $description = 'Generates content entity';
+  protected string $alias = 'content-entity';
   protected string $templatePath = Application::TEMPLATE_PATH . '/content-entity';
 
   /**

@@ -1,32 +1,30 @@
  Select generator 
   [ 0] ..
   [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Plugin
-  [ 5] Service
-  [ 6] Test
-  [ 7] Yaml
-  [ 8] composer.json
-  [ 9] Configuration entity
-  [10] Content entity
-  [11] Controller
-  [12] Entity bundle class
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module
-  [19] Module file
-  [20] PhpStorm metadata
-  [21] Plugin manager
-  [22] Render element
-  [23] Service provider
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
  ➤ 1⏎
  Select generator 
   [0] ..
@@ -38,33 +36,65 @@
  Select generator 
   [ 0] ..
   [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Plugin
-  [ 5] Service
-  [ 6] Test
-  [ 7] Yaml
-  [ 8] composer.json
-  [ 9] Configuration entity
-  [10] Content entity
-  [11] Controller
-  [12] Entity bundle class
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module
-  [19] Module file
-  [20] PhpStorm metadata
-  [21] Plugin manager
-  [22] Render element
-  [23] Service provider
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
  ➤ 2⏎
+ Select generator 
+  [0] ..
+  [1] Bundle class
+  [2] Configuration
+  [3] Content
+ ➤ 0⏎
+ Select generator 
+  [ 0] ..
+  [ 1] Console
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+ ➤ 3⏎
  Select generator 
   [0] ..
   [1] Config
@@ -74,33 +104,31 @@
  Select generator 
   [ 0] ..
   [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Plugin
-  [ 5] Service
-  [ 6] Test
-  [ 7] Yaml
-  [ 8] composer.json
-  [ 9] Configuration entity
-  [10] Content entity
-  [11] Controller
-  [12] Entity bundle class
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module
-  [19] Module file
-  [20] PhpStorm metadata
-  [21] Plugin manager
-  [22] Render element
-  [23] Service provider
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
- ➤ 3⏎
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+ ➤ 4⏎
  Select generator 
   [0] ..
   [1] Drupal 7
@@ -178,33 +206,31 @@
  Select generator 
   [ 0] ..
   [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Plugin
-  [ 5] Service
-  [ 6] Test
-  [ 7] Yaml
-  [ 8] composer.json
-  [ 9] Configuration entity
-  [10] Content entity
-  [11] Controller
-  [12] Entity bundle class
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module
-  [19] Module file
-  [20] PhpStorm metadata
-  [21] Plugin manager
-  [22] Render element
-  [23] Service provider
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
- ➤ 4⏎
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+ ➤ 5⏎
  Select generator 
   [ 0] ..
   [ 1] Field
@@ -224,33 +250,31 @@
  Select generator 
   [ 0] ..
   [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Plugin
-  [ 5] Service
-  [ 6] Test
-  [ 7] Yaml
-  [ 8] composer.json
-  [ 9] Configuration entity
-  [10] Content entity
-  [11] Controller
-  [12] Entity bundle class
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module
-  [19] Module file
-  [20] PhpStorm metadata
-  [21] Plugin manager
-  [22] Render element
-  [23] Service provider
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
- ➤ 5⏎
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+ ➤ 6⏎
  Select generator 
   [ 0] ..
   [ 1] Access checker
@@ -272,33 +296,31 @@
  Select generator 
   [ 0] ..
   [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Plugin
-  [ 5] Service
-  [ 6] Test
-  [ 7] Yaml
-  [ 8] composer.json
-  [ 9] Configuration entity
-  [10] Content entity
-  [11] Controller
-  [12] Entity bundle class
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module
-  [19] Module file
-  [20] PhpStorm metadata
-  [21] Plugin manager
-  [22] Render element
-  [23] Service provider
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
- ➤ 6⏎
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+ ➤ 7⏎
  Select generator 
   [0] ..
   [1] Browser
@@ -310,33 +332,31 @@
  Select generator 
   [ 0] ..
   [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Plugin
-  [ 5] Service
-  [ 6] Test
-  [ 7] Yaml
-  [ 8] composer.json
-  [ 9] Configuration entity
-  [10] Content entity
-  [11] Controller
-  [12] Entity bundle class
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module
-  [19] Module file
-  [20] PhpStorm metadata
-  [21] Plugin manager
-  [22] Render element
-  [23] Service provider
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
- ➤ 7⏎
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+ ➤ 8⏎
  Select generator 
   [0] ..
   [1] Links
@@ -352,33 +372,31 @@
  Select generator 
   [ 0] ..
   [ 1] Console
-  [ 2] Form
-  [ 3] Miscellaneous
-  [ 4] Plugin
-  [ 5] Service
-  [ 6] Test
-  [ 7] Yaml
-  [ 8] composer.json
-  [ 9] Configuration entity
-  [10] Content entity
-  [11] Controller
-  [12] Entity bundle class
-  [13] Field
-  [14] Hook
-  [15] Install file
-  [16] Javascript
-  [17] Layout
-  [18] Module
-  [19] Module file
-  [20] PhpStorm metadata
-  [21] Plugin manager
-  [22] Render element
-  [23] Service provider
-  [24] Template
-  [25] Theme
-  [26] Theme file
-  [27] Theme settings
- ➤ 15⏎
+  [ 2] Entity
+  [ 3] Form
+  [ 4] Miscellaneous
+  [ 5] Plugin
+  [ 6] Service
+  [ 7] Test
+  [ 8] Yaml
+  [ 9] composer.json
+  [10] Controller
+  [11] Field
+  [12] Hook
+  [13] Install file
+  [14] Javascript
+  [15] Layout
+  [16] Module
+  [17] Module file
+  [18] PhpStorm metadata
+  [19] Plugin manager
+  [20] Render element
+  [21] Service provider
+  [22] Template
+  [23] Theme
+  [24] Theme file
+  [25] Theme settings
+ ➤ 13⏎
 
  Welcome to install-file generator!
 ––––––––––––––––––––––––––––––––––––
