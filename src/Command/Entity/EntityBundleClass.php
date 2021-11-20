@@ -6,6 +6,8 @@ use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Implements entity-bundle-class command.
@@ -25,13 +27,18 @@ final class EntityBundleClass extends ModuleGenerator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(array &$vars): void {
-
+  protected function execute(InputInterface $input, OutputInterface $output): int {
     // @todo Figure out how to hide generators that cannot run without Drupal context.
     if (!$this->drupalContext) {
       $this->io->getErrorStyle()->error('This command requires a fully bootstrapped Drupal instance.');
-      return;
+      return 1;
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function generate(array &$vars): void {
 
     $this->collectDefault($vars);
     $vars['namespace'] = 'Drupal\\' . $vars['machine_name'] . '\Entity\Bundle';

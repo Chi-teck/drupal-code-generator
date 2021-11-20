@@ -18,21 +18,9 @@ final class EntityBundleClassTest extends GeneratorTest {
    * Test callback.
    */
   public function testWithEmptyDrupalContext(): void {
-
     $this->execute(new EntityBundleClass(), []);
 
-    $expected_display = <<< 'TXT'
-
-     Welcome to entity-bundle-class generator!
-    –––––––––––––––––––––––––––––––––––––––––––
-
-     [ERROR] This command requires a fully bootstrapped Drupal instance.                                                    
-
-
-    TXT;
-
-    $this->assertDisplay($expected_display);
-
+    self::assertStringContainsString('This command requires a fully bootstrapped Drupal instance.', $this->display);
   }
 
 }
