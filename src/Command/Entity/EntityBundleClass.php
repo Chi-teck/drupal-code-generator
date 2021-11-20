@@ -29,7 +29,7 @@ final class EntityBundleClass extends ModuleGenerator {
 
     // @todo Figure out how to hide generators that cannot run without Drupal context.
     if (!$this->drupalContext) {
-      $this->io->error('This command requires a fully bootstrapped Drupal instance.');
+      $this->io->getErrorStyle()->error('This command requires a fully bootstrapped Drupal instance.');
       return;
     }
 

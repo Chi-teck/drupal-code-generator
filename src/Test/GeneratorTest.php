@@ -84,7 +84,7 @@ abstract class GeneratorTest extends TestCase {
   /**
    * Creates DCG application.
    */
-  private function createApplication(): Application {
+  protected function createApplication(): Application {
     $application = Application::create();
 
     $helper_set = $application->getHelperSet();

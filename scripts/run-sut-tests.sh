@@ -406,6 +406,24 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
   dcg_drush pmu $MODULE_MACHINE_NAME
 fi
 
+# --- Test bundle class --- #
+if [[ $TARGET_TEST = all || $TARGET_TEST = bundle_class ]]; then
+  dcg_label 'Bundle classes'
+
+  # @todo Figure out how to test commands that require Drupal context.
+#  MODULE_MACHINE_NAME=acme
+#  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+#  cp -R $SELF_PATH/$MODULE_MACHINE_NAME $MODULE_DIR
+#  cd $MODULE_DIR
+#
+#  $DCG entity:bundle-class -a Acme -a acme
+#
+#  dcg_phpcs $MODULE_DIR
+#  dcg_drush en $MODULE_MACHINE_NAME
+#  dcg_phpunit tests
+#  dcg_drush pmu $MODULE_MACHINE_NAME
+fi
+
 # --- Test module --- #
 if [[ $TARGET_TEST = all || $TARGET_TEST = module ]]; then
   dcg_label Module
