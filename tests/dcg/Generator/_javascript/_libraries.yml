@@ -1,0 +1,5 @@
+coca_cola:
+  js:
+    js/coca-cola.js: {}
+  dependencies:
+    - core/drupal

@@ -135,7 +135,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = module_component ]]; then
   $DCG composer -a bar -a 'Bar project' -a 'drupal-module' -a Yes
   $DCG controller -a Bar -a bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
   $DCG install -a Bar -a bar
-  $DCG javascript -a Bar -a bar
+  $DCG javascript -a Bar -a bar -a heavy-metal.js -a Yes -a heavy_metal
   $DCG module-file -a Bar -a bar
   $DCG service-provider -a Bar -a bar
   $DCG template -a Bar -a bar -a example -a Yes -a Yes

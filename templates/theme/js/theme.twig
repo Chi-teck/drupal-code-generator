@@ -1,12 +1,12 @@
 /**
  * @file
- * Foo behaviors.
+ * {{ name }} behaviors.
  */
 (function (Drupal) {
 
   'use strict';
 
-  Drupal.behaviors.foo = {
+  Drupal.behaviors.{{ machine_name|camelize(false) }} = {
     attach: function (context, settings) {
 
       console.log('It works!');

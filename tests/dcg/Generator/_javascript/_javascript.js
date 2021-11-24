@@ -2,15 +2,11 @@
  * @file
  * Foo bar behaviors.
  */
-
-(function ($, Drupal) {
+(function (Drupal) {
 
   'use strict';
 
-  /**
-   * Behavior description.
-   */
-  Drupal.behaviors.fooBar = {
+  Drupal.behaviors.fooBarCocaCola = {
     attach: function (context, settings) {
 
       console.log('It works!');
@@ -18,4 +14,4 @@
     }
   };
 
-} (jQuery, Drupal));
+} (Drupal));

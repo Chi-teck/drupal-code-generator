@@ -8,7 +8,8 @@ use DrupalCodeGenerator\Utils;
 /**
  * Implements theme command.
  *
- * @TODO: Create a SUT test for this.
+ * @todo: Create a SUT test for this.
+ * @todo: Clean-up.
  */
 final class Theme extends ThemeGenerator {
 
@@ -33,7 +34,7 @@ final class Theme extends ThemeGenerator {
     $this->addFile('{machine_name}/{machine_name}.info.yml', 'yml/theme-info/theme-info');
     $this->addFile('{machine_name}/{machine_name}.libraries.yml', 'yml/theme-libraries/theme-libraries');
     $this->addFile('{machine_name}/{machine_name}.theme', 'theme-file/theme');
-    $this->addFile('{machine_name}/js/{machine_name|u2h}.js', 'javascript/javascript');
+    $this->addFile('{machine_name}/js/{machine_name|u2h}.js', 'theme/js/theme.twig');
 
     if ($vars['breakpoints']) {
       $this->addFile('{machine_name}/{machine_name}.breakpoints.yml', 'yml/breakpoints/breakpoints');

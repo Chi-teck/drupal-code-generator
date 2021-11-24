@@ -10,14 +10,14 @@ use DrupalCodeGenerator\Test\GeneratorTest;
  */
 final class JavaScriptTest extends GeneratorTest {
 
-  protected string $fixtureDir = __DIR__;
+  protected string $fixtureDir = __DIR__ . '/_javascript';
 
   /**
    * Test callback.
    */
   public function testGenerator(): void {
 
-    $this->execute(new JavaScript(), ['Foo bar', 'foo_bar']);
+    $this->execute(new JavaScript(), ['Foo bar', 'foo_bar', 'coca-cola.js']);
 
     $expected_display = <<< 'TXT'
 
@@ -30,15 +30,24 @@ final class JavaScriptTest extends GeneratorTest {
      Module machine name [foo_bar]:
      ➤ 
 
+     File name [foo-bar.js]:
+     ➤ 
+
+     Would you like to create a library for this file? [Yes]:
+     ➤ 
+
+
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • js/foo-bar.js
+     • foo_bar.libraries.yml
+     • js/coca-cola.js
 
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('js/foo-bar.js', '/_javascript.js');
+    $this->assertGeneratedFile('js/coca-cola.js', '_javascript.js');
+    $this->assertGeneratedFile('foo_bar.libraries.yml', '_libraries.yml');
   }
 
 }
