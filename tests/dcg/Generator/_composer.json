@@ -1,14 +1,14 @@
 {
     "name": "drupal/example",
     "type": "drupal-module",
-    "description": "Example description.",
+    "description": "Some description.",
     "keywords": ["Drupal"],
     "license": "GPL-2.0+",
     "homepage": "https://www.drupal.org/project/example",
     "authors": [
         {
             "name": "Your name here",
-            "homepage": "https://www.drupal.org/u/your_name_here",
+            "homepage": "https://www.drupal.org/u/YOUR_NAME_HERE",
             "role": "Maintainer"
         },
         {
