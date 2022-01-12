@@ -99,7 +99,7 @@ final class ContentEntity extends ModuleGenerator {
     }
 
     if ($vars['rest_configuration']) {
-      $this->addFile('config/optional/rest.resource.entity.{entity_type_id}', 'config/optional/rest.resource.entity.example.yml');
+      $this->addFile('config/optional/rest.resource.entity.{entity_type_id}.yml', 'config/optional/rest.resource.entity.example.yml');
     }
 
     if ($vars['bundle']) {
