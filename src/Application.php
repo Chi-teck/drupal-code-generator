@@ -29,7 +29,7 @@ class Application extends BaseApplication {
   /**
    * DCG version.
    */
-  public const VERSION = '2.3.1';
+  public const VERSION = '2.3.2';
 
   /**
    * DCG API version.
