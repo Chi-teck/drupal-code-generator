@@ -27,6 +27,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function offsetSet($key, $value) {
     if ($key === NULL) {
       $this->assets[] = $value;
@@ -39,6 +40,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function offsetGet($key) {
     if (isset($this->assets[$key])) {
       return $this->assets[$key];

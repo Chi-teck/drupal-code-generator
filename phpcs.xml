@@ -5,7 +5,11 @@
   <file>./scripts</file>
   <file>./src</file>
   <file>./tests</file>
-  <rule ref="vendor/drupal/coder/coder_sniffer/Drupal"/>
+  <rule ref="vendor/drupal/coder/coder_sniffer/Drupal">
+    <!-- Conflicts with PHP attributes. -->
+    <exclude name="Drupal.Commenting.InlineComment.DocBlock"/>
+    <exclude name="Drupal.Commenting.FunctionComment.Missing"/>
+  </rule>
   <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
     <exclude name="Drupal.Arrays.Array.LongLineDeclaration"/>
