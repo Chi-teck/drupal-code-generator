@@ -71,10 +71,10 @@ final class EntityBundleClass extends ModuleGenerator {
     $bundle_choices_all = \array_merge(['all' => 'All'], $bundle_choices);
     $vars['bundle_ids'] = $this->choice('Bundles, comma separated', $bundle_choices_all, NULL, TRUE);
 
-    if (\in_array('all', $vars['bundle_ids']) && \count($vars['bundle_ids']) >= 2) {
-      throw new \UnexpectedValueException("'All' may not be combined with other choices.");
-    }
     if (\in_array('all', $vars['bundle_ids'])) {
+      if (\count($vars['bundle_ids']) >= 2) {
+        throw new \UnexpectedValueException("'All' may not be combined with other choices.");
+      }
       // Replace 'all' with all bundle IDs.
       $vars['bundle_ids'] = \array_keys($bundle_choices);
     }
