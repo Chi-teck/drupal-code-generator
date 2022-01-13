@@ -68,10 +68,9 @@ final class EntityBundleClass extends ModuleGenerator {
       $bundle_info->getBundleInfo($vars['entity_type_id']),
     );
     // Prepend an 'All' choice for user's convenience.
-    $bundle_choices_all = ['all' => 'All'] + $bundle_choices;
+    $bundle_choices_all = ['' => 'All'] + $bundle_choices;
     $vars['bundle_ids'] = $this->choice('Bundles, comma separated', $bundle_choices_all, NULL, TRUE);
-
-    if (\in_array('all', $vars['bundle_ids'])) {
+    if (\in_array('', $vars['bundle_ids'])) {
       if (\count($vars['bundle_ids']) >= 2) {
         throw new \UnexpectedValueException("'All' may not be combined with other choices.");
       }
