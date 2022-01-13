@@ -22,7 +22,7 @@ final class EntityBundleClass extends ModuleGenerator {
   protected string $name = 'entity:bundle-class';
   protected string $description = 'Generate a bundle class for a content entity.';
   protected string $templatePath = Application::TEMPLATE_PATH . '/entity-bundle-class';
-  protected string $alias = 'entity-bundle-class';
+  protected string $alias = 'bundle-class';
 
   /**
    * {@inheritdoc}
