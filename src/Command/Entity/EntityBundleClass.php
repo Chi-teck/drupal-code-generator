@@ -63,19 +63,26 @@ final class EntityBundleClass extends ModuleGenerator {
 
     /** @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface $bundle_info */
     $bundle_info = $this->drupalContext->getContainer()->get('entity_type.bundle.info');
-    $bundle_choices = \array_map(
+    $bundles = \array_map(
       static fn (array $bundle): string => (string) $bundle['label'],
       $bundle_info->getBundleInfo($vars['entity_type_id']),
     );
-    // Prepend an 'All' choice for user's convenience.
-    $bundle_choices_all = ['' => 'All'] + $bundle_choices;
-    $vars['bundle_ids'] = $this->choice('Bundles, comma separated', $bundle_choices_all, NULL, TRUE);
-    if (\in_array('', $vars['bundle_ids'])) {
-      if (\count($vars['bundle_ids']) >= 2) {
-        throw new \UnexpectedValueException("'All' may not be combined with other choices.");
+
+    // Skip the question when only 1 bundle exists.
+    if (\count($bundles) === 1) {
+      $vars['bundle_ids'] = \array_keys($bundles);
+    }
+    else {
+      // Prepend an 'All' choice for user's convenience.
+      $bundle_choices = ['' => 'All'] + $bundles;
+      $vars['bundle_ids'] = $this->choice('Bundles, comma separated', $bundle_choices, NULL, TRUE);
+      if (\in_array('', $vars['bundle_ids'])) {
+        if (\count($vars['bundle_ids']) >= 2) {
+          throw new \UnexpectedValueException("'All' may not be combined with other choices.");
+        }
+        // Replace 'all' with all bundle IDs.
+        $vars['bundle_ids'] = \array_keys($bundles);
       }
-      // Replace 'all' with all bundle IDs.
-      $vars['bundle_ids'] = \array_keys($bundle_choices);
     }
 
     $vars['classes'] = [];
@@ -83,7 +90,7 @@ final class EntityBundleClass extends ModuleGenerator {
     foreach ($vars['bundle_ids'] as $bundle_id) {
       $vars['bundle_id'] = $bundle_id;
       $vars['class'] = $this->ask(
-        \sprintf('Class for %s bundle', $bundle_choices[$bundle_id]),
+        \sprintf('Class for %s bundle', $bundles[$bundle_id]),
         '{bundle_id|camelize}Bundle',
       );
       $vars['class_fqn'] = '\\' . $vars['namespace'] . '\\' . $vars['class'];
