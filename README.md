@@ -7,7 +7,6 @@
 A command line code generator for Drupal.
 
 ## Installation
-
 ```
 composer require chi-teck/drupal-code-generator --dev
 ```
