@@ -31,9 +31,3 @@ Then after you have logged out and in the _dcg_ development version will be acce
 # Test generated code.
 /path/to/drupal-code-generator/scripts/run-sut-tests.sh
 ```
-
-## Building PHAR executable
-
-1. Install dependencies without dev packages `composer install --no-dev`.
-2. Run `scripts/compile.sh` script.
-3. Test the generated archive: `php dcg.phar --version`.

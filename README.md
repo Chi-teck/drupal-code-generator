@@ -8,11 +8,9 @@ A command line code generator for Drupal.
 
 ## Installation
 
-1. Download the latest [stable release](https://github.com/Chi-teck/drupal-code-generator/releases) of the code generator.
-2. Make the file executable.
-3. Move it to a directory that is part of your `PATH`.
-
-Installation using Composer is also supported.
+```
+composer require chi-teck/drupal-code-generator --dev
+```
 
 ## Upgrade
 Simply repeat installation commands.
