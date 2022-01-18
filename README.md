@@ -12,9 +12,6 @@ A command line code generator for Drupal.
 composer require chi-teck/drupal-code-generator --dev
 ```
 
-## Upgrade
-Simply repeat installation commands.
-
 ## Usage
 ```shell
 # Display navigation.
