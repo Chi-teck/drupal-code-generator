@@ -18,13 +18,13 @@ Simply repeat installation commands.
 ## Usage
 ```shell
 # Display navigation.
-dcg
+./vendor/bin/dcg
 
 # Call generator directly.
-dcg plugin:field:widget
+./vendor/bin/dcg plugin:field:widget
 
 # Generate code non-interactively.
-dcg config-form -a Example -a example -a SettingsForm -a No
+/vendor/bin/dcg config-form -a Example -a example -a SettingsForm -a No
 ```
 
 ## Compatibility
