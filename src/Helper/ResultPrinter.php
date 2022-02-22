@@ -72,7 +72,7 @@ class ResultPrinter extends Helper implements IOAwareInterface {
     // Summary.
     $total_assets = \count($assets);
     $rows[] = [
-      NULL,
+      '',
       \sprintf('Total: %d %s', $total_assets, $total_assets == 1 ? 'asset' : 'assets'),
       $total_lines,
       self::formatMemory($total_size),
