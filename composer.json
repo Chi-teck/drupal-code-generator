@@ -37,8 +37,8 @@
         "twig/twig": "^2.12 || ^3.1"
     },
     "require-dev": {
-        "chi-teck/drupal-coder-extension": "^1.0",
-        "drupal/coder": "^8.3.13",
+        "chi-teck/drupal-coder-extension": "^1.1.1",
+        "drupal/coder": "^8.3.14",
         "friendsoftwig/twigcs": "^5.0",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.4",

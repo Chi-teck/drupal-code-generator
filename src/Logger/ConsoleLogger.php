@@ -117,6 +117,7 @@ class ConsoleLogger extends AbstractLogger {
         $replacements["{{$key}}"] = $value->format(\DateTime::RFC3339);
       }
       elseif (\is_object($value)) {
+        // @phpcs:disable SlevomatCodingStandard.Classes.ModernClassNameReference.ClassNameReferencedViaFunctionCall
         $replacements["{{$key}}"] = '[object ' . \get_class($value) . ']';
       }
       else {

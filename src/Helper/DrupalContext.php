@@ -258,6 +258,7 @@ class DrupalContext extends Helper {
     $services = $this->container
       ->get('kernel')
       ->getCachedContainerDefinition();
+    // @phpcs:disable DrupalPractice.FunctionCalls.InsecureUnserialize.InsecureUnserialize
     return isset($services['services'][$service_id]) ?
       \unserialize($services['services'][$service_id]) : NULL;
   }
