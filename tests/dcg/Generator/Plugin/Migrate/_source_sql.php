@@ -73,7 +73,7 @@ class Foo extends SourcePluginBase {
    * {@inheritdoc}
    */
   public function getIds() {
-    $ids['id']['type'] = [
+    $ids['id'] = [
       'type' => 'integer',
       'unsigned' => TRUE,
       'size' => 'big',
