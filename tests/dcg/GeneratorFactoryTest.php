@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\GeneratorFactory;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\Test\TestLogger;
 
 /**
  * Test for GeneratorsDiscovery.
@@ -32,7 +31,12 @@ final class GeneratorFactoryTest extends TestCase {
     }
     self::assertCount(self::TOTAL_GENERATORS, $generators);
 
-    self::assertTrue($logger->hasDebugThatMatches('/^Total generators: {total}/'));
+    $log_records[] = [
+      'level' => 'debug',
+      'message' => 'Total generators: {total}',
+      'context' => ['total' => 15],
+    ];
+    self::assertSame($log_records, $logger->records);
   }
 
 }
