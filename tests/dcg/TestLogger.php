@@ -14,7 +14,7 @@ final class TestLogger extends AbstractLogger {
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = []) {
+  public function log($level, $message, array $context = []): void {
     $this->records[] = [
       'level' => $level,
       'message' => $message,

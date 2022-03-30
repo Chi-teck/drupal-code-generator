@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Style;
 
+use DrupalCodeGenerator\Compatibility\AskQuestionTrait;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
@@ -15,6 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * Output decorator for the DCG style guide.
  */
 final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
+  use AskQuestionTrait;
 
   /**
    * Console input.
@@ -47,14 +49,19 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
   public function title($message): void {
     $this->writeln('');
     $this->writeln(' ' . $message);
-    $length = Helper::strlenWithoutDecoration($this->getFormatter(), $message);
+    if (\method_exists('\Symfony\Component\Console\Helper\Helper', 'width')) {
+      $length = Helper::width(Helper::removeDecoration($this->getFormatter(), $message));
+    }
+    else {
+      $length = Helper::strlenWithoutDecoration($this->getFormatter(), $message);
+    }
     $this->writeln(\sprintf('<fg=cyan;options=bold>%s</>', \str_repeat('–', $length + 2)));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function askQuestion(Question $question) {
+  protected function compatAskQuestion(Question $question) {
     $answer = $this->questionHelper->ask($this->input, $this, $question);
     if (\is_string($answer)) {
       $answer = Utils::addSlashes($answer);
@@ -114,7 +121,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
   /**
    * {@inheritdoc}
    */
-  public function getErrorStyle(): GeneratorStyleInterface {
+  public function getErrorStyle(): self {
     return new self($this->input, $this->getErrorOutput(), $this->questionHelper);
   }
 

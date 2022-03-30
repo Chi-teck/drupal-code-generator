@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\Compatibility\AskTrait;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\QuestionHelper as BaseQuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,6 +16,7 @@ use Symfony\Component\Console\Question\Question;
  * The QuestionHelper class provides helpers to interact with the user.
  */
 class QuestionHelper extends BaseQuestionHelper {
+  use AskTrait;
 
   /**
    * Counter to match questions and answers.
@@ -24,7 +26,7 @@ class QuestionHelper extends BaseQuestionHelper {
   /**
    * {@inheritdoc}
    */
-  public function ask(InputInterface $input, OutputInterface $output, Question $question) {
+  protected function compatAsk(InputInterface $input, OutputInterface $output, Question $question) {
 
     // Input is not supplied with 'answer' option when the generator was started
     // from the Navigation command.
@@ -123,13 +125,14 @@ class QuestionHelper extends BaseQuestionHelper {
     $output->write($question_text);
 
     if ($question instanceof ChoiceQuestion) {
-      $max_width = \max(\array_map([$this, 'strlen'], \array_keys($question->getChoices())));
+      $func_name = \method_exists($this, 'width') ? 'width' : 'strlen';
+      $max_width = \max(\array_map([$this, $func_name], \array_keys($question->getChoices())));
 
       $output->writeln('');
       $messages = [];
       $choices = $question->getChoices();
       foreach ($choices as $key => $value) {
-        $width = $max_width - static::strlen((string) $key);
+        $width = $max_width - static::$func_name((string) $key);
         $messages[] = '  [<info>' . \str_repeat(' ', $width) . $key . '</info>] ' . $value;
       }
       $output->writeln($messages);

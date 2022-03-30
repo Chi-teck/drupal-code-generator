@@ -10,6 +10,8 @@
     <!-- Conflicts with PHP attributes. -->
     <exclude name="Drupal.Commenting.InlineComment.DocBlock"/>
     <exclude name="Drupal.Commenting.FunctionComment.Missing"/>
+    <!-- Conflicts with BC layer. -->
+    <exclude name="Drupal.Commenting.FileComment.Missing"/>
   </rule>
   <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
