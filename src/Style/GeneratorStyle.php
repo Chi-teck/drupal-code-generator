@@ -47,14 +47,14 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
   public function title($message): void {
     $this->writeln('');
     $this->writeln(' ' . $message);
-    $length = Helper::strlenWithoutDecoration($this->getFormatter(), $message);
+    $length = Helper::width(Helper::removeDecoration($this->getFormatter(), $message));
     $this->writeln(\sprintf('<fg=cyan;options=bold>%s</>', \str_repeat('–', $length + 2)));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function askQuestion(Question $question) {
+  public function askQuestion(Question $question): mixed {
     $answer = $this->questionHelper->ask($this->input, $this, $question);
     if (\is_string($answer)) {
       $answer = Utils::addSlashes($answer);
@@ -114,7 +114,7 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
   /**
    * {@inheritdoc}
    */
-  public function getErrorStyle(): GeneratorStyleInterface {
+  public function getErrorStyle(): self {
     return new self($this->input, $this->getErrorOutput(), $this->questionHelper);
   }
 

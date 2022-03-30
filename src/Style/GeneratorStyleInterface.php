@@ -19,7 +19,7 @@ interface GeneratorStyleInterface extends SymfonyStyleInterface, OutputInterface
    * @return mixed
    *   The answer.
    */
-  public function askQuestion(Question $question);
+  public function askQuestion(Question $question): mixed;
 
   /**
    * Builds console table.

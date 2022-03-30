@@ -24,7 +24,7 @@ class QuestionHelper extends BaseQuestionHelper {
   /**
    * {@inheritdoc}
    */
-  public function ask(InputInterface $input, OutputInterface $output, Question $question) {
+  public function ask(InputInterface $input, OutputInterface $output, Question $question): mixed {
 
     // Input is not supplied with 'answer' option when the generator was started
     // from the Navigation command.
@@ -123,13 +123,13 @@ class QuestionHelper extends BaseQuestionHelper {
     $output->write($question_text);
 
     if ($question instanceof ChoiceQuestion) {
-      $max_width = \max(\array_map([$this, 'strlen'], \array_keys($question->getChoices())));
+      $max_width = \max(\array_map([$this, 'width'], \array_keys($question->getChoices())));
 
       $output->writeln('');
       $messages = [];
       $choices = $question->getChoices();
       foreach ($choices as $key => $value) {
-        $width = $max_width - static::strlen((string) $key);
+        $width = $max_width - static::width((string) $key);
         $messages[] = '  [<info>' . \str_repeat(' ', $width) . $key . '</info>] ' . $value;
       }
       $output->writeln($messages);
