@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *   label = @Translation("Foo"),
  *   uri_paths = {
  *     "canonical" = "/api/example-foo/{id}",
- *     "https://www.drupal.org/link-relations/create" = "/api/example-foo"
+ *     "create" = "/api/example-foo"
  *   }
  * )
  *
