@@ -12,6 +12,3 @@ echo -e "\e[104m PHPUnit \e[0m\n"
 echo -e "\n\e[104m Code sniffer \e[0m\n"
 ./vendor/bin/phpcs -p
 
-echo -e "\e[104m Twig linter \e[0m\n"
-# @todo Uncomment this once twigcs supports Symfony 6.
-# ./vendor/bin/twigcs ./templates
