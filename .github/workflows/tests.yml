@@ -31,7 +31,7 @@ jobs:
             - name: Install Symfony CLI
               run: |
                 echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' | sudo tee /etc/apt/sources.list.d/symfony-cli.list
-                apt update && apt install symfony-cli
+                sudo apt update && sudo apt install symfony-cli
 
             - name: Install dependencies
               run: composer install --ansi
