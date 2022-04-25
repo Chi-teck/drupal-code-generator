@@ -35,7 +35,7 @@ jobs:
               run: composer update --${{ matrix.dependency-mode }} --ansi
 
             - name: Run code sniffer
-              run: ./scipts/lint.sh
+              run: ./scripts/lint.sh
 
             - name: Run unit tests
               run: ./scripts/unit-tests.sh
