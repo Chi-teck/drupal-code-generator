@@ -35,10 +35,10 @@ jobs:
               run: composer update --${{ matrix.dependency-mode }} --ansi
 
             - name: Run code sniffer
-              run: vendor/bin/phpcs -p --colors
+              run: ./scipts/ling.sh
 
             - name: Run unit tests
-              run: ./vendor/bin/phpunit --colors=always
+              run: ./scripts/unit-tests.sh
 
             - name: Run functional tests
-              run: ./scripts/run-functional-tests.sh
+              run: ./scripts/functional-tests.sh
