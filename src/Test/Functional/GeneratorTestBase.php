@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Test\Functional;
 
-use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
