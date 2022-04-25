@@ -1,6 +1,0 @@
-/**
- * Implements hook_node_type_delete().
- */
-function {{ machine_name }}_node_type_delete($info) {
-  variable_del('comment_' . $info->type);
-}

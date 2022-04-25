@@ -1,7 +1,0 @@
-/**
- * Implements hook_openid_discovery_method_info_alter().
- */
-function {{ machine_name }}_openid_discovery_method_info_alter(&$methods) {
-  // Remove XRI discovery scheme.
-  unset($methods['xri']);
-}

@@ -1,7 +1,0 @@
-/**
- * Implements hook_ajax_render_alter().
- */
-function {{ machine_name }}_ajax_render_alter(&$commands) {
-  // Inject any new status messages into the content area.
-  $commands[] = ajax_command_prepend('#block-system-main .content', theme('status_messages'));
-}

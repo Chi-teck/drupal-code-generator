@@ -1,9 +1,0 @@
-/**
- * Implements hook_taxonomy_term_update().
- */
-function {{ machine_name }}_taxonomy_term_update($term) {
-  db_update('mytable')
-    ->fields(array('foo' => $term->foo))
-    ->condition('tid', $term->tid)
-    ->execute();
-}

@@ -1,7 +1,0 @@
-/**
- * Implements hook_comment_view().
- */
-function {{ machine_name }}_comment_view($comment, $view_mode, $langcode) {
-  // how old is the comment
-  $comment->time_ago = time() - $comment->changed;
-}

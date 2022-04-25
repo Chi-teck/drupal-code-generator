@@ -1,8 +1,0 @@
-/**
- * Implements hook_file_download_access().
- */
-function {{ machine_name }}_file_download_access($file_item, $entity_type, $entity) {
-  if ($entity_type == 'node') {
-    return node_access('view', $entity);
-  }
-}

@@ -1,9 +1,0 @@
-/**
- * Implements hook_system_info_alter().
- */
-function {{ machine_name }}_system_info_alter(&$info, $file, $type) {
-  // Only fill this in if the .info file does not define a 'datestamp'.
-  if (empty($info['datestamp'])) {
-    $info['datestamp'] = filemtime($file->filename);
-  }
-}

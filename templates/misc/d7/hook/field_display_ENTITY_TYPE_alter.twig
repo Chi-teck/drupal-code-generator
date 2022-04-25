@@ -1,9 +1,0 @@
-/**
- * Implements hook_field_display_ENTITY_TYPE_alter().
- */
-function {{ machine_name }}_field_display_ENTITY_TYPE_alter(&$display, $context) {
-  // Leave field labels out of the search index.
-  if ($context['view_mode'] == 'search_index') {
-    $display['label'] = 'hidden';
-  }
-}

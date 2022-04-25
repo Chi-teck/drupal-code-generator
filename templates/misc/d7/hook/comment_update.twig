@@ -1,7 +1,0 @@
-/**
- * Implements hook_comment_update().
- */
-function {{ machine_name }}_comment_update($comment) {
-  // Reindex the node when comments are updated.
-  search_touch_node($comment->nid);
-}

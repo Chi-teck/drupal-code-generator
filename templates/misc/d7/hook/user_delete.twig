@@ -1,8 +1,0 @@
-/**
- * Implements hook_user_delete().
- */
-function {{ machine_name }}_user_delete($account) {
-  db_delete('mytable')
-    ->condition('uid', $account->uid)
-    ->execute();
-}

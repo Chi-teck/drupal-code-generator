@@ -1,8 +1,0 @@
-/**
- * Implements hook_block_cid_parts_alter().
- */
-function {{ machine_name }}_block_cid_parts_alter(&$cid_parts, $block) {
-  global $user;
-  // This example shows how to cache a block based on the user's timezone.
-  $cid_parts[] = $user->timezone;
-}

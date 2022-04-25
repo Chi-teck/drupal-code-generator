@@ -1,9 +1,0 @@
-/**
- * Implements hook_field_is_empty().
- */
-function {{ machine_name }}_field_is_empty($item, $field) {
-  if (empty($item['value']) && (string) $item['value'] !== '0') {
-    return TRUE;
-  }
-  return FALSE;
-}

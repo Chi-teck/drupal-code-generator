@@ -1,8 +1,0 @@
-/**
- * Implements hook_taxonomy_vocabulary_insert().
- */
-function {{ machine_name }}_taxonomy_vocabulary_insert($vocabulary) {
-  if ($vocabulary->machine_name == 'my_vocabulary') {
-    $vocabulary->weight = 100;
-  }
-}

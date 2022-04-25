@@ -1,7 +1,0 @@
-/**
- * Implements hook_stream_wrappers_alter().
- */
-function {{ machine_name }}_stream_wrappers_alter(&$wrappers) {
-  // Change the name of private files to reflect the performance.
-  $wrappers['private']['name'] = t('Slow files');
-}

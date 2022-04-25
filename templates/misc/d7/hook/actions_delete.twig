@@ -1,8 +1,0 @@
-/**
- * Implements hook_actions_delete().
- */
-function {{ machine_name }}_actions_delete($aid) {
-  db_delete('actions_assignments')
-    ->condition('aid', $aid)
-    ->execute();
-}

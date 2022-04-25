@@ -1,9 +1,0 @@
-/**
- * Implements hook_block_save().
- */
-function {{ machine_name }}_block_save($delta = '', $edit = array()) {
-  // This example comes from node.module.
-  if ($delta == 'recent') {
-    variable_set('node_recent_block_count', $edit['node_recent_block_count']);
-  }
-}

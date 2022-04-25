@@ -1,8 +1,0 @@
-/**
- * Implements hook_date_format_types_alter().
- */
-function {{ machine_name }}_date_format_types_alter(&$types) {
-  foreach ($types as $name => $type) {
-    $types[$name]['locked'] = 1;
-  }
-}

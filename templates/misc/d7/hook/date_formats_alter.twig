@@ -1,8 +1,0 @@
-/**
- * Implements hook_date_formats_alter().
- */
-function {{ machine_name }}_date_formats_alter(&$formats) {
-  foreach ($formats as $id => $format) {
-    $formats[$id]['locales'][] = 'en-ca';
-  }
-}
