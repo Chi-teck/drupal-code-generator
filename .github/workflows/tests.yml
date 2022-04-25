@@ -42,5 +42,8 @@ jobs:
             - name: Run code sniffer
               run: vendor/bin/phpcs -p --colors
 
-            - name: Run tests
+            - name: Run unit tests
               run: ./vendor/bin/phpunit --colors=always
+
+            - name: Run functional tests
+              run: ./scripts/run-functional-tests.sh
