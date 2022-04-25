@@ -134,7 +134,6 @@
   [1] Apache virtual host
   [2] HTML page
   [3] Nginx virtual host
-  [4] Project
  ➤ 0⏎
  Select generator 
   [ 0] ..
