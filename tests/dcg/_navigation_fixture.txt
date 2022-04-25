@@ -131,77 +131,10 @@
  ➤ 4⏎
  Select generator 
   [0] ..
-  [1] Drupal 7
-  [2] Apache virtual host
-  [3] HTML page
-  [4] Nginx virtual host
-  [5] Project
- ➤ 1⏎
- Select generator 
-  [ 0] ..
-  [ 1] Ctools plugin
-  [ 2] Views plugin
-  [ 3] Hook
-  [ 4] Info (module)
-  [ 5] Info (theme)
-  [ 6] Install file
-  [ 7] Javascript
-  [ 8] Module
-  [ 9] Module file
-  [10] settings.php
-  [11] template.php
-  [12] Test
-  [13] Theme
- ➤ 1⏎
- Select generator 
-  [0] ..
-  [1] Access
-  [2] Content type
-  [3] Relationship
- ➤ 0⏎
- Select generator 
-  [ 0] ..
-  [ 1] Ctools plugin
-  [ 2] Views plugin
-  [ 3] Hook
-  [ 4] Info (module)
-  [ 5] Info (theme)
-  [ 6] Install file
-  [ 7] Javascript
-  [ 8] Module
-  [ 9] Module file
-  [10] settings.php
-  [11] template.php
-  [12] Test
-  [13] Theme
- ➤ 2⏎
- Select generator 
-  [0] ..
-  [1] Argument default
- ➤ 0⏎
- Select generator 
-  [ 0] ..
-  [ 1] Ctools plugin
-  [ 2] Views plugin
-  [ 3] Hook
-  [ 4] Info (module)
-  [ 5] Info (theme)
-  [ 6] Install file
-  [ 7] Javascript
-  [ 8] Module
-  [ 9] Module file
-  [10] settings.php
-  [11] template.php
-  [12] Test
-  [13] Theme
- ➤ 0⏎
- Select generator 
-  [0] ..
-  [1] Drupal 7
-  [2] Apache virtual host
-  [3] HTML page
-  [4] Nginx virtual host
-  [5] Project
+  [1] Apache virtual host
+  [2] HTML page
+  [3] Nginx virtual host
+  [4] Project
  ➤ 0⏎
  Select generator 
   [ 0] ..

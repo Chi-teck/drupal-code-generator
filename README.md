@@ -28,6 +28,7 @@ DCG|PHP|Symfony|Twig|Drupal|Drush
 :-:|:-:|:-:|:-:|:-:|:-:
 1|7.1+|3, 4|1, 2|7, 8|9, 10
 2|7.4+|4, 5|2, 3|7, 9|11+
+3|8.1+|6|3|10|
 
 ## License
 GNU General Public License, version 2 or later.

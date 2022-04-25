@@ -1,7 +1,0 @@
-name = Example
-description = A theme for test.
-base theme = garland
-core = 7.x
-
-stylesheets[all][] = css/example.css
-scripts[] = js/example.js

@@ -1,7 +1,0 @@
-name = Bar
-description = Theme description
-base theme = omega
-core = 7.x
-
-stylesheets[all][] = css/bar.css
-scripts[] = js/bar.js

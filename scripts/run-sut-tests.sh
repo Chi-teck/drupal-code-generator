@@ -20,7 +20,7 @@ SELF_PATH=$(dirname "$(readlink -f "$0")")/../tests/sut
 
 DRUPAL_VERSION=${DRUPAL_VERSION:-}
 if [[ -z $DRUPAL_VERSION ]]; then
-  DRUPAL_VERSION=$(git ls-remote -h https://git.drupalcode.org/project/drupal.git | grep -o '9\..\.x' | tail -n1)
+  DRUPAL_VERSION=$(git ls-remote -h https://git.drupalcode.org/project/drupal.git | grep -o '10\..\.x' | tail -n1)
 fi
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut/build}
 DRUPAL_CACHE_DIR=${DRUPAL_CACHE_DIR:-/tmp/dcg_sut/cache/$DRUPAL_VERSION}

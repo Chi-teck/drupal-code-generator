@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class GeneratorFactoryTest extends TestCase {
 
-  private const TOTAL_GENERATORS = 15;
+  private const TOTAL_GENERATORS = 4;
 
   /**
    * Test callback.
@@ -23,8 +23,8 @@ final class GeneratorFactoryTest extends TestCase {
     $logger = new TestLogger();
     $factory = new GeneratorFactory(new SimpleClassResolver(), $logger);
     $generators = $factory->getGenerators(
-      [Application::ROOT . '/src/Command/Misc/Drupal_7'],
-      '\DrupalCodeGenerator\Command\Misc\Drupal_7',
+      [Application::ROOT . '/src/Command/Misc'],
+      '\DrupalCodeGenerator\Command\Misc',
     );
     foreach ($generators as $generator) {
       self::assertInstanceOf('DrupalCodeGenerator\Command\Generator', $generator);
@@ -34,7 +34,7 @@ final class GeneratorFactoryTest extends TestCase {
     $log_records[] = [
       'level' => 'debug',
       'message' => 'Total generators: {total}',
-      'context' => ['total' => 15],
+      'context' => ['total' => self::TOTAL_GENERATORS],
     ];
     self::assertSame($log_records, $logger->records);
   }
