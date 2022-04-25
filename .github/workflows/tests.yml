@@ -36,9 +36,6 @@ jobs:
             - name: Update  dependencies
               run: composer update --${{ matrix.dependency-mode }} --ansi
 
-            - name: Run Twig linter
-              run: ./vendor/bin/twigcs ./templates
-
             - name: Run code sniffer
               run: vendor/bin/phpcs -p --colors
 
