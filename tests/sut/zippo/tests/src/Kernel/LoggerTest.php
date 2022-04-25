@@ -27,9 +27,9 @@ final class LoggerTest extends KernelTestBase {
 
     $logged_data = \file_get_contents('temporary://drupal.log');
 
-    self::assertRegExp('/\[message\] => foo\n/', $logged_data);
-    self::assertRegExp('/\[type\] => zippo\n/', $logged_data);
-    self::assertRegExp('/\[severity\] => Notice\n/', $logged_data);
+    self::assertMatchesRegularExpression('/\[message\] => foo\n/', $logged_data);
+    self::assertMatchesRegularExpression('/\[type\] => zippo\n/', $logged_data);
+    self::assertMatchesRegularExpression('/\[severity\] => Notice\n/', $logged_data);
   }
 
 }

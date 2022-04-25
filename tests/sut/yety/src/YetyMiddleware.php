@@ -3,6 +3,7 @@
 namespace Drupal\yety;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -27,7 +28,7 @@ final class YetyMiddleware implements HttpKernelInterface {
   /**
    * {@inheritdoc}
    */
-  public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = TRUE) {
+  public function handle(Request $request, $type = self::MAIN_REQUEST, $catch = TRUE): Response {
     return $this->httpKernel->handle($request, $type, $catch);
   }
 

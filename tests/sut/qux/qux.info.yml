@@ -6,5 +6,4 @@ dependencies:
   - drupal:filter
   - drupal:ckeditor
   - example:example
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^10

@@ -34,7 +34,7 @@ class BarMiddleware implements HttpKernelInterface {
   /**
    * {@inheritdoc}
    */
-  public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = TRUE) {
+  public function handle(Request $request, $type = self::MAIN_REQUEST, $catch = TRUE): Response {
 
     if ($request->getClientIp() == '127.0.0.10') {
       return new Response($this->t('Bye!'), 403);

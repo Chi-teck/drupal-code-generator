@@ -2,7 +2,6 @@ name: Zippo
 type: module
 description: Helper module to testing generated services.
 package: DCG
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^10
 dependencies:
   - example:example

@@ -2,7 +2,7 @@ name: Acme
 type: module
 description: Helper module for testing generated bundle classes.
 package: DCG
-core_version_requirement: ^9
+core_version_requirement: ^10
 dependencies:
   - drupal:node
   - drupal:system

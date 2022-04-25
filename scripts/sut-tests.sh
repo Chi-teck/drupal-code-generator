@@ -7,7 +7,7 @@ set -o nounset
 
 function dcg_on_exit {
   local STATUS=$?
-  $DRUPAL_DIR/vendor/bin/web.server stop --pidfile=/tmp/dcg-ws-pid
+  symfony server:stop --dir=$DRUPAL_DIR
   if [[ $STATUS == 0 ]] ; then
     echo -e "\n\e[0;42m SUCCESS \e[0m"
   else
@@ -64,7 +64,7 @@ function dcg_label {
 
 # === Create a site under testing. === #
 
-# Keep Drupal dir itself because PHP built-in server is watching it.
+# Keep Drupal dir itself because Symfony server is watching it.
 if [[ -d $DRUPAL_DIR ]]; then
   sudo rm -rf $DRUPAL_DIR/* $DRUPAL_DIR/.[^.]*
 else
@@ -78,26 +78,18 @@ else
   export COMPOSER_PROCESS_TIMEOUT=1900
   git clone --depth 1 --branch $DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR
   composer -d$DRUPAL_DIR install
-  composer -d$DRUPAL_DIR require drush/drush chi-teck/web-server
+  composer -d$DRUPAL_DIR require drush/drush
   $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
-  dcg_drush site:install minimal --db-url=sqlite://sites/default/files/.db.sqlite --sites-subdir=default
+  php $DRUPAL_DIR/core/scripts/drupal install minimal
   cp -R $SELF_PATH/dcg_test $DRUPAL_DIR/modules
   dcg_drush pm:enable dcg_test
   mkdir -p $DRUPAL_CACHE_DIR
   cp -r $DRUPAL_DIR/. $DRUPAL_CACHE_DIR
 fi
 
-# Start server.
-# Use Drupal router because PHP built-in server cannot handle routers with dots.
-# See https://bugs.php.net/bug.php?id=61286.
-$DRUPAL_DIR/vendor/bin/web.server \
-  start \
-  $DRUPAL_HOST:$DRUPAL_PORT \
-  --docroot=$DRUPAL_DIR \
-  --router=$DRUPAL_DIR/.ht.router.php \
-  --pidfile=/tmp/dcg-ws-pid
+symfony server:start -d --dir=$DRUPAL_DIR --port=$DRUPAL_PORT
 
 export SUT_TEST=1
 # === Tests === #
