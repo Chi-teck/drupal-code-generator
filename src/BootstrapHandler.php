@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator;
 
 use Composer\Autoload\ClassLoader;
+use Composer\InstalledVersions;
 use Drupal\Core\DrupalKernel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,9 @@ class BootstrapHandler {
       return NULL;
     }
     try {
+      $root_package = InstalledVersions::getRootPackage();
+      \chdir($root_package['install_path']);
+
       $request = Request::createFromGlobals();
       $kernel = DrupalKernel::createFromRequest($request, $this->classLoader, 'prod');
       $kernel->boot();

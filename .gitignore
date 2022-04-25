@@ -1,7 +1,7 @@
 *.phar
 /.idea/
 /.php_cs.cache
-/.phpunit.result.cache
+.phpunit.result.cache
 /composer.lock
 /coverage
 /sandbox/
