@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\Compatibility\AskTrait;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\QuestionHelper as BaseQuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,7 +15,6 @@ use Symfony\Component\Console\Question\Question;
  * The QuestionHelper class provides helpers to interact with the user.
  */
 class QuestionHelper extends BaseQuestionHelper {
-  use AskTrait;
 
   /**
    * Counter to match questions and answers.
@@ -26,7 +24,7 @@ class QuestionHelper extends BaseQuestionHelper {
   /**
    * {@inheritdoc}
    */
-  protected function compatAsk(InputInterface $input, OutputInterface $output, Question $question) {
+  public function ask(InputInterface $input, OutputInterface $output, Question $question): mixed {
 
     // Input is not supplied with 'answer' option when the generator was started
     // from the Navigation command.

@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Style;
 
-use DrupalCodeGenerator\Compatibility\AskQuestionTrait;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
@@ -16,7 +15,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * Output decorator for the DCG style guide.
  */
 final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
-  use AskQuestionTrait;
 
   /**
    * Console input.
@@ -49,19 +47,14 @@ final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterfa
   public function title($message): void {
     $this->writeln('');
     $this->writeln(' ' . $message);
-    if (\method_exists('\Symfony\Component\Console\Helper\Helper', 'width')) {
-      $length = Helper::width(Helper::removeDecoration($this->getFormatter(), $message));
-    }
-    else {
-      $length = Helper::strlenWithoutDecoration($this->getFormatter(), $message);
-    }
+    $length = Helper::width(Helper::removeDecoration($this->getFormatter(), $message));
     $this->writeln(\sprintf('<fg=cyan;options=bold>%s</>', \str_repeat('–', $length + 2)));
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function compatAskQuestion(Question $question) {
+  public function askQuestion(Question $question): mixed {
     $answer = $this->questionHelper->ask($this->input, $this, $question);
     if (\is_string($answer)) {
       $answer = Utils::addSlashes($answer);
