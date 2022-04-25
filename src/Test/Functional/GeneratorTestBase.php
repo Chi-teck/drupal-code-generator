@@ -59,7 +59,7 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
    * Asserts generated display.
    */
   protected function assertDisplay(string $expected_display): void {
-    $default_name = Utils::machine2human(\basename($this->directory), TRUE);
+    $default_name = \basename(\getcwd());
     $expected_display = \str_replace('%default_name%', $default_name, $expected_display);
     self::assertEquals($expected_display, $this->display);
   }
