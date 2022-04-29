@@ -2,7 +2,7 @@
   "name": "foo",
   "private": true,
   "scripts": {
-    "livereload": "livereload css"
+    "livereload": "livereload -d"
   },
   "devDependencies": {
     "livereload": "^0.9.3"
