@@ -13,14 +13,14 @@ if [[ -z $DRUPAL_VERSION ]]; then
 fi
 DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_functional/build}
 DRUPAL_CACHE_DIR=${DRUPAL_CACHE_DIR:-/tmp/dcg_functional/cache/$DRUPAL_VERSION}
-TEST_DIR=$DRUPAL_DIR/vendor/chi-teck/drupal-code-generator/tests/functional
+DCG_DIR=$DRUPAL_DIR/vendor/chi-teck/drupal-code-generator
 
 TARGET_TEST=${1:-all}
 
 echo -----------------------------------------------
 echo ' DRUPAL PATH:   ' $DRUPAL_DIR
 echo ' DRUPAL VERSION:' $DRUPAL_VERSION
-echo ' TEST DIR:      ' $TEST_DIR
+echo ' DCG DIR:       ' $DCG_DIR
 echo ' ROOT DIR:      ' $ROOT_DIR
 echo -----------------------------------------------
 
@@ -31,7 +31,7 @@ function dcg_label {
 }
 
 function dcg_phpunit {
-  $DRUPAL_DIR/vendor/bin/phpunit -c $TEST_DIR $TEST_DIR
+  $DRUPAL_DIR/vendor/bin/phpunit -c $DCG_DIR --testsuite=functional
 }
 
 # === Create a site under testing. === #
@@ -54,7 +54,6 @@ else
   cp -r $DRUPAL_DIR/. $DRUPAL_CACHE_DIR
 fi
 
-export SUT_TEST=1
 # === Tests === #
 dcg_label 'TESTS'
 dcg_phpunit
