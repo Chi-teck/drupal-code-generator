@@ -66,8 +66,8 @@ final class EntityBundleClassTest extends GeneratorTestBase {
     $this->assertDisplay($expected_display);
 
     $this->fixtureDir .= '/_entity_bundle_class_without_base_class';
-    $this->assertGeneratedFile('foo.module', 'foo.module');
-    $this->assertGeneratedFile('src/Entity/Bundle/ArticleBundle.php', 'src/Entity/Bundle/ArticleBundle.php');
+    $this->assertGeneratedFile('foo.module');
+    $this->assertGeneratedFile('src/Entity/Bundle/ArticleBundle.php');
   }
 
   public function testAllBundlesWithBaseClass(): void {
@@ -133,9 +133,9 @@ final class EntityBundleClassTest extends GeneratorTestBase {
     $this->assertDisplay($expected_display);
 
     $this->fixtureDir .= '/_entity_bundle_class_all_bundles_with_base_class';
-    $this->assertGeneratedFile('foo.module', 'foo.module');
-    $this->assertGeneratedFile('src/Entity/Bundle/ArticleBundle.php', 'src/Entity/Bundle/ArticleBundle.php');
-    $this->assertGeneratedFile('src/Entity/Bundle/PageBundle.php', 'src/Entity/Bundle/PageBundle.php');
+    $this->assertGeneratedFile('foo.module');
+    $this->assertGeneratedFile('src/Entity/Bundle/ArticleBundle.php');
+    $this->assertGeneratedFile('src/Entity/Bundle/PageBundle.php');
   }
 
 }

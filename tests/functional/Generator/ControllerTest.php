@@ -72,8 +72,8 @@ final class ControllerTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('src/Controller/FooController.php', 'src/Controller/FooController.php');
-    $this->assertGeneratedFile('foo.routing.yml', 'foo.routing.yml');
+    $this->assertGeneratedFile('src/Controller/FooController.php');
+    $this->assertGeneratedFile('foo.routing.yml');
   }
 
 }

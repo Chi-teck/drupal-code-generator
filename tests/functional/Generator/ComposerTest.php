@@ -50,7 +50,7 @@ final class ComposerTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('composer.json', 'composer.json');
+    $this->assertGeneratedFile('composer.json');
   }
 
 }

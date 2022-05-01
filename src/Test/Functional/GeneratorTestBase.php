@@ -66,7 +66,9 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
   /**
    * Asserts generated file.
    */
-  protected function assertGeneratedFile(string $file, string $fixture): void {
+  protected function assertGeneratedFile(string $file, ?string $fixture = NULL): void {
+    // Fixture name typically is the same as the generated file name.
+    $fixture ??= $file;
     self::assertFileEquals($this->fixtureDir . '/' . $fixture, $this->directory . '/' . $file);
   }
 
