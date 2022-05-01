@@ -20,7 +20,7 @@ composer require chi-teck/drupal-code-generator --dev
 ./vendor/bin/dcg plugin:field:widget
 
 # Generate code non-interactively.
-/vendor/bin/dcg config-form -a Example -a example -a SettingsForm -a No
+./vendor/bin/dcg config-form -a Example -a example -a SettingsForm -a No
 ```
 
 ## Compatibility
