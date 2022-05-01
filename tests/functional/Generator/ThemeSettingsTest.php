@@ -3,31 +3,28 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Command\ThemeSettings;
-use DrupalCodeGenerator\Test\GeneratorTest;
+use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
  * Test for theme-settings command.
  */
-final class ThemeSettingsTest extends GeneratorTest {
+final class ThemeSettingsTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__;
+  protected string $fixtureDir = __DIR__ . '/_theme_settings';
 
   /**
    * Test callback.
    */
   public function testGenerator(): void {
 
-    $this->execute(new ThemeSettings(), ['Foo', 'foo']);
+    $this->execute(new ThemeSettings(), ['foo']);
 
     $expected_display = <<< 'TXT'
 
      Welcome to theme-settings generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Theme name [%default_name%]:
-     ➤ 
-
-     Theme machine name [foo]:
+     Theme machine name [%default_name%]:
      ➤ 
 
      The following directories and files have been created or updated:
@@ -40,9 +37,9 @@ final class ThemeSettingsTest extends GeneratorTest {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('theme-settings.php', '_theme_settings_form.php');
-    $this->assertGeneratedFile('config/install/foo.settings.yml', '_theme_settings_config.yml');
-    $this->assertGeneratedFile('config/schema/foo.schema.yml', '_theme_settings_schema.yml');
+    $this->assertGeneratedFile('theme-settings.php');
+    $this->assertGeneratedFile('config/install/foo.settings.yml');
+    $this->assertGeneratedFile('config/schema/foo.schema.yml');
   }
 
 }
