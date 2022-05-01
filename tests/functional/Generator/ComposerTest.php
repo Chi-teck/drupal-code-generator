@@ -3,30 +3,15 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Command\Composer;
-use DrupalCodeGenerator\Test\GeneratorTest;
+use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
  * Test for composer command.
  */
-final class ComposerTest extends GeneratorTest {
+final class ComposerTest extends GeneratorTestBase {
 
-  protected string $class = 'Composer';
+  protected string $fixtureDir = __DIR__ . '/_composer';
 
-  protected array $interaction = [
-    'Project machine name [%default_machine_name%]:' => 'example',
-    'Description:' => 'Example description.',
-    'Is this project hosted on drupal.org? [No]:' => 'Yes',
-  ];
-
-  protected array $fixtures = [
-    'composer.json' => '/_composer.json',
-  ];
-
-  protected string $fixtureDir = __DIR__;
-
-  /**
-   * Test callback.
-   */
   public function testGenerator(): void {
 
     $user_input = ['drupal/example', 'Some description.', 'drupal-module', 'Yes', 'Yes'];
@@ -65,7 +50,7 @@ final class ComposerTest extends GeneratorTest {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('composer.json', '_composer.json');
+    $this->assertGeneratedFile('composer.json', 'composer.json');
   }
 
 }
