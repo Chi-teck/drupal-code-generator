@@ -10,7 +10,7 @@ use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
  */
 final class ControllerTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__;
+  protected string $fixtureDir = __DIR__ . '/_controller';
 
   public function testController(): void {
 
@@ -72,8 +72,8 @@ final class ControllerTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('src/Controller/FooController.php', '_controller.php');
-    $this->assertGeneratedFile('foo.routing.yml', '_controller_routing.yml');
+    $this->assertGeneratedFile('src/Controller/FooController.php', 'src/Controller/FooController.php');
+    $this->assertGeneratedFile('foo.routing.yml', 'foo.routing.yml');
   }
 
 }
