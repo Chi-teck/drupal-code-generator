@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/Chi-teck/drupal-code-generator/workflows/Tests/badge.svg)](https://github.com/Chi-teck/drupal-code-generator/actions?query=workflow%3ATests)
 [![Total Downloads](https://poser.pugx.org/chi-teck/drupal-code-generator/downloads)](//packagist.org/packages/chi-teck/drupal-code-generator)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg?style=flat)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg?style=flat)](https://php.net/)
 
 A command line code generator for Drupal.
 
