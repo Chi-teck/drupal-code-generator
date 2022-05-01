@@ -10,9 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Implements entity-bundle-class command.
- *
- * @todo Create a test.
+ * Implements entity:bundle-class command.
  */
 final class EntityBundleClass extends ModuleGenerator {
 
@@ -90,7 +88,7 @@ final class EntityBundleClass extends ModuleGenerator {
     foreach ($vars['bundle_ids'] as $bundle_id) {
       $vars['bundle_id'] = $bundle_id;
       $vars['class'] = $this->ask(
-        \sprintf('Class for %s bundle', $bundles[$bundle_id]),
+        \sprintf('Class for "%s" bundle', $bundles[$bundle_id]),
         '{bundle_id|camelize}Bundle',
       );
       $vars['class_fqn'] = '\\' . $vars['namespace'] . '\\' . $vars['class'];
@@ -100,6 +98,7 @@ final class EntityBundleClass extends ModuleGenerator {
       $vars['classes_fqn'][$bundle_id] = $vars['class_fqn'];
     }
 
+    $vars['base_class'] = FALSE;
     if ($this->confirm('Use a base class?', FALSE)) {
       $vars['base_class'] = $this->ask('Base class', '{entity_type_id|camelize}Bundle');
       $this->addFile('src/Entity/Bundle/{base_class}.php', 'bundle-base-class');

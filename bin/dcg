@@ -9,11 +9,15 @@ use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
 use Psr\Log\NullLogger;
 
-// The autoloader may have a different location if DCG is installed as a local
-// Composer package.
-$class_loader = file_exists(__DIR__ . '/../vendor/autoload.php')
-  ? require __DIR__ . '/../vendor/autoload.php'
-  : require __DIR__ . '/../../../autoload.php';
+$dcg_path = \str_starts_with($argv[0], '/') ?
+  $argv[0] : \getcwd() . '/' . $argv[0];
+$autoload_dir = \dirname($dcg_path) . '/..';
+
+if (!\file_exists($autoload_dir . '/autoload.php')) {
+  $autoload_dir = $autoload_dir . '/vendor';
+}
+
+$class_loader = require $autoload_dir . '/autoload.php';
 
 $bootstrap_handler = new BootstrapHandler($class_loader);
 $container = $bootstrap_handler->bootstrap();

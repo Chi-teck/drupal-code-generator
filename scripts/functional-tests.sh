@@ -49,7 +49,7 @@ else
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   composer -d$DRUPAL_DIR config repositories.dcg path "$ROOT_DIR"
   composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator --ignore-platform-req=php
-  php $DRUPAL_DIR/core/scripts/drupal install minimal
+  php $DRUPAL_DIR/core/scripts/drupal install standard
   mkdir -p $DRUPAL_CACHE_DIR
   cp -r $DRUPAL_DIR/. $DRUPAL_CACHE_DIR
 fi
