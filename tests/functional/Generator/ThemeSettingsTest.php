@@ -1,20 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\ThemeSettings;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for theme-settings command.
+ * Tests theme-settings generator.
  */
 final class ThemeSettingsTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_theme_settings';
 
-  /**
-   * Test callback.
-   */
   public function testGenerator(): void {
 
     $this->execute(new ThemeSettings(), ['foo']);

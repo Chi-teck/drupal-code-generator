@@ -1,20 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\JavaScript;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for javascript command.
+ * Tests javascript generator.
  */
 final class JavaScriptTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_javascript';
 
-  /**
-   * Test callback.
-   */
   public function testGenerator(): void {
 
     $this->execute(new JavaScript(), ['foo_bar', 'coca-cola.js']);

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\Composer;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for composer command.
+ * Tests composer generator.
  */
 final class ComposerTest extends GeneratorTestBase {
 

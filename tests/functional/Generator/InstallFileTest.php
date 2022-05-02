@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\InstallFile;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for install-file command.
+ * Tests install-file generator.
  */
 final class InstallFileTest extends GeneratorTestBase {
 

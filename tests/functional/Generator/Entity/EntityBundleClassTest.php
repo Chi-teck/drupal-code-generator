@@ -6,7 +6,7 @@ use DrupalCodeGenerator\Command\Entity\EntityBundleClass;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for entity:bundle-class command.
+ * Tests entity:bundle-class generator.
  */
 final class EntityBundleClassTest extends GeneratorTestBase {
 

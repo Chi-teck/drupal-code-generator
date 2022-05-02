@@ -1,20 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\ThemeFile;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for theme-file command.
+ * Tests theme-file generator.
  */
 final class ThemeFileTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_theme_file';
 
-  /**
-   * Test callback.
-   */
   public function testGenerator(): void {
 
     $this->execute(new ThemeFile(), ['foo']);

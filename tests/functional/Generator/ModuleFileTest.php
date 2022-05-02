@@ -1,20 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\ModuleFile;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for module-file command.
+ * Tests module-file generator.
  */
 final class ModuleFileTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_module_file';
 
-  /**
-   * Test callback.
-   */
   public function testGenerator(): void {
 
     $this->execute(new ModuleFile(), ['foo']);

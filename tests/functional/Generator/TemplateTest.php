@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\Template;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * A test for template command.
+ * Tests template generator.
  */
 final class TemplateTest extends GeneratorTestBase {
 

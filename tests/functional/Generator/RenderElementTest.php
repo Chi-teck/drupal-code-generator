@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\RenderElement;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for render-element command.
+ * Tests render-element generator.
  */
 final class RenderElementTest extends GeneratorTestBase {
 

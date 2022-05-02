@@ -6,7 +6,7 @@ use DrupalCodeGenerator\Command\Controller;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for controller command.
+ * Tests controller generator.
  */
 final class ControllerTest extends GeneratorTestBase {
 
