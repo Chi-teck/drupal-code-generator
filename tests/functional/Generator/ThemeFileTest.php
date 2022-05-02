@@ -31,7 +31,6 @@ final class ThemeFileTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo.theme
 
-
     TXT;
     $this->assertDisplay($expected_display);
 

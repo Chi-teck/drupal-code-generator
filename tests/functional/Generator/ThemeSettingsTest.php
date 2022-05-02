@@ -33,7 +33,6 @@ final class ThemeSettingsTest extends GeneratorTestBase {
      • config/install/foo.settings.yml
      • config/schema/foo.schema.yml
 
-
     TXT;
     $this->assertDisplay($expected_display);
 

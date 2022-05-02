@@ -41,7 +41,6 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
    *   stream.
    */
   protected function execute(Command $command, array $user_input): int {
-
     $this->application->add($command);
 
     $command_tester = new CommandTester($command);
@@ -59,7 +58,7 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
    */
   protected function assertDisplay(string $expected_display): void {
     $default_name = \basename(\getcwd());
-    $expected_display = \str_replace('%default_name%', $default_name, $expected_display);
+    $expected_display = \str_replace('%default_name%', $default_name, $expected_display) . \PHP_EOL;
     self::assertEquals($expected_display, $this->display);
   }
 

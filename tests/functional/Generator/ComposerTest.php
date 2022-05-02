@@ -46,7 +46,6 @@ final class ComposerTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • composer.json
 
-
     TXT;
     $this->assertDisplay($expected_display);
 

@@ -61,7 +61,6 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      • foo.module
      • src/Entity/Bundle/ArticleBundle.php
 
-
     TXT;
     $this->assertDisplay($expected_display);
 
@@ -127,7 +126,6 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      • src/Entity/Bundle/ArticleBundle.php
      • src/Entity/Bundle/NodeBundle.php
      • src/Entity/Bundle/PageBundle.php
-
 
     TXT;
     $this->assertDisplay($expected_display);

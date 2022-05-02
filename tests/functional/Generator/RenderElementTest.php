@@ -28,7 +28,6 @@ final class RenderElementTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • src/Element/Entity.php
 
-
     TXT;
     $this->assertDisplay($expected_display);
 

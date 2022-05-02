@@ -68,7 +68,6 @@ final class ControllerTest extends GeneratorTestBase {
      • foo.routing.yml
      • src/Controller/FooController.php
 
-
     TXT;
     $this->assertDisplay($expected_display);
 
