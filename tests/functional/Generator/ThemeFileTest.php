@@ -3,31 +3,28 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Command\ThemeFile;
-use DrupalCodeGenerator\Test\GeneratorTest;
+use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
  * Test for theme-file command.
  */
-final class ThemeFileTest extends GeneratorTest {
+final class ThemeFileTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__;
+  protected string $fixtureDir = __DIR__ . '/_theme_file';
 
   /**
    * Test callback.
    */
   public function testGenerator(): void {
 
-    $this->execute(new ThemeFile(), ['Foo', 'foo']);
+    $this->execute(new ThemeFile(), ['foo']);
 
     $expected_display = <<< 'TXT'
 
      Welcome to theme-file generator!
     ––––––––––––––––––––––––––––––––––
 
-     Theme name [%default_name%]:
-     ➤ 
-
-     Theme machine name [foo]:
+     Theme machine name [%default_name%]:
      ➤ 
 
      The following directories and files have been created or updated:
@@ -38,7 +35,7 @@ final class ThemeFileTest extends GeneratorTest {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('foo.theme', '_.theme');
+    $this->assertGeneratedFile('foo.theme');
   }
 
 }
