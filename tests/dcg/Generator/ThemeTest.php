@@ -25,7 +25,6 @@ final class ThemeTest extends GeneratorTest {
       'Custom',
       'Yes',
       'Yes',
-      'Yes',
     ];
     $this->execute(new Theme(), $input);
 
@@ -47,9 +46,6 @@ final class ThemeTest extends GeneratorTest {
      ➤ 
 
      Package [Custom]:
-     ➤ 
-
-     Would you like to use SASS to compile style sheets? [No]:
      ➤ 
 
      Would you like to create breakpoints? [No]:
@@ -77,22 +73,22 @@ final class ThemeTest extends GeneratorTest {
      • foo/theme-settings.php
      • foo/config/install/foo.settings.yml
      • foo/config/schema/foo.schema.yml
+     • foo/css/base/elements.css
+     • foo/css/components/block.css
+     • foo/css/components/breadcrumb.css
+     • foo/css/components/buttons.css
+     • foo/css/components/field.css
+     • foo/css/components/form.css
+     • foo/css/components/header.css
+     • foo/css/components/menu.css
+     • foo/css/components/messages.css
+     • foo/css/components/node.css
+     • foo/css/components/sidebar.css
+     • foo/css/components/table.css
+     • foo/css/components/tabs.css
+     • foo/css/layouts/layout.css
+     • foo/css/theme/print.css
      • foo/js/foo.js
-     • foo/scss/base/elements.scss
-     • foo/scss/components/block.scss
-     • foo/scss/components/breadcrumb.scss
-     • foo/scss/components/buttons.scss
-     • foo/scss/components/field.scss
-     • foo/scss/components/form.scss
-     • foo/scss/components/header.scss
-     • foo/scss/components/menu.scss
-     • foo/scss/components/messages.scss
-     • foo/scss/components/node.scss
-     • foo/scss/components/sidebar.scss
-     • foo/scss/components/table.scss
-     • foo/scss/components/tabs.scss
-     • foo/scss/layouts/layout.scss
-     • foo/scss/theme/print.scss
 
 
     TXT;
@@ -117,21 +113,7 @@ final class ThemeTest extends GeneratorTest {
     $this->assertGeneratedFile('foo/config/install/foo.settings.yml', '/_theme/config/install/foo.settings.yml');
     $this->assertGeneratedFile('foo/config/schema/foo.schema.yml', '/_theme/config/schema/foo.schema.yml');
     $this->assertGeneratedFile('foo/js/foo.js', '/_theme/js/foo.js');
-    $this->assertGeneratedFile('foo/scss/base/elements.scss', '/_theme/scss/base/elements.scss');
-    $this->assertGeneratedFile('foo/scss/components/block.scss', '/_theme/scss/components/block.scss');
-    $this->assertGeneratedFile('foo/scss/components/breadcrumb.scss', '/_theme/scss/components/breadcrumb.scss');
-    $this->assertGeneratedFile('foo/scss/components/buttons.scss', '/_theme/scss/components/buttons.scss');
-    $this->assertGeneratedFile('foo/scss/components/field.scss', '/_theme/scss/components/field.scss');
-    $this->assertGeneratedFile('foo/scss/components/form.scss', '/_theme/scss/components/form.scss');
-    $this->assertGeneratedFile('foo/scss/components/header.scss', '/_theme/scss/components/header.scss');
-    $this->assertGeneratedFile('foo/scss/components/menu.scss', '/_theme/scss/components/menu.scss');
-    $this->assertGeneratedFile('foo/scss/components/messages.scss', '/_theme/scss/components/messages.scss');
-    $this->assertGeneratedFile('foo/scss/components/node.scss', '/_theme/scss/components/node.scss');
-    $this->assertGeneratedFile('foo/scss/components/sidebar.scss', '/_theme/scss/components/sidebar.scss');
-    $this->assertGeneratedFile('foo/scss/components/table.scss', '/_theme/scss/components/table.scss');
-    $this->assertGeneratedFile('foo/scss/components/tabs.scss', '/_theme/scss/components/tabs.scss');
-    $this->assertGeneratedFile('foo/scss/layouts/layout.scss', '/_theme/scss/layouts/layout.scss');
-    $this->assertGeneratedFile('foo/scss/theme/print.scss', '/_theme/scss/theme/print.scss');
+
   }
 
 }

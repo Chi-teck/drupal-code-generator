@@ -27,7 +27,6 @@ final class Theme extends ThemeGenerator {
     $vars['base_theme'] = Utils::human2machine($this->ask('Base theme', 'classy'));
     $vars['description'] = $this->ask('Description', 'A flexible theme with a responsive, mobile-first layout.');
     $vars['package'] = $this->ask('Package', 'Custom');
-    $vars['sass'] = $this->confirm('Would you like to use SASS to compile style sheets?', FALSE);
     $vars['breakpoints'] = $this->confirm('Would you like to create breakpoints?', FALSE);
     $vars['theme_settings'] = $this->confirm('Would you like to create theme settings form?', FALSE);
 
@@ -63,26 +62,24 @@ final class Theme extends ThemeGenerator {
     $this->addDirectory('{machine_name}/css');
 
     $style_sheets = [
-      'base/elements',
-      'components/block',
-      'components/breadcrumb',
-      'components/field',
-      'components/form',
-      'components/header',
-      'components/menu',
-      'components/messages',
-      'components/node',
-      'components/sidebar',
-      'components/table',
-      'components/tabs',
-      'components/buttons',
-      'layouts/layout',
-      'theme/print',
+      'base/elements.css',
+      'components/block.css',
+      'components/breadcrumb.css',
+      'components/field.css',
+      'components/form.css',
+      'components/header.css',
+      'components/menu.css',
+      'components/messages.css',
+      'components/node.css',
+      'components/sidebar.css',
+      'components/table.css',
+      'components/tabs.css',
+      'components/buttons.css',
+      'layouts/layout.css',
+      'theme/print.css',
     ];
-
     foreach ($style_sheets as $file) {
-      $this->addFile('{machine_name}/' . ($vars['sass'] ? "scss/$file.scss" : "css/$file.css"))
-        ->content('');
+      $this->addFile('{machine_name}/css/' . $file)->content('');
     }
 
   }
