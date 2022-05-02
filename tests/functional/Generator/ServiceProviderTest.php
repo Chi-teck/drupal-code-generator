@@ -1,45 +1,36 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\ServiceProvider;
-use DrupalCodeGenerator\Test\GeneratorTest;
+use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for service-provider command.
+ * Tests service-provider generator.
  */
-final class ServiceProviderTest extends GeneratorTest {
+final class ServiceProviderTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__;
+  protected string $fixtureDir = __DIR__ . '/_service_provider';
 
-  /**
-   * Test callback.
-   */
   public function testGenerator(): void {
-
-    $user_input = ['Example', 'example', 'foo', 'Yes', 'Yes'];
-    $this->execute(new ServiceProvider(), $user_input);
+    $this->execute(new ServiceProvider(), ['example']);
 
     $expected_display = <<< 'TXT'
 
      Welcome to service-provider generator!
     ––––––––––––––––––––––––––––––––––––––––
 
-     Module name [%default_name%]:
-     ➤ 
-
-     Module machine name [example]:
+     Module machine name [%default_name%]:
      ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • src/ExampleServiceProvider.php
 
-
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('src/ExampleServiceProvider.php', '_service_provider.php');
+    $this->assertGeneratedFile('src/ExampleServiceProvider.php');
   }
 
 }
