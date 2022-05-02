@@ -12,7 +12,7 @@ final class ControllerTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_controller';
 
-  public function testController(): void {
+  public function testGenerator(): void {
 
     $input = [
       'foo',
