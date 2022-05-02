@@ -3,12 +3,12 @@
 namespace DrupalCodeGenerator\Tests\Generator;
 
 use DrupalCodeGenerator\Command\JavaScript;
-use DrupalCodeGenerator\Test\GeneratorTest;
+use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
  * Test for javascript command.
  */
-final class JavaScriptTest extends GeneratorTest {
+final class JavaScriptTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_javascript';
 
@@ -17,17 +17,14 @@ final class JavaScriptTest extends GeneratorTest {
    */
   public function testGenerator(): void {
 
-    $this->execute(new JavaScript(), ['Foo bar', 'foo_bar', 'coca-cola.js']);
+    $this->execute(new JavaScript(), ['foo_bar', 'coca-cola.js']);
 
     $expected_display = <<< 'TXT'
 
      Welcome to javascript generator!
     ––––––––––––––––––––––––––––––––––
 
-     Module name [%default_name%]:
-     ➤ 
-
-     Module machine name [foo_bar]:
+     Module machine name [%default_name%]:
      ➤ 
 
      File name [foo-bar.js]:
@@ -41,7 +38,6 @@ final class JavaScriptTest extends GeneratorTest {
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo_bar.libraries.yml
      • js/coca-cola.js
-
 
     TXT;
     $this->assertDisplay($expected_display);
