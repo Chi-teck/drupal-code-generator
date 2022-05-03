@@ -38,6 +38,7 @@ final class PhpStormMetadata extends DrupalGenerator {
         $vars['services'][$service_id] = $service_definition['class'];
       }
     }
+    \ksort($vars['services']);
 
     $entity_type_manager = $container->get('entity_type.manager');
     $vars['storages'] = [];
