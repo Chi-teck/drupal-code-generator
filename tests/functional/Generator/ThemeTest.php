@@ -1,20 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\Theme;
-use DrupalCodeGenerator\Test\GeneratorTest;
+use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Test for theme generator.
+ * Tests theme generator.
  */
-final class ThemeTest extends GeneratorTest {
+final class ThemeTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__;
+  protected string $fixtureDir = __DIR__ . '/_theme';
 
-  /**
-   * Test callback.
-   */
   public function testGenerator(): void {
 
     $input = [
@@ -33,7 +30,7 @@ final class ThemeTest extends GeneratorTest {
      Welcome to theme generator!
     –––––––––––––––––––––––––––––
 
-     Theme name [%default_name%]:
+     Theme name [%default_human_name%]:
      ➤ 
 
      Theme machine name [foo]:
@@ -90,7 +87,6 @@ final class ThemeTest extends GeneratorTest {
      • foo/css/theme/print.css
      • foo/js/foo.js
 
-
     TXT;
     $this->assertDisplay($expected_display);
 
@@ -103,17 +99,16 @@ final class ThemeTest extends GeneratorTest {
     $this->assertGeneratedDirectory('foo/templates/page');
     $this->assertGeneratedDirectory('foo/templates/view');
 
-    $this->assertGeneratedFile('foo/foo.breakpoints.yml', '/_theme/foo.breakpoints.yml');
-    $this->assertGeneratedFile('foo/foo.info.yml', '/_theme/foo.info.yml');
-    $this->assertGeneratedFile('foo/foo.libraries.yml', '/_theme/foo.libraries.yml');
-    $this->assertGeneratedFile('foo/foo.theme', '/_theme/foo.theme');
-    $this->assertGeneratedFile('foo/logo.svg', '/_theme/logo.svg');
-    $this->assertGeneratedFile('foo/package.json', '/_theme/package.json');
-    $this->assertGeneratedFile('foo/theme-settings.php', '/_theme/theme-settings.php');
-    $this->assertGeneratedFile('foo/config/install/foo.settings.yml', '/_theme/config/install/foo.settings.yml');
-    $this->assertGeneratedFile('foo/config/schema/foo.schema.yml', '/_theme/config/schema/foo.schema.yml');
-    $this->assertGeneratedFile('foo/js/foo.js', '/_theme/js/foo.js');
-
+    $this->assertGeneratedFile('foo/foo.breakpoints.yml');
+    $this->assertGeneratedFile('foo/foo.info.yml');
+    $this->assertGeneratedFile('foo/foo.libraries.yml');
+    $this->assertGeneratedFile('foo/foo.theme');
+    $this->assertGeneratedFile('foo/logo.svg');
+    $this->assertGeneratedFile('foo/package.json');
+    $this->assertGeneratedFile('foo/theme-settings.php');
+    $this->assertGeneratedFile('foo/config/install/foo.settings.yml');
+    $this->assertGeneratedFile('foo/config/schema/foo.schema.yml');
+    $this->assertGeneratedFile('foo/js/foo.js');
   }
 
 }
