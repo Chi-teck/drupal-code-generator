@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Test\Functional;
 
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
@@ -59,6 +60,9 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
   protected function assertDisplay(string $expected_display): void {
     $default_name = \basename(\getcwd());
     $expected_display = \str_replace('%default_name%', $default_name, $expected_display) . \PHP_EOL;
+    // @todo Do not provide default value for the human name.
+    $default_human_name = Utils::machine2human($default_name);
+    $expected_display = \str_replace('%default_human_name%', $default_human_name, $expected_display);
     self::assertEquals($expected_display, $this->display);
   }
 
