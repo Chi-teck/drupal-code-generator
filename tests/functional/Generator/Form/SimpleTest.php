@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Generator\Form;
+namespace DrupalCodeGenerator\Tests\Functional\Generator\Form;
 
 use DrupalCodeGenerator\Command\Form\Simple;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
@@ -13,7 +13,6 @@ final class SimpleTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_simple';
 
   public function testGenerator(): void {
-
     $input = [
       'foo',
       'ExampleForm',
@@ -59,6 +58,7 @@ final class SimpleTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
+    $this->assertGeneratedFile('foo.routing.yml');
     $this->assertGeneratedFile('src/Form/ExampleForm.php');
   }
 
