@@ -13,13 +13,8 @@ final class BreakpointsTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_breakpoints';
 
   public function testGenerator(): void {
-    $input = [
-      'example',
-      'garland',
-      'Example description.',
-      'Custom',
-    ];
-    $this->execute(new Breakpoints(), $input);
+
+    $this->execute(new Breakpoints(), ['example']);
 
     $expected_display = <<< 'TXT'
 
