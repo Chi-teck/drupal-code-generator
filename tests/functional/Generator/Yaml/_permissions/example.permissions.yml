@@ -1,0 +1,4 @@
+administer example configuration:
+  title: 'Administer example configuration'
+  description: 'Optional description.'
+  restrict access: true
