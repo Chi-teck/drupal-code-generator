@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types = 1);
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
@@ -9,17 +9,26 @@ use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
 use Psr\Log\NullLogger;
 
+// __DIR__ cannot be used here as it contains a path with symlinks resolved.
 $dcg_path = \str_starts_with($argv[0], '/') ?
   $argv[0] : \getcwd() . '/' . $argv[0];
+
+// DCG is installed as composer package.
 $autoload_dir = \dirname($dcg_path) . '/..';
+if (!\file_exists($autoload_dir . '/autoload.php')) {
+  // DCG is installed as composer project.
+  $autoload_dir = $autoload_dir . '/vendor';
+}
 
 if (!\file_exists($autoload_dir . '/autoload.php')) {
-  $autoload_dir = $autoload_dir . '/vendor';
+  \fwrite(\STDERR, '[ERROR] Could not locate class loader.' . \PHP_EOL);
+  exit(1);
 }
 
 $class_loader = require $autoload_dir . '/autoload.php';
 
 $bootstrap_handler = new BootstrapHandler($class_loader);
+// @todo Handle missing Drupal installation.
 $container = $bootstrap_handler->bootstrap();
 
 $generator_factory = new GeneratorFactory(new SimpleClassResolver(), new NullLogger());

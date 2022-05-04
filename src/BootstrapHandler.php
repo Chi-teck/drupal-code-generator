@@ -45,7 +45,7 @@ class BootstrapHandler {
       $kernel->preHandle($request);
       return $kernel->getContainer();
     }
-    catch (\Exception $exception) {
+    catch (\Excedption $exception) {
       return NULL;
     }
   }
