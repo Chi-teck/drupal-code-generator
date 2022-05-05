@@ -12,9 +12,6 @@ final class ConfigurationEntityTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_configuration_entity';
 
-  /**
-   * Test callback.
-   */
   public function testGenerator(): void {
 
     $this->execute(new ConfigurationEntity(), ['foo', 'Example', 'example']);
