@@ -10,6 +10,11 @@
     </testsuite>
     <testsuite name="functional">
       <directory>./tests/functional</directory>
+      <!-- Exclude generated tests. -->
+      <exclude>./tests/functional/Generator/Test/_web_driver/tests/src/FunctionalJavascript/ExampleTest.php</exclude>
+      <exclude>./tests/functional/Generator/Test/_unit/tests/src/Unit/ExampleTest.php</exclude>
+      <exclude>./tests/functional/Generator/Test/_kernel/tests/src/Kernel/ExampleTest.php</exclude>
+      <exclude>./tests/functional/Generator/Test/_browser/tests/src/Functional/ExampleTest.php</exclude>
     </testsuite>
   </testsuites>
 </phpunit>
