@@ -13,6 +13,7 @@ final class UninstallValidatorTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_uninstall_validator';
 
   public function testGenerator(): void {
+
     $this->execute(new UninstallValidator(), ['foo', 'ExampleUninstallValidator']);
 
     $expected_display = <<< 'TXT'
