@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Functional\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Generator\Service;
 
 use DrupalCodeGenerator\Command\Service\TwigExtension;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
