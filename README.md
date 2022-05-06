@@ -26,7 +26,7 @@ composer require chi-teck/drupal-code-generator --dev
 ## Compatibility
 DCG|PHP|Symfony|Twig|Drupal|Drush
 :-:|:-:|:-:|:-:|:-:|:-:
-1|7.1+|3, 4|1, 2|7, 8|9, 10
+1|7.1 - 7.4|3, 4|1, 2|7, 8|9, 10
 2|7.4+|4, 5|2, 3|7, 9|11+
 3|8.1+|6|3|10|
 
