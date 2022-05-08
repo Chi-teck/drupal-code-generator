@@ -1,0 +1,4 @@
+services:
+  foo.example:
+    class: Drupal\foo\Example
+    arguments: ['@entity_type.manager', '@cron', '@cache_tags.invalidator']
