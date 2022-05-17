@@ -1,7 +1,0 @@
-views.field.foo_example:
-  type: views.field.field
-  label: 'Example'
-  mapping:
-    example:
-      type: string
-      label: 'Example'
