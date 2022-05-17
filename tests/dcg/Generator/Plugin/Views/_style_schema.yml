@@ -1,7 +1,0 @@
-views.style.example_foo:
-  type: views_style
-  label: 'Foo'
-  mapping:
-    wrapper_class:
-      type: string
-      label: Wrapper class
