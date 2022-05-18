@@ -2,7 +2,7 @@
 
 namespace Drupal\example\Plugin\migrate\source;
 
-use Drupal\migrate\Plugin\migrate\source\SourcePluginBase;
+use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
 
 /**
@@ -13,49 +13,15 @@ use Drupal\migrate\Row;
  *   source_module = "example"
  * )
  */
-class Foo extends SourcePluginBase {
+class Foo extends SqlBase {
 
   /**
    * {@inheritdoc}
    */
-  public function __toString() {
-    // @DCG You may return something meaningful here.
-    return '';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function initializeIterator() {
-
-    // @DCG
-    // In this example we return a hardcoded set of records.
-    //
-    // For large sets of data consider using generators like follows:
-    // @code
-    // foreach ($foo->nextRecord() as $record) {
-    //  yield $record;
-    // }
-    // @endcode
-    $records = [
-      [
-        'id' => 1,
-        'name' => 'Alpha',
-        'status' => TRUE,
-      ],
-      [
-        'id' => 2,
-        'name' => 'Beta',
-        'status' => FALSE,
-      ],
-      [
-        'id' => 3,
-        'name' => 'Gamma',
-        'status' => TRUE,
-      ],
-    ];
-
-    return new \ArrayIterator($records);
+  public function query() {
+    $query = $this->select('example', 'e')
+      ->fields('e', ['id', 'name', 'status']);
+    return $query;
   }
 
   /**
