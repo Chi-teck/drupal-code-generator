@@ -64,7 +64,7 @@ class {{ widget_class }} extends WidgetBase {
 
 {% for subfield in subfields %}
   {% set title %}'#title' => $this->t('{{ subfield.name }}'),{% endset %}
-  {% set default_value %}'#default_value' => isset($items[$delta]->{{ subfield.machine_name }}) ? $items[$delta]->{{ subfield.machine_name }} : NULL,{% endset %}
+  {% set default_value %}'#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,{% endset %}
   {% set size %}'#size' => 20,{% endset %}
   {% if subfield.list %}
     $element['{{ subfield.machine_name }}'] = [

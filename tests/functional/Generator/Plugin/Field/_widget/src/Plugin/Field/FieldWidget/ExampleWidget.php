@@ -55,7 +55,7 @@ class ExampleWidget extends WidgetBase {
 
     $element['value'] = $element + [
       '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
+      '#default_value' => $items[$delta]->value ?? NULL,
     ];
 
     return $element;

@@ -57,56 +57,56 @@ class FooWidget extends WidgetBase {
     $element['value_1'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Value 1'),
-      '#default_value' => isset($items[$delta]->value_1) ? $items[$delta]->value_1 : NULL,
+      '#default_value' => $items[$delta]->value_1 ?? NULL,
     ];
 
     $element['value_2'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Value 2'),
-      '#default_value' => isset($items[$delta]->value_2) ? $items[$delta]->value_2 : NULL,
+      '#default_value' => $items[$delta]->value_2 ?? NULL,
     ];
 
     $element['value_3'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Value 3'),
-      '#default_value' => isset($items[$delta]->value_3) ? $items[$delta]->value_3 : NULL,
+      '#default_value' => $items[$delta]->value_3 ?? NULL,
     ];
 
     $element['value_4'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Value 4'),
-      '#default_value' => isset($items[$delta]->value_4) ? $items[$delta]->value_4 : NULL,
+      '#default_value' => $items[$delta]->value_4 ?? NULL,
     ];
 
     $element['value_5'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Value 5'),
-      '#default_value' => isset($items[$delta]->value_5) ? $items[$delta]->value_5 : NULL,
+      '#default_value' => $items[$delta]->value_5 ?? NULL,
     ];
 
     $element['value_6'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Value 6'),
-      '#default_value' => isset($items[$delta]->value_6) ? $items[$delta]->value_6 : NULL,
+      '#default_value' => $items[$delta]->value_6 ?? NULL,
     ];
 
     $element['value_7'] = [
       '#type' => 'number',
       '#title' => $this->t('Value 7'),
-      '#default_value' => isset($items[$delta]->value_7) ? $items[$delta]->value_7 : NULL,
+      '#default_value' => $items[$delta]->value_7 ?? NULL,
     ];
 
     $element['value_8'] = [
       '#type' => 'select',
       '#title' => $this->t('Value 8'),
       '#options' => ['' => $this->t('- None -')] + FooItem::allowedValue8Values(),
-      '#default_value' => isset($items[$delta]->value_8) ? $items[$delta]->value_8 : NULL,
+      '#default_value' => $items[$delta]->value_8 ?? NULL,
     ];
 
     $element['value_9'] = [
       '#type' => 'number',
       '#title' => $this->t('Value 9'),
-      '#default_value' => isset($items[$delta]->value_9) ? $items[$delta]->value_9 : NULL,
+      '#default_value' => $items[$delta]->value_9 ?? NULL,
       '#step' => 0.001,
     ];
 
@@ -114,13 +114,13 @@ class FooWidget extends WidgetBase {
       '#type' => 'select',
       '#title' => $this->t('Value 10'),
       '#options' => ['' => $this->t('- None -')] + FooItem::allowedValue10Values(),
-      '#default_value' => isset($items[$delta]->value_10) ? $items[$delta]->value_10 : NULL,
+      '#default_value' => $items[$delta]->value_10 ?? NULL,
     ];
 
     $element['value_11'] = [
       '#type' => 'number',
       '#title' => $this->t('Value 11'),
-      '#default_value' => isset($items[$delta]->value_11) ? $items[$delta]->value_11 : NULL,
+      '#default_value' => $items[$delta]->value_11 ?? NULL,
       '#step' => 0.01,
     ];
 
@@ -128,46 +128,46 @@ class FooWidget extends WidgetBase {
       '#type' => 'select',
       '#title' => $this->t('Value 12'),
       '#options' => ['' => $this->t('- None -')] + FooItem::allowedValue12Values(),
-      '#default_value' => isset($items[$delta]->value_12) ? $items[$delta]->value_12 : NULL,
+      '#default_value' => $items[$delta]->value_12 ?? NULL,
     ];
 
     $element['value_13'] = [
       '#type' => 'email',
       '#title' => $this->t('Value 13'),
-      '#default_value' => isset($items[$delta]->value_13) ? $items[$delta]->value_13 : NULL,
+      '#default_value' => $items[$delta]->value_13 ?? NULL,
     ];
 
     $element['value_14'] = [
       '#type' => 'select',
       '#title' => $this->t('Value 14'),
       '#options' => ['' => $this->t('- Select a value -')] + FooItem::allowedValue14Values(),
-      '#default_value' => isset($items[$delta]->value_14) ? $items[$delta]->value_14 : NULL,
+      '#default_value' => $items[$delta]->value_14 ?? NULL,
     ];
 
     $element['value_15'] = [
       '#type' => 'tel',
       '#title' => $this->t('Value 15'),
-      '#default_value' => isset($items[$delta]->value_15) ? $items[$delta]->value_15 : NULL,
+      '#default_value' => $items[$delta]->value_15 ?? NULL,
     ];
 
     $element['value_16'] = [
       '#type' => 'select',
       '#title' => $this->t('Value 16'),
       '#options' => ['' => $this->t('- Select a value -')] + FooItem::allowedValue16Values(),
-      '#default_value' => isset($items[$delta]->value_16) ? $items[$delta]->value_16 : NULL,
+      '#default_value' => $items[$delta]->value_16 ?? NULL,
     ];
 
     $element['value_17'] = [
       '#type' => 'url',
       '#title' => $this->t('Value 17'),
-      '#default_value' => isset($items[$delta]->value_17) ? $items[$delta]->value_17 : NULL,
+      '#default_value' => $items[$delta]->value_17 ?? NULL,
     ];
 
     $element['value_18'] = [
       '#type' => 'select',
       '#title' => $this->t('Value 18'),
       '#options' => ['' => $this->t('- Select a value -')] + FooItem::allowedValue18Values(),
-      '#default_value' => isset($items[$delta]->value_18) ? $items[$delta]->value_18 : NULL,
+      '#default_value' => $items[$delta]->value_18 ?? NULL,
     ];
 
     $element['value_19'] = [
@@ -189,7 +189,7 @@ class FooWidget extends WidgetBase {
       '#type' => 'select',
       '#title' => $this->t('Value 20'),
       '#options' => ['' => $this->t('- Select a value -')] + FooItem::allowedValue20Values(),
-      '#default_value' => isset($items[$delta]->value_20) ? $items[$delta]->value_20 : NULL,
+      '#default_value' => $items[$delta]->value_20 ?? NULL,
     ];
 
     $element['#theme_wrappers'] = ['container', 'form_element'];

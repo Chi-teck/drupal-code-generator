@@ -77,7 +77,6 @@ else
   git clone --depth 1 --branch $DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR
   composer -d$DRUPAL_DIR install
   composer -d$DRUPAL_DIR require drush/drush
-  $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   php $DRUPAL_DIR/core/scripts/drupal install minimal
