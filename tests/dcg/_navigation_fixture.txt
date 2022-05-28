@@ -29,9 +29,8 @@
  Select generator 
   [0] ..
   [1] DCG command
-  [2] Drupal console command
-  [3] Drush command
-  [4] Symfony command
+  [2] Drush command
+  [3] Symfony command
  ➤ 0⏎
  Select generator 
   [ 0] ..
