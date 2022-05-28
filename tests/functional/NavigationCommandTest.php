@@ -8,7 +8,6 @@ use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 use DrupalCodeGenerator\Test\Functional\QuestionHelper;
-use DrupalCodeGenerator\Utils;
 use Psr\Log\NullLogger;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Tester\TesterTrait;
@@ -47,7 +46,7 @@ final class NavigationCommandTest extends FunctionalTestBase {
     $factory = new GeneratorFactory(new SimpleClassResolver(), new NullLogger());
     $generators = $factory->getGenerators([Application::ROOT . '/src/Command'], Application::GENERATOR_NAMESPACE);
 
-    $application = Application::create();
+    $application = $this->createApplication();
 
     $helper_set = $application->getHelperSet();
     $helper_set->set(new QuestionHelper());
@@ -64,15 +63,17 @@ final class NavigationCommandTest extends FunctionalTestBase {
     \preg_match_all('/\s([^\s]+)⏎/', $fixture, $matches);
 
     $command_tester->setInputs($matches[1]);
-    $input = ['--working-dir' => $this->directory];
+    $input = [
+      '--working-dir' => $this->directory,
+      '--destination' => $this->directory,
+    ];
 
     $command_tester->execute($input);
 
     $expected_output = \rtrim(\preg_replace('/[^\s]+⏎/', '', $fixture));
     // @todo clean-up this.
-    $default_name = \basename($this->directory);
-    $default_human_name = Utils::machine2human($default_name, TRUE);
-    $expected_output = \str_replace('%default_name%', $default_human_name, $expected_output);
+    $default_name = \basename(\getcwd());
+    $expected_output = \str_replace('%default_name%', $default_name, $expected_output);
 
     $output = \rtrim($command_tester->getDisplay());
 

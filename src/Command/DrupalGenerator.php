@@ -142,13 +142,11 @@ abstract class DrupalGenerator extends Generator {
    * {@inheritdoc}
    */
   protected function getDestination(array $vars): ?string {
-    if ($this->drupalContext) {
-      if ($this->extensionType === DrupalGenerator::EXTENSION_TYPE_MODULE) {
-        $destination = $this->drupalContext->getModuleDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);
-      }
-      elseif ($this->extensionType === DrupalGenerator::EXTENSION_TYPE_THEME) {
-        $destination = $this->drupalContext->getThemeDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);
-      }
+    if ($this->extensionType === DrupalGenerator::EXTENSION_TYPE_MODULE) {
+      $destination = $this->drupalContext->getModuleDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);
+    }
+    elseif ($this->extensionType === DrupalGenerator::EXTENSION_TYPE_THEME) {
+      $destination = $this->drupalContext->getThemeDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);
     }
     return $destination ?? parent::getDestination($vars);
   }

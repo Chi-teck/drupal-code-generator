@@ -331,10 +331,7 @@
  Welcome to install-file generator!
 ––––––––––––––––––––––––––––––––––––
 
- Module name [%default_name%]:
- ➤ Action⏎
-
- Module machine name [action]:
+ Module machine name [dcg_sandbox]:
  ➤ action⏎
 
  The following directories and files have been created or updated:
