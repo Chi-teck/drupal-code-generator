@@ -1,23 +1,43 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests;
+namespace DrupalCodeGenerator\Tests\Functional;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
+use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
+use DrupalCodeGenerator\Test\Functional\QuestionHelper;
+use DrupalCodeGenerator\Utils;
 use Psr\Log\NullLogger;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Tester\TesterTrait;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * A test for navigation command.
+ * Test navigation command.
  *
  * @todo Clean-up
  */
-final class NavigationCommandTest extends BaseTestCase {
+final class NavigationCommandTest extends FunctionalTestBase {
 
   use TesterTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(): void {
+    parent::setUp();
+    $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function tearDown(): void {
+    parent::tearDown();
+    (new Filesystem())->remove($this->directory);
+  }
 
   /**
    * Test callback.
@@ -49,6 +69,11 @@ final class NavigationCommandTest extends BaseTestCase {
     $command_tester->execute($input);
 
     $expected_output = \rtrim(\preg_replace('/[^\s]+⏎/', '', $fixture));
+    // @todo clean-up this.
+    $default_name = \basename($this->directory);
+    $default_human_name = Utils::machine2human($default_name, TRUE);
+    $expected_output = \str_replace('%default_name%', $default_human_name, $expected_output);
+
     $output = \rtrim($command_tester->getDisplay());
 
     self::assertSame($expected_output, $output);
