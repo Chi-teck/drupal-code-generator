@@ -34,8 +34,8 @@ final class ApplicationTest extends FunctionalTestBase {
   public function testApplication(): void {
 
     $cmd = \sprintf(
-      '%s/bin/dcg install --working-dir %s --destination %s -a action 2>&1',
-      '/var/www/d10/docroot/vendor',
+      '%s/vendor/bin/dcg install --working-dir %s --destination %s -a action 2>&1',
+      \getcwd(),
       $this->directory,
       $this->directory,
     );

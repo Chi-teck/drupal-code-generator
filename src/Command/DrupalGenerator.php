@@ -50,7 +50,7 @@ abstract class DrupalGenerator extends Generator {
    *
    * This helper is set if Drupal is fully bootstrapped.
    */
-  protected ?DrupalContext $drupalContext = NULL;
+  protected DrupalContext $drupalContext;
 
   protected ContainerInterface $container;
 
@@ -60,9 +60,7 @@ abstract class DrupalGenerator extends Generator {
   protected function initialize(InputInterface $input, OutputInterface $output): void {
     parent::initialize($input, $output);
 
-    if ($this->getHelperSet()->has('drupal_context')) {
-      $this->drupalContext = $this->getHelper('drupal_context');
-    }
+    $this->drupalContext = $this->getHelper('drupal_context');
 
     // Set working directory to extension root.
     if (!$this->isNewExtension) {
@@ -76,7 +74,7 @@ abstract class DrupalGenerator extends Generator {
   protected function collectDefault(array &$vars): void {
     // If Drupal context is available it is quite possible that we can provide
     // the extension name without interacting with a user.
-    if (!$this->isNewExtension && $this->drupalContext) {
+    if (!$this->isNewExtension) {
       $vars['machine_name'] = $this->askMachineName($vars);
       $vars['name'] = $this->getExtensionList()[$vars['machine_name']]
         ?? Utils::machine2human($vars['machine_name']);
@@ -126,9 +124,6 @@ abstract class DrupalGenerator extends Generator {
    *   and whose values are extension names.
    */
   protected function getExtensionList(): array {
-    if ($this->drupalContext === NULL) {
-      return [];
-    }
     switch ($this->extensionType) {
       case DrupalGenerator::EXTENSION_TYPE_MODULE:
         return $this->drupalContext->getModules();

@@ -82,4 +82,11 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
     self::assertDirectoryExists($this->directory . '/' . $directory);
   }
 
+  /**
+   * Returns contents of the generated file.
+   */
+  protected function getGeneratedContent(string $file): string {
+    return \file_get_contents($this->directory . '/' . $file);
+  }
+
 }
