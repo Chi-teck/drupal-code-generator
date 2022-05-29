@@ -6,7 +6,7 @@
   processIsolation="true">
   <testsuites>
     <testsuite name="unit">
-      <directory>./tests/dcg</directory>
+      <directory>./tests/unit</directory>
     </testsuite>
     <testsuite name="functional">
       <directory>./tests/functional</directory>

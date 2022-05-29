@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests;
+namespace DrupalCodeGenerator\Tests\Unit;
 
 use DrupalCodeGenerator\Helper\QuestionHelper as BaseHelper;
 use Symfony\Component\Console\Input\InputInterface;

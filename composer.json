@@ -12,7 +12,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "DrupalCodeGenerator\\Tests\\": "tests/dcg",
+            "DrupalCodeGenerator\\Tests\\Unit\\": "tests/unit",
             "DrupalCodeGenerator\\Tests\\Functional\\": "tests/functional"
         }
     },

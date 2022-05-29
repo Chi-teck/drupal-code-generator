@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Helper;
+namespace DrupalCodeGenerator\Tests\Unit\Helper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\ResultPrinter;
 use DrupalCodeGenerator\Style\GeneratorStyle;
-use DrupalCodeGenerator\Tests\QuestionHelper;
+use DrupalCodeGenerator\Tests\Unit\QuestionHelper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\BufferedOutput;

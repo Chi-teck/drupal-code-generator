@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Helper;
+namespace DrupalCodeGenerator\Tests\Unit\Helper;
 
 use DrupalCodeGenerator\Helper\DumperOptions;
-use DrupalCodeGenerator\Tests\BaseTestCase;
+use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
 
 /**
  * A test for Dumper helper.

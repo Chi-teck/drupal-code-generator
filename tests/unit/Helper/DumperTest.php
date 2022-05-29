@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Helper;
+namespace DrupalCodeGenerator\Tests\Unit\Helper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
@@ -10,7 +10,7 @@ use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Style\GeneratorStyle;
-use DrupalCodeGenerator\Tests\BaseTestCase;
+use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests;
+namespace DrupalCodeGenerator\Tests\Unit;
 
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Filesystem\Filesystem;
