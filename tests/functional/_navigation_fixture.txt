@@ -130,8 +130,7 @@
  Select generator 
   [0] ..
   [1] Apache virtual host
-  [2] HTML page
-  [3] Nginx virtual host
+  [2] Nginx virtual host
  ➤ 0⏎
  Select generator 
   [ 0] ..
