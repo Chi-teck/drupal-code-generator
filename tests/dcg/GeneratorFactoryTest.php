@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class GeneratorFactoryTest extends TestCase {
 
-  private const TOTAL_GENERATORS = 3;
+  private const TOTAL_GENERATORS = 2;
 
   /**
    * Test callback.
