@@ -11,6 +11,6 @@ if (!$module) {
 }
 
 $container = (new BootstrapHandler($class_loader))->bootstrap();
-if (!$container->get('module_installer')->uninstall([$module], true)) {
+if (!$container->get('module_installer')->uninstall([$module])) {
   throw new \Exception(\sprintf('Unable to uninstall module %s.', $module));
 }

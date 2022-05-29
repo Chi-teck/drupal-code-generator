@@ -11,6 +11,6 @@ if (!$module) {
 }
 
 $container = (new BootstrapHandler($class_loader))->bootstrap();
-if (!$container->get('module_installer')->install([$module], true)) {
+if (!$container->get('module_installer')->install([$module])) {
   throw new \Exception(\sprintf('Unable to install module %s.', $module));
 }
