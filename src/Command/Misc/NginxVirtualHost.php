@@ -29,8 +29,12 @@ final class NginxVirtualHost extends Generator {
     $vars['file_private_path'] = $this->ask('Private file system path');
     $vars['fastcgi_pass'] = $this->ask('Address of a FastCGI server', 'unix:' . $socket);
 
-    $vars['file_public_path'] = \trim($vars['file_public_path'], '/');
-    $vars['file_private_path'] = \trim($vars['file_private_path'], '/');
+    if ($vars['file_public_path']) {
+      $vars['file_public_path'] = \trim($vars['file_public_path'], '/');
+    }
+    if ($vars['file_private_path']) {
+      $vars['file_private_path'] = \trim($vars['file_private_path'], '/');
+    }
 
     $this->addFile('{server_name}', 'host.twig');
   }
