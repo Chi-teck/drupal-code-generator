@@ -19,7 +19,7 @@ final class CKEditorTest extends GeneratorTestBase {
       'foo_example',
       'Example',
     ];
-    $this->execute(new CKEditor(), $input);
+    $this->execute(CKEditor::class, $input);
 
     $expected_display = <<< 'TXT'
 

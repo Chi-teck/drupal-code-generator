@@ -20,7 +20,7 @@ final class FilterTest extends GeneratorTestBase {
       'Example',
       '1',
     ];
-    $this->execute(new Filter(), $input);
+    $this->execute(Filter::class, $input);
 
     $expected_display = <<< 'TXT'
 

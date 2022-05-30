@@ -20,7 +20,7 @@ final class StyleTest extends GeneratorTestBase {
       'Foo',
       'Yes',
     ];
-    $this->execute(new Style(), $input);
+    $this->execute(Style::class, $input);
 
     $expected_display = <<< 'TXT'
 

@@ -18,7 +18,7 @@ final class AccessCheckerTest extends GeneratorTestBase {
       '_foo',
       'FooAccessChecker',
     ];
-    $this->execute(new AccessChecker(), $input);
+    $this->execute(AccessChecker::class, $input);
 
     $expected_display = <<< 'TXT'
 

@@ -26,7 +26,7 @@ final class ControllerTest extends GeneratorTestBase {
       'Bar',
       'access content',
     ];
-    $this->execute(new Controller(), $input);
+    $this->execute(Controller::class, $input);
 
     $expected_display = <<< 'TXT'
 

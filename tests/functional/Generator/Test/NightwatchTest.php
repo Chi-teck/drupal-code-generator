@@ -14,7 +14,7 @@ final class NightwatchTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Nightwatch(), ['foo', 'example']);
+    $this->execute(Nightwatch::class, ['foo', 'example']);
 
     $expected_display = <<< 'TXT'
 

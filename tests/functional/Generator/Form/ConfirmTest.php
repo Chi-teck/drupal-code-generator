@@ -22,7 +22,7 @@ final class ConfirmTest extends GeneratorTestBase {
       'Wow',
       'administer site configuration',
     ];
-    $this->execute(new Confirm(), $input);
+    $this->execute(Confirm::class, $input);
 
     $expected_display = <<< 'TXT'
 

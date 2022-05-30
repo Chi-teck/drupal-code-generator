@@ -14,7 +14,7 @@ final class BreadcrumbBuilderTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new BreadcrumbBuilder(), ['example', 'ExampleBreadcrumbBuilder']);
+    $this->execute(BreadcrumbBuilder::class, ['example', 'ExampleBreadcrumbBuilder']);
 
     $expected_display = <<< 'TXT'
 

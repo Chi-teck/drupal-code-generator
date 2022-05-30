@@ -14,7 +14,7 @@ final class ModuleFileTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new ModuleFile(), ['foo']);
+    $this->execute(ModuleFile::class, ['foo']);
 
     $expected_display = <<< 'TXT'
 

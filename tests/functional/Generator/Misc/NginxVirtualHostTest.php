@@ -21,7 +21,7 @@ final class NginxVirtualHostTest extends GeneratorTestBase {
       'files/private',
       'unix:/run/php/php8.2-fpm.sock',
     ];
-    $this->execute(new NginxVirtualHost(), $user_input);
+    $this->execute(NginxVirtualHost::class, $user_input);
 
     $expected_display = <<< 'TXT'
 

@@ -22,7 +22,7 @@ final class EntityReferenceSelectionTest extends GeneratorTestBase {
       'ExampleNodeSelection',
       'Yes',
     ];
-    $this->execute(new EntityReferenceSelection(), $input);
+    $this->execute(EntityReferenceSelection::class, $input);
 
     $expected_display = <<< 'TXT'
 

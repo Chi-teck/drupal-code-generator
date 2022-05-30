@@ -21,7 +21,7 @@ final class TypeTest extends GeneratorTestBase {
       'Yes',
       'Yes',
     ];
-    $this->execute(new Type(), $input);
+    $this->execute(Type::class, $input);
 
     $expected_display = <<< 'TXT'
 

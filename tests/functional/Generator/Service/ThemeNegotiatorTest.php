@@ -14,7 +14,7 @@ final class ThemeNegotiatorTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new ThemeNegotiator(), ['foo', 'FooNegotiator']);
+    $this->execute(ThemeNegotiator::class, ['foo', 'FooNegotiator']);
 
     $expected_display = <<< 'TXT'
 

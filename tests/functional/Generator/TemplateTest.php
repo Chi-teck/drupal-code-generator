@@ -15,7 +15,7 @@ final class TemplateTest extends GeneratorTestBase {
   public function testGenerator(): void {
 
     $user_input = ['example', 'foo', 'Yes', 'Yes'];
-    $this->execute(new Template(), $user_input);
+    $this->execute(Template::class, $user_input);
 
     $expected_display = <<< 'TXT'
 

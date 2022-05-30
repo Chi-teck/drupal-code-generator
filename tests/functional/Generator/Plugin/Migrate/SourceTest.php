@@ -21,7 +21,7 @@ final class SourceTest extends GeneratorTestBase {
       'Foo',
       'SQL',
     ];
-    $this->execute(new Source(), $input);
+    $this->execute(Source::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -59,7 +59,7 @@ final class SourceTest extends GeneratorTestBase {
       'Bar',
       'Other',
     ];
-    $this->execute(new Source(), $input);
+    $this->execute(Source::class, $input);
 
     $expected_display = <<< 'TXT'
 

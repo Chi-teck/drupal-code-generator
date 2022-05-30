@@ -13,7 +13,7 @@ final class HookTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_hook';
 
   public function testGenerator(): void {
-    $this->execute(new Hook(), ['example', 'theme']);
+    $this->execute(Hook::class, ['example', 'theme']);
 
     $expected_display = <<< 'TXT'
 

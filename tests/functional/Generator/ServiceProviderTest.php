@@ -13,7 +13,7 @@ final class ServiceProviderTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_service_provider';
 
   public function testGenerator(): void {
-    $this->execute(new ServiceProvider(), ['example']);
+    $this->execute(ServiceProvider::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

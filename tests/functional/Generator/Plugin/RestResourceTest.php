@@ -19,7 +19,7 @@ final class RestResourceTest extends GeneratorTestBase {
       'example_foo',
       'FooResource',
     ];
-    $this->execute(new RestResource(), $input);
+    $this->execute(RestResource::class, $input);
 
     $expected_display = <<< 'TXT'
 

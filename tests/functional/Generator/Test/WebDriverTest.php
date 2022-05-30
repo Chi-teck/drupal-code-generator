@@ -14,7 +14,7 @@ final class WebDriverTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new WebDriver(), ['foo', 'ExampleTest']);
+    $this->execute(WebDriver::class, ['foo', 'ExampleTest']);
 
     $expected_display = <<< 'TXT'
 

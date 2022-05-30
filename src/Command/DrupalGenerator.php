@@ -17,6 +17,7 @@ abstract class DrupalGenerator extends Generator {
   public const EXTENSION_TYPE_THEME = 0x02;
   public const EXTENSION_TYPE_PROFILE = 0x03;
 
+
   /**
    * Name question.
    */
@@ -123,7 +124,7 @@ abstract class DrupalGenerator extends Generator {
   protected function getExtensionList(): array {
     switch ($this->extensionType) {
       case DrupalGenerator::EXTENSION_TYPE_MODULE:
-        return $this->container->get('dcg.module_info')->getModules();
+        return $this->moduleInfo->getModules();
 
       case DrupalGenerator::EXTENSION_TYPE_THEME:
         return $this->drupalContext->getThemes();
@@ -135,7 +136,7 @@ abstract class DrupalGenerator extends Generator {
    */
   protected function getDestination(array $vars): ?string {
     if ($this->extensionType === DrupalGenerator::EXTENSION_TYPE_MODULE) {
-      $destination = $this->drupalContext->getModuleDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);
+      $destination = $this->moduleInfo->findDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);
     }
     elseif ($this->extensionType === DrupalGenerator::EXTENSION_TYPE_THEME) {
       $destination = $this->drupalContext->getThemeDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);

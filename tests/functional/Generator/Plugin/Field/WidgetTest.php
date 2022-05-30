@@ -20,7 +20,7 @@ final class WidgetTest extends GeneratorTestBase {
       'ExampleWidget',
       'Yes',
     ];
-    $this->execute(new Widget(), $input);
+    $this->execute(Widget::class, $input);
 
     $expected_display = <<< 'TXT'
 

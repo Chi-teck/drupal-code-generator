@@ -14,7 +14,7 @@ final class InstallFileTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new InstallFile(), ['foo']);
+    $this->execute(InstallFile::class, ['foo']);
 
     $expected_display = <<< 'TXT'
 

@@ -14,7 +14,7 @@ class TaskTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Task(), ['example']);
+    $this->execute(Task::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

@@ -14,7 +14,7 @@ final class ModuleLibrariesTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new ModuleLibraries(), ['example']);
+    $this->execute(ModuleLibraries::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

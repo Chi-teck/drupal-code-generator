@@ -34,7 +34,7 @@ final class ContentEntityTest extends GeneratorTestBase {
       'Yes',
       'No',
     ];
-    $this->execute(new ContentEntity(), $input);
+    $this->execute(ContentEntity::class, $input);
 
     $expected_display = <<< 'TXT'
 

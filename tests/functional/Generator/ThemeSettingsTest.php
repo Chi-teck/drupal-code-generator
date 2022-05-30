@@ -14,7 +14,7 @@ final class ThemeSettingsTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new ThemeSettings(), ['foo']);
+    $this->execute(ThemeSettings::class, ['foo']);
 
     $expected_display = <<< 'TXT'
 

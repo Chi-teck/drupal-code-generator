@@ -14,7 +14,7 @@ final class JavaScriptTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new JavaScript(), ['foo_bar', 'coca-cola.js']);
+    $this->execute(JavaScript::class, ['foo_bar', 'coca-cola.js']);
 
     $expected_display = <<< 'TXT'
 

@@ -20,7 +20,7 @@ final class TwigExtensionTest extends GeneratorTestBase {
       'entity_type.manager',
       '',
     ];
-    $this->execute(new TwigExtension(), $input);
+    $this->execute(TwigExtension::class, $input);
 
     $expected_display = <<< 'TXT'
 

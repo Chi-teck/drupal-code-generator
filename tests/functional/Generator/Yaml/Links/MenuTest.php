@@ -14,7 +14,7 @@ class MenuTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Menu(), ['example']);
+    $this->execute(Menu::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

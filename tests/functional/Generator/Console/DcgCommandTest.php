@@ -19,7 +19,7 @@ final class DcgCommandTest extends GeneratorTestBase {
       'Some description',
       'example',
     ];
-    $this->execute(new DcgCommand(), $input);
+    $this->execute(DcgCommand::class, $input);
 
     $expected_display = <<< 'TXT'
 

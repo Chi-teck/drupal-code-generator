@@ -22,7 +22,7 @@ final class SymfonyCommandTest extends GeneratorTestBase {
       'BarCommand',
       'Yes',
     ];
-    $this->execute(new SymfonyCommand(), $input);
+    $this->execute(SymfonyCommand::class, $input);
 
     $expected_display = <<< 'TXT'
 

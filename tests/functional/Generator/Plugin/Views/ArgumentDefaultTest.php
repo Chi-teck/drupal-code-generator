@@ -23,7 +23,7 @@ final class ArgumentDefaultTest extends GeneratorTestBase {
       'current_route_match',
       '',
     ];
-    $this->execute(new ArgumentDefault(), $input);
+    $this->execute(ArgumentDefault::class, $input);
 
     $expected_display = <<< 'TXT'
 

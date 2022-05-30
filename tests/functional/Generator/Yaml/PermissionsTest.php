@@ -14,7 +14,7 @@ final class PermissionsTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Permissions(), ['example']);
+    $this->execute(Permissions::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

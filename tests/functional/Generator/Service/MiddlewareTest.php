@@ -14,7 +14,7 @@ final class MiddlewareTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Middleware(), ['foo', 'BarMiddleware']);
+    $this->execute(Middleware::class, ['foo', 'BarMiddleware']);
 
     $expected_display = <<< 'TXT'
 

@@ -26,7 +26,7 @@ final class ConfigTest extends GeneratorTestBase {
       'Configure foo.',
       'system.admin_config_content',
     ];
-    $this->execute(new Config(), $input);
+    $this->execute(Config::class, $input);
 
     $expected_display = <<< 'TXT'
 

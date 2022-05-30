@@ -14,7 +14,7 @@ final class BreakpointsTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Breakpoints(), ['example']);
+    $this->execute(Breakpoints::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

@@ -40,15 +40,12 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
    *   An array of strings representing each input passed to the command input
    *   stream.
    */
-  protected function execute($command_class, array $user_input): int {
+  protected function execute(string $command_class, array $user_input): int {
 
-    if (\is_object($command_class)) {
-      @\trigger_error('Passing command objects to the GeneratorTestBase::execute method is deprecated.');
-      $command = $this->application
-        ->getContainer()
-        ->get('class_resolver')
-        ->getInstanceFromDefinition($command_class::class);
-    }
+    $command = $this->application
+      ->getContainer()
+      ->get('class_resolver')
+      ->getInstanceFromDefinition($command_class);
 
     $this->application->add($command);
 

@@ -14,7 +14,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new PhpStormMetadata(), []);
+    $this->execute(PhpStormMetadata::class, []);
 
     $expected_display = <<< 'TXT'
 

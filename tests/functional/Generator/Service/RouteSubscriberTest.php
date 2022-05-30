@@ -19,7 +19,7 @@ final class RouteSubscriberTest extends GeneratorTestBase {
       'BarRouteSubscriber',
       'No',
     ];
-    $this->execute(new RouteSubscriber(), $input);
+    $this->execute(RouteSubscriber::class, $input);
 
     $expected_display = <<< 'TXT'
 

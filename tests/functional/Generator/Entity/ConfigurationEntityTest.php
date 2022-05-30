@@ -14,7 +14,7 @@ final class ConfigurationEntityTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new ConfigurationEntity(), ['foo', 'Example', 'example']);
+    $this->execute(ConfigurationEntity::class, ['foo', 'Example', 'example']);
 
     $expected_display = <<< 'TXT'
 

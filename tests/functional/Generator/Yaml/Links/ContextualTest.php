@@ -14,7 +14,7 @@ class ContextualTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Contextual(), ['example']);
+    $this->execute(Contextual::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

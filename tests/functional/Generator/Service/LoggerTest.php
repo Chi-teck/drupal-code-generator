@@ -14,7 +14,7 @@ final class LoggerTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Logger(), ['foo', 'FileLog']);
+    $this->execute(Logger::class, ['foo', 'FileLog']);
 
     $expected_display = <<< 'TXT'
 

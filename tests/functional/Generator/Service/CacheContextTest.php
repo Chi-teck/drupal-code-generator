@@ -20,7 +20,7 @@ final class CacheContextTest extends GeneratorTestBase {
       'RequestStackCacheContextBase',
       'Yes',
     ];
-    $this->execute(new CacheContext(), $input);
+    $this->execute(CacheContext::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -66,7 +66,7 @@ final class CacheContextTest extends GeneratorTestBase {
       'RequestStackCacheContextBase',
       'Not',
     ];
-    $this->execute(new CacheContext(), $input);
+    $this->execute(CacheContext::class, $input);
 
     $expected_display = <<< 'TXT'
 

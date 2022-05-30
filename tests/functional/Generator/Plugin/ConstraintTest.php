@@ -20,7 +20,7 @@ final class ConstraintTest extends GeneratorTestBase {
       'AlphaConstraint',
       '1',
     ];
-    $this->execute(new Constraint(), $input);
+    $this->execute(Constraint::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -67,7 +67,7 @@ final class ConstraintTest extends GeneratorTestBase {
       'BetaConstraint',
       '2',
     ];
-    $this->execute(new Constraint(), $input);
+    $this->execute(Constraint::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -114,7 +114,7 @@ final class ConstraintTest extends GeneratorTestBase {
       'GammaConstraint',
       '3',
     ];
-    $this->execute(new Constraint(), $input);
+    $this->execute(Constraint::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -161,7 +161,7 @@ final class ConstraintTest extends GeneratorTestBase {
       'DeltaConstraint',
       '4',
     ];
-    $this->execute(new Constraint(), $input);
+    $this->execute(Constraint::class, $input);
 
     $expected_display = <<< 'TXT'
 

@@ -29,7 +29,7 @@ final class ModuleTest extends GeneratorTestBase {
       'Yes',
       'Yes',
     ];
-    $this->execute(new Module(), $input);
+    $this->execute(Module::class, $input);
 
     $expected_display = <<< 'TXT'
 

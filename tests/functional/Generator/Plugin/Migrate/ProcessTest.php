@@ -18,7 +18,7 @@ final class ProcessTest extends GeneratorTestBase {
       'example_qux',
       'Qux',
     ];
-    $this->execute(new Process(), $input);
+    $this->execute(Process::class, $input);
 
     $expected_display = <<< 'TXT'
 

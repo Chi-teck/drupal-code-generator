@@ -14,7 +14,7 @@ final class UnitTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Unit(), ['foo', 'ExampleTest']);
+    $this->execute(Unit::class, ['foo', 'ExampleTest']);
 
     $expected_display = <<< 'TXT'
 

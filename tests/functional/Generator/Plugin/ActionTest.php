@@ -21,7 +21,7 @@ final class ActionTest extends GeneratorTestBase {
       'Custom',
       'yes',
     ];
-    $this->execute(new Action(), $input);
+    $this->execute(Action::class, $input);
 
     $expected_display = <<< 'TXT'
 

@@ -14,7 +14,7 @@ final class BrowserTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Browser(), ['foo', 'ExampleTest']);
+    $this->execute(Browser::class, ['foo', 'ExampleTest']);
 
     $expected_display = <<< 'TXT'
 

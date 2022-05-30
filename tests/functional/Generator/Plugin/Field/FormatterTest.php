@@ -20,7 +20,7 @@ final class FormatterTest extends GeneratorTestBase {
       'ZooFormatter',
       'Yes',
     ];
-    $this->execute(new Formatter(), $input);
+    $this->execute(Formatter::class, $input);
 
     $expected_display = <<< 'TXT'
 

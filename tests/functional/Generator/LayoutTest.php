@@ -21,7 +21,7 @@ final class LayoutTest extends GeneratorTestBase {
       'Yes',
       'Yes',
     ];
-    $this->execute(new Layout(), $input);
+    $this->execute(Layout::class, $input);
 
     $expected_display = <<< 'TXT'
 

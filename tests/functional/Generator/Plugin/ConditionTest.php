@@ -19,7 +19,7 @@ final class ConditionTest extends GeneratorTestBase {
       'foo_example',
       'Example',
     ];
-    $this->execute(new Condition(), $input);
+    $this->execute(Condition::class, $input);
 
     $expected_display = <<< 'TXT'
 

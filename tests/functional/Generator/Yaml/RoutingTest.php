@@ -14,7 +14,7 @@ final class RoutingTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Routing(), ['example']);
+    $this->execute(Routing::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

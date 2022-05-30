@@ -14,7 +14,7 @@ final class ServicesTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Services(), ['foo']);
+    $this->execute(Services::class, ['foo']);
 
     $expected_display = <<< 'TXT'
 

@@ -18,7 +18,7 @@ final class DestinationTest extends GeneratorTestBase {
       'example_bar',
       'Bar',
     ];
-    $this->execute(new Destination(), $input);
+    $this->execute(Destination::class, $input);
 
     $expected_display = <<< 'TXT'
 

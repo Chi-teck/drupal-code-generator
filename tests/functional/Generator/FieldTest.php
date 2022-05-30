@@ -50,7 +50,7 @@ final class FieldTest extends GeneratorTestBase {
       'Yes',
       'Yes',
     ];
-    $this->execute(new Field(), $input);
+    $this->execute(Field::class, $input);
 
     $type_options = <<< 'TXT'
       [ 1] Boolean

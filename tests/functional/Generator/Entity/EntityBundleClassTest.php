@@ -21,7 +21,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
       'ArticleBundle',
       'No',
     ];
-    $this->execute(new EntityBundleClass(), $input);
+    $this->execute(EntityBundleClass::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -79,7 +79,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
       'PageBundle',
       'yes',
     ];
-    $this->execute(new EntityBundleClass(), $input);
+    $this->execute(EntityBundleClass::class, $input);
 
     $expected_display = <<< 'TXT'
 

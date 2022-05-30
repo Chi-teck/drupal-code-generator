@@ -14,7 +14,7 @@ final class ResponsePolicyTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new ResponsePolicy(), ['foo', 'Example']);
+    $this->execute(ResponsePolicy::class, ['foo', 'Example']);
 
     $expected_display = <<< 'TXT'
 

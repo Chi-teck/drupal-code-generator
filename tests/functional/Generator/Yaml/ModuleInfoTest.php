@@ -20,7 +20,7 @@ final class ModuleInfoTest extends GeneratorTestBase {
       'example.settings',
       'views, node, fields',
     ];
-    $this->execute(new ModuleInfo(), $input);
+    $this->execute(ModuleInfo::class, $input);
 
     $expected_display = <<< 'TXT'
 

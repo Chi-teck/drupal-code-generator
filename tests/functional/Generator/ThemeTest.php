@@ -23,7 +23,7 @@ final class ThemeTest extends GeneratorTestBase {
       'Yes',
       'Yes',
     ];
-    $this->execute(new Theme(), $input);
+    $this->execute(Theme::class, $input);
 
     $expected_display = <<< 'TXT'
 

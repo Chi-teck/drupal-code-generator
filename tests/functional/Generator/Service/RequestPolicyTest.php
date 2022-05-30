@@ -14,7 +14,7 @@ final class RequestPolicyTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new RequestPolicy(), ['foo', 'Example']);
+    $this->execute(RequestPolicy::class, ['foo', 'Example']);
 
     $expected_display = <<< 'TXT'
 

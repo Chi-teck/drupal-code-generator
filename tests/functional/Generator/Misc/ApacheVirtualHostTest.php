@@ -18,7 +18,7 @@ final class ApacheVirtualHostTest extends GeneratorTestBase {
       'site.com',
       '/var/www/example.com/public',
     ];
-    $this->execute(new ApacheVirtualHost(), $user_input);
+    $this->execute(ApacheVirtualHost::class, $user_input);
 
     $expected_display = <<< 'TXT'
 

@@ -25,7 +25,7 @@ final class BlockTest extends GeneratorTestBase {
       '',
       'Yes',
     ];
-    $this->execute(new Block(), $input);
+    $this->execute(Block::class, $input);
 
     $expected_display = <<< 'TXT'
 

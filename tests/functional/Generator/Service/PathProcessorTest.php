@@ -14,7 +14,7 @@ final class PathProcessorTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new PathProcessor(), ['example', 'PathProcessorExample']);
+    $this->execute(PathProcessor::class, ['example', 'PathProcessorExample']);
 
     $expected_display = <<< 'TXT'
 

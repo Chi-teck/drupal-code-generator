@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
@@ -11,6 +12,7 @@ use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
+use DrupalCodeGenerator\Service\ModuleInfo;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\ValidatorTrait;
@@ -21,18 +23,16 @@ use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base class for code generators.
  */
-abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface, ContainerAwareInterface {
+abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface, ContainerInjectionInterface {
 
   use IOAwareTrait;
   use LoggerAwareTrait;
   use ValidatorTrait;
-  use ContainerAwareTrait;
 
   /**
    * The API version.
@@ -89,6 +89,20 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @var array
    */
   private array $vars;
+
+  /**
+   * The constructor is private because all generators must be created with
+   * `create` factory method.
+   */
+  final private function __construct(protected ModuleInfo $moduleInfo) {
+    parent::__construct();
+  }
+
+  public static function create(ContainerInterface $container): static {
+    return new static(
+      $container->get('dcg.module_info'),
+    );
+  }
 
   /**
    * {@inheritdoc}

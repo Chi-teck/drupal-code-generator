@@ -23,7 +23,7 @@ final class CustomTest extends GeneratorTestBase {
       'cache_tags.invalidator',
       '',
     ];
-    $this->execute(new Custom(), $input);
+    $this->execute(Custom::class, $input);
 
     $expected_display = <<< 'TXT'
 

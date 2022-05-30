@@ -14,7 +14,7 @@ class ActionTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Action(), ['example']);
+    $this->execute(Action::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

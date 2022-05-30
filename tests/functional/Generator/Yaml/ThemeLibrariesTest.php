@@ -13,7 +13,7 @@ final class ThemeLibrariesTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_theme_libraries';
 
   public function testGenerator(): void {
-    $this->execute(new ThemeLibraries(), ['example']);
+    $this->execute(ThemeLibraries::class, ['example']);
 
     $expected_display = <<< 'TXT'
 

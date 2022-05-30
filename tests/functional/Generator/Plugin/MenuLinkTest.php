@@ -17,7 +17,7 @@ final class MenuLinkTest extends GeneratorTestBase {
       'example',
       'FooMenuLink',
     ];
-    $this->execute(new MenuLink(), $input);
+    $this->execute(MenuLink::class, $input);
 
     $expected_display = <<< 'TXT'
 

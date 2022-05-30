@@ -14,7 +14,7 @@ final class RenderElementTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new RenderElement(), ['foo']);
+    $this->execute(RenderElement::class, ['foo']);
 
     $expected_display = <<< 'TXT'
 

@@ -19,7 +19,7 @@ final class ThemeInfoTest extends GeneratorTestBase {
       'Example description.',
       'Custom',
     ];
-    $this->execute(new ThemeInfo(), $input);
+    $this->execute(ThemeInfo::class, $input);
 
     $expected_display = <<< 'TXT'
 

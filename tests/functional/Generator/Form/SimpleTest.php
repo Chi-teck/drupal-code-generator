@@ -22,7 +22,7 @@ final class SimpleTest extends GeneratorTestBase {
       'Hey',
       'access content',
     ];
-    $this->execute(new Simple(), $input);
+    $this->execute(Simple::class, $input);
 
     $expected_display = <<< 'TXT'
 

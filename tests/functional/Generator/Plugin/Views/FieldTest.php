@@ -23,7 +23,7 @@ final class FieldTest extends GeneratorTestBase {
       'entity_type.manager',
       '',
     ];
-    $this->execute(new Field(), $input);
+    $this->execute(Field::class, $input);
 
     $expected_display = <<< 'TXT'
 

@@ -14,7 +14,7 @@ final class KernelTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(new Kernel(), ['foo', 'ExampleTest']);
+    $this->execute(Kernel::class, ['foo', 'ExampleTest']);
 
     $expected_display = <<< 'TXT'
 

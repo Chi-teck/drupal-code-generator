@@ -20,7 +20,7 @@ final class EventSubscriberTest extends GeneratorTestBase {
       'messenger',
       '',
     ];
-    $this->execute(new EventSubscriber(), $input);
+    $this->execute(EventSubscriber::class, $input);
 
     $expected_display = <<< 'TXT'
 

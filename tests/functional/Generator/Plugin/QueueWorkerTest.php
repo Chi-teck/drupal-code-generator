@@ -19,7 +19,7 @@ final class QueueWorkerTest extends GeneratorTestBase {
       'example_foo_bar',
       'FooBar',
     ];
-    $this->execute(new QueueWorker(), $input);
+    $this->execute(QueueWorker::class, $input);
 
     $expected_display = <<< 'TXT'
 

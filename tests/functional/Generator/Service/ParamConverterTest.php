@@ -18,7 +18,7 @@ final class ParamConverterTest extends GeneratorTestBase {
       'foo',
       'FooParamConverter',
     ];
-    $this->execute(new ParamConverter(), $input);
+    $this->execute(ParamConverter::class, $input);
 
     $expected_display = <<< 'TXT'
 

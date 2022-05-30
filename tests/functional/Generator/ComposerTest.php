@@ -15,7 +15,7 @@ final class ComposerTest extends GeneratorTestBase {
   public function testGenerator(): void {
 
     $user_input = ['drupal/example', 'Some description.', 'drupal-module', 'Yes', 'Yes'];
-    $this->execute(new Composer(), $user_input);
+    $this->execute(Composer::class, $user_input);
 
     $expected_display = <<< 'TXT'
 

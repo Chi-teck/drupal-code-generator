@@ -18,7 +18,7 @@ final class PluginManagerTest extends GeneratorTestBase {
       'bar',
       'Annotation',
     ];
-    $this->execute(new PluginManager(), $input);
+    $this->execute(PluginManager::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -64,7 +64,7 @@ final class PluginManagerTest extends GeneratorTestBase {
       'bar',
       'YAML',
     ];
-    $this->execute(new PluginManager(), $input);
+    $this->execute(PluginManager::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -108,7 +108,7 @@ final class PluginManagerTest extends GeneratorTestBase {
       'bar',
       'Hook',
     ];
-    $this->execute(new PluginManager(), $input);
+    $this->execute(PluginManager::class, $input);
 
     $expected_display = <<< 'TXT'
 
