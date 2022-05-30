@@ -3,14 +3,14 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use Symfony\Component\Console\Attribute\AsCommand;
 
 /**
  * Implements controller command.
  */
+#[AsCommand('controller', 'Generates a controller')]
 final class Controller extends ModuleGenerator {
 
-  protected string $name = 'controller';
-  protected string $description = 'Generates a controller';
   protected string $templatePath = Application::TEMPLATE_PATH . '/controller';
 
   /**

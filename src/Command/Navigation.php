@@ -6,6 +6,7 @@ use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,6 +16,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 /**
  * Implements navigation command.
  */
+#[AsCommand(name: 'navigation')]
 final class Navigation extends Command implements IOAwareInterface, LoggerAwareInterface {
 
   use IOAwareTrait;

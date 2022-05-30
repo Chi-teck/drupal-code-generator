@@ -85,10 +85,17 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * {@inheritdoc}
    */
   protected function configure(): void {
-    $this
-      ->setName($this->name)
-      ->setDescription($this->description)
-      ->setAliases($this->alias ? [$this->alias] : []);
+    parent::configure();
+    // @todo Deprecate these properties.
+    if (isset($this->name)) {
+      $this->setName($this->name);
+    }
+    if (isset($this->name)) {
+      $this->setDescription($this->description);
+    }
+    if ($this->alias) {
+      $this->setAliases([$this->alias]);
+    }
   }
 
   /**

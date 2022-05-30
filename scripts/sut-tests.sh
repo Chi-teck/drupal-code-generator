@@ -67,7 +67,6 @@ function dcg_label {
   echo -e "\n\e[30;43m -= $* =- \e[0m\n"
 }
 
-
 # === Create a site under testing. === #
 
 # Keep Drupal dir itself because Symfony server is watching it.
