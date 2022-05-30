@@ -91,6 +91,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   private array $vars;
 
   /**
+   * Constructs the generator.
+   *
    * The constructor is private because all generators must be created with
    * `create` factory method.
    */

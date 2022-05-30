@@ -8,7 +8,6 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
-use DrupalCodeGenerator\Service\ModuleInfo;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
