@@ -5,7 +5,6 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
 use DrupalCodeGenerator\Command\GenerateCompletion;
 use DrupalCodeGenerator\Command\Navigation;
-use DrupalCodeGenerator\GeneratorFactory;
 
 // __DIR__ cannot be used here as it contains a path with symlinks resolved.
 $dcg_path = \str_starts_with($argv[0], '/') ?
