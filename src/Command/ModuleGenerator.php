@@ -109,6 +109,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    *   Service definition or null if service is unknown.
    */
   protected function getServiceDefinition(string $service_id): array {
+    // @todo Fetch service information runtime.
     $service_definitions = self::getDumpedServiceDefinitions();
     if (isset($service_definitions[$service_id])) {
       $definition = $service_definitions[$service_id];
@@ -122,13 +123,11 @@ abstract class ModuleGenerator extends DrupalGenerator {
         'description' => "The $service_id service.",
       ];
 
-      if ($this->drupalContext) {
-        // Try to guess correct type of service instance.
-        $compiled_definition = $this->drupalContext->getServiceDefinition($service_id);
-        if ($compiled_definition && isset($compiled_definition['class'])) {
-          $interface = $compiled_definition['class'] . 'Interface';
-          $definition['type'] = \interface_exists($interface) ? $interface : $compiled_definition['class'];
-        }
+      // Try to guess correct type of service instance.
+      $compiled_definition = $this->drupalContext->getServiceDefinition($service_id);
+      if ($compiled_definition && isset($compiled_definition['class'])) {
+        $interface = $compiled_definition['class'] . 'Interface';
+        $definition['type'] = \interface_exists($interface) ? $interface : $compiled_definition['class'];
       }
     }
 
