@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\Command\DrupalGenerator;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -11,42 +10,32 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @todo Support installation profiles.
  */
-class DrupalContext extends Helper {
-
-  /**
-   * Drupal container.
-   */
-  protected ContainerInterface $container;
+final class DrupalContext extends Helper {
 
   /**
    * List of currently installed modules.
    *
    * @var \Drupal\Core\Extension\Extension[]
    */
-  protected array $modules = [];
+  private array $modules = [];
 
   /**
    * List of currently installed themes.
    *
    * @var \Drupal\Core\Extension\Extension[]
    */
-  protected array $themes = [];
-
-  /**
-   * Defines the root directory of the Drupal installation.
-   */
-  protected string $drupalRoot;
+  private array $themes = [];
 
   /**
    * DrupalContext constructor.
    */
-  public function __construct(ContainerInterface $container, string $drupal_root = \DRUPAL_ROOT) {
-    $this->container = $container;
-    $this->drupalRoot = $drupal_root;
-  }
+  public function __construct(
+    private ContainerInterface $container,
+    private string $drupalRoot = \DRUPAL_ROOT,
+  ) {}
 
   /**
-   * Return Drupal container.
+   * Returns Drupal container.
    */
   public function getContainer(): ContainerInterface {
     return $this->container;
@@ -99,7 +88,7 @@ class DrupalContext extends Helper {
   }
 
   /**
-   * Returns destination for generated module code.
+   * Returns destination for generated theme code.
    */
   public function getThemeDestination(bool $is_new, ?string $machine_name): ?string {
     $destination = NULL;
@@ -138,47 +127,7 @@ class DrupalContext extends Helper {
   }
 
   /**
-   * Returns a list of currently installed extensions.
-   *
-   * @deprecated Use ::getModules() or getThemes() instead.
-   */
-  public function getExtensionList(int $extension_type): array {
-    switch ($extension_type) {
-      case DrupalGenerator::EXTENSION_TYPE_MODULE:
-        return $this->getModules();
-
-      case DrupalGenerator::EXTENSION_TYPE_THEME:
-        return $this->getThemes();
-
-      default:
-        throw new \UnexpectedValueException(\sprintf('Unsupported extension type "%s".', $extension_type));
-    }
-  }
-
-  /**
-   * Returns destination for generated code.
-   *
-   * @deprecated Use ::getModuleDestination() or getThemeDestination() instead.
-   */
-  public function getDestination(int $extension_type, bool $is_new, ?string $machine_name): ?string {
-    switch ($extension_type) {
-      case DrupalGenerator::EXTENSION_TYPE_MODULE:
-        return $this->getModuleDestination($is_new, $machine_name);
-
-      case DrupalGenerator::EXTENSION_TYPE_THEME:
-        return $this->getThemeDestination($is_new, $machine_name);
-
-      default:
-        throw new \UnexpectedValueException(\sprintf('Unsupported extension type "%s".', $extension_type));
-    }
-    return $destination;
-  }
-
-  /**
    * Gets defined hooks.
-   *
-   * @return array
-   *   An associative array of hook templates keyed by hook name.
    */
   public function getHooks(): array {
 
@@ -216,14 +165,8 @@ class DrupalContext extends Helper {
 
   /**
    * Extracts hooks from PHP file.
-   *
-   * @param string $file
-   *   File to parse.
-   *
-   * @return array
-   *   Array of parsed hooks keyed by hook name.
    */
-  protected static function parseHooks(string $file): array {
+  private static function parseHooks(string $file): array {
     $code = \file_get_contents($file);
     \preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);
 
@@ -240,9 +183,6 @@ class DrupalContext extends Helper {
 
   /**
    * Gets all defined service IDs.
-   *
-   * @return array
-   *   An array of all defined service IDs.
    */
   public function getServicesIds(): array {
     return $this->container->getServiceIds();
@@ -250,9 +190,6 @@ class DrupalContext extends Helper {
 
   /**
    * Gets all defined services.
-   *
-   * @return array
-   *   Compiled service definition.
    */
   public function getServiceDefinition(string $service_id): ?array {
     $services = $this->container
