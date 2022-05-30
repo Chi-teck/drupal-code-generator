@@ -30,28 +30,31 @@ class BootstrapHandler {
 
   /**
    * Bootstraps Drupal.
-   *
-   * @return \Symfony\Component\DependencyInjection\ContainerInterface|null
-   *   Current service container or null if bootstrap failed.
    */
-  public function bootstrap(): ?ContainerInterface {
-    if (!\defined('Drupal::VERSION') || \version_compare(\Drupal::VERSION, '9.0.0', '<')) {
-      return NULL;
-    }
-    try {
-      $root_package = InstalledVersions::getRootPackage();
-      \chdir($root_package['install_path']);
+  public function bootstrap(): ContainerInterface {
+    self::assertInstallation();
 
-      $request = Request::createFromGlobals();
-      $kernel = DrupalKernel::createFromRequest($request, $this->classLoader, 'prod');
-      $kernel->boot();
-      $kernel->preHandle($request);
-      $container = $kernel->getContainer();
-      self::configureContainer($container);
-      return $container;
-    }
-    catch (\Exception $exception) {
-      return NULL;
+    $root_package = InstalledVersions::getRootPackage();
+    \chdir($root_package['install_path']);
+
+    $request = Request::createFromGlobals();
+    $kernel = DrupalKernel::createFromRequest($request, $this->classLoader, 'prod');
+    $kernel->boot();
+    $kernel->preHandle($request);
+
+    $container = $kernel->getContainer();
+    self::configureContainer($container);
+    return $container;
+  }
+
+  private static function assertInstallation(): void {
+    $preflight = \defined('Drupal::VERSION') &&
+      \version_compare(\Drupal::VERSION, '10.0.0-dev', '>=') &&
+      \class_exists(InstalledVersions::class) &&
+      \class_exists(Request::class) &&
+      \class_exists(DrupalKernel::class);
+    if (!$preflight) {
+      throw new \RuntimeException('Could not load Drupal.');
     }
   }
 
