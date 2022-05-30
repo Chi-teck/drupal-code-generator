@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator;
+namespace DrupalCodeGenerator\Service;
 
 use DrupalCodeGenerator\ClassResolver\ClassResolverInterface;
 use Psr\Log\LoggerInterface;

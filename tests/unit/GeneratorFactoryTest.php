@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator\Tests\Unit;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
-use DrupalCodeGenerator\GeneratorFactory;
+use DrupalCodeGenerator\Service\GeneratorFactory;
 use PHPUnit\Framework\TestCase;
 
 /**

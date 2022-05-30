@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Functional;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\Navigation;
-use DrupalCodeGenerator\GeneratorFactory;
+use DrupalCodeGenerator\Service\GeneratorFactory;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 use DrupalCodeGenerator\Test\Functional\QuestionHelper;
 use Psr\Log\NullLogger;

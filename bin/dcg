@@ -31,8 +31,8 @@ $bootstrap_handler = new BootstrapHandler($class_loader);
 // @todo Handle missing Drupal installation.
 $container = $bootstrap_handler->bootstrap();
 
-$generator_factory = new GeneratorFactory(new SimpleClassResolver(), new NullLogger());
-$generators = $generator_factory->getGenerators([Application::ROOT . '/src/Command'], Application::GENERATOR_NAMESPACE);
+$generators = $container->get('dcg.generator_factory')
+  ->getGenerators([Application::ROOT . '/src/Command'], Application::GENERATOR_NAMESPACE);
 
 $application = Application::create($container);
 $application->addCommands($generators);
