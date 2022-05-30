@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Test\Functional;
 
 use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -35,13 +34,22 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
   /**
    * Executes the command.
    *
-   * @param \Symfony\Component\Console\Command\Command $command
-   *   A command to execute.
+   * @param string $command_class
+   *   A command class to instantiate generator.
    * @param array $user_input
    *   An array of strings representing each input passed to the command input
    *   stream.
    */
-  protected function execute(Command $command, array $user_input): int {
+  protected function execute($command_class, array $user_input): int {
+
+    if (\is_object($command_class)) {
+      @\trigger_error('Passing command objects to the GeneratorTestBase::execute method is deprecated.');
+      $command = $this->application
+        ->getContainer()
+        ->get('class_resolver')
+        ->getInstanceFromDefinition($command_class::class);
+    }
+
     $this->application->add($command);
 
     $command_tester = new CommandTester($command);

@@ -15,6 +15,8 @@ use Twig\Loader\FilesystemLoader;
  */
 abstract class FunctionalTestBase extends TestCase {
 
+  protected Application $application;
+
   /**
    * {@inheritdoc}
    */

@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator;
 
+use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Helper\QuestionHelper;
@@ -12,6 +13,8 @@ use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Loader\FilesystemLoader;
@@ -19,7 +22,9 @@ use Twig\Loader\FilesystemLoader;
 /**
  * DCG console application.
  */
-class Application extends BaseApplication {
+class Application extends BaseApplication implements ContainerAwareInterface {
+
+  use ContainerAwareTrait;
 
   /**
    * Path to DCG root directory.
@@ -46,6 +51,7 @@ class Application extends BaseApplication {
    */
   public static function create(ContainerInterface $container): Application {
     $application = new static('Drupal Code Generator', self::VERSION);
+    $application->setContainer($container);
 
     $helper_set = new HelperSet([
       new QuestionHelper(),
@@ -54,7 +60,6 @@ class Application extends BaseApplication {
       new ResultPrinter(),
       new DrupalContext($container),
     ]);
-
     $application->setHelperSet($helper_set);
 
     return $application;
@@ -77,6 +82,13 @@ class Application extends BaseApplication {
     $definition->addOption(new InputOption('full-path', NULL, InputOption::VALUE_NONE, 'Print full path to generated assets'));
     $definition->addOption(new InputOption('destination', NULL, InputOption::VALUE_OPTIONAL, 'Path to a base directory for file writing'));
     return $definition;
+  }
+
+  public function getContainer(): ContainerInterface {
+    if (!$this->container) {
+      throw new ContainerNotInitializedException('Application::$container is not initialized yet.');
+    }
+    return $this->container;
   }
 
 }

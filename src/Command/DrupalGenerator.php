@@ -123,7 +123,7 @@ abstract class DrupalGenerator extends Generator {
   protected function getExtensionList(): array {
     switch ($this->extensionType) {
       case DrupalGenerator::EXTENSION_TYPE_MODULE:
-        return $this->drupalContext->getModules();
+        return $this->container->get('dcg.module_info')->getModules();
 
       case DrupalGenerator::EXTENSION_TYPE_THEME:
         return $this->drupalContext->getThemes();
