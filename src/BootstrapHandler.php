@@ -12,37 +12,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Provides a handler to bootstrap Drupal.
+ * Provides a handler to bootstrap DCG environment.
  */
 class BootstrapHandler {
 
-  /**
-   * The class loader.
-   */
-  private ClassLoader $classLoader;
+  public function __construct(private ClassLoader $classLoader) {}
 
-  /**
-   * Construct a BootstrapHandler object.
-   */
-  public function __construct(ClassLoader $class_loader) {
-    $this->classLoader = $class_loader;
-  }
-
-  /**
-   * Bootstraps Drupal.
-   */
   public function bootstrap(): ContainerInterface {
     self::assertInstallation();
-
-    $root_package = InstalledVersions::getRootPackage();
-    \chdir($root_package['install_path']);
-
-    $request = Request::createFromGlobals();
-    $kernel = DrupalKernel::createFromRequest($request, $this->classLoader, 'prod');
-    $kernel->boot();
-    $kernel->preHandle($request);
-
-    $container = $kernel->getContainer();
+    $container = $this->boostrapDrupal();
     self::configureContainer($container);
     return $container;
   }
@@ -56,6 +34,16 @@ class BootstrapHandler {
     if (!$preflight) {
       throw new \RuntimeException('Could not load Drupal.');
     }
+  }
+
+  private function boostrapDrupal(): ContainerInterface {
+    $root_package = InstalledVersions::getRootPackage();
+    \chdir($root_package['install_path']);
+    $request = Request::createFromGlobals();
+    $kernel = DrupalKernel::createFromRequest($request, $this->classLoader, 'prod');
+    $kernel->boot();
+    $kernel->preHandle($request);
+    return $kernel->getContainer();
   }
 
   private static function configureContainer(ContainerInterface $container): void {
