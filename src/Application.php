@@ -42,11 +42,6 @@ class Application extends BaseApplication {
   public const TEMPLATE_PATH = Application::ROOT . '/templates';
 
   /**
-   * Namespace of core DCG generators.
-   */
-  public const GENERATOR_NAMESPACE = '\DrupalCodeGenerator\Command';
-
-  /**
    * Creates the application.
    */
   public static function create(ContainerInterface $container): Application {

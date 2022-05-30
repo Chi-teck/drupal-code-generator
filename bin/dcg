@@ -3,11 +3,9 @@
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
-use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\GenerateCompletion;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\GeneratorFactory;
-use Psr\Log\NullLogger;
 
 // __DIR__ cannot be used here as it contains a path with symlinks resolved.
 $dcg_path = \str_starts_with($argv[0], '/') ?
@@ -32,7 +30,7 @@ $bootstrap_handler = new BootstrapHandler($class_loader);
 $container = $bootstrap_handler->bootstrap();
 
 $generators = $container->get('dcg.generator_factory')
-  ->getGenerators([Application::ROOT . '/src/Command'], Application::GENERATOR_NAMESPACE);
+  ->getCoreGenerators();
 
 $application = Application::create($container);
 $application->addCommands($generators);

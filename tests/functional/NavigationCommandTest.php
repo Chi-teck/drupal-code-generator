@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Tests\Functional;
 
-use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\Service\GeneratorFactory;
@@ -44,7 +43,7 @@ final class NavigationCommandTest extends FunctionalTestBase {
   public function testNavigation(): void {
 
     $factory = new GeneratorFactory(new SimpleClassResolver(), new NullLogger());
-    $generators = $factory->getGenerators([Application::ROOT . '/src/Command'], Application::GENERATOR_NAMESPACE);
+    $generators = $factory->getCoreGenerators();
 
     $application = $this->createApplication();
 

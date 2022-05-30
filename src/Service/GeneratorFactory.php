@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Service;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\ClassResolver\ClassResolverInterface;
 use Psr\Log\LoggerInterface;
 
@@ -72,6 +73,13 @@ final class GeneratorFactory {
 
     $this->logger->debug('Total generators: {total}', ['total' => \count($commands)]);
     return $commands;
+  }
+
+  /**
+   * Finds and instantiates DCG core generator commands.
+   */
+  public function getCoreGenerators(): array {
+    return $this->getGenerators([Application::ROOT . '/src/Command'], '\DrupalCodeGenerator\Command');
   }
 
 }
