@@ -21,15 +21,18 @@ use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Base class for code generators.
  */
-abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
+abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface, ContainerAwareInterface {
 
   use IOAwareTrait;
   use LoggerAwareTrait;
   use ValidatorTrait;
+  use ContainerAwareTrait;
 
   /**
    * The API version.

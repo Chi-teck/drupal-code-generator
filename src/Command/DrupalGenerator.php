@@ -7,7 +7,6 @@ use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base class for Drupal generators.
@@ -51,8 +50,6 @@ abstract class DrupalGenerator extends Generator {
    * This helper is set if Drupal is fully bootstrapped.
    */
   protected DrupalContext $drupalContext;
-
-  protected ContainerInterface $container;
 
   /**
    * {@inheritdoc}
