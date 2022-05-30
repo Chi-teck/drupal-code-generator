@@ -136,6 +136,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
+
     $this->logger->debug('Command: {command}', ['command' => static::class]);
 
     try {

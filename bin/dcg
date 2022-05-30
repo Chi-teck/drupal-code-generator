@@ -33,12 +33,13 @@ catch (\Exception $exception) {
   exit(1);
 }
 
+$application = Application::create($container);
+
 $generators = $container->get('dcg.generator_factory')
   ->getCoreGenerators();
-
-$application = Application::create($container);
 $application->addCommands($generators);
 $application->add(new GenerateCompletion());
 $application->add(new Navigation());
 $application->setDefaultCommand('navigation');
+
 $application->run();
