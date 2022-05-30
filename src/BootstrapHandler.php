@@ -5,7 +5,6 @@ namespace DrupalCodeGenerator;
 use Composer\Autoload\ClassLoader;
 use Composer\InstalledVersions;
 use Drupal\Core\DrupalKernel;
-use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Service\GeneratorFactory;
 use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -59,7 +58,10 @@ class BootstrapHandler {
   }
 
   private static function configureContainer(ContainerInterface $container): void {
-    $generator_factory = new GeneratorFactory(new SimpleClassResolver(), new NullLogger());
+    $generator_factory = new GeneratorFactory(
+      $container->get('class_resolver'),
+      new NullLogger(),
+    );
     $container->set('dcg.generator_factory', $generator_factory);
   }
 

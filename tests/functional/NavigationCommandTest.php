@@ -2,12 +2,9 @@
 
 namespace DrupalCodeGenerator\Tests\Functional;
 
-use DrupalCodeGenerator\ClassResolver\SimpleClassResolver;
 use DrupalCodeGenerator\Command\Navigation;
-use DrupalCodeGenerator\Service\GeneratorFactory;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 use DrupalCodeGenerator\Test\Functional\QuestionHelper;
-use Psr\Log\NullLogger;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Tester\TesterTrait;
 use Symfony\Component\Filesystem\Filesystem;
@@ -42,13 +39,16 @@ final class NavigationCommandTest extends FunctionalTestBase {
    */
   public function testNavigation(): void {
 
-    $factory = new GeneratorFactory(new SimpleClassResolver(), new NullLogger());
-    $generators = $factory->getCoreGenerators();
-
     $application = $this->createApplication();
 
     $helper_set = $application->getHelperSet();
     $helper_set->set(new QuestionHelper());
+
+    // @todo Should application give direct access to the container?
+    $container = $helper_set->get('drupal_context')->getContainer();
+
+    $generators = $container->get('dcg.generator_factory')
+      ->getCoreGenerators();
 
     $application->addCommands($generators);
     $navigation = new Navigation();

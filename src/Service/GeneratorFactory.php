@@ -2,8 +2,8 @@
 
 namespace DrupalCodeGenerator\Service;
 
+use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\ClassResolver\ClassResolverInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -67,7 +67,7 @@ final class GeneratorFactory {
           continue;
         }
 
-        $commands[] = $this->classResolver->getInstance($class);
+        $commands[] = $this->classResolver->getInstanceFromDefinition($class);
       }
     }
 
