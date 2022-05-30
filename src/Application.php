@@ -49,7 +49,7 @@ class Application extends BaseApplication {
   /**
    * Creates the application.
    */
-  public static function create(?ContainerInterface $container = NULL): Application {
+  public static function create(ContainerInterface $container): Application {
     $application = new static('Drupal Code Generator', self::VERSION);
 
     $helper_set = new HelperSet([
@@ -57,11 +57,9 @@ class Application extends BaseApplication {
       new Dumper(new Filesystem()),
       new Renderer(new TwigEnvironment(new FilesystemLoader([Application::TEMPLATE_PATH]))),
       new ResultPrinter(),
+      new DrupalContext($container),
     ]);
 
-    if ($container) {
-      $helper_set->set(new DrupalContext($container));
-    }
     $application->setHelperSet($helper_set);
 
     return $application;
