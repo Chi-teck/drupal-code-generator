@@ -50,7 +50,6 @@ final class ModuleInfo extends Helper {
     if ($destination) {
       $destination = \DRUPAL_ROOT . '/' . $destination;
     }
-
     return $destination;
   }
 

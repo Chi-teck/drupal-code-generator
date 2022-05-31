@@ -42,6 +42,9 @@ class BootstrapHandler {
     $kernel = DrupalKernel::createFromRequest($request, $this->classLoader, 'prod');
     $kernel->boot();
     $kernel->preHandle($request);
+    // Cancel Drupal error handler and send the errors to STDOUT immeditatly.
+    \restore_error_handler();
+    \error_reporting(\E_ALL);
     return $kernel->getContainer();
   }
 

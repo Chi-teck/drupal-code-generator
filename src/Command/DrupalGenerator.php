@@ -141,6 +141,7 @@ abstract class DrupalGenerator extends Generator {
    * {@inheritdoc}
    */
   protected function getDestination(array $vars): ?string {
+    // @todo Figure out the case when machine name is not provided.
     return match ($this->extensionType) {
       DrupalGenerator::EXTENSION_TYPE_MODULE => $this->getHelper('module_info')
         ->getDestination($this->isNewExtension, $vars['machine_name']),
