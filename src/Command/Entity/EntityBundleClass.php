@@ -22,14 +22,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class EntityBundleClass extends ModuleGenerator {
 
   protected string $templatePath = Application::TEMPLATE_PATH . '/entity-bundle-class';
-  private EntityTypeManagerInterface $entityTypeManager;
-  private EntityTypeBundleInfoInterface $bundleInfo;
+
+  public function __construct(
+    readonly private EntityTypeManagerInterface $entityTypeManager,
+    readonly private EntityTypeBundleInfoInterface $bundleInfo,
+    ContainerInterface $container,
+  ) {
+    parent::__construct($container);
+  }
 
   public static function create(ContainerInterface $container): static {
-    $generator = parent::create($container);
-    $generator->entityTypeManager = $container->get('entity_type.manager');
-    $generator->bundleInfo = $container->get('entity_type.bundle.info');
-    return $generator;
+    return new self(
+      $container->get('entity_type.manager'),
+      $container->get('entity_type.bundle.info'),
+      $container,
+    );
   }
 
   protected function generate(array &$vars): void {

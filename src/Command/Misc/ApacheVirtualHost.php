@@ -3,12 +3,12 @@
 namespace DrupalCodeGenerator\Command\Misc;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\Generator;
+use DrupalCodeGenerator\Command\DrupalGenerator;
 
 /**
  * Implements misc:apache-virtual-host command.
  */
-final class ApacheVirtualHost extends Generator {
+final class ApacheVirtualHost extends DrupalGenerator {
 
   protected string $name = 'misc:apache-virtual-host';
   protected string $description = 'Generates an Apache site configuration file';

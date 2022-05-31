@@ -3,12 +3,12 @@
 namespace DrupalCodeGenerator\Command\Misc;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\Generator;
+use DrupalCodeGenerator\Command\DrupalGenerator;
 
 /**
  * Implements misc:nginx-virtual-host command.
  */
-final class NginxVirtualHost extends Generator {
+final class NginxVirtualHost extends DrupalGenerator {
 
   protected string $name = 'misc:nginx-virtual-host';
   protected string $description = 'Generates an Nginx site configuration file';

@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base class for Drupal generators.
@@ -51,6 +52,17 @@ abstract class DrupalGenerator extends Generator {
    * This helper is set if Drupal is fully bootstrapped.
    */
   protected DrupalContext $drupalContext;
+
+  /**
+   * Constructs the generator.
+   */
+  public function __construct(protected ContainerInterface $container) {
+    parent::__construct();
+  }
+
+  public static function create(ContainerInterface $container): static {
+    return new static($container);
+  }
 
   /**
    * {@inheritdoc}
@@ -124,7 +136,7 @@ abstract class DrupalGenerator extends Generator {
   protected function getExtensionList(): array {
     switch ($this->extensionType) {
       case DrupalGenerator::EXTENSION_TYPE_MODULE:
-        return $this->moduleInfo->getModules();
+        return $this->container->get('dcg.module_info')->getModules();
 
       case DrupalGenerator::EXTENSION_TYPE_THEME:
         return $this->drupalContext->getThemes();
@@ -136,7 +148,7 @@ abstract class DrupalGenerator extends Generator {
    */
   protected function getDestination(array $vars): ?string {
     if ($this->extensionType === DrupalGenerator::EXTENSION_TYPE_MODULE) {
-      $destination = $this->moduleInfo->findDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);
+      $destination = $this->container->get('dcg.module_info')->findDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);
     }
     elseif ($this->extensionType === DrupalGenerator::EXTENSION_TYPE_THEME) {
       $destination = $this->drupalContext->getThemeDestination($this->isNewExtension, $vars['machine_name'] ?? NULL);

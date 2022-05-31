@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Console;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\Generator;
+use DrupalCodeGenerator\Command\DrupalGenerator;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Utils;
  *
  * @todo Test this manually.
  */
-final class DcgCommand extends Generator {
+final class DcgCommand extends DrupalGenerator {
 
   protected string $name = 'console:dcg-command';
   protected string $description = 'Generates DCG command';
