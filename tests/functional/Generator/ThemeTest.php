@@ -30,7 +30,7 @@ final class ThemeTest extends GeneratorTestBase {
      Welcome to theme generator!
     –––––––––––––––––––––––––––––
 
-     Theme name [%default_human_name%]:
+     Theme name:
      ➤ 
 
      Theme machine name [foo]:

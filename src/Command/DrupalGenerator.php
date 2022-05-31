@@ -102,14 +102,12 @@ abstract class DrupalGenerator extends Generator {
    * Asks name question.
    */
   protected function askName(): string {
-    $root_directory = \basename(Utils::getExtensionRoot($this->directory) ?: $this->directory);
-    $default_value = Utils::machine2human($root_directory, TRUE);
-    $name_question = new Question($this->nameQuestion, $default_value);
-    $name_question->setValidator([static::class, 'validateRequired']);
+    $question = new Question($this->nameQuestion);
+    $question->setValidator([static::class, 'validateRequired']);
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
-      $name_question->setAutocompleterValues($extensions);
+      $question->setAutocompleterValues($extensions);
     }
-    return $this->io->askQuestion($name_question);
+    return $this->io->askQuestion($question);
   }
 
   /**

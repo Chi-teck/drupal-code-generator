@@ -29,7 +29,7 @@ final class EntityReferenceSelectionTest extends GeneratorTestBase {
      Welcome to entity-reference-selection generator!
     ––––––––––––––––––––––––––––––––––––––––––––––––––
 
-     Module name [%default_human_name%]:
+     Module name:
      ➤ 
 
      Module machine name [example]:

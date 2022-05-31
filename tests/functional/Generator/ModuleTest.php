@@ -36,7 +36,7 @@ final class ModuleTest extends GeneratorTestBase {
      Welcome to module generator!
     ––––––––––––––––––––––––––––––
 
-     Module name [%default_human_name%]:
+     Module name:
      ➤ 
 
      Module machine name [foo]:
