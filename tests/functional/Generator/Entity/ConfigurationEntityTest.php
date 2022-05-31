@@ -21,7 +21,7 @@ final class ConfigurationEntityTest extends GeneratorTestBase {
      Welcome to config-entity generator!
     –––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Entity type label [Foo]:

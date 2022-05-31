@@ -28,7 +28,7 @@ final class SourceTest extends GeneratorTestBase {
      Welcome to migrate-source generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin ID [example_example]:
@@ -66,7 +66,7 @@ final class SourceTest extends GeneratorTestBase {
      Welcome to migrate-source generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin ID [example_example]:

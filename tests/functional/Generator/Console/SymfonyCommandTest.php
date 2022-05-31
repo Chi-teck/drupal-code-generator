@@ -29,7 +29,7 @@ final class SymfonyCommandTest extends GeneratorTestBase {
      Welcome to symfony-command generator!
     –––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Command name [foo:example]:

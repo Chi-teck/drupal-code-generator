@@ -26,7 +26,7 @@ final class CKEditorTest extends GeneratorTestBase {
      Welcome to ckeditor generator!
     ––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

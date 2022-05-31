@@ -25,7 +25,7 @@ final class DestinationTest extends GeneratorTestBase {
      Welcome to migrate-destination generator!
     –––––––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin ID [example_example]:

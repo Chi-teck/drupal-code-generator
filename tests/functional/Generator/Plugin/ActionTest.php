@@ -28,7 +28,7 @@ final class ActionTest extends GeneratorTestBase {
      Welcome to action generator!
     ––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Action label [Update node title]:

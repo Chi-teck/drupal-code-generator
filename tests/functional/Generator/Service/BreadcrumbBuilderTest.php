@@ -21,7 +21,7 @@ final class BreadcrumbBuilderTest extends GeneratorTestBase {
      Welcome to breadcrumb-builder generator!
     ––––––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleBreadcrumbBuilder]:

@@ -20,7 +20,7 @@ final class HookTest extends GeneratorTestBase {
      Welcome to hook generator!
     ––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Hook name:

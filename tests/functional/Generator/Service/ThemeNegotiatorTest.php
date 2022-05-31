@@ -21,7 +21,7 @@ final class ThemeNegotiatorTest extends GeneratorTestBase {
      Welcome to theme-negotiator generator!
     ––––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [FooNegotiator]:

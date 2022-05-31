@@ -62,9 +62,7 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
    * Asserts generated display.
    */
   protected function assertDisplay(string $expected_display): void {
-    $default_name = \basename(\getcwd());
-    $expected_display = \str_replace('%default_name%', $default_name, $expected_display) . \PHP_EOL;
-    self::assertEquals($expected_display, $this->display);
+    self::assertEquals($expected_display . \PHP_EOL, $this->display);
   }
 
   /**

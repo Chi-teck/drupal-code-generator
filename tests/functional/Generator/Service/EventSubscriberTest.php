@@ -27,7 +27,7 @@ final class EventSubscriberTest extends GeneratorTestBase {
      Welcome to event-subscriber generator!
     ––––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [FooSubscriber]:

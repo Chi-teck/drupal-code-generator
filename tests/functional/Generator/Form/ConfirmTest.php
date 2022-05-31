@@ -29,7 +29,7 @@ final class ConfirmTest extends GeneratorTestBase {
      Welcome to confirm-form generator!
     ––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleConfirmForm]:

@@ -30,7 +30,7 @@ final class CustomTest extends GeneratorTestBase {
      Welcome to custom-service generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Service name [foo.example]:

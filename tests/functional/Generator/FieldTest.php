@@ -70,7 +70,7 @@ final class FieldTest extends GeneratorTestBase {
      Welcome to field generator!
     –––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Field label [Example]:

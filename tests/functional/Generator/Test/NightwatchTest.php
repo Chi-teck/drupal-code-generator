@@ -21,7 +21,7 @@ final class NightwatchTest extends GeneratorTestBase {
      Welcome to nightwatch-test generator!
     –––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Test name [example]:

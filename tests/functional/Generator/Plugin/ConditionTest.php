@@ -26,7 +26,7 @@ final class ConditionTest extends GeneratorTestBase {
      Welcome to condition generator!
     –––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

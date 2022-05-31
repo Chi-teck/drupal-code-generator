@@ -28,7 +28,7 @@ final class LayoutTest extends GeneratorTestBase {
      Welcome to layout generator!
     ––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Layout name [Example]:

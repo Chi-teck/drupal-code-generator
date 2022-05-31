@@ -33,7 +33,7 @@ final class ConfigTest extends GeneratorTestBase {
      Welcome to config-form generator!
     –––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [SettingsForm]:

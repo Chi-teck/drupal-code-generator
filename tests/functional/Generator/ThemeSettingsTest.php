@@ -21,7 +21,7 @@ final class ThemeSettingsTest extends GeneratorTestBase {
      Welcome to theme-settings generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Theme machine name [%default_name%]:
+     Theme machine name:
      ➤ 
 
      The following directories and files have been created or updated:

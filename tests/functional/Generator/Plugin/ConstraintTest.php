@@ -27,7 +27,7 @@ final class ConstraintTest extends GeneratorTestBase {
      Welcome to constraint generator!
     ––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:
@@ -74,7 +74,7 @@ final class ConstraintTest extends GeneratorTestBase {
      Welcome to constraint generator!
     ––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:
@@ -121,7 +121,7 @@ final class ConstraintTest extends GeneratorTestBase {
      Welcome to constraint generator!
     ––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:
@@ -168,7 +168,7 @@ final class ConstraintTest extends GeneratorTestBase {
      Welcome to constraint generator!
     ––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

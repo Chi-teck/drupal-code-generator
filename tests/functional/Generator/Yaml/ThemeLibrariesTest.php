@@ -20,7 +20,7 @@ final class ThemeLibrariesTest extends GeneratorTestBase {
      Welcome to theme-libraries generator!
     –––––––––––––––––––––––––––––––––––––––
 
-     Theme machine name [%default_name%]:
+     Theme machine name:
      ➤ 
 
      The following directories and files have been created or updated:

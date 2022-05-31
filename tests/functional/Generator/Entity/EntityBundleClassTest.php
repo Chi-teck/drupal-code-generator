@@ -28,7 +28,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      Welcome to bundle-class generator!
     ––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Entity type:
@@ -86,7 +86,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      Welcome to bundle-class generator!
     ––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Entity type:

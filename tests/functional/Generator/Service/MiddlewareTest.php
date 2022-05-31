@@ -21,7 +21,7 @@ final class MiddlewareTest extends GeneratorTestBase {
      Welcome to middleware generator!
     ––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [FooMiddleware]:

@@ -25,7 +25,7 @@ final class PluginManagerTest extends GeneratorTestBase {
      Welcome to plugin-manager generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin type [foo]:
@@ -71,7 +71,7 @@ final class PluginManagerTest extends GeneratorTestBase {
      Welcome to plugin-manager generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin type [foo]:
@@ -115,7 +115,7 @@ final class PluginManagerTest extends GeneratorTestBase {
      Welcome to plugin-manager generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin type [foo]:

@@ -26,7 +26,7 @@ final class RestResourceTest extends GeneratorTestBase {
      Welcome to rest-resource generator!
     –––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

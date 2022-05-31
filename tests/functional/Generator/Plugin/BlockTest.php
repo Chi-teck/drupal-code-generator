@@ -32,7 +32,7 @@ final class BlockTest extends GeneratorTestBase {
      Welcome to block generator!
     –––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Block admin label [Example]:

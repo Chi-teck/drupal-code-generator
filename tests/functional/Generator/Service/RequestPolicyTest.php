@@ -21,7 +21,7 @@ final class RequestPolicyTest extends GeneratorTestBase {
      Welcome to request-policy generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [Example]:

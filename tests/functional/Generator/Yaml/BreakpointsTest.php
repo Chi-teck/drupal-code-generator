@@ -21,7 +21,7 @@ final class BreakpointsTest extends GeneratorTestBase {
      Welcome to breakpoints generator!
     –––––––––––––––––––––––––––––––––––
 
-     Theme machine name [%default_name%]:
+     Theme machine name:
      ➤ 
 
      The following directories and files have been created or updated:

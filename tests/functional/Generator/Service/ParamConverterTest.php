@@ -25,7 +25,7 @@ final class ParamConverterTest extends GeneratorTestBase {
      Welcome to param-converter generator!
     –––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Parameter type [example]:

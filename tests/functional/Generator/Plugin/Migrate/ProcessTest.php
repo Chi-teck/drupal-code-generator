@@ -25,7 +25,7 @@ final class ProcessTest extends GeneratorTestBase {
      Welcome to migrate-process generator!
     –––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin ID [example_example]:

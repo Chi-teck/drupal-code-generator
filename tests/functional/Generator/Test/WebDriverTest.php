@@ -21,7 +21,7 @@ final class WebDriverTest extends GeneratorTestBase {
      Welcome to webdriver-test generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleTest]:

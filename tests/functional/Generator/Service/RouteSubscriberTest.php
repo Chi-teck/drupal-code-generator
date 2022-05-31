@@ -26,7 +26,7 @@ final class RouteSubscriberTest extends GeneratorTestBase {
      Welcome to route-subscriber generator!
     ––––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [FooRouteSubscriber]:

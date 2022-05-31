@@ -21,7 +21,7 @@ final class UnitTest extends GeneratorTestBase {
      Welcome to unit-test generator!
     –––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleTest]:

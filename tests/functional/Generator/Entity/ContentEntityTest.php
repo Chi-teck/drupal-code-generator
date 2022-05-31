@@ -41,7 +41,7 @@ final class ContentEntityTest extends GeneratorTestBase {
      Welcome to content-entity generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Entity type label [Foo]:

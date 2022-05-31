@@ -27,7 +27,7 @@ final class TwigExtensionTest extends GeneratorTestBase {
      Welcome to twig-extension generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleTwigExtension]:

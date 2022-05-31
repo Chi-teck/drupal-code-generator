@@ -21,7 +21,7 @@ final class KernelTest extends GeneratorTestBase {
      Welcome to kernel-test generator!
     –––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleTest]:

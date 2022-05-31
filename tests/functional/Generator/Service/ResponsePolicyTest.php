@@ -21,7 +21,7 @@ final class ResponsePolicyTest extends GeneratorTestBase {
      Welcome to response-policy generator!
     –––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [Example]:

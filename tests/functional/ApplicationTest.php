@@ -46,7 +46,7 @@ final class ApplicationTest extends FunctionalTestBase {
      Welcome to install-file generator!
     ––––––––––––––––––––––––––––––––––––
 
-     Module machine name [dcg_sandbox]:
+     Module machine name:
      ➤ action
     
      The following directories and files have been created or updated:

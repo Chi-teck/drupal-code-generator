@@ -26,7 +26,7 @@ final class ThemeInfoTest extends GeneratorTestBase {
      Welcome to theme-info generator!
     ––––––––––––––––––––––––––––––––––
 
-     Theme machine name [%default_name%]:
+     Theme machine name:
      ➤ 
 
      Base theme [classy]:

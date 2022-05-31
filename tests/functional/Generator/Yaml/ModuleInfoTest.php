@@ -27,7 +27,7 @@ final class ModuleInfoTest extends GeneratorTestBase {
      Welcome to module-info generator!
     –––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Description [Module description.]:

@@ -21,7 +21,7 @@ final class PathProcessorTest extends GeneratorTestBase {
      Welcome to path-processor generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [PathProcessorExample]:

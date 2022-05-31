@@ -114,13 +114,13 @@ abstract class DrupalGenerator extends Generator {
    * Asks machine name question.
    */
   protected function askMachineName(array $vars): string {
-    $default_value = Utils::human2machine($vars['name'] ?? \basename($this->directory));
-    $machine_name_question = new Question($this->machineNameQuestion, $default_value);
-    $machine_name_question->setValidator([static::class, 'validateRequiredMachineName']);
+    $default_value = isset($vars['name']) ? Utils::human2machine($vars['name']) : NULL;
+    $question = new Question($this->machineNameQuestion, $default_value);
+    $question->setValidator([static::class, 'validateRequiredMachineName']);
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
-      $machine_name_question->setAutocompleterValues(\array_keys($extensions));
+      $question->setAutocompleterValues(\array_keys($extensions));
     }
-    return $this->io->askQuestion($machine_name_question);
+    return $this->io->askQuestion($question);
   }
 
   /**

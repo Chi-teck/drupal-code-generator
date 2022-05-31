@@ -33,7 +33,7 @@ final class ControllerTest extends GeneratorTestBase {
      Welcome to controller generator!
     ––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [FooController]:

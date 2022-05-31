@@ -30,7 +30,7 @@ final class ArgumentDefaultTest extends GeneratorTestBase {
      Welcome to views-argument-default generator!
     ––––––––––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

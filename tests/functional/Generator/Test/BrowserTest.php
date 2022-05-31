@@ -21,7 +21,7 @@ final class BrowserTest extends GeneratorTestBase {
      Welcome to browser-test generator!
     ––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleTest]:

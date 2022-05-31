@@ -27,7 +27,7 @@ final class CacheContextTest extends GeneratorTestBase {
      Welcome to cache-context generator!
     –––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Context ID [example]:
@@ -73,7 +73,7 @@ final class CacheContextTest extends GeneratorTestBase {
      Welcome to cache-context generator!
     –––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Context ID [example]:

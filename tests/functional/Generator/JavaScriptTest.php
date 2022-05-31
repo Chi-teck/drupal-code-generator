@@ -21,7 +21,7 @@ final class JavaScriptTest extends GeneratorTestBase {
      Welcome to javascript generator!
     ––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      File name [foo-bar.js]:

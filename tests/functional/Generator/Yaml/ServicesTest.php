@@ -21,7 +21,7 @@ final class ServicesTest extends GeneratorTestBase {
      Welcome to services generator!
     ––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      The following directories and files have been created or updated:

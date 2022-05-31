@@ -24,7 +24,7 @@ final class MenuLinkTest extends GeneratorTestBase {
      Welcome to menu-link generator!
     –––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleMenuLink]:

@@ -27,7 +27,7 @@ final class FilterTest extends GeneratorTestBase {
      Welcome to filter generator!
     ––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

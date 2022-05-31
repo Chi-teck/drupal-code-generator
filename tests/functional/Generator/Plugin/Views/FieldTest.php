@@ -30,7 +30,7 @@ final class FieldTest extends GeneratorTestBase {
      Welcome to views-field generator!
     –––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

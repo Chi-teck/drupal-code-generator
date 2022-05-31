@@ -25,7 +25,7 @@ final class AccessCheckerTest extends GeneratorTestBase {
      Welcome to access-checker generator!
     ––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Applies to [_foo]:

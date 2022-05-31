@@ -21,7 +21,7 @@ final class InstallFileTest extends GeneratorTestBase {
      Welcome to install-file generator!
     ––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      The following directories and files have been created or updated:

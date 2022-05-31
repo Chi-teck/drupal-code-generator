@@ -21,7 +21,7 @@ final class UninstallValidatorTest extends GeneratorTestBase {
      Welcome to uninstall-validator generator!
     –––––––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [FooUninstallValidator]:

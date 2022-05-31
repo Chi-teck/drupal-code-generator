@@ -27,7 +27,7 @@ final class StyleTest extends GeneratorTestBase {
      Welcome to views-style generator!
     –––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

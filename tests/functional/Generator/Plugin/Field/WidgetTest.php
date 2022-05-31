@@ -27,7 +27,7 @@ final class WidgetTest extends GeneratorTestBase {
      Welcome to field-widget generator!
     ––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Plugin label [Example]:

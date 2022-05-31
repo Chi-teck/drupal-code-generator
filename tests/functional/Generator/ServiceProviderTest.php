@@ -20,7 +20,7 @@ final class ServiceProviderTest extends GeneratorTestBase {
      Welcome to service-provider generator!
     ––––––––––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      The following directories and files have been created or updated:

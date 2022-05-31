@@ -22,7 +22,7 @@ final class TemplateTest extends GeneratorTestBase {
      Welcome to template generator!
     ––––––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Template name [example]:

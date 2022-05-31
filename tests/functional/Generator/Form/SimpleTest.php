@@ -29,7 +29,7 @@ final class SimpleTest extends GeneratorTestBase {
      Welcome to form generator!
     ––––––––––––––––––––––––––––
 
-     Module machine name [%default_name%]:
+     Module machine name:
      ➤ 
 
      Class [ExampleForm]:
