@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator;
 
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
+use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Helper\Dumper;
@@ -60,6 +61,7 @@ class Application extends BaseApplication implements ContainerAwareInterface {
       new Renderer(new TwigEnvironment(new FilesystemLoader([Application::TEMPLATE_PATH]))),
       new ResultPrinter(),
       new DrupalContext($container),
+      new ModuleInfo($container->get('module_handler')),
       new ThemeInfo($container->get('theme_handler')),
     ]);
     $application->setHelperSet($helper_set);

@@ -6,7 +6,6 @@ use Composer\Autoload\ClassLoader;
 use Composer\InstalledVersions;
 use Drupal\Core\DrupalKernel;
 use DrupalCodeGenerator\Service\GeneratorFactory;
-use DrupalCodeGenerator\Service\ModuleInfo;
 use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +51,6 @@ class BootstrapHandler {
       new NullLogger(),
     );
     $container->set('dcg.generator_factory', $generator_factory);
-    $container->set('dcg.module_info', new ModuleInfo($container->get('module_handler')));
   }
 
 }

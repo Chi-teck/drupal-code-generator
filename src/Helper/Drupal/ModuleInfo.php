@@ -1,17 +1,22 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Service;
+namespace DrupalCodeGenerator\Helper\Drupal;
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Symfony\Component\Console\Helper\Helper;
 
 /**
  * A helper that provides information about installed Drupal modules.
  *
- * @todo Support installation profiles.
+ * @todo Test this.
  */
-final class ModuleInfo {
+final class ModuleInfo extends Helper {
 
   public function __construct(private ModuleHandlerInterface $moduleHandler) {}
+
+  public function getName(): string {
+    return 'module_info';
+  }
 
   /**
    * Returns a list of currently installed modules.
@@ -27,7 +32,7 @@ final class ModuleInfo {
   /**
    * Returns destination for generated module code.
    */
-  public function findDestination(bool $is_new, ?string $machine_name): ?string {
+  public function getDestination(bool $is_new, ?string $machine_name): ?string {
     $destination = NULL;
 
     $modules_dir = \is_dir(\DRUPAL_ROOT . '/modules/custom') ?

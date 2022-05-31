@@ -132,7 +132,7 @@ abstract class DrupalGenerator extends Generator {
    */
   protected function getExtensionList(): array {
     return match ($this->extensionType) {
-      DrupalGenerator::EXTENSION_TYPE_MODULE => $this->container->get('dcg.module_info')->getModules(),
+      DrupalGenerator::EXTENSION_TYPE_MODULE => $this->getHelper('module_info')->getModules(),
       DrupalGenerator::EXTENSION_TYPE_THEME => $this->getHelper('theme_info')->getThemes(),
     };
   }
@@ -142,10 +142,10 @@ abstract class DrupalGenerator extends Generator {
    */
   protected function getDestination(array $vars): ?string {
     return match ($this->extensionType) {
-      DrupalGenerator::EXTENSION_TYPE_MODULE => $this->container
-        ->get('dcg.module_info')
-        ->findDestination($this->isNewExtension, $vars['machine_name']),
-      DrupalGenerator::EXTENSION_TYPE_THEME => $this->getHelper('theme_info')->getDestination(),
+      DrupalGenerator::EXTENSION_TYPE_MODULE => $this->getHelper('module_info')
+        ->getDestination($this->isNewExtension, $vars['machine_name']),
+      DrupalGenerator::EXTENSION_TYPE_THEME => $this->getHelper('theme_info')
+        ->getDestination($this->isNewExtension, $vars['machine_name']),
       default => parent::getDestination($vars),
     };
   }
