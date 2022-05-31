@@ -90,6 +90,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * {@inheritdoc}
+   *
+   * @noinspection PhpDeprecationInspection
    */
   protected function configure(): void {
     parent::configure();
@@ -111,7 +113,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * {@inheritdoc}
    */
   protected function initialize(InputInterface $input, OutputInterface $output): void {
-
+    parent::initialize($input, $output);
     $this->assets = new AssetCollection();
 
     $helper_set = $this->getHelperSet();
@@ -143,6 +145,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * {@inheritdoc}
+   *
+   * @noinspection PhpMissingParentCallCommonInspection
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
 
@@ -235,18 +239,8 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * Asks a question.
-   *
-   * @param string $question
-   *   A question to ask.
-   * @param string|null $default
-   *   The default answer to return if the user enters nothing.
-   * @param mixed $validator
-   *   A validator for the question.
-   *
-   * @return mixed
-   *   The user answer
    */
-  protected function ask(string $question, ?string $default = NULL, $validator = NULL) {
+  protected function ask(string $question, ?string $default = NULL, string|callable|NULL $validator = NULL): mixed {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
     if ($default) {
       $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
@@ -265,25 +259,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function confirm(string $question, bool $default = TRUE): bool {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
-    return (bool) $this->io->confirm($question, $default);
+    return $this->io->confirm($question, $default);
   }
 
   /**
    * Asks a choice question.
-   *
-   * @param string $question
-   *   A question to ask.
-   * @param array $choices
-   *   The list of available choices.
-   * @param string|null $default
-   *   The default answer to return if the user enters nothing.
-   * @param bool $multiselect
-   *   Indicates that multiple choices can be answered.
-   *
-   * @return mixed
-   *   The user answer
    */
-  protected function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE) {
+  protected function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE): array|string {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
 
     // The choices can be an associative array.
@@ -306,12 +288,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * Creates a directory asset.
-   *
-   * @param string $path
-   *   (Optional) Directory path.
-   *
-   * @return \DrupalCodeGenerator\Asset\Directory
-   *   The directory asset.
    */
   protected function addDirectory(string $path): Directory {
     return $this->assets[] = new Directory($path);
@@ -319,14 +295,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   /**
    * Creates a file asset.
-   *
-   * @param string $path
-   *   (Optional) File path.
-   * @param string|null $template
-   *   (Optional) Template.
-   *
-   * @return \DrupalCodeGenerator\Asset\File
-   *   The file asset.
    */
   protected function addFile(string $path, ?string $template = NULL): File {
     $asset = new File($path);
@@ -337,13 +305,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Creates a symlink asset.
    *
-   * @param string $path
-   *   Symlink path.
-   * @param string $target
-   *   Symlink target.
-   *
-   * @return \DrupalCodeGenerator\Asset\File
-   *   The file asset.
+   * @noinspection PhpUnused
    */
   protected function addSymlink(string $path, string $target): Symlink {
     $asset = new Symlink($path, $target);
