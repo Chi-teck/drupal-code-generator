@@ -8,25 +8,28 @@ SCRIPTS_DIR=$(dirname "$(readlink -f "$0")");
 SELF_DIR=$(realpath $SCRIPTS_DIR/..)
 SOURCE_DIR=$SELF_DIR/tests/sut
 
-DRUPAL_VERSION=${DRUPAL_VERSION:-}
-if [[ -z $DRUPAL_VERSION ]]; then
-  DRUPAL_VERSION=$(git ls-remote -h https://git.drupalcode.org/project/drupal.git | grep -o '10\..\.x' | tail -n1)
+if [[ -z ${DCG_DRUPAL_VERSION:-} ]]; then
+  DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
+  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\..\.x' | tail -n1)
 fi
-DRUPAL_DIR=${DRUPAL_DIR:-/tmp/dcg_sut/build}
-DRUPAL_CACHE_DIR=${DRUPAL_CACHE_DIR:-/tmp/dcg_sut/cache/$DRUPAL_VERSION}
-DRUPAL_HOST=${DRUPAL_HOST:-127.0.0.1}
-DRUPAL_PORT=${DRUPAL_PORT:-8085}
+
+WORKSPACE_DIR=${DCG_TMP_DIR:-/tmp}/dcg_sut
+DRUPAL_DIR=$WORKSPACE_DIR/drupal
+CACHE_DIR=$WORKSPACE_DIR/cache
+
+DCG_DRUPAL_HOST=${DCG_DRUPAL_HOST:-'127.0.0.1'}
+DCG_DRUPAL_PORT=${DCG_DRUPAL_PORT:-'8085'}
 DCG=$DRUPAL_DIR/vendor/bin/dcg
-WD_URL=${WD_URL:-http://localhost:4444/wd/hub}
-TARGET_TEST=${1:-all}
+DCG_WD_URL=${DCG_WD_URL:-'http://localhost:4444/wd/hub'}
+DCG_TEST_FILTER=${1:-'all'}
 
 echo -----------------------------------------------
-echo ' DRUPAL VERSION:' $DRUPAL_VERSION
+echo ' DRUPAL VERSION:' $DCG_DRUPAL_VERSION
 echo ' DRUPAL DIR:    ' $DRUPAL_DIR
 echo ' DCG:           ' $DCG
 echo ' SOURCE_DIR:    ' $SOURCE_DIR
-echo ' SITE URL:      ' http://$DRUPAL_HOST:$DRUPAL_PORT
-echo ' WD_URL:        ' $WD_URL
+echo ' SITE URL:      ' http://$DCG_DRUPAL_HOST:$DCG_DRUPAL_PORT
+echo ' WD_URL:        ' $DCG_WD_URL
 echo -----------------------------------------------
 
 function dcg_on_exit {
@@ -39,7 +42,6 @@ function dcg_on_exit {
     echo -e "\n\e[0;41m FAIL \e[0m"
   fi
 }
-
 trap dcg_on_exit EXIT
 
 # === Helper functions. === #
@@ -57,9 +59,9 @@ function dcg_phpcs {
 }
 
 function dcg_phpunit {
-  SIMPLETEST_BASE_URL=http://$DRUPAL_HOST:$DRUPAL_PORT \
-  SIMPLETEST_DB=sqlite://localhost//dev/shm/dcg_test.sqlite \
-  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chromeOptions": {"w3c": false, "args": ["--headless"]}}, "'$WD_URL'"]' \
+  SIMPLETEST_BASE_URL=http://$DCG_DRUPAL_HOST:$DCG_DRUPAL_PORT \
+  SIMPLETEST_DB=sqlite://localhost//$DRUPAL_DIR/sites/default/files/dcg_test.sqlite \
+  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chromeOptions": {"w3c": false, "args": ["--headless"]}}, "'$DCG_WD_URL'"]' \
   $DRUPAL_DIR/vendor/bin/phpunit -c $DRUPAL_DIR/core "$@"
 }
 
@@ -69,21 +71,18 @@ function dcg_label {
 
 # === Create a site under testing. === #
 
-# Keep Drupal dir itself because Symfony server is watching it.
 if [[ -d $DRUPAL_DIR ]]; then
-  sudo rm -rf $DRUPAL_DIR/* $DRUPAL_DIR/.[^.]*
-else
-  mkdir -p $DRUPAL_DIR
+  chmod -R 777 $DRUPAL_DIR
+  rm -rf $DRUPAL_DIR
 fi
 
-if [[ -d $DRUPAL_CACHE_DIR ]]; then
+if [[ -d $CACHE_DIR/$DCG_DRUPAL_VERSION ]]; then
   echo '🚩 Install Drupal from cache'
-  rm -r $DRUPAL_DIR
-  cp -r $DRUPAL_CACHE_DIR $DRUPAL_DIR
+  cp -r $CACHE_DIR/$DCG_DRUPAL_VERSION $DRUPAL_DIR
 else
   export COMPOSER_PROCESS_TIMEOUT=1900
   echo '🚩 Clone Drupal core'
-  git clone --depth 1 --branch $DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR
+  git clone --depth 1 --branch $DCG_DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR
   echo '🚩 Install Composer dependencies'
   composer -d$DRUPAL_DIR install
   echo '🚩 Install local DCG'
@@ -97,17 +96,19 @@ else
   cp -R $SOURCE_DIR/dcg_test $DRUPAL_DIR/modules
   dcg_module_install dcg_test
   echo '🚩 Update cache'
-  mkdir -p $DRUPAL_CACHE_DIR
-  cp -r $DRUPAL_DIR/. $DRUPAL_CACHE_DIR
+  if [[ ! -d $CACHE_DIR ]]; then
+    mkdir -p $CACHE_DIR
+  fi
+  cp -r $DRUPAL_DIR $CACHE_DIR/$DCG_DRUPAL_VERSION
 fi
 echo '🚩 Start server'
-symfony server:start --daemon --dir=$DRUPAL_DIR --port=$DRUPAL_PORT --no-tls
+symfony server:start --daemon --dir=$DRUPAL_DIR --port=$DCG_DRUPAL_PORT --no-tls
 export SUT_TEST=1
 
 # === Tests === #
 echo '🚩 Run tests'
 # --- Test forms --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = form ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = form ]]; then
   dcg_label Form
 
   MODULE_MACHINE_NAME=foo
@@ -127,7 +128,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = form ]]; then
 fi
 
 # --- Test module components --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = module_component ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
   dcg_label Module component
 
   MODULE_MACHINE_NAME=bar
@@ -189,7 +190,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = module_component ]]; then
 fi
 
 # --- Test plugins --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = plugin ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
   dcg_label Plugin
 
   MODULE_MACHINE_NAME=qux
@@ -225,7 +226,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = plugin ]]; then
 fi
 
 # --- Test services --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = service ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = service ]]; then
   dcg_label Service
 
   MODULE_MACHINE_NAME=zippo
@@ -257,7 +258,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = service ]]; then
 fi
 
 # --- Test YML --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = yml ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
   dcg_label YML
 
   MODULE_MACHINE_NAME=yety
@@ -278,12 +279,12 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = yml ]]; then
 
   dcg_phpcs $MODULE_DIR
   dcg_module_install $MODULE_MACHINE_NAME
-#  dcg_phpunit tests
+  # dcg_phpunit tests
   dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
 
 # --- Test tests --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = test ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = test ]]; then
   dcg_label Test
 
   MODULE_MACHINE_NAME=xerox
@@ -304,7 +305,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = test ]]; then
 fi
 
 # --- Test theme components --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = theme_component ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme_component ]]; then
   dcg_label Theme component
 
   THEME_MACHINE_NAME=shreya
@@ -323,7 +324,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = theme_component ]]; then
 fi
 
 # --- Test plugin manager --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = plugin_manager ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin_manager ]]; then
   dcg_label Plugin manager
 
   MODULE_MACHINE_NAME=lamda
@@ -342,7 +343,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = plugin_manager ]]; then
 fi
 
 # --- Test configuration entity --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = configuration_entity ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = configuration_entity ]]; then
   dcg_label Configuration entity
 
   MODULE_MACHINE_NAME=wine
@@ -359,7 +360,7 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = configuration_entity ]]; then
 fi
 
 # --- Test content entity --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = content_entity ]]; then
   dcg_label 'Content entity (with bundles and fields)'
 
   MODULE_MACHINE_NAME=nigma
@@ -405,12 +406,12 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = content_entity ]]; then
 
   dcg_phpcs .
   dcg_module_install $MODULE_MACHINE_NAME
-#  dcg_phpunit tests
+  # dcg_phpunit tests
   dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
 
 # --- Test bundle class --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = bundle_class ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = bundle_class ]]; then
   dcg_label 'Bundle classes'
 
   MODULE_MACHINE_NAME=acme
@@ -422,13 +423,13 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = bundle_class ]]; then
 
   dcg_phpcs $MODULE_DIR
   # @todo fix tests.
-  #  dcg_module_install $MODULE_MACHINE_NAME
-  #  dcg_phpunit tests
-  #  dcg_module_uninstall $MODULE_MACHINE_NAME
+  # dcg_module_install $MODULE_MACHINE_NAME
+  # dcg_phpunit tests
+  # dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
 
 # --- Test module --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = module ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module ]]; then
   dcg_label Module
 
   MODULE_MACHINE_NAME=peach
@@ -439,12 +440,12 @@ if [[ $TARGET_TEST = all || $TARGET_TEST = module ]]; then
 
   dcg_phpcs $MODULE_DIR
   dcg_module_install $MODULE_MACHINE_NAME
-  #dcg_phpunit $MODULE_PATH/tests
+  # dcg_phpunit $MODULE_PATH/tests
   dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
 
 # --- Test theme --- #
-if [[ $TARGET_TEST = all || $TARGET_TEST = theme ]]; then
+if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme ]]; then
   dcg_label Theme
 
   THEME_MACHINE_NAME=azalea
