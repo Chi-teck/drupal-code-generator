@@ -50,9 +50,9 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
         map([
+          'action' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
+          'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideStorage',
           'block' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
-          'block_content_type' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
-          'block_content' => '\Drupal\Core\Entity\Sql\SqlContentEntityStorage',
     TXT;
     self::assertStringContainsString($entity_storages, $generated_content);
 

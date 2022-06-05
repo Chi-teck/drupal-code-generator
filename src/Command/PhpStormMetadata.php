@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Exception\RuntimeException;
-use DrupalCodeGenerator\Helper\DrupalContext;
 
 /**
  * Implements phpstorm-metadata command.
@@ -20,10 +18,6 @@ final class PhpStormMetadata extends DrupalGenerator {
    * {@inheritdoc}
    */
   protected function generate(array &$vars): void {
-
-    if (!$this->drupalContext) {
-      throw new RuntimeException('Could not bootstrap Drupal to fetch metadata.');
-    }
 
     $container = $this->drupalContext->getContainer();
 
@@ -50,6 +44,7 @@ final class PhpStormMetadata extends DrupalGenerator {
       /** @var \Drupal\Core\Entity\EntityTypeInterface $definition */
       $vars['entity_classes'][] = $definition->getClass();
       $vars['storages'][$type] = $definition->getStorageClass();
+      \ksort($vars['storages']);
       $vars['access_controls'][$type] = $definition->getAccessControlClass();
       if ($definition->hasViewBuilderClass()) {
         $vars['view_builders'][$type] = $definition->getViewBuilderClass();
@@ -59,7 +54,7 @@ final class PhpStormMetadata extends DrupalGenerator {
       }
     }
 
-    // Some classes does not have leading slash.
+    // Some classes do not have leading slash.
     \array_walk_recursive($vars, static function (string &$class): void {
       if ($class[0] != '\\') {
         $class = '\\' . $class;
@@ -67,13 +62,6 @@ final class PhpStormMetadata extends DrupalGenerator {
     });
 
     $this->addFile('.phpstorm.meta.php', 'phpstorm.meta.php');
-  }
-
-  /**
-   * Setter for Drupal context (for testing).
-   */
-  public function setDrupalContext(DrupalContext $drupal_context): void {
-    $this->drupalContext = $drupal_context;
   }
 
 }
