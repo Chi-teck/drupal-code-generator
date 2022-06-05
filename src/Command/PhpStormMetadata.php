@@ -44,7 +44,6 @@ final class PhpStormMetadata extends DrupalGenerator {
       /** @var \Drupal\Core\Entity\EntityTypeInterface $definition */
       $vars['entity_classes'][] = $definition->getClass();
       $vars['storages'][$type] = $definition->getStorageClass();
-      \ksort($vars['storages']);
       $vars['access_controls'][$type] = $definition->getAccessControlClass();
       if ($definition->hasViewBuilderClass()) {
         $vars['view_builders'][$type] = $definition->getViewBuilderClass();
@@ -60,6 +59,11 @@ final class PhpStormMetadata extends DrupalGenerator {
         $class = '\\' . $class;
       }
     });
+
+    $sort = static function (array $items): void {
+      \sort($items);
+    };
+    \array_walk($vars, $sort);
 
     $this->addFile('.phpstorm.meta.php', 'phpstorm.meta.php');
   }
