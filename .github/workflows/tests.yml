@@ -8,6 +8,9 @@ on:
 
     workflow_dispatch:
 
+env:
+  DCG_TMP_DIR: /dev/shm
+
 jobs:
     tests :
         runs-on: ubuntu-latest
