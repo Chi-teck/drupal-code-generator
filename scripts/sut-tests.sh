@@ -82,7 +82,7 @@ if [[ -d $CACHE_DIR/$DCG_DRUPAL_VERSION ]]; then
 else
   export COMPOSER_PROCESS_TIMEOUT=1900
   echo '🚩 Clone Drupal core'
-  git clone --depth 1 --branch $DCG_DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR
+  git clone --depth 1 --branch $DCG_DRUPAL_VERSION $DRUPAL_REPO $DRUPAL_DIR
   echo '🚩 Install Composer dependencies'
   composer -d$DRUPAL_DIR install
   echo '🚩 Install local DCG'

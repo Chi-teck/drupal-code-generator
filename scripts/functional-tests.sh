@@ -6,18 +6,19 @@ set -Eeuo pipefail
 
 ROOT_DIR=$(realpath "$(dirname $0)")/..
 
-DRUPAL_VERSION=${DRUPAL_VERSION:-}
-if [[ -z $DRUPAL_VERSION ]]; then
-  DRUPAL_VERSION=$(git ls-remote -h https://git.drupalcode.org/project/drupal.git | grep -o '10\..\.x' | tail -n1)
+DCG_DRUPAL_VERSION=${DCG_DRUPAL_VERSION:-}
+if [[ -z $DCG_DRUPAL_VERSION ]]; then
+  DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
+  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\..\.x' | tail -n1)
 fi
-WORKSPACE_DIR=${WORKSPACE_DIR:-/tmp/dcg_functional}
+WORKSPACE_DIR=${DCG_TMP_DIR:-/tmp}/dcg_functional
 DRUPAL_DIR=$WORKSPACE_DIR/drupal
 CACHE_DIR=$WORKSPACE_DIR/cache
 DCG_DIR=$DRUPAL_DIR/vendor/chi-teck/drupal-code-generator
 
 echo -----------------------------------------------
 echo ' DRUPAL PATH:   ' $DRUPAL_DIR
-echo ' DRUPAL VERSION:' $DRUPAL_VERSION
+echo ' DRUPAL VERSION:' $DCG_DRUPAL_VERSION
 echo ' DCG DIR:       ' $DCG_DIR
 echo ' ROOT DIR:      ' $ROOT_DIR
 echo -----------------------------------------------
@@ -27,12 +28,12 @@ if [[ -d $DRUPAL_DIR ]]; then
   rm -rf $DRUPAL_DIR
 fi
 
-if [[ -d $CACHE_DIR/$DRUPAL_VERSION ]]; then
+if [[ -d $CACHE_DIR/$DCG_DRUPAL_VERSION ]]; then
   echo '🚩 Install Drupal from cache'
-  cp -r $CACHE_DIR/$DRUPAL_VERSION $DRUPAL_DIR
+  cp -r $CACHE_DIR/$DCG_DRUPAL_VERSION $DRUPAL_DIR
 else
   echo '🚩 Clone Drupal core'
-  git clone --depth 1 --branch $DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR
+  git clone --depth 1 --branch $DCG_DRUPAL_VERSION $DRUPAL_REPO $DRUPAL_DIR
   echo '🚩 Install Composer dependencies'
   composer -d$DRUPAL_DIR install
   echo '🚩 Install local DCG'
@@ -45,7 +46,7 @@ else
   if [[ ! -d $CACHE_DIR ]]; then
     mkdir -p $CACHE_DIR
   fi
-  cp -r $DRUPAL_DIR $CACHE_DIR/$DRUPAL_VERSION
+  cp -r $DRUPAL_DIR $CACHE_DIR/$DCG_DRUPAL_VERSION
 fi
 
 echo '🚩 Run tests'
