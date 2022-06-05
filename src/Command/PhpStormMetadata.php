@@ -60,8 +60,8 @@ final class PhpStormMetadata extends DrupalGenerator {
       }
     });
 
-    $sort = static function (array $items): void {
-      \sort($items);
+    $sort = static function (array &$items): void {
+      \ksort($items);
     };
     \array_walk($vars, $sort);
 

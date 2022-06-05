@@ -50,9 +50,9 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
         map([
+          'action' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
+          'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideStorage',
           'block' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
-          'block_content_type' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
-          'block_content' => '\Drupal\Core\Entity\Sql\SqlContentEntityStorage',
     TXT;
     self::assertStringContainsString($entity_storages, $generated_content);
 
@@ -71,8 +71,8 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
         \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
         map([
           'block' => '\Drupal\block\BlockListBuilder',
-          'block_content_type' => '\Drupal\block_content\BlockContentTypeListBuilder',
           'block_content' => '\Drupal\block_content\BlockContentListBuilder',
+          'block_content_type' => '\Drupal\block_content\BlockContentTypeListBuilder',
     TXT;
     self::assertStringContainsString($entity_list_builders, $generated_content);
 
@@ -80,9 +80,9 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
         map([
+         'action' => '\Drupal\Core\Entity\EntityAccessControlHandler',
+         'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideAccessControlHandler',
          'block' => '\Drupal\block\BlockAccessControlHandler',
-         'block_content_type' => '\Drupal\Core\Entity\EntityAccessControlHandler',
-         'block_content' => '\Drupal\block_content\BlockContentAccessControlHandler',
     TXT;
     self::assertStringContainsString($access_control_handlers, $generated_content);
 
