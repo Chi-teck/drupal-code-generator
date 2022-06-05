@@ -6,15 +6,16 @@ set -Eeuo pipefail
 
 ROOT_DIR=$(realpath "$(dirname $0)")/..
 
-DCG_DRUPAL_VERSION=${DCG_DRUPAL_VERSION:-}
-if [[ -z $DCG_DRUPAL_VERSION ]]; then
-  DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
-  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\..\.x' | tail -n1)
-fi
 WORKSPACE_DIR=${DCG_TMP_DIR:-/tmp}/dcg_functional
 DRUPAL_DIR=$WORKSPACE_DIR/drupal
 CACHE_DIR=$WORKSPACE_DIR/cache
 DCG_DIR=$DRUPAL_DIR/vendor/chi-teck/drupal-code-generator
+DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
+
+DCG_DRUPAL_VERSION=${DCG_DRUPAL_VERSION:-}
+if [[ -z $DCG_DRUPAL_VERSION ]]; then
+  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\..\.x' | tail -n1)
+fi
 
 echo -----------------------------------------------
 echo ' DRUPAL PATH:   ' $DRUPAL_DIR

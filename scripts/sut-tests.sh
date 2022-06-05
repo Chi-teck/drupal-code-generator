@@ -8,11 +8,6 @@ SCRIPTS_DIR=$(dirname "$(readlink -f "$0")");
 SELF_DIR=$(realpath $SCRIPTS_DIR/..)
 SOURCE_DIR=$SELF_DIR/tests/sut
 
-if [[ -z ${DCG_DRUPAL_VERSION:-} ]]; then
-  DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
-  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\..\.x' | tail -n1)
-fi
-
 WORKSPACE_DIR=${DCG_TMP_DIR:-/tmp}/dcg_sut
 DRUPAL_DIR=$WORKSPACE_DIR/drupal
 CACHE_DIR=$WORKSPACE_DIR/cache
@@ -21,7 +16,12 @@ DCG_DRUPAL_HOST=${DCG_DRUPAL_HOST:-'127.0.0.1'}
 DCG_DRUPAL_PORT=${DCG_DRUPAL_PORT:-'8085'}
 DCG=$DRUPAL_DIR/vendor/bin/dcg
 DCG_WD_URL=${DCG_WD_URL:-'http://localhost:4444/wd/hub'}
+DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
 DCG_TEST_FILTER=${1:-'all'}
+
+if [[ -z ${DCG_DRUPAL_VERSION:-} ]]; then
+  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\..\.x' | tail -n1)
+fi
 
 echo -----------------------------------------------
 echo ' DRUPAL VERSION:' $DCG_DRUPAL_VERSION
@@ -80,7 +80,6 @@ if [[ -d $CACHE_DIR/$DCG_DRUPAL_VERSION ]]; then
   echo '🚩 Install Drupal from cache'
   cp -r $CACHE_DIR/$DCG_DRUPAL_VERSION $DRUPAL_DIR
 else
-  export COMPOSER_PROCESS_TIMEOUT=1900
   echo '🚩 Clone Drupal core'
   git clone --depth 1 --branch $DCG_DRUPAL_VERSION $DRUPAL_REPO $DRUPAL_DIR
   echo '🚩 Install Composer dependencies'
