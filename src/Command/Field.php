@@ -4,6 +4,8 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Validator\Required;
+use DrupalCodeGenerator\Validator\RequiredMachineName;
 
 /**
  * Implements field command.
@@ -119,8 +121,8 @@ final class Field extends ModuleGenerator {
 
     $this->collectDefault($vars);
 
-    $vars['field_label'] = $this->ask('Field label', 'Example', '::validateRequired');
-    $vars['field_id'] = $this->ask('Field ID', '{machine_name}_{field_label|h2m}', '::validateRequiredMachineName');
+    $vars['field_label'] = $this->ask('Field label', 'Example', new Required());
+    $vars['field_id'] = $this->ask('Field ID', '{machine_name}_{field_label|h2m}', new RequiredMachineName());
 
     $subfield_count_validator = static function ($value) {
       if (!\is_numeric($value) || \intval($value) != $value || $value <= 0) {

@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Validator\Required;
 
 /**
  * Implements plugin:action command.
@@ -35,7 +36,7 @@ final class Action extends PluginGenerator {
    * {@inheritdoc}
    */
   protected function askPluginLabelQuestion(): ?string {
-    return $this->ask('Action label', $this->pluginLabelDefault, '::validateRequired');
+    return $this->ask('Action label', $this->pluginLabelDefault, new Required());
   }
 
 }

@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\Command\Console;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\DrupalGenerator;
 use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Validator\RegExp;
 
 /**
  * Implements console:dcg-command command.
@@ -23,8 +24,8 @@ final class DcgCommand extends DrupalGenerator {
    * {@inheritdoc}
    */
   protected function generate(array &$vars): void {
-    $command_name_validator = static fn (?string $value): ?string
-      => self::validate($value, '^[a-z][a-z0-9-_:]*[a-z0-9]$', 'The value is not correct command name.');
+
+    $command_name_validator = new RegExp('/^[a-z][a-z0-9-_:]*[a-z0-9]$/', 'The value is not correct command name.');
     $vars['command_name'] = $this->ask('Command name', 'custom:example', $command_name_validator);
 
     $vars['description'] = $this->ask('Command description');
@@ -32,8 +33,7 @@ final class DcgCommand extends DrupalGenerator {
     $sub_names = \explode(':', $vars['command_name']);
     $short_name = \array_pop($sub_names);
 
-    $alias_validator = static fn (?string $value): ?string
-    => self::validate($value, '^[a-z0-9][a-z0-9_]+$', 'The value is not correct alias name.');
+    $alias_validator = new RegExp('/^[a-z0-9][a-z0-9_]+$/', 'The value is not correct alias name.');
     $vars['alias'] = $this->ask('Command alias', $short_name, $alias_validator);
 
     $vars['class'] = Utils::camelize($short_name);

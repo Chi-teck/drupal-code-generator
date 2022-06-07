@@ -3,6 +3,8 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Validator\Required;
+use DrupalCodeGenerator\Validator\RequiredMachineName;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -41,7 +43,7 @@ final class EntityReferenceSelection extends PluginGenerator {
     $vars['machine_name'] = $this->askMachineName($vars);
 
     $entity_type_question = new Question('Entity type that can be referenced by this plugin', 'node');
-    $entity_type_question->setValidator([self::class, 'validateRequiredMachineName']);
+    $entity_type_question->setValidator(new RequiredMachineName());
     $entity_type_question->setAutocompleterValues(\array_keys(self::baseClasses()));
     $vars['entity_type'] = $this->io->askQuestion($entity_type_question);
 
@@ -54,7 +56,7 @@ final class EntityReferenceSelection extends PluginGenerator {
    * Asks plugin label question.
    */
   protected function askPluginLabelQuestion(): ?string {
-    return $this->ask('Plugin label', 'Advanced {entity_type} selection', '::validateRequired');
+    return $this->ask('Plugin label', 'Advanced {entity_type} selection', new Required());
   }
 
   /**

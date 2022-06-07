@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Validator\Required;
 
 /**
  * Implements yml:module-info command.
@@ -21,7 +22,7 @@ final class ModuleInfo extends ModuleGenerator {
    */
   protected function generate(array &$vars): void {
     $this->collectDefault($vars);
-    $vars['description'] = $this->ask('Description', 'Module description.', '::validateRequired');
+    $vars['description'] = $this->ask('Description', 'Module description.', new Required());
     $vars['package'] = $this->ask('Package', 'Custom');
     $vars['configure'] = $this->ask('Configuration page (route name)');
     $vars['dependencies'] = $this->ask('Dependencies (comma separated)');

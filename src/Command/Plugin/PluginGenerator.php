@@ -4,6 +4,8 @@ namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Validator\Required;
+use DrupalCodeGenerator\Validator\RequiredMachineName;
 
 /**
  * Base class for plugin generators.
@@ -26,14 +28,14 @@ abstract class PluginGenerator extends ModuleGenerator {
    * Asks plugin label question.
    */
   protected function askPluginLabelQuestion(): ?string {
-    return $this->ask('Plugin label', 'Example', '::validateRequired');
+    return $this->ask('Plugin label', 'Example', new Required());
   }
 
   /**
    * Asks plugin ID question.
    */
   protected function askPluginIdQuestion(): ?string {
-    return $this->ask('Plugin ID', '{machine_name}_{plugin_label|h2m}', '::validateRequiredMachineName');
+    return $this->ask('Plugin ID', '{machine_name}_{plugin_label|h2m}', new RequiredMachineName());
   }
 
   /**

@@ -4,6 +4,9 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Validator\Chained;
+use DrupalCodeGenerator\Validator\MachineName;
+use DrupalCodeGenerator\Validator\Required;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -103,7 +106,7 @@ abstract class DrupalGenerator extends Generator {
    */
   protected function askName(): string {
     $question = new Question($this->nameQuestion);
-    $question->setValidator([static::class, 'validateRequired']);
+    $question->setValidator(new Required());
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
       $question->setAutocompleterValues($extensions);
     }
@@ -116,7 +119,7 @@ abstract class DrupalGenerator extends Generator {
   protected function askMachineName(array $vars): string {
     $default_value = isset($vars['name']) ? Utils::human2machine($vars['name']) : NULL;
     $question = new Question($this->machineNameQuestion, $default_value);
-    $question->setValidator([static::class, 'validateRequiredMachineName']);
+    $question->setValidator(new Chained(new Required(), new MachineName()));
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
       $question->setAutocompleterValues(\array_keys($extensions));
     }

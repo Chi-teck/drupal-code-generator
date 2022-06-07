@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Validator\Required;
 
 /**
  * Implements plugin:block command.
@@ -39,7 +40,7 @@ final class Block extends PluginGenerator {
    * {@inheritdoc}
    */
   protected function askPluginLabelQuestion(): ?string {
-    return $this->ask('Block admin label', 'Example', '::validateRequired');
+    return $this->ask('Block admin label', 'Example', new Required());
   }
 
 }

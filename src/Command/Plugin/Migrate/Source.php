@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Command\Plugin\Migrate;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
+use DrupalCodeGenerator\Validator\RequiredMachineName;
 
 /**
  * Implements plugin:migrate:source command.
@@ -42,7 +43,7 @@ final class Source extends PluginGenerator {
    * {@inheritdoc}
    */
   protected function askPluginIdQuestion(): ?string {
-    return $this->ask('Plugin ID', '{machine_name}_example', '::validateRequiredMachineName');
+    return $this->ask('Plugin ID', '{machine_name}_example', new RequiredMachineName());
   }
 
 }

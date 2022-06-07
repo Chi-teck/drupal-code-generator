@@ -4,6 +4,8 @@ namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ThemeGenerator;
+use DrupalCodeGenerator\Validator\Required;
+use DrupalCodeGenerator\Validator\RequiredMachineName;
 
 /**
  * Implements yml:theme-info command.
@@ -21,8 +23,8 @@ final class ThemeInfo extends ThemeGenerator {
    */
   protected function generate(array &$vars): void {
     $this->collectDefault($vars);
-    $vars['base_theme'] = $this->ask('Base theme', 'classy', '::validateRequiredMachineName');
-    $vars['description'] = $this->ask('Description', 'A flexible theme with a responsive, mobile-first layout.', '::validateRequired');
+    $vars['base_theme'] = $this->ask('Base theme', 'classy', new RequiredMachineName());
+    $vars['description'] = $this->ask('Description', 'A flexible theme with a responsive, mobile-first layout.', new Required());
     $vars['package'] = $this->ask('Package', 'Custom');
     $this->addFile('{machine_name}.info.yml', 'theme-info');
   }

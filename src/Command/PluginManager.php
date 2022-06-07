@@ -3,6 +3,8 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Validator\Chained;
+use DrupalCodeGenerator\Validator\Required;
 
 /**
  * Implements plugin-manager command.
@@ -22,13 +24,12 @@ final class PluginManager extends ModuleGenerator {
     // self::validateMachineName() does not allow dots, but they can appear
     // in some plugin types (field.widget, views.argument, etc).
     $plugin_type_validator = static function (string $value): string {
-      $value = self::validateRequired($value);
       if (!\preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
         throw new \UnexpectedValueException('The value is not correct machine name.');
       }
       return $value;
     };
-    $vars['plugin_type'] = $this->ask('Plugin type', '{machine_name}', $plugin_type_validator);
+    $vars['plugin_type'] = $this->ask('Plugin type', '{machine_name}', new Chained(new Required(), $plugin_type_validator));
 
     $discovery_types = [
       'annotation' => 'Annotation',

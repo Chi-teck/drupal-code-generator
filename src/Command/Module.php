@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Validator\Required;
 
 /**
  * Implements module command.
@@ -20,7 +21,7 @@ final class Module extends ModuleGenerator {
   protected function generate(array &$vars): void {
     $this->collectDefault($vars);
 
-    $vars['description'] = $this->ask('Module description', 'Provides additional functionality for the site.', '::validateRequired');
+    $vars['description'] = $this->ask('Module description', 'Provides additional functionality for the site.', new Required());
     $vars['package'] = $this->ask('Package', 'Custom');
 
     $dependencies = $this->ask('Dependencies (comma separated)');

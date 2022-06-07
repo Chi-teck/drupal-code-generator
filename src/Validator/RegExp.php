@@ -1,0 +1,23 @@
+<?php declare(strict_types=1);
+
+namespace DrupalCodeGenerator\Validator;
+
+/**
+ * Validates whether a value match or not given regexp pattern.
+ */
+final class RegExp {
+
+  public function __construct(
+    readonly private string $pattern,
+    readonly private ?string $message = NULL,
+  ) {}
+
+  public function __invoke(mixed $value): string {
+    if (!\is_string($value) || !\preg_match($this->pattern, $value)) {
+      $message = $this->message ?? \sprintf('The value does not match pattern "%s"', $this->pattern);
+      throw new \UnexpectedValueException($message);
+    }
+    return $value;
+  }
+
+}

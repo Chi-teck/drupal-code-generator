@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Command\Test;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Validator\RequiredClassName;
 
 /**
  * Implements test:browser command.
@@ -20,7 +21,7 @@ final class Browser extends ModuleGenerator {
    */
   protected function generate(array &$vars): void {
     $this->collectDefault($vars);
-    $vars['class'] = $this->ask('Class', 'ExampleTest', '::validateRequiredClassName');
+    $vars['class'] = $this->ask('Class', 'ExampleTest', new RequiredClassName());
     $this->addFile('tests/src/Functional/{class}.php', 'browser');
   }
 

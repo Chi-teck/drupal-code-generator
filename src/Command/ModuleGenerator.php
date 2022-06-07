@@ -4,6 +4,8 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\Asset;
+use DrupalCodeGenerator\Validator\Optional;
+use DrupalCodeGenerator\Validator\ServiceName;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -66,7 +68,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
     $services = [];
     while (TRUE) {
       $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
-      $question->setValidator([static::class, 'validateServiceName']);
+      $question->setValidator(new Optional(new ServiceName()));
       $question->setAutocompleterValues($service_ids);
       $service = $this->io()->askQuestion($question);
       if (!$service) {

@@ -5,6 +5,8 @@ namespace DrupalCodeGenerator\Command\Service;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Validator\RequiredClassName;
+use DrupalCodeGenerator\Validator\RequiredServiceName;
 
 /**
  * Implements service:custom command.
@@ -22,10 +24,10 @@ final class Custom extends ModuleGenerator {
    */
   protected function generate(array &$vars): void {
     $this->collectDefault($vars);
-    $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', '::validateRequiredServiceName');
+    $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', new RequiredServiceName());
 
     $service = \preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
-    $vars['class'] = $this->ask('Class', Utils::camelize($service), '::validateRequiredClassName');
+    $vars['class'] = $this->ask('Class', Utils::camelize($service), new RequiredClassName());
 
     $this->collectServices($vars);
 
