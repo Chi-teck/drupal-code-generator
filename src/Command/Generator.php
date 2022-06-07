@@ -31,32 +31,12 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   use IOAwareTrait;
   use LoggerAwareTrait;
   use ValidatorTrait;
+  use LegacyTrait;
 
   /**
    * The API version.
    */
   protected static int $api;
-
-  /**
-   * The command name.
-   *
-   * @deprecated
-   */
-  protected string $name;
-
-  /**
-   * The command description.
-   *
-   * @deprecated
-   */
-  protected string $description;
-
-  /**
-   * The command alias.
-   *
-   * @deprecated
-   */
-  protected string $alias = '';
 
   /**
    * A human-readable name of the generator.
@@ -87,27 +67,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * @var array
    */
   private array $vars;
-
-  /**
-   * {@inheritdoc}
-   *
-   * @noinspection PhpDeprecationInspection
-   */
-  protected function configure(): void {
-    parent::configure();
-    if (isset($this->name)) {
-      @\trigger_error('Generator::name property is deprecated. Use PHP attributes instead.', \E_USER_DEPRECATED);
-      $this->setName($this->name);
-    }
-    if (isset($this->description)) {
-      @\trigger_error('Generator::description property is deprecated. Use PHP attributes instead.', \E_USER_DEPRECATED);
-      $this->setDescription($this->description);
-    }
-    if ($this->alias) {
-      @\trigger_error('Generator::alias property is deprecated. Use PHP attributes instead.', \E_USER_DEPRECATED);
-      $this->setAliases([$this->alias]);
-    }
-  }
 
   /**
    * {@inheritdoc}
