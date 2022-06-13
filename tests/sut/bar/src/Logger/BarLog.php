@@ -15,7 +15,7 @@ final class BarLog extends DbLog {
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = []) {
+  public function log($level, string|\Stringable $message, array $context = []): void {
     \Drupal::messenger()->addStatus($this->t('Bar logger is active.'));
     parent::log($level, $message, $context);
   }

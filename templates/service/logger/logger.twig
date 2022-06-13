@@ -56,7 +56,7 @@ class {{ class }} implements LoggerInterface {
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = []) {
+  public function log($level, string|\Stringable $message, array $context = []): void {
 
     // Populate the message placeholders and then replace them in the message.
     $message_placeholders = $this->parser->parseMessagePlaceholders($message, $context);
