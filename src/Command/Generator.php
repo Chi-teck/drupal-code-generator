@@ -8,6 +8,8 @@ use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
+use DrupalCodeGenerator\GeneratorDefinition;
+use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Interviewer\Interviewer;
 use DrupalCodeGenerator\IOAwareInterface;
@@ -152,6 +154,21 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Generates assets.
    */
   abstract protected function generate(array &$vars): void;
+
+  protected function getGeneratorDefinition(): GeneratorDefinition {
+    // Detect type from legacy properties.
+    if ($this instanceof DrupalGenerator) {
+      $type = match ($this->extensionType) {
+        DrupalGenerator::EXTENSION_TYPE_MODULE => $this->isNewExtension ? GeneratorType::MODULE : GeneratorType::MODULE_COMPONENT,
+        DrupalGenerator::EXTENSION_TYPE_THEME => $this->isNewExtension ? GeneratorType::THEME : GeneratorType::THEME_COMPONENT,
+      };
+    }
+    return new GeneratorDefinition(
+      type: $type,
+      templatePath: $this->templatePath,
+      label: \method_exists($this, 'getLabel') ? $this->getLabel() : NULL,
+    );
+  }
 
   protected function createInterviewer(array &$vars): Interviewer {
     return new Interviewer(
