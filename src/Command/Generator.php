@@ -9,6 +9,7 @@ use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\Helper\DumperOptions;
+use DrupalCodeGenerator\Interviewer\Interviewer;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
@@ -20,7 +21,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ChoiceQuestion;
 
 /**
  * Base class for code generators.
@@ -153,6 +153,15 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   abstract protected function generate(array &$vars): void;
 
+  protected function createInterviewer(array &$vars): Interviewer {
+    return new Interviewer(
+      $this->io,
+      $vars,
+      $this->getGeneratorDefinition(),
+      $this->getHelper('module_info'),
+    );
+  }
+
   /**
    * Render assets.
    */
@@ -194,55 +203,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   public function getLabel(): string {
     return $this->label;
-  }
-
-  /**
-   * Asks a question.
-   */
-  protected function ask(string $question, ?string $default = NULL, string|callable|NULL $validator = NULL): mixed {
-    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
-    if ($default) {
-      $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
-    }
-
-    // Allow the validators to be referenced in a short form like
-    // '::validateMachineName'.
-    if (\is_string($validator) && \str_starts_with($validator, '::')) {
-      $validator = [static::class, \substr($validator, 2)];
-    }
-    return $this->io->ask($question, $default, $validator);
-  }
-
-  /**
-   * Asks for confirmation.
-   */
-  protected function confirm(string $question, bool $default = TRUE): bool {
-    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
-    return $this->io->confirm($question, $default);
-  }
-
-  /**
-   * Asks a choice question.
-   */
-  protected function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE): array|string {
-    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
-
-    // The choices can be an associative array.
-    $choice_labels = \array_values($choices);
-    // Start choices list form '1'.
-    \array_unshift($choice_labels, NULL);
-    unset($choice_labels[0]);
-
-    $question = new ChoiceQuestion($question, $choice_labels, $default);
-    $question->setMultiselect($multiselect);
-
-    // Do not use IO choice here as it prints choice key as default value.
-    // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
-    $answer = $this->io->askQuestion($question);
-
-    // @todo Create a test for this.
-    $get_key = static fn (string $answer): string => \array_search($answer, $choices);
-    return \is_array($answer) ? \array_map($get_key, $answer) : $get_key($answer);
   }
 
   /**

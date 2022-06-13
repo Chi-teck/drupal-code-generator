@@ -1,0 +1,110 @@
+<?php declare(strict_types=1);
+
+namespace DrupalCodeGenerator\Interviewer;
+
+use DrupalCodeGenerator\Command\GeneratorDefinition;
+use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
+use DrupalCodeGenerator\Style\GeneratorStyleInterface;
+use DrupalCodeGenerator\Utils;
+use DrupalCodeGenerator\Validator\Chained;
+use DrupalCodeGenerator\Validator\MachineName;
+use DrupalCodeGenerator\Validator\Required;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\Question;
+
+/**
+ * Defines a helper to interact with a user.
+ */
+final class Interviewer {
+
+  public function __construct(
+    private readonly GeneratorStyleInterface $io,
+    private readonly array &$vars,
+    private readonly GeneratorDefinition $generatorDefinition,
+    private readonly ModuleInfo $moduleInfo,
+  ) {}
+
+  public function askQuestion(Question $question): mixed {
+    $answer = $this->io->askQuestion($question);
+    if (\is_string($answer)) {
+      $answer = Utils::addSlashes($answer);
+    }
+    return $answer;
+  }
+
+  /**
+   * Asks a question.
+   */
+  public function ask(string $question, ?string $default = NULL, string|callable|NULL $validator = NULL): mixed {
+    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
+    if ($default) {
+      $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
+    }
+
+    // Allow the validators to be referenced in a short form like
+    // '::validateMachineName'.
+    // @todo Remove this.
+    if (\is_string($validator) && \str_starts_with($validator, '::')) {
+      $validator = [self::class, \substr($validator, 2)];
+    }
+    return $this->io->ask($question, $default, $validator);
+  }
+
+  /**
+   * Asks for confirmation.
+   */
+  public function confirm(string $question, bool $default = TRUE): bool {
+    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
+    return $this->io->confirm($question, $default);
+  }
+
+  /**
+   * Asks a choice question.
+   */
+  public function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE): array|string {
+    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
+
+    // The choices can be an associative array.
+    $choice_labels = \array_values($choices);
+    // Start choices list form '1'.
+    \array_unshift($choice_labels, NULL);
+    unset($choice_labels[0]);
+
+    $question = new ChoiceQuestion($question, $choice_labels, $default);
+    $question->setMultiselect($multiselect);
+
+    // Do not use IO choice here as it prints choice key as default value.
+    // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
+    $answer = $this->io->askQuestion($question);
+
+    // @todo Create a test for this.
+    $get_key = static fn (string $answer): string => \array_search($answer, $choices);
+    return \is_array($answer) ? \array_map($get_key, $answer) : $get_key($answer);
+  }
+
+  /**
+   * Asks name question.
+   */
+  public function askName(): string {
+    $question = new Question('Module name');
+    $question->setValidator(new Required());
+    if (!$this->generatorDefinition->isNew && $extensions = $this->moduleInfo->getModules()) {
+      $question->setAutocompleterValues($extensions);
+    }
+    return $this->io->askQuestion($question);
+  }
+
+  /**
+   * Asks machine name question.
+   */
+  public function askMachineName(array $vars): string {
+    $default_value = isset($vars['name']) ? Utils::human2machine($vars['name']) : NULL;
+    $question = new Question('Machine name', $default_value);
+    $question->setValidator(new Chained(new Required(), new MachineName()));
+    if (!$this->generatorDefinition->isNew && $extensions = $this->moduleInfo->getModules()) {
+      $question->setAutocompleterValues(\array_keys($extensions));
+    }
+    return $this->io->askQuestion($question);
+  }
+
+}
