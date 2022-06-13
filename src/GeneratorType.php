@@ -17,4 +17,11 @@ enum GeneratorType {
   case THEME_COMPONENT;
   case OTHER;
 
+  public function isNewExtension(): bool {
+    return match ($this) {
+      self::MODULE, self::THEME => TRUE,
+      default => FALSE,
+    };
+  }
+
 }

@@ -17,16 +17,19 @@ final class Controller extends ModuleGenerator {
    * {@inheritdoc}
    */
   protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['class'] = $this->ask('Class', '{machine_name|camelize}Controller');
+    $interviewer = $this->createInterviewer($vars);
+
+    $vars['machine_name'] = $interviewer->askMachineName();
+    $vars['name'] = '{machine_name|m2h}';
+    $vars['class'] = $interviewer->ask('Class', '{machine_name|camelize}Controller');
 
     $this->collectServices($vars, FALSE);
 
-    if ($this->confirm('Would you like to create a route for this controller?')) {
-      $vars['route_name'] = $this->ask('Route name', '{machine_name}.example');
-      $vars['route_path'] = $this->ask('Route path', '/{machine_name|u2h}/example');
-      $vars['route_title'] = $this->ask('Route title', 'Example');
-      $vars['route_permission'] = $this->ask('Route permission', 'access content');
+    if ($interviewer->confirm('Would you like to create a route for this controller?')) {
+      $vars['route_name'] = $interviewer->ask('Route name', '{machine_name}.example');
+      $vars['route_path'] = $interviewer->ask('Route path', '/{machine_name|u2h}/example');
+      $vars['route_title'] = $interviewer->ask('Route title', 'Example');
+      $vars['route_permission'] = $interviewer->ask('Route permission', 'access content');
       $this->addFile('{machine_name}.routing.yml', 'route')->appendIfExists();
     }
 

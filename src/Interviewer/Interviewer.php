@@ -2,8 +2,10 @@
 
 namespace DrupalCodeGenerator\Interviewer;
 
-use DrupalCodeGenerator\Command\GeneratorDefinition;
+use DrupalCodeGenerator\GeneratorDefinition;
+use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
+use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\Chained;
@@ -22,6 +24,7 @@ final class Interviewer {
     private readonly array &$vars,
     private readonly GeneratorDefinition $generatorDefinition,
     private readonly ModuleInfo $moduleInfo,
+    private readonly ThemeInfo $themeInfo,
   ) {}
 
   public function askQuestion(Question $question): mixed {
@@ -86,24 +89,68 @@ final class Interviewer {
    * Asks name question.
    */
   public function askName(): string {
-    $question = new Question('Module name');
-    $question->setValidator(new Required());
-    if (!$this->generatorDefinition->isNew && $extensions = $this->moduleInfo->getModules()) {
-      $question->setAutocompleterValues($extensions);
+
+    $question_str = match ($this->generatorDefinition->type) {
+      GeneratorType::MODULE_COMPONENT => 'Module name',
+      GeneratorType::THEME_COMPONENT => 'Theme name',
+      default => 'Name',
+    };
+
+    $default_value = NULL;
+    if (isset($this->vars['machine_name'])) {
+      if ($this->generatorDefinition->type->isNewExtension()) {
+        $default_value = Utils::machine2human($this->vars['machine_name']);
+      }
+      else {
+        $default_value = match ($this->generatorDefinition->type) {
+          GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModules()[$this->vars['machine_name']],
+          GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemes()[$this->vars['machine_name']],
+          default => NULL,
+        };
+      }
     }
+
+    $question = new Question($question_str, $default_value);
+    $question->setValidator(new Required());
     return $this->io->askQuestion($question);
   }
 
   /**
    * Asks machine name question.
    */
-  public function askMachineName(array $vars): string {
-    $default_value = isset($vars['name']) ? Utils::human2machine($vars['name']) : NULL;
-    $question = new Question('Machine name', $default_value);
+  public function askMachineName(): string {
+
+    $default_value = NULL;
+    if (isset($this->vars['name'])) {
+      if ($this->generatorDefinition->type->isNewExtension()) {
+        $default_value = Utils::human2machine($this->vars['name']);
+      }
+      else {
+        $default_value = match ($this->generatorDefinition->type) {
+          GeneratorType::MODULE_COMPONENT => \array_search($this->vars['name'], $this->moduleInfo->getModules()),
+          GeneratorType::THEME_COMPONENT => \array_search($this->vars['name'], $this->themeInfo->getThemes()),
+          default => NULL,
+        };
+      }
+    }
+
+    $question_str = match ($this->generatorDefinition->type) {
+      GeneratorType::MODULE_COMPONENT => 'Module machine name',
+      GeneratorType::THEME_COMPONENT => 'Theme machine name',
+      default => 'Machine name',
+    };
+    $question = new Question($question_str, $default_value);
     $question->setValidator(new Chained(new Required(), new MachineName()));
-    if (!$this->generatorDefinition->isNew && $extensions = $this->moduleInfo->getModules()) {
+
+    $extensions = match ($this->generatorDefinition->type) {
+      GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModules(),
+      GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemes(),
+      default => [],
+    };
+    if ($extensions) {
       $question->setAutocompleterValues(\array_keys($extensions));
     }
+
     return $this->io->askQuestion($question);
   }
 

@@ -172,10 +172,11 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   protected function createInterviewer(array &$vars): Interviewer {
     return new Interviewer(
-      $this->io,
-      $vars,
-      $this->getGeneratorDefinition(),
-      $this->getHelper('module_info'),
+      io: $this->io,
+      vars: $vars,
+      generatorDefinition: $this->getGeneratorDefinition(),
+      moduleInfo: $this->getHelper('module_info'),
+      themeInfo: $this->getHelper('theme_info'),
     );
   }
 
