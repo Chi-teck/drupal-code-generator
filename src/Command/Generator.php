@@ -278,7 +278,14 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    * Returns destination for generated files.
    */
   protected function getDestination(array $vars): ?string {
-    return $this->directory;
+    // @todo Figure out the case when machine name is not provided.
+    return match ($this->extensionType) {
+      DrupalGenerator::EXTENSION_TYPE_MODULE => $this->getHelper('module_info')
+        ->getDestination($this->isNewExtension, $vars['machine_name']),
+      DrupalGenerator::EXTENSION_TYPE_THEME => $this->getHelper('theme_info')
+        ->getDestination($this->isNewExtension, $vars['machine_name']),
+      default => $this->directory,
+    };
   }
 
   /**
