@@ -61,20 +61,10 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   protected AssetCollection $assets;
 
   /**
-   * Twig template variables.
-   *
-   * @var array
-   */
-  private array $vars;
-
-  /**
    * {@inheritdoc}
    */
   protected function initialize(InputInterface $input, OutputInterface $output): void {
     parent::initialize($input, $output);
-
-    // Use class property to make vars available for IO helpers.
-    $this->vars = $this->getDefaultVars();
 
     $this->assets = new AssetCollection();
 
@@ -120,7 +110,7 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     try {
       $this->printHeader();
 
-      $vars = &$this->vars;
+      $vars = [];
       $this->generate($vars);
 
       $vars = self::processVars($vars);
@@ -286,13 +276,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
         ->getDestination($this->isNewExtension, $vars['machine_name']),
       default => $this->directory,
     };
-  }
-
-  /**
-   * Returns default template variables.
-   */
-  protected function getDefaultVars(): array {
-    return [];
   }
 
 }
