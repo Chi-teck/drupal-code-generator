@@ -18,10 +18,7 @@ enum GeneratorType {
   case OTHER;
 
   public function isNewExtension(): bool {
-    return match ($this) {
-      self::MODULE, self::THEME => TRUE,
-      default => FALSE,
-    };
+    return $this === self::MODULE || $this === self::THEME;
   }
 
 }
