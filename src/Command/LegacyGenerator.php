@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\Application;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
@@ -17,20 +17,19 @@ use DrupalCodeGenerator\IOAwareTrait;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Utils;
-use DrupalCodeGenerator\Validator\Optional;
-use DrupalCodeGenerator\Validator\ServiceName;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Base class for code generators.
+ *
+ * @deprecated
  */
-abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
+abstract class LegacyGenerator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface, ContainerInjectionInterface {
 
   use IOAwareTrait;
   use LoggerAwareTrait;
@@ -104,9 +103,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       $this->getHelper('renderer')->prependPath($this->templatePath);
     }
 
-    // @todo Remove this.
-    $this->drupalContext = $this->getHelper('drupal_context');
-
     $this->directory = $input->getOption('working-dir') ?: \getcwd();
 
     $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
@@ -163,11 +159,13 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
   protected function getGeneratorDefinition(): GeneratorDefinition {
     // Detect type from legacy properties.
-    $type = match ($this->extensionType) {
-      DrupalGenerator::EXTENSION_TYPE_MODULE => $this->isNewExtension ? GeneratorType::MODULE : GeneratorType::MODULE_COMPONENT,
-      DrupalGenerator::EXTENSION_TYPE_THEME => $this->isNewExtension ? GeneratorType::THEME : GeneratorType::THEME_COMPONENT,
-      default => GeneratorType::OTHER,
-    };
+    $type = GeneratorType::OTHER;
+    if ($this instanceof DrupalGenerator) {
+      $type = match ($this->extensionType) {
+        DrupalGenerator::EXTENSION_TYPE_MODULE => $this->isNewExtension ? GeneratorType::MODULE : GeneratorType::MODULE_COMPONENT,
+        DrupalGenerator::EXTENSION_TYPE_THEME => $this->isNewExtension ? GeneratorType::THEME : GeneratorType::THEME_COMPONENT,
+      };
+    }
     return new GeneratorDefinition(
       type: $type,
       templatePath: $this->templatePath,
@@ -289,110 +287,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
    */
   protected function getDefaultVars(): array {
     return [];
-  }
-
-  /**
-   * Collects services.
-   *
-   * @param array $vars
-   *   Template variables.
-   * @param bool $default
-   *   (Optional) Default value for the confirmation question.
-   *
-   * @return array
-   *   List of collected services.
-   */
-  protected function collectServices(array &$vars, bool $default = TRUE): array {
-
-    if (!$this->io->confirm('Would you like to inject dependencies?', $default)) {
-      return $vars['services'] = [];
-    }
-
-    $service_ids = $this->getServiceIds();
-
-    $services = [];
-    while (TRUE) {
-      $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
-      $question->setValidator(new Optional(new ServiceName()));
-      $question->setAutocompleterValues($service_ids);
-      $service = $this->io()->askQuestion($question);
-      if (!$service) {
-        break;
-      }
-      $services[] = $service;
-    }
-
-    $vars['services'] = [];
-    foreach (\array_unique($services) as $service_id) {
-      $vars['services'][$service_id] = $this->getServiceDefinition($service_id);
-    }
-    return $vars['services'];
-  }
-
-  /**
-   * Gets service definitions.
-   *
-   * @return array
-   *   List of service IDs.
-   */
-  protected function getServiceIds(): array {
-    if ($this->drupalContext) {
-      $data = $this->drupalContext->getServicesIds();
-    }
-    else {
-      $service_definitions = self::getDumpedServiceDefinitions();
-      $data = \array_keys($service_definitions);
-    }
-    return $data;
-  }
-
-  /**
-   * Gets service definitions.
-   *
-   * @param string $service_id
-   *   The service ID.
-   *
-   * @return array
-   *   Service definition or null if service is unknown.
-   */
-  protected function getServiceDefinition(string $service_id): array {
-    // @todo Fetch service information runtime.
-    $service_definitions = self::getDumpedServiceDefinitions();
-    if (isset($service_definitions[$service_id])) {
-      $definition = $service_definitions[$service_id];
-    }
-    else {
-      // Make up service definition.
-      $name_parts = \explode('.', $service_id);
-      $definition = [
-        'name' => \end($name_parts),
-        'type' => 'Drupal\example\ExampleInterface',
-        'description' => "The $service_id service.",
-      ];
-
-      // Try to guess correct type of service instance.
-      $compiled_definition = $this->drupalContext->getServiceDefinition($service_id);
-      if ($compiled_definition && isset($compiled_definition['class'])) {
-        $interface = $compiled_definition['class'] . 'Interface';
-        $definition['type'] = \interface_exists($interface) ? $interface : $compiled_definition['class'];
-      }
-    }
-
-    $type_parts = \explode('\\', $definition['type']);
-    $definition['short_type'] = \end($type_parts);
-
-    return $definition;
-  }
-
-  /**
-   * Gets service definitions.
-   *
-   * @return array
-   *   List of service definitions keyed by service ID.
-   */
-  private static function getDumpedServiceDefinitions(): array {
-    $data_encoded = \file_get_contents(Application::ROOT . '/resources/service-definitions.json');
-    return \json_decode($data_encoded, TRUE);
   }
 
 }

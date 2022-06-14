@@ -28,7 +28,7 @@ final class GeneratorFactoryTest extends TestCase {
       '\DrupalCodeGenerator\Command\Misc',
     );
     foreach ($generators as $generator) {
-      self::assertInstanceOf('DrupalCodeGenerator\Command\Generator', $generator);
+      self::assertInstanceOf('DrupalCodeGenerator\Command\LegacyGenerator', $generator);
     }
     self::assertCount(self::TOTAL_GENERATORS, $generators);
 

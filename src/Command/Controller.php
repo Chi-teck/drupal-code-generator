@@ -9,9 +9,11 @@ use Symfony\Component\Console\Attribute\AsCommand;
  * Implements controller command.
  */
 #[AsCommand('controller', 'Generates a controller')]
-final class Controller extends ModuleGenerator {
+final class Controller extends Generator {
 
   protected string $templatePath = Application::TEMPLATE_PATH . '/controller';
+  protected ?int $extensionType = DrupalGenerator::EXTENSION_TYPE_MODULE;
+  protected bool $isNewExtension = FALSE;
 
   /**
    * {@inheritdoc}

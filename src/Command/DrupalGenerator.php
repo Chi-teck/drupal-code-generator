@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Base class for Drupal generators.
  */
-abstract class DrupalGenerator extends Generator {
+abstract class DrupalGenerator extends LegacyGenerator {
 
   public const EXTENSION_TYPE_MODULE = 0x01;
   public const EXTENSION_TYPE_THEME = 0x02;
