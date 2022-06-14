@@ -25,7 +25,7 @@ final class Controller extends Generator {
     $vars['name'] = '{machine_name|m2h}';
     $vars['class'] = $interviewer->ask('Class', '{machine_name|camelize}Controller');
 
-    $this->collectServices($vars, FALSE);
+    $vars['services'] = $interviewer->askServices(FALSE);
 
     if ($interviewer->confirm('Would you like to create a route for this controller?')) {
       $vars['route_name'] = $interviewer->ask('Route name', '{machine_name}.example');

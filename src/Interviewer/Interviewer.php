@@ -2,15 +2,19 @@
 
 namespace DrupalCodeGenerator\Interviewer;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\GeneratorDefinition;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
+use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\Chained;
 use DrupalCodeGenerator\Validator\MachineName;
+use DrupalCodeGenerator\Validator\Optional;
 use DrupalCodeGenerator\Validator\Required;
+use DrupalCodeGenerator\Validator\ServiceName;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
@@ -25,6 +29,7 @@ final class Interviewer {
     private readonly GeneratorDefinition $generatorDefinition,
     private readonly ModuleInfo $moduleInfo,
     private readonly ThemeInfo $themeInfo,
+    private readonly ServiceInfo $serviceInfo,
   ) {}
 
   public function askQuestion(Question $question): mixed {
@@ -152,6 +157,85 @@ final class Interviewer {
     }
 
     return $this->io->askQuestion($question);
+  }
+
+  /**
+   * Collects services.
+   */
+  public function askServices(bool $default = TRUE): array {
+
+    if (!$this->io->confirm('Would you like to inject dependencies?', $default)) {
+      return [];
+    }
+
+    $service_ids = $this->serviceInfo->getServicesIds();
+
+    $services = [];
+    while (TRUE) {
+      $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
+      $question->setValidator(new Optional(new ServiceName()));
+      $question->setAutocompleterValues($service_ids);
+      $service = $this->io->askQuestion($question);
+      if (!$service) {
+        break;
+      }
+      $services[] = $service;
+    }
+
+    $definitions = [];
+    foreach (\array_unique($services) as $service_id) {
+      $definitions[$service_id] = $this->getServiceDefinition($service_id);
+    }
+    return $definitions;
+  }
+
+  /**
+   * Gets service definitions.
+   *
+   * @param string $service_id
+   *   The service ID.
+   *
+   * @return array
+   *   Service definition or null if service is unknown.
+   */
+  protected function getServiceDefinition(string $service_id): array {
+    // @todo Fetch service information runtime.
+    $service_definitions = self::getDumpedServiceDefinitions();
+    if (isset($service_definitions[$service_id])) {
+      $definition = $service_definitions[$service_id];
+    }
+    else {
+      // Make up service definition.
+      $name_parts = \explode('.', $service_id);
+      $definition = [
+        'name' => \end($name_parts),
+        'type' => 'Drupal\example\ExampleInterface',
+        'description' => "The $service_id service.",
+      ];
+
+      // Try to guess correct type of service instance.
+      $compiled_definition = $this->serviceInfo->getServiceDefinition($service_id);
+      if ($compiled_definition && isset($compiled_definition['class'])) {
+        $interface = $compiled_definition['class'] . 'Interface';
+        $definition['type'] = \interface_exists($interface) ? $interface : $compiled_definition['class'];
+      }
+    }
+
+    $type_parts = \explode('\\', $definition['type']);
+    $definition['short_type'] = \end($type_parts);
+
+    return $definition;
+  }
+
+  /**
+   * Gets service definitions.
+   *
+   * @return array
+   *   List of service definitions keyed by service ID.
+   */
+  private static function getDumpedServiceDefinitions(): array {
+    $data_encoded = \file_get_contents(Application::ROOT . '/resources/service-definitions.json');
+    return \json_decode($data_encoded, TRUE);
   }
 
 }
