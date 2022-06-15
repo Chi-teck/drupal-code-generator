@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\AssetCollection;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 /**
@@ -18,7 +19,7 @@ final class Controller extends Generator {
   /**
    * {@inheritdoc}
    */
-  protected function generate(array &$vars): void {
+  protected function generate(array &$vars, AssetCollection $assets): void {
     $interviewer = $this->createInterviewer($vars);
 
     $vars['machine_name'] = $interviewer->askMachineName();
@@ -32,10 +33,10 @@ final class Controller extends Generator {
       $vars['route_path'] = $interviewer->ask('Route path', '/{machine_name|u2h}/example');
       $vars['route_title'] = $interviewer->ask('Route title', 'Example');
       $vars['route_permission'] = $interviewer->ask('Route permission', 'access content');
-      $this->addFile('{machine_name}.routing.yml', 'route')->appendIfExists();
+      $assets->addFile('{machine_name}.routing.yml', 'route.twig')->appendIfExists();
     }
 
-    $this->addFile('src/Controller/{class}.php', 'controller');
+    $assets->addFile('src/Controller/{class}.php', 'controller.twig');
   }
 
 }

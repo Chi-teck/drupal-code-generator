@@ -3,9 +3,6 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\Asset\Directory;
-use DrupalCodeGenerator\Asset\File;
-use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\GeneratorDefinition;
 use DrupalCodeGenerator\GeneratorType;
@@ -56,23 +53,14 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   protected string $directory;
 
   /**
-   * Assets to create.
-   */
-  protected AssetCollection $assets;
-
-  /**
    * {@inheritdoc}
    */
   protected function initialize(InputInterface $input, OutputInterface $output): void {
     parent::initialize($input, $output);
 
-    $this->assets = new AssetCollection();
-
-    $helper_set = $this->getHelperSet();
-
     /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
     $logger = new ConsoleLogger($output);
-    $question_helper = $helper_set->get('question');
+    $question_helper = $this->getHelper('question');
     $io = new GeneratorStyle($input, $output, $question_helper);
 
     $items = \iterator_to_array($this->getHelperSet());
@@ -89,9 +77,6 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
     if ($this->templatePath) {
       $this->getHelper('renderer')->prependPath($this->templatePath);
     }
-
-    // @todo Remove this.
-    $this->drupalContext = $this->getHelper('drupal_context');
 
     $this->directory = $input->getOption('working-dir') ?: \getcwd();
 
@@ -111,15 +96,19 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
       $this->printHeader();
 
       $vars = [];
-      $this->generate($vars);
+      $assets = new AssetCollection();
+      $this->generate($vars, $assets);
 
       $vars = self::processVars($vars);
       $collected_vars = \preg_replace('/^Array/', '', \print_r($vars, TRUE));
       $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
 
-      $this->processAssets($vars);
+      foreach ($assets as $asset) {
+        // Local asset variables take precedence over global ones.
+        $asset->vars(\array_merge($vars, $asset->getVars()));
+      }
 
-      $this->render();
+      $this->render($assets);
 
       // Destination passed through command line option takes precedence over
       // destination defined in a generator.
@@ -128,24 +117,24 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
 
       $full_path = $input->getOption('full-path');
       $dry_run = $input->getOption('dry-run');
-      $dumped_assets = $this->dump($destination, $dry_run, $full_path);
+      $dumped_assets = $this->dump($assets, $destination, $dry_run, $full_path);
 
       $this->printSummary($dumped_assets, $full_path ? $destination . '/' : '');
     }
     catch (ExceptionInterface $exception) {
       $this->io()->getErrorStyle()->error($exception->getMessage());
-      return 1;
+      return self::FAILURE;
     }
 
     $this->logger->debug('Memory usage: {memory}', ['memory' => Helper::formatMemory(\memory_get_peak_usage())]);
 
-    return 0;
+    return self::SUCCESS;
   }
 
   /**
    * Generates assets.
    */
-  abstract protected function generate(array &$vars): void;
+  abstract protected function generate(array &$vars, AssetCollection $assets): void;
 
   protected function getGeneratorDefinition(): GeneratorDefinition {
     // Detect type from legacy properties.
@@ -175,13 +164,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Render assets.
    */
-  protected function render(): void {
+  protected function render(AssetCollection $assets): void {
     $renderer = $this->getHelper('renderer');
-    foreach ($this->assets->getFiles() as $asset) {
-      // Supply the asset with all collected variables if it has no local ones.
-      if (!$asset->getVars()) {
-        $asset->vars($this->vars);
-      }
+    foreach ($assets->getFiles() as $asset) {
       $renderer->renderAsset($asset);
     }
   }
@@ -189,9 +174,9 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   /**
    * Dumps assets.
    */
-  protected function dump(string $destination, bool $dry_run, bool $full_path): AssetCollection {
+  protected function dump(AssetCollection $assets, string $destination, bool $dry_run, bool $full_path): AssetCollection {
     $options = new DumperOptions(NULL, $dry_run, $full_path);
-    return $this->getHelper('dumper')->dump($this->assets, $destination, $options);
+    return $this->getHelper('dumper')->dump($assets, $destination, $options);
   }
 
   /**
@@ -216,52 +201,16 @@ abstract class Generator extends Command implements GeneratorInterface, IOAwareI
   }
 
   /**
-   * Creates a directory asset.
-   */
-  protected function addDirectory(string $path): Directory {
-    return $this->assets[] = new Directory($path);
-  }
-
-  /**
-   * Creates a file asset.
-   */
-  protected function addFile(string $path, ?string $template = NULL): File {
-    $asset = new File($path);
-    $asset->template($template);
-    return $this->assets[] = $asset;
-  }
-
-  /**
-   * Creates a symlink asset.
-   *
-   * @noinspection PhpUnused
-   */
-  protected function addSymlink(string $path, string $target): Symlink {
-    $asset = new Symlink($path, $target);
-    return $this->assets[] = $asset;
-  }
-
-  /**
    * Processes collected variables.
    */
   private static function processVars(array $vars): array {
-    $process_vars = static function (&$var, string $key, array $vars): void {
+    $processor = static function (&$var, string $key, array $vars): void {
       if (\is_string($var)) {
         $var = Utils::stripSlashes(Utils::replaceTokens($var, $vars));
       }
     };
-    \array_walk_recursive($vars, $process_vars, $vars);
+    \array_walk_recursive($vars, $processor, $vars);
     return $vars;
-  }
-
-  /**
-   * Processes collected assets.
-   */
-  private function processAssets(array $vars): void {
-    foreach ($this->assets as $asset) {
-      // Local asset variables take precedence over global ones.
-      $asset->vars(\array_merge($vars, $asset->getVars()));
-    }
   }
 
   /**

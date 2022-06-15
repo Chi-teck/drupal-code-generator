@@ -25,40 +25,66 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
   /**
+   * Creates a directory asset.
+   */
+  public function addDirectory(string $path): Directory {
+    $directory = new Directory($path);
+    $this->assets[] = $directory;
+    return $directory;
+  }
+
+  /**
+   * Creates a file asset.
+   */
+  public function addFile(string $path, ?string $template = NULL): File {
+    $file = new File($path);
+    $file->template($template);
+    $this->assets[] = $file;
+    return $file;
+  }
+
+  /**
+   * Creates a symlink asset.
+   *
+   * @noinspection PhpUnused
+   */
+  public function addSymlink(string $path, string $target): Symlink {
+    $symlink = new Symlink($path, $target);
+    $this->assets[] = $symlink;
+    return $symlink;
+  }
+
+  /**
    * {@inheritdoc}
    */
-  #[\ReturnTypeWillChange]
-  public function offsetSet($key, $value) {
-    if ($key === NULL) {
+  public function offsetSet(mixed $offset, mixed $value): void {
+    if ($offset === NULL) {
       $this->assets[] = $value;
     }
     else {
-      $this->assets[$key] = $value;
+      $this->assets[$offset] = $value;
     }
   }
 
   /**
    * {@inheritdoc}
    */
-  #[\ReturnTypeWillChange]
-  public function offsetGet($key) {
-    if (isset($this->assets[$key])) {
-      return $this->assets[$key];
-    }
+  public function offsetGet(mixed $offset): ?Asset {
+    return $this->assets[$offset] ?? NULL;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function offsetUnset($key): void {
-    unset($this->assets[$key]);
+  public function offsetUnset(mixed $offset): void {
+    unset($this->assets[$offset]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function offsetExists($key): bool {
-    return isset($this->assets[$key]);
+  public function offsetExists(mixed $offset): bool {
+    return isset($this->assets[$offset]);
   }
 
   /**

@@ -34,6 +34,13 @@ abstract class Asset {
   }
 
   /**
+   * Assets named constructor.
+   */
+  public static function create(string $path): static {
+    return new static($path);
+  }
+
+  /**
    * Getter for the asset path.
    */
   public function getPath(): string {
