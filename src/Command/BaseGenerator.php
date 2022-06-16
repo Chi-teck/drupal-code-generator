@@ -36,6 +36,15 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    */
   protected string $directory;
 
+  protected function configure() {
+    parent::configure();
+    $definition = $this->getGeneratorDefinition();
+    $this->setName($definition->name)
+      ->setDescription($definition->description)
+      ->setAliases($definition->aliases)
+      ->setHidden($definition->hidden);
+  }
+
   /**
    * {@inheritdoc}
    */

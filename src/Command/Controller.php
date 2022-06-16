@@ -6,12 +6,7 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
-use Symfony\Component\Console\Attribute\AsCommand;
 
-/**
- * Implements controller command.
- */
-#[AsCommand('controller', 'Generates a controller')]
 #[Generator(
   name: 'controller',
   description: 'Generates a controller',
