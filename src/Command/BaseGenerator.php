@@ -27,7 +27,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
 
   use IOAwareTrait;
   use LoggerAwareTrait;
-  use LegacyTrait;
 
   /**
    * The API version.
