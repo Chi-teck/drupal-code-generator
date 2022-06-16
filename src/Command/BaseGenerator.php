@@ -29,11 +29,6 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
   use LoggerAwareTrait;
 
   /**
-   * The API version.
-   */
-  protected static int $api;
-
-  /**
    * A human-readable name of the generator.
    */
   protected string $label = '';
