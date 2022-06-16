@@ -15,19 +15,11 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[Generator(
   name: 'controller',
   description: 'Generates a controller',
-  aliases: ['ddd'],
   templatePath: Application::TEMPLATE_PATH . '/controller',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Controller extends BaseGenerator {
 
-  protected string $templatePath = Application::TEMPLATE_PATH . '/controller';
-  protected ?int $extensionType = DrupalGenerator::EXTENSION_TYPE_MODULE;
-  protected bool $isNewExtension = FALSE;
-
-  /**
-   * {@inheritdoc}
-   */
   protected function generate(array &$vars, AssetCollection $assets): void {
     $interviewer = $this->createInterviewer($vars);
 

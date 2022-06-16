@@ -77,7 +77,7 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
     // Build the menu structure.
     $this->menuTree = [];
     foreach ($this->getApplication()->all() as $command) {
-      if ($command instanceof GeneratorInterface && !$command->isHidden()) {
+      if ($command instanceof LabelInterface && !$command->isHidden()) {
         self::arraySetNestedValue($this->menuTree, \explode(':', $command->getName()));
         // Collect command labels.
         if ($label = $command->getLabel()) {

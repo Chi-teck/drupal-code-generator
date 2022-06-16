@@ -8,10 +8,10 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Defines generator factory.
+ *
+ * @internal
  */
 final class GeneratorFactory {
-
-  private const COMMAND_INTERFACE = '\DrupalCodeGenerator\Command\GeneratorInterface';
 
   private ClassResolverInterface $classResolver;
   private LoggerInterface $logger;
@@ -63,7 +63,7 @@ final class GeneratorFactory {
           continue;
         }
 
-        if ($reflected_class->isInterface() || $reflected_class->isAbstract() || $reflected_class->isTrait() || !$reflected_class->implementsInterface(self::COMMAND_INTERFACE)) {
+        if ($reflected_class->isInterface() || $reflected_class->isAbstract() || $reflected_class->isTrait()) {
           continue;
         }
 
@@ -77,6 +77,8 @@ final class GeneratorFactory {
 
   /**
    * Finds and instantiates DCG core generator commands.
+   *
+   * @todo Remove this.
    */
   public function getCoreGenerators(): array {
     return $this->getGenerators([Application::ROOT . '/src/Command'], '\DrupalCodeGenerator\Command');

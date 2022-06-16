@@ -3,9 +3,9 @@
 namespace DrupalCodeGenerator\Command;
 
 /**
- * Defines generator interface.
+ * Interface for generators that provide human-readable label.
  */
-interface GeneratorInterface {
+interface LabelInterface {
 
   /**
    * Returns the human-readable command label.
