@@ -4,13 +4,22 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\GeneratorType;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 /**
  * Implements controller command.
  */
 #[AsCommand('controller', 'Generates a controller')]
-final class Controller extends Generator {
+#[Generator(
+  name: 'controller',
+  description: 'Generates a controller',
+  aliases: ['ddd'],
+  templatePath: Application::TEMPLATE_PATH . '/controller',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Controller extends BaseGenerator {
 
   protected string $templatePath = Application::TEMPLATE_PATH . '/controller';
   protected ?int $extensionType = DrupalGenerator::EXTENSION_TYPE_MODULE;

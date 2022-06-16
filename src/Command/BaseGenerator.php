@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Base class for code generators.
  */
-abstract class Generator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
+abstract class BaseGenerator extends Command implements GeneratorInterface, IOAwareInterface, LoggerAwareInterface {
 
   use IOAwareTrait;
   use LoggerAwareTrait;
