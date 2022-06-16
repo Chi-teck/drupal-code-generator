@@ -10,6 +10,6 @@ interface GeneratorInterface {
   /**
    * Returns the human-readable command label.
    */
-  public function getLabel(): string;
+  public function getLabel(): ?string;
 
 }
