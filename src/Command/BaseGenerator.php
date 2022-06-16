@@ -3,8 +3,8 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
-use DrupalCodeGenerator\GeneratorDefinition;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Interviewer\Interviewer;
@@ -144,8 +144,12 @@ abstract class BaseGenerator extends Command implements GeneratorInterface, IOAw
       default => GeneratorType::OTHER,
     };
     return new GeneratorDefinition(
-      type: $type,
+      name: $this->getName(),
+      description: $this->getDescription(),
+      aliases: $this->getAliases(),
+      hidden: $this->isHidden(),
       templatePath: $this->templatePath,
+      type: $type,
       label: \method_exists($this, 'getLabel') ? $this->getLabel() : NULL,
     );
   }

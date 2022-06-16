@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Interviewer;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\GeneratorDefinition;
+use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
