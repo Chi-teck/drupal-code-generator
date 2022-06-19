@@ -14,6 +14,7 @@ use DrupalCodeGenerator\Validator\Chained;
 use DrupalCodeGenerator\Validator\MachineName;
 use DrupalCodeGenerator\Validator\Optional;
 use DrupalCodeGenerator\Validator\Required;
+use DrupalCodeGenerator\Validator\RequiredClassName;
 use DrupalCodeGenerator\Validator\RequiredMachineName;
 use DrupalCodeGenerator\Validator\ServiceName;
 use Symfony\Component\Console\Question\ChoiceQuestion;
@@ -161,6 +162,13 @@ final class Interviewer {
   }
 
   /**
+   * Asks class question.
+   */
+  public function askClass(string $question = 'Class', ?string $default_value = NULL): ?string {
+    return $this->ask($question, $default_value, new RequiredClassName());
+  }
+
+  /**
    * Asks plugin label question.
    */
   public function askPluginLabel(string $question = 'Plugin label', ?string $default_value = NULL): ?string {
@@ -176,13 +184,15 @@ final class Interviewer {
 
   /**
    * Asks plugin class question.
+   *
+   * @todo Remove $suffix parameter.
    */
   public function askPluginClass(string $question = 'Plugin class', ?string $default_value = NULL, string $suffix = ''): ?string {
     if ($default_value === NULL && isset($this->vars['machine_name'], $this->vars['plugin_id'])) {
       $unprefixed_plugin_id = Utils::removePrefix($this->vars['plugin_id'], $this->vars['machine_name'] . '_');
       $default_value = Utils::camelize($unprefixed_plugin_id) . $suffix;
     }
-    return $this->ask($question, $default_value, new Required());
+    return $this->askClass($question, $default_value);
   }
 
   /**
