@@ -209,4 +209,18 @@ final class UtilsTest extends BaseTestCase {
     self::assertSame('mice', Utils::pluralize('mouse'));
   }
 
+  /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Utils::removePrefix()
+   */
+  public function testRemovePrefix(): void {
+    self::assertSame('bar', Utils::removePrefix('foo_bar', 'foo_'));
+    self::assertSame('', Utils::removePrefix('foo', 'foo'));
+    self::assertSame('foo', Utils::removePrefix('foo', 'foo_foo_foo'));
+    self::assertSame('FOO_BAR', Utils::removePrefix('FOO_BAR', 'foo_'));
+    self::assertSame('foo_bar', Utils::removePrefix('foo_bar', ' foo_'));
+    self::assertSame('foo_bar', Utils::removePrefix('foo_bar', ' foo'));
+  }
+
 }

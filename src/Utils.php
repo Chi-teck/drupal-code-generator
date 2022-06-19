@@ -152,4 +152,12 @@ class Utils {
     return (new EnglishInflector())->pluralize($input)[0];
   }
 
+  /**
+   * Remove a string from the beginning of a string.
+   */
+  public static function removePrefix(string $input, string $prefix): string {
+    return \str_starts_with($input, $prefix)
+      ? \substr_replace($input, '', 0, \strlen($prefix)) : $input;
+  }
+
 }
