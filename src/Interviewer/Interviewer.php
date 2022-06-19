@@ -178,14 +178,16 @@ final class Interviewer {
    * Asks plugin class question.
    */
   public function askPluginClass(string $question = 'Plugin class', ?string $default_value = NULL, string $suffix = ''): ?string {
-    if ($default_value === NULL && isset($vars['machine_name'], $vars['plugin_id'])) {
+    if ($default_value === NULL && isset($this->vars['machine_name'], $this->vars['plugin_id'])) {
       $prefix = $this->vars['machine_name'] . '_';
+      // @todo Move this to Utils.
+      $unprefixed_plugin_id = $this->vars['plugin_id'];
       if (\str_starts_with($this->vars['plugin_id'], $prefix)) {
         $unprefixed_plugin_id = \substr_replace($this->vars['plugin_id'], '', 0, \strlen($prefix));
-        $default_value = Utils::camelize($unprefixed_plugin_id) . $suffix;
       }
+      $default_value = Utils::camelize($unprefixed_plugin_id) . $suffix;
     }
-    return $this->ask($question, $default_value);
+    return $this->ask($question, $default_value, new Required());
   }
 
   /**
