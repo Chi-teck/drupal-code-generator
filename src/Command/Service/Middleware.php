@@ -3,26 +3,26 @@
 namespace DrupalCodeGenerator\Command\Service;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements service:middleware command.
- */
-final class Middleware extends ModuleGenerator {
+#[Generator(
+  name: 'service:middleware',
+  description: 'Generates a middleware',
+  aliases: ['middleware'],
+  templatePath: Application::TEMPLATE_PATH . '/service/middleware',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Middleware extends BaseGenerator {
 
-  protected string $name = 'service:middleware';
-  protected string $description = 'Generates a middleware';
-  protected string $alias = 'middleware';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/service/middleware';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['class'] = $this->ask('Class', '{machine_name|camelize}Middleware');
-    $this->addFile('src/{class}.php', 'middleware');
-    $this->addServicesFile()->template('services');
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['class'] = $ir->askClass(default_value: '{machine_name|camelize}Middleware');
+    $assets->addFile('src/{class}.php', 'middleware.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

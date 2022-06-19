@@ -63,6 +63,15 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
   /**
+   * Adds an asset for service file.
+   */
+  public function addServicesFile(string $path = '{machine_name}.services.yml'): File {
+    return $this->addFile($path)
+      ->appendIfExists()
+      ->headerSize(1);
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function offsetSet(mixed $offset, mixed $value): void {

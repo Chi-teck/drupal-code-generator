@@ -16,19 +16,19 @@ use DrupalCodeGenerator\GeneratorType;
 final class Controller extends BaseGenerator {
 
   protected function generate(array &$vars, AssetCollection $assets): void {
-    $interviewer = $this->createInterviewer($vars);
+    $ir = $this->createInterviewer($vars);
 
-    $vars['machine_name'] = $interviewer->askMachineName();
+    $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $this->getHelper('module_info')->getModuleName($vars['machine_name']);
-    $vars['class'] = $interviewer->ask('Class', '{machine_name|camelize}Controller');
+    $vars['class'] = $ir->askClass(default_value: '{machine_name|camelize}Controller');
 
-    $vars['services'] = $interviewer->askServices(FALSE);
+    $vars['services'] = $ir->askServices(FALSE);
 
-    if ($interviewer->confirm('Would you like to create a route for this controller?')) {
-      $vars['route_name'] = $interviewer->ask('Route name', '{machine_name}.example');
-      $vars['route_path'] = $interviewer->ask('Route path', '/{machine_name|u2h}/example');
-      $vars['route_title'] = $interviewer->ask('Route title', 'Example');
-      $vars['route_permission'] = $interviewer->ask('Route permission', 'access content');
+    if ($ir->confirm('Would you like to create a route for this controller?')) {
+      $vars['route_name'] = $ir->ask('Route name', '{machine_name}.example');
+      $vars['route_path'] = $ir->ask('Route path', '/{machine_name|u2h}/example');
+      $vars['route_title'] = $ir->ask('Route title', 'Example');
+      $vars['route_permission'] = $ir->ask('Route permission', 'access content');
       $assets->addFile('{machine_name}.routing.yml', 'route.twig')->appendIfExists();
     }
 
