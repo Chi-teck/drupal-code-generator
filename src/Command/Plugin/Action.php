@@ -3,40 +3,36 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Validator\Required;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:action command.
- */
-final class Action extends PluginGenerator {
+#[Generator(
+  name: 'plugin:action',
+  description: 'Generates action plugin',
+  aliases: ['action'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/action',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Action extends BaseGenerator {
 
-  protected string $name = 'plugin:action';
-  protected string $description = 'Generates action plugin';
-  protected string $alias = 'action';
-  protected string $pluginLabelDefault = 'Update node title';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/action';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['plugin_label'] = $ir->askPluginLabel('Action label', 'Update node title');
+    $vars['plugin_id'] = $ir->askPluginId();
+    $vars['class'] = $ir->askPluginClass(default_value: 'Foo');
 
-    $vars['category'] = $this->ask('Action category', 'Custom');
-    $vars['configurable'] = $this->confirm('Make the action configurable?', FALSE);
+    $vars['category'] = $ir->ask('Action category', 'Custom');
+    $vars['configurable'] = $ir->confirm('Make the action configurable?', FALSE);
 
-    $this->addFile('src/Plugin/Action/{class}.php', 'action');
+    $assets->addFile('src/Plugin/Action/{class}.php', 'action.twig');
 
     if ($vars['configurable']) {
-      $this->addSchemaFile()->template('schema');
+      $assets->addSchemaFile()->template('schema');
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function askPluginLabelQuestion(): ?string {
-    return $this->ask('Action label', $this->pluginLabelDefault, new Required());
   }
 
 }

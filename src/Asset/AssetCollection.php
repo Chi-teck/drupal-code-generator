@@ -55,6 +55,14 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
   /**
+   * Adds an asset for configuration schema file.
+   */
+  public function addSchemaFile(string $path = 'config/schema/{machine_name}.schema.yml'): File {
+    return $this->addFile($path)
+      ->appendIfExists();
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function offsetSet(mixed $offset, mixed $value): void {

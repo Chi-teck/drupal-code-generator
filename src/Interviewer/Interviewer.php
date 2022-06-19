@@ -14,6 +14,7 @@ use DrupalCodeGenerator\Validator\Chained;
 use DrupalCodeGenerator\Validator\MachineName;
 use DrupalCodeGenerator\Validator\Optional;
 use DrupalCodeGenerator\Validator\Required;
+use DrupalCodeGenerator\Validator\RequiredMachineName;
 use DrupalCodeGenerator\Validator\ServiceName;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
@@ -157,6 +158,34 @@ final class Interviewer {
     }
 
     return $this->io->askQuestion($question);
+  }
+
+  /**
+   * Asks plugin label question.
+   */
+  public function askPluginLabel(string $question = 'Plugin label', ?string $default_value = NULL): ?string {
+    return $this->ask($question, $default_value, new Required());
+  }
+
+  /**
+   * Asks plugin ID question.
+   */
+  public function askPluginId(string $question = 'Plugin ID'): ?string {
+    return $this->ask($question, '{machine_name}_{plugin_label|h2m}', new RequiredMachineName());
+  }
+
+  /**
+   * Asks plugin class question.
+   */
+  public function askPluginClass(string $question = 'Plugin class', ?string $default_value = NULL, string $suffix = ''): ?string {
+    if ($default_value === NULL && isset($vars['machine_name'], $vars['plugin_id'])) {
+      $prefix = $this->vars['machine_name'] . '_';
+      if (\str_starts_with($this->vars['plugin_id'], $prefix)) {
+        $unprefixed_plugin_id = \substr_replace($this->vars['plugin_id'], '', 0, \strlen($prefix));
+        $default_value = Utils::camelize($unprefixed_plugin_id) . $suffix;
+      }
+    }
+    return $this->ask($question, $default_value);
   }
 
   /**
