@@ -19,7 +19,7 @@ final class Controller extends BaseGenerator {
     $interviewer = $this->createInterviewer($vars);
 
     $vars['machine_name'] = $interviewer->askMachineName();
-    $vars['name'] = '{machine_name|m2h}';
+    $vars['name'] = $this->getHelper('module_info')->getModuleName($vars['machine_name']);
     $vars['class'] = $interviewer->ask('Class', '{machine_name|camelize}Controller');
 
     $vars['services'] = $interviewer->askServices(FALSE);

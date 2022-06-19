@@ -22,7 +22,8 @@ final class ModuleInfo extends BaseGenerator {
   protected function generate(array &$vars, AssetCollection $assets): void {
     $interviewer = $this->createInterviewer($vars);
     $vars['machine_name'] = $interviewer->askMachineName();
-    $vars['name'] = '{machine_name|m2h}';
+    $interviewer->askName();
+    $vars['name'] = $this->getHelper('module_info')->getModuleName($vars['machine_name']);
     $vars['description'] = $interviewer->ask('Description', 'Module description.', new Required());
     $vars['package'] = $interviewer->ask('Package', 'Custom');
     $vars['configure'] = $interviewer->ask('Configuration page (route name)');

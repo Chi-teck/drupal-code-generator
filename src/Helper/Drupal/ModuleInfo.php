@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Helper\Drupal;
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
 
 /**
@@ -51,6 +52,13 @@ final class ModuleInfo extends Helper {
       $destination = \DRUPAL_ROOT . '/' . $destination;
     }
     return $destination;
+  }
+
+  /**
+   * Returns module human name.
+   */
+  public function getModuleName(string $machine_name): ?string {
+    return $this->getModules()[$machine_name] ?? Utils::machine2human($machine_name);
   }
 
 }
