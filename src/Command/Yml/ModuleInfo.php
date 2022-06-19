@@ -3,33 +3,34 @@
 namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\Required;
 
-/**
- * Implements yml:module-info command.
- */
-final class ModuleInfo extends ModuleGenerator {
+#[Generator(
+  name: 'yml:module-info',
+  description: 'Generates a module info yml file',
+  aliases: ['module-info'],
+  templatePath: Application::TEMPLATE_PATH . '/yml/module-info',
+  type: GeneratorType::MODULE_COMPONENT,
+  label: 'Info (module)',
+)]
+final class ModuleInfo extends BaseGenerator {
 
-  protected string $name = 'yml:module-info';
-  protected string $description = 'Generates a module info yml file';
-  protected string $alias = 'module-info';
-  protected string $label = 'Info (module)';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/module-info';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['description'] = $this->ask('Description', 'Module description.', new Required());
-    $vars['package'] = $this->ask('Package', 'Custom');
-    $vars['configure'] = $this->ask('Configuration page (route name)');
-    $vars['dependencies'] = $this->ask('Dependencies (comma separated)');
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $interviewer = $this->createInterviewer($vars);
+    $vars['machine_name'] = $interviewer->askMachineName();
+    $vars['name'] = '{machine_name|m2h}';
+    $vars['description'] = $interviewer->ask('Description', 'Module description.', new Required());
+    $vars['package'] = $interviewer->ask('Package', 'Custom');
+    $vars['configure'] = $interviewer->ask('Configuration page (route name)');
+    $vars['dependencies'] = $interviewer->ask('Dependencies (comma separated)');
     if ($vars['dependencies']) {
       $vars['dependencies'] = \array_map('trim', \explode(',', \strtolower($vars['dependencies'])));
     }
-    $this->addFile('{machine_name}.info.yml', 'module-info');
+    $assets->addFile('{machine_name}.info.yml', 'module-info.twig');
   }
 
 }
