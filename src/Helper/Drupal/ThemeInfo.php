@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Helper\Drupal;
 
 use Drupal\Core\Extension\ThemeHandlerInterface;
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
 
 /**
@@ -52,6 +53,13 @@ final class ThemeInfo extends Helper {
     }
 
     return $destination;
+  }
+
+  /**
+   * Returns theme human name.
+   */
+  public function getThemeName(string $machine_name): ?string {
+    return $this->getThemes()[$machine_name] ?? Utils::machine2human($machine_name);
   }
 
 }

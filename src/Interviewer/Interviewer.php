@@ -109,7 +109,7 @@ final class Interviewer {
       else {
         $default_value = match ($this->generatorDefinition->type) {
           GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModuleName($this->vars['machine_name']),
-          GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemes()[$this->vars['machine_name']],
+          GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemeName($this->vars['machine_name']),
           default => NULL,
         };
       }
