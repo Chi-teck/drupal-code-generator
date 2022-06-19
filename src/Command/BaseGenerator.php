@@ -36,6 +36,9 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    */
   protected string $directory;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function configure() {
     parent::configure();
     $definition = $this->getGeneratorDefinition();
@@ -133,7 +136,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
   protected function getGeneratorDefinition(): GeneratorDefinition {
     $attributes = (new \ReflectionClass(static::class))->getAttributes(GeneratorDefinition::class);
     if (\count($attributes) === 0) {
-      throw new \LogicException(\sprintf('Generator %s does not have generator annotation.', static::class));
+      throw new \LogicException(\sprintf('Command %s does not have generator annotation.', static::class));
     }
     /** @noinspection PhpIncompatibleReturnTypeInspection */
     return $attributes[0]->newInstance();
