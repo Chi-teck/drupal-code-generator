@@ -3,34 +3,39 @@
 namespace DrupalCodeGenerator\Command\Misc;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\DrupalGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\Chained;
 use DrupalCodeGenerator\Validator\Required;
 
-/**
- * Implements misc:apache-virtual-host command.
- */
-final class ApacheVirtualHost extends DrupalGenerator {
+#[Generator(
+  name: 'misc:apache-virtual-host',
+  description: 'Generates an Apache site configuration file',
+  aliases: ['apache-virtual-host'],
+  templatePath: Application::TEMPLATE_PATH . '/misc/apache-virtual-host',
+  type: GeneratorType::OTHER,
+)]
+final class ApacheVirtualHost extends BaseGenerator {
 
-  protected string $name = 'misc:apache-virtual-host';
-  protected string $description = 'Generates an Apache site configuration file';
-  protected string $alias = 'apache-virtual-host';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/misc/apache-virtual-host';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $vars['hostname'] = $this->io->ask('Host name', 'example.local', self::getDomainValidator());
+    $vars['docroot'] = $this->io->ask('Document root', \DRUPAL_ROOT);
+    $assets->addFile('{hostname}.conf', 'host');
+    $assets->addFile('{hostname}-ssl.conf', 'host-ssl');
+  }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $domain_validator = static function (?string $value): string {
-      if (!\filter_var($value, \FILTER_VALIDATE_DOMAIN, \FILTER_FLAG_HOSTNAME)) {
-        throw new \UnexpectedValueException('The value is not correct domain name.');
-      }
-      return $value;
-    };
-    $vars['hostname'] = $this->ask('Host name', 'example.local', new Chained(new Required(), $domain_validator));
-    $vars['docroot'] = $this->ask('Document root', '/var/www/{hostname}/public');
-    $this->addFile('{hostname}.conf', 'host');
-    $this->addFile('{hostname}-ssl.conf', 'host-ssl');
+  private static function getDomainValidator(): callable {
+    return new Chained(
+      new Required(),
+      static function (?string $value): string {
+        if (!\filter_var($value, \FILTER_VALIDATE_DOMAIN, \FILTER_FLAG_HOSTNAME)) {
+          throw new \UnexpectedValueException('The value is not correct domain name.');
+        }
+        return $value;
+      },
+    );
   }
 
 }
