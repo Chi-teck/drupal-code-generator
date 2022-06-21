@@ -33,7 +33,7 @@ final class ModuleInfo extends Helper {
   /**
    * Returns destination for generated module code.
    */
-  public function getDestination(bool $is_new, ?string $machine_name): ?string {
+  public function getDestination(bool $is_new, string $machine_name): ?string {
     $destination = NULL;
 
     $modules_dir = \is_dir(\DRUPAL_ROOT . '/modules/custom') ?
@@ -58,6 +58,7 @@ final class ModuleInfo extends Helper {
    * Returns module human name.
    */
   public function getModuleName(string $machine_name): ?string {
+    // @todo Use title case of the machine name as fallback.
     return $this->getModules()[$machine_name] ?? Utils::machine2human($machine_name);
   }
 
