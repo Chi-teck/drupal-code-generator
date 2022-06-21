@@ -1,9 +1,0 @@
-/**
- * Implements hook_editor_js_settings_alter().
- */
-function {{ machine_name }}_editor_js_settings_alter(array &$settings) {
-  if (isset($settings['editor']['formats']['basic_html'])) {
-    $settings['editor']['formats']['basic_html']['editor'] = 'MyDifferentEditor';
-    $settings['editor']['formats']['basic_html']['editorSettings']['buttons'] = ['strong', 'italic', 'underline'];
-  }
-}

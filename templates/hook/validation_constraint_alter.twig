@@ -1,6 +1,0 @@
-/**
- * Implements hook_validation_constraint_alter().
- */
-function {{ machine_name }}_validation_constraint_alter(array &$definitions) {
-  $definitions['Null']['class'] = '\Drupal\mymodule\Plugin\Validation\Constraints\MyClass';
-}

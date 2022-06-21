@@ -1,9 +1,0 @@
-/**
- * Implements hook_field_info_alter().
- */
-function {{ machine_name }}_field_info_alter(&$info) {
-  // Change the default widget for fields of type 'foo'.
-  if (isset($info['foo'])) {
-    $info['foo']['default_widget'] = 'mymodule_widget';
-  }
-}

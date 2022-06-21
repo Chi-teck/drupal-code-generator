@@ -1,7 +1,0 @@
-/**
- * Implements hook_field_formatter_info_alter().
- */
-function {{ machine_name }}_field_formatter_info_alter(array &$info) {
-  // Let a new field type re-use an existing formatter.
-  $info['text_default']['field_types'][] = 'my_field_type';
-}

@@ -1,9 +1,0 @@
-/**
- * Implements hook_entity_base_field_info_alter().
- */
-function {{ machine_name }}_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type) {
-  // Alter the mymodule_text field to use a custom class.
-  if ($entity_type->id() == 'node' && !empty($fields['mymodule_text'])) {
-    $fields['mymodule_text']->setClass('\Drupal\anothermodule\EntityComputedText');
-  }
-}

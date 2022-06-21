@@ -139,6 +139,7 @@ final class DrupalContext extends Helper {
     $hooks = self::parseHooks($this->getDrupalRoot() . '/core/core.api.php');
 
     $api_files = \glob($this->getDrupalRoot() . '/core/lib/Drupal/Core/*/*.api.php');
+
     foreach ($api_files as $api_file) {
       if (\file_exists($api_file)) {
         $hooks = \array_merge($hooks, self::parseHooks($api_file));

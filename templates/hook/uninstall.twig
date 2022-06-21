@@ -1,7 +1,0 @@
-/**
- * Implements hook_uninstall().
- */
-function {{ machine_name }}_uninstall($is_syncing) {
-  // Delete remaining general module variables.
-  \Drupal::state()->delete('mymodule.foo');
-}

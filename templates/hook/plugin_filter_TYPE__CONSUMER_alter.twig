@@ -1,7 +1,0 @@
-/**
- * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
- */
-function {{ machine_name }}_plugin_filter_TYPE__CONSUMER_alter(array &$definitions, array $extra) {
-  // Explicitly remove the "Help" block for this consumer.
-  unset($definitions['help_block']);
-}

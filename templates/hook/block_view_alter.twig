@@ -1,9 +1,0 @@
-/**
- * Implements hook_block_view_alter().
- */
-function {{ machine_name }}_block_view_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
-  // Remove the contextual links on all blocks that provide them.
-  if (isset($build['#contextual_links'])) {
-    unset($build['#contextual_links']);
-  }
-}

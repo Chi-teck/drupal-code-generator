@@ -1,8 +1,0 @@
-/**
- * Implements hook_css_alter().
- */
-function {{ machine_name }}_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-  // Remove defaults.css file.
-  $file_path = \Drupal::service('extension.list.module')->getPath('system') . '/defaults.css';
-  unset($css[$file_path]);
-}

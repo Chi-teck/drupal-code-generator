@@ -1,8 +1,0 @@
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-function {{ machine_name }}_theme_suggestions_HOOK_alter(array &$suggestions, array $variables) {
-  if (empty($variables['header'])) {
-    $suggestions[] = 'hookname__no_header';
-  }
-}

@@ -1,9 +1,0 @@
-/**
- * Implements hook_ENTITY_TYPE_revision_delete().
- */
-function {{ machine_name }}_ENTITY_TYPE_revision_delete(\Drupal\Core\Entity\EntityInterface $entity) {
-  $referenced_files_by_field = _editor_get_file_uuids_by_field($entity);
-  foreach ($referenced_files_by_field as $field => $uuids) {
-    _editor_delete_file_usage($uuids, $entity, 1);
-  }
-}

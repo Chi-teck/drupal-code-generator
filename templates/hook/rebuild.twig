@@ -1,9 +1,0 @@
-/**
- * Implements hook_rebuild().
- */
-function {{ machine_name }}_rebuild() {
-  $themes = \Drupal::service('theme_handler')->listInfo();
-  foreach ($themes as $theme) {
-    _block_rehash($theme->getName());
-  }
-}

@@ -1,7 +1,0 @@
-/**
- * Implements hook_theme_suggestions_alter().
- */
-function {{ machine_name }}_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
-  // Add an interface-language specific suggestion to all theme hooks.
-  $suggestions[] = $hook . '__' . \Drupal::languageManager()->getCurrentLanguage()->getId();
-}

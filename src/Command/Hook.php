@@ -21,9 +21,9 @@ final class Hook extends ModuleGenerator {
     $this->collectDefault($vars);
 
     $hook_question = new Question('Hook name');
-    $supported_hooks = $this->getSupportedHooks();
-    $hook_validator = static function ($value) use ($supported_hooks) {
-      if (!\in_array($value, $supported_hooks)) {
+    $supported_hooks = $this->drupalContext->getHooks();
+    $hook_validator = static function (mixed $value) use ($supported_hooks): string {
+      if (!\is_string($value) || !\array_key_exists($value, $supported_hooks)) {
         throw new \UnexpectedValueException('The value is not correct hook name.');
       }
       return $value;
@@ -47,27 +47,6 @@ final class Hook extends ModuleGenerator {
     else {
       $file->template('hook/{hook_name}');
     }
-  }
-
-  /**
-   * Returns list of supported hooks.
-   */
-  private function getSupportedHooks(): array {
-    $hook_names = [];
-    if ($this->drupalContext) {
-      $hook_names = \array_keys($this->drupalContext->getHooks());
-    }
-    // When Drupal context is not provided build list of supported hooks from
-    // hook template names.
-    else {
-      $iterator = new \DirectoryIterator($this->templatePath . '/hook');
-      foreach ($iterator as $file_info) {
-        if (!$file_info->isDot()) {
-          $hook_names[] = $file_info->getBasename('.twig');
-        }
-      }
-    }
-    return $hook_names;
   }
 
   /**

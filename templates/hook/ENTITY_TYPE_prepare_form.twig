@@ -1,9 +1,0 @@
-/**
- * Implements hook_ENTITY_TYPE_prepare_form().
- */
-function {{ machine_name }}_ENTITY_TYPE_prepare_form(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Form\FormStateInterface $form_state) {
-  if ($operation == 'edit') {
-    $entity->label->value = 'Altered label';
-    $form_state->set('label_altered', TRUE);
-  }
-}

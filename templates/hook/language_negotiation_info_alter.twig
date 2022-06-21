@@ -1,8 +1,0 @@
-/**
- * Implements hook_language_negotiation_info_alter().
- */
-function {{ machine_name }}_language_negotiation_info_alter(array &$negotiation_info) {
-  if (isset($negotiation_info['custom_language_method'])) {
-    $negotiation_info['custom_language_method']['config'] = 'admin/config/regional/language/detection/custom-language-method';
-  }
-}

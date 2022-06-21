@@ -1,8 +1,0 @@
-/**
- * Implements hook_ENTITY_TYPE_load().
- */
-function {{ machine_name }}_ENTITY_TYPE_load($entities) {
-  foreach ($entities as $entity) {
-    $entity->foo = mymodule_add_something($entity);
-  }
-}

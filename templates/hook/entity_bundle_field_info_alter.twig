@@ -1,9 +1,0 @@
-/**
- * Implements hook_entity_bundle_field_info_alter().
- */
-function {{ machine_name }}_entity_bundle_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type, $bundle) {
-  if ($entity_type->id() == 'node' && $bundle == 'article' && !empty($fields['mymodule_text'])) {
-    // Alter the mymodule_text field to use a custom class.
-    $fields['mymodule_text']->setClass('\Drupal\anothermodule\EntityComputedText');
-  }
-}

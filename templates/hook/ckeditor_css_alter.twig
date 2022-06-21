@@ -1,6 +1,0 @@
-/**
- * Implements hook_ckeditor_css_alter().
- */
-function {{ machine_name }}_ckeditor_css_alter(array &$css, Editor $editor) {
-  $css[] = \Drupal::service('extension.list.module')->getPath('mymodule') . '/css/mymodule-ckeditor.css';
-}

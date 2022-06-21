@@ -1,9 +1,0 @@
-/**
- * Implements hook_themes_uninstalled().
- */
-function {{ machine_name }}_themes_uninstalled(array $themes) {
-  // Remove some state entries depending on the theme.
-  foreach ($themes as $theme) {
-    \Drupal::state()->delete('example.' . $theme);
-  }
-}

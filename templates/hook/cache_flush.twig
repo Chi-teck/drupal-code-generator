@@ -1,8 +1,0 @@
-/**
- * Implements hook_cache_flush().
- */
-function {{ machine_name }}_cache_flush() {
-  if (defined('MAINTENANCE_MODE') && MAINTENANCE_MODE == 'update') {
-    _update_cache_clear();
-  }
-}

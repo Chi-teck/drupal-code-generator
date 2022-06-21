@@ -1,9 +1,0 @@
-/**
- * Implements hook_migration_plugins_alter().
- */
-function {{ machine_name }}_migration_plugins_alter(array &$migrations) {
-  $migrations = array_filter($migrations, function (array $migration) {
-    $tags = isset($migration['migration_tags']) ? (array) $migration['migration_tags'] : [];
-    return !in_array('Drupal 6', $tags);
-  });
-}

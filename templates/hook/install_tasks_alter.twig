@@ -1,8 +1,0 @@
-/**
- * Implements hook_install_tasks_alter().
- */
-function {{ machine_name }}_install_tasks_alter(&$tasks, $install_state) {
-  // Replace the entire site configuration form provided by Drupal core
-  // with a custom callback function defined by this installation profile.
-  $tasks['install_configure_form']['function'] = 'my_profile_install_configure_form';
-}

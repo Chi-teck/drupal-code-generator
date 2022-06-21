@@ -1,6 +1,0 @@
-/**
- * Implements hook_entity_translation_create().
- */
-function {{ machine_name }}_entity_translation_create(\Drupal\Core\Entity\EntityInterface $translation) {
-  \Drupal::logger('example')->info('Entity translation created: @label', ['@label' => $translation->label()]);
-}

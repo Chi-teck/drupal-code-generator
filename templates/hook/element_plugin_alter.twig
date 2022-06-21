@@ -1,7 +1,0 @@
-/**
- * Implements hook_element_plugin_alter().
- */
-function {{ machine_name }}_element_plugin_alter(array &$definitions) {
-  // Use a custom class for the LayoutBuilder element.
-  $definitions['layout_builder']['class'] = '\Drupal\mymodule\Element\MyLayoutBuilderElement';
-}

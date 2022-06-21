@@ -1,9 +1,0 @@
-/**
- * Implements hook_entity_type_build().
- */
-function {{ machine_name }}_entity_type_build(array &$entity_types) {
-  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
-  // Add a form for a custom node form without overriding the default
-  // node form. To override the default node form, use hook_entity_type_alter().
-  $entity_types['node']->setFormClass('mymodule_foo', 'Drupal\mymodule\NodeFooForm');
-}

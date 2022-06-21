@@ -1,9 +1,0 @@
-/**
- * Implements hook_views_pre_render().
- */
-function {{ machine_name }}_views_pre_render(ViewExecutable $view) {
-  // Scramble the order of the rows shown on this result page.
-  // Note that this could be done earlier, but not later in the view execution
-  // process.
-  shuffle($view->result);
-}
