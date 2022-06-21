@@ -17,17 +17,16 @@ bin/dcg
 
 ```
 
-To make _dcg_ available in any system location append this line to your _.bashrc_ file:
-`alias dcg-dev=/path/to/to/drupal-code-generator/bin/dcg`
-Then after you have logged out and in the _dcg_ development version will be accessible through _dcg-dev_ command.
-
 ## Testing
 
 ### 
 ```sh
-# Test code generator.
-/path/to/drupal-code-generator/scripts/run-dcg-tests.sh
+# Run unit tests.
+/path/to/drupal-code-generator/scripts/unit-tests.sh
 
-# Test generated code.
-/path/to/drupal-code-generator/scripts/run-sut-tests.sh
+# Run functional tests.
+/path/to/drupal-code-generator/scripts/functional-tests.sh
+
+# Run tests for generated code.
+/path/to/drupal-code-generator/scripts/sut-tests.sh
 ```
