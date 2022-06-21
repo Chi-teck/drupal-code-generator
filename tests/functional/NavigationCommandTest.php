@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Functional;
 
 use DrupalCodeGenerator\Command\Navigation;
+use DrupalCodeGenerator\GeneratorFactory;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 use DrupalCodeGenerator\Test\Functional\QuestionHelper;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -47,8 +48,8 @@ final class NavigationCommandTest extends FunctionalTestBase {
     // @todo Should application give direct access to the container?
     $container = $helper_set->get('drupal_context')->getContainer();
 
-    $generators = $container->get('dcg.generator_factory')
-      ->getCoreGenerators();
+    $generator_factory = new GeneratorFactory($container->get('class_resolver'));
+    $generators = $generator_factory->getGenerators();
 
     $application->addCommands($generators);
     $navigation = new Navigation();

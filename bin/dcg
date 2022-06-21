@@ -5,6 +5,7 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
 use DrupalCodeGenerator\Command\GenerateCompletion;
 use DrupalCodeGenerator\Command\Navigation;
+use DrupalCodeGenerator\GeneratorFactory;
 
 // __DIR__ cannot be used here as it contains a path with symlinks resolved.
 $dcg_path = \str_starts_with($argv[0], '/') ?
@@ -33,10 +34,11 @@ catch (\Exception $exception) {
   exit(1);
 }
 
+$generator_factory = new GeneratorFactory($container->get('class_resolver'));
+$generators = $generator_factory->getGenerators();
+
 $application = Application::create($container);
 
-$generators = $container->get('dcg.generator_factory')
-  ->getCoreGenerators();
 $application->addCommands($generators);
 $application->add(new GenerateCompletion());
 $application->add(new Navigation());
