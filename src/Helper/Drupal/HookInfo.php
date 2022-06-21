@@ -49,6 +49,8 @@ final class HookInfo extends Helper {
 
   /**
    * Extracts hooks from PHP file.
+   *
+   * @todo Test this.
    */
   private static function parseHooks(string $file): array {
     $code = \file_get_contents($file);
@@ -63,6 +65,83 @@ final class HookInfo extends Helper {
     }
 
     return $results;
+  }
+
+  /**
+   * Returns file type of the hook.
+   */
+  public function getFileType(string $hook_name): string {
+
+    // Drupal hooks that are not situated in MODULE_NAME.module file.
+    $special_hooks = [
+      'install' => [
+        'install',
+        'uninstall',
+        'schema',
+        'requirements',
+        'update_N',
+        'update_last_removed',
+      ],
+      // See views_hook_info().
+      'views.inc' => [
+        'views_data',
+        'views_data_alter',
+        'views_analyze',
+        'views_invalidate_cache',
+        'field_views_data',
+        'field_views_data_alter',
+        // See \Drupal\views\views::$plugins.
+        'views_plugins_access_alter',
+        'views_plugins_area_alter',
+        'views_plugins_argument_alter',
+        'views_plugins_argument_default_alter',
+        'views_plugins_argument_validator_alter',
+        'views_plugins_cache_alter',
+        'views_plugins_display_extender_alter',
+        'views_plugins_display_alter',
+        'views_plugins_exposed_form_alter',
+        'views_plugins_field_alter',
+        'views_plugins_filter_alter',
+        'views_plugins_join_alter',
+        'views_plugins_pager_alter',
+        'views_plugins_query_alter',
+        'views_plugins_relationship_alter',
+        'views_plugins_row_alter',
+        'views_plugins_sort_alter',
+        'views_plugins_style_alter',
+        'views_plugins_wizard_alter',
+      ],
+      'views_execution.inc' => [
+        'views_query_substitutions',
+        'views_form_substitutions',
+        'views_pre_view',
+        'views_pre_build',
+        'views_post_build',
+        'views_pre_execute',
+        'views_post_execute',
+        'views_pre_render',
+        'views_post_render',
+        'views_query_alter',
+      ],
+      // See system_hook_info().
+      'tokens.inc' => [
+        'token_info',
+        'token_info_alter',
+        'tokens',
+        'tokens_alter',
+      ],
+      'post_update.php' => [
+        'post_update_N',
+      ],
+    ];
+
+    foreach ($special_hooks as $group => $hooks) {
+      if (\in_array($hook_name, $hooks)) {
+        return $group;
+      }
+    }
+
+    return 'module';
   }
 
 }
