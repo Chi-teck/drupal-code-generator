@@ -3,78 +3,79 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\Required;
 
-/**
- * Implements module command.
- */
-final class Module extends ModuleGenerator {
+#[Generator(
+  name: 'module',
+  description: 'Generates Drupal module',
+  templatePath: Application::TEMPLATE_PATH . '/module',
+  type: GeneratorType::MODULE,
+)]
+final class Module extends BaseGenerator {
 
-  protected string $name = 'module';
-  protected string $description = 'Generates Drupal module';
-  protected bool $isNewExtension = TRUE;
-  protected string $templatePath = Application::TEMPLATE_PATH . '/module';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
+    $vars['name'] = $ir->askName();
+    $vars['machine_name'] = $ir->askMachineName();
 
-    $vars['description'] = $this->ask('Module description', 'Provides additional functionality for the site.', new Required());
-    $vars['package'] = $this->ask('Package', 'Custom');
+    $vars['description'] = $ir->ask('Module description', 'Provides additional functionality for the site.', new Required());
+    $vars['package'] = $ir->ask('Package', 'Custom');
 
-    $dependencies = $this->ask('Dependencies (comma separated)');
+    $dependencies = $ir->ask('Dependencies (comma separated)');
     $vars['dependencies'] = $dependencies ?
       \array_map('trim', \explode(',', \strtolower($dependencies))) : [];
 
     $vars['class_prefix'] = '{machine_name|camelize}';
 
-    $this->addFile('{machine_name}/{machine_name}.info.yml', 'model.info.yml');
+    $assets->addFile('{machine_name}/{machine_name}.info.yml', 'model.info.yml');
 
-    if ($this->confirm('Would you like to create module file?', FALSE)) {
-      $this->addFile('{machine_name}/{machine_name}.module', 'model.module');
+    if ($ir->confirm('Would you like to create module file?', FALSE)) {
+      $assets->addFile('{machine_name}/{machine_name}.module', 'model.module');
     }
 
-    if ($this->confirm('Would you like to create install file?', FALSE)) {
-      $this->addFile('{machine_name}/{machine_name}.install', 'model.install');
+    if ($ir->confirm('Would you like to create install file?', FALSE)) {
+      $assets->addFile('{machine_name}/{machine_name}.install', 'model.install');
     }
 
-    if ($this->confirm('Would you like to create libraries.yml file?', FALSE)) {
-      $this->addFile('{machine_name}/{machine_name}.libraries.yml', 'model.libraries.yml');
+    if ($ir->confirm('Would you like to create libraries.yml file?', FALSE)) {
+      $assets->addFile('{machine_name}/{machine_name}.libraries.yml', 'model.libraries.yml');
     }
 
-    if ($this->confirm('Would you like to create permissions.yml file?', FALSE)) {
-      $this->addFile('{machine_name}/{machine_name}.permissions.yml', 'model.permissions.yml');
+    if ($ir->confirm('Would you like to create permissions.yml file?', FALSE)) {
+      $assets->addFile('{machine_name}/{machine_name}.permissions.yml', 'model.permissions.yml');
     }
 
-    if ($this->confirm('Would you like to create event subscriber?', FALSE)) {
-      $this->addFile("{machine_name}/src/EventSubscriber/{class_prefix}Subscriber.php")
+    if ($ir->confirm('Would you like to create event subscriber?', FALSE)) {
+      $assets->addFile("{machine_name}/src/EventSubscriber/{class_prefix}Subscriber.php")
         ->template('src/EventSubscriber/ExampleSubscriber.php');
-      $this->addFile('{machine_name}/{machine_name}.services.yml', 'model.services.yml');
+      $assets->addFile('{machine_name}/{machine_name}.services.yml', 'model.services.yml');
     }
 
-    if ($this->confirm('Would you like to create block plugin?', FALSE)) {
-      $this->addFile('{machine_name}/src/Plugin/Block/ExampleBlock.php')
+    if ($ir->confirm('Would you like to create block plugin?', FALSE)) {
+      $assets->addFile('{machine_name}/src/Plugin/Block/ExampleBlock.php')
         ->template('src/Plugin/Block/ExampleBlock.php');
     }
 
-    if ($vars['controller'] = $this->confirm('Would you like to create a controller?', FALSE)) {
-      $this->addFile("{machine_name}/src/Controller/{class_prefix}Controller.php")
+    if ($vars['controller'] = $ir->confirm('Would you like to create a controller?', FALSE)) {
+      $assets->addFile("{machine_name}/src/Controller/{class_prefix}Controller.php")
         ->template('src/Controller/ExampleController.php');
     }
 
-    if ($vars['form'] = $this->confirm('Would you like to create settings form?', FALSE)) {
-      $this->addFile('{machine_name}/src/Form/SettingsForm.php')
+    if ($vars['form'] = $ir->confirm('Would you like to create settings form?', FALSE)) {
+      $assets->addFile('{machine_name}/src/Form/SettingsForm.php')
         ->template('src/Form/SettingsForm.php');
-      $this->addFile('{machine_name}/config/schema/{machine_name}.schema.yml')
+      $assets->addFile('{machine_name}/config/schema/{machine_name}.schema.yml')
         ->template('config/schema/model.schema.yml');
-      $this->addFile('{machine_name}/{machine_name}.links.menu.yml')
+      $assets->addFile('{machine_name}/{machine_name}.links.menu.yml')
         ->template('model.links.menu');
     }
 
     if ($vars['controller'] || $vars['form']) {
-      $this->addFile('{machine_name}/{machine_name}.routing.yml')
+      $assets->addFile('{machine_name}/{machine_name}.routing.yml')
         ->template('model.routing.yml');
     }
 

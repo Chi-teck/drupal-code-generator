@@ -113,8 +113,8 @@ final class Interviewer {
     }
 
     $question_str = match ($type) {
-      GeneratorType::MODULE_COMPONENT => 'Module name',
-      GeneratorType::THEME_COMPONENT => 'Theme name',
+      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => 'Module name',
+      GeneratorType::THEME, GeneratorType::THEME_COMPONENT => 'Theme name',
       default => 'Name',
     };
     $default_value = $machine_name ? Utils::machine2human($machine_name) : NULL;
@@ -143,8 +143,8 @@ final class Interviewer {
     }
 
     $question_str = match ($this->generatorDefinition->type) {
-      GeneratorType::MODULE_COMPONENT => 'Module machine name',
-      GeneratorType::THEME_COMPONENT => 'Theme machine name',
+      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => 'Module machine name',
+      GeneratorType::THEME, GeneratorType::THEME_COMPONENT => 'Theme machine name',
       default => 'Machine name',
     };
     $question = new Question($question_str, $default_value);
