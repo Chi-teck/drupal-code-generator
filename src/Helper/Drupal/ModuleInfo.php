@@ -8,8 +8,6 @@ use Symfony\Component\Console\Helper\Helper;
 
 /**
  * A helper that provides information about installed Drupal modules.
- *
- * @todo Test this.
  */
 final class ModuleInfo extends Helper {
 
@@ -33,25 +31,20 @@ final class ModuleInfo extends Helper {
   /**
    * Returns destination for generated module code.
    */
-  public function getDestination(bool $is_new, string $machine_name): ?string {
-    $destination = NULL;
-
+  public function getDestination(string $machine_name, bool $is_new): ?string {
     $modules_dir = \is_dir(\DRUPAL_ROOT . '/modules/custom') ?
       'modules/custom' : 'modules';
 
     if ($is_new) {
       $destination = $modules_dir;
     }
-    elseif ($machine_name) {
+    else {
       $destination = \array_key_exists($machine_name, $this->getModules())
         ? $this->moduleHandler->getModule($machine_name)->getPath()
         : $modules_dir . '/' . $machine_name;
     }
 
-    if ($destination) {
-      $destination = \DRUPAL_ROOT . '/' . $destination;
-    }
-    return $destination;
+    return \DRUPAL_ROOT . '/' . $destination;
   }
 
   /**

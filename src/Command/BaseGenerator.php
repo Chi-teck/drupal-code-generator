@@ -184,17 +184,21 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
 
   /**
    * Returns destination for generated files.
+   *
+   * @todo Test this.
    */
   protected function getDestination(array $vars): ?string {
-    // @todo Figure out the case when machine name is not provided.
+    if (!isset($vars['machine_name'])) {
+      return $this->getWorkingDirectory();
+    }
     $definition = $this->getGeneratorDefinition();
     $is_new = $definition->type->isNewExtension();
     return match ($definition->type) {
-      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => $this->getHelper('module_info')
-        ->getDestination($is_new, $vars['machine_name']),
-      GeneratorType::THEME, GeneratorType::THEME_COMPONENT => $this->getHelper('theme_info')
-        ->getDestination($is_new, $vars['machine_name']),
-      default => $this->directory,
+      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT =>
+        $this->getHelper('module_info')->getDestination($vars['machine_name'], $is_new),
+      GeneratorType::THEME, GeneratorType::THEME_COMPONENT =>
+        $this->getHelper('theme_info')->getDestination($vars['machine_name'], $is_new),
+      default => $this->getWorkingDirectory(),
     };
   }
 

@@ -33,26 +33,20 @@ final class ThemeInfo extends Helper {
   /**
    * Returns destination for generated theme code.
    */
-  public function getDestination(bool $is_new, ?string $machine_name): ?string {
-    $destination = NULL;
-
+  public function getDestination(string $machine_name, bool $is_new): ?string {
     $themes_dir = \is_dir(\DRUPAL_ROOT . '/themes/custom') ?
       'themes/custom' : 'themes';
 
     if ($is_new) {
       $destination = $themes_dir;
     }
-    elseif ($machine_name) {
+    else {
       $destination = \array_key_exists($machine_name, $this->getThemes())
         ? $this->themeHandler->getTheme($machine_name)->getPath()
         : $themes_dir . '/' . $machine_name;
     }
 
-    if ($destination) {
-      $destination = \DRUPAL_ROOT . '/' . $destination;
-    }
-
-    return $destination;
+    return \DRUPAL_ROOT . '/' . $destination;
   }
 
   /**
