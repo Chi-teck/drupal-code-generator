@@ -29,14 +29,6 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
   use LoggerAwareTrait;
 
   /**
-   * The working directory.
-   *
-   * This is used to supply generators with some context. For instance, the
-   * directory name can be used to set default extension name.
-   */
-  protected string $directory;
-
-  /**
    * {@inheritdoc}
    */
   protected function configure() {
@@ -75,9 +67,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       $this->getHelper('renderer')->prependPath($template_path);
     }
 
-    $this->directory = $input->getOption('working-dir') ?: \getcwd();
-
-    $this->logger->debug('Working directory: {directory}', ['directory' => $this->directory]);
+    $this->logger->debug('Working directory: {directory}', ['directory' => $this->getWorkingDirectory()]);
   }
 
   /**
@@ -206,6 +196,16 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
         ->getDestination($is_new, $vars['machine_name']),
       default => $this->directory,
     };
+  }
+
+  /**
+   * Returns current working directory.
+   *
+   * Can be helpful to supply generators with some context. For instance, the
+   * directory name can be used to set default extension name.
+   */
+  final protected function getWorkingDirectory(): string {
+    return $this->io->getInput()->getOption('working-dir') ?? \getcwd();
   }
 
 }
