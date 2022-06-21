@@ -140,7 +140,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
   $DCG install -a bar
   $DCG javascript -a bar -a heavy-metal.js -a Yes -a heavy_metal
   $DCG module-file -a bar
-  $DCG service-provider -a bar
+  $DCG service-provider -a bar -a Bar
   $DCG template -a bar -a example -a Yes -a Yes
   $DCG layout -a bar -a Foo -a foo -a my -a Yes -a Yes
   $DCG render-element -a bar

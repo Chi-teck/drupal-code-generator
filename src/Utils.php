@@ -83,7 +83,7 @@ class Utils {
       if (!\array_key_exists($name, $data)) {
         throw new \UnexpectedValueException(\sprintf('Variable "%s" is not defined', $name));
       }
-      // The variable value might be float or integer.
+      // The variable value can be of float or integer type.
       $result = (string) $data[$name];
       return match ($filter) {
         'u2h' => \str_replace('_', '-', $result),
@@ -94,7 +94,7 @@ class Utils {
         'pluralize' => self::pluralize($result),
         'c2m' => self::camel2machine($result),
         NULL => $result,
-        default => throw new \UnexpectedValueException(\sprintf('Filter "%s" is not defined', $filter))
+        default => throw new \UnexpectedValueException(\sprintf('Filter "%s" is not defined.', $filter))
       };
     };
 

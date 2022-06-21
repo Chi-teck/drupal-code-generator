@@ -13,7 +13,7 @@ final class ServiceProviderTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_service_provider';
 
   public function testGenerator(): void {
-    $this->execute(ServiceProvider::class, ['example']);
+    $this->execute(ServiceProvider::class, ['example', 'Example']);
 
     $expected_display = <<< 'TXT'
 
@@ -21,6 +21,9 @@ final class ServiceProviderTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Example]:
      ➤ 
 
      The following directories and files have been created or updated:
