@@ -15,6 +15,7 @@ final class ModuleInfoTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'example',
+      'Example',
       'Example description.',
       'Custom',
       'example.settings',
@@ -28,6 +29,9 @@ final class ModuleInfoTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Example]:
      ➤ 
 
      Description [Module description.]:

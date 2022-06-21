@@ -25,7 +25,7 @@ final class ModuleInfoTest extends FunctionalTestBase {
     self::assertDestination('modules/foo', $module_info->getDestination('foo', FALSE));
 
     self::assertSame('Database Logging', $module_info->getModuleName('dblog'));
-    self::assertSame('Unknown module', $module_info->getModuleName('unknown_module'));
+    self::assertNull($module_info->getModuleName('unknown_module'));
   }
 
   private static function assertModules(array $modules): void {

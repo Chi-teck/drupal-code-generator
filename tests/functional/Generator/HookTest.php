@@ -13,7 +13,7 @@ final class HookTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_hook';
 
   public function testGenerator(): void {
-    $this->execute(Hook::class, ['example', 'theme']);
+    $this->execute(Hook::class, ['example', 'Example', 'theme']);
 
     $expected_display = <<< 'TXT'
 
@@ -21,6 +21,9 @@ final class HookTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Example]:
      ➤ 
 
      Hook name:

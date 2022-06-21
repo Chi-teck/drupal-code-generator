@@ -22,7 +22,7 @@ final class Hook extends BaseGenerator {
 
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
-    $vars['name'] = $this->getHelper('module_info')->getModuleName($vars['machine_name']);
+    $vars['name'] = $ir->askName();
 
     $hook_question = new Question('Hook name');
     $hook_question->setValidator(self::getHookValidator($available_hooks));

@@ -16,6 +16,7 @@ final class ControllerTest extends GeneratorTestBase {
 
     $input = [
       'foo',
+      'Foo',
       'FooController',
       'Yes',
       'database',
@@ -34,6 +35,9 @@ final class ControllerTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [FooController]:

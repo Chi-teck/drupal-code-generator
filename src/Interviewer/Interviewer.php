@@ -97,26 +97,27 @@ final class Interviewer {
    */
   public function askName(): string {
 
-    $question_str = match ($this->generatorDefinition->type) {
+    $type = $this->generatorDefinition->type;
+    $machine_name = $this->vars['machine_name'] ?? NULL;
+
+    // Try to determine the name without interaction with the user.
+    if ($machine_name && !$type->isNewExtension()) {
+      $name = match ($type) {
+        GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModuleName($machine_name),
+        GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemeName($machine_name),
+        default => NULL,
+      };
+      if ($name) {
+        return $name;
+      }
+    }
+
+    $question_str = match ($type) {
       GeneratorType::MODULE_COMPONENT => 'Module name',
       GeneratorType::THEME_COMPONENT => 'Theme name',
       default => 'Name',
     };
-
-    $default_value = NULL;
-    if (isset($this->vars['machine_name'])) {
-      if ($this->generatorDefinition->type->isNewExtension()) {
-        $default_value = Utils::machine2human($this->vars['machine_name']);
-      }
-      else {
-        $default_value = match ($this->generatorDefinition->type) {
-          GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModuleName($this->vars['machine_name']),
-          GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemeName($this->vars['machine_name']),
-          default => NULL,
-        };
-      }
-    }
-
+    $default_value = $machine_name ? Utils::machine2human($machine_name) : NULL;
     $question = new Question($question_str, $default_value);
     $question->setValidator(new Required());
     return $this->io->askQuestion($question);
