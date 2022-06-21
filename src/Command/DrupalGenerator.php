@@ -147,9 +147,9 @@ abstract class DrupalGenerator extends LegacyGenerator {
     // @todo Figure out the case when machine name is not provided.
     return match ($this->extensionType) {
       DrupalGenerator::EXTENSION_TYPE_MODULE => $this->getHelper('module_info')
-        ->getDestination($this->isNewExtension, $vars['machine_name']),
+        ->getDestination($vars['machine_name'], $this->isNewExtension),
       DrupalGenerator::EXTENSION_TYPE_THEME => $this->getHelper('theme_info')
-        ->getDestination($this->isNewExtension, $vars['machine_name']),
+        ->getDestination($vars['machine_name'], $this->isNewExtension),
       default => parent::getDestination($vars),
     };
   }

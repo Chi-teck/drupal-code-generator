@@ -3,26 +3,24 @@
 namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements yml:module-libraries command.
- */
-final class ModuleLibraries extends ModuleGenerator {
+#[Generator(
+  name: 'yml:module-libraries',
+  description: 'Generates module libraries yml file',
+  aliases: ['module-libraries'],
+  templatePath: Application::TEMPLATE_PATH . '/yml/module-libraries',
+  type: GeneratorType::MODULE_COMPONENT,
+  label: 'Libraries (module)',
+)]
+final class ModuleLibraries extends BaseGenerator {
 
-  protected string $name = 'yml:module-libraries';
-  protected string $description = 'Generates module libraries yml file';
-  protected string $alias = 'module-libraries';
-  protected string $label = 'Libraries (module)';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/module-libraries';
-  protected ?string $nameQuestion = NULL;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('{machine_name}.libraries.yml', 'module-libraries');
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
+    $assets->addFile('{machine_name}.libraries.yml', 'module-libraries.twig');
   }
 
 }
