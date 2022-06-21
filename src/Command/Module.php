@@ -2,11 +2,15 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Extension\Exception\UnknownExtensionException;
+use Drupal\Core\Extension\ModuleExtensionList;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\Required;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 #[Generator(
   name: 'module',
@@ -14,7 +18,15 @@ use DrupalCodeGenerator\Validator\Required;
   templatePath: Application::TEMPLATE_PATH . '/module',
   type: GeneratorType::MODULE,
 )]
-final class Module extends BaseGenerator {
+final class Module extends BaseGenerator implements ContainerInjectionInterface {
+
+  public function __construct(private ModuleExtensionList $moduleList) {
+    parent::__construct();
+  }
+
+  public static function create(ContainerInterface $container): self {
+    return new self($container->get('extension.list.module'));
+  }
 
   protected function generate(array &$vars, AssetCollection $assets): void {
     $ir = $this->createInterviewer($vars);
@@ -25,9 +37,8 @@ final class Module extends BaseGenerator {
     $vars['description'] = $ir->ask('Module description', 'Provides additional functionality for the site.', new Required());
     $vars['package'] = $ir->ask('Package', 'Custom');
 
-    $dependencies = $ir->ask('Dependencies (comma separated)');
-    $vars['dependencies'] = $dependencies ?
-      \array_map('trim', \explode(',', \strtolower($dependencies))) : [];
+    $dependencies = $ir->ask('Dependencies (comma separated)') ?? '';
+    $vars['dependencies'] = \array_map([$this, 'normalizeDependency'], \explode(',', $dependencies));
 
     $vars['class_prefix'] = '{machine_name|camelize}';
 
@@ -50,7 +61,7 @@ final class Module extends BaseGenerator {
     }
 
     if ($ir->confirm('Would you like to create event subscriber?', FALSE)) {
-      $assets->addFile("{machine_name}/src/EventSubscriber/{class_prefix}Subscriber.php")
+      $assets->addFile('{machine_name}/src/EventSubscriber/{class_prefix}Subscriber.php')
         ->template('src/EventSubscriber/ExampleSubscriber.php');
       $assets->addFile('{machine_name}/{machine_name}.services.yml', 'model.services.yml');
     }
@@ -78,7 +89,28 @@ final class Module extends BaseGenerator {
       $assets->addFile('{machine_name}/{machine_name}.routing.yml')
         ->template('model.routing.yml');
     }
+  }
 
+  private function normalizeDependency(string $name): string {
+    $name = \trim(\strtolower($name));
+    // Check if the module name is already prefixed.
+    if (\str_contains($name, ':')) {
+      return $name;
+    }
+
+    // Dependencies should be namespaced in the format {project}:{name}.
+    $project = $name;
+    try {
+      $package = $this->moduleList->getExtensionInfo($name)['package'] ?? NULL;
+      if ($package === 'Core') {
+        $project = 'drupal';
+      }
+    }
+    catch (UnknownExtensionException) {
+
+    }
+
+    return $project . ':' . $name;
   }
 
 }
