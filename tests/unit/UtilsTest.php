@@ -223,4 +223,23 @@ final class UtilsTest extends BaseTestCase {
     self::assertSame('foo_bar', Utils::removePrefix('foo_bar', ' foo'));
   }
 
+  /**
+   * Test callback.
+   *
+   * @covers \DrupalCodeGenerator\Utils::processVars()
+   */
+  public function testProcessVars(): void {
+    $vars = [
+      'alpha' => '-= {beta} =-',
+      'beta' => 123,
+      'gamma' => 'example/\{id\}',
+    ];
+    $expected_vars = [
+      'alpha' => '-= 123 =-',
+      'beta' => 123,
+      'gamma' => 'example/{id}',
+    ];
+    self::assertSame($expected_vars, Utils::processVars($vars));
+  }
+
 }

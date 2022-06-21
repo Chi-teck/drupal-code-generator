@@ -83,7 +83,8 @@ class Utils {
       if (!\array_key_exists($name, $data)) {
         throw new \UnexpectedValueException(\sprintf('Variable "%s" is not defined', $name));
       }
-      $result = $data[$name];
+      // The variable value might be float or integer.
+      $result = (string) $data[$name];
       return match ($filter) {
         'u2h' => \str_replace('_', '-', $result),
         'h2u' => \str_replace('-', '_', $result),
@@ -131,6 +132,19 @@ class Utils {
   public static function removePrefix(string $input, string $prefix): string {
     return \str_starts_with($input, $prefix)
       ? \substr_replace($input, '', 0, \strlen($prefix)) : $input;
+  }
+
+  /**
+   * Processes collected variables.
+   */
+  public static function processVars(array $vars): array {
+    $processor = static function (&$var, string $key, array $vars): void {
+      if (\is_string($var)) {
+        $var = Utils::stripSlashes(Utils::replaceTokens($var, $vars));
+      }
+    };
+    \array_walk_recursive($vars, $processor, $vars);
+    return $vars;
   }
 
 }

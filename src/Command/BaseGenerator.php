@@ -71,7 +71,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     }
 
     $template_path = $this->getGeneratorDefinition()->templatePath;
-    if ($template_path) {
+    if ($template_path !== NULL) {
       $this->getHelper('renderer')->prependPath($template_path);
     }
 
@@ -96,7 +96,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       $assets = new AssetCollection();
       $this->generate($vars, $assets);
 
-      $vars = self::processVars($vars);
+      $vars = Utils::processVars($vars);
       $collected_vars = \preg_replace('/^Array/', '', \print_r($vars, TRUE));
       $this->logger->debug('Collected variables: {vars}', ['vars' => $collected_vars]);
 
@@ -190,19 +190,6 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    */
   public function getLabel(): ?string {
     return $this->getGeneratorDefinition()->label;
-  }
-
-  /**
-   * Processes collected variables.
-   */
-  private static function processVars(array $vars): array {
-    $processor = static function (&$var, string $key, array $vars): void {
-      if (\is_string($var)) {
-        $var = Utils::stripSlashes(Utils::replaceTokens($var, $vars));
-      }
-    };
-    \array_walk_recursive($vars, $processor, $vars);
-    return $vars;
   }
 
   /**
