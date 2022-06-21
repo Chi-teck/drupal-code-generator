@@ -136,7 +136,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
   cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG controller -a bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
+  $DCG controller -a bar -a Bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
   $DCG install -a bar
   $DCG javascript -a bar -a heavy-metal.js -a Yes -a heavy_metal
   $DCG module-file -a bar
