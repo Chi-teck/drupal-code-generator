@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
@@ -33,6 +32,7 @@ class Dumper extends Helper implements IOAwareInterface {
   public function dump(AssetCollection $assets, string $destination, DumperOptions $options): AssetCollection {
 
     $dumped_assets = new AssetCollection();
+    $default_resolver = new Resolver($options, $this->io);
 
     // -- Directories.
     /** @var \DrupalCodeGenerator\Asset\Directory $asset */
@@ -41,14 +41,19 @@ class Dumper extends Helper implements IOAwareInterface {
       $directory_path = $destination . '/' . $directory->getPath();
 
       // Recreating directories makes no sense.
-      if (!$this->filesystem->exists($directory_path)) {
-        if ($options->dryRun) {
-          $this->io->title(($options->fullPath ? $directory_path : $directory->getPath()) . ' (empty directory)');
+      if ($this->filesystem->exists($directory_path)) {
+        $directory = $default_resolver($directory, $directory_path);
+        if ($directory === NULL) {
+          continue;
         }
-        else {
-          $this->filesystem->mkdir($directory_path, $directory->getMode());
-          $dumped_assets[] = $directory;
-        }
+      }
+
+      if ($options->dryRun) {
+        $this->io->title(($options->fullPath ? $directory_path : $directory->getPath()) . ' (empty directory)');
+      }
+      else {
+        $this->filesystem->mkdir($directory_path, $directory->getMode());
+        $dumped_assets[] = $directory;
       }
 
     }
@@ -60,8 +65,11 @@ class Dumper extends Helper implements IOAwareInterface {
       $file_path = $destination . '/' . $file->getPath();
 
       if ($this->filesystem->exists($file_path)) {
-        $resolver = $file->getResolver() ?? new FileResolver($options, $this->io);
+        $resolver = $file->getResolver() ?? $default_resolver;
         $file = $resolver($file, $file_path);
+        if ($file === NULL) {
+          continue;
+        }
       }
 
       // Nothing to dump.
@@ -88,15 +96,9 @@ class Dumper extends Helper implements IOAwareInterface {
       $link_path = $destination . '/' . $symlink->getPath();
 
       if ($file_exists = $this->filesystem->exists($link_path)) {
-        switch ($symlink->getAction()) {
-          case Symlink::ACTION_SKIP:
-            continue 2;
-
-          case Symlink::ACTION_REPLACE:
-            if (!$options->dryRun && !$this->confirmReplace($link_path, $options->replace)) {
-              continue 2;
-            }
-            break;
+        $symlink = $default_resolver($symlink, $link_path);
+        if ($symlink === NULL) {
+          continue;
         }
       }
 
@@ -120,16 +122,6 @@ class Dumper extends Helper implements IOAwareInterface {
     }
 
     return $dumped_assets;
-  }
-
-  /**
-   * Confirms file replace.
-   */
-  protected function confirmReplace(string $file_path, ?bool $replace): bool {
-    if ($replace === NULL) {
-      return $this->io->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?");
-    }
-    return $replace;
   }
 
 }

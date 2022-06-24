@@ -233,9 +233,10 @@ final class DumperTest extends BaseTestCase {
 
     $assets = new AssetCollection();
     $assets[] = (new File('log.txt'))->content('File header')->prependIfExists();
-
     $dumped_assets = $this->dump($assets, TRUE);
-    self::assertEquals($assets, $dumped_assets);
+    $expected_assets = new AssetCollection();
+    $expected_assets[] = (new File('log.txt'))->content("File header\nRecord 1")->prependIfExists();
+    self::assertEquals($expected_assets, $dumped_assets);
 
     $expected_content = [
       'log.txt' => "File header\nRecord 1",
@@ -247,6 +248,8 @@ final class DumperTest extends BaseTestCase {
 
   /**
    * Test callback.
+   *
+   * @todo Clean-up.
    */
   public function testAppendFile(): void {
     $this->createFile('log.txt', 'File header');
@@ -260,8 +263,17 @@ final class DumperTest extends BaseTestCase {
       ->content('Record 2')
       ->appendIfExists();
 
+    $expected_assets = new AssetCollection();
+    $expected_assets[] = (new File('log.txt'))
+      ->content("File header\nRecord 1")
+      ->appendIfExists()
+      ->headerSize(1);
+    $expected_assets[] = (new File('log.txt'))
+      ->content("File header\nRecord 1\nRecord 2")
+      ->appendIfExists();
+
     $dumped_assets = $this->dump($assets, TRUE);
-    self::assertEquals($assets, $dumped_assets);
+    self::assertEquals($expected_assets, $dumped_assets);
 
     $expected_content = [
       'log.txt' => "File header\nRecord 1\nRecord 2",
