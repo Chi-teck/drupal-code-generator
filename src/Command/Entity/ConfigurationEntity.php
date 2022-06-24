@@ -3,6 +3,7 @@
 namespace DrupalCodeGenerator\Command\Entity;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -41,9 +42,13 @@ final class ConfigurationEntity extends ModuleGenerator {
       ->appendIfExists();
 
     // Add 'configure' link to the info file if it exists.
-    $update_info = static function (?string $existing_content) use ($vars): ?string {
+    $update_info = static function (File $file, string $path) use ($vars): ?File {
+      $existing_content = \file_get_contents($path);
       if ($existing_content && !\preg_match('/^configure: /m', $existing_content)) {
-        return "{$existing_content}configure: entity.{$vars['entity_type_id']}.collection\n";
+        $content = "{$existing_content}configure: entity.{$vars['entity_type_id']}.collection\n";
+        $resoved_file = clone $file;
+        $resoved_file->content($content);
+        return $file;
       }
       return NULL;
     };

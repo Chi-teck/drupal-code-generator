@@ -354,12 +354,12 @@ final class DumperTest extends BaseTestCase {
    */
   public function testDryDump(): void {
     $assets = new AssetCollection();
-    $assets[] = (new File('example.txt'))->content('Example');
     $assets[] = new Directory('foo');
+    $assets[] = (new File('example.txt'))->content('Example');
     $assets[] = new Symlink('foo.link', 'example.txt');
 
     $dumped_assets = $this->dump($assets, NULL, TRUE);
-    self::assertEquals(new AssetCollection(), $dumped_assets);
+    self::assertEquals($assets, $dumped_assets);
 
     self::assertDirectoryDoesNotExist($this->directory);
 

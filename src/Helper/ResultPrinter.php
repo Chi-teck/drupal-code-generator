@@ -26,11 +26,6 @@ class ResultPrinter extends Helper implements IOAwareInterface {
 
   /**
    * Prints summary.
-   *
-   * @param \DrupalCodeGenerator\Asset\AssetCollection $assets
-   *   List of created or updated assets.
-   * @param string $base_path
-   *   (Optional) Base path.
    */
   public function printResult(AssetCollection $assets, string $base_path = ''): void {
     if (\count($assets) > 0) {
