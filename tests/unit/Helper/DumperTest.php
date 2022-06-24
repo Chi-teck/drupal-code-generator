@@ -6,7 +6,7 @@ use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
-use DrupalCodeGenerator\Helper\Dumper;
+use DrupalCodeGenerator\Helper\Dumper\Dumper;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Style\GeneratorStyle;

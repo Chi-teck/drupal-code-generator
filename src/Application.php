@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Helper\DrupalContext;
-use DrupalCodeGenerator\Helper\Dumper;
+use DrupalCodeGenerator\Helper\Dumper\Dumper;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\ResultPrinter;

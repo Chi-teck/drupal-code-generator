@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Helper;
+namespace DrupalCodeGenerator\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
+use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
@@ -18,17 +18,7 @@ class Dumper extends Helper implements IOAwareInterface {
 
   use IOAwareTrait;
 
-  /**
-   * The file system utility.
-   */
-  public Filesystem $filesystem;
-
-  /**
-   * Constructs a generator command.
-   */
-  public function __construct(Filesystem $filesystem) {
-    $this->filesystem = $filesystem;
-  }
+  public function __construct(private Filesystem $filesystem) {}
 
   /**
    * {@inheritdoc}
@@ -64,54 +54,27 @@ class Dumper extends Helper implements IOAwareInterface {
     }
 
     // -- Files.
-    /** @var \DrupalCodeGenerator\Asset\File $asset */
+    /** @var \DrupalCodeGenerator\Asset\File $file */
     foreach ($assets->getFiles() as $file) {
 
       $file_path = $destination . '/' . $file->getPath();
-      $content = $file->getContent();
 
       if ($this->filesystem->exists($file_path)) {
-        // Resolve $file.
-        if ($resolver = $file->getResolver()) {
-          $existing_content = \file_get_contents($file_path);
-          $content = $resolver($existing_content, $content);
-        }
-        else {
-          switch ($file->getAction()) {
-            case File::ACTION_SKIP:
-              continue 2;
-
-            case File::ACTION_REPLACE:
-              if (!$options->dryRun && !$this->confirmReplace($file_path, $options->replace)) {
-                continue 2;
-              }
-              break;
-
-            case File::ACTION_PREPEND:
-              $existing_content = \file_get_contents($file_path);
-              $content = static::prependContent($existing_content, $content);
-              break;
-
-            case File::ACTION_APPEND:
-              $existing_content = \file_get_contents($file_path);
-              $content = static::appendContent($existing_content, $content, $file->getHeaderSize());
-              break;
-          }
-        }
-
+        $resolver = $file->getResolver() ?? new FileResolver($options, $this->io);
+        $file = $resolver($file, $file_path);
       }
 
       // Nothing to dump.
-      if ($content === NULL) {
+      if ($file->getContent() === NULL) {
         continue;
       }
 
       if ($options->dryRun) {
         $this->io->title($options->fullPath ? $file_path : $file->getPath());
-        $this->io->writeln($content, OutputInterface::OUTPUT_RAW);
+        $this->io->writeln($file->getContent(), OutputInterface::OUTPUT_RAW);
       }
       else {
-        $this->filesystem->dumpFile($file_path, $content);
+        $this->filesystem->dumpFile($file_path, $file->getContent());
         $this->filesystem->chmod($file_path, $file->getMode());
         $dumped_assets[] = $file;
       }
@@ -167,29 +130,6 @@ class Dumper extends Helper implements IOAwareInterface {
       return $this->io->confirm("The file <comment>$file_path</comment> already exists. Would you like to replace it?");
     }
     return $replace;
-  }
-
-  /**
-   * Prepends generated content to the existing one.
-   */
-  protected static function prependContent(string $existing_content, ?string $new_content): string {
-    if ($new_content === NULL) {
-      return $existing_content;
-    }
-    return $new_content . "\n" . $existing_content;
-  }
-
-  /**
-   * Appends generated content to the end of existing one.
-   */
-  protected static function appendContent(string $existing_content, ?string $new_content, int $header_size): string {
-    if ($new_content === NULL) {
-      return $existing_content;
-    }
-    if ($header_size > 0) {
-      $new_content = \implode("\n", \array_slice(\explode("\n", $new_content), $header_size));
-    }
-    return $existing_content . "\n" . $new_content;
   }
 
 }
