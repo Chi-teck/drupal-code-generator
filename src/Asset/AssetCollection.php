@@ -10,21 +10,12 @@ namespace DrupalCodeGenerator\Asset;
 final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Countable {
 
   /**
-   * Assets.
-   *
-   * @var \DrupalCodeGenerator\Asset\Asset[]
-   */
-  private array $assets;
-
-  /**
    * AssetCollection constructor.
    *
    * @param \DrupalCodeGenerator\Asset\Asset[] $assets
    *   Assets.
    */
-  public function __construct(array $assets = []) {
-    $this->assets = $assets;
-  }
+  public function __construct(private array $assets = []) {}
 
   /**
    * Creates a directory asset.

@@ -40,9 +40,7 @@ class Dumper extends Helper implements IOAwareInterface {
       $path = $destination . '/' . $asset->getPath();
 
       if ($this->filesystem->exists($path)) {
-        // @todo Move 'getResolver' method to Asset base class.
-        $resolver = \method_exists($asset, 'getResolver') ?
-          $asset->getResolver() ?? $default_resolver : $default_resolver;
+        $resolver = $asset->getResolver() ?? $default_resolver;
         $asset = $resolver($asset, $path);
         if ($asset === NULL) {
           continue;

@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\Helper\Dumper;
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
+use DrupalCodeGenerator\Asset\ResolverAction;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
@@ -26,12 +27,11 @@ final class Resolver {
   }
 
   private function resolveFile(File $file, string $path): ?File {
-    $content = match ($file->getAction()) {
-      File::ACTION_SKIP => NULL,
-      File::ACTION_REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : $file->getContent(),
-      File::ACTION_PREPEND => self::prependContent($file, \file_get_contents($path)),
-      File::ACTION_APPEND => self::appendContent($file, \file_get_contents($path)),
-      default => throw new \LogicException('Unsupported file action'),
+    $content = match ($file->getResolverAction()) {
+      ResolverAction::SKIP => NULL,
+      ResolverAction::REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : $file->getContent(),
+      ResolverAction::PREPEND => self::prependContent($file, \file_get_contents($path)),
+      ResolverAction::APPEND => self::appendContent($file, \file_get_contents($path)),
     };
     if ($content === NULL) {
       return NULL;
@@ -42,9 +42,9 @@ final class Resolver {
   }
 
   private function resolveSymlink(Symlink $symlink, string $path): ?Symlink {
-    return match ($symlink->getAction()) {
-      Symlink::ACTION_SKIP => NULL,
-      Symlink::ACTION_REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : clone $symlink,
+    return match ($symlink->getResolverAction()) {
+      ResolverAction::SKIP => NULL,
+      ResolverAction::REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : clone $symlink,
     };
   }
 

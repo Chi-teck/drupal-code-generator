@@ -7,16 +7,6 @@ namespace DrupalCodeGenerator\Asset;
  */
 final class Symlink extends Asset {
 
-  public const ACTION_REPLACE = 0x01;
-  public const ACTION_SKIP = 0x04;
-
-  /**
-   * Action.
-   *
-   * An action to take if specified symlink already exists.
-   */
-  private int $action = self::ACTION_REPLACE;
-
   /**
    * Symlink target.
    */
@@ -35,36 +25,24 @@ final class Symlink extends Asset {
    * Getter for symlink target.
    *
    * @return string
-   *   Asset action.
+   *   Asset resolverAction.
    */
   public function getTarget(): string {
     return $this->replaceTokens($this->target);
   }
 
   /**
-   * Getter for asset action.
-   *
-   * @return string|callable
-   *   Asset action.
+   * {@inheritdoc}
    */
-  public function getAction() {
-    return $this->action;
+  public function prependIfExists(): self {
+    throw new \LogicException('"prepend" action is not supported for symlinks.');
   }
 
   /**
-   * Sets the "replace" action.
+   * {@inheritdoc}
    */
-  public function replaceIfExists(): self {
-    $this->action = self::ACTION_REPLACE;
-    return $this;
-  }
-
-  /**
-   * Sets the "skip" action.
-   */
-  public function skipIfExists(): self {
-    $this->action = self::ACTION_SKIP;
-    return $this;
+  public function appendIfExists(): self {
+    throw new \LogicException('"append" action is not supported for symlinks.');
   }
 
 }

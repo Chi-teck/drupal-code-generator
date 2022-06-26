@@ -7,11 +7,6 @@ namespace DrupalCodeGenerator\Asset;
  */
 final class File extends Asset {
 
-  public const ACTION_REPLACE = 0x01;
-  public const ACTION_PREPEND = 0x02;
-  public const ACTION_APPEND = 0x03;
-  public const ACTION_SKIP = 0x04;
-
   /**
    * Asset content.
    */
@@ -33,23 +28,9 @@ final class File extends Asset {
   private ?string $inlineTemplate = NULL;
 
   /**
-   * Action.
-   *
-   * An action to take if specified file already exists.
-   */
-  private int $action = self::ACTION_REPLACE;
-
-  /**
    * Header size.
    */
   private int $headerSize = 0;
-
-  /**
-   * Content resolver.
-   *
-   * @var callable|null
-   */
-  private $resolver = NULL;
 
   /**
    * {@inheritdoc}
@@ -88,24 +69,10 @@ final class File extends Asset {
   }
 
   /**
-   * Returns the asset action.
-   */
-  public function getAction(): int {
-    return $this->action;
-  }
-
-  /**
    * Returns the asset header size (number of lines).
    */
   public function getHeaderSize(): int {
     return $this->headerSize;
-  }
-
-  /**
-   * Returns the asset resolver.
-   */
-  public function getResolver(): ?callable {
-    return $this->resolver;
   }
 
   /**
@@ -143,38 +110,6 @@ final class File extends Asset {
   }
 
   /**
-   * Sets the "replace" action.
-   */
-  public function replaceIfExists(): self {
-    $this->action = self::ACTION_REPLACE;
-    return $this;
-  }
-
-  /**
-   * Sets the "prepend" action.
-   */
-  public function prependIfExists(): self {
-    $this->action = self::ACTION_PREPEND;
-    return $this;
-  }
-
-  /**
-   * Sets the "append" action.
-   */
-  public function appendIfExists(): self {
-    $this->action = self::ACTION_APPEND;
-    return $this;
-  }
-
-  /**
-   * Sets the "skip" action.
-   */
-  public function skipIfExists(): self {
-    $this->action = self::ACTION_SKIP;
-    return $this;
-  }
-
-  /**
    * Set the asset header size.
    */
   public function headerSize(int $header_size): self {
@@ -182,25 +117,6 @@ final class File extends Asset {
       throw new \InvalidArgumentException('Header size must be greater than or equal to 0.');
     }
     $this->headerSize = $header_size;
-    return $this;
-  }
-
-  /**
-   * Setter for asset resolver.
-   *
-   * @param callable|null $resolver
-   *   A callable responsible for resolving content.
-   *   @code
-   *     $resolver = static function (?string $existing_content, ?string $generated_content): ?string {
-   *       if ($existing_content !== NULL) {
-   *         return $generated_content . "\n" . $existing_content;
-   *       }
-   *       return $generated_content;
-   *     }
-   *   @endcode
-   */
-  public function resolver(?callable $resolver): self {
-    $this->resolver = $resolver;
     return $this;
   }
 

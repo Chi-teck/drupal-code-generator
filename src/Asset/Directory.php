@@ -12,4 +12,18 @@ final class Directory extends Asset {
     $this->mode(0755);
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function prependIfExists(): self {
+    throw new \LogicException('"prepend" action is not supported for directories.');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function appendIfExists(): self {
+    throw new \LogicException('"append" action is not supported for directories.');
+  }
+
 }
