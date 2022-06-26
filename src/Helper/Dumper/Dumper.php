@@ -3,10 +3,6 @@
 namespace DrupalCodeGenerator\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\Asset\Resolver\ChainedResolver;
-use DrupalCodeGenerator\Asset\Resolver\DirectoryResolver;
-use DrupalCodeGenerator\Asset\Resolver\FileResolver;
-use DrupalCodeGenerator\Asset\Resolver\SymlinkResolver;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
@@ -36,11 +32,6 @@ class Dumper extends Helper implements IOAwareInterface {
 
     $dumped_assets = new AssetCollection();
 
-    $directory_resolver = new DirectoryResolver();
-    $file_resolver = new FileResolver($options, $this->io);
-    $symlink_resolver = new SymlinkResolver($options, $this->io);
-
-    $default_resolver = new ChainedResolver($directory_resolver, $file_resolver, $symlink_resolver);
     $asset_dumper = $options->dryRun ?
       new DryAssetDumper($this->io, $options) :
       new FileSystemAssetDumper($this->filesystem);
@@ -49,7 +40,7 @@ class Dumper extends Helper implements IOAwareInterface {
       $path = $destination . '/' . $asset->getPath();
 
       if ($this->filesystem->exists($path)) {
-        $resolver = $asset->getResolver() ?? $default_resolver;
+        $resolver = $asset->getResolver($this->io, $options);
         if (!$resolver->supports($asset)) {
           throw new \LogicException(\sprintf('Asset "%s" already exists and cannot be resolved.', \get_debug_type($asset)));
         }

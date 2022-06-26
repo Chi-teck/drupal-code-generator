@@ -2,6 +2,11 @@
 
 namespace DrupalCodeGenerator\Asset;
 
+use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
+use DrupalCodeGenerator\Asset\Resolver\SymlinkResolver;
+use DrupalCodeGenerator\Helper\DumperOptions;
+use DrupalCodeGenerator\Style\GeneratorStyleInterface;
+
 /**
  * Simple data structure to represent a symlink being generated.
  */
@@ -29,6 +34,13 @@ final class Symlink extends Asset {
    */
   public function getTarget(): string {
     return $this->replaceTokens($this->target);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getResolver(GeneratorStyleInterface $io, DumperOptions $options): ResolverInterface {
+    return $this->resolver ?? new SymlinkResolver($options, $io);
   }
 
 }

@@ -2,6 +2,9 @@
 
 namespace DrupalCodeGenerator\Asset;
 
+use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
+use DrupalCodeGenerator\Helper\DumperOptions;
+use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -23,15 +26,13 @@ abstract class Asset {
 
   /**
    * Content resolver.
-   *
-   * @var callable|null
    */
-  private $resolver = NULL;
+  protected ?ResolverInterface $resolver = NULL;
 
   /**
-   * Action.
+   * Default resolver action.
    *
-   * An resolverAction to take if specified file already exists.
+   * An action to take if specified file already exists.
    */
   protected ResolverAction $resolverAction = ResolverAction::REPLACE;
 
@@ -85,9 +86,7 @@ abstract class Asset {
   /**
    * Returns the asset resolver.
    */
-  final public function getResolver(): ?callable {
-    return $this->resolver;
-  }
+  abstract public function getResolver(GeneratorStyleInterface $io, DumperOptions $options): ResolverInterface;
 
   /**
    * Setter for asset mode.
@@ -133,19 +132,8 @@ abstract class Asset {
 
   /**
    * Setter for asset resolver.
-   *
-   * @param callable|null $resolver
-   *   A callable responsible for resolving content.
-   *   @code
-   *     $resolver = static function (?string $existing_content, ?string $generated_content): ?string {
-   *       if ($existing_content !== NULL) {
-   *         return $generated_content . "\n" . $existing_content;
-   *       }
-   *       return $generated_content;
-   *     }
-   *   @endcode
    */
-  final public function resolver(?callable $resolver): self {
+  final public function resolver(ResolverInterface $resolver): self {
     $this->resolver = $resolver;
     return $this;
   }

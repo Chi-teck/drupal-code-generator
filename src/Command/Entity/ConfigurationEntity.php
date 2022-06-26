@@ -3,7 +3,9 @@
 namespace DrupalCodeGenerator\Command\Entity;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\File;
+use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
 use DrupalCodeGenerator\Command\ModuleGenerator;
 
 /**
@@ -41,19 +43,37 @@ final class ConfigurationEntity extends ModuleGenerator {
     $this->addFile('config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml')
       ->appendIfExists();
 
-    // Add 'configure' link to the info file if it exists.
-    $update_info = static function (File $file, string $path) use ($vars): ?File {
-      $existing_content = \file_get_contents($path);
-      if ($existing_content && !\preg_match('/^configure: /m', $existing_content)) {
-        $content = "{$existing_content}configure: entity.{$vars['entity_type_id']}.collection\n";
-        $resoved_file = clone $file;
-        $resoved_file->content($content);
-        return $file;
-      }
-      return NULL;
-    };
     $this->addFile('{machine_name}.info.yml')
-      ->resolver($update_info);
+      ->resolver($this->getInfoResolver($vars));
+  }
+
+  /**
+   * Returns resolver for the module info file.
+   *
+   * @todo Clean-up.
+   */
+  private function getInfoResolver(array $vars): ResolverInterface {
+    // Add 'configure' link to the info file if it exists.
+    return new class ($vars) implements ResolverInterface {
+
+      public function __construct(private array $vars) {}
+
+      public function supports(Asset $asset): bool {
+        return $asset instanceof File;
+      }
+
+      public function resolve(Asset $asset, string $path): ?Asset {
+        $existing_content = \file_get_contents($path);
+        if ($existing_content && !\preg_match('/^configure: /m', $existing_content)) {
+          $content = "{$existing_content}configure: entity.{$this->vars['entity_type_id']}.collection\n";
+          $resolved = clone $asset;
+          $resolved->content($content);
+          return $asset;
+        }
+        return NULL;
+      }
+
+    };
   }
 
 }

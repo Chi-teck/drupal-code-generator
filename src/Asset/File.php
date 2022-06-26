@@ -2,6 +2,11 @@
 
 namespace DrupalCodeGenerator\Asset;
 
+use DrupalCodeGenerator\Asset\Resolver\FileResolver;
+use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
+use DrupalCodeGenerator\Helper\DumperOptions;
+use DrupalCodeGenerator\Style\GeneratorStyleInterface;
+
 /**
  * Simple data structure to represent a file being generated.
  */
@@ -158,6 +163,13 @@ final class File extends Asset {
       $template .= '.twig';
     }
     return $template;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getResolver(GeneratorStyleInterface $io, DumperOptions $options): ResolverInterface {
+    return $this->resolver ?? new FileResolver($options, $io);
   }
 
 }
