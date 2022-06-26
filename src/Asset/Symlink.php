@@ -31,18 +31,4 @@ final class Symlink extends Asset {
     return $this->replaceTokens($this->target);
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function prependIfExists(): self {
-    throw new \LogicException('"prepend" action is not supported for symlinks.');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function appendIfExists(): self {
-    throw new \LogicException('"append" action is not supported for symlinks.');
-  }
-
 }

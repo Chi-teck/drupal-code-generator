@@ -121,10 +121,26 @@ final class File extends Asset {
   }
 
   /**
+   * Sets the "prepend" resolverAction.
+   */
+  public function prependIfExists(): self {
+    $this->resolverAction = ResolverAction::PREPEND;
+    return $this;
+  }
+
+  /**
+   * Sets the "append" resolverAction.
+   */
+  public function appendIfExists(): self {
+    $this->resolverAction = ResolverAction::APPEND;
+    return $this;
+  }
+
+  /**
    * Adds the Twig file extension if needed.
    */
   private static function addTwigFileExtension(string $template): string {
-    if ($template && \pathinfo($template, \PATHINFO_EXTENSION) != 'twig') {
+    if ($template && \pathinfo($template, \PATHINFO_EXTENSION) !== 'twig') {
       $template .= '.twig';
     }
     return $template;

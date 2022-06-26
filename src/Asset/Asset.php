@@ -33,7 +33,7 @@ abstract class Asset {
    *
    * An resolverAction to take if specified file already exists.
    */
-  private ResolverAction $resolverAction = ResolverAction::REPLACE;
+  protected ResolverAction $resolverAction = ResolverAction::REPLACE;
 
   /**
    * Asset constructor.
@@ -106,22 +106,6 @@ abstract class Asset {
    */
   public function replaceIfExists(): self {
     $this->resolverAction = ResolverAction::REPLACE;
-    return $this;
-  }
-
-  /**
-   * Sets the "prepend" resolverAction.
-   */
-  public function prependIfExists(): self {
-    $this->resolverAction = ResolverAction::PREPEND;
-    return $this;
-  }
-
-  /**
-   * Sets the "append" resolverAction.
-   */
-  public function appendIfExists(): self {
-    $this->resolverAction = ResolverAction::APPEND;
     return $this;
   }
 
