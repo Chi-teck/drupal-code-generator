@@ -17,6 +17,7 @@ enum ResolverAction {
   case REPLACE;
   case PREPEND;
   case APPEND;
+  // @todo Rename to PRESERVE.
   case SKIP;
 
 }

@@ -69,10 +69,17 @@ abstract class Asset {
   }
 
   /**
-   * Returns the asset resolverAction.
+   * Indicated weather or not the dumper should replace the existing asset.
    */
-  final public function getResolverAction(): ResolverAction {
-    return $this->resolverAction;
+  final public function shouldReplace(): bool {
+    return $this->resolverAction === ResolverAction::REPLACE;
+  }
+
+  /**
+   * Indicated weather or not the dumper should preserve the existing asset.
+   */
+  final public function shouldPreserve(): bool {
+    return $this->resolverAction === ResolverAction::SKIP;
   }
 
   /**

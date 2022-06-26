@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Helper\Resolver;
 
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\File;
-use DrupalCodeGenerator\Asset\ResolverAction;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 
@@ -19,13 +18,13 @@ final class FileResolver implements ResolverInterface {
     return $asset instanceof File;
   }
 
-  public function resolve(Asset $asset, string $path): ?Asset {
+  public function resolve(Asset $asset, string $path): ?File {
     /** @var \DrupalCodeGenerator\Asset\File $asset */
-    $content = match ($asset->getResolverAction()) {
-      ResolverAction::SKIP => NULL,
-      ResolverAction::REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : $asset->getContent(),
-      ResolverAction::PREPEND => self::prependContent($asset, \file_get_contents($path)),
-      ResolverAction::APPEND => self::appendContent($asset, \file_get_contents($path)),
+    $content = match (TRUE) {
+      $asset->shouldPreserve() => NULL,
+      $asset->shouldReplace() => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : $asset->getContent(),
+      $asset->shouldPrepend() => self::prependContent($asset, \file_get_contents($path)),
+      $asset->shouldAppend() => self::appendContent($asset, \file_get_contents($path)),
     };
     if ($content === NULL) {
       return NULL;

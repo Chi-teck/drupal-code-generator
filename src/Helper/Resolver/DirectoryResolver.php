@@ -11,7 +11,7 @@ final class DirectoryResolver implements ResolverInterface {
     return $asset instanceof Directory;
   }
 
-  public function resolve(Asset $asset, string $path): ?Asset {
+  public function resolve(Asset $asset, string $path): ?Directory {
     // Recreating directories makes no sense.
     return NULL;
   }

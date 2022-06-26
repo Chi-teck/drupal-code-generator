@@ -76,6 +76,20 @@ final class File extends Asset {
   }
 
   /**
+   * Indicated that the exising content should be prepended with this one.
+   */
+  final public function shouldPrepend(): bool {
+    return $this->resolverAction === ResolverAction::PREPEND;
+  }
+
+  /**
+   * Indicated that the exising content should be appended with this one.
+   */
+  final public function shouldAppend(): bool {
+    return $this->resolverAction === ResolverAction::APPEND;
+  }
+
+  /**
    * Sets the asset content.
    */
   public function content(?string $content): self {

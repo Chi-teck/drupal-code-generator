@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Helper\Resolver;
 
 use DrupalCodeGenerator\Asset\Asset;
-use DrupalCodeGenerator\Asset\ResolverAction;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
@@ -19,10 +18,14 @@ final class SymlinkResolver implements ResolverInterface {
     return $asset instanceof Symlink;
   }
 
-  public function resolve(Asset $asset, string $path): ?Asset {
-    return match ($asset->getResolverAction()) {
-      ResolverAction::SKIP => NULL,
-      ResolverAction::REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : clone $asset,
+  /**
+   * {@inheritdoc}
+   */
+  public function resolve(Asset $asset, string $path): ?Symlink {
+    /** @var \DrupalCodeGenerator\Asset\Symlink $asset */
+    return match (TRUE) {
+      $asset->shouldPreserve() => NULL,
+      $asset->shouldReplace() => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : clone $asset,
     };
   }
 
