@@ -290,7 +290,7 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('log.txt', 'Existing record');
 
     $assets = new AssetCollection();
-    $assets[] = (new File('log.txt'))->content('New Record')->skipIfExists();
+    $assets[] = (new File('log.txt'))->content('New Record')->preserveIfExists();
 
     $dumped_assets = $this->dump($assets, TRUE);
     self::assertEquals(new AssetCollection(), $dumped_assets);
@@ -336,7 +336,7 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('foo.link', 'Existing content');
 
     $assets = new AssetCollection();
-    $assets[] = (new Symlink('foo.link', 'foo.txt'))->skipIfExists();
+    $assets[] = (new Symlink('foo.link', 'foo.txt'))->preserveIfExists();
 
     $dumped_assets = $this->dump($assets, TRUE);
     self::assertEquals(new AssetCollection(), $dumped_assets);

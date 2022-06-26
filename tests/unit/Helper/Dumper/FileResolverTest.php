@@ -15,7 +15,7 @@ final class FileResolverTest extends BaseResolverTest {
   public function testSkip(): void {
     $this->markTestSkipped();
     $path = $this->createFile('log.txt');
-    $asset = (new File('log.txt'))->content('content')->skipIfExists();
+    $asset = (new File('log.txt'))->content('content')->preserveIfExists();
 
     $resolver = $this->createResolver(replace: TRUE, dry_run: FALSE);
     $resolved_asset = $resolver->resolve($asset, $path);

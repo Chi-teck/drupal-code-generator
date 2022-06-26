@@ -61,7 +61,7 @@ final class SymlinkResolverTest extends BaseResolverTest {
   public function testSkip(): void {
     $this->markTestSkipped();
     $path = $this->createSymlink('example', 'example_target');
-    $asset = (new Symlink('example', 'example_target'))->skipIfExists();
+    $asset = (new Symlink('example', 'example_target'))->preserveIfExists();
 
     // -- Replace: Yes.
     $resolver = $this->createResolver(replace: TRUE, dry_run: FALSE);

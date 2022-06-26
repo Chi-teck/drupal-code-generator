@@ -11,7 +11,7 @@ final class DirectoryResolver implements ResolverInterface {
     if (!$asset instanceof Directory) {
       throw new \InvalidArgumentException('Wrong asset type.');
     }
-    return clone $asset->skipIfExists();
+    return clone $asset->preserveIfExists();
   }
 
 }

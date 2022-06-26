@@ -21,7 +21,7 @@ final class FileResolver implements ResolverInterface {
     $resolved_file = clone $asset;
     return match (TRUE) {
       $asset->shouldPreserve() => $resolved_file,
-      $asset->shouldReplace() => $this->shouldReplace($path) ? $asset : $asset->skipIfExists(),
+      $asset->shouldReplace() => $this->shouldReplace($path) ? $asset : $asset->preserveIfExists(),
       $asset->shouldPrepend() => self::prependContent($asset, \file_get_contents($path)),
       $asset->shouldAppend() => self::appendContent($asset, \file_get_contents($path)),
     };

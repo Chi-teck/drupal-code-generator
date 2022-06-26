@@ -80,7 +80,7 @@ abstract class Asset {
    * Indicated weather or not the dumper should preserve the existing asset.
    */
   final public function shouldPreserve(): bool {
-    return $this->resolverAction === ResolverAction::SKIP;
+    return $this->resolverAction === ResolverAction::PRESERVE;
   }
 
   /**
@@ -118,8 +118,8 @@ abstract class Asset {
   /**
    * Sets the "skip" resolverAction.
    */
-  public function skipIfExists(): self {
-    $this->resolverAction = ResolverAction::SKIP;
+  public function preserveIfExists(): self {
+    $this->resolverAction = ResolverAction::PRESERVE;
     return $this;
   }
 

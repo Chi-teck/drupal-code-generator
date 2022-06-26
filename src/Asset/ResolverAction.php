@@ -14,10 +14,9 @@ namespace DrupalCodeGenerator\Asset;
  */
 enum ResolverAction {
 
+  case PRESERVE;
   case REPLACE;
   case PREPEND;
   case APPEND;
-  // @todo Rename to PRESERVE.
-  case SKIP;
 
 }
