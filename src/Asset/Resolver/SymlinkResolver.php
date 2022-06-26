@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Helper\Resolver;
+namespace DrupalCodeGenerator\Asset\Resolver;
 
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\Symlink;

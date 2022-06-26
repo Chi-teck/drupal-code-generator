@@ -3,11 +3,11 @@
 namespace DrupalCodeGenerator\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\Resolver\ChainedResolver;
+use DrupalCodeGenerator\Asset\Resolver\DirectoryResolver;
+use DrupalCodeGenerator\Asset\Resolver\FileResolver;
+use DrupalCodeGenerator\Asset\Resolver\SymlinkResolver;
 use DrupalCodeGenerator\Helper\DumperOptions;
-use DrupalCodeGenerator\Helper\Resolver\ChainedResolver;
-use DrupalCodeGenerator\Helper\Resolver\DirectoryResolver;
-use DrupalCodeGenerator\Helper\Resolver\FileResolver;
-use DrupalCodeGenerator\Helper\Resolver\SymlinkResolver;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;

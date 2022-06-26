@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Tests\Unit\Helper\Dumper;
 
+use DrupalCodeGenerator\Asset\Resolver\ChainedResolver;
+use DrupalCodeGenerator\Asset\Resolver\DirectoryResolver;
+use DrupalCodeGenerator\Asset\Resolver\FileResolver;
+use DrupalCodeGenerator\Asset\Resolver\SymlinkResolver;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Helper\QuestionHelper;
-use DrupalCodeGenerator\Helper\Resolver\ChainedResolver;
-use DrupalCodeGenerator\Helper\Resolver\DirectoryResolver;
-use DrupalCodeGenerator\Helper\Resolver\FileResolver;
-use DrupalCodeGenerator\Helper\Resolver\SymlinkResolver;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
