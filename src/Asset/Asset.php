@@ -13,6 +13,11 @@ use DrupalCodeGenerator\Utils;
 abstract class Asset {
 
   /**
+   * Indicates that the asset should not be dumped.
+   */
+  public bool $isVirtual = FALSE;
+
+  /**
    * Asset mode.
    */
   private int $mode;
@@ -67,20 +72,6 @@ abstract class Asset {
    */
   final public function getVars(): array {
     return $this->vars;
-  }
-
-  /**
-   * Indicated weather or not the dumper should replace the existing asset.
-   */
-  final public function shouldReplace(): bool {
-    return $this->resolverAction === ResolverAction::REPLACE;
-  }
-
-  /**
-   * Indicated weather or not the dumper should preserve the existing asset.
-   */
-  final public function shouldPreserve(): bool {
-    return $this->resolverAction === ResolverAction::PRESERVE;
   }
 
   /**

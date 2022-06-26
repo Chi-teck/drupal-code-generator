@@ -2,7 +2,10 @@
 
 namespace DrupalCodeGenerator\Asset;
 
-use DrupalCodeGenerator\Asset\Resolver\FileResolver;
+use DrupalCodeGenerator\Asset\Resolver\AppendResolver;
+use DrupalCodeGenerator\Asset\Resolver\PrependResolver;
+use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
+use DrupalCodeGenerator\Asset\Resolver\ReplaceResolver;
 use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
@@ -169,7 +172,12 @@ final class File extends Asset {
    * {@inheritDoc}
    */
   public function getResolver(GeneratorStyleInterface $io, DumperOptions $options): ResolverInterface {
-    return $this->resolver ?? new FileResolver($options, $io);
+    return $this->resolver ?? match ($this->resolverAction) {
+      ResolverAction::PRESERVE => new PreserveResolver(),
+      ResolverAction::REPLACE => new ReplaceResolver($options, $io),
+      ResolverAction::PREPEND => new PrependResolver(),
+      ResolverAction::APPEND => new AppendResolver(),
+    };
   }
 
 }

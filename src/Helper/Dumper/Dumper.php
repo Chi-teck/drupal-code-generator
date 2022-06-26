@@ -43,7 +43,7 @@ class Dumper extends Helper implements IOAwareInterface {
       if ($this->filesystem->exists($path)) {
         $resolver = $asset->getResolver($this->io, $options);
         $asset = $resolver->resolve($asset, $path);
-        if ($asset->shouldPreserve()) {
+        if ($asset->isVirtual) {
           continue;
         }
       }

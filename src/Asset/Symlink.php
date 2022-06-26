@@ -2,8 +2,9 @@
 
 namespace DrupalCodeGenerator\Asset;
 
+use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
+use DrupalCodeGenerator\Asset\Resolver\ReplaceResolver;
 use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
-use DrupalCodeGenerator\Asset\Resolver\SymlinkResolver;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 
@@ -40,7 +41,11 @@ final class Symlink extends Asset {
    * {@inheritDoc}
    */
   public function getResolver(GeneratorStyleInterface $io, DumperOptions $options): ResolverInterface {
-    return $this->resolver ?? new SymlinkResolver($options, $io);
+    return $this->resolver ?? match ($this->resolverAction) {
+      ResolverAction::PRESERVE => new PreserveResolver(),
+      ResolverAction::REPLACE => new ReplaceResolver($options, $io),
+      default => throw new \InvalidArgumentException('Unsupported resolver action'),
+    };
   }
 
 }
