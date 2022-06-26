@@ -4,7 +4,10 @@ namespace DrupalCodeGenerator\Tests\Unit\Helper\Dumper;
 
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Helper\QuestionHelper;
-use DrupalCodeGenerator\Helper\Resolver\Resolver;
+use DrupalCodeGenerator\Helper\Resolver\ChainedResolver;
+use DrupalCodeGenerator\Helper\Resolver\DirectoryResolver;
+use DrupalCodeGenerator\Helper\Resolver\FileResolver;
+use DrupalCodeGenerator\Helper\Resolver\SymlinkResolver;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -42,10 +45,13 @@ abstract class BaseResolverTest extends BaseTestCase {
     $this->filesystem = new Filesystem();
   }
 
-  protected function createResolver(?bool $replace, bool $dry_run): Resolver {
+  protected function createResolver(?bool $replace, bool $dry_run): ChainedResolver {
     $options = new DumperOptions($replace, $dry_run, TRUE);
     $io = $this->createGeneratorStyle();
-    return new Resolver($options, $io);
+    $directory_resolver = new DirectoryResolver();
+    $file_resolver = new FileResolver($options, $io);
+    $symlink_resolver = new SymlinkResolver($options, $io);
+    return new ChainedResolver($directory_resolver, $file_resolver, $symlink_resolver);
   }
 
   protected function createGeneratorStyle(): GeneratorStyle {

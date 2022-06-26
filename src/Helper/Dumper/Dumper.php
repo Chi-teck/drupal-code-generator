@@ -4,7 +4,10 @@ namespace DrupalCodeGenerator\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Helper\DumperOptions;
-use DrupalCodeGenerator\Helper\Resolver\Resolver;
+use DrupalCodeGenerator\Helper\Resolver\ChainedResolver;
+use DrupalCodeGenerator\Helper\Resolver\DirectoryResolver;
+use DrupalCodeGenerator\Helper\Resolver\FileResolver;
+use DrupalCodeGenerator\Helper\Resolver\SymlinkResolver;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
@@ -32,7 +35,12 @@ class Dumper extends Helper implements IOAwareInterface {
   public function dump(AssetCollection $assets, string $destination, DumperOptions $options): AssetCollection {
 
     $dumped_assets = new AssetCollection();
-    $default_resolver = new Resolver($options, $this->io);
+
+    $directory_resolver = new DirectoryResolver();
+    $file_resolver = new FileResolver($options, $this->io);
+    $symlink_resolver = new SymlinkResolver($options, $this->io);
+
+    $default_resolver = new ChainedResolver($directory_resolver, $file_resolver, $symlink_resolver);
     $asset_dumper = $options->dryRun ?
       new DryAssetDumper($this->io, $options) :
       new FileSystemAssetDumper($this->filesystem);
@@ -42,7 +50,10 @@ class Dumper extends Helper implements IOAwareInterface {
 
       if ($this->filesystem->exists($path)) {
         $resolver = $asset->getResolver() ?? $default_resolver;
-        $asset = $resolver($asset, $path);
+        if (!$resolver->supports($asset)) {
+          throw new \LogicException(\sprintf('Asset "%s" already exists and cannot be resolved.', \get_debug_type($asset)));
+        }
+        $asset = $resolver->resolve($asset, $path);
         if ($asset === NULL) {
           continue;
         }

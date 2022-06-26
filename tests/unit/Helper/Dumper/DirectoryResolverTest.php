@@ -18,7 +18,7 @@ final class DirectoryResolverTest extends BaseResolverTest {
     $asset = new Directory('example');
 
     $resolver = $this->createResolver(replace: TRUE, dry_run: FALSE);
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     self::assertNull($resolved_asset);
     $this->assertEmptyOutput();
   }

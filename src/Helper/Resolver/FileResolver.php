@@ -3,49 +3,36 @@
 namespace DrupalCodeGenerator\Helper\Resolver;
 
 use DrupalCodeGenerator\Asset\Asset;
-use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\ResolverAction;
-use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 
-final class Resolver {
+final class FileResolver implements ResolverInterface {
 
   public function __construct(
     private DumperOptions $options,
     private GeneratorStyleInterface $io,
   ) {}
 
-  public function __invoke(Asset $asset, string $path): ?Asset {
-    return match (TRUE) {
-      // Recreating directories makes no sense.
-      $asset instanceof Directory => NULL,
-      $asset instanceof File => $this->resolveFile($asset, $path),
-      $asset instanceof Symlink => $this->resolveSymlink($asset, $path),
-    };
+  public function supports(Asset $asset): bool {
+    return $asset instanceof File;
   }
 
-  private function resolveFile(File $file, string $path): ?File {
-    $content = match ($file->getResolverAction()) {
+  public function resolve(Asset $asset, string $path): ?Asset {
+    /** @var \DrupalCodeGenerator\Asset\File $asset */
+    $content = match ($asset->getResolverAction()) {
       ResolverAction::SKIP => NULL,
-      ResolverAction::REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : $file->getContent(),
-      ResolverAction::PREPEND => self::prependContent($file, \file_get_contents($path)),
-      ResolverAction::APPEND => self::appendContent($file, \file_get_contents($path)),
+      ResolverAction::REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : $asset->getContent(),
+      ResolverAction::PREPEND => self::prependContent($asset, \file_get_contents($path)),
+      ResolverAction::APPEND => self::appendContent($asset, \file_get_contents($path)),
     };
     if ($content === NULL) {
       return NULL;
     }
-    $resolved_file = clone $file;
+    $resolved_file = clone $asset;
     $resolved_file->content($content);
     return $resolved_file;
-  }
-
-  private function resolveSymlink(Symlink $symlink, string $path): ?Symlink {
-    return match ($symlink->getResolverAction()) {
-      ResolverAction::SKIP => NULL,
-      ResolverAction::REPLACE => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : clone $symlink,
-    };
   }
 
   /**

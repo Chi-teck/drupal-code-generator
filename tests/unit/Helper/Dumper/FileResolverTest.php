@@ -18,11 +18,11 @@ final class FileResolverTest extends BaseResolverTest {
     $asset = (new File('log.txt'))->content('content')->skipIfExists();
 
     $resolver = $this->createResolver(replace: TRUE, dry_run: FALSE);
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     self::assertNull($resolved_asset);
     $this->assertEmptyOutput();
 
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     self::assertNull($resolved_asset);
     $this->assertEmptyOutput();
   }
@@ -37,21 +37,21 @@ final class FileResolverTest extends BaseResolverTest {
 
     // -- Replace = Yes.
     $resolver = $this->createResolver(replace: TRUE, dry_run: FALSE);
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     $expected_resolved_asset = clone $asset->content('content');
     self::assertEquals($expected_resolved_asset, $resolved_asset);
     $this->assertEmptyOutput();
 
     // -- Replace = No.
     $resolver = $this->createResolver(replace: FALSE, dry_run: FALSE);
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     self::assertNull($resolved_asset);
     $this->assertEmptyOutput();
 
     // -- Replace = Confirm.
     $resolver = $this->createResolver(replace: NULL, dry_run: FALSE);
     $this->setStream("Yes\n");
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     $expected_resolved_asset = clone $asset->content('content');
     self::assertEquals($expected_resolved_asset, $resolved_asset);
     $expected_output = <<< 'TEXT'
@@ -62,7 +62,7 @@ final class FileResolverTest extends BaseResolverTest {
     $this->assertOutput($expected_output);
 
     $this->setStream("No\n");
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     self::assertNull($resolved_asset);
 
     $expected_output = <<< 'TEXT'
@@ -82,7 +82,7 @@ final class FileResolverTest extends BaseResolverTest {
     $asset = (new File('log.txt'))->content('New content.')->prependIfExists();
 
     $resolver = $this->createResolver(replace: TRUE, dry_run: FALSE);
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     $expected_resolved_asset = clone $asset->content("New content.\nExisting content.");
     self::assertEquals($expected_resolved_asset, $resolved_asset);
     $this->assertEmptyOutput();
@@ -99,7 +99,7 @@ final class FileResolverTest extends BaseResolverTest {
     $path = $this->createFile('log.txt', 'Existing content.');
     $asset = (new File('log.txt'))->content('New content.')->appendIfExists();
 
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     $expected_resolved_asset = clone $asset->content("Existing content.\nNew content.");
     self::assertEquals($expected_resolved_asset, $resolved_asset);
     $this->assertEmptyOutput();
@@ -108,7 +108,7 @@ final class FileResolverTest extends BaseResolverTest {
     $path = $this->createFile('log.txt', 'Existing content.');
     $asset = (new File('log.txt'))->content("Header\nNew content.")->appendIfExists()->headerSize(1);
 
-    $resolved_asset = $resolver($asset, $path);
+    $resolved_asset = $resolver->resolve($asset, $path);
     $expected_resolved_asset = clone $asset->content("Existing content.\nNew content.");
     self::assertEquals($expected_resolved_asset, $resolved_asset);
     $this->assertEmptyOutput();
