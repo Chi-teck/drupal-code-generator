@@ -13,8 +13,6 @@ use DrupalCodeGenerator\Asset\Asset;
  */
 interface ResolverInterface {
 
-  public function supports(Asset $asset): bool;
-
   /**
    * Resolves an asset.
    *
@@ -23,9 +21,11 @@ interface ResolverInterface {
    * @param string $path
    *   Path to existing asset that caused the resolving process.
    *
-   * @return \DrupalCodeGenerator\Asset\Asset|null
-   *   The resolved asset or null if the existing asset needs to be preserved.
+   * @return \DrupalCodeGenerator\Asset\Asset
+   *   The resolved asset.
+   *
+   * @throw \InvalidArgumentException
    */
-  public function resolve(Asset $asset, string $path): ?Asset;
+  public function resolve(Asset $asset, string $path): Asset;
 
 }

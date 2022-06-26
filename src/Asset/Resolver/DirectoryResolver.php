@@ -7,13 +7,11 @@ use DrupalCodeGenerator\Asset\Directory;
 
 final class DirectoryResolver implements ResolverInterface {
 
-  public function supports(Asset $asset): bool {
-    return $asset instanceof Directory;
-  }
-
-  public function resolve(Asset $asset, string $path): ?Directory {
-    // Recreating directories makes no sense.
-    return NULL;
+  public function resolve(Asset $asset, string $path): Directory {
+    if (!$asset instanceof Directory) {
+      throw new \InvalidArgumentException('Wrong asset type.');
+    }
+    return clone $asset->skipIfExists();
   }
 
 }

@@ -14,27 +14,32 @@ final class SymlinkResolver implements ResolverInterface {
     private GeneratorStyleInterface $io,
   ) {}
 
-  public function supports(Asset $asset): bool {
-    return $asset instanceof Symlink;
-  }
-
   /**
    * {@inheritdoc}
    */
-  public function resolve(Asset $asset, string $path): ?Symlink {
-    /** @var \DrupalCodeGenerator\Asset\Symlink $asset */
+  public function resolve(Asset $asset, string $path): Symlink {
+    if (!$asset instanceof Symlink) {
+      throw new \InvalidArgumentException('Wrong asset type.');
+    }
+    $asset = clone $asset;
     return match (TRUE) {
-      $asset->shouldPreserve() => NULL,
-      $asset->shouldReplace() => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : clone $asset,
+      $asset->shouldPreserve() => $asset,
+      $asset->shouldReplace() => $this->shouldReplace($path) ? $asset->replaceIfExists() : $asset,
     };
+  }
+
+  /**
+   * Checks if the symlink can be replaced.
+   */
+  private function shouldReplace(string $path): bool {
+    return $this->options->replace ?? ($this->options->dryRun || $this->confirmReplace($path));
   }
 
   /**
    * Confirms symlink replace.
    */
   private function confirmReplace(string $path): bool {
-    return $this->options->replace ??
-      $this->io->confirm("The symlink <comment>$path</comment> already exists. Would you like to replace it?");
+    return $this->io->confirm("The symlink <comment>$path</comment> already exists. Would you like to replace it?");
   }
 
 }

@@ -62,15 +62,18 @@ final class ConfigurationEntity extends ModuleGenerator {
         return $asset instanceof File;
       }
 
-      public function resolve(Asset $asset, string $path): ?Asset {
+      public function resolve(Asset $asset, string $path): Asset {
+        if (!$asset instanceof File) {
+          throw new \InvalidArgumentException('Wrong asset type.');
+        }
+        $resolved = clone $asset;
         $existing_content = \file_get_contents($path);
         if ($existing_content && !\preg_match('/^configure: /m', $existing_content)) {
           $content = "{$existing_content}configure: entity.{$this->vars['entity_type_id']}.collection\n";
-          $resolved = clone $asset;
           $resolved->content($content);
-          return $asset;
+          return $resolved;
         }
-        return NULL;
+        return $resolved;
       }
 
     };

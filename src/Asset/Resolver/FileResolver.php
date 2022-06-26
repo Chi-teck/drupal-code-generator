@@ -14,58 +14,59 @@ final class FileResolver implements ResolverInterface {
     private GeneratorStyleInterface $io,
   ) {}
 
-  public function supports(Asset $asset): bool {
-    return $asset instanceof File;
-  }
-
-  public function resolve(Asset $asset, string $path): ?File {
-    /** @var \DrupalCodeGenerator\Asset\File $asset */
-    $content = match (TRUE) {
-      $asset->shouldPreserve() => NULL,
-      $asset->shouldReplace() => !$this->options->dryRun && !$this->confirmReplace($path) ? NULL : $asset->getContent(),
+  public function resolve(Asset $asset, string $path): File {
+    if (!$asset instanceof File) {
+      throw new \InvalidArgumentException('Wrong asset type.');
+    }
+    $resolved_file = clone $asset;
+    return match (TRUE) {
+      $asset->shouldPreserve() => $resolved_file,
+      $asset->shouldReplace() => $this->shouldReplace($path) ? $asset : $asset->skipIfExists(),
       $asset->shouldPrepend() => self::prependContent($asset, \file_get_contents($path)),
       $asset->shouldAppend() => self::appendContent($asset, \file_get_contents($path)),
     };
-    if ($content === NULL) {
-      return NULL;
-    }
-    $resolved_file = clone $asset;
-    $resolved_file->content($content);
-    return $resolved_file;
+  }
+
+  /**
+   * Checks if the file can be replaced.
+   */
+  private function shouldReplace(string $path): bool {
+    return $this->options->replace ?? ($this->options->dryRun || $this->confirmReplace($path));
   }
 
   /**
    * Confirms file replace.
    */
   private function confirmReplace(string $path): bool {
-    return $this->options->replace ??
-      $this->io->confirm("The file <comment>$path</comment> already exists. Would you like to replace it?");
+    return $this->io->confirm("The file <comment>$path</comment> already exists. Would you like to replace it?");
   }
 
   /**
    * Prepends generated content to the existing one.
    */
-  private static function prependContent(File $file, string $existing_content): string {
+  private static function prependContent(File $file, string $existing_content): File {
     $new_content = $file->getContent();
     if ($new_content === NULL) {
-      return $existing_content;
+      return $file;
     }
-    return $new_content . "\n" . $existing_content;
+    $file->content($new_content . "\n" . $existing_content);
+    return $file;
   }
 
   /**
    * Appends generated content to the end of existing one.
    */
-  private static function appendContent(File $file, string $existing_content): string {
+  private static function appendContent(File $file, string $existing_content): File {
     $new_content = $file->getContent();
     if ($new_content === NULL) {
-      return $existing_content;
+      return $file;
     }
     $header_size = $file->getHeaderSize();
     if ($header_size > 0) {
       $new_content = \implode("\n", \array_slice(\explode("\n", $new_content), $header_size));
     }
-    return $existing_content . "\n" . $new_content;
+    $file->content($existing_content . "\n" . $new_content);
+    return $file;
   }
 
 }

@@ -36,16 +36,14 @@ class Dumper extends Helper implements IOAwareInterface {
       new DryAssetDumper($this->io, $options) :
       new FileSystemAssetDumper($this->filesystem);
 
+    /** @var \DrupalCodeGenerator\Asset\Asset $asset */
     foreach ($assets as $asset) {
       $path = $destination . '/' . $asset->getPath();
 
       if ($this->filesystem->exists($path)) {
         $resolver = $asset->getResolver($this->io, $options);
-        if (!$resolver->supports($asset)) {
-          throw new \LogicException(\sprintf('Asset "%s" already exists and cannot be resolved.', \get_debug_type($asset)));
-        }
         $asset = $resolver->resolve($asset, $path);
-        if ($asset === NULL) {
+        if ($asset->shouldPreserve()) {
           continue;
         }
       }
