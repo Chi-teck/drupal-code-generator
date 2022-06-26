@@ -2,9 +2,9 @@
 
 namespace DrupalCodeGenerator\Tests\Unit\Helper\Dumper;
 
-use DrupalCodeGenerator\Helper\Dumper\Resolver;
 use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Helper\QuestionHelper;
+use DrupalCodeGenerator\Helper\Resolver\Resolver;
 use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;

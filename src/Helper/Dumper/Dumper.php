@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Helper\DumperOptions;
+use DrupalCodeGenerator\Helper\Resolver\Resolver;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
