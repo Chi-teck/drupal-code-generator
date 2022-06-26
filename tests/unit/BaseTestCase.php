@@ -22,6 +22,7 @@ abstract class BaseTestCase extends TestCase {
    */
   public function setUp(): void {
     $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
+    (new Filesystem())->mkdir($this->directory);
   }
 
   /**

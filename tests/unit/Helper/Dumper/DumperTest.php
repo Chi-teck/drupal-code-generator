@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Tests\Unit\Helper;
+namespace DrupalCodeGenerator\Tests\Unit\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
@@ -361,7 +361,8 @@ final class DumperTest extends BaseTestCase {
     $dumped_assets = $this->dump($assets, NULL, TRUE);
     self::assertEquals($assets, $dumped_assets);
 
-    self::assertDirectoryDoesNotExist($this->directory);
+    $dir_content = \scandir($this->directory);
+    self::assertSame(['.', '..'], $dir_content);
 
     $expected_output = <<< 'TEXT'
 
