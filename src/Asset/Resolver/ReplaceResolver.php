@@ -30,7 +30,7 @@ final class ReplaceResolver implements ResolverInterface {
    * Checks if the asset can be replaced.
    */
   private function shouldReplace(string $path): bool {
-    return $this->options->replace ?? ($this->options->dryRun || $this->confirmReplace($path));
+    return $this->options->replace ?? ($this->io->getInput()->getOption('dry-run') || $this->confirmReplace($path));
   }
 
   /**

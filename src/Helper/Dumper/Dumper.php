@@ -32,8 +32,8 @@ class Dumper extends Helper implements IOAwareInterface {
 
     $dumped_assets = new AssetCollection();
 
-    $asset_dumper = $options->dryRun ?
-      new DryAssetDumper($this->io, $options) :
+    $asset_dumper = $this->io->getInput()->getOption('dry-run') ?
+      new DryAssetDumper($this->io) :
       new FileSystemAssetDumper($this->filesystem);
 
     /** @var \DrupalCodeGenerator\Asset\Asset $asset */

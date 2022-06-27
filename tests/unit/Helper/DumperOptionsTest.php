@@ -15,11 +15,9 @@ final class DumperOptionsTest extends BaseTestCase {
    *
    * @dataProvider constructorProvider()
    */
-  public function testConstructor(?bool $replace, bool $dry_run, bool $full_path): void {
-    $options = new DumperOptions($replace, $dry_run, $full_path);
+  public function testConstructor(?bool $replace): void {
+    $options = new DumperOptions($replace);
     self::assertSame($replace, $options->replace);
-    self::assertSame($dry_run, $options->dryRun);
-    self::assertSame($full_path, $options->fullPath);
   }
 
   /**
@@ -27,9 +25,9 @@ final class DumperOptionsTest extends BaseTestCase {
    */
   public function constructorProvider(): array {
     return [
-      [TRUE, TRUE, TRUE],
-      [FALSE, FALSE, FALSE],
-      [NULL, FALSE, FALSE],
+      [TRUE],
+      [FALSE],
+      [NULL],
     ];
   }
 

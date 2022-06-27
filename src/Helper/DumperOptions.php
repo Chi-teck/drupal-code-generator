@@ -10,10 +10,8 @@ final class DumperOptions {
   /**
    * Options constructor.
    */
-  public function __construct(?bool $replace, bool $dry_run, bool $full_path) {
+  public function __construct(?bool $replace) {
     $this->replace = $replace;
-    $this->dryRun = $dry_run;
-    $this->fullPath = $full_path;
   }
 
   /**
@@ -23,15 +21,5 @@ final class DumperOptions {
    * user will be prompted to confirm replacing of each existing file.
    */
   public ?bool $replace;
-
-  /**
-   * Print assets to stdout instead of dumping them to file system.
-   */
-  public bool $dryRun;
-
-  /**
-   * Print full path to dumped assets.
-   */
-  public bool $fullPath;
 
 }

@@ -13,6 +13,8 @@ use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -41,7 +43,15 @@ final class DumperTest extends BaseTestCase {
    */
   public function setUp(): void {
     parent::setUp();
-    $this->input = new ArrayInput([]);
+    $definition[] = new InputOption(
+      name: 'dry-run',
+      mode: InputOption::VALUE_NONE,
+    );
+    $definition[] = new InputOption(
+      name: 'full-path',
+      mode: InputOption::VALUE_NONE,
+    );
+    $this->input = new ArrayInput([], new InputDefinition($definition));
     $this->output = new BufferedOutput();
     $this->filesystem = new Filesystem();
   }
@@ -353,12 +363,14 @@ final class DumperTest extends BaseTestCase {
    * Test callback.
    */
   public function testDryDump(): void {
+    $this->input->setOption('dry-run', TRUE);
+
     $assets = new AssetCollection();
     $assets[] = new Directory('foo');
     $assets[] = (new File('example.txt'))->content('Example');
     $assets[] = new Symlink('foo.link', 'example.txt');
 
-    $dumped_assets = $this->dump($assets, NULL, TRUE);
+    $dumped_assets = $this->dump($assets, TRUE);
     self::assertEquals($assets, $dumped_assets);
 
     $dir_content = \scandir($this->directory);
@@ -398,16 +410,16 @@ final class DumperTest extends BaseTestCase {
   /**
    * Dumps assets into file system.
    */
-  private function dump(AssetCollection $assets, ?bool $replace = NULL, bool $dry_run = FALSE): AssetCollection {
+  private function dump(AssetCollection $assets, ?bool $replace = NULL): AssetCollection {
     $question_helper = new QuestionHelper();
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
     $io = new GeneratorStyle($this->input, $this->output, $question_helper);
-    $dumper = new Dumper($this->filesystem, $replace);
+    $dumper = new Dumper($this->filesystem);
     $dumper->io($io);
     $dumper->setHelperSet($helper_set);
 
-    $options = new DumperOptions($replace, $dry_run, FALSE);
+    $options = new DumperOptions($replace, FALSE);
     return $dumper->dump($assets, $this->directory, $options);
   }
 

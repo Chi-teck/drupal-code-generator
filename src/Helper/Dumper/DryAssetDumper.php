@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
-use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -15,10 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class DryAssetDumper {
 
-  public function __construct(
-    private GeneratorStyleInterface $io,
-    private DumperOptions $options,
-  ) {}
+  public function __construct(private GeneratorStyleInterface $io) {}
 
   /**
    * Simulates asset dumping.
@@ -33,17 +29,21 @@ final class DryAssetDumper {
   }
 
   private function dumpDirectory(Directory $directory, string $path): void {
-    $this->io->title(($this->options->fullPath ? $path : $directory->getPath()) . ' (empty directory)');
+    $this->io->title(($this->getPath($directory, $path)) . ' (empty directory)');
   }
 
   private function dumpFile(File $file, string $path): void {
-    $this->io->title($this->options->fullPath ? $path : $file->getPath());
+    $this->io->title($this->getPath($file, $path));
     $this->io->writeln($file->getContent(), OutputInterface::OUTPUT_RAW);
   }
 
   private function dumpSymlink(Symlink $symlink, string $path): void {
-    $this->io->title($this->options->fullPath ? $path : $symlink->getPath());
+    $this->io->title($this->getPath($symlink, $path));
     $this->io->writeln('Symlink to ' . $symlink->getTarget(), OutputInterface::OUTPUT_RAW);
+  }
+
+  private function getPath(Asset $asset, string $path): string {
+    return $this->io->getInput()->getOption('full-path') ? $path : $asset->getPath();
   }
 
 }
