@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\GeneratorType;
-use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Interviewer\Interviewer;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
@@ -102,10 +101,9 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       $destination = $input->getOption('destination') ?: $this->getDestination($vars);
       $this->logger->debug('Destination directory: {directory}', ['directory' => $destination]);
 
-      $full_path = $input->getOption('full-path');
-      $dry_run = $input->getOption('dry-run');
-      $dumped_assets = $this->dump($assets, $destination, $dry_run, $full_path);
+      $dumped_assets = $this->dump($assets, $destination);
 
+      $full_path = $input->getOption('full-path');
       $this->printSummary($dumped_assets, $full_path ? $destination . '/' : '');
     }
     catch (ExceptionInterface $exception) {
@@ -156,9 +154,8 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
   /**
    * Dumps assets.
    */
-  protected function dump(AssetCollection $assets, string $destination, bool $dry_run, bool $full_path): AssetCollection {
-    $options = new DumperOptions(NULL, $dry_run, $full_path);
-    return $this->getHelper('dumper')->dump($assets, $destination, $options);
+  protected function dump(AssetCollection $assets, string $destination): AssetCollection {
+    return $this->getHelper('dumper')->dump($assets, $destination);
   }
 
   /**

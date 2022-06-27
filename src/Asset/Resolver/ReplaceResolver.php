@@ -5,15 +5,11 @@ namespace DrupalCodeGenerator\Asset\Resolver;
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
-use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 
 final class ReplaceResolver implements ResolverInterface {
 
-  public function __construct(
-    private DumperOptions $options,
-    private GeneratorStyleInterface $io,
-  ) {}
+  public function __construct(private GeneratorStyleInterface $io) {}
 
   public function resolve(Asset $asset, string $path): File {
     if (!$asset instanceof File && !$asset instanceof Symlink) {

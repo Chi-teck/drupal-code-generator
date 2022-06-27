@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Asset;
 
 use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
 use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
-use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 
 /**
@@ -20,7 +19,7 @@ final class Directory extends Asset {
   /**
    * {@inheritDoc}
    */
-  public function getResolver(GeneratorStyleInterface $io, DumperOptions $options): ResolverInterface {
+  public function getResolver(GeneratorStyleInterface $io): ResolverInterface {
     // Recreating existing directories makes no sense.
     return $this->resolver ?? new PreserveResolver();
   }

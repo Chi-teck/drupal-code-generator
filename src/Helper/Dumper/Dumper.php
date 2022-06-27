@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\IOAwareInterface;
 use DrupalCodeGenerator\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
@@ -28,7 +27,7 @@ class Dumper extends Helper implements IOAwareInterface {
   /**
    * Dumps the generated code to file system or stdout.
    */
-  public function dump(AssetCollection $assets, string $destination, DumperOptions $options): AssetCollection {
+  public function dump(AssetCollection $assets, string $destination): AssetCollection {
 
     $dumped_assets = new AssetCollection();
 
@@ -41,7 +40,7 @@ class Dumper extends Helper implements IOAwareInterface {
       $path = $destination . '/' . $asset->getPath();
 
       if ($this->filesystem->exists($path)) {
-        $resolver = $asset->getResolver($this->io, $options);
+        $resolver = $asset->getResolver($this->io);
         $asset = $resolver->resolve($asset, $path);
         if ($asset->isVirtual) {
           continue;

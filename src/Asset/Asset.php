@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Asset;
 
 use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
-use DrupalCodeGenerator\Helper\DumperOptions;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Utils;
 
@@ -77,7 +76,7 @@ abstract class Asset {
   /**
    * Returns the asset resolver.
    */
-  abstract public function getResolver(GeneratorStyleInterface $io, DumperOptions $options): ResolverInterface;
+  abstract public function getResolver(GeneratorStyleInterface $io): ResolverInterface;
 
   /**
    * Setter for asset mode.
