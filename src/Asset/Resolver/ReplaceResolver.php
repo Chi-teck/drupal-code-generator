@@ -30,14 +30,9 @@ final class ReplaceResolver implements ResolverInterface {
    * Checks if the asset can be replaced.
    */
   private function shouldReplace(string $path): bool {
-    return $this->options->replace ?? ($this->io->getInput()->getOption('dry-run') || $this->confirmReplace($path));
-  }
-
-  /**
-   * Confirms asset replace.
-   */
-  private function confirmReplace(string $path): bool {
-    return $this->io->confirm("The file <comment>$path</comment> already exists. Would you like to replace it?");
+    return $this->io->getInput()->getOption('replace') ||
+           $this->io->getInput()->getOption('dry-run') ||
+           $this->io->confirm("The file <comment>$path</comment> already exists. Would you like to replace it?");
   }
 
 }

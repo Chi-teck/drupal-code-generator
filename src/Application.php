@@ -16,7 +16,7 @@ use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputOption as Option;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -80,15 +80,17 @@ class Application extends BaseApplication implements ContainerAwareInterface {
     $definition = parent::getDefaultInputDefinition();
 
     $options = $definition->getOptions();
-    // As most generators are interactive these options make no sense.
+
+    // Since most generators are interactive these options make no sense.
     unset($options['no-interaction'], $options['quiet']);
     $definition->setOptions($options);
 
-    $definition->addOption(new InputOption('working-dir', 'd', InputOption::VALUE_OPTIONAL, 'Working directory'));
-    $definition->addOption(new InputOption('answer', 'a', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Answer to generator question'));
-    $definition->addOption(new InputOption('dry-run', NULL, InputOption::VALUE_NONE, 'Output the generated code but not save it to file system'));
-    $definition->addOption(new InputOption('full-path', NULL, InputOption::VALUE_NONE, 'Print full path to generated assets'));
-    $definition->addOption(new InputOption('destination', NULL, InputOption::VALUE_OPTIONAL, 'Path to a base directory for file writing'));
+    $definition->addOption(new Option('working-dir', 'd', Option::VALUE_OPTIONAL, 'Working directory'));
+    $definition->addOption(new Option('answer', 'a', Option::VALUE_IS_ARRAY | Option::VALUE_OPTIONAL, 'Answer to generator question'));
+    $definition->addOption(new Option('dry-run', NULL, Option::VALUE_NONE, 'Output the generated code but not save it to file system'));
+    $definition->addOption(new Option('full-path', NULL, Option::VALUE_NONE, 'Print full path to generated assets'));
+    $definition->addOption(new Option('destination', NULL, Option::VALUE_OPTIONAL, 'Path to a base directory for file writing'));
+    $definition->addOption(new Option('replace', NULL, Option::VALUE_NONE, 'Replace existing assets without confirmation'));
     return $definition;
   }
 

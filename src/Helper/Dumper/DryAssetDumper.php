@@ -29,7 +29,7 @@ final class DryAssetDumper {
   }
 
   private function dumpDirectory(Directory $directory, string $path): void {
-    $this->io->title(($this->getPath($directory, $path)) . ' (empty directory)');
+    $this->io->title($this->getPath($directory, $path) . ' (empty directory)');
   }
 
   private function dumpFile(File $file, string $path): void {

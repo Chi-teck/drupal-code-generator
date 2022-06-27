@@ -43,14 +43,9 @@ final class DumperTest extends BaseTestCase {
    */
   public function setUp(): void {
     parent::setUp();
-    $definition[] = new InputOption(
-      name: 'dry-run',
-      mode: InputOption::VALUE_NONE,
-    );
-    $definition[] = new InputOption(
-      name: 'full-path',
-      mode: InputOption::VALUE_NONE,
-    );
+    $definition[] = new InputOption('dry-run', NULL, InputOption::VALUE_NONE);
+    $definition[] = new InputOption('full-path', NULL, InputOption::VALUE_NONE);
+    $definition[] = new InputOption('replace', NULL, InputOption::VALUE_NONE);
     $this->input = new ArrayInput([], new InputDefinition($definition));
     $this->output = new BufferedOutput();
     $this->filesystem = new Filesystem();
@@ -165,31 +160,12 @@ final class DumperTest extends BaseTestCase {
     $assets = new AssetCollection();
     $assets[] = (new File('wine.txt'))->content('Wine');
 
+    $this->input->setOption('replace', TRUE);
     $dumped_assets = $this->dump($assets, TRUE);
     self::assertEquals($assets, $dumped_assets);
 
     $expected_content = [
       'wine.txt' => 'Wine',
-    ];
-    $this->assertContent($expected_content);
-
-    $this->assertEmptyOutput();
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testReplaceOptionNo(): void {
-    $this->createFile('beer.txt', 'Old beer');
-
-    $assets = new AssetCollection();
-    $assets[] = (new File('beer.txt'))->content('New beer');
-
-    $dumped_assets = $this->dump($assets, FALSE);
-    self::assertEquals(new AssetCollection(), $dumped_assets);
-
-    $expected_content = [
-      'beer.txt' => 'Old beer',
     ];
     $this->assertContent($expected_content);
 
