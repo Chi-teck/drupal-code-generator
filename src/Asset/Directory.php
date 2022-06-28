@@ -17,6 +17,13 @@ final class Directory extends Asset {
   }
 
   /**
+   * Named constructor.
+   */
+  final public static function create(string $path): self {
+    return new self($path);
+  }
+
+  /**
    * {@inheritDoc}
    */
   public function getResolver(GeneratorStyleInterface $io): ResolverInterface {

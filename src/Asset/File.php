@@ -48,6 +48,13 @@ final class File extends Asset {
   }
 
   /**
+   * Named constructor.
+   */
+  final public static function create(string $path): self {
+    return new self($path);
+  }
+
+  /**
    * Returns the asset content.
    */
   public function getContent(): string {

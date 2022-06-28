@@ -38,6 +38,7 @@ abstract class BaseResolverTest extends BaseTestCase {
   public function setUp(): void {
     parent::setUp();
     $definition[] = new InputOption('replace', NULL, InputOption::VALUE_NONE);
+    $definition[] = new InputOption('dry-run', NULL, InputOption::VALUE_NONE);
     $this->input = new ArrayInput([], new InputDefinition($definition));
     $this->setStream('');
     $this->output = new BufferedOutput();

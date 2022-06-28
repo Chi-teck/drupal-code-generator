@@ -46,13 +46,6 @@ abstract class Asset {
   public function __construct(protected string $path) {}
 
   /**
-   * Assets named constructor.
-   */
-  final public static function create(string $path): static {
-    return new static($path);
-  }
-
-  /**
    * Getter for the asset path.
    */
   final public function getPath(): string {
