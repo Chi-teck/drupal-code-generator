@@ -15,20 +15,12 @@ final class ReplaceResolver implements ResolverInterface {
     if (!$asset instanceof File && !$asset instanceof Symlink) {
       throw new \InvalidArgumentException('Wrong asset type.');
     }
-    $resolved_asset = clone $asset;
-    if (!$this->shouldReplace($path)) {
-      $resolved_asset->setVirtual(TRUE);
-    }
-    return $resolved_asset;
-  }
 
-  /**
-   * Checks if the asset can be replaced.
-   */
-  private function shouldReplace(string $path): bool {
-    return $this->io->getInput()->getOption('replace') ||
-           $this->io->getInput()->getOption('dry-run') ||
-           $this->io->confirm("The file <comment>$path</comment> already exists. Would you like to replace it?");
+    $replace = $this->io->getInput()->getOption('replace') ||
+               $this->io->getInput()->getOption('dry-run') ||
+               $this->io->confirm("The file <comment>$path</comment> already exists. Would you like to replace it?");
+
+    return clone $asset->setVirtual(!$replace);
   }
 
 }
