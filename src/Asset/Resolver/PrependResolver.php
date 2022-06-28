@@ -14,11 +14,9 @@ final class PrependResolver implements ResolverInterface {
     if (!$asset instanceof File) {
       throw new \InvalidArgumentException('Wrong asset type.');
     }
-    $resolved_asset = clone $asset;
-    $new_content = $resolved_asset->getContent();
+    $new_content = $asset->getContent();
     $existing_content = \file_get_contents($path);
-    $resolved_asset->content($new_content . "\n" . $existing_content);
-    return $resolved_asset;
+    return clone $asset->content($new_content . "\n" . $existing_content);
   }
 
 }
