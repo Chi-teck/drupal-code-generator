@@ -20,30 +20,25 @@ final class FileSystemAssetDumper {
   /**
    * Dumps an asset to the file system.
    */
-  public function dump(Asset $asset, string $path): ?Asset {
-    return match ($asset::class) {
-      Directory::class => $this->dumpDirectory($asset, $path),
-      File::class => $this->dumpFile($asset, $path),
-      Symlink::class => $this->dumpSymlink($asset, $path),
+  public function dump(Asset $asset, string $path): void {
+    match (TRUE) {
+      $asset instanceof Directory => $this->dumpDirectory($asset, $path),
+      $asset instanceof File => $this->dumpFile($asset, $path),
+      $asset instanceof Symlink => $this->dumpSymlink($asset, $path),
+      default => throw new \LogicException('Unsupported asset type'),
     };
   }
 
-  private function dumpDirectory(Directory $directory, string $path): Directory {
+  private function dumpDirectory(Directory $directory, string $path): void {
     $this->filesystem->mkdir($path, $directory->getMode());
-    return clone $directory;
   }
 
-  private function dumpFile(File $file, string $path): ?File {
-    // Nothing to dump.
-    if ($file->getContent() === NULL) {
-      return NULL;
-    }
+  private function dumpFile(File $file, string $path): void {
     $this->filesystem->dumpFile($path, $file->getContent());
     $this->filesystem->chmod($path, $file->getMode());
-    return clone $file;
   }
 
-  private function dumpSymlink(Symlink $symlink, string $path): Symlink {
+  private function dumpSymlink(Symlink $symlink, string $path): void {
     $file_exists = $this->filesystem->exists($path);
     if ($file_exists) {
       $this->filesystem->remove($path);
@@ -52,7 +47,6 @@ final class FileSystemAssetDumper {
       throw new \RuntimeException('Could not create a symlink to ' . $symlink->getTarget());
     }
     $this->filesystem->chmod($path, $symlink->getMode());
-    return clone $symlink;
   }
 
 }

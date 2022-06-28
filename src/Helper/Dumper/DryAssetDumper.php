@@ -19,13 +19,13 @@ final class DryAssetDumper {
   /**
    * Simulates asset dumping.
    */
-  public function dump(Asset $asset, string $path): Asset {
+  public function dump(Asset $asset, string $path): void {
     match (TRUE) {
       $asset instanceof Directory => $this->dumpDirectory($asset, $path),
       $asset instanceof File => $this->dumpFile($asset, $path),
       $asset instanceof Symlink => $this->dumpSymlink($asset, $path),
+      default => throw new \LogicException('Unsupported asset type'),
     };
-    return clone $asset;
   }
 
   private function dumpDirectory(Directory $directory, string $path): void {

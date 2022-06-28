@@ -11,7 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Asset dumper form generators.
  */
-class Dumper extends Helper implements IOAwareInterface {
+final class Dumper extends Helper implements IOAwareInterface {
 
   use IOAwareTrait;
 
@@ -47,7 +47,8 @@ class Dumper extends Helper implements IOAwareInterface {
       }
 
       if ($resolved_asset) {
-        $dumped_assets[] = $asset_dumper->dump($resolved_asset, $path);
+        $asset_dumper->dump($resolved_asset, $path);
+        $dumped_assets[] = $resolved_asset;
       }
     }
 
