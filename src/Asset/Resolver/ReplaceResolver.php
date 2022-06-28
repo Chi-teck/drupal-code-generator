@@ -11,7 +11,7 @@ final class ReplaceResolver implements ResolverInterface {
 
   public function __construct(private GeneratorStyleInterface $io) {}
 
-  public function resolve(Asset $asset, string $path): File|Symlink {
+  public function resolve(Asset $asset, string $path): NULL|File|Symlink {
     if (!$asset instanceof File && !$asset instanceof Symlink) {
       throw new \InvalidArgumentException('Wrong asset type.');
     }
@@ -20,7 +20,7 @@ final class ReplaceResolver implements ResolverInterface {
                $this->io->getInput()->getOption('dry-run') ||
                $this->io->confirm("The file <comment>$path</comment> already exists. Would you like to replace it?");
 
-    return clone $asset->setVirtual(!$replace);
+    return $replace ? clone $asset : NULL;
   }
 
 }

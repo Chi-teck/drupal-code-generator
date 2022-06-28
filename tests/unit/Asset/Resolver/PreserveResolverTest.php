@@ -18,10 +18,8 @@ final class PreserveResolverTest extends BaseResolverTest {
 
     $asset = File::create('foo.txt')->content('Example');
     $resolved_asset = $resolver->resolve($asset, 'foo.txt');
-    self::assertNotSame($asset, $resolved_asset);
 
-    $expected_resolved_asset = File::create('foo.txt')->content('Example')->setVirtual(TRUE);
-    self::assertEquals($expected_resolved_asset, $resolved_asset);
+    self::assertNull($resolved_asset);
 
     $this->assertEmptyOutput();
   }

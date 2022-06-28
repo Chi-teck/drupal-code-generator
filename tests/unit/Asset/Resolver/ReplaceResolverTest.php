@@ -66,10 +66,7 @@ final class ReplaceResolverTest extends BaseResolverTest {
     $asset = File::create('log.txt')->content('content');
     $resolved_asset = $resolver->resolve($asset, $path);
 
-    self::assertNotSame($asset, $resolved_asset);
-
-    $expected_resolved_asset = File::create('log.txt')->content('content')->setVirtual(TRUE);
-    self::assertEquals($expected_resolved_asset, $resolved_asset);
+    self::assertNull($resolved_asset);
 
     $expected_output = <<< 'TEXT'
 

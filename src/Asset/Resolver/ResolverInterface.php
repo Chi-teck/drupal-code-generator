@@ -22,10 +22,10 @@ interface ResolverInterface {
    *   Path to existing asset that caused the resolving process.
    *
    * @return \DrupalCodeGenerator\Asset\Asset
-   *   The resolved asset.
+   *   The resolved asset or NULL if existing asset is up-to-date.
    *
    * @throw \InvalidArgumentException
    */
-  public function resolve(Asset $asset, string $path): Asset;
+  public function resolve(Asset $asset, string $path): ?Asset;
 
 }

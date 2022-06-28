@@ -35,21 +35,19 @@ class Dumper extends Helper implements IOAwareInterface {
       new DryAssetDumper($this->io) :
       new FileSystemAssetDumper($this->filesystem);
 
-    /** @var \DrupalCodeGenerator\Asset\Asset $asset */
     foreach ($assets as $asset) {
       $path = $destination . '/' . $asset->getPath();
 
+      $resolved_asset = clone $asset;
       if ($this->filesystem->exists($path)) {
-        $resolver = $asset->getResolver($this->io);
-        $asset = $resolver->resolve($asset, $path);
+        $resolved_asset = $asset->getResolver($this->io)->resolve($asset, $path);
       }
-
-      if ($asset->isVirtual()) {
+      elseif ($asset->isVirtual()) {
         continue;
       }
 
-      if ($asset = $asset_dumper->dump($asset, $path)) {
-        $dumped_assets[] = $asset;
+      if ($resolved_asset) {
+        $dumped_assets[] = $asset_dumper->dump($resolved_asset, $path);
       }
     }
 

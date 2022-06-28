@@ -9,8 +9,8 @@ final class PreserveResolver implements ResolverInterface {
   /**
    * {@inheritdoc}
    */
-  public function resolve(Asset $asset, string $path): Asset {
-    return clone $asset->setVirtual(TRUE);
+  public function resolve(Asset $asset, string $path): ?Asset {
+    return NULL;
   }
 
 }
