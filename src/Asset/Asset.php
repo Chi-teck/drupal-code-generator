@@ -37,16 +37,14 @@ abstract class Asset {
   protected ?ResolverInterface $resolver = NULL;
 
   /**
-   * Default resolver action.
-   *
-   * An action to take if specified file already exists.
+   * Suggested resover action.
    */
   protected string $resolverAction = self::RESOLVER_ACTION_REPLACE;
 
   /**
    * Asset constructor.
    */
-  public function __construct(protected string $path) {}
+  public function __construct(readonly protected string $path) {}
 
   /**
    * Getter for the asset path.

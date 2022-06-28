@@ -15,7 +15,7 @@ final class Symlink extends Asset {
   /**
    * Symlink target.
    */
-  private string $target;
+  readonly private string $target;
 
   /**
    * {@inheritdoc}
@@ -35,9 +35,6 @@ final class Symlink extends Asset {
 
   /**
    * Getter for symlink target.
-   *
-   * @return string
-   *   Asset resolverAction.
    */
   public function getTarget(): string {
     return $this->replaceTokens($this->target);
