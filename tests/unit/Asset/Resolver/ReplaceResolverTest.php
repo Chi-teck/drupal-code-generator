@@ -82,6 +82,26 @@ final class ReplaceResolverTest extends BaseResolverTest {
   /**
    * Test callback.
    */
+  public function testDryRun(): void {
+
+    $resolver = new ReplaceResolver($this->createGeneratorStyle());
+    $this->input->setOption('dry-run', TRUE);
+
+    $path = $this->createFile('log.txt');
+    $asset = File::create('log.txt')->content('content');
+    $resolved_asset = $resolver->resolve($asset, $path);
+
+    self::assertNotSame($asset, $resolved_asset);
+
+    $expected_resolved_asset = File::create('log.txt')->content('content');
+    self::assertEquals($expected_resolved_asset, $resolved_asset);
+
+    self::assertEmptyOutput();
+  }
+
+  /**
+   * Test callback.
+   */
   public function testSupportedAssets(): void {
     $resolver = new ReplaceResolver($this->createGeneratorStyle());
     $this->input->setOption('replace', TRUE);
