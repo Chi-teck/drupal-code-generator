@@ -11,6 +11,9 @@ use DrupalCodeGenerator\Utils;
  */
 abstract class Asset {
 
+  protected const RESOLVER_ACTION_PRESERVE = 'preserve';
+  protected const RESOLVER_ACTION_REPLACE = 'replace';
+
   /**
    * Indicates that the asset should not be dumped.
    */
@@ -38,7 +41,7 @@ abstract class Asset {
    *
    * An action to take if specified file already exists.
    */
-  protected ResolverAction $resolverAction = ResolverAction::REPLACE;
+  protected string $resolverAction = self::RESOLVER_ACTION_REPLACE;
 
   /**
    * Asset constructor.
@@ -98,7 +101,7 @@ abstract class Asset {
   }
 
   /**
-   * Sets virtual.
+   * Makes the asset "virtual".
    */
   final public function setVirtual(bool $virtual): self {
     $this->virtual = $virtual;
@@ -106,18 +109,18 @@ abstract class Asset {
   }
 
   /**
-   * Sets the "replace" resolverAction.
+   * Indicates that existing asset should be replaced.
    */
   public function replaceIfExists(): self {
-    $this->resolverAction = ResolverAction::REPLACE;
+    $this->resolverAction = self::RESOLVER_ACTION_REPLACE;
     return $this;
   }
 
   /**
-   * Sets the "skip" resolverAction.
+   * Indicates that existing asset should be preserved.
    */
   public function preserveIfExists(): self {
-    $this->resolverAction = ResolverAction::PRESERVE;
+    $this->resolverAction = self::RESOLVER_ACTION_PRESERVE;
     return $this;
   }
 

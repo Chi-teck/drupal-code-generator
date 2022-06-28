@@ -14,6 +14,9 @@ use DrupalCodeGenerator\Style\GeneratorStyleInterface;
  */
 final class File extends Asset {
 
+  private const RESOLVER_ACTION_PREPEND = 'prepend';
+  private const RESOLVER_ACTION_APPEND = 'append';
+
   /**
    * Asset content.
    */
@@ -138,7 +141,7 @@ final class File extends Asset {
    * Sets the "prepend" resolverAction.
    */
   public function prependIfExists(): self {
-    $this->resolverAction = ResolverAction::PREPEND;
+    $this->resolverAction = self::RESOLVER_ACTION_PREPEND;
     return $this;
   }
 
@@ -146,7 +149,7 @@ final class File extends Asset {
    * Sets the "append" resolverAction.
    */
   public function appendIfExists(): self {
-    $this->resolverAction = ResolverAction::APPEND;
+    $this->resolverAction = self::RESOLVER_ACTION_APPEND;
     return $this;
   }
 
@@ -165,10 +168,10 @@ final class File extends Asset {
    */
   public function getResolver(GeneratorStyleInterface $io): ResolverInterface {
     return $this->resolver ?? match ($this->resolverAction) {
-      ResolverAction::PRESERVE => new PreserveResolver(),
-      ResolverAction::REPLACE => new ReplaceResolver($io),
-      ResolverAction::PREPEND => new PrependResolver(),
-      ResolverAction::APPEND => new AppendResolver(),
+      self::RESOLVER_ACTION_PRESERVE => new PreserveResolver(),
+      self::RESOLVER_ACTION_REPLACE => new ReplaceResolver($io),
+      self::RESOLVER_ACTION_PREPEND => new PrependResolver(),
+      self::RESOLVER_ACTION_APPEND => new AppendResolver(),
     };
   }
 

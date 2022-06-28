@@ -48,9 +48,8 @@ final class Symlink extends Asset {
    */
   public function getResolver(GeneratorStyleInterface $io): ResolverInterface {
     return $this->resolver ?? match ($this->resolverAction) {
-      ResolverAction::PRESERVE => new PreserveResolver(),
-      ResolverAction::REPLACE => new ReplaceResolver($io),
-      default => throw new \InvalidArgumentException('Unsupported resolver action'),
+      self::RESOLVER_ACTION_PRESERVE => new PreserveResolver(),
+      self::RESOLVER_ACTION_REPLACE => new ReplaceResolver($io),
     };
   }
 
