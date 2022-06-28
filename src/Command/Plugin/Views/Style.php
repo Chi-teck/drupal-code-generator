@@ -31,8 +31,7 @@ final class Style extends PluginGenerator {
     $this->addFile('{machine_name}.module')
       ->headerTemplate('_lib/file-docs/module')
       ->template('preprocess')
-      ->appendIfExists()
-      ->headerSize(7);
+      ->appendIfExists(7);
 
     if ($vars['configurable']) {
       $this->addSchemaFile()->template('schema');

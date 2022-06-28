@@ -14,7 +14,7 @@ final class AppendResolverTest extends BaseResolverTest {
   /**
    * Test callback.
    */
-  public function testWithHeader(): void {
+  public function testWithoutHeader(): void {
     $resolver = new AppendResolver();
 
     $path = $this->createFile('foo.txt', 'Existing content.');
@@ -33,18 +33,17 @@ final class AppendResolverTest extends BaseResolverTest {
   /**
    * Test callback.
    */
-  public function testWithoutHeader(): void {
-    $resolver = new AppendResolver();
+  public function testWithHeader(): void {
+    $resolver = new AppendResolver(1);
 
     $path = $this->createFile('bar.txt', 'Existing content.');
-    $asset = File::create('bar.txt')->content("Header\nNew content.")->headerSize(1);
+    $asset = File::create('bar.txt')->content("Header\nNew content.");
     $resolved_asset = $resolver->resolve($asset, $path);
 
     self::assertNotSame($asset, $resolved_asset);
 
     $expected_resolved_asset = File::create('bar.txt')
-      ->content("Existing content.\nNew content.")
-      ->headerSize(1);
+      ->content("Existing content.\nNew content.");
     self::assertEquals($expected_resolved_asset, $resolved_asset);
     $this->assertEmptyOutput();
 

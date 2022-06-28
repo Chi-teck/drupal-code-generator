@@ -60,8 +60,7 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    */
   public function addServicesFile(string $path = '{machine_name}.services.yml'): File {
     return $this->addFile($path)
-      ->appendIfExists()
-      ->headerSize(1);
+      ->appendIfExists(1);
   }
 
   /**

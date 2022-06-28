@@ -90,8 +90,7 @@ final class ContentEntity extends ModuleGenerator {
     if ($vars['template']) {
       $this->addFile('templates/{entity_type_id|u2h}.html.twig', 'templates/model-example.html.twig');
       $this->addFile('{machine_name}.module', 'model.module')
-        ->appendIfExists()
-        ->headerSize(7);
+        ->appendIfExists(7);
     }
 
     if ($vars['access_controller']) {

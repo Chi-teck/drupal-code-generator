@@ -28,8 +28,7 @@ abstract class ModuleGenerator extends DrupalGenerator {
    */
   protected function addServicesFile(string $path = '{machine_name}.services.yml'): Asset {
     return $this->addFile($path)
-      ->appendIfExists()
-      ->headerSize(1);
+      ->appendIfExists(1);
   }
 
   /**

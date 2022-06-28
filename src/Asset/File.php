@@ -32,11 +32,6 @@ final class File extends Asset {
   private ?string $inlineTemplate = NULL;
 
   /**
-   * Header size.
-   */
-  private int $headerSize = 0;
-
-  /**
    * {@inheritdoc}
    */
   public function __construct(string $path) {
@@ -80,13 +75,6 @@ final class File extends Asset {
   }
 
   /**
-   * Returns the asset header size (number of lines).
-   */
-  public function getHeaderSize(): int {
-    return $this->headerSize;
-  }
-
-  /**
    * Sets the asset content.
    */
   public function content(string $content): self {
@@ -121,17 +109,6 @@ final class File extends Asset {
   }
 
   /**
-   * Set the asset header size.
-   */
-  public function headerSize(int $header_size): self {
-    if ($header_size < 0) {
-      throw new \InvalidArgumentException('Header size must be greater than or equal to 0.');
-    }
-    $this->headerSize = $header_size;
-    return $this;
-  }
-
-  /**
    * Sets the "prepend" resolverAction.
    */
   public function prependIfExists(): self {
@@ -142,8 +119,8 @@ final class File extends Asset {
   /**
    * Sets the "append" resolverAction.
    */
-  public function appendIfExists(): self {
-    $this->resolverDefinition = new ResolverDefinition(AppendResolver::class);
+  public function appendIfExists(int $header_size = 0): self {
+    $this->resolverDefinition = new ResolverDefinition(AppendResolver::class, $header_size);
     return $this;
   }
 

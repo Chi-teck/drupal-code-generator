@@ -104,8 +104,7 @@ final class EntityBundleClass extends ModuleGenerator {
 
     // @todo Handle duplicated hooks.
     $this->addFile('{machine_name}.module', 'module.twig')
-      ->appendIfExists()
-      ->headerSize(7);
+      ->appendIfExists(7);
   }
 
 }

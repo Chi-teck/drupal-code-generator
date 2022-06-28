@@ -242,8 +242,7 @@ final class DumperTest extends BaseTestCase {
     $assets = new AssetCollection();
     $assets[] = (new File('log.txt'))
       ->content("redundant line\nRecord 1")
-      ->appendIfExists()
-      ->headerSize(1);
+      ->appendIfExists(1);
     $assets[] = (new File('log.txt'))
       ->content('Record 2')
       ->appendIfExists();
@@ -251,8 +250,7 @@ final class DumperTest extends BaseTestCase {
     $expected_assets = new AssetCollection();
     $expected_assets[] = (new File('log.txt'))
       ->content("File header\nRecord 1")
-      ->appendIfExists()
-      ->headerSize(1);
+      ->appendIfExists(1);
     $expected_assets[] = (new File('log.txt'))
       ->content("File header\nRecord 1\nRecord 2")
       ->appendIfExists();
