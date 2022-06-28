@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class DryAssetDumper {
 
-  public function __construct(private GeneratorStyleInterface $io) {}
+  public function __construct(readonly private GeneratorStyleInterface $io) {}
 
   /**
    * Simulates asset dumping.

@@ -13,9 +13,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 final class FileSystemAssetDumper {
 
-  public function __construct(
-    private Filesystem $filesystem,
-  ) {}
+  public function __construct(readonly private Filesystem $filesystem) {}
 
   /**
    * Dumps an asset to the file system.

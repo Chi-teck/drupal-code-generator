@@ -120,33 +120,24 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    * Returns a collection of directory assets.
    */
   public function getDirectories(): self {
-    $assets = \array_filter(
-      $this->assets,
-      static fn ($asset): bool => $asset instanceof Directory,
-    );
-    return new self($assets);
+    $is_directory = static fn ($asset): bool => $asset instanceof Directory;
+    return new self(\array_filter($this->assets, $is_directory));
   }
 
   /**
    * Returns a collection of file assets.
    */
   public function getFiles(): self {
-    $assets = \array_filter(
-      $this->assets,
-      static fn ($asset): bool => $asset instanceof File,
-    );
-    return new self($assets);
+    $is_file = static fn ($asset): bool => $asset instanceof File;
+    return new self(\array_filter($this->assets, $is_file));
   }
 
   /**
    * Returns a collection of symlink assets.
    */
   public function getSymlinks(): self {
-    $assets = \array_filter(
-      $this->assets,
-      static fn ($asset): bool => $asset instanceof Symlink,
-    );
-    return new self($assets);
+    $is_symlink = static fn ($asset): bool => $asset instanceof Symlink;
+    return new self(\array_filter($this->assets, $is_symlink));
   }
 
   /**

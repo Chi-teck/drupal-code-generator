@@ -15,7 +15,7 @@ final class Dumper extends Helper implements IOAwareInterface {
 
   use IOAwareTrait;
 
-  public function __construct(private Filesystem $filesystem) {}
+  public function __construct(readonly private Filesystem $filesystem) {}
 
   /**
    * {@inheritdoc}

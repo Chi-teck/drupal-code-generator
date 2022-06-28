@@ -26,8 +26,6 @@ abstract class Asset {
 
   /**
    * Template variables.
-   *
-   * @var array
    */
   private array $vars = [];
 
@@ -37,7 +35,7 @@ abstract class Asset {
   protected ?ResolverInterface $resolver = NULL;
 
   /**
-   * Suggested resover action.
+   * Suggested resolver action.
    */
   protected string $resolverAction = self::RESOLVER_ACTION_REPLACE;
 
@@ -69,6 +67,10 @@ abstract class Asset {
 
   /**
    * Checks if the asset is virtual.
+   *
+   * Virtual assets should not cause creating new directories, files or symlinks
+   * on file system. They meant to be used by resolvers to update existing
+   * objects.
    */
   final public function isVirtual(): bool {
     return $this->virtual;
@@ -109,7 +111,7 @@ abstract class Asset {
   /**
    * Indicates that existing asset should be replaced.
    */
-  public function replaceIfExists(): self {
+  final public function replaceIfExists(): self {
     $this->resolverAction = self::RESOLVER_ACTION_REPLACE;
     return $this;
   }
@@ -117,16 +119,9 @@ abstract class Asset {
   /**
    * Indicates that existing asset should be preserved.
    */
-  public function preserveIfExists(): self {
+  final public function preserveIfExists(): self {
     $this->resolverAction = self::RESOLVER_ACTION_PRESERVE;
     return $this;
-  }
-
-  /**
-   * Implements the magic __toString() method.
-   */
-  final public function __toString(): string {
-    return $this->getPath();
   }
 
   /**
@@ -135,6 +130,13 @@ abstract class Asset {
   final public function resolver(ResolverInterface $resolver): self {
     $this->resolver = $resolver;
     return $this;
+  }
+
+  /**
+   * Implements the magic __toString() method.
+   */
+  final public function __toString(): string {
+    return $this->getPath();
   }
 
   /**
