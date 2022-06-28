@@ -17,6 +17,7 @@ final class AppendResolver implements ResolverInterface {
     $resolved_asset = clone $asset;
     $new_content = $resolved_asset->getContent();
     $header_size = $resolved_asset->getHeaderSize();
+    // Remove header from existing content.
     if ($header_size > 0) {
       $new_content = \implode("\n", \array_slice(\explode("\n", $new_content), $header_size));
     }

@@ -11,7 +11,7 @@ final class ReplaceResolver implements ResolverInterface {
 
   public function __construct(private GeneratorStyleInterface $io) {}
 
-  public function resolve(Asset $asset, string $path): File {
+  public function resolve(Asset $asset, string $path): File|Symlink {
     if (!$asset instanceof File && !$asset instanceof Symlink) {
       throw new \InvalidArgumentException('Wrong asset type.');
     }
