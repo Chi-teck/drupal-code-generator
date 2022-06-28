@@ -57,11 +57,7 @@ final class ConfigurationEntity extends ModuleGenerator {
     // Add 'configure' link to the info file if it exists.
     return new class ($vars) implements ResolverInterface {
 
-      public function __construct(private array $vars) {}
-
-      public function supports(Asset $asset): bool {
-        return $asset instanceof File;
-      }
+      public function __construct(readonly private array $vars) {}
 
       public function resolve(Asset $asset, string $path): Asset {
         if (!$asset instanceof File) {

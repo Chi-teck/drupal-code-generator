@@ -12,7 +12,13 @@ final class ResolverDefinition {
   ) {}
 
   public function createResolver(GeneratorStyle $io): ResolverInterface {
-    return new $this->className($io, $this->options);
+    if (\is_subclass_of($this->className, ResolverFactoryInterface::class)) {
+      $resolver = $this->className::createResolver($io, $this->options);
+    }
+    else {
+      $resolver = new $this->className();
+    }
+    return $resolver;
   }
 
 }

@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Asset\Resolver;
 
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\File;
+use DrupalCodeGenerator\Style\GeneratorStyle;
 
 final class AppendResolver implements ResolverInterface {
 
