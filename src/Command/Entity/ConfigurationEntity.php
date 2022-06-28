@@ -44,6 +44,7 @@ final class ConfigurationEntity extends ModuleGenerator {
       ->appendIfExists();
 
     $this->addFile('{machine_name}.info.yml')
+      ->setVirtual(TRUE)
       ->resolver($this->getInfoResolver($vars));
   }
 

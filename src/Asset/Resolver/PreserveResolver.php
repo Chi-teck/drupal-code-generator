@@ -10,9 +10,7 @@ final class PreserveResolver implements ResolverInterface {
    * {@inheritdoc}
    */
   public function resolve(Asset $asset, string $path): Asset {
-    $resolved_asset = clone $asset;
-    $resolved_asset->isVirtual = TRUE;
-    return $resolved_asset;
+    return clone $asset->setVirtual(TRUE);
   }
 
 }

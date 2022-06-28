@@ -14,7 +14,7 @@ abstract class Asset {
   /**
    * Indicates that the asset should not be dumped.
    */
-  public bool $isVirtual = FALSE;
+  private bool $virtual = FALSE;
 
   /**
    * Asset mode.
@@ -74,6 +74,13 @@ abstract class Asset {
   }
 
   /**
+   * Checks if the asset is virtual.
+   */
+  final public function isVirtual(): bool {
+    return $this->virtual;
+  }
+
+  /**
    * Returns the asset resolver.
    */
   abstract public function getResolver(GeneratorStyleInterface $io): ResolverInterface;
@@ -94,6 +101,14 @@ abstract class Asset {
    */
   final public function vars(array $vars): self {
     $this->vars = $vars;
+    return $this;
+  }
+
+  /**
+   * Sets virtual.
+   */
+  final public function setVirtual(bool $virtual): self {
+    $this->virtual = $virtual;
     return $this;
   }
 

@@ -17,7 +17,7 @@ final class ReplaceResolver implements ResolverInterface {
     }
     $resolved_asset = clone $asset;
     if (!$this->shouldReplace($path)) {
-      $resolved_asset->isVirtual = TRUE;
+      $resolved_asset->setVirtual(TRUE);
     }
     return $resolved_asset;
   }

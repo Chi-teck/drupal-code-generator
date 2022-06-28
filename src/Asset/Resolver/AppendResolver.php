@@ -16,10 +16,6 @@ final class AppendResolver implements ResolverInterface {
     }
     $resolved_asset = clone $asset;
     $new_content = $resolved_asset->getContent();
-    // @todo Figure out why the new content can be NULL.
-    if ($new_content === NULL) {
-      return $resolved_asset;
-    }
     $header_size = $resolved_asset->getHeaderSize();
     if ($header_size > 0) {
       $new_content = \implode("\n", \array_slice(\explode("\n", $new_content), $header_size));
