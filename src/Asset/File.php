@@ -4,18 +4,12 @@ namespace DrupalCodeGenerator\Asset;
 
 use DrupalCodeGenerator\Asset\Resolver\AppendResolver;
 use DrupalCodeGenerator\Asset\Resolver\PrependResolver;
-use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
-use DrupalCodeGenerator\Asset\Resolver\ReplaceResolver;
-use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
-use DrupalCodeGenerator\Style\GeneratorStyleInterface;
+use DrupalCodeGenerator\Asset\Resolver\ResolverDefinition;
 
 /**
  * Simple data structure to represent a file being generated.
  */
 final class File extends Asset {
-
-  private const RESOLVER_ACTION_PREPEND = 'prepend';
-  private const RESOLVER_ACTION_APPEND = 'append';
 
   /**
    * Asset content.
@@ -109,7 +103,7 @@ final class File extends Asset {
   }
 
   /**
-   * Returns the asset template.
+   * Sets the asset template.
    */
   public function template(?string $template): self {
     if ($template !== NULL) {
@@ -141,7 +135,7 @@ final class File extends Asset {
    * Sets the "prepend" resolverAction.
    */
   public function prependIfExists(): self {
-    $this->resolverAction = self::RESOLVER_ACTION_PREPEND;
+    $this->resolverDefinition = new ResolverDefinition(PrependResolver::class);
     return $this;
   }
 
@@ -149,7 +143,7 @@ final class File extends Asset {
    * Sets the "append" resolverAction.
    */
   public function appendIfExists(): self {
-    $this->resolverAction = self::RESOLVER_ACTION_APPEND;
+    $this->resolverDefinition = new ResolverDefinition(AppendResolver::class);
     return $this;
   }
 
@@ -161,18 +155,6 @@ final class File extends Asset {
       $template .= '.twig';
     }
     return $template;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function getResolver(GeneratorStyleInterface $io): ResolverInterface {
-    return $this->resolver ?? match ($this->resolverAction) {
-      self::RESOLVER_ACTION_PRESERVE => new PreserveResolver(),
-      self::RESOLVER_ACTION_REPLACE => new ReplaceResolver($io),
-      self::RESOLVER_ACTION_PREPEND => new PrependResolver(),
-      self::RESOLVER_ACTION_APPEND => new AppendResolver(),
-    };
   }
 
 }

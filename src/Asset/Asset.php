@@ -2,6 +2,9 @@
 
 namespace DrupalCodeGenerator\Asset;
 
+use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
+use DrupalCodeGenerator\Asset\Resolver\ReplaceResolver;
+use DrupalCodeGenerator\Asset\Resolver\ResolverDefinition;
 use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
 use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Utils;
@@ -11,11 +14,8 @@ use DrupalCodeGenerator\Utils;
  */
 abstract class Asset {
 
-  protected const RESOLVER_ACTION_PRESERVE = 'preserve';
-  protected const RESOLVER_ACTION_REPLACE = 'replace';
-
   /**
-   * Indicates that the asset should not be dumped.
+   * Indicates that the asset can be updated but never created.
    */
   private bool $virtual = FALSE;
 
@@ -35,14 +35,16 @@ abstract class Asset {
   protected ?ResolverInterface $resolver = NULL;
 
   /**
-   * Suggested resolver action.
+   * Resolver definition.
    */
-  protected string $resolverAction = self::RESOLVER_ACTION_REPLACE;
+  protected ResolverDefinition $resolverDefinition;
 
   /**
    * Asset constructor.
    */
-  public function __construct(readonly protected string $path) {}
+  public function __construct(readonly protected string $path) {
+    $this->resolverDefinition = new ResolverDefinition(ReplaceResolver::class);
+  }
 
   /**
    * Getter for the asset path.
@@ -79,7 +81,9 @@ abstract class Asset {
   /**
    * Returns the asset resolver.
    */
-  abstract public function getResolver(GeneratorStyleInterface $io): ResolverInterface;
+  public function getResolver(GeneratorStyleInterface $io): ResolverInterface {
+    return $this->resolver ?? $this->resolverDefinition->createResolver($io);
+  }
 
   /**
    * Setter for asset mode.
@@ -112,7 +116,7 @@ abstract class Asset {
    * Indicates that existing asset should be replaced.
    */
   final public function replaceIfExists(): self {
-    $this->resolverAction = self::RESOLVER_ACTION_REPLACE;
+    $this->resolverDefinition = new ResolverDefinition(ReplaceResolver::class);
     return $this;
   }
 
@@ -120,7 +124,7 @@ abstract class Asset {
    * Indicates that existing asset should be preserved.
    */
   final public function preserveIfExists(): self {
-    $this->resolverAction = self::RESOLVER_ACTION_PRESERVE;
+    $this->resolverDefinition = new ResolverDefinition(PreserveResolver::class);
     return $this;
   }
 

@@ -3,8 +3,7 @@
 namespace DrupalCodeGenerator\Asset;
 
 use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
-use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
-use DrupalCodeGenerator\Style\GeneratorStyleInterface;
+use DrupalCodeGenerator\Asset\Resolver\ResolverDefinition;
 
 /**
  * Simple data structure to represent a directory being created.
@@ -14,6 +13,8 @@ final class Directory extends Asset {
   public function __construct(string $path) {
     parent::__construct($path);
     $this->mode(0755);
+    // Recreating existing directories makes no sense.
+    $this->resolverDefinition = new ResolverDefinition(PreserveResolver::class);
   }
 
   /**
@@ -21,14 +22,6 @@ final class Directory extends Asset {
    */
   final public static function create(string $path): self {
     return new self($path);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function getResolver(GeneratorStyleInterface $io): ResolverInterface {
-    // Recreating existing directories makes no sense.
-    return $this->resolver ?? new PreserveResolver();
   }
 
 }
