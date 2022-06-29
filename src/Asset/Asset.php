@@ -22,7 +22,7 @@ abstract class Asset {
   /**
    * Asset mode.
    */
-  private int $mode;
+  private int $mode = 0444;
 
   /**
    * Template variables.
@@ -146,8 +146,8 @@ abstract class Asset {
   /**
    * Replaces all tokens in a given string with appropriate values.
    */
-  final protected function replaceTokens(string $text): ?string {
-    return Utils::replaceTokens($text, $this->vars);
+  final protected function replaceTokens(string $input): ?string {
+    return Utils::replaceTokens($input, $this->vars);
   }
 
 }
