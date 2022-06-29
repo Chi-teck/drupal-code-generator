@@ -3,28 +3,32 @@
 namespace DrupalCodeGenerator\Command\Plugin\Field;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:field:widget command.
- */
-final class Widget extends PluginGenerator {
+#[Generator(
+  name: 'plugin:field:widget',
+  description: 'Generates field widget plugin',
+  aliases: ['field-widget'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/field/widget',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Widget extends BaseGenerator {
 
-  protected string $name = 'plugin:field:widget';
-  protected string $description = 'Generates field widget plugin';
-  protected string $alias = 'field-widget';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/field/widget';
-  protected string $pluginClassSuffix = 'Widget';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['configurable'] = $this->confirm('Make the widget configurable?', FALSE);
-    $this->addFile('src/Plugin/Field/FieldWidget/{class}.php', 'widget');
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['plugin_label'] = $ir->askPluginLabel();
+    $vars['plugin_id'] = $ir->askPluginId();
+    $vars['class'] = $ir->askPluginClass(suffix: 'Widget');
+
+    $vars['configurable'] = $ir->confirm('Make the widget configurable?', FALSE);
+    $assets->addFile('src/Plugin/Field/FieldWidget/{class}.php', 'widget');
     if ($vars['configurable']) {
-      $this->addSchemaFile()->template('schema');
+      $assets->addSchemaFile()->template('schema');
     }
   }
 
