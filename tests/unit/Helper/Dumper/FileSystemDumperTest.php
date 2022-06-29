@@ -6,7 +6,7 @@ use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
-use DrupalCodeGenerator\Helper\Dumper\Dumper;
+use DrupalCodeGenerator\Helper\Dumper\FileSystemDumper;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
@@ -18,9 +18,9 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * A test for Dumper helper.
+ * A test for FileSystemDumper helper.
  */
-final class DumperTest extends BaseTestCase {
+final class FileSystemDumperTest extends BaseTestCase {
 
   /**
    * Console input.
@@ -43,7 +43,6 @@ final class DumperTest extends BaseTestCase {
   public function setUp(): void {
     parent::setUp();
     $definition[] = new InputOption('dry-run', NULL, InputOption::VALUE_NONE);
-    $definition[] = new InputOption('full-path', NULL, InputOption::VALUE_NONE);
     $definition[] = new InputOption('replace', NULL, InputOption::VALUE_NONE);
     $this->input = new ArrayInput([], new InputDefinition($definition));
     $this->output = new BufferedOutput();
@@ -55,9 +54,9 @@ final class DumperTest extends BaseTestCase {
    */
   public function testWithoutExistingFiles(): void {
     $assets = new AssetCollection();
-    $assets[] = (new File('alpha.txt'))->content('alpha');
-    $assets[] = (new File('beta.txt'))->content('beta');
-    $assets[] = (new File('gamma.txt'))->content('gamma');
+    $assets[] = File::create('alpha.txt')->content('alpha');
+    $assets[] = File::create('beta.txt')->content('beta');
+    $assets[] = File::create('gamma.txt')->content('gamma');
 
     $dumped_assets = $this->dump($assets);
     self::assertEquals($assets, $dumped_assets);
@@ -79,7 +78,7 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('foo.txt');
 
     $assets = new AssetCollection();
-    $assets[] = (new File('foo.txt'))->content('foo');
+    $assets[] = File::create('foo.txt')->content('foo');
 
     $this->setStream("\n");
     $dumped_assets = $this->dump($assets);
@@ -105,7 +104,7 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('bar.txt');
 
     $assets = new AssetCollection();
-    $assets[] = (new File('bar.txt'))->content('bar');
+    $assets[] = File::create('bar.txt')->content('bar');
 
     $this->setStream("Yes\n");
     $dumped_assets = $this->dump($assets);
@@ -131,7 +130,7 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('example.txt', 'Example');
 
     $assets = new AssetCollection();
-    $assets[] = (new File('example.txt'))->content('example');
+    $assets[] = File::create('example.txt')->content('example');
 
     $this->setStream("No\n");
     $dumped_assets = $this->dump($assets);
@@ -157,7 +156,7 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('wine.txt');
 
     $assets = new AssetCollection();
-    $assets[] = (new File('wine.txt'))->content('Wine');
+    $assets[] = File::create('wine.txt')->content('Wine');
 
     $this->input->setOption('replace', TRUE);
     $dumped_assets = $this->dump($assets);
@@ -176,7 +175,7 @@ final class DumperTest extends BaseTestCase {
    */
   public function testFilePermissions(): void {
     $assets = new AssetCollection();
-    $assets[] = (new File('prize.txt'))->content('Prize')->mode(0757);
+    $assets[] = File::create('prize.txt')->content('Prize')->mode(0757);
 
     $dumped_assets = $this->dump($assets);
     self::assertEquals($assets, $dumped_assets);
@@ -217,10 +216,10 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('log.txt', 'Record 1');
 
     $assets = new AssetCollection();
-    $assets[] = (new File('log.txt'))->content('File header')->prependIfExists();
+    $assets[] = File::create('log.txt')->content('File header')->prependIfExists();
     $dumped_assets = $this->dump($assets);
     $expected_assets = new AssetCollection();
-    $expected_assets[] = (new File('log.txt'))->content("File header\nRecord 1")->prependIfExists();
+    $expected_assets[] = File::create('log.txt')->content("File header\nRecord 1")->prependIfExists();
     self::assertEquals($expected_assets, $dumped_assets);
 
     $expected_content = [
@@ -240,18 +239,18 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('log.txt', 'File header');
 
     $assets = new AssetCollection();
-    $assets[] = (new File('log.txt'))
+    $assets[] = File::create('log.txt')
       ->content("redundant line\nRecord 1")
       ->appendIfExists(1);
-    $assets[] = (new File('log.txt'))
+    $assets[] = File::create('log.txt')
       ->content('Record 2')
       ->appendIfExists();
 
     $expected_assets = new AssetCollection();
-    $expected_assets[] = (new File('log.txt'))
+    $expected_assets[] = File::create('log.txt')
       ->content("File header\nRecord 1")
       ->appendIfExists(1);
-    $expected_assets[] = (new File('log.txt'))
+    $expected_assets[] = File::create('log.txt')
       ->content("File header\nRecord 1\nRecord 2")
       ->appendIfExists();
 
@@ -273,7 +272,7 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('log.txt', 'Existing record');
 
     $assets = new AssetCollection();
-    $assets[] = (new File('log.txt'))->content('New Record')->preserveIfExists();
+    $assets[] = File::create('log.txt')->content('New Record')->preserveIfExists();
 
     $dumped_assets = $this->dump($assets);
     self::assertEquals(new AssetCollection(), $dumped_assets);
@@ -291,10 +290,10 @@ final class DumperTest extends BaseTestCase {
    */
   public function testSymlink(): void {
     $assets = new AssetCollection();
-    $assets[] = new Directory('Alpha/Beta/Gamma');
-    $assets[] = (new File('foo.txt'))->content('Bar');
-    $assets[] = new Symlink('foo.link', 'foo.txt');
-    $assets[] = new Symlink('abg.link', 'Alpha/Beta/Gamma');
+    $assets[] = Directory::create('Alpha/Beta/Gamma');
+    $assets[] = File::create('foo.txt')->content('Bar');
+    $assets[] = Symlink::create('foo.link', 'foo.txt');
+    $assets[] = Symlink::create('abg.link', 'Alpha/Beta/Gamma');
 
     $dumped_assets = $this->dump($assets);
     self::assertEquals($assets, $dumped_assets);
@@ -319,7 +318,7 @@ final class DumperTest extends BaseTestCase {
     $this->createFile('foo.link', 'Existing content');
 
     $assets = new AssetCollection();
-    $assets[] = (new Symlink('foo.link', 'foo.txt'))->preserveIfExists();
+    $assets[] = Symlink::create('foo.link', 'foo.txt')->preserveIfExists();
 
     $dumped_assets = $this->dump($assets);
     self::assertEquals(new AssetCollection(), $dumped_assets);
@@ -330,40 +329,6 @@ final class DumperTest extends BaseTestCase {
     $this->assertContent($expected_content);
 
     $this->assertEmptyOutput();
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testDryDump(): void {
-    $this->input->setOption('dry-run', TRUE);
-
-    $assets = new AssetCollection();
-    $assets[] = new Directory('foo');
-    $assets[] = (new File('example.txt'))->content('Example');
-    $assets[] = new Symlink('foo.link', 'example.txt');
-
-    $dumped_assets = $this->dump($assets);
-    self::assertEquals($assets, $dumped_assets);
-
-    $dir_content = \scandir($this->directory);
-    self::assertSame(['.', '..'], $dir_content);
-
-    $expected_output = <<< 'TEXT'
-
-     foo (empty directory)
-    –––––––––––––––––––––––
-
-     example.txt
-    –––––––––––––
-    Example
-
-     foo.link
-    ––––––––––
-    Symlink to example.txt
-
-    TEXT;
-    self::assertSame($expected_output, $this->output->fetch());
   }
 
   /**
@@ -387,8 +352,10 @@ final class DumperTest extends BaseTestCase {
     $question_helper = new QuestionHelper();
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
+
     $io = new IO($this->input, $this->output, $question_helper);
-    $dumper = new Dumper($this->filesystem);
+
+    $dumper = new FileSystemDumper($this->filesystem);
     $dumper->io($io);
     $dumper->setHelperSet($helper_set);
 

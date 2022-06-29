@@ -45,7 +45,6 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
   protected function initialize(InputInterface $input, OutputInterface $output): void {
     parent::initialize($input, $output);
 
-    /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
     $logger = new ConsoleLogger($output);
     $question_helper = $this->getHelper('question');
     $io = new IO($input, $output, $question_helper);
@@ -155,7 +154,8 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    * Dumps assets.
    */
   protected function dump(AssetCollection $assets, string $destination): AssetCollection {
-    return $this->getHelper('dumper')->dump($assets, $destination);
+    $dumper_name = $this->io->getInput()->getOption('dry-run') ? 'dry_dumper' : 'filesystem_dumper';
+    return $this->getHelper($dumper_name)->dump($assets, $destination);
   }
 
   /**

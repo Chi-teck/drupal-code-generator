@@ -8,7 +8,8 @@ use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Helper\DrupalContext;
-use DrupalCodeGenerator\Helper\Dumper\Dumper;
+use DrupalCodeGenerator\Helper\Dumper\DryDumper;
+use DrupalCodeGenerator\Helper\Dumper\FileSystemDumper;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\ResultPrinter;
@@ -20,8 +21,8 @@ use Symfony\Component\Console\Input\InputOption as Option;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Filesystem\Filesystem;
-use Twig\Loader\FilesystemLoader;
+use Symfony\Component\Filesystem\Filesystem as SymfonyFileSystem;
+use Twig\Loader\FilesystemLoader as TemplateLoader;
 
 /**
  * DCG console application.
@@ -57,10 +58,12 @@ class Application extends BaseApplication implements ContainerAwareInterface {
     $application = new static('Drupal Code Generator', self::VERSION);
     $application->setContainer($container);
 
+    $file_system = new SymfonyFileSystem();
     $helper_set = new HelperSet([
       new QuestionHelper(),
-      new Dumper(new Filesystem()),
-      new Renderer(new TwigEnvironment(new FilesystemLoader([Application::TEMPLATE_PATH]))),
+      new DryDumper($file_system),
+      new FileSystemDumper($file_system),
+      new Renderer(new TwigEnvironment(new TemplateLoader([Application::TEMPLATE_PATH]))),
       new ResultPrinter(),
       new DrupalContext($container),
       new ModuleInfo($container->get('module_handler')),

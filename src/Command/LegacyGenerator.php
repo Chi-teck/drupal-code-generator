@@ -268,7 +268,8 @@ abstract class LegacyGenerator extends Command implements LabelInterface, IOAwar
    * Dumps assets.
    */
   protected function dump(string $destination): AssetCollection {
-    return $this->getHelper('dumper')->dump($this->assets, $destination);
+    $dumper_name = $this->io->getInput()->getOption('dry-run') ? 'dry_dumper' : 'filesystem_dumper';
+    return $this->getHelper($dumper_name)->dump($this->assets, $destination);
   }
 
   /**
