@@ -84,9 +84,6 @@ else
   git clone --depth 1 --branch $DCG_DRUPAL_VERSION $DRUPAL_REPO $DRUPAL_DIR
   echo '🚩 Install Composer dependencies'
   composer -d$DRUPAL_DIR install
-  echo '🚩 Install local DCG'
-  composer -d"$DRUPAL_DIR" config repositories.dcg "$(printf '{"type": "path", "url": "%s", "options": {"symlink": false}}' $SELF_DIR)"
-  composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator:3.x
   cp $SCRIPTS_DIR/drupal.php $DRUPAL_DIR/
   cp -R $SOURCE_DIR/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
@@ -100,6 +97,11 @@ else
   fi
   cp -r $DRUPAL_DIR $CACHE_DIR/$DCG_DRUPAL_VERSION
 fi
+
+echo '🚩 Install local DCG'
+composer -d"$DRUPAL_DIR" config repositories.dcg "$(printf '{"type": "path", "url": "%s", "options": {"symlink": false}}' $SELF_DIR)"
+composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator:3.x
+
 echo '🚩 Start server'
 symfony server:start --daemon --dir=$DRUPAL_DIR --port=$DCG_DRUPAL_PORT --no-tls
 export SUT_TEST=1

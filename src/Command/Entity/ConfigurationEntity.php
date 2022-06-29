@@ -67,8 +67,7 @@ final class ConfigurationEntity extends ModuleGenerator {
         $existing_content = \file_get_contents($path);
         if ($existing_content && !\preg_match('/^configure: /m', $existing_content)) {
           $content = "{$existing_content}configure: entity.{$this->vars['entity_type_id']}.collection\n";
-          $resolved->content($content);
-          return $resolved;
+          return $resolved->content($content);
         }
         return $resolved;
       }
