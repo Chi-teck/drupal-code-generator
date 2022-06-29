@@ -31,7 +31,7 @@ final class TypeTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Plugin label:
      ➤ 
 
      Plugin ID [example_foo]:

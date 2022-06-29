@@ -3,28 +3,32 @@
 namespace DrupalCodeGenerator\Command\Plugin\Field;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:field:type command.
- */
-final class Type extends PluginGenerator {
+#[Generator(
+  name: 'plugin:field:type',
+  description: 'Generates field type plugin',
+  aliases: ['field-type'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/field/type',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Type extends BaseGenerator {
 
-  protected string $name = 'plugin:field:type';
-  protected string $description = 'Generates field type plugin';
-  protected string $alias = 'field-type';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/field/type';
-  protected string $pluginClassSuffix = 'Item';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['configurable_storage'] = $this->confirm('Make the field storage configurable?', FALSE);
-    $vars['configurable_instance'] = $this->confirm('Make the field instance configurable?', FALSE);
-    $this->addFile('src/Plugin/Field/FieldType/{class}.php', 'type');
-    $this->addSchemaFile()->template('schema');
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['plugin_label'] = $ir->askPluginLabel();
+    $vars['plugin_id'] = $ir->askPluginId();
+    $vars['class'] = $ir->askPluginClass(suffix: 'Item');
+
+    $vars['configurable_storage'] = $ir->confirm('Make the field storage configurable?', FALSE);
+    $vars['configurable_instance'] = $ir->confirm('Make the field instance configurable?', FALSE);
+    $assets->addFile('src/Plugin/Field/FieldType/{class}.php', 'type.twig');
+    $assets->addSchemaFile()->template('schema.twig');
   }
 
 }
