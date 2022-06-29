@@ -16,6 +16,7 @@ final class SymfonyCommandTest extends GeneratorTestBase {
 
     $input = [
       'foo',
+      'Foo',
       'foo:bar',
       'Example command.',
       'bar',
@@ -30,6 +31,9 @@ final class SymfonyCommandTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Command name [foo:example]:
