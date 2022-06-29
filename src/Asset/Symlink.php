@@ -24,7 +24,7 @@ final class Symlink extends Asset {
   /**
    * Named constructor.
    */
-  final public static function create(string $path, string $target): self {
+  public static function create(string $path, string $target): self {
     return new self($path, $target);
   }
 
