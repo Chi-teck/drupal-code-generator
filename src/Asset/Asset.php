@@ -6,7 +6,7 @@ use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
 use DrupalCodeGenerator\Asset\Resolver\ReplaceResolver;
 use DrupalCodeGenerator\Asset\Resolver\ResolverDefinition;
 use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
-use DrupalCodeGenerator\Style\GeneratorStyleInterface;
+use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Utils;
 
 /**
@@ -81,7 +81,7 @@ abstract class Asset {
   /**
    * Returns the asset resolver.
    */
-  public function getResolver(GeneratorStyleInterface $io): ResolverInterface {
+  public function getResolver(IO $io): ResolverInterface {
     return $this->resolver ?? $this->resolverDefinition->createResolver($io);
   }
 

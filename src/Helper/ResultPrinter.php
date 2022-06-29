@@ -4,8 +4,8 @@ namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\IOAwareInterface;
-use DrupalCodeGenerator\IOAwareTrait;
+use DrupalCodeGenerator\InputOutput\IOAwareInterface;
+use DrupalCodeGenerator\InputOutput\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableStyle;

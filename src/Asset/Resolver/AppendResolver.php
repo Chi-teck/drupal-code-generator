@@ -4,7 +4,7 @@ namespace DrupalCodeGenerator\Asset\Resolver;
 
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\File;
-use DrupalCodeGenerator\Style\GeneratorStyle;
+use DrupalCodeGenerator\InputOutput\IO;
 
 final class AppendResolver implements ResolverInterface, ResolverFactoryInterface {
 
@@ -17,7 +17,7 @@ final class AppendResolver implements ResolverInterface, ResolverFactoryInterfac
   /**
    * {@inheritdoc}
    */
-  public static function createResolver(GeneratorStyle $io, mixed $options): self {
+  public static function createResolver(IO $io, mixed $options): self {
     return new self($options);
   }
 

@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\ResultPrinter;
-use DrupalCodeGenerator\Style\GeneratorStyle;
+use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Tests\Unit\QuestionHelper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -39,7 +39,7 @@ final class ResultPrinterTest extends TestCase {
     $this->output = new BufferedOutput();
 
     $question_helper = new QuestionHelper();
-    $io = new GeneratorStyle($input, $this->output, $question_helper);
+    $io = new IO($input, $this->output, $question_helper);
 
     $this->printer = new ResultPrinter();
     $this->printer->io($io);

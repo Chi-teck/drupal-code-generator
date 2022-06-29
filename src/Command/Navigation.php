@@ -2,8 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use DrupalCodeGenerator\IOAwareInterface;
-use DrupalCodeGenerator\IOAwareTrait;
+use DrupalCodeGenerator\InputOutput\IOAwareInterface;
+use DrupalCodeGenerator\InputOutput\IOAwareTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Attribute\AsCommand;

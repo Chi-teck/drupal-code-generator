@@ -6,7 +6,7 @@ use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
-use DrupalCodeGenerator\Style\GeneratorStyleInterface;
+use DrupalCodeGenerator\InputOutput\IO;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class DryAssetDumper {
 
-  public function __construct(readonly private GeneratorStyleInterface $io) {}
+  public function __construct(readonly private IO $io) {}
 
   /**
    * Simulates asset dumping.

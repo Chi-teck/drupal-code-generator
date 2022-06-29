@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator;
-
-use DrupalCodeGenerator\Style\GeneratorStyleInterface;
+namespace DrupalCodeGenerator\InputOutput;
 
 /**
  * Defines a trait to set console IO.
@@ -12,12 +10,12 @@ trait IOAwareTrait {
   /**
    * Console input.
    */
-  protected GeneratorStyleInterface $io;
+  protected IO $io;
 
   /**
    * Sets the console IO.
    */
-  public function io(?GeneratorStyleInterface $io = NULL): GeneratorStyleInterface {
+  public function io(?IO $io = NULL): IO {
     if ($io) {
       $this->io = $io;
     }

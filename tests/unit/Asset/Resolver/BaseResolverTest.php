@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Unit\Asset\Resolver;
 
 use DrupalCodeGenerator\Helper\QuestionHelper;
-use DrupalCodeGenerator\Style\GeneratorStyle;
+use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -45,11 +45,11 @@ abstract class BaseResolverTest extends BaseTestCase {
     $this->filesystem = new Filesystem();
   }
 
-  final protected function createGeneratorStyle(): GeneratorStyle {
+  final protected function createGeneratorStyle(): IO {
     $question_helper = new QuestionHelper();
     $helper_set = new HelperSet();
     $helper_set->set($question_helper);
-    return new GeneratorStyle($this->input, $this->output, $question_helper);
+    return new IO($this->input, $this->output, $question_helper);
   }
 
   final protected function assertOutput(string $expected_output): void {

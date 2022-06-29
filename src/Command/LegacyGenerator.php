@@ -8,10 +8,10 @@ use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
-use DrupalCodeGenerator\IOAwareInterface;
-use DrupalCodeGenerator\IOAwareTrait;
+use DrupalCodeGenerator\InputOutput\IO;
+use DrupalCodeGenerator\InputOutput\IOAwareInterface;
+use DrupalCodeGenerator\InputOutput\IOAwareTrait;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
-use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Utils;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -180,7 +180,7 @@ abstract class LegacyGenerator extends Command implements LabelInterface, IOAwar
     /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
     $logger = new ConsoleLogger($output);
     $question_helper = $helper_set->get('question');
-    $io = new GeneratorStyle($input, $output, $question_helper);
+    $io = new IO($input, $output, $question_helper);
 
     $items = \iterator_to_array($this->getHelperSet());
     $items[] = $this;

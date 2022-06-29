@@ -5,16 +5,16 @@ namespace DrupalCodeGenerator\Asset\Resolver;
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
-use DrupalCodeGenerator\Style\GeneratorStyle;
+use DrupalCodeGenerator\InputOutput\IO;
 
 final class ReplaceResolver implements ResolverInterface, ResolverFactoryInterface {
 
-  public function __construct(readonly private GeneratorStyle $io) {}
+  public function __construct(readonly private IO $io) {}
 
   /**
    * {@inheritdoc}
    */
-  public static function createResolver(GeneratorStyle $io, mixed $options): self {
+  public static function createResolver(IO $io, mixed $options): self {
     return new self($io);
   }
 

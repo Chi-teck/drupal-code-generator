@@ -3,8 +3,8 @@
 namespace DrupalCodeGenerator\Helper\Dumper;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\IOAwareInterface;
-use DrupalCodeGenerator\IOAwareTrait;
+use DrupalCodeGenerator\InputOutput\IOAwareInterface;
+use DrupalCodeGenerator\InputOutput\IOAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Filesystem\Filesystem;
 

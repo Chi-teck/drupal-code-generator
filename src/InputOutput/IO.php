@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Style;
+namespace DrupalCodeGenerator\InputOutput;
 
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Utils;
@@ -9,12 +9,13 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\StyleInterface as SymfonyStyleInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Output decorator for the DCG style guide.
  */
-final class GeneratorStyle extends SymfonyStyle implements GeneratorStyleInterface {
+final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInterface {
 
   /**
    * Console input.

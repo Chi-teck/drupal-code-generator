@@ -6,11 +6,11 @@ use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\GeneratorType;
-use DrupalCodeGenerator\Interviewer\Interviewer;
-use DrupalCodeGenerator\IOAwareInterface;
-use DrupalCodeGenerator\IOAwareTrait;
+use DrupalCodeGenerator\InputOutput\Interviewer;
+use DrupalCodeGenerator\InputOutput\IO;
+use DrupalCodeGenerator\InputOutput\IOAwareInterface;
+use DrupalCodeGenerator\InputOutput\IOAwareTrait;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
-use DrupalCodeGenerator\Style\GeneratorStyle;
 use DrupalCodeGenerator\Utils;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -48,7 +48,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     /** @var \DrupalCodeGenerator\Helper\QuestionHelper $question_helper */
     $logger = new ConsoleLogger($output);
     $question_helper = $this->getHelper('question');
-    $io = new GeneratorStyle($input, $output, $question_helper);
+    $io = new IO($input, $output, $question_helper);
 
     $items = \iterator_to_array($this->getHelperSet());
     $items[] = $this;

@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Helper\Dumper\Dumper;
 use DrupalCodeGenerator\Helper\QuestionHelper;
-use DrupalCodeGenerator\Style\GeneratorStyle;
+use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -387,7 +387,7 @@ final class DumperTest extends BaseTestCase {
     $question_helper = new QuestionHelper();
     $helper_set = new HelperSet();
     $helper_set->set(new QuestionHelper());
-    $io = new GeneratorStyle($this->input, $this->output, $question_helper);
+    $io = new IO($this->input, $this->output, $question_helper);
     $dumper = new Dumper($this->filesystem);
     $dumper->io($io);
     $dumper->setHelperSet($helper_set);

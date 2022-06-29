@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrupalCodeGenerator\Interviewer;
+namespace DrupalCodeGenerator\InputOutput;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
@@ -8,7 +8,6 @@ use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
-use DrupalCodeGenerator\Style\GeneratorStyleInterface;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\Chained;
 use DrupalCodeGenerator\Validator\MachineName;
@@ -26,7 +25,7 @@ use Symfony\Component\Console\Question\Question;
 final class Interviewer {
 
   public function __construct(
-    private readonly GeneratorStyleInterface $io,
+    private readonly IO $io,
     private readonly array &$vars,
     private readonly GeneratorDefinition $generatorDefinition,
     private readonly ModuleInfo $moduleInfo,

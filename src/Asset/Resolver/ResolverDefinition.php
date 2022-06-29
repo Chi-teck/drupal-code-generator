@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Asset\Resolver;
 
-use DrupalCodeGenerator\Style\GeneratorStyle;
+use DrupalCodeGenerator\InputOutput\IO;
 
 final class ResolverDefinition {
 
@@ -11,7 +11,7 @@ final class ResolverDefinition {
     readonly public mixed $options = NULL,
   ) {}
 
-  public function createResolver(GeneratorStyle $io): ResolverInterface {
+  public function createResolver(IO $io): ResolverInterface {
     if (\is_subclass_of($this->className, ResolverFactoryInterface::class)) {
       $resolver = $this->className::createResolver($io, $this->options);
     }
