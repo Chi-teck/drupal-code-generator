@@ -27,7 +27,7 @@ final class Hook extends BaseGenerator {
     $hook_question = new Question('Hook name');
     $hook_question->setValidator(self::getHookValidator($available_hooks));
     $hook_question->setAutocompleterValues($available_hooks);
-    $vars['hook_name'] = $this->io->askQuestion($hook_question);
+    $vars['hook_name'] = $this->io()->askQuestion($hook_question);
 
     $vars['file_type'] = $hook_info->getFileType($vars['hook_name']);
 

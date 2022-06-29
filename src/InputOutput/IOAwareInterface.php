@@ -8,8 +8,8 @@ namespace DrupalCodeGenerator\InputOutput;
 interface IOAwareInterface {
 
   /**
-   * Sets the console IO.
+   * Sets or gets the console IO.
    */
-  public function io(IO $io): IO;
+  public function io(?IO $io = NULL): IO;
 
 }

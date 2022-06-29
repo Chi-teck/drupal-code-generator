@@ -163,7 +163,7 @@ final class Field extends ModuleGenerator {
     $vars['formatter_class'] = '{field_label|camelize}DefaultFormatter';
 
     for ($i = 1; $i <= $vars['subfield_count']; $i++) {
-      $this->io->writeln(\sprintf('<fg=green>%s</>', \str_repeat('–', 50)));
+      $this->io()->writeln(\sprintf('<fg=green>%s</>', \str_repeat('–', 50)));
 
       $subfield = new \stdClass();
 
@@ -228,7 +228,7 @@ final class Field extends ModuleGenerator {
 
     }
 
-    $this->io->writeln(\sprintf('<fg=green>%s</>', \str_repeat('–', 50)));
+    $this->io()->writeln(\sprintf('<fg=green>%s</>', \str_repeat('–', 50)));
 
     $vars['storage_settings'] = $this->confirm('Would you like to create field storage settings form?', FALSE);
     $vars['instance_settings'] = $this->confirm('Would you like to create field instance settings form?', FALSE);

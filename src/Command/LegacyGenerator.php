@@ -125,7 +125,7 @@ abstract class LegacyGenerator extends Command implements LabelInterface, IOAwar
     if (\is_string($validator) && \str_starts_with($validator, '::')) {
       $validator = [static::class, \substr($validator, 2)];
     }
-    return $this->io->ask($question, $default, $validator);
+    return $this->io()->ask($question, $default, $validator);
   }
 
   /**
@@ -135,7 +135,7 @@ abstract class LegacyGenerator extends Command implements LabelInterface, IOAwar
    */
   protected function confirm(string $question, bool $default = TRUE): bool {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
-    return $this->io->confirm($question, $default);
+    return $this->io()->confirm($question, $default);
   }
 
   /**

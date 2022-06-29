@@ -13,39 +13,25 @@ use Symfony\Component\Console\Style\StyleInterface as SymfonyStyleInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * Output decorator for the DCG style guide.
+ * The Input/Output helper.
  */
 final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInterface {
 
   /**
-   * Console input.
+   * IO constructor.
    */
-  private InputInterface $input;
-
-  /**
-   * Console output.
-   */
-  private OutputInterface $output;
-
-  /**
-   * Question helper.
-   */
-  private QuestionHelper $questionHelper;
-
-  /**
-   * OutputStyle constructor.
-   */
-  public function __construct(InputInterface $input, OutputInterface $output, QuestionHelper $question_helper) {
-    $this->input = $input;
-    $this->output = $output;
-    $this->questionHelper = $question_helper;
+  public function __construct(
+    readonly private InputInterface $input,
+    readonly private OutputInterface $output,
+    readonly private QuestionHelper $questionHelper,
+  ) {
     parent::__construct($input, $output);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function title($message): void {
+  public function title(string $message): void {
     $this->writeln('');
     $this->writeln(' ' . $message);
     $length = Helper::width(Helper::removeDecoration($this->getFormatter(), $message));
@@ -54,6 +40,8 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
 
   /**
    * {@inheritdoc}
+   *
+   * @noinspection PhpMissingParentCallCommonInspection
    */
   public function askQuestion(Question $question): mixed {
     $answer = $this->questionHelper->ask($this->input, $this, $question);
@@ -65,22 +53,14 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
 
   /**
    * {@inheritdoc}
+   *
+   * @noinspection PhpMissingParentCallCommonInspection
    */
   public function listing(array $elements): void {
     $build_item = static fn (string $element): string => \sprintf(' • %s', $element);
     $elements = \array_map($build_item, $elements);
     $this->writeln($elements);
     $this->newLine();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function text($message): void {
-    $messages = \is_array($message) ? \array_values($message) : [$message];
-    foreach ($messages as $message) {
-      $this->writeln(\sprintf(' <info>%s</info>', $message));
-    }
   }
 
   /**
@@ -114,6 +94,8 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
 
   /**
    * {@inheritdoc}
+   *
+   * @noinspection PhpMissingParentCallCommonInspection
    */
   public function getErrorStyle(): self {
     return new self($this->input, $this->getErrorOutput(), $this->questionHelper);

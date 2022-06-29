@@ -29,7 +29,7 @@ final class CacheContext extends ModuleGenerator {
       'RequestStackCacheContextBase',
       'UserCacheContextBase',
     ];
-    $vars['base_class'] = $this->io->choice('Base class', $base_class_choices);
+    $vars['base_class'] = $this->io()->choice('Base class', $base_class_choices);
     if ($vars['base_class'] == '-') {
       $vars['base_class'] = FALSE;
     }

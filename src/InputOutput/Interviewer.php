@@ -21,6 +21,8 @@ use Symfony\Component\Console\Question\Question;
 
 /**
  * Defines a helper to interact with a user.
+ *
+ * @todo Create a test for this.
  */
 final class Interviewer {
 
@@ -44,17 +46,10 @@ final class Interviewer {
   /**
    * Asks a question.
    */
-  public function ask(string $question, ?string $default = NULL, string|callable|NULL $validator = NULL): mixed {
+  public function ask(string $question, ?string $default = NULL, ?callable $validator = NULL): mixed {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
-    if ($default) {
+    if ($default !== NULL) {
       $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
-    }
-
-    // Allow the validators to be referenced in a short form like
-    // '::validateMachineName'.
-    // @todo Remove this.
-    if (\is_string($validator) && \str_starts_with($validator, '::')) {
-      $validator = [self::class, \substr($validator, 2)];
     }
     return $this->io->ask($question, $default, $validator);
   }
@@ -226,13 +221,7 @@ final class Interviewer {
   }
 
   /**
-   * Gets service definitions.
-   *
-   * @param string $service_id
-   *   The service ID.
-   *
-   * @return array
-   *   Service definition or null if service is unknown.
+   * Gets service definition.
    */
   protected function getServiceDefinition(string $service_id): array {
     // @todo Fetch service information runtime.

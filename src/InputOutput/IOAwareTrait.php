@@ -3,17 +3,14 @@
 namespace DrupalCodeGenerator\InputOutput;
 
 /**
- * Defines a trait to set console IO.
+ * Defines a trait to set and get console IO.
  */
 trait IOAwareTrait {
 
-  /**
-   * Console input.
-   */
-  protected IO $io;
+  private IO $io;
 
   /**
-   * Sets the console IO.
+   * {@inheritdoc}
    */
   public function io(?IO $io = NULL): IO {
     if ($io) {

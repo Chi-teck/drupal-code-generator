@@ -110,7 +110,7 @@ abstract class DrupalGenerator extends LegacyGenerator {
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
       $question->setAutocompleterValues($extensions);
     }
-    return $this->io->askQuestion($question);
+    return $this->io()->askQuestion($question);
   }
 
   /**
@@ -123,7 +123,7 @@ abstract class DrupalGenerator extends LegacyGenerator {
     if (!$this->isNewExtension && $extensions = $this->getExtensionList()) {
       $question->setAutocompleterValues(\array_keys($extensions));
     }
-    return $this->io->askQuestion($question);
+    return $this->io()->askQuestion($question);
   }
 
   /**

@@ -45,7 +45,7 @@ final class EntityReferenceSelection extends PluginGenerator {
     $entity_type_question = new Question('Entity type that can be referenced by this plugin', 'node');
     $entity_type_question->setValidator(new RequiredMachineName());
     $entity_type_question->setAutocompleterValues(\array_keys(self::baseClasses()));
-    $vars['entity_type'] = $this->io->askQuestion($entity_type_question);
+    $vars['entity_type'] = $this->io()->askQuestion($entity_type_question);
 
     $vars['plugin_label'] = $this->askPluginLabelQuestion();
     $vars['plugin_id'] = $this->askPluginIdQuestion();
