@@ -71,6 +71,8 @@ class Utils {
    *
    * @return string
    *   Text with tokens replaced.
+   *
+   * @todo Use double braces for escaping.
    */
   public static function replaceTokens(string $text, array $data): string {
 
@@ -98,11 +100,19 @@ class Utils {
       };
     };
 
+    // Preserve slashes.
+    $escaped_double_slash = '\\\\';
+    $replaced_double_slash = 'DCG_DOUBLE_SLASH';
+    $text = \str_replace($escaped_double_slash, $replaced_double_slash, $text);
+
+    // Preserve brackets.
     $escaped_brackets = ['\\{', '\\}'];
-    $tmp_replacement = ['DCG-open-bracket', 'DCG-close-bracket'];
+    $tmp_replacement = ['DCG_OPEN_BRACKET', 'DCG_CLOSE_BRACKET'];
     $text = \str_replace($escaped_brackets, $tmp_replacement, $text);
+
     $text = \preg_replace_callback('/{(.+?)}/', $process_token, $text);
-    return \str_replace($tmp_replacement, $escaped_brackets, $text);
+    $text = \str_replace($tmp_replacement, $escaped_brackets, $text);
+    return \str_replace($replaced_double_slash, '\\', $text);
   }
 
   /**
@@ -137,13 +147,15 @@ class Utils {
   /**
    * Processes collected variables.
    */
-  public static function processVars(array $vars): array {
-    $processor = static function (&$var, string $key, array $vars): void {
-      if (\is_string($var)) {
-        $var = Utils::stripSlashes(Utils::replaceTokens($var, $vars));
-      }
-    };
-    \array_walk_recursive($vars, $processor, $vars);
+  public static function processVars(array $vars, ?array $data = NULL): array {
+    $data ??= $vars;
+    foreach ($vars as $key => $value) {
+      $vars[$key] = match (TRUE) {
+        \is_string($value) => Utils::stripSlashes(Utils::replaceTokens($value, $data)),
+        \is_array($value) => self::processVars($value, $data),
+        default => $value,
+      };
+    }
     return $vars;
   }
 

@@ -16,6 +16,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
 
     $input = [
       'foo',
+      'Foo',
       'Content',
       'Article',
       'ArticleBundle',
@@ -29,6 +30,9 @@ final class EntityBundleClassTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Entity type:
@@ -73,6 +77,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
 
     $input = [
       'foo',
+      'Foo',
       'Content',
       'All',
       'ArticleBundle',
@@ -87,6 +92,9 @@ final class EntityBundleClassTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Entity type:

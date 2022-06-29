@@ -156,6 +156,9 @@ final class UtilsTest extends BaseTestCase {
    */
   public function replaceTokensProvider(): array {
     return [
+      ['\Drupal\\\{foo}\Example', ['foo' => 'bar'], '\Drupal\bar\Example'],
+      ['\Drupal\foo\Example', ['foo' => 'bar'], '\Drupal\foo\Example'],
+      ['-=\\\{foo}=-', ['foo' => 'bar'], '-=\bar=-'],
       ['-={foo}=-', ['foo' => 'bar'], '-=bar=-'],
       ['-=\{foo\}=-', ['foo' => 'bar'], '-=\{foo\}=-'],
       ['-={foo|camelize}=-', ['foo' => 'bar'], '-=Bar=-'],

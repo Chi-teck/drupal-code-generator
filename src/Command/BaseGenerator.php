@@ -91,7 +91,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
 
       foreach ($assets as $asset) {
         // Local asset variables take precedence over global ones.
-        $asset->vars(\array_merge($vars, $asset->getVars()));
+        $asset->vars(\array_merge($vars, Utils::processVars($asset->getVars())));
       }
 
       $this->render($assets);
