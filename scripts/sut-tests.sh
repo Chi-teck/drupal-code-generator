@@ -418,7 +418,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = bundle_class ]]; then
   cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG entity:bundle-class -a acme -a Content -a All -a No
+  $DCG entity:bundle-class -a acme -a Acme -a Content -a All -a No
 
   dcg_phpcs $MODULE_DIR
   # @todo fix tests.
