@@ -161,3 +161,5 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
 }
+// Give it short alias.
+\class_alias(AssetCollection::class, '\DrupalCodeGenerator\Asset\Assets');

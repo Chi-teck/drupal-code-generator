@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
 
@@ -15,7 +15,7 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class Controller extends BaseGenerator {
 
-  protected function generate(array &$vars, AssetCollection $assets): void {
+  protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
 
     $vars['machine_name'] = $ir->askMachineName();
