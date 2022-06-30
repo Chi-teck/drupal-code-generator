@@ -4,60 +4,59 @@ namespace DrupalCodeGenerator\Command\Entity;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\Asset;
+use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Resolver\ResolverInterface;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements configuration-entity command.
- */
-final class ConfigurationEntity extends ModuleGenerator {
+#[Generator(
+  name: 'entity:configuration',
+  description: 'Generates configuration entity',
+  aliases: ['config-entity'],
+  templatePath: Application::TEMPLATE_PATH . '/configuration-entity',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class ConfigurationEntity extends BaseGenerator {
 
-  protected string $name = 'entity:configuration';
-  protected string $description = 'Generates configuration entity';
-  protected string $alias = 'config-entity';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/configuration-entity';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-
-    $vars['entity_type_label'] = $this->ask('Entity type label', '{name}');
-    $vars['entity_type_id'] = $this->ask('Entity type ID', '{entity_type_label|h2m}');
+    $vars['entity_type_label'] = $ir->ask('Entity type label', '{name}');
+    $vars['entity_type_id'] = $ir->ask('Entity type ID', '{entity_type_label|h2m}');
     $vars['class_prefix'] = '{entity_type_id|camelize}';
 
-    $this->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php');
-    $this->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php');
-    $this->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
-    $this->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
-    $this->addFile('{machine_name}.routing.yml', 'model.routing.yml')
+    $assets->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php');
+    $assets->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php');
+    $assets->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
+    $assets->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
+    $assets->addFile('{machine_name}.routing.yml', 'model.routing.yml')
       ->appendIfExists();
-    $this->addFile('{machine_name}.links.action.yml', 'model.links.action.yml')
+    $assets->addFile('{machine_name}.links.action.yml', 'model.links.action.yml')
       ->appendIfExists();
-    $this->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml')
+    $assets->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml')
       ->appendIfExists();
-    $this->addFile('{machine_name}.permissions.yml', 'model.permissions.yml')
+    $assets->addFile('{machine_name}.permissions.yml', 'model.permissions.yml')
       ->appendIfExists();
-    $this->addFile('config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml')
+    $assets->addFile('config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml')
       ->appendIfExists();
 
-    $this->addFile('{machine_name}.info.yml')
+    $assets->addFile('{machine_name}.info.yml')
       ->setVirtual(TRUE)
       ->resolver($this->getInfoResolver($vars));
   }
 
   /**
    * Returns resolver for the module info file.
-   *
-   * @todo Clean-up.
    */
   private function getInfoResolver(array $vars): ResolverInterface {
     // Add 'configure' link to the info file if it exists.
     return new class ($vars) implements ResolverInterface {
 
-      public function __construct(readonly private array $vars) {}
+      public function __construct(private readonly array $vars) {}
 
       public function resolve(Asset $asset, string $path): Asset {
         if (!$asset instanceof File) {
@@ -65,7 +64,7 @@ final class ConfigurationEntity extends ModuleGenerator {
         }
         $resolved = clone $asset;
         $existing_content = \file_get_contents($path);
-        if ($existing_content && !\preg_match('/^configure: /m', $existing_content)) {
+        if (!\preg_match('/^configure: /m', $existing_content)) {
           $content = "{$existing_content}configure: entity.{$this->vars['entity_type_id']}.collection\n";
           return $resolved->content($content);
         }

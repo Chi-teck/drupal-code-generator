@@ -14,7 +14,8 @@ final class ConfigurationEntityTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(ConfigurationEntity::class, ['foo', 'Example', 'example']);
+    $input = ['foo', 'Foo', 'Example', 'example'];
+    $this->execute(ConfigurationEntity::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +23,9 @@ final class ConfigurationEntityTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Entity type label [Foo]:

@@ -352,7 +352,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = configuration_entity ]]; then
   cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG entity:configuration -a wine -a Example -a example
+  $DCG entity:configuration -a wine -a Wine -a Example -a example
 
   dcg_phpcs .
   dcg_module_install $MODULE_MACHINE_NAME
