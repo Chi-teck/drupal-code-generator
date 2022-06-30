@@ -8,7 +8,7 @@ use DrupalCodeGenerator\BootstrapHandler;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use PHPUnit\Framework\TestCase;
-use Twig\Loader\FilesystemLoader;
+use Twig\Loader\FilesystemLoader as FileSystemLoader;
 
 /**
  * Base class for functional tests.
@@ -20,7 +20,7 @@ abstract class FunctionalTestBase extends TestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  protected function setUp(): void {
     parent::setUp();
     $this->application = $this->createApplication();
   }
@@ -44,7 +44,7 @@ abstract class FunctionalTestBase extends TestCase {
     $helper_set->set(new QuestionHelper());
 
     // Replace default renderer to enable 'strict_variables' in tests.
-    $twig_environment = new TwigEnvironment(new FilesystemLoader([Application::TEMPLATE_PATH]), ['strict_variables' => TRUE]);
+    $twig_environment = new TwigEnvironment(new FileSystemLoader([Application::TEMPLATE_PATH]), ['strict_variables' => TRUE]);
     $helper_set->set(new Renderer($twig_environment));
     return $application;
   }

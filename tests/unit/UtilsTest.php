@@ -13,7 +13,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  protected function setUp(): void {
     parent::setUp();
     (new Filesystem())->dumpFile($this->directory . '/foo/foo.info.yml', 'Content.');
   }

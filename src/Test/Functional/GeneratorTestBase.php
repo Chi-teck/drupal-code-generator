@@ -17,7 +17,7 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  protected function setUp(): void {
     parent::setUp();
     $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
   }
@@ -25,7 +25,7 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
   /**
    * {@inheritdoc}
    */
-  public function tearDown(): void {
+  protected function tearDown(): void {
     parent::tearDown();
     (new Filesystem())->remove($this->directory);
   }

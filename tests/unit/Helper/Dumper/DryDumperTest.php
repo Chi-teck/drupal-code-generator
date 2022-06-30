@@ -39,7 +39,7 @@ final class DryDumperTest extends BaseTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  protected function setUp(): void {
     parent::setUp();
     $definition[] = new InputOption('full-path', NULL, InputOption::VALUE_NONE);
     $this->input = new ArrayInput([], new InputDefinition($definition));

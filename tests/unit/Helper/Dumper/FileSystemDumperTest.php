@@ -40,7 +40,7 @@ final class FileSystemDumperTest extends BaseTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  protected function setUp(): void {
     parent::setUp();
     $definition[] = new InputOption('dry-run', NULL, InputOption::VALUE_NONE);
     $definition[] = new InputOption('replace', NULL, InputOption::VALUE_NONE);
