@@ -153,16 +153,14 @@ final class ConsoleLoggerTest extends TestCase {
     ];
 
     // Render expected output.
-    \array_walk(
-      $mapping,
-      static function (&$row): void {
-        if ($row[2]) {
-          $output = new BufferedOutput($row[1], TRUE);
-          $output->writeln($row[2]);
-          $row[2] = $output->fetch();
-        }
-      },
-    );
+    $render_output = static function (array &$row): void {
+      if ($row[2]) {
+        $output = new BufferedOutput($row[1], TRUE);
+        $output->writeln($row[2]);
+        $row[2] = $output->fetch();
+      }
+    };
+    \array_walk($mapping, $render_output);
 
     return $mapping;
   }
@@ -191,30 +189,33 @@ final class ConsoleLoggerTest extends TestCase {
             Value 3: {v3}
             Value 4: {v4}
             Value 5: {v5}
+            Value 6: {v6}
         EOT;
     $context = [
       'v1' => 'Example',
-      'v2' => new \DateTime('2000-01-01T00:00:00+00:00'),
-      'v3' => new \stdClass(),
+      'v2' => 123,
+      'v3' => new \DateTime('2000-01-01T00:00:00+00:00'),
+      'v4' => new \stdClass(),
 
-      'v4' => new class {
+      'v5' => new class {
         // phpcs:ignore Drupal.Commenting.FunctionComment.Missing
         public function __toString(): string {
           return 'This is foo object.';
         }
 
       },
-      'v5' => [],
+      'v6' => [],
     ];
     $logger->log(LL::WARNING, $message, $context);
 
     $expected_output = <<< 'EOT'
         [warning] 
             Value 1: Example
-            Value 2: 2000-01-01T00:00:00+00:00
-            Value 3: [object stdClass]
-            Value 4: This is foo object.
-            Value 5: [array]
+            Value 2: 123
+            Value 3: 2000-01-01T00:00:00+00:00
+            Value 4: [object stdClass]
+            Value 5: This is foo object.
+            Value 6: [array]
 
         EOT;
     self::assertSame($expected_output, $output->fetch());

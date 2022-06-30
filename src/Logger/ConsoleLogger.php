@@ -11,17 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * PSR-3 compliant console logger.
  */
-class ConsoleLogger extends AbstractLogger {
-
-  /**
-   * Console output.
-   */
-  protected OutputInterface $output;
+final class ConsoleLogger extends AbstractLogger {
 
   /**
    * Verbosity level map.
-   *
-   * @var array
    */
   private array $verbosityLevelMap = [
     LogLevel::EMERGENCY => OutputInterface::VERBOSITY_NORMAL,
@@ -37,14 +30,12 @@ class ConsoleLogger extends AbstractLogger {
   /**
    * Logger constructor.
    */
-  public function __construct(OutputInterface $output) {
-    $this->output = $output;
-  }
+  public function __construct(private readonly OutputInterface $output) {}
 
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = []): void {
+  public function log($level, string|\Stringable $message, array $context = []): void {
 
     if (!isset($this->verbosityLevelMap[$level])) {
       throw new InvalidArgumentException("The log level \"$level\" does not exist.");
@@ -71,27 +62,16 @@ class ConsoleLogger extends AbstractLogger {
     // message formatting is relatively expensive.
     if ($output->getVerbosity() >= $this->verbosityLevelMap[$level]) {
 
-      switch ($level) {
-        case LogLevel::EMERGENCY;
-        case LogLevel::ALERT;
-        case LogLevel::CRITICAL;
-        case LogLevel::ERROR;
-          $label = "<fg=red;options=bold;>$level</>";
-          break;
-
-        case LogLevel::WARNING;
-          $label = "<fg=yellow;options=bold;>$level</>";
-          break;
-
-        case LogLevel::NOTICE;
-        case LogLevel::INFO;
-          $label = "<fg=green;options=bold;>$level</>";
-          break;
-
-        case LogLevel::DEBUG;
-          $label = "<fg=cyan;options=bold;>$level</>";
-          break;
-      }
+      $label = match ($level) {
+        LogLevel::EMERGENCY,
+        LogLevel::ALERT,
+        LogLevel::CRITICAL,
+        LogLevel::ERROR => "<fg=red;options=bold;>$level</>",
+        LogLevel::WARNING => "<fg=yellow;options=bold;>$level</>",
+        LogLevel::NOTICE,
+        LogLevel::INFO => "<fg=green;options=bold;>$level</>",
+        LogLevel::DEBUG => "<fg=cyan;options=bold;>$level</>",
+      };
 
       $formatted_message = \sprintf('[%s] %s', $label, $this->interpolate($message, $context));
       $output->writeln($formatted_message, $this->verbosityLevelMap[$level]);
@@ -110,19 +90,12 @@ class ConsoleLogger extends AbstractLogger {
 
     $replacements = [];
     foreach ($context as $key => $value) {
-      if ($value === NULL || \is_scalar($value) || (\is_object($value) && \method_exists($value, '__toString'))) {
-        $replacements["{{$key}}"] = $value;
-      }
-      elseif ($value instanceof \DateTimeInterface) {
-        $replacements["{{$key}}"] = $value->format(\DateTime::RFC3339);
-      }
-      elseif (\is_object($value)) {
-        // @phpcs:disable SlevomatCodingStandard.Classes.ModernClassNameReference.ClassNameReferencedViaFunctionCall
-        $replacements["{{$key}}"] = '[object ' . \get_class($value) . ']';
-      }
-      else {
-        $replacements["{{$key}}"] = '[' . \gettype($value) . ']';
-      }
+      $replacements["{{$key}}"] = match(TRUE) {
+        $value === NULL || \is_scalar($value) || (\is_object($value) && \method_exists($value, '__toString')) => $value,
+        $value instanceof \DateTimeInterface => $value->format(\DateTimeInterface::RFC3339),
+        \is_object($value) => '[object ' . $value::class . ']',
+        default => '[' . \get_debug_type($value) . ']'
+      };
     }
 
     return \strtr($message, $replacements);
