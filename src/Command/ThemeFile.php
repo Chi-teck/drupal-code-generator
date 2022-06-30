@@ -3,22 +3,23 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements theme-file command.
- */
-final class ThemeFile extends ThemeGenerator {
+#[Generator(
+  name: 'theme-file',
+  description: 'Generates a theme file',
+  templatePath: Application::TEMPLATE_PATH . '/theme-file',
+  type: GeneratorType::THEME_COMPONENT,
+)]
+final class ThemeFile extends BaseGenerator {
 
-  protected string $name = 'theme-file';
-  protected string $description = 'Generates a theme file';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/theme-file';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('{machine_name}.theme', 'theme');
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
+    $assets->addFile('{machine_name}.theme', 'theme.twig');
   }
 
 }

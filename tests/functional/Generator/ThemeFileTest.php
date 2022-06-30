@@ -14,7 +14,7 @@ final class ThemeFileTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(ThemeFile::class, ['foo']);
+    $this->execute(ThemeFile::class, ['foo', 'Foo']);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +22,9 @@ final class ThemeFileTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––
 
      Theme machine name:
+     ➤ 
+
+     Theme name [Foo]:
      ➤ 
 
      The following directories and files have been created or updated:
