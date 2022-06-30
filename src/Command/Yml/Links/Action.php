@@ -3,25 +3,24 @@
 namespace DrupalCodeGenerator\Command\Yml\Links;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements yml:links:action command.
- */
-final class Action extends ModuleGenerator {
+#[Generator(
+  name: 'yml:links:action',
+  description: 'Generates a links.action yml file',
+  aliases: ['action-links'],
+  templatePath: Application::TEMPLATE_PATH . '/yml/links/action',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Action extends BaseGenerator {
 
-  protected string $name = 'yml:links:action';
-  protected string $description = 'Generates a links.action yml file';
-  protected string $alias = 'action-links';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/links/action';
-  protected ?string $nameQuestion = NULL;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('{machine_name}.links.action.yml', 'links.action');
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $interviewer = $this->createInterviewer($vars);
+    $vars['machine_name'] = $interviewer->askMachineName();
+    $assets->addFile('{machine_name}.links.action.yml', 'links.action');
   }
 
 }
