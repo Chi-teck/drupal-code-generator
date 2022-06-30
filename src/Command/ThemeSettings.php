@@ -3,24 +3,27 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements theme-settings command.
- */
-final class ThemeSettings extends ThemeGenerator {
+#[Generator(
+  name: 'theme-settings',
+  description: 'Generates Drupal theme-settings.php file',
+  templatePath: Application::TEMPLATE_PATH . '/theme-settings',
+  type: GeneratorType::THEME_COMPONENT,
+)]
+final class ThemeSettings extends BaseGenerator {
 
-  protected string $name = 'theme-settings';
-  protected string $description = 'Generates Drupal theme-settings.php file';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/theme-settings';
+  protected function generate(array &$vars, AssetCollection $assets): void {
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('theme-settings.php', 'form');
-    $this->addFile('config/install/{machine_name}.settings.yml', 'config');
-    $this->addFile('config/schema/{machine_name}.schema.yml', 'schema');
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
+
+    $assets->addFile('theme-settings.php', 'form');
+    $assets->addFile('config/install/{machine_name}.settings.yml', 'config');
+    $assets->addFile('config/schema/{machine_name}.schema.yml', 'schema');
   }
 
 }

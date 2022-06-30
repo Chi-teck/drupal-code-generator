@@ -23,6 +23,9 @@ final class ThemeSettingsTest extends GeneratorTestBase {
 
      Theme machine name:
      ➤ 
+     
+     Theme name [Foo]:
+     ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
