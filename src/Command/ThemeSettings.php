@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
 
@@ -15,8 +15,7 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class ThemeSettings extends BaseGenerator {
 
-  protected function generate(array &$vars, AssetCollection $assets): void {
-
+  protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
