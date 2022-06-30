@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 /**
- * Tests Asset base class.
+ * Tests asset base class.
  */
 final class AssetTest extends BaseTestCase {
 
