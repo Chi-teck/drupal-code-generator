@@ -35,7 +35,7 @@ final class BlockTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Block admin label [Example]:
+     Block admin label:
      ➤ 
 
      Plugin ID [foo_example]:

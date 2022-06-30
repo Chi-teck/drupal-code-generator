@@ -23,6 +23,7 @@ final class Action extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['plugin_label'] = $ir->askPluginLabel('Action label', 'Update node title');
     $vars['plugin_id'] = $ir->askPluginId();
+    // @todo Change default value.
     $vars['class'] = $ir->askPluginClass(default_value: 'Foo');
 
     $vars['category'] = $ir->ask('Action category', 'Custom');
