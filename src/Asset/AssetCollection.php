@@ -2,8 +2,6 @@
 
 namespace DrupalCodeGenerator\Asset;
 
-use function PHPUnit\Framework\isInstanceOf;
-
 /**
  * Asset collection.
  */
@@ -171,4 +169,3 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
 }
-\class_alias(AssetCollection::class, '\DrupalCodeGenerator\Asset\Assets');
