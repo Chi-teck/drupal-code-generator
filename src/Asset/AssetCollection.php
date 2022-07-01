@@ -4,8 +4,6 @@ namespace DrupalCodeGenerator\Asset;
 
 /**
  * Asset collection.
- *
- * @todo Create a test for this.
  */
 final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Countable {
 
@@ -120,7 +118,10 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    */
   public function getDirectories(): self {
     $is_directory = static fn ($asset): bool => $asset instanceof Directory;
-    return new self(\array_filter($this->assets, $is_directory));
+    $directories = \array_filter($this->assets, $is_directory);
+    // Reindex assets if needed.
+    $directories = self::isAssoc($directories) ? $directories : \array_values($directories);
+    return new self($directories);
   }
 
   /**
@@ -128,7 +129,10 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    */
   public function getFiles(): self {
     $is_file = static fn ($asset): bool => $asset instanceof File;
-    return new self(\array_filter($this->assets, $is_file));
+    $files = \array_filter($this->assets, $is_file);
+    // Reindex assets if needed.
+    $files = self::isAssoc($files) ? $files : \array_values($files);
+    return new self($files);
   }
 
   /**
@@ -136,7 +140,10 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    */
   public function getSymlinks(): self {
     $is_symlink = static fn ($asset): bool => $asset instanceof Symlink;
-    return new self(\array_filter($this->assets, $is_symlink));
+    $symlinks = \array_filter($this->assets, $is_symlink);
+    // Reindex assets if needed.
+    $symlinks = self::isAssoc($symlinks) ? $symlinks : \array_values($symlinks);
+    return new self($symlinks);
   }
 
   /**
@@ -158,6 +165,10 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
     $assets = $this->assets;
     \usort($assets, $sorter);
     return new self($assets);
+  }
+
+  private static function isAssoc(array $value): bool {
+    return (bool) \count(\array_filter(\array_keys($value), 'is_string'));
   }
 
 }
