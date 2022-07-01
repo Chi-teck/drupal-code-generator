@@ -2,11 +2,14 @@
 
 namespace DrupalCodeGenerator\Tests\Unit\Asset;
 
+use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\Assets;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
+use stdClass;
 
 /**
  * Tests asset collection.
@@ -27,6 +30,14 @@ final class AssetCollectionTest extends BaseTestCase {
     ];
     $collection = new AssetCollection($assets);
     self::assertAssets($collection, $assets);
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testAlias(): void {
+    $collection = new Assets();
+    self::assertInstanceOf(AssetCollection::class, $collection);
   }
 
   /**
@@ -132,6 +143,18 @@ final class AssetCollectionTest extends BaseTestCase {
     unset($collection[2]);
     self::assertCount(2, $collection);
     self::assertFalse(isset($collection[2]));
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testSupportedTypes(): void {
+    $collection = new AssetCollection();
+    $collection[] = new Directory('foo');
+    $collection[] = new File('foo.txt');
+    $collection[] = new Symlink('foo.link', 'foo.txt');
+    self::expectExceptionObject(new \InvalidArgumentException('Unsupported asset type.'));
+    $collection[] = new stdClass();
   }
 
   /**

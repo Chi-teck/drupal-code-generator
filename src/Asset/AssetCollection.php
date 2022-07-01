@@ -2,6 +2,8 @@
 
 namespace DrupalCodeGenerator\Asset;
 
+use function PHPUnit\Framework\isInstanceOf;
+
 /**
  * Asset collection.
  */
@@ -65,11 +67,12 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    * {@inheritdoc}
    */
   public function offsetSet(mixed $offset, mixed $value): void {
-    if (!$value instanceof Asset) {
-      throw new \InvalidArgumentException(
-        \sprintf('Asset must be instance of %s, "%s" was given.', Asset::class, \get_debug_type($value)),
-      );
-    }
+    match (TRUE) {
+      $value instanceof Directory,
+      $value instanceof File,
+      $value instanceof Symlink => NULL,
+      default => throw new \InvalidArgumentException('Unsupported asset type.'),
+    };
     if ($offset === NULL) {
       $this->assets[] = $value;
     }
