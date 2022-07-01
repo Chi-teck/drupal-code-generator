@@ -3,31 +3,32 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements template command.
- */
-final class Template extends ModuleGenerator {
+#[Generator(
+  name: 'template',
+  description: 'Generates a template',
+  aliases: ['template'],
+  templatePath: Application::TEMPLATE_PATH . '/template',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Template extends BaseGenerator {
 
-  protected string $name = 'template';
-  protected string $description = 'Generates a template';
-  protected string $alias = 'template';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/template';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
+    $vars['template_name'] = $ir->ask('Template name', 'example');
+    $vars['create_theme'] = $ir->confirm('Create theme hook?');
+    $vars['create_preprocess'] = $ir->confirm('Create preprocess hook?');
 
-    $vars['template_name'] = $this->ask('Template name', 'example');
-    $vars['create_theme'] = $this->confirm('Create theme hook?');
-    $vars['create_preprocess'] = $this->confirm('Create preprocess hook?');
-
-    $this->addFile('templates/{template_name}.html.twig', 'template');
+    $assets->addFile('templates/{template_name}.html.twig', 'template');
 
     if ($vars['create_theme'] || $vars['create_preprocess']) {
-      $this->addFile('{machine_name}.module')
+      $assets->addFile('{machine_name}.module')
         ->template('module')
         ->appendIfExists(7);
     }
