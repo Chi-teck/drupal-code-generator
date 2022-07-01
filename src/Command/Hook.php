@@ -32,7 +32,6 @@ final class Hook extends BaseGenerator {
     $vars['file_type'] = $hook_info->getFileType($vars['hook_name']);
 
     $file = $assets->addFile('{machine_name}.{file_type}')
-      ->headerTemplate('_lib/file-docs/{file_type}')
       ->appendIfExists(7);
 
     $hook_template = $available_hooks[$vars['hook_name']];

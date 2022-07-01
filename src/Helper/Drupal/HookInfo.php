@@ -8,6 +8,7 @@ use Symfony\Component\Console\Helper\Helper;
 /**
  * A helper that provides information about available Drupal hooks.
  *
+ * @todo Clean-up.
  * @todo Create a test for this.
  */
 final class HookInfo extends Helper {
@@ -59,7 +60,8 @@ final class HookInfo extends Helper {
     $results = [];
     foreach ($matches[0] as $index => $hook) {
       $hook_name = $matches[1][$index];
-      $output = "/**\n * Implements hook_$hook_name().\n */\n";
+      $output = self::getHeaderTemplate(self::getFileType($hook_name));
+      $output .= "/**\n * Implements hook_$hook_name().\n */\n";
       $output .= \str_replace('function hook_', 'function {{ machine_name }}_', $hook);
       $results[$hook_name] = $output;
     }
@@ -67,10 +69,32 @@ final class HookInfo extends Helper {
     return $results;
   }
 
+  public static function getHeaderTemplate(string $file_type): string {
+    $description = match($file_type) {
+      'install' => 'Install, update and uninstall functions for the {{ name }} module.',
+      'module' => 'Primary module hooks for {{ name }} module.',
+      'post_update.php' => 'Post update functions for the {{ name }} module.',
+      'tokens.inc' => 'Builds tokens for the {{ name }} module.',
+      'views.inc' => 'Views hooks for the {{ name }} module.',
+      'views_execution.inc' => 'Provide views runtime hooks for the {{ name }} module.',
+      default => throw new \InvalidArgumentException('Unsupported file type.'),
+    };
+    return <<< TWIG
+      <?php
+      
+      /**
+       * @file
+       * $description
+       */
+
+
+      TWIG;
+  }
+
   /**
    * Returns file type of the hook.
    */
-  public function getFileType(string $hook_name): string {
+  public static function getFileType(string $hook_name): string {
 
     // Drupal hooks that are not situated in MODULE_NAME.module file.
     $special_hooks = [

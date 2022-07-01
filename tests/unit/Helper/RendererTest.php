@@ -60,19 +60,6 @@ final class RendererTest extends TestCase {
   /**
    * Test callback.
    */
-  public function testRenderAssetWithHeaderTemplate(): void {
-    $asset = (new File('foo'))
-      ->template('_template.twig')
-      ->vars(['name' => 'foo', 'value' => 'bar'])
-      ->headerTemplate('_header_template.twig');
-    $this->renderer->renderAsset($asset);
-    $expected_content = "The name is foo.\n\nThe value is bar.\n";
-    self::assertSame($expected_content, $asset->getContent());
-  }
-
-  /**
-   * Test callback.
-   */
   public function testRenderAssetWithContent(): void {
     $asset = (new File('foo'))
       ->content('example')

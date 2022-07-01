@@ -58,8 +58,7 @@ final class PluginManager extends ModuleGenerator {
 
       case 'hook':
         $this->addFile('{machine_name}.module', 'hook/model.module')
-          ->appendIfExists(7)
-          ->headerTemplate('_lib/file-docs/module');
+          ->appendIfExists(7);
         $this->addFile('src/{class_prefix}Default.php', 'hook/src/ExampleDefault.php');
         break;
     }

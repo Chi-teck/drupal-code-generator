@@ -29,7 +29,6 @@ final class Style extends PluginGenerator {
       ->template('template');
 
     $this->addFile('{machine_name}.module')
-      ->headerTemplate('_lib/file-docs/module')
       ->template('preprocess')
       ->appendIfExists(7);
 

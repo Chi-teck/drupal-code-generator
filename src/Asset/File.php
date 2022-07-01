@@ -17,11 +17,6 @@ final class File extends Asset {
   private string $content = '';
 
   /**
-   * Twig template to render header.
-   */
-  private ?string $headerTemplate = NULL;
-
-  /**
    * Twig template to render main content.
    */
   private ?string $template = NULL;
@@ -54,13 +49,6 @@ final class File extends Asset {
   }
 
   /**
-   * Returns the header template.
-   */
-  public function getHeaderTemplate(): ?string {
-    return $this->headerTemplate ? $this->replaceTokens($this->headerTemplate) : $this->headerTemplate;
-  }
-
-  /**
    * Returns the asset template.
    */
   public function getTemplate(): ?string {
@@ -79,14 +67,6 @@ final class File extends Asset {
    */
   public function content(string $content): self {
     $this->content = $content;
-    return $this;
-  }
-
-  /**
-   * Sets the asset header template.
-   */
-  public function headerTemplate(?string $header_template): self {
-    $this->headerTemplate = self::addTwigFileExtension($header_template);
     return $this;
   }
 

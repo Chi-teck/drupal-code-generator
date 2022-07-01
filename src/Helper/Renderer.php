@@ -80,10 +80,6 @@ class Renderer extends Helper implements LoggerAwareInterface {
     }
 
     $content = '';
-    if ($header_template = $asset->getHeaderTemplate()) {
-      $content .= $this->render($header_template, $asset->getVars()) . "\n";
-    }
-
     if ($template) {
       $content .= $this->render($template, $asset->getVars());
     }

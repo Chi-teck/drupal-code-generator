@@ -30,9 +30,6 @@ final class FileTest extends BaseTestCase {
 
     self::assertSame('', $file->getContent());
 
-    self::assertNull($file->getHeaderTemplate());
-    self::assertSame('header-bar.twig', $file->headerTemplate('header-{foo}.twig')->getHeaderTemplate());
-
     self::assertNull($file->getTemplate());
     self::assertSame('bar.twig', $file->template('{foo}.twig')->getTemplate());
     self::assertSame('without-extension.twig', $file->template('without-extension')->getTemplate());
