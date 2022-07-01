@@ -9,11 +9,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Provides a handler to bootstrap DCG environment.
+ * Provides a handler to bootstrap Drupal.
  */
-class BootstrapHandler {
+final class BootstrapHandler {
 
-  public function __construct(private ClassLoader $classLoader) {}
+  public function __construct(private readonly ClassLoader $classLoader) {}
 
   public function bootstrap(): ContainerInterface {
     self::assertInstallation();
@@ -24,7 +24,7 @@ class BootstrapHandler {
     $kernel = DrupalKernel::createFromRequest($request, $this->classLoader, 'prod');
     $kernel->boot();
     $kernel->preHandle($request);
-    // Cancel Drupal error handler and send the errors to STDOUT immeditatly.
+    // Cancel Drupal error handler to get all errors in STDOUT.
     \restore_error_handler();
     \error_reporting(\E_ALL);
     return $kernel->getContainer();
