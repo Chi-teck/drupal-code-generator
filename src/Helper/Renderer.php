@@ -2,30 +2,23 @@
 
 namespace DrupalCodeGenerator\Helper;
 
-use DrupalCodeGenerator\Asset\File;
+use DrupalCodeGenerator\Asset\RenderableInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Helper\Helper;
-use Twig\Environment;
+use Twig\Environment as TwigEnvironment;
 
 /**
  * Output dumper form generators.
  */
-class Renderer extends Helper implements LoggerAwareInterface {
+final class Renderer extends Helper implements RendererInterface, LoggerAwareInterface {
 
   use LoggerAwareTrait;
 
   /**
-   * The twig environment.
-   */
-  protected Environment $twig;
-
-  /**
    * Constructs the Renderer object.
    */
-  public function __construct(Environment $twig) {
-    $this->twig = $twig;
-  }
+  public function __construct(private readonly TwigEnvironment $twig) {}
 
   /**
    * {@inheritdoc}
@@ -35,72 +28,33 @@ class Renderer extends Helper implements LoggerAwareInterface {
   }
 
   /**
-   * Renders a template.
-   *
-   * @param string $template
-   *   Twig template.
-   * @param array $vars
-   *   Template variables.
-   *
-   * @return string
-   *   A string representing the rendered output.
+   * {@inheritdoc}
    */
   public function render(string $template, array $vars): string {
+    $this->logger->debug('Rendered template: {template}', ['template' => $template]);
     return $this->twig->render($template, $vars);
   }
 
   /**
-   * Renders a Twig string directly.
-   *
-   * @param string $inline_template
-   *   The template string to render.
-   * @param array $vars
-   *   (Optional) Template variables.
-   *
-   * @return string
-   *   A string representing the rendered output.
+   * {@inheritdoc}
    */
   public function renderInline(string $inline_template, array $vars): string {
     return $this->twig->createTemplate($inline_template)->render($vars);
   }
 
   /**
-   * Renders an asset.
-   *
-   * @param \DrupalCodeGenerator\Asset\File $asset
-   *   Asset to render.
+   * {@inheritdoc}
    */
-  public function renderAsset(File $asset): void {
-
-    $template = $asset->getTemplate();
-    $inline_template = $asset->getInlineTemplate();
-    // A generator may set content directly.
-    if (!$template && !$inline_template) {
-      return;
-    }
-
-    $content = '';
-    if ($template) {
-      $content .= $this->render($template, $asset->getVars());
-    }
-    elseif ($inline_template) {
-      $content .= $this->renderInline($inline_template, $asset->getVars());
-    }
-    $this->logger->debug('Rendered template: {template}', ['template' => $asset->getTemplate()]);
-
-    $asset->content($content);
+  public function renderAsset(RenderableInterface $asset): void {
+    $asset->render($this);
   }
 
   /**
-   * Adds a path where templates are stored.
-   *
-   * @param string $path
-   *   A path where to look for templates.
+   * {@inheritdoc}
    */
-  public function prependPath(string $path): void {
-    /** @var \Twig\Loader\FilesystemLoader $loader */
-    $loader = $this->twig->getLoader();
-    $loader->prependPath($path);
+  public function registerTemplatePath(string $path): void {
+    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+    $this->twig->getLoader()->prependPath($path);
   }
 
 }

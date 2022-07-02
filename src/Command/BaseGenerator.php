@@ -62,7 +62,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
 
     $template_path = $this->getGeneratorDefinition()->templatePath;
     if ($template_path !== NULL) {
-      $this->getHelper('renderer')->prependPath($template_path);
+      $this->getHelper('renderer')->registerTemplatePath($template_path);
     }
 
     $this->logger->debug('Working directory: {directory}', ['directory' => $this->getWorkingDirectory()]);

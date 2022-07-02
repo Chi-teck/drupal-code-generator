@@ -194,7 +194,7 @@ abstract class LegacyGenerator extends Command implements LabelInterface, IOAwar
     }
 
     if ($this->templatePath) {
-      $this->getHelper('renderer')->prependPath($this->templatePath);
+      $this->getHelper('renderer')->registerTemplatePath($this->templatePath);
     }
 
     $this->directory = $input->getOption('working-dir') ?: \getcwd();
@@ -305,7 +305,9 @@ abstract class LegacyGenerator extends Command implements LabelInterface, IOAwar
    */
   protected function addFile(string $path, ?string $template = NULL): File {
     $asset = new File($path);
-    $asset->template($template);
+    if ($template) {
+      $asset->template($template);
+    }
     return $this->assets[] = $asset;
   }
 

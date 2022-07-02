@@ -5,11 +5,12 @@ namespace DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Asset\Resolver\AppendResolver;
 use DrupalCodeGenerator\Asset\Resolver\PrependResolver;
 use DrupalCodeGenerator\Asset\Resolver\ResolverDefinition;
+use DrupalCodeGenerator\Helper\RendererInterface;
 
 /**
- * Simple data structure to represent a file being generated.
+ * A data structure to represent a file being generated.
  */
-final class File extends Asset {
+final class File extends Asset implements RenderableInterface {
 
   /**
    * Asset content.
@@ -19,12 +20,12 @@ final class File extends Asset {
   /**
    * Twig template to render main content.
    */
-  private ?string $template = NULL;
+  private string $template;
 
   /**
    * The template string to render.
    */
-  private ?string $inlineTemplate = NULL;
+  private string $inlineTemplate;
 
   /**
    * {@inheritdoc}
@@ -49,20 +50,6 @@ final class File extends Asset {
   }
 
   /**
-   * Returns the asset template.
-   */
-  public function getTemplate(): ?string {
-    return $this->template ? $this->replaceTokens($this->template) : $this->template;
-  }
-
-  /**
-   * Returns the asset inline template.
-   */
-  public function getInlineTemplate(): ?string {
-    return $this->inlineTemplate;
-  }
-
-  /**
    * Sets the asset content.
    */
   public function content(string $content): self {
@@ -73,23 +60,27 @@ final class File extends Asset {
   /**
    * Sets the asset template.
    */
-  public function template(?string $template): self {
-    if ($template !== NULL) {
-      $this->template = self::addTwigFileExtension($template);
+  public function template(string $template): self {
+    if (isset($this->inlineTemplate)) {
+      throw new \LogicException('A file cannot have both inline and regular templates.');
     }
+    $this->template = self::addTwigFileExtension($template);
     return $this;
   }
 
   /**
    * Returns the asset inline template.
    */
-  public function inlineTemplate(?string $inline_template): self {
+  public function inlineTemplate(string $inline_template): self {
+    if (isset($this->template)) {
+      throw new \LogicException('A file cannot have both inline and regular templates.');
+    }
     $this->inlineTemplate = $inline_template;
     return $this;
   }
 
   /**
-   * Sets the "prepend" resolverAction.
+   * Sets the "prepend" resolver.
    */
   public function prependIfExists(): self {
     $this->resolverDefinition = new ResolverDefinition(PrependResolver::class);
@@ -97,7 +88,7 @@ final class File extends Asset {
   }
 
   /**
-   * Sets the "append" resolverAction.
+   * Sets the "append" resolver.
    */
   public function appendIfExists(int $header_size = 0): self {
     $this->resolverDefinition = new ResolverDefinition(AppendResolver::class, $header_size);
@@ -112,6 +103,23 @@ final class File extends Asset {
       $template .= '.twig';
     }
     return $template;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function render(RendererInterface $renderer): void {
+    if (isset($this->inlineTemplate)) {
+      $content = $renderer->renderInline($this->inlineTemplate, $this->getVars());
+      $this->content($content);
+    }
+    elseif (isset($this->template)) {
+      $template = $this->replaceTokens($this->template);
+      $content = $renderer->render($template, $this->getVars());
+      $this->content($content);
+    }
+    // It's OK that the file has no templates as consumers may set rendered
+    // content directly through `content()` method.
   }
 
 }

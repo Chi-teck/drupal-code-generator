@@ -30,13 +30,6 @@ final class FileTest extends BaseTestCase {
 
     self::assertSame('', $file->getContent());
 
-    self::assertNull($file->getTemplate());
-    self::assertSame('bar.twig', $file->template('{foo}.twig')->getTemplate());
-    self::assertSame('without-extension.twig', $file->template('without-extension')->getTemplate());
-
-    self::assertNull($file->getInlineTemplate());
-    self::assertSame('template', $file->inlineTemplate('template')->getInlineTemplate());
-
     self::assertInstanceOf(Asset::class, $file);
   }
 

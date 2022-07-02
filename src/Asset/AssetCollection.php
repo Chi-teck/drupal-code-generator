@@ -29,7 +29,9 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    */
   public function addFile(string $path, ?string $template = NULL): File {
     $file = new File($path);
-    $file->template($template);
+    if ($template) {
+      $file->template($template);
+    }
     $this->assets[] = $file;
     return $file;
   }
