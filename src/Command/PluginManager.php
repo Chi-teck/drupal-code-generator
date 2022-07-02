@@ -3,63 +3,61 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\Chained;
 use DrupalCodeGenerator\Validator\Required;
 
-/**
- * Implements plugin-manager command.
- */
-final class PluginManager extends ModuleGenerator {
+#[Generator(
+  name: 'plugin-manager',
+  description: 'Generates plugin manager',
+  templatePath: Application::TEMPLATE_PATH . '/plugin-manager',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class PluginManager extends BaseGenerator {
 
-  protected string $name = 'plugin-manager';
-  protected string $description = 'Generates plugin manager';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin-manager';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-
-    // self::validateMachineName() does not allow dots, but they can appear
-    // in some plugin types (field.widget, views.argument, etc).
+    // Machine name validator does not allow dots.
     $plugin_type_validator = static function (string $value): string {
       if (!\preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
         throw new \UnexpectedValueException('The value is not correct machine name.');
       }
       return $value;
     };
-    $vars['plugin_type'] = $this->ask('Plugin type', '{machine_name}', new Chained(new Required(), $plugin_type_validator));
+    $vars['plugin_type'] = $ir->ask('Plugin type', '{machine_name}', new Chained(new Required(), $plugin_type_validator));
 
     $discovery_types = [
       'annotation' => 'Annotation',
       'yaml' => 'YAML',
       'hook' => 'Hook',
     ];
-    $vars['discovery'] = $this->choice('Discovery type', $discovery_types, 'Annotation');
+    $vars['discovery'] = $ir->choice('Discovery type', $discovery_types, 'Annotation');
     $vars['class_prefix'] = '{plugin_type|camelize}';
 
-    // Common files.
-    $this->addServicesFile()->template('{discovery}/model.services.yml');
-    $this->addFile('src/{class_prefix}Interface.php', '{discovery}/src/ExampleInterface.php');
-    $this->addFile('src/{class_prefix}PluginManager.php', '{discovery}/src/ExamplePluginManager.php');
+    $assets->addServicesFile()->template('{discovery}/model.services.yml');
+    $assets->addFile('src/{class_prefix}Interface.php', '{discovery}/src/ExampleInterface.php');
+    $assets->addFile('src/{class_prefix}PluginManager.php', '{discovery}/src/ExamplePluginManager.php');
 
     switch ($vars['discovery']) {
       case 'annotation':
-        $this->addFile('src/Annotation/{class_prefix}.php', 'annotation/src/Annotation/Example.php');
-        $this->addFile('src/{class_prefix}PluginBase.php', 'annotation/src/ExamplePluginBase.php');
-        $this->addFile('src/Plugin/{class_prefix}/Foo.php', 'annotation/src/Plugin/Example/Foo.php');
+        $assets->addFile('src/Annotation/{class_prefix}.php', 'annotation/src/Annotation/Example.php');
+        $assets->addFile('src/{class_prefix}PluginBase.php', 'annotation/src/ExamplePluginBase.php');
+        $assets->addFile('src/Plugin/{class_prefix}/Foo.php', 'annotation/src/Plugin/Example/Foo.php');
         break;
 
       case 'yaml':
-        $this->addFile('{machine_name}.{plugin_type|pluralize}.yml', 'yaml/model.examples.yml');
-        $this->addFile('src/{class_prefix}Default.php', 'yaml/src/ExampleDefault.php');
+        $assets->addFile('{machine_name}.{plugin_type|pluralize}.yml', 'yaml/model.examples.yml');
+        $assets->addFile('src/{class_prefix}Default.php', 'yaml/src/ExampleDefault.php');
         break;
 
       case 'hook':
-        $this->addFile('{machine_name}.module', 'hook/model.module')
-          ->appendIfExists(7);
-        $this->addFile('src/{class_prefix}Default.php', 'hook/src/ExampleDefault.php');
+        $assets->addFile('{machine_name}.module', 'hook/model.module')->appendIfExists(7);
+        $assets->addFile('src/{class_prefix}Default.php', 'hook/src/ExampleDefault.php');
         break;
     }
 

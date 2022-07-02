@@ -333,9 +333,9 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin_manager ]]; then
   cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG plugin-manager -a lamda -a alpha -a Annotation
-  $DCG plugin-manager -a lamda -a beta -a YAML
-  $DCG plugin-manager -a lamda -a gamma -a Hook
+  $DCG plugin-manager -a lamda -a Lamda -a alpha -a Annotation
+  $DCG plugin-manager -a lamda -a Lamda -a beta -a YAML
+  $DCG plugin-manager -a lamda -a Lamda -a gamma -a Hook
 
   dcg_phpcs .
   dcg_module_install $MODULE_MACHINE_NAME

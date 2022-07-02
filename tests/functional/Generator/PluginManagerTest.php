@@ -15,6 +15,7 @@ final class PluginManagerTest extends GeneratorTestBase {
   public function testAnnotationDiscovery(): void {
     $input = [
       'foo',
+      'Foo',
       'bar',
       'Annotation',
     ];
@@ -26,6 +27,9 @@ final class PluginManagerTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Plugin type [foo]:
@@ -61,6 +65,7 @@ final class PluginManagerTest extends GeneratorTestBase {
   public function testYamlDiscovery(): void {
     $input = [
       'foo',
+      'Foo',
       'bar',
       'YAML',
     ];
@@ -72,6 +77,9 @@ final class PluginManagerTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Plugin type [foo]:
@@ -105,6 +113,7 @@ final class PluginManagerTest extends GeneratorTestBase {
   public function testHookDiscovery(): void {
     $input = [
       'foo',
+      'Foo',
       'bar',
       'Hook',
     ];
@@ -116,6 +125,9 @@ final class PluginManagerTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Plugin type [foo]:
