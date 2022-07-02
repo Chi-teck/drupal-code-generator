@@ -6,17 +6,14 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Symfony\Component\Console\Helper\Helper;
 
 /**
- * A helper that provides information about available Drupal hooks.
- *
- * @todo Clean-up.
- * @todo Create a test for this.
+ * Provides information about available Drupal hooks.
  */
 final class HookInfo extends Helper {
 
   /**
    * Constructs helper.
    */
-  public function __construct(private ModuleHandlerInterface $moduleHandler) {}
+  public function __construct(private readonly ModuleHandlerInterface $moduleHandler) {}
 
   /**
    * {@inheritdoc}
@@ -29,14 +26,10 @@ final class HookInfo extends Helper {
    * Gets templates for all available hooks.
    */
   public function getHookTemplates(): array {
-
     static $hooks;
     if ($hooks) {
       return $hooks;
     }
-
-    $hooks = self::parseHooks(\DRUPAL_ROOT . '/core/core.api.php');
-    dump($hooks);
 
     $core_api_files = \glob(\DRUPAL_ROOT . '/core/lib/Drupal/Core/*/*.api.php');
     $core_api_files[] = \DRUPAL_ROOT . '/core/core.api.php';
@@ -49,38 +42,50 @@ final class HookInfo extends Helper {
       }
     }
 
-    $templates = [];
     $api_files = \array_merge($core_api_files, $module_api_files);
-    foreach ($api_files as $api_file) {
-      $templates = \array_merge($hooks, self::parseHooks($api_file));
-    }
 
-    return $templates;
+    $reducer = static fn (array $collected, string $api_file): array =>
+      \array_merge($collected, self::parseHooks($api_file));
+
+    return \array_reduce($api_files, $reducer, []);
   }
 
   /**
-   * Extracts hooks from PHP file.
-   *
-   * @todo Test this.
+   * Creates hook templates from PHP file.
    */
   private static function parseHooks(string $file): array {
+
     $code = \file_get_contents($file);
-    \preg_match_all("/function hook_(.*)\(.*\n\}\n/Us", $code, $matches);
+    \preg_match_all("/function hook_(?P<name>.*)\(.*\n\}\n/Us", $code, $matches);
 
     $results = [];
     foreach ($matches[0] as $index => $hook) {
-      $hook_name = $matches[1][$index];
-      $output = self::getHeaderTemplate(self::getFileType($hook_name));
-      $output .= "/**\n * Implements hook_$hook_name().\n */\n";
-      $output .= \str_replace('function hook_', 'function {{ machine_name }}_', $hook);
-      $results[$hook_name] = $output;
+      $hook_name = $matches['name'][$index];
+      $file_description = self::getFileDescription(self::getFileType($hook_name));
+      $hook = \str_replace('function hook_', 'function {{ machine_name }}_', $hook);
+      $results[$hook_name] = <<< TWIG
+        <?php
+
+        /**
+         * @file
+         * $file_description
+         */
+
+        /**
+         * Implements hook_$hook_name().
+         */
+        $hook
+        TWIG;
     }
 
     return $results;
   }
 
-  public static function getHeaderTemplate(string $file_type): string {
-    $description = match($file_type) {
+  /**
+   * Gets file description.
+   */
+  private static function getFileDescription(string $file_type): string {
+    return match($file_type) {
       'install' => 'Install, update and uninstall functions for the {{ name }} module.',
       'module' => 'Primary module hooks for {{ name }} module.',
       'post_update.php' => 'Post update functions for the {{ name }} module.',
@@ -89,16 +94,6 @@ final class HookInfo extends Helper {
       'views_execution.inc' => 'Provide views runtime hooks for the {{ name }} module.',
       default => throw new \InvalidArgumentException('Unsupported file type.'),
     };
-    return <<< TWIG
-      <?php
-      
-      /**
-       * @file
-       * $description
-       */
-
-
-      TWIG;
   }
 
   /**
