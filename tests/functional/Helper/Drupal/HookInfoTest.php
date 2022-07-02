@@ -27,7 +27,7 @@ final class HookInfoTest extends FunctionalTestBase {
   public function testHookInfoTemplates(): void {
     $container = $this->application->getContainer();
     $hook_info = new HookInfo($container->get('module_handler'));
-    $hook_templates = $hook_info->getHooks();
+    $hook_templates = $hook_info->getHookTemplates();
     self::assertCount(259, $hook_templates);
 
     // A hook from core.api.php file.

@@ -18,7 +18,7 @@ final class Hook extends BaseGenerator {
 
   protected function generate(array &$vars, AssetCollection $assets): void {
     $hook_info = $this->getHelper('hook_info');
-    $available_hooks = $hook_info->getHooks();
+    $available_hooks = $hook_info->getHookTemplates();
 
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();

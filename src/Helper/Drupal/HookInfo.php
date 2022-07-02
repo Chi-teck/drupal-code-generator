@@ -13,16 +13,22 @@ use Symfony\Component\Console\Helper\Helper;
  */
 final class HookInfo extends Helper {
 
+  /**
+   * Constructs helper.
+   */
   public function __construct(private ModuleHandlerInterface $moduleHandler) {}
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName(): string {
     return 'hook_info';
   }
 
   /**
-   * Gets defined hooks.
+   * Gets templates for all available hooks.
    */
-  public function getHooks(): array {
+  public function getHookTemplates(): array {
 
     static $hooks;
     if ($hooks) {
