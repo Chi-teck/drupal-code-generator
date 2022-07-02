@@ -8,11 +8,16 @@ use DrupalCodeGenerator\Asset\Resolver\AppendResolver;
 use DrupalCodeGenerator\Asset\Resolver\PrependResolver;
 use DrupalCodeGenerator\Asset\Resolver\ReplaceResolver;
 use DrupalCodeGenerator\Helper\QuestionHelper;
+use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\InputOutput\IO;
+use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
+use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\NullOutput;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * Tests file asset.
@@ -36,6 +41,26 @@ final class FileTest extends BaseTestCase {
   /**
    * Test callback.
    */
+  public function testRegularTemplateAfterInlineTemplate(): void {
+    $this->expectExceptionObject(new \LogicException('A file cannot have both inline and regular templates.'));
+    File::create('example.txt')
+      ->inlineTemplate('template')
+      ->template('_template.twig');
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testInlineemplateAfterRegulaTemplate(): void {
+    $this->expectExceptionObject(new \LogicException('A file cannot have both inline and regular templates.'));
+    File::create('example.txt')
+      ->template('_template.twig')
+      ->inlineTemplate('template');
+  }
+
+  /**
+   * Test callback.
+   */
   public function testResolvers(): void {
     $file = File::create('example.txt');
 
@@ -50,6 +75,30 @@ final class FileTest extends BaseTestCase {
   }
 
   /**
+   * Test callback.
+   */
+  public function testRender(): void {
+    $file = File::create('example.txt')
+      ->content('must be overridden')
+      ->inlineTemplate('- {{ foo * 5 }} -')
+      ->vars(['foo' => 10]);
+    $file->render(self::createRenderer());
+    self::assertSame('- 50 -', $file->getContent());
+
+    $file = File::create('example.txt')
+      ->content('must be overridden')
+      ->template('_template.twig')
+      ->vars(['foo' => 'bar']);
+    $file->render(self::createRenderer());
+    self::assertSame("-= bar =-\n", $file->getContent());
+
+    $file = File::create('example.txt')
+      ->content('must not be overridden');
+    $file->render(self::createRenderer());
+    self::assertSame('must not be overridden', $file->getContent());
+  }
+
+  /**
    * Creates IO object.
    *
    * @phpcs:disable Drupal.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
@@ -61,6 +110,16 @@ final class FileTest extends BaseTestCase {
     $helper_set = new HelperSet();
     $helper_set->set($question_helper);
     return new IO($input, $output, $question_helper);
+  }
+
+  private static function createRenderer(): Renderer {
+    $twig_loader = new FilesystemLoader();
+    $twig = new TwigEnvironment($twig_loader);
+    $renderer = new Renderer($twig);
+    $renderer->registerTemplatePath(__DIR__);
+    $logger = new ConsoleLogger(new NullOutput());
+    $renderer->setLogger($logger);
+    return $renderer;
   }
 
 }
