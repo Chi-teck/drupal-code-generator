@@ -18,7 +18,9 @@ final class Hook extends BaseGenerator {
 
   protected function generate(array &$vars, AssetCollection $assets): void {
     $hook_info = $this->getHelper('hook_info');
-    $available_hooks = $hook_info->getHookTemplates();
+
+    $hook_templates = $hook_info->getHookTemplates();
+    $available_hooks = \array_keys($hook_templates);
 
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
@@ -29,20 +31,18 @@ final class Hook extends BaseGenerator {
     $hook_question->setAutocompleterValues($available_hooks);
     $vars['hook_name'] = $this->io()->askQuestion($hook_question);
 
-    $vars['file_type'] = $hook_info->getFileType($vars['hook_name']);
+    $vars['file_type'] = $hook_info::getFileType($vars['hook_name']);
 
-    $file = $assets->addFile('{machine_name}.{file_type}')
+    $assets->addFile('{machine_name}.{file_type}')
+      ->inlineTemplate($hook_templates[$vars['hook_name']])
       ->appendIfExists(7);
-
-    $hook_template = $available_hooks[$vars['hook_name']];
-    $file->inlineTemplate($hook_template);
   }
 
   private static function getHookValidator(array $available_hooks): callable {
     return new Chained(
       new Required(),
       static function (string $value) use ($available_hooks): string {
-        if (!\array_key_exists($value, $available_hooks)) {
+        if (!\in_array($value, $available_hooks)) {
           throw new \UnexpectedValueException('The value is not correct hook name.');
         }
         return $value;
