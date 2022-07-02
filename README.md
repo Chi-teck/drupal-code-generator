@@ -11,6 +11,11 @@ A command line code generator for Drupal.
 composer require chi-teck/drupal-code-generator --dev
 ```
 
+Optionally, generate shell completions for DCG executable.
+```
+./vendor/bin/dcg generate-completion > ~/.bash_completion
+```
+
 ## Usage
 ```shell
 # Display navigation.

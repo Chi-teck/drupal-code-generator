@@ -16,10 +16,10 @@ _dcg()
 
     if [[ ${cur} == --* ]]; then
         state="option"
-        opts=("--help:Display this help message" "--quiet:Do not output any message" "--verbose:Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug" "--version:Display this application version" "--ansi:Force ANSI output" "--no-ansi:Disable ANSI output" "--no-interaction:Do not ask any interactive question")
+        opts=("--help:Display help for the given command. When no command is given display help for the <info\>navigation</info\> command" "--verbose:Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug" "--version:Display this application version" "--ansi:Force \(or disable --no-ansi\) ANSI output" "--no-ansi:Negate the "--ansi" option" "--working-dir:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system" "--full-path:Print full path to generated assets" "--destination:Path to a base directory for file writing" "--replace:Replace existing assets without confirmation")
     elif [[ $cur == $com ]]; then
         state="command"
-        coms=("composer:Generates a composer.json file" "configuration-entity:Generates configuration entity module" "content-entity:Generates content entity module" "controller:Generates a controller" "field:Generates a field" "generate-completion:Generates shell completion" "help:Displays help for a command" "hook:Generates a hook" "install-file:Generates an install file" "javascript:Generates Drupal JavaScript file" "layout:Generates a layout" "list:Lists commands" "module:Generates Drupal module" "module-file:Generates a module file" "navigation:Command line code generator" "plugin-manager:Generates plugin manager" "render-element:Generates Drupal render element" "service-provider:Generates a service provider" "template:Generates a template" "theme:Generates Drupal theme" "theme-file:Generates a theme file" "theme-settings:Generates Drupal theme-settings.php file" "console\:dcg-command:Generates DCG command" "console\:drupal-console-command:Generates Drupal Console command" "console\:drush-command:Generates Drush command" "console\:symfony-command:Generates Symfony console command" "form\:config:Generates a configuration form" "form\:confirm:Generates a confirmation form" "form\:simple:Generates simple form" "misc\:apache-virtual-host:Generates an Apache site configuration file" "misc\:d7\:ctools-plugin\:access:Generates CTools access plugin" "misc\:d7\:ctools-plugin\:content-type:Generates CTools content type plugin" "misc\:d7\:ctools-plugin\:relationship:Generates CTools relationship plugin" "misc\:d7\:hook:Generates a hook" "misc\:d7\:install-file:Generates Drupal 7 install file" "misc\:d7\:javascript:Generates Drupal 7 JavaScript file" "misc\:d7\:module:Generates Drupal 7 module" "misc\:d7\:module-file:Generates Drupal 7 module file" "misc\:d7\:module-info:Generates Drupal 7 info file for a module" "misc\:d7\:settings.php:Generates Drupal 7 settings.php file" "misc\:d7\:template.php:Generates Drupal 7 template.php file" "misc\:d7\:test:Generates Drupal 7 test case" "misc\:d7\:theme:Generates Drupal 7 theme" "misc\:d7\:theme-info:Generates info file for a Drupal 7 theme" "misc\:d7\:views-plugin\:argument-default:Generates Drupal 7 argument default views plugin" "misc\:html-page:Generates a simple html page" "misc\:nginx-virtual-host:Generates an Nginx site configuration file" "misc\:project:Generates a composer project" "plugin\:action:Generates action plugin" "plugin\:block:Generates block plugin" "plugin\:ckeditor:Generates CKEditor plugin" "plugin\:condition:Generates condition plugin" "plugin\:constraint:Generates constraint plugin" "plugin\:entity-reference-selection:Generates entity reference selection plugin" "plugin\:field\:formatter:Generates field formatter plugin" "plugin\:field\:type:Generates field type plugin" "plugin\:field\:widget:Generates field widget plugin" "plugin\:filter:Generates filter plugin" "plugin\:menu-link:Generates menu-link plugin" "plugin\:migrate\:destination:Generates migrate destination plugin" "plugin\:migrate\:process:Generates migrate process plugin" "plugin\:migrate\:source:Generates migrate source plugin" "plugin\:queue-worker:Generates queue worker plugin" "plugin\:rest-resource:Generates rest resource plugin" "plugin\:views\:argument-default:Generates views default argument plugin" "plugin\:views\:field:Generates views field plugin" "plugin\:views\:style:Generates views style plugin" "service\:access-checker:Generates an access checker service" "service\:breadcrumb-builder:Generates a breadcrumb builder service" "service\:cache-context:Generates a cache context service" "service\:custom:Generates a custom Drupal service" "service\:event-subscriber:Generates an event subscriber" "service\:logger:Generates a logger service" "service\:middleware:Generates a middleware" "service\:param-converter:Generates a param converter service" "service\:path-processor:Generates a path processor service" "service\:request-policy:Generates a request policy service" "service\:response-policy:Generates a response policy service" "service\:route-subscriber:Generates a route subscriber" "service\:theme-negotiator:Generates a theme negotiator" "service\:twig-extension:Generates Twig extension service" "service\:uninstall-validator:Generates a uninstall validator service" "test\:browser:Generates a browser based test" "test\:kernel:Generates a kernel based test" "test\:nightwatch:Generates a nightwatch test" "test\:unit:Generates a unit test" "test\:webdriver:Generates a test that supports JavaScript" "yml\:breakpoints:Generates a breakpoints yml file" "yml\:links\:action:Generates a links.action yml file" "yml\:links\:contextual:Generates links.contextual yml file" "yml\:links\:menu:Generates a links.menu yml file" "yml\:links\:task:Generates a links.task yml file" "yml\:module-info:Generates a module info yml file" "yml\:module-libraries:Generates module libraries yml file" "yml\:permissions:Generates a permissions yml file" "yml\:routing:Generates a routing yml file" "yml\:services:Generates a services yml file" "yml\:theme-info:Generates a theme info yml file" "yml\:theme-libraries:Generates theme libraries yml file")
+        coms=("_complete:Internal command to provide shell completion suggestions" "completion:Dump the shell completion script" "composer:Generates a composer.json file" "controller:Generates a controller" "field:Generates a field" "generate-completion:Generates shell completion" "help:Display help for a command" "hook:Generates a hook" "install-file:Generates an install file" "javascript:Generates Drupal JavaScript file" "layout:Generates a layout" "list:List commands" "module:Generates Drupal module" "module-file:Generates a module file" "navigation:Command line code generator" "phpstorm-metadata:Generates PhpStorm metadata" "plugin-manager:Generates plugin manager" "render-element:Generates Drupal render element" "service-provider:Generates a service provider" "template:Generates a template" "theme:Generates Drupal theme" "theme-file:Generates a theme file" "theme-settings:Generates Drupal theme-settings.php file" "console\:dcg-command:Generates DCG command" "console\:symfony-command:Generates Symfony console command" "entity\:bundle-class:Generate a bundle class for a content entity." "entity\:configuration:Generates configuration entity" "entity\:content:Generates content entity" "form\:config:Generates a configuration form" "form\:confirm:Generates a confirmation form" "form\:simple:Generates simple form" "misc\:apache-virtual-host:Generates an Apache site configuration file" "misc\:nginx-virtual-host:Generates an Nginx site configuration file" "plugin\:action:Generates action plugin" "plugin\:block:Generates block plugin" "plugin\:ckeditor:Generates CKEditor plugin" "plugin\:condition:Generates condition plugin" "plugin\:constraint:Generates constraint plugin" "plugin\:entity-reference-selection:Generates entity reference selection plugin" "plugin\:field\:formatter:Generates field formatter plugin" "plugin\:field\:type:Generates field type plugin" "plugin\:field\:widget:Generates field widget plugin" "plugin\:filter:Generates filter plugin" "plugin\:menu-link:Generates menu-link plugin" "plugin\:migrate\:destination:Generates migrate destination plugin" "plugin\:migrate\:process:Generates migrate process plugin" "plugin\:migrate\:source:Generates migrate source plugin" "plugin\:queue-worker:Generates queue worker plugin" "plugin\:rest-resource:Generates rest resource plugin" "plugin\:views\:argument-default:Generates views default argument plugin" "plugin\:views\:field:Generates views field plugin" "plugin\:views\:style:Generates views style plugin" "service\:access-checker:Generates an access checker service" "service\:breadcrumb-builder:Generates a breadcrumb builder service" "service\:cache-context:Generates a cache context service" "service\:custom:Generates a custom Drupal service" "service\:event-subscriber:Generates an event subscriber" "service\:logger:Generates a logger service" "service\:middleware:Generates a middleware" "service\:param-converter:Generates a param converter service" "service\:path-processor:Generates a path processor service" "service\:request-policy:Generates a request policy service" "service\:response-policy:Generates a response policy service" "service\:route-subscriber:Generates a route subscriber" "service\:theme-negotiator:Generates a theme negotiator" "service\:twig-extension:Generates Twig extension service" "service\:uninstall-validator:Generates a uninstall validator service" "test\:browser:Generates a browser based test" "test\:kernel:Generates a kernel based test" "test\:nightwatch:Generates a nightwatch test" "test\:unit:Generates a unit test" "test\:webdriver:Generates a test that supports JavaScript" "yml\:breakpoints:Generates a breakpoints yml file" "yml\:links\:action:Generates a links.action yml file" "yml\:links\:contextual:Generates links.contextual yml file" "yml\:links\:menu:Generates a links.menu yml file" "yml\:links\:task:Generates a links.task yml file" "yml\:module-info:Generates a module info yml file" "yml\:module-libraries:Generates module libraries yml file" "yml\:permissions:Generates a permissions yml file" "yml\:routing:Generates a routing yml file" "yml\:services:Generates a services yml file" "yml\:theme-info:Generates a theme info yml file" "yml\:theme-libraries:Generates theme libraries yml file")
     fi
 
     case $state in
@@ -29,24 +29,24 @@ _dcg()
         option)
             case "$com" in
 
+            _complete)
+            opts+=("--shell:The shell type \("bash", "fish"\)" "--input:An array of input tokens \(e.g. COMP_WORDS or argv\)" "--current:The index of the "input" array that the cursor is in \(e.g. COMP_CWORD\)" "--symfony:The version of the completion script")
+            ;;
+
+            completion)
+            opts+=("--debug:Tail the completion debug log")
+            ;;
+
             composer)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            configuration-entity)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            content-entity)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             controller)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             field)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             generate-completion)
@@ -58,371 +58,311 @@ _dcg()
             ;;
 
             hook)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             install-file)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             javascript)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             layout)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             list)
-            opts+=("--raw:To output raw command list" "--format:The output format \(txt, xml, json, or md\)")
+            opts+=("--raw:To output raw command list" "--format:The output format \(txt, xml, json, or md\)" "--short:To skip describing commands\' arguments")
             ;;
 
             module)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             module-file)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             navigation)
-            opts+=("--directory:Working directory")
+            opts+=()
+            ;;
+
+            phpstorm-metadata)
+            opts+=()
             ;;
 
             plugin-manager)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             render-element)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service-provider)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             template)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             theme)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             theme-file)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             theme-settings)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             console:dcg-command)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            console:drupal-console-command)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            console:drush-command)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             console:symfony-command)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
+            ;;
+
+            entity:bundle-class)
+            opts+=()
+            ;;
+
+            entity:configuration)
+            opts+=()
+            ;;
+
+            entity:content)
+            opts+=()
             ;;
 
             form:config)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             form:confirm)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             form:simple)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             misc:apache-virtual-host)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:ctools-plugin:access)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:ctools-plugin:content-type)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:ctools-plugin:relationship)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:hook)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:install-file)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:javascript)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:module)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:module-file)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:module-info)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:settings.php)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:template.php)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:test)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:theme)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:theme-info)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:d7:views-plugin:argument-default)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:html-page)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             misc:nginx-virtual-host)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
-            ;;
-
-            misc:project)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:action)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:block)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:ckeditor)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:condition)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:constraint)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:entity-reference-selection)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:field:formatter)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:field:type)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:field:widget)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:filter)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:menu-link)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:migrate:destination)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:migrate:process)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:migrate:source)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:queue-worker)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:rest-resource)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:views:argument-default)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:views:field)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             plugin:views:style)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:access-checker)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:breadcrumb-builder)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:cache-context)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:custom)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:event-subscriber)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:logger)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:middleware)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:param-converter)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:path-processor)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:request-policy)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:response-policy)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:route-subscriber)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:theme-negotiator)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:twig-extension)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             service:uninstall-validator)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             test:browser)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             test:kernel)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             test:nightwatch)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             test:unit)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             test:webdriver)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:breakpoints)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:links:action)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:links:contextual)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:links:menu)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:links:task)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:module-info)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:module-libraries)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:permissions)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:routing)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:services)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:theme-info)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             yml:theme-libraries)
-            opts+=("--directory:Working directory" "--answer:Answer to generator question" "--dry-run:Output the generated code but not save it to file system")
+            opts+=()
             ;;
 
             esac
