@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the {{ name }} module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function {{ machine_name }}_install($is_syncing) {
+  // Set general module variables.
+  \Drupal::state()->set('mymodule.foo', 'bar');
+}
