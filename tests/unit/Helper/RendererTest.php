@@ -7,7 +7,8 @@ use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 use Twig\Loader\FilesystemLoader;
 
 /**
@@ -18,18 +19,22 @@ final class RendererTest extends TestCase {
   /**
    * The renderer to test.
    */
-  private Renderer $renderer;
+  private readonly Renderer $renderer;
+
+  /**
+   * Logger output.
+   */
+  private readonly BufferedOutput $output;
 
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  protected function setUp(): void {
     parent::setUp();
-    $twig_loader = new FilesystemLoader();
-    $twig = new TwigEnvironment($twig_loader);
-    $this->renderer = new Renderer($twig);
+    $this->renderer = new Renderer(new TwigEnvironment(new FilesystemLoader()));
     $this->renderer->registerTemplatePath(__DIR__);
-    $logger = new ConsoleLogger(new NullOutput());
+    $this->output = new BufferedOutput(OutputInterface::VERBOSITY_DEBUG);
+    $logger = new ConsoleLogger($this->output);
     $this->renderer->setLogger($logger);
   }
 
@@ -74,6 +79,17 @@ final class RendererTest extends TestCase {
       ->vars(['a' => '2', 'b' => '3']);
     $this->renderer->renderAsset($asset);
     self::assertSame('2 + 3 = 5', $asset->getContent());
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testLogger(): void {
+    File::create('foo')
+      ->template('_template.twig')
+      ->vars(['value' => 'example'])
+      ->render($this->renderer);
+    self::assertSame("[debug] Rendered template: _template.twig\n", $this->output->fetch());
   }
 
 }

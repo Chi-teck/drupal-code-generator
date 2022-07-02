@@ -9,7 +9,7 @@ use Symfony\Component\Console\Helper\Helper;
 use Twig\Environment as TwigEnvironment;
 
 /**
- * Output dumper form generators.
+ * Renders assets and Twig templates.
  */
 final class Renderer extends Helper implements RendererInterface, LoggerAwareInterface {
 
