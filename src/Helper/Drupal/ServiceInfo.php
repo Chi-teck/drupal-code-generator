@@ -4,16 +4,21 @@ namespace DrupalCodeGenerator\Helper\Drupal;
 
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * A helper that provides information about available Drupal services.
- *
- * @todo Create a test for this.
  */
 final class ServiceInfo extends Helper {
 
-  public function __construct(private ContainerInterface $container) {}
+  /**
+   * Constructs the helper.
+   */
+  public function __construct(private readonly ContainerInterface $container) {}
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName(): string {
     return 'service_info';
   }
@@ -22,29 +27,39 @@ final class ServiceInfo extends Helper {
    * Gets all defined service IDs.
    */
   public function getServicesIds(): array {
-    return $this->container->getServiceIds();
+    $service_ids = $this->container->getServiceIds();
+    \sort($service_ids);
+    return $service_ids;
   }
 
   /**
    * Gets all service definitions.
    */
-  public function getServiceDefinitions(): ?array {
-    $serialized_definitions = $this->container
-      ->get('kernel')
-      ->getCachedContainerDefinition()['services'];
-    return \array_map('unserialize', $serialized_definitions);
+  public function getServiceDefinitions(): array {
+    return \array_map('unserialize', $this->getSerializedDefinitions());
   }
 
   /**
    * Gets service definition.
    */
   public function getServiceDefinition(string $service_id): ?array {
+    $serialized_definitions = $this->getSerializedDefinitions();
+    if (!\array_key_exists($service_id, $serialized_definitions)) {
+      throw new ServiceNotFoundException($service_id);
+    }
+    // @phpcs:ignore DrupalPractice.FunctionCalls.InsecureUnserialize.InsecureUnserialize
+    return \unserialize($serialized_definitions[$service_id]);
+  }
+
+  /**
+   * Returns array of serialized service definitions.
+   */
+  private function getSerializedDefinitions(): array {
     $serialized_definitions = $this->container
       ->get('kernel')
       ->getCachedContainerDefinition()['services'];
-    // @phpcs:disable DrupalPractice.FunctionCalls.InsecureUnserialize.InsecureUnserialize
-    return isset($serialized_definitions[$service_id]) ?
-      \unserialize($serialized_definitions[$service_id]) : NULL;
+    \ksort($serialized_definitions);
+    return $serialized_definitions;
   }
 
 }
