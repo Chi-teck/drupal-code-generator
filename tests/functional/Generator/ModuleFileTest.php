@@ -14,7 +14,7 @@ final class ModuleFileTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(ModuleFile::class, ['foo']);
+    $this->execute(ModuleFile::class, ['foo', 'Foo']);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +22,9 @@ final class ModuleFileTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      The following directories and files have been created or updated:
