@@ -26,15 +26,25 @@ final class ServiceInfo extends Helper {
   }
 
   /**
-   * Gets all defined services.
+   * Gets all service definitions.
+   */
+  public function getServiceDefinitions(): ?array {
+    $serialized_definitions = $this->container
+      ->get('kernel')
+      ->getCachedContainerDefinition()['services'];
+    return \array_map('unserialize', $serialized_definitions);
+  }
+
+  /**
+   * Gets service definition.
    */
   public function getServiceDefinition(string $service_id): ?array {
-    $services = $this->container
+    $serialized_definitions = $this->container
       ->get('kernel')
-      ->getCachedContainerDefinition();
+      ->getCachedContainerDefinition()['services'];
     // @phpcs:disable DrupalPractice.FunctionCalls.InsecureUnserialize.InsecureUnserialize
-    return isset($services['services'][$service_id]) ?
-      \unserialize($services['services'][$service_id]) : NULL;
+    return isset($serialized_definitions[$service_id]) ?
+      \unserialize($serialized_definitions[$service_id]) : NULL;
   }
 
 }

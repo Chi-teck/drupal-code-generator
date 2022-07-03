@@ -2,30 +2,36 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\GeneratorType;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Implements phpstorm-metadata command.
- */
-final class PhpStormMetadata extends DrupalGenerator {
+// @todo Clean-up.
+#[Generator(
+  name: 'phpstorm-metadata',
+  description: 'Generates PhpStorm metadata',
+  templatePath: Application::TEMPLATE_PATH . '/phpstorm-metadata',
+  type: GeneratorType::OTHER,
+  label: 'PhpStorm metadata',
+)]
+final class PhpStormMetadata extends BaseGenerator implements ContainerInjectionInterface {
 
-  protected string $name = 'phpstorm-metadata';
-  protected string $description = 'Generates PhpStorm metadata';
-  protected string $label = 'PhpStorm metadata';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/phpstorm-metadata';
+  public function __construct(private readonly EntityTypeManagerInterface $entityTypeManager) {
+    parent::__construct();
+  }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
+  public static function create(ContainerInterface $container): self {
+    return new self($container->get('entity_type.manager'));
+  }
 
-    $container = $this->drupalContext->getContainer();
+  protected function generate(array &$vars, AssetCollection $assets): void {
 
-    $service_definitions = $this->drupalContext
-      ->getContainer()
-      ->get('kernel')
-      ->getCachedContainerDefinition()['services'];
-    $service_definitions = \array_map('unserialize', $service_definitions);
+    $service_info = $this->getHelper('service_info');
+    $service_definitions = $service_info->getServiceDefinitions();
 
     foreach ($service_definitions as $service_id => $service_definition) {
       if ($service_definition['class'] ?? NULL) {
@@ -34,14 +40,12 @@ final class PhpStormMetadata extends DrupalGenerator {
     }
     \ksort($vars['services']);
 
-    $entity_type_manager = $container->get('entity_type.manager');
     $vars['storages'] = [];
     $vars['view_builders'] = [];
     $vars['list_builders'] = [];
     $vars['access_controls'] = [];
     $vars['entity_classes'] = [];
-    foreach ($entity_type_manager->getDefinitions() as $type => $definition) {
-      /** @var \Drupal\Core\Entity\EntityTypeInterface $definition */
+    foreach ($this->entityTypeManager->getDefinitions() as $type => $definition) {
       $vars['entity_classes'][] = $definition->getClass();
       $vars['storages'][$type] = $definition->getStorageClass();
       $vars['access_controls'][$type] = $definition->getAccessControlClass();
@@ -65,7 +69,7 @@ final class PhpStormMetadata extends DrupalGenerator {
     };
     \array_walk($vars, $sort);
 
-    $this->addFile('.phpstorm.meta.php', 'phpstorm.meta.php');
+    $assets->addFile('.phpstorm.meta.php', 'phpstorm.meta.php.twig');
   }
 
 }
