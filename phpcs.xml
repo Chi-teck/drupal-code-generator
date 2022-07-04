@@ -24,6 +24,7 @@
     <exclude name="Drupal.Commenting.TodoComment.TodoFormat"/>
     <exclude name="Drupal.WhiteSpace.OpenTagNewline.BlankLine"/>
     <exclude name="Drupal.Commenting.VariableComment.MissingVar"/>
+    <exclude name="Drupal.Commenting.ClassComment.Short"/>
   </rule>
   <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended74">
     <exclude-pattern>./tests/sut</exclude-pattern>

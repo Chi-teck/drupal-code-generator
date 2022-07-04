@@ -14,6 +14,7 @@ namespace PHPSTORM_META {
       'renderer' => \DrupalCodeGenerator\Helper\RendererInterface::class,
       'question_helper' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
       'result_printer' => \DrupalCodeGenerator\Helper\ResultPrinter::class,
+      'rector' => \DrupalCodeGenerator\Helper\Rector::class,
     ]),
   );
 
@@ -29,6 +30,7 @@ namespace PHPSTORM_META {
       'renderer' => \DrupalCodeGenerator\Helper\RendererInterface::class,
       'question_helper' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
       'result_printer' => \DrupalCodeGenerator\Helper\ResultPrinter::class,
+      'rector' => \DrupalCodeGenerator\Helper\Rector::class,
     ])
   );
 

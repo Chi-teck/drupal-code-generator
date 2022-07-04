@@ -11,6 +11,7 @@ use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Helper\Dumper\DryDumper;
 use DrupalCodeGenerator\Helper\Dumper\FileSystemDumper;
 use DrupalCodeGenerator\Helper\QuestionHelper;
+use DrupalCodeGenerator\Helper\Rector;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\ResultPrinter;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
@@ -65,6 +66,7 @@ class Application extends BaseApplication implements ContainerAwareInterface {
       new FileSystemDumper($file_system),
       new Renderer(new TwigEnvironment(new TemplateLoader([Application::TEMPLATE_PATH]))),
       new ResultPrinter(),
+      new Rector(),
       new DrupalContext($container),
       new ModuleInfo($container->get('module_handler')),
       new ThemeInfo($container->get('theme_handler')),

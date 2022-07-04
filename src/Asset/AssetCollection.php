@@ -131,6 +131,20 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
   }
 
   /**
+   * Returns a collection of file assets.
+   */
+  public function getPhpFiles(): self {
+    $php_files = new AssetCollection();
+    foreach ($this->getFiles() as $file) {
+      $extension = \pathinfo($file->getPath(), \PATHINFO_EXTENSION);
+      if ($extension === 'php' || $extension === 'module') {
+        $php_files[] = $file;
+      }
+    }
+    return $php_files;
+  }
+
+  /**
    * Returns a collection of symlink assets.
    */
   public function getSymlinks(): self {
