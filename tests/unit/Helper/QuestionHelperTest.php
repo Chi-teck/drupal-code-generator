@@ -250,7 +250,7 @@ final class QuestionHelperTest extends TestCase {
   /**
    * Asks a question.
    */
-  private function ask(Question $question): null|bool|string {
+  private function ask(Question $question): NULL|bool|string {
     return (new QuestionHelper())->ask($this->input, $this->output, $question);
   }
 
