@@ -65,6 +65,8 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       $this->getHelper('renderer')->registerTemplatePath($template_path);
     }
 
+    $this->logger->debug('PHP binary: {binary}', ['binary' => \PHP_BINARY]);
+    $this->logger->debug('DCG executable: {dcg}', ['dcg' => \realpath($_SERVER['PHP_SELF'])]);
     $this->logger->debug('Working directory: {directory}', ['directory' => $this->getWorkingDirectory()]);
   }
 
