@@ -4,8 +4,10 @@ namespace DrupalCodeGenerator\Tests\Unit\Helper;
 
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Input\StreamableInputInterface;
-use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
@@ -16,43 +18,68 @@ use Symfony\Component\Console\Question\Question;
 final class QuestionHelperTest extends TestCase {
 
   /**
+   * Console input.
+   */
+  private ArrayInput $input;
+
+  /**
+   * Console output.
+   */
+  private BufferedOutput $output;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(): void {
+    parent::setUp();
+    $definition[] = new InputOption('answer', 'a', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL);
+    $this->input = new ArrayInput([], new InputDefinition($definition));
+    $this->output = new BufferedOutput();
+  }
+
+  /**
    * Test callback.
    */
-  public function testAsk(): void {
+  public function testQuestionWithDefaultValue(): void {
+    $this->setStream("\n");
 
-    // -- Question with default value.
-    $output = $this->createOutput();
-    $input = $this->createInput("\n");
-
-    $question = new Question('What time is it?', '3:00');
-    $answer = (new QuestionHelper())->ask($input, $output, $question);
+    $answer = $this->ask(new Question('What time is it?', '3:00'));
     self::assertSame('3:00', $answer);
 
-    $expected_display = "\n";
-    $expected_display .= " What time is it? [3:00]:\n";
-    $expected_display .= ' ➤ ';
-    self::assertSame($expected_display, $this->getDisplay($output));
+    $expected_display = <<< 'TXT'
 
-    // -- Question without default value.
-    $output = $this->createOutput();
-    $input = $this->createInput("4:00\n");
+       What time is it? [3:00]:
+       ➤ 
+      TXT;
+    $this->assertOutput($expected_display);
+  }
 
-    $question = new Question('What time is it?');
-    $answer = (new QuestionHelper())->ask($input, $output, $question);
+  /**
+   * Test callback.
+   */
+  public function testQuestionWithoutDefaultValue(): void {
+    $this->setStream("4:00\n");
+
+    $answer = $this->ask(new Question('What time is it?'));
     self::assertSame('4:00', $answer);
 
-    $expected_display = "\n";
-    $expected_display .= " What time is it?\n";
-    $expected_display .= ' ➤ ';
-    self::assertSame($expected_display, $this->getDisplay($output));
+    $expected_display = <<< 'TXT'
 
-    // -- Question with validator.
-    $output = $this->createOutput();
-    $input = $this->createInput("4:00\n5:00\n");
+       What time is it?
+       ➤ 
+      TXT;
+    $this->assertOutput($expected_display);
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testQuestionValidator(): void {
+    $this->setStream("4:00\n5:00\n");
 
     $question = new Question('What time is it?');
     $validator = static function (string $value): string {
-      if ($value != '5:00') {
+      if ($value !== '5:00') {
         throw new \UnexpectedValueException('The time is not correct!');
       }
       return $value;
@@ -61,33 +88,105 @@ final class QuestionHelperTest extends TestCase {
     // Symfony\Component\Console\Helper\QuestionHelper::validateAttempts()
     // only allows one attempt when running without TTY.
     $question->setMaxAttempts(2);
-    $answer = (new QuestionHelper())->ask($input, $output, $question);
+    $answer = $this->ask($question);
     self::assertSame('5:00', $answer);
 
-    $expected_display = "\n";
-    $expected_display .= " What time is it?\n";
-    $expected_display .= " ➤  The time is not correct!\n";
-    $expected_display .= "\n";
-    $expected_display .= " What time is it?\n";
-    $expected_display .= ' ➤ ';
-    self::assertSame($expected_display, $this->getDisplay($output));
+    // The error message does not show up on a new line because user input is
+    // not reflected in the trapped output.
+    $expected_display = <<< 'TXT'
+      
+       What time is it?
+       ➤  The time is not correct!
 
-    // -- Confirmation question.
-    $output = $this->createOutput();
-    $input = $this->createInput("\nYes\n");
+       What time is it?
+       ➤ 
+      TXT;
+    $this->assertOutput($expected_display);
+  }
 
-    $question = new ConfirmationQuestion('Are you ready?');
-    $answer = (new QuestionHelper())->ask($input, $output, $question);
+  /**
+   * Test callback.
+   */
+  public function testQuestionSuffix(): void {
+    $this->setStream("\n");
+    $this->ask(new Question('test?'));
+    $this->assertOutput("\n test?\n ➤ ");
+
+    $this->setStream("\n");
+    $this->ask(new Question('test'));
+    $this->assertOutput("\n test:\n ➤ ");
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testConfirmationQuestionWithDefaultValueYes(): void {
+    $this->setStream("\n");
+
+    $question = new ConfirmationQuestion('Are you ready?', TRUE);
+    $answer = $this->ask($question);
     self::assertTrue($answer);
 
-    $expected_display = "\n";
-    $expected_display .= " Are you ready? [Yes]:\n";
-    $expected_display .= ' ➤ ';
-    self::assertSame($expected_display, $this->getDisplay($output));
+    $expected_display = <<< 'TXT'
 
-    // -- Choice question.
-    $output = $this->createOutput();
-    $input = $this->createInput("5:00\n");
+       Are you ready? [Yes]:
+       ➤ 
+      TXT;
+    $this->assertOutput($expected_display);
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testConfirmationQuestionWithDefaultValueNo(): void {
+    $this->setStream("\n");
+
+    $question = new ConfirmationQuestion('Are you ready?', FALSE);
+    $answer = $this->ask($question);
+    self::assertFalse($answer);
+
+    $expected_display = <<< 'TXT'
+
+       Are you ready? [No]:
+       ➤ 
+      TXT;
+    $this->assertOutput($expected_display);
+  }
+
+  /**
+   * Test callback.
+   *
+   * @dataProvider confirmationQuestionProvider
+   */
+  public function testConfirmationQuestionAnswers(string $input, bool $expected_answer): void {
+    $this->setStream("$input\n");
+
+    $question = new ConfirmationQuestion('Are you ready?');
+    $answer = $this->ask($question);
+    self::assertSame($expected_answer, $answer);
+  }
+
+  /**
+   * Data provider for testConfirmationQuestionAnswers().
+   */
+  public function confirmationQuestionProvider(): array {
+    return [
+      ['Yes', TRUE],
+      ['yes', TRUE],
+      ['YeS', TRUE],
+      ['yo', TRUE],
+      ['', TRUE],
+      ['No', FALSE],
+      ['---', FALSE],
+      ['%&^*(%', FALSE],
+    ];
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testChoiceQuestion(): void {
+    $this->setStream("5:00\n");
 
     $choices = [
       '3:00',
@@ -95,93 +194,81 @@ final class QuestionHelperTest extends TestCase {
       '5:00',
     ];
     $question = new ChoiceQuestion('What time is it?', $choices);
-    $question->setAutocompleterValues(NULL);
-    $answer = (new QuestionHelper())->ask($input, $output, $question);
+    $answer = $this->ask($question);
     self::assertSame('5:00', $answer);
 
-    $expected_display = "\n";
-    $expected_display .= " What time is it?\n";
-    $expected_display .= "  [0] 3:00\n";
-    $expected_display .= "  [1] 4:00\n";
-    $expected_display .= "  [2] 5:00\n";
-    $expected_display .= " ➤ ";
-    self::assertSame($expected_display, $this->getDisplay($output));
+    $expected_display = <<< 'TXT'
 
-    // -- Question answer option.
-    $output = $this->createOutput();
-    $input = $this->createInput('', ['5:00', NULL, '4:00']);
+       What time is it?
+        [0] 3:00
+        [1] 4:00
+        [2] 5:00
+       ➤ 
+      TXT;
+    $this->assertOutput($expected_display);
+  }
 
-    $dialog = new QuestionHelper();
+  /**
+   * Test callback.
+   */
+  public function testAnswerOption(): void {
+    // This matches the following command `dcg <generator> -a 5:00 -a -a 4:00`.
+    $this->input->setOption('answer', ['5:00', NULL, '4:00']);
+
+    $question_helper = new QuestionHelper();
+
+    // Answer from the option.
     $question = new Question('What time is it?');
-    $answer = $dialog->ask($input, $output, $question);
+    $answer = $question_helper->ask($this->input, $this->output, $question);
     self::assertSame('5:00', $answer);
 
+    // Answer from the default value as the option value is set to NULL.
     $question = new Question('What time is it?', '3:00');
-    $answer = $dialog->ask($input, $output, $question);
+    $answer = $question_helper->ask($this->input, $this->output, $question);
     self::assertSame('3:00', $answer);
 
+    // Answer from the option.
     $question = new Question('What time is it?');
-    $answer = $dialog->ask($input, $output, $question);
+    $answer = $question_helper->ask($this->input, $this->output, $question);
     self::assertSame('4:00', $answer);
 
-    $expected_display = "\n";
-    $expected_display .= " What time is it?\n";
-    $expected_display .= " ➤ 5:00\n";
-    $expected_display .= "\n";
-    $expected_display .= " What time is it? [3:00]:\n";
-    $expected_display .= " ➤ \n";
-    $expected_display .= "\n";
-    $expected_display .= " What time is it?\n";
-    $expected_display .= " ➤ 4:00\n";
-    self::assertSame($expected_display, $this->getDisplay($output));
+    $expected_display = <<< 'TXT'
 
+       What time is it?
+       ➤ 5:00
+
+       What time is it? [3:00]:
+       ➤ 
+
+       What time is it?
+       ➤ 4:00
+
+      TXT;
+    $this->assertOutput($expected_display);
   }
 
   /**
-   * Creates input mock.
+   * Asks a question.
    */
-  private function createInput(string $answers, ?array $answer_options = NULL): StreamableInputInterface {
+  private function ask(Question $question): null|bool|string {
+    return (new QuestionHelper())->ask($this->input, $this->output, $question);
+  }
 
+  /**
+   * Sets the input stream to read from when interacting with the user.
+   */
+  private function setStream(string $input): void {
     $stream = \fopen('php://memory', 'r+', FALSE);
-    \fwrite($stream, $answers);
+    \fwrite($stream, $input);
     \rewind($stream);
-
-    $mock = $this->getMockBuilder(StreamableInputInterface::class)->getMock();
-    $mock->expects($this->any())
-      ->method('isInteractive')
-      ->willReturn(TRUE);
-
-    $mock->expects($this->any())
-      ->method('getStream')
-      ->willReturn($stream);
-
-    $mock->expects($this->atLeast(1))
-      ->method('hasOption')
-      ->with('answer')
-      ->willReturn(TRUE);
-
-    $mock->expects($this->atLeast(1))
-      ->method('getOption')
-      ->with('answer')
-      ->willReturn($answer_options);
-
-    /** @var \Symfony\Component\Console\Input\StreamableInputInterface $mock */
-    return $mock;
+    $this->input->setStream($stream);
   }
 
   /**
-   * Creates stream output.
+   * Asserts output.
    */
-  private function createOutput(): StreamOutput {
-    return new StreamOutput(\fopen('php://memory', 'r+', FALSE));
-  }
-
-  /**
-   * Returns output display.
-   */
-  private function getDisplay(StreamOutput $output): string {
-    \rewind($output->getStream());
-    return \stream_get_contents($output->getStream());
+  private function assertOutput(string $expected_output): void {
+    self::assertSame($expected_output, $this->output->fetch());
   }
 
 }
