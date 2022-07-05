@@ -31,7 +31,7 @@ class QuestionHelper extends BaseQuestionHelper {
     $answers = $input->hasOption('answer') ? $input->getOption('answer') : NULL;
 
     if ($answers && \array_key_exists($this->counter, $answers)) {
-      $answer = $this->doAsk($output, $question, $answers);
+      $answer = $this->askDry($output, $question, $answers);
     }
     else {
       $answer = parent::ask($input, $output, $question);
@@ -42,12 +42,9 @@ class QuestionHelper extends BaseQuestionHelper {
   }
 
   /**
-   * Asks a question to the user and returns the answer.
-   *
-   * @return mixed
-   *   The user answer.
+   * Prints to output question and answer.
    */
-  protected function doAsk(OutputInterface $output, Question $question, array $answers) {
+  protected function askDry(OutputInterface $output, Question $question, array $answers): mixed {
 
     if ($output instanceof ConsoleOutputInterface) {
       $output = $output->getErrorOutput();
@@ -79,7 +76,6 @@ class QuestionHelper extends BaseQuestionHelper {
       }
     }
     elseif ($question instanceof ChoiceQuestion) {
-
       $choices = $question->getChoices();
       if ($question->isMultiselect()) {
         // @todo Support multiselect.
@@ -118,27 +114,21 @@ class QuestionHelper extends BaseQuestionHelper {
       elseif (!\str_ends_with($question->getQuestion(), '?')) {
         $question_text .= ':';
       }
-
     }
 
-    $output->write($question_text);
+    $output->writeln($question_text);
 
     if ($question instanceof ChoiceQuestion) {
       $max_width = \max(\array_map([self::class, 'width'], \array_keys($question->getChoices())));
-
-      $output->writeln('');
       $messages = [];
-      $choices = $question->getChoices();
-      foreach ($choices as $key => $value) {
-        $width = $max_width - self::width((string) $key);
-        $messages[] = '  [<info>' . \str_repeat(' ', $width) . $key . '</info>] ' . $value;
+      foreach ($question->getChoices() as $key => $value) {
+        $key = \str_pad((string) $key, $max_width, pad_type: \STR_PAD_LEFT);
+        $messages[] = '  [<info>' . $key . '</info>] ' . $value;
       }
       $output->writeln($messages);
-      $output->write(' ➤ ');
     }
-    else {
-      $output->write("\n ➤ ");
-    }
+
+    $output->write(' ➤ ');
   }
 
   /**
