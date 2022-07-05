@@ -14,7 +14,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * The QuestionHelper class provides helpers to interact with the user.
  */
-class QuestionHelper extends BaseQuestionHelper {
+final class QuestionHelper extends BaseQuestionHelper {
 
   /**
    * Counter to match questions and answers.
@@ -95,7 +95,7 @@ class QuestionHelper extends BaseQuestionHelper {
    * {@inheritdoc}
    */
   protected function writePrompt(OutputInterface $output, Question $question): void {
-    // @todo Remove this once Symfony fixes the following bug.
+    // @todo Remove this once the following issue is resolved.
     // @see https://github.com/symfony/symfony/issues/39946
     $style = new OutputFormatterStyle('white', 'blue', ['bold']);
     $output->getFormatter()->setStyle('title', $style);
@@ -110,27 +110,27 @@ class QuestionHelper extends BaseQuestionHelper {
       if ($question instanceof ConfirmationQuestion && \is_bool($default_value)) {
         $default_value = $default_value ? 'Yes' : 'No';
       }
-      if ($default_value !== NULL && $default_value) {
-        $question_text .= " [<comment>$default_value</comment>]";
-      }
 
+      if ($default_value !== NULL && $default_value !== '') {
+        $question_text .= " [<comment>$default_value</comment>]:";
+      }
       // No need to append colon if the text ends with a question mark.
-      if ($default_value !== NULL || $question->getQuestion()[-1] != '?') {
+      elseif (!\str_ends_with($question->getQuestion(), '?')) {
         $question_text .= ':';
       }
+
     }
 
     $output->write($question_text);
 
     if ($question instanceof ChoiceQuestion) {
-      $func_name = \method_exists($this, 'width') ? 'width' : 'strlen';
-      $max_width = \max(\array_map([$this, $func_name], \array_keys($question->getChoices())));
+      $max_width = \max(\array_map([self::class, 'width'], \array_keys($question->getChoices())));
 
       $output->writeln('');
       $messages = [];
       $choices = $question->getChoices();
       foreach ($choices as $key => $value) {
-        $width = $max_width - static::$func_name((string) $key);
+        $width = $max_width - self::width((string) $key);
         $messages[] = '  [<info>' . \str_repeat(' ', $width) . $key . '</info>] ' . $value;
       }
       $output->writeln($messages);
