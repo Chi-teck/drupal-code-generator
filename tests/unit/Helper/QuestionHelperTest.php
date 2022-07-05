@@ -157,6 +157,7 @@ final class QuestionHelperTest extends TestCase {
    * Test callback.
    *
    * @dataProvider confirmationQuestionProvider
+   * @todo Remove this as it actually tests default question helper.
    */
   public function testConfirmationQuestionAnswers(string $input, bool $expected_answer): void {
     $this->setStream("$input\n");
@@ -210,6 +211,10 @@ final class QuestionHelperTest extends TestCase {
 
   /**
    * Test callback.
+   *
+   * @todo test validation.
+   * @todo test trimming.
+   * @todo test normalizer.
    */
   public function testAnswerOption(): void {
     // This matches the following command `dcg <generator> -a 5:00 -a -a 4:00`.

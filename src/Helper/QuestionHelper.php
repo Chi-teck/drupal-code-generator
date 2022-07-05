@@ -26,8 +26,8 @@ class QuestionHelper extends BaseQuestionHelper {
    * {@inheritdoc}
    */
   public function ask(InputInterface $input, OutputInterface $output, Question $question): mixed {
-    // Input is not supplied with 'answer' option when the generator was started
-    // from the Navigation command.
+    // When the generator is started from the Navigation command the input is
+    // not supplied with 'answer' option.
     $answers = $input->hasOption('answer') ? $input->getOption('answer') : [];
 
     if (!\array_key_exists($this->counter, $answers)) {
@@ -80,7 +80,7 @@ class QuestionHelper extends BaseQuestionHelper {
     $question_text = $question->getQuestion();
     $default_value = $question->getDefault();
 
-    // Do not change formatted title.
+    // Do not change formatted question.
     if (!\str_starts_with($question_text, '<title>')) {
       $question_text = "\n <info>$question_text</info>";
 
@@ -91,7 +91,7 @@ class QuestionHelper extends BaseQuestionHelper {
       if ($default_value !== NULL && $default_value !== '') {
         $question_text .= " [<comment>$default_value</comment>]:";
       }
-      // No need to append colon if the text ends with a question mark.
+      // Colon and question mark should not show up together.
       elseif (!\str_ends_with($question->getQuestion(), '?')) {
         $question_text .= ':';
       }
@@ -103,6 +103,7 @@ class QuestionHelper extends BaseQuestionHelper {
       $max_width = \max(\array_map([self::class, 'width'], \array_keys($question->getChoices())));
       $messages = [];
       foreach ($question->getChoices() as $key => $value) {
+        // For numeric keys left padding makes more sense.
         $key = \str_pad((string) $key, $max_width, pad_type: \STR_PAD_LEFT);
         $messages[] = '  [<info>' . $key . '</info>] ' . $value;
       }
