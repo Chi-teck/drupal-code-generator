@@ -14,6 +14,8 @@ use Symfony\Component\Console\Question\Question;
 
 /**
  * The QuestionHelper class provides helpers to interact with the user.
+ *
+ * @todo Move answers queue in a separate helper.
  */
 class QuestionHelper extends BaseQuestionHelper {
 
@@ -80,15 +82,17 @@ class QuestionHelper extends BaseQuestionHelper {
     $question_text = $question->getQuestion();
     $default_value = $question->getDefault();
 
-    // Do not change formatted question.
+    // Navigation command formats questions itself.
+    // @todo Check if the question is already formatted in a more generic way.
     if (!\str_starts_with($question_text, '<title>')) {
       $question_text = "\n <info>$question_text</info>";
 
-      if ($question instanceof ConfirmationQuestion && \is_bool($default_value)) {
-        $default_value = $default_value ? 'Yes' : 'No';
-      }
-
       if ($default_value !== NULL && $default_value !== '') {
+        if ($question instanceof ConfirmationQuestion) {
+          // Confirmation question always has boolean default value.
+          // @see \Symfony\Component\Console\Question\ConfirmationQuestion::__construct()
+          $default_value = $default_value ? 'Yes' : 'No';
+        }
         $question_text .= " [<comment>$default_value</comment>]:";
       }
       // Colon and question mark should not show up together.
