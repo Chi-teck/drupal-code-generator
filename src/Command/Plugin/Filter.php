@@ -3,22 +3,29 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:filter command.
- */
-final class Filter extends PluginGenerator {
+#[Generator(
+  name: 'plugin:filter',
+  description: 'Generates filter plugin',
+  aliases: ['filter'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/filter',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Filter extends BaseGenerator {
 
-  protected string $name = 'plugin:filter';
-  protected string $description = 'Generates filter plugin';
-  protected string $alias = 'filter';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/filter';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
+
+    $vars['plugin_label'] = $ir->askPluginLabel();
+    $vars['plugin_id'] = $ir->askPluginId();
+    $vars['class'] = $ir->askPluginClass();
 
     $filter_types = [
       'TYPE_HTML_RESTRICTOR' => 'HTML restrictor',
@@ -26,10 +33,10 @@ final class Filter extends PluginGenerator {
       'TYPE_TRANSFORM_IRREVERSIBLE' => 'Irreversible transformation',
       'TYPE_TRANSFORM_REVERSIBLE' => 'Reversible transformation',
     ];
-    $vars['filter_type'] = $this->choice('Filter type', $filter_types);
+    $vars['filter_type'] = $ir->choice('Filter type', $filter_types);
 
-    $this->addFile('src/Plugin/Filter/{class}.php', 'filter');
-    $this->addSchemaFile()->template('schema');
+    $assets->addFile('src/Plugin/Filter/{class}.php', 'filter');
+    $assets->addSchemaFile()->template('schema');
   }
 
 }

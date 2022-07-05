@@ -15,6 +15,7 @@ final class FilterTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'foo',
+      'Foo',
       'Example',
       'foo_example',
       'Example',
@@ -30,7 +31,10 @@ final class FilterTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Module name [Foo]:
+     ➤ 
+
+     Plugin label:
      ➤ 
 
      Plugin ID [foo_example]:

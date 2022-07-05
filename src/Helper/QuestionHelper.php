@@ -14,7 +14,7 @@ use Symfony\Component\Console\Question\Question;
 /**
  * The QuestionHelper class provides helpers to interact with the user.
  */
-final class QuestionHelper extends BaseQuestionHelper {
+class QuestionHelper extends BaseQuestionHelper {
 
   /**
    * Counter to match questions and answers.
