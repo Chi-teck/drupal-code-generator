@@ -65,7 +65,7 @@ final class Interviewer {
   /**
    * Asks a choice question.
    */
-  public function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE): array|string {
+  public function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE): array|string|int {
     $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
 
     // The choices can be an associative array.
@@ -82,7 +82,7 @@ final class Interviewer {
     $answer = $this->io->askQuestion($question);
 
     // @todo Create a test for this.
-    $get_key = static fn (string $answer): string => \array_search($answer, $choices);
+    $get_key = static fn (string $answer): string|int => \array_search($answer, $choices);
     return \is_array($answer) ? \array_map($get_key, $answer) : $get_key($answer);
   }
 

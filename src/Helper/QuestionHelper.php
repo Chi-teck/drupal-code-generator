@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper;
 
+use DrupalCodeGenerator\Exception\SilentException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\QuestionHelper as BaseQuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,72 +26,52 @@ class QuestionHelper extends BaseQuestionHelper {
    * {@inheritdoc}
    */
   public function ask(InputInterface $input, OutputInterface $output, Question $question): mixed {
-
     // Input is not supplied with 'answer' option when the generator was started
     // from the Navigation command.
-    $answers = $input->hasOption('answer') ? $input->getOption('answer') : NULL;
+    $answers = $input->hasOption('answer') ? $input->getOption('answer') : [];
 
-    if ($answers && \array_key_exists($this->counter, $answers)) {
-      $answer = $this->askDry($output, $question, $answers);
-    }
-    else {
-      $answer = parent::ask($input, $output, $question);
+    if (!\array_key_exists($this->counter, $answers)) {
+      return parent::ask($input, $output, $question);
     }
 
-    $this->counter++;
-    return $answer;
-  }
-
-  /**
-   * Prints to output question and answer.
-   */
-  protected function askDry(OutputInterface $output, Question $question, array $answers): mixed {
+    // -- Simulate interaction.
+    $answer = $answers[$this->counter++];
 
     if ($output instanceof ConsoleOutputInterface) {
       $output = $output->getErrorOutput();
     }
-
-    $answer = $answers[$this->counter];
-
     $this->writePrompt($output, $question);
-
     $output->write("$answer\n");
 
-    if ($answer === NULL) {
-      $answer = $question->getDefault();
-    }
-    elseif ($question instanceof ConfirmationQuestion) {
-      $answer = (bool) \preg_match('/^Ye?s?$/i', $answer);
-    }
+    $answer ??= $question->getDefault();
 
     if ($validator = $question->getValidator()) {
       try {
         $answer = $validator($answer);
       }
-      catch (\UnexpectedValueException $exception) {
-        // UnexpectedValueException can be a result of wrong user input. So
-        // no need to render the exception in details as
-        // Application::renderException() does.
+      catch (\Exception $exception) {
+        // The exception is a result of wrong user input. So no need to render
+        // it in details as Application::renderException() does.
         $this->writeError($output, $exception);
-        exit(1);
+        throw new SilentException($exception->getMessage(), previous: $exception);
       }
     }
-    elseif ($question instanceof ChoiceQuestion) {
-      $choices = $question->getChoices();
-      if ($question->isMultiselect()) {
-        // @todo Support multiselect.
-      }
-      else {
-        $answer = $choices[$answer] ?? NULL;
-      }
+
+    if ($question->isTrimmable() && \is_string($answer)) {
+      $answer = \trim($answer);
     }
+
+    if ($normalizer = $question->getNormalizer()) {
+      $answer = $normalizer($answer);
+    }
+
     return $answer;
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function writePrompt(OutputInterface $output, Question $question): void {
+  final protected function writePrompt(OutputInterface $output, Question $question): void {
     // @todo Remove this once the following issue is resolved.
     // @see https://github.com/symfony/symfony/issues/39946
     $style = new OutputFormatterStyle('white', 'blue', ['bold']);
@@ -134,7 +115,7 @@ class QuestionHelper extends BaseQuestionHelper {
   /**
    * {@inheritdoc}
    */
-  protected function writeError(OutputInterface $output, \Exception $error): void {
+  final protected function writeError(OutputInterface $output, \Exception $error): void {
     // Add one-space indentation to comply with DCG output style.
     $output->writeln(' <error>' . $error->getMessage() . '</error>');
   }

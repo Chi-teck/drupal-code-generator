@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\Command;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
+use DrupalCodeGenerator\Exception\SilentException;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\InputOutput\Interviewer;
 use DrupalCodeGenerator\InputOutput\IO;
@@ -108,7 +109,9 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       $this->printSummary($dumped_assets, $full_path ? $destination . '/' : '');
     }
     catch (ExceptionInterface $exception) {
-      $this->io()->getErrorStyle()->error($exception->getMessage());
+      if (!$exception instanceof SilentException) {
+        $this->io()->getErrorStyle()->error($exception->getMessage());
+      }
       return self::FAILURE;
     }
 
