@@ -14,7 +14,7 @@ final class JavaScriptTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(JavaScript::class, ['foo_bar', 'coca-cola.js']);
+    $this->execute(JavaScript::class, ['foo_bar', 'Foo bar', 'coca-cola.js']);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +22,9 @@ final class JavaScriptTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo bar]:
      ➤ 
 
      File name [foo-bar.js]:
