@@ -6,7 +6,7 @@ use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Symlink;
-use DrupalCodeGenerator\Helper\ResultPrinter;
+use DrupalCodeGenerator\Helper\TablePrinter;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Tests\Unit\QuestionHelper;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * A test for output handler.
  */
-final class ResultPrinterTest extends TestCase {
+final class TablePrinterTest extends TestCase {
 
   /**
    * Console Output.
@@ -27,7 +27,7 @@ final class ResultPrinterTest extends TestCase {
   /**
    * Result printer.
    */
-  private ResultPrinter $printer;
+  private TablePrinter $printer;
 
   /**
    * {@inheritdoc}
@@ -41,7 +41,7 @@ final class ResultPrinterTest extends TestCase {
     $question_helper = new QuestionHelper();
     $io = new IO($input, $this->output, $question_helper);
 
-    $this->printer = new ResultPrinter();
+    $this->printer = new TablePrinter();
     $this->printer->io($io);
   }
 
@@ -49,70 +49,6 @@ final class ResultPrinterTest extends TestCase {
    * Test callback.
    */
   public function testDefaultOutput(): void {
-
-    $assets = new AssetCollection();
-    $assets[] = new File('bbb/eee/ggg.php');
-    $assets[] = (new File('aaa/ddd.txt'))->content('123');
-    $assets[] = (new File('ccc'))->content("123\n456\789");
-    $assets[] = (new File('/tmp/aaa'))->content('123');
-    $assets[] = new File('bbb/fff.module');
-
-    $this->printer->printResult($assets);
-    $expected_output = <<< 'TEXT'
-
-     The following directories and files have been created or updated:
-    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • ccc
-     • /tmp/aaa
-     • aaa/ddd.txt
-     • bbb/fff.module
-     • bbb/eee/ggg.php
-
-
-    TEXT;
-    self::assertSame($expected_output, $this->output->fetch());
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testOutputWithBasePath(): void {
-
-    $assets = new AssetCollection();
-    $assets[] = new File('bbb/eee/ggg.php');
-    $assets[] = (new File('aaa/ddd.txt'))->content('123');
-    $assets[] = (new File('ccc'))->content("123\n456\789");
-    $assets[] = (new File('/tmp/aaa'))->content('123');
-    $assets[] = new File('bbb/fff.module');
-
-    $this->printer->printResult($assets, '/project/root/');
-    $expected_output = <<< 'TEXT'
-
-     The following directories and files have been created or updated:
-    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • /project/root/ccc
-     • /tmp/aaa
-     • /project/root/aaa/ddd.txt
-     • /project/root/bbb/fff.module
-     • /project/root/bbb/eee/ggg.php
-
-
-    TEXT;
-    self::assertSame($expected_output, $this->output->fetch());
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testEmptyOutput(): void {
-    $this->printer->printResult(new AssetCollection());
-    self::assertSame('', $this->output->fetch());
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testVerboseOutput(): void {
     $this->output->setVerbosity(OutputInterface::VERBOSITY_VERBOSE);
 
     $assets = new AssetCollection();
@@ -124,7 +60,7 @@ final class ResultPrinterTest extends TestCase {
     $assets[] = new Symlink('bbb/fff.module.link', 'bbb/fff.module');
     $assets[] = new Directory('ddd');
 
-    $this->printer->printResult($assets);
+    $this->printer->printAssets($assets);
 
     $expected_output = <<< 'TEXT'
 
@@ -147,6 +83,21 @@ final class ResultPrinterTest extends TestCase {
 
     TEXT;
     self::assertSame($expected_output, $this->output->fetch());
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testOutputWithBasePath(): void {
+    $this->markTestIncomplete();
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testEmptyOutput(): void {
+    $this->printer->printAssets(new AssetCollection());
+    self::assertSame('', $this->output->fetch());
   }
 
 }

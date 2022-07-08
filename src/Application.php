@@ -10,10 +10,11 @@ use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Helper\Dumper\DryDumper;
 use DrupalCodeGenerator\Helper\Dumper\FileSystemDumper;
+use DrupalCodeGenerator\Helper\ListPrinter;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\RectorProcessor;
 use DrupalCodeGenerator\Helper\Renderer;
-use DrupalCodeGenerator\Helper\ResultPrinter;
+use DrupalCodeGenerator\Helper\TablePrinter;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -65,7 +66,8 @@ class Application extends BaseApplication implements ContainerAwareInterface {
       new DryDumper($file_system),
       new FileSystemDumper($file_system),
       new Renderer(new TwigEnvironment(new TemplateLoader([Application::TEMPLATE_PATH]))),
-      new ResultPrinter(),
+      new ListPrinter(),
+      new TablePrinter(),
       new RectorProcessor(),
       new DrupalContext($container),
       new ModuleInfo($container->get('module_handler')),

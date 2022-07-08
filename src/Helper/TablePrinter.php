@@ -11,9 +11,9 @@ use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableStyle;
 
 /**
- * Result printer for generators.
+ * Prints assets in tabular form.
  */
-class ResultPrinter extends Helper implements IOAwareInterface {
+class TablePrinter extends Helper implements IOAwareInterface {
 
   use IOAwareTrait;
 
@@ -21,24 +21,18 @@ class ResultPrinter extends Helper implements IOAwareInterface {
    * {@inheritdoc}
    */
   public function getName(): string {
-    return 'result_printer';
-  }
-
-  /**
-   * Prints summary.
-   */
-  public function printResult(AssetCollection $assets, string $base_path = ''): void {
-    if (\count($assets) > 0) {
-      $this->io->title('The following directories and files have been created or updated:');
-      $this->io->isVerbose() ?
-        $this->printTable($assets, $base_path) : $this->printList($assets, $base_path);
-    }
+    return 'assets_table_printer';
   }
 
   /**
    * Prints assets in tabular form.
    */
-  protected function printTable(AssetCollection $assets, string $base_path): void {
+  public function printAssets(AssetCollection $assets, string $base_path = ''): void {
+    if (\count($assets) === 0) {
+      return;
+    }
+
+    $this->io->title('The following directories and files have been created or updated:');
 
     $headers[] = ['Type', 'Path', 'Lines', 'Size'];
 
@@ -74,32 +68,13 @@ class ResultPrinter extends Helper implements IOAwareInterface {
     ];
 
     $right_aligned = (new TableStyle())->setPadType(\STR_PAD_LEFT);
-    $this->io
+    $this->io()
       ->buildTable($headers, $rows)
       ->setColumnStyle(2, $right_aligned)
       ->setColumnStyle(3, $right_aligned)
       ->render();
 
-    $this->io->newLine();
-  }
-
-  /**
-   * Prints assets as a bulleted list.
-   */
-  protected function printList(AssetCollection $assets, string $base_path): void {
-    $dumped_files = [];
-    // Group results by asset type.
-    $assets = $assets->getSorted();
-    foreach ($assets->getDirectories() as $directory) {
-      $dumped_files[] = $this->formatPath($base_path, $directory);
-    }
-    foreach ($assets->getFiles() as $file) {
-      $dumped_files[] = $this->formatPath($base_path, $file);
-    }
-    foreach ($assets->getSymlinks() as $symlink) {
-      $dumped_files[] = $this->formatPath($base_path, $symlink);
-    }
-    $this->io->listing($dumped_files);
+    $this->io()->newLine();
   }
 
   /**

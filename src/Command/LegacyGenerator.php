@@ -283,7 +283,8 @@ abstract class LegacyGenerator extends Command implements LabelInterface, IOAwar
    * Prints summary.
    */
   protected function printSummary(AssetCollection $dumped_assets, string $base_path): void {
-    $this->getHelper('result_printer')->printResult($dumped_assets, $base_path);
+    $printer_name = $this->io()->isVerbose() ? 'assets_table_printer' : 'assets_list_printer';
+    $this->getHelper($printer_name)->printAssets($dumped_assets, $base_path);
   }
 
   /**
