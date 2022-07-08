@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Utils;
 /**
  * Base class for assets.
  */
-abstract class Asset {
+abstract class Asset implements \Stringable {
 
   /**
    * Indicates that the asset can be updated but never created.

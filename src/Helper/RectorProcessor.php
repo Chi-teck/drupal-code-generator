@@ -4,17 +4,19 @@ namespace DrupalCodeGenerator\Helper;
 
 use Composer\InstalledVersions;
 use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Exception\RuntimeException;
 use DrupalCodeGenerator\InputOutput\IOAwareInterface;
 use DrupalCodeGenerator\InputOutput\IOAwareTrait;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Helper\Helper;
 
 /**
  * Rector processor.
  */
-final class Rector extends Helper implements IOAwareInterface, LoggerAwareInterface {
+final class RectorProcessor extends Helper implements IOAwareInterface, LoggerAwareInterface {
 
   use IOAwareTrait;
   use LoggerAwareTrait;
@@ -23,7 +25,7 @@ final class Rector extends Helper implements IOAwareInterface, LoggerAwareInterf
    * {@inheritdoc}
    */
   public function getName(): string {
-    return 'rector';
+    return 'rector_processor';
   }
 
   /**
@@ -40,20 +42,45 @@ final class Rector extends Helper implements IOAwareInterface, LoggerAwareInterf
       return;
     }
 
-    $rector_path = InstalledVersions::getInstallPath('rector/rector');
     $paths = [];
-    foreach ($assets->getPhpFiles() as $file) {
+    $php_files = new \CallbackFilterIterator($assets->getFiles()->getIterator(), [self::class, 'isPhpFile']);
+    foreach ($php_files as $file) {
       $paths[] = $destination . '/' . $file;
     }
+
+    if (\count($paths) === 0) {
+      $this->logger->debug('There are no PHP files to process by rector.');
+      return;
+    }
+
+    $rector_path = InstalledVersions::getInstallPath('rector/rector');
+
     $command = $rector_path . '/bin/rector process --ansi --no-diffs --no-progress-bar ' . \implode(' ', $paths);
     $this->logger->debug('Executing `{command}`.', ['command' => $command]);
+
+    $this->io()->getErrorStyle()->writeln(\PHP_EOL . ' <comment>Starting rector...</comment>');
     $output = NULL;
     $result = NULL;
     \exec($command, $output, $result);
+    // Remove 'Starting rector...' message.
+    (new Cursor($this->io()->getOutput()))
+      ->moveUp()->clearLine()->moveUp()->clearLine();
+
     if ($result !== 0) {
       throw new RuntimeException('Rector processor failed.');
     }
-    $this->io->write(\implode(\PHP_EOL, $output));
+    $this->io()->write(\implode(\PHP_EOL, $output));
+  }
+
+  /**
+   * Checks if a given file is of PHP type.
+   */
+  private static function isPhpFile(File $file): bool {
+    $extension = \pathinfo($file->getPath(), \PATHINFO_EXTENSION);
+    return match($extension) {
+      'php', 'module', 'theme', 'profile', 'inc' => TRUE,
+      default => FALSE,
+    };
   }
 
 }
