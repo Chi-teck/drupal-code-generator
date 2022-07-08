@@ -34,7 +34,7 @@ final class ApplicationTest extends FunctionalTestBase {
   public function testApplication(): void {
 
     $cmd = \sprintf(
-      '%s/vendor/bin/dcg install --working-dir %s --destination %s -a action 2>&1',
+      '%s/vendor/bin/dcg install --working-dir %s --destination %s -a action -a Action 2>&1',
       \getcwd(),
       $this->directory,
       $this->directory,
@@ -48,6 +48,9 @@ final class ApplicationTest extends FunctionalTestBase {
 
      Module machine name:
      ➤ action
+
+     Module name [Action]:
+     ➤ Action
     
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

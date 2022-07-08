@@ -333,6 +333,9 @@
  Module machine name:
  ➤ action⏎
 
+ Module name [Action]:
+ ➤ Action⏎
+
  The following directories and files have been created or updated:
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
  • action.install
