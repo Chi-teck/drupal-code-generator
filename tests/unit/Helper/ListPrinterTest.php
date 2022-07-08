@@ -32,11 +32,9 @@ final class ListPrinterTest extends TestCase {
   public function setUp(): void {
     parent::setUp();
 
-    $input = new ArgvInput();
     $this->output = new BufferedOutput();
 
-    $question_helper = new QuestionHelper();
-    $io = new IO($input, $this->output, $question_helper);
+    $io = new IO(new ArgvInput(), $this->output, new QuestionHelper());
 
     $this->printer = new ListPrinter();
     $this->printer->io($io);
@@ -46,13 +44,12 @@ final class ListPrinterTest extends TestCase {
    * Test callback.
    */
   public function testDefaultOutput(): void {
-
     $assets = new AssetCollection();
-    $assets[] = new File('bbb/eee/ggg.php');
-    $assets[] = (new File('aaa/ddd.txt'))->content('123');
-    $assets[] = (new File('ccc'))->content("123\n456\789");
-    $assets[] = (new File('/tmp/aaa'))->content('123');
-    $assets[] = new File('bbb/fff.module');
+    $assets[] = File::create('bbb/eee/ggg.php');
+    $assets[] = File::create('aaa/ddd.txt')->content('123');
+    $assets[] = File::create('ccc')->content("123\n456\789");
+    $assets[] = File::create('/tmp/aaa')->content('123');
+    $assets[] = File::create('bbb/fff.module');
 
     $this->printer->printAssets($assets);
     $expected_output = <<< 'TEXT'
@@ -74,13 +71,12 @@ final class ListPrinterTest extends TestCase {
    * Test callback.
    */
   public function testOutputWithBasePath(): void {
-
     $assets = new AssetCollection();
-    $assets[] = new File('bbb/eee/ggg.php');
-    $assets[] = (new File('aaa/ddd.txt'))->content('123');
-    $assets[] = (new File('ccc'))->content("123\n456\789");
-    $assets[] = (new File('/tmp/aaa'))->content('123');
-    $assets[] = new File('bbb/fff.module');
+    $assets[] = File::create('bbb/eee/ggg.php');
+    $assets[] = File::create('aaa/ddd.txt')->content('123');
+    $assets[] = File::create('ccc')->content("123\n456\789");
+    $assets[] = File::create('/tmp/aaa')->content('123');
+    $assets[] = File::create('bbb/fff.module');
 
     $this->printer->printAssets($assets, '/project/root/');
     $expected_output = <<< 'TEXT'

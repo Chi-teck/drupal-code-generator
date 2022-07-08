@@ -29,28 +29,29 @@ final class ListPrinter extends Helper implements IOAwareInterface {
     if (\count($assets) === 0) {
       return;
     }
+
     $this->io->title('The following directories and files have been created or updated:');
-    $dumped_files = [];
-    // Group results by asset type.
+
     $assets = $assets->getSorted();
-    foreach ($assets->getDirectories() as $directory) {
-      $dumped_files[] = $this->formatPath($base_path, $directory);
-    }
-    foreach ($assets->getFiles() as $file) {
-      $dumped_files[] = $this->formatPath($base_path, $file);
-    }
-    foreach ($assets->getSymlinks() as $symlink) {
-      $dumped_files[] = $this->formatPath($base_path, $symlink);
-    }
-    $this->io()->listing($dumped_files);
+
+    $print_asset = static fn (Asset $asset): string => self::formatPath($asset, $base_path);
+
+    // Group results by asset type.
+    $directories = \array_map($print_asset, \iterator_to_array($assets->getDirectories()));
+    $files = \array_map($print_asset, \iterator_to_array($assets->getFiles()));
+    $symlinks = \array_map($print_asset, \iterator_to_array($assets->getSymlinks()));
+
+    $all_items = \array_merge($directories, $files, $symlinks);
+
+    $this->io()->listing($all_items);
   }
 
   /**
    * Returns formatted path of a given asset.
    */
-  private function formatPath(string $base_path, Asset $asset): string {
+  private static function formatPath(Asset $asset, string $base_path): string {
     $path = $asset->getPath();
-    if ($path[0] != '/') {
+    if (!\str_starts_with($path, '/')) {
       $path = $base_path . $path;
     }
     return $path;
