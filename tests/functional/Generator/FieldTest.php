@@ -17,6 +17,7 @@ final class FieldTest extends GeneratorTestBase {
     $input = [
       // General questions.
       'example',
+      'Example',
       'Foo',
       'example_foo',
       '20',
@@ -71,6 +72,9 @@ final class FieldTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Example]:
      ➤ 
 
      Field label [Example]:

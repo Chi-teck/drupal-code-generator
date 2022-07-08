@@ -148,7 +148,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
   $DCG render-element -a bar
 
   $DCG field \
-    -a bar -a 'Example 1' -a bar_example_1 -a 10 \
+    -a bar -a Bar -a 'Example 1' -a bar_example_1 -a 10 \
     -a 'Value 1' -a value_1 -a Boolean -a No \
     -a 'Value 2' -a value_2 -a Text -a No -a No \
     -a 'Value 3' -a value_3 -a 'Text (long)' -a No \
@@ -162,7 +162,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
     -a No -a No -a No -a No -a No -a No
 
   $DCG field \
-    -a bar -a 'Example 2' -a bar_example_2 -a 10 \
+    -a bar -a Bar -a 'Example 2' -a bar_example_2 -a 10 \
     -a 'Value 1' -a value_1 -a Boolean -a Yes \
     -a 'Value 2' -a value_2 -a Text -a Yes -a Yes \
     -a 'Value 3' -a value_3 -a 'Text (long)' -a Yes \
@@ -176,7 +176,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
     -a No -a No -a No -a No -a No -a No
 
   $DCG field \
-    -a bar -a 'Example 3' -a bar_example_3 -a 5 \
+    -a bar -a Bar -a 'Example 3' -a bar_example_3 -a 5 \
     -a 'Value 1' -a value_1 -a Boolean -a No \
     -a 'Value 2' -a value_2 -a Text -a No -a No \
     -a 'Value 3' -a value_3 -a 'Text (long)' -a No \
