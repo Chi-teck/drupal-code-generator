@@ -3,33 +3,35 @@
 namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements composer command.
- */
-final class Composer extends DrupalGenerator {
+#[Generator(
+  name: 'composer',
+  description: 'Generates a composer.json file',
+  aliases: ['composer.json'],
+  templatePath: Application::TEMPLATE_PATH . '/composer',
+  type: GeneratorType::MODULE_COMPONENT,
+  label: 'composer.json',
+)]
+final class Composer extends BaseGenerator {
 
-  protected string $name = 'composer';
-  protected string $description = 'Generates a composer.json file';
-  protected string $alias = 'composer.json';
-  protected string $label = 'composer.json';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/composer';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
     // @see https://getcomposer.org/doc/04-schema.md#name
+    // @todo Test this.
     $validator = static function (string $input): string {
       if (!\preg_match('#^[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9](([_.]?|-{0,2})[a-z0-9]+)*$#', $input)) {
-        throw new \UnexpectedValueException('The package name sdsdf is invalid, it should be lowercase and have a vendor name, a forward slash, and a package name.');
+        throw new \UnexpectedValueException("The package name \"$input\" is invalid, it should be lowercase and have a vendor name, a forward slash, and a package name.");
       }
       return $input;
     };
-    $vars['project_name'] = $this->ask('Project name', 'drupal/example', $validator);
+    $vars['project_name'] = $ir->ask('Project name', 'drupal/example', $validator);
     [, $vars['machine_name']] = \explode('/', $vars['project_name']);
 
-    $vars['description'] = $this->ask('Description');
+    $vars['description'] = $ir->ask('Description');
 
     $type_choices = [
       'drupal-module',
@@ -41,22 +43,14 @@ final class Composer extends DrupalGenerator {
       'drupal-custom-profile',
       'drupal-drush',
     ];
-    $vars['type'] = $this->choice('Project type', \array_combine($type_choices, $type_choices));
+    $vars['type'] = $ir->choice('Project type', \array_combine($type_choices, $type_choices));
 
-    $custom_types = [
-      'drupal-custom-module',
-      'drupal-custom-theme',
-      'drupal-custom-profile',
-    ];
-    if (\in_array($vars['type'], $custom_types)) {
-      $vars['drupal_org'] = FALSE;
-    }
-    else {
-      // If project type is custom, there is no reason to ask this.
-      $vars['drupal_org'] = $this->confirm('Is this project hosted on drupal.org?', FALSE);
-    }
+    $vars['drupal_org'] = match($vars['type']) {
+      'drupal-custom-module', 'drupal-custom-theme', 'drupal-custom-profile' => FALSE,
+      default => $ir->confirm('Is this project hosted on drupal.org?'),
+    };
 
-    $this->addFile('composer.json', 'composer');
+    $assets->addFile('composer.json', 'composer');
   }
 
 }

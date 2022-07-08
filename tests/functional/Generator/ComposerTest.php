@@ -39,7 +39,7 @@ final class ComposerTest extends GeneratorTestBase {
       [8] drupal-drush
      ➤ 
 
-     Is this project hosted on drupal.org? [No]:
+     Is this project hosted on drupal.org? [Yes]:
      ➤ 
 
      The following directories and files have been created or updated:
