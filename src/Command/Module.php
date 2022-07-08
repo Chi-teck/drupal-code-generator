@@ -37,8 +37,10 @@ final class Module extends BaseGenerator implements ContainerInjectionInterface 
     $vars['description'] = $ir->ask('Module description', 'Provides additional functionality for the site.', new Required());
     $vars['package'] = $ir->ask('Package', 'Custom');
 
-    $dependencies = $ir->ask('Dependencies (comma separated)') ?? '';
-    $vars['dependencies'] = \array_map([$this, 'normalizeDependency'], \explode(',', $dependencies));
+    $dependencies = $ir->ask('Dependencies (comma separated)');
+    // @todo Clean-up and test.
+    $vars['dependencies'] = $dependencies ?
+      \array_map([$this, 'normalizeDependency'], \explode(',', $dependencies)) : [];
 
     $vars['class_prefix'] = '{machine_name|camelize}';
 
