@@ -13,7 +13,7 @@ use Symfony\Component\Console\Helper\TableStyle;
 /**
  * Prints assets in tabular form.
  */
-class TablePrinter extends Helper implements IOAwareInterface {
+final class TablePrinter extends Helper implements IOAwareInterface {
 
   use IOAwareTrait;
 
@@ -37,17 +37,15 @@ class TablePrinter extends Helper implements IOAwareInterface {
     $headers[] = ['Type', 'Path', 'Lines', 'Size'];
 
     $rows = [];
-
     foreach ($assets->getDirectories()->getSorted() as $directory) {
       $rows[] = ['directory', $this->formatPath($base_path, $directory), '-', '-'];
     }
 
     $total_size = $total_lines = 0;
     foreach ($assets->getFiles()->getSorted() as $file) {
-      $file_content = $file->getContent();
-      $size = $file_content === NULL ? 0 : \mb_strlen($file_content);
+      $size = \mb_strlen($file->getContent());
       $total_size += $size;
-      $lines = $size == 0 ? 0 : \substr_count($file->getContent(), "\n") + 1;
+      $lines = $size === 0 ? 0 : \substr_count($file->getContent(), "\n") + 1;
       $total_lines += $lines;
       $rows[] = ['file', $this->formatPath($base_path, $file), $lines, $size];
     }
@@ -82,7 +80,7 @@ class TablePrinter extends Helper implements IOAwareInterface {
    */
   protected function formatPath(string $base_path, Asset $asset): string {
     $path = $asset->getPath();
-    if ($path[0] != '/') {
+    if (!\str_starts_with($path, '/')) {
       $path = $base_path . $path;
     }
     return $path;

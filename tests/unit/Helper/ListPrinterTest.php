@@ -22,7 +22,7 @@ final class ListPrinterTest extends TestCase {
   private BufferedOutput $output;
 
   /**
-   * Result printer.
+   * Asset printer.
    */
   private ListPrinter $printer;
 
@@ -31,11 +31,8 @@ final class ListPrinterTest extends TestCase {
    */
   public function setUp(): void {
     parent::setUp();
-
     $this->output = new BufferedOutput();
-
     $io = new IO(new ArgvInput(), $this->output, new QuestionHelper());
-
     $this->printer = new ListPrinter();
     $this->printer->io($io);
   }
