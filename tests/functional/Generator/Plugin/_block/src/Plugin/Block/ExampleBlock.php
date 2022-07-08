@@ -30,18 +30,6 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
 
   /**
    * Constructs a new ExampleBlock instance.
-   *
-   * @param array $configuration
-   *   The plugin configuration, i.e. an array with configuration values keyed
-   *   by configuration option name. The special key 'context' may be used to
-   *   initialize the defined contexts by setting it to an array of context
-   *   values keyed by context names.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\CronInterface $cron
-   *   The cron service.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, CronInterface $cron) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -51,32 +39,32 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('cron')
+      $container->get('cron'),
     );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
-      'foo' => $this->t('Hello world!'),
+      'example' => $this->t('Hello world!'),
     ];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function blockForm($form, FormStateInterface $form_state) {
-    $form['foo'] = [
+  public function blockForm($form, FormStateInterface $form_state): array {
+    $form['example'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Foo'),
-      '#default_value' => $this->configuration['foo'],
+      '#title' => $this->t('Example'),
+      '#default_value' => $this->configuration['example'],
     ];
     return $form;
   }
@@ -84,23 +72,22 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
   /**
    * {@inheritdoc}
    */
-  public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->configuration['foo'] = $form_state->getValue('foo');
+  public function blockSubmit($form, FormStateInterface $form_state): void {
+    $this->configuration['example'] = $form_state->getValue('example');
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function blockAccess(AccountInterface $account) {
-    // @DCG Evaluate the access condition here.
-    $condition = TRUE;
-    return AccessResult::allowedIf($condition);
+  protected function blockAccess(AccountInterface $account): AccessResult {
+    // @todo Evaluate the access condition here.
+    return AccessResult::allowedIf(TRUE);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function build() {
+  public function build(): array {
     $build['content'] = [
       '#markup' => $this->t('It works!'),
     ];

@@ -25,12 +25,20 @@ final class BlockTest extends BrowserTestBase {
   protected $defaultTheme = 'stark';
 
   /**
-   * Test callback.
+   * {@inheritdoc}
    */
-  public function testBlock(): void {
+  protected function setUp(): void {
+    parent::setUp();
     $permissions = ['administer blocks', 'administer themes'];
     $admin_user = $this->drupalCreateUser($permissions);
     $this->drupalLogin($admin_user);
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testBlock(): void {
+
     $this->drupalGet('admin/structure/block/library/stark');
     $link_xpath = '//td[. = "Example"]/following-sibling::td[text() = "DCG"]';
     $link_xpath .= '/following-sibling::td//a[text() = "Place block"]';
@@ -39,12 +47,12 @@ final class BlockTest extends BrowserTestBase {
 
     // Check default configuration.
     $this->assertXpath('//input[@name = "settings[label]" and @value = "Example"]');
-    $this->assertXpath('//textarea[@name = "settings[foo]" and text() = "Hello world!"]');
+    $this->assertXpath('//textarea[@name = "settings[example]" and text() = "Hello world!"]');
 
     // Update block configuration.
     $edit = [
       'settings[label]' => 'Beer',
-      'settings[foo]' => 'Wine',
+      'settings[example]' => 'Wine',
       'region' => 'sidebar_first',
     ];
     $this->submitForm($edit, 'Save block');
@@ -53,7 +61,7 @@ final class BlockTest extends BrowserTestBase {
     // Make sure the configuration has been persisted.
     $this->drupalGet('admin/structure/block/manage/example');
     $this->assertXpath('//input[@name = "settings[label]" and @value = "Beer"]');
-    $this->assertXpath('//textarea[@name = "settings[foo]" and text() = "Wine"]');
+    $this->assertXpath('//textarea[@name = "settings[example]" and text() = "Wine"]');
 
     // Render the block.
     $this->drupalGet('<front>');

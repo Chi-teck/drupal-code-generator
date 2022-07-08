@@ -2,6 +2,6 @@ block.settings.foo_example:
   type: block_settings
   label: 'Example block'
   mapping:
-    foo:
+    example:
       type: string
-      label: Foo
+      label: Example
