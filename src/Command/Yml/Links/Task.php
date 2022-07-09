@@ -3,25 +3,23 @@
 namespace DrupalCodeGenerator\Command\Yml\Links;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements yml:links:task command.
- */
-final class Task extends ModuleGenerator {
+#[Generator(
+  name: 'yml:links:task',
+  description: 'Generates a links.task yml file',
+  aliases: ['task-links'],
+  templatePath: Application::TEMPLATE_PATH . '/yml/links/task',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Task extends BaseGenerator {
 
-  protected string $name = 'yml:links:task';
-  protected string $description = 'Generates a links.task yml file';
-  protected string $alias = 'task-links';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/links/task';
-  protected ?string $nameQuestion = NULL;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('{machine_name}.links.task.yml', 'links.task');
+  protected function generate(array &$vars, Assets $assets): void {
+    $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
+    $assets->addFile('{machine_name}.links.task.yml', 'links.task');
   }
 
 }
