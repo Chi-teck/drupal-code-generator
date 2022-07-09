@@ -135,6 +135,7 @@ final class Interviewer {
         };
       }
     }
+    $default_value ??= $this->moduleInfo->getModuleFromPath($this->io->getWorkingDirectory())?->getName();
 
     $question_str = match ($this->generatorDefinition->type) {
       GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => 'Module machine name',
