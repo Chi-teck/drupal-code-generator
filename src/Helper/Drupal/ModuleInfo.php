@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper\Drupal;
 
+use Drupal\Core\Extension\Extension;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Symfony\Component\Console\Helper\Helper;
 
@@ -51,6 +52,21 @@ final class ModuleInfo extends Helper {
    */
   public function getModuleName(string $machine_name): ?string {
     return $this->getModules()[$machine_name] ?? NULL;
+  }
+
+  /**
+   * Gets module info for a given absolute path.
+   */
+  public function getModuleFromPath(string $path): ?Extension {
+    if (!\str_starts_with($path, '/')) {
+      throw new \InvalidArgumentException('The path must be absolute.');
+    }
+    foreach ($this->moduleHandler->getModuleList() as $module) {
+      if (\str_starts_with($path, \DRUPAL_ROOT . '/' . $module->getPath())) {
+        return $module;
+      }
+    }
+    return NULL;
   }
 
 }
