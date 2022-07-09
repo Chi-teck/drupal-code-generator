@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Yml\Links;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
@@ -17,9 +17,8 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class Action extends BaseGenerator {
 
-  protected function generate(array &$vars, AssetCollection $assets): void {
-    $interviewer = $this->createInterviewer($vars);
-    $vars['machine_name'] = $interviewer->askMachineName();
+  protected function generate(array &$vars, Assets $assets): void {
+    $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
     $assets->addFile('{machine_name}.links.action.yml', 'links.action');
   }
 

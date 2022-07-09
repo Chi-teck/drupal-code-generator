@@ -3,25 +3,23 @@
 namespace DrupalCodeGenerator\Command\Yml\Links;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements yml:links:contextual command.
- */
-final class Contextual extends ModuleGenerator {
+#[Generator(
+  name: 'yml:links:contextual',
+  description: 'Generates links.contextual yml file',
+  aliases: ['contextual-links'],
+  templatePath: Application::TEMPLATE_PATH . '/yml/links/contextual',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Contextual extends BaseGenerator {
 
-  protected string $name = 'yml:links:contextual';
-  protected string $description = 'Generates links.contextual yml file';
-  protected string $alias = 'contextual-links';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/links/contextual';
-  protected ?string $nameQuestion = NULL;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('{machine_name}.links.contextual.yml', 'links.contextual');
+  protected function generate(array &$vars, Assets $assets): void {
+    $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
+    $assets->addFile('{machine_name}.links.contextual.yml', 'links.contextual');
   }
 
 }
