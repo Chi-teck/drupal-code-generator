@@ -3,25 +3,23 @@
 namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements yml:permissions command.
- */
-final class Permissions extends ModuleGenerator {
+#[Generator(
+  name: 'yml:permissions',
+  description: 'Generates a permissions yml file',
+  aliases: ['permissions'],
+  templatePath: Application::TEMPLATE_PATH . '/yml/permissions',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Permissions extends BaseGenerator {
 
-  protected string $name = 'yml:permissions';
-  protected string $description = 'Generates a permissions yml file';
-  protected string $alias = 'permissions';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/permissions';
-  protected ?string $nameQuestion = NULL;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('{machine_name}.permissions.yml', 'permissions');
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
+    $assets->addFile('{machine_name}.permissions.yml', 'permissions');
   }
 
 }
