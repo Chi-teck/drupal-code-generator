@@ -3,25 +3,23 @@
 namespace DrupalCodeGenerator\Command\Yml\Links;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements yml:links:menu command.
- */
-final class Menu extends ModuleGenerator {
+#[Generator(
+  name: 'yml:links:menu',
+  description: 'Generates a links.menu yml file',
+  aliases: ['menu-links'],
+  templatePath: Application::TEMPLATE_PATH . '/yml/links/menu',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Menu extends BaseGenerator {
 
-  protected string $name = 'yml:links:menu';
-  protected string $description = 'Generates a links.menu yml file';
-  protected string $alias = 'menu-links';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/links/menu';
-  protected ?string $nameQuestion = NULL;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('{machine_name}.links.menu.yml', 'links.menu');
+  protected function generate(array &$vars, Assets $assets): void {
+    $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
+    $assets->addFile('{machine_name}.links.menu.yml', 'links.menu');
   }
 
 }
