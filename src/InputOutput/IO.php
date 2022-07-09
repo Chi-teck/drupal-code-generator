@@ -32,7 +32,7 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
    * {@inheritdoc}
    */
   public function title(string $message): void {
-    $this->writeln('');
+    $this->newLine();
     $this->writeln(' ' . $message);
     $length = Helper::width(Helper::removeDecoration($this->getFormatter(), $message));
     $this->writeln(\sprintf('<fg=cyan;options=bold>%s</>', \str_repeat('–', $length + 2)));
@@ -108,7 +108,7 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
    * directory name can be used to set default extension name.
    */
   public function getWorkingDirectory(): string {
-    // $_SERVER['PWD'] take precedence over getcwd() as it does not mutate
+    // $_SERVER['PWD'] takes precedence over getcwd() as it does not mutate
     // during bootstrap process.
     return $this->getInput()->getOption('working-dir') ?? $_SERVER['PWD'] ?? \getcwd();
   }
