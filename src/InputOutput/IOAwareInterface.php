@@ -9,6 +9,8 @@ interface IOAwareInterface {
 
   /**
    * Sets or gets the console IO.
+   *
+   * @throws \LogicException if IO is not not initialized.
    */
   public function io(?IO $io = NULL): IO;
 
