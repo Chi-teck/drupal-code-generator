@@ -101,4 +101,16 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
     return new self($this->input, $this->getErrorOutput(), $this->questionHelper);
   }
 
+  /**
+   * Returns current working directory.
+   *
+   * Can be helpful to supply generators with some context. For instance, the
+   * directory name can be used to set default extension name.
+   */
+  public function getWorkingDirectory(): string {
+    // $_SERVER['PWD'] take precedence over getcwd() as it does not mutate
+    // during bootstrap process.
+    return $this->getInput()->getOption('working-dir') ?? $_SERVER['PWD'] ?? \getcwd();
+  }
+
 }

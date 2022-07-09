@@ -68,7 +68,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
 
     $this->logger->debug('PHP binary: {binary}', ['binary' => \PHP_BINARY]);
     $this->logger->debug('DCG executable: {dcg}', ['dcg' => \realpath($_SERVER['PHP_SELF'])]);
-    $this->logger->debug('Working directory: {directory}', ['directory' => $this->getWorkingDirectory()]);
+    $this->logger->debug('Working directory: {directory}', ['directory' => $io->getWorkingDirectory()]);
   }
 
   /**
@@ -197,7 +197,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    */
   protected function getDestination(array $vars): ?string {
     if (!isset($vars['machine_name'])) {
-      return $this->getWorkingDirectory();
+      return $this->io()->getWorkingDirectory();
     }
     $definition = $this->getGeneratorDefinition();
     $is_new = $definition->type->isNewExtension();
@@ -206,18 +206,8 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
         $this->getHelper('module_info')->getDestination($vars['machine_name'], $is_new),
       GeneratorType::THEME, GeneratorType::THEME_COMPONENT =>
         $this->getHelper('theme_info')->getDestination($vars['machine_name'], $is_new),
-      default => $this->getWorkingDirectory(),
+      default => $this->io()->getWorkingDirectory(),
     };
-  }
-
-  /**
-   * Returns current working directory.
-   *
-   * Can be helpful to supply generators with some context. For instance, the
-   * directory name can be used to set default extension name.
-   */
-  final protected function getWorkingDirectory(): string {
-    return $this->io->getInput()->getOption('working-dir') ?? \getcwd();
   }
 
 }
