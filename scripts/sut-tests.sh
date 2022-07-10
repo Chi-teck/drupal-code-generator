@@ -275,7 +275,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
   $DCG yml:module-info -a yety -a -a 'Helper module for testing generated YML files' -a DCG -a -a drupal:system,drupal:node,drupal:user
   $DCG yml:module-libraries -a yety
   $DCG yml:permissions -a yety
-  $DCG yml:routing -a yety
+  $DCG yml:routing -a yety -a Yety
   $DCG yml:services -a yety
 
   dcg_phpcs $MODULE_DIR
