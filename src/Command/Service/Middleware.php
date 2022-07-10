@@ -20,7 +20,7 @@ final class Middleware extends BaseGenerator {
   protected function generate(array &$vars, AssetCollection $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
-    $vars['class'] = $ir->askClass(default_value: '{machine_name|camelize}Middleware');
+    $vars['class'] = $ir->askClass(default: '{machine_name|camelize}Middleware');
     $assets->addFile('src/{class}.php', 'middleware.twig');
     $assets->addServicesFile()->template('services.twig');
   }

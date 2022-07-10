@@ -20,7 +20,7 @@ final class Controller extends BaseGenerator {
 
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
-    $vars['class'] = $ir->askClass(default_value: '{machine_name|camelize}Controller');
+    $vars['class'] = $ir->askClass(default: '{machine_name|camelize}Controller');
 
     $vars['services'] = $ir->askServices(FALSE);
 

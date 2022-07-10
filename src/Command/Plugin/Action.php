@@ -24,7 +24,7 @@ final class Action extends BaseGenerator {
     $vars['plugin_label'] = $ir->askPluginLabel('Action label', 'Update node title');
     $vars['plugin_id'] = $ir->askPluginId();
     // @todo Change default value.
-    $vars['class'] = $ir->askPluginClass(default_value: 'Foo');
+    $vars['class'] = $ir->askPluginClass(default: 'Foo');
 
     $vars['category'] = $ir->ask('Action category', 'Custom');
     $vars['configurable'] = $ir->confirm('Make the action configurable?', FALSE);

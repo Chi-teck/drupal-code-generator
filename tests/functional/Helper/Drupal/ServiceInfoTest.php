@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Tests\Functional;
 
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * Tests 'service info' helper.
@@ -112,8 +111,8 @@ final class ServiceInfoTest extends FunctionalTestBase {
     ];
     self::assertEquals($expected_definition, $definition);
 
-    self::expectExceptionObject(new ServiceNotFoundException('unknown_service'));
-    $service_info->getServiceDefinition('unknown_service');
+    $definition = $service_info->getServiceDefinition('unknown_service');
+    self::assertNull($definition);
   }
 
 }

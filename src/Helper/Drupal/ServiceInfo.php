@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Helper\Drupal;
 
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * A helper that provides information about available Drupal services.
@@ -45,7 +44,7 @@ final class ServiceInfo extends Helper {
   public function getServiceDefinition(string $service_id): ?array {
     $serialized_definitions = $this->getSerializedDefinitions();
     if (!\array_key_exists($service_id, $serialized_definitions)) {
-      throw new ServiceNotFoundException($service_id);
+      return NULL;
     }
     // @phpcs:ignore DrupalPractice.FunctionCalls.InsecureUnserialize.InsecureUnserialize
     return \unserialize($serialized_definitions[$service_id]);

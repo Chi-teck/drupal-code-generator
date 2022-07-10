@@ -111,8 +111,8 @@ final class Interviewer {
       GeneratorType::THEME, GeneratorType::THEME_COMPONENT => 'Theme name',
       default => 'Name',
     };
-    $default_value = $machine_name ? Utils::machine2human($machine_name) : NULL;
-    $question = new Question($question_str, $default_value);
+    $default = $machine_name ? Utils::machine2human($machine_name) : NULL;
+    $question = new Question($question_str, $default);
     $question->setValidator(new Required());
     return $this->io->askQuestion($question);
   }
@@ -122,27 +122,32 @@ final class Interviewer {
    */
   public function askMachineName(): string {
 
-    $default_value = NULL;
+    $default = NULL;
     if (isset($this->vars['name'])) {
       if ($this->generatorDefinition->type->isNewExtension()) {
-        $default_value = Utils::human2machine($this->vars['name']);
+        $default = Utils::human2machine($this->vars['name']);
       }
       else {
-        $default_value = match ($this->generatorDefinition->type) {
+        $default = match ($this->generatorDefinition->type) {
           GeneratorType::MODULE_COMPONENT => \array_search($this->vars['name'], $this->moduleInfo->getModules()),
           GeneratorType::THEME_COMPONENT => \array_search($this->vars['name'], $this->themeInfo->getThemes()),
           default => NULL,
         };
       }
     }
-    $default_value ??= $this->moduleInfo->getModuleFromPath($this->io->getWorkingDirectory())?->getName();
+
+    // @todo Clean-up.
+    if ($default === FALSE) {
+      $default = NULL;
+    }
+    $default ??= $this->moduleInfo->getModuleFromPath($this->io->getWorkingDirectory())?->getName();
 
     $question_str = match ($this->generatorDefinition->type) {
       GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => 'Module machine name',
       GeneratorType::THEME, GeneratorType::THEME_COMPONENT => 'Theme machine name',
       default => 'Machine name',
     };
-    $question = new Question($question_str, $default_value);
+    $question = new Question($question_str, $default);
     $question->setValidator(new Chained(new Required(), new MachineName()));
 
     $extensions = match ($this->generatorDefinition->type) {
@@ -160,22 +165,22 @@ final class Interviewer {
   /**
    * Asks class question.
    */
-  public function askClass(string $question = 'Class', ?string $default_value = NULL): ?string {
-    return $this->ask($question, $default_value, new RequiredClassName());
+  public function askClass(string $question = 'Class', ?string $default = NULL): ?string {
+    return $this->ask($question, $default, new RequiredClassName());
   }
 
   /**
    * Asks plugin label question.
    */
-  public function askPluginLabel(string $question = 'Plugin label', ?string $default_value = NULL): ?string {
-    return $this->ask($question, $default_value, new Required());
+  public function askPluginLabel(string $question = 'Plugin label', ?string $default = NULL): ?string {
+    return $this->ask($question, $default, new Required());
   }
 
   /**
    * Asks plugin ID question.
    */
-  public function askPluginId(string $question = 'Plugin ID'): ?string {
-    return $this->ask($question, '{machine_name}_{plugin_label|h2m}', new RequiredMachineName());
+  public function askPluginId(string $question = 'Plugin ID', ?string $default = '{machine_name}_{plugin_label|h2m}'): ?string {
+    return $this->ask($question, $default, new RequiredMachineName());
   }
 
   /**
@@ -183,12 +188,12 @@ final class Interviewer {
    *
    * @todo Remove $suffix parameter.
    */
-  public function askPluginClass(string $question = 'Plugin class', ?string $default_value = NULL, string $suffix = ''): ?string {
-    if ($default_value === NULL && isset($this->vars['machine_name'], $this->vars['plugin_id'])) {
+  public function askPluginClass(string $question = 'Plugin class', ?string $default = NULL, string $suffix = ''): ?string {
+    if ($default === NULL && isset($this->vars['machine_name'], $this->vars['plugin_id'])) {
       $unprefixed_plugin_id = Utils::removePrefix($this->vars['plugin_id'], $this->vars['machine_name'] . '_');
-      $default_value = Utils::camelize($unprefixed_plugin_id) . $suffix;
+      $default = Utils::camelize($unprefixed_plugin_id) . $suffix;
     }
-    return $this->askClass($question, $default_value);
+    return $this->askClass($question, $default);
   }
 
   /**
