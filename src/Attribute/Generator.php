@@ -5,10 +5,10 @@ namespace DrupalCodeGenerator\Attribute;
 use DrupalCodeGenerator\GeneratorType;
 
 /**
- * Service tag to autoconfigure generators.
+ * Generator definition.
  */
 #[\Attribute(\Attribute::TARGET_CLASS)]
-class Generator {
+final class Generator {
 
   public function __construct(
     public string $name,
