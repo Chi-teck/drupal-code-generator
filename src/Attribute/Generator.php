@@ -11,13 +11,13 @@ use DrupalCodeGenerator\GeneratorType;
 final class Generator {
 
   public function __construct(
-    public string $name,
-    public ?string $description = NULL,
-    public array $aliases = [],
-    public bool $hidden = FALSE,
-    public ?string $templatePath = NULL,
-    public GeneratorType $type = GeneratorType::OTHER,
-    public ?string $label = NULL,
+    public readonly string $name,
+    public readonly ?string $description = NULL,
+    public readonly array $aliases = [],
+    public readonly bool $hidden = FALSE,
+    public readonly ?string $templatePath = NULL,
+    public readonly GeneratorType $type = GeneratorType::OTHER,
+    public readonly ?string $label = NULL,
   ) {}
 
 }
