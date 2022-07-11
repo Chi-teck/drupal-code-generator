@@ -570,7 +570,7 @@ final class InterviewerTest extends FunctionalTestBase {
     $module_info = new ModuleInfo($container->get('module_handler'));
     $theme_info = new ThemeInfo($container->get('theme_handler'));
     $service_info = new ServiceInfo($container);
-    return new Interviewer($this->io, $vars, $definition, $module_info, $theme_info, $service_info);
+    return new Interviewer($this->io, $vars, $definition, $service_info, $module_info, $theme_info);
   }
 
   /**

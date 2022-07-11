@@ -69,20 +69,20 @@ final class ModuleInfoTest extends FunctionalTestBase {
   /**
    * Test callback.
    */
-  public function testGetModuleFromPath(): void {
+  public function testGetExtensionFromPath(): void {
     $module_info = $this->createModuleInfo();
 
-    $module = $module_info->getModuleFromPath(\DRUPAL_ROOT . '/core/modules/node');
+    $module = $module_info->getExtensionFromPath(\DRUPAL_ROOT . '/core/modules/node');
     self::assertSame('node', $module->getName());
 
-    $module = $module_info->getModuleFromPath(\DRUPAL_ROOT . '/core/modules/node/src/Plugin');
+    $module = $module_info->getExtensionFromPath(\DRUPAL_ROOT . '/core/modules/node/src/Plugin');
     self::assertSame('node', $module->getName());
 
-    $module = $module_info->getModuleFromPath(\DRUPAL_ROOT . '/core/modules');
+    $module = $module_info->getExtensionFromPath(\DRUPAL_ROOT . '/core/modules');
     self::assertNull($module);
 
     self::expectExceptionObject(new \InvalidArgumentException('The path must be absolute.'));
-    $module_info->getModuleFromPath('relative/path');
+    $module_info->getExtensionFromPath('relative/path');
   }
 
   /**

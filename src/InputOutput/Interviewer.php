@@ -5,7 +5,9 @@ namespace DrupalCodeGenerator\InputOutput;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\GeneratorType;
+use DrupalCodeGenerator\Helper\Drupal\ExtensionInfoInterface;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
+use DrupalCodeGenerator\Helper\Drupal\NullInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Utils;
@@ -21,19 +23,25 @@ use Symfony\Component\Console\Question\Question;
 
 /**
  * Defines a helper to interact with a user.
- *
- * @todo Create a test for this.
  */
 final class Interviewer {
+
+  private readonly ExtensionInfoInterface $extensionInfo;
 
   public function __construct(
     private readonly IO $io,
     private readonly array &$vars,
     private readonly GeneratorDefinition $generatorDefinition,
-    private readonly ModuleInfo $moduleInfo,
-    private readonly ThemeInfo $themeInfo,
     private readonly ServiceInfo $serviceInfo,
-  ) {}
+    ModuleInfo $moduleInfo,
+    ThemeInfo $themeInfo,
+  ) {
+    $this->extensionInfo = match ($this->generatorDefinition->type) {
+      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => $moduleInfo,
+      GeneratorType::THEME, GeneratorType::THEME_COMPONENT => $themeInfo,
+      default => new NullInfo(),
+    };
+  }
 
   public function askQuestion(Question $question): mixed {
     $answer = $this->io->askQuestion($question);
@@ -96,11 +104,7 @@ final class Interviewer {
 
     // Try to determine the name without interaction with the user.
     if ($machine_name && !$type->isNewExtension()) {
-      $name = match ($type) {
-        GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getExtensionName($machine_name),
-        GeneratorType::THEME_COMPONENT => $this->themeInfo->getExtensionName($machine_name),
-        default => NULL,
-      };
+      $name = $this->extensionInfo->getExtensionName($machine_name);
       if ($name) {
         return $name;
       }
@@ -128,15 +132,11 @@ final class Interviewer {
         $default = Utils::human2machine($this->vars['name']);
       }
       else {
-        $default = match ($this->generatorDefinition->type) {
-          GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getExtensionMachineName($this->vars['name']),
-          GeneratorType::THEME_COMPONENT => $this->themeInfo->getExtensionMachineName($this->vars['name']),
-          default => NULL,
-        };
+        $default = $this->extensionInfo->getExtensionMachineName($this->vars['name']);
       }
     }
 
-    $default ??= $this->moduleInfo->getModuleFromPath($this->io->getWorkingDirectory())?->getName();
+    $default ??= $this->extensionInfo->getExtensionFromPath($this->io->getWorkingDirectory())?->getName();
 
     $question_str = match ($this->generatorDefinition->type) {
       GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => 'Module machine name',
@@ -146,11 +146,7 @@ final class Interviewer {
     $question = new Question($question_str, $default);
     $question->setValidator(new Chained(new Required(), new MachineName()));
 
-    $extensions = match ($this->generatorDefinition->type) {
-      GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getExtensions(),
-      GeneratorType::THEME_COMPONENT => $this->themeInfo->getExtensions(),
-      default => [],
-    };
+    $extensions = $this->extensionInfo->getExtensions();
     if ($extensions) {
       $question->setAutocompleterValues(\array_keys($extensions));
     }

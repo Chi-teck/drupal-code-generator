@@ -64,7 +64,7 @@ final class ModuleInfo extends Helper implements ExtensionInfoInterface {
   /**
    * Gets module info for a given absolute path.
    */
-  public function getModuleFromPath(string $path): ?Extension {
+  public function getExtensionFromPath(string $path): ?Extension {
     if (!\str_starts_with($path, '/')) {
       throw new \InvalidArgumentException('The path must be absolute.');
     }

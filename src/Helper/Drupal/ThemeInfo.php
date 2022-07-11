@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper\Drupal;
 
+use Drupal\Core\Extension\Extension;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Symfony\Component\Console\Helper\Helper;
 
@@ -60,6 +61,17 @@ final class ThemeInfo extends Helper implements ExtensionInfoInterface {
    */
   public function getExtensionMachineName(string $name): ?string {
     return \array_search($name, $this->getExtensions()) ?: NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExtensionFromPath(string $path): ?Extension {
+    if (!\str_starts_with($path, '/')) {
+      throw new \InvalidArgumentException('The path must be absolute.');
+    }
+    // @todo Implements this.
+    return NULL;
   }
 
 }
