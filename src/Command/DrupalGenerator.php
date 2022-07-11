@@ -135,8 +135,8 @@ abstract class DrupalGenerator extends LegacyGenerator {
    */
   protected function getExtensionList(): array {
     return match ($this->extensionType) {
-      DrupalGenerator::EXTENSION_TYPE_MODULE => $this->getHelper('module_info')->getModules(),
-      DrupalGenerator::EXTENSION_TYPE_THEME => $this->getHelper('theme_info')->getThemes(),
+      DrupalGenerator::EXTENSION_TYPE_MODULE => $this->getHelper('module_info')->getExtensions(),
+      DrupalGenerator::EXTENSION_TYPE_THEME => $this->getHelper('theme_info')->getExtensions(),
     };
   }
 

@@ -10,7 +10,7 @@ use Symfony\Component\Console\Helper\Helper;
  *
  * @todo Create a test for this.
  */
-final class ThemeInfo extends Helper {
+final class ThemeInfo extends Helper implements ExtensionInfoInterface {
 
   public function __construct(private ThemeHandlerInterface $themeHandler) {}
 
@@ -19,9 +19,9 @@ final class ThemeInfo extends Helper {
   }
 
   /**
-   * Returns a list of currently installed themes.
+   * {@inheritdoc}
    */
-  public function getThemes(): array {
+  public function getExtensions(): array {
     $themes = [];
     foreach ($this->themeHandler->listInfo() as $machine_name => $theme) {
       $themes[$machine_name] = $theme->info['name'];
@@ -30,7 +30,7 @@ final class ThemeInfo extends Helper {
   }
 
   /**
-   * Returns destination for generated theme code.
+   * {@inheritdoc}
    */
   public function getDestination(string $machine_name, bool $is_new): ?string {
     $themes_dir = \is_dir(\DRUPAL_ROOT . '/themes/custom') ?
@@ -40,7 +40,7 @@ final class ThemeInfo extends Helper {
       $destination = $themes_dir;
     }
     else {
-      $destination = \array_key_exists($machine_name, $this->getThemes())
+      $destination = \array_key_exists($machine_name, $this->getExtensions())
         ? $this->themeHandler->getTheme($machine_name)->getPath()
         : $themes_dir . '/' . $machine_name;
     }
@@ -49,17 +49,17 @@ final class ThemeInfo extends Helper {
   }
 
   /**
-   * Returns theme human name.
+   * {@inheritdoc}
    */
-  public function getThemeName(string $machine_name): ?string {
-    return $this->getThemes()[$machine_name] ?? NULL;
+  public function getExtensionName(string $machine_name): ?string {
+    return $this->getExtensions()[$machine_name] ?? NULL;
   }
 
   /**
-   * Returns theme machine name.
+   * {@inheritdoc}
    */
-  public function getThemeMachineName(string $name): ?string {
-    return \array_search($name, $this->getThemes()) ?: NULL;
+  public function getExtensionMachineName(string $name): ?string {
+    return \array_search($name, $this->getExtensions()) ?: NULL;
   }
 
 }

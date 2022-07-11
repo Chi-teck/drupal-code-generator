@@ -97,8 +97,8 @@ final class Interviewer {
     // Try to determine the name without interaction with the user.
     if ($machine_name && !$type->isNewExtension()) {
       $name = match ($type) {
-        GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModuleName($machine_name),
-        GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemeName($machine_name),
+        GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getExtensionName($machine_name),
+        GeneratorType::THEME_COMPONENT => $this->themeInfo->getExtensionName($machine_name),
         default => NULL,
       };
       if ($name) {
@@ -129,8 +129,8 @@ final class Interviewer {
       }
       else {
         $default = match ($this->generatorDefinition->type) {
-          GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModuleMachineName($this->vars['name']),
-          GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemeMachineName($this->vars['name']),
+          GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getExtensionMachineName($this->vars['name']),
+          GeneratorType::THEME_COMPONENT => $this->themeInfo->getExtensionMachineName($this->vars['name']),
           default => NULL,
         };
       }
@@ -147,8 +147,8 @@ final class Interviewer {
     $question->setValidator(new Chained(new Required(), new MachineName()));
 
     $extensions = match ($this->generatorDefinition->type) {
-      GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModules(),
-      GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemes(),
+      GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getExtensions(),
+      GeneratorType::THEME_COMPONENT => $this->themeInfo->getExtensions(),
       default => [],
     };
     if ($extensions) {

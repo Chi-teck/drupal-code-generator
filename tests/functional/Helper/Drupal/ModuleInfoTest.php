@@ -25,7 +25,7 @@ final class ModuleInfoTest extends FunctionalTestBase {
   public function testGetModules(): void {
     $module_info = $this->createModuleInfo();
 
-    $modules = $module_info->getModules();
+    $modules = $module_info->getExtensions();
     // Full list of modules is rather long and may vary depending on`
     // environment.
     self::assertSame('Custom Block', $modules['block_content']);
@@ -52,8 +52,8 @@ final class ModuleInfoTest extends FunctionalTestBase {
   public function testGetModuleName(): void {
     $module_info = $this->createModuleInfo();
 
-    self::assertSame('Database Logging', $module_info->getModuleName('dblog'));
-    self::assertNull($module_info->getModuleName('unknown_module'));
+    self::assertSame('Database Logging', $module_info->getExtensionName('dblog'));
+    self::assertNull($module_info->getExtensionName('unknown_module'));
   }
 
   /**
@@ -62,8 +62,8 @@ final class ModuleInfoTest extends FunctionalTestBase {
   public function testGetModuleMachineName(): void {
     $module_info = $this->createModuleInfo();
 
-    self::assertSame('dblog', $module_info->getModuleMachineName('Database Logging'));
-    self::assertNull($module_info->getModuleName('Unknown Module'));
+    self::assertSame('dblog', $module_info->getExtensionMachineName('Database Logging'));
+    self::assertNull($module_info->getExtensionName('Unknown Module'));
   }
 
   /**

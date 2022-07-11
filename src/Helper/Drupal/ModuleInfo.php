@@ -9,7 +9,7 @@ use Symfony\Component\Console\Helper\Helper;
 /**
  * A helper that provides information about installed Drupal modules.
  */
-final class ModuleInfo extends Helper {
+final class ModuleInfo extends Helper implements ExtensionInfoInterface {
 
   public function __construct(private ModuleHandlerInterface $moduleHandler) {}
 
@@ -18,9 +18,9 @@ final class ModuleInfo extends Helper {
   }
 
   /**
-   * Returns a list of currently installed modules.
+   * {@inheritdoc}
    */
-  public function getModules(): array {
+  public function getExtensions(): array {
     $modules = [];
     foreach ($this->moduleHandler->getModuleList() as $machine_name => $module) {
       $modules[$machine_name] = $this->moduleHandler->getName($machine_name);
@@ -29,7 +29,7 @@ final class ModuleInfo extends Helper {
   }
 
   /**
-   * Returns destination for generated module code.
+   * {@inheritdoc}
    */
   public function getDestination(string $machine_name, bool $is_new): ?string {
     $modules_dir = \is_dir(\DRUPAL_ROOT . '/modules/custom') ?
@@ -39,7 +39,7 @@ final class ModuleInfo extends Helper {
       $destination = $modules_dir;
     }
     else {
-      $destination = \array_key_exists($machine_name, $this->getModules())
+      $destination = \array_key_exists($machine_name, $this->getExtensions())
         ? $this->moduleHandler->getModule($machine_name)->getPath()
         : $modules_dir . '/' . $machine_name;
     }
@@ -48,17 +48,17 @@ final class ModuleInfo extends Helper {
   }
 
   /**
-   * Returns module human name.
+   * {@inheritdoc}
    */
-  public function getModuleName(string $machine_name): ?string {
-    return $this->getModules()[$machine_name] ?? NULL;
+  public function getExtensionName(string $machine_name): ?string {
+    return $this->getExtensions()[$machine_name] ?? NULL;
   }
 
   /**
-   * Returns module machine name.
+   * {@inheritdoc}
    */
-  public function getModuleMachineName(string $name): ?string {
-    return \array_search($name, $this->getModules()) ?: NULL;
+  public function getExtensionMachineName(string $name): ?string {
+    return \array_search($name, $this->getExtensions()) ?: NULL;
   }
 
   /**
