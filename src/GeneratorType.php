@@ -21,4 +21,20 @@ enum GeneratorType {
     return $this === self::MODULE || $this === self::THEME;
   }
 
+  public function getNameLabel(): string {
+    return match ($this) {
+      self::MODULE, self::MODULE_COMPONENT => 'Module name',
+      self::THEME, self::THEME_COMPONENT => 'Theme name',
+      default => 'Name',
+    };
+  }
+
+  public function getMachineNameLabel(): string {
+    return match ($this) {
+      self::MODULE, self::MODULE_COMPONENT => 'Module machine name',
+      self::THEME, self::THEME_COMPONENT => 'Theme machine name',
+      default => 'Machine name',
+    };
+  }
+
 }

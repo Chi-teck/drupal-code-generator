@@ -110,13 +110,8 @@ final class Interviewer {
       }
     }
 
-    $question_str = match ($type) {
-      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => 'Module name',
-      GeneratorType::THEME, GeneratorType::THEME_COMPONENT => 'Theme name',
-      default => 'Name',
-    };
     $default = $machine_name ? Utils::machine2human($machine_name) : NULL;
-    $question = new Question($question_str, $default);
+    $question = new Question($type->getNameLabel(), $default);
     $question->setValidator(new Required());
     return $this->io->askQuestion($question);
   }
@@ -125,10 +120,11 @@ final class Interviewer {
    * Asks machine name question.
    */
   public function askMachineName(): string {
+    $type = $this->generatorDefinition->type;
 
     $default = NULL;
     if (isset($this->vars['name'])) {
-      if ($this->generatorDefinition->type->isNewExtension()) {
+      if ($type->isNewExtension()) {
         $default = Utils::human2machine($this->vars['name']);
       }
       else {
@@ -138,12 +134,7 @@ final class Interviewer {
 
     $default ??= $this->extensionInfo->getExtensionFromPath($this->io->getWorkingDirectory())?->getName();
 
-    $question_str = match ($this->generatorDefinition->type) {
-      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => 'Module machine name',
-      GeneratorType::THEME, GeneratorType::THEME_COMPONENT => 'Theme machine name',
-      default => 'Machine name',
-    };
-    $question = new Question($question_str, $default);
+    $question = new Question($type->getMachineNameLabel(), $default);
     $question->setValidator(new Chained(new Required(), new MachineName()));
 
     $extensions = $this->extensionInfo->getExtensions();
