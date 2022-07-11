@@ -1,0 +1,7 @@
+foo.example:
+  path: '/foo/example'
+  defaults:
+    _controller: '\Drupal\foo\Controller\FooController::build'
+    _title: 'Example'
+  requirements:
+    _permission: 'some permission'

@@ -3,7 +3,7 @@
 namespace Drupal\yety\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -14,7 +14,7 @@ final class YetySubscriber implements EventSubscriberInterface {
   /**
    * Kernel request event handler.
    */
-  public function onKernelRequest(GetResponseEvent $event): void {
+  public function onKernelRequest(RequestEvent $event): void {
     // Intentionally empty.
   }
 

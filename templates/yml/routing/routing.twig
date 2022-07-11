@@ -1,14 +1,7 @@
-{{ machine_name }}.reports:
-  path: '/admin/reports/{{ machine_name }}'
+{{ machine_name }}.example:
+  path: '/{{ machine_name|u2h }}/example'
   defaults:
     _controller: '\Drupal\{{ machine_name }}\Controller\{{ class }}::build'
-    _title: '{{ name }} report'
+    _title: 'Example'
   requirements:
-    _permission: 'access site reports'
-{{ machine_name }}.settings:
-  path: '/admin/config/{{ machine_name }}/settings'
-  defaults:
-    _form: 'Drupal\{{ machine_name }}\Form\SettingsForm'
-    _title: '{{ name }} settings'
-  requirements:
-    _permission: 'administer {{ machine_name }} configuration'
+    _permission: 'some permission'

@@ -13,13 +13,7 @@ final class YetyController extends ControllerBase {
    * Builds the response.
    */
   public function build(): array {
-
-    $build['content'] = [
-      '#type' => 'item',
-      '#markup' => 'It works!',
-    ];
-
-    return $build;
+    return ['#markup' => 'It works!'];
   }
 
 }

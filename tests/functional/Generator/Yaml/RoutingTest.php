@@ -14,7 +14,7 @@ final class RoutingTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(Routing::class, ['example', 'Example']);
+    $this->execute(Routing::class, ['foo', 'Foo']);
 
     $expected_display = <<< 'TXT'
 
@@ -24,17 +24,17 @@ final class RoutingTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Module name [Example]:
+     Module name [Foo]:
      ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • example.routing.yml
+     • foo.routing.yml
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('example.routing.yml');
+    $this->assertGeneratedFile('foo.routing.yml');
   }
 
 }

@@ -271,7 +271,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
   $DCG yml:links:action -a yety
   $DCG yml:links:contextual -a yety
   $DCG yml:links:menu -a yety
-  $DCG yml:links:task -a yet
+  $DCG yml:links:task -a yety
   $DCG yml:module-info -a yety -a -a 'Helper module for testing generated YML files' -a DCG -a -a drupal:system,drupal:node,drupal:user
   $DCG yml:module-libraries -a yety
   $DCG yml:permissions -a yety
@@ -280,7 +280,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
 
   dcg_phpcs $MODULE_DIR
   dcg_module_install $MODULE_MACHINE_NAME
-  # dcg_phpunit tests
+  dcg_phpunit tests
   dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
 
