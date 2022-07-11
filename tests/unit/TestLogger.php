@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Tests\Unit;
 
@@ -6,6 +6,8 @@ use Psr\Log\AbstractLogger;
 
 /**
  * Test logger.
+ *
+ * @todo Is it still used?
  */
 final class TestLogger extends AbstractLogger {
 

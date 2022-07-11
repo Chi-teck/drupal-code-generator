@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Helper\Drupal;
 
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Helper\Helper;
  */
 final class ModuleInfo extends Helper implements ExtensionInfoInterface {
 
-  public function __construct(private ModuleHandlerInterface $moduleHandler) {}
+  public function __construct(private readonly ModuleHandlerInterface $moduleHandler) {}
 
   public function getName(): string {
     return 'module_info';

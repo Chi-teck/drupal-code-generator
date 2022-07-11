@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator;
 
@@ -16,7 +16,9 @@ final class GeneratorFactory {
   private const DIRECTORY = Application::ROOT . '/src/Command';
   private const NAMESPACE = '\DrupalCodeGenerator\Command';
 
-  public function __construct(private ClassResolverInterface $classResolver) {}
+  public function __construct(
+    private readonly ClassResolverInterface $classResolver,
+  ) {}
 
   /**
    * Finds and instantiates DCG core generators.
@@ -45,6 +47,7 @@ final class GeneratorFactory {
         continue;
       }
 
+      // @todo Update this once we remove LegacyGenerator class.
       if (!$reflected_class->isSubclassOf(BaseGenerator::class) && !$reflected_class->isSubclassOf(LegacyGenerator::class)) {
         continue;
       }

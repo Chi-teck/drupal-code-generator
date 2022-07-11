@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Asset\Resolver;
 
@@ -9,7 +9,7 @@ use DrupalCodeGenerator\InputOutput\IO;
 
 final class ReplaceResolver implements ResolverInterface, ResolverFactoryInterface {
 
-  public function __construct(readonly private IO $io) {}
+  public function __construct(private readonly IO $io) {}
 
   /**
    * {@inheritdoc}

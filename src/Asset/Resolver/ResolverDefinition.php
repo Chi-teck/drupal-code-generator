@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Asset\Resolver;
 
@@ -7,8 +7,8 @@ use DrupalCodeGenerator\InputOutput\IO;
 final class ResolverDefinition {
 
   public function __construct(
-    readonly public string $className,
-    readonly public mixed $options = NULL,
+    public readonly string $className,
+    public readonly mixed $options = NULL,
   ) {}
 
   public function createResolver(IO $io): ResolverInterface {

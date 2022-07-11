@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Validator;
 
@@ -8,8 +8,8 @@ namespace DrupalCodeGenerator\Validator;
 final class RegExp {
 
   public function __construct(
-    readonly private string $pattern,
-    readonly private ?string $message = NULL,
+    private readonly string $pattern,
+    private readonly ?string $message = NULL,
   ) {}
 
   public function __invoke(mixed $value): string {

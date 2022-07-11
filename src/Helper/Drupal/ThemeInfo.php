@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Helper\Drupal;
 
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Helper\Helper;
  */
 final class ThemeInfo extends Helper implements ExtensionInfoInterface {
 
-  public function __construct(private ThemeHandlerInterface $themeHandler) {}
+  public function __construct(private readonly ThemeHandlerInterface $themeHandler) {}
 
   public function getName(): string {
     return 'theme_info';

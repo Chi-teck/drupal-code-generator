@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Validator;
 
@@ -7,7 +7,7 @@ namespace DrupalCodeGenerator\Validator;
  */
 final class Optional {
 
-  readonly private \Closure $validator;
+  private readonly \Closure $validator;
 
   public function __construct(callable $validator) {
     // Convert into closure as typed properties cannot be callable.

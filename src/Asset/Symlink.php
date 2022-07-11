@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Asset;
 
@@ -10,7 +10,7 @@ final class Symlink extends Asset {
   /**
    * Symlink target.
    */
-  readonly private string $target;
+  private readonly string $target;
 
   /**
    * {@inheritdoc}

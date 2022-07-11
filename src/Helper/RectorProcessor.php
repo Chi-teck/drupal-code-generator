@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Helper;
 
@@ -15,6 +15,8 @@ use Symfony\Component\Console\Helper\Helper;
 
 /**
  * Rector processor.
+ *
+ * @todo Is it really needed?
  */
 final class RectorProcessor extends Helper implements IOAwareInterface, LoggerAwareInterface {
 

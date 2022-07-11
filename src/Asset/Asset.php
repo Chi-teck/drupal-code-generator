@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Asset;
 
@@ -42,7 +42,7 @@ abstract class Asset implements \Stringable {
   /**
    * Asset constructor.
    */
-  public function __construct(readonly protected string $path) {
+  public function __construct(protected readonly string $path) {
     $this->resolverDefinition = new ResolverDefinition(ReplaceResolver::class);
   }
 

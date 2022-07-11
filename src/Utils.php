@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator;
 
@@ -8,7 +8,7 @@ use Symfony\Component\String\Inflector\EnglishInflector;
 /**
  * Helper methods for code generators.
  */
-class Utils {
+final class Utils {
 
   /**
    * Transforms a machine name to human name.
@@ -22,11 +22,9 @@ class Utils {
    * Transforms a human name to machine name.
    */
   public static function human2machine(string $human_name): string {
-    return \trim(\preg_replace(
-      ['/^[0-9]+/', '/[^a-z0-9_]+/'],
-      '_',
-      \strtolower($human_name),
-    ), '_');
+    $output = \strtolower($human_name);
+    $output = \preg_replace(['/^[0-9]+/', '/[^a-z0-9_]+/'], '_', $output);
+    return \trim($output, '_');
   }
 
   /**
@@ -47,6 +45,8 @@ class Utils {
 
   /**
    * Returns extension root.
+   *
+   * @todo Is it still needed?
    */
   public static function getExtensionRoot(string $directory): ?string {
     $extension_root = NULL;

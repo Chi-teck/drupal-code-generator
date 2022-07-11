@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Asset\Resolver;
 
@@ -8,7 +8,7 @@ use DrupalCodeGenerator\InputOutput\IO;
 
 final class AppendResolver implements ResolverInterface, ResolverFactoryInterface {
 
-  public function __construct(readonly private int $headerSize = 0) {
+  public function __construct(private readonly int $headerSize = 0) {
     if ($headerSize < 0) {
       throw new \InvalidArgumentException('Header size must be greater than or equal to 0.');
     }

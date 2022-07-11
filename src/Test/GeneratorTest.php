@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Test;
 
@@ -25,14 +25,14 @@ abstract class GeneratorTest extends TestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  protected function setUp(): void {
     $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function tearDown(): void {
+  protected function tearDown(): void {
     (new Filesystem())->remove($this->directory);
   }
 
@@ -83,6 +83,8 @@ abstract class GeneratorTest extends TestCase {
 
   /**
    * Creates DCG application.
+   *
+   * @todo Fix this.
    */
   protected function createApplication(): Application {
     $application = Application::create();

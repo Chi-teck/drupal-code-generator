@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Test\Functional;
 
@@ -9,6 +9,8 @@ use Symfony\Component\Console\Question\Question;
 
 /**
  * Question helper without autocomplete.
+ *
+ * @todo Is it still needed?
  */
 final class QuestionHelper extends BaseHelper {
 

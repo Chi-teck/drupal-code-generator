@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Validator;
 
@@ -7,7 +7,7 @@ namespace DrupalCodeGenerator\Validator;
  */
 final class Chained {
 
-  readonly private array $validators;
+  private readonly array $validators;
 
   public function __construct(callable ...$validators) {
     $this->validators = $validators;

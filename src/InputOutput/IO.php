@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\InputOutput;
 
@@ -21,9 +21,9 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
    * IO constructor.
    */
   public function __construct(
-    readonly private InputInterface $input,
-    readonly private OutputInterface $output,
-    readonly private QuestionHelper $questionHelper,
+    private readonly InputInterface $input,
+    private readonly OutputInterface $output,
+    private readonly QuestionHelper $questionHelper,
   ) {
     parent::__construct($input, $output);
   }

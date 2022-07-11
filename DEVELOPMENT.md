@@ -11,10 +11,6 @@ cd drupal-code-generator
 
 # Install dependencies.
 composer install
-
-# Run generator.
-bin/dcg
-
 ```
 
 ## Testing

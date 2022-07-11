@@ -34,7 +34,7 @@
   <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
     <properties>
       <property name="declareOnFirstLine" value="true"/>
-      <property name="spacesCountAroundEqualsSign" value="0"/>
+      <property name="spacesCountAroundEqualsSign" value="1"/>
     </properties>
     <exclude-pattern>./tests/sut</exclude-pattern>
   </rule>

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Logger;
 
@@ -16,7 +16,7 @@ final class ConsoleLogger extends AbstractLogger {
   /**
    * Verbosity level map.
    */
-  private array $verbosityLevelMap = [
+  private const VERBOSITY_LEVEL_MAP = [
     LogLevel::EMERGENCY => OutputInterface::VERBOSITY_NORMAL,
     LogLevel::ALERT => OutputInterface::VERBOSITY_NORMAL,
     LogLevel::CRITICAL => OutputInterface::VERBOSITY_NORMAL,
@@ -37,7 +37,7 @@ final class ConsoleLogger extends AbstractLogger {
    */
   public function log($level, string|\Stringable $message, array $context = []): void {
 
-    if (!isset($this->verbosityLevelMap[$level])) {
+    if (!isset(self::VERBOSITY_LEVEL_MAP[$level])) {
       throw new InvalidArgumentException("The log level \"$level\" does not exist.");
     }
 
@@ -60,7 +60,7 @@ final class ConsoleLogger extends AbstractLogger {
     // The if condition check isn't necessary -- it's the same one that $output
     // will do internally anyway. We only do it for efficiency here as the
     // message formatting is relatively expensive.
-    if ($output->getVerbosity() >= $this->verbosityLevelMap[$level]) {
+    if ($output->getVerbosity() >= self::VERBOSITY_LEVEL_MAP[$level]) {
 
       $label = match ($level) {
         LogLevel::EMERGENCY,
@@ -74,7 +74,7 @@ final class ConsoleLogger extends AbstractLogger {
       };
 
       $formatted_message = \sprintf('[%s] %s', $label, $this->interpolate($message, $context));
-      $output->writeln($formatted_message, $this->verbosityLevelMap[$level]);
+      $output->writeln($formatted_message, self::VERBOSITY_LEVEL_MAP[$level]);
     }
   }
 

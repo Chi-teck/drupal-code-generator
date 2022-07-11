@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator\Helper;
 
@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * A helper that provides a bridge between generators and Drupal installation.
  *
- * @todo Support installation profiles.
+ * @deprecated
  */
 final class DrupalContext extends Helper {
 

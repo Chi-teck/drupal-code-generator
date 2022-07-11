@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace DrupalCodeGenerator;
 
@@ -29,7 +29,7 @@ use Twig\Loader\FilesystemLoader as TemplateLoader;
 /**
  * DCG console application.
  */
-class Application extends BaseApplication implements ContainerAwareInterface {
+final class Application extends BaseApplication implements ContainerAwareInterface {
 
   use ContainerAwareTrait;
 
@@ -56,8 +56,8 @@ class Application extends BaseApplication implements ContainerAwareInterface {
   /**
    * Creates the application.
    */
-  public static function create(ContainerInterface $container): Application {
-    $application = new static('Drupal Code Generator', self::VERSION);
+  public static function create(ContainerInterface $container): self {
+    $application = new self('Drupal Code Generator', self::VERSION);
     $application->setContainer($container);
 
     $file_system = new SymfonyFileSystem();
@@ -83,7 +83,7 @@ class Application extends BaseApplication implements ContainerAwareInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultInputDefinition(): InputDefinition {
+  protected function getDefaultInputDefinition(): InputDefinition {
     $definition = parent::getDefaultInputDefinition();
 
     $options = $definition->getOptions();
