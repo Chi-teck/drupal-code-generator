@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\Exception\SilentException;
 use DrupalCodeGenerator\GeneratorType;
+use DrupalCodeGenerator\Helper\Drupal\NullInfo;
 use DrupalCodeGenerator\InputOutput\Interviewer;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\InputOutput\IOAwareInterface;
@@ -125,6 +126,9 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    */
   abstract protected function generate(array &$vars, AssetCollection $assets): void;
 
+  /**
+   * Gets generator definition.
+   */
   protected function getGeneratorDefinition(): GeneratorDefinition {
     $attributes = (new \ReflectionClass(static::class))->getAttributes(GeneratorDefinition::class);
     if (\count($attributes) === 0) {
@@ -134,14 +138,21 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     return $attributes[0]->newInstance();
   }
 
+  /**
+   * Creates interviewer.
+   */
   protected function createInterviewer(array &$vars): Interviewer {
+    $extension_info = match ($this->getGeneratorDefinition()->type) {
+      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => $this->getHelper('module_info'),
+      GeneratorType::THEME, GeneratorType::THEME_COMPONENT => $this->getHelper('theme_info'),
+      default => new NullInfo(),
+    };
     return new Interviewer(
       io: $this->io,
       vars: $vars,
       generatorDefinition: $this->getGeneratorDefinition(),
-      moduleInfo: $this->getHelper('module_info'),
-      themeInfo: $this->getHelper('theme_info'),
       serviceInfo: $this->getHelper('service_info'),
+      extensionInfo: $extension_info,
     );
   }
 

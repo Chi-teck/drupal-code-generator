@@ -4,12 +4,8 @@ namespace DrupalCodeGenerator\InputOutput;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
-use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ExtensionInfoInterface;
-use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
-use DrupalCodeGenerator\Helper\Drupal\NullInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
-use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\Chained;
 use DrupalCodeGenerator\Validator\MachineName;
@@ -26,38 +22,21 @@ use Symfony\Component\Console\Question\Question;
  */
 final class Interviewer {
 
-  private readonly ExtensionInfoInterface $extensionInfo;
-
   public function __construct(
     private readonly IO $io,
     private readonly array &$vars,
     private readonly GeneratorDefinition $generatorDefinition,
     private readonly ServiceInfo $serviceInfo,
-    ModuleInfo $moduleInfo,
-    ThemeInfo $themeInfo,
-  ) {
-    $this->extensionInfo = match ($this->generatorDefinition->type) {
-      GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => $moduleInfo,
-      GeneratorType::THEME, GeneratorType::THEME_COMPONENT => $themeInfo,
-      default => new NullInfo(),
-    };
-  }
-
-  public function askQuestion(Question $question): mixed {
-    $answer = $this->io->askQuestion($question);
-    if (\is_string($answer)) {
-      $answer = Utils::addSlashes($answer);
-    }
-    return $answer;
-  }
+    private readonly ExtensionInfoInterface $extensionInfo,
+  ) {}
 
   /**
    * Asks a question.
    */
   public function ask(string $question, ?string $default = NULL, ?callable $validator = NULL): mixed {
-    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
+    $question = $this->processText($question);
     if ($default !== NULL) {
-      $default = Utils::stripSlashes(Utils::replaceTokens($default, $this->vars));
+      $default = $this->processText($default);
     }
     return $this->io->ask($question, $default, $validator);
   }
@@ -66,7 +45,7 @@ final class Interviewer {
    * Asks for confirmation.
    */
   public function confirm(string $question, bool $default = TRUE): bool {
-    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
+    $question = $this->processText($question);
     return $this->io->confirm($question, $default);
   }
 
@@ -74,7 +53,7 @@ final class Interviewer {
    * Asks a choice question.
    */
   public function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE): array|string|int {
-    $question = Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
+    $question = $this->processText($question);
 
     // The choices can be an associative array.
     $choice_labels = \array_values($choices);
@@ -89,7 +68,6 @@ final class Interviewer {
     // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
     $answer = $this->io->askQuestion($question);
 
-    // @todo Create a test for this.
     $get_key = static fn (string $answer): string|int => \array_search($answer, $choices);
     return \is_array($answer) ? \array_map($get_key, $answer) : $get_key($answer);
   }
@@ -99,8 +77,8 @@ final class Interviewer {
    */
   public function askName(): string {
 
-    $type = $this->generatorDefinition->type;
     $machine_name = $this->vars['machine_name'] ?? NULL;
+    $type = $this->generatorDefinition->type;
 
     // Try to determine the name without interaction with the user.
     if ($machine_name && !$type->isNewExtension()) {
@@ -122,23 +100,16 @@ final class Interviewer {
   public function askMachineName(): string {
     $type = $this->generatorDefinition->type;
 
-    $default = NULL;
     if (isset($this->vars['name'])) {
-      if ($type->isNewExtension()) {
-        $default = Utils::human2machine($this->vars['name']);
-      }
-      else {
-        $default = $this->extensionInfo->getExtensionMachineName($this->vars['name']);
-      }
+      $default = $type->isNewExtension() ?
+        Utils::human2machine($this->vars['name']) : $this->extensionInfo->getExtensionMachineName($this->vars['name']);
     }
-
     $default ??= $this->extensionInfo->getExtensionFromPath($this->io->getWorkingDirectory())?->getName();
 
     $question = new Question($type->getMachineNameLabel(), $default);
     $question->setValidator(new Chained(new Required(), new MachineName()));
 
-    $extensions = $this->extensionInfo->getExtensions();
-    if ($extensions) {
+    if ($extensions = $this->extensionInfo->getExtensions()) {
       $question->setAutocompleterValues(\array_keys($extensions));
     }
 
@@ -168,8 +139,6 @@ final class Interviewer {
 
   /**
    * Asks plugin class question.
-   *
-   * @todo Remove $suffix parameter.
    */
   public function askPluginClass(string $question = 'Plugin class', ?string $default = NULL, string $suffix = ''): ?string {
     if ($default === NULL && isset($this->vars['machine_name'], $this->vars['plugin_id'])) {
@@ -250,6 +219,13 @@ final class Interviewer {
   private static function getDumpedServiceDefinitions(): array {
     $data_encoded = \file_get_contents(Application::ROOT . '/resources/service-definitions.json');
     return \json_decode($data_encoded, TRUE);
+  }
+
+  /**
+   * Processes the text using previously collected variables.
+   */
+  private function processText(string $question): string {
+    return Utils::stripSlashes(Utils::replaceTokens($question, $this->vars));
   }
 
 }

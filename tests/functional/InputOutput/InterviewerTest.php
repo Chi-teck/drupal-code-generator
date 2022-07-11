@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\Tests\Functional\InputOutput;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
+use DrupalCodeGenerator\Helper\Drupal\NullInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Helper\QuestionHelper;
@@ -567,10 +568,17 @@ final class InterviewerTest extends FunctionalTestBase {
     GeneratorDefinition $definition = new GeneratorDefinition('example'),
   ): Interviewer {
     $container = $this->application->getContainer();
-    $module_info = new ModuleInfo($container->get('module_handler'));
-    $theme_info = new ThemeInfo($container->get('theme_handler'));
-    $service_info = new ServiceInfo($container);
-    return new Interviewer($this->io, $vars, $definition, $service_info, $module_info, $theme_info);
+    return new Interviewer(
+      $this->io,
+      $vars,
+      $definition,
+      new ServiceInfo($container),
+      match ($definition->type) {
+        GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => new ModuleInfo($container->get('module_handler')),
+        GeneratorType::THEME, GeneratorType::THEME_COMPONENT => new ThemeInfo($container->get('theme_handler')),
+        default => new NullInfo(),
+      },
+    );
   }
 
   /**
