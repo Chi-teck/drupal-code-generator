@@ -26,7 +26,7 @@ final class RoutingTest extends BrowserTestBase {
    */
   public function testRoute(): void {
     $this->drupalGet('yety/example');
-    // The request returns 'Access denied' because the route defines
+    // The request returns 'Access denied' because the generated route defines
     // non-existing permission.
     $this->assertSession()->statusCodeEquals(403);
   }

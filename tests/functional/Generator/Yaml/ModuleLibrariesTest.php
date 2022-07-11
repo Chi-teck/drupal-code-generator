@@ -14,7 +14,7 @@ final class ModuleLibrariesTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(ModuleLibraries::class, ['example']);
+    $this->execute(ModuleLibraries::class, ['foo']);
 
     $expected_display = <<< 'TXT'
 
@@ -26,12 +26,12 @@ final class ModuleLibrariesTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • example.libraries.yml
+     • foo.libraries.yml
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('example.libraries.yml');
+    $this->assertGeneratedFile('foo.libraries.yml');
   }
 
 }

@@ -7,7 +7,7 @@ example_1:
       css/example-1.css: {}
   dependencies:
     - core/drupalSettings
-    - {{ machine_name }}/example_2
+    - foo/example_2
 
 # Third-party library (self hosted).
 example_2:
