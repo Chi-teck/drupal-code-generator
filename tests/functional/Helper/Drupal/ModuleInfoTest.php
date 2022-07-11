@@ -59,6 +59,16 @@ final class ModuleInfoTest extends FunctionalTestBase {
   /**
    * Test callback.
    */
+  public function testGetModuleMachineName(): void {
+    $module_info = $this->createModuleInfo();
+
+    self::assertSame('dblog', $module_info->getModuleMachineName('Database Logging'));
+    self::assertNull($module_info->getModuleName('Unknown Module'));
+  }
+
+  /**
+   * Test callback.
+   */
   public function testGetModuleFromPath(): void {
     $module_info = $this->createModuleInfo();
 

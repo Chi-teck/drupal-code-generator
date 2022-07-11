@@ -129,17 +129,13 @@ final class Interviewer {
       }
       else {
         $default = match ($this->generatorDefinition->type) {
-          GeneratorType::MODULE_COMPONENT => \array_search($this->vars['name'], $this->moduleInfo->getModules()),
-          GeneratorType::THEME_COMPONENT => \array_search($this->vars['name'], $this->themeInfo->getThemes()),
+          GeneratorType::MODULE_COMPONENT => $this->moduleInfo->getModuleMachineName($this->vars['name']),
+          GeneratorType::THEME_COMPONENT => $this->themeInfo->getThemeMachineName($this->vars['name']),
           default => NULL,
         };
       }
     }
 
-    // @todo Clean-up.
-    if ($default === FALSE) {
-      $default = NULL;
-    }
     $default ??= $this->moduleInfo->getModuleFromPath($this->io->getWorkingDirectory())?->getName();
 
     $question_str = match ($this->generatorDefinition->type) {

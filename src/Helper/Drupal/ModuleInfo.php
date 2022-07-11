@@ -55,6 +55,13 @@ final class ModuleInfo extends Helper {
   }
 
   /**
+   * Returns module machine name.
+   */
+  public function getModuleMachineName(string $name): ?string {
+    return \array_search($name, $this->getModules()) ?: NULL;
+  }
+
+  /**
    * Gets module info for a given absolute path.
    */
   public function getModuleFromPath(string $path): ?Extension {

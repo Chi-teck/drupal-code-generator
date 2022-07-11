@@ -55,4 +55,11 @@ final class ThemeInfo extends Helper {
     return $this->getThemes()[$machine_name] ?? NULL;
   }
 
+  /**
+   * Returns theme machine name.
+   */
+  public function getThemeMachineName(string $name): ?string {
+    return \array_search($name, $this->getThemes()) ?: NULL;
+  }
+
 }
