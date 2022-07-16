@@ -14,7 +14,7 @@ final class ServicesTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(Services::class, ['foo']);
+    $this->execute(Services::class, ['foo', 'Foo']);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +22,9 @@ final class ServicesTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      The following directories and files have been created or updated:

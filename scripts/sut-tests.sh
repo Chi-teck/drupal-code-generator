@@ -276,7 +276,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
   $DCG yml:module-libraries -a yety
   $DCG yml:permissions -a yety
   $DCG yml:routing -a yety -a Yety
-  $DCG yml:services -a yety
+  $DCG yml:services -a yety -a Yety
 
   dcg_phpcs $MODULE_DIR
   dcg_module_install $MODULE_MACHINE_NAME

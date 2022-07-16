@@ -3,25 +3,26 @@
 namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements yml:services command.
- */
-final class Services extends ModuleGenerator {
+#[Generator(
+  name: 'yml:services',
+  description: 'Generates a services yml file',
+  aliases: ['services'],
+  templatePath: Application::TEMPLATE_PATH . '/yml/services',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Services extends BaseGenerator {
 
-  protected string $name = 'yml:services';
-  protected string $description = 'Generates a services yml file';
-  protected string $alias = 'services';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/yml/services';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
     $vars['class'] = '{machine_name|camelize}';
-    $this->addFile('{machine_name}.services.yml', 'services');
+    $assets->addFile('{machine_name}.services.yml', 'services');
   }
 
 }
