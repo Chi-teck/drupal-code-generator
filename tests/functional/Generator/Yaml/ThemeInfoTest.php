@@ -15,6 +15,7 @@ final class ThemeInfoTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'example',
+      'Example',
       'garland',
       'Example description.',
       'Custom',
@@ -27,6 +28,9 @@ final class ThemeInfoTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––
 
      Theme machine name:
+     ➤ 
+
+     Theme name [Example]:
      ➤ 
 
      Base theme [classy]:

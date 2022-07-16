@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
@@ -19,14 +19,14 @@ use DrupalCodeGenerator\Validator\Required;
 )]
 final class ModuleInfo extends BaseGenerator {
 
-  protected function generate(array &$vars, AssetCollection $assets): void {
-    $interviewer = $this->createInterviewer($vars);
-    $vars['machine_name'] = $interviewer->askMachineName();
-    $vars['name'] = $interviewer->askName();
-    $vars['description'] = $interviewer->ask('Description', 'Module description.', new Required());
-    $vars['package'] = $interviewer->ask('Package', 'Custom');
-    $vars['configure'] = $interviewer->ask('Configuration page (route name)');
-    $vars['dependencies'] = $interviewer->ask('Dependencies (comma separated)');
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
+    $vars['description'] = $ir->ask('Description', 'Module description.', new Required());
+    $vars['package'] = $ir->ask('Package', 'Custom');
+    $vars['configure'] = $ir->ask('Configuration page (route name)');
+    $vars['dependencies'] = $ir->ask('Dependencies (comma separated)');
     if ($vars['dependencies']) {
       $vars['dependencies'] = \array_map('trim', \explode(',', \strtolower($vars['dependencies'])));
     }

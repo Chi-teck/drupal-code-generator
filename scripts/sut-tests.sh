@@ -319,7 +319,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme_component ]]; then
   $DCG yml:breakpoints -a shreya
   $DCG theme-settings -a shreya -a Shreya
   $DCG yml:theme-libraries -a shreya
-  $DCG yml:theme-info -a shreya -a bartik -a 'Helper theme for testing DCG components.' -a DCG
+  $DCG yml:theme-info -a shreya -a Shreya -a bartik -a 'Helper theme for testing DCG components.' -a DCG
 
   dcg_phpcs $THEME_DIR
 fi

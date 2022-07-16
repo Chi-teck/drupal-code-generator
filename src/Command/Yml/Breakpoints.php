@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
@@ -17,7 +17,7 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class Breakpoints extends BaseGenerator {
 
-  protected function generate(array &$vars, AssetCollection $assets): void {
+  protected function generate(array &$vars, Assets $assets): void {
     $interviewer = $this->createInterviewer($vars);
     $vars['machine_name'] = $interviewer->askMachineName();
     $assets->addFile('{machine_name}.breakpoints.yml', 'breakpoints.twig');

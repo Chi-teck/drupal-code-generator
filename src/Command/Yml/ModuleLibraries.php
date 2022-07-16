@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Yml;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
@@ -18,7 +18,7 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class ModuleLibraries extends BaseGenerator {
 
-  protected function generate(array &$vars, AssetCollection $assets): void {
+  protected function generate(array &$vars, Assets $assets): void {
     $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
     $assets->addFile('{machine_name}.libraries.yml', 'module-libraries.twig');
   }
