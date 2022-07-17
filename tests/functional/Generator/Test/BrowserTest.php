@@ -13,8 +13,12 @@ final class BrowserTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_browser';
 
   public function testGenerator(): void {
-
-    $this->execute(Browser::class, ['foo', 'ExampleTest']);
+    $input = [
+      'foo',
+      'Foo',
+      'ExampleTest',
+    ];
+    $this->execute(Browser::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +26,9 @@ final class BrowserTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [ExampleTest]:

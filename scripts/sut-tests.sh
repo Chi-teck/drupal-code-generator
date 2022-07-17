@@ -283,6 +283,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
   dcg_phpunit tests
   dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
+#</editor-fold>
 
 # --- Test tests --- #
 if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = test ]]; then
@@ -294,7 +295,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = test ]]; then
   cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG test:browser -a xerox -a ExampleTest
+  $DCG test:browser -a xerox -a Xerox -a ExampleTest
   $DCG test:webdriver -a xerox -a ExampleTest
   $DCG test:kernel -a xerox -a ExampleTest
   $DCG test:unit -a xerox -a ExampleTest
