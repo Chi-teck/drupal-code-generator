@@ -283,7 +283,6 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
   dcg_phpunit tests
   dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
-#</editor-fold>
 
 # --- Test tests --- #
 if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = test ]]; then
@@ -310,11 +309,16 @@ fi
 if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme_component ]]; then
   dcg_label Theme component
 
+  MODULE_MACHINE_NAME=plantain
+  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+
+  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
+  cd $MODULE_DIR
+
   THEME_MACHINE_NAME=shreya
   THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
 
   mkdir $THEME_DIR
-  cd $THEME_DIR
 
   $DCG theme-file -a shreya -a Shreya
   $DCG yml:breakpoints -a shreya
@@ -323,6 +327,11 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme_component ]]; then
   $DCG yml:theme-info -a shreya -a Shreya -a bartik -a 'Helper theme for testing DCG components.' -a DCG
 
   dcg_phpcs $THEME_DIR
+
+  dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
+  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpunit tests
+  dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
 
 # --- Test plugin manager --- #

@@ -1,0 +1,5 @@
+name: Plantain
+type: module
+description: A helper module to test generated theme components.
+package: DCG
+core_version_requirement: ^10
