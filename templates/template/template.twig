@@ -1,13 +1,13 @@
 {{ '{#' }}
 /**
  * @file
- * Default theme implementation to display something.
+ * Default theme implementation to display {{ theme_key }}.
  *
  * Available variables:
  * - foo: Foo variable description.
 {% if create_preprocess %}
  *
- * @see template_preprocess_{{ template_name|h2u }}()
+ * @see template_preprocess_{{ theme_key }}()
 {% endif %}
  *
  * @ingroup themeable
