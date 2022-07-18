@@ -13,8 +13,12 @@ final class WebDriverTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_web_driver';
 
   public function testGenerator(): void {
-
-    $this->execute(WebDriver::class, ['foo', 'ExampleTest']);
+    $input = [
+      'foo',
+      'Foo',
+      'ExampleTest',
+    ];
+    $this->execute(WebDriver::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +26,9 @@ final class WebDriverTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [ExampleTest]:

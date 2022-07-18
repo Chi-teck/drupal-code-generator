@@ -6,7 +6,6 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Command\ModuleGenerator;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\RequiredClassName;
 
