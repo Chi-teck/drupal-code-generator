@@ -3,6 +3,6 @@ foo.settings:
   type: theme_settings
   label: 'Foo settings'
   mapping:
-    font_size:
-      type: integer
-      label: Font size
+    example:
+      type: string
+      label: Example

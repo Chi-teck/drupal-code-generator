@@ -42,6 +42,7 @@ final class Theme extends BaseGenerator {
       $assets->addFile('{machine_name}/{machine_name}.breakpoints.yml', 'yml/breakpoints/breakpoints');
     }
 
+    // @todo Do not reuse templates from other generators.
     if ($vars['theme_settings']) {
       $assets->addFile('{machine_name}/theme-settings.php', 'theme-settings/form');
       $assets->addFile('{machine_name}/config/install/{machine_name}.settings.yml', 'theme-settings/config');

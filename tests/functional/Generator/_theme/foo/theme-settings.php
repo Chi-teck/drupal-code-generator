@@ -1,14 +1,16 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * @file
  * Theme settings form for Foo theme.
  */
 
+use Drupal\Core\Form\FormState;
+
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
-function foo_form_system_theme_settings_alter(&$form, &$form_state) {
+function foo_form_system_theme_settings_alter(array &$form, FormState $form_state): void {
 
   $form['foo'] = [
     '#type' => 'details',
@@ -16,12 +18,10 @@ function foo_form_system_theme_settings_alter(&$form, &$form_state) {
     '#open' => TRUE,
   ];
 
-  $form['foo']['font_size'] = [
-    '#type' => 'number',
-    '#title' => t('Font size'),
-    '#min' => 12,
-    '#max' => 18,
-    '#default_value' => theme_get_setting('font_size'),
+  $form['foo']['example'] = [
+    '#type' => 'textfield',
+    '#title' => t('Example'),
+    '#default_value' => theme_get_setting('example'),
   ];
 
 }
