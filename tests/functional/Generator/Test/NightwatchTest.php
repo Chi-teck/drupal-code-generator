@@ -13,8 +13,12 @@ final class NightwatchTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_nightwatch';
 
   public function testGenerator(): void {
-
-    $this->execute(Nightwatch::class, ['foo', 'example']);
+    $input = [
+      'foo',
+      'Foo',
+      'example',
+    ];
+    $this->execute(Nightwatch::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +26,9 @@ final class NightwatchTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Test name [example]:
