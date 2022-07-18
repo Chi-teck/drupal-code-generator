@@ -13,8 +13,12 @@ final class UnitTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_unit';
 
   public function testGenerator(): void {
-
-    $this->execute(Unit::class, ['foo', 'ExampleTest']);
+    $input = [
+      'foo',
+      'Foo',
+      'ExampleTest',
+    ];
+    $this->execute(Unit::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +26,9 @@ final class UnitTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [ExampleTest]:
