@@ -3,26 +3,27 @@
 namespace DrupalCodeGenerator\Command\Test;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\RequiredClassName;
 
-/**
- * Implements test:kernel command.
- */
-final class Kernel extends ModuleGenerator {
+#[Generator(
+  name: 'test:kernel',
+  description: 'Generates a kernel based test',
+  aliases: ['kernel-test'],
+  templatePath: Application::TEMPLATE_PATH . '/test/kernel',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Kernel extends BaseGenerator {
 
-  protected string $name = 'test:kernel';
-  protected string $description = 'Generates a kernel based test';
-  protected string $alias = 'kernel-test';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/test/kernel';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['class'] = $this->ask('Class', 'ExampleTest', new RequiredClassName());
-    $this->addFile('tests/src/Kernel/{class}.php', 'kernel');
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
+    $vars['class'] = $ir->ask('Class', 'ExampleTest', new RequiredClassName());
+    $assets->addFile('tests/src/Kernel/{class}.php', 'kernel');
   }
 
 }

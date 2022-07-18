@@ -13,8 +13,12 @@ final class KernelTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_kernel';
 
   public function testGenerator(): void {
-
-    $this->execute(Kernel::class, ['foo', 'ExampleTest']);
+    $input = [
+      'foo',
+      'Foo',
+      'ExampleTest',
+    ];
+    $this->execute(Kernel::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +26,9 @@ final class KernelTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [ExampleTest]:

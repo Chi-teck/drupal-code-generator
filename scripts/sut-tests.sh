@@ -295,8 +295,8 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = test ]]; then
   cd $MODULE_DIR
 
   $DCG test:browser -a xerox -a Xerox -a ExampleTest
+  $DCG test:kernel -a xerox -a Xerox -a ExampleTest
   $DCG test:webdriver -a xerox -a ExampleTest
-  $DCG test:kernel -a xerox -a ExampleTest
   $DCG test:unit -a xerox -a ExampleTest
 
   dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
