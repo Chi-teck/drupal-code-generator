@@ -29,17 +29,17 @@ final class ThemeSettingsTest extends BrowserTestBase {
     $this->drupalGet('/admin/appearance/settings/shreya');
 
     $assert_session = $this->assertSession();
-    $assert_session->fieldExists('Font size');
-    $assert_session->fieldValueEquals('Font size', 16);
-    $this->submitForm(['font_size' => 18], 'Save configuration');
+    $assert_session->fieldExists('example');
+    $assert_session->fieldValueEquals('example', 'foo');
+    $this->submitForm(['example' => 'bar'], 'Save configuration');
     $assert_session->pageTextContainsOnce('The configuration options have been saved.');
-    $assert_session->fieldValueEquals('Font size', 18);
+    $assert_session->fieldValueEquals('example', 'bar');
 
-    $saved_font_size = $this->container
+    $saved_value = $this->container
       ->get('config.factory')
       ->get('shreya.settings')
-      ->get('font_size');
-    self::assertSame(18, $saved_font_size);
+      ->get('example');
+    self::assertSame('bar', $saved_value);
   }
 
 }

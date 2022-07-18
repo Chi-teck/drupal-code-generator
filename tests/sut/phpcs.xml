@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="DCG (generated code)">
+  <description>PHP CodeSniffer configuration for generated code.</description>
+  <arg name="extensions" value="inc,install,module,php,profile,test,theme,yml"/>
+  <rule ref="./vendor/drupal/coder/coder_sniffer/Drupal">
+    <!-- Conflicts with strict types. -->
+    <exclude name="Drupal.Commenting.FileComment.Missing"/>
+  </rule>
+  <rule ref="./vendor/drupal/coder/coder_sniffer/DrupalPractice">
+    <!-- Conflicts with strict types. -->
+    <exclude name="Drupal.WhiteSpace.OpenTagNewline.BlankLine"/>
+  </rule>
+</ruleset>

@@ -55,7 +55,7 @@ function dcg_module_uninstall {
 }
 
 function dcg_phpcs {
-  $DRUPAL_DIR/vendor/bin/phpcs -p --standard=Drupal,DrupalPractice "$@"
+  $DRUPAL_DIR/vendor/bin/phpcs -sp "$@"
 }
 
 function dcg_phpunit {
@@ -84,10 +84,12 @@ else
   git clone --depth 1 --branch $DCG_DRUPAL_VERSION $DRUPAL_REPO $DRUPAL_DIR
   echo '🚩 Install Composer dependencies'
   composer -d$DRUPAL_DIR install
+  echo '🚩 Add DCG scripts and configuration'
   cp $SCRIPTS_DIR/drupal.php $DRUPAL_DIR/
   cp -R $SOURCE_DIR/example $DRUPAL_DIR/modules
-  mkdir -m 777 $DRUPAL_DIR/sites/default/files
+  cp -R $SOURCE_DIR/phpcs.xml $DRUPAL_DIR
   echo '🚩 Install Drupal'
+  mkdir -m 777 $DRUPAL_DIR/sites/default/files
   php $DRUPAL_DIR/core/scripts/drupal install minimal
   cp -R $SOURCE_DIR/dcg_test $DRUPAL_DIR/modules
   dcg_module_install dcg_test
@@ -433,8 +435,8 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = bundle_class ]]; then
 
   $DCG entity:bundle-class -a acme -a Acme -a Content -a All -a No
 
-  dcg_phpcs $MODULE_DIR
   # @todo fix tests.
+  # dcg_phpcs $MODULE_DIR
   # dcg_module_install $MODULE_MACHINE_NAME
   # dcg_phpunit tests
   # dcg_module_uninstall $MODULE_MACHINE_NAME
