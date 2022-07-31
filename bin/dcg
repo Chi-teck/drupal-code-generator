@@ -1,26 +1,30 @@
 #!/usr/bin/env php
 <?php declare(strict_types = 1);
 
+use Composer\InstalledVersions;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
-use DrupalCodeGenerator\Command\GenerateCompletion;
-use DrupalCodeGenerator\Command\Navigation;
-use DrupalCodeGenerator\GeneratorFactory;
+use DrupalCodeGenerator\Runner\BaseRunner;
+use DrupalCodeGenerator\Runner\RunnerInterface;
+
+$dcg_exit = static function(string $message): never {
+  \fwrite(\STDERR, "\e[0;41m [ERROR] $message \e[0m" . \PHP_EOL);
+  exit(1);
+};
 
 // __DIR__ cannot be used here as it contains a path with symlinks resolved.
 $dcg_path = \str_starts_with($argv[0], '/') ?
   $argv[0] : \getcwd() . '/' . $argv[0];
 
-// DCG is installed as composer package.
+// DCG is installed as Composer package.
 $autoload_dir = \dirname($dcg_path) . '/..';
 if (!\file_exists($autoload_dir . '/autoload.php')) {
-  // DCG is installed as composer project.
+  // DCG is installed as Composer project.
   $autoload_dir = $autoload_dir . '/vendor';
 }
 
 if (!\file_exists($autoload_dir . '/autoload.php')) {
-  \fwrite(\STDERR, '[ERROR] Could not locate class loader.' . \PHP_EOL);
-  exit(1);
+  $dcg_exit('Could not locate class loader.');
 }
 
 $class_loader = require $autoload_dir . '/autoload.php';
@@ -30,18 +34,25 @@ try {
   $container = $bootstrap_handler->bootstrap();
 }
 catch (\Exception $exception) {
-  \fwrite(\STDERR, '[ERROR] ' . $exception->getMessage() . \PHP_EOL);
-  exit(1);
+  $dcg_exit($exception->getMessage());
 }
-
-$generator_factory = new GeneratorFactory($container->get('class_resolver'));
-$generators = $generator_factory->getGenerators();
 
 $application = Application::create($container);
 
-$application->addCommands($generators);
-$application->add(new GenerateCompletion());
-$application->add(new Navigation());
-$application->setDefaultCommand('navigation');
+$runner_file = InstalledVersions::getRootPackage()['install_path'] . '.dcg.php';
+if (\file_exists($runner_file)) {
+  $runner = require_once $runner_file;
+  if (!$runner instanceof RunnerInterface) {
+    $message = \sprintf(
+      'Runner must be instance of %s interface, %s was given.',
+      RunnerInterface::class,
+      \get_debug_type($runner),
+    );
+    $dcg_exit($message);
+  }
+}
+else {
+  $runner = new class() extends BaseRunner {};
+}
 
-$application->run();
+$runner->run($application);
