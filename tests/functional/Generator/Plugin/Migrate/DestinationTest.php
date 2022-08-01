@@ -28,7 +28,7 @@ final class DestinationTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin ID [example_example]:
+     Plugin ID:
      ➤ 
 
      Plugin class [Bar]:
