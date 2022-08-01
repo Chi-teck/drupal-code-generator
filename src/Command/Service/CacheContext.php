@@ -3,27 +3,28 @@
 namespace DrupalCodeGenerator\Command\Service;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements service:cache-context command.
- */
-final class CacheContext extends ModuleGenerator {
+#[Generator(
+  name: 'service:cache-context',
+  description: 'Generates a cache context service',
+  aliases: ['cache-context'],
+  templatePath: Application::TEMPLATE_PATH . '/service/cache-context',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class CacheContext extends BaseGenerator {
 
-  protected string $name = 'service:cache-context';
-  protected string $description = 'Generates a cache context service';
-  protected string $alias = 'cache-context';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/service/cache-context';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
+    $vars['context_id'] = $ir->ask('Context ID', 'example');
+    $vars['class'] = $ir->ask('Class', '{context_id|camelize}CacheContext');
 
-    $vars['context_id'] = $this->ask('Context ID', 'example');
-    $vars['class'] = $this->ask('Class', '{context_id|camelize}CacheContext');
-
+    // @todo Clean-up.
     $base_class_choices = [
       '-',
       'RequestStackCacheContextBase',
@@ -34,14 +35,14 @@ final class CacheContext extends ModuleGenerator {
       $vars['base_class'] = FALSE;
     }
 
-    $vars['calculated'] = $this->confirm('Make the context calculated?', FALSE);
+    $vars['calculated'] = $ir->confirm('Make the context calculated?', FALSE);
     $vars['context_label'] = '{context_id|m2h}';
 
     $vars['interface'] = $vars['calculated'] ?
       'CalculatedCacheContextInterface' : 'CacheContextInterface';
 
-    $this->addFile('src/Cache/Context/{class}.php', 'cache-context');
-    $this->addServicesFile()->template('services');
+    $assets->addFile('src/Cache/Context/{class}.php', 'cache-context');
+    $assets->addServicesFile()->template('services');
   }
 
 }
