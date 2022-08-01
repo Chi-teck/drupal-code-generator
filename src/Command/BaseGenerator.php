@@ -170,9 +170,12 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    * Dumps assets.
    */
   protected function dump(AssetCollection $assets, string $destination): AssetCollection {
-    $is_dry = $this->io()->getInput()->getOption('dry-run');
-    $dumper_name = $is_dry ? 'dry_dumper' : 'filesystem_dumper';
+    // @todo Test processing.
+    $processor = $this->getHelper('processor');
+    $processor->preProcess($assets);
+    $dumper_name = $this->io()->getInput()->getOption('dry-run') ? 'dry_dumper' : 'filesystem_dumper';
     $dumped_assets = $this->getHelper($dumper_name)->dump($assets, $destination);
+    $processor->postProcess($dumped_assets, $destination);
     return $dumped_assets;
   }
 

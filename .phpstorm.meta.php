@@ -9,12 +9,12 @@ namespace PHPSTORM_META {
       'module_info' => \DrupalCodeGenerator\Helper\Drupal\ModuleInfo::class,
       'theme_info' => \DrupalCodeGenerator\Helper\Drupal\ThemeInfo::class,
       'hook_info' => \DrupalCodeGenerator\Helper\Drupal\HookInfo::class,
+      'processor' => \DrupalCodeGenerator\Helper\Processor\ProcessorInterface::class,
       'dry_dumper' => \DrupalCodeGenerator\Helper\Dumper\DryDumper::class,
       'filesytem_dumper' => \DrupalCodeGenerator\Helper\Dumper\FileSystemDumper::class,
       'renderer' => \DrupalCodeGenerator\Helper\RendererInterface::class,
       'question_helper' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
       'result_printer' => \DrupalCodeGenerator\Helper\ResultPrinter::class,
-      'rector' => \DrupalCodeGenerator\Helper\Rector::class,
     ]),
   );
 
@@ -25,12 +25,12 @@ namespace PHPSTORM_META {
       'module_info' => \DrupalCodeGenerator\Helper\Drupal\ModuleInfo::class,
       'theme_info' => \DrupalCodeGenerator\Helper\Drupal\ThemeInfo::class,
       'hook_info' => \DrupalCodeGenerator\Helper\Drupal\HookInfo::class,
+      'processor' => \DrupalCodeGenerator\Helper\Processor\ProcessorInterface::class,
       'dry_dumper' => \DrupalCodeGenerator\Helper\Dumper\DryDumper::class,
       'filesytem_dumper' => \DrupalCodeGenerator\Helper\Dumper\FileSystemDumper::class,
       'renderer' => \DrupalCodeGenerator\Helper\RendererInterface::class,
       'question_helper' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
       'result_printer' => \DrupalCodeGenerator\Helper\ResultPrinter::class,
-      'rector' => \DrupalCodeGenerator\Helper\Rector::class,
     ])
   );
 
