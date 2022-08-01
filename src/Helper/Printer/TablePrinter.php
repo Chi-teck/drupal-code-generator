@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Helper;
+namespace DrupalCodeGenerator\Helper\Printer;
 
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\AssetCollection;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Helper\TableStyle;
 /**
  * Prints assets in tabular form.
  */
-final class TablePrinter extends Helper implements IOAwareInterface {
+final class TablePrinter extends Helper implements PrinterInterface, IOAwareInterface {
 
   use IOAwareTrait;
 
@@ -25,7 +25,7 @@ final class TablePrinter extends Helper implements IOAwareInterface {
   }
 
   /**
-   * Prints assets in tabular form.
+   * {@inheritdoc}
    */
   public function printAssets(AssetCollection $assets, string $base_path = ''): void {
     if (\count($assets) === 0) {

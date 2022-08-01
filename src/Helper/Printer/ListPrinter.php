@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Helper;
+namespace DrupalCodeGenerator\Helper\Printer;
 
 use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\AssetCollection;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Helper\Helper;
 /**
  * Prints assets as a bulleted list.
  */
-final class ListPrinter extends Helper implements IOAwareInterface {
+final class ListPrinter extends Helper implements PrinterInterface, IOAwareInterface {
 
   use IOAwareTrait;
 
@@ -23,7 +23,7 @@ final class ListPrinter extends Helper implements IOAwareInterface {
   }
 
   /**
-   * Prints summary.
+   * {@inheritdoc}
    */
   public function printAssets(AssetCollection $assets, string $base_path = ''): void {
     if (\count($assets) === 0) {
