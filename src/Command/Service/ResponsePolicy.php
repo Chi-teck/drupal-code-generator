@@ -3,26 +3,27 @@
 namespace DrupalCodeGenerator\Command\Service;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements service:response-policy command.
- */
-final class ResponsePolicy extends ModuleGenerator {
+#[Generator(
+  name: 'service:response-policy',
+  description: 'Generates a response policy service',
+  aliases: ['response-policy'],
+  templatePath: Application::TEMPLATE_PATH . '/service/response-policy',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class ResponsePolicy extends BaseGenerator {
 
-  protected string $name = 'service:response-policy';
-  protected string $description = 'Generates a response policy service';
-  protected string $alias = 'response-policy';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/service/response-policy';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['class'] = $ir->ask('Class', 'Example');
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['class'] = $this->ask('Class', 'Example');
-    $this->addFile('src/PageCache/{class}.php', 'response-policy');
-    $this->addServicesFile()->template('services');
+    $assets->addFile('src/PageCache/{class}.php', 'response-policy');
+    $assets->addServicesFile()->template('services');
   }
 
 }
