@@ -3,36 +3,40 @@
 namespace DrupalCodeGenerator\Command\Service;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\RequiredClassName;
 use DrupalCodeGenerator\Validator\RequiredServiceName;
 
-/**
- * Implements service:custom command.
- */
-final class Custom extends ModuleGenerator {
+#[Generator(
+  name: 'service:custom',
+  description: 'Generates a custom Drupal service',
+  aliases: ['custom-service'],
+  templatePath: Application::TEMPLATE_PATH . '/service/custom',
+  type: GeneratorType::MODULE_COMPONENT,
+  label: 'Custom service',
+)]
+final class Custom extends BaseGenerator {
 
-  protected string $name = 'service:custom';
-  protected string $description = 'Generates a custom Drupal service';
-  protected string $alias = 'custom-service';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/service/custom';
-  protected string $label = 'Custom service';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['service_name'] = $this->ask('Service name', '{machine_name}.example', new RequiredServiceName());
+    $vars['service_name'] = $ir->ask('Service name', '{machine_name}.example', new RequiredServiceName());
 
-    $service = \preg_replace('/^' . $vars['machine_name'] . '/', '', $vars['service_name']);
-    $vars['class'] = $this->ask('Class', Utils::camelize($service), new RequiredClassName());
+    $default_class = Utils::camelize(
+      Utils::removePrefix($vars['service_name'], $vars['machine_name']),
+    );
+    $vars['class'] = $ir->ask('Class', $default_class, new RequiredClassName());
 
-    $this->collectServices($vars);
+    $vars['services'] = $ir->askServices();
 
-    $this->addFile('src/{class}.php', 'custom');
-    $this->addServicesFile()->template('services');
+    $assets->addFile('src/{class}.php', 'custom.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }
