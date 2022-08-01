@@ -3,26 +3,27 @@
 namespace DrupalCodeGenerator\Command\Service;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements service:logger command.
- */
-final class Logger extends ModuleGenerator {
+#[Generator(
+  name: 'service:logger',
+  description: 'Generates a logger service',
+  aliases: ['logger'],
+  templatePath: Application::TEMPLATE_PATH . '/service/logger',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Logger extends BaseGenerator {
 
-  protected string $name = 'service:logger';
-  protected string $description = 'Generates a logger service';
-  protected string $alias = 'logger';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/service/logger';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['class'] = $this->ask('Class', 'FileLog');
-    $this->addFile('src/Logger/{class}.php', 'logger');
-    $this->addServicesFile()->template('services');
+    $vars['class'] = $ir->ask('Class', 'FileLog');
+    $assets->addFile('src/Logger/{class}.php', 'logger.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }
