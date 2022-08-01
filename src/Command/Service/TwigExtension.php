@@ -3,27 +3,27 @@
 namespace DrupalCodeGenerator\Command\Service;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements service:twig-extension command.
- */
-final class TwigExtension extends ModuleGenerator {
+#[Generator(
+  name: 'service:twig-extension',
+  description: 'Generates Twig extension service',
+  aliases: ['twig-extension'],
+  templatePath: Application::TEMPLATE_PATH . '/service/twig-extension',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class TwigExtension extends BaseGenerator {
 
-  protected string $name = 'service:twig-extension';
-  protected string $description = 'Generates Twig extension service';
-  protected string $alias = 'twig-extension';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/service/twig-extension';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['class'] = $this->ask('Class', '{machine_name|camelize}TwigExtension');
-    $this->collectServices($vars);
-    $this->addFile('src/{class}.php', 'twig-extension');
-    $this->addServicesFile()->template('services');
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['class'] = $ir->ask('Class', '{machine_name|camelize}TwigExtension');
+    $vars['services'] = $ir->askServices();
+    $assets->addFile('src/{class}.php', 'twig-extension');
+    $assets->addServicesFile()->template('services');
   }
 
 }
