@@ -15,6 +15,7 @@ final class EventSubscriberTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'foo',
+      'Foo',
       'BarSubscriber',
       'Yes',
       'messenger',
@@ -28,6 +29,9 @@ final class EventSubscriberTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [FooSubscriber]:
