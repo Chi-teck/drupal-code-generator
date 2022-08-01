@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Helper;
+namespace DrupalCodeGenerator\Helper\Renderer;
 
 use DrupalCodeGenerator\Asset\RenderableInterface;
 
@@ -13,7 +13,7 @@ interface RendererInterface {
    * Renders a template.
    *
    * @param string $template
-   *   Path to Twig template.
+   *   Path to a template.
    * @param array $vars
    *   Template variables.
    *
@@ -23,7 +23,7 @@ interface RendererInterface {
   public function render(string $template, array $vars): string;
 
   /**
-   * Renders a Twig string directly.
+   * Renders a template string directly.
    *
    * @param string $inline_template
    *   The template string to render.

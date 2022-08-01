@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Test;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Helper\Renderer;
+use DrupalCodeGenerator\Helper\Renderer\TwigRenderer;
 use DrupalCodeGenerator\Tests\QuestionHelper;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use DrupalCodeGenerator\Utils;
@@ -96,7 +96,7 @@ abstract class GeneratorTest extends TestCase {
 
     // Replace default renderer to enable 'strict_variables' in tests.
     $twig_environment = new TwigEnvironment(new FilesystemLoader([Application::TEMPLATE_PATH]), ['strict_variables' => TRUE]);
-    $helper_set->set(new Renderer($twig_environment));
+    $helper_set->set(new TwigRenderer($twig_environment));
     return $application;
   }
 

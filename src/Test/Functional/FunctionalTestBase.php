@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Test\Functional;
 use Composer\InstalledVersions;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
-use DrupalCodeGenerator\Helper\Renderer;
+use DrupalCodeGenerator\Helper\Renderer\TwigRenderer;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use PHPUnit\Framework\TestCase;
 use Twig\Loader\FilesystemLoader as FileSystemLoader;
@@ -45,7 +45,7 @@ abstract class FunctionalTestBase extends TestCase {
 
     // Replace default renderer to enable 'strict_variables' in tests.
     $twig_environment = new TwigEnvironment(new FileSystemLoader([Application::TEMPLATE_PATH]), ['strict_variables' => TRUE]);
-    $helper_set->set(new Renderer($twig_environment));
+    $helper_set->set(new TwigRenderer($twig_environment));
     return $application;
   }
 

@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Helper\Dumper\FileSystemDumper;
 use DrupalCodeGenerator\Helper\ListPrinter;
 use DrupalCodeGenerator\Helper\Processor\NullProcessor;
 use DrupalCodeGenerator\Helper\QuestionHelper;
-use DrupalCodeGenerator\Helper\Renderer;
+use DrupalCodeGenerator\Helper\Renderer\TwigRenderer;
 use DrupalCodeGenerator\Helper\TablePrinter;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Symfony\Component\Console\Application as BaseApplication;
@@ -66,7 +66,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
       new NullProcessor(),
       new DryDumper($file_system),
       new FileSystemDumper($file_system),
-      new Renderer(new TwigEnvironment(new TemplateLoader([Application::TEMPLATE_PATH]))),
+      new TwigRenderer(new TwigEnvironment(new TemplateLoader([Application::TEMPLATE_PATH]))),
       new ListPrinter(),
       new TablePrinter(),
       new DrupalContext($container),

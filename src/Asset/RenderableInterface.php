@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Asset;
 
-use DrupalCodeGenerator\Helper\RendererInterface;
+use DrupalCodeGenerator\Helper\Renderer\RendererInterface;
 
 /**
  * An interface for renderable assets.

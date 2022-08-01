@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Helper;
+namespace DrupalCodeGenerator\Helper\Renderer;
 
 use DrupalCodeGenerator\Asset\RenderableInterface;
 use Psr\Log\LoggerAwareInterface;
@@ -9,9 +9,9 @@ use Symfony\Component\Console\Helper\Helper;
 use Twig\Environment as TwigEnvironment;
 
 /**
- * Renders assets and Twig templates.
+ * Renders assets and templates using Twig template engine.
  */
-final class Renderer extends Helper implements RendererInterface, LoggerAwareInterface {
+final class TwigRenderer extends Helper implements RendererInterface, LoggerAwareInterface {
 
   use LoggerAwareTrait;
 

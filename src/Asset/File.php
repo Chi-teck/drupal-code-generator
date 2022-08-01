@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Asset\Resolver\AppendResolver;
 use DrupalCodeGenerator\Asset\Resolver\PrependResolver;
 use DrupalCodeGenerator\Asset\Resolver\ResolverDefinition;
-use DrupalCodeGenerator\Helper\RendererInterface;
+use DrupalCodeGenerator\Helper\Renderer\RendererInterface;
 
 /**
  * A data structure to represent a file being generated.

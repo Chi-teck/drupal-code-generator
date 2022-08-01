@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Asset\Resolver\AppendResolver;
 use DrupalCodeGenerator\Asset\Resolver\PrependResolver;
 use DrupalCodeGenerator\Asset\Resolver\ReplaceResolver;
 use DrupalCodeGenerator\Helper\QuestionHelper;
-use DrupalCodeGenerator\Helper\Renderer;
+use DrupalCodeGenerator\Helper\Renderer\TwigRenderer;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Tests\Unit\BaseTestCase;
@@ -112,10 +112,10 @@ final class FileTest extends BaseTestCase {
     return new IO($input, $output, $question_helper);
   }
 
-  private static function createRenderer(): Renderer {
+  private static function createRenderer(): TwigRenderer {
     $twig_loader = new FilesystemLoader();
     $twig = new TwigEnvironment($twig_loader);
-    $renderer = new Renderer($twig);
+    $renderer = new TwigRenderer($twig);
     $renderer->registerTemplatePath(__DIR__);
     $logger = new ConsoleLogger(new NullOutput());
     $renderer->setLogger($logger);

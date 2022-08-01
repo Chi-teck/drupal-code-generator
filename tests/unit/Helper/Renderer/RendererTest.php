@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Unit\Helper;
+namespace DrupalCodeGenerator\Tests\Unit\Helper\Renderer;
 
 use DrupalCodeGenerator\Asset\File;
-use DrupalCodeGenerator\Helper\Renderer;
+use DrupalCodeGenerator\Helper\Renderer\TwigRenderer;
 use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +19,7 @@ final class RendererTest extends TestCase {
   /**
    * The renderer to test.
    */
-  private readonly Renderer $renderer;
+  private readonly TwigRenderer $renderer;
 
   /**
    * Logger output.
@@ -31,7 +31,7 @@ final class RendererTest extends TestCase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->renderer = new Renderer(new TwigEnvironment(new FilesystemLoader()));
+    $this->renderer = new TwigRenderer(new TwigEnvironment(new FilesystemLoader()));
     $this->renderer->registerTemplatePath(__DIR__);
     $this->output = new BufferedOutput(OutputInterface::VERBOSITY_DEBUG);
     $logger = new ConsoleLogger($this->output);
