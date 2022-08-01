@@ -14,14 +14,14 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Asset dumper form generators.
  */
-abstract class BaseDumper extends Helper implements IOAwareInterface {
+abstract class BaseDumper extends Helper implements DumperInterface, IOAwareInterface {
 
   use IOAwareTrait;
 
   public function __construct(protected readonly Filesystem $filesystem) {}
 
   /**
-   * Dumps the generated code to file system or stdout.
+   * {@inheritdoc}
    */
   final public function dump(AssetCollection $assets, string $destination): AssetCollection {
 
