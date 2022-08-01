@@ -251,7 +251,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = service ]]; then
   $DCG service:path-processor -a zippo -a PathProcessorZippo
   $DCG service:request-policy -a zippo -a Example
   $DCG service:response-policy -a zippo -a ExampleResponsePolicy
-  $DCG service:uninstall-validator -a zippo -a ExampleUninstallValidator
+  $DCG service:uninstall-validator -a zippo -a Zippo -a ExampleUninstallValidator
   $DCG service:cache-context -a zippo -a example -a ExampleCacheContext -a UserCacheContextBase -a Yes
 
   dcg_phpcs $MODULE_DIR

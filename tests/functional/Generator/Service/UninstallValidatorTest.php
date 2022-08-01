@@ -14,7 +14,12 @@ final class UninstallValidatorTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(UninstallValidator::class, ['foo', 'ExampleUninstallValidator']);
+    $input = [
+      'foo',
+      'Foo',
+      'ExampleUninstallValidator',
+    ];
+    $this->execute(UninstallValidator::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +27,9 @@ final class UninstallValidatorTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [FooUninstallValidator]:
