@@ -3,26 +3,27 @@
 namespace DrupalCodeGenerator\Command\Service;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements service:request-policy command.
- */
-final class RequestPolicy extends ModuleGenerator {
+#[Generator(
+  name: 'service:request-policy',
+  description: 'Generates a request policy service',
+  aliases: ['request-policy'],
+  templatePath: Application::TEMPLATE_PATH . '/service/request-policy',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class RequestPolicy extends BaseGenerator {
 
-  protected string $name = 'service:request-policy';
-  protected string $description = 'Generates a request policy service';
-  protected string $alias = 'request-policy';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/service/request-policy';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['class'] = $ir->ask('Class', 'Example');
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['class'] = $this->ask('Class', 'Example');
-    $this->addFile('src/PageCache/{class}.php', 'request-policy');
-    $this->addServicesFile()->template('services');
+    $assets->addFile('src/PageCache/{class}.php', 'request-policy');
+    $assets->addServicesFile()->template('services');
   }
 
 }
