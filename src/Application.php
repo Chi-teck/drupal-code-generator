@@ -12,7 +12,6 @@ use DrupalCodeGenerator\Helper\Dumper\DryDumper;
 use DrupalCodeGenerator\Helper\Dumper\FileSystemDumper;
 use DrupalCodeGenerator\Helper\ListPrinter;
 use DrupalCodeGenerator\Helper\QuestionHelper;
-use DrupalCodeGenerator\Helper\RectorProcessor;
 use DrupalCodeGenerator\Helper\Renderer;
 use DrupalCodeGenerator\Helper\TablePrinter;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
@@ -68,7 +67,6 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
       new Renderer(new TwigEnvironment(new TemplateLoader([Application::TEMPLATE_PATH]))),
       new ListPrinter(),
       new TablePrinter(),
-      new RectorProcessor(),
       new DrupalContext($container),
       new ModuleInfo($container->get('module_handler')),
       new ThemeInfo($container->get('theme_handler')),

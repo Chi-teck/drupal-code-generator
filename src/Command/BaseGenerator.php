@@ -173,9 +173,6 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     $is_dry = $this->io()->getInput()->getOption('dry-run');
     $dumper_name = $is_dry ? 'dry_dumper' : 'filesystem_dumper';
     $dumped_assets = $this->getHelper($dumper_name)->dump($assets, $destination);
-    if (!$is_dry) {
-      $this->getHelper('rector_processor')->process($dumped_assets, $destination);
-    }
     return $dumped_assets;
   }
 
