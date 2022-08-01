@@ -3,30 +3,30 @@
 namespace DrupalCodeGenerator\Command\Service;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\ModuleGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements service:param-converter command.
- */
-final class ParamConverter extends ModuleGenerator {
+#[Generator(
+  name: 'service:param-converter',
+  description: 'Generates a param converter service',
+  aliases: ['param-converter'],
+  templatePath: Application::TEMPLATE_PATH . '/service/param-converter',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class ParamConverter extends BaseGenerator {
 
-  protected string $name = 'service:param-converter';
-  protected string $description = 'Generates a param converter service';
-  protected string $alias = 'param-converter';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/service/param-converter';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-
-    $vars['parameter_type'] = $this->ask('Parameter type', 'example');
-    $vars['class'] = $this->ask('Class', '{parameter_type|camelize}ParamConverter');
+    $vars['parameter_type'] = $ir->ask('Parameter type', 'example');
+    $vars['class'] = $ir->ask('Class', '{parameter_type|camelize}ParamConverter');
     $vars['controller_class'] = '{machine_name|camelize}Controller';
 
-    $this->addFile('src/{class}.php', 'param-converter');
-    $this->addServicesFile()->template('services');
+    $assets->addFile('src/{class}.php', 'param-converter');
+    $assets->addServicesFile()->template('services');
   }
 
 }
