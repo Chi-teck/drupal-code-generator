@@ -35,7 +35,7 @@ final class Theme extends BaseGenerator {
 
     $assets->addFile('{machine_name}/{machine_name}.info.yml', 'yml/theme-info/theme-info');
     $assets->addFile('{machine_name}/{machine_name}.libraries.yml', 'yml/theme-libraries/theme-libraries');
-    $assets->addFile('{machine_name}/{machine_name}.theme', 'theme-file/theme');
+    $assets->addFile('{machine_name}/{machine_name}.theme', 'theme');
     $assets->addFile('{machine_name}/js/{machine_name|u2h}.js', 'theme/js/theme.twig');
 
     if ($vars['breakpoints']) {
