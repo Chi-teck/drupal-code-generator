@@ -3,32 +3,37 @@
 namespace DrupalCodeGenerator\Command\Plugin\Views;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:views:argument-default command.
- */
-final class ArgumentDefault extends PluginGenerator {
+#[Generator(
+  name: 'plugin:views:argument-default',
+  description: 'Generates views default argument plugin',
+  aliases: ['views-argument-default'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/views/argument-default',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class ArgumentDefault extends BaseGenerator {
 
-  protected string $name = 'plugin:views:argument-default';
-  protected string $description = 'Generates views default argument plugin';
-  protected string $alias = 'views-argument-default';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/views/argument-default';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $vars['configurable'] = $this->confirm('Make the plugin configurable?', FALSE);
+    $vars['plugin_label'] = $ir->askPluginLabel();
+    $vars['plugin_id'] = $ir->askPluginId();
+    $vars['class'] = $ir->askPluginClass();
 
-    $this->collectServices($vars, FALSE);
+    $vars['configurable'] = $ir->confirm('Make the plugin configurable?', FALSE);
 
-    $this->addFile('src/Plugin/views/argument_default/{class}.php')
+    $vars['services'] = $ir->askServices(FALSE);
+
+    $assets->addFile('src/Plugin/views/argument_default/{class}.php')
       ->template('argument-default');
 
     if ($vars['configurable']) {
-      $this->addSchemaFile('config/schema/{machine_name}.views.schema.yml')
+      $assets->addSchemaFile('config/schema/{machine_name}.views.schema.yml')
         ->template('argument-default-schema');
     }
   }
