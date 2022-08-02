@@ -31,7 +31,7 @@ final class SourceTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin ID [example_example]:
+     Plugin ID:
      ➤ 
 
      Plugin class [Foo]:
@@ -69,7 +69,7 @@ final class SourceTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin ID [example_example]:
+     Plugin ID:
      ➤ 
 
      Plugin class [Bar]:

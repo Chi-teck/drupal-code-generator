@@ -3,47 +3,32 @@
 namespace DrupalCodeGenerator\Command\Plugin\Migrate;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
-use DrupalCodeGenerator\Validator\RequiredMachineName;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:migrate:source command.
- */
-final class Source extends PluginGenerator {
+#[Generator(
+  name: 'plugin:migrate:source',
+  description: 'Generates migrate source plugin',
+  aliases: ['migrate-source'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/migrate/source',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Source extends BaseGenerator {
 
-  protected string $name = 'plugin:migrate:source';
-  protected string $description = 'Generates migrate source plugin';
-  protected string $alias = 'migrate-source';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/migrate/source';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['plugin_id'] = $ir->askPluginId(default: NULL);
+    $vars['class'] = $ir->askPluginClass();
     $choices = [
       'sql' => 'SQL',
       'other' => 'Other',
     ];
-    $vars['source_type'] = $this->choice('Source type', $choices);
-    $vars['base_class'] = $vars['source_type'] == 'sql' ? 'SqlBase' : 'SourcePluginBase';
-
-    $this->addFile('src/Plugin/migrate/source/{class}.php', 'source');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function askPluginLabelQuestion(): ?string {
-    return NULL;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function askPluginIdQuestion(): ?string {
-    return $this->ask('Plugin ID', '{machine_name}_example', new RequiredMachineName());
+    $vars['source_type'] = $ir->choice('Source type', $choices);
+    $vars['base_class'] = $vars['source_type'] === 'sql' ? 'SqlBase' : 'SourcePluginBase';
+    $assets->addFile('src/Plugin/migrate/source/{class}.php', 'source');
   }
 
 }
