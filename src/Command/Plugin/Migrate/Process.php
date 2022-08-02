@@ -3,39 +3,26 @@
 namespace DrupalCodeGenerator\Command\Plugin\Migrate;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Command\Plugin\PluginGenerator;
-use DrupalCodeGenerator\Validator\RequiredMachineName;
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:migrate:process command.
- */
-final class Process extends PluginGenerator {
+#[Generator(
+  name: 'plugin:migrate:process',
+  description: 'Generates migrate process plugin',
+  aliases: ['migrate-process'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/migrate/process',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Process extends BaseGenerator {
 
-  protected string $name = 'plugin:migrate:process';
-  protected string $description = 'Generates migrate process plugin';
-  protected string $alias = 'migrate-process';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/migrate/process';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('src/Plugin/migrate/process/{class}.php', 'process');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function askPluginLabelQuestion(): ?string {
-    return NULL;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function askPluginIdQuestion(): ?string {
-    return $this->ask('Plugin ID', '{machine_name}_example', new RequiredMachineName());
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['plugin_id'] = $ir->askPluginId(default: NULL);
+    $vars['class'] = $ir->askPluginClass();
+    $assets->addFile('src/Plugin/migrate/process/{class}.php', 'process');
   }
 
 }
