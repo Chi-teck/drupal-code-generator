@@ -210,7 +210,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
 
   $DCG plugin:views:argument-default -a qux -a Example -a qux_example -a Example -a Yes -a No
   $DCG plugin:views:field -a qux -a Example -a qux_example -a Example -a Yes -a No
-  $DCG plugin:views:style -a qux -a Example -a qux_example -a Example -a Yes -a No
+  $DCG plugin:views:style -a qux -a Qux -a Example -a qux_example -a Example -a Yes -a No
 
   $DCG plugin:action -a qux -a 'Update node title' -a qux_update_node_title -a UpdateNodeTitle -a DCG -a Yes
   $DCG plugin:block -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No

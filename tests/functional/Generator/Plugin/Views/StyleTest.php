@@ -15,6 +15,7 @@ final class StyleTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'example',
+      'Example',
       'Foo',
       'example_foo',
       'Foo',
@@ -30,7 +31,10 @@ final class StyleTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Module name [Example]:
+     ➤ 
+
+     Plugin label:
      ➤ 
 
      Plugin ID [example_foo]:
