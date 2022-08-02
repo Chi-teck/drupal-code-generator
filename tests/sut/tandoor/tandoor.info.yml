@@ -1,0 +1,5 @@
+name: Tandoor
+type: module
+description: A helper module for testing generated theme.
+package: DCG
+core_version_requirement: ^10
