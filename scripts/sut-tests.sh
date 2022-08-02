@@ -323,7 +323,6 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme_component ]]; then
 
   mkdir $THEME_DIR
 
-  $DCG theme-file -a shreya -a Shreya
   $DCG yml:breakpoints -a shreya
   $DCG theme-settings -a shreya -a Shreya
   $DCG yml:theme-libraries -a shreya
