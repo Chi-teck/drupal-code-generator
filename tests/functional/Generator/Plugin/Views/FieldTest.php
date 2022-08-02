@@ -33,7 +33,7 @@ final class FieldTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Plugin label:
      ➤ 
 
      Plugin ID [foo_example]:
