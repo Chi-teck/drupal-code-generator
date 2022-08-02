@@ -22,20 +22,20 @@ final class ThemeTest extends BrowserTestBase {
   public function testCssFiles(): void {
     $this->drupalGet('/user');
     $this->assertCssFile('base/elements.css');
-    $this->assertCssFile('layouts/layout.css');
-    $this->assertCssFile('components/buttons.css');
-    $this->assertCssFile('components/block.css');
-    $this->assertCssFile('components/breadcrumb.css');
-    $this->assertCssFile('components/field.css');
-    $this->assertCssFile('components/form.css');
-    $this->assertCssFile('components/header.css');
-    $this->assertCssFile('components/menu.css');
-    $this->assertCssFile('components/messages.css');
-    $this->assertCssFile('components/node.css');
-    $this->assertCssFile('components/sidebar.css');
-    $this->assertCssFile('components/table.css');
-    $this->assertCssFile('components/tabs.css');
-    $this->assertCssFile('components/buttons.css');
+    $this->assertCssFile('layout/layout.css');
+    $this->assertCssFile('component/buttons.css');
+    $this->assertCssFile('component/block.css');
+    $this->assertCssFile('component/breadcrumb.css');
+    $this->assertCssFile('component/field.css');
+    $this->assertCssFile('component/form.css');
+    $this->assertCssFile('component/header.css');
+    $this->assertCssFile('component/menu.css');
+    $this->assertCssFile('component/messages.css');
+    $this->assertCssFile('component/node.css');
+    $this->assertCssFile('component/sidebar.css');
+    $this->assertCssFile('component/table.css');
+    $this->assertCssFile('component/tabs.css');
+    $this->assertCssFile('component/buttons.css');
     $this->assertCssFile('theme/print.css');
 
     // Make sure CSS files from base theme are loaded.

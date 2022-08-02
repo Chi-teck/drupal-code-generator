@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * @file
@@ -8,20 +8,20 @@
 /**
  * Implements hook_preprocess_HOOK() for html.html.twig.
  */
-function {{ machine_name }}_preprocess_html(&$variables) {
+function {{ machine_name }}_preprocess_html(array &$variables): void {
 
 }
 
 /**
  * Implements hook_preprocess_HOOK() for page.html.twig.
  */
-function {{ machine_name }}_preprocess_page(&$variables) {
+function {{ machine_name }}_preprocess_page(array &$variables): void {
 
 }
 
 /**
  * Implements hook_preprocess_HOOK() for node.html.twig.
  */
-function {{ machine_name }}_preprocess_node(&$variables) {
+function {{ machine_name }}_preprocess_node(array &$variables): void {
 
 }

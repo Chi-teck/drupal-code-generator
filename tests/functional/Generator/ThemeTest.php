@@ -71,26 +71,30 @@ final class ThemeTest extends GeneratorTestBase {
      • foo/config/install/foo.settings.yml
      • foo/config/schema/foo.schema.yml
      • foo/css/base/elements.css
-     • foo/css/components/block.css
-     • foo/css/components/breadcrumb.css
-     • foo/css/components/buttons.css
-     • foo/css/components/field.css
-     • foo/css/components/form.css
-     • foo/css/components/header.css
-     • foo/css/components/menu.css
-     • foo/css/components/messages.css
-     • foo/css/components/node.css
-     • foo/css/components/sidebar.css
-     • foo/css/components/table.css
-     • foo/css/components/tabs.css
-     • foo/css/layouts/layout.css
+     • foo/css/component/block.css
+     • foo/css/component/breadcrumb.css
+     • foo/css/component/buttons.css
+     • foo/css/component/field.css
+     • foo/css/component/form.css
+     • foo/css/component/header.css
+     • foo/css/component/menu.css
+     • foo/css/component/messages.css
+     • foo/css/component/node.css
+     • foo/css/component/sidebar.css
+     • foo/css/component/table.css
+     • foo/css/component/tabs.css
+     • foo/css/layout/layout.css
      • foo/css/theme/print.css
      • foo/js/foo.js
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedDirectory('foo/css');
+    // For CSS just check the directories to reduce the number of fixtures.
+    $this->assertGeneratedDirectory('foo/css/base');
+    $this->assertGeneratedDirectory('foo/css/component');
+    $this->assertGeneratedDirectory('foo/css/layout');
+    $this->assertGeneratedDirectory('foo/css/theme');
     $this->assertGeneratedDirectory('foo/images');
     $this->assertGeneratedDirectory('foo/templates/block');
     $this->assertGeneratedDirectory('foo/templates/field');

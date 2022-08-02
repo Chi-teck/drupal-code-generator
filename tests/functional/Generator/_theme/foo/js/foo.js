@@ -7,7 +7,7 @@
   'use strict';
 
   Drupal.behaviors.foo = {
-    attach: function (context, settings) {
+    attach (context, settings) {
 
       console.log('It works!');
 

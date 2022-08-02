@@ -1,0 +1,27 @@
+<?php declare(strict_types = 1);
+
+/**
+ * @file
+ * Theme settings form for {{ name }} theme.
+ */
+
+use Drupal\Core\Form\FormState;
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function {{ machine_name }}_form_system_theme_settings_alter(array &$form, FormState $form_state): void {
+
+  $form['{{ machine_name }}'] = [
+    '#type' => 'details',
+    '#title' => t('{{ name }}'),
+    '#open' => TRUE,
+  ];
+
+  $form['{{ machine_name }}']['example'] = [
+    '#type' => 'textfield',
+    '#title' => t('Example'),
+    '#default_value' => theme_get_setting('example'),
+  ];
+
+}

@@ -10,9 +10,6 @@ use DrupalCodeGenerator\Utils;
 
 /**
  * Implements theme command.
- *
- * @todo: Create a SUT test for this.
- * @todo: Clean-up.
  */
 #[Generator(
   name: 'theme',
@@ -33,20 +30,19 @@ final class Theme extends BaseGenerator {
     $vars['breakpoints'] = $ir->confirm('Would you like to create breakpoints?', FALSE);
     $vars['theme_settings'] = $ir->confirm('Would you like to create theme settings form?', FALSE);
 
-    $assets->addFile('{machine_name}/{machine_name}.info.yml', 'yml/theme-info/theme-info');
-    $assets->addFile('{machine_name}/{machine_name}.libraries.yml', 'yml/theme-libraries/theme-libraries');
-    $assets->addFile('{machine_name}/{machine_name}.theme', 'theme');
-    $assets->addFile('{machine_name}/js/{machine_name|u2h}.js', 'theme/js/theme.twig');
+    $assets->addFile('{machine_name}/{machine_name}.info.yml', 'model.info');
+    $assets->addFile('{machine_name}/{machine_name}.libraries.yml', 'model.libraries.yml');
+    $assets->addFile('{machine_name}/{machine_name}.theme', 'model.theme');
+    $assets->addFile('{machine_name}/js/{machine_name|u2h}.js', 'js/model.js');
 
     if ($vars['breakpoints']) {
-      $assets->addFile('{machine_name}/{machine_name}.breakpoints.yml', 'yml/breakpoints/breakpoints');
+      $assets->addFile('{machine_name}/{machine_name}.breakpoints.yml', 'model.breakpoints.yml');
     }
 
-    // @todo Do not reuse templates from other generators.
     if ($vars['theme_settings']) {
-      $assets->addFile('{machine_name}/theme-settings.php', 'theme-settings/form');
-      $assets->addFile('{machine_name}/config/install/{machine_name}.settings.yml', 'theme-settings/config');
-      $assets->addFile('{machine_name}/config/schema/{machine_name}.schema.yml', 'theme-settings/schema');
+      $assets->addFile('{machine_name}/theme-settings.php', 'theme-settings.php');
+      $assets->addFile('{machine_name}/config/install/{machine_name}.settings.yml', 'config/install/model.settings.yml');
+      $assets->addFile('{machine_name}/config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml');
     }
 
     $assets->addFile('{machine_name}/logo.svg', 'theme/logo');
@@ -67,19 +63,19 @@ final class Theme extends BaseGenerator {
 
     $style_sheets = [
       'base/elements.css',
-      'components/block.css',
-      'components/breadcrumb.css',
-      'components/field.css',
-      'components/form.css',
-      'components/header.css',
-      'components/menu.css',
-      'components/messages.css',
-      'components/node.css',
-      'components/sidebar.css',
-      'components/table.css',
-      'components/tabs.css',
-      'components/buttons.css',
-      'layouts/layout.css',
+      'component/block.css',
+      'component/breadcrumb.css',
+      'component/field.css',
+      'component/form.css',
+      'component/header.css',
+      'component/menu.css',
+      'component/messages.css',
+      'component/node.css',
+      'component/sidebar.css',
+      'component/table.css',
+      'component/tabs.css',
+      'component/buttons.css',
+      'layout/layout.css',
       'theme/print.css',
     ];
     foreach ($style_sheets as $file) {
