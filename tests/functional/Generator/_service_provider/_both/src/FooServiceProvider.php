@@ -1,22 +1,18 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }};
+namespace Drupal\foo;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-{% sort %}
-{% for interface in interfaces %}
-use Drupal\Core\DependencyInjection\{{ interface }};
-{% endfor %}
-{% endsort %}
+use Drupal\Core\DependencyInjection\ServiceModifierInterface;
+use Drupal\Core\DependencyInjection\ServiceProviderInterface;
 
 /**
- * Defines a service provider for the {{ name }} module.
+ * Defines a service provider for the Foo module.
  *
  * @see https://www.drupal.org/node/2026959
  */
-final class {{ class }} implements {{ interfaces|join(', ') }} {
+final class FooServiceProvider implements ServiceProviderInterface, ServiceModifierInterface {
 
-{% if provide %}
   /**
    * {@inheritdoc}
    */
@@ -24,14 +20,12 @@ final class {{ class }} implements {{ interfaces|join(', ') }} {
     // @DCG Example of how to register a new service.
     // @code
     //   $container
-    //     ->register('{{ machine_name }}.example_subscriber', ExampleSubscriber::class)
+    //     ->register('foo.example_subscriber', ExampleSubscriber::class)
     //     ->addTag('event_subscriber')
     //     ->addArgument(new Reference('entity_type.manager'));
     // @endcode
   }
 
-{% endif %}
-{% if modify %}
   /**
    * {@inheritdoc}
    */
@@ -45,5 +39,4 @@ final class {{ class }} implements {{ interfaces|join(', ') }} {
     // @endcode
   }
 
-{% endif %}
 }

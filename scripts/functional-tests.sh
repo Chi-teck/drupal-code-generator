@@ -52,4 +52,4 @@ else
 fi
 
 echo '🚩 Run tests'
-$DRUPAL_DIR/vendor/bin/phpunit -c $DCG_DIR --testsuite=functional
+$DRUPAL_DIR/vendor/bin/phpunit -c $DCG_DIR --testsuite=functional ${1:-}

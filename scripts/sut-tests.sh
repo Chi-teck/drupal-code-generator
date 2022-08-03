@@ -143,7 +143,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
   $DCG controller -a bar -a Bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
   $DCG install-file -a bar -a Bar
   $DCG javascript -a bar -a Bar -a heavy-metal.js -a Yes -a heavy_metal
-  $DCG service-provider -a bar -a Bar
+  $DCG service-provider -a bar -a Bar -a Yes -a Yes
   $DCG template -a bar -a Bar -a example -a Yes -a Yes
   $DCG layout -a bar -a Foo -a foo -a my -a Yes -a Yes
   $DCG render-element -a bar
