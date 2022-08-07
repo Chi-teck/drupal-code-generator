@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo;
 
@@ -9,10 +9,7 @@ interface BarInterface {
 
   /**
    * Returns the translated plugin label.
-   *
-   * @return string
-   *   The translated title.
    */
-  public function label();
+  public function label(): string;
 
 }

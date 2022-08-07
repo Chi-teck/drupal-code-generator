@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * @file
@@ -8,14 +8,14 @@
 /**
  * Implements hook_{{ plugin_type }}_info().
  */
-function {{ machine_name }}_{{ plugin_type }}_info() {
+function {{ machine_name }}_{{ plugin_type }}_info(): array {
   return [
-    'foo' => [
+    '{{ machine_name }}.foo' => [
       'id' => 'foo',
       'label' => t('Foo'),
       'description' => t('Foo description.'),
     ],
-    'bar' => [
+    '{{ machine_name }}.bar' => [
       'id' => 'bar',
       'label' => t('Bar'),
       'description' => t('Bar description.'),

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo;
 
@@ -13,9 +13,8 @@ use Drupal\Core\Plugin\Factory\ContainerFactory;
  *
  * @see \Drupal\foo\BarDefault
  * @see \Drupal\foo\BarInterface
- * @see plugin_api
  */
-class BarPluginManager extends DefaultPluginManager {
+final class BarPluginManager extends DefaultPluginManager {
 
   /**
    * {@inheritdoc}
@@ -28,16 +27,11 @@ class BarPluginManager extends DefaultPluginManager {
     // The bar description.
     'description' => '',
     // Default plugin class.
-    'class' => 'Drupal\foo\BarDefault',
+    'class' => BarDefault::class,
   ];
 
   /**
    * Constructs BarPluginManager object.
-   *
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   The module handler to invoke the alter hook with.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache_backend
-   *   Cache backend instance to use.
    */
   public function __construct(ModuleHandlerInterface $module_handler, CacheBackendInterface $cache_backend) {
     $this->factory = new ContainerFactory($this);
@@ -49,7 +43,7 @@ class BarPluginManager extends DefaultPluginManager {
   /**
    * {@inheritdoc}
    */
-  protected function getDiscovery() {
+  protected function getDiscovery(): HookDiscovery {
     if (!isset($this->discovery)) {
       $this->discovery = new HookDiscovery($this->moduleHandler, 'bar_info');
     }

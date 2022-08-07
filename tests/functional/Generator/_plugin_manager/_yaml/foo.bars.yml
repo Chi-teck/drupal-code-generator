@@ -1,9 +1,9 @@
-foo_1:
-  label: 'Foo 1'
+foo.example_1:
+  label: 'Example 1'
   description: 'Plugin description.'
-foo_2:
-  label: 'Foo 2'
+foo.example_2:
+  label: 'Example 2'
   description: 'Plugin description.'
-foo_3:
-  label: 'Foo 3'
+foo.example_3:
+  label: 'Example 3'
   description: 'Plugin description.'

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }};
 
@@ -13,9 +13,8 @@ use Drupal\Core\Plugin\Factory\ContainerFactory;
  *
  * @see \Drupal\{{ machine_name }}\{{ class_prefix }}Default
  * @see \Drupal\{{ machine_name }}\{{ class_prefix }}Interface
- * @see plugin_api
  */
-class {{ class_prefix }}PluginManager extends DefaultPluginManager {
+final class {{ class_prefix }}PluginManager extends DefaultPluginManager {
 
   /**
    * {@inheritdoc}
@@ -28,16 +27,11 @@ class {{ class_prefix }}PluginManager extends DefaultPluginManager {
     // The {{ plugin_type }} description.
     'description' => '',
     // Default plugin class.
-    'class' => 'Drupal\{{ machine_name }}\{{ class_prefix }}Default',
+    'class' => {{ class_prefix }}Default::class,
   ];
 
   /**
    * Constructs {{ class_prefix }}PluginManager object.
-   *
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   The module handler to invoke the alter hook with.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache_backend
-   *   Cache backend instance to use.
    */
   public function __construct(ModuleHandlerInterface $module_handler, CacheBackendInterface $cache_backend) {
     $this->factory = new ContainerFactory($this);
@@ -49,7 +43,7 @@ class {{ class_prefix }}PluginManager extends DefaultPluginManager {
   /**
    * {@inheritdoc}
    */
-  protected function getDiscovery() {
+  protected function getDiscovery(): HookDiscovery {
     if (!isset($this->discovery)) {
       $this->discovery = new HookDiscovery($this->moduleHandler, '{{ plugin_type }}_info');
     }

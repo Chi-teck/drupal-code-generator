@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }};
 
@@ -9,10 +9,7 @@ interface {{ class_prefix }}Interface {
 
   /**
    * Returns the translated plugin label.
-   *
-   * @return string
-   *   The translated title.
    */
-  public function label();
+  public function label(): string;
 
 }

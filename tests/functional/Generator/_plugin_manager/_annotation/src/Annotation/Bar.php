@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Annotation;
 
@@ -9,31 +9,25 @@ use Drupal\Component\Annotation\Plugin;
  *
  * @Annotation
  */
-class Bar extends Plugin {
+final class Bar extends Plugin {
 
   /**
    * The plugin ID.
-   *
-   * @var string
    */
-  public $id;
+  public readonly string $id;
 
   /**
    * The human-readable name of the plugin.
    *
-   * @var \Drupal\Core\Annotation\Translation
-   *
    * @ingroup plugin_translatable
    */
-  public $title;
+  public readonly string $title;
 
   /**
    * The description of the plugin.
    *
-   * @var \Drupal\Core\Annotation\Translation
-   *
    * @ingroup plugin_translatable
    */
-  public $description;
+  public readonly string $description;
 
 }

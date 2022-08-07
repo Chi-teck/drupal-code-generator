@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Asset\Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\Chained;
+use DrupalCodeGenerator\Validator\RegExp;
 use DrupalCodeGenerator\Validator\Required;
 
 #[Generator(
@@ -23,13 +24,11 @@ final class PluginManager extends BaseGenerator {
     $vars['name'] = $ir->askName();
 
     // Machine name validator does not allow dots.
-    $plugin_type_validator = static function (string $value): string {
-      if (!\preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
-        throw new \UnexpectedValueException('The value is not correct machine name.');
-      }
-      return $value;
-    };
-    $vars['plugin_type'] = $ir->ask('Plugin type', '{machine_name}', new Chained(new Required(), $plugin_type_validator));
+    $validator = new Chained(
+      new Required(),
+      new RegExp('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', 'The value is not correct machine name.'),
+    );
+    $vars['plugin_type'] = $ir->ask('Plugin type', '{machine_name}', $validator);
 
     $discovery_types = [
       'annotation' => 'Annotation',

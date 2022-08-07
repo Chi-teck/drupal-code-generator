@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Plugin\Bar;
 
@@ -13,6 +13,6 @@ use Drupal\foo\BarPluginBase;
  *   description = @Translation("Foo description.")
  * )
  */
-class Foo extends BarPluginBase {
+final class Foo extends BarPluginBase {
 
 }

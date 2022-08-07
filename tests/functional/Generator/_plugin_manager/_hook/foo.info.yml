@@ -1,9 +1,0 @@
-name: Foo
-type: module
-description: Provides bar plugin type.
-package: Custom
-core: 8.x
-dependencies:
-  - drupal:views
-  - drupal:field
-  - drupal:node

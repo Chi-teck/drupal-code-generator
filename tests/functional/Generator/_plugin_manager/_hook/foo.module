@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * @file
@@ -8,14 +8,14 @@
 /**
  * Implements hook_bar_info().
  */
-function foo_bar_info() {
+function foo_bar_info(): array {
   return [
-    'foo' => [
+    'foo.foo' => [
       'id' => 'foo',
       'label' => t('Foo'),
       'description' => t('Foo description.'),
     ],
-    'bar' => [
+    'foo.bar' => [
       'id' => 'bar',
       'label' => t('Bar'),
       'description' => t('Bar description.'),

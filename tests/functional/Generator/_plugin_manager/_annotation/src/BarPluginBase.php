@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo;
 
@@ -12,7 +12,7 @@ abstract class BarPluginBase extends PluginBase implements BarInterface {
   /**
    * {@inheritdoc}
    */
-  public function label() {
+  public function label(): string {
     // Cast the label to a string since it is a TranslatableMarkup object.
     return (string) $this->pluginDefinition['label'];
   }

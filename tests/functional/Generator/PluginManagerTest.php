@@ -12,6 +12,9 @@ final class PluginManagerTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_plugin_manager';
 
+  /**
+   * Test callback.
+   */
   public function testAnnotationDiscovery(): void {
     $input = [
       'foo',
@@ -62,6 +65,9 @@ final class PluginManagerTest extends GeneratorTestBase {
     $this->assertGeneratedFile('src/Plugin/Bar/Foo.php');
   }
 
+  /**
+   * Test callback.
+   */
   public function testYamlDiscovery(): void {
     $input = [
       'foo',
@@ -110,6 +116,9 @@ final class PluginManagerTest extends GeneratorTestBase {
     $this->assertGeneratedFile('src/BarPluginManager.php');
   }
 
+  /**
+   * Test callback.
+   */
   public function testHookDiscovery(): void {
     $input = [
       'foo',

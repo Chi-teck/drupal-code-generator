@@ -5,6 +5,10 @@
   <rule ref="./vendor/drupal/coder/coder_sniffer/Drupal">
     <!-- Conflicts with strict types. -->
     <exclude name="Drupal.Commenting.FileComment.Missing"/>
+    <!-- Typed class properties do not need @var annotation.  -->
+    <!-- @todo Remove this once https://www.drupal.org/project/coder/issues/3123282 is resolved.    -->
+    <exclude name="Drupal.Commenting.VariableComment.MissingVar"/>
+    <exclude name="Drupal.Commenting.VariableComment.Missing"/>
   </rule>
   <rule ref="./vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <!-- Conflicts with strict types. -->
