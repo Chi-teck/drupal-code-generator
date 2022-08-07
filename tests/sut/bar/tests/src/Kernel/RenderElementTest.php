@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\Tests\bar\Kernel;
 
@@ -14,46 +14,26 @@ final class RenderElementTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['block', 'system', 'user', 'bar'];
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-
-    \Drupal::service('theme_installer')->install(['stark']);
-    \Drupal::configFactory()->getEditable('system.theme')->set('default', 'stark')->save();
-
-    $this->container
-      ->get('entity_type.manager')
-      ->getStorage('block')
-      ->create([
-        'id' => 'test_block',
-        'plugin' => 'system_powered_by_block',
-        'theme' => 'stark',
-        'region' => 'content',
-      ])
-      ->save();
-  }
+  protected static $modules = ['bar'];
 
   /**
    * Test callback.
    */
-  public function testBlockRendering(): void {
+  public function testElementRendering(): void {
+    $renderer = $this->container->get('renderer');
 
     $build = [
-      '#type' => 'entity',
-      '#entity_type' => 'block',
-      '#entity_id' => 'test_block',
+      '#type' => 'example',
     ];
+    $result = $renderer->renderRoot($build);
+    self::assertEquals('bar', $result);
 
-    $content = \Drupal::service('renderer')->renderRoot($build);
-
-    $result = (new \SimpleXMLElement($content))
-      ->xpath('//div[@id = "block-test-block"]/span/a[text() = "Drupal"]');
-
-    self::assertCount(1, $result);
+    $build = [
+      '#type' => 'example',
+      '#foo' => 'Hello world!',
+    ];
+    $result = $renderer->renderRoot($build);
+    self::assertEquals('Hello world!', $result);
   }
 
 }

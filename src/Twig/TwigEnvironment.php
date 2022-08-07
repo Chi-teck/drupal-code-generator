@@ -38,6 +38,9 @@ final class TwigEnvironment extends Environment {
     $h2u = static fn (string $input): string => \str_replace('-', '_', $input);
     $this->addFilter(new TwigFilter('h2u', $h2u));
 
+    $this->addFilter(new TwigFilter('m2h', [Utils::class, 'machine2human']));
+    $this->addFilter(new TwigFilter('h2m', [Utils::class, 'human2machine']));
+
     $this->addGlobal('SUT_TEST', \getenv('SUT_TEST'));
   }
 

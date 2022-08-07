@@ -1,26 +1,26 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Element;
+namespace Drupal\foo\Element;
 
 use Drupal\Core\Render\Element\RenderElement;
 
 /**
- * Provides a render element to display {{ type|m2h|article|lower }}.
+ * Provides a render element to display an example.
  *
  * Properties:
  * - #foo: Property description here.
  *
  * Usage Example:
  * @code
- * $build['{{ type }}'] = [
- *   '#type' => '{{ type }}',
+ * $build['example'] = [
+ *   '#type' => 'example',
  *   '#foo' => 'Some value.',
  * ];
  * @endcode
  *
- * @RenderElement("{{ type }}")
+ * @RenderElement("example")
  */
-final class {{ class }} extends RenderElement {
+final class Example extends RenderElement {
 
   /**
    * {@inheritdoc}
@@ -39,10 +39,10 @@ final class {{ class }} extends RenderElement {
   }
 
   /**
-   * {{ type|m2h }} element pre render callback.
+   * Example element pre render callback.
    *
    * @param array $element
-   *   An associative array containing the properties of the {{ type }} element.
+   *   An associative array containing the properties of the example element.
    *
    * @return array
    *   The modified element.

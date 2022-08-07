@@ -146,7 +146,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
   $DCG service-provider -a bar -a Bar -a Yes -a Yes
   $DCG template -a bar -a Bar -a example -a Yes -a Yes
   $DCG layout -a bar -a Foo -a foo -a my -a Yes -a Yes
-  $DCG render-element -a bar
+  $DCG render-element -a bar -a example -a Example
 
   $DCG field \
     -a bar -a Bar -a 'Example 1' -a bar_example_1 -a 10 \

@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
+use DrupalCodeGenerator\Validator\RequiredMachineName;
 
 #[Generator(
   name: 'render-element',
@@ -18,7 +19,9 @@ final class RenderElement extends BaseGenerator {
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
-    $assets->addFile('src/Element/Entity.php', 'render-element.twig');
+    $vars['type'] = $ir->ask('Element ID (#type)', validator: new RequiredMachineName());
+    $vars['class'] = $ir->askClass(default: '{type|camelize}');
+    $assets->addFile('src/Element/{class}.php', 'render-element.twig');
   }
 
 }

@@ -14,7 +14,13 @@ final class RenderElementTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(RenderElement::class, ['foo']);
+    $input = [
+      'foo',
+      'Wrong ID',
+      'example',
+      'Example',
+    ];
+    $this->execute(RenderElement::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -24,14 +30,23 @@ final class RenderElementTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
+     Element ID (#type):
+     ➤  The value is not correct machine name.
+
+     Element ID (#type):
+     ➤ 
+
+     Class [Example]:
+     ➤ 
+
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • src/Element/Entity.php
+     • src/Element/Example.php
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('src/Element/Entity.php');
+    $this->assertGeneratedFile('src/Element/Example.php');
   }
 
 }
