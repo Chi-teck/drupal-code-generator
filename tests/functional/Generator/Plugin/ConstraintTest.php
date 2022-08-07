@@ -15,6 +15,7 @@ final class ConstraintTest extends GeneratorTestBase {
   public function testEntityConstraint(): void {
     $input = [
       'foo',
+      'Foo',
       'Alpha',
       'FooAlpha',
       'AlphaConstraint',
@@ -30,10 +31,13 @@ final class ConstraintTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Module name [Foo]:
      ➤ 
 
-     Constraint ID [FooAlpha]:
+     Plugin label:
+     ➤ 
+
+     Plugin ID [FooAlpha]:
      ➤ 
 
      Plugin class [AlphaConstraint]:
@@ -62,6 +66,7 @@ final class ConstraintTest extends GeneratorTestBase {
   public function testItemListConstraint(): void {
     $input = [
       'foo',
+      'Foo',
       'Beta',
       'FooBeta',
       'BetaConstraint',
@@ -77,10 +82,13 @@ final class ConstraintTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Module name [Foo]:
      ➤ 
 
-     Constraint ID [FooBeta]:
+     Plugin label:
+     ➤ 
+
+     Plugin ID [FooBeta]:
      ➤ 
 
      Plugin class [BetaConstraint]:
@@ -109,6 +117,7 @@ final class ConstraintTest extends GeneratorTestBase {
   public function testItemConstraint(): void {
     $input = [
       'foo',
+      'Foo',
       'Gamma',
       'FooGamma',
       'GammaConstraint',
@@ -124,10 +133,13 @@ final class ConstraintTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Module name [Foo]:
      ➤ 
 
-     Constraint ID [FooGamma]:
+     Plugin label:
+     ➤ 
+
+     Plugin ID [FooGamma]:
      ➤ 
 
      Plugin class [GammaConstraint]:
@@ -156,6 +168,7 @@ final class ConstraintTest extends GeneratorTestBase {
   public function testRowValueConstraint(): void {
     $input = [
       'foo',
+      'Foo',
       'Delta',
       'FooDelta',
       'DeltaConstraint',
@@ -171,10 +184,13 @@ final class ConstraintTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Module name [Foo]:
      ➤ 
 
-     Constraint ID [FooDelta]:
+     Plugin label:
+     ➤ 
+
+     Plugin ID [FooDelta]:
      ➤ 
 
      Plugin class [DeltaConstraint]:
