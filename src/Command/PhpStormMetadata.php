@@ -10,7 +10,6 @@ use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-// @todo Clean-up.
 #[Generator(
   name: 'phpstorm-metadata',
   description: 'Generates PhpStorm metadata',
@@ -56,10 +55,9 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
         $vars['list_builders'][$type] = $definition->getListBuilderClass();
       }
     }
-
     // Some classes do not have leading slash.
     \array_walk_recursive($vars, static function (string &$class): void {
-      if ($class[0] != '\\') {
+      if (!\str_starts_with($class, '\\')) {
         $class = '\\' . $class;
       }
     });
