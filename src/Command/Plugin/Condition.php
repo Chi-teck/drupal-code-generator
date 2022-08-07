@@ -3,24 +3,29 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:condition command.
- */
-final class Condition extends PluginGenerator {
+#[Generator(
+  name: 'plugin:condition',
+  description: 'Generates condition plugin',
+  aliases: ['condition'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/condition',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class Condition extends BaseGenerator {
 
-  protected string $name = 'plugin:condition';
-  protected string $description = 'Generates condition plugin';
-  protected string $alias = 'condition';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/condition';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['plugin_label'] = $ir->askPluginLabel();
+    $vars['plugin_id'] = $ir->askPluginId();
+    $vars['class'] = $ir->askPluginClass();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('src/Plugin/Condition/{class}.php', 'condition');
-    $this->addSchemaFile()->template('schema');
+    $assets->addFile('src/Plugin/Condition/{class}.php', 'condition.twig');
+    $assets->addSchemaFile()->template('schema');
   }
 
 }
