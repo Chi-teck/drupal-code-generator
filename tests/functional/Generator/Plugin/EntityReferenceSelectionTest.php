@@ -14,8 +14,8 @@ final class EntityReferenceSelectionTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
     $input = [
-      'Example',
       'example',
+      'Example',
       'node',
       'Advanced node selection',
       'example_advanced_node_selection',
@@ -29,10 +29,10 @@ final class EntityReferenceSelectionTest extends GeneratorTestBase {
      Welcome to entity-reference-selection generator!
     ––––––––––––––––––––––––––––––––––––––––––––––––––
 
-     Module name:
+     Module machine name:
      ➤ 
 
-     Module machine name [example]:
+     Module name [Example]:
      ➤ 
 
      Entity type that can be referenced by this plugin [node]:
