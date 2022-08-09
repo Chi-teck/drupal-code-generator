@@ -1,4 +1,0 @@
-administer foo configuration:
-  title: 'Administer foo configuration'
-  description: 'Optional description.'
-  restrict access: true

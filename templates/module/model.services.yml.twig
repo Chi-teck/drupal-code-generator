@@ -1,6 +1,0 @@
-services:
-  {{ machine_name }}.event_subscriber:
-    class: Drupal\{{ machine_name }}\EventSubscriber\{{ class_prefix }}Subscriber
-    arguments: ['@messenger']
-    tags:
-      - { name: event_subscriber }

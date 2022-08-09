@@ -1,6 +1,0 @@
-foo.settings_form:
-  title: 'Foo'
-  description: 'Configure Foo.'
-  parent: system.admin_config_system
-  route_name: foo.settings_form
-  weight: 10

@@ -1,7 +1,13 @@
-name: 'Foo'
+name: 'Bar'
 type: module
 description: 'Some description.'
 package: Custom
 core_version_requirement: ^10
 dependencies:
+  - drupal:node
+  - drupal:system
   - drupal:views
+  - alpha:alpha
+  - beta:beta
+  - gamma:gamma
+  - space_inside:space_inside

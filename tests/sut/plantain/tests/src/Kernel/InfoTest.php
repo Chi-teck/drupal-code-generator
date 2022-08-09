@@ -27,7 +27,7 @@ final class InfoTest extends KernelTestBase {
   /**
    * Test callback.
    */
-  public function testInfo() {
+  public function testInfo(): void {
     $theme = $this->container
       ->get('theme_handler')
       ->getTheme('shreya');
