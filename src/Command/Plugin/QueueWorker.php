@@ -3,23 +3,30 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:queue-worker command.
- */
-final class QueueWorker extends PluginGenerator {
+#[Generator(
+  name: 'plugin:queue-worker',
+  description: 'Generates queue worker plugin',
+  aliases: ['queue-worker'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/queue-worker',
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class QueueWorker extends BaseGenerator {
 
-  protected string $name = 'plugin:queue-worker';
-  protected string $description = 'Generates queue worker plugin';
-  protected string $alias = 'queue-worker';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/queue-worker';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('src/Plugin/QueueWorker/{class}.php', 'queue-worker');
+    $vars['machine_name'] = $ir->askMachineName();
+
+    $vars['plugin_label'] = $ir->askPluginLabel();
+    $vars['plugin_id'] = $ir->askPluginId();
+    $vars['class'] = $ir->askPluginClass();
+
+    $assets->addFile('src/Plugin/QueueWorker/{class}.php', 'queue-worker');
   }
 
 }

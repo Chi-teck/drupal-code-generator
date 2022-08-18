@@ -29,7 +29,7 @@ final class QueueWorkerTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Plugin label [Example]:
+     Plugin label:
      ➤ 
 
      Plugin ID [example_test]:
