@@ -37,7 +37,7 @@ final class LayoutTest extends GeneratorTestBase {
      Layout machine name [foo_bar]:
      ➤ 
 
-     Category [My layouts]:
+     Category [Example Layouts]:
      ➤ 
 
      Would you like to create JavaScript file for this layout? [No]:

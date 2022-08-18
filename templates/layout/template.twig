@@ -1,7 +1,8 @@
-{{ '{' }}#
+{% verbatim -%}
+{#
 /**
  * @file
- * Default theme implementation to display {{ layout_name|lower }} layout.
+ * Default theme implementation to display {% endverbatim %}{{ layout_name|lower }}{% verbatim %} layout.
  *
  * Available variables:
  * - content: The content for this layout.
@@ -9,15 +10,17 @@
  *
  * @ingroup themeable
  */
-#{{ '}' }}
-{{ '{' }}%
-  set classes = [
-    'layout',
-    'layout--{{ layout_machine_name|u2h }}',
-  ]
-%{{ '}' }}
-{% verbatim %}
+#}
 {% if content %}
+
+  {# @DCG Drupal naming convention for CSS classes in layouts seems weird. Feel free to change it. #}
+  {%
+    set classes = [
+      'layout',
+      'layout--{% endverbatim %}{{ layout_machine_name|u2h }}'{% verbatim %},
+    ]
+  %}
+
   <div{{ attributes.addClass(classes) }}>
 
     {% if content.main %}
@@ -33,5 +36,6 @@
     {% endif %}
 
   </div>
+
 {% endif %}
-{% endverbatim %}
+{% endverbatim -%}

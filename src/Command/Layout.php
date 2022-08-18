@@ -21,7 +21,7 @@ final class Layout extends BaseGenerator {
 
     $vars['layout_name'] = $ir->ask('Layout name', 'Example');
     $vars['layout_machine_name'] = $ir->ask('Layout machine name', '{layout_name|h2m}');
-    $vars['category'] = $ir->ask('Category', 'My layouts');
+    $vars['category'] = $ir->ask('Category', '{machine_name|m2h} Layouts');
 
     $vars['js'] = $ir->confirm('Would you like to create JavaScript file for this layout?', FALSE);
     $vars['css'] = $ir->confirm('Would you like to create CSS file for this layout?', FALSE);

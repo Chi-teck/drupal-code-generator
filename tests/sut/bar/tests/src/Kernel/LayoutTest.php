@@ -22,7 +22,7 @@ final class LayoutTest extends KernelTestBase {
   public function testTemplateRendering(): void {
 
     /** @var \Drupal\Core\Layout\LayoutInterface $layout */
-    $layout = \Drupal::service('plugin.manager.core.layout')
+    $layout = $this->container->get('plugin.manager.core.layout')
       ->createInstance('bar_foo');
 
     $regions = [
@@ -31,10 +31,11 @@ final class LayoutTest extends KernelTestBase {
     ];
     $build = $layout->build($regions);
 
-    self::assertEquals($build['#attached']['library'], ['bar/foo']);
+    self::assertSame($build['#attached']['library'], ['bar/foo']);
 
     $expected_output = <<< 'HTML'
-    
+
+        
       <div class="layout layout--foo">
 
               <div  class="layout__region layout__region--main">
@@ -51,7 +52,7 @@ final class LayoutTest extends KernelTestBase {
     HTML;
 
     $output = (string) $this->container->get('renderer')->renderRoot($build);
-    self::assertEquals($expected_output, $output);
+    self::assertSame($expected_output, $output);
 
     $expected_definition = [
       'js' => [
@@ -79,9 +80,9 @@ final class LayoutTest extends KernelTestBase {
         'gpl-compatible' => TRUE,
       ],
     ];
-    $definition = \Drupal::service('library.discovery')
+    $definition = $this->container->get('library.discovery')
       ->getLibraryByName('bar', 'foo');
-    self::assertEquals($expected_definition, $definition);
+    self::assertSame($expected_definition, $definition);
   }
 
 }

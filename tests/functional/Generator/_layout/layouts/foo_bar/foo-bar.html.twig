@@ -10,14 +10,16 @@
  * @ingroup themeable
  */
 #}
-{%
-  set classes = [
-    'layout',
-    'layout--foo-bar',
-  ]
-%}
-
 {% if content %}
+
+  {# @DCG Drupal naming convention for CSS classes in layouts seems weird. Feel free to change it. #}
+  {%
+    set classes = [
+      'layout',
+      'layout--foo-bar',
+    ]
+  %}
+
   <div{{ attributes.addClass(classes) }}>
 
     {% if content.main %}
@@ -33,5 +35,5 @@
     {% endif %}
 
   </div>
-{% endif %}
 
+{% endif %}

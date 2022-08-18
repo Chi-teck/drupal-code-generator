@@ -1,21 +1,21 @@
 .layout--{{ layout_machine_name|u2h }} {
-  outline: solid 1px orange;
   display: flex;
-  padding: 10px;
+  gap:  1rem;
+  padding: 1rem;
+  outline: solid 1px orange;
 }
 
 .layout--{{ layout_machine_name|u2h }} > .layout__region {
+  padding: 1rem;
   outline: solid 1px orange;
-  margin: 10px;
-  padding: 20px;
 }
 
-.layout--{{ layout_machine_name|u2h }} .layout__region--main {
-  width: 66%;
+.layout--{{ layout_machine_name|u2h }} > .layout__region--main {
+  flex-basis: 66%;
 }
 
-.layout--{{ layout_machine_name|u2h }} .layout__region--sidebar {
-  width: 33%;
+.layout--{{ layout_machine_name|u2h }} > .layout__region--sidebar {
+  flex-basis: 33%;
 }
 
 @media all and (max-width: 850px) {
@@ -23,6 +23,6 @@
     flex-direction: column;
   }
   .layout--{{ layout_machine_name|u2h }} > .layout__region {
-    width: auto;
+    flex-basis: auto;
   }
 }
