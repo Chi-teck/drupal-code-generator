@@ -3,25 +3,31 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
+use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Command\BaseGenerator;
+use DrupalCodeGenerator\GeneratorType;
 
-/**
- * Implements plugin:rest-resource command.
- */
-final class RestResource extends PluginGenerator {
+#[Generator(
+  name: 'plugin:rest-resource',
+  description: 'Generates rest resource plugin',
+  aliases: ['rest-resource'],
+  templatePath: Application::TEMPLATE_PATH . '/plugin/rest-resource',
+  type: GeneratorType::MODULE_COMPONENT,
+  label: 'REST resource',
+)]
+final class RestResource extends BaseGenerator {
 
-  protected string $name = 'plugin:rest-resource';
-  protected string $description = 'Generates rest resource plugin';
-  protected string $alias = 'rest-resource';
-  protected string $templatePath = Application::TEMPLATE_PATH . '/plugin/rest-resource';
-  protected string $label = 'REST resource';
-  protected string $pluginClassSuffix = 'Resource';
+  protected function generate(array &$vars, Assets $assets): void {
+    $ir = $this->createInterviewer($vars);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function generate(array &$vars): void {
-    $this->collectDefault($vars);
-    $this->addFile('src/Plugin/rest/resource/{class}.php', 'rest-resource');
+    $vars['machine_name'] = $ir->askMachineName();
+
+    $vars['plugin_label'] = $ir->askPluginLabel();
+    $vars['plugin_id'] = $ir->askPluginId();
+    $vars['class'] = $ir->askPluginClass(suffix: 'Resource');
+
+    $assets->addFile('src/Plugin/rest/resource/{class}.php', 'rest-resource');
   }
 
 }
