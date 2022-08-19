@@ -28,11 +28,11 @@ final class JavaScript extends BaseGenerator {
 
     if ($ir->confirm('Would you like to create a library for this file?')) {
       $vars['library'] = $ir->ask('Library name', '{file_name|h2u}');
-      $assets->addFile('{machine_name}.libraries.yml', 'libraries')
+      $assets->addFile('{machine_name}.libraries.yml', 'libraries.twig')
         ->appendIfExists();
     }
 
-    $assets->addFile('js/{file_name_full}', 'javascript');
+    $assets->addFile('js/{file_name_full}', 'javascript.twig');
   }
 
 }

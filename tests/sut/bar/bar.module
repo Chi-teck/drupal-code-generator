@@ -1,0 +1,13 @@
+<?php declare(strict_types = 1);
+
+/**
+ * @file
+ * Primary module hooks for Bar module.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function bar_page_attachments(array &$attachments): void {
+  $attachments['#attached']['library'][] = 'bar/heavy_metal';
+}
