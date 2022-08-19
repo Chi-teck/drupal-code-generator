@@ -15,6 +15,7 @@ final class SimpleTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'foo',
+      'Foo',
       'ExampleForm',
       'Yes',
       'foo.example',
@@ -30,6 +31,9 @@ final class SimpleTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [ExampleForm]:

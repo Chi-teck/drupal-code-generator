@@ -15,6 +15,7 @@ final class ConfirmTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'foo',
+      'Foo',
       'ExampleConfirmForm',
       'Yes',
       'foo.example',
@@ -30,6 +31,9 @@ final class ConfirmTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [ExampleConfirmForm]:

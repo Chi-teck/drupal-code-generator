@@ -15,6 +15,7 @@ final class ConfigTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'foo',
+      'Foo',
       'SettingsForm',
       'Yes',
       'foo.example',
@@ -34,6 +35,9 @@ final class ConfigTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Class [SettingsForm]:

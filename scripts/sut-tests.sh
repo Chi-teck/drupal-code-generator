@@ -120,9 +120,9 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = form ]]; then
   cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG form:simple -a foo -a SimpleForm -a Yes -a foo.simple_form -a /admin/config/foo/simple -a Example -a 'access administration pages'
-  $DCG form:config -a foo -a SettingsForm -a Yes -a foo.config_form -a /admin/config/foo/settings -a Example -a 'access administration pages' -a No
-  $DCG form:confirm -a foo -a ConfirmForm -a Yes -a foo.confirm_form -a /admin/config/foo/confirm -a Example -a 'access administration pages'
+  $DCG form:simple -a foo -a Foo -a SimpleForm -a Yes -a foo.simple_form -a /admin/config/foo/simple -a Example -a 'access administration pages'
+  $DCG form:config -a foo -a Foo -a SettingsForm -a Yes -a foo.config_form -a /admin/config/foo/settings -a Example -a 'access administration pages' -a No
+  $DCG form:confirm -a foo -a Foo -a ConfirmForm -a Yes -a foo.confirm_form -a /admin/config/foo/confirm -a Example -a 'access administration pages'
 
   dcg_phpcs --exclude=DrupalPractice.Yaml.RoutingAccess .
   dcg_module_install $MODULE_MACHINE_NAME
