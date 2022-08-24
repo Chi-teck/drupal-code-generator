@@ -24,7 +24,8 @@ final class Interviewer {
 
   public function __construct(
     private readonly IO $io,
-    private readonly array &$vars,
+    // With readonly attribute it fails on CI by some reason.
+    private array &$vars,
     private readonly GeneratorDefinition $generatorDefinition,
     private readonly ServiceInfo $serviceInfo,
     private readonly ExtensionInfoInterface $extensionInfo,

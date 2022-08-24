@@ -48,5 +48,8 @@ jobs:
             - name: Run unit tests
               run: ./scripts/unit-tests.sh
 
+            - name: Run functional tests
+              run: ./scripts/functional-tests.sh
+
             - name: Run SUT tests
               run: ./scripts/sut-tests.sh
