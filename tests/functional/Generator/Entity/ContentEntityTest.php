@@ -16,6 +16,7 @@ final class ContentEntityTest extends GeneratorTestBase {
 
     $input = [
       'foo',
+      'Foo',
       'Example',
       'foo_example',
       '/example',
@@ -42,6 +43,9 @@ final class ContentEntityTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Module name [Foo]:
      ➤ 
 
      Entity type label [Foo]:

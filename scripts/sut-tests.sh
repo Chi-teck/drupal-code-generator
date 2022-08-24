@@ -381,7 +381,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = content_entity ]]; then
   cd $MODULE_DIR
 
   $DCG entity:content \
-    -a nigma -a Example -a example -a /admin/content/example \
+    -a nigma -a Nigma -a Example -a example -a /admin/content/example \
     -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
   dcg_phpcs .
@@ -397,7 +397,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = content_entity ]]; then
   cd $MODULE_DIR
 
   $DCG entity:content \
-    -a sigma -a Example -a example -a /example \
+    -a sigma -a Sigma -a Example -a example -a /example \
     -a Yes -a No -a No -a No -a Yes -a No -a No -a Yes -a No -a No -a No -a No -a No -a No
 
   dcg_phpcs .
@@ -413,7 +413,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = content_entity ]]; then
   cd $MODULE_DIR
 
   $DCG entity:content \
-    -a figma -a Example -a example -a /example \
+    -a figma -a Figma -a Example -a example -a /example \
     -a No -a No -a No -a No -a No -a No -a No -a Yes -a No -a No -a No -a No -a No
 
   dcg_phpcs .
