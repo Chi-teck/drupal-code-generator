@@ -7,7 +7,6 @@ use DrupalCodeGenerator\Helper\Drupal\HookInfo;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
-use DrupalCodeGenerator\Helper\DrupalContext;
 use DrupalCodeGenerator\Helper\Dumper\DryDumper;
 use DrupalCodeGenerator\Helper\Dumper\FileSystemDumper;
 use DrupalCodeGenerator\Helper\Printer\ListPrinter;
@@ -69,7 +68,6 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
       new TwigRenderer(new TwigEnvironment(new TemplateLoader([Application::TEMPLATE_PATH]))),
       new ListPrinter(),
       new TablePrinter(),
-      new DrupalContext($container),
       new ModuleInfo($container->get('module_handler')),
       new ThemeInfo($container->get('theme_handler')),
       new ServiceInfo($container),

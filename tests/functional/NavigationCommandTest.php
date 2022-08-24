@@ -45,9 +45,7 @@ final class NavigationCommandTest extends FunctionalTestBase {
     $helper_set = $application->getHelperSet();
     $helper_set->set(new QuestionHelper());
 
-    // @todo Should application give direct access to the container?
-    $container = $helper_set->get('drupal_context')->getContainer();
-
+    $container = $application->getContainer();
     $generator_factory = new GeneratorFactory($container->get('class_resolver'));
     $generators = $generator_factory->getGenerators();
 

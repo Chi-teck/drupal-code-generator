@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator;
 
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Command\LegacyGenerator;
 
 /**
  * Defines generator factory.
@@ -47,8 +46,7 @@ final class GeneratorFactory {
         continue;
       }
 
-      // @todo Update this once we remove LegacyGenerator class.
-      if (!$reflected_class->isSubclassOf(BaseGenerator::class) && !$reflected_class->isSubclassOf(LegacyGenerator::class)) {
+      if (!$reflected_class->isSubclassOf(BaseGenerator::class)) {
         continue;
       }
 
