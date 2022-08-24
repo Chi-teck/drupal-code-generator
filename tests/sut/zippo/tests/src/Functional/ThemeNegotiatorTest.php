@@ -25,10 +25,10 @@ final class ThemeNegotiatorTest extends BrowserTestBase {
    * Test callback.
    */
   public function testThemeNegotiator(): void {
-    \Drupal::service('theme_installer')->install(['bartik']);
+    \Drupal::service('theme_installer')->install(['olivero']);
 
-    $options = ['query' => ['theme' => 'bartik']];
-    $pattern = '#/core/themes/bartik/#';
+    $options = ['query' => ['theme' => 'olivero']];
+    $pattern = '#/core/themes/olivero/#';
     $assert_session = $this->assertSession();
 
     $this->drupalGet('<front>', $options);

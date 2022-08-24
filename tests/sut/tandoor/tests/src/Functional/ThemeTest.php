@@ -39,7 +39,7 @@ final class ThemeTest extends BrowserTestBase {
     $this->assertCssFile('theme/print.css');
 
     // Make sure CSS files from base theme are loaded.
-    $this->assertSession()->elementExists('xpath', '//link[contains(@href, "/core/themes/bartik/css/components/buttons.css?")]');
+    $this->assertSession()->elementExists('xpath', '//link[contains(@href, "/core/themes/claro/css/components/button.css?")]');
   }
 
   /**

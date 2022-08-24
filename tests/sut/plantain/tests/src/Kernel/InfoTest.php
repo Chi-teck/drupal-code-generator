@@ -44,7 +44,7 @@ final class InfoTest extends KernelTestBase {
     $expected_info = [
       'name' => 'Shreya',
       'type' => 'theme',
-      'base theme' => 'bartik',
+      'base theme' => 'claro',
       'description' => 'Helper theme for testing DCG components.',
       'package' => 'DCG',
       'core_version_requirement' => '^10',
@@ -79,7 +79,7 @@ final class InfoTest extends KernelTestBase {
       'php' => '8.1.0',
       'libraries_extend' => [],
       'libraries_override' => [],
-      'dependencies' => ['bartik'],
+      'dependencies' => ['claro'],
     ];
     unset($info['mtime']);
     self::assertSame($expected_info, $info);
