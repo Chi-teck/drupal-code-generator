@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Validator\Chained;
+use DrupalCodeGenerator\Validator\Choice;
 use DrupalCodeGenerator\Validator\Required;
 use Symfony\Component\Console\Question\Question;
 
@@ -27,7 +28,11 @@ final class Hook extends BaseGenerator {
     $vars['name'] = $ir->askName();
 
     $hook_question = new Question('Hook name');
-    $hook_question->setValidator(self::getHookValidator($available_hooks));
+    $validator = new Chained(
+      new Required(),
+      new Choice($available_hooks, 'The value is not correct hook name.'),
+    );
+    $hook_question->setValidator($validator);
     $hook_question->setAutocompleterValues($available_hooks);
     $vars['hook_name'] = $this->io()->askQuestion($hook_question);
 
@@ -36,18 +41,6 @@ final class Hook extends BaseGenerator {
     $assets->addFile('{machine_name}.{file_type}')
       ->inlineTemplate($hook_templates[$vars['hook_name']])
       ->appendIfExists(7);
-  }
-
-  private static function getHookValidator(array $available_hooks): callable {
-    return new Chained(
-      new Required(),
-      static function (string $value) use ($available_hooks): string {
-        if (!\in_array($value, $available_hooks)) {
-          throw new \UnexpectedValueException('The value is not correct hook name.');
-        }
-        return $value;
-      },
-    );
   }
 
 }

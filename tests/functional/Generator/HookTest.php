@@ -39,4 +39,42 @@ final class HookTest extends GeneratorTestBase {
     $this->assertGeneratedFile('example.module');
   }
 
+  public function testHookNameValidation(): void {
+    $input = [
+      'example',
+      'Example',
+      NULL,
+      'wrong',
+      'theme',
+    ];
+    $this->execute(Hook::class, $input);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to hook generator!
+    ––––––––––––––––––––––––––––
+
+     Module machine name:
+     ➤ 
+
+     Module name [Example]:
+     ➤ 
+
+     Hook name:
+     ➤  The value is required.
+
+     Hook name:
+     ➤  The value is not correct hook name.
+
+     Hook name:
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.module
+
+    TXT;
+    $this->assertDisplay($expected_display);
+  }
+
 }
