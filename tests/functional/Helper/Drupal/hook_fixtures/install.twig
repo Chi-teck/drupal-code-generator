@@ -8,7 +8,7 @@
 /**
  * Implements hook_install().
  */
-function {{ machine_name }}_install($is_syncing) {
+function {{ machine_name }}_install($is_syncing): void {
   // Set general module variables.
   \Drupal::state()->set('mymodule.foo', 'bar');
 }

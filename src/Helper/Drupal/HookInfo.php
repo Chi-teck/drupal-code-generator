@@ -51,52 +51,6 @@ final class HookInfo extends Helper {
   }
 
   /**
-   * Creates hook templates from PHP file.
-   */
-  private static function parseHooks(string $file): array {
-
-    $code = \file_get_contents($file);
-    \preg_match_all("/function hook_(?P<name>.*)\(.*\n\}\n/Us", $code, $matches);
-
-    $results = [];
-    foreach ($matches[0] as $index => $hook) {
-      $hook_name = $matches['name'][$index];
-      $file_description = self::getFileDescription(self::getFileType($hook_name));
-      $hook = \str_replace('function hook_', 'function {{ machine_name }}_', $hook);
-      $results[$hook_name] = <<< TWIG
-        <?php declare(strict_types = 1);
-
-        /**
-         * @file
-         * $file_description
-         */
-
-        /**
-         * Implements hook_$hook_name().
-         */
-        $hook
-        TWIG;
-    }
-
-    return $results;
-  }
-
-  /**
-   * Gets file description.
-   */
-  private static function getFileDescription(string $file_type): string {
-    return match($file_type) {
-      'install' => 'Install, update and uninstall functions for the {{ name }} module.',
-      'module' => 'Primary module hooks for {{ name }} module.',
-      'post_update.php' => 'Post update functions for the {{ name }} module.',
-      'tokens.inc' => 'Builds tokens for the {{ name }} module.',
-      'views.inc' => 'Views hooks for the {{ name }} module.',
-      'views_execution.inc' => 'Provide views runtime hooks for the {{ name }} module.',
-      default => throw new \InvalidArgumentException('Unsupported file type.'),
-    };
-  }
-
-  /**
    * Returns filetype of a hook.
    */
   public static function getFileType(string $hook_name): string {
@@ -151,6 +105,69 @@ final class HookInfo extends Helper {
       'tokens_alter' => 'tokens.inc',
       'post_update_N' => 'post_update.php',
       default => 'module',
+    };
+  }
+
+  /**
+   * Creates hook templates from PHP file.
+   */
+  private static function parseHooks(string $file): array {
+
+    \preg_match_all(
+      "/function hook_(?P<name>.*)\(.*\n\}\n/Us",
+      \file_get_contents($file),
+      $matches,
+    );
+
+    $results = [];
+    foreach ($matches[0] as $index => $hook_code) {
+      $hook_name = $matches['name'][$index];
+      $results[$hook_name] = self::buildHookTemplate($hook_name, $hook_code);
+    }
+
+    return $results;
+  }
+
+  /**
+   * Builds hook template from PHP code.
+   */
+  private static function buildHookTemplate(string $hook_name, string $hook_code): string {
+    $hook_template = \str_replace('function hook_', 'function {{ machine_name }}_', $hook_code);
+
+    // Add 'void' return type when it is clear that the hook returns nothing.
+    // @todo Remove this once Drupal adds return typehints for hooks.
+    if (!\str_contains($hook_template, 'return')) {
+      $hook_template = \preg_replace('#^(function \{\{ machine_name \}\}_.+\)) \{$#m', '\1: void {', $hook_template);
+    }
+
+    $file_description = self::getFileDescription(self::getFileType($hook_name));
+    return <<< TWIG
+        <?php declare(strict_types = 1);
+
+        /**
+         * @file
+         * $file_description
+         */
+
+        /**
+         * Implements hook_$hook_name().
+         */
+        $hook_template
+        TWIG;
+  }
+
+  /**
+   * Gets file description.
+   */
+  private static function getFileDescription(string $file_type): string {
+    return match($file_type) {
+      'install' => 'Install, update and uninstall functions for the {{ name }} module.',
+      'module' => 'Primary module hooks for {{ name }} module.',
+      'post_update.php' => 'Post update functions for the {{ name }} module.',
+      'tokens.inc' => 'Builds tokens for the {{ name }} module.',
+      'views.inc' => 'Views hooks for the {{ name }} module.',
+      'views_execution.inc' => 'Provide views runtime hooks for the {{ name }} module.',
+      default => throw new \InvalidArgumentException('Unsupported file type.'),
     };
   }
 
