@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\Tests\bar\Functional;
 
@@ -10,7 +10,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group DCG
  */
-final class InstallTest extends BrowserTestBase {
+final class InstallFileTest extends BrowserTestBase {
 
   use TestTrait;
 
@@ -34,24 +34,7 @@ final class InstallTest extends BrowserTestBase {
       'modules[bar][enable]' => TRUE,
     ];
     $this->submitForm($edit, 'Install');
-    $this->assertStatusMessage('bar_install');
-
-    // Test hook_requirements().
-    $this->drupalGet('admin/reports/status');
-    $this->assertXpath('//details/summary[normalize-space(text()) = "Bar status"]');
-
-    // Test hook_schema().
-    $fields = [
-      'uid' => 1,
-      'status' => TRUE,
-      'type' => 'example',
-      'created' => 123456789,
-      'data' => 'abcdefgh',
-    ];
-    $database = \Drupal::database();
-    $database->insert('bar_example')->fields($fields)->execute();
-    $data = $database->query('SELECT * FROM {bar_example}')->fetchAssoc();
-    self::assertEquals(['id' => 1] + $fields, $data);
+    $this->assertStatusMessage('Module Bar has been installed.');
 
     // Test hook_uninstall().
     $this->drupalGet('admin/modules/uninstall');
@@ -60,7 +43,7 @@ final class InstallTest extends BrowserTestBase {
     ];
     $this->submitForm($edit, 'Uninstall');
     $this->submitForm([], 'Uninstall');
-    $this->assertStatusMessage('bar_uninstall');
+    $this->assertStatusMessage('Module Bar has been uninstalled.');
   }
 
 }
