@@ -64,7 +64,7 @@ final class HookInfo extends Helper {
       $file_description = self::getFileDescription(self::getFileType($hook_name));
       $hook = \str_replace('function hook_', 'function {{ machine_name }}_', $hook);
       $results[$hook_name] = <<< TWIG
-        <?php
+        <?php declare(strict_types = 1);
 
         /**
          * @file
