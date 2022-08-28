@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
@@ -19,15 +19,15 @@ use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
  * @FieldFormatter(
  *   id = "{{ field_id }}_key_value",
  *   label = @Translation("Key-value"),
- *   field_types = {"{{ field_id }}"}
+ *   field_types = {"{{ field_id }}"},
  * )
  */
-class {{ key_value_formatter_class }} extends FormatterBase {
+final class {{ key_value_formatter_class }} extends FormatterBase {
 
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode) {
+  public function viewElements(FieldItemListInterface $items, $langcode): array {
 
     $element = [];
 

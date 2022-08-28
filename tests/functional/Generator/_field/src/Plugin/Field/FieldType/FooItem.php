@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example\Plugin\Field\FieldType;
 
@@ -21,12 +21,12 @@ use Drupal\Core\TypedData\DataDefinition;
  *   default_formatter = "example_foo_default"
  * )
  */
-class FooItem extends FieldItemBase {
+final class FooItem extends FieldItemBase {
 
   /**
    * {@inheritdoc}
    */
-  public static function defaultStorageSettings() {
+  public static function defaultStorageSettings(): array {
     $settings = ['foo' => 'example'];
     return $settings + parent::defaultStorageSettings();
   }
@@ -34,7 +34,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
+  public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data): array {
     $settings = $this->getSettings();
 
     $element['foo'] = [
@@ -50,7 +50,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function defaultFieldSettings() {
+  public static function defaultFieldSettings(): array {
     $settings = ['bar' => 'example'];
     return $settings + parent::defaultFieldSettings();
   }
@@ -58,7 +58,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
+  public function fieldSettingsForm(array $form, FormStateInterface $form_state): array {
     $settings = $this->getSettings();
 
     $element['bar'] = [
@@ -73,7 +73,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function isEmpty() {
+  public function isEmpty(): bool {
     if ($this->value_1 == 1) {
       return FALSE;
     }
@@ -140,7 +140,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
+  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
 
     $properties['value_1'] = DataDefinition::create('boolean')
       ->setLabel(t('Value 1'));
@@ -189,7 +189,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function getConstraints() {
+  public function getConstraints(): array {
     $constraints = parent::getConstraints();
 
     // NotBlank validator is not suitable for booleans because it does not
@@ -242,7 +242,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function schema(FieldStorageDefinitionInterface $field_definition) {
+  public static function schema(FieldStorageDefinitionInterface $field_definition): array {
 
     $columns = [
       'value_1' => [
@@ -340,7 +340,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
+  public static function generateSampleValue(FieldDefinitionInterface $field_definition): array {
 
     $random = new Random();
 
@@ -404,7 +404,7 @@ class FooItem extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function allowedValue8Values() {
+  public static function allowedValue8Values(): array {
     return [
       123 => 123,
       456 => 456,
@@ -418,7 +418,7 @@ class FooItem extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function allowedValue10Values() {
+  public static function allowedValue10Values(): array {
     return [
       '12.3' => '12.3',
       '4.56' => '4.56',
@@ -432,7 +432,7 @@ class FooItem extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function allowedValue12Values() {
+  public static function allowedValue12Values(): array {
     return [
       '12.35' => '12.35',
       '45.65' => '45.65',
@@ -446,7 +446,7 @@ class FooItem extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function allowedValue14Values() {
+  public static function allowedValue14Values(): array {
     return [
       'alpha@example.com' => 'alpha@example.com',
       'beta@example.com' => 'beta@example.com',
@@ -460,7 +460,7 @@ class FooItem extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function allowedValue16Values() {
+  public static function allowedValue16Values(): array {
     return [
       '71234567001' => '+7(123)45-67-001',
       '71234567002' => '+7(123)45-67-002',
@@ -474,7 +474,7 @@ class FooItem extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function allowedValue18Values() {
+  public static function allowedValue18Values(): array {
     return [
       'https://example.com' => 'https://example.com',
       'http://www.php.net' => 'http://www.php.net',
@@ -488,7 +488,7 @@ class FooItem extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function allowedValue20Values() {
+  public static function allowedValue20Values(): array {
     return [
       '2018-01-01' => '1 January 2018',
       '2018-02-01' => '1 February 2018',

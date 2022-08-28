@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example\Plugin\Field\FieldWidget;
 
@@ -18,19 +18,19 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
  *   field_types = {"example_foo"},
  * )
  */
-class FooWidget extends WidgetBase {
+final class FooWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
+  public static function defaultSettings(): array {
     return ['foo' => 'bar'] + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
     $settings = $this->getSettings();
     $element['foo'] = [
       '#type' => 'textfield',
@@ -43,7 +43,7 @@ class FooWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function settingsSummary() {
+  public function settingsSummary(): array {
     $settings = $this->getSettings();
     $summary[] = $this->t('Foo: @foo', ['@foo' => $settings['foo']]);
     return $summary;
@@ -52,7 +52,7 @@ class FooWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
 
     $element['value_1'] = [
       '#type' => 'checkbox',
@@ -202,14 +202,14 @@ class FooWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function errorElement(array $element, ConstraintViolationInterface $violation, array $form, FormStateInterface $form_state) {
+  public function errorElement(array $element, ConstraintViolationInterface $violation, array $form, FormStateInterface $form_state): array {
     return isset($violation->arrayPropertyPath[0]) ? $element[$violation->arrayPropertyPath[0]] : $element;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
+  public function massageFormValues(array $values, array $form, FormStateInterface $form_state): array {
     foreach ($values as $delta => $value) {
       if ($value['value_1'] === '') {
         $values[$delta]['value_1'] = NULL;

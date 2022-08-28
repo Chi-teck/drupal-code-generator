@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example\Plugin\Field\FieldFormatter;
 
@@ -16,12 +16,12 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
  *   field_types = {"example_foo"}
  * )
  */
-class FooKeyValueFormatter extends FormatterBase {
+final class FooKeyValueFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode) {
+  public function viewElements(FieldItemListInterface $items, $langcode): array {
 
     $element = [];
 

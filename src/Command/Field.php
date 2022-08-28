@@ -21,7 +21,7 @@ final class Field extends BaseGenerator {
   /**
    * Field sub-types.
    */
-  private array $subTypes = [
+  private const SUB_TYPES = [
     'boolean' => [
       'label' => 'Boolean',
       'list' => FALSE,
@@ -107,7 +107,7 @@ final class Field extends BaseGenerator {
   /**
    * Date types.
    */
-  private array $dateTypes = [
+  private const DATE_TYPES = [
     'date' => 'Date only',
     'datetime' => 'Date and time',
   ];
@@ -134,9 +134,10 @@ final class Field extends BaseGenerator {
 
     $vars['subfield_count'] = $ir->ask('How many sub-fields would you like to create?', '3', $subfield_count_validator);
 
-    $type_choice_keys = \array_keys($this->subTypes);
-    $type_choice_labels = \array_column($this->subTypes, 'label');
-    $type_choices = \array_combine($type_choice_keys, $type_choice_labels);
+    $type_choices = \array_combine(
+      \array_keys(self::SUB_TYPES),
+      \array_column(self::SUB_TYPES, 'label'),
+    );
 
     // Indicates that at least one of sub-fields needs Random component.
     $vars['random'] = FALSE;
@@ -169,14 +170,17 @@ final class Field extends BaseGenerator {
       $subfield = new \stdClass();
 
       $subfield->name = $ir->ask("Label for sub-field #$i", "Value $i");
-      $subfield->machineName = $ir->ask("Machine name for sub-field #$i", Utils::human2machine($subfield->name));
+      $subfield->machineName = $ir->ask(
+        "Machine name for sub-field #$i",
+        Utils::human2machine($subfield->name),
+        new RequiredMachineName(),
+      );
       $type = $ir->choice("Type of sub-field #$i", $type_choices, 'Text');
 
-      if ($type == 'datetime') {
-        $subfield->dateType = $ir->choice("Date type for sub-field #$i", $this->dateTypes, 'Date only');
-      }
+      $subfield->dateType = $type === 'datetime' ?
+        $ir->choice("Date type for sub-field #$i", self::DATE_TYPES, 'Date only') : NULL;
 
-      $definition = $this->subTypes[$type];
+      $definition = self::SUB_TYPES[$type];
       if ($definition['list']) {
         $subfield->list = $ir->confirm("Limit allowed values for sub-field #$i?", FALSE);
       }
@@ -193,7 +197,7 @@ final class Field extends BaseGenerator {
         'required' => $subfield->required,
         'link' => $definition['link'],
       ];
-      if (isset($subfield->dateType)) {
+      if ($subfield->dateType) {
         $vars['subfields'][$i]['date_type'] = $subfield->dateType;
         // Back to date type ID.
         $vars['subfields'][$i]['date_storage_format'] = $subfield->dateType == 'date' ? 'Y-m-d' : 'Y-m-d\TH:i:s';

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldType;
 
@@ -24,16 +24,16 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("{{ field_label }}"),
  *   category = @Translation("General"),
  *   default_widget = "{{ field_id }}",
- *   default_formatter = "{{ field_id }}_default"
+ *   default_formatter = "{{ field_id }}_default",
  * )
  */
-class {{ type_class }} extends FieldItemBase {
+final class {{ type_class }} extends FieldItemBase {
 
 {% if storage_settings %}
   /**
    * {@inheritdoc}
    */
-  public static function defaultStorageSettings() {
+  public static function defaultStorageSettings(): array {
     $settings = ['foo' => 'example'];
     return $settings + parent::defaultStorageSettings();
   }
@@ -41,7 +41,7 @@ class {{ type_class }} extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
+  public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data): array {
     $settings = $this->getSettings();
 
     $element['foo'] = [
@@ -59,7 +59,7 @@ class {{ type_class }} extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function defaultFieldSettings() {
+  public static function defaultFieldSettings(): array {
     $settings = ['bar' => 'example'];
     return $settings + parent::defaultFieldSettings();
   }
@@ -67,7 +67,7 @@ class {{ type_class }} extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
+  public function fieldSettingsForm(array $form, FormStateInterface $form_state): array {
     $settings = $this->getSettings();
 
     $element['bar'] = [
@@ -83,7 +83,7 @@ class {{ type_class }} extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function isEmpty() {
+  public function isEmpty(): bool {
 {% for subfield in subfields %}
   {% set condition %}
     {% if subfield.type == 'boolean' %}$this->{{ subfield.machine_name }} == 1{% else %}$this->{{ subfield.machine_name }} !== NULL{% endif %}
@@ -102,7 +102,7 @@ class {{ type_class }} extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
+  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
 
 {% for subfield in subfields %}
     $properties['{{ subfield.machine_name }}'] = DataDefinition::create('{{ subfield.data_type }}')
@@ -115,7 +115,7 @@ class {{ type_class }} extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function getConstraints() {
+  public function getConstraints(): array {
     $constraints = parent::getConstraints();
 
 {% for subfield in subfields %}
@@ -151,7 +151,7 @@ class {{ type_class }} extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function schema(FieldStorageDefinitionInterface $field_definition) {
+  public static function schema(FieldStorageDefinitionInterface $field_definition): array {
 
     $columns = [
 {% for subfield in subfields %}
@@ -203,7 +203,7 @@ class {{ type_class }} extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
+  public static function generateSampleValue(FieldDefinitionInterface $field_definition): array {
 
 {% if random %}
     $random = new Random();
@@ -267,7 +267,7 @@ class {{ type_class }} extends FieldItemBase {
    * @return array
    *   The list of allowed values.
    */
-  public static function {{ subfield.allowed_values_method }}() {
+  public static function {{ subfield.allowed_values_method }}(): array {
     return [
     {% if subfield.type == 'string' %}
       'alpha' => t('Alpha'),

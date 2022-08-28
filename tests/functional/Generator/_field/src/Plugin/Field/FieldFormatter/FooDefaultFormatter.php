@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example\Plugin\Field\FieldFormatter;
 
@@ -18,19 +18,19 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
  *   field_types = {"example_foo"}
  * )
  */
-class FooDefaultFormatter extends FormatterBase {
+final class FooDefaultFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
+  public static function defaultSettings(): array {
     return ['foo' => 'bar'] + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
     $settings = $this->getSettings();
     $element['foo'] = [
       '#type' => 'textfield',
@@ -43,7 +43,7 @@ class FooDefaultFormatter extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function settingsSummary() {
+  public function settingsSummary(): array {
     $settings = $this->getSettings();
     $summary[] = $this->t('Foo: @foo', ['@foo' => $settings['foo']]);
     return $summary;
@@ -52,7 +52,7 @@ class FooDefaultFormatter extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode) {
+  public function viewElements(FieldItemListInterface $items, $langcode): array {
     $element = [];
 
     foreach ($items as $delta => $item) {

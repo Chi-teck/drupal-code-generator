@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
@@ -25,23 +25,23 @@ use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
  * @FieldFormatter(
  *   id = "{{ field_id }}_default",
  *   label = @Translation("Default"),
- *   field_types = {"{{ field_id }}"}
+ *   field_types = {"{{ field_id }}"},
  * )
  */
-class {{ formatter_class }} extends FormatterBase {
+final class {{ formatter_class }} extends FormatterBase {
 
 {% if formatter_settings %}
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
+  public static function defaultSettings(): array {
     return ['foo' => 'bar'] + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
     $settings = $this->getSettings();
     $element['foo'] = [
       '#type' => 'textfield',
@@ -54,7 +54,7 @@ class {{ formatter_class }} extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function settingsSummary() {
+  public function settingsSummary(): array {
     $settings = $this->getSettings();
     $summary[] = $this->t('Foo: @foo', ['@foo' => $settings['foo']]);
     return $summary;
@@ -64,7 +64,7 @@ class {{ formatter_class }} extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode) {
+  public function viewElements(FieldItemListInterface $items, $langcode): array {
     $element = [];
 
     foreach ($items as $delta => $item) {
