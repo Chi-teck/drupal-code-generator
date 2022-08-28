@@ -77,10 +77,6 @@ _dcg()
             opts="${opts} "
             ;;
 
-            module-file)
-            opts="${opts} "
-            ;;
-
             navigation)
             opts="${opts} "
             ;;
@@ -106,10 +102,6 @@ _dcg()
             ;;
 
             theme)
-            opts="${opts} "
-            ;;
-
-            theme-file)
             opts="${opts} "
             ;;
 
@@ -371,7 +363,7 @@ _dcg()
 
     # completing for a command
     if [[ $cur == $com ]]; then
-        coms="_complete completion composer controller field generate-completion help hook install-file javascript layout list module module-file navigation phpstorm-metadata plugin-manager render-element service-provider template theme theme-file theme-settings console:dcg-command console:symfony-command entity:bundle-class entity:configuration entity:content form:config form:confirm form:simple misc:apache-virtual-host misc:nginx-virtual-host plugin:action plugin:block plugin:ckeditor plugin:condition plugin:constraint plugin:entity-reference-selection plugin:field:formatter plugin:field:type plugin:field:widget plugin:filter plugin:menu-link plugin:migrate:destination plugin:migrate:process plugin:migrate:source plugin:queue-worker plugin:rest-resource plugin:views:argument-default plugin:views:field plugin:views:style service:access-checker service:breadcrumb-builder service:cache-context service:custom service:event-subscriber service:logger service:middleware service:param-converter service:path-processor service:request-policy service:response-policy service:route-subscriber service:theme-negotiator service:twig-extension service:uninstall-validator test:browser test:kernel test:nightwatch test:unit test:webdriver yml:breakpoints yml:links:action yml:links:contextual yml:links:menu yml:links:task yml:module-info yml:module-libraries yml:permissions yml:routing yml:services yml:theme-info yml:theme-libraries"
+        coms="_complete completion composer controller field generate-completion help hook install-file javascript layout list module navigation phpstorm-metadata plugin-manager render-element service-provider template theme theme-settings console:dcg-command console:symfony-command entity:bundle-class entity:configuration entity:content form:config form:confirm form:simple misc:apache-virtual-host misc:nginx-virtual-host plugin:action plugin:block plugin:ckeditor plugin:condition plugin:constraint plugin:entity-reference-selection plugin:field:formatter plugin:field:type plugin:field:widget plugin:filter plugin:menu-link plugin:migrate:destination plugin:migrate:process plugin:migrate:source plugin:queue-worker plugin:rest-resource plugin:views:argument-default plugin:views:field plugin:views:style service:access-checker service:breadcrumb-builder service:cache-context service:custom service:event-subscriber service:logger service:middleware service:param-converter service:path-processor service:request-policy service:response-policy service:route-subscriber service:theme-negotiator service:twig-extension service:uninstall-validator test:browser test:kernel test:nightwatch test:unit test:webdriver yml:breakpoints yml:links:action yml:links:contextual yml:links:menu yml:links:task yml:module-info yml:module-libraries yml:permissions yml:routing yml:services yml:theme-info yml:theme-libraries"
 
         COMPREPLY=($(compgen -W "${coms}" -- ${cur}))
         __ltrim_colon_completions "$cur"
