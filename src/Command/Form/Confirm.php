@@ -41,7 +41,7 @@ final class Confirm extends BaseGenerator {
       $vars['route_permission'] = $ir->ask('Route permission', 'administer site configuration');
 
       $assets->addFile('{machine_name}.routing.yml')
-        ->template('form/routing')
+        ->template('routing.twig')
         ->appendIfExists();
     }
 

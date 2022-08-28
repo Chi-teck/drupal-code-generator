@@ -60,12 +60,14 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
     $application->setContainer($container);
 
     $file_system = new SymfonyFileSystem();
+    $template_loader = new TemplateLoader();
+    $template_loader->addPath(self::TEMPLATE_PATH . '/_lib', 'lib');
     $helper_set = new HelperSet([
       new QuestionHelper(),
       new NullProcessor(),
       new DryDumper($file_system),
       new FileSystemDumper($file_system),
-      new TwigRenderer(new TwigEnvironment(new TemplateLoader([Application::TEMPLATE_PATH]))),
+      new TwigRenderer(new TwigEnvironment($template_loader)),
       new ListPrinter(),
       new TablePrinter(),
       new ModuleInfo($container->get('module_handler')),

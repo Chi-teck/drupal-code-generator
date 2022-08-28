@@ -1,0 +1,7 @@
+{{ route_name }}:
+  path: '{{ route_path }}'
+  defaults:
+    _title: '{{ route_title }}'
+    _form: 'Drupal\{{ machine_name }}\Form\{{ class }}'
+  requirements:
+    _permission: '{{ route_permission }}'

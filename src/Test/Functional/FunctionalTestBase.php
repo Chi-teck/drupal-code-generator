@@ -44,7 +44,9 @@ abstract class FunctionalTestBase extends TestCase {
     $helper_set->set(new QuestionHelper());
 
     // Replace default renderer to enable 'strict_variables' in tests.
-    $twig_environment = new TwigEnvironment(new FileSystemLoader([Application::TEMPLATE_PATH]), ['strict_variables' => TRUE]);
+    $template_loader = new FileSystemLoader();
+    $template_loader->addPath(Application::TEMPLATE_PATH . '/_lib', 'lib');
+    $twig_environment = new TwigEnvironment($template_loader, ['strict_variables' => TRUE]);
     $helper_set->set(new TwigRenderer($twig_environment));
     return $application;
   }

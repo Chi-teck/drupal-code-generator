@@ -45,7 +45,7 @@ final class Theme extends BaseGenerator {
       $assets->addFile('{machine_name}/config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml');
     }
 
-    $assets->addFile('{machine_name}/logo.svg', 'theme/logo');
+    $assets->addFile('{machine_name}/logo.svg', 'logo');
 
     // Templates directory structure.
     $assets->addDirectory('{machine_name}/templates/page');
@@ -56,7 +56,7 @@ final class Theme extends BaseGenerator {
     $assets->addDirectory('{machine_name}/templates/menu');
     $assets->addDirectory('{machine_name}/images');
 
-    $assets->addFile('{machine_name}/package.json', 'theme/package.json');
+    $assets->addFile('{machine_name}/package.json', 'package.json');
 
     // Style sheets directory structure.
     $assets->addDirectory('{machine_name}/css');

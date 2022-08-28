@@ -1,4 +1,4 @@
-{% import '_lib/di.twig' as di %}
+{% import '@lib/di.twig' as di %}
 services:
   {{ machine_name }}.route_subscriber:
     class: Drupal\{{ machine_name }}\EventSubscriber\{{ class }}
