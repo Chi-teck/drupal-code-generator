@@ -102,7 +102,8 @@ fi
 
 echo '🚩 Install local DCG'
 composer -d"$DRUPAL_DIR" config repositories.dcg "$(printf '{"type": "path", "url": "%s", "options": {"symlink": false}}' $SELF_DIR)"
-composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator:3.x
+composer -d$DRUPAL_DIR info --available chi-teck/drupal-code-generator
+composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator
 
 echo '🚩 Start server'
 symfony server:start --daemon --dir=$DRUPAL_DIR --port=$DCG_DRUPAL_PORT --no-tls
