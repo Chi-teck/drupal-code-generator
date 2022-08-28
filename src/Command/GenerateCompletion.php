@@ -10,8 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Implements generate-completion command.
- *
- * @todo Create a test for this.
  */
 final class GenerateCompletion extends Command {
 
@@ -33,11 +31,14 @@ final class GenerateCompletion extends Command {
   protected function execute(InputInterface $input, OutputInterface $output): int {
     $shell = $input->getOption('shell');
     if (!\in_array($shell, ['bash', 'fish', 'zsh'])) {
-      $message = \sprintf('<error>%s shell is not supported.</error>', \strip_tags($shell));
+      $message = \sprintf('<error>Shell "%s" is not supported.</error>', \strip_tags($shell));
       /** @var \Symfony\Component\Console\Output\ConsoleOutput $output */
       $output->getErrorOutput()->writeln($message);
       return self::FAILURE;
     }
+    // The completions need to be re-generated each time the command set is
+    // updated.
+    // @see https://github.com/bamarni/symfony-console-autocomplete
     $content = \file_get_contents(Application::ROOT . "/resources/$shell-completion");
     $output->writeln($content, OutputInterface::OUTPUT_RAW);
     return self::SUCCESS;
