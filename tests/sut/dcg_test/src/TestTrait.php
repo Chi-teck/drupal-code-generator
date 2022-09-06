@@ -71,25 +71,25 @@ trait TestTrait {
   /**
    * Passes if a given error message was found on the page.
    */
-  protected function assertErrorMessage(string $message): void {
+  protected function assertErrorMessage(string|\Stringable $message): void {
     $messages = $this->getMessages('error');
-    self::assertContains($message, $messages, 'Error message was found.');
+    self::assertContains((string) $message, $messages, 'Error message was found.');
   }
 
   /**
    * Passes if a given warning message was found on the page.
    */
-  protected function assertWarningMessage(string $message): void {
+  protected function assertWarningMessage(string|\Stringable $message): void {
     $messages = $this->getMessages('warning');
-    self::assertContains($message, $messages, 'Warning message was found.');
+    self::assertContains((string) $message, $messages, 'Warning message was found.');
   }
 
   /**
    * Passes if a given status message was found on the page.
    */
-  protected function assertStatusMessage(string $message): void {
+  protected function assertStatusMessage(string|\Stringable $message): void {
     $messages = $this->getMessages('status');
-    self::assertContains($message, $messages, 'Status message was found.');
+    self::assertContains((string) $message, $messages, 'Status message was found.');
   }
 
   /**

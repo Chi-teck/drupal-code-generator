@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\Tests\bar\Functional;
 
-use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Component\Render\FormattableMarkup as FM;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
@@ -58,7 +58,7 @@ final class FieldTest extends BrowserTestBase {
     $this->submitForm($edit, 'Save and continue');
     $this->submitForm([], 'Save field settings');
     $this->submitForm([], 'Save settings');
-    $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     // -- Test widget form elements.
     $this->drupalGet('node/add/page');
@@ -104,19 +104,19 @@ final class FieldTest extends BrowserTestBase {
       '%limit' => '128',
       '%value' => '129',
     ];
-    $message = new FormattableMarkup('@label cannot be longer than %limit characters but is currently %value characters long.', $arguments);
+    $message = new FM('@label cannot be longer than %limit characters but is currently %value characters long.', $arguments);
     $this->assertErrorMessage($message);
 
-    $message = new FormattableMarkup('%label must be a number.', ['%label' => 'Value 4']);
+    $message = new FM('%label must be a number.', ['%label' => 'Value 4']);
     $this->assertErrorMessage($message);
 
-    $message = new FormattableMarkup('%label must be a number.', ['%label' => 'Value 5']);
+    $message = new FM('%label must be a number.', ['%label' => 'Value 5']);
     $this->assertErrorMessage($message);
 
-    $message = new FormattableMarkup('%label must be a number.', ['%label' => 'Value 6']);
+    $message = new FM('%label must be a number.', ['%label' => 'Value 6']);
     $this->assertErrorMessage($message);
 
-    $message = new FormattableMarkup('The email address %value is not valid.', ['%value' => 'wrong email']);
+    $message = new FM('The email address %value is not valid.', ['%value' => 'wrong email']);
     $this->assertErrorMessage($message);
 
     $arguments = [
@@ -124,17 +124,17 @@ final class FieldTest extends BrowserTestBase {
       '%limit' => '128',
       '%value' => '129',
     ];
-    $message = new FormattableMarkup('@label cannot be longer than %limit characters but is currently %value characters long.', $arguments);
+    $message = new FM('@label cannot be longer than %limit characters but is currently %value characters long.', $arguments);
     $this->assertErrorMessage($message);
 
-    $message = new FormattableMarkup('The URL %value is not valid.', ['%value' => 'wrong URL']);
+    $message = new FM('The URL %value is not valid.', ['%value' => 'wrong URL']);
     $this->assertErrorMessage($message);
 
     $arguments = [
       '%label' => 'Value 10',
       '%format' => (new DrupalDateTime())->format('Y-m-d'),
     ];
-    $message = new FormattableMarkup('The %label date is invalid. Please enter a date in the format %format.', $arguments);
+    $message = new FM('The %label date is invalid. Please enter a date in the format %format.', $arguments);
     $this->assertErrorMessage($message);
 
     // Submit the form with correct values and test formatter output.
@@ -180,7 +180,7 @@ final class FieldTest extends BrowserTestBase {
     $this->submitForm($edit, 'Save and continue');
     $this->submitForm([], 'Save field settings');
     $this->submitForm([], 'Save settings');
-    $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     // -- Test widget form elements.
     $this->drupalGet('node/add/page');
@@ -248,7 +248,7 @@ final class FieldTest extends BrowserTestBase {
     $options = [
       '- Select a value -',
       'https://example.com',
-      'http://www.php.net',
+      'https://www.php.net',
       'https://www.drupal.org',
     ];
     $this->assertXpath($prefix . $xpath . self::buildOptionsXpath($options, 0));
@@ -339,19 +339,19 @@ final class FieldTest extends BrowserTestBase {
     ];
     $this->submitForm($edit, 'Save field settings');
 
-    $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "settings[bar]" and @value = "example"][1]');
+    $this->assertXpath('//label[text() = "Bar"]/following::input[@name = "settings[bar]" and @value = "example"][1]');
     $edit = [
       'settings[bar]' => 'test 2',
     ];
     $this->submitForm($edit, 'Save settings');
 
-    $this->assertStatusMessage(new FormattableMarkup('Saved %label configuration.', ['%label' => 'Foo']));
+    $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     // Make sure the settings are saved.
     $this->drupalGet('admin/structure/types/manage/page/fields/node.page.field_foo/storage');
     $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "settings[foo]" and @value = "test 1"][1]');
     $this->drupalGet('admin/structure/types/manage/page/fields/node.page.field_foo');
-    $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "settings[bar]" and @value = "test 2"][1]');
+    $this->assertXpath('//label[text() = "Bar"]/following::input[@name = "settings[bar]" and @value = "test 2"][1]');
 
     $this->drupalGet('admin/structure/types/manage/page/form-display');
     $this->assertXpath('//tr[@id = "field-foo"]/td/div[text() = "Foo: bar"]');
@@ -420,7 +420,7 @@ final class FieldTest extends BrowserTestBase {
   /**
    * Asserts formatter item.
    */
-  protected function assertFormatterItem(string $prefix, string $label, string $value): void {
+  private function assertFormatterItem(string $prefix, string $label, string $value): void {
     $xpath = '/label[text() = "%s" and normalize-space(following::text()[1]) = "%s"]';
     $this->assertXpath($prefix . \sprintf($xpath, $label, $value));
   }
@@ -428,7 +428,7 @@ final class FieldTest extends BrowserTestBase {
   /**
    * Builds options xpath.
    */
-  protected static function buildOptionsXpath(array $options, string $selected_option): string {
+  private static function buildOptionsXpath(array $options, int $selected_option): string {
     $xpath = \sprintf('/option[text() = "%s"%s]', \array_shift($options), $selected_option == 0 ? ' and @selected' : '');
     foreach ($options as $index => $option) {
       $xpath .= \sprintf('/following::option[text() = "%s"%s][1]', $option, $selected_option == $index + 1 ? ' and @selected' : '');

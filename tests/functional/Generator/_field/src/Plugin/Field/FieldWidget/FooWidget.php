@@ -44,7 +44,7 @@ final class FooWidget extends WidgetBase {
    */
   public function settingsSummary(): array {
     return [
-      $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')])
+      $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]),
     ];
   }
 
