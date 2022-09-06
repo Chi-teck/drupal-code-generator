@@ -31,11 +31,10 @@ final class FooDefaultFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state): array {
-    $settings = $this->getSettings();
     $element['foo'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Foo'),
-      '#default_value' => $settings['foo'],
+      '#default_value' => $this->getSetting('foo'),
     ];
     return $element;
   }
@@ -44,9 +43,9 @@ final class FooDefaultFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function settingsSummary(): array {
-    $settings = $this->getSettings();
-    $summary[] = $this->t('Foo: @foo', ['@foo' => $settings['foo']]);
-    return $summary;
+    return [
+      $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]),
+    ];
   }
 
   /**
