@@ -13,7 +13,7 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
  * @FieldFormatter(
  *   id = "example_foo_table",
  *   label = @Translation("Table"),
- *   field_types = {"example_foo"}
+ *   field_types = {"example_foo"},
  * )
  */
 final class FooTableFormatter extends FormatterBase {

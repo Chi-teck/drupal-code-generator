@@ -13,7 +13,7 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
  * @FieldFormatter(
  *   id = "example_foo_key_value",
  *   label = @Translation("Key-value"),
- *   field_types = {"example_foo"}
+ *   field_types = {"example_foo"},
  * )
  */
 final class FooKeyValueFormatter extends FormatterBase {

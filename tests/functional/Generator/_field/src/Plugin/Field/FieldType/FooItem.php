@@ -18,7 +18,7 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("Foo"),
  *   category = @Translation("General"),
  *   default_widget = "example_foo",
- *   default_formatter = "example_foo_default"
+ *   default_formatter = "example_foo_default",
  * )
  */
 final class FooItem extends FieldItemBase {
@@ -63,7 +63,7 @@ final class FooItem extends FieldItemBase {
 
     $element['bar'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Foo'),
+      '#title' => $this->t('Bar'),
       '#default_value' => $settings['bar'],
     ];
 
@@ -74,67 +74,7 @@ final class FooItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public function isEmpty(): bool {
-    if ($this->value_1 == 1) {
-      return FALSE;
-    }
-    elseif ($this->value_2 == 1) {
-      return FALSE;
-    }
-    elseif ($this->value_3 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_4 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_5 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_6 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_7 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_8 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_9 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_10 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_11 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_12 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_13 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_14 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_15 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_16 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_17 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_18 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_19 !== NULL) {
-      return FALSE;
-    }
-    elseif ($this->value_20 !== NULL) {
-      return FALSE;
-    }
-    return TRUE;
+    return $this->value_1 != 1 && $this->value_2 != 1 && $this->value_3 === NULL && $this->value_4 === NULL && $this->value_5 === NULL && $this->value_6 === NULL && $this->value_7 === NULL && $this->value_8 === NULL && $this->value_9 === NULL && $this->value_10 === NULL && $this->value_11 === NULL && $this->value_12 === NULL && $this->value_13 === NULL && $this->value_14 === NULL && $this->value_15 === NULL && $this->value_16 === NULL && $this->value_17 === NULL && $this->value_18 === NULL && $this->value_19 === NULL && $this->value_20 === NULL;
   }
 
   /**
@@ -400,11 +340,9 @@ final class FooItem extends FieldItemBase {
 
   /**
    * Returns allowed values for 'value_8' sub-field.
-   *
-   * @return array
-   *   The list of allowed values.
    */
   public static function allowedValue8Values(): array {
+    // @todo Update allowed values.
     return [
       123 => 123,
       456 => 456,
@@ -414,11 +352,9 @@ final class FooItem extends FieldItemBase {
 
   /**
    * Returns allowed values for 'value_10' sub-field.
-   *
-   * @return array
-   *   The list of allowed values.
    */
   public static function allowedValue10Values(): array {
+    // @todo Update allowed values.
     return [
       '12.3' => '12.3',
       '4.56' => '4.56',
@@ -428,11 +364,9 @@ final class FooItem extends FieldItemBase {
 
   /**
    * Returns allowed values for 'value_12' sub-field.
-   *
-   * @return array
-   *   The list of allowed values.
    */
   public static function allowedValue12Values(): array {
+    // @todo Update allowed values.
     return [
       '12.35' => '12.35',
       '45.65' => '45.65',
@@ -442,11 +376,9 @@ final class FooItem extends FieldItemBase {
 
   /**
    * Returns allowed values for 'value_14' sub-field.
-   *
-   * @return array
-   *   The list of allowed values.
    */
   public static function allowedValue14Values(): array {
+    // @todo Update allowed values.
     return [
       'alpha@example.com' => 'alpha@example.com',
       'beta@example.com' => 'beta@example.com',
@@ -456,11 +388,9 @@ final class FooItem extends FieldItemBase {
 
   /**
    * Returns allowed values for 'value_16' sub-field.
-   *
-   * @return array
-   *   The list of allowed values.
    */
   public static function allowedValue16Values(): array {
+    // @todo Update allowed values.
     return [
       '71234567001' => '+7(123)45-67-001',
       '71234567002' => '+7(123)45-67-002',
@@ -470,25 +400,21 @@ final class FooItem extends FieldItemBase {
 
   /**
    * Returns allowed values for 'value_18' sub-field.
-   *
-   * @return array
-   *   The list of allowed values.
    */
   public static function allowedValue18Values(): array {
+    // @todo Update allowed values.
     return [
       'https://example.com' => 'https://example.com',
-      'http://www.php.net' => 'http://www.php.net',
+      'https://www.php.net' => 'https://www.php.net',
       'https://www.drupal.org' => 'https://www.drupal.org',
     ];
   }
 
   /**
    * Returns allowed values for 'value_20' sub-field.
-   *
-   * @return array
-   *   The list of allowed values.
    */
   public static function allowedValue20Values(): array {
+    // @todo Update allowed values.
     return [
       '2018-01-01' => '1 January 2018',
       '2018-02-01' => '1 February 2018',

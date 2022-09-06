@@ -72,7 +72,7 @@ final class {{ type_class }} extends FieldItemBase {
 
     $element['bar'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Foo'),
+      '#title' => $this->t('Bar'),
       '#default_value' => $settings['bar'],
     ];
 
@@ -84,19 +84,14 @@ final class {{ type_class }} extends FieldItemBase {
    * {@inheritdoc}
    */
   public function isEmpty(): bool {
+{% set conditions = [] %}
 {% for subfield in subfields %}
   {% set condition %}
-    {% if subfield.type == 'boolean' %}$this->{{ subfield.machine_name }} == 1{% else %}$this->{{ subfield.machine_name }} !== NULL{% endif %}
+    {% if subfield.type == 'boolean' %}$this->{{ subfield.machine_name }} != 1{% else %}$this->{{ subfield.machine_name }} === NULL{% endif %}
   {% endset %}
-  {% if loop.index == 1 %}
-    if ({{ condition }}) {
-  {% else %}
-    elseif ({{ condition }}) {
-  {% endif %}
-      return FALSE;
-    }
+  {% set conditions = conditions|merge([condition]) %}
 {% endfor %}
-    return TRUE;
+    return {{ conditions|join(' && ')|raw }};
   }
 
   /**
@@ -263,11 +258,9 @@ final class {{ type_class }} extends FieldItemBase {
   {% if subfield.list %}
   /**
    * Returns allowed values for '{{ subfield.machine_name }}' sub-field.
-   *
-   * @return array
-   *   The list of allowed values.
    */
   public static function {{ subfield.allowed_values_method }}(): array {
+    // @todo Update allowed values.
     return [
     {% if subfield.type == 'string' %}
       'alpha' => t('Alpha'),
@@ -295,7 +288,7 @@ final class {{ type_class }} extends FieldItemBase {
       '71234567003' => '+7(123)45-67-003',
     {% elseif subfield.type == 'uri' %}
       'https://example.com' => 'https://example.com',
-      'http://www.php.net' => 'http://www.php.net',
+      'https://www.php.net' => 'https://www.php.net',
       'https://www.drupal.org' => 'https://www.drupal.org',
     {% elseif subfield.type == 'datetime' %}
       {% if subfield.date_type == 'date' %}
