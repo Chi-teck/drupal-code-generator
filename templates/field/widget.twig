@@ -38,11 +38,10 @@ final class {{ widget_class }} extends WidgetBase {
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state): array {
-    $settings = $this->getSettings();
     $element['foo'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Foo'),
-      '#default_value' => $settings['foo'],
+      '#default_value' => $this->getSetting('foo'),
     ];
     return $element;
   }
@@ -51,9 +50,9 @@ final class {{ widget_class }} extends WidgetBase {
    * {@inheritdoc}
    */
   public function settingsSummary(): array {
-    $settings = $this->getSettings();
-    $summary[] = $this->t('Foo: @foo', ['@foo' => $settings['foo']]);
-    return $summary;
+    return [
+      $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')])
+    ];
   }
 
 {% endif %}
@@ -63,89 +62,86 @@ final class {{ widget_class }} extends WidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
 
 {% for subfield in subfields %}
-  {% set title %}'#title' => $this->t('{{ subfield.name }}'),{% endset %}
-  {% set default_value %}'#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,{% endset %}
-  {% set size %}'#size' => 20,{% endset %}
   {% if subfield.list %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'select',
-      {{ title }}
+      '#title' => $this->t('{{ subfield.name }}'),
       '#options' => ['' => $this->t('- {{ subfield.required ? 'Select a value' : 'None' }} -')] + {{ type_class }}::{{ subfield.allowed_values_method }}(),
-      {{ default_value }}
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
     ];
   {% else %}
     {% if subfield.type == 'boolean' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'checkbox',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
     ];
     {% elseif subfield.type == 'string' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'textfield',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
       {% if inline %}
-      {{ size }}
+      '#size' => 20,
       {% endif %}
     ];
     {% elseif subfield.type == 'text' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'textarea',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
     ];
     {% elseif subfield.type == 'integer' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'number',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
     ];
     {% elseif subfield.type == 'float' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'number',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
       '#step' => 0.001,
     ];
     {% elseif subfield.type == 'numeric' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'number',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
       '#step' => 0.01,
     ];
     {% elseif subfield.type == 'email' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'email',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
       {% if inline %}
-      {{ size }}
+      '#size' => 20,
       {% endif %}
     ];
     {% elseif subfield.type == 'telephone' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'tel',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
       {% if inline %}
-      {{ size }}
+      '#size' => 20,
       {% endif %}
     ];
     {% elseif subfield.type == 'uri' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'url',
-      {{ title }}
-      {{ default_value }}
+      '#title' => $this->t('{{ subfield.name }}'),
+      '#default_value' => $items[$delta]->{{ subfield.machine_name }} ?? NULL,
       {% if inline %}
-      {{ size }}
+      '#size' => 20,
       {% endif %}
     ];
     {% elseif subfield.type == 'datetime' %}
     $element['{{ subfield.machine_name }}'] = [
       '#type' => 'datetime',
-      {{ title }}
+      '#title' => $this->t('{{ subfield.name }}'),
       '#default_value' => NULL,
       {% if subfield.date_type == 'date' %}
       '#date_time_element' => 'none',
