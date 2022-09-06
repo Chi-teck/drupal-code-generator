@@ -38,6 +38,7 @@
         "twig/twig": "^3.3"
     },
     "require-dev": {
+        "ext-simplexml": "*",
         "chi-teck/drupal-coder-extension": "^1.2",
         "drupal/coder": "^8.3.14",
         "phpspec/prophecy-phpunit": "^2.0",

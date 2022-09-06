@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\Tests\qux\Kernel;
 
@@ -64,7 +64,7 @@ final class ViewStyleTest extends KernelTestBase {
   protected static function assertWrapperClass(string $wrapper_class): void {
     $build = \views_embed_view('qux_example');
     $output = \Drupal::service('renderer')->renderRoot($build);
-    $xml = new \SimpleXMLElement($output);
+    $xml = new \SimpleXMLElement((string) $output);
     $xpath = \sprintf('//div/div[@class = "%s"]/div//a[text() = "Hello world!"]', $wrapper_class);
     self::assertCount(1, $xml->xpath($xpath));
   }

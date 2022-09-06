@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\dcg_test;
 
@@ -95,10 +95,10 @@ trait TestTrait {
   /**
    * Passes if expected page title was found.
    */
-  protected function assertPageTitle(string $title): void {
+  protected function assertPageTitle(string|\Stringable $title): void {
     $title_element = $this->xpath('//h1');
     if (isset($title_element[0])) {
-      self::assertSame($title, \trim(\strip_tags($title_element[0]->getHtml(), '<em>')));
+      self::assertSame((string) $title, \trim(\strip_tags($title_element[0]->getHtml(), '<em>')));
     }
     else {
       self::fail('Page title was not found.');

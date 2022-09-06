@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\acme\Entity\Bundle;
 
 /**
  * A bundle class for node entities.
  */
-class ArticleBundle extends NodeBundle {
+final class ArticleBundle extends NodeBundle {
 
 }
