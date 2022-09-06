@@ -26,7 +26,6 @@ final class FooKeyValueFormatter extends FormatterBase {
     $element = [];
 
     foreach ($items as $delta => $item) {
-
       $table = [
         '#type' => 'table',
       ];
@@ -477,7 +476,6 @@ final class FooKeyValueFormatter extends FormatterBase {
       }
 
       $element[$delta] = $table;
-
     }
 
     return $element;

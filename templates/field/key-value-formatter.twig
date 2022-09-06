@@ -32,7 +32,6 @@ final class {{ key_value_formatter_class }} extends FormatterBase {
     $element = [];
 
     foreach ($items as $delta => $item) {
-
       $table = [
         '#type' => 'table',
       ];
@@ -96,7 +95,6 @@ final class {{ key_value_formatter_class }} extends FormatterBase {
 
 {% endfor %}
       $element[$delta] = $table;
-
     }
 
     return $element;
