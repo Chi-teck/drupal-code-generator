@@ -1,5 +1,5 @@
 {% import '@lib/di.twig' as di %}
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Controller;
 
@@ -14,34 +14,30 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Returns responses for {{ name }} routes.
  */
-class {{ class }} extends ControllerBase {
-
+final class {{ class }} extends ControllerBase {
 {% if services %}
-{{ di.properties(services) }}
 
   /**
    * The controller constructor.
-   *
-{{ di.annotation(services) }}
    */
-  public function __construct({{ di.signature(services) }}) {
-{{ di.assignment(services) }}
-  }
+  public function __construct(
+{{ di.signature(services, true) }}
+  ) {}
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    return new static(
+  public static function create(ContainerInterface $container): self {
+    return new self(
 {{ di.container(services) }}
     );
   }
-
 {% endif %}
+
   /**
    * Builds the response.
    */
-  public function build() {
+  public function build(): array {
 
     $build['content'] = [
       '#type' => 'item',

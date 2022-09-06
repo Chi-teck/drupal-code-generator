@@ -10,6 +10,7 @@ use {{ service.type }};
   {% endsort %}
 {% endmacro %}
 
+{# @deprecated #}
 {% macro properties(services) %}
   {% for service in services %}
   /**
@@ -21,6 +22,7 @@ use {{ service.type }};
   {%- endfor %}
 {% endmacro %}
 
+{# @deprecated #}
 {% macro annotation(services) %}
   {% for service in services %}
    * @param \{{ service.type }} ${{ service.name }}
@@ -28,10 +30,18 @@ use {{ service.type }};
    {%- endfor %}
 {% endmacro %}
 
-{% macro signature(services) %}
-  {% for service in services %}{{ service.short_type }} ${{ service.name }}{{ loop.last ? '' : ', ' }}{% endfor %}
+{# @todo Set true as default valuef for the multiline option. #}
+{% macro signature(services, multiline=false) %}
+  {% if multiline %}
+    {% for service in services %}
+    private readonly {{ service.short_type }} ${{ service.name|camelize(false) }},{{ loop.last ? '' : "\n" }}
+    {%- endfor %}
+  {%- else %}
+    {% for service in services %}{{ service.short_type }} ${{ service.name }}{{ loop.last ? '' : ', ' }}{% endfor %}
+  {% endif %}
 {% endmacro %}
 
+{# @deprecated #}
 {% macro assignment(services) %}
   {% for service in services %}
     $this->{{ service.name|camelize(false) }} = ${{ service.name }};{{ loop.last ? '' : "\n" }}
@@ -40,7 +50,7 @@ use {{ service.type }};
 
 {% macro container(services) %}
   {% for service_id, service in services %}
-      $container->get('{{ service_id }}'){{ loop.last ? '' : ",\n" }}
+      $container->get('{{ service_id }}'),{{ loop.last ? '' : "\n" }}
   {%- endfor %}
 {% endmacro %}
 

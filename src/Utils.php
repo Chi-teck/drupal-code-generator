@@ -92,6 +92,8 @@ final class Utils {
         'h2u' => \str_replace('-', '_', $result),
         'h2m' => self::human2machine($result),
         'm2h' => self::machine2human($result),
+        // @todo Test this.
+        'm2t' => self::machine2human($result, TRUE),
         'camelize' => self::camelize($result),
         'pluralize' => self::pluralize($result),
         'c2m' => self::camel2machine($result),

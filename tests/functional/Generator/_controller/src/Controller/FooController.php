@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Controller;
 
@@ -9,38 +9,28 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Returns responses for Foo routes.
  */
-class FooController extends ControllerBase {
-
-  /**
-   * The database connection.
-   *
-   * @var \Drupal\Core\Database\Connection
-   */
-  protected $connection;
+final class FooController extends ControllerBase {
 
   /**
    * The controller constructor.
-   *
-   * @param \Drupal\Core\Database\Connection $connection
-   *   The database connection.
    */
-  public function __construct(Connection $connection) {
-    $this->connection = $connection;
-  }
+  public function __construct(
+    private readonly Connection $connection,
+  ) {}
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('database')
+  public static function create(ContainerInterface $container): self {
+    return new self(
+      $container->get('database'),
     );
   }
 
   /**
    * Builds the response.
    */
-  public function build() {
+  public function build(): array {
 
     $build['content'] = [
       '#type' => 'item',

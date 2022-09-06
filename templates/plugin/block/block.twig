@@ -49,7 +49,7 @@ class {{ class }} extends BlockBase {% if services %}implements ContainerFactory
       $configuration,
       $plugin_id,
       $plugin_definition,
-{{ di.container(services) }},
+{{ di.container(services) }}
     );
   }
 

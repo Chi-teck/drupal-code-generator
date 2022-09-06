@@ -54,7 +54,7 @@ class Example extends ArgumentDefaultPluginBase implements CacheableDependencyIn
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('current_route_match')
+      $container->get('current_route_match'),
     );
   }
 

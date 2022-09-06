@@ -7,6 +7,8 @@ use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
  * Tests controller generator.
+ *
+ * @todo Test default values of route variables.
  */
 final class ControllerTest extends GeneratorTestBase {
 
@@ -58,10 +60,10 @@ final class ControllerTest extends GeneratorTestBase {
      Route name [foo.example]:
      ➤ 
 
-     Route path [/foo/example]:
+     Route path [/foo/example-bar]:
      ➤ 
 
-     Route title [Example]:
+     Route title [Example Bar]:
      ➤ 
 
      Route permission [access content]:
