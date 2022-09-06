@@ -229,6 +229,20 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
+   * @covers \DrupalCodeGenerator\Utils::removeSuffix()
+   */
+  public function testRemoveSuffix(): void {
+    self::assertSame('foo', Utils::removeSuffix('foo_bar', '_bar'));
+    self::assertSame('', Utils::removeSuffix('foo', 'foo'));
+    self::assertSame('foo', Utils::removeSuffix('foo', 'foo_foo_foo'));
+    self::assertSame('FOO_BAR', Utils::removeSuffix('FOO_BAR', '_bar'));
+    self::assertSame('foo_bar', Utils::removeSuffix('foo_bar', ' _bar'));
+    self::assertSame('foo_bar', Utils::removeSuffix('foo_bar', ' bar'));
+  }
+
+  /**
+   * Test callback.
+   *
    * @covers \DrupalCodeGenerator\Utils::processVars()
    */
   public function testProcessVars(): void {

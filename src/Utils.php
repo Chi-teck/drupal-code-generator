@@ -145,6 +145,14 @@ final class Utils {
   }
 
   /**
+   * Remove a string from the beginning of a string.
+   */
+  public static function removeSuffix(string $input, string $suffix): string {
+    return \str_ends_with($input, $suffix)
+      ? \substr_replace($input, '', -1 * \strlen($suffix), \strlen($suffix)) : $input;
+  }
+
+  /**
    * Processes collected variables.
    */
   public static function processVars(array $vars, ?array $data = NULL): array {
