@@ -7,12 +7,18 @@ use DrupalCodeGenerator\Asset\Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\GeneratorType;
 
+/**
+ * A generator for composer.json file.
+ *
+ * @todo Clean-up
+ * @todo Define destination automatically based on project type.
+ */
 #[Generator(
   name: 'composer',
   description: 'Generates a composer.json file',
   aliases: ['composer.json'],
   templatePath: Application::TEMPLATE_PATH . '/composer',
-  type: GeneratorType::MODULE_COMPONENT,
+  type: GeneratorType::OTHER,
   label: 'composer.json',
 )]
 final class Composer extends BaseGenerator {
@@ -47,7 +53,7 @@ final class Composer extends BaseGenerator {
 
     $vars['drupal_org'] = match($vars['type']) {
       'drupal-custom-module', 'drupal-custom-theme', 'drupal-custom-profile' => FALSE,
-      default => $ir->confirm('Is this project hosted on drupal.org?'),
+      default => $ir->confirm('Will this project be hosted on drupal.org?'),
     };
 
     $assets->addFile('composer.json', 'composer');
