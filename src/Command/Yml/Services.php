@@ -11,7 +11,7 @@ use DrupalCodeGenerator\GeneratorType;
 #[Generator(
   name: 'yml:services',
   description: 'Generates a services yml file',
-  aliases: ['services'],
+  aliases: ['services', 'services.yml'],
   templatePath: Application::TEMPLATE_PATH . '/yml/services',
   type: GeneratorType::MODULE_COMPONENT,
 )]
@@ -21,7 +21,6 @@ final class Services extends BaseGenerator {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
-    $vars['class'] = '{machine_name|camelize}';
     $assets->addFile('{machine_name}.services.yml', 'services');
   }
 
