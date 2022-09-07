@@ -1,11 +1,11 @@
-name: Example
+name: Shreya
 type: theme
-base theme: garland
-description: Example description.
-package: Custom
+base theme: claro
+description: Helper theme for testing DCG components.
+package: DCG
 core_version_requirement: ^10
 libraries:
-  - example/global
+  - shreya/global
 regions:
   header: 'Header'
   primary_menu: 'Primary menu'

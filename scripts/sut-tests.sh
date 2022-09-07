@@ -315,18 +315,16 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme_component ]]; then
   MODULE_MACHINE_NAME=plantain
   MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
 
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
-
   THEME_MACHINE_NAME=shreya
   THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
+  cp -R $SOURCE_DIR/$THEME_MACHINE_NAME $THEME_DIR
 
-  mkdir $THEME_DIR
+  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
+  cd $MODULE_DIR
 
   $DCG yml:breakpoints -a shreya
   $DCG theme-settings -a shreya -a Shreya
   $DCG yml:theme-libraries -a shreya
-  $DCG yml:theme-info -a shreya -a Shreya -a claro -a 'Helper theme for testing DCG components.' -a DCG
 
   dcg_phpcs $THEME_DIR
 
