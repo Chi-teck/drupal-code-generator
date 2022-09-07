@@ -274,7 +274,6 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
   $DCG yml:links:contextual -a yety
   $DCG yml:links:menu -a yety
   $DCG yml:links:task -a yety
-  $DCG yml:module-info -a yety -a -a 'Helper module for testing generated YML files' -a DCG -a -a drupal:system,drupal:node,drupal:user
   $DCG yml:module-libraries -a yety
   $DCG yml:permissions -a yety
   $DCG yml:routing -a yety -a Yety

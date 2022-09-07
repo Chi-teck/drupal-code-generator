@@ -273,12 +273,11 @@
   [0] ..
   [1] Links
   [2] Breakpoints
-  [3] Info (module)
-  [4] Libraries (module)
-  [5] Libraries (theme)
-  [6] Permissions
-  [7] Routing
-  [8] Services
+  [3] Libraries (module)
+  [4] Libraries (theme)
+  [5] Permissions
+  [6] Routing
+  [7] Services
  ➤ 0⏎
  Select generator 
   [ 0] ..

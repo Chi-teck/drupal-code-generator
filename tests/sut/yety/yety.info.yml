@@ -1,0 +1,6 @@
+name: Yety
+type: module
+description: Module description.
+package: Helper module for testing generated YML files
+core_version_requirement: ^10
+configure: DCG
