@@ -11,7 +11,7 @@ use DrupalCodeGenerator\GeneratorType;
 #[Generator(
   name: 'yml:routing',
   description: 'Generates a routing yml file',
-  aliases: ['routing'],
+  aliases: ['routing', 'routing.yml'],
   templatePath: Application::TEMPLATE_PATH . '/yml/routing',
   type: GeneratorType::MODULE_COMPONENT,
 )]
