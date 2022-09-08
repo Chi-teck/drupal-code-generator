@@ -11,7 +11,7 @@ use DrupalCodeGenerator\GeneratorType;
 #[Generator(
   name: 'yml:permissions',
   description: 'Generates a permissions yml file',
-  aliases: ['permissions'],
+  aliases: ['permissions', 'permissions.yml'],
   templatePath: Application::TEMPLATE_PATH . '/yml/permissions',
   type: GeneratorType::MODULE_COMPONENT,
 )]
@@ -19,7 +19,7 @@ final class Permissions extends BaseGenerator {
 
   protected function generate(array &$vars, Assets $assets): void {
     $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
-    $assets->addFile('{machine_name}.permissions.yml', 'permissions');
+    $assets->addFile('{machine_name}.permissions.yml', 'permissions.twig');
   }
 
 }
