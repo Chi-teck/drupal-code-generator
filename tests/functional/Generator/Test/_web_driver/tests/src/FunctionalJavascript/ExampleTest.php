@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\Tests\foo\FunctionalJavascript;
 
@@ -9,7 +9,7 @@ use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
  *
  * @group foo
  */
-class ExampleTest extends WebDriverTestBase {
+final class ExampleTest extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}
@@ -26,35 +26,14 @@ class ExampleTest extends WebDriverTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    // Set up the test here.
+    // @todo Set up the test here or remove this method.
   }
 
   /**
    * Test callback.
    */
-  public function testSomething() {
-    // Let's test password strength widget.
-    \Drupal::configFactory()->getEditable('user.settings')
-      ->set('verify_mail', FALSE)
-      ->save();
-
-    $this->drupalGet('user/register');
-
-    $page = $this->getSession()->getPage();
-
-    $password_field = $page->findField('Password');
-    $password_strength = $page->find('css', '.js-password-strength__text');
-
-    self::assertSame('', $password_strength->getText());
-
-    $password_field->setValue('abc');
-    self::assertSame('Weak', $password_strength->getText());
-
-    $password_field->setValue('abcABC123!');
-    self::assertSame('Fair', $password_strength->getText());
-
-    $password_field->setValue('abcABC123!sss');
-    self::assertSame('Strong', $password_strength->getText());
+  public function testSomething(): void {
+    // Place your code here.
   }
 
 }
