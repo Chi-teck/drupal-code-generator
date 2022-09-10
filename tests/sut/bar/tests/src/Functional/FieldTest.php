@@ -26,7 +26,7 @@ final class FieldTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
@@ -155,16 +155,16 @@ final class FieldTest extends BrowserTestBase {
     $this->submitForm($edit, 'Save');
     $this->assertSession()->pageTextContains('Page Test has been updated.');
 
-    $prefix = '//div[contains(@class, "field--name-field-foo")]/div[@class = "field__item"]/div';
-    $this->assertFormatterItem($prefix, 'Value 1', 'No');
-    $this->assertFormatterItem($prefix, 'Value 2', 'value_2_content');
-    $this->assertFormatterItem($prefix, 'Value 4', '123');
-    $this->assertFormatterItem($prefix, 'Value 5', '123.456');
-    $this->assertFormatterItem($prefix, 'Value 6', '123.45');
-    $this->assertXpath($prefix . '/label[text() = "Value 7"]/following::a[@href = "mailto:no-reply@example.com" and text() = "no-reply@example.com"][1]');
-    $this->assertXpath($prefix . '/label[text() = "Value 8"]/following::a[@href = "tel:89124578945" and text() = "89124578945"][1]');
-    $this->assertXpath($prefix . '/label[text() = "Value 9"]/following::a[@href = "https://example.com" and text() = "https://example.com"][1]');
-    $this->assertXpath($prefix . '/label[text() = "Value 10"]/following::time[@datetime][1]');
+    $this->assertXpath('//label[text() = "Value 1" and normalize-space(following::text()[1]) = "No"]');
+    $this->assertXpath('//label[text() = "Value 2" and normalize-space(following::text()[1]) = "value_2_content"]');
+    $this->assertXpath('//label[text() = "Value 3" and normalize-space(following::text()[1]) = "value_3_content"]');
+    $this->assertXpath('//label[text() = "Value 4" and normalize-space(following::text()[1]) = "123"]');
+    $this->assertXpath('//label[text() = "Value 5" and normalize-space(following::text()[1]) = "123.456"]');
+    $this->assertXpath('//label[text() = "Value 6" and normalize-space(following::text()[1]) = "123.45"]');
+    $this->assertXpath('//label[text() = "Value 7"]/following::a[@href = "mailto:no-reply@example.com" and text() = "no-reply@example.com"][1]');
+    $this->assertXpath('//label[text() = "Value 8"]/following::a[@href = "tel:89124578945" and text() = "89124578945"][1]');
+    $this->assertXpath('//label[text() = "Value 9"]/following::a[@href = "https://example.com" and text() = "https://example.com"][1]');
+    $this->assertXpath('//label[text() = "Value 10"]/following::time[@datetime][1]');
   }
 
   /**
@@ -308,17 +308,16 @@ final class FieldTest extends BrowserTestBase {
     $this->submitForm($edit, 'Save');
     $this->assertSession()->pageTextContains('Page Test has been updated.');
 
-    $prefix = '//div[contains(@class, "field--name-field-foo")]/div[@class = "field__item"]/div';
-    $this->assertFormatterItem($prefix, 'Value 1', 'Yes');
-    $this->assertFormatterItem($prefix, 'Value 2', 'Alpha');
-    $this->assertFormatterItem($prefix, 'Value 3', 'value_3_content');
-    $this->assertFormatterItem($prefix, 'Value 4', '123');
-    $this->assertFormatterItem($prefix, 'Value 5', '12.3');
-    $this->assertFormatterItem($prefix, 'Value 6', '12.35');
-    $this->assertXpath($prefix . '/label[text() = "Value 7"]/following::a[@href = "mailto:alpha@example.com" and text() = "alpha@example.com"][1]');
-    $this->assertXpath($prefix . '/label[text() = "Value 8"]/following::a[@href = "tel:71234567001" and text() = "+7(123)45-67-001"][1]');
-    $this->assertXpath($prefix . '/label[text() = "Value 9"]/following::a[@href = "https://example.com" and text() = "https://example.com"][1]');
-    $this->assertXpath($prefix . '/label[text() = "Value 10"]/following::time[@datetime = "2018-01-01T00:10:10Z" and text() = "1 January 2018, 00:10:10"][1]');
+    $this->assertXpath('//label[text() = "Value 1" and normalize-space(following::text()[1]) = "Yes"]');
+    $this->assertXpath('//label[text() = "Value 2" and normalize-space(following::text()[1]) = "Alpha"]');
+    $this->assertXpath('//label[text() = "Value 3" and normalize-space(following::text()[1]) = "value_3_content"]');
+    $this->assertXpath('//label[text() = "Value 4" and normalize-space(following::text()[1]) = "123"]');
+    $this->assertXpath('//label[text() = "Value 5" and normalize-space(following::text()[1]) = "12.3"]');
+    $this->assertXpath('//label[text() = "Value 6" and normalize-space(following::text()[1]) = "12.35"]');
+    $this->assertXpath('//label[text() = "Value 7"]/following::a[@href = "mailto:alpha@example.com" and text() = "alpha@example.com"][1]');
+    $this->assertXpath('//label[text() = "Value 8"]/following::a[@href = "tel:71234567001" and text() = "+7(123)45-67-001"][1]');
+    $this->assertXpath('//label[text() = "Value 9"]/following::a[@href = "https://example.com" and text() = "https://example.com"][1]');
+    $this->assertXpath('//label[text() = "Value 10"]/following::time[@datetime = "2018-01-01T00:10:10Z" and text() = "1 January 2018, 00:10:10"][1]');
   }
 
   /**
@@ -372,12 +371,11 @@ final class FieldTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('Page Test has been created.');
 
     // Default formatter.
-    $prefix = '//div[contains(@class, "field--name-field-foo")]/div[@class = "field__item"]/div';
-    $this->assertFormatterItem($prefix, 'Value 1', 'Yes');
-    $this->assertFormatterItem($prefix, 'Value 2', 'value_2_content');
-    $this->assertFormatterItem($prefix, 'Value 3', '123.456');
-    $this->assertXpath($prefix . '/label[text() = "Value 4"]/following::a[@href = "mailto:beta@example.com" and text() = "beta@example.com"][1]');
-    $this->assertXpath($prefix . '/label[text() = "Value 5"]/following::a[@href = "https://www.drupal.org" and text() = "https://www.drupal.org"][1]');
+    $this->assertXpath('//label[text() = "Value 1" and normalize-space(following::text()[1]) = "Yes"]');
+    $this->assertXpath('//label[text() = "Value 2" and normalize-space(following::text()[1]) = "value_2_content"]');
+    $this->assertXpath('//label[text() = "Value 3" and normalize-space(following::text()[1]) = "123.456"]');
+    $this->assertXpath('//label[text() = "Value 4"]/following::a[@href = "mailto:beta@example.com" and text() = "beta@example.com"][1]');
+    $this->assertXpath('//label[text() = "Value 5"]/following::a[@href = "https://www.drupal.org" and text() = "https://www.drupal.org"][1]');
 
     // Key-value formatter.
     $this->drupalGet('admin/structure/types/manage/page/display');
@@ -387,11 +385,10 @@ final class FieldTest extends BrowserTestBase {
     $this->submitForm($edit, 'Save');
     $this->drupalGet('node/1');
 
-    $prefix = '//div[contains(@class, "field--name-field-foo")]//table/tbody/tr';
-    $this->assertXpath($prefix . '/th[text() = "Value 1"]/following::td[text() = "Yes"]');
-    $this->assertXpath($prefix . '/th[text() = "Value 2"]/following::td[text() = "value_2_content"]');
-    $this->assertXpath($prefix . '/th[text() = "Value 4"]/following::td[text() = "beta@example.com"]');
-    $this->assertXpath($prefix . '/th[text() = "Value 5"]/following::td[text() = "https://www.drupal.org"]');
+    $this->assertXpath('//table/tbody/tr/th[text() = "Value 1"]/following::td[text() = "Yes"]');
+    $this->assertXpath('//table/tbody/tr/th[text() = "Value 2"]/following::td[text() = "value_2_content"]');
+    $this->assertXpath('//table/tbody/tr/th[text() = "Value 4"]/following::td[text() = "beta@example.com"]');
+    $this->assertXpath('//table/tbody/tr/th[text() = "Value 5"]/following::td[text() = "https://www.drupal.org"]');
 
     // Table formatter.
     $this->drupalGet('admin/structure/types/manage/page/display');
@@ -400,29 +397,20 @@ final class FieldTest extends BrowserTestBase {
     ];
     $this->submitForm($edit, 'Save');
     $this->drupalGet('node/1');
-    $prefix = '//div[contains(@class, "field--name-field-foo")]//table';
-    $xpath = $prefix . '/thead/tr/th[text() = "#"]';
+    $xpath = '//table/thead/tr/th[text() = "#"]';
     $xpath .= '/following::th[text() = "Value 1"][1]';
     $xpath .= '/following::th[text() = "Value 2"][1]';
     $xpath .= '/following::th[text() = "Value 3"][1]';
     $xpath .= '/following::th[text() = "Value 4"][1]';
     $xpath .= '/following::th[text() = "Value 5"][1]';
     $this->assertXpath($xpath);
-    $xpath = $prefix . '/tbody/tr/td[text() = "1"]';
+    $xpath = '//table/tbody/tr/td[text() = "1"]';
     $xpath .= '/following::td[text() = "Yes"][1]';
     $xpath .= '/following::td[text() = "value_2_content"][1]';
     $xpath .= '/following::td[text() = "123.456"][1]';
     $xpath .= '/following::td[text() = "beta@example.com"][1]';
     $xpath .= '/following::td[text() = "https://www.drupal.org"][1]';
     $this->assertXpath($xpath);
-  }
-
-  /**
-   * Asserts formatter item.
-   */
-  private function assertFormatterItem(string $prefix, string $label, string $value): void {
-    $xpath = '/label[text() = "%s" and normalize-space(following::text()[1]) = "%s"]';
-    $this->assertXpath($prefix . \sprintf($xpath, $label, $value));
   }
 
   /**
