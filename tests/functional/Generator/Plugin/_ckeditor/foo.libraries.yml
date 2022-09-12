@@ -1,0 +1,12 @@
+pooh_bear:
+  js:
+    js/build/poohBear.js: { preprocess: false, minified: true }
+  dependencies:
+    - ckeditor5/ckeditor5
+
+# Loaded in the text format configuration form to provide styling for the icon
+# used in toolbar config.
+admin.pooh_bear:
+  css:
+    theme:
+      css/pooh-bear.admin.css: { }

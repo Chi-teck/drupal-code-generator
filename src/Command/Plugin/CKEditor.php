@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Utils;
 #[Generator(
   name: 'plugin:ckeditor',
   description: 'Generates CKEditor plugin',
-  aliases: ['ckeditor'],
+  aliases: ['ckeditor', 'ckeditor-plugin'],
   templatePath: Application::TEMPLATE_PATH . '/plugin/ckeditor',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'CKEditor',
@@ -24,21 +24,27 @@ final class CKEditor extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['plugin_label'] = $ir->askPluginLabel();
     $vars['plugin_id'] = $ir->askPluginId();
-    $vars['class'] = $ir->askPluginClass();
 
-    $unprefixed_plugin_id = Utils::removePrefix($vars['plugin_id'], $vars['machine_name'] . '_');
+    $vars['unprefixed_plugin_id'] = Utils::removePrefix($vars['plugin_id'], $vars['machine_name'] . '_');
+    $vars['class'] = Utils::camelize($vars['unprefixed_plugin_id']);
 
     // Convert plugin ID to hyphen case.
-    $vars['short_plugin_id'] = \str_replace('_', '-', $unprefixed_plugin_id);
-    $vars['command_name'] = Utils::camelize($unprefixed_plugin_id, FALSE);
+    $vars['fe_plugin_id'] = Utils::camelize($vars['unprefixed_plugin_id'], FALSE);
 
-    $assets->addFile('src/Plugin/CKEditorPlugin/{class}.php', 'ckeditor');
-    $assets->addFile('js/plugins/{short_plugin_id}/plugin.js', 'plugin');
-    $assets->addFile('js/plugins/{short_plugin_id}/dialogs/{short_plugin_id}.js', 'dialog');
-
-    $assets->addFile('js/plugins/{short_plugin_id}/icons/{short_plugin_id}.png')
-      ->content(\file_get_contents(Application::TEMPLATE_PATH . '/plugin/ckeditor/icon.png'))
+    $assets->addFile('webpack.config.js', 'webpack.config.js.twig');
+    $assets->addFile('package.json', 'package.json.twig');
+    $assets->addFile('.gitignore', 'gitignore.twig');
+    $assets->addFile('{machine_name}.libraries.yml', 'model.libraries.yml.twig')
       ->appendIfExists();
+    $assets->addFile('{machine_name}.ckeditor5.yml', 'model.ckeditor5.yml.twig')
+      ->appendIfExists();
+
+    $assets->addFile('css/{unprefixed_plugin_id|u2h}.admin.css', 'css/model.admin.css.twig');
+    $assets->addFile('icons/{unprefixed_plugin_id|u2h}.svg', 'icons/example.svg');
+    $assets->addFile('js/ckeditor5_plugins/{fe_plugin_id}/src/{class}.js', 'js/ckeditor5_plugins/example/src/Example.js.twig');
+    $assets->addFile('js/ckeditor5_plugins/{fe_plugin_id}/src/index.js', 'js/ckeditor5_plugins/example/src/index.js.twig');
+    $assets->addDirectory('js/build');
+
   }
 
 }

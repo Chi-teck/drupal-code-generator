@@ -4,34 +4,14 @@ dependencies:
   config:
     - filter.format.test
   module:
-    - ckeditor
+    - ckeditor5
 format: test
-editor: ckeditor
+editor: ckeditor5
 settings:
   toolbar:
-    rows:
-      -
-        -
-          name: Formatting
-          items:
-            - Bold
-            - Italic
-        -
-          name: Linking
-          items:
-            - DrupalLink
-            - DrupalUnlink
-        -
-          name: Lists
-          items:
-            - BulletedList
-            - NumberedList
-        -
-          name: Media
-          items:
-            - Blockquote
-            - DrupalImage
-        -
-          name: Block Formatting
-          items:
-            - Format
+    items:
+      - bold
+      - italic
+      - link
+  plugins: {  }
+image_upload: {  }

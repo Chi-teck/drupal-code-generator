@@ -1,0 +1,18 @@
+# @see core/modules/ckeditor5/ckeditor5.ckeditor5.yml
+# @see https://www.drupal.org/project/ckeditor5_dev
+foo_pooh_bear:
+  # Configuration that will be sent to CKEditor 5 JavaScript plugins.
+  ckeditor5:
+    plugins:
+      - poohBear.PoohBear
+
+  # Configuration that will be used directly by Drupal.
+  drupal:
+    label: 'Pooh Bear'
+    library: foo/pooh_bear
+    admin_library: foo/admin.pooh_bear
+    toolbar_items:
+      poohBear:
+        label: 'Pooh Bear'
+    # The plugin does not provide elements.
+    elements: false

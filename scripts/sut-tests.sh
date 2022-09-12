@@ -214,7 +214,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
 
   $DCG plugin:action -a qux -a 'Update node title' -a qux_update_node_title -a UpdateNodeTitle -a DCG -a Yes
   $DCG plugin:block -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
-  $DCG plugin:ckeditor -a qux -a Example -a qux_example -a Example
+  $DCG plugin:ckeditor -a qux -a 'Pooh Bear' -a qux_pooh_bear
   $DCG plugin:condition -a qux -a Example -a example -a Example
   $DCG plugin:entity-reference-selection -a qux -a Qux -a node -a Example -a qux_example -a Example -a Yes
   $DCG plugin:filter -a qux -a Qux -a Example -a example -a Example -a 'HTML restrictor'
@@ -224,6 +224,8 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
 
   dcg_phpcs .
   dcg_module_install $MODULE_MACHINE_NAME
+  # Build CKEditor plugin.
+  npm install && npm run build
   dcg_phpunit tests
   dcg_module_uninstall $MODULE_MACHINE_NAME
 fi

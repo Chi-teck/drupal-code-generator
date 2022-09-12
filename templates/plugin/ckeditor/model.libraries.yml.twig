@@ -1,0 +1,12 @@
+{{ unprefixed_plugin_id }}:
+  js:
+    js/build/{{ class|camelize(false) }}.js: { preprocess: false, minified: true }
+  dependencies:
+    - ckeditor5/ckeditor5
+
+# Loaded in the text format configuration form to provide styling for the icon
+# used in toolbar config.
+admin.{{ unprefixed_plugin_id }}:
+  css:
+    theme:
+      css/{{ unprefixed_plugin_id|u2h }}.admin.css: { }

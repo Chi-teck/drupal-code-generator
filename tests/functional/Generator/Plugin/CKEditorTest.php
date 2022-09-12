@@ -15,9 +15,8 @@ final class CKEditorTest extends GeneratorTestBase {
   public function testGenerator(): void {
     $input = [
       'foo',
-      'Example',
-      'foo_example',
-      'Example',
+      'Pooh Bear',
+      'foo_pooh_bear',
     ];
     $this->execute(CKEditor::class, $input);
 
@@ -32,26 +31,35 @@ final class CKEditorTest extends GeneratorTestBase {
      Plugin label:
      ➤ 
 
-     Plugin ID [foo_example]:
-     ➤ 
-
-     Plugin class [Example]:
+     Plugin ID [foo_pooh_bear]:
      ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • js/plugins/example/plugin.js
-     • js/plugins/example/dialogs/example.js
-     • js/plugins/example/icons/example.png
-     • src/Plugin/CKEditorPlugin/Example.php
+     • js/build
+     • .gitignore
+     • foo.ckeditor5.yml
+     • foo.libraries.yml
+     • package.json
+     • webpack.config.js
+     • css/pooh-bear.admin.css
+     • icons/pooh-bear.svg
+     • js/ckeditor5_plugins/poohBear/src/index.js
+     • js/ckeditor5_plugins/poohBear/src/PoohBear.js
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('js/plugins/example/plugin.js');
-    $this->assertGeneratedFile('js/plugins/example/dialogs/example.js');
-    $this->assertGeneratedFile('js/plugins/example/icons/example.png');
-    $this->assertGeneratedFile('src/Plugin/CKEditorPlugin/Example.php');
+    $this->assertGeneratedDirectory('js/build');
+    $this->assertGeneratedFile('.gitignore');
+    $this->assertGeneratedFile('foo.ckeditor5.yml');
+    $this->assertGeneratedFile('foo.libraries.yml');
+    $this->assertGeneratedFile('package.json');
+    $this->assertGeneratedFile('webpack.config.js');
+    $this->assertGeneratedFile('css/pooh-bear.admin.css');
+    $this->assertGeneratedFile('icons/pooh-bear.svg');
+    $this->assertGeneratedFile('js/ckeditor5_plugins/poohBear/src/PoohBear.js');
+    $this->assertGeneratedFile('js/ckeditor5_plugins/poohBear/src/index.js');
   }
 
 }

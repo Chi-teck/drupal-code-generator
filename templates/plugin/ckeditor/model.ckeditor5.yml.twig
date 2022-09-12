@@ -1,0 +1,18 @@
+# @see core/modules/ckeditor5/ckeditor5.ckeditor5.yml
+# @see https://www.drupal.org/project/ckeditor5_dev
+{{ plugin_id }}:
+  # Configuration that will be sent to CKEditor 5 JavaScript plugins.
+  ckeditor5:
+    plugins:
+      - {{ fe_plugin_id }}.{{ class }}
+
+  # Configuration that will be used directly by Drupal.
+  drupal:
+    label: '{{ plugin_label }}'
+    library: {{ machine_name }}/{{ unprefixed_plugin_id }}
+    admin_library: {{ machine_name }}/admin.{{ unprefixed_plugin_id }}
+    toolbar_items:
+      {{ fe_plugin_id }}:
+        label: '{{ plugin_label }}'
+    # The plugin does not provide elements.
+    elements: false

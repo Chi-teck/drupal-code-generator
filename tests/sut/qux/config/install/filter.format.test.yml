@@ -1,10 +1,9 @@
-format: test
-name: Test
-roles:
-  - anonymous
-  - authenticated
-status: true
 langcode: en
+status: true
+dependencies: {  }
+name: Test
+format: test
+weight: 0
 filters:
   filter_url:
     id: filter_url
@@ -13,3 +12,12 @@ filters:
     weight: 0
     settings:
       filter_url_length: 72
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<br> <p> <strong> <em> <a href> <ul> <ol reversed start> <li>'
+      filter_html_help: false
+      filter_html_nofollow: false
