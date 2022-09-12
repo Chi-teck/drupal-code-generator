@@ -29,10 +29,10 @@ final class FieldWidgetTest extends FieldBaseTest {
     $assert_session->elementExists('xpath', $xpath);
 
     // Change widget settings.
-    // Some issue in the latest Chrome. Sleep is required to proceed.
-    \sleep(1);
     $this->click('#field-wine input[name="field_wine_settings_edit"]');
     $this->waitForAjax();
+    // Some issue in the latest Chrome. Sleep is required to proceed.
+    \sleep(1);
     $xpath = '//tr[@id = "field-wine"]//input[@name = "fields[field_wine][settings_edit_form][settings][foo]" and @value = "bar"]';
     $assert_session->elementExists('xpath', $xpath);
     $page->fillField('fields[field_wine][settings_edit_form][settings][foo]', 'example');

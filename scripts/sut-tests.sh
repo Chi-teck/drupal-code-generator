@@ -224,7 +224,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
 
   dcg_phpcs .
   dcg_module_install $MODULE_MACHINE_NAME
-  # Build CKEditor plugin.
+  echo 'Build CKEditor plugin...'
   npm install && npm run build
   dcg_phpunit tests
   dcg_module_uninstall $MODULE_MACHINE_NAME

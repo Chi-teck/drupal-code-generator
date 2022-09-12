@@ -24,7 +24,7 @@ final class ContentEntityTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * Test callback.
@@ -45,7 +45,7 @@ final class ContentEntityTest extends BrowserTestBase {
     // -- Create a new bundle.
     $this->drupalGet('admin/structure/example_types');
     $this->assertPageTitle('Example types');
-    $this->assertXpath('//td[@class = "empty message" and contains(text(), "No example types available.")]');
+    $this->assertXpath('//td[@colspan = "2" and contains(text(), "No example types available.")]');
 
     $this->clickLink('Add example type');
 
@@ -145,7 +145,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->assertXpath('//div[text() = "Status"]/following-sibling::div[text() = "Enabled"]');
     $this->assertXpath('//div[text() = "Description"]/following-sibling::div/p[text() = "Dark"]');
     $this->assertXpath('//div[text() = "Author"]/following-sibling::div/a[text() = "example_admin"]');
-    $this->assertXpath('//div[text() = "Authored on"]/following-sibling::div[@class = "field__item"]');
+    $this->assertXpath('//div[text() = "Authored on"]/following-sibling::div');
 
     // -- Test entity form.
     $this->drupalGet('/admin/content/example/1/edit');

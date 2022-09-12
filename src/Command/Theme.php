@@ -24,7 +24,7 @@ final class Theme extends BaseGenerator {
     $vars['name'] = $ir->askName();
     $vars['machine_name'] = $ir->askMachineName();
 
-    $vars['base_theme'] = Utils::human2machine($ir->ask('Base theme', 'classy'));
+    $vars['base_theme'] = Utils::human2machine($ir->ask('Base theme', 'stable'));
     $vars['description'] = $ir->ask('Description', 'A flexible theme with a responsive, mobile-first layout.');
     $vars['package'] = $ir->ask('Package', 'Custom');
     $vars['breakpoints'] = $ir->confirm('Would you like to create breakpoints?', FALSE);

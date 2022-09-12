@@ -36,7 +36,7 @@ final class ThemeTest extends GeneratorTestBase {
      Theme machine name [foo]:
      ➤ 
 
-     Base theme [classy]:
+     Base theme [stable]:
      ➤ 
 
      Description [A flexible theme with a responsive, mobile-first layout.]:
