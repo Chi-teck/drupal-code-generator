@@ -38,9 +38,6 @@ else
   git clone --depth 1 --branch $DCG_DRUPAL_VERSION $DRUPAL_REPO $DRUPAL_DIR
   echo '🚩 Install Composer dependencies'
   composer -d$DRUPAL_DIR install
-  echo '🚩 Install local DCG'
-  composer -d$DRUPAL_DIR config repositories.dcg path "$ROOT_DIR"
-  composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator --ignore-platform-req=php
   echo '🚩 Install Drupal'
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   php $DRUPAL_DIR/core/scripts/drupal install standard
@@ -50,6 +47,10 @@ else
   fi
   cp -r $DRUPAL_DIR $CACHE_DIR/$DCG_DRUPAL_VERSION
 fi
+
+echo '🚩 Install local DCG'
+composer -d$DRUPAL_DIR config repositories.dcg path "$ROOT_DIR"
+composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator --ignore-platform-req=php
 
 echo '🚩 Run tests'
 $DRUPAL_DIR/vendor/bin/phpunit -c $DCG_DIR --testsuite=functional ${1:-}
