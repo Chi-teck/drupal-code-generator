@@ -46,8 +46,9 @@ function dcg_drush {
 }
 
 function dcg_phpcs {
+  # Sniffs below has been fixed in the 3.x branch.
   $DRUPAL_DIR/vendor/bin/phpcs \
-     --exclude='SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator' \
+     --exclude='SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator,Generic.CodeAnalysis.UselessOverridingMethod' \
     -p --standard=Drupal,DrupalPractice "$@"
 }
 
