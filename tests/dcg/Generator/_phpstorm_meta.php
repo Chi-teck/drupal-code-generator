@@ -10,6 +10,13 @@ namespace PHPSTORM_META {
   );
 
   override(
+    \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
+    map([
+      'foo' => '\Foo',
+    ])
+  );
+
+  override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
     map([
       'example' => '\StorageExample',
