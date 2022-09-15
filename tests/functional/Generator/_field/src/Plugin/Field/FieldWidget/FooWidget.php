@@ -201,8 +201,13 @@ final class FooWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function errorElement(array $element, ConstraintViolationInterface $violation, array $form, FormStateInterface $form_state): array {
-    return isset($violation->arrayPropertyPath[0]) ? $element[$violation->arrayPropertyPath[0]] : $element;
+  public function errorElement(array $element, ConstraintViolationInterface $error, array $form, FormStateInterface $form_state): array|bool {
+    $element = parent::errorElement($element, $error, $form, $form_state);
+    if ($element === FALSE) {
+      return FALSE;
+    }
+    $error_property = explode('.', $error->getPropertyPath())[1];
+    return $element[$error_property];
   }
 
   /**
