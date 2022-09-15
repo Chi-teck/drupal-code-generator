@@ -34,7 +34,7 @@ final class PhpStormMetadata extends DrupalGenerator {
     $service_definitions = \array_map('unserialize', $service_definitions);
 
     foreach ($service_definitions as $service_id => $service_definition) {
-      if ($service_definition['class']) {
+      if ($service_definition['class'] ?? NULL) {
         $vars['services'][$service_id] = $service_definition['class'];
       }
     }
