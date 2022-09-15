@@ -14,7 +14,7 @@ final class CkePluginTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'claro';
 
   /**
    * {@inheritdoc}

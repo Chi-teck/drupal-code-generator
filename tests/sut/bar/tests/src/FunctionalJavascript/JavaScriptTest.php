@@ -14,7 +14,7 @@ final class JavaScriptTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'claro';
 
   /**
    * {@inheritdoc}

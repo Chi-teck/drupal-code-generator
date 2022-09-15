@@ -14,7 +14,7 @@ class ExampleTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'claro';
 
   /**
    * {@inheritdoc}
