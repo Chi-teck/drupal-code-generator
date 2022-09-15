@@ -46,7 +46,9 @@ function dcg_drush {
 }
 
 function dcg_phpcs {
-  $DRUPAL_DIR/vendor/bin/phpcs -p --standard=Drupal,DrupalPractice "$@"
+  $DRUPAL_DIR/vendor/bin/phpcs \
+     --exclude='SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator' \
+    -p --standard=Drupal,DrupalPractice "$@"
 }
 
 function dcg_phpunit {
@@ -79,7 +81,6 @@ else
   git clone --depth 1 --branch $DRUPAL_VERSION  https://git.drupalcode.org/project/drupal.git $DRUPAL_DIR
   composer -d$DRUPAL_DIR install
   composer -d$DRUPAL_DIR require drush/drush chi-teck/web-server
-  $DRUPAL_DIR/vendor/bin/phpcs --config-set installed_paths $DRUPAL_DIR/vendor/drupal/coder/coder_sniffer
   cp -R $SELF_PATH/example $DRUPAL_DIR/modules
   mkdir -m 777 $DRUPAL_DIR/sites/default/files
   dcg_drush site:install minimal --db-url=sqlite://sites/default/files/.db.sqlite --sites-subdir=default
