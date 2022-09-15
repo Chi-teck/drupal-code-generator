@@ -23,7 +23,7 @@ final class Unit extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
     $vars['class'] = $ir->ask('Class', 'ExampleTest', new RequiredClassName());
-    $assets->addFile('tests/src/Unit/{class}.php', 'unit');
+    $assets->addFile('tests/src/Unit/{class}.php', 'unit.twig');
   }
 
 }

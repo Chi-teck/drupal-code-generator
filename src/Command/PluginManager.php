@@ -38,25 +38,25 @@ final class PluginManager extends BaseGenerator {
     $vars['discovery'] = $ir->choice('Discovery type', $discovery_types, 'Annotation');
     $vars['class_prefix'] = '{plugin_type|camelize}';
 
-    $assets->addServicesFile()->template('{discovery}/model.services.yml');
-    $assets->addFile('src/{class_prefix}Interface.php', '{discovery}/src/ExampleInterface.php');
-    $assets->addFile('src/{class_prefix}PluginManager.php', '{discovery}/src/ExamplePluginManager.php');
+    $assets->addServicesFile()->template('{discovery}/model.services.yml.twig');
+    $assets->addFile('src/{class_prefix}Interface.php', '{discovery}/src/ExampleInterface.php.twig');
+    $assets->addFile('src/{class_prefix}PluginManager.php', '{discovery}/src/ExamplePluginManager.php.twig');
 
     switch ($vars['discovery']) {
       case 'annotation':
-        $assets->addFile('src/Annotation/{class_prefix}.php', 'annotation/src/Annotation/Example.php');
-        $assets->addFile('src/{class_prefix}PluginBase.php', 'annotation/src/ExamplePluginBase.php');
-        $assets->addFile('src/Plugin/{class_prefix}/Foo.php', 'annotation/src/Plugin/Example/Foo.php');
+        $assets->addFile('src/Annotation/{class_prefix}.php', 'annotation/src/Annotation/Example.php.twig');
+        $assets->addFile('src/{class_prefix}PluginBase.php', 'annotation/src/ExamplePluginBase.php.twig');
+        $assets->addFile('src/Plugin/{class_prefix}/Foo.php', 'annotation/src/Plugin/Example/Foo.php.twig');
         break;
 
       case 'yaml':
-        $assets->addFile('{machine_name}.{plugin_type|pluralize}.yml', 'yaml/model.examples.yml');
-        $assets->addFile('src/{class_prefix}Default.php', 'yaml/src/ExampleDefault.php');
+        $assets->addFile('{machine_name}.{plugin_type|pluralize}.yml', 'yaml/model.examples.yml.twig');
+        $assets->addFile('src/{class_prefix}Default.php', 'yaml/src/ExampleDefault.php.twig');
         break;
 
       case 'hook':
-        $assets->addFile('{machine_name}.module', 'hook/model.module')->appendIfExists(7);
-        $assets->addFile('src/{class_prefix}Default.php', 'hook/src/ExampleDefault.php');
+        $assets->addFile('{machine_name}.module', 'hook/model.module.twig')->appendIfExists(7);
+        $assets->addFile('src/{class_prefix}Default.php', 'hook/src/ExampleDefault.php.twig');
         break;
     }
 

@@ -23,7 +23,7 @@ final class Kernel extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
     $vars['class'] = $ir->ask('Class', 'ExampleTest', new RequiredClassName());
-    $assets->addFile('tests/src/Kernel/{class}.php', 'kernel');
+    $assets->addFile('tests/src/Kernel/{class}.php', 'kernel.twig');
   }
 
 }

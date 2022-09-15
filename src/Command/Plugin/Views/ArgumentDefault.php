@@ -30,11 +30,11 @@ final class ArgumentDefault extends BaseGenerator {
     $vars['services'] = $ir->askServices(FALSE);
 
     $assets->addFile('src/Plugin/views/argument_default/{class}.php')
-      ->template('argument-default');
+      ->template('argument-default.twig');
 
     if ($vars['configurable']) {
       $assets->addSchemaFile('config/schema/{machine_name}.views.schema.yml')
-        ->template('argument-default-schema');
+        ->template('argument-default-schema.twig');
     }
   }
 

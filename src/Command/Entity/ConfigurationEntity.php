@@ -29,22 +29,22 @@ final class ConfigurationEntity extends BaseGenerator {
     $vars['entity_type_id'] = $ir->ask('Entity type ID', '{entity_type_label|h2m}');
     $vars['class_prefix'] = '{entity_type_id|camelize}';
 
-    $assets->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php');
-    $assets->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php');
-    $assets->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
-    $assets->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
-    $assets->addFile('{machine_name}.routing.yml', 'model.routing.yml')
+    $assets->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php.twig');
+    $assets->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php.twig');
+    $assets->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php.twig');
+    $assets->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php.twig');
+    $assets->addFile('{machine_name}.routing.yml', 'model.routing.yml.twig')
       ->appendIfExists();
-    $assets->addFile('{machine_name}.links.action.yml', 'model.links.action.yml')
+    $assets->addFile('{machine_name}.links.action.yml', 'model.links.action.yml.twig')
       ->appendIfExists();
-    $assets->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml')
+    $assets->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml.twig')
       ->appendIfExists();
-    $assets->addFile('{machine_name}.permissions.yml', 'model.permissions.yml')
+    $assets->addFile('{machine_name}.permissions.yml', 'model.permissions.yml.twig')
       ->appendIfExists();
-    $assets->addFile('config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml')
+    $assets->addFile('config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml.twig')
       ->appendIfExists();
 
-    $assets->addFile('{machine_name}.info.yml')
+    $assets->addFile('{machine_name}.info.yml.twig')
       ->setVirtual(TRUE)
       ->resolver($this->getInfoResolver($vars));
   }

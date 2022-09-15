@@ -26,7 +26,7 @@ final class QueueWorker extends BaseGenerator {
     $vars['plugin_id'] = $ir->askPluginId();
     $vars['class'] = $ir->askPluginClass();
 
-    $assets->addFile('src/Plugin/QueueWorker/{class}.php', 'queue-worker');
+    $assets->addFile('src/Plugin/QueueWorker/{class}.php', 'queue-worker.twig');
   }
 
 }

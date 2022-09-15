@@ -22,8 +22,8 @@ final class PathProcessor extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['class'] = $ir->ask('Class', 'PathProcessor{machine_name|camelize}');
 
-    $assets->addFile('src/PathProcessor/{class}.php', 'path-processor');
-    $assets->addServicesFile()->template('services');
+    $assets->addFile('src/PathProcessor/{class}.php', 'path-processor.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

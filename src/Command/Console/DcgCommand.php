@@ -53,8 +53,8 @@ final class DcgCommand extends BaseGenerator {
       $vars['path'] = '/' . $file_path;
     }
 
-    $assets->addFile($file_path . '/{class}.php', 'command');
-    $assets->addFile($file_path . '/{template_name}.twig', 'template');
+    $assets->addFile($file_path . '/{class}.php', 'command.twig');
+    $assets->addFile($file_path . '/{template_name}.twig', 'template.twig');
   }
 
 }

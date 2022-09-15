@@ -35,11 +35,11 @@ final class Template extends BaseGenerator {
     $vars['create_theme'] = $ir->confirm('Create theme hook?');
     $vars['create_preprocess'] = $ir->confirm('Create preprocess hook?');
 
-    $assets->addFile('templates/{template_name}', 'template');
+    $assets->addFile('templates/{template_name}', 'template.twig');
 
     if ($vars['create_theme'] || $vars['create_preprocess']) {
       $assets->addFile('{machine_name}.module')
-        ->template('module')
+        ->template('module.twig')
         ->appendIfExists(7);
     }
   }

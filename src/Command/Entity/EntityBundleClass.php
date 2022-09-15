@@ -93,7 +93,7 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
         '{bundle_id|camelize}Bundle',
       );
       $vars['class_fqn'] = '\\' . $vars['namespace'] . '\\' . $vars['class'];
-      $assets->addFile('src/Entity/Bundle/{class}.php', 'bundle-class')->vars($vars);
+      $assets->addFile('src/Entity/Bundle/{class}.php', 'bundle-class.twig')->vars($vars);
       // Track all bundle classes to generate hook_entity_bundle_info_alter().
       $vars['classes'][$bundle_id] = $vars['class'];
       $vars['classes_fqn'][$bundle_id] = $vars['class_fqn'];

@@ -26,9 +26,9 @@ final class Widget extends BaseGenerator {
     $vars['class'] = $ir->askPluginClass(suffix: 'Widget');
 
     $vars['configurable'] = $ir->confirm('Make the widget configurable?', FALSE);
-    $assets->addFile('src/Plugin/Field/FieldWidget/{class}.php', 'widget');
+    $assets->addFile('src/Plugin/Field/FieldWidget/{class}.php', 'widget.twig');
     if ($vars['configurable']) {
-      $assets->addSchemaFile()->template('schema');
+      $assets->addSchemaFile()->template('schema.twig');
     }
   }
 

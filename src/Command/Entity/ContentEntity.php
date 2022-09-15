@@ -61,53 +61,53 @@ final class ContentEntity extends BaseGenerator {
 
     // Contextual links need title suffix to be added to entity template.
     if ($vars['template']) {
-      $assets->addFile('{machine_name}.links.contextual.yml', 'model.links.contextual.yml')
+      $assets->addFile('{machine_name}.links.contextual.yml', 'model.links.contextual.yml.twig')
         ->appendIfExists();
     }
-    $assets->addFile('{machine_name}.links.action.yml', 'model.links.action.yml')
+    $assets->addFile('{machine_name}.links.action.yml', 'model.links.action.yml.twig')
       ->appendIfExists();
-    $assets->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml')
+    $assets->addFile('{machine_name}.links.menu.yml', 'model.links.menu.yml.twig')
       ->appendIfExists();
-    $assets->addFile('{machine_name}.links.task.yml', 'model.links.task.yml')
+    $assets->addFile('{machine_name}.links.task.yml', 'model.links.task.yml.twig')
       ->appendIfExists();
-    $assets->addFile('{machine_name}.permissions.yml', 'model.permissions.yml')
+    $assets->addFile('{machine_name}.permissions.yml', 'model.permissions.yml.twig')
       ->appendIfExists();
-    $assets->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php');
-    $assets->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php');
+    $assets->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php.twig');
+    $assets->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php.twig');
 
     if (!$vars['canonical']) {
-      $assets->addFile('src/Routing/{class_prefix}HtmlRouteProvider.php', 'src/Routing/ExampleHtmlRouteProvider.php');
+      $assets->addFile('src/Routing/{class_prefix}HtmlRouteProvider.php', 'src/Routing/ExampleHtmlRouteProvider.php.twig');
     }
 
-    $assets->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php');
-    $assets->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php');
+    $assets->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php.twig');
+    $assets->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php.twig');
 
     if ($vars['fieldable_no_bundle']) {
-      $assets->addFile('{machine_name}.routing.yml', 'model.routing.yml')
+      $assets->addFile('{machine_name}.routing.yml', 'model.routing.yml.twig')
         ->appendIfExists();
-      $assets->addFile('src/Form/{class_prefix}SettingsForm.php', 'src/Form/ExampleSettingsForm.php');
+      $assets->addFile('src/Form/{class_prefix}SettingsForm.php', 'src/Form/ExampleSettingsForm.php.twig');
     }
 
     if ($vars['template']) {
-      $assets->addFile('templates/{entity_type_id|u2h}.html.twig', 'templates/model-example.html.twig');
-      $assets->addFile('{machine_name}.module', 'model.module')
+      $assets->addFile('templates/{entity_type_id|u2h}.html.twig', 'templates/model-example.html.twig.twig');
+      $assets->addFile('{machine_name}.module', 'model.module.twig')
         ->appendIfExists(7);
     }
 
     if ($vars['access_controller']) {
-      $assets->addFile('src/{class_prefix}AccessControlHandler.php', 'src/ExampleAccessControlHandler.php');
+      $assets->addFile('src/{class_prefix}AccessControlHandler.php', 'src/ExampleAccessControlHandler.php.twig');
     }
 
     if ($vars['rest_configuration']) {
-      $assets->addFile('config/optional/rest.resource.entity.{entity_type_id}.yml', 'config/optional/rest.resource.entity.example.yml');
+      $assets->addFile('config/optional/rest.resource.entity.{entity_type_id}.yml', 'config/optional/rest.resource.entity.example.yml.twig');
     }
 
     if ($vars['bundle']) {
-      $assets->addFile('config/schema/{machine_name}.entity_type.schema.yml', 'config/schema/model.entity_type.schema.yml')
+      $assets->addFile('config/schema/{machine_name}.entity_type.schema.yml', 'config/schema/model.entity_type.schema.yml.twig')
         ->appendIfExists();
-      $assets->addFile('src/{class_prefix}TypeListBuilder.php', 'src/ExampleTypeListBuilder.php');
-      $assets->addFile('src/Entity/{class_prefix}Type.php', 'src/Entity/ExampleType.php');
-      $assets->addFile('src/Form/{class_prefix}TypeForm.php', 'src/Form/ExampleTypeForm.php');
+      $assets->addFile('src/{class_prefix}TypeListBuilder.php', 'src/ExampleTypeListBuilder.php.twig');
+      $assets->addFile('src/Entity/{class_prefix}Type.php', 'src/Entity/ExampleType.php.twig');
+      $assets->addFile('src/Form/{class_prefix}TypeForm.php', 'src/Form/ExampleTypeForm.php.twig');
     }
 
   }

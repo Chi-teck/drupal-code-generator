@@ -22,8 +22,8 @@ final class TwigExtension extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['class'] = $ir->ask('Class', '{machine_name|camelize}TwigExtension');
     $vars['services'] = $ir->askServices();
-    $assets->addFile('src/{class}.php', 'twig-extension');
-    $assets->addServicesFile()->template('services');
+    $assets->addFile('src/{class}.php', 'twig-extension.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

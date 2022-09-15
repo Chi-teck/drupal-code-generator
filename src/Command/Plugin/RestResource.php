@@ -27,7 +27,7 @@ final class RestResource extends BaseGenerator {
     $vars['plugin_id'] = $ir->askPluginId();
     $vars['class'] = $ir->askPluginClass(suffix: 'Resource');
 
-    $assets->addFile('src/Plugin/rest/resource/{class}.php', 'rest-resource');
+    $assets->addFile('src/Plugin/rest/resource/{class}.php', 'rest-resource.twig');
   }
 
 }

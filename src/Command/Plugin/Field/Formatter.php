@@ -26,7 +26,7 @@ final class Formatter extends BaseGenerator {
     $vars['class'] = $ir->askPluginClass(suffix: 'Formatter');
 
     $vars['configurable'] = $ir->confirm('Make the formatter configurable?', FALSE);
-    $assets->addFile('src/Plugin/Field/FieldFormatter/{class}.php', 'formatter');
+    $assets->addFile('src/Plugin/Field/FieldFormatter/{class}.php', 'formatter.twig');
     if ($vars['configurable']) {
       $assets->addSchemaFile()->template('schema.twig');
     }

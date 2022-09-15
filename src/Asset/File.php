@@ -18,7 +18,7 @@ final class File extends Asset implements RenderableInterface {
   private string $content = '';
 
   /**
-   * Twig template to render main content.
+   * Template to render main content.
    */
   private string $template;
 
@@ -59,12 +59,14 @@ final class File extends Asset implements RenderableInterface {
 
   /**
    * Sets the asset template.
+   *
+   * Templates with 'twig' extension are processed with Twig template engine.
    */
   public function template(string $template): self {
     if (isset($this->inlineTemplate)) {
       throw new \LogicException('A file cannot have both inline and regular templates.');
     }
-    $this->template = self::addTwigFileExtension($template);
+    $this->template = $template;
     return $this;
   }
 

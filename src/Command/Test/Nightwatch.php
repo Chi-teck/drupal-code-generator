@@ -23,7 +23,7 @@ final class Nightwatch extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
     $vars['test_name'] = Utils::camelize($ir->ask('Test name', 'example'), FALSE);
-    $assets->addFile('tests/src/Nightwatch/{test_name}Test.js', 'nightwatch');
+    $assets->addFile('tests/src/Nightwatch/{test_name}Test.js', 'nightwatch.twig');
   }
 
 }

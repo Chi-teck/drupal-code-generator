@@ -42,8 +42,8 @@ final class EntityReferenceSelection extends BaseGenerator {
     $vars['base_class'] = \explode('EntityReferenceSelection\\', $vars['base_class_full'])[1];
 
     $assets->addFile('src/Plugin/EntityReferenceSelection/{class}.php')
-      ->template('entity-reference-selection');
-    $assets->addSchemaFile()->template('schema');
+      ->template('entity-reference-selection.twig');
+    $assets->addSchemaFile()->template('schema.twig');
   }
 
   /**

@@ -22,8 +22,8 @@ final class ResponsePolicy extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['class'] = $ir->ask('Class', 'Example');
 
-    $assets->addFile('src/PageCache/{class}.php', 'response-policy');
-    $assets->addServicesFile()->template('services');
+    $assets->addFile('src/PageCache/{class}.php', 'response-policy.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

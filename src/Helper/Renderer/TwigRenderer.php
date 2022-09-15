@@ -31,8 +31,16 @@ final class TwigRenderer extends Helper implements RendererInterface, LoggerAwar
    * {@inheritdoc}
    */
   public function render(string $template, array $vars): string {
-    $this->logger->debug('Rendered template: {template}', ['template' => $template]);
-    return $this->twig->render($template, $vars);
+    if (\str_ends_with($template, '.twig')) {
+      $output = $this->twig->render($template, $vars);
+      $this->logger->debug('Rendered template: {template}', ['template' => $template]);
+    }
+    else {
+      $file_name = $this->twig->resolveTemplate($template)->getSourceContext()->getPath();
+      $output = \file_get_contents($file_name);
+      $this->logger->debug('Copied source: {source}', ['source' => $file_name]);
+    }
+    return $output;
   }
 
   /**

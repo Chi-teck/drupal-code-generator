@@ -29,11 +29,11 @@ final class Field extends BaseGenerator {
 
     $vars['services'] = $ir->askServices(FALSE);
 
-    $assets->addFile('src/Plugin/views/field/{class}.php', 'field');
+    $assets->addFile('src/Plugin/views/field/{class}.php', 'field.twig');
 
     if ($vars['configurable']) {
       $assets->addSchemaFile('config/schema/{machine_name}.views.schema.yml')
-        ->template('schema');
+        ->template('schema.twig');
     }
 
   }

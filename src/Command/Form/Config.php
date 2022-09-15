@@ -57,13 +57,13 @@ final class Config extends BaseGenerator {
         }
 
         $assets->addFile('{machine_name}.links.menu.yml')
-          ->template('links.menu')
+          ->template('links.menu.twig')
           ->appendIfExists();
       }
     }
 
-    $assets->addFile('src/Form/{class}.php', 'form');
-    $assets->addSchemaFile()->template('schema');
+    $assets->addFile('src/Form/{class}.php', 'form.twig');
+    $assets->addSchemaFile()->template('schema.twig');
   }
 
 }

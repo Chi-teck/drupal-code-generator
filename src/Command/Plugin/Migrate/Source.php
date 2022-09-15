@@ -28,7 +28,7 @@ final class Source extends BaseGenerator {
     ];
     $vars['source_type'] = $ir->choice('Source type', $choices);
     $vars['base_class'] = $vars['source_type'] === 'sql' ? 'SqlBase' : 'SourcePluginBase';
-    $assets->addFile('src/Plugin/migrate/source/{class}.php', 'source');
+    $assets->addFile('src/Plugin/migrate/source/{class}.php', 'source.twig');
   }
 
 }

@@ -20,9 +20,9 @@ final class ThemeSettings extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
 
-    $assets->addFile('theme-settings.php', 'form');
-    $assets->addFile('config/install/{machine_name}.settings.yml', 'config');
-    $assets->addFile('config/schema/{machine_name}.schema.yml', 'schema');
+    $assets->addFile('theme-settings.php', 'form.twig');
+    $assets->addFile('config/install/{machine_name}.settings.yml', 'config.twig');
+    $assets->addFile('config/schema/{machine_name}.schema.yml', 'schema.twig');
   }
 
 }

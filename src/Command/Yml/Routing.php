@@ -22,7 +22,7 @@ final class Routing extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
     $vars['class'] = '{machine_name|camelize}Controller';
-    $assets->addFile('{machine_name}.routing.yml', 'routing');
+    $assets->addFile('{machine_name}.routing.yml', 'routing.twig');
   }
 
 }

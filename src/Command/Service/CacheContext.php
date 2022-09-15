@@ -41,8 +41,8 @@ final class CacheContext extends BaseGenerator {
     $vars['interface'] = $vars['calculated'] ?
       'CalculatedCacheContextInterface' : 'CacheContextInterface';
 
-    $assets->addFile('src/Cache/Context/{class}.php', 'cache-context');
-    $assets->addServicesFile()->template('services');
+    $assets->addFile('src/Cache/Context/{class}.php', 'cache-context.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

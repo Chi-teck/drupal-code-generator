@@ -31,9 +31,9 @@ final class CKEditor extends BaseGenerator {
     // Convert plugin ID to hyphen case.
     $vars['fe_plugin_id'] = Utils::camelize($vars['unprefixed_plugin_id'], FALSE);
 
-    $assets->addFile('webpack.config.js', 'webpack.config.js.twig');
+    $assets->addFile('webpack.config.js', 'webpack.config.js');
     $assets->addFile('package.json', 'package.json.twig');
-    $assets->addFile('.gitignore', 'gitignore.twig');
+    $assets->addFile('.gitignore', 'gitignore');
     $assets->addFile('{machine_name}.libraries.yml', 'model.libraries.yml.twig')
       ->appendIfExists();
     $assets->addFile('{machine_name}.ckeditor5.yml', 'model.ckeditor5.yml.twig')

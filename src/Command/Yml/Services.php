@@ -21,7 +21,7 @@ final class Services extends BaseGenerator {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
-    $assets->addFile('{machine_name}.services.yml', 'services');
+    $assets->addFile('{machine_name}.services.yml', 'services.twig');
   }
 
 }

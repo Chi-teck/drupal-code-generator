@@ -242,27 +242,27 @@ final class Field extends BaseGenerator {
     $vars['table_formatter'] = $ir->confirm('Would you like to create table formatter?', FALSE);
     $vars['key_value_formatter'] = $ir->confirm('Would you like to create key-value formatter?', FALSE);
 
-    $assets->addFile('src/Plugin/Field/FieldType/{type_class}.php', 'type');
+    $assets->addFile('src/Plugin/Field/FieldType/{type_class}.php', 'type.twig');
 
-    $assets->addFile('src/Plugin/Field/FieldWidget/{widget_class}.php', 'widget');
+    $assets->addFile('src/Plugin/Field/FieldWidget/{widget_class}.php', 'widget.twig');
 
-    $assets->addFile('src/Plugin/Field/FieldFormatter/{formatter_class}.php', 'default-formatter');
+    $assets->addFile('src/Plugin/Field/FieldFormatter/{formatter_class}.php', 'default-formatter.twig');
 
-    $assets->addSchemaFile()->template('schema');
+    $assets->addSchemaFile()->template('schema.twig');
 
-    $assets->addFile('{machine_name}.libraries.yml', 'libraries')
+    $assets->addFile('{machine_name}.libraries.yml', 'libraries.twig')
       ->appendIfExists();
 
-    $assets->addFile('css/{field_id|u2h}-widget.css', 'widget-css');
+    $assets->addFile('css/{field_id|u2h}-widget.css', 'widget-css.twig');
 
     if ($vars['table_formatter']) {
       $vars['table_formatter_class'] = '{field_label|camelize}TableFormatter';
-      $assets->addFile('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php', '/table-formatter');
+      $assets->addFile('src/Plugin/Field/FieldFormatter/{table_formatter_class}.php', '/table-formatter.twig');
     }
 
     if ($vars['key_value_formatter']) {
       $vars['key_value_formatter_class'] = '{field_label|camelize}KeyValueFormatter';
-      $assets->addFile('src/Plugin/Field/FieldFormatter/{key_value_formatter_class}.php', 'key-value-formatter');
+      $assets->addFile('src/Plugin/Field/FieldFormatter/{key_value_formatter_class}.php', 'key-value-formatter.twig');
     }
 
   }

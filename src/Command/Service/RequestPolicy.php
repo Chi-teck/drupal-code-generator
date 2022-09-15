@@ -22,8 +22,8 @@ final class RequestPolicy extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['class'] = $ir->ask('Class', 'Example');
 
-    $assets->addFile('src/PageCache/{class}.php', 'request-policy');
-    $assets->addServicesFile()->template('services');
+    $assets->addFile('src/PageCache/{class}.php', 'request-policy.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

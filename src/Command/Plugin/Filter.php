@@ -35,8 +35,8 @@ final class Filter extends BaseGenerator {
     ];
     $vars['filter_type'] = $ir->choice('Filter type', $filter_types);
 
-    $assets->addFile('src/Plugin/Filter/{class}.php', 'filter');
-    $assets->addSchemaFile()->template('schema');
+    $assets->addFile('src/Plugin/Filter/{class}.php', 'filter.twig');
+    $assets->addSchemaFile()->template('schema.twig');
   }
 
 }

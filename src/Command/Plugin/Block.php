@@ -33,10 +33,10 @@ final class Block extends BaseGenerator {
 
     $vars['access'] = $ir->confirm('Create access callback?', FALSE);
 
-    $assets->addFile('src/Plugin/Block/{class}.php', 'block');
+    $assets->addFile('src/Plugin/Block/{class}.php', 'block.twig');
 
     if ($vars['configurable']) {
-      $assets->addSchemaFile()->template('schema');
+      $assets->addSchemaFile()->template('schema.twig');
     }
   }
 

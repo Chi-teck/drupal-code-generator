@@ -22,8 +22,8 @@ final class ApacheVirtualHost extends BaseGenerator {
   protected function generate(array &$vars, AssetCollection $assets): void {
     $vars['hostname'] = $this->io()->ask('Host name', 'example.local', self::getDomainValidator());
     $vars['docroot'] = $this->io()->ask('Document root', \DRUPAL_ROOT);
-    $assets->addFile('{hostname}.conf', 'host');
-    $assets->addFile('{hostname}-ssl.conf', 'host-ssl');
+    $assets->addFile('{hostname}.conf', 'host.twig');
+    $assets->addFile('{hostname}-ssl.conf', 'host-ssl.twig');
   }
 
   private static function getDomainValidator(): callable {

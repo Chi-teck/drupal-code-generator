@@ -25,8 +25,8 @@ final class EventSubscriber extends BaseGenerator {
     $vars['class'] = $ir->ask('Class', '{machine_name|camelize}Subscriber');
     $vars['services'] = $ir->askServices(FALSE);
 
-    $assets->addFile('src/EventSubscriber/{class}.php', 'event-subscriber');
-    $assets->addServicesFile()->template('services');
+    $assets->addFile('src/EventSubscriber/{class}.php', 'event-subscriber.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

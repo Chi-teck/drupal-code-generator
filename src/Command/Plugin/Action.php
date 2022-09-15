@@ -32,7 +32,7 @@ final class Action extends BaseGenerator {
     $assets->addFile('src/Plugin/Action/{class}.php', 'action.twig');
 
     if ($vars['configurable']) {
-      $assets->addSchemaFile()->template('schema');
+      $assets->addSchemaFile()->template('schema.twig');
     }
   }
 

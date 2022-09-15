@@ -21,8 +21,8 @@ final class BreadcrumbBuilder extends BaseGenerator {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['class'] = $ir->ask('Class', '{machine_name|camelize}BreadcrumbBuilder');
-    $assets->addFile('src/{class}.php', 'breadcrumb-builder');
-    $assets->addServicesFile()->template('services');
+    $assets->addFile('src/{class}.php', 'breadcrumb-builder.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

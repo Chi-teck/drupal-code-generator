@@ -12,6 +12,8 @@ interface RendererInterface {
   /**
    * Renders a template.
    *
+   * Templates with 'twig' extension are processed with Twig template engine.
+   *
    * @param string $template
    *   Path to a template.
    * @param array $vars

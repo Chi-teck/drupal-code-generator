@@ -19,7 +19,7 @@ final class Action extends BaseGenerator {
 
   protected function generate(array &$vars, Assets $assets): void {
     $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
-    $assets->addFile('{machine_name}.links.action.yml', 'links.action');
+    $assets->addFile('{machine_name}.links.action.yml', 'links.action.twig');
   }
 
 }

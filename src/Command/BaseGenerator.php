@@ -62,7 +62,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       }
     }
 
-    $template_path = $this->getGeneratorDefinition()->templatePath;
+    $template_path = $this->getTemplatePath();
     if ($template_path !== NULL) {
       $this->getHelper('renderer')->registerTemplatePath($template_path);
     }
@@ -199,6 +199,13 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    */
   public function getLabel(): ?string {
     return $this->getGeneratorDefinition()->label;
+  }
+
+  /**
+   * Returns template path.
+   */
+  final protected function getTemplatePath(): ?string {
+    return $this->getGeneratorDefinition()->templatePath;
   }
 
   /**

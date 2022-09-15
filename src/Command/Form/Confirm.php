@@ -45,7 +45,7 @@ final class Confirm extends BaseGenerator {
         ->appendIfExists();
     }
 
-    $assets->addFile('src/Form/{class}.php', 'form');
+    $assets->addFile('src/Form/{class}.php', 'form.twig');
   }
 
 }

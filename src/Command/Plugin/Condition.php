@@ -25,7 +25,7 @@ final class Condition extends BaseGenerator {
     $vars['class'] = $ir->askPluginClass();
 
     $assets->addFile('src/Plugin/Condition/{class}.php', 'condition.twig');
-    $assets->addSchemaFile()->template('schema');
+    $assets->addSchemaFile()->template('schema.twig');
   }
 
 }

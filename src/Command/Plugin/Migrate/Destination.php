@@ -22,7 +22,7 @@ final class Destination extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['plugin_id'] = $ir->askPluginId(default: NULL);
     $vars['class'] = $ir->askPluginClass();
-    $assets->addFile('src/Plugin/migrate/destination/{class}.php', 'destination');
+    $assets->addFile('src/Plugin/migrate/destination/{class}.php', 'destination.twig');
   }
 
 }

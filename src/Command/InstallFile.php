@@ -19,7 +19,7 @@ final class InstallFile extends BaseGenerator {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
-    $assets->addFile('{machine_name}.install', 'install');
+    $assets->addFile('{machine_name}.install', 'install.twig');
   }
 
 }

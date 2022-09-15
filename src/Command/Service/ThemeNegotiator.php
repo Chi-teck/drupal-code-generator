@@ -22,8 +22,8 @@ final class ThemeNegotiator extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['class'] = $ir->ask('Class', '{machine_name|camelize}Negotiator');
 
-    $assets->addFile('src/Theme/{class}.php', 'theme-negotiator');
-    $assets->addServicesFile()->template('services');
+    $assets->addFile('src/Theme/{class}.php', 'theme-negotiator.twig');
+    $assets->addServicesFile()->template('services.twig');
   }
 
 }

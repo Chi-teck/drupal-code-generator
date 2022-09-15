@@ -20,7 +20,7 @@ final class ThemeLibraries extends BaseGenerator {
 
   protected function generate(array &$vars, Assets $assets): void {
     $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
-    $assets->addFile('{machine_name}.libraries.yml', 'theme-libraries');
+    $assets->addFile('{machine_name}.libraries.yml', 'theme-libraries.twig');
   }
 
 }

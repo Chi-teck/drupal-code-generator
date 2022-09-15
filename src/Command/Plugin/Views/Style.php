@@ -29,17 +29,17 @@ final class Style extends BaseGenerator {
     $vars['configurable'] = $ir->confirm('Make the plugin configurable?');
 
     $assets->addFile('src/Plugin/views/style/{class}.php')
-      ->template('style');
+      ->template('style.twig');
 
     $assets->addFile('templates/views-style-{plugin_id|u2h}.html.twig')
-      ->template('template');
+      ->template('template.twig');
 
     $assets->addFile('{machine_name}.module')
-      ->template('preprocess')
+      ->template('preprocess.twig')
       ->appendIfExists(7);
 
     if ($vars['configurable']) {
-      $assets->addSchemaFile()->template('schema');
+      $assets->addSchemaFile()->template('schema.twig');
     }
 
   }

@@ -30,22 +30,22 @@ final class Theme extends BaseGenerator {
     $vars['breakpoints'] = $ir->confirm('Would you like to create breakpoints?', FALSE);
     $vars['theme_settings'] = $ir->confirm('Would you like to create theme settings form?', FALSE);
 
-    $assets->addFile('{machine_name}/{machine_name}.info.yml', 'model.info');
-    $assets->addFile('{machine_name}/{machine_name}.libraries.yml', 'model.libraries.yml');
-    $assets->addFile('{machine_name}/{machine_name}.theme', 'model.theme');
-    $assets->addFile('{machine_name}/js/{machine_name|u2h}.js', 'js/model.js');
+    $assets->addFile('{machine_name}/{machine_name}.info.yml', 'model.info.twig');
+    $assets->addFile('{machine_name}/{machine_name}.libraries.yml', 'model.libraries.yml.twig');
+    $assets->addFile('{machine_name}/{machine_name}.theme', 'model.theme.twig');
+    $assets->addFile('{machine_name}/js/{machine_name|u2h}.js', 'js/model.js.twig');
 
     if ($vars['breakpoints']) {
-      $assets->addFile('{machine_name}/{machine_name}.breakpoints.yml', 'model.breakpoints.yml');
+      $assets->addFile('{machine_name}/{machine_name}.breakpoints.yml', 'model.breakpoints.yml.twig');
     }
 
     if ($vars['theme_settings']) {
-      $assets->addFile('{machine_name}/theme-settings.php', 'theme-settings.php');
-      $assets->addFile('{machine_name}/config/install/{machine_name}.settings.yml', 'config/install/model.settings.yml');
-      $assets->addFile('{machine_name}/config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml');
+      $assets->addFile('{machine_name}/theme-settings.php', 'theme-settings.php.twig');
+      $assets->addFile('{machine_name}/config/install/{machine_name}.settings.yml', 'config/install/model.settings.yml.twig');
+      $assets->addFile('{machine_name}/config/schema/{machine_name}.schema.yml', 'config/schema/model.schema.yml.twig');
     }
 
-    $assets->addFile('{machine_name}/logo.svg', 'logo');
+    $assets->addFile('{machine_name}/logo.svg', 'logo.svg.twig');
 
     // Templates directory structure.
     $assets->addDirectory('{machine_name}/templates/page');
@@ -56,7 +56,7 @@ final class Theme extends BaseGenerator {
     $assets->addDirectory('{machine_name}/templates/menu');
     $assets->addDirectory('{machine_name}/images');
 
-    $assets->addFile('{machine_name}/package.json', 'package.json');
+    $assets->addFile('{machine_name}/package.json', 'package.json.twig');
 
     // Style sheets directory structure.
     $assets->addDirectory('{machine_name}/css');

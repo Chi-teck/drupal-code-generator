@@ -49,10 +49,10 @@ final class Constraint extends BaseGenerator {
     $vars['input_type'] = $ir->choice('Type of data to validate', $input_types, 'Item list');
 
     $assets->addFile('src/Plugin/Validation/Constraint/{class}.php')
-      ->template('constraint');
+      ->template('constraint.twig');
 
     $assets->addFile('src/Plugin/Validation/Constraint/{class}Validator.php')
-      ->template('validator');
+      ->template('validator.twig');
   }
 
 }

@@ -21,7 +21,7 @@ final class MenuLink extends BaseGenerator {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['class'] = $ir->askPluginClass('Class', '{machine_name|camelize}MenuLink');
-    $assets->addFile('src/Plugin/Menu/{class}.php', 'menu-link');
+    $assets->addFile('src/Plugin/Menu/{class}.php', 'menu-link.twig');
   }
 
 }

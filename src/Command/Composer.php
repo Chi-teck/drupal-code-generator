@@ -56,7 +56,7 @@ final class Composer extends BaseGenerator {
       default => $ir->confirm('Will this project be hosted on drupal.org?'),
     };
 
-    $assets->addFile('composer.json', 'composer');
+    $assets->addFile('composer.json', 'composer.twig');
   }
 
 }
