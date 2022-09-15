@@ -32,7 +32,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     // we assert specific parts of that file.
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php');
 
-    $services = <<< 'TXT'
+    $services_1 = <<< 'TXT'
     <?php /** @noinspection ALL */
     
     namespace PHPSTORM_META {
@@ -44,7 +44,17 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
           'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
           'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
     TXT;
-    self::assertStringContainsString($services, $generated_content);
+    self::assertStringContainsString($services_1, $generated_content);
+
+    $services_2 = <<< 'TXT'
+      override(
+        \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
+        map([
+          'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
+          'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
+          'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
+    TXT;
+    self::assertStringContainsString($services_2, $generated_content);
 
     $entity_storages = <<< 'TXT'
       override(
