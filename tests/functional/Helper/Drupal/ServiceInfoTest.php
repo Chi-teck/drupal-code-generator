@@ -75,7 +75,6 @@ final class ServiceInfoTest extends FunctionalTestBase {
           'resolve' => TRUE,
         ],
       'arguments_count' => 1,
-      'properties' => ['_serviceId' => 'router.admin_context'],
     ];
     self::assertEquals($expected_definition, $definitions['router.admin_context']);
   }
@@ -104,10 +103,6 @@ final class ServiceInfoTest extends FunctionalTestBase {
           'resolve' => TRUE,
         ],
       'arguments_count' => 1,
-      'properties' =>
-        [
-          '_serviceId' => 'current_route_match',
-        ],
     ];
     self::assertEquals($expected_definition, $definition);
 
