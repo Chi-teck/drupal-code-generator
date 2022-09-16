@@ -51,6 +51,9 @@ fi
 echo '🚩 Install local DCG'
 composer -d$DRUPAL_DIR config repositories.dcg path "$ROOT_DIR"
 composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator --ignore-platform-req=php
+echo '————————————————————————————————————————————'
+composer -d$DRUPAL_DIR show --ansi chi-teck/drupal-code-generator | head -n 10
+echo '————————————————————————————————————————————'
 
 echo '🚩 Run tests'
 $DRUPAL_DIR/vendor/bin/phpunit -c $DCG_DIR --testsuite=functional ${1:-}
