@@ -56,6 +56,16 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     TXT;
     self::assertStringContainsString($services_2, $generated_content);
 
+    $plugins = <<< 'TXT'
+      override(\Drupal\Core\Action\ActionManager::createInstance(), map(['' => '\Drupal\Core\Action\ActionInterface']));
+      override(\Drupal\Core\Action\ActionManager::getInstance(), map(['' => '\Drupal\Core\Action\ActionInterface|bool']));
+      override(\Drupal\Core\Archiver\ArchiverManager::createInstance(), map(['' => '\Drupal\Core\Archiver\ArchiverInterface']));
+      override(\Drupal\Core\Archiver\ArchiverManager::getInstance(), map(['' => '\Drupal\Core\Archiver\ArchiverInterface|bool']));
+      override(\Drupal\Core\Block\BlockManager::createInstance(), map(['' => '\Drupal\Core\Block\BlockPluginInterface']));
+      override(\Drupal\Core\Block\BlockManager::getInstance(), map(['' => '\Drupal\Core\Block\BlockPluginInterface|bool']));
+    TXT;
+    self::assertStringContainsString($plugins, $generated_content);
+
     $entity_storages = <<< 'TXT'
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),

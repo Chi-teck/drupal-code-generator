@@ -39,6 +39,8 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     }
     \ksort($vars['services']);
 
+    $vars['plugins'] = self::getPlugins();
+
     $vars['storages'] = [];
     $vars['view_builders'] = [];
     $vars['list_builders'] = [];
@@ -68,6 +70,50 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     \array_walk($vars, $sort);
 
     $assets->addFile('.phpstorm.meta.php', 'phpstorm.meta.php.twig');
+  }
+
+  /**
+   * Returns plugin interfaces.
+   *
+   * It's tricky to get the interfaces automatically as the
+   * PluginManagerBase::getFactory() method is protected. Here is a code snippet
+   * to obtain classes of plugin managers. The supported plugin interface needs
+   * to be checked manually for each plugin manager.
+   * @code
+   *   $plugin_managers = \array_filter(
+   *     $vars['services'],
+   *     static fn (string $class): bool => \is_subclass_of($class, PluginManagerInterface::class),
+   *   );
+   * @endcode
+   */
+  private static function getPlugins(): array {
+    // The \Drupal\views\Plugin\ViewsPluginManager class is not listed here as
+    // it is used by multiple plugin mangers.
+    return [
+      '\Drupal\Core\Action\ActionManager' => '\Drupal\Core\Action\ActionInterface',
+      '\Drupal\Core\Archiver\ArchiverManager' => '\Drupal\Core\Archiver\ArchiverInterface',
+      '\Drupal\Core\Block\BlockManager' => '\Drupal\Core\Block\BlockPluginInterface',
+      '\Drupal\ckeditor5\Plugin\CKEditor5PluginManager' => '\Drupal\ckeditor5\Plugin\CKEditor5PluginInterface',
+      '\Drupal\Core\Condition\ConditionManager' => '\Drupal\Core\Condition\ConditionInterface',
+      '\Drupal\Core\Display\VariantManager' => '\Drupal\Core\Display\VariantInterface',
+      '\Drupal\editor\Plugin\EditorManager' => '\Drupal\editor\Plugin\EditorPluginInterface',
+      '\Drupal\Core\Render\ElementInfoManager' => '\Drupal\Core\Render\Element\ElementInterface',
+      '\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManager' => '\Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface',
+      '\Drupal\Core\Field\FieldTypePluginManager' => '\Drupal\Core\Field\FieldItemInterface',
+      '\Drupal\Core\Field\FormatterPluginManager' => '\Drupal\Core\Field\FormatterInterface',
+      '\Drupal\Core\Field\WidgetPluginManager' => '\Drupal\Core\Field\WidgetInterface',
+      '\Drupal\filter\FilterPluginManager' => '\Drupal\filter\Plugin\FilterInterface',
+      '\Drupal\help\HelpSectionManager' => '\Drupal\help\HelpSectionPluginInterface',
+      '\Drupal\image\ImageEffectManager' => '\Drupal\image\ImageEffectInterface',
+      '\\Drupal\Core\Http\LinkRelationTypeManager' => '\Drupal\Core\Http\LinkRelationTypeInterface',
+      '\Drupal\Core\Mail\MailManager' => '\Drupal\Core\Mail\MailInterface',
+      '\Drupal\Core\Menu\ContextualLinkManager' => '\Drupal\Core\Menu\ContextualLinkInterface',
+      '\Drupal\Core\Menu\LocalActionManager' => '\Drupal\Core\Menu\LocalActionInterface',
+      '\Drupal\Core\Menu\LocalTaskManager' => '\Drupal\Core\Menu\LocalTaskInterface',
+      '\Drupal\Core\Queue\QueueWorkerManager' => '\Drupal\Core\Queue\QueueWorkerInterface',
+      '\Drupal\search\SearchPluginManager' => '\Drupal\search\Plugin\SearchInterface',
+      '\Drupal\tour\TipPluginManager' => '\Drupal\tour\TipPluginInterface',
+    ];
   }
 
 }
