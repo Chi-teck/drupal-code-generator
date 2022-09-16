@@ -14,7 +14,7 @@ class ActionTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(Action::class, ['example']);
+    $this->execute(Action::class, ['foo']);
 
     $expected_display = <<< 'TXT'
 
@@ -26,12 +26,12 @@ class ActionTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • example.links.action.yml
+     • foo.links.action.yml
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('example.links.action.yml');
+    $this->assertGeneratedFile('foo.links.action.yml');
   }
 
 }
