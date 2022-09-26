@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\Tests\{{ machine_name }}\Functional;
 
@@ -9,7 +9,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group {{ machine_name }}
  */
-class {{ class }} extends BrowserTestBase {
+final class {{ class }} extends BrowserTestBase {
 
   /**
    * {@inheritdoc}
@@ -32,7 +32,7 @@ class {{ class }} extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testSomething() {
+  public function testSomething(): void {
     $admin_user = $this->drupalCreateUser(['access administration pages']);
     $this->drupalLogin($admin_user);
     $this->drupalGet('admin');
