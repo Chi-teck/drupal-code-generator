@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\Tests\foo\Kernel;
 
@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group foo
  */
-class ExampleTest extends KernelTestBase {
+final class ExampleTest extends KernelTestBase {
 
   /**
    * {@inheritdoc}
@@ -21,15 +21,14 @@ class ExampleTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    // Mock required services here.
+    // Mock necessary services here.
   }
 
   /**
    * Test callback.
    */
-  public function testSomething() {
-    $result = $this->container->get('transliteration')->transliterate('Друпал');
-    self::assertSame('Drupal', $result);
+  public function testSomething(): void {
+    self::assertTrue(TRUE);
   }
 
 }
