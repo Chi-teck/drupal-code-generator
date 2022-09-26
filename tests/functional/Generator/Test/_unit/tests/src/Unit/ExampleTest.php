@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\Tests\foo\Unit;
 
@@ -9,7 +9,7 @@ use Drupal\Tests\UnitTestCase;
  *
  * @group foo
  */
-class ExampleTest extends UnitTestCase {
+final class ExampleTest extends UnitTestCase {
 
   /**
    * {@inheritdoc}
@@ -22,7 +22,7 @@ class ExampleTest extends UnitTestCase {
   /**
    * Tests something.
    */
-  public function testSomething() {
+  public function testSomething(): void {
     self::assertTrue(TRUE, 'This is TRUE!');
   }
 
