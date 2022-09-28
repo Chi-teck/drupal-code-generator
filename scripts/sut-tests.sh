@@ -256,13 +256,13 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = service ]]; then
   $DCG service:path-processor -a zippo -a PathProcessorZippo
   $DCG service:request-policy -a zippo -a Example
   $DCG service:response-policy -a zippo -a ExampleResponsePolicy
-  $DCG service:uninstall-validator -a zippo -a Zippo -a ExampleUninstallValidator
+  $DCG service:uninstall-validator -a zippo -a Zippo -a ExampleUninstallValidator -a No
   $DCG service:cache-context -a zippo -a example -a ExampleCacheContext -a UserCacheContextBase -a Yes
 
   dcg_phpcs $MODULE_DIR
   dcg_module_install $MODULE_MACHINE_NAME
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  # Do not uninstall this module as the uninstall validator prevents it.
 fi
 
 # --- Test YML --- #

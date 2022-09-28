@@ -22,6 +22,7 @@ final class UninstallValidator extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
     $vars['class'] = $ir->ask('Class', '{name|camelize}UninstallValidator');
+    $vars['services'] = $ir->askServices();
 
     $assets->addFile('src/{class}.php', 'uninstall-validator.twig');
     $assets->addServicesFile()->template('services.twig');

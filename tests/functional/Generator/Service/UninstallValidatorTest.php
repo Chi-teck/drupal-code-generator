@@ -18,6 +18,9 @@ final class UninstallValidatorTest extends GeneratorTestBase {
       'foo',
       'Foo',
       'ExampleUninstallValidator',
+      'Yes',
+      'entity_type.manager',
+      '',
     ];
     $this->execute(UninstallValidator::class, $input);
 
@@ -33,6 +36,15 @@ final class UninstallValidatorTest extends GeneratorTestBase {
      ➤ 
 
      Class [FooUninstallValidator]:
+     ➤ 
+
+     Would you like to inject dependencies? [Yes]:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
      ➤ 
 
      The following directories and files have been created or updated:

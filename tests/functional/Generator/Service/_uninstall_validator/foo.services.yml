@@ -1,6 +1,6 @@
 services:
   foo.uninstall_validator:
     class: Drupal\foo\ExampleUninstallValidator
+    arguments: ['@entity_type.manager']
     tags:
       - { name: module_install.uninstall_validator }
-    arguments: ['@plugin.manager.block', '@entity_type.manager', '@string_translation']
