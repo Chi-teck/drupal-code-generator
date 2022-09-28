@@ -24,7 +24,7 @@ final class {{ class }} implements ModuleUninstallValidatorInterface {
   /**
    * Constructs a new {{ class }} object.
    */
-  public function __construct({{ di.signature(services) }}) {
+  public function __construct({{ di.signature(services, false) }}) {
 {{ di.assignment(services) }}
   }
 

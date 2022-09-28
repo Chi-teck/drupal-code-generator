@@ -17,20 +17,16 @@ use Twig\TwigTest;
  * Twig extension.
  */
 class {{ class }} extends AbstractExtension {
-
 {% if services %}
-{{ di.properties(services) }}
 
   /**
    * Constructs a new {{ class }} object.
-   *
-{{ di.annotation(services) }}
    */
-  public function __construct({{ di.signature(services) }}) {
-{{ di.assignment(services) }}
-  }
-
+  public function __construct(
+{{ di.signature(services) }}
+  ) {}
 {% endif %}
+
   /**
    * {@inheritdoc}
    */

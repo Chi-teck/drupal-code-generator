@@ -30,14 +30,14 @@ use {{ service.type }};
    {%- endfor %}
 {% endmacro %}
 
-{# @todo Set true as default valuef for the multiline option. #}
-{% macro signature(services, multiline=false) %}
+{# @todo Remove the multiline option. #}
+{% macro signature(services, multiline=true) %}
   {% if multiline %}
     {% for service in services %}
     private readonly {{ service.short_type }} ${{ service.name|camelize(false) }},{{ loop.last ? '' : "\n" }}
     {%- endfor %}
   {%- else %}
-    {% for service in services %}{{ service.short_type }} ${{ service.name }}{{ loop.last ? '' : ', ' }}{% endfor %}
+    {%- for service in services %}{{ service.short_type }} ${{ service.name }}{{ loop.last ? '' : ', ' }}{% endfor %}
   {% endif %}
 {% endmacro %}
 
