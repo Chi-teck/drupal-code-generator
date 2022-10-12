@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example;
 
@@ -11,10 +11,10 @@ use Twig\TwigTest;
 /**
  * Twig extension.
  */
-class ExampleTwigExtension extends AbstractExtension {
+final class ExampleTwigExtension extends AbstractExtension {
 
   /**
-   * Constructs a new ExampleTwigExtension object.
+   * Constructs the extension object.
    */
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,
@@ -23,34 +23,40 @@ class ExampleTwigExtension extends AbstractExtension {
   /**
    * {@inheritdoc}
    */
-  public function getFunctions() {
-    return [
-      new TwigFunction('foo', function ($argument = NULL) {
-        return 'Foo: ' . $argument;
-      }),
-    ];
+  public function getFunctions(): array {
+    $functions[] = new TwigFunction(
+      'example',
+      static function (string $argument): string {
+        return 'Example: ' . $argument;
+      },
+    );
+    return $functions;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getFilters() {
-    return [
-      new TwigFilter('bar', function ($text) {
-        return str_replace('bar', 'BAR', $text);
-      }),
-    ];
+  public function getFilters(): array {
+    $filters[] = new TwigFilter(
+      'example',
+      static function (string $text): string {
+        return str_replace('example', 'EXAMPLE', $text);
+      },
+    );
+    return $filters;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getTests() {
-    return [
-      new TwigTest('color', function ($text) {
-        return preg_match('/^#(?:[0-9a-f]{3}){1,2}$/i', $text);
-      }),
-    ];
+  public function getTests(): array {
+    $tests[] = new TwigTest(
+      'example',
+      static function (string $text): bool {
+        return $text === 'example';
+      },
+    );
+    return $tests;
   }
 
 }

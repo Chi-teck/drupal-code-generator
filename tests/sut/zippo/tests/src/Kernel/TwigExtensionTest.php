@@ -21,24 +21,28 @@ final class TwigExtensionTest extends KernelTestBase {
    */
   public function testTwigExtension(): void {
 
-    $template = \implode([
-      '{{ foo("example") }}',
-      '{{ "-=bar=-"|bar }}',
-      '{{ "#123" is color }}',
-      '{{ "example" is color }}',
-    ]);
-
     $build = [
       '#type' => 'inline_template',
-      '#template' => $template,
+      '#template' => <<< 'TXT'
+        {{ example('foo') }}
+        {{ '-=example=-'|example }}
+        {{ 'example' is example ? 'Yes' : 'No' }}
+        {{ 'not_example' is example ? 'Yes' : 'No' }}
+        TXT,
     ];
 
-    $output = $this
+    $output = (string) $this
       ->container
       ->get('renderer')
       ->renderRoot($build);
 
-    self::assertEquals('Foo: example-=BAR=-10', $output);
+    $expected_output = <<< 'TXT'
+      Example: foo
+      -=EXAMPLE=-
+      Yes
+      No
+      TXT;
+    self::assertSame($expected_output, $output);
   }
 
 }
