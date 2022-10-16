@@ -1,49 +1,43 @@
-<?php
+{% import '@lib/di.twig' as di %}
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Theme;
 
+{% sort %}
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Theme\ThemeNegotiatorInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+  {% if services %}
+{{ di.use(services) }}
+  {% endif %}
+{% endsort %}
 
 /**
  * Defines a theme negotiator that deals with the active theme on example page.
  */
-class {{ class }} implements ThemeNegotiatorInterface {
+final class {{ class }} implements ThemeNegotiatorInterface {
+{% if services %}
 
   /**
-   * The request stack.
-   *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * Constructs the negotiator object.
    */
-  protected $requestStack;
+  public function __construct(
+{{ di.signature(services) }}
+  ) {}
+{% endif %}
 
   /**
-   * Constructs a new {{ class }}.
-   *
-   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
-   *   The request stack used to retrieve the current request.
+   * {@inheritdoc}
    */
-  public function __construct(RequestStack $request_stack) {
-    $this->requestStack = $request_stack;
+  public function applies(RouteMatchInterface $route_match): bool {
+    return $route_match->getRouteName() === '{{ machine_name }}.example';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function applies(RouteMatchInterface $route_match) {
-    return $route_match->getRouteName() == '{{ machine_name }}.example';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function determineActiveTheme(RouteMatchInterface $route_match) {
-    // Allow users to pass theme name through 'theme' query parameter.
-    $theme = $this->requestStack->getCurrentRequest()->query->get('theme');
-    if (is_string($theme)) {
-      return $theme;
-    }
+  public function determineActiveTheme(RouteMatchInterface $route_match): ?string {
+    // @DCG Here you can determine the active theme for the request.
+    return 'claro';
   }
 
 }

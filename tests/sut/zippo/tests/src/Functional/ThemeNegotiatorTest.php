@@ -25,10 +25,10 @@ final class ThemeNegotiatorTest extends BrowserTestBase {
    * Test callback.
    */
   public function testThemeNegotiator(): void {
-    \Drupal::service('theme_installer')->install(['olivero']);
+    $this->container->get('theme_installer')->install(['claro']);
 
     $options = ['query' => ['theme' => 'olivero']];
-    $pattern = '#/core/themes/olivero/#';
+    $pattern = '#/core/themes/claro/#';
     $assert_session = $this->assertSession();
 
     $this->drupalGet('<front>', $options);
@@ -36,9 +36,6 @@ final class ThemeNegotiatorTest extends BrowserTestBase {
 
     $this->drupalGet('example', $options);
     $assert_session->responseMatches($pattern);
-
-    $this->drupalGet('example');
-    $assert_session->responseNotMatches($pattern);
   }
 
 }

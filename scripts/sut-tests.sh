@@ -250,8 +250,8 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = service ]]; then
   $DCG service:logger -a zippo -a FileLog
   $DCG service:middleware -a zippo -a BarMiddelware
   $DCG service:param-converter -a zippo -a example -a ExampleParamConverter
-  $DCG service:route-subscriber -a zippo -a ZippoRouterSubscibre -a Not
-  $DCG service:theme-negotiator -a zippo -a ZippoThemeNegotiator
+  $DCG service:route-subscriber -a zippo -a ZippoRouterSubscibre -a No
+  $DCG service:theme-negotiator -a zippo -a ZippoThemeNegotiator -a No
   $DCG service:twig-extension -a zippo -a ZippoTwigExtension -a No
   $DCG service:path-processor -a zippo -a PathProcessorZippo
   $DCG service:request-policy -a zippo -a Example

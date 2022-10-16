@@ -14,7 +14,14 @@ final class ThemeNegotiatorTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(ThemeNegotiator::class, ['foo', 'FooNegotiator']);
+    $input = [
+      'foo',
+      'FooNegotiator',
+      'Yes',
+      'entity_type.manager',
+      '',
+    ];
+    $this->execute(ThemeNegotiator::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -25,6 +32,15 @@ final class ThemeNegotiatorTest extends GeneratorTestBase {
      ➤ 
 
      Class [FooNegotiator]:
+     ➤ 
+
+     Would you like to inject dependencies? [Yes]:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
      ➤ 
 
      The following directories and files have been created or updated:
