@@ -1,0 +1,5 @@
+services:
+  bar.route_subscriber:
+    class: Drupal\bar\EventSubscriber\BarRouteSubscriber
+    tags:
+      - { name: event_subscriber }

@@ -1,5 +1,6 @@
 services:
   foo.route_subscriber:
-    class: Drupal\foo\EventSubscriber\BarRouteSubscriber
+    class: Drupal\foo\EventSubscriber\FooRouteSubscriber
+    arguments: ['@entity_type.manager']
     tags:
       - { name: event_subscriber }

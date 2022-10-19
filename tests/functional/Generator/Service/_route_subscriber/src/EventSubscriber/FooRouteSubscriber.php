@@ -1,29 +1,22 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\EventSubscriber;
+namespace Drupal\foo\EventSubscriber;
 
-{% sort %}
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Symfony\Component\Routing\RouteCollection;
-{% endsort %}
 
 /**
  * Route subscriber.
  */
-final class {{ class }} extends RouteSubscriberBase {
-{% if services %}
+final class FooRouteSubscriber extends RouteSubscriberBase {
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs a FooRouteSubscriber object.
    */
   public function __construct(
-{{ di.signature(services) }}
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {}
-{% endif %}
 
   /**
    * {@inheritdoc}
