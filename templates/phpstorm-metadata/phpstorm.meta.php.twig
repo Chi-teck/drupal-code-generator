@@ -117,4 +117,16 @@ namespace PHPSTORM_META {
   expectedArguments(\file_save_upload(), 4, argumentsSet('file_system_exists_behaviour'));
   expectedArguments(\system_retrieve_file(), 3, argumentsSet('file_system_exists_behaviour'));
 
+  registerArgumentsSet('route_names',
+{% for route_name in route_names %}
+    '{{ route_name|raw }}',
+{% endfor %}
+  );
+
+  expectedArguments(\Symfony\Component\Routing\RouteCollection::get(), 0, argumentsSet('route_names'));
+  expectedArguments(\Symfony\Component\Routing\RouteCollection::remove(), 0, argumentsSet('route_names'));
+  expectedArguments(\Drupal\Core\Url::__construct(), 0, argumentsSet('route_names'));
+  expectedArguments(\Drupal\Core\Url::fromRoute(), 0, argumentsSet('route_names'));
+  expectedArguments(\Drupal\Core\Link::createFromRoute(), 1, argumentsSet('route_names'));
+
 }

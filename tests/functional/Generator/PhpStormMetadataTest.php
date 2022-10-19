@@ -161,6 +161,28 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       expectedArguments(\system_retrieve_file(), 3, argumentsSet('file_system_exists_behaviour'));
     TXT;
     self::assertStringContainsString($other, $generated_content);
+
+    $route_names = <<< 'TXT'
+      registerArgumentsSet('route_names',
+        '<button>',
+        '<current>',
+        '<front>',
+        '<nolink>',
+        '<none>',
+        'big_pipe.nojs',
+        'block.admin_add',
+        'block.admin_demo',
+    TXT;
+    self::assertStringContainsString($route_names, $generated_content);
+
+    $route_arguments = <<< 'TXT'
+      expectedArguments(\Symfony\Component\Routing\RouteCollection::get(), 0, argumentsSet('route_names'));
+      expectedArguments(\Symfony\Component\Routing\RouteCollection::remove(), 0, argumentsSet('route_names'));
+      expectedArguments(\Drupal\Core\Url::__construct(), 0, argumentsSet('route_names'));
+      expectedArguments(\Drupal\Core\Url::fromRoute(), 0, argumentsSet('route_names'));
+      expectedArguments(\Drupal\Core\Link::createFromRoute(), 1, argumentsSet('route_names'));
+    TXT;
+    self::assertStringContainsString($route_arguments, $generated_content);
   }
 
 }

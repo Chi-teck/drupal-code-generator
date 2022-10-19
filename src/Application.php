@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator;
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use DrupalCodeGenerator\Helper\Drupal\HookInfo;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
+use DrupalCodeGenerator\Helper\Drupal\RouteInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Helper\Dumper\DryDumper;
@@ -74,6 +75,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
       new ThemeInfo($container->get('theme_handler')),
       new ServiceInfo($container),
       new HookInfo($container->get('module_handler')),
+      new RouteInfo($container->get('router.route_provider')),
     ]);
     $application->setHelperSet($helper_set);
 

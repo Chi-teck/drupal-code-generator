@@ -69,6 +69,9 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     };
     \array_walk($vars, $sort);
 
+    $route_info = $this->getHelper('route_info');
+    $vars['route_names'] = $route_info->getRouteNames();
+
     $assets->addFile('.phpstorm.meta.php', 'phpstorm.meta.php.twig');
   }
 
