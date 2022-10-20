@@ -3,11 +3,9 @@
 namespace DrupalCodeGenerator\Command;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\Core\Entity\EntityFieldManager;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
-use Drupal\node\NodeInterface;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator;

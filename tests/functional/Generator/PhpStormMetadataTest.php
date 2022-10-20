@@ -4,9 +4,6 @@ namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\PhpStormMetadata;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
-use function PHPSTORM_META\argumentsSet;
-use function PHPSTORM_META\expectedArguments;
-use function PHPSTORM_META\registerArgumentsSet;
 
 /**
  * Tests phpstorm-metadata generator.
