@@ -1,29 +1,14 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\PageCache;
+namespace Drupal\example\PageCache;
 
-{% sort %}
 use Drupal\Core\PageCache\RequestPolicyInterface;
 use Symfony\Component\HttpFoundation\Request;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 /**
  * @todo Add policy description here.
  */
-final class {{ class }} implements RequestPolicyInterface {
-{% if services %}
-
-  /**
-   * Constructs {{ class|article }} object.
-   */
-  public function __construct(
-{{ di.signature(services) }}
-  ) {}
-{% endif %}
+final class MonteCarlo implements RequestPolicyInterface {
 
   /**
    * {@inheritdoc}

@@ -15,15 +15,14 @@ final class RequestPolicyTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['zippo', 'example'];
+  protected static $modules = ['zippo'];
 
   /**
    * Test callback.
    */
   public function testRequestPolicy(): void {
-    $request_policy = \Drupal::service('zippo.page_cache_request_policy.example');
+    $request_policy = $this->container->get('zippo.page_cache_request_policy.example');
     self::assertNull($request_policy->check(new Request()));
-    self::assertSame('deny', $request_policy->check(new Request(['no-cache' => 1])));
   }
 
 }

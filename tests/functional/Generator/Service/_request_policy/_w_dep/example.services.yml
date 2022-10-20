@@ -1,0 +1,6 @@
+services:
+  example.page_cache_request_policy.foo:
+    class: Drupal\example\PageCache\Foo
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: page_cache_request_policy }

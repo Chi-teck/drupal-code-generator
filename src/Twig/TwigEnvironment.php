@@ -40,6 +40,7 @@ final class TwigEnvironment extends Environment {
 
     $this->addFilter(new TwigFilter('m2h', [Utils::class, 'machine2human']));
     $this->addFilter(new TwigFilter('h2m', [Utils::class, 'human2machine']));
+    $this->addFilter(new TwigFilter('c2m', [Utils::class, 'camel2machine']));
 
     $this->addGlobal('SUT_TEST', \getenv('SUT_TEST'));
   }

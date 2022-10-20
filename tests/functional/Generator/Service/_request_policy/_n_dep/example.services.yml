@@ -1,0 +1,5 @@
+services:
+  example.page_cache_request_policy.monte_carlo:
+    class: Drupal\example\PageCache\MonteCarlo
+    tags:
+      - { name: page_cache_request_policy }

@@ -254,7 +254,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = service ]]; then
   $DCG service:theme-negotiator -a zippo -a ZippoThemeNegotiator -a No
   $DCG service:twig-extension -a zippo -a ZippoTwigExtension -a No
   $DCG service:path-processor -a zippo -a PathProcessorZippo
-  $DCG service:request-policy -a zippo -a Example
+  $DCG service:request-policy -a zippo -a Example -a Yes -a 'entity_type.manager' -a
   $DCG service:response-policy -a zippo -a ExampleResponsePolicy
   $DCG service:uninstall-validator -a zippo -a Zippo -a ExampleUninstallValidator -a No
   $DCG service:cache-context -a zippo -a example -a ExampleCacheContext -a UserCacheContextBase -a Yes
