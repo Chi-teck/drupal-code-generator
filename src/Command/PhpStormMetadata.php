@@ -3,7 +3,11 @@
 namespace DrupalCodeGenerator\Command;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Entity\EntityFieldManager;
+use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\node\NodeInterface;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator;
@@ -19,12 +23,18 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 )]
 final class PhpStormMetadata extends BaseGenerator implements ContainerInjectionInterface {
 
-  public function __construct(private readonly EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(
+    private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly EntityFieldManagerInterface $entityFieldManager,
+  ) {
     parent::__construct();
   }
 
   public static function create(ContainerInterface $container): self {
-    return new self($container->get('entity_type.manager'));
+    return new self(
+      $container->get('entity_type.manager'),
+      $container->get('entity_field.manager'),
+    );
   }
 
   protected function generate(array &$vars, AssetCollection $assets): void {
@@ -69,8 +79,25 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     };
     \array_walk($vars, $sort);
 
-    $route_info = $this->getHelper('route_info');
-    $vars['route_names'] = $route_info->getRouteNames();
+    $vars['route_names'] = $this->getHelper('route_info')->getRouteNames();
+    $vars['config_names'] = $this->getHelper('config_info')->getConfigNames();
+
+    $vars['entity_fields'] = [];
+    foreach ($this->entityTypeManager->getDefinitions() as $entity_type => $definition) {
+      if (!$definition->entityClassImplements(FieldableEntityInterface::class)) {
+        continue;
+      }
+      $class = '\\' . \ltrim($definition->getClass(), '\\');
+      // Most of content entity types implement an interface which name matches
+      // the following pattern.
+      $interface = \str_replace('\Entity\\', '\\', $class) . 'Interface';
+      $vars['entity_fields'][] = [
+        'type' => $entity_type,
+        'class' => $class,
+        'interface' => $definition->entityClassImplements($interface) ? $interface : NULL,
+        'fields' => \array_keys($this->entityFieldManager->getFieldStorageDefinitions($entity_type)),
+      ];
+    }
 
     $assets->addFile('.phpstorm.meta.php', 'phpstorm.meta.php.twig');
   }
