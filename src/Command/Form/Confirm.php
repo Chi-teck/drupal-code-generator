@@ -28,7 +28,7 @@ final class Confirm extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
 
-    $vars['class'] = $ir->ask('Class', 'ExampleConfirmForm');
+    $vars['class'] = $ir->askClass(default: 'ExampleConfirmForm');
     $vars['raw_form_id'] = \preg_replace('/_form/', '', Utils::camel2machine($vars['class']));
     $vars['form_id'] = '{machine_name}_{raw_form_id}';
 

@@ -28,7 +28,7 @@ final class Simple extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
 
-    $vars['class'] = $ir->ask('Class', 'ExampleForm');
+    $vars['class'] = $ir->askClass(default: 'ExampleForm');
     $vars['raw_form_id'] = \preg_replace('/_form/', '', Utils::camel2machine($vars['class']));
     $vars['form_id'] = '{machine_name}_{raw_form_id}';
 

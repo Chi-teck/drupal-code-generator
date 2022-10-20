@@ -21,7 +21,7 @@ final class Logger extends BaseGenerator {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
 
-    $vars['class'] = $ir->ask('Class', 'FileLog');
+    $vars['class'] = $ir->askClass(default: 'FileLog');
     $assets->addFile('src/Logger/{class}.php', 'logger.twig');
     $assets->addServicesFile()->template('services.twig');
   }

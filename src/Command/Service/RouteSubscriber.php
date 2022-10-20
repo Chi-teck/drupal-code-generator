@@ -20,7 +20,7 @@ final class RouteSubscriber extends BaseGenerator {
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
-    $vars['class'] = $ir->ask('Class', '{machine_name|camelize}RouteSubscriber');
+    $vars['class'] = $ir->askClass(default: '{machine_name|camelize}RouteSubscriber');
     $vars['services'] = $ir->askServices(FALSE);
 
     $assets->addFile('src/EventSubscriber/{class}.php', 'route-subscriber.twig');

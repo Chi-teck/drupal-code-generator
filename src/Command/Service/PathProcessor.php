@@ -20,7 +20,7 @@ final class PathProcessor extends BaseGenerator {
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
-    $vars['class'] = $ir->ask('Class', 'PathProcessor{machine_name|camelize}');
+    $vars['class'] = $ir->askClass(default: 'PathProcessor{machine_name|camelize}');
 
     $assets->addFile('src/PathProcessor/{class}.php', 'path-processor.twig');
     $assets->addServicesFile()->template('services.twig');

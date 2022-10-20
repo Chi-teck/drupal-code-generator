@@ -22,7 +22,7 @@ final class ParamConverter extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
 
     $vars['parameter_type'] = $ir->ask('Parameter type', 'example');
-    $vars['class'] = $ir->ask('Class', '{parameter_type|camelize}ParamConverter');
+    $vars['class'] = $ir->askClass(default: '{parameter_type|camelize}ParamConverter');
     $vars['controller_class'] = '{machine_name|camelize}Controller';
 
     $assets->addFile('src/{class}.php', 'param-converter.twig');

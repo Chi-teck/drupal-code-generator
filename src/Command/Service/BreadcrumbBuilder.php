@@ -20,7 +20,7 @@ final class BreadcrumbBuilder extends BaseGenerator {
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
-    $vars['class'] = $ir->ask('Class', '{machine_name|camelize}BreadcrumbBuilder');
+    $vars['class'] = $ir->askClass(default: '{machine_name|camelize}BreadcrumbBuilder');
     $assets->addFile('src/{class}.php', 'breadcrumb-builder.twig');
     $assets->addServicesFile()->template('services.twig');
   }

@@ -20,7 +20,7 @@ final class TwigExtension extends BaseGenerator {
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
-    $vars['class'] = $ir->ask('Class', '{machine_name|camelize}TwigExtension');
+    $vars['class'] = $ir->askClass(default: '{machine_name|camelize}TwigExtension');
     $vars['services'] = $ir->askServices();
     $assets->addFile('src/{class}.php', 'twig-extension.twig');
     $assets->addServicesFile()->template('services.twig');

@@ -29,7 +29,7 @@ final class AccessChecker extends BaseGenerator {
     };
     $vars['applies_to'] = $ir->ask('Applies to', '_foo', $validator);
 
-    $vars['class'] = $ir->ask('Class', '{applies_to|camelize}AccessChecker');
+    $vars['class'] = $ir->askClass(default: '{applies_to|camelize}AccessChecker');
 
     $assets->addFile('src/Access/{class}.php', 'access-checker.twig');
     $assets->addServicesFile()->template('services.twig');

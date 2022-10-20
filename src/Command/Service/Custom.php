@@ -8,7 +8,6 @@ use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Utils;
-use DrupalCodeGenerator\Validator\RequiredClassName;
 use DrupalCodeGenerator\Validator\RequiredServiceName;
 
 #[Generator(
@@ -30,7 +29,7 @@ final class Custom extends BaseGenerator {
     $default_class = Utils::camelize(
       Utils::removePrefix($vars['service_name'], $vars['machine_name']),
     );
-    $vars['class'] = $ir->ask('Class', $default_class, new RequiredClassName());
+    $vars['class'] = $ir->askClass(default: $default_class);
 
     $vars['services'] = $ir->askServices();
 

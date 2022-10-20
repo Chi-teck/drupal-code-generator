@@ -22,7 +22,7 @@ final class CacheContext extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
 
     $vars['context_id'] = $ir->ask('Context ID', 'example');
-    $vars['class'] = $ir->ask('Class', '{context_id|camelize}CacheContext');
+    $vars['class'] = $ir->askClass(default: '{context_id|camelize}CacheContext');
 
     // @todo Clean-up.
     $base_class_choices = [
