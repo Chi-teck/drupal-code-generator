@@ -12,9 +12,19 @@ final class ResponsePolicyTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_response_policy';
 
-  public function testGenerator(): void {
+  /**
+   * Test callback.
+   */
+  public function testWithDependencies(): void {
 
-    $this->execute(ResponsePolicy::class, ['foo', 'Example']);
+    $input = [
+      'foo',
+      'Example',
+      'Yes',
+      'entity_type.manager',
+      '',
+    ];
+    $this->execute(ResponsePolicy::class, $input);
 
     $expected_display = <<< 'TXT'
 
@@ -27,6 +37,15 @@ final class ResponsePolicyTest extends GeneratorTestBase {
      Class [Example]:
      ➤ 
 
+     Would you like to inject dependencies? [Yes]:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo.services.yml
@@ -35,8 +54,41 @@ final class ResponsePolicyTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('foo.services.yml');
-    $this->assertGeneratedFile('src/PageCache/Example.php');
+    $this->assertGeneratedFile('foo.services.yml', '_w_dep/foo.services.yml');
+    $this->assertGeneratedFile('src/PageCache/Example.php', '_w_dep/src/PageCache/Example.php');
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testWithoutDependencies(): void {
+
+    $this->execute(ResponsePolicy::class, ['foo', 'Example', 'No']);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to response-policy generator!
+    –––––––––––––––––––––––––––––––––––––––
+
+     Module machine name:
+     ➤ 
+
+     Class [Example]:
+     ➤ 
+
+     Would you like to inject dependencies? [Yes]:
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.services.yml
+     • src/PageCache/Example.php
+
+    TXT;
+    $this->assertDisplay($expected_display);
+
+    $this->assertGeneratedFile('foo.services.yml', '_n_dep/foo.services.yml');
+    $this->assertGeneratedFile('src/PageCache/Example.php', '_n_dep/src/PageCache/Example.php');
   }
 
 }

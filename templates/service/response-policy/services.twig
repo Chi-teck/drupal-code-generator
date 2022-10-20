@@ -1,7 +1,11 @@
+{% import '@lib/di.twig' as di %}
 services:
-  {{ machine_name }}.page_cache_response_policy.example:
+  {{ machine_name }}.page_cache_response_policy.{{ class|c2m }}:
     class: Drupal\{{ machine_name }}\PageCache\{{ class }}
     public: false
+{% if services %}
+    arguments: [{{ di.arguments(services) }}]
+{% endif %}
     tags:
       - { name: page_cache_response_policy }
       - { name: dynamic_page_cache_response_policy }

@@ -3,6 +3,7 @@
 namespace Drupal\Tests\zippo\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\zippo\PageCache\ExampleResponsePolicy;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,14 +23,9 @@ final class ResponsePolicyTest extends KernelTestBase {
    * Test callback.
    */
   public function testResponsePolicy(): void {
-    // The service is private so we have to test it implicitly through service
-    // collector.
-    $request_policy = \Drupal::service('page_cache_response_policy');
-    $response = new Response();
-    $request = new Request();
-    self::assertNull($request_policy->check($response, $request));
-    $request->cookies->set('foo', 'bar');
-    self::assertSame('deny', $request_policy->check($response, $request));
+    // The service is private so we have to instantiate it directly.
+    $request_policy = new ExampleResponsePolicy();
+    self::assertNull($request_policy->check(new Response(), new Request()));
   }
 
 }

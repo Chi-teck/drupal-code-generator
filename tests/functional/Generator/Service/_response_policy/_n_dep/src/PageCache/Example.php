@@ -1,30 +1,15 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\PageCache;
+namespace Drupal\foo\PageCache;
 
-{% sort %}
 use Drupal\Core\PageCache\ResponsePolicyInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 /**
  * @todo Add policy description here.
  */
-final class {{ class }} implements ResponsePolicyInterface {
-{% if services %}
-
-  /**
-   * Constructs {{ class|article }} object.
-   */
-  public function __construct(
-{{ di.signature(services) }}
-  ) {}
-{% endif %}
+final class Example implements ResponsePolicyInterface {
 
   /**
    * {@inheritdoc}
