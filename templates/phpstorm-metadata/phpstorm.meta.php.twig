@@ -134,6 +134,7 @@ namespace PHPSTORM_META {
   expectedReturnValues(\Drupal\Core\Menu\LocalActionInterface::getRouteName(), argumentsSet('route_names'));
   expectedReturnValues(\Drupal\Core\Menu\LocalTaskInterface::getRouteName(), argumentsSet('route_names'));
   expectedReturnValues(\Drupal\Core\Menu\MenuLinkInterface::getRouteName(), argumentsSet('route_names'));
+  expectedReturnValues(\Drupal\Core\Form\FormStateInterface::setRedirect(), argumentsSet('route_names'));
 
   registerArgumentsSet('config_names',
 {% for config_name in config_names %}

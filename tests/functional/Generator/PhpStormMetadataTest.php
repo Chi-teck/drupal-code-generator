@@ -166,6 +166,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       expectedReturnValues(\Drupal\Core\Menu\LocalActionInterface::getRouteName(), argumentsSet('route_names'));
       expectedReturnValues(\Drupal\Core\Menu\LocalTaskInterface::getRouteName(), argumentsSet('route_names'));
       expectedReturnValues(\Drupal\Core\Menu\MenuLinkInterface::getRouteName(), argumentsSet('route_names'));
+      expectedReturnValues(\Drupal\Core\Form\FormStateInterface::setRedirect(), argumentsSet('route_names'));
     TXT;
     self::assertStringContainsString($route_arguments, $generated_content);
   }
