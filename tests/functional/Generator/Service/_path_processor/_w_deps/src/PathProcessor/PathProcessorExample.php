@@ -1,17 +1,12 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\PathProcessor;
+namespace Drupal\example\PathProcessor;
 
-{% sort %}
+use Drupal\Core\Database\Connection;
 use Drupal\Core\PathProcessor\InboundPathProcessorInterface;
 use Drupal\Core\PathProcessor\OutboundPathProcessorInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Symfony\Component\HttpFoundation\Request;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 /**
  * Path processor to replace 'node' with 'content' in URLs.
@@ -19,16 +14,14 @@ use Symfony\Component\HttpFoundation\Request;
  * @DCG In case you need to implement only one processor (inbound or outbound)
  * remove the corresponding interface, method and service tag.
  */
-final class {{ class }} implements InboundPathProcessorInterface, OutboundPathProcessorInterface {
-{% if services %}
+final class PathProcessorExample implements InboundPathProcessorInterface, OutboundPathProcessorInterface {
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs a PathProcessorExample object.
    */
   public function __construct(
-{{ di.signature(services) }}
+    private readonly Connection $connection,
   ) {}
-{% endif %}
 
   /**
    * {@inheritdoc}

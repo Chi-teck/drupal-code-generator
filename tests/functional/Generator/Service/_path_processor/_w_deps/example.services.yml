@@ -1,0 +1,7 @@
+services:
+  path_processor.example:
+    class: Drupal\example\PathProcessor\PathProcessorExample
+    arguments: ['@database']
+    tags:
+      - { name: path_processor_inbound }
+      - { name: path_processor_outbound }

@@ -1,6 +1,0 @@
-services:
-  path_processor.example:
-    class: Drupal\example\PathProcessor\PathProcessorExample
-    tags:
-      - { name: path_processor_inbound, priority: 1000 }
-      - { name: path_processor_outbound, priority: 1000 }

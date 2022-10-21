@@ -1,6 +1,10 @@
+{% import '@lib/di.twig' as di %}
 services:
   path_processor.{{ machine_name }}:
     class: Drupal\{{ machine_name }}\PathProcessor\{{ class }}
+{% if services %}
+    arguments: [{{ di.arguments(services) }}]
+{% endif %}
     tags:
-      - { name: path_processor_inbound, priority: 1000 }
-      - { name: path_processor_outbound, priority: 1000 }
+      - { name: path_processor_inbound }
+      - { name: path_processor_outbound }
