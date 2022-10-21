@@ -160,6 +160,12 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       expectedArguments(\Drupal\Core\Url::__construct(), 0, argumentsSet('route_names'));
       expectedArguments(\Drupal\Core\Url::fromRoute(), 0, argumentsSet('route_names'));
       expectedArguments(\Drupal\Core\Link::createFromRoute(), 1, argumentsSet('route_names'));
+      expectedReturnValues(\Drupal\Core\Url::getRouteName(), argumentsSet('route_names'));
+      expectedReturnValues(\Drupal\Core\Routing\RouteMatchInterface::getRouteName(), argumentsSet('route_names'));
+      expectedReturnValues(\Drupal\Core\Menu\ContextualLinkInterface::getRouteName(), argumentsSet('route_names'));
+      expectedReturnValues(\Drupal\Core\Menu\LocalActionInterface::getRouteName(), argumentsSet('route_names'));
+      expectedReturnValues(\Drupal\Core\Menu\LocalTaskInterface::getRouteName(), argumentsSet('route_names'));
+      expectedReturnValues(\Drupal\Core\Menu\MenuLinkInterface::getRouteName(), argumentsSet('route_names'));
     TXT;
     self::assertStringContainsString($route_arguments, $generated_content);
   }
