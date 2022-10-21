@@ -43,6 +43,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     self::assertRoutes($generated_content);
     self::assertConfigs($generated_content);
     self::assertFields($generated_content);
+    self::assertRoles($generated_content);
   }
 
   private static function assertServices(string $generated_content): void {
@@ -265,6 +266,21 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       expectedArguments(\system_retrieve_file(), 3, argumentsSet('file_system_exists_behaviour'));
     TXT;
     self::assertStringContainsString($other, $generated_content);
+  }
+
+  private static function assertRoles(string $generated_content): void {
+    $roles = <<< 'TXT'
+      registerArgumentsSet('role_names',
+        'anonymous',
+        'authenticated',
+        'content_editor',
+        'administrator',
+      );
+      expectedArguments(\Drupal\user\UserInterface::hasRole(), 0, argumentsSet('role_names'));
+      expectedArguments(\Drupal\user\UserInterface::addRole(), 0, argumentsSet('role_names'));
+      expectedArguments(\Drupal\user\UserInterface::removeRole(), 0, argumentsSet('role_names'));
+    TXT;
+    self::assertStringContainsString($roles, $generated_content);
   }
 
 }

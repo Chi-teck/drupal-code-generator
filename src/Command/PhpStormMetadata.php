@@ -80,7 +80,25 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     $vars['route_names'] = $this->getHelper('route_info')->getRouteNames();
     $vars['config_names'] = $this->getHelper('config_info')->getConfigNames();
 
-    $vars['entity_fields'] = [];
+    $vars['entity_fields'] = $this->getEntityFields();
+    $vars['role_names'] = $this->getRoleNames();
+
+    $assets->addFile('.phpstorm.meta.php', 'phpstorm.meta.php.twig');
+  }
+
+  /**
+   * Gets role names.
+   */
+  public function getRoleNames(): array {
+    $roles = $this->entityTypeManager->getStorage('user_role')->loadMultiple();
+    return \array_keys($roles);
+  }
+
+  /**
+   * Gets entity fields.
+   */
+  private function getEntityFields(): array {
+    $entity_fields = [];
     foreach ($this->entityTypeManager->getDefinitions() as $entity_type => $definition) {
       if (!$definition->entityClassImplements(FieldableEntityInterface::class)) {
         continue;
@@ -89,15 +107,14 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
       // Most of content entity types implement an interface which name matches
       // the following pattern.
       $interface = \str_replace('\Entity\\', '\\', $class) . 'Interface';
-      $vars['entity_fields'][] = [
+      $entity_fields[] = [
         'type' => $entity_type,
         'class' => $class,
         'interface' => $definition->entityClassImplements($interface) ? $interface : NULL,
         'fields' => \array_keys($this->entityFieldManager->getFieldStorageDefinitions($entity_type)),
       ];
     }
-
-    $assets->addFile('.phpstorm.meta.php', 'phpstorm.meta.php.twig');
+    return $entity_fields;
   }
 
   /**
