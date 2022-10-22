@@ -1,0 +1,10 @@
+<?php /** @noinspection ALL */
+
+namespace PHPSTORM_META {
+{% for manager_class, plugin_class in plugins %}
+{# Using map() to work around PhpStorm bug. #}
+{# @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001516519 #}
+  override({{ manager_class }}::createInstance(), map(['' => '{{ plugin_class }}']));
+  override({{ manager_class }}::getInstance(), map(['' => '{{ plugin_class }}|bool']));
+{% endfor %}
+}

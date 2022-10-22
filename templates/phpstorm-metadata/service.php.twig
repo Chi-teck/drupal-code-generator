@@ -1,0 +1,20 @@
+<?php /** @noinspection ALL */
+
+namespace PHPSTORM_META {
+  override(
+    \Drupal::service(0),
+    map([
+{% for service_id, class in services %}
+      '{{ service_id }}' => '{{ class }}',
+{% endfor %}
+    ])
+  );
+  override(
+    \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
+    map([
+{% for service_id, class in services %}
+      '{{ service_id }}' => '{{ class }}',
+{% endfor %}
+    ])
+  );
+}

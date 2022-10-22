@@ -1,0 +1,13 @@
+<?php /** @noinspection ALL */
+
+namespace PHPSTORM_META {
+  registerArgumentsSet('config_names',
+{% for config_name in config_names %}
+    '{{ config_name }}',
+{% endfor %}
+  );
+  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::get(), 0, argumentsSet('config_names'));
+  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::getEditable(), 0, argumentsSet('config_names'));
+  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::reset(), 0, argumentsSet('config_names'));
+  expectedArguments(\Drupal::config(), 0, argumentsSet('config_names'));
+}

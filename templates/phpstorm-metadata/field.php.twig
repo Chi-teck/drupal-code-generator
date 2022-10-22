@@ -1,0 +1,21 @@
+<?php /** @noinspection ALL */
+
+namespace PHPSTORM_META {
+{% for definition in entity_fields %}
+
+  {% set field_argument_set = 'fields_' ~ definition.type %}
+  registerArgumentsSet('{{ field_argument_set }}',
+  {% for field in definition.fields %}
+    '{{ field }}',
+  {% endfor %}
+  );
+  expectedArguments({{ definition.class }}::set(), 0, argumentsSet('{{ field_argument_set }}'));
+  expectedArguments({{ definition.class }}::get(), 0, argumentsSet('{{ field_argument_set }}'));
+  expectedArguments({{ definition.class }}::hasField(), 0, argumentsSet('{{ field_argument_set }}'));
+  {% if definition.interface %}
+  expectedArguments({{ definition.interface }}::set(), 0, argumentsSet('{{ field_argument_set }}'));
+  expectedArguments({{ definition.interface }}::get(), 0, argumentsSet('{{ field_argument_set }}'));
+  expectedArguments({{ definition.interface }}::hasField(), 0, argumentsSet('{{ field_argument_set }}'));
+  {% endif %}
+{% endfor %}
+}

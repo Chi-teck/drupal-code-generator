@@ -37,61 +37,88 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
 
   protected function generate(array &$vars, AssetCollection $assets): void {
 
-    $service_info = $this->getHelper('service_info');
-    $service_definitions = $service_info->getServiceDefinitions();
+    $assets->addFile('.phpstorm.meta.php/plugin.php', 'plugin.php.twig')
+      ->vars(['plugins' => self::getPlugins()]);
 
+    $assets->addFile('.phpstorm.meta.php/entity_type.php', 'entity_type.php.twig')
+      ->vars(['entity_types' => $this->getEntityTypes()]);
+
+    $assets->addFile('.phpstorm.meta.php/field.php', 'field.php.twig')
+      ->vars(['entity_fields' => $this->getEntityFields()]);
+
+    $assets->addFile('.phpstorm.meta.php/service.php', 'service.php.twig')
+      ->vars(['services' => $this->getServices()]);
+
+    $route_names = $this->getHelper('route_info')->getRouteNames();
+    $assets->addFile('.phpstorm.meta.php/route.php', 'route.php.twig')
+      ->vars(['route_names' => $route_names]);
+
+    $config_names = $this->getHelper('config_info')->getConfigNames();
+    $assets->addFile('.phpstorm.meta.php/configuration.php', 'configuration.php.twig')
+      ->vars(['config_names' => $config_names]);
+
+    $assets->addFile('.phpstorm.meta.php/role.php', 'role.php.twig')
+      // @todo Create a helper for roles.
+      ->vars(['role_names' => $this->getRoleNames()]);
+
+    $permission_names = $this->getHelper('permission_info')->getPermissionNames();
+    $assets->addFile('.phpstorm.meta.php/permission.php', 'permission.php.twig')
+      ->vars(['permission_names' => $permission_names]);
+
+    $assets->addFile('.phpstorm.meta.php/file_system.php', 'file_system.php.twig');
+    $assets->addFile('.phpstorm.meta.php/miscellaneous.php', 'miscellaneous.php.twig');
+  }
+
+  /**
+   * Gets services.
+   */
+  private function getServices(): array {
+    $services = [];
+    $service_definitions = $this->getHelper('service_info')->getServiceDefinitions();
     foreach ($service_definitions as $service_id => $service_definition) {
-      if ($service_definition['class'] ?? NULL) {
-        $vars['services'][$service_id] = $service_definition['class'];
+      if (isset($service_definition['class'])) {
+        $services[$service_id] = $service_definition['class'];
       }
     }
-    \ksort($vars['services']);
+    \array_walk($services, [self::class, 'addSlash']);
+    \ksort($services);
+    return $services;
+  }
 
-    $vars['plugins'] = self::getPlugins();
-
-    $vars['storages'] = [];
-    $vars['view_builders'] = [];
-    $vars['list_builders'] = [];
-    $vars['access_controls'] = [];
-    $vars['entity_classes'] = [];
+  /**
+   * Gets entity types.
+   */
+  private function getEntityTypes(): array {
+    $entity_types['storages'] = [];
+    $entity_types['view_builders'] = [];
+    $entity_types['list_builders'] = [];
+    $entity_types['access_controls'] = [];
+    $entity_types['classes'] = [];
     foreach ($this->entityTypeManager->getDefinitions() as $type => $definition) {
-      $vars['entity_classes'][] = $definition->getClass();
-      $vars['storages'][$type] = $definition->getStorageClass();
-      $vars['access_controls'][$type] = $definition->getAccessControlClass();
+      $entity_types['classes'][] = $definition->getClass();
+      $entity_types['storages'][$type] = $definition->getStorageClass();
+      $entity_types['access_controls'][$type] = $definition->getAccessControlClass();
       if ($definition->hasViewBuilderClass()) {
-        $vars['view_builders'][$type] = $definition->getViewBuilderClass();
+        $entity_types['view_builders'][$type] = $definition->getViewBuilderClass();
       }
       if ($definition->hasListBuilderClass()) {
-        $vars['list_builders'][$type] = $definition->getListBuilderClass();
+        $entity_types['list_builders'][$type] = $definition->getListBuilderClass();
       }
     }
     // Some classes do not have leading slash.
-    \array_walk_recursive($vars, static function (string &$class): void {
-      if (!\str_starts_with($class, '\\')) {
-        $class = '\\' . $class;
-      }
-    });
+    \array_walk_recursive($entity_types, [self::class, 'addSlash']);
 
     $sort = static function (array &$items): void {
       \ksort($items);
     };
-    \array_walk($vars, $sort);
-
-    $vars['route_names'] = $this->getHelper('route_info')->getRouteNames();
-    $vars['config_names'] = $this->getHelper('config_info')->getConfigNames();
-
-    $vars['entity_fields'] = $this->getEntityFields();
-    $vars['role_names'] = $this->getRoleNames();
-
-    $vars['permission_names'] = $this->getHelper('permission_info')->getPermissionNames();
-
-    $assets->addFile('.phpstorm.meta.php', 'phpstorm.meta.php.twig');
+    \array_walk($entity_types, $sort);
+    return $entity_types;
   }
 
   /**
    * Gets role names.
    */
-  public function getRoleNames(): array {
+  private function getRoleNames(): array {
     $roles = $this->entityTypeManager->getStorage('user_role')->loadMultiple();
     return \array_keys($roles);
   }
@@ -105,7 +132,8 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
       if (!$definition->entityClassImplements(FieldableEntityInterface::class)) {
         continue;
       }
-      $class = '\\' . \ltrim($definition->getClass(), '\\');
+      $class = $definition->getClass();
+      self::addSlash($class);
       // Most of content entity types implement an interface which name matches
       // the following pattern.
       $interface = \str_replace('\Entity\\', '\\', $class) . 'Interface';
@@ -161,6 +189,15 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
       '\Drupal\search\SearchPluginManager' => '\Drupal\search\Plugin\SearchInterface',
       '\Drupal\tour\TipPluginManager' => '\Drupal\tour\TipPluginInterface',
     ];
+  }
+
+  /**
+   * Adds slash to class name.
+   */
+  private static function addSlash(string &$class): void {
+    if (!\str_starts_with($class, '\\')) {
+      $class = '\\' . $class;
+    }
   }
 
 }
