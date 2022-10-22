@@ -174,4 +174,16 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\user\UserInterface::addRole(), 0, argumentsSet('role_names'));
   expectedArguments(\Drupal\user\UserInterface::removeRole(), 0, argumentsSet('role_names'));
 
+  registerArgumentsSet('permission_names',
+{% for permission_name in permission_names %}
+    '{{ permission_name }}',
+{% endfor %}
+  );
+  expectedArguments(\Drupal\Core\Session\AccountInterface::hasPermission(), 0, argumentsSet('permission_names'));
+  expectedArguments(\Drupal\Core\Access\AccessResult::allowedIfHasPermission(), 1, argumentsSet('permission_names'));
+  expectedArguments(\Drupal\user\RoleInterface::allowedIfHasPermission(), 0, argumentsSet('permission_names'));
+  expectedArguments(\Drupal\user\RoleInterface::grantPermission(), 0, argumentsSet('permission_names'));
+  expectedArguments(\Drupal\user\RoleInterface::revokePermission(), 0, argumentsSet('permission_names'));
+
 }
+

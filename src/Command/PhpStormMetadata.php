@@ -83,6 +83,8 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     $vars['entity_fields'] = $this->getEntityFields();
     $vars['role_names'] = $this->getRoleNames();
 
+    $vars['permission_names'] = $this->getHelper('permission_info')->getPermissionNames();
+
     $assets->addFile('.phpstorm.meta.php', 'phpstorm.meta.php.twig');
   }
 

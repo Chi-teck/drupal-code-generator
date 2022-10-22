@@ -44,6 +44,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     self::assertConfigs($generated_content);
     self::assertFields($generated_content);
     self::assertRoles($generated_content);
+    self::assertPermissions($generated_content);
   }
 
   private static function assertServices(string $generated_content): void {
@@ -281,6 +282,27 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       expectedArguments(\Drupal\user\UserInterface::removeRole(), 0, argumentsSet('role_names'));
     TXT;
     self::assertStringContainsString($roles, $generated_content);
+  }
+
+  private static function assertPermissions(string $generated_content): void {
+    $permission_names = <<< 'TXT'
+      registerArgumentsSet('permission_names',
+        'administer blocks',
+        'administer comment types',
+        'administer comments',
+        'edit own comments',
+        'post comments',
+    TXT;
+    self::assertStringContainsString($permission_names, $generated_content);
+
+    $permission_arguments = <<< 'TXT'
+      expectedArguments(\Drupal\Core\Session\AccountInterface::hasPermission(), 0, argumentsSet('permission_names'));
+      expectedArguments(\Drupal\Core\Access\AccessResult::allowedIfHasPermission(), 1, argumentsSet('permission_names'));
+      expectedArguments(\Drupal\user\RoleInterface::allowedIfHasPermission(), 0, argumentsSet('permission_names'));
+      expectedArguments(\Drupal\user\RoleInterface::grantPermission(), 0, argumentsSet('permission_names'));
+      expectedArguments(\Drupal\user\RoleInterface::revokePermission(), 0, argumentsSet('permission_names'));
+    TXT;
+    self::assertStringContainsString($permission_arguments, $generated_content);
   }
 
 }
