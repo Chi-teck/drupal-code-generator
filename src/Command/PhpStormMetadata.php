@@ -70,6 +70,18 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
   }
 
   /**
+   * {@inheritdoc}
+   */
+  protected function getDestination(array $vars): ?string {
+    // Typically the root of the PhpStorm project is one level above of the
+    // Drupal root.
+    if (!\file_exists(\DRUPAL_ROOT . '/.idea') && \file_exists(\DRUPAL_ROOT . '/../.idea')) {
+      return \DRUPAL_ROOT . '/..';
+    }
+    return \DRUPAL_ROOT;
+  }
+
+  /**
    * Gets services.
    */
   private function getServices(): array {
