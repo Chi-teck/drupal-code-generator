@@ -1,0 +1,11 @@
+<?php /** @noinspection ALL */
+
+namespace PHPSTORM_META {
+  expectedArguments(
+    \Drupal\Core\Site\Settings::get(),
+    0,
+{% for name in setting_names %}
+    '{{ name }}',
+{% endfor %}
+  );
+}

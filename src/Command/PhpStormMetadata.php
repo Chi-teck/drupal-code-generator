@@ -6,6 +6,7 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Site\Settings;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator;
@@ -64,6 +65,9 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     $permission_names = $this->getHelper('permission_info')->getPermissionNames();
     $assets->addFile('.phpstorm.meta.php/permission.php', 'permission.php.twig')
       ->vars(['permission_names' => $permission_names]);
+
+    $assets->addFile('.phpstorm.meta.php/settings.php', 'settings.php.twig')
+      ->vars(['setting_names' => \array_keys(Settings::getAll())]);
 
     $assets->addFile('.phpstorm.meta.php/file_system.php', 'file_system.php.twig');
     $assets->addFile('.phpstorm.meta.php/miscellaneous.php', 'miscellaneous.php.twig');

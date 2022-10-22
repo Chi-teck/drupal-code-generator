@@ -33,6 +33,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
      • .phpstorm.meta.php/role.php
      • .phpstorm.meta.php/route.php
      • .phpstorm.meta.php/service.php
+     • .phpstorm.meta.php/settings.php
 
     TXT;
     $this->assertDisplay($expected_display);
@@ -52,6 +53,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     $this->assertGeneratedFile('.phpstorm.meta.php/field.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/role.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/permission.php');
+    $this->assertSettings();
   }
 
   private function assertServices(): void {
@@ -140,6 +142,19 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       override(\Drupal\block\Entity\Block::create(), map(['' => '\Drupal\block\Entity\Block']));
     PHP;
     self::assertStringContainsString($entity_static_methods, $generated_content);
+  }
+
+  private function assertSettings(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/settings.php');
+    // The full list of settings depends on environment.
+    $settings = <<< 'PHP'
+        'container_yamls',
+        'file_scan_ignore_directories',
+        'entity_update_batch_size',
+        'entity_update_backup',
+        'migrate_node_migrate_type_classic',
+    PHP;
+    self::assertStringContainsString($settings, $generated_content);
   }
 
 }
