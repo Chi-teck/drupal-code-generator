@@ -6,3 +6,15 @@ zippo.example:
   requirements:
     # No need to check access here.
     _access: 'TRUE'
+
+zippo.param_converter_test:
+  path: '/zippo/{letter}'
+  defaults:
+    _title: 'Check converter'
+    _controller: '\Drupal\zippo\Controller\ShowLetterController'
+  requirements:
+    # No need to check access here.
+    _access: 'TRUE'
+  options:
+    parameters:
+      letter: { type: 'example' }

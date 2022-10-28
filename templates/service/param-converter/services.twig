@@ -1,6 +1,9 @@
+{% import '@lib/di.twig' as di %}
 services:
-  {{ machine_name }}.foo_param_converter:
+  {{ machine_name }}.{{ parameter_type }}_param_converter:
     class: Drupal\{{ machine_name }}\{{ class }}
-    arguments: ['@database']
+{% if services %}
+    arguments: [{{ di.arguments(services) }}]
+{% endif %}
     tags:
       - { name: paramconverter }

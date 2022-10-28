@@ -1,15 +1,9 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }};
+namespace Drupal\example;
 
-{% sort %}
 use Drupal\Core\ParamConverter\ParamConverterInterface;
 use Symfony\Component\Routing\Route;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 /**
  * @todo Add description for the converter.
@@ -17,31 +11,22 @@ use Symfony\Component\Routing\Route;
  * @DCG
  * To use this converter specify parameter type in a relevant route as follows:
  * @code
- * {{ machine_name }}.{{ parameter_type }}_parameter_converter:
+ * example.foo_parameter_converter:
  *   path: example/{record}
  *   defaults:
- *     _controller: '\Drupal\{{ machine_name }}\Controller\{{ controller_class }}::build'
+ *     _controller: '\Drupal\example\Controller\ExampleController::build'
  *   requirements:
  *     _access: 'TRUE'
  *   options:
  *     parameters:
  *       record:
- *        type: {{ parameter_type }}
+ *        type: foo
  * @endcode
  *
  * Note that parameter converter for entities already exists in Drupal core.
  * @see \Drupal\Core\ParamConverter\EntityConverter
  */
-final class {{ class }} implements ParamConverterInterface {
-{% if services %}
-
-  /**
-   * Constructs {{ class|article }} object.
-   */
-  public function __construct(
-{{ di.signature(services) }}
-  ) {}
-{% endif %}
+final class FooParamConverter implements ParamConverterInterface {
 
   /**
    * {@inheritdoc}
