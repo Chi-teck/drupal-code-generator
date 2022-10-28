@@ -18,8 +18,8 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
 
     $expected_display = <<< 'TXT'
 
-     Welcome to phpstorm-metadata generator!
-    –––––––––––––––––––––––––––––––––––––––––
+     Welcome to phpstorm-meta generator!
+    –––––––––––––––––––––––––––––––––––––
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -34,6 +34,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
      • .phpstorm.meta.php/route.php
      • .phpstorm.meta.php/service.php
      • .phpstorm.meta.php/settings.php
+     • .phpstorm.meta.php/state.php
 
     TXT;
     $this->assertDisplay($expected_display);
@@ -54,6 +55,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     $this->assertGeneratedFile('.phpstorm.meta.php/role.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/permission.php');
     $this->assertSettings();
+    $this->assertStates();
   }
 
   private function assertServices(): void {
@@ -155,6 +157,29 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
         'migrate_node_migrate_type_classic',
     PHP;
     self::assertStringContainsString($settings, $generated_content);
+  }
+
+  private function assertStates(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/state.php');
+    // The full list of states depends on environment.
+    $states = <<< 'PHP'
+    <?php /** @noinspection ALL */
+    
+    namespace PHPSTORM_META {
+      registerArgumentsSet('state_names',
+        'comment.maintain_entity_statistics',
+        'comment.node_comment_statistics_scale',
+        'install_task',
+        'install_time',
+    PHP;
+    self::assertStringContainsString($states, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\Core\State\StateInterface::get(), 0, argumentsSet('state_names'));
+      expectedArguments(\Drupal\Core\State\StateInterface::set(), 0, argumentsSet('state_names'));
+      expectedArguments(\Drupal\Core\State\StateInterface::delete(), 0, argumentsSet('state_names'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
   }
 
 }

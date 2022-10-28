@@ -6,6 +6,7 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\Site\Settings;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
@@ -16,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 #[Generator(
   name: 'phpstorm-metadata',
   description: 'Generates PhpStorm metadata',
+  aliases: ['phpstorm-meta', 'phpstorm-data'],
   templatePath: Application::TEMPLATE_PATH . '/phpstorm-metadata',
   type: GeneratorType::OTHER,
   label: 'PhpStorm metadata',
@@ -25,6 +27,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly EntityFieldManagerInterface $entityFieldManager,
+    private readonly KeyValueFactoryInterface $keyValueStore,
   ) {
     parent::__construct();
   }
@@ -33,6 +36,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     return new self(
       $container->get('entity_type.manager'),
       $container->get('entity_field.manager'),
+      $container->get('keyvalue'),
     );
   }
 
@@ -68,6 +72,9 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
 
     $assets->addFile('.phpstorm.meta.php/settings.php', 'settings.php.twig')
       ->vars(['setting_names' => \array_keys(Settings::getAll())]);
+
+    $assets->addFile('.phpstorm.meta.php/state.php', 'state.php.twig')
+      ->vars(['state_names' => \array_keys($this->keyValueStore->get('state')->getAll())]);
 
     $assets->addFile('.phpstorm.meta.php/file_system.php', 'file_system.php.twig');
     $assets->addFile('.phpstorm.meta.php/miscellaneous.php', 'miscellaneous.php.twig');
