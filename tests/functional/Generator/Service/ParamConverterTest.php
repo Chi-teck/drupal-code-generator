@@ -124,7 +124,7 @@ final class ParamConverterTest extends GeneratorTestBase {
      ➤ 
 
      Parameter type [example]:
-     ➤  The value does not match pattern "/^[a-z][a-z0-9_\:]*[a-z0-9]$/"
+     ➤  The value does not match pattern "/^[a-z][a-z0-9_\:]*[a-z0-9]$/".
 
      Parameter type [example]:
      ➤ 

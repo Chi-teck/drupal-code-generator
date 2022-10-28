@@ -25,12 +25,12 @@ final class RegExpTest extends TestCase {
 
   public function dataProvider(): array {
     return [
-      ['wrong', '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/"')],
+      ['wrong', '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
       ['wrong', '/abc/', 'Custom message', new \UnexpectedValueException('Custom message')],
       ['abc', '/abc/', NULL, NULL],
-      [NULL, '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/"')],
-      [FALSE, '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/"')],
-      [[], '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/"')],
+      [NULL, '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
+      [FALSE, '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
+      [[], '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
     ];
   }
 

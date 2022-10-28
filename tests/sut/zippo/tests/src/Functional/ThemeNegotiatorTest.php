@@ -27,14 +27,13 @@ final class ThemeNegotiatorTest extends BrowserTestBase {
   public function testThemeNegotiator(): void {
     $this->container->get('theme_installer')->install(['claro']);
 
-    $options = ['query' => ['theme' => 'olivero']];
     $pattern = '#/core/themes/claro/#';
     $assert_session = $this->assertSession();
 
-    $this->drupalGet('<front>', $options);
+    $this->drupalGet('<front>');
     $assert_session->responseNotMatches($pattern);
 
-    $this->drupalGet('example', $options);
+    $this->drupalGet('example');
     $assert_session->responseMatches($pattern);
   }
 
