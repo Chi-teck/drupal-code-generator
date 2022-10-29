@@ -152,24 +152,21 @@ final class Interviewer {
   /**
    * Collects services.
    */
-  public function askServices(bool $default = TRUE): array {
+  public function askServices(bool $default = TRUE, array $forced_services = []): array {
+    $services = $forced_services;
 
-    if (!$this->io->confirm('Would you like to inject dependencies?', $default)) {
-      return [];
-    }
-
-    $service_ids = $this->serviceInfo->getServicesIds();
-
-    $services = [];
-    while (TRUE) {
-      $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
-      $question->setValidator(new Optional(new ServiceName()));
-      $question->setAutocompleterValues($service_ids);
-      $service = $this->io->askQuestion($question);
-      if (!$service) {
-        break;
+    if ($this->io->confirm('Would you like to inject dependencies?', $default)) {
+      $service_ids = $this->serviceInfo->getServicesIds();
+      while (TRUE) {
+        $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
+        $question->setValidator(new Optional(new ServiceName()));
+        $question->setAutocompleterValues($service_ids);
+        $service = $this->io->askQuestion($question);
+        if (!$service) {
+          break;
+        }
+        $services[] = $service;
       }
-      $services[] = $service;
     }
 
     $definitions = [];

@@ -20,7 +20,14 @@ final class Middleware extends BaseGenerator {
   protected function generate(array &$vars, AssetCollection $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
+
     $vars['class'] = $ir->askClass(default: '{machine_name|camelize}Middleware');
+    $vars['services'] = $ir->askServices(forced_services: ['http_kernel']);
+    // HTTP kernel argument should not be included to services definition as it
+    // is added by container compiler pass.
+    $vars['service_arguments'] = $vars['services'];
+    unset($vars['service_arguments']['http_kernel']);
+
     $assets->addFile('src/{class}.php', 'middleware.twig');
     $assets->addServicesFile()->template('services.twig');
   }

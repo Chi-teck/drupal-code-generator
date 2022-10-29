@@ -248,7 +248,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = service ]]; then
   $DCG service:custom -a zippo -a zippo.foo -a Foo -a Y -a entity_type.manager -a
   $DCG service:event-subscriber -a zippo -a Zippo -a FooSubscriber -a Yes -a messenger -a
   $DCG service:logger -a zippo -a FileLog
-  $DCG service:middleware -a zippo -a BarMiddelware
+  $DCG service:middleware -a zippo -a BarMiddelware -a No
   $DCG service:param-converter -a zippo -a example -a ExampleParamConverter -a No
   $DCG service:route-subscriber -a zippo -a ZippoRouterSubscibrer -a No
   $DCG service:theme-negotiator -a zippo -a ZippoThemeNegotiator -a No

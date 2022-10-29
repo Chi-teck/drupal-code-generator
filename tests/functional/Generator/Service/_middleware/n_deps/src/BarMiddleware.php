@@ -1,30 +1,22 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }};
+namespace Drupal\foo;
 
-{% sort %}
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 /**
  * @todo Add a description for the middleware.
  */
-final class {{ class }} implements HttpKernelInterface {
-{% if services %}
+final class BarMiddleware implements HttpKernelInterface {
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs a BarMiddleware object.
    */
   public function __construct(
-{{ di.signature(services) }}
+    private readonly HttpKernelInterface $httpKernel,
   ) {}
-{% endif %}
 
   /**
    * {@inheritdoc}
@@ -33,9 +25,6 @@ final class {{ class }} implements HttpKernelInterface {
     // @todo Modify the request here.
     $response = $this->httpKernel->handle($request, $type, $catch);
     // @todo Modify the response here.
-{% if SUT_TEST %}
-    $response->headers->set('x-middleware-handle-test', NULL);
-{% endif %}
     return $response;
   }
 

@@ -1,0 +1,6 @@
+services:
+  foo.middleware:
+    class: Drupal\foo\BarMiddleware
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: http_middleware, priority: 1000 }

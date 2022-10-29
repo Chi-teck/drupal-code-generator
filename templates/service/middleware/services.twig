@@ -1,5 +1,9 @@
+{% import '@lib/di.twig' as di %}
 services:
   {{ machine_name }}.middleware:
     class: Drupal\{{ machine_name }}\{{ class }}
+{% if service_arguments %}
+    arguments: [{{ di.arguments(service_arguments) }}]
+{% endif %}
     tags:
       - { name: http_middleware, priority: 1000 }
