@@ -24,17 +24,17 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • .phpstorm.meta.php/configuration.php
-     • .phpstorm.meta.php/entity_type.php
-     • .phpstorm.meta.php/field.php
+     • .phpstorm.meta.php/entity_types.php
+     • .phpstorm.meta.php/fields.php
      • .phpstorm.meta.php/file_system.php
      • .phpstorm.meta.php/miscellaneous.php
-     • .phpstorm.meta.php/permission.php
-     • .phpstorm.meta.php/plugin.php
-     • .phpstorm.meta.php/role.php
-     • .phpstorm.meta.php/route.php
-     • .phpstorm.meta.php/service.php
+     • .phpstorm.meta.php/permissions.php
+     • .phpstorm.meta.php/plugins.php
+     • .phpstorm.meta.php/roles.php
+     • .phpstorm.meta.php/routes.php
+     • .phpstorm.meta.php/services.php
      • .phpstorm.meta.php/settings.php
-     • .phpstorm.meta.php/state.php
+     • .phpstorm.meta.php/states.php
 
     TXT;
     $this->assertDisplay($expected_display);
@@ -47,19 +47,19 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     $this->assertEntityListBuilders();
     $this->assertControlHandlers();
     $this->assertEntityStaticMethods();
-    $this->assertGeneratedFile('.phpstorm.meta.php/plugin.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/plugins.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/miscellaneous.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/route.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/routes.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/configuration.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/field.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/role.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/permission.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/fields.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/roles.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/permissions.php');
     $this->assertSettings();
     $this->assertStates();
   }
 
   private function assertServices(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/service.php');
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/services.php');
     $services_1 = <<< 'PHP'
     <?php /** @noinspection ALL */
     
@@ -85,7 +85,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
   }
 
   private function assertEntityStorages(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_type.php');
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
     $entity_storages = <<< 'PHP'
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
@@ -98,7 +98,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
   }
 
   private function assertEntityViewBuilders(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_type.php');
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
     $entity_view_builders = <<< 'PHP'
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getViewBuilder(0),
@@ -111,7 +111,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
   }
 
   private function assertEntityListBuilders(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_type.php');
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
     $entity_list_builders = <<< 'PHP'
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
@@ -124,7 +124,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
   }
 
   private function assertControlHandlers(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_type.php');
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
     $access_control_handlers = <<< 'PHP'
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
@@ -137,7 +137,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
   }
 
   private function assertEntityStaticMethods(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_type.php');
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
     $entity_static_methods = <<< 'PHP'
       override(\Drupal\block\Entity\Block::loadMultiple(), map(['' => '\Drupal\block\Entity\Block[]']));
       override(\Drupal\block\Entity\Block::load(), map(['' => '\Drupal\block\Entity\Block']));
@@ -160,7 +160,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
   }
 
   private function assertStates(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/state.php');
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/states.php');
     // The full list of states depends on environment.
     $states = <<< 'PHP'
     <?php /** @noinspection ALL */

@@ -42,38 +42,38 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
 
   protected function generate(array &$vars, AssetCollection $assets): void {
 
-    $assets->addFile('.phpstorm.meta.php/plugin.php', 'plugin.php.twig')
+    $assets->addFile('.phpstorm.meta.php/plugins.php', 'plugins.php.twig')
       ->vars(['plugins' => self::getPlugins()]);
 
-    $assets->addFile('.phpstorm.meta.php/entity_type.php', 'entity_type.php.twig')
+    $assets->addFile('.phpstorm.meta.php/entity_types.php', 'entity_types.php.twig')
       ->vars(['entity_types' => $this->getEntityTypes()]);
 
-    $assets->addFile('.phpstorm.meta.php/field.php', 'field.php.twig')
+    $assets->addFile('.phpstorm.meta.php/fields.php', 'fields.php.twig')
       ->vars(['entity_fields' => $this->getEntityFields()]);
 
-    $assets->addFile('.phpstorm.meta.php/service.php', 'service.php.twig')
+    $assets->addFile('.phpstorm.meta.php/services.php', 'services.php.twig')
       ->vars(['services' => $this->getServices()]);
 
     $route_names = $this->getHelper('route_info')->getRouteNames();
-    $assets->addFile('.phpstorm.meta.php/route.php', 'route.php.twig')
+    $assets->addFile('.phpstorm.meta.php/routes.php', 'routes.php.twig')
       ->vars(['route_names' => $route_names]);
 
     $config_names = $this->getHelper('config_info')->getConfigNames();
     $assets->addFile('.phpstorm.meta.php/configuration.php', 'configuration.php.twig')
       ->vars(['config_names' => $config_names]);
 
-    $assets->addFile('.phpstorm.meta.php/role.php', 'role.php.twig')
+    $assets->addFile('.phpstorm.meta.php/roles.php', 'roles.php.twig')
       // @todo Create a helper for roles.
       ->vars(['role_names' => $this->getRoleNames()]);
 
     $permission_names = $this->getHelper('permission_info')->getPermissionNames();
-    $assets->addFile('.phpstorm.meta.php/permission.php', 'permission.php.twig')
+    $assets->addFile('.phpstorm.meta.php/permissions.php', 'permissions.php.twig')
       ->vars(['permission_names' => $permission_names]);
 
     $assets->addFile('.phpstorm.meta.php/settings.php', 'settings.php.twig')
       ->vars(['setting_names' => \array_keys(Settings::getAll())]);
 
-    $assets->addFile('.phpstorm.meta.php/state.php', 'state.php.twig')
+    $assets->addFile('.phpstorm.meta.php/states.php', 'states.php.twig')
       ->vars(['state_names' => \array_keys($this->keyValueStore->get('state')->getAll())]);
 
     $assets->addFile('.phpstorm.meta.php/file_system.php', 'file_system.php.twig');
