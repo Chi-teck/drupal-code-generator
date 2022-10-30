@@ -1,0 +1,6 @@
+services:
+  logger.example_log:
+    class: Drupal\foo\Logger\ExampleLog
+    arguments: ['@logger.log_message_parser']
+    tags:
+      - { name: logger }

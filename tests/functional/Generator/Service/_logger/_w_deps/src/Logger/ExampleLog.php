@@ -1,32 +1,28 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Logger;
+namespace Drupal\foo\Logger;
 
-{% sort %}
+use Drupal\Core\Database\Connection;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LogMessageParserInterface;
 use Drupal\Core\Logger\RfcLoggerTrait;
 use Psr\Log\LoggerInterface;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 /**
  * @todo Add a description for the logger.
  */
-final class {{ class }} implements LoggerInterface {
+final class ExampleLog implements LoggerInterface {
 
   use RfcLoggerTrait;
-{% if services %}
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs an ExampleLog object.
    */
   public function __construct(
-{{ di.signature(services) }}
+    private readonly LogMessageParserInterface $parser,
+    private readonly Connection $connection,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {}
-{% endif %}
 
   /**
    * {@inheritdoc}
@@ -38,9 +34,6 @@ final class {{ class }} implements LoggerInterface {
     // @see \Drupal\Core\Logger\LoggerChannel::log() for all available contexts.
     $rendered_message = strtr($message, $placeholders);
     // @todo Log the rendered message here.
-{% if SUT_TEST %}
-    \file_put_contents('temporary://logger_test.log', $level . ' -> ' . $rendered_message);
-{% endif %}
   }
 
 }

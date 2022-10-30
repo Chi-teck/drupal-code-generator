@@ -12,9 +12,12 @@ final class LoggerTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_logger';
 
-  public function testGenerator(): void {
+  /**
+   * Test callback.
+   */
+  public function testWithoutDependencies(): void {
 
-    $this->execute(Logger::class, ['foo', 'FileLog']);
+    $this->execute(Logger::class, ['foo', 'ExampleLog', 'No']);
 
     $expected_display = <<< 'TXT'
 
@@ -24,19 +27,72 @@ final class LoggerTest extends GeneratorTestBase {
      Module machine name:
      ➤ 
 
-     Class [FileLog]:
+     Class:
+     ➤ 
+
+     Would you like to inject dependencies? [Yes]:
      ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo.services.yml
-     • src/Logger/FileLog.php
+     • src/Logger/ExampleLog.php
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('foo.services.yml');
-    $this->assertGeneratedFile('src/Logger/FileLog.php');
+    $this->assertGeneratedFile('foo.services.yml', '_n_deps/foo.services.yml');
+    $this->assertGeneratedFile('src/Logger/ExampleLog.php', '_n_deps/src/Logger/ExampleLog.php');
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testWithDependencies(): void {
+
+    $input = [
+      'foo',
+      'ExampleLog',
+      'Yes',
+      'database',
+      'entity_type.manager',
+      '',
+    ];
+    $this->execute(Logger::class, $input);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to logger generator!
+    ––––––––––––––––––––––––––––––
+
+     Module machine name:
+     ➤ 
+
+     Class:
+     ➤ 
+
+     Would you like to inject dependencies? [Yes]:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.services.yml
+     • src/Logger/ExampleLog.php
+
+    TXT;
+    $this->assertDisplay($expected_display);
+
+    $this->assertGeneratedFile('foo.services.yml', '_w_deps/foo.services.yml');
+    $this->assertGeneratedFile('src/Logger/ExampleLog.php', '_w_deps/src/Logger/ExampleLog.php');
   }
 
 }

@@ -14,22 +14,18 @@ final class LoggerTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['system', 'zippo', 'example'];
+  protected static $modules = ['zippo'];
 
   /**
    * Test callback.
    */
   public function testLogger(): void {
-
-    $this->installConfig('system');
-
-    \Drupal::logger('zippo')->notice('foo');
-
-    $logged_data = \file_get_contents('temporary://drupal.log');
-
-    self::assertMatchesRegularExpression('/\[message\] => foo\n/', $logged_data);
-    self::assertMatchesRegularExpression('/\[type\] => zippo\n/', $logged_data);
-    self::assertMatchesRegularExpression('/\[severity\] => Notice\n/', $logged_data);
+    $this->container
+      ->get('logger.factory')
+      ->get('zippo')
+      ->notice('Foo: {foo}', ['foo' => 'bar']);
+    $logged_data = \file_get_contents('temporary://logger_test.log');
+    self::assertSame('5 -> Foo: bar', $logged_data);
   }
 
 }

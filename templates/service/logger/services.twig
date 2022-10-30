@@ -1,6 +1,9 @@
+{% import '@lib/di.twig' as di %}
 services:
-  logger.{{ machine_name }}:
+  logger.{{ service_id }}:
     class: Drupal\{{ machine_name }}\Logger\{{ class }}
-    arguments: ['@config.factory', '@logger.log_message_parser', '@date.formatter']
+{% if services %}
+    arguments: [{{ di.arguments(services) }}]
+{% endif %}
     tags:
       - { name: logger }

@@ -41,8 +41,8 @@ final class MiddlewareTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('foo.services.yml', 'n_deps/foo.services.yml');
-    $this->assertGeneratedFile('src/BarMiddleware.php', 'n_deps/src/BarMiddleware.php');
+    $this->assertGeneratedFile('foo.services.yml', '_n_deps/foo.services.yml');
+    $this->assertGeneratedFile('src/BarMiddleware.php', '_n_deps/src/BarMiddleware.php');
   }
 
   /**
@@ -87,8 +87,8 @@ final class MiddlewareTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('foo.services.yml', 'w_deps/foo.services.yml');
-    $this->assertGeneratedFile('src/BarMiddleware.php', 'w_deps/src/BarMiddleware.php');
+    $this->assertGeneratedFile('foo.services.yml', '_w_deps/foo.services.yml');
+    $this->assertGeneratedFile('src/BarMiddleware.php', '_w_deps/src/BarMiddleware.php');
   }
 
 }
