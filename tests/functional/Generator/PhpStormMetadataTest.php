@@ -42,29 +42,77 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
 
     // The content of some files may vary depending on the Drupal version. So
     // that we only assert specific parts of those files.
-    $this->assertServices();
-    $this->assertEntityStorages();
-    $this->assertEntityViewBuilders();
-    $this->assertEntityListBuilders();
-    $this->assertControlHandlers();
-    $this->assertEntityStaticMethods();
-    $this->assertGeneratedFile('.phpstorm.meta.php/date_formats.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/plugins.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/miscellaneous.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/routes.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/configuration.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/date_formats.php');
+    $this->assertEntityTypes();
     $this->assertGeneratedFile('.phpstorm.meta.php/fields.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/roles.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/file_system.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/miscellaneous.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/permissions.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/plugins.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/roles.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/routes.php');
+    $this->assertServices();
     $this->assertSettings();
     $this->assertStates();
+  }
+
+  private function assertEntityTypes(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
+
+    $entity_storages = <<< 'PHP'
+      override(
+        \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
+        map([
+          'action' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
+          'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideStorage',
+          'block' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
+    PHP;
+    self::assertStringContainsString($entity_storages, $generated_content);
+
+    $entity_view_builders = <<< 'PHP'
+      override(
+        \Drupal\Core\Entity\EntityTypeManagerInterface::getViewBuilder(0),
+        map([
+          'block' => '\Drupal\block\BlockViewBuilder',
+          'block_content' => '\Drupal\block_content\BlockContentViewBuilder',
+          'comment' => '\Drupal\comment\CommentViewBuilder',
+    PHP;
+    self::assertStringContainsString($entity_view_builders, $generated_content);
+
+    $entity_list_builders = <<< 'PHP'
+      override(
+        \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
+        map([
+          'block' => '\Drupal\block\BlockListBuilder',
+          'block_content' => '\Drupal\block_content\BlockContentListBuilder',
+          'block_content_type' => '\Drupal\block_content\BlockContentTypeListBuilder',
+    PHP;
+    self::assertStringContainsString($entity_list_builders, $generated_content);
+
+    $access_control_handlers = <<< 'PHP'
+      override(
+        \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
+        map([
+         'action' => '\Drupal\Core\Entity\EntityAccessControlHandler',
+         'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideAccessControlHandler',
+         'block' => '\Drupal\block\BlockAccessControlHandler',
+    PHP;
+    self::assertStringContainsString($access_control_handlers, $generated_content);
+
+    $entity_static_methods = <<< 'PHP'
+      override(\Drupal\block\Entity\Block::loadMultiple(), map(['' => '\Drupal\block\Entity\Block[]']));
+      override(\Drupal\block\Entity\Block::load(), map(['' => '\Drupal\block\Entity\Block']));
+      override(\Drupal\block\Entity\Block::create(), map(['' => '\Drupal\block\Entity\Block']));
+    PHP;
+    self::assertStringContainsString($entity_static_methods, $generated_content);
   }
 
   private function assertServices(): void {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/services.php');
     $services_1 = <<< 'PHP'
     <?php /** @noinspection ALL */
-    
+
     namespace PHPSTORM_META {
       override(
         \Drupal::service(0),
@@ -84,68 +132,6 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
           'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
     PHP;
     self::assertStringContainsString($services_2, $generated_content);
-  }
-
-  private function assertEntityStorages(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
-    $entity_storages = <<< 'PHP'
-      override(
-        \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
-        map([
-          'action' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
-          'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideStorage',
-          'block' => '\Drupal\Core\Config\Entity\ConfigEntityStorage',
-    PHP;
-    self::assertStringContainsString($entity_storages, $generated_content);
-  }
-
-  private function assertEntityViewBuilders(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
-    $entity_view_builders = <<< 'PHP'
-      override(
-        \Drupal\Core\Entity\EntityTypeManagerInterface::getViewBuilder(0),
-        map([
-          'block' => '\Drupal\block\BlockViewBuilder',
-          'block_content' => '\Drupal\block_content\BlockContentViewBuilder',
-          'comment' => '\Drupal\comment\CommentViewBuilder',
-    PHP;
-    self::assertStringContainsString($entity_view_builders, $generated_content);
-  }
-
-  private function assertEntityListBuilders(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
-    $entity_list_builders = <<< 'PHP'
-      override(
-        \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
-        map([
-          'block' => '\Drupal\block\BlockListBuilder',
-          'block_content' => '\Drupal\block_content\BlockContentListBuilder',
-          'block_content_type' => '\Drupal\block_content\BlockContentTypeListBuilder',
-    PHP;
-    self::assertStringContainsString($entity_list_builders, $generated_content);
-  }
-
-  private function assertControlHandlers(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
-    $access_control_handlers = <<< 'PHP'
-      override(
-        \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
-        map([
-         'action' => '\Drupal\Core\Entity\EntityAccessControlHandler',
-         'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideAccessControlHandler',
-         'block' => '\Drupal\block\BlockAccessControlHandler',
-    PHP;
-    self::assertStringContainsString($access_control_handlers, $generated_content);
-  }
-
-  private function assertEntityStaticMethods(): void {
-    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
-    $entity_static_methods = <<< 'PHP'
-      override(\Drupal\block\Entity\Block::loadMultiple(), map(['' => '\Drupal\block\Entity\Block[]']));
-      override(\Drupal\block\Entity\Block::load(), map(['' => '\Drupal\block\Entity\Block']));
-      override(\Drupal\block\Entity\Block::create(), map(['' => '\Drupal\block\Entity\Block']));
-    PHP;
-    self::assertStringContainsString($entity_static_methods, $generated_content);
   }
 
   private function assertSettings(): void {
