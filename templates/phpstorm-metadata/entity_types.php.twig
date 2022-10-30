@@ -1,6 +1,8 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
+
+  // Storages.
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
     map([
@@ -10,6 +12,7 @@ namespace PHPSTORM_META {
     ])
   );
 
+  // View builders.
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getViewBuilder(0),
     map([
@@ -19,6 +22,7 @@ namespace PHPSTORM_META {
     ])
   );
 
+  // List builders.
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
     map([
@@ -28,6 +32,7 @@ namespace PHPSTORM_META {
     ])
   );
 
+  // Access control handlers.
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
     map([
@@ -37,6 +42,7 @@ namespace PHPSTORM_META {
     ])
   );
 
+  // Class methods.
 {% for class in entity_types.classes %}
 {# Using map() to work around PhpStorm bug. #}
 {# @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001516519 #}

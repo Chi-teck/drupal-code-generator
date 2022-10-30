@@ -1,6 +1,7 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
+
   expectedArguments(
     \Drupal\Core\File\FileSystemInterface::prepareDirectory(),
     1,
@@ -23,4 +24,5 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\file\FileRepositoryInterface::file_save_data(), 2, argumentsSet('file_system_exists_behaviour'));
   expectedArguments(\file_save_upload(), 4, argumentsSet('file_system_exists_behaviour'));
   expectedArguments(\system_retrieve_file(), 3, argumentsSet('file_system_exists_behaviour'));
+
 }

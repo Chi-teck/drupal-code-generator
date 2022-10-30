@@ -1,7 +1,8 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
-  registerArgumentsSet('config_names',
+
+  registerArgumentsSet('configs',
     'automated_cron.settings',
     'block.block.claro_breadcrumbs',
     'block.block.claro_content',
@@ -183,9 +184,10 @@ namespace PHPSTORM_META {
     'views.view.who_s_new',
     'views.view.who_s_online',
   );
-  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::get(), 0, argumentsSet('config_names'));
-  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::getEditable(), 0, argumentsSet('config_names'));
-  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::reset(), 0, argumentsSet('config_names'));
-  expectedArguments(\Drupal::config(), 0, argumentsSet('config_names'));
-  expectedArguments(\Drupal\Core\Form\ConfigFormBaseTrait::config(), 0, argumentsSet('config_names'));
+  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::get(), 0, argumentsSet('configs'));
+  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::getEditable(), 0, argumentsSet('configs'));
+  expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::reset(), 0, argumentsSet('configs'));
+  expectedArguments(\Drupal::config(), 0, argumentsSet('configs'));
+  expectedArguments(\Drupal\Core\Form\ConfigFormBaseTrait::config(), 0, argumentsSet('configs'));
+
 }

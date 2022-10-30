@@ -1,7 +1,8 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
-  registerArgumentsSet('route_names',
+
+  registerArgumentsSet('routes',
     '<button>',
     '<current>',
     '<front>',
@@ -370,16 +371,17 @@ namespace PHPSTORM_META {
     'views_ui.settings_advanced',
     'views_ui.settings_basic',
   );
-  expectedArguments(\Symfony\Component\Routing\RouteCollection::get(), 0, argumentsSet('route_names'));
-  expectedArguments(\Symfony\Component\Routing\RouteCollection::remove(), 0, argumentsSet('route_names'));
-  expectedArguments(\Drupal\Core\Url::__construct(), 0, argumentsSet('route_names'));
-  expectedArguments(\Drupal\Core\Url::fromRoute(), 0, argumentsSet('route_names'));
-  expectedArguments(\Drupal\Core\Link::createFromRoute(), 1, argumentsSet('route_names'));
-  expectedReturnValues(\Drupal\Core\Url::getRouteName(), argumentsSet('route_names'));
-  expectedReturnValues(\Drupal\Core\Routing\RouteMatchInterface::getRouteName(), argumentsSet('route_names'));
-  expectedReturnValues(\Drupal\Core\Menu\ContextualLinkInterface::getRouteName(), argumentsSet('route_names'));
-  expectedReturnValues(\Drupal\Core\Menu\LocalActionInterface::getRouteName(), argumentsSet('route_names'));
-  expectedReturnValues(\Drupal\Core\Menu\LocalTaskInterface::getRouteName(), argumentsSet('route_names'));
-  expectedReturnValues(\Drupal\Core\Menu\MenuLinkInterface::getRouteName(), argumentsSet('route_names'));
-  expectedReturnValues(\Drupal\Core\Form\FormStateInterface::setRedirect(), argumentsSet('route_names'));
+  expectedArguments(\Symfony\Component\Routing\RouteCollection::get(), 0, argumentsSet('routes'));
+  expectedArguments(\Symfony\Component\Routing\RouteCollection::remove(), 0, argumentsSet('routes'));
+  expectedArguments(\Drupal\Core\Url::__construct(), 0, argumentsSet('routes'));
+  expectedArguments(\Drupal\Core\Url::fromRoute(), 0, argumentsSet('routes'));
+  expectedArguments(\Drupal\Core\Link::createFromRoute(), 1, argumentsSet('routes'));
+  expectedReturnValues(\Drupal\Core\Url::getRouteName(), argumentsSet('routes'));
+  expectedReturnValues(\Drupal\Core\Routing\RouteMatchInterface::getRouteName(), argumentsSet('routes'));
+  expectedReturnValues(\Drupal\Core\Menu\ContextualLinkInterface::getRouteName(), argumentsSet('routes'));
+  expectedReturnValues(\Drupal\Core\Menu\LocalActionInterface::getRouteName(), argumentsSet('routes'));
+  expectedReturnValues(\Drupal\Core\Menu\LocalTaskInterface::getRouteName(), argumentsSet('routes'));
+  expectedReturnValues(\Drupal\Core\Menu\MenuLinkInterface::getRouteName(), argumentsSet('routes'));
+  expectedReturnValues(\Drupal\Core\Form\FormStateInterface::setRedirect(), argumentsSet('routes'));
+
 }

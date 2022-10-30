@@ -100,17 +100,17 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     return $definition->entityClassImplements($interface) ? $interface : NULL;
   }
 
+  private function generateConfiguration(Assets $assets): void {
+    $configs = $this->getHelper('config_info')->getConfigNames();
+    $assets->addFile('.phpstorm.meta.php/configuration.php', 'configuration.php.twig')
+      ->vars(['configs' => $configs]);
+  }
+
   private function generateDateFormats(Assets $assets): void {
     $date_formats = $this->entityTypeManager->getStorage('date_format')->loadMultiple();
     $date_formats['custom'] = NULL;
     $assets->addFile('.phpstorm.meta.php/date_formats.php', 'date_formats.php.twig')
       ->vars(['date_formats' => \array_keys($date_formats)]);
-  }
-
-  private function generateConfiguration(Assets $assets): void {
-    $config_names = $this->getHelper('config_info')->getConfigNames();
-    $assets->addFile('.phpstorm.meta.php/configuration.php', 'configuration.php.twig')
-      ->vars(['config_names' => $config_names]);
   }
 
   private function generateEntityLinks(Assets $assets): void {
@@ -161,22 +161,23 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
   }
 
   private function generateFields(Assets $assets): void {
-    $entity_fields = [];
+    $definitions = [];
     foreach ($this->entityTypeManager->getDefinitions() as $entity_type => $definition) {
       if (!$definition->entityClassImplements(FieldableEntityInterface::class)) {
         continue;
       }
       $class = $definition->getClass();
       self::addSlash($class);
-      $entity_fields[] = [
+      $definitions[] = [
         'type' => $entity_type,
+        'label' => $definition->getLabel(),
         'class' => $class,
         'interface' => self::getEntityInterface($definition),
         'fields' => \array_keys($this->entityFieldManager->getFieldStorageDefinitions($entity_type)),
       ];
     }
     $assets->addFile('.phpstorm.meta.php/fields.php', 'fields.php.twig')
-      ->vars(['entity_fields' => $entity_fields]);
+      ->vars(['definitions' => $definitions]);
   }
 
   private function generateFileSystem(Assets $assets): void {
@@ -188,9 +189,9 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
   }
 
   private function generatePermissions(Assets $assets): void {
-    $permission_names = $this->getHelper('permission_info')->getPermissionNames();
+    $permissions = $this->getHelper('permission_info')->getPermissionNames();
     $assets->addFile('.phpstorm.meta.php/permissions.php', 'permissions.php.twig')
-      ->vars(['permission_names' => $permission_names]);
+      ->vars(['permissions' => $permissions]);
   }
 
   private function generatePlugins(Assets $assets): void {
@@ -241,13 +242,13 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     $roles = $this->entityTypeManager->getStorage('user_role')->loadMultiple();
     $assets->addFile('.phpstorm.meta.php/roles.php', 'roles.php.twig')
       // @todo Create a helper for roles.
-      ->vars(['role_names' => \array_keys($roles)]);
+      ->vars(['roles' => \array_keys($roles)]);
   }
 
   private function generateRoutes(Assets $assets): void {
-    $route_names = $this->getHelper('route_info')->getRouteNames();
+    $routes = $this->getHelper('route_info')->getRouteNames();
     $assets->addFile('.phpstorm.meta.php/routes.php', 'routes.php.twig')
-      ->vars(['route_names' => $route_names]);
+      ->vars(['routes' => $routes]);
   }
 
   private function generateServices(Assets $assets): void {
@@ -260,19 +261,18 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     }
     \array_walk($services, [self::class, 'addSlash']);
     \ksort($services);
-
     $assets->addFile('.phpstorm.meta.php/services.php', 'services.php.twig')
       ->vars(['services' => $services]);
   }
 
   private function generateSettings(Assets $assets): void {
     $assets->addFile('.phpstorm.meta.php/settings.php', 'settings.php.twig')
-      ->vars(['setting_names' => \array_keys(Settings::getAll())]);
+      ->vars(['settings' => \array_keys(Settings::getAll())]);
   }
 
   private function generateStates(Assets $assets): void {
     $assets->addFile('.phpstorm.meta.php/states.php', 'states.php.twig')
-      ->vars(['state_names' => \array_keys($this->keyValueStore->get('state')->getAll())]);
+      ->vars(['states' => \array_keys($this->keyValueStore->get('state')->getAll())]);
   }
 
 }

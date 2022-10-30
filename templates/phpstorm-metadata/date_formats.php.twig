@@ -1,10 +1,12 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
+
   registerArgumentsSet('date_formats',
 {% for date_format in date_formats %}
     '{{ date_format }}',
 {% endfor %}
   );
   expectedArguments(\Drupal\Core\Datetime\DateFormatter::format(), 1, argumentsSet('date_formats'));
+
 }

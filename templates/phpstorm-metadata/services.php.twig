@@ -1,6 +1,7 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
+
   override(
     \Drupal::service(0),
     map([
@@ -17,4 +18,5 @@ namespace PHPSTORM_META {
 {% endfor %}
     ])
   );
+
 }

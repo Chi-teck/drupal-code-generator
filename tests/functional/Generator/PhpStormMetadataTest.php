@@ -112,10 +112,12 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
 
   private function assertServices(): void {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/services.php');
+
     $services_1 = <<< 'PHP'
-    <?php /** @noinspection ALL */
+    <?php declare(strict_types = 1);
 
     namespace PHPSTORM_META {
+
       override(
         \Drupal::service(0),
         map([
@@ -153,10 +155,11 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/states.php');
     // The full list of states depends on environment.
     $states = <<< 'PHP'
-    <?php /** @noinspection ALL */
+    <?php declare(strict_types = 1);
     
     namespace PHPSTORM_META {
-      registerArgumentsSet('state_names',
+
+      registerArgumentsSet('states',
         'comment.maintain_entity_statistics',
         'comment.node_comment_statistics_scale',
         'install_task',
@@ -165,9 +168,9 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     self::assertStringContainsString($states, $generated_content);
 
     $arguments = <<< 'PHP'
-      expectedArguments(\Drupal\Core\State\StateInterface::get(), 0, argumentsSet('state_names'));
-      expectedArguments(\Drupal\Core\State\StateInterface::set(), 0, argumentsSet('state_names'));
-      expectedArguments(\Drupal\Core\State\StateInterface::delete(), 0, argumentsSet('state_names'));
+      expectedArguments(\Drupal\Core\State\StateInterface::get(), 0, argumentsSet('states'));
+      expectedArguments(\Drupal\Core\State\StateInterface::set(), 0, argumentsSet('states'));
+      expectedArguments(\Drupal\Core\State\StateInterface::delete(), 0, argumentsSet('states'));
     PHP;
     self::assertStringContainsString($arguments, $generated_content);
   }

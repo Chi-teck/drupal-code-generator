@@ -1,12 +1,14 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
-  registerArgumentsSet('state_names',
-{% for state_name in state_names %}
-    '{{ state_name }}',
+
+  registerArgumentsSet('states',
+{% for state in states %}
+    '{{ state }}',
 {% endfor %}
   );
-  expectedArguments(\Drupal\Core\State\StateInterface::get(), 0, argumentsSet('state_names'));
-  expectedArguments(\Drupal\Core\State\StateInterface::set(), 0, argumentsSet('state_names'));
-  expectedArguments(\Drupal\Core\State\StateInterface::delete(), 0, argumentsSet('state_names'));
+  expectedArguments(\Drupal\Core\State\StateInterface::get(), 0, argumentsSet('states'));
+  expectedArguments(\Drupal\Core\State\StateInterface::set(), 0, argumentsSet('states'));
+  expectedArguments(\Drupal\Core\State\StateInterface::delete(), 0, argumentsSet('states'));
+
 }

@@ -1,6 +1,7 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
+
   override(\Drupal\Core\Action\ActionManager::createInstance(), map(['' => '\Drupal\Core\Action\ActionInterface']));
   override(\Drupal\Core\Action\ActionManager::getInstance(), map(['' => '\Drupal\Core\Action\ActionInterface|bool']));
   override(\Drupal\Core\Archiver\ArchiverManager::createInstance(), map(['' => '\Drupal\Core\Archiver\ArchiverInterface']));
@@ -47,4 +48,5 @@ namespace PHPSTORM_META {
   override(\Drupal\search\SearchPluginManager::getInstance(), map(['' => '\Drupal\search\Plugin\SearchInterface|bool']));
   override(\Drupal\tour\TipPluginManager::createInstance(), map(['' => '\Drupal\tour\TipPluginInterface']));
   override(\Drupal\tour\TipPluginManager::getInstance(), map(['' => '\Drupal\tour\TipPluginInterface|bool']));
+
 }

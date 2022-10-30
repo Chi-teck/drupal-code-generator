@@ -1,6 +1,7 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
+
   expectedReturnValues(
     \Drupal\Core\Entity\EntityInterface::save(),
     \SAVED_NEW,
@@ -23,4 +24,5 @@ namespace PHPSTORM_META {
     \Drupal\Core\Messenger\MessengerInterface::TYPE_WARNING,
     \Drupal\Core\Messenger\MessengerInterface::TYPE_ERROR
   );
+
 }

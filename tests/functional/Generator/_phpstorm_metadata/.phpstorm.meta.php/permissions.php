@@ -1,7 +1,8 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
-  registerArgumentsSet('permission_names',
+
+  registerArgumentsSet('permissions',
     'administer blocks',
     'administer comment types',
     'administer comments',
@@ -103,9 +104,10 @@ namespace PHPSTORM_META {
     'access user profiles',
     'administer views',
   );
-  expectedArguments(\Drupal\Core\Session\AccountInterface::hasPermission(), 0, argumentsSet('permission_names'));
-  expectedArguments(\Drupal\Core\Access\AccessResult::allowedIfHasPermission(), 1, argumentsSet('permission_names'));
-  expectedArguments(\Drupal\user\RoleInterface::allowedIfHasPermission(), 0, argumentsSet('permission_names'));
-  expectedArguments(\Drupal\user\RoleInterface::grantPermission(), 0, argumentsSet('permission_names'));
-  expectedArguments(\Drupal\user\RoleInterface::revokePermission(), 0, argumentsSet('permission_names'));
+  expectedArguments(\Drupal\Core\Session\AccountInterface::hasPermission(), 0, argumentsSet('permissions'));
+  expectedArguments(\Drupal\Core\Access\AccessResult::allowedIfHasPermission(), 1, argumentsSet('permissions'));
+  expectedArguments(\Drupal\user\RoleInterface::allowedIfHasPermission(), 0, argumentsSet('permissions'));
+  expectedArguments(\Drupal\user\RoleInterface::grantPermission(), 0, argumentsSet('permissions'));
+  expectedArguments(\Drupal\user\RoleInterface::revokePermission(), 0, argumentsSet('permissions'));
+
 }

@@ -1,6 +1,7 @@
-<?php /** @noinspection ALL */
+<?php declare(strict_types = 1);
 
 namespace PHPSTORM_META {
+
   registerArgumentsSet('date_formats',
     'fallback',
     'html_date',
@@ -17,4 +18,5 @@ namespace PHPSTORM_META {
     'custom',
   );
   expectedArguments(\Drupal\Core\Datetime\DateFormatter::format(), 1, argumentsSet('date_formats'));
+
 }
