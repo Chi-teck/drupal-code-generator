@@ -3,4 +3,4 @@ services:
     class: Drupal\foo\BarMiddleware
     arguments: ['@entity_type.manager']
     tags:
-      - { name: http_middleware, priority: 1000 }
+      - { name: http_middleware, priority: 10 }
