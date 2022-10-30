@@ -1,0 +1,22 @@
+<?php declare(strict_types = 1);
+
+namespace PHPSTORM_META {
+
+{% for definition in definitions %}
+  {% if definition.links|length > 0 %}
+  // {{ definition.label }}.
+  registerArgumentsSet('{{ definition.type ~ '__links' }}',
+  {% for link in definition.links %}
+    '{{ link }}',
+  {% endfor %}
+  );
+  expectedArguments({{ definition.class }}::toUrl(), 0, argumentsSet('{{ definition.type ~ '__links' }}'));
+  expectedArguments({{ definition.class }}::toLink(), 1, argumentsSet('{{ definition.type ~ '__links' }}'));
+  {% if definition.interface %}
+  expectedArguments({{ definition.interface }}::toUrl(), 0, argumentsSet('{{ definition.type ~ '__links' }}'));
+  expectedArguments({{ definition.interface }}::toLink(), 1, argumentsSet('{{ definition.type ~ '__links' }}'));
+  {% endif %}
+
+  {% endif %}
+{% endfor %}
+}

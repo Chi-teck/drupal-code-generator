@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Command;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
@@ -52,6 +53,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
   protected function generate(array &$vars, Assets $assets): void {
     $this->generatePlugins($assets);
     $this->generateDateFormats($assets);
+    $this->generateEntityLinks($assets);
     $this->generateEntityTypes($assets);
     $this->generateFields($assets);
     $this->generateServices($assets);
@@ -86,6 +88,18 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     }
   }
 
+  /**
+   * Returns entity interface for a given entity type.
+   */
+  private static function getEntityInterface(EntityTypeInterface $definition): ?string {
+    $class = $definition->getClass();
+    self::addSlash($class);
+    // Most of content entity types implement an interface which name follows
+    // this pattern.
+    $interface = \str_replace('\Entity\\', '\\', $class) . 'Interface';
+    return $definition->entityClassImplements($interface) ? $interface : NULL;
+  }
+
   private function generateDateFormats(Assets $assets): void {
     $date_formats = $this->entityTypeManager->getStorage('date_format')->loadMultiple();
     $date_formats['custom'] = NULL;
@@ -97,6 +111,24 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     $config_names = $this->getHelper('config_info')->getConfigNames();
     $assets->addFile('.phpstorm.meta.php/configuration.php', 'configuration.php.twig')
       ->vars(['config_names' => $config_names]);
+  }
+
+  private function generateEntityLinks(Assets $assets): void {
+    $definitions = [];
+    foreach ($this->entityTypeManager->getDefinitions() as $entity_type => $definition) {
+      $class = $definition->getClass();
+      self::addSlash($class);
+      $definitions[] = [
+        'type' => $entity_type,
+        'label' => $definition->getLabel(),
+        'class' => $class,
+        'interface' => self::getEntityInterface($definition),
+        'links' => \array_keys($definition->getLinkTemplates()),
+      ];
+    }
+    \asort($definitions);
+    $assets->addFile('.phpstorm.meta.php/entity_links.php', 'entity_links.php.twig')
+      ->vars(['definitions' => $definitions]);
   }
 
   private function generateEntityTypes(Assets $assets): void {
@@ -136,13 +168,10 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
       }
       $class = $definition->getClass();
       self::addSlash($class);
-      // Most of content entity types implement an interface which name matches
-      // the following pattern.
-      $interface = \str_replace('\Entity\\', '\\', $class) . 'Interface';
       $entity_fields[] = [
         'type' => $entity_type,
         'class' => $class,
-        'interface' => $definition->entityClassImplements($interface) ? $interface : NULL,
+        'interface' => self::getEntityInterface($definition),
         'fields' => \array_keys($this->entityFieldManager->getFieldStorageDefinitions($entity_type)),
       ];
     }
