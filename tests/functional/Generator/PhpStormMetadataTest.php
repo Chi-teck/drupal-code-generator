@@ -24,6 +24,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • .phpstorm.meta.php/configuration.php
+     • .phpstorm.meta.php/date_formats.php
      • .phpstorm.meta.php/entity_types.php
      • .phpstorm.meta.php/fields.php
      • .phpstorm.meta.php/file_system.php
@@ -47,6 +48,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     $this->assertEntityListBuilders();
     $this->assertControlHandlers();
     $this->assertEntityStaticMethods();
+    $this->assertGeneratedFile('.phpstorm.meta.php/date_formats.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/plugins.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/miscellaneous.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/routes.php');

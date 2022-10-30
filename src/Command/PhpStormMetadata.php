@@ -45,6 +45,9 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     $assets->addFile('.phpstorm.meta.php/plugins.php', 'plugins.php.twig')
       ->vars(['plugins' => self::getPlugins()]);
 
+    $assets->addFile('.phpstorm.meta.php/date_formats.php', 'date_formats.php.twig')
+      ->vars(['date_formats' => self::getDateFormats()]);
+
     $assets->addFile('.phpstorm.meta.php/entity_types.php', 'entity_types.php.twig')
       ->vars(['entity_types' => $this->getEntityTypes()]);
 
@@ -136,6 +139,15 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     };
     \array_walk($entity_types, $sort);
     return $entity_types;
+  }
+
+  /**
+   * Gets date formats.
+   */
+  private function getDateFormats(): array {
+    $date_formats = $this->entityTypeManager->getStorage('date_format')->loadMultiple();
+    $date_formats['custom'] = NULL;
+    return \array_keys($date_formats);
   }
 
   /**
