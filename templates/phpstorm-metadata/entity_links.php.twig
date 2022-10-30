@@ -12,9 +12,11 @@ namespace PHPSTORM_META {
   );
   expectedArguments({{ definition.class }}::toUrl(), 0, argumentsSet('{{ definition.type ~ '__links' }}'));
   expectedArguments({{ definition.class }}::toLink(), 1, argumentsSet('{{ definition.type ~ '__links' }}'));
+  expectedArguments({{ definition.class }}::hasLinkTemplate(), 0, argumentsSet('{{ definition.type ~ '__links' }}'));
   {% if definition.interface %}
   expectedArguments({{ definition.interface }}::toUrl(), 0, argumentsSet('{{ definition.type ~ '__links' }}'));
   expectedArguments({{ definition.interface }}::toLink(), 1, argumentsSet('{{ definition.type ~ '__links' }}'));
+  expectedArguments({{ definition.interface }}::hasLinkTemplate(), 0, argumentsSet('{{ definition.type ~ '__links' }}'));
   {% endif %}
 
   {% endif %}
