@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Command;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
@@ -29,6 +30,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
    * {@inheritdoc}
    */
   public function __construct(
+    private readonly EntityTypeBundleInfoInterface $entityTypeBundleInfo,
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly EntityFieldManagerInterface $entityFieldManager,
     private readonly KeyValueFactoryInterface $keyValueStore,
@@ -41,6 +43,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
    */
   public static function create(ContainerInterface $container): self {
     return new self(
+      $container->get('entity_type.bundle.info'),
       $container->get('entity_type.manager'),
       $container->get('entity_field.manager'),
       $container->get('keyvalue'),
@@ -53,6 +56,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
   protected function generate(array &$vars, Assets $assets): void {
     $this->generatePlugins($assets);
     $this->generateDateFormats($assets);
+    $this->generateEntityBundles($assets);
     $this->generateEntityLinks($assets);
     $this->generateEntityTypes($assets);
     $this->generateFields($assets);
@@ -129,6 +133,17 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     \asort($definitions);
     $assets->addFile('.phpstorm.meta.php/entity_links.php', 'entity_links.php.twig')
       ->vars(['definitions' => $definitions]);
+  }
+
+  private function generateEntityBundles(Assets $assets): void {
+    $bundles = [];
+    $definitions = $this->entityTypeManager->getDefinitions();
+    \ksort($definitions);
+    foreach ($definitions as $entity_type_id => $definition) {
+        $z = $this->entityTypeBundleInfo->getBundleInfo($entity_type_id);
+        dump($z);
+    }
+
   }
 
   private function generateEntityTypes(Assets $assets): void {
