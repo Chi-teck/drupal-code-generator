@@ -132,32 +132,31 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
   }
 
   private function generateEntityTypes(Assets $assets): void {
-    $entity_types['storages'] = [];
-    $entity_types['view_builders'] = [];
-    $entity_types['list_builders'] = [];
-    $entity_types['access_controls'] = [];
-    $entity_types['classes'] = [];
-    foreach ($this->entityTypeManager->getDefinitions() as $type => $definition) {
-      $entity_types['classes'][] = $definition->getClass();
-      $entity_types['storages'][$type] = $definition->getStorageClass();
-      $entity_types['access_controls'][$type] = $definition->getAccessControlClass();
+    $entity_types = [];
+    $handlers['storages'] = [];
+    $handlers['view_builders'] = [];
+    $handlers['list_builders'] = [];
+    $handlers['access_controls'] = [];
+    $handlers['classes'] = [];
+    $definitions = $this->entityTypeManager->getDefinitions();
+    \ksort($definitions);
+    foreach ($definitions as $type => $definition) {
+      $entity_types[] = $type;
+      $handlers['classes'][] = $definition->getClass();
+      $handlers['storages'][$type] = $definition->getStorageClass();
+      $handlers['access_controls'][$type] = $definition->getAccessControlClass();
       if ($definition->hasViewBuilderClass()) {
-        $entity_types['view_builders'][$type] = $definition->getViewBuilderClass();
+        $handlers['view_builders'][$type] = $definition->getViewBuilderClass();
       }
       if ($definition->hasListBuilderClass()) {
-        $entity_types['list_builders'][$type] = $definition->getListBuilderClass();
+        $handlers['list_builders'][$type] = $definition->getListBuilderClass();
       }
     }
     // Some classes do not have leading slash.
-    \array_walk_recursive($entity_types, [self::class, 'addSlash']);
-
-    $sort = static function (array &$items): void {
-      \ksort($items);
-    };
-    \array_walk($entity_types, $sort);
+    \array_walk_recursive($handlers, [self::class, 'addSlash']);
 
     $assets->addFile('.phpstorm.meta.php/entity_types.php', 'entity_types.php.twig')
-      ->vars(['entity_types' => $entity_types]);
+      ->vars(['handlers' => $handlers, 'entity_types' => $entity_types]);
   }
 
   private function generateFields(Assets $assets): void {

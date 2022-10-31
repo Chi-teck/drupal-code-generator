@@ -62,6 +62,17 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
   private function assertEntityTypes(): void {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
 
+    $entity_types = <<< 'PHP'
+      expectedReturnValues(
+        \Drupal\Core\Entity\EntityInterface::getEntityTypeId(),
+        'action',
+        'base_field_override',
+        'block',
+        'block_content',
+        'block_content_type',
+    PHP;
+    self::assertStringContainsString($entity_types, $generated_content);
+
     $entity_storages = <<< 'PHP'
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),

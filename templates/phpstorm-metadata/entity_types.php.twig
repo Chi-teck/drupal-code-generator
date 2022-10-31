@@ -2,11 +2,19 @@
 
 namespace PHPSTORM_META {
 
+  // Entity types.
+  expectedReturnValues(
+    \Drupal\Core\Entity\EntityInterface::getEntityTypeId(),
+{% for entity_type_id in entity_types %}
+    '{{ entity_type_id }}',
+{% endfor %}
+  );
+
   // Storages.
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
     map([
-{% for entity_type_id, class in entity_types.storages %}
+{% for entity_type_id, class in handlers.storages %}
       '{{ entity_type_id }}' => '{{ class }}',
 {% endfor %}
     ])
@@ -16,7 +24,7 @@ namespace PHPSTORM_META {
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getViewBuilder(0),
     map([
-{% for entity_type_id, class in entity_types.view_builders %}
+{% for entity_type_id, class in handlers.view_builders %}
       '{{ entity_type_id }}' => '{{ class }}',
 {% endfor %}
     ])
@@ -26,7 +34,7 @@ namespace PHPSTORM_META {
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
     map([
-{% for entity_type_id, class in entity_types.list_builders %}
+{% for entity_type_id, class in handlers.list_builders %}
       '{{ entity_type_id }}' => '{{ class }}',
 {% endfor %}
     ])
@@ -36,14 +44,14 @@ namespace PHPSTORM_META {
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
     map([
-{% for entity_type_id, class in entity_types.access_controls %}
+{% for entity_type_id, class in handlers.access_controls %}
      '{{ entity_type_id }}' => '{{ class }}',
 {% endfor %}
     ])
   );
 
   // Class methods.
-{% for class in entity_types.classes %}
+{% for class in handlers.classes %}
 {# Using map() to work around PhpStorm bug. #}
 {# @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001516519 #}
   override({{ class }}::loadMultiple(), map(['' => '{{ class }}[]']));
