@@ -12,7 +12,51 @@ final class EventSubscriberTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_event_subscriber';
 
-  public function testGenerator(): void {
+  /**
+   * Test callback.
+   */
+  public function testWithoutDependencies(): void {
+    $input = [
+      'foo',
+      'Foo',
+      'BarSubscriber',
+      'No',
+    ];
+    $this->execute(EventSubscriber::class, $input);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to event-subscriber generator!
+    ––––––––––––––––––––––––––––––––––––––––
+
+     Module machine name:
+     ➤ 
+
+     Module name [Foo]:
+     ➤ 
+
+     Class [FooSubscriber]:
+     ➤ 
+
+     Would you like to inject dependencies? [No]:
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.services.yml
+     • src/EventSubscriber/BarSubscriber.php
+
+    TXT;
+    $this->assertDisplay($expected_display);
+
+    $this->assertGeneratedFile('foo.services.yml', '_n_deps/foo.services.yml');
+    $this->assertGeneratedFile('src/EventSubscriber/BarSubscriber.php', '_n_deps/src/EventSubscriber/BarSubscriber.php');
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testWithDependencies(): void {
     $input = [
       'foo',
       'Foo',
@@ -54,8 +98,8 @@ final class EventSubscriberTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('foo.services.yml');
-    $this->assertGeneratedFile('src/EventSubscriber/BarSubscriber.php');
+    $this->assertGeneratedFile('foo.services.yml', '_w_deps/foo.services.yml');
+    $this->assertGeneratedFile('src/EventSubscriber/BarSubscriber.php', '_w_deps/src/EventSubscriber/BarSubscriber.php');
   }
 
 }

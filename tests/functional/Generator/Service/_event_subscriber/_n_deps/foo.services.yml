@@ -1,0 +1,5 @@
+services:
+  foo.event_subscriber:
+    class: Drupal\foo\EventSubscriber\BarSubscriber
+    tags:
+      - { name: event_subscriber }

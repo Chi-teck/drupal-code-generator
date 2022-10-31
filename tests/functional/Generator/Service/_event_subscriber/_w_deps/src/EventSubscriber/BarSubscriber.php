@@ -1,40 +1,30 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\EventSubscriber;
+namespace Drupal\foo\EventSubscriber;
 
-{% sort %}
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
+use Drupal\Core\Messenger\MessengerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-{% endsort %}
 
 /**
  * @todo Add description for this subscriber.
  */
-final class {{ class }} implements EventSubscriberInterface {
-{% if services %}
+final class BarSubscriber implements EventSubscriberInterface {
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs a BarSubscriber object.
    */
   public function __construct(
-{{ di.signature(services) }}
+    private readonly MessengerInterface $messenger,
   ) {}
-{% endif %}
 
   /**
    * Kernel request event handler.
    */
   public function onKernelRequest(RequestEvent $event): void {
     // @todo Place your code here.
-{% if SUT_TEST %}
-    $this->messenger->addStatus(__FUNCTION__);
-{% endif %}
   }
 
   /**
@@ -42,9 +32,6 @@ final class {{ class }} implements EventSubscriberInterface {
    */
   public function onKernelResponse(ResponseEvent $event): void {
     // @todo Place your code here.
-{% if SUT_TEST %}
-    $this->messenger->addStatus(__FUNCTION__);
-{% endif %}
   }
 
   /**
