@@ -6,8 +6,10 @@ use Drupal\Core\Extension\Extension;
 
 /**
  * This helper can be used to avoid conditional calls for extension info.
+ *
+ * @todo Is it still needed?
  */
-final class NullInfo implements ExtensionInfoInterface {
+final class NullExtensionInfo implements ExtensionInfoInterface {
 
   /**
    * {@inheritdoc}

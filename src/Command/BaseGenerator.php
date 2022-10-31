@@ -7,7 +7,7 @@ use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\Exception\SilentException;
 use DrupalCodeGenerator\GeneratorType;
-use DrupalCodeGenerator\Helper\Drupal\NullInfo;
+use DrupalCodeGenerator\Helper\Drupal\NullExtensionInfo;
 use DrupalCodeGenerator\InputOutput\Interviewer;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\InputOutput\IOAwareInterface;
@@ -145,7 +145,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     $extension_info = match ($this->getGeneratorDefinition()->type) {
       GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => $this->getHelper('module_info'),
       GeneratorType::THEME, GeneratorType::THEME_COMPONENT => $this->getHelper('theme_info'),
-      default => new NullInfo(),
+      default => new NullExtensionInfo(),
     };
     return new Interviewer(
       io: $this->io,

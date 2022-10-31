@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator\Tests\Functional\InputOutput;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
-use DrupalCodeGenerator\Helper\Drupal\NullInfo;
+use DrupalCodeGenerator\Helper\Drupal\NullExtensionInfo;
 use DrupalCodeGenerator\Helper\Drupal\PermissionInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
@@ -610,7 +610,7 @@ final class InterviewerTest extends FunctionalTestBase {
       match ($definition->type) {
         GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => new ModuleInfo($container->get('module_handler')),
         GeneratorType::THEME, GeneratorType::THEME_COMPONENT => new ThemeInfo($container->get('theme_handler')),
-        default => new NullInfo(),
+        default => new NullExtensionInfo(),
       },
       new PermissionInfo($container->get('user.permissions')),
     );
