@@ -25,6 +25,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • .phpstorm.meta.php/configuration.php
      • .phpstorm.meta.php/date_formats.php
+     • .phpstorm.meta.php/entity_bundles.php
      • .phpstorm.meta.php/entity_links.php
      • .phpstorm.meta.php/entity_types.php
      • .phpstorm.meta.php/fields.php
@@ -45,6 +46,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     // that we only assert specific parts of those files.
     $this->assertGeneratedFile('.phpstorm.meta.php/configuration.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/date_formats.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/entity_bundles.php');
     $this->assertEntityTypes();
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_links.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/fields.php');

@@ -136,14 +136,27 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
   }
 
   private function generateEntityBundles(Assets $assets): void {
-    $bundles = [];
-    $definitions = $this->entityTypeManager->getDefinitions();
-    \ksort($definitions);
-    foreach ($definitions as $entity_type_id => $definition) {
-        $z = $this->entityTypeBundleInfo->getBundleInfo($entity_type_id);
-        dump($z);
+    $definitions = [];
+    $entity_definitions = $this->entityTypeManager->getDefinitions();
+    \ksort($entity_definitions);
+    $bundle_getters = [
+      'node' => 'getType',
+      'comment' => 'getTypeId',
+    ];
+    foreach ($entity_definitions as $entity_type_id => $entity_definition) {
+      $class = $entity_definition->getClass();
+      self::addSlash($class);
+      $definitions[] = [
+        'type' => $entity_type_id,
+        'label' => $entity_definition->getLabel(),
+        'class' => $class,
+        'interface' => self::getEntityInterface($entity_definition),
+        'bundle_getter' => $bundle_getters[$entity_type_id] ?? NULL,
+        'bundles' => \array_keys($this->entityTypeBundleInfo->getBundleInfo($entity_type_id)),
+      ];
     }
-
+    $assets->addFile('.phpstorm.meta.php/entity_bundles.php', 'entity_bundles.php.twig')
+      ->vars(['definitions' => $definitions]);
   }
 
   private function generateEntityTypes(Assets $assets): void {

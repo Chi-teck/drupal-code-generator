@@ -1,0 +1,25 @@
+<?php declare(strict_types = 1);
+
+namespace PHPSTORM_META {
+
+{% for definition in definitions %}
+  // {{  definition.label }}.
+  {% set key = definition.type ~ '__bundles' %}
+  registerArgumentsSet('{{ key }}',
+  {% for bundle in definition.bundles %}
+    '{{ bundle }}',
+  {% endfor %}
+  );
+  expectedReturnValues({{ definition.class }}::bundle(), argumentsSet('{{ key }}'));
+  {% if definition.bundle_getter %}
+  expectedReturnValues({{ definition.class }}::{{ definition.bundle_getter }}(), argumentsSet('{{ key }}'));
+  {% endif %}
+  {% if definition.interface %}
+  expectedReturnValues({{ definition.interface }}::bundle(), argumentsSet('{{ key }}'));
+    {% if definition.bundle_getter %}
+  expectedReturnValues({{ definition.interface }}::{{ definition.bundle_getter }}(), argumentsSet('{{ key }}'));
+    {% endif %}
+  {% endif %}
+
+{% endfor %}
+}
