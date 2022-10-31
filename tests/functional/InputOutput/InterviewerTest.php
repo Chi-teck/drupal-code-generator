@@ -6,6 +6,7 @@ use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
 use DrupalCodeGenerator\Helper\Drupal\NullInfo;
+use DrupalCodeGenerator\Helper\Drupal\PermissionInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Helper\Drupal\ThemeInfo;
 use DrupalCodeGenerator\Helper\QuestionHelper;
@@ -561,6 +562,39 @@ final class InterviewerTest extends FunctionalTestBase {
   }
 
   /**
+   * Test callback.
+   *
+   * @todo Figure out how to test autocompletion.
+   */
+  public function testAskPermission(): void {
+    $interviewer = $this->createInterviewer();
+
+    // Test default values.
+    $this->setStream('foo');
+    $answer = $interviewer->askPermission();
+    self::assertSame('foo', $answer);
+
+    $expected_output = <<< 'TXT'
+
+       Permission:
+       ➤ 
+      TXT;
+    $this->assertOutput($expected_output);
+
+    // Custom values.
+    $this->setStream('bar');
+    $answer = $interviewer->askPermission('Route permission', 'access content');
+    self::assertSame('bar', $answer);
+
+    $expected_output = <<< 'TXT'
+
+       Route permission [access content]:
+       ➤ 
+      TXT;
+    $this->assertOutput($expected_output);
+  }
+
+  /**
    * Creates interviewer.
    */
   private function createInterviewer(
@@ -578,6 +612,7 @@ final class InterviewerTest extends FunctionalTestBase {
         GeneratorType::THEME, GeneratorType::THEME_COMPONENT => new ThemeInfo($container->get('theme_handler')),
         default => new NullInfo(),
       },
+      new PermissionInfo($container->get('user.permissions')),
     );
   }
 

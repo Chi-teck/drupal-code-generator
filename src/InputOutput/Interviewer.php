@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\InputOutput;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\Helper\Drupal\ExtensionInfoInterface;
+use DrupalCodeGenerator\Helper\Drupal\PermissionInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\Chained;
@@ -29,6 +30,7 @@ final class Interviewer {
     private readonly GeneratorDefinition $generatorDefinition,
     private readonly ServiceInfo $serviceInfo,
     private readonly ExtensionInfoInterface $extensionInfo,
+    private readonly PermissionInfo $permissionInfo,
   ) {}
 
   /**
@@ -174,6 +176,19 @@ final class Interviewer {
       $definitions[$service_id] = $this->getServiceDefinition($service_id);
     }
     return $definitions;
+  }
+
+  /**
+   * Asks permission.
+   */
+  public function askPermission(string $question = 'Permission', ?string $default = NULL): string {
+    $question = new Question($question, $default);
+    $question->setValidator(new Required());
+    $permissions = $this->permissionInfo->getPermissionNames();
+    if (\count($permissions) > 0) {
+      $question->setAutocompleterValues($permissions);
+    }
+    return $this->io->askQuestion($question);
   }
 
   /**

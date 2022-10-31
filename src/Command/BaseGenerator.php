@@ -153,6 +153,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       generatorDefinition: $this->getGeneratorDefinition(),
       serviceInfo: $this->getHelper('service_info'),
       extensionInfo: $extension_info,
+      permissionInfo: $this->getHelper('permission_info'),
     );
   }
 

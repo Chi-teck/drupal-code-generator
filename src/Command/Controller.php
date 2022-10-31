@@ -37,7 +37,7 @@ final class Controller extends BaseGenerator {
       );
       $vars['route_path'] = $ir->ask('Route path', '/{machine_name|u2h}/{unprefixed_route_name|u2h}');
       $vars['route_title'] = $ir->ask('Route title', '{unprefixed_route_name|m2t}');
-      $vars['route_permission'] = $ir->ask('Route permission', 'access content');
+      $vars['route_permission'] = $ir->askPermission('Route permission', 'access content');
       $assets->addFile('{machine_name}.routing.yml', 'route.twig')->appendIfExists();
     }
 

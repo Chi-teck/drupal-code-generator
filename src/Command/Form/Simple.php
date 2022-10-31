@@ -38,7 +38,7 @@ final class Simple extends BaseGenerator {
       $vars['route_name'] = $ir->ask('Route name', '{machine_name}.' . $vars['raw_form_id']);
       $vars['route_path'] = $ir->ask('Route path', $default_route_path);
       $vars['route_title'] = $ir->ask('Route title', '{raw_form_id|m2h}');
-      $vars['route_permission'] = $ir->ask('Route permission', 'access content');
+      $vars['route_permission'] = $ir->askPermission('Route permission', 'access content');
 
       $assets->addFile('{machine_name}.routing.yml')
         ->template('routing.twig')
