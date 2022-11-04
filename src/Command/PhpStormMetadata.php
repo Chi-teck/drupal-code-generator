@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\Site\Settings;
 use DrupalCodeGenerator\Application;
@@ -34,6 +35,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly EntityFieldManagerInterface $entityFieldManager,
     private readonly KeyValueFactoryInterface $keyValueStore,
+    private readonly FieldTypePluginManagerInterface $fieldTypePluginManager,
   ) {
     parent::__construct();
   }
@@ -47,6 +49,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
       $container->get('entity_type.manager'),
       $container->get('entity_field.manager'),
       $container->get('keyvalue'),
+      $container->get('plugin.manager.field.field_type'),
     );
   }
 
@@ -60,6 +63,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     $this->generateEntityLinks($assets);
     $this->generateEntityTypes($assets);
     $this->generateFields($assets);
+    $this->generateFieldDefinitions($assets);
     $this->generateServices($assets);
     $this->generateRoutes($assets);
     $this->generateConfiguration($assets);
@@ -205,6 +209,16 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     }
     $assets->addFile('.phpstorm.meta.php/fields.php', 'fields.php.twig')
       ->vars(['definitions' => $definitions]);
+  }
+
+  private function generateFieldDefinitions(Assets $assets): void {
+    $entity_types = \array_keys($this->entityTypeManager->getDefinitions());
+    \sort($entity_types);
+    $field_types = \array_keys($this->fieldTypePluginManager->getDefinitions());
+    \sort($field_types);
+
+    $assets->addFile('.phpstorm.meta.php/field_definitions.php', 'field_definitions.php.twig')
+      ->vars(['entity_types' => $entity_types, 'field_types' => $field_types]);
   }
 
   private function generateFileSystem(Assets $assets): void {

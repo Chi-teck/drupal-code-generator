@@ -1,0 +1,30 @@
+<?php declare(strict_types = 1);
+
+namespace PHPSTORM_META {
+
+  registerArgumentsSet('display_context',
+    'view',
+    'form',
+  );
+  expectedArguments(\Drupal\Core\Field\FieldDefinitionInterface::getDisplayOptions(), 0, argumentsSet('display_context'));
+  expectedArguments(\Drupal\Core\Field\BaseFieldDefinition::setDisplayOptions(), 0, argumentsSet('display_context'));
+  expectedArguments(\Drupal\Core\Field\BaseFieldDefinition::getDisplayOptions(), 0, argumentsSet('display_context'));
+  expectedArguments(\Drupal\Core\Field\BaseFieldDefinition::setDisplayConfigurable(), 0, argumentsSet('display_context'));
+  expectedArguments(\Drupal\Core\Field\BaseFieldDefinition::isDisplayConfigurable(), 0, argumentsSet('display_context'));
+
+  registerArgumentsSet('entity_types',
+{% for entity_type in entity_types %}
+    '{{ entity_type }}',
+{% endfor %}
+  );
+  expectedReturnValues(\Drupal\Core\Field\FieldDefinitionInterface::getTargetEntityTypeId(), argumentsSet('entity_types'));
+
+  registerArgumentsSet('field_types',
+{% for field_type in field_types %}
+    '{{ field_type }}',
+{% endfor %}
+  );
+  expectedArguments(\Drupal\Core\Field\BaseFieldDefinition::create(), 0, argumentsSet('field_types'));
+  expectedReturnValues(\Drupal\Core\Field\FieldDefinitionInterface::getType(), argumentsSet('field_types'));
+
+}

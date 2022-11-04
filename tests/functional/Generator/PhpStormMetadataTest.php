@@ -28,6 +28,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
      • .phpstorm.meta.php/entity_bundles.php
      • .phpstorm.meta.php/entity_links.php
      • .phpstorm.meta.php/entity_types.php
+     • .phpstorm.meta.php/field_definitions.php
      • .phpstorm.meta.php/fields.php
      • .phpstorm.meta.php/file_system.php
      • .phpstorm.meta.php/miscellaneous.php
@@ -49,6 +50,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_bundles.php');
     $this->assertEntityTypes();
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_links.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/field_definitions.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/fields.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/file_system.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/miscellaneous.php');
