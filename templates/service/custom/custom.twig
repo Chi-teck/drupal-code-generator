@@ -1,5 +1,5 @@
 {% import '@lib/di.twig' as di %}
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }};
 
@@ -7,28 +7,24 @@ namespace Drupal\{{ machine_name }};
 {{ di.use(services) }}
 {% endif %}
 /**
- * Service description.
+ * @todo Add class description.
  */
-class {{ class }} {
-
+final class {{ class }}{{ interface ? ' implements ' ~ interface }} {
 {% if services %}
-{{ di.properties(services) }}
 
   /**
    * Constructs {{ class|article }} object.
-   *
-{{ di.annotation(services) }}
    */
-  public function __construct({{ di.signature(services, false) }}) {
-{{ di.assignment(services) }}
-  }
-
+  public function __construct(
+{{ di.signature(services) }}
+  ) {}
 {% endif %}
+
   /**
-   * Method description.
+   * {{ interface ? '{@inheritdoc}' : '@todo Add method description.'}}
    */
-  public function doSomething() {
-    // @DCG place your code here.
+  public function doSomething(): void {
+    // @todo Place your code here.
   }
 
 }

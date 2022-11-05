@@ -14,14 +14,15 @@ final class CustomServiceTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['zippo', 'example'];
+  protected static $modules = ['zippo'];
 
   /**
    * Test callback.
    */
   public function testService(): void {
-    $foo = \Drupal::service('zippo.foo');
+    $foo = $this->container->get('zippo.foo');
     self::assertInstanceOf('Drupal\zippo\Foo', $foo);
+    self::assertInstanceOf('Drupal\zippo\FooInterface', $foo);
     self::assertNull($foo->doSomething());
   }
 

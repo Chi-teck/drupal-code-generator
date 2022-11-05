@@ -27,14 +27,19 @@ final class Custom extends BaseGenerator {
     $vars['service_name'] = $ir->ask('Service name', '{machine_name}.example', new RequiredServiceName());
 
     $default_class = Utils::camelize(
-      Utils::removePrefix($vars['service_name'], $vars['machine_name']),
+      Utils::removePrefix($vars['service_name'], $vars['machine_name']) ?: $vars['machine_name'],
     );
     $vars['class'] = $ir->askClass(default: $default_class);
+    $vars['interface'] = $ir->confirm('Would like to create an interface for this class?', FALSE) ?
+      '{class}Interface' : NULL;
 
     $vars['services'] = $ir->askServices();
 
-    $assets->addFile('src/{class}.php', 'custom.twig');
     $assets->addServicesFile()->template('services.twig');
+    $assets->addFile('src/{class}.php', 'custom.twig');
+    if ($vars['interface']) {
+      $assets->addFile('src/{interface}.php', 'interface.twig');
+    }
   }
 
 }
