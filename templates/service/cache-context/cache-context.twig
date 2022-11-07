@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Cache\Context;
 
@@ -9,7 +9,7 @@ use Drupal\Core\Cache\Context\{{ base_class }};
 {% endif %}
 
 /**
- * Defines the ExampleCacheContext service.
+ * @todo Add a description for the cache context.
  *
  * Cache context ID: '{{ context_id }}'.
  *
@@ -17,20 +17,20 @@ use Drupal\Core\Cache\Context\{{ base_class }};
  * Check out the core/lib/Drupal/Core/Cache/Context directory for examples of
  * cache contexts provided by Drupal core.
  */
-class {{ class }} {% if base_class %}extends {{ base_class }} {% endif %}implements {{ interface }} {
+final class {{ class }} {% if base_class %}extends {{ base_class }} {% endif %}implements {{ interface }} {
 
   /**
    * {@inheritdoc}
    */
-  public static function getLabel() {
-    return t('{{ context_label }}');
+  public static function getLabel(): string {
+    return (string) t('{{ context_label }}');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getContext({% if calculated %}$parameter = NULL{% endif %}) {
-    // @DCG: Define the cache context here.
+  public function getContext({% if calculated %}$parameter = NULL{% endif %}): string {
+    // @todo Calculate the cache context here.
     $context = 'some_string_value';
     return $context;
   }
@@ -38,7 +38,7 @@ class {{ class }} {% if base_class %}extends {{ base_class }} {% endif %}impleme
   /**
    * {@inheritdoc}
    */
-  public function getCacheableMetadata({% if calculated %}$parameter = NULL{% endif %}) {
+  public function getCacheableMetadata({% if calculated %}$parameter = NULL{% endif %}): CacheableMetadata {
     return new CacheableMetadata();
   }
 

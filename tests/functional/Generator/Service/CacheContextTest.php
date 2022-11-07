@@ -12,6 +12,9 @@ final class CacheContextTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_cache_context';
 
+  /**
+   * Test callback.
+   */
   public function testCalculatedCacheContext(): void {
     $input = [
       'foo',
@@ -58,6 +61,9 @@ final class CacheContextTest extends GeneratorTestBase {
     $this->assertGeneratedFile('src/Cache/Context/ExampleCacheContext.php');
   }
 
+  /**
+   * Test callback.
+   */
   public function testNotCalculatedCacheContext(): void {
     $input = [
       'foo',
