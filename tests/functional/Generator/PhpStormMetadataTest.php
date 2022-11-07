@@ -28,6 +28,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
      • .phpstorm.meta.php/entity_bundles.php
      • .phpstorm.meta.php/entity_links.php
      • .phpstorm.meta.php/entity_types.php
+     • .phpstorm.meta.php/extensions.php
      • .phpstorm.meta.php/field_definitions.php
      • .phpstorm.meta.php/fields.php
      • .phpstorm.meta.php/file_system.php
@@ -50,6 +51,7 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_bundles.php');
     $this->assertEntityTypes();
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_links.php');
+    $this->assertExtensions();
     $this->assertGeneratedFile('.phpstorm.meta.php/field_definitions.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/fields.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/file_system.php');
@@ -123,6 +125,39 @@ final class PhpStormMetadataTest extends GeneratorTestBase {
       override(\Drupal\block\Entity\Block::create(), map(['' => '\Drupal\block\Entity\Block']));
     PHP;
     self::assertStringContainsString($entity_static_methods, $generated_content);
+  }
+
+  private function assertExtensions(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/extensions.php');
+    // Testing environments may have different database drivers.
+    $modules = <<< 'PHP'
+    <?php declare(strict_types = 1);
+    
+    namespace PHPSTORM_META {
+    
+      registerArgumentsSet('modules',
+        'automated_cron',
+        'big_pipe',
+        'block',
+        'block_content',
+        'breakpoint',
+    PHP;
+    self::assertStringContainsString($modules, $generated_content);
+
+    $themes = <<< 'PHP'
+      registerArgumentsSet('themes',
+        'claro',
+        'olivero',
+      );
+      expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::getBaseThemes(), 1, argumentsSet('themes'));
+      expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::getName(), 0, argumentsSet('themes'));
+      expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::themeExists(), 0, argumentsSet('themes'));
+      expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::getTheme(), 0, argumentsSet('themes'));
+      expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::hasUi(), 0, argumentsSet('themes'));
+      expectedReturnValue(\Drupal\Core\Extension\ThemeHandlerInterface::getDefault(), argumentsSet('themes'));
+      expectedReturnValue(\Drupal\Core\Theme\ActiveTheme::getName(), argumentsSet('themes'));
+    PHP;
+    self::assertStringContainsString($themes, $generated_content);
   }
 
   private function assertServices(): void {

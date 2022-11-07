@@ -1,0 +1,34 @@
+<?php declare(strict_types = 1);
+
+namespace PHPSTORM_META {
+
+  registerArgumentsSet('modules',
+{% for module in modules %}
+    '{{ module }}',
+{% endfor %}
+  );
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::moduleExists(), 0, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::load(), 0, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::getModule(), 0, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::addModule(), 0, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::loadAllIncludes(), 1, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::loadInclude(), 0, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::hasImplementations(), 1, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::invoke(), 0, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::invokeDeprecated(), 1, argumentsSet('modules'));
+  expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::getName(), 0, argumentsSet('modules'));
+
+  registerArgumentsSet('themes',
+{% for theme in themes %}
+    '{{ theme }}',
+{% endfor %}
+  );
+  expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::getBaseThemes(), 1, argumentsSet('themes'));
+  expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::getName(), 0, argumentsSet('themes'));
+  expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::themeExists(), 0, argumentsSet('themes'));
+  expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::getTheme(), 0, argumentsSet('themes'));
+  expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::hasUi(), 0, argumentsSet('themes'));
+  expectedReturnValue(\Drupal\Core\Extension\ThemeHandlerInterface::getDefault(), argumentsSet('themes'));
+  expectedReturnValue(\Drupal\Core\Theme\ActiveTheme::getName(), argumentsSet('themes'));
+
+}

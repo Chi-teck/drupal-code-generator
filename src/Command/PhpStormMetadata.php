@@ -8,6 +8,9 @@ use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Extension\Extension;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\Site\Settings;
@@ -36,6 +39,8 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     private readonly EntityFieldManagerInterface $entityFieldManager,
     private readonly KeyValueFactoryInterface $keyValueStore,
     private readonly FieldTypePluginManagerInterface $fieldTypePluginManager,
+    private readonly ModuleHandlerInterface $moduleHandler,
+    private readonly ThemeHandlerInterface $themeHandler,
   ) {
     parent::__construct();
   }
@@ -50,6 +55,8 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
       $container->get('entity_field.manager'),
       $container->get('keyvalue'),
       $container->get('plugin.manager.field.field_type'),
+      $container->get('module_handler'),
+      $container->get('theme_handler'),
     );
   }
 
@@ -62,6 +69,7 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
     $this->generateEntityBundles($assets);
     $this->generateEntityLinks($assets);
     $this->generateEntityTypes($assets);
+    $this->generateExtensions($assets);
     $this->generateFields($assets);
     $this->generateFieldDefinitions($assets);
     $this->generateServices($assets);
@@ -189,6 +197,18 @@ final class PhpStormMetadata extends BaseGenerator implements ContainerInjection
 
     $assets->addFile('.phpstorm.meta.php/entity_types.php', 'entity_types.php.twig')
       ->vars(['handlers' => $handlers, 'entity_types' => $entity_types]);
+  }
+
+  private function generateExtensions(Assets $assets): void {
+    $module_extensions = \array_filter(
+      $this->moduleHandler->getModuleList(),
+      static fn (Extension $extension): bool => $extension->getType() === 'module',
+    );
+    $modules = \array_keys($module_extensions);
+    $themes = \array_keys($this->themeHandler->listInfo());
+    \sort($themes);
+    $assets->addFile('.phpstorm.meta.php/extensions.php', 'extensions.php.twig')
+      ->vars(['modules' => $modules, 'themes' => $themes]);
   }
 
   private function generateFields(Assets $assets): void {
