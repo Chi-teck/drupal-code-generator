@@ -3,6 +3,10 @@
 namespace DrupalCodeGenerator;
 
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
+use DrupalCodeGenerator\Command\GenerateCompletion;
+use DrupalCodeGenerator\Command\Navigation;
+use DrupalCodeGenerator\Event\ApplicationEvent;
+use DrupalCodeGenerator\Event\GeneratorsEvent;
 use DrupalCodeGenerator\Helper\Drupal\ConfigInfo;
 use DrupalCodeGenerator\Helper\Drupal\HookInfo;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
@@ -14,10 +18,10 @@ use DrupalCodeGenerator\Helper\Dumper\DryDumper;
 use DrupalCodeGenerator\Helper\Dumper\FileSystemDumper;
 use DrupalCodeGenerator\Helper\Printer\ListPrinter;
 use DrupalCodeGenerator\Helper\Printer\TablePrinter;
-use DrupalCodeGenerator\Helper\Processor\NullProcessor;
 use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\Helper\Renderer\TwigRenderer;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -31,7 +35,7 @@ use Twig\Loader\FilesystemLoader as TemplateLoader;
 /**
  * DCG console application.
  */
-final class Application extends BaseApplication implements ContainerAwareInterface {
+final class Application extends BaseApplication implements ContainerAwareInterface, EventDispatcherInterface {
 
   use ContainerAwareTrait;
 
@@ -65,25 +69,61 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
     $file_system = new SymfonyFileSystem();
     $template_loader = new TemplateLoader();
     $template_loader->addPath(self::TEMPLATE_PATH . '/_lib', 'lib');
-    $helper_set = new HelperSet([
-      new QuestionHelper(),
-      new NullProcessor(),
-      new DryDumper($file_system),
-      new FileSystemDumper($file_system),
-      new TwigRenderer(new TwigEnvironment($template_loader)),
-      new ListPrinter(),
-      new TablePrinter(),
-      new ModuleInfo($container->get('module_handler')),
-      new ThemeInfo($container->get('theme_handler')),
-      new ServiceInfo($container),
-      new HookInfo($container->get('module_handler')),
-      new RouteInfo($container->get('router.route_provider')),
-      new ConfigInfo($container->get('config.factory')),
-      new PermissionInfo($container->get('user.permissions')),
-    ]);
-    $application->setHelperSet($helper_set);
+    $application->setHelperSet(
+      new HelperSet([
+        new QuestionHelper(),
+        new DryDumper($file_system),
+        new FileSystemDumper($file_system),
+        new TwigRenderer(new TwigEnvironment($template_loader)),
+        new ListPrinter(),
+        new TablePrinter(),
+        new ModuleInfo($container->get('module_handler')),
+        new ThemeInfo($container->get('theme_handler')),
+        new ServiceInfo($container),
+        new HookInfo($container->get('module_handler')),
+        new RouteInfo($container->get('router.route_provider')),
+        new ConfigInfo($container->get('config.factory')),
+        new PermissionInfo($container->get('user.permissions')),
+      ])
+    );
 
+    $generator_factory = new GeneratorFactory(
+      $application->getContainer()->get('class_resolver'),
+    );
+    $generators_event = new GeneratorsEvent(
+      $generator_factory->getGenerators(),
+    );
+    $application->addCommands(
+      $application->dispatch($generators_event)->generators,
+    );
+
+    $application->add(new GenerateCompletion());
+    $application->add(new Navigation());
+    $application->setDefaultCommand('navigation');
+
+    $application->dispatch(
+      new ApplicationEvent($application),
+    );
     return $application;
+  }
+
+  /**
+   * Returns Drupal container.
+   */
+  public function getContainer(): ContainerInterface {
+    if (!$this->container) {
+      throw new ContainerNotInitializedException('Application::$container is not initialized yet.');
+    }
+    return $this->container;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Move this to a helper.
+   */
+  public function dispatch(object $event): object {
+    return $this->getContainer()->get('event_dispatcher')->dispatch($event);
   }
 
   /**
@@ -93,7 +133,6 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
     $definition = parent::getDefaultInputDefinition();
 
     $options = $definition->getOptions();
-
     // Since most generators are interactive these options make no sense.
     unset($options['no-interaction'], $options['quiet']);
     $definition->setOptions($options);
@@ -105,13 +144,6 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
     $definition->addOption(new Option('destination', NULL, Option::VALUE_OPTIONAL, 'Path to a base directory for file writing'));
     $definition->addOption(new Option('replace', NULL, Option::VALUE_NONE, 'Replace existing assets without confirmation'));
     return $definition;
-  }
-
-  public function getContainer(): ContainerInterface {
-    if (!$this->container) {
-      throw new ContainerNotInitializedException('Application::$container is not initialized yet.');
-    }
-    return $this->container;
   }
 
 }

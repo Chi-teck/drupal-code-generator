@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
+use DrupalCodeGenerator\Event\PreProcessEvent;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\Exception\SilentException;
 use DrupalCodeGenerator\GeneratorType;
@@ -134,7 +135,6 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     if (\count($attributes) === 0) {
       throw new \LogicException(\sprintf('Command %s does not have generator annotation.', static::class));
     }
-    /** @noinspection PhpIncompatibleReturnTypeInspection */
     return $attributes[0]->newInstance();
   }
 
@@ -171,13 +171,20 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    * Dumps assets.
    */
   protected function dump(AssetCollection $assets, string $destination): AssetCollection {
-    // @todo Test processing.
-    $processor = $this->getHelper('processor');
-    $processor->preProcess($assets);
-    $dumper_name = $this->io()->getInput()->getOption('dry-run') ? 'dry_dumper' : 'filesystem_dumper';
-    $dumped_assets = $this->getHelper($dumper_name)->dump($assets, $destination);
-    $processor->postProcess($dumped_assets, $destination);
-    return $dumped_assets;
+
+    $dumper = $this->getHelper(
+      $this->io()->getInput()->getOption('dry-run') ? 'dry_dumper' : 'filesystem_dumper',
+    );
+
+    $pre_process_event = $this->getApplication()->dispatch(
+      new PreProcessEvent($assets, $dumper, $destination, $this),
+    );
+    $dumped_assets = $dumper->dump($pre_process_event->assets, $destination);
+
+    $post_process_event = $this->getApplication()->dispatch(
+      new PreProcessEvent($dumped_assets, $dumper, $destination, $this),
+    );
+    return $post_process_event->assets;
   }
 
   /**

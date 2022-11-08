@@ -1,11 +1,8 @@
 #!/usr/bin/env php
 <?php declare(strict_types = 1);
 
-use Composer\InstalledVersions;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\BootstrapHandler;
-use DrupalCodeGenerator\Runner\BaseRunner;
-use DrupalCodeGenerator\Runner\RunnerInterface;
 
 $dcg_exit = static function(string $message): never {
   \fwrite(\STDERR, "\e[0;41m [ERROR] $message \e[0m" . \PHP_EOL);
@@ -28,7 +25,6 @@ if (!\file_exists($autoload_dir . '/autoload.php')) {
 }
 
 $class_loader = require $autoload_dir . '/autoload.php';
-
 $bootstrap_handler = new BootstrapHandler($class_loader);
 try {
   $container = $bootstrap_handler->bootstrap();
@@ -37,22 +33,4 @@ catch (\Exception $exception) {
   $dcg_exit($exception->getMessage());
 }
 
-$application = Application::create($container);
-
-$runner_file = InstalledVersions::getRootPackage()['install_path'] . '.dcg.php';
-if (\file_exists($runner_file)) {
-  $runner = require_once $runner_file;
-  if (!$runner instanceof RunnerInterface) {
-    $message = \sprintf(
-      'Runner must be instance of %s interface, %s was given.',
-      RunnerInterface::class,
-      \get_debug_type($runner),
-    );
-    $dcg_exit($message);
-  }
-}
-else {
-  $runner = new class() extends BaseRunner {};
-}
-
-$runner->run($application);
+Application::create($container)->run();
