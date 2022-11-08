@@ -1,0 +1,6 @@
+services:
+  example.breadcrumb:
+    class: Drupal\example\ExampleBreadcrumbBuilder
+    arguments: ['@cron']
+    tags:
+      - { name: breadcrumb_builder, priority: 1000 }

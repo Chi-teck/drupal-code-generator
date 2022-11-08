@@ -1,34 +1,27 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }};
+namespace Drupal\example;
 
-{% sort %}
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
+use Drupal\Core\CronInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 /**
  * @todo Add description for this breadcrumb builder.
  */
-final class {{ class }} implements BreadcrumbBuilderInterface {
+final class ExampleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
   use StringTranslationTrait;
-{% if services %}
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs an ExampleBreadcrumbBuilder object.
    */
   public function __construct(
-{{ di.signature(services) }}
+    private readonly CronInterface $cron,
   ) {}
-{% endif %}
 
   /**
    * {@inheritdoc}

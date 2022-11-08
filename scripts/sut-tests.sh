@@ -244,7 +244,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = service ]]; then
   cd $MODULE_DIR
 
   $DCG service:access-checker -a zippo -a _zippo -a ZippoAccessChecker
-  $DCG service:breadcrumb-builder -a zippo -a ZippoBreadcrumbBuilder
+  $DCG service:breadcrumb-builder -a zippo -a ZippoBreadcrumbBuilder -a No
   $DCG service:custom -a zippo -a zippo.foo -a Foo -a Yes -a Yes -a entity_type.manager -a
   $DCG service:event-subscriber -a zippo -a Zippo -a FooSubscriber -a Yes -a messenger -a
   $DCG service:logger -a zippo -a FileLog -a No
