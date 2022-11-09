@@ -6,4 +6,6 @@ services:
     arguments: [{{ di.arguments(services) }}]
 {% endif %}
     tags:
+      # In order to override breadcrumbs built with PathBasedBreadcrumbBuilder
+      # set the priority higher than zero.
       - { name: breadcrumb_builder, priority: 1000 }

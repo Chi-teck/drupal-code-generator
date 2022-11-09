@@ -2,4 +2,6 @@ services:
   example.breadcrumb:
     class: Drupal\example\ExampleBreadcrumbBuilder
     tags:
+      # In order to override breadcrumbs built with PathBasedBreadcrumbBuilder
+      # set the priority higher than zero.
       - { name: breadcrumb_builder, priority: 1000 }
