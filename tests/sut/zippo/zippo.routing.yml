@@ -18,3 +18,11 @@ zippo.param_converter_test:
   options:
     parameters:
       letter: { type: 'example' }
+
+zippo.access_checker_test:
+  path: '/access-check/{parameter}'
+  defaults:
+    _controller: '\Drupal\zippo\Controller\AccessCheckerController'
+    _title: 'Example'
+  requirements:
+    _zippo: '123'

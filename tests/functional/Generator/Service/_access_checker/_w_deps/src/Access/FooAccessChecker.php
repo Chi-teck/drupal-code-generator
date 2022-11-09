@@ -1,16 +1,11 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Access;
+namespace Drupal\example\Access;
 
-{% sort %}
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\CronInterface;
 use Drupal\Core\Routing\Access\AccessInterface;
 use Symfony\Component\Routing\Route;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 /**
  * Checks if passed parameter matches the route configuration.
@@ -21,21 +16,19 @@ use Symfony\Component\Routing\Route;
  *   path: '/example/{parameter}'
  *   defaults:
  *     _title: 'Example'
- *     _controller: '\Drupal\{{ machine_name }}\Controller\{{ machine_name|camelize }}Controller'
+ *     _controller: '\Drupal\example\Controller\ExampleController'
  *   requirements:
- *     {{ requirement }}: 'some value'
+ *     _foo: 'some value'
  * @endcode
  */
-final class {{ class }} implements AccessInterface {
-{% if services %}
+final class FooAccessChecker implements AccessInterface {
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs a FooAccessChecker object.
    */
   public function __construct(
-{{ di.signature(services) }}
+    private readonly CronInterface $cron,
   ) {}
-{% endif %}
 
   /**
    * Access callback.
@@ -51,7 +44,7 @@ final class {{ class }} implements AccessInterface {
    *   - \Symfony\Component\Routing\Route
    */
   public function access(Route $route, mixed $parameter): AccessResult {
-    return AccessResult::allowedIf($parameter === $route->getRequirement('{{ requirement }}'));
+    return AccessResult::allowedIf($parameter === $route->getRequirement('_foo'));
   }
 
 }

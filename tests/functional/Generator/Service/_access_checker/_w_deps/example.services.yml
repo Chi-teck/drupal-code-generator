@@ -1,0 +1,6 @@
+services:
+  access_check.example.foo:
+    class: Drupal\example\Access\FooAccessChecker
+    arguments: ['@cron']
+    tags:
+      - { name: access_check, applies_to: _foo }

@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
+use DrupalCodeGenerator\Validator\RegExp;
 
 #[Generator(
   name: 'service:access-checker',
@@ -21,15 +22,13 @@ final class AccessChecker extends BaseGenerator {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
 
-    $validator = static function (mixed $value): string {
-      if (!\is_string($value) && !\preg_match('/^_[a-z0-9_]*[a-z0-9]$/', $value)) {
-        throw new \UnexpectedValueException('The value is not correct name for "applies_to" property.');
-      }
-      return $value;
-    };
-    $vars['applies_to'] = $ir->ask('Applies to', '_foo', $validator);
-
-    $vars['class'] = $ir->askClass(default: '{applies_to|camelize}AccessChecker');
+    $validator = new RegExp(
+      '/^_[a-z0-9_]*[a-z0-9]$/',
+      'The value is not correct name for requirement name.',
+    );
+    $vars['requirement'] = $ir->ask('Requirement', '_foo', $validator);
+    $vars['class'] = $ir->askClass(default: '{requirement|camelize}AccessChecker');
+    $vars['services'] = $ir->askServices(FALSE);
 
     $assets->addFile('src/Access/{class}.php', 'access-checker.twig');
     $assets->addServicesFile()->template('services.twig');
