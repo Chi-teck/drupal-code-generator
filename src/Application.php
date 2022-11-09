@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator;
 
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
-use DrupalCodeGenerator\Command\GenerateCompletion;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\Event\ApplicationEvent;
 use DrupalCodeGenerator\Event\GeneratorsEvent;
@@ -95,7 +94,6 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
       $application->dispatch($generators_event)->generators,
     );
 
-    $application->add(new GenerateCompletion());
     $application->add(new Navigation());
     $application->setDefaultCommand('navigation');
 

@@ -13,7 +13,7 @@ composer require chi-teck/drupal-code-generator --dev
 
 Optionally, generate shell completions for DCG executable.
 ```
-./vendor/bin/dcg generate-completion > ~/.bash_completion
+./vendor/bin/dcg completion bash >> ~/.bash_completion
 ```
 
 ## Usage
