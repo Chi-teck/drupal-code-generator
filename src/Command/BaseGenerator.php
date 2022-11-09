@@ -9,6 +9,7 @@ use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\Exception\SilentException;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\NullExtensionInfo;
+use DrupalCodeGenerator\InputOutput\DefaultOptions;
 use DrupalCodeGenerator\InputOutput\Interviewer;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\InputOutput\IOAwareInterface;
@@ -40,6 +41,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       ->setDescription($definition->description)
       ->setAliases($definition->aliases)
       ->setHidden($definition->hidden);
+    DefaultOptions::apply($this);
   }
 
   /**

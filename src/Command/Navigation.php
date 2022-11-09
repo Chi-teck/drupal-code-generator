@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\InputOutput\DefaultOptions;
 use DrupalCodeGenerator\InputOutput\IOAwareInterface;
 use DrupalCodeGenerator\InputOutput\IOAwareTrait;
 use Psr\Log\LoggerAwareInterface;
@@ -58,7 +59,8 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
       ->setName('navigation')
       ->setDescription('Command line code generator')
       ->setHelp($help)
-      ->setHidden(TRUE);
+      ->setHidden();
+    DefaultOptions::apply($this);
   }
 
   /**
