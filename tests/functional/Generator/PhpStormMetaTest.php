@@ -2,19 +2,19 @@
 
 namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
-use DrupalCodeGenerator\Command\PhpStormMetadata;
+use DrupalCodeGenerator\Command\PhpStormMeta;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
  * Tests phpstorm-metadata generator.
  */
-final class PhpStormMetadataTest extends GeneratorTestBase {
+final class PhpStormMetaTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__ . '/_phpstorm_metadata';
+  protected string $fixtureDir = __DIR__ . '/_phpstorm_meta';
 
   public function testGenerator(): void {
 
-    $this->execute(PhpStormMetadata::class, []);
+    $this->execute(PhpStormMeta::class, []);
 
     $expected_display = <<< 'TXT'
 

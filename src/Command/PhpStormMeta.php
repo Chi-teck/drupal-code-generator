@@ -21,14 +21,13 @@ use DrupalCodeGenerator\GeneratorType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 #[Generator(
-  name: 'phpstorm-metadata',
+  name: 'phpstorm-meta',
   description: 'Generates PhpStorm metadata',
-  aliases: ['phpstorm-meta', 'phpstorm-data'],
   templatePath: Application::TEMPLATE_PATH . '/_phpstorm-meta',
   type: GeneratorType::OTHER,
   label: 'PhpStorm metadata',
 )]
-final class PhpStormMetadata extends BaseGenerator implements ContainerInjectionInterface {
+final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInterface {
 
   /**
    * {@inheritdoc}
