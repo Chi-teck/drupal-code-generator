@@ -98,16 +98,6 @@ final class File extends Asset implements RenderableInterface {
   }
 
   /**
-   * Adds the Twig file extension if needed.
-   */
-  private static function addTwigFileExtension(string $template): string {
-    if ($template && \pathinfo($template, \PATHINFO_EXTENSION) !== 'twig') {
-      $template .= '.twig';
-    }
-    return $template;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function render(RendererInterface $renderer): void {
