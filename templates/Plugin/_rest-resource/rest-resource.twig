@@ -1,14 +1,16 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\rest\resource;
 
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
+use Drupal\Core\KeyValueStore\KeyValueStoreInterface;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ResourceResponse;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Route;
 
 /**
  * Represents {{ plugin_label }} records as resources.
@@ -27,7 +29,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * import the resource configuration into active configuration storage. An
  * example of such configuration can be located in the following file:
  * core/modules/rest/config/optional/rest.resource.entity.node.yml.
- * Alternatively you can enable it through admin interface provider by REST UI
+ * Alternatively, you can enable it through admin interface provider by REST UI
  * module.
  * @see https://www.drupal.org/project/restui
  *
@@ -44,14 +46,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Drupal core.
  * @see \Drupal\rest\Plugin\rest\resource\EntityResource
  */
-class {{ class }} extends ResourceBase {
+final class {{ class }} extends ResourceBase {
 
   /**
    * The key-value storage.
-   *
-   * @var \Drupal\Core\KeyValueStore\KeyValueStoreInterface
    */
-  protected $storage;
+  private readonly KeyValueStoreInterface $storage;
 
   /**
    * {@inheritdoc}
@@ -71,8 +71,8 @@ class {{ class }} extends ResourceBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    return new self(
       $configuration,
       $plugin_id,
       $plugin_definition,
@@ -84,31 +84,19 @@ class {{ class }} extends ResourceBase {
 
   /**
    * Responds to POST requests and saves the new record.
-   *
-   * @param array $data
-   *   Data to write into the database.
-   *
-   * @return \Drupal\rest\ModifiedResourceResponse
-   *   The HTTP response object.
    */
-  public function post(array $data) {
+  public function post(array $data): ModifiedResourceResponse {
     $data['id'] = $this->getNextId();
     $this->storage->set($data['id'], $data);
-    $this->logger->notice('Create new {{ plugin_label|lower }} record @id.');
+    $this->logger->notice('Created new {{ plugin_label|lower }} record @id.', ['@id' => $data['id']]);
     // Return the newly created record in the response body.
     return new ModifiedResourceResponse($data, 201);
   }
 
   /**
    * Responds to GET requests.
-   *
-   * @param int $id
-   *   The ID of the record.
-   *
-   * @return \Drupal\rest\ResourceResponse
-   *   The response containing the record.
    */
-  public function get($id) {
+  public function get($id): ResourceResponse {
     if (!$this->storage->has($id)) {
       throw new NotFoundHttpException();
     }
@@ -118,36 +106,22 @@ class {{ class }} extends ResourceBase {
 
   /**
    * Responds to PATCH requests.
-   *
-   * @param int $id
-   *   The ID of the record.
-   * @param array $data
-   *   Data to write into the storage.
-   *
-   * @return \Drupal\rest\ModifiedResourceResponse
-   *   The HTTP response object.
    */
-  public function patch($id, array $data) {
+  public function patch($id, array $data): ModifiedResourceResponse {
     if (!$this->storage->has($id)) {
       throw new NotFoundHttpException();
     }
     $stored_data = $this->storage->get($id);
     $data += $stored_data;
     $this->storage->set($id, $data);
-    $this->logger->notice('The {{ plugin_label|lower }} record @id has been updated.');
+    $this->logger->notice('The {{ plugin_label|lower }} record @id has been updated.', ['@id' => $id]);
     return new ModifiedResourceResponse($data, 200);
   }
 
   /**
    * Responds to DELETE requests.
-   *
-   * @param int $id
-   *   The ID of the record.
-   *
-   * @return \Drupal\rest\ModifiedResourceResponse
-   *   The HTTP response object.
    */
-  public function delete($id) {
+  public function delete($id): ModifiedResourceResponse {
     if (!$this->storage->has($id)) {
       throw new NotFoundHttpException();
     }
@@ -160,10 +134,10 @@ class {{ class }} extends ResourceBase {
   /**
    * {@inheritdoc}
    */
-  protected function getBaseRoute($canonical_path, $method) {
+  protected function getBaseRoute($canonical_path, $method): Route {
     $route = parent::getBaseRoute($canonical_path, $method);
     // Set ID validation pattern.
-    if ($method != 'POST') {
+    if ($method !== 'POST') {
       $route->setRequirement('id', '\d+');
     }
     return $route;
@@ -172,7 +146,7 @@ class {{ class }} extends ResourceBase {
   /**
    * Returns next available ID.
    */
-  private function getNextId() {
+  private function getNextId(): int {
     $ids = \array_keys($this->storage->getAll());
     return count($ids) > 0 ? max($ids) + 1 : 1;
   }

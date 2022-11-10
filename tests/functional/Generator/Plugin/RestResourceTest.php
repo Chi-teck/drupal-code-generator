@@ -12,6 +12,9 @@ final class RestResourceTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_rest_resource';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
     $input = [
       'example',
