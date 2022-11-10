@@ -120,33 +120,27 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
    * Returns a collection of directory assets.
    */
   public function getDirectories(): self {
-    return $this->getFiltered(Directory::class);
+    return $this->getFiltered(
+      static fn (Asset $asset): bool => $asset instanceof Directory,
+    );
   }
 
   /**
    * Returns a collection of file assets.
    */
   public function getFiles(): self {
-    return $this->getFiltered(File::class);
+    return $this->getFiltered(
+      static fn (Asset $asset): bool => $asset instanceof File,
+    );
   }
 
   /**
    * Returns a collection of symlink assets.
    */
   public function getSymlinks(): self {
-    return $this->getFiltered(Symlink::class);
-  }
-
-  /**
-   * Filters the collection by asset type.
-   */
-  private function getFiltered(string $type): self {
-    $match = static fn ($asset): bool => $asset instanceof $type;
-    $iterator = new \CallbackFilterIterator($this->getIterator(), $match);
-    $assets = \iterator_to_array($iterator);
-    $str_keys = \array_filter(\array_keys($assets), 'is_string');
-    // Reindex if it's not an associative array.
-    return new self(\count($str_keys) > 0 ? $assets : \array_values($assets));
+    return $this->getFiltered(
+      static fn (Asset $asset): bool => $asset instanceof Symlink,
+    );
   }
 
   /**
@@ -168,6 +162,17 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
     $assets = $this->assets;
     \usort($assets, $sorter);
     return new self($assets);
+  }
+
+  /**
+   * Filters the asset collection.
+   */
+  public function getFiltered(callable $filter): self {
+    $iterator = new \CallbackFilterIterator($this->getIterator(), $filter);
+    $assets = \iterator_to_array($iterator);
+    $str_keys = \array_filter(\array_keys($assets), 'is_string');
+    // Reindex if it's not an associative array.
+    return new self(\count($str_keys) > 0 ? $assets : \array_values($assets));
   }
 
   /**

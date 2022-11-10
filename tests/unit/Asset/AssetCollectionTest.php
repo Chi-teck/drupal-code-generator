@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Unit\Asset;
 
+use DrupalCodeGenerator\Asset\Asset;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Assets;
 use DrupalCodeGenerator\Asset\Directory;
@@ -215,6 +216,27 @@ final class AssetCollectionTest extends BaseTestCase {
       new Symlink('example-3.link', 'example-3.txt'),
     ];
     self::assertAssets($file_collection, $expected_assets);
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testGetFiltered(): void {
+    $collection = new AssetCollection([
+      new File('foo/bar/example.php'),
+      new File('foo/bar.txt'),
+      new Directory('foo/bar'),
+      new File('foo/example.txt'),
+      new Symlink('bar.php', 'bar'),
+    ]);
+    $expected_assets = [
+      new File('foo/bar/example.php'),
+      new File('foo/example.txt'),
+    ];
+    $filtered_collection = $collection->getFiltered(
+      static fn (Asset $asset): bool => \str_contains($asset->getPath(), 'example'),
+    );
+    self::assertAssets($filtered_collection, $expected_assets);
   }
 
   /**
