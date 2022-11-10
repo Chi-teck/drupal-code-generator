@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:middleware',
   description: 'Generates a middleware',
   aliases: ['middleware'],
-  templatePath: Application::TEMPLATE_PATH . '/service/middleware',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_middleware',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Middleware extends BaseGenerator {

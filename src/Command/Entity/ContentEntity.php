@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'entity:content',
   description: 'Generates content entity',
   aliases: ['content-entity'],
-  templatePath: Application::TEMPLATE_PATH . '/content-entity',
+  templatePath: Application::TEMPLATE_PATH . '/Entity/_content-entity',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class ContentEntity extends BaseGenerator {

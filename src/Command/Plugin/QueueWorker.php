@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:queue-worker',
   description: 'Generates queue worker plugin',
   aliases: ['queue-worker'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/queue-worker',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_queue-worker',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class QueueWorker extends BaseGenerator {

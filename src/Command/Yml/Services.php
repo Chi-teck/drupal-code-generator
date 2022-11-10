@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:services',
   description: 'Generates a services yml file',
   aliases: ['services', 'services.yml'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/services',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/_services',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Services extends BaseGenerator {

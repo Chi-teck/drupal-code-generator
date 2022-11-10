@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:links:contextual',
   description: 'Generates links.contextual yml file',
   aliases: ['contextual-links'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/links/contextual',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/Links/_contextual',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Contextual extends BaseGenerator {

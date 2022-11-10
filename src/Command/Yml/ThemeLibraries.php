@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:theme-libraries',
   description: 'Generates theme libraries yml file',
   aliases: ['theme-libraries'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/theme-libraries',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/_theme-libraries',
   type: GeneratorType::THEME_COMPONENT,
   label: 'Libraries (theme)',
 )]

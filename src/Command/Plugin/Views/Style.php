@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:views:style',
   description: 'Generates views style plugin',
   aliases: ['views-style'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/views/style',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Views/_style',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Style extends BaseGenerator {

@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:theme-negotiator',
   description: 'Generates a theme negotiator',
   aliases: ['theme-negotiator'],
-  templatePath: Application::TEMPLATE_PATH . '/service/theme-negotiator',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_theme-negotiator',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class ThemeNegotiator extends BaseGenerator {

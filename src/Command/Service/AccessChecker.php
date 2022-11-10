@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Validator\RegExp;
   name: 'service:access-checker',
   description: 'Generates an access checker service',
   aliases: ['access-checker'],
-  templatePath: Application::TEMPLATE_PATH . '/service/access-checker',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_access-checker',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class AccessChecker extends BaseGenerator {

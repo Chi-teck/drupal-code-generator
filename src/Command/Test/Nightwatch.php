@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Utils;
   name: 'test:nightwatch',
   description: 'Generates a nightwatch test',
   aliases: ['nightwatch-test'],
-  templatePath: Application::TEMPLATE_PATH . '/test/nightwatch',
+  templatePath: Application::TEMPLATE_PATH . '/Test/_nightwatch',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Nightwatch extends BaseGenerator {

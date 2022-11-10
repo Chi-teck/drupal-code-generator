@@ -14,7 +14,7 @@ use DrupalCodeGenerator\Validator\RequiredServiceName;
   name: 'service:custom',
   description: 'Generates a custom Drupal service',
   aliases: ['custom-service'],
-  templatePath: Application::TEMPLATE_PATH . '/service/custom',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_custom',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'Custom service',
 )]

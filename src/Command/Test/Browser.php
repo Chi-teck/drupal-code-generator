@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Validator\RequiredClassName;
   name: 'test:browser',
   description: 'Generates a browser based test',
   aliases: ['browser-test'],
-  templatePath: Application::TEMPLATE_PATH . '/test/browser',
+  templatePath: Application::TEMPLATE_PATH . '/Test/_browser',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Browser extends BaseGenerator {

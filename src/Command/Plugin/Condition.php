@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:condition',
   description: 'Generates condition plugin',
   aliases: ['condition'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/condition',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_condition',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Condition extends BaseGenerator {

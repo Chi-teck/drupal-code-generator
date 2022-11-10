@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:uninstall-validator',
   description: 'Generates a uninstall validator service',
   aliases: ['uninstall-validator'],
-  templatePath: Application::TEMPLATE_PATH . '/service/uninstall-validator',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_uninstall-validator',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class UninstallValidator extends BaseGenerator {

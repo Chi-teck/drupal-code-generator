@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:event-subscriber',
   description: 'Generates an event subscriber',
   aliases: ['event-subscriber'],
-  templatePath: Application::TEMPLATE_PATH . '/service/event-subscriber',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_event-subscriber',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class EventSubscriber extends BaseGenerator {

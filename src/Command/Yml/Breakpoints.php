@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:breakpoints',
   description: 'Generates a breakpoints yml file',
   aliases: ['breakpoints'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/breakpoints',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/_breakpoints',
   type: GeneratorType::THEME_COMPONENT,
 )]
 final class Breakpoints extends BaseGenerator {

@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:rest-resource',
   description: 'Generates rest resource plugin',
   aliases: ['rest-resource'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/rest-resource',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_rest-resource',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'REST resource',
 )]

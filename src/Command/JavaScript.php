@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Utils;
 #[Generator(
   name: 'javascript',
   description: 'Generates Drupal JavaScript file',
-  templatePath: Application::TEMPLATE_PATH . '/javascript',
+  templatePath: Application::TEMPLATE_PATH . '/_javascript',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class JavaScript extends BaseGenerator {

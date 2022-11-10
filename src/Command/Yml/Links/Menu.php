@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:links:menu',
   description: 'Generates a links.menu yml file',
   aliases: ['menu-links'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/links/menu',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/Links/_menu',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Menu extends BaseGenerator {

@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:field:formatter',
   description: 'Generates field formatter plugin',
   aliases: ['field-formatter'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/field/formatter',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Field/_formatter',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Formatter extends BaseGenerator {

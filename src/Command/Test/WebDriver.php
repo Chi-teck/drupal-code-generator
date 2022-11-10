@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Validator\RequiredClassName;
   name: 'test:webdriver',
   description: 'Generates a test that supports JavaScript',
   aliases: ['webdriver-test'],
-  templatePath: Application::TEMPLATE_PATH . '/test/webdriver',
+  templatePath: Application::TEMPLATE_PATH . '/Test/_webdriver',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'WebDriver',
 )]

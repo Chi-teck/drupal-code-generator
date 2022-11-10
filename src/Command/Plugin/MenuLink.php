@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:menu-link',
   description: 'Generates menu-link plugin',
   aliases: ['menu-link'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/menu-link',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_menu-link',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class MenuLink extends BaseGenerator {

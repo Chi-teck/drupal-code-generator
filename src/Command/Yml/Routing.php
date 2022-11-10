@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:routing',
   description: 'Generates a routing yml file',
   aliases: ['routing', 'routing.yml'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/routing',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/_routing',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Routing extends BaseGenerator {

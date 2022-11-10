@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:field:widget',
   description: 'Generates field widget plugin',
   aliases: ['field-widget'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/field/widget',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Field/_widget',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Widget extends BaseGenerator {

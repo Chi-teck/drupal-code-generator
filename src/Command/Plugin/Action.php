@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:action',
   description: 'Generates action plugin',
   aliases: ['action'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/action',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_action',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Action extends BaseGenerator {

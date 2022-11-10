@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Command\Misc;
+namespace DrupalCodeGenerator\Command\Miscellaneous;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
@@ -14,7 +14,7 @@ use DrupalCodeGenerator\Validator\Required;
   name: 'misc:apache-virtual-host',
   description: 'Generates an Apache site configuration file',
   aliases: ['apache-virtual-host'],
-  templatePath: Application::TEMPLATE_PATH . '/misc/apache-virtual-host',
+  templatePath: Application::TEMPLATE_PATH . '/Miscellaneous/_apache-virtual-host',
   type: GeneratorType::OTHER,
 )]
 final class ApacheVirtualHost extends BaseGenerator {

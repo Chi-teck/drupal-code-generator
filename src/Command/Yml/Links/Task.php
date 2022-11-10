@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:links:task',
   description: 'Generates a links.task yml file',
   aliases: ['task-links'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/links/task',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/Links/_task',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Task extends BaseGenerator {

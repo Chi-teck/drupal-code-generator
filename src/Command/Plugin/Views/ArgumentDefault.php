@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:views:argument-default',
   description: 'Generates views default argument plugin',
   aliases: ['views-argument-default'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/views/argument-default',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Views/_argument-default',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class ArgumentDefault extends BaseGenerator {

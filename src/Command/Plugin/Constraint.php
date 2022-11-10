@@ -22,7 +22,7 @@ use DrupalCodeGenerator\Validator\Required;
   name: 'plugin:constraint',
   description: 'Generates constraint plugin',
   aliases: ['constraint'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/constraint',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_constraint',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Constraint extends BaseGenerator {

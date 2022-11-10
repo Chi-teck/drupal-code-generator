@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:links:action',
   description: 'Generates a links.action yml file',
   aliases: ['action-links'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/links/action',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/Links/_action',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Action extends BaseGenerator {

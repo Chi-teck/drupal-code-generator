@@ -18,7 +18,7 @@ use DrupalCodeGenerator\Utils;
   name: 'form:confirm',
   description: 'Generates a confirmation form',
   aliases: ['confirm-form'],
-  templatePath: Application::TEMPLATE_PATH . '/form/confirm',
+  templatePath: Application::TEMPLATE_PATH . '/Form/_confirm',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Confirm extends BaseGenerator {

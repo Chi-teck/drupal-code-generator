@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Validator\RequiredMachineName;
 #[Generator(
   name: 'field',
   description: 'Generates a field',
-  templatePath: Application::TEMPLATE_PATH . '/field',
+  templatePath: Application::TEMPLATE_PATH . '/_field',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Field extends BaseGenerator {

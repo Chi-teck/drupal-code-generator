@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:request-policy',
   description: 'Generates a request policy service',
   aliases: ['request-policy'],
-  templatePath: Application::TEMPLATE_PATH . '/service/request-policy',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_request-policy',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class RequestPolicy extends BaseGenerator {

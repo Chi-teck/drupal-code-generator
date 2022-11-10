@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   name: 'phpstorm-metadata',
   description: 'Generates PhpStorm metadata',
   aliases: ['phpstorm-meta', 'phpstorm-data'],
-  templatePath: Application::TEMPLATE_PATH . '/phpstorm-metadata',
+  templatePath: Application::TEMPLATE_PATH . '/_phpstorm-meta',
   type: GeneratorType::OTHER,
   label: 'PhpStorm metadata',
 )]

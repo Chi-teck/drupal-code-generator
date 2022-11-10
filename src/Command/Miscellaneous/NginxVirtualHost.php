@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Command\Misc;
+namespace DrupalCodeGenerator\Command\Miscellaneous;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
@@ -17,7 +17,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'misc:nginx-virtual-host',
   description: 'Generates an Nginx site configuration file',
   aliases: ['nginx-virtual-host'],
-  templatePath: Application::TEMPLATE_PATH . '/misc/nginx-virtual-host',
+  templatePath: Application::TEMPLATE_PATH . '/Miscellaneous/_nginx-virtual-host',
   type: GeneratorType::OTHER,
 )]
 final class NginxVirtualHost extends BaseGenerator {

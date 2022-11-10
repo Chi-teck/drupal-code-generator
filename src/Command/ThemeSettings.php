@@ -10,7 +10,7 @@ use DrupalCodeGenerator\GeneratorType;
 #[Generator(
   name: 'theme-settings',
   description: 'Generates Drupal theme-settings.php file',
-  templatePath: Application::TEMPLATE_PATH . '/theme-settings',
+  templatePath: Application::TEMPLATE_PATH . '/_theme-settings',
   type: GeneratorType::THEME_COMPONENT,
 )]
 final class ThemeSettings extends BaseGenerator {

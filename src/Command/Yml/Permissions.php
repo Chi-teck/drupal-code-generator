@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:permissions',
   description: 'Generates a permissions yml file',
   aliases: ['permissions', 'permissions.yml'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/permissions',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/_permissions',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Permissions extends BaseGenerator {

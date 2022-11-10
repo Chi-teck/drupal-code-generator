@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Generator\Misc;
+namespace DrupalCodeGenerator\Tests\Generator\Miscellaneous;
 
-use DrupalCodeGenerator\Command\Misc\ApacheVirtualHost;
+use DrupalCodeGenerator\Command\Miscellaneous\ApacheVirtualHost;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**

@@ -17,7 +17,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'composer',
   description: 'Generates a composer.json file',
   aliases: ['composer.json'],
-  templatePath: Application::TEMPLATE_PATH . '/composer',
+  templatePath: Application::TEMPLATE_PATH . '/_composer',
   type: GeneratorType::OTHER,
   label: 'composer.json',
 )]

@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:block',
   description: 'Generates block plugin',
   aliases: ['block'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/block',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_block',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Block extends BaseGenerator {

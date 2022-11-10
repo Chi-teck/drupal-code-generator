@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 #[Generator(
   name: 'module',
   description: 'Generates Drupal module',
-  templatePath: Application::TEMPLATE_PATH . '/module',
+  templatePath: Application::TEMPLATE_PATH . '/_module',
   type: GeneratorType::MODULE,
 )]
 final class Module extends BaseGenerator implements ContainerInjectionInterface {

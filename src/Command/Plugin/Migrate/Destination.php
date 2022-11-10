@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:migrate:destination',
   description: 'Generates migrate destination plugin',
   aliases: ['migrate-destination'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/migrate/destination',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Migrate/_destination',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Destination extends BaseGenerator {

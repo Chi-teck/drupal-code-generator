@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Validator\Required;
 #[Generator(
   name: 'plugin-manager',
   description: 'Generates plugin manager',
-  templatePath: Application::TEMPLATE_PATH . '/plugin-manager',
+  templatePath: Application::TEMPLATE_PATH . '/_plugin-manager',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class PluginManager extends BaseGenerator {

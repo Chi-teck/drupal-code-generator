@@ -10,7 +10,7 @@ use DrupalCodeGenerator\GeneratorType;
 #[Generator(
   name: 'layout',
   description: 'Generates a layout',
-  templatePath: Application::TEMPLATE_PATH . '/layout',
+  templatePath: Application::TEMPLATE_PATH . '/_layout',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Layout extends BaseGenerator {

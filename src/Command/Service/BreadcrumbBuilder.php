@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:breadcrumb-builder',
   description: 'Generates a breadcrumb builder service',
   aliases: ['breadcrumb-builder'],
-  templatePath: Application::TEMPLATE_PATH . '/service/breadcrumb-builder',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_breadcrumb-builder',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class BreadcrumbBuilder extends BaseGenerator {

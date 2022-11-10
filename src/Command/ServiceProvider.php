@@ -10,7 +10,7 @@ use DrupalCodeGenerator\GeneratorType;
 #[Generator(
   name: 'service-provider',
   description: 'Generates a service provider',
-  templatePath: Application::TEMPLATE_PATH . '/service-provider',
+  templatePath: Application::TEMPLATE_PATH . '/_service-provider',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class ServiceProvider extends BaseGenerator {

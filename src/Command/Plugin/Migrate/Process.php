@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:migrate:process',
   description: 'Generates migrate process plugin',
   aliases: ['migrate-process'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/migrate/process',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Migrate/_process',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Process extends BaseGenerator {

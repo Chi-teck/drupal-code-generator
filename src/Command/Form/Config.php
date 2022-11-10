@@ -18,7 +18,7 @@ use DrupalCodeGenerator\Utils;
   name: 'form:config',
   description: 'Generates a configuration form',
   aliases: ['config-form'],
-  templatePath: Application::TEMPLATE_PATH . '/form/config',
+  templatePath: Application::TEMPLATE_PATH . '/Form/_config',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Config extends BaseGenerator {

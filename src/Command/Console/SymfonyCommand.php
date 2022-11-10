@@ -15,7 +15,7 @@ use DrupalCodeGenerator\Validator\RegExp;
   name: 'console:symfony-command',
   description: 'Generates Symfony console command',
   aliases: ['symfony-command'],
-  templatePath: Application::TEMPLATE_PATH . '/console/symfony-command',
+  templatePath: Application::TEMPLATE_PATH . '/Console/_symfony-command',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class SymfonyCommand extends BaseGenerator {

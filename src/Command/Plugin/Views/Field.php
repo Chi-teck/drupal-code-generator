@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:views:field',
   description: 'Generates views field plugin',
   aliases: ['views-field'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/views/field',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Views/_field',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Field extends BaseGenerator {

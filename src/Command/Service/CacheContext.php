@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:cache-context',
   description: 'Generates a cache context service',
   aliases: ['cache-context'],
-  templatePath: Application::TEMPLATE_PATH . '/service/cache-context',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_cache-context',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class CacheContext extends BaseGenerator {

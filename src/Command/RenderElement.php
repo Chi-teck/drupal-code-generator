@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Validator\RequiredMachineName;
 #[Generator(
   name: 'render-element',
   description: 'Generates Drupal render element',
-  templatePath: Application::TEMPLATE_PATH . '/render-element',
+  templatePath: Application::TEMPLATE_PATH . '/_render-element',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class RenderElement extends BaseGenerator {

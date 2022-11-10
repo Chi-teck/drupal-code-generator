@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   name: 'entity:bundle-class',
   description: 'Generate a bundle class for a content entity.',
   aliases: ['bundle-class'],
-  templatePath: Application::TEMPLATE_PATH . '/entity-bundle-class',
+  templatePath: Application::TEMPLATE_PATH . '/Entity/_entity-bundle-class',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class EntityBundleClass extends BaseGenerator implements ContainerInjectionInterface {

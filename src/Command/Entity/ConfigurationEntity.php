@@ -15,7 +15,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'entity:configuration',
   description: 'Generates configuration entity',
   aliases: ['config-entity'],
-  templatePath: Application::TEMPLATE_PATH . '/configuration-entity',
+  templatePath: Application::TEMPLATE_PATH . '/Entity/_configuration-entity',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class ConfigurationEntity extends BaseGenerator {

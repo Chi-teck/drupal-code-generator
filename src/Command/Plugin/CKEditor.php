@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Utils;
   name: 'plugin:ckeditor',
   description: 'Generates CKEditor plugin',
   aliases: ['ckeditor', 'ckeditor-plugin'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/ckeditor',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_ckeditor',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'CKEditor',
 )]

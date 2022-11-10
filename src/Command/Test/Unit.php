@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Validator\RequiredClassName;
   name: 'test:unit',
   description: 'Generates a unit test',
   aliases: ['unit-test'],
-  templatePath: Application::TEMPLATE_PATH . '/test/unit',
+  templatePath: Application::TEMPLATE_PATH . '/Test/_unit',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Unit extends BaseGenerator {

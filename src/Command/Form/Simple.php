@@ -18,7 +18,7 @@ use DrupalCodeGenerator\Utils;
   name: 'form:simple',
   description: 'Generates simple form',
   aliases: ['form'],
-  templatePath: Application::TEMPLATE_PATH . '/form/simple',
+  templatePath: Application::TEMPLATE_PATH . '/Form/_simple',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Simple extends BaseGenerator {

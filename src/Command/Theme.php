@@ -14,7 +14,7 @@ use DrupalCodeGenerator\Utils;
 #[Generator(
   name: 'theme',
   description: 'Generates Drupal theme',
-  templatePath: Application::TEMPLATE_PATH . '/theme',
+  templatePath: Application::TEMPLATE_PATH . '/_theme',
   type: GeneratorType::THEME,
 )]
 final class Theme extends BaseGenerator {

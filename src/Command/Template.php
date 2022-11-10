@@ -11,7 +11,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'template',
   description: 'Generates a template',
   aliases: ['template'],
-  templatePath: Application::TEMPLATE_PATH . '/template',
+  templatePath: Application::TEMPLATE_PATH . '/_template',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Template extends BaseGenerator {

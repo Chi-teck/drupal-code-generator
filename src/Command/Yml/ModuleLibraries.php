@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'yml:module-libraries',
   description: 'Generates module libraries yml file',
   aliases: ['module-libraries'],
-  templatePath: Application::TEMPLATE_PATH . '/yml/module-libraries',
+  templatePath: Application::TEMPLATE_PATH . '/Yaml/_module-libraries',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'Libraries (module)',
 )]

@@ -14,7 +14,7 @@ use Symfony\Component\Console\Question\Question;
   name: 'plugin:entity-reference-selection',
   description: 'Generates entity reference selection plugin',
   aliases: ['entity-reference-selection'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/entity-reference-selection',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_entity-reference-selection',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class EntityReferenceSelection extends BaseGenerator {

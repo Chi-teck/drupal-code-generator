@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Utils;
 #[Generator(
   name: 'controller',
   description: 'Generates a controller',
-  templatePath: Application::TEMPLATE_PATH . '/controller',
+  templatePath: Application::TEMPLATE_PATH . '/_controller',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Controller extends BaseGenerator {

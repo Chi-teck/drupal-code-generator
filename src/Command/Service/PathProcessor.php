@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:path-processor',
   description: 'Generates a path processor service',
   aliases: ['path-processor'],
-  templatePath: Application::TEMPLATE_PATH . '/service/path-processor',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_path-processor',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class PathProcessor extends BaseGenerator {

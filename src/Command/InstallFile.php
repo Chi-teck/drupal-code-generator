@@ -10,7 +10,7 @@ use DrupalCodeGenerator\GeneratorType;
 #[Generator(
   name: 'install-file',
   description: 'Generates an install file',
-  templatePath: Application::TEMPLATE_PATH . '/install-file',
+  templatePath: Application::TEMPLATE_PATH . '/_install-file',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class InstallFile extends BaseGenerator {

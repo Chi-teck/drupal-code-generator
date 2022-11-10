@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:field:type',
   description: 'Generates field type plugin',
   aliases: ['field-type'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/field/type',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Field/_type',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Type extends BaseGenerator {

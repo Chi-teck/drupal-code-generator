@@ -21,7 +21,7 @@ use DrupalCodeGenerator\Validator\RegExp;
   aliases: ['dcg-command'],
   // @todo Enable the generator once it is updated.
   hidden: TRUE,
-  templatePath: Application::TEMPLATE_PATH . '/console/dcg-command',
+  templatePath: Application::TEMPLATE_PATH . '/Console/_dcg-command',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'DCG command',
 )]

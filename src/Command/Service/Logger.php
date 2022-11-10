@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:logger',
   description: 'Generates a logger service',
   aliases: ['logger'],
-  templatePath: Application::TEMPLATE_PATH . '/service/logger',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_logger',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Logger extends BaseGenerator {

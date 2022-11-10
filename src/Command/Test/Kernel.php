@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Validator\RequiredClassName;
   name: 'test:kernel',
   description: 'Generates a kernel based test',
   aliases: ['kernel-test'],
-  templatePath: Application::TEMPLATE_PATH . '/test/kernel',
+  templatePath: Application::TEMPLATE_PATH . '/Test/_kernel',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Kernel extends BaseGenerator {

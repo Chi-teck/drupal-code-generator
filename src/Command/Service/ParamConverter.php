@@ -13,7 +13,7 @@ use DrupalCodeGenerator\Validator\RegExp;
   name: 'service:param-converter',
   description: 'Generates a param converter service',
   aliases: ['param-converter'],
-  templatePath: Application::TEMPLATE_PATH . '/service/param-converter',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_param-converter',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class ParamConverter extends BaseGenerator {

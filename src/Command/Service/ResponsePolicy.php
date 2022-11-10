@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:response-policy',
   description: 'Generates a response policy service',
   aliases: ['response-policy'],
-  templatePath: Application::TEMPLATE_PATH . '/service/response-policy',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_response-policy',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class ResponsePolicy extends BaseGenerator {

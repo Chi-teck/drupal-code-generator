@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:filter',
   description: 'Generates filter plugin',
   aliases: ['filter'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/filter',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/_filter',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Filter extends BaseGenerator {

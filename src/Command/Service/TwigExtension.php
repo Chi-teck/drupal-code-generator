@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:twig-extension',
   description: 'Generates Twig extension service',
   aliases: ['twig-extension'],
-  templatePath: Application::TEMPLATE_PATH . '/service/twig-extension',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_twig-extension',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class TwigExtension extends BaseGenerator {

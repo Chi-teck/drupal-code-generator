@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'service:route-subscriber',
   description: 'Generates a route subscriber',
   aliases: ['route-subscriber'],
-  templatePath: Application::TEMPLATE_PATH . '/service/route-subscriber',
+  templatePath: Application::TEMPLATE_PATH . '/Service/_route-subscriber',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class RouteSubscriber extends BaseGenerator {

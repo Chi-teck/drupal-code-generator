@@ -12,7 +12,7 @@ use DrupalCodeGenerator\GeneratorType;
   name: 'plugin:migrate:source',
   description: 'Generates migrate source plugin',
   aliases: ['migrate-source'],
-  templatePath: Application::TEMPLATE_PATH . '/plugin/migrate/source',
+  templatePath: Application::TEMPLATE_PATH . '/Plugin/Migrate/_source',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class Source extends BaseGenerator {
