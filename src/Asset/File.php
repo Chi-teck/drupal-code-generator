@@ -114,4 +114,14 @@ final class File extends Asset implements RenderableInterface {
     // content directly through `content()` method.
   }
 
+  /**
+   * Checks if the asset is a PHP script.
+   */
+  public function isPhp(): bool {
+    return \in_array(
+      \pathinfo($this->getPath(), \PATHINFO_EXTENSION),
+      ['php', 'module', 'install', 'inc', 'theme'],
+    );
+  }
+
 }

@@ -51,11 +51,25 @@ final class FileTest extends BaseTestCase {
   /**
    * Test callback.
    */
-  public function testInlineemplateAfterRegulaTemplate(): void {
+  public function testInlineTemplateAfterRegulaTemplate(): void {
     $this->expectExceptionObject(new \LogicException('A file cannot have both inline and regular templates.'));
     File::create('example.txt')
       ->template('_template.twig')
       ->inlineTemplate('template');
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testIsPhp(): void {
+    self::assertFalse(File::create('example')->isPhp());
+    self::assertFalse(File::create('example.txt')->isPhp());
+    self::assertFalse(File::create('example.json')->isPhp());
+    self::assertTrue(File::create('example.php')->isPhp());
+    self::assertTrue(File::create('example.module')->isPhp());
+    self::assertTrue(File::create('example.install')->isPhp());
+    self::assertTrue(File::create('example.inc')->isPhp());
+    self::assertTrue(File::create('example.theme')->isPhp());
   }
 
   /**
@@ -112,6 +126,9 @@ final class FileTest extends BaseTestCase {
     return new IO($input, $output, $question_helper);
   }
 
+  /**
+   * Creates renderer.
+   */
   private static function createRenderer(): TwigRenderer {
     $twig_loader = new FilesystemLoader();
     $twig = new TwigEnvironment($twig_loader);
