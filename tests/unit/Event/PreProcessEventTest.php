@@ -16,11 +16,11 @@ final class PreProcessEventTest extends TestCase {
    */
   public function testPreProcessEvent(): void {
     $assets = new AssetCollection();
-    $event = new PreProcessEvent($assets, 'example', FALSE, 'some/path');
+    $event = new PreProcessEvent($assets, 'some/path', 'example', FALSE);
     self::assertSame($assets, $event->assets);
+    self::assertSame('some/path', $event->destination);
     self::assertSame('example', $event->commandName);
     self::assertSame(FALSE, $event->isDry);
-    self::assertSame('some/path', $event->destination);
   }
 
 }

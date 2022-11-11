@@ -16,9 +16,9 @@ final class PreProcessEvent {
    */
   public function __construct(
     public AssetCollection $assets,
+    public string $destination,
     public readonly string $commandName,
     public readonly bool $isDry,
-    public string $destination,
   ) {}
 
 }
