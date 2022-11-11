@@ -15,7 +15,7 @@ final class PostProcessEvent {
    * Constructs the event object.
    */
   public function __construct(
-    public readonly AssetCollection $assets,
+    public AssetCollection $assets,
     public readonly string $commandName,
     public readonly bool $isDry,
     // Unlike PreProcessEvent::$destination this one is readonly as there is no

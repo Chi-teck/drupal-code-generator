@@ -12,7 +12,7 @@ final class Generator {
 
   public function __construct(
     public readonly string $name,
-    public readonly ?string $description = NULL,
+    public readonly string $description = '',
     public readonly array $aliases = [],
     public readonly bool $hidden = FALSE,
     public readonly ?string $templatePath = NULL,

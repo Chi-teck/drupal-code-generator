@@ -4,7 +4,6 @@ namespace DrupalCodeGenerator\Test;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Helper\Renderer\TwigRenderer;
-use DrupalCodeGenerator\Tests\QuestionHelper;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use DrupalCodeGenerator\Utils;
 use PHPUnit\Framework\TestCase;

@@ -39,7 +39,7 @@ final class GeneratorTest extends TestCase {
   public function testDefaults(): void {
     $definition = new GeneratorDefinition('example');
     self::assertSame('example', $definition->name);
-    self::assertNull($definition->description);
+    self::assertSame('', $definition->description);
     self::assertSame([], $definition->aliases);
     self::assertFalse($definition->hidden);
     self::assertNull($definition->templatePath);

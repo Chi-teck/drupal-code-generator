@@ -15,7 +15,7 @@ final class PreProcessEvent {
    * Constructs the event object.
    */
   public function __construct(
-    public readonly AssetCollection $assets,
+    public AssetCollection $assets,
     public readonly string $commandName,
     public readonly bool $isDry,
     public string $destination,
