@@ -4,6 +4,7 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
+use DrupalCodeGenerator\Event\PostProcessEvent;
 use DrupalCodeGenerator\Event\PreProcessEvent;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\Exception\SilentException;
@@ -173,18 +174,20 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    * Dumps assets.
    */
   protected function dump(AssetCollection $assets, string $destination): AssetCollection {
-
-    $dumper = $this->getHelper(
-      $this->io()->getInput()->getOption('dry-run') ? 'dry_dumper' : 'filesystem_dumper',
-    );
+    $is_dry = $this->io()->getInput()->getOption('dry-run');
 
     $pre_process_event = $this->getApplication()->dispatch(
-      new PreProcessEvent($assets, $dumper, $destination, $this),
+      new PreProcessEvent($assets, $this->getName(), $is_dry, $destination),
     );
-    $dumped_assets = $dumper->dump($pre_process_event->assets, $destination);
+    $assets = $pre_process_event->assets;
+    $destination = $pre_process_event->destination;
+
+    /** @var \DrupalCodeGenerator\Helper\Dumper\DumperInterface $dumper */
+    $dumper = $this->getHelper($is_dry ? 'dry_dumper' : 'filesystem_dumper');
+    $dumped_assets = $dumper->dump($assets, $destination);
 
     $post_process_event = $this->getApplication()->dispatch(
-      new PreProcessEvent($dumped_assets, $dumper, $destination, $this),
+      new PostProcessEvent($dumped_assets, $this->getName(), $is_dry, $destination),
     );
     return $post_process_event->assets;
   }

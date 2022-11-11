@@ -3,8 +3,6 @@
 namespace DrupalCodeGenerator\Event;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\Helper\Dumper\DumperInterface;
-use Symfony\Component\Console\Command\Command;
 
 /**
  * Fired when altering rendered assets.
@@ -18,9 +16,9 @@ final class PreProcessEvent {
    */
   public function __construct(
     public readonly AssetCollection $assets,
-    public readonly DumperInterface $dumper,
-    public readonly string $destination,
-    public readonly Command $generator,
+    public readonly string $commandName,
+    public readonly bool $isDry,
+    public string $destination,
   ) {}
 
 }
