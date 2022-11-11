@@ -103,7 +103,7 @@ final class HookInfo extends Helper {
       'token_info_alter',
       'tokens',
       'tokens_alter' => 'tokens.inc',
-      'post_update_N' => 'post_update.php',
+      'post_update_NAME' => 'post_update.php',
       default => 'module',
     };
   }

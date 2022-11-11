@@ -64,7 +64,7 @@ final class HookInfoTest extends FunctionalTestBase {
     self::assertSame('views.inc', HookInfo::getFileType('views_analyze'));
     self::assertSame('views_execution.inc', HookInfo::getFileType('views_pre_render'));
     self::assertSame('tokens.inc', HookInfo::getFileType('token_info_alter'));
-    self::assertSame('post_update.php', HookInfo::getFileType('post_update_N'));
+    self::assertSame('post_update.php', HookInfo::getFileType('post_update_NAME'));
   }
 
   /**
