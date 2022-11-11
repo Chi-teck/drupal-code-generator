@@ -134,7 +134,7 @@ final class Hook extends ModuleGenerator {
         'tokens_alter',
       ],
       'post_update.php' => [
-        'post_update_N',
+        'post_update_NAME',
       ],
     ];
 
