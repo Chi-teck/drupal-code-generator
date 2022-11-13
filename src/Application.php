@@ -4,8 +4,8 @@ namespace DrupalCodeGenerator;
 
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use DrupalCodeGenerator\Command\Navigation;
-use DrupalCodeGenerator\Event\ApplicationEvent;
 use DrupalCodeGenerator\Event\GeneratorInfo;
+use DrupalCodeGenerator\Event\StoppableEventTrait;
 use DrupalCodeGenerator\Helper\Drupal\ConfigInfo;
 use DrupalCodeGenerator\Helper\Drupal\HookInfo;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
@@ -35,6 +35,7 @@ use Twig\Loader\FilesystemLoader as TemplateLoader;
 final class Application extends BaseApplication implements ContainerAwareInterface, EventDispatcherInterface {
 
   use ContainerAwareTrait;
+  use StoppableEventTrait;
 
   /**
    * Path to DCG root directory.
@@ -99,9 +100,8 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
     $application->add(new Navigation());
     $application->setDefaultCommand('navigation');
 
-    $application->dispatch(
-      new ApplicationEvent($application),
-    );
+    /** @var \DrupalCodeGenerator\Application $application */
+    $application = $application->dispatch($application);
     return $application;
   }
 
@@ -117,8 +117,6 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
 
   /**
    * {@inheritdoc}
-   *
-   * @todo Move this to a helper.
    */
   public function dispatch(object $event): object {
     return $this->getContainer()->get('event_dispatcher')->dispatch($event);

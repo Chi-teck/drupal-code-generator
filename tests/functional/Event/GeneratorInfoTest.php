@@ -35,10 +35,6 @@ final class GeneratorInfoTest extends FunctionalTestBase {
 
     $application = self::createApplication($container);
 
-    $application->getContainer()
-      ->get('event_dispatcher')
-      ->addListener(GeneratorInfo::class, $listener);
-
     self::assertTrue($application->has('test-1'));
     self::assertTrue($application->has('test-2'));
     self::assertTrue($application->has('test-3'));

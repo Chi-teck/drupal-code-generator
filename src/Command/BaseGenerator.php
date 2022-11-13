@@ -26,6 +26,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Base class for code generators.
+ *
+ * @method \DrupalCodeGenerator\Application getApplication()
  */
 abstract class BaseGenerator extends Command implements LabelInterface, IOAwareInterface, LoggerAwareInterface {
 
