@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Functional;
+namespace DrupalCodeGenerator\Tests\Functional\Event;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\Directory;
@@ -12,7 +12,6 @@ use DrupalCodeGenerator\Event\PreProcessEvent;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Test process events.
@@ -20,32 +19,10 @@ use Symfony\Component\Filesystem\Filesystem;
 final class ProcessEventTest extends FunctionalTestBase {
 
   /**
-   * Working directory.
-   */
-  private readonly string $directory;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-    $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function tearDown(): void {
-    parent::tearDown();
-    (new Filesystem())->remove($this->directory);
-  }
-
-  /**
    * Test callback.
    */
   public function testPreProcessEvent(): void {
-    $application = $this->createApplication();
-    $application->setAutoExit(FALSE);
+    $application = self::createApplication();
     $application->add(self::createTestGenerator());
 
     $listener = static function (PreProcessEvent $event): void {
@@ -89,8 +66,7 @@ final class ProcessEventTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testPostProcessEvent(): void {
-    $application = $this->createApplication();
-    $application->setAutoExit(FALSE);
+    $application = self::createApplication();
     $application->add(self::createTestGenerator());
 
     $listener = function (PostProcessEvent $event): void {

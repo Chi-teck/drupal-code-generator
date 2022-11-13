@@ -14,17 +14,15 @@ final class ConfigInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetName(): void {
-    $container = $this->application->getContainer();
-    $route_info = new ConfigInfo($container->get('config.factory'));
-    self::assertSame('config_info', $route_info->getName());
+    $config_info = new ConfigInfo(self::bootstrap()->get('config.factory'));
+    self::assertSame('config_info', $config_info->getName());
   }
 
   /**
    * Test callback.
    */
   public function testGetConfigNames(): void {
-    $container = $this->application->getContainer();
-    $config_info = new ConfigInfo($container->get('config.factory'));
+    $config_info = new ConfigInfo(self::bootstrap()->get('config.factory'));
     $config_names = $config_info->getConfigNames();
     self::assertGreaterThan(150, \count($config_names));
     self::assertContains('automated_cron.settings', $config_names);

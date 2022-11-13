@@ -7,6 +7,8 @@ use Symfony\Component\Console\Helper\Helper;
 
 /**
  * A helper that provides information about permissions.
+ *
+ * @todo Create a test for this.
  */
 final class PermissionInfo extends Helper {
 

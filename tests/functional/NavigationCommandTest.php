@@ -8,7 +8,6 @@ use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 use DrupalCodeGenerator\Test\Functional\QuestionHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Tester\TesterTrait;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Test navigation command.
@@ -20,27 +19,11 @@ final class NavigationCommandTest extends FunctionalTestBase {
   use TesterTrait;
 
   /**
-   * {@inheritdoc}
-   */
-  public function setUp(): void {
-    parent::setUp();
-    $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function tearDown(): void {
-    parent::tearDown();
-    (new Filesystem())->remove($this->directory);
-  }
-
-  /**
    * Test callback.
    */
   public function testNavigation(): void {
 
-    $application = $this->createApplication();
+    $application = self::createApplication();
 
     $helper_set = $application->getHelperSet();
     $helper_set->set(new QuestionHelper());

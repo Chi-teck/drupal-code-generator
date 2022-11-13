@@ -15,8 +15,7 @@ final class HookInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testHelper(): void {
-    $container = $this->application->getContainer();
-    $hook_info = new HookInfo($container->get('module_handler'));
+    $hook_info = new HookInfo(self::bootstrap()->get('module_handler'));
     self::assertSame('hook_info', $hook_info->getName());
     self::assertInstanceOf(HelperInterface::class, $hook_info);
   }
@@ -25,8 +24,7 @@ final class HookInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testHookInfoTemplates(): void {
-    $container = $this->application->getContainer();
-    $hook_info = new HookInfo($container->get('module_handler'));
+    $hook_info = new HookInfo(self::bootstrap()->get('module_handler'));
     $hook_templates = $hook_info->getHookTemplates();
     self::assertCount(259, $hook_templates);
 

@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Test\Functional;
 
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Base class for generator tests.
@@ -12,23 +11,6 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
 
   protected string $display;
   protected string $fixtureDir;
-  private string $directory;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-    $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function tearDown(): void {
-    parent::tearDown();
-    (new Filesystem())->remove($this->directory);
-  }
 
   /**
    * Executes the command.
@@ -41,12 +23,12 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
    */
   protected function execute(string $command_class, array $user_input): int {
 
-    $command = $this->application
+    $application = self::createApplication();
+    $command = $application
       ->getContainer()
       ->get('class_resolver')
       ->getInstanceFromDefinition($command_class);
-
-    $this->application->add($command);
+    $application->add($command);
 
     $command_tester = new CommandTester($command);
     $result = $command_tester

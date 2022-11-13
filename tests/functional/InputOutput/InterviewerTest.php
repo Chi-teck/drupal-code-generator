@@ -601,7 +601,7 @@ final class InterviewerTest extends FunctionalTestBase {
     array $vars = [],
     GeneratorDefinition $definition = new GeneratorDefinition('example'),
   ): Interviewer {
-    $container = $this->application->getContainer();
+    $container = self::bootstrap();
     return new Interviewer(
       $this->io,
       $vars,

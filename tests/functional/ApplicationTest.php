@@ -3,7 +3,6 @@
 namespace DrupalCodeGenerator\Tests\Functional;
 
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Test DCG application.
@@ -13,29 +12,12 @@ use Symfony\Component\Filesystem\Filesystem;
 final class ApplicationTest extends FunctionalTestBase {
 
   /**
-   * {@inheritdoc}
-   */
-  public function setUp(): void {
-    parent::setUp();
-    $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function tearDown(): void {
-    parent::tearDown();
-    (new Filesystem())->remove($this->directory);
-  }
-
-  /**
    * Test callback.
    */
   public function testApplication(): void {
-
     $cmd = \sprintf(
       '%s/vendor/bin/dcg install --working-dir %s --destination %s -a action -a Action 2>&1',
-      \getcwd(),
+      \DRUPAL_ROOT,
       $this->directory,
       $this->directory,
     );

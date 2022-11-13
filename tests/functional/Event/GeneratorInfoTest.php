@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Functional;
+namespace DrupalCodeGenerator\Tests\Functional\Event;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator;
@@ -9,33 +9,11 @@ use DrupalCodeGenerator\Event\GeneratorInfo;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Test generator info event.
  */
 final class GeneratorInfoTest extends FunctionalTestBase {
-
-  /**
-   * Working directory.
-   */
-  private readonly string $directory;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-    $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function tearDown(): void {
-    parent::tearDown();
-    (new Filesystem())->remove($this->directory);
-  }
 
   /**
    * Test callback.
@@ -55,8 +33,7 @@ final class GeneratorInfoTest extends FunctionalTestBase {
       ->get('event_dispatcher')
       ->addListener(GeneratorInfo::class, $listener);
 
-    $application = $this->createApplication($container);
-    $application->setAutoExit(FALSE);
+    $application = self::createApplication($container);
 
     $application->getContainer()
       ->get('event_dispatcher')

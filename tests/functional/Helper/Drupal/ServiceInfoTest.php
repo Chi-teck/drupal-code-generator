@@ -14,7 +14,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetName(): void {
-    $service_info = new ServiceInfo($this->application->getContainer());
+    $service_info = new ServiceInfo(self::bootstrap());
     self::assertSame('service_info', $service_info->getName());
   }
 
@@ -22,7 +22,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServicesIds(): void {
-    $service_info = new ServiceInfo($this->application->getContainer());
+    $service_info = new ServiceInfo(self::bootstrap());
 
     $service_ids = $service_info->getServicesIds();
     self::assertGreaterThan(500, \count($service_ids));
@@ -43,7 +43,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServiceDefinitions(): void {
-    $service_info = new ServiceInfo($this->application->getContainer());
+    $service_info = new ServiceInfo(self::bootstrap());
 
     $definitions = $service_info->getServiceDefinitions();
     self::assertGreaterThan(500, \count($definitions));
@@ -83,7 +83,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServiceDefinition(): void {
-    $service_info = new ServiceInfo($this->application->getContainer());
+    $service_info = new ServiceInfo(self::bootstrap());
 
     $definition = $service_info->getServiceDefinition('current_route_match');
     $expected_definition = [

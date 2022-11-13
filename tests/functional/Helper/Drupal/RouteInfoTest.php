@@ -14,8 +14,7 @@ final class RouteInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetName(): void {
-    $container = $this->application->getContainer();
-    $route_info = new RouteInfo($container->get('router.route_provider'));
+    $route_info = new RouteInfo(self::bootstrap()->get('router.route_provider'));
     self::assertSame('route_info', $route_info->getName());
   }
 
@@ -23,8 +22,7 @@ final class RouteInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetRouteNames(): void {
-    $container = $this->application->getContainer();
-    $route_info = new RouteInfo($container->get('router.route_provider'));
+    $route_info = new RouteInfo(self::bootstrap()->get('router.route_provider'));
     $route_names = $route_info->getRouteNames();
     self::assertGreaterThan(300, \count($route_names));
     self::assertContains('<front>', $route_names);
