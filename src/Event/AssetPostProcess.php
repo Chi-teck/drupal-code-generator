@@ -5,9 +5,9 @@ namespace DrupalCodeGenerator\Event;
 use DrupalCodeGenerator\Asset\AssetCollection;
 
 /**
- * Fired when altering dumped assets.
+ * Fired after dumped assets.
  */
-final class PostProcessEvent {
+final class AssetPostProcess {
 
   use StoppableEventTrait;
 

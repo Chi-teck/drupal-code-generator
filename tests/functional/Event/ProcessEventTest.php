@@ -7,8 +7,8 @@ use DrupalCodeGenerator\Asset\Directory;
 use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Event\PostProcessEvent;
-use DrupalCodeGenerator\Event\PreProcessEvent;
+use DrupalCodeGenerator\Event\AssetPostProcess;
+use DrupalCodeGenerator\Event\AssetPreProcess;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -25,7 +25,7 @@ final class ProcessEventTest extends FunctionalTestBase {
     $application = self::createApplication();
     $application->add(self::createTestGenerator());
 
-    $listener = static function (PreProcessEvent $event): void {
+    $listener = static function (AssetPreProcess $event): void {
       $event->destination .= '/changed';
       /** @var \DrupalCodeGenerator\Asset\File $file */
       $file = $event->assets[0];
@@ -35,7 +35,7 @@ final class ProcessEventTest extends FunctionalTestBase {
     };
     $application->getContainer()
       ->get('event_dispatcher')
-      ->addListener(PreProcessEvent::class, $listener);
+      ->addListener(AssetPreProcess::class, $listener);
 
     $application->run(
       new StringInput('test -d ' . $this->directory),
@@ -69,7 +69,7 @@ final class ProcessEventTest extends FunctionalTestBase {
     $application = self::createApplication();
     $application->add(self::createTestGenerator());
 
-    $listener = function (PostProcessEvent $event): void {
+    $listener = function (AssetPostProcess $event): void {
       /** @var \DrupalCodeGenerator\Asset\File $file */
       $file = $event->assets[0];
       $path = $this->directory . '/' . $file->getPath();
@@ -79,7 +79,7 @@ final class ProcessEventTest extends FunctionalTestBase {
     };
     $application->getContainer()
       ->get('event_dispatcher')
-      ->addListener(PostProcessEvent::class, $listener);
+      ->addListener(AssetPostProcess::class, $listener);
 
     $application->run(
       new StringInput('test -d ' . $this->directory),

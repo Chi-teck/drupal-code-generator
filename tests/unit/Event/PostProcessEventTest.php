@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Unit\Event;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\Event\PostProcessEvent;
+use DrupalCodeGenerator\Event\AssetPostProcess;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,7 +16,7 @@ final class PostProcessEventTest extends TestCase {
    */
   public function testPreProcessEvent(): void {
     $assets = new AssetCollection();
-    $event = new PostProcessEvent($assets, 'some/path', 'example', FALSE);
+    $event = new AssetPostProcess($assets, 'some/path', 'example', FALSE);
     self::assertSame($assets, $event->assets);
     self::assertSame('some/path', $event->destination);
     self::assertSame('example', $event->commandName);

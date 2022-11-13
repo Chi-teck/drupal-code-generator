@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Tests\Unit\Event;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
-use DrupalCodeGenerator\Event\PreProcessEvent;
+use DrupalCodeGenerator\Event\AssetPreProcess;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,7 +16,7 @@ final class PreProcessEventTest extends TestCase {
    */
   public function testPreProcessEvent(): void {
     $assets = new AssetCollection();
-    $event = new PreProcessEvent($assets, 'some/path', 'example', FALSE);
+    $event = new AssetPreProcess($assets, 'some/path', 'example', FALSE);
     self::assertSame($assets, $event->assets);
     self::assertSame('some/path', $event->destination);
     self::assertSame('example', $event->commandName);

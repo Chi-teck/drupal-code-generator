@@ -4,8 +4,8 @@ namespace DrupalCodeGenerator\Command;
 
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
-use DrupalCodeGenerator\Event\PostProcessEvent;
-use DrupalCodeGenerator\Event\PreProcessEvent;
+use DrupalCodeGenerator\Event\AssetPostProcess;
+use DrupalCodeGenerator\Event\AssetPreProcess;
 use DrupalCodeGenerator\Exception\ExceptionInterface;
 use DrupalCodeGenerator\Exception\SilentException;
 use DrupalCodeGenerator\GeneratorType;
@@ -177,7 +177,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     $is_dry = $this->io()->getInput()->getOption('dry-run');
 
     $pre_process_event = $this->getApplication()->dispatch(
-      new PreProcessEvent($assets, $destination, $this->getName(), $is_dry),
+      new AssetPreProcess($assets, $destination, $this->getName(), $is_dry),
     );
     $assets = $pre_process_event->assets;
     $destination = $pre_process_event->destination;
@@ -187,7 +187,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     $dumped_assets = $dumper->dump($assets, $destination);
 
     $post_process_event = $this->getApplication()->dispatch(
-      new PostProcessEvent($dumped_assets, $destination, $this->getName(), $is_dry),
+      new AssetPostProcess($dumped_assets, $destination, $this->getName(), $is_dry),
     );
     return $post_process_event->assets;
   }
