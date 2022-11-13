@@ -8,6 +8,7 @@ use DrupalCodeGenerator\BootstrapHandler;
 use DrupalCodeGenerator\Helper\Renderer\TwigRenderer;
 use DrupalCodeGenerator\Twig\TwigEnvironment;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Loader\FilesystemLoader as FileSystemLoader;
 
 /**
@@ -28,13 +29,11 @@ abstract class FunctionalTestBase extends TestCase {
   /**
    * Creates DCG application.
    */
-  protected function createApplication(): Application {
+  protected function createApplication(?ContainerInterface $container = NULL): Application {
 
-    $root_package = InstalledVersions::getRootPackage();
-    $class_loader = require $root_package['install_path'] . 'vendor/autoload.php';
-
-    $bootstrap_handler = new BootstrapHandler($class_loader);
-    $container = $bootstrap_handler->bootstrap();
+    if (!$container) {
+      $container = self::bootstrap();
+    }
 
     $application = Application::create($container);
 
@@ -49,6 +48,17 @@ abstract class FunctionalTestBase extends TestCase {
     $twig_environment = new TwigEnvironment($template_loader, ['strict_variables' => TRUE]);
     $helper_set->set(new TwigRenderer($twig_environment));
     return $application;
+  }
+
+  /**
+   * Bootstraps Drupal.
+   */
+  protected static function bootstrap(): ContainerInterface {
+    $root_package = InstalledVersions::getRootPackage();
+    $class_loader = require $root_package['install_path'] . 'vendor/autoload.php';
+
+    $bootstrap_handler = new BootstrapHandler($class_loader);
+    return $bootstrap_handler->bootstrap();
   }
 
 }

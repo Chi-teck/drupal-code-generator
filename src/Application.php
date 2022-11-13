@@ -5,7 +5,7 @@ namespace DrupalCodeGenerator;
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\Event\ApplicationEvent;
-use DrupalCodeGenerator\Event\GeneratorsEvent;
+use DrupalCodeGenerator\Event\GeneratorInfo;
 use DrupalCodeGenerator\Helper\Drupal\ConfigInfo;
 use DrupalCodeGenerator\Helper\Drupal\HookInfo;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
@@ -87,11 +87,13 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
     $generator_factory = new GeneratorFactory(
       $application->getContainer()->get('class_resolver'),
     );
-    $generators_event = new GeneratorsEvent(
-      $generator_factory->getGenerators(),
-    );
+
+    $core_generators = $generator_factory->getGenerators();
+    $user_generators = [];
+    $application->dispatch(new GeneratorInfo($user_generators));
+
     $application->addCommands(
-      $application->dispatch($generators_event)->generators,
+      \array_merge($core_generators, $user_generators),
     );
 
     $application->add(new Navigation());
