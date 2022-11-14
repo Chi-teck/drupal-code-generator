@@ -21,7 +21,7 @@ final class QueueWorkerTest extends KernelTestBase {
    */
   public function testPlugin(): void {
     /** @var \Drupal\Core\Queue\QueueWorkerInterface $plugin */
-    $plugin = \Drupal::service('plugin.manager.queue_worker')
+    $plugin = $this->container->get('plugin.manager.queue_worker')
       ->createInstance('qux_example');
 
     // Check plugin definition.
@@ -31,13 +31,13 @@ final class QueueWorkerTest extends KernelTestBase {
 
     // As the plugin does nothing just make sure it can process items without
     // any errors.
-    $queue = \Drupal::queue('qux_example');
+    $queue = $this->container->get('queue')->get('qux_example');
     $queue->createQueue();
 
     $queue->createItem(['foo' => 'bar']);
     self::assertSame(1, $queue->numberOfItems());
 
-    \Drupal::service('cron')->run();
+    $this->container->get('cron')->run();
     self::assertSame(0, $queue->numberOfItems());
   }
 

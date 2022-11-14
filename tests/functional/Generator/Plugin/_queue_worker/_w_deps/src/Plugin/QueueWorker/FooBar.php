@@ -1,37 +1,31 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\QueueWorker;
+namespace Drupal\example\Plugin\QueueWorker;
 
-{% sort %}
-use Drupal\Core\Queue\QueueWorkerBase;
-  {% if services %}
-{{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Queue\QueueWorkerBase;
+use Drupal\Core\Theme\ThemeNegotiatorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
- * Defines '{{ plugin_id }}' queue worker.
+ * Defines 'example_foo_bar' queue worker.
  *
  * @QueueWorker(
- *   id = "{{ plugin_id }}",
- *   title = @Translation("{{ plugin_label }}"),
+ *   id = "example_foo_bar",
+ *   title = @Translation("Test"),
  *   cron = {"time" = 60},
  * )
  */
-final class {{ class }} extends QueueWorkerBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class FooBar extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
-{% if services %}
   /**
-   * Constructs a new {{ class }} instance.
+   * Constructs a new FooBar instance.
    */
   public function __construct(
     array $configuration,
     $plugin_id,
     $plugin_definition,
-{{ di.signature(services) }}
+    private readonly ThemeNegotiatorInterface $themeNegotiator,
    ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -44,11 +38,10 @@ final class {{ class }} extends QueueWorkerBase {% if services %}implements Cont
       $configuration,
       $plugin_id,
       $plugin_definition,
-{{ di.container(services) }}
+      $container->get('theme.negotiator'),
     );
   }
 
-{% endif %}
   /**
    * {@inheritdoc}
    */
