@@ -2,8 +2,10 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -13,6 +15,11 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Core\Menu\ContextualLinkManagerInterface;
+use Drupal\Core\Menu\LocalActionManagerInterface;
+use Drupal\Core\Queue\QueueWorkerManagerInterface;
+use Drupal\Core\Render\ElementInfoManagerInterface;
 use Drupal\Core\Site\Settings;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection as Assets;
@@ -255,42 +262,29 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
   }
 
   private function generatePlugins(Assets $assets): void {
-    // It's tricky to get the interfaces automatically as the
-    // PluginManagerBase::getFactory() method is protected. Here is a code
-    // snippet to obtain classes of plugin managers. The supported plugin
-    // interface needs to be checked manually for each plugin manager.
-    // @code
-    //   $plugin_managers = \array_filter(
-    //     $vars['services'],
-    //     static fn (string $class): bool
-    //       => \is_subclass_of($class, PluginManagerInterface::class),
-    //   );
-    // @endcode
-    //
-    // Note that \Drupal\views\Plugin\ViewsPluginManager class is not listed
-    // here as it is used by multiple plugin mangers.
     $plugins = [
       '\Drupal\Core\Action\ActionManager' => '\Drupal\Core\Action\ActionInterface',
       '\Drupal\Core\Archiver\ArchiverManager' => '\Drupal\Core\Archiver\ArchiverInterface',
-      '\Drupal\Core\Block\BlockManager' => '\Drupal\Core\Block\BlockPluginInterface',
-      '\Drupal\ckeditor5\Plugin\CKEditor5PluginManager' => '\Drupal\ckeditor5\Plugin\CKEditor5PluginInterface',
+      '\Drupal\Core\Block\BlockManagerInterface' => '\Drupal\Core\Block\BlockPluginInterface',
+      '\Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface' => '\Drupal\ckeditor5\Plugin\CKEditor5PluginInterface',
       '\Drupal\Core\Condition\ConditionManager' => '\Drupal\Core\Condition\ConditionInterface',
       '\Drupal\Core\Display\VariantManager' => '\Drupal\Core\Display\VariantInterface',
       '\Drupal\editor\Plugin\EditorManager' => '\Drupal\editor\Plugin\EditorPluginInterface',
-      '\Drupal\Core\Render\ElementInfoManager' => '\Drupal\Core\Render\Element\ElementInterface',
-      '\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManager' => '\Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface',
-      '\Drupal\Core\Field\FieldTypePluginManager' => '\Drupal\Core\Field\FieldItemInterface',
+      '\Drupal\Core\Render\ElementInfoManagerInterface' => '\Drupal\Core\Render\Element\ElementInterface',
+      '\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface' => '\Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface',
+      '\Drupal\Core\Field\FieldTypePluginManagerInterface' => '\Drupal\Core\Field\FieldItemInterface',
       '\Drupal\Core\Field\FormatterPluginManager' => '\Drupal\Core\Field\FormatterInterface',
       '\Drupal\Core\Field\WidgetPluginManager' => '\Drupal\Core\Field\WidgetInterface',
       '\Drupal\filter\FilterPluginManager' => '\Drupal\filter\Plugin\FilterInterface',
       '\Drupal\help\HelpSectionManager' => '\Drupal\help\HelpSectionPluginInterface',
       '\Drupal\image\ImageEffectManager' => '\Drupal\image\ImageEffectInterface',
       '\\Drupal\Core\Http\LinkRelationTypeManager' => '\Drupal\Core\Http\LinkRelationTypeInterface',
-      '\Drupal\Core\Mail\MailManager' => '\Drupal\Core\Mail\MailInterface',
-      '\Drupal\Core\Menu\ContextualLinkManager' => '\Drupal\Core\Menu\ContextualLinkInterface',
+      '\Drupal\Core\Mail\MailManagerInterface' => '\Drupal\Core\Mail\MailInterface',
+      '\Drupal\Core\Menu\ContextualLinkManagerInterface' => '\Drupal\Core\Menu\ContextualLinkInterface',
       '\Drupal\Core\Menu\LocalActionManager' => '\Drupal\Core\Menu\LocalActionInterface',
-      '\Drupal\Core\Menu\LocalTaskManager' => '\Drupal\Core\Menu\LocalTaskInterface',
-      '\Drupal\Core\Queue\QueueWorkerManager' => '\Drupal\Core\Queue\QueueWorkerInterface',
+      '\Drupal\Core\Menu\LocalActionManagerInterface' => '\Drupal\Core\Menu\LocalTaskInterface',
+      '\Drupal\Core\Menu\MenuLinkManagerInterface' => '\Drupal\Core\Menu\MenuLinkInterface',
+      '\Drupal\Core\Queue\QueueWorkerManagerInterface' => '\Drupal\Core\Queue\QueueWorkerInterface',
       '\Drupal\search\SearchPluginManager' => '\Drupal\search\Plugin\SearchInterface',
       '\Drupal\tour\TipPluginManager' => '\Drupal\tour\TipPluginInterface',
     ];
