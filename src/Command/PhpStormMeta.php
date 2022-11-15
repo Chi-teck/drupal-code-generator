@@ -2,10 +2,8 @@
 
 namespace DrupalCodeGenerator\Command;
 
-use Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
-use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -15,11 +13,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
-use Drupal\Core\Mail\MailManagerInterface;
-use Drupal\Core\Menu\ContextualLinkManagerInterface;
-use Drupal\Core\Menu\LocalActionManagerInterface;
-use Drupal\Core\Queue\QueueWorkerManagerInterface;
-use Drupal\Core\Render\ElementInfoManagerInterface;
 use Drupal\Core\Site\Settings;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection as Assets;
