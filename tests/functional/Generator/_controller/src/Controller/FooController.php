@@ -30,7 +30,7 @@ final class FooController extends ControllerBase {
   /**
    * Builds the response.
    */
-  public function build(): array {
+  public function __invoke(): array {
 
     $build['content'] = [
       '#type' => 'item',
