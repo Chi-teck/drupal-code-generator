@@ -1,3 +1,5 @@
 qux.test:
   menu_name: main
+  title: Example
+  route_name: qux.example
   class: Drupal\qux\Plugin\Menu\FooExampleLink

@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\qux\Kernel;
 
-use Drupal\Core\Database\Database;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\qux\Plugin\Menu\FooExampleLink;
 
 /**
  * Test for menu link plugin.
@@ -23,24 +23,14 @@ final class MenuLinkTest extends KernelTestBase {
   public function testMenuLink(): void {
 
     /** @var \Drupal\Core\Menu\MenuLinkManagerInterface $plugin_manager */
-    $plugin_manager = \Drupal::service('plugin.manager.menu.link');
+    $plugin_manager = $this->container->get('plugin.manager.menu.link');
     $plugin_manager->rebuild();
 
     $plugin = $plugin_manager->createInstance('qux.test');
 
-    $db_connection = Database::getConnection();
-
-    // Create a table for testing form submission.
-    $table['fields']['id']['type'] = 'int';
-    $db_connection->schema()->createTable('messages', $table);
-
-    self::assertEquals('Messages (0)', $plugin->getTitle());
-    $db_connection->insert('messages')->fields(['id' => 1])->execute();
-
-    self::assertEquals('Messages (1)', $plugin->getTitle());
-    self::assertSame('qux.messages', $plugin->getRouteName());
-
-    self::assertSame(['qux.messages_count'], $plugin->getCacheTags());
+    self::assertInstanceOf(FooExampleLink::class, $plugin);
+    self::assertSame('Example', $plugin->getTitle());
+    self::assertSame('qux.example', $plugin->getRouteName());
   }
 
 }

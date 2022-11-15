@@ -26,7 +26,7 @@ final class FooBar extends QueueWorkerBase implements ContainerFactoryPluginInte
     $plugin_id,
     $plugin_definition,
     private readonly ThemeNegotiatorInterface $themeNegotiator,
-   ) {
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 

@@ -1,16 +1,8 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\Menu;
+namespace Drupal\example\Plugin\Menu;
 
-{% sort %}
 use Drupal\Core\Menu\MenuLinkDefault;
-  {% if services %}
-{{ di.use(services) }}
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
  * @todo Provide description for this class.
@@ -38,32 +30,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   class: \Drupal\foo\Plugin\Menu\FooMenuLink
  * @endcode
  */
-final class {{ class }} extends MenuLinkDefault {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class FooMenuLink extends MenuLinkDefault {
 
-{% if services %}
-  /**
-   * Constructs a new {{ class }} instance.
-   */
-  public function __construct(
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
-{{ di.signature(services) }}
-  ) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
-    return new self(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-{{ di.container(services) }}
-    );
-  }
-
-{% endif %}
 }

@@ -221,7 +221,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
   $DCG plugin:condition -a qux -a Example -a example -a Example
   $DCG plugin:entity-reference-selection -a qux -a Qux -a node -a Example -a qux_example -a Example -a Yes
   $DCG plugin:filter -a qux -a Qux -a Example -a example -a Example -a 'HTML restrictor'
-  $DCG plugin:menu-link -a qux -a FooExampleLink
+  $DCG plugin:menu-link -a qux -a FooExampleLink -a No
   $DCG plugin:queue-worker -a qux -a Example -a qux_example -a Example -a No
   $DCG plugin:rest-resource -a qux -a Example -a qux_example -a ExampleResource
 
