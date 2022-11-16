@@ -13,6 +13,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
+use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Site\Settings;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection as Assets;
@@ -33,6 +34,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
    * {@inheritdoc}
    */
   public function __construct(
+    private readonly ContainerInterface $container,
     private readonly EntityTypeBundleInfoInterface $entityTypeBundleInfo,
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly EntityFieldManagerInterface $entityFieldManager,
@@ -49,6 +51,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
    */
   public static function create(ContainerInterface $container): self {
     return new self(
+      $container,
       $container->get('entity_type.bundle.info'),
       $container->get('entity_type.manager'),
       $container->get('entity_field.manager'),
@@ -255,32 +258,44 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
   }
 
   private function generatePlugins(Assets $assets): void {
-    $plugins = [
-      '\Drupal\Core\Action\ActionManager' => '\Drupal\Core\Action\ActionInterface',
-      '\Drupal\Core\Archiver\ArchiverManager' => '\Drupal\Core\Archiver\ArchiverInterface',
-      '\Drupal\Core\Block\BlockManagerInterface' => '\Drupal\Core\Block\BlockPluginInterface',
-      '\Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface' => '\Drupal\ckeditor5\Plugin\CKEditor5PluginInterface',
-      '\Drupal\Core\Condition\ConditionManager' => '\Drupal\Core\Condition\ConditionInterface',
-      '\Drupal\Core\Display\VariantManager' => '\Drupal\Core\Display\VariantInterface',
-      '\Drupal\editor\Plugin\EditorManager' => '\Drupal\editor\Plugin\EditorPluginInterface',
-      '\Drupal\Core\Render\ElementInfoManagerInterface' => '\Drupal\Core\Render\Element\ElementInterface',
-      '\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface' => '\Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface',
-      '\Drupal\Core\Field\FieldTypePluginManagerInterface' => '\Drupal\Core\Field\FieldItemInterface',
-      '\Drupal\Core\Field\FormatterPluginManager' => '\Drupal\Core\Field\FormatterInterface',
-      '\Drupal\Core\Field\WidgetPluginManager' => '\Drupal\Core\Field\WidgetInterface',
-      '\Drupal\filter\FilterPluginManager' => '\Drupal\filter\Plugin\FilterInterface',
-      '\Drupal\help\HelpSectionManager' => '\Drupal\help\HelpSectionPluginInterface',
-      '\Drupal\image\ImageEffectManager' => '\Drupal\image\ImageEffectInterface',
-      '\\Drupal\Core\Http\LinkRelationTypeManager' => '\Drupal\Core\Http\LinkRelationTypeInterface',
-      '\Drupal\Core\Mail\MailManagerInterface' => '\Drupal\Core\Mail\MailInterface',
-      '\Drupal\Core\Menu\ContextualLinkManagerInterface' => '\Drupal\Core\Menu\ContextualLinkInterface',
-      '\Drupal\Core\Menu\LocalActionManager' => '\Drupal\Core\Menu\LocalActionInterface',
-      '\Drupal\Core\Menu\LocalActionManagerInterface' => '\Drupal\Core\Menu\LocalTaskInterface',
-      '\Drupal\Core\Menu\MenuLinkManagerInterface' => '\Drupal\Core\Menu\MenuLinkInterface',
-      '\Drupal\Core\Queue\QueueWorkerManagerInterface' => '\Drupal\Core\Queue\QueueWorkerInterface',
-      '\Drupal\search\SearchPluginManager' => '\Drupal\search\Plugin\SearchInterface',
-      '\Drupal\tour\TipPluginManager' => '\Drupal\tour\TipPluginInterface',
-    ];
+
+    // Getter for protected 'pluginInterface' property.
+    $get_plugin_interface = static fn (DefaultPluginManager $manager): ?string =>
+      (new \ReflectionClass($manager))
+        ->getProperty('pluginInterface')
+        ->getValue($manager);
+
+    $plugins = [];
+    foreach ($this->getHelper('service_info')->getServiceDefinitions() as $manager_id => $manager_definition) {
+      if (!isset($manager_definition['class'])) {
+        continue;
+      }
+      if (!\is_subclass_of($manager_definition['class'], DefaultPluginManager::class)) {
+        continue;
+      }
+
+      /** @var \Drupal\Core\Plugin\DefaultPluginManager $manager */
+      $manager = $this->container->get($manager_id);
+      /** @var string $class */
+      $class = $manager_definition['class'];
+      self::addSlash($class);
+
+      $guessed_interface = $class . 'Interface';
+      $interface = $manager instanceof $guessed_interface
+        ? $guessed_interface : NULL;
+
+      $plugin_ids = \array_keys($manager->getDefinitions());
+      \sort($plugin_ids);
+
+      $plugins[] = [
+        'manager_id' => $manager_id,
+        'manager_class' => $class,
+        'manager_interface' => $interface,
+        'plugin_type' => $get_plugin_interface($manager),
+        'plugin_ids' => $plugin_ids,
+      ];
+    }
+
     $assets->addFile('.phpstorm.meta.php/plugins.php', 'plugins.php.twig')
       ->vars(['plugins' => $plugins]);
   }

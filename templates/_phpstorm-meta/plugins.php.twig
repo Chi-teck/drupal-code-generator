@@ -1,12 +1,38 @@
 <?php declare(strict_types = 1);
 
+{# @todo: Add meta for functions and methods that are specific to some plugin types. #}
 namespace PHPSTORM_META {
+{% for plugin in plugins %}
 
-{% for manager_class, plugin_class in plugins %}
+  // -- {{ plugin.manager_id }}.
 {# Using map() to work around PhpStorm bug. #}
 {# @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001516519 #}
-  override({{ manager_class }}::createInstance(), map(['' => '{{ plugin_class }}']));
-  override({{ manager_class }}::getInstance(), map(['' => '{{ plugin_class }}|bool']));
+  {% if plugin.plugin_type %}
+  override({{ plugin.manager_class }}::createInstance(), map(['' => '{{ plugin.plugin_type }}']));
+  override({{ plugin.manager_class }}::getInstance(), map(['' => '{{ plugin.plugin_type }}|bool']));
+    {% if plugin.manager_interface %}
+  override({{ plugin.manager_interface }}::createInstance(), map(['' => '{{ plugin.plugin_type }}']));
+  override({{ plugin.manager_interface }}::getInstance(), map(['' => '{{ plugin.plugin_type }}|bool']));
+    {% endif %}
+  {% endif %}
+  {% if plugin.plugin_ids|length > 0 %}
+    {% set set_name = plugin.manager_id ~ '__plugin_ids' %}
+  registerArgumentsSet('{{ set_name }}',
+    {% for plugin_id in plugin.plugin_ids %}
+    '{{ plugin_id }}',
+     {% endfor %}
+  );
+  expectedArguments({{ plugin.manager_class }}::createInstance(), 0, argumentsSet('{{ set_name }}'));
+  expectedArguments({{ plugin.manager_class }}::getDefinition(), 0, argumentsSet('{{ set_name }}'));
+  expectedArguments({{ plugin.manager_class }}::hasDefinition(), 0, argumentsSet('{{ set_name }}'));
+  expectedArguments({{ plugin.manager_class }}::processDefinition(), 1, argumentsSet('{{ set_name }}'));
+    {% if plugin.manager_interface %}
+  expectedArguments({{ plugin.manager_interface }}::createInstance(), 0, argumentsSet('{{ set_name }}'));
+  expectedArguments({{ plugin.manager_interface }}::getDefinition(), 0, argumentsSet('{{ set_name }}'));
+  expectedArguments({{ plugin.manager_interface }}::hasDefinition(), 0, argumentsSet('{{ set_name }}'));
+  expectedArguments({{ plugin.manager_interface }}::processDefinition(), 1, argumentsSet('{{ set_name }}'));
+    {% endif %}
+  {% endif %}
 {% endfor %}
 
 }
