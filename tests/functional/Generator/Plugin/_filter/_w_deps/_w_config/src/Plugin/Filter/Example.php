@@ -1,46 +1,36 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\Filter;
+namespace Drupal\foo\Plugin\Filter;
 
-{% sort %}
-  {% if configurable %}
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
-  {% endif %}
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
-  {% if services %}
-{{ di.use(services) }}
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
  * @todo Add filter description here.
  *
  * @Filter(
- *   id = "{{ plugin_id }}",
- *   title = @Translation("{{ plugin_label }}"),
- *   type = Drupal\filter\Plugin\FilterInterface::{{ filter_type }},
-{% if configurable %}
+ *   id = "foo_example",
+ *   title = @Translation("Example"),
+ *   type = Drupal\filter\Plugin\FilterInterface::TYPE_HTML_RESTRICTOR,
  *   settings = {
  *     "example" = "foo",
  *   },
-{% endif %}
  * )
  */
-final class {{ class }} extends FilterBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class Example extends FilterBase implements ContainerFactoryPluginInterface {
 
-{% if services %}
   /**
-   * Constructs a new {{ class }} instance.
+   * Constructs a new Example instance.
    */
   public function __construct(
     array $configuration,
     $plugin_id,
     $plugin_definition,
-{{ di.signature(services) }}
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -53,12 +43,10 @@ final class {{ class }} extends FilterBase {% if services %}implements Container
       $configuration,
       $plugin_id,
       $plugin_definition,
-{{ di.container(services) }}
+      $container->get('entity_type.manager'),
     );
   }
 
-{% endif %}
-{% if configurable %}
   /**
    * {@inheritdoc}
    */
@@ -72,15 +60,11 @@ final class {{ class }} extends FilterBase {% if services %}implements Container
     return $form;
   }
 
-{% endif %}
   /**
    * {@inheritdoc}
    */
   public function process($text, $langcode): FilterProcessResult {
     // @todo Process text here.
-{% if SUT_TEST %}
-    $text = \str_replace('foo', 'bar', $text);
-{% endif %}
     return new FilterProcessResult($text);
   }
 

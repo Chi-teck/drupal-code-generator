@@ -34,9 +34,13 @@ final class Filter extends BaseGenerator {
       'TYPE_TRANSFORM_REVERSIBLE' => 'Reversible transformation',
     ];
     $vars['filter_type'] = $ir->choice('Filter type', $filter_types);
+    $vars['configurable'] = $ir->confirm('Make the filter configurable?', FALSE);
+    $vars['services'] = $ir->askServices(FALSE);
 
     $assets->addFile('src/Plugin/Filter/{class}.php', 'filter.twig');
-    $assets->addSchemaFile()->template('schema.twig');
+    if ($vars['configurable']) {
+      $assets->addSchemaFile()->template('schema.twig');
+    }
   }
 
 }

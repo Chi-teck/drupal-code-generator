@@ -1,0 +1,7 @@
+filter_settings.foo_example:
+  type: filter
+  label: 'Example filter'
+  mapping:
+    example:
+      type: string
+      label: Example
