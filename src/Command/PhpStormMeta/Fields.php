@@ -31,11 +31,10 @@ final class Fields {
       if (!$definition->entityClassImplements(FieldableEntityInterface::class)) {
         continue;
       }
-      $class = Utils::addLeadingSlash($definition->getClass());
       $definitions[] = [
         'type' => $entity_type,
         'label' => $definition->getLabel(),
-        'class' => $class,
+        'class' => Utils::addLeadingSlash($definition->getClass()),
         'interface' => ($this->entityInterface)($definition),
         'fields' => \array_keys($this->entityFieldManager->getFieldStorageDefinitions($entity_type)),
       ];

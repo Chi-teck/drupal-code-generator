@@ -25,11 +25,10 @@ final class EntityLinks {
   public function __invoke(): File {
     $definitions = [];
     foreach ($this->entityTypeManager->getDefinitions() as $entity_type => $definition) {
-      $class = Utils::addLeadingSlash($definition->getClass());
       $definitions[] = [
         'type' => $entity_type,
         'label' => $definition->getLabel(),
-        'class' => $class,
+        'class' => Utils::addLeadingSlash($definition->getClass()),
         'interface' => ($this->entityInterface)($definition),
         'links' => \array_keys($definition->getLinkTemplates()),
       ];

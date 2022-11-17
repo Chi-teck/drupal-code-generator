@@ -33,11 +33,10 @@ final class EntityBundles {
       'comment' => 'getTypeId',
     ];
     foreach ($entity_definitions as $entity_type_id => $entity_definition) {
-      $class = $entity_definition->getClass();
       $definitions[] = [
         'type' => $entity_type_id,
         'label' => $entity_definition->getLabel(),
-        'class' => Utils::addLeadingSlash($class),
+        'class' => Utils::addLeadingSlash($entity_definition->getClass()),
         'interface' => ($this->entityInterface)($entity_definition),
         'bundle_getter' => $bundle_getters[$entity_type_id] ?? NULL,
         'bundles' => \array_keys($this->entityTypeBundleInfo->getBundleInfo($entity_type_id)),
