@@ -23,6 +23,13 @@ final class ServiceInfo extends Helper {
   }
 
   /**
+   * Gets a service by name.
+   */
+  public function getService(string $name): mixed {
+    return $this->container->get($name);
+  }
+
+  /**
    * Gets all defined service IDs.
    */
   public function getServicesIds(): array {

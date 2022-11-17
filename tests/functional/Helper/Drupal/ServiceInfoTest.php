@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Functional;
 
+use Drupal\Core\CronInterface;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
 
@@ -16,6 +17,14 @@ final class ServiceInfoTest extends FunctionalTestBase {
   public function testGetName(): void {
     $service_info = new ServiceInfo(self::bootstrap());
     self::assertSame('service_info', $service_info->getName());
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testGetService(): void {
+    $service_info = new ServiceInfo(self::bootstrap());
+    self::assertInstanceOf(CronInterface::class, $service_info->getService ('cron'));
   }
 
   /**
