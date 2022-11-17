@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
-use DrupalCodeGenerator\Command\PhpStormMeta;
+use DrupalCodeGenerator\Command\PhpStormMeta\PhpStormMeta;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
@@ -12,6 +12,9 @@ final class PhpStormMetaTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_phpstorm_meta';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
 
     $this->execute(PhpStormMeta::class, []);
@@ -44,14 +47,10 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    // The content of some files may vary depending on the Drupal version. So
-    // that we only assert specific parts of those files.
     $this->assertGeneratedFile('.phpstorm.meta.php/configuration.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/date_formats.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_bundles.php');
-    $this->assertEntityTypes();
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_links.php');
-    $this->assertExtensions();
     $this->assertGeneratedFile('.phpstorm.meta.php/field_definitions.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/fields.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/file_system.php');
@@ -60,6 +59,10 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $this->assertGeneratedFile('.phpstorm.meta.php/plugins.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/roles.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/routes.php');
+    // The content of some files may vary depending on the Drupal version. So
+    // that we only assert specific parts of those files.
+    $this->assertEntityTypes();
+    $this->assertExtensions();
     $this->assertServices();
     $this->assertSettings();
     $this->assertStates();

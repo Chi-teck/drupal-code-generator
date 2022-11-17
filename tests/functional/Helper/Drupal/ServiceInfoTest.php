@@ -24,7 +24,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
    */
   public function testGetService(): void {
     $service_info = new ServiceInfo(self::bootstrap());
-    self::assertInstanceOf(CronInterface::class, $service_info->getService ('cron'));
+    self::assertInstanceOf(CronInterface::class, $service_info->getService('cron'));
   }
 
   /**

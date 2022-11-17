@@ -1,0 +1,74 @@
+<?php declare(strict_types = 1);
+
+namespace DrupalCodeGenerator\Command\PhpStormMeta;
+
+use Drupal\Core\Plugin\DefaultPluginManager;
+use DrupalCodeGenerator\Asset\File;
+use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
+use DrupalCodeGenerator\Utils;
+
+/**
+ * Generates PhpStorm meta-data for plugins.
+ */
+final class Plugins {
+
+  /**
+   * Constructs the object.
+   */
+  public function __construct(
+    private readonly ServiceInfo $serviceInfo,
+  ) {}
+
+  /**
+   * Generator callback.
+   */
+  public function __invoke(): File {
+
+    $plugins = [];
+    foreach ($this->serviceInfo->getServiceDefinitions() as $manager_id => $manager_definition) {
+      /** @var string[] $manager_definition */
+      if (!isset($manager_definition['class'])) {
+        continue;
+      }
+      if (!\is_subclass_of($manager_definition['class'], DefaultPluginManager::class)) {
+        continue;
+      }
+      // That's just a workaround for some PhpStorm bug.
+      \assert(\is_string($manager_definition['class']));
+
+      $manager = $this->serviceInfo->getService($manager_id);
+
+      $class = Utils::addLeadingSlash($manager_definition['class']);
+
+      $guessed_interface = $class . 'Interface';
+      $interface = $manager instanceof $guessed_interface
+        ? $guessed_interface : NULL;
+
+      $plugin_ids = \array_keys($manager->getDefinitions());
+      \sort($plugin_ids);
+
+      $plugins[] = [
+        'manager_id' => $manager_id,
+        'manager_class' => $class,
+        'manager_interface' => $interface,
+        'plugin_interface' => self::getPluginInterface($manager),
+        'plugin_ids' => $plugin_ids,
+      ];
+    }
+
+    return File::create('.phpstorm.meta.php/plugins.php')
+      ->template('plugins.php.twig')
+      ->vars(['plugins' => $plugins]);
+  }
+
+  /**
+   * Getter for protected 'pluginInterface' property.
+   */
+  private static function getPluginInterface(DefaultPluginManager $manager): ?string {
+    $interface = (new \ReflectionClass($manager))
+      ->getProperty('pluginInterface')
+      ->getValue($manager);
+    return $interface ? Utils::addLeadingSlash($interface) : NULL;
+  }
+
+}

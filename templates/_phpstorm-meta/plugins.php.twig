@@ -7,12 +7,12 @@ namespace PHPSTORM_META {
   // -- {{ plugin.manager_id }}.
 {# Using map() to work around PhpStorm bug. #}
 {# @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001516519 #}
-  {% if plugin.plugin_type %}
-  override({{ plugin.manager_class }}::createInstance(), map(['' => '{{ plugin.plugin_type }}']));
-  override({{ plugin.manager_class }}::getInstance(), map(['' => '{{ plugin.plugin_type }}|bool']));
+  {% if plugin.plugin_interface %}
+  override({{ plugin.manager_class }}::createInstance(), map(['' => '{{ plugin.plugin_interface }}']));
+  override({{ plugin.manager_class }}::getInstance(), map(['' => '{{ plugin.plugin_interface }}|bool']));
     {% if plugin.manager_interface %}
-  override({{ plugin.manager_interface }}::createInstance(), map(['' => '{{ plugin.plugin_type }}']));
-  override({{ plugin.manager_interface }}::getInstance(), map(['' => '{{ plugin.plugin_type }}|bool']));
+  override({{ plugin.manager_interface }}::createInstance(), map(['' => '{{ plugin.plugin_interface }}']));
+  override({{ plugin.manager_interface }}::getInstance(), map(['' => '{{ plugin.plugin_interface }}|bool']));
     {% endif %}
   {% endif %}
   {% if plugin.plugin_ids|length > 0 %}

@@ -599,10 +599,10 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Config\TypedConfigManagerInterface::processDefinition(), 1, argumentsSet('config.typed__plugin_ids'));
 
   // -- entity_type.manager.
-  override(\Drupal\Core\Entity\EntityTypeManager::createInstance(), map(['' => 'Drupal\Core\Entity\EntityInterface']));
-  override(\Drupal\Core\Entity\EntityTypeManager::getInstance(), map(['' => 'Drupal\Core\Entity\EntityInterface|bool']));
-  override(\Drupal\Core\Entity\EntityTypeManagerInterface::createInstance(), map(['' => 'Drupal\Core\Entity\EntityInterface']));
-  override(\Drupal\Core\Entity\EntityTypeManagerInterface::getInstance(), map(['' => 'Drupal\Core\Entity\EntityInterface|bool']));
+  override(\Drupal\Core\Entity\EntityTypeManager::createInstance(), map(['' => '\Drupal\Core\Entity\EntityInterface']));
+  override(\Drupal\Core\Entity\EntityTypeManager::getInstance(), map(['' => '\Drupal\Core\Entity\EntityInterface|bool']));
+  override(\Drupal\Core\Entity\EntityTypeManagerInterface::createInstance(), map(['' => '\Drupal\Core\Entity\EntityInterface']));
+  override(\Drupal\Core\Entity\EntityTypeManagerInterface::getInstance(), map(['' => '\Drupal\Core\Entity\EntityInterface|bool']));
   registerArgumentsSet('entity_type.manager__plugin_ids',
     'action',
     'base_field_override',
@@ -649,8 +649,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Entity\EntityTypeManagerInterface::processDefinition(), 1, argumentsSet('entity_type.manager__plugin_ids'));
 
   // -- image.toolkit.manager.
-  override(\Drupal\Core\ImageToolkit\ImageToolkitManager::createInstance(), map(['' => 'Drupal\Core\ImageToolkit\ImageToolkitInterface']));
-  override(\Drupal\Core\ImageToolkit\ImageToolkitManager::getInstance(), map(['' => 'Drupal\Core\ImageToolkit\ImageToolkitInterface|bool']));
+  override(\Drupal\Core\ImageToolkit\ImageToolkitManager::createInstance(), map(['' => '\Drupal\Core\ImageToolkit\ImageToolkitInterface']));
+  override(\Drupal\Core\ImageToolkit\ImageToolkitManager::getInstance(), map(['' => '\Drupal\Core\ImageToolkit\ImageToolkitInterface|bool']));
   registerArgumentsSet('image.toolkit.manager__plugin_ids',
     'gd',
   );
@@ -660,10 +660,10 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\ImageToolkit\ImageToolkitManager::processDefinition(), 1, argumentsSet('image.toolkit.manager__plugin_ids'));
 
   // -- image.toolkit.operation.manager.
-  override(\Drupal\Core\ImageToolkit\ImageToolkitOperationManager::createInstance(), map(['' => 'Drupal\Core\ImageToolkit\ImageToolkitOperationInterface']));
-  override(\Drupal\Core\ImageToolkit\ImageToolkitOperationManager::getInstance(), map(['' => 'Drupal\Core\ImageToolkit\ImageToolkitOperationInterface|bool']));
-  override(\Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface::createInstance(), map(['' => 'Drupal\Core\ImageToolkit\ImageToolkitOperationInterface']));
-  override(\Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface::getInstance(), map(['' => 'Drupal\Core\ImageToolkit\ImageToolkitOperationInterface|bool']));
+  override(\Drupal\Core\ImageToolkit\ImageToolkitOperationManager::createInstance(), map(['' => '\Drupal\Core\ImageToolkit\ImageToolkitOperationInterface']));
+  override(\Drupal\Core\ImageToolkit\ImageToolkitOperationManager::getInstance(), map(['' => '\Drupal\Core\ImageToolkit\ImageToolkitOperationInterface|bool']));
+  override(\Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface::createInstance(), map(['' => '\Drupal\Core\ImageToolkit\ImageToolkitOperationInterface']));
+  override(\Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface::getInstance(), map(['' => '\Drupal\Core\ImageToolkit\ImageToolkitOperationInterface|bool']));
   registerArgumentsSet('image.toolkit.operation.manager__plugin_ids',
     'gd_convert',
     'gd_create_new',
@@ -684,8 +684,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface::processDefinition(), 1, argumentsSet('image.toolkit.operation.manager__plugin_ids'));
 
   // -- plugin.manager.action.
-  override(\Drupal\Core\Action\ActionManager::createInstance(), map(['' => 'Drupal\Core\Action\ActionInterface']));
-  override(\Drupal\Core\Action\ActionManager::getInstance(), map(['' => 'Drupal\Core\Action\ActionInterface|bool']));
+  override(\Drupal\Core\Action\ActionManager::createInstance(), map(['' => '\Drupal\Core\Action\ActionInterface']));
+  override(\Drupal\Core\Action\ActionManager::getInstance(), map(['' => '\Drupal\Core\Action\ActionInterface|bool']));
   registerArgumentsSet('plugin.manager.action__plugin_ids',
     'action_goto_action',
     'action_message_action',
@@ -730,8 +730,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Action\ActionManager::processDefinition(), 1, argumentsSet('plugin.manager.action__plugin_ids'));
 
   // -- plugin.manager.archiver.
-  override(\Drupal\Core\Archiver\ArchiverManager::createInstance(), map(['' => 'Drupal\Core\Archiver\ArchiverInterface']));
-  override(\Drupal\Core\Archiver\ArchiverManager::getInstance(), map(['' => 'Drupal\Core\Archiver\ArchiverInterface|bool']));
+  override(\Drupal\Core\Archiver\ArchiverManager::createInstance(), map(['' => '\Drupal\Core\Archiver\ArchiverInterface']));
+  override(\Drupal\Core\Archiver\ArchiverManager::getInstance(), map(['' => '\Drupal\Core\Archiver\ArchiverInterface|bool']));
   registerArgumentsSet('plugin.manager.archiver__plugin_ids',
     'Tar',
     'Zip',
@@ -742,10 +742,10 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Archiver\ArchiverManager::processDefinition(), 1, argumentsSet('plugin.manager.archiver__plugin_ids'));
 
   // -- plugin.manager.block.
-  override(\Drupal\Core\Block\BlockManager::createInstance(), map(['' => 'Drupal\Core\Block\BlockPluginInterface']));
-  override(\Drupal\Core\Block\BlockManager::getInstance(), map(['' => 'Drupal\Core\Block\BlockPluginInterface|bool']));
-  override(\Drupal\Core\Block\BlockManagerInterface::createInstance(), map(['' => 'Drupal\Core\Block\BlockPluginInterface']));
-  override(\Drupal\Core\Block\BlockManagerInterface::getInstance(), map(['' => 'Drupal\Core\Block\BlockPluginInterface|bool']));
+  override(\Drupal\Core\Block\BlockManager::createInstance(), map(['' => '\Drupal\Core\Block\BlockPluginInterface']));
+  override(\Drupal\Core\Block\BlockManager::getInstance(), map(['' => '\Drupal\Core\Block\BlockPluginInterface|bool']));
+  override(\Drupal\Core\Block\BlockManagerInterface::createInstance(), map(['' => '\Drupal\Core\Block\BlockPluginInterface']));
+  override(\Drupal\Core\Block\BlockManagerInterface::getInstance(), map(['' => '\Drupal\Core\Block\BlockPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.block__plugin_ids',
     'broken',
     'help_block',
@@ -781,10 +781,10 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Block\BlockManagerInterface::processDefinition(), 1, argumentsSet('plugin.manager.block__plugin_ids'));
 
   // -- plugin.manager.ckeditor5.plugin.
-  override(\Drupal\ckeditor5\Plugin\CKEditor5PluginManager::createInstance(), map(['' => 'Drupal\ckeditor5\Plugin\CKEditor5PluginInterface']));
-  override(\Drupal\ckeditor5\Plugin\CKEditor5PluginManager::getInstance(), map(['' => 'Drupal\ckeditor5\Plugin\CKEditor5PluginInterface|bool']));
-  override(\Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface::createInstance(), map(['' => 'Drupal\ckeditor5\Plugin\CKEditor5PluginInterface']));
-  override(\Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface::getInstance(), map(['' => 'Drupal\ckeditor5\Plugin\CKEditor5PluginInterface|bool']));
+  override(\Drupal\ckeditor5\Plugin\CKEditor5PluginManager::createInstance(), map(['' => '\Drupal\ckeditor5\Plugin\CKEditor5PluginInterface']));
+  override(\Drupal\ckeditor5\Plugin\CKEditor5PluginManager::getInstance(), map(['' => '\Drupal\ckeditor5\Plugin\CKEditor5PluginInterface|bool']));
+  override(\Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface::createInstance(), map(['' => '\Drupal\ckeditor5\Plugin\CKEditor5PluginInterface']));
+  override(\Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface::getInstance(), map(['' => '\Drupal\ckeditor5\Plugin\CKEditor5PluginInterface|bool']));
   registerArgumentsSet('plugin.manager.ckeditor5.plugin__plugin_ids',
     'ckeditor5_alignment',
     'ckeditor5_arbitraryHtmlSupport',
@@ -834,8 +834,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\ckeditor5\Plugin\CKEditor5PluginManagerInterface::processDefinition(), 1, argumentsSet('plugin.manager.ckeditor5.plugin__plugin_ids'));
 
   // -- plugin.manager.condition.
-  override(\Drupal\Core\Condition\ConditionManager::createInstance(), map(['' => 'Drupal\Core\Condition\ConditionInterface']));
-  override(\Drupal\Core\Condition\ConditionManager::getInstance(), map(['' => 'Drupal\Core\Condition\ConditionInterface|bool']));
+  override(\Drupal\Core\Condition\ConditionManager::createInstance(), map(['' => '\Drupal\Core\Condition\ConditionInterface']));
+  override(\Drupal\Core\Condition\ConditionManager::getInstance(), map(['' => '\Drupal\Core\Condition\ConditionInterface|bool']));
   registerArgumentsSet('plugin.manager.condition__plugin_ids',
     'current_theme',
     'entity_bundle:block_content',
@@ -854,8 +854,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Condition\ConditionManager::processDefinition(), 1, argumentsSet('plugin.manager.condition__plugin_ids'));
 
   // -- plugin.manager.display_variant.
-  override(\Drupal\Core\Display\VariantManager::createInstance(), map(['' => 'Drupal\Core\Display\VariantInterface']));
-  override(\Drupal\Core\Display\VariantManager::getInstance(), map(['' => 'Drupal\Core\Display\VariantInterface|bool']));
+  override(\Drupal\Core\Display\VariantManager::createInstance(), map(['' => '\Drupal\Core\Display\VariantInterface']));
+  override(\Drupal\Core\Display\VariantManager::getInstance(), map(['' => '\Drupal\Core\Display\VariantInterface|bool']));
   registerArgumentsSet('plugin.manager.display_variant__plugin_ids',
     'block_page',
     'simple_page',
@@ -866,8 +866,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Display\VariantManager::processDefinition(), 1, argumentsSet('plugin.manager.display_variant__plugin_ids'));
 
   // -- plugin.manager.editor.
-  override(\Drupal\editor\Plugin\EditorManager::createInstance(), map(['' => 'Drupal\editor\Plugin\EditorPluginInterface']));
-  override(\Drupal\editor\Plugin\EditorManager::getInstance(), map(['' => 'Drupal\editor\Plugin\EditorPluginInterface|bool']));
+  override(\Drupal\editor\Plugin\EditorManager::createInstance(), map(['' => '\Drupal\editor\Plugin\EditorPluginInterface']));
+  override(\Drupal\editor\Plugin\EditorManager::getInstance(), map(['' => '\Drupal\editor\Plugin\EditorPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.editor__plugin_ids',
     'ckeditor5',
   );
@@ -877,10 +877,10 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\editor\Plugin\EditorManager::processDefinition(), 1, argumentsSet('plugin.manager.editor__plugin_ids'));
 
   // -- plugin.manager.element_info.
-  override(\Drupal\Core\Render\ElementInfoManager::createInstance(), map(['' => 'Drupal\Core\Render\Element\ElementInterface']));
-  override(\Drupal\Core\Render\ElementInfoManager::getInstance(), map(['' => 'Drupal\Core\Render\Element\ElementInterface|bool']));
-  override(\Drupal\Core\Render\ElementInfoManagerInterface::createInstance(), map(['' => 'Drupal\Core\Render\Element\ElementInterface']));
-  override(\Drupal\Core\Render\ElementInfoManagerInterface::getInstance(), map(['' => 'Drupal\Core\Render\Element\ElementInterface|bool']));
+  override(\Drupal\Core\Render\ElementInfoManager::createInstance(), map(['' => '\Drupal\Core\Render\Element\ElementInterface']));
+  override(\Drupal\Core\Render\ElementInfoManager::getInstance(), map(['' => '\Drupal\Core\Render\Element\ElementInterface|bool']));
+  override(\Drupal\Core\Render\ElementInfoManagerInterface::createInstance(), map(['' => '\Drupal\Core\Render\Element\ElementInterface']));
+  override(\Drupal\Core\Render\ElementInfoManagerInterface::getInstance(), map(['' => '\Drupal\Core\Render\Element\ElementInterface|bool']));
   registerArgumentsSet('plugin.manager.element_info__plugin_ids',
     'actions',
     'ajax',
@@ -960,10 +960,10 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Render\ElementInfoManagerInterface::processDefinition(), 1, argumentsSet('plugin.manager.element_info__plugin_ids'));
 
   // -- plugin.manager.entity_reference_selection.
-  override(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManager::createInstance(), map(['' => 'Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface']));
-  override(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManager::getInstance(), map(['' => 'Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface|bool']));
-  override(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface::createInstance(), map(['' => 'Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface']));
-  override(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface::getInstance(), map(['' => 'Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface|bool']));
+  override(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManager::createInstance(), map(['' => '\Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface']));
+  override(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManager::getInstance(), map(['' => '\Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface|bool']));
+  override(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface::createInstance(), map(['' => '\Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface']));
+  override(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface::getInstance(), map(['' => '\Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface|bool']));
   registerArgumentsSet('plugin.manager.entity_reference_selection__plugin_ids',
     'broken',
     'default:action',
@@ -1012,10 +1012,10 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface::processDefinition(), 1, argumentsSet('plugin.manager.entity_reference_selection__plugin_ids'));
 
   // -- plugin.manager.field.field_type.
-  override(\Drupal\Core\Field\FieldTypePluginManager::createInstance(), map(['' => 'Drupal\Core\Field\FieldItemInterface']));
-  override(\Drupal\Core\Field\FieldTypePluginManager::getInstance(), map(['' => 'Drupal\Core\Field\FieldItemInterface|bool']));
-  override(\Drupal\Core\Field\FieldTypePluginManagerInterface::createInstance(), map(['' => 'Drupal\Core\Field\FieldItemInterface']));
-  override(\Drupal\Core\Field\FieldTypePluginManagerInterface::getInstance(), map(['' => 'Drupal\Core\Field\FieldItemInterface|bool']));
+  override(\Drupal\Core\Field\FieldTypePluginManager::createInstance(), map(['' => '\Drupal\Core\Field\FieldItemInterface']));
+  override(\Drupal\Core\Field\FieldTypePluginManager::getInstance(), map(['' => '\Drupal\Core\Field\FieldItemInterface|bool']));
+  override(\Drupal\Core\Field\FieldTypePluginManagerInterface::createInstance(), map(['' => '\Drupal\Core\Field\FieldItemInterface']));
+  override(\Drupal\Core\Field\FieldTypePluginManagerInterface::getInstance(), map(['' => '\Drupal\Core\Field\FieldItemInterface|bool']));
   registerArgumentsSet('plugin.manager.field.field_type__plugin_ids',
     'boolean',
     'changed',
@@ -1057,8 +1057,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Field\FieldTypePluginManagerInterface::processDefinition(), 1, argumentsSet('plugin.manager.field.field_type__plugin_ids'));
 
   // -- plugin.manager.field.formatter.
-  override(\Drupal\Core\Field\FormatterPluginManager::createInstance(), map(['' => 'Drupal\Core\Field\FormatterInterface']));
-  override(\Drupal\Core\Field\FormatterPluginManager::getInstance(), map(['' => 'Drupal\Core\Field\FormatterInterface|bool']));
+  override(\Drupal\Core\Field\FormatterPluginManager::createInstance(), map(['' => '\Drupal\Core\Field\FormatterInterface']));
+  override(\Drupal\Core\Field\FormatterPluginManager::getInstance(), map(['' => '\Drupal\Core\Field\FormatterInterface|bool']));
   registerArgumentsSet('plugin.manager.field.formatter__plugin_ids',
     'author',
     'basic_string',
@@ -1111,8 +1111,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Field\FormatterPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.field.formatter__plugin_ids'));
 
   // -- plugin.manager.field.widget.
-  override(\Drupal\Core\Field\WidgetPluginManager::createInstance(), map(['' => 'Drupal\Core\Field\WidgetInterface']));
-  override(\Drupal\Core\Field\WidgetPluginManager::getInstance(), map(['' => 'Drupal\Core\Field\WidgetInterface|bool']));
+  override(\Drupal\Core\Field\WidgetPluginManager::createInstance(), map(['' => '\Drupal\Core\Field\WidgetInterface']));
+  override(\Drupal\Core\Field\WidgetPluginManager::getInstance(), map(['' => '\Drupal\Core\Field\WidgetInterface|bool']));
   registerArgumentsSet('plugin.manager.field.widget__plugin_ids',
     'boolean_checkbox',
     'comment_default',
@@ -1143,8 +1143,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Field\WidgetPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.field.widget__plugin_ids'));
 
   // -- plugin.manager.filter.
-  override(\Drupal\filter\FilterPluginManager::createInstance(), map(['' => 'Drupal\filter\Plugin\FilterInterface']));
-  override(\Drupal\filter\FilterPluginManager::getInstance(), map(['' => 'Drupal\filter\Plugin\FilterInterface|bool']));
+  override(\Drupal\filter\FilterPluginManager::createInstance(), map(['' => '\Drupal\filter\Plugin\FilterInterface']));
+  override(\Drupal\filter\FilterPluginManager::getInstance(), map(['' => '\Drupal\filter\Plugin\FilterInterface|bool']));
   registerArgumentsSet('plugin.manager.filter__plugin_ids',
     'editor_file_reference',
     'filter_align',
@@ -1163,8 +1163,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\filter\FilterPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.filter__plugin_ids'));
 
   // -- plugin.manager.help_section.
-  override(\Drupal\help\HelpSectionManager::createInstance(), map(['' => 'Drupal\help\HelpSectionPluginInterface']));
-  override(\Drupal\help\HelpSectionManager::getInstance(), map(['' => 'Drupal\help\HelpSectionPluginInterface|bool']));
+  override(\Drupal\help\HelpSectionManager::createInstance(), map(['' => '\Drupal\help\HelpSectionPluginInterface']));
+  override(\Drupal\help\HelpSectionManager::getInstance(), map(['' => '\Drupal\help\HelpSectionPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.help_section__plugin_ids',
     'hook_help',
     'tour',
@@ -1175,8 +1175,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\help\HelpSectionManager::processDefinition(), 1, argumentsSet('plugin.manager.help_section__plugin_ids'));
 
   // -- plugin.manager.image.effect.
-  override(\Drupal\image\ImageEffectManager::createInstance(), map(['' => 'Drupal\image\ImageEffectInterface']));
-  override(\Drupal\image\ImageEffectManager::getInstance(), map(['' => 'Drupal\image\ImageEffectInterface|bool']));
+  override(\Drupal\image\ImageEffectManager::createInstance(), map(['' => '\Drupal\image\ImageEffectInterface']));
+  override(\Drupal\image\ImageEffectManager::getInstance(), map(['' => '\Drupal\image\ImageEffectInterface|bool']));
   registerArgumentsSet('plugin.manager.image.effect__plugin_ids',
     'image_convert',
     'image_crop',
@@ -1192,8 +1192,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\image\ImageEffectManager::processDefinition(), 1, argumentsSet('plugin.manager.image.effect__plugin_ids'));
 
   // -- plugin.manager.link_relation_type.
-  override(\Drupal\Core\Http\LinkRelationTypeManager::createInstance(), map(['' => 'Drupal\Core\Http\LinkRelationTypeInterface']));
-  override(\Drupal\Core\Http\LinkRelationTypeManager::getInstance(), map(['' => 'Drupal\Core\Http\LinkRelationTypeInterface|bool']));
+  override(\Drupal\Core\Http\LinkRelationTypeManager::createInstance(), map(['' => '\Drupal\Core\Http\LinkRelationTypeInterface']));
+  override(\Drupal\Core\Http\LinkRelationTypeManager::getInstance(), map(['' => '\Drupal\Core\Http\LinkRelationTypeInterface|bool']));
   registerArgumentsSet('plugin.manager.link_relation_type__plugin_ids',
     'about',
     'add-form',
@@ -1300,10 +1300,10 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Http\LinkRelationTypeManager::processDefinition(), 1, argumentsSet('plugin.manager.link_relation_type__plugin_ids'));
 
   // -- plugin.manager.mail.
-  override(\Drupal\Core\Mail\MailManager::createInstance(), map(['' => 'Drupal\Core\Mail\MailInterface']));
-  override(\Drupal\Core\Mail\MailManager::getInstance(), map(['' => 'Drupal\Core\Mail\MailInterface|bool']));
-  override(\Drupal\Core\Mail\MailManagerInterface::createInstance(), map(['' => 'Drupal\Core\Mail\MailInterface']));
-  override(\Drupal\Core\Mail\MailManagerInterface::getInstance(), map(['' => 'Drupal\Core\Mail\MailInterface|bool']));
+  override(\Drupal\Core\Mail\MailManager::createInstance(), map(['' => '\Drupal\Core\Mail\MailInterface']));
+  override(\Drupal\Core\Mail\MailManager::getInstance(), map(['' => '\Drupal\Core\Mail\MailInterface|bool']));
+  override(\Drupal\Core\Mail\MailManagerInterface::createInstance(), map(['' => '\Drupal\Core\Mail\MailInterface']));
+  override(\Drupal\Core\Mail\MailManagerInterface::getInstance(), map(['' => '\Drupal\Core\Mail\MailInterface|bool']));
   registerArgumentsSet('plugin.manager.mail__plugin_ids',
     'php_mail',
     'test_mail_collector',
@@ -1552,14 +1552,14 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Menu\LocalTaskManagerInterface::processDefinition(), 1, argumentsSet('plugin.manager.menu.local_task__plugin_ids'));
 
   // -- plugin.manager.queue_worker.
-  override(\Drupal\Core\Queue\QueueWorkerManager::createInstance(), map(['' => 'Drupal\Core\Queue\QueueWorkerInterface']));
-  override(\Drupal\Core\Queue\QueueWorkerManager::getInstance(), map(['' => 'Drupal\Core\Queue\QueueWorkerInterface|bool']));
-  override(\Drupal\Core\Queue\QueueWorkerManagerInterface::createInstance(), map(['' => 'Drupal\Core\Queue\QueueWorkerInterface']));
-  override(\Drupal\Core\Queue\QueueWorkerManagerInterface::getInstance(), map(['' => 'Drupal\Core\Queue\QueueWorkerInterface|bool']));
+  override(\Drupal\Core\Queue\QueueWorkerManager::createInstance(), map(['' => '\Drupal\Core\Queue\QueueWorkerInterface']));
+  override(\Drupal\Core\Queue\QueueWorkerManager::getInstance(), map(['' => '\Drupal\Core\Queue\QueueWorkerInterface|bool']));
+  override(\Drupal\Core\Queue\QueueWorkerManagerInterface::createInstance(), map(['' => '\Drupal\Core\Queue\QueueWorkerInterface']));
+  override(\Drupal\Core\Queue\QueueWorkerManagerInterface::getInstance(), map(['' => '\Drupal\Core\Queue\QueueWorkerInterface|bool']));
 
   // -- plugin.manager.search.
-  override(\Drupal\search\SearchPluginManager::createInstance(), map(['' => 'Drupal\search\Plugin\SearchInterface']));
-  override(\Drupal\search\SearchPluginManager::getInstance(), map(['' => 'Drupal\search\Plugin\SearchInterface|bool']));
+  override(\Drupal\search\SearchPluginManager::createInstance(), map(['' => '\Drupal\search\Plugin\SearchInterface']));
+  override(\Drupal\search\SearchPluginManager::getInstance(), map(['' => '\Drupal\search\Plugin\SearchInterface|bool']));
   registerArgumentsSet('plugin.manager.search__plugin_ids',
     'node_search',
     'user_search',
@@ -1570,8 +1570,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\search\SearchPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.search__plugin_ids'));
 
   // -- plugin.manager.tour.tip.
-  override(\Drupal\tour\TipPluginManager::createInstance(), map(['' => 'Drupal\tour\TipPluginInterface']));
-  override(\Drupal\tour\TipPluginManager::getInstance(), map(['' => 'Drupal\tour\TipPluginInterface|bool']));
+  override(\Drupal\tour\TipPluginManager::createInstance(), map(['' => '\Drupal\tour\TipPluginInterface']));
+  override(\Drupal\tour\TipPluginManager::getInstance(), map(['' => '\Drupal\tour\TipPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.tour.tip__plugin_ids',
     'text',
   );
@@ -1581,8 +1581,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\tour\TipPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.tour.tip__plugin_ids'));
 
   // -- plugin.manager.views.access.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.access__plugin_ids',
     'none',
     'perm',
@@ -1594,8 +1594,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.access__plugin_ids'));
 
   // -- plugin.manager.views.area.
-  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface']));
-  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
   registerArgumentsSet('plugin.manager.views.area__plugin_ids',
     'block_content_listing_empty',
     'broken',
@@ -1616,8 +1616,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsHandlerManager::processDefinition(), 1, argumentsSet('plugin.manager.views.area__plugin_ids'));
 
   // -- plugin.manager.views.argument.
-  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface']));
-  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
   registerArgumentsSet('plugin.manager.views.argument__plugin_ids',
     'argument_comment_user_uid',
     'broken',
@@ -1665,8 +1665,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsHandlerManager::processDefinition(), 1, argumentsSet('plugin.manager.views.argument__plugin_ids'));
 
   // -- plugin.manager.views.argument_default.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.argument_default__plugin_ids',
     'current_user',
     'fixed',
@@ -1682,8 +1682,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.argument_default__plugin_ids'));
 
   // -- plugin.manager.views.argument_validator.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.argument_validator__plugin_ids',
     'entity:action',
     'entity:base_field_override',
@@ -1730,8 +1730,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.argument_validator__plugin_ids'));
 
   // -- plugin.manager.views.cache.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.cache__plugin_ids',
     'none',
     'tag',
@@ -1743,8 +1743,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.cache__plugin_ids'));
 
   // -- plugin.manager.views.display.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.display__plugin_ids',
     'attachment',
     'block',
@@ -1760,8 +1760,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.display__plugin_ids'));
 
   // -- plugin.manager.views.display_extender.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.display_extender__plugin_ids',
     'default',
   );
@@ -1771,8 +1771,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.display_extender__plugin_ids'));
 
   // -- plugin.manager.views.exposed_form.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.exposed_form__plugin_ids',
     'basic',
     'input_required',
@@ -1783,8 +1783,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.exposed_form__plugin_ids'));
 
   // -- plugin.manager.views.field.
-  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface']));
-  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
   registerArgumentsSet('plugin.manager.views.field__plugin_ids',
     'boolean',
     'broken',
@@ -1844,8 +1844,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsHandlerManager::processDefinition(), 1, argumentsSet('plugin.manager.views.field__plugin_ids'));
 
   // -- plugin.manager.views.filter.
-  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface']));
-  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
   registerArgumentsSet('plugin.manager.views.filter__plugin_ids',
     'boolean',
     'boolean_string',
@@ -1888,8 +1888,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsHandlerManager::processDefinition(), 1, argumentsSet('plugin.manager.views.filter__plugin_ids'));
 
   // -- plugin.manager.views.join.
-  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\join\JoinPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\join\JoinPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\join\JoinPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\join\JoinPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.join__plugin_ids',
     'field_or_language_join',
     'standard',
@@ -1901,8 +1901,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsHandlerManager::processDefinition(), 1, argumentsSet('plugin.manager.views.join__plugin_ids'));
 
   // -- plugin.manager.views.pager.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.pager__plugin_ids',
     'full',
     'mini',
@@ -1915,8 +1915,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.pager__plugin_ids'));
 
   // -- plugin.manager.views.query.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.query__plugin_ids',
     'views_query',
   );
@@ -1926,8 +1926,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.query__plugin_ids'));
 
   // -- plugin.manager.views.relationship.
-  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface']));
-  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
   registerArgumentsSet('plugin.manager.views.relationship__plugin_ids',
     'broken',
     'entity_reverse',
@@ -1941,8 +1941,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsHandlerManager::processDefinition(), 1, argumentsSet('plugin.manager.views.relationship__plugin_ids'));
 
   // -- plugin.manager.views.row.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.row__plugin_ids',
     'comment_rss',
     'entity:block_content',
@@ -1964,8 +1964,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.row__plugin_ids'));
 
   // -- plugin.manager.views.sort.
-  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface']));
-  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface']));
+  override(\Drupal\views\Plugin\ViewsHandlerManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsHandlerInterface|bool']));
   registerArgumentsSet('plugin.manager.views.sort__plugin_ids',
     'broken',
     'comment_ces_last_comment_name',
@@ -1984,8 +1984,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsHandlerManager::processDefinition(), 1, argumentsSet('plugin.manager.views.sort__plugin_ids'));
 
   // -- plugin.manager.views.style.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.style__plugin_ids',
     'default',
     'default_summary',
@@ -2004,8 +2004,8 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\views\Plugin\ViewsPluginManager::processDefinition(), 1, argumentsSet('plugin.manager.views.style__plugin_ids'));
 
   // -- plugin.manager.views.wizard.
-  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface']));
-  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => 'Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::createInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface']));
+  override(\Drupal\views\Plugin\ViewsPluginManager::getInstance(), map(['' => '\Drupal\views\Plugin\views\ViewsPluginInterface|bool']));
   registerArgumentsSet('plugin.manager.views.wizard__plugin_ids',
     'block_content',
     'comment',
