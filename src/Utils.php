@@ -169,4 +169,14 @@ final class Utils {
     return $vars;
   }
 
+  /**
+   * Adds a leading slash to a string.
+   */
+  public static function addLeadingSlash(string $input): string {
+    if (!\str_starts_with($input, '\\')) {
+      $input = '\\' . $input;
+    }
+    return $input;
+  }
+
 }

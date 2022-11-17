@@ -259,4 +259,12 @@ final class UtilsTest extends BaseTestCase {
     self::assertSame($expected_vars, Utils::processVars($vars));
   }
 
+  /**
+   * Test callback.
+   */
+  public function testAddLeadingSlash(): void {
+    self::assertSame('\Example', Utils::addLeadingSlash('Example'));
+    self::assertSame('\Example', Utils::addLeadingSlash('\Example'));
+  }
+
 }
