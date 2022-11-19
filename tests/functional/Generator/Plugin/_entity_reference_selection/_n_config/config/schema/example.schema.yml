@@ -1,0 +1,3 @@
+entity_reference_selection.contact_message_selection:
+  type: entity_reference_selection.default
+  label: 'Contact message selection handler settings'

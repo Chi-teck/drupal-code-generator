@@ -1,39 +1,37 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example\Plugin\EntityReferenceSelection;
 
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Plugin\EntityReferenceSelection\NodeSelection;
 
 /**
- * Plugin description.
+ * @todo Add plugin description here.
  *
  * @EntityReferenceSelection(
- *   id = "example_advanced_node_selection",
+ *   id = "example_node_selection",
  *   label = @Translation("Advanced node selection"),
- *   group = "example_advanced_node_selection",
+ *   group = "example_node_selection",
  *   entity_types = {"node"},
- *   weight = 0
  * )
  */
-class ExampleNodeSelection extends NodeSelection {
+final class ExampleNodeSelection extends NodeSelection {
 
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
-
+  public function defaultConfiguration(): array {
     $default_configuration = [
       'foo' => 'bar',
     ];
-
     return $default_configuration + parent::defaultConfiguration();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildConfigurationForm($form, $form_state);
 
     $form['foo'] = [
@@ -48,14 +46,9 @@ class ExampleNodeSelection extends NodeSelection {
   /**
    * {@inheritdoc}
    */
-  protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS') {
+  protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS'): QueryInterface {
     $query = parent::buildEntityQuery($match, $match_operator);
-
-    // @DCG
-    // Here you can apply addition conditions, sorting, etc to the query.
-    // Also see self::entityQueryAlter().
-    $query->condition('field_example', 123);
-
+    // @todo Modify the query here.
     return $query;
   }
 

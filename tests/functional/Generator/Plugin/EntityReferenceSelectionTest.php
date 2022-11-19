@@ -12,13 +12,16 @@ final class EntityReferenceSelectionTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_entity_reference_selection';
 
-  public function testGenerator(): void {
+  /**
+   * Test callback.
+   */
+  public function testWithConfig(): void {
     $input = [
       'example',
       'Example',
       'node',
       'Advanced node selection',
-      'example_advanced_node_selection',
+      'example_node_selection',
       'ExampleNodeSelection',
       'Yes',
     ];
@@ -41,7 +44,7 @@ final class EntityReferenceSelectionTest extends GeneratorTestBase {
      Plugin label [Advanced node selection]:
      ➤ 
 
-     Plugin ID [example_advanced_node_selection]:
+     Plugin ID [example_node_selection]:
      ➤ 
 
      Plugin class [NodeSelection]:
@@ -58,8 +61,73 @@ final class EntityReferenceSelectionTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('config/schema/example.schema.yml');
-    $this->assertGeneratedFile('src/Plugin/EntityReferenceSelection/ExampleNodeSelection.php');
+    $this->assertGeneratedFile(
+      'config/schema/example.schema.yml',
+      '_w_config/config/schema/example.schema.yml',
+    );
+    $this->assertGeneratedFile(
+      'src/Plugin/EntityReferenceSelection/ExampleNodeSelection.php',
+      '_w_config/src/Plugin/EntityReferenceSelection/ExampleNodeSelection.php',
+    );
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testWithoutConfig(): void {
+    $input = [
+      'example',
+      'Example',
+      'contact_message',
+      'Contact message selection',
+      'contact_message_selection',
+      'ContactMessageSelection',
+      'No',
+    ];
+    $this->execute(EntityReferenceSelection::class, $input);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to entity-reference-selection generator!
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+     Module machine name:
+     ➤ 
+
+     Module name [Example]:
+     ➤ 
+
+     Entity type that can be referenced by this plugin [node]:
+     ➤ 
+
+     Plugin label [Advanced contact_message selection]:
+     ➤ 
+
+     Plugin ID [example_contact_message_selection]:
+     ➤ 
+
+     Plugin class [ContactMessageSelection]:
+     ➤ 
+
+     Provide additional plugin configuration? [No]:
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • config/schema/example.schema.yml
+     • src/Plugin/EntityReferenceSelection/ContactMessageSelection.php
+
+    TXT;
+    $this->assertDisplay($expected_display);
+
+    $this->assertGeneratedFile(
+      'config/schema/example.schema.yml',
+      '_n_config/config/schema/example.schema.yml',
+    );
+    $this->assertGeneratedFile(
+      'src/Plugin/EntityReferenceSelection/ContactMessageSelection.php',
+      '_n_config/src/Plugin/EntityReferenceSelection/ContactMessageSelection.php',
+    );
   }
 
 }
