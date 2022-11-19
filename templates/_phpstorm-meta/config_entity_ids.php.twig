@@ -1,0 +1,26 @@
+<?php declare(strict_types = 1);
+
+namespace PHPSTORM_META {
+
+{% for definition in definitions %}
+  // -- {{  definition.label }}.
+  {% set key = definition.type ~ '__ids' %}
+  registerArgumentsSet('{{ key }}',
+  {% for id in definition.ids %}
+    '{{ id }}',
+  {% endfor %}
+  );
+  expectedArguments({{ definition.class }}::load(), 0, argumentsSet('{{ key }}'));
+  expectedReturnValues({{ definition.class }}::id(), argumentsSet('{{ key }}'));
+  {% if definition.interface %}
+  expectedArguments({{ definition.interface }}::load(), 0, argumentsSet('{{ key }}'));
+  expectedReturnValues({{ definition.interface }}::id(), argumentsSet('{{ key }}'));
+  {% endif %}
+  {% if definition.type == 'filter_format' %}
+  expectedArguments(\check_markup(), 1, argumentsSet('{{ key }}'));
+  {% elseif definition.type == 'view' %}
+  expectedArguments(\views_embed_view(), 0, argumentsSet('{{ key }}'));
+  {% endif %}
+
+{% endfor %}
+}

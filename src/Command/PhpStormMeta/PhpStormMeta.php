@@ -53,6 +53,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
       return $definition->entityClassImplements($interface) ? $interface : NULL;
     };
 
+    $assets[] = (new ConfigEntityIds($service('entity_type.manager'), $entity_interface))();
     $assets[] = (new Configuration($this->getHelper('config_info')))();
     $assets[] = (new DateFormats($service('entity_type.manager')))();
     $assets[] = (new EntityBundles($service('entity_type.manager'), $service('entity_type.bundle.info'), $entity_interface))();

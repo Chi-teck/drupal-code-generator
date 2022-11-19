@@ -26,6 +26,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • .phpstorm.meta.php/config_entity_ids.php
      • .phpstorm.meta.php/configuration.php
      • .phpstorm.meta.php/date_formats.php
      • .phpstorm.meta.php/entity_bundles.php
@@ -47,6 +48,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
+    $this->assertGeneratedFile('.phpstorm.meta.php/config_entity_ids.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/configuration.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/date_formats.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_bundles.php');
@@ -157,8 +159,8 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::themeExists(), 0, argumentsSet('themes'));
       expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::getTheme(), 0, argumentsSet('themes'));
       expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::hasUi(), 0, argumentsSet('themes'));
-      expectedReturnValue(\Drupal\Core\Extension\ThemeHandlerInterface::getDefault(), argumentsSet('themes'));
-      expectedReturnValue(\Drupal\Core\Theme\ActiveTheme::getName(), argumentsSet('themes'));
+      expectedReturnValues(\Drupal\Core\Extension\ThemeHandlerInterface::getDefault(), argumentsSet('themes'));
+      expectedReturnValues(\Drupal\Core\Theme\ActiveTheme::getName(), argumentsSet('themes'));
     PHP;
     self::assertStringContainsString($themes, $generated_content);
   }

@@ -28,7 +28,7 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::themeExists(), 0, argumentsSet('themes'));
   expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::getTheme(), 0, argumentsSet('themes'));
   expectedArguments(\Drupal\Core\Extension\ThemeHandlerInterface::hasUi(), 0, argumentsSet('themes'));
-  expectedReturnValue(\Drupal\Core\Extension\ThemeHandlerInterface::getDefault(), argumentsSet('themes'));
-  expectedReturnValue(\Drupal\Core\Theme\ActiveTheme::getName(), argumentsSet('themes'));
+  expectedReturnValues(\Drupal\Core\Extension\ThemeHandlerInterface::getDefault(), argumentsSet('themes'));
+  expectedReturnValues(\Drupal\Core\Theme\ActiveTheme::getName(), argumentsSet('themes'));
 
 }
