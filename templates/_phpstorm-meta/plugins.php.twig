@@ -33,6 +33,10 @@ namespace PHPSTORM_META {
   expectedArguments({{ plugin.manager_interface }}::processDefinition(), 1, argumentsSet('{{ set_name }}'));
     {% endif %}
   {% endif %}
+  {% if plugin.manager_id == 'validation.constraint' %}
+  expectedArguments(\Drupal\Core\Entity\EntityTypeInterface::addConstraint(), 0, argumentsSet('validation.constraint__plugin_ids'));
+  expectedArguments(\Drupal\Core\TypedData\DataDefinitionInterface::addConstraint(), 0, argumentsSet('validation.constraint__plugin_ids'));
+  {% endif %}
 {% endfor %}
 
 }

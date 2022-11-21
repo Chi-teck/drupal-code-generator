@@ -2187,5 +2187,7 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Validation\ConstraintManager::getDefinition(), 0, argumentsSet('validation.constraint__plugin_ids'));
   expectedArguments(\Drupal\Core\Validation\ConstraintManager::hasDefinition(), 0, argumentsSet('validation.constraint__plugin_ids'));
   expectedArguments(\Drupal\Core\Validation\ConstraintManager::processDefinition(), 1, argumentsSet('validation.constraint__plugin_ids'));
+  expectedArguments(\Drupal\Core\Entity\EntityTypeInterface::addConstraint(), 0, argumentsSet('validation.constraint__plugin_ids'));
+  expectedArguments(\Drupal\Core\TypedData\DataDefinitionInterface::addConstraint(), 0, argumentsSet('validation.constraint__plugin_ids'));
 
 }
