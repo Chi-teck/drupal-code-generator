@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Validation\Constraint;
 
@@ -13,22 +13,30 @@ use Symfony\Component\Validator\Constraint;
  * )
 {% if input_type == 'entity' %}
  *
- * @DCG
- * To apply this constraint, see https://www.drupal.org/docs/drupal-apis/entity-api/entity-validation-api/providing-a-custom-validation-constraint.
+ * @see https://www.drupal.org/node/2015723.
 {% elseif input_type == 'item_list' %}
  *
  * @DCG
  * To apply this constraint on third party entity types implement either
  * hook_entity_base_field_info_alter() or hook_entity_bundle_field_info_alter().
+ *
+ * @see https://www.drupal.org/node/2015723
 {% elseif input_type == 'item' %}
  *
  * @DCG
  * To apply this constraint on third party field types. Implement
- * hook_field_info_alter().
+ * hook_field_info_alter() as follows.
+ * @code
+ * function {{ machine_name }}_field_info_alter(array &$info): void {
+ *   $info['FIELD_TYPE']['constraints']['{{ plugin_id }}'] = [];
+ * }
+ * @endcode
+ *
+ * @see https://www.drupal.org/node/2015723
 {% endif %}
  */
-class {{ class }} extends Constraint {
+final class {{ class }} extends Constraint {
 
-  public $errorMessage = 'The error message.';
+  public string $message = '@todo Specify error message here.';
 
 }

@@ -12,6 +12,9 @@ final class ConstraintTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_constraint';
 
+  /**
+   * Test callback.
+   */
   public function testEntityConstraint(): void {
     $input = [
       'foo',
@@ -20,6 +23,7 @@ final class ConstraintTest extends GeneratorTestBase {
       'FooAlpha',
       'AlphaConstraint',
       '1',
+      'No',
     ];
     $this->execute(Constraint::class, $input);
 
@@ -50,6 +54,9 @@ final class ConstraintTest extends GeneratorTestBase {
       [4] Raw value
      ➤ 
 
+     Would you like to inject dependencies? [No]:
+     ➤ 
+
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • src/Plugin/Validation/Constraint/AlphaConstraint.php
@@ -58,11 +65,14 @@ final class ConstraintTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->fixtureDir .= '/_entity';
+    $this->fixtureDir .= '/_n_deps/_entity';
     $this->assertGeneratedFile('src/Plugin/Validation/Constraint/AlphaConstraint.php');
     $this->assertGeneratedFile('src/Plugin/Validation/Constraint/AlphaConstraintValidator.php');
   }
 
+  /**
+   * Test callback.
+   */
   public function testItemListConstraint(): void {
     $input = [
       'foo',
@@ -71,6 +81,7 @@ final class ConstraintTest extends GeneratorTestBase {
       'FooBeta',
       'BetaConstraint',
       '2',
+      'No',
     ];
     $this->execute(Constraint::class, $input);
 
@@ -101,6 +112,9 @@ final class ConstraintTest extends GeneratorTestBase {
       [4] Raw value
      ➤ 
 
+     Would you like to inject dependencies? [No]:
+     ➤ 
+
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • src/Plugin/Validation/Constraint/BetaConstraint.php
@@ -109,11 +123,14 @@ final class ConstraintTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->fixtureDir .= '/_item_list';
+    $this->fixtureDir .= '/_n_deps/_item_list';
     $this->assertGeneratedFile('src/Plugin/Validation/Constraint/BetaConstraint.php');
     $this->assertGeneratedFile('src/Plugin/Validation/Constraint/BetaConstraintValidator.php');
   }
 
+  /**
+   * Test callback.
+   */
   public function testItemConstraint(): void {
     $input = [
       'foo',
@@ -122,6 +139,7 @@ final class ConstraintTest extends GeneratorTestBase {
       'FooGamma',
       'GammaConstraint',
       '3',
+      'No',
     ];
     $this->execute(Constraint::class, $input);
 
@@ -152,6 +170,9 @@ final class ConstraintTest extends GeneratorTestBase {
       [4] Raw value
      ➤ 
 
+     Would you like to inject dependencies? [No]:
+     ➤ 
+
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • src/Plugin/Validation/Constraint/GammaConstraint.php
@@ -160,12 +181,15 @@ final class ConstraintTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->fixtureDir .= '/_item';
+    $this->fixtureDir .= '/_n_deps/_item';
     $this->assertGeneratedFile('src/Plugin/Validation/Constraint/GammaConstraint.php');
     $this->assertGeneratedFile('src/Plugin/Validation/Constraint/GammaConstraintValidator.php');
   }
 
-  public function testRowValueConstraint(): void {
+  /**
+   * Test callback.
+   */
+  public function testRawValueConstraint(): void {
     $input = [
       'foo',
       'Foo',
@@ -173,6 +197,7 @@ final class ConstraintTest extends GeneratorTestBase {
       'FooDelta',
       'DeltaConstraint',
       '4',
+      'No',
     ];
     $this->execute(Constraint::class, $input);
 
@@ -203,6 +228,9 @@ final class ConstraintTest extends GeneratorTestBase {
       [4] Raw value
      ➤ 
 
+     Would you like to inject dependencies? [No]:
+     ➤ 
+
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • src/Plugin/Validation/Constraint/DeltaConstraint.php
@@ -211,7 +239,73 @@ final class ConstraintTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->fixtureDir .= '/_raw_value';
+    $this->fixtureDir .= '/_n_deps/_raw_value';
+    $this->assertGeneratedFile('src/Plugin/Validation/Constraint/DeltaConstraint.php');
+    $this->assertGeneratedFile('src/Plugin/Validation/Constraint/DeltaConstraintValidator.php');
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testRawValueConstraintWithDependencies(): void {
+    $input = [
+      'foo',
+      'Foo',
+      'Delta',
+      'FooDelta',
+      'DeltaConstraint',
+      '4',
+      'Yes',
+      'database',
+      '',
+    ];
+    $this->execute(Constraint::class, $input);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to constraint generator!
+    ––––––––––––––––––––––––––––––––––
+
+     Module machine name:
+     ➤ 
+
+     Module name [Foo]:
+     ➤ 
+
+     Plugin label:
+     ➤ 
+
+     Plugin ID [FooDelta]:
+     ➤ 
+
+     Plugin class [DeltaConstraint]:
+     ➤ 
+
+     Type of data to validate [Item list]:
+      [1] Entity
+      [2] Item list
+      [3] Item
+      [4] Raw value
+     ➤ 
+
+     Would you like to inject dependencies? [No]:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
+     Type the service name or use arrows up/down. Press enter to continue:
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • src/Plugin/Validation/Constraint/DeltaConstraint.php
+     • src/Plugin/Validation/Constraint/DeltaConstraintValidator.php
+
+    TXT;
+    $this->assertDisplay($expected_display);
+
+    $this->fixtureDir .= '/_w_deps/_raw_value';
     $this->assertGeneratedFile('src/Plugin/Validation/Constraint/DeltaConstraint.php');
     $this->assertGeneratedFile('src/Plugin/Validation/Constraint/DeltaConstraintValidator.php');
   }
