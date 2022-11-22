@@ -224,6 +224,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
   $DCG plugin:menu-link -a qux -a FooExampleLink -a No
   $DCG plugin:queue-worker -a qux -a Example -a qux_example -a Example -a No
   $DCG plugin:rest-resource -a qux -a Example -a qux_example -a ExampleResource
+  $DCG plugin:constraint -a qux -a Qux -a Example -a QuxConstraint -a ExampleConstraint -a 'Raw value' -a No
 
   dcg_phpcs .
   dcg_module_install $MODULE_MACHINE_NAME
