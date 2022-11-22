@@ -5,11 +5,11 @@ namespace Drupal\foo\Plugin\Validation\Constraint;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Provides a Beta constraint.
+ * Provides a Gamma constraint.
  *
  * @Constraint(
- *   id = "FooBeta",
- *   label = @Translation("Beta", context = "Validation"),
+ *   id = "FooGamma",
+ *   label = @Translation("Gamma", context = "Validation"),
  * )
  *
  * @DCG
@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraint;
  *
  * @see https://www.drupal.org/node/2015723
  */
-final class BetaConstraint extends Constraint {
+final class GammaConstraint extends Constraint {
 
   public string $message = '@todo Specify error message here.';
 

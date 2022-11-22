@@ -11,8 +11,6 @@ use Symfony\Component\Validator\Constraint;
  *   id = "FooAlpha",
  *   label = @Translation("Alpha", context = "Validation"),
  * )
- *
- * @see https://www.drupal.org/node/2015723.
  */
 final class AlphaConstraint extends Constraint {
 

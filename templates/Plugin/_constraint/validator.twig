@@ -6,6 +6,13 @@ namespace Drupal\{{ machine_name }}\Plugin\Validation\Constraint;
 {% sort %}
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+  {% if input_type == 'item' %}
+use Drupal\Core\Field\FieldItemInterface;
+  {% elseif input_type == 'item_list' %}
+use Drupal\Core\Field\FieldItemListInterface;
+  {% elseif input_type == 'entity' %}
+use Drupal\Core\Entity\EntityInterface;
+  {% endif %}
   {% if services %}
 {{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -20,7 +27,7 @@ final class {{ class }}Validator extends ConstraintValidator {% if services %}im
 
 {% if services %}
   /**
-   * Constructs a new {{ class }} instance.
+   * Constructs the object.
    */
   public function __construct(
     array $configuration,
@@ -47,23 +54,32 @@ final class {{ class }}Validator extends ConstraintValidator {% if services %}im
   /**
    * {@inheritdoc}
    */
-{% if input_type == 'entity' %}
-  public function validate($entity, Constraint $constraint): void {
-    // @todo Validate the entity here.
-    /** @var \Drupal\Core\Entity\EntityInterface $entity */
-    if ($entity->label() === 'wrong') {
-      // @DCG Use the following code to bind the violation to a specific field.
-      // @code
-      // $this->context->buildViolation($constraint->message)
-      //   ->atPath('field_example')
-      //   ->addViolation();
-      // @endcode
+{% if input_type == 'raw_value' %}
+  public function validate(mixed $value, Constraint $constraint): void {
+    // @todo Validate the value here.
+    if ($value === 'wrong') {
+      $this->context->addViolation($constraint->message);
+    }
+  }
+{% elseif input_type == 'item' %}
+  public function validate(mixed $item, Constraint $constraint): void {
+    if (!$item instanceof FieldItemInterface) {
+      throw new \InvalidArgumentException(
+        sprintf('The validated value must be instance of \Drupal\Core\Field\FieldItemInterface, %s was given.', get_debug_type($item))
+      );
+    }
+    // @todo Validate the item value here.
+    if ($item->value === 'wrong') {
       $this->context->addViolation($constraint->message);
     }
   }
 {% elseif input_type == 'item_list' %}
-  public function validate($items, Constraint $constraint): void {
-    /** @var \Drupal\Core\TypedData\Plugin\DataType\ItemList $items */
+  public function validate(mixed $items, Constraint $constraint): void {
+    if (!$items instanceof FieldItemListInterface) {
+      throw new \InvalidArgumentException(
+        sprintf('The validated value must be instance of \Drupal\Core\Field\FieldItemListInterface, %s was given.', get_debug_type($items))
+      );
+    }
     foreach ($items as $delta => $item) {
       // @todo Validate the item list here.
       if ($item->value === 'wrong') {
@@ -73,19 +89,21 @@ final class {{ class }}Validator extends ConstraintValidator {% if services %}im
       }
     }
   }
-{% elseif input_type == 'item' %}
-  public function validate($item, Constraint $constraint): void {
-    /** @var \Drupal\Core\Field\FieldItemInterface $item */
-    $value = $item->getValue()['value'];
-    // @todo Validate the item value here.
-    if ($value === 'wrong') {
-      $this->context->addViolation($constraint->message);
+{% elseif input_type == 'entity' %}
+  public function validate(mixed $entity, Constraint $constraint): void {
+    if (!$entity instanceof EntityInterface) {
+      throw new \InvalidArgumentException(
+        sprintf('The validated value must be instance of \Drupal\Core\Entity\EntityInterface, %s was given.', get_debug_type($entity))
+      );
     }
-  }
-{% else %}
-  public function validate($value, Constraint $constraint): void {
-    // @todo Validate the value here.
-    if ($value === 'wrong') {
+    // @todo Validate the entity here.
+    if ($entity->label() === 'wrong') {
+      // @DCG Use the following code to bind the violation to a specific field.
+      // @code
+      // $this->context->buildViolation($constraint->message)
+      //   ->atPath('field_example')
+      //   ->addViolation();
+      // @endcode
       $this->context->addViolation($constraint->message);
     }
   }

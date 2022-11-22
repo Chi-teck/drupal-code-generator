@@ -6,14 +6,14 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Validates the Delta constraint.
+ * Validates the Alpha constraint.
  */
-final class DeltaConstraintValidator extends ConstraintValidator {
+final class AlphaConstraintValidator extends ConstraintValidator {
 
   /**
    * {@inheritdoc}
    */
-  public function validate($value, Constraint $constraint): void {
+  public function validate(mixed $value, Constraint $constraint): void {
     // @todo Validate the value here.
     if ($value === 'wrong') {
       $this->context->addViolation($constraint->message);

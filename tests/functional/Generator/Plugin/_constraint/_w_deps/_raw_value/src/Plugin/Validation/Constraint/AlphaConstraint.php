@@ -5,14 +5,14 @@ namespace Drupal\foo\Plugin\Validation\Constraint;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Provides a Delta constraint.
+ * Provides an Alpha constraint.
  *
  * @Constraint(
- *   id = "FooDelta",
- *   label = @Translation("Delta", context = "Validation"),
+ *   id = "FooAlpha",
+ *   label = @Translation("Alpha", context = "Validation"),
  * )
  */
-final class DeltaConstraint extends Constraint {
+final class AlphaConstraint extends Constraint {
 
   public string $message = '@todo Specify error message here.';
 

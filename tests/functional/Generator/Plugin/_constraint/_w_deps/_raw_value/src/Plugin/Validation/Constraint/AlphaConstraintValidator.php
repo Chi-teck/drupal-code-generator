@@ -9,12 +9,12 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Validates the Delta constraint.
+ * Validates the Alpha constraint.
  */
-final class DeltaConstraintValidator extends ConstraintValidator implements ContainerFactoryPluginInterface {
+final class AlphaConstraintValidator extends ConstraintValidator implements ContainerFactoryPluginInterface {
 
   /**
-   * Constructs a new DeltaConstraint instance.
+   * Constructs the object.
    */
   public function __construct(
     array $configuration,
@@ -40,7 +40,7 @@ final class DeltaConstraintValidator extends ConstraintValidator implements Cont
   /**
    * {@inheritdoc}
    */
-  public function validate($value, Constraint $constraint): void {
+  public function validate(mixed $value, Constraint $constraint): void {
     // @todo Validate the value here.
     if ($value === 'wrong') {
       $this->context->addViolation($constraint->message);
