@@ -20,6 +20,9 @@ use DrupalCodeGenerator\Validator\RequiredServiceName;
 )]
 final class Custom extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();

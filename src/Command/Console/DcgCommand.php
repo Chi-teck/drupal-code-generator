@@ -27,6 +27,9 @@ use DrupalCodeGenerator\Validator\RegExp;
 )]
 final class DcgCommand extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
 

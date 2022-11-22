@@ -24,6 +24,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 )]
 final class EntityBundleClass extends BaseGenerator implements ContainerInjectionInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly EntityTypeBundleInfoInterface $bundleInfo,
@@ -31,6 +34,9 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
     parent::__construct();
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container): self {
     return new self(
       $container->get('entity_type.manager'),
@@ -38,6 +44,9 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
     );
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, AssetCollection $assets): void {
 
     $ir = $this->createInterviewer($vars);

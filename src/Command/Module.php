@@ -20,14 +20,23 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 )]
 final class Module extends BaseGenerator implements ContainerInjectionInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct(private ModuleExtensionList $moduleList) {
     parent::__construct();
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container): self {
     return new self($container->get('extension.list.module'));
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, AssetCollection $assets): void {
     $ir = $this->createInterviewer($vars);
 

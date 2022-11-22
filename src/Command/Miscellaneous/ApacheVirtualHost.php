@@ -19,6 +19,9 @@ use DrupalCodeGenerator\Validator\Required;
 )]
 final class ApacheVirtualHost extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, AssetCollection $assets): void {
     $vars['hostname'] = $this->io()->ask('Host name', 'example.local', self::getDomainValidator());
     $vars['docroot'] = $this->io()->ask('Document root', \DRUPAL_ROOT);

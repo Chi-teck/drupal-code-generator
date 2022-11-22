@@ -16,6 +16,9 @@ use DrupalCodeGenerator\Validator\RequiredMachineName;
 )]
 final class RenderElement extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();

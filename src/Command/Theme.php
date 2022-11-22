@@ -19,6 +19,9 @@ use DrupalCodeGenerator\Utils;
 )]
 final class Theme extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
     $vars['name'] = $ir->askName();

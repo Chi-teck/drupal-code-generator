@@ -17,6 +17,9 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class Task extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, Assets $assets): void {
     $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
     $assets->addFile('{machine_name}.links.task.yml', 'links.task.twig');

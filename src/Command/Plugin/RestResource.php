@@ -18,6 +18,9 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class RestResource extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
 

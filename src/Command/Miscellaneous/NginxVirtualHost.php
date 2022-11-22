@@ -22,6 +22,9 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class NginxVirtualHost extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, AssetCollection $assets): void {
     $socket = \PHP_MAJOR_VERSION == 5
       ? '/run/php5-fpm.sock'

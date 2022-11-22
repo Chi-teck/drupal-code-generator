@@ -17,6 +17,9 @@ use Symfony\Component\Console\Question\Question;
 )]
 final class Hook extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, AssetCollection $assets): void {
     $hook_info = $this->getHelper('hook_info');
 

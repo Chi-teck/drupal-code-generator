@@ -16,6 +16,9 @@ use DrupalCodeGenerator\Utils;
 )]
 final class Controller extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
 

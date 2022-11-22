@@ -17,6 +17,9 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class Breakpoints extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, Assets $assets): void {
     $interviewer = $this->createInterviewer($vars);
     $vars['machine_name'] = $interviewer->askMachineName();

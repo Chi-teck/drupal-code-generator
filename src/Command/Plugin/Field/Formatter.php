@@ -17,6 +17,9 @@ use DrupalCodeGenerator\GeneratorType;
 )]
 final class Formatter extends BaseGenerator {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function generate(array &$vars, AssetCollection $assets): void {
     $ir = $this->createInterviewer($vars);
 
