@@ -42,12 +42,12 @@ final class Constraint extends BaseGenerator {
     $vars['class'] = $ir->askPluginClass(default: $unprefixed_plugin_id . 'Constraint');
 
     $input_types = [
-      'entity' => 'Entity',
-      'item_list' => 'Item list',
-      'item' => 'Item',
       'raw_value' => 'Raw value',
+      'item' => 'Item',
+      'item_list' => 'Item list',
+      'entity' => 'Entity',
     ];
-    $vars['input_type'] = $ir->choice('Type of data to validate', $input_types, 'Item list');
+    $vars['input_type'] = $ir->choice('Type of data to validate', $input_types);
 
     $vars['services'] = $ir->askServices(FALSE);
 
