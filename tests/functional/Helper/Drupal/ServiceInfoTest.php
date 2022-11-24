@@ -91,6 +91,26 @@ final class ServiceInfoTest extends FunctionalTestBase {
   /**
    * Test callback.
    */
+  public function testGetServiceClasses(): void {
+    $service_info = new ServiceInfo(self::bootstrap());
+
+    $classes = $service_info->getServiceClasses();
+    self::assertGreaterThan(500, \count($classes));
+    self::assertLessThan(550, \count($classes));
+
+    $expected_service_ids = [
+      'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
+      'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
+      'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
+      'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',
+      'access_check.custom' => '\Drupal\Core\Access\CustomAccessCheck',
+    ];
+    self::assertSame($expected_service_ids, \array_slice($classes, 0, 5));
+  }
+
+  /**
+   * Test callback.
+   */
   public function testGetServiceDefinition(): void {
     $service_info = new ServiceInfo(self::bootstrap());
 

@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper\Drupal;
 
+use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -43,6 +44,21 @@ final class ServiceInfo extends Helper {
    */
   public function getServiceDefinitions(): array {
     return \array_map('unserialize', $this->getSerializedDefinitions());
+  }
+
+  /**
+   * Gets all service definitions.
+   */
+  public function getServiceClasses(): array {
+    $service_definitions = \array_filter(
+      $this->getServiceDefinitions(),
+      static fn ($definition): bool => \array_key_exists('class', $definition),
+    );
+    $classes = \array_combine(
+      \array_keys($service_definitions),
+      \array_column($service_definitions, 'class'),
+    );
+    return \array_map([Utils::class, 'addLeadingSlash'], $classes);
   }
 
   /**

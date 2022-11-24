@@ -25,20 +25,11 @@ final class Plugins {
   public function __invoke(): File {
 
     $plugins = [];
-    foreach ($this->serviceInfo->getServiceDefinitions() as $manager_id => $manager_definition) {
-      /** @var string[] $manager_definition */
-      if (!isset($manager_definition['class'])) {
+    foreach ($this->serviceInfo->getServiceClasses() as $manager_id => $class) {
+      if (!\is_subclass_of($class, DefaultPluginManager::class)) {
         continue;
       }
-      if (!\is_subclass_of($manager_definition['class'], DefaultPluginManager::class)) {
-        continue;
-      }
-      // That's just a workaround for some PhpStorm bug.
-      \assert(\is_string($manager_definition['class']));
-
       $manager = $this->serviceInfo->getService($manager_id);
-
-      $class = Utils::addLeadingSlash($manager_definition['class']);
 
       $guessed_interface = $class . 'Interface';
       $interface = $manager instanceof $guessed_interface
