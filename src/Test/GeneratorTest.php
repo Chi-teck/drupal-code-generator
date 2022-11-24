@@ -83,6 +83,8 @@ abstract class GeneratorTest extends TestCase {
   /**
    * Creates DCG application.
    *
+   * @psalm-suppress UndefinedClass
+   * @psalm-suppress TooFewArguments
    * @todo Fix this.
    */
   protected function createApplication(): Application {

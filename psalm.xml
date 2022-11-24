@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<psalm
+    xmlns="https://getpsalm.org/schema/config"
+    errorLevel="8"
+    autoloader="psalm-autoloader.php"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <ignoreFiles>
+            <!-- Psalm reports issues about Twig by some reason. -->
+            <directory name="vendor/twig"/>
+        </ignoreFiles>
+    </projectFiles>
+</psalm>

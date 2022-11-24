@@ -4,6 +4,9 @@ namespace DrupalCodeGenerator\Asset;
 
 /**
  * Asset collection.
+ *
+ * @template-implements \ArrayAccess<string,\DrupalCodeGenerator\Asset\Asset>
+ * @template-implements \IteratorAggregate<string,\DrupalCodeGenerator\Asset\Asset>
  */
 final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Countable, \Stringable {
 

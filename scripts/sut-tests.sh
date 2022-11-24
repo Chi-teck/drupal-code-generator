@@ -102,7 +102,7 @@ fi
 
 echo '🚩 Install local DCG'
 composer -d"$DRUPAL_DIR" config repositories.dcg "$(printf '{"type": "path", "url": "%s", "options": {"symlink": false}}' $SELF_DIR)"
-composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator
+composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator --with-all-dependencies
 echo '————————————————————————————————————————————'
 composer -d$DRUPAL_DIR show --ansi chi-teck/drupal-code-generator | head -n 10
 echo '————————————————————————————————————————————'
