@@ -218,7 +218,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
   $DCG plugin:action -a qux -a 'Update node title' -a qux_update_node_title -a UpdateNodeTitle -a DCG -a Yes
   $DCG plugin:block -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
   $DCG plugin:ckeditor -a qux -a 'Pooh Bear' -a qux_pooh_bear
-  $DCG plugin:condition -a qux -a Example -a example -a Example
+  $DCG plugin:condition -a qux -a Example -a example -a Example -a No
   $DCG plugin:entity-reference-selection -a qux -a Qux -a node -a Example -a qux_example -a Example -a Yes
   $DCG plugin:filter -a qux -a Qux -a Example -a example -a Example -a 'HTML restrictor' -a Yes -a No
   $DCG plugin:menu-link -a qux -a FooExampleLink -a No

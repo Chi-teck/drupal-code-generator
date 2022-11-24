@@ -1,37 +1,31 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\Condition;
+namespace Drupal\foo\Plugin\Condition;
 
-{% sort %}
 use Drupal\Core\Condition\ConditionPluginBase;
+use Drupal\Core\CronInterface;
 use Drupal\Core\Form\FormStateInterface;
-  {% if services %}
-{{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
- * Provides a '{{ plugin_label }}' condition.
+ * Provides a 'Example' condition.
  *
  * @Condition(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
+ *   id = "foo_example",
+ *   label = @Translation("Example"),
  * )
  */
-final class {{ class }} extends ConditionPluginBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class Example extends ConditionPluginBase implements ContainerFactoryPluginInterface {
 
-{% if services %}
   /**
-   * Constructs a new {{ class }} instance.
+   * Constructs a new Example instance.
    */
   public function __construct(
     array $configuration,
     $plugin_id,
     $plugin_definition,
-{{ di.signature(services) }}
+    private readonly CronInterface $cron,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -44,11 +38,10 @@ final class {{ class }} extends ConditionPluginBase {% if services %}implements 
       $configuration,
       $plugin_id,
       $plugin_definition,
-{{ di.container(services) }}
+      $container->get('cron'),
     );
   }
 
-{% endif %}
   /**
    * {@inheritdoc}
    */

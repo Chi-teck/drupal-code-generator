@@ -1,0 +1,7 @@
+condition.plugin.foo_example:
+  type: condition.plugin
+  label: 'Example condition'
+  mapping:
+    age:
+      type: integer
+      label: Age
