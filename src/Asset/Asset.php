@@ -146,7 +146,7 @@ abstract class Asset implements \Stringable {
   /**
    * Replaces all tokens in a given string with appropriate values.
    */
-  final protected function replaceTokens(string $input): ?string {
+  final protected function replaceTokens(string $input): string {
     return Utils::replaceTokens($input, $this->vars);
   }
 
