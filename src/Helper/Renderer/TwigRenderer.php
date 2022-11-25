@@ -61,8 +61,9 @@ final class TwigRenderer extends Helper implements RendererInterface, LoggerAwar
    * {@inheritdoc}
    */
   public function registerTemplatePath(string $path): void {
-    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-    $this->twig->getLoader()->prependPath($path);
+    $loader = $this->twig->getLoader();
+    /** @var \Twig\Loader\FilesystemLoader $loader */
+    $loader->prependPath($path);
   }
 
 }

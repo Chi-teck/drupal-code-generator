@@ -35,8 +35,9 @@ final class GeneratorFactory {
       if ($file->getExtension() !== 'php') {
         continue;
       }
-
-      $sub_path = $iterator->getInnerIterator()->getSubPath();
+      /** @var \RecursiveDirectoryIterator $directory_iterator */
+      $directory_iterator = $iterator->getInnerIterator();
+      $sub_path = $directory_iterator->getSubPath();
       $sub_namespace = $sub_path ? \str_replace(\DIRECTORY_SEPARATOR, '\\', $sub_path) . '\\' : '';
       $class = self::NAMESPACE . '\\' . $sub_namespace . $file->getBasename('.php');
 

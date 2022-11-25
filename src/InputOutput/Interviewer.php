@@ -23,6 +23,11 @@ use Symfony\Component\Console\Question\Question;
  */
 final class Interviewer {
 
+  /**
+   * Constructs the object.
+   *
+   * @noinspection PhpPropertyCanBeReadonlyInspection
+   */
   public function __construct(
     private readonly IO $io,
     // With readonly attribute it fails on CI by some reason.
@@ -71,6 +76,7 @@ final class Interviewer {
     // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
     $answer = $this->io->askQuestion($question);
 
+    /** @psalm-suppress FalsableReturnStatement */
     $get_key = static fn (string $answer): string|int => \array_search($answer, $choices);
     return \is_array($answer) ? \array_map($get_key, $answer) : $get_key($answer);
   }

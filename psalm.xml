@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <psalm
     xmlns="https://getpsalm.org/schema/config"
-    errorLevel="6"
+    errorLevel="5"
     autoloader="psalm-autoloader.php"
 >
     <projectFiles>
@@ -11,4 +11,11 @@
             <directory name="vendor/twig"/>
         </ignoreFiles>
     </projectFiles>
+<issueHandlers>
+    <UndefinedInterfaceMethod>
+        <errorLevel type="suppress">
+            <referencedMethod name="/^Symfony\\Component\\Console\\Helper\\HelperInterface::.+$/"/>
+        </errorLevel>
+    </UndefinedInterfaceMethod>
+</issueHandlers>
 </psalm>

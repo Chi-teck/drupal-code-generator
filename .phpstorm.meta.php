@@ -16,7 +16,7 @@ namespace PHPSTORM_META {
       'dry_dumper' => \DrupalCodeGenerator\Helper\Dumper\DryDumper::class,
       'filesytem_dumper' => \DrupalCodeGenerator\Helper\Dumper\FileSystemDumper::class,
       'renderer' => \DrupalCodeGenerator\Helper\RendererInterface::class,
-      'question_helper' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
+      'question' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
       'result_printer' => \DrupalCodeGenerator\Helper\ResultPrinter::class,
     ]),
   );
@@ -35,7 +35,7 @@ namespace PHPSTORM_META {
       'dry_dumper' => \DrupalCodeGenerator\Helper\Dumper\DryDumper::class,
       'filesytem_dumper' => \DrupalCodeGenerator\Helper\Dumper\FileSystemDumper::class,
       'renderer' => \DrupalCodeGenerator\Helper\RendererInterface::class,
-      'question_helper' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
+      'question' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
       'result_printer' => \DrupalCodeGenerator\Helper\ResultPrinter::class,
     ])
   );

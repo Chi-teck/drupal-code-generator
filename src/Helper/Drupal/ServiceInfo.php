@@ -26,7 +26,7 @@ final class ServiceInfo extends Helper {
   /**
    * Gets a service by name.
    */
-  public function getService(string $name): mixed {
+  public function getService(string $name): ?object {
     return $this->container->get($name);
   }
 
@@ -34,7 +34,9 @@ final class ServiceInfo extends Helper {
    * Gets all defined service IDs.
    */
   public function getServicesIds(): array {
-    $service_ids = $this->container->getServiceIds();
+    // $this->container->getServiceIds() cannot be used here because it is not
+    // defined in the Symfony\Component\DependencyInjection\ContainerInterface.
+    $service_ids = \array_keys($this->getServiceDefinitions());
     \sort($service_ids);
     return $service_ids;
   }

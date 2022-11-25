@@ -32,7 +32,7 @@ final class ApacheVirtualHost extends BaseGenerator {
   private static function getDomainValidator(): callable {
     return new Chained(
       new Required(),
-      static function (?string $value): string {
+      static function (string $value): string {
         if (!\filter_var($value, \FILTER_VALIDATE_DOMAIN, \FILTER_FLAG_HOSTNAME)) {
           throw new \UnexpectedValueException('The value is not correct domain name.');
         }
