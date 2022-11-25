@@ -21,6 +21,7 @@ final class Hook extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate(array &$vars, AssetCollection $assets): void {
+    /** @var \DrupalCodeGenerator\Helper\Drupal\HookInfo   $hook_info */
     $hook_info = $this->getHelper('hook_info');
 
     $hook_templates = $hook_info->getHookTemplates();

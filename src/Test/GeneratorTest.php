@@ -85,6 +85,7 @@ abstract class GeneratorTest extends TestCase {
    *
    * @psalm-suppress UndefinedClass
    * @psalm-suppress TooFewArguments
+   * @psalm-suppress InvalidArgument
    * @todo Fix this.
    */
   protected function createApplication(): Application {

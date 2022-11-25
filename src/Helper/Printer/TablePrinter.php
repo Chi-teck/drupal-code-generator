@@ -43,6 +43,7 @@ final class TablePrinter extends Helper implements PrinterInterface, IOAwareInte
 
     $total_size = $total_lines = 0;
     foreach ($assets->getFiles()->getSorted() as $file) {
+      /** @var \DrupalCodeGenerator\Asset\File $file */
       $size = \mb_strlen($file->getContent());
       $total_size += $size;
       $lines = $size === 0 ? 0 : \substr_count($file->getContent(), "\n") + 1;

@@ -61,7 +61,7 @@ final class ConsoleLogger extends AbstractLogger {
     // will do internally anyway. We only do it for efficiency here as the
     // message formatting is relatively expensive.
     if ($output->getVerbosity() >= self::VERBOSITY_LEVEL_MAP[$level]) {
-
+      /** @psalm-suppress UnhandledMatchCondition */
       $label = match ($level) {
         LogLevel::EMERGENCY,
         LogLevel::ALERT,

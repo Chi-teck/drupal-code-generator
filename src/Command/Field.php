@@ -175,6 +175,7 @@ final class Field extends BaseGenerator {
         Utils::human2machine($subfield->name),
         new RequiredMachineName(),
       );
+      /** @var string $type */
       $type = $ir->choice("Type of sub-field #$i", $type_choices, 'Text');
 
       $subfield->dateType = $type === 'datetime' ?
