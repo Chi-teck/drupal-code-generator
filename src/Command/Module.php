@@ -80,6 +80,9 @@ final class Module extends BaseGenerator implements ContainerInjectionInterface 
       // Dependencies should be namespaced in the format {project}:{name}.
       $project = $dependency;
       try {
+        // The extension list is internal for extending not instantiating.
+        // @see \Drupal\Core\Extension\ExtensionList
+        /** @psalm-suppress InternalMethod */
         $package = $this->moduleList->getExtensionInfo($dependency)['package'] ?? NULL;
         if ($package === 'Core') {
           $project = 'drupal';

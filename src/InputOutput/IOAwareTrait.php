@@ -7,7 +7,7 @@ namespace DrupalCodeGenerator\InputOutput;
  */
 trait IOAwareTrait {
 
-  private IO $io;
+  private ?IO $io = NULL;
 
   /**
    * {@inheritdoc}
@@ -16,7 +16,7 @@ trait IOAwareTrait {
     if ($io) {
       $this->io = $io;
     }
-    elseif (!isset($this->io)) {
+    elseif (!$this->io) {
       throw new \LogicException('IO is not initialized yet.');
     }
     return $this->io;

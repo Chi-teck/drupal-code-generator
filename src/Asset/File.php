@@ -20,12 +20,12 @@ final class File extends Asset implements RenderableInterface {
   /**
    * Template to render main content.
    */
-  private string $template;
+  private ?string $template = NULL;
 
   /**
    * The template string to render.
    */
-  private string $inlineTemplate;
+  private ?string $inlineTemplate = NULL;
 
   /**
    * {@inheritdoc}
@@ -63,7 +63,7 @@ final class File extends Asset implements RenderableInterface {
    * Templates with 'twig' extension are processed with Twig template engine.
    */
   public function template(string $template): self {
-    if (isset($this->inlineTemplate)) {
+    if ($this->inlineTemplate) {
       throw new \LogicException('A file cannot have both inline and regular templates.');
     }
     $this->template = $template;
@@ -74,7 +74,7 @@ final class File extends Asset implements RenderableInterface {
    * Returns the asset inline template.
    */
   public function inlineTemplate(string $inline_template): self {
-    if (isset($this->template)) {
+    if ($this->template) {
       throw new \LogicException('A file cannot have both inline and regular templates.');
     }
     $this->inlineTemplate = $inline_template;
@@ -101,11 +101,11 @@ final class File extends Asset implements RenderableInterface {
    * {@inheritdoc}
    */
   public function render(RendererInterface $renderer): void {
-    if (isset($this->inlineTemplate)) {
+    if ($this->inlineTemplate) {
       $content = $renderer->renderInline($this->inlineTemplate, $this->getVars());
       $this->content($content);
     }
-    elseif (isset($this->template)) {
+    elseif ($this->template) {
       $template = $this->replaceTokens($this->template);
       $content = $renderer->render($template, $this->getVars());
       $this->content($content);

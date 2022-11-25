@@ -11,8 +11,14 @@ use Symfony\Component\Console\Helper\Helper;
  */
 final class ModuleInfo extends Helper implements ExtensionInfoInterface {
 
+  /**
+   * Constructs the object.
+   */
   public function __construct(private readonly ModuleHandlerInterface $moduleHandler) {}
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName(): string {
     return 'module_info';
   }
