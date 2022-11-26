@@ -29,6 +29,8 @@ final class TwigRenderer extends Helper implements RendererInterface, LoggerAwar
 
   /**
    * {@inheritdoc}
+   *
+   * @psalm-suppress PossiblyNullReference
    */
   public function render(string $template, array $vars): string {
     if (\str_ends_with($template, '.twig')) {

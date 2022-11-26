@@ -30,7 +30,7 @@ final class ListPrinter extends Helper implements PrinterInterface, IOAwareInter
       return;
     }
 
-    $this->io->title('The following directories and files have been created or updated:');
+    $this->io()->title('The following directories and files have been created or updated:');
 
     $assets = $assets->getSorted();
 

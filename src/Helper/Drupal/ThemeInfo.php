@@ -33,7 +33,7 @@ final class ThemeInfo extends Helper implements ExtensionInfoInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDestination(string $machine_name, bool $is_new): ?string {
+  public function getDestination(string $machine_name, bool $is_new): string {
     $themes_dir = \is_dir(\DRUPAL_ROOT . '/themes/custom') ?
       'themes/custom' : 'themes';
 

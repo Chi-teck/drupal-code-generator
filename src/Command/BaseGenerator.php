@@ -19,6 +19,7 @@ use DrupalCodeGenerator\Logger\ConsoleLogger;
 use DrupalCodeGenerator\Utils;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Psr\Log\NullLogger;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,11 +29,21 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Base class for code generators.
  *
  * @method \DrupalCodeGenerator\Application getApplication()
+ * @method string getName()
+ * @method \Symfony\Component\Console\Helper\HelperSet getHelperSet()
  */
 abstract class BaseGenerator extends Command implements LabelInterface, IOAwareInterface, LoggerAwareInterface {
 
   use IOAwareTrait;
   use LoggerAwareTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct() {
+    parent::__construct();
+    $this->logger = new NullLogger();
+  }
 
   /**
    * {@inheritdoc}
@@ -167,8 +178,9 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    */
   protected function render(AssetCollection $assets): void {
     $renderer = $this->getHelper('renderer');
-    foreach ($assets->getFiles() as $asset) {
-      $renderer->renderAsset($asset);
+    foreach ($assets->getFiles() as $file) {
+      /** @var \DrupalCodeGenerator\Asset\File $file */
+      $renderer->renderAsset($file);
     }
   }
 
@@ -206,6 +218,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    */
   protected function printSummary(AssetCollection $dumped_assets, string $base_path): void {
     $printer_name = $this->io()->isVerbose() ? 'assets_table_printer' : 'assets_list_printer';
+    /** @psalm-suppress UndefinedInterfaceMethod */
     $this->getHelper($printer_name)->printAssets($dumped_assets, $base_path);
   }
 
@@ -228,7 +241,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    *
    * @todo Test this.
    */
-  protected function getDestination(array $vars): ?string {
+  protected function getDestination(array $vars): string {
     if (!isset($vars['machine_name'])) {
       return $this->io()->getWorkingDirectory();
     }

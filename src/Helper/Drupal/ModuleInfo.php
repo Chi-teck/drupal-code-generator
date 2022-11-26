@@ -37,7 +37,7 @@ final class ModuleInfo extends Helper implements ExtensionInfoInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDestination(string $machine_name, bool $is_new): ?string {
+  public function getDestination(string $machine_name, bool $is_new): string {
     $modules_dir = \is_dir(\DRUPAL_ROOT . '/modules/custom') ?
       'modules/custom' : 'modules';
 

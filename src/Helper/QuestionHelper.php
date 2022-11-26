@@ -104,9 +104,11 @@ class QuestionHelper extends BaseQuestionHelper {
     $output->writeln($question_text);
 
     if ($question instanceof ChoiceQuestion) {
-      $max_width = \max(\array_map([self::class, 'width'], \array_keys($question->getChoices())));
+      $choices = $question->getChoices();
+      \assert(\count($choices) > 0);
+      $max_width = \max(\array_map([self::class, 'width'], \array_keys($choices)));
       $messages = [];
-      foreach ($question->getChoices() as $key => $value) {
+      foreach ($choices as $key => $value) {
         // For numeric keys left padding makes more sense.
         $key = \str_pad((string) $key, $max_width, pad_type: \STR_PAD_LEFT);
         $messages[] = '  [<info>' . $key . '</info>] ' . $value;

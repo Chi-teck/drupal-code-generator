@@ -13,10 +13,11 @@ final class Choice {
   ) {}
 
   public function __invoke(mixed $value): string|int|float {
-    if (!\is_scalar($value) || !\in_array($value, $this->choices, TRUE)) {
-      throw new \UnexpectedValueException($this->message);
-    }
-    return $value;
+    return match(FALSE) {
+      \is_string($value) || \is_int($value) || \is_float($value),
+      \in_array($value, $this->choices, TRUE) => throw new \UnexpectedValueException($this->message),
+      default => $value,
+    };
   }
 
 }

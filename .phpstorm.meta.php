@@ -2,8 +2,10 @@
 
 namespace PHPSTORM_META {
 
+  use DrupalCodeGenerator\Helper\Dumper\DumperInterface;
+
   override(
-    \Symfony\Component\Console\Helper\HelperSet::get(),
+    \Symfony\Component\Console\Helper\HelperSet::get(0),
     map([
       'service_info' => \DrupalCodeGenerator\Helper\Drupal\ServiceInfo::class,
       'module_info' => \DrupalCodeGenerator\Helper\Drupal\ModuleInfo::class,
@@ -12,17 +14,17 @@ namespace PHPSTORM_META {
       'route_info' => \DrupalCodeGenerator\Helper\Drupal\RouteInfo::class,
       'permission_info' => \DrupalCodeGenerator\Helper\Drupal\PermissionInfo::class,
       'config_info' => \DrupalCodeGenerator\Helper\Drupal\ConfigInfo::class,
-      'processor' => \DrupalCodeGenerator\Helper\Processor\ProcessorInterface::class,
-      'dry_dumper' => \DrupalCodeGenerator\Helper\Dumper\DryDumper::class,
-      'filesytem_dumper' => \DrupalCodeGenerator\Helper\Dumper\FileSystemDumper::class,
-      'renderer' => \DrupalCodeGenerator\Helper\RendererInterface::class,
+      'dry_dumper' => \DrupalCodeGenerator\Helper\Dumper\DumperInterface::class,
+      'filesytem_dumper' => \DrupalCodeGenerator\Helper\Dumper\DumperInterface::class,
+      'renderer' => \DrupalCodeGenerator\Helper\Renderer\RendererInterface::class,
       'question' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
-      'result_printer' => \DrupalCodeGenerator\Helper\ResultPrinter::class,
+      'assets_table_printer' => \DrupalCodeGenerator\Helper\Printer\PrinterInterface::class,
+      'assets_list_printer' => \DrupalCodeGenerator\Helper\Printer\PrinterInterface::class,
     ]),
   );
 
   override(
-    \Symfony\Component\Console\Command\Command::getHelper(),
+    \Symfony\Component\Console\Command\Command::getHelper(0),
     map([
       'service_info' => \DrupalCodeGenerator\Helper\Drupal\ServiceInfo::class,
       'module_info' => \DrupalCodeGenerator\Helper\Drupal\ModuleInfo::class,
@@ -31,12 +33,12 @@ namespace PHPSTORM_META {
       'route_info' => \DrupalCodeGenerator\Helper\Drupal\RouteInfo::class,
       'permission_info' => \DrupalCodeGenerator\Helper\Drupal\PermissionInfo::class,
       'config_info' => \DrupalCodeGenerator\Helper\Drupal\ConfigInfo::class,
-      'processor' => \DrupalCodeGenerator\Helper\Processor\ProcessorInterface::class,
-      'dry_dumper' => \DrupalCodeGenerator\Helper\Dumper\DryDumper::class,
-      'filesytem_dumper' => \DrupalCodeGenerator\Helper\Dumper\FileSystemDumper::class,
-      'renderer' => \DrupalCodeGenerator\Helper\RendererInterface::class,
+      'dry_dumper' => \DrupalCodeGenerator\Helper\Dumper\DumperInterface::class,
+      'filesytem_dumper' => \DrupalCodeGenerator\Helper\Dumper\DumperInterface::class,
+      'renderer' => \DrupalCodeGenerator\Helper\Renderer\RendererInterface::class,
       'question' => \DrupalCodeGenerator\Helper\QuestionHelper::class,
-      'result_printer' => \DrupalCodeGenerator\Helper\ResultPrinter::class,
+      'assets_table_printer' => \DrupalCodeGenerator\Helper\Printer\PrinterInterface::class,
+      'assets_list_printer' => \DrupalCodeGenerator\Helper\Printer\PrinterInterface::class,
     ])
   );
 

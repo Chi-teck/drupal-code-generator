@@ -128,21 +128,21 @@ final class Interviewer {
   /**
    * Asks class question.
    */
-  public function askClass(string $question = 'Class', ?string $default = NULL): ?string {
+  public function askClass(string $question = 'Class', ?string $default = NULL): string {
     return $this->ask($question, $default, new RequiredClassName());
   }
 
   /**
    * Asks plugin label question.
    */
-  public function askPluginLabel(string $question = 'Plugin label', ?string $default = NULL): ?string {
+  public function askPluginLabel(string $question = 'Plugin label', ?string $default = NULL): string {
     return $this->ask($question, $default, new Required());
   }
 
   /**
    * Asks plugin ID question.
    */
-  public function askPluginId(string $question = 'Plugin ID', ?string $default = '{machine_name}_{plugin_label|h2m}'): ?string {
+  public function askPluginId(string $question = 'Plugin ID', ?string $default = '{machine_name}_{plugin_label|h2m}'): string {
     return $this->ask($question, $default, new RequiredMachineName());
   }
 

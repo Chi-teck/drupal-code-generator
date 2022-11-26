@@ -42,7 +42,7 @@ jobs:
             - name: Update  dependencies
               run: composer update --${{ matrix.dependency-mode }} --ansi
 
-            - name: Run code sniffer
+            - name: Run lint
               run: ./scripts/lint.sh
 
             - name: Run unit tests

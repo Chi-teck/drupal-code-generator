@@ -80,10 +80,12 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
     $this->menuTree = [];
     foreach ($this->getApplication()->all() as $command) {
       if ($command instanceof LabelInterface && !$command->isHidden()) {
-        self::arraySetNestedValue($this->menuTree, \explode(':', $command->getName()));
+        /** @var string $command_name */
+        $command_name = $command->getName();
+        self::arraySetNestedValue($this->menuTree, \explode(':', $command_name));
         // Collect command labels.
         if ($label = $command->getLabel()) {
-          $this->labels[$command->getName()] = $label;
+          $this->labels[$command_name] = $label;
         }
       }
     }

@@ -29,6 +29,7 @@ final class Plugins {
       if (!\is_subclass_of($class, DefaultPluginManager::class)) {
         continue;
       }
+      /** @var \Drupal\Core\Plugin\DefaultPluginManager $manager */
       $manager = $this->serviceInfo->getService($manager_id);
 
       $guessed_interface = $class . 'Interface';

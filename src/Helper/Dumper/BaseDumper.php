@@ -40,9 +40,9 @@ abstract class BaseDumper extends Helper implements DumperInterface, IOAwareInte
 
       if ($resolved_asset) {
         match (TRUE) {
-          $asset instanceof Directory => $this->dumpDirectory($resolved_asset, $path),
-          $asset instanceof File => $this->dumpFile($resolved_asset, $path),
-          $asset instanceof Symlink => $this->dumpSymlink($resolved_asset, $path),
+          $resolved_asset instanceof Directory => $this->dumpDirectory($resolved_asset, $path),
+          $resolved_asset instanceof File => $this->dumpFile($resolved_asset, $path),
+          $resolved_asset instanceof Symlink => $this->dumpSymlink($resolved_asset, $path),
           default => throw new \LogicException('Unsupported asset type'),
         };
         $dumped_assets[] = $resolved_asset;

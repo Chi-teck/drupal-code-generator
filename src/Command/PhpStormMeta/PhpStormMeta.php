@@ -77,7 +77,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
   /**
    * {@inheritdoc}
    */
-  protected function getDestination(array $vars): ?string {
+  protected function getDestination(array $vars): string {
     // Typically the root of the PhpStorm project is one level above of the
     // Drupal root.
     if (!\file_exists(\DRUPAL_ROOT . '/.idea') && \file_exists(\DRUPAL_ROOT . '/../.idea')) {

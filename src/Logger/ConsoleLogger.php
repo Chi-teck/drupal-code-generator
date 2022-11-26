@@ -73,7 +73,9 @@ final class ConsoleLogger extends AbstractLogger {
         LogLevel::DEBUG => "<fg=cyan;options=bold;>$level</>",
       };
 
-      $formatted_message = \sprintf('[%s] %s', $label, $this->interpolate($message, $context));
+      $formatted_message = \sprintf(
+        '[%s] %s', $label, $this->interpolate((string) $message, $context),
+      );
       $output->writeln($formatted_message, self::VERBOSITY_LEVEL_MAP[$level]);
     }
   }

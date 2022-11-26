@@ -32,7 +32,7 @@ final class TablePrinter extends Helper implements PrinterInterface, IOAwareInte
       return;
     }
 
-    $this->io->title('The following directories and files have been created or updated:');
+    $this->io()->title('The following directories and files have been created or updated:');
 
     $headers[] = ['Type', 'Path', 'Lines', 'Size'];
 

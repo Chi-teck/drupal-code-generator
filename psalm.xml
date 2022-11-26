@@ -7,15 +7,15 @@
     <projectFiles>
         <directory name="src"/>
         <ignoreFiles>
-            <!-- Psalm reports issues about Twig by some reason. -->
-            <directory name="vendor/twig"/>
+            <!-- Psalm reports issues about vendors by some reason. -->
+            <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
-<issueHandlers>
-    <UndefinedInterfaceMethod>
-        <errorLevel type="suppress">
-            <referencedMethod name="/^Symfony\\Component\\Console\\Helper\\HelperInterface::.+$/"/>
-        </errorLevel>
-    </UndefinedInterfaceMethod>
-</issueHandlers>
+    <issueHandlers>
+        <PossiblyNullArgument>
+            <errorLevel type="suppress">
+                <referencedFunction name="/__construct/"/>
+            </errorLevel>
+        </PossiblyNullArgument>
+    </issueHandlers>
 </psalm>
