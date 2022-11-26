@@ -22,7 +22,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": false
         }
     },
-    "minimum-stability": "rc",
+    "minimum-stability": "RC",
     "extra": {
         "branch-alias": {
             "dev-master": "2.x-dev"
