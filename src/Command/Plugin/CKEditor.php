@@ -47,7 +47,6 @@ final class CKEditor extends BaseGenerator {
     $assets->addFile('js/ckeditor5_plugins/{fe_plugin_id}/src/{class}.js', 'js/ckeditor5_plugins/example/src/Example.js.twig');
     $assets->addFile('js/ckeditor5_plugins/{fe_plugin_id}/src/index.js', 'js/ckeditor5_plugins/example/src/index.js.twig');
     $assets->addDirectory('js/build');
-
   }
 
 }
