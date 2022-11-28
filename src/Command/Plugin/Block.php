@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Command\Plugin;
 
 use DrupalCodeGenerator\Application;
-use DrupalCodeGenerator\Asset\Assets;
+use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
@@ -27,17 +27,15 @@ final class Block extends BaseGenerator {
 
     $vars['plugin_label'] = $ir->askPluginLabel('Block admin label');
     $vars['plugin_id'] = $ir->askPluginId();
-
     $vars['class'] = $ir->askPluginClass(suffix: 'Block');
+
     $vars['category'] = $ir->ask('Block category', 'Custom');
     $vars['configurable'] = $ir->confirm('Make the block configurable?', FALSE);
-
     $vars['services'] = $ir->askServices(FALSE);
 
-    $vars['access'] = $ir->confirm('Create access callback?', FALSE);
+   $vars['access'] = $ir->confirm('Create access callback?', FALSE);
 
     $assets->addFile('src/Plugin/Block/{class}.php', 'block.twig');
-
     if ($vars['configurable']) {
       $assets->addSchemaFile()->template('schema.twig');
     }

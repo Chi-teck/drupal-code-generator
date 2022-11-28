@@ -29,9 +29,9 @@ final class BlockTest extends BrowserTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $permissions = ['administer blocks', 'administer themes'];
-    $admin_user = $this->drupalCreateUser($permissions);
-    $this->drupalLogin($admin_user);
+    $this->drupalLogin(
+      $this->drupalCreateUser(['administer blocks', 'administer themes']),
+    );
   }
 
   /**

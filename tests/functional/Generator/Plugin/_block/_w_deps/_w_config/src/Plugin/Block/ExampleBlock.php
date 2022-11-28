@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Plugin\Block;
 
@@ -16,31 +16,28 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @Block(
  *   id = "foo_example",
  *   admin_label = @Translation("Example"),
- *   category = @Translation("Custom")
+ *   category = @Translation("Custom"),
  * )
  */
-class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface {
+final class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The cron service.
-   *
-   * @var \Drupal\Core\CronInterface
+   * Constructs the plugin instance.
    */
-  protected $cron;
-
-  /**
-   * Constructs a new ExampleBlock instance.
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CronInterface $cron) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    private readonly CronInterface $cron,
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->cron = $cron;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
-    return new static(
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    return new self(
       $configuration,
       $plugin_id,
       $plugin_definition,
@@ -79,19 +76,19 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
   /**
    * {@inheritdoc}
    */
-  protected function blockAccess(AccountInterface $account): AccessResult {
-    // @todo Evaluate the access condition here.
-    return AccessResult::allowedIf(TRUE);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function build(): array {
     $build['content'] = [
       '#markup' => $this->t('It works!'),
     ];
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function blockAccess(AccountInterface $account): AccessResult {
+    // @todo Evaluate the access condition here.
+    return AccessResult::allowedIf(TRUE);
   }
 
 }

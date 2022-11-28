@@ -1,5 +1,5 @@
 {% import '@lib/di.twig' as di %}
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Block;
 
@@ -25,27 +25,29 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @Block(
  *   id = "{{ plugin_id }}",
  *   admin_label = @Translation("{{ plugin_label }}"),
- *   category = @Translation("{{ category }}")
+ *   category = @Translation("{{ category }}"),
  * )
  */
-class {{ class }} extends BlockBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class {{ class }} extends BlockBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
 
 {% if services %}
-{{ di.properties(services) }}
-
   /**
-   * Constructs a new {{ class }} instance.
+   * Constructs the plugin instance.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, {{ di.signature(services, false) }}) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+{{ di.signature(services) }}
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-{{ di.assignment(services) }}
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
-    return new static(
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    return new self(
       $configuration,
       $plugin_id,
       $plugin_definition,
@@ -84,16 +86,6 @@ class {{ class }} extends BlockBase {% if services %}implements ContainerFactory
   }
 
 {% endif %}
-{% if access %}
-  /**
-   * {@inheritdoc}
-   */
-  protected function blockAccess(AccountInterface $account): AccessResult {
-    // @todo Evaluate the access condition here.
-    return AccessResult::allowedIf(TRUE);
-  }
-
-{% endif %}
   /**
    * {@inheritdoc}
    */
@@ -103,5 +95,15 @@ class {{ class }} extends BlockBase {% if services %}implements ContainerFactory
     ];
     return $build;
   }
+{% if access %}
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function blockAccess(AccountInterface $account): AccessResult {
+    // @todo Evaluate the access condition here.
+    return AccessResult::allowedIf(TRUE);
+  }
+{% endif %}
 
 }
