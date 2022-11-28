@@ -33,7 +33,7 @@ final class Block extends BaseGenerator {
     $vars['configurable'] = $ir->confirm('Make the block configurable?', FALSE);
     $vars['services'] = $ir->askServices(FALSE);
 
-   $vars['access'] = $ir->confirm('Create access callback?', FALSE);
+    $vars['access'] = $ir->confirm('Create access callback?', FALSE);
 
     $assets->addFile('src/Plugin/Block/{class}.php', 'block.twig');
     if ($vars['configurable']) {
