@@ -15,7 +15,7 @@ DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
 DCG_DRUPAL_VERSION=${DCG_DRUPAL_VERSION:-}
 if [[ -z $DCG_DRUPAL_VERSION ]]; then
   # @todo Figure out how to find most recent Drupal core branch open for development.
-  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\.0\.x' | tail -n1)
+  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\.1\.x' | tail -n1)
 fi
 
 echo -----------------------------------------------

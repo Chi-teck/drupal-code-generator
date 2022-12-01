@@ -39,11 +39,11 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
     // Check if the services are sorted alphabetically.
     $expected_service_ids = [
-      'access_arguments_resolver_factory',
-      'access_check.contact_personal',
-      'access_check.cron',
-      'access_check.csrf',
-      'access_check.custom',
+      'Drupal\Core\Access\CheckProviderInterface',
+      'Drupal\Core\Config\StorageManagerInterface',
+      'Drupal\Core\Form\FormCacheInterface',
+      'Drupal\Core\Http\HandlerStackConfigurator',
+      'Drupal\Core\Menu\MenuTreeStorageInterface',
     ];
     self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 5));
   }
@@ -59,11 +59,11 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertLessThan(550, \count($definitions));
 
     $expected_service_ids = [
-      'access_arguments_resolver_factory',
-      'access_check.contact_personal',
-      'access_check.cron',
-      'access_check.csrf',
-      'access_check.custom',
+      'Drupal\Core\Access\CheckProviderInterface',
+      'Drupal\Core\Config\StorageManagerInterface',
+      'Drupal\Core\Form\FormCacheInterface',
+      'Drupal\Core\Http\HandlerStackConfigurator',
+      'Drupal\Core\Menu\MenuTreeStorageInterface',
     ];
     self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 5));
 
@@ -99,11 +99,11 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertLessThan(550, \count($classes));
 
     $expected_service_ids = [
-      'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
-      'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
-      'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
-      'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',
-      'access_check.custom' => '\Drupal\Core\Access\CustomAccessCheck',
+      'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
+      'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
+      'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
+      'Drupal\Core\Http\HandlerStackConfigurator' => '\Drupal\Core\Http\HandlerStackConfigurator',
+      'Drupal\Core\Menu\MenuTreeStorageInterface' => '\Drupal\Core\Menu\MenuTreeStorage',
     ];
     self::assertSame($expected_service_ids, \array_slice($classes, 0, 5));
   }

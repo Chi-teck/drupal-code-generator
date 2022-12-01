@@ -139,6 +139,7 @@ namespace PHPSTORM_META {
     'system.cron',
     'system.date',
     'system.diff',
+    'system.feature_flags',
     'system.file',
     'system.image',
     'system.image.gd',

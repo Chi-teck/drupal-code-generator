@@ -302,6 +302,7 @@ namespace PHPSTORM_META {
     'system.cron',
     'system.date',
     'system.diff',
+    'system.feature_flags',
     'system.file',
     'system.image',
     'system.image.gd',
@@ -1154,6 +1155,7 @@ namespace PHPSTORM_META {
     'filter_html_escape',
     'filter_html_image_secure',
     'filter_htmlcorrector',
+    'filter_image_lazy_load',
     'filter_null',
     'filter_url',
   );

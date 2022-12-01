@@ -176,9 +176,9 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Drupal::service(0),
         map([
-          'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
-          'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
-          'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
+          'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
+          'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
+          'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
     PHP;
     self::assertStringContainsString($services_1, $generated_content);
 
@@ -186,9 +186,9 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
         map([
-          'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
-          'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
-          'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
+          'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
+          'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
+          'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
     PHP;
     self::assertStringContainsString($services_2, $generated_content);
   }

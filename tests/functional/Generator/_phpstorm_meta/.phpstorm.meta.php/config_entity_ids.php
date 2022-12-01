@@ -115,7 +115,7 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Datetime\DateFormatInterface::load(), 0, argumentsSet('date_format__ids'));
   expectedReturnValues(\Drupal\Core\Datetime\DateFormatInterface::id(), argumentsSet('date_format__ids'));
 
-  // -- Text Editor.
+  // -- Text editor.
   registerArgumentsSet('editor__ids',
     'basic_html',
     'full_html',

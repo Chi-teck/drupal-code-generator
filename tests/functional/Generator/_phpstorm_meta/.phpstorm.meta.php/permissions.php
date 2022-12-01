@@ -17,6 +17,7 @@ namespace PHPSTORM_META {
     'access site-wide contact form',
     'access user contact forms',
     'access contextual links',
+    'edit any basic block content',
     'administer comment display',
     'administer contact_message display',
     'administer node display',

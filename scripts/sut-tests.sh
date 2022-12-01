@@ -20,7 +20,7 @@ DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
 DCG_TEST_FILTER=${1:-'all'}
 
 if [[ -z ${DCG_DRUPAL_VERSION:-} ]]; then
-  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\.0\.x' | tail -n1)
+  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\.1\.x' | tail -n1)
 fi
 
 echo -----------------------------------------------

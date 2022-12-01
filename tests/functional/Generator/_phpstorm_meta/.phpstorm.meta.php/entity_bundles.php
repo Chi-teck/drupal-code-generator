@@ -73,7 +73,7 @@ namespace PHPSTORM_META {
   expectedReturnValues(\Drupal\Core\Datetime\Entity\DateFormat::bundle(), argumentsSet('date_format__bundles'));
   expectedReturnValues(\Drupal\Core\Datetime\DateFormatInterface::bundle(), argumentsSet('date_format__bundles'));
 
-  // Text Editor.
+  // Text editor.
   registerArgumentsSet('editor__bundles',
     'editor',
   );
