@@ -3,7 +3,11 @@
 namespace Drupal\Tests\qux\Functional;
 
 use Drupal\Component\Render\FormattableMarkup as FM;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\dcg_test\TestTrait;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\node\NodeTypeInterface;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -30,57 +34,82 @@ final class ActionTest extends BrowserTestBase {
    */
   public function testAction(): void {
 
-    $this->createContentType(['type' => 'article']);
+    $content_type = $this->createContentType(['type' => 'article']);
+    self::addExampleField($content_type);
     $node = $this->createNode(['type' => 'article']);
 
-    $permissions = ['access content overview', 'administer actions'];
-    $user = $this->drupalCreateUser($permissions);
-    $this->drupalLogin($user);
+    $this->drupalLogin(
+      $this->drupalCreateUser(['access content overview', 'administer actions']),
+    );
 
+    // -- Create an action.
     $this->drupalGet('admin/config/system/actions');
     $edit = [
-      'action' => 'qux_update_node_title',
+      'action' => 'qux_update_node_field',
     ];
     $this->submitForm($edit, 'Create');
 
     $edit = [
-      'id' => 'update_node_title',
-      'title' => 'Example',
+      'id' => 'update_node_field',
+      'example' => 'Yay',
     ];
     $this->submitForm($edit, 'Save');
     $this->assertStatusMessage('The action has been successfully saved.');
+    $this->drupalGet('admin/config/system/actions/configure/update_node_field');
+    $this->assertXpath('//input[@name = "label" and @value = "Update node field"]');
+    $this->assertXpath('//input[@name = "example" and @value = "Yay"]');
 
-    $this->drupalGet('admin/config/system/actions/configure/update_node_title');
-    $this->assertXpath('//input[@name = "label" and @value = "Update node title"]');
-    $this->assertXpath('//input[@name = "title" and @value = "Example"]');
-
+    // -- Apply the action.
     $this->drupalGet('admin/content');
     $edit = [
-      'action' => 'update_node_title',
+      'action' => 'update_node_field',
       'node_bulk_form[0]' => TRUE,
     ];
     $this->submitForm($edit, 'Apply to selected items');
-    $message_arguments = [
-      '%action_label' => 'Update node title',
-      '%node_label' => $node->label(),
-    ];
-    $this->assertErrorMessage(new FM('No access to execute %action_label on the Content %node_label.', $message_arguments));
+    $this->assertErrorMessage(
+      new FM(
+        'No access to execute %action_label on the Content %node_label.',
+        [
+          '%action_label' => 'Update node field',
+          '%node_label' => $node->label(),
+        ],
+      ),
+    );
 
     // Create another user with permission to edit articles.
     $permissions = ['access content overview', 'edit any article content'];
-    $content_manager = $this->drupalCreateUser($permissions);
-    $this->drupalLogin($content_manager);
+    $this->drupalLogin($this->drupalCreateUser($permissions));
     $this->drupalGet('admin/content');
-    $edit = [
-      'action' => 'update_node_title',
-      'node_bulk_form[0]' => TRUE,
-    ];
     $this->submitForm($edit, 'Apply to selected items');
-    $message_arguments = [
-      '%action_label' => 'Update node title',
-    ];
-    $this->assertStatusMessage(new FM('%action_label was applied to 1 item.', $message_arguments));
-    $this->assertXpath('//table//td[@class = "views-field views-field-title"]/a[text() = "Example"]');
+    $this->assertStatusMessage(
+      new FM('%action_label was applied to 1 item.',
+        ['%action_label' => 'Update node field'],
+      ),
+    );
+    $this->drupalGet($node->toUrl());
+    $this->assertXpath('//article//div[text() = "Example"]/following-sibling::div[text() = "New value"]');
+  }
+
+  /**
+   * Adds 'field_example' field to a content type.
+   */
+  private static function addExampleField(NodeTypeInterface $type): void {
+    $field_storage = FieldStorageConfig::create([
+      'field_name' => 'field_example',
+      'entity_type' => 'node',
+      'type' => 'string',
+    ]);
+    $field_storage->save();
+
+    FieldConfig::create([
+      'field_storage' => $field_storage,
+      'bundle' => $type->id(),
+      'label' => 'Example',
+    ])->save();
+
+    EntityViewDisplay::load('node.' . $type->id() . '.default')
+      ->setComponent('field_example', ['label' => 'Example'])
+      ->save();
   }
 
 }

@@ -1,33 +1,20 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\Action;
+namespace Drupal\example\Plugin\Action;
 
-{% sort %}
-use Drupal\Core\Entity\ContentEntityInterface;
-  {% if configurable %}
 use Drupal\Core\Action\ConfigurableActionBase;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
-  {% else %}
-use Drupal\Core\Action\ActionBase;
-use Drupal\Core\Session\AccountInterface;
-  {% endif %}
-  {% if services %}
-{{ di.use(services) }}
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
- * Provides {{ plugin_label|article }} action.
+ * Provides a Foo action.
  *
  * @Action(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
- *   type = "{{ entity_type }}",
- *   category = @Translation("{{ category }}"),
+ *   id = "example_foo",
+ *   label = @Translation("Foo"),
+ *   type = "node",
+ *   category = @Translation("Custom"),
  * )
  *
  * @DCG
@@ -44,35 +31,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * The whole action API is subject of change.
  * @see https://www.drupal.org/project/drupal/issues/2011038
  */
-final class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'ActionBase' }} {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class Foo extends ConfigurableActionBase {
 
-{% if services %}
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct(
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
-{{ di.signature(services) }}
-  ) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
-    return new self(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-{{ di.container(services) }}
-    );
-  }
-
-{% endif %}
-{% if configurable %}
   /**
    * {@inheritdoc}
    */
@@ -99,7 +59,6 @@ final class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'Ac
     $this->configuration['example'] = $form_state->getValue('example');
   }
 
-{% endif %}
   /**
    * {@inheritdoc}
    */
