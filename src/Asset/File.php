@@ -91,6 +91,8 @@ final class File extends Asset implements RenderableInterface {
 
   /**
    * Sets the "append" resolver.
+   *
+   * @psalm-param int<0, max> $header_size
    */
   public function appendIfExists(int $header_size = 0): self {
     $this->resolverDefinition = new ResolverDefinition(AppendResolver::class, $header_size);

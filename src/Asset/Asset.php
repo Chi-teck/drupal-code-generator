@@ -21,11 +21,15 @@ abstract class Asset implements \Stringable {
 
   /**
    * Asset mode.
+   *
+   * @psalm-var int<0, 511>
    */
   private int $mode = 0444;
 
   /**
    * Template variables.
+   *
+   * @psalm-var array<string, mixed>
    */
   private array $vars = [];
 
@@ -55,6 +59,8 @@ abstract class Asset implements \Stringable {
 
   /**
    * Getter for the asset mode.
+   *
+   * @psalm-return int<0, 511>
    */
   final public function getMode(): int {
     return $this->mode;
@@ -62,6 +68,8 @@ abstract class Asset implements \Stringable {
 
   /**
    * Getter for the asset vars.
+   *
+   * @psalm-return array<string, mixed>
    */
   final public function getVars(): array {
     return $this->vars;
@@ -87,10 +95,12 @@ abstract class Asset implements \Stringable {
 
   /**
    * Setter for asset mode.
+   *
+   * @psalm-param int<0, 511> $mode
    */
   final public function mode(int $mode): Asset {
     if ($mode < 0000 || $mode > 0777) {
-      throw new \InvalidArgumentException("Incorrect mode value $mode.");
+      throw new \InvalidArgumentException('Incorrect mode value.');
     }
     $this->mode = $mode;
     return $this;
@@ -98,6 +108,8 @@ abstract class Asset implements \Stringable {
 
   /**
    * Setter for the asset vars.
+   *
+   * @psalm-param array<string, mixed> $vars
    */
   final public function vars(array $vars): self {
     $this->vars = $vars;

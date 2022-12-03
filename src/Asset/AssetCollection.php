@@ -68,6 +68,8 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
 
   /**
    * {@inheritdoc}
+   *
+   * @psalm-param \DrupalCodeGenerator\Asset\Asset $value
    */
   public function offsetSet(mixed $offset, mixed $value): void {
     match (TRUE) {
@@ -114,6 +116,8 @@ final class AssetCollection implements \ArrayAccess, \IteratorAggregate, \Counta
 
   /**
    * {@inheritdoc}
+   *
+   * @psalm-return int<0, max>
    */
   public function count(): int {
     return \count($this->assets);

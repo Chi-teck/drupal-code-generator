@@ -9,6 +9,9 @@ use DrupalCodeGenerator\InputOutput\IO;
 
 final class ReplaceResolver implements ResolverInterface, ResolverFactoryInterface {
 
+  /**
+   * Constructs the object.
+   */
   public function __construct(private readonly IO $io) {}
 
   /**

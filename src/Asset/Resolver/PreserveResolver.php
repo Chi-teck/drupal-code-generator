@@ -8,6 +8,8 @@ final class PreserveResolver implements ResolverInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @psalm-return null
    */
   public function resolve(Asset $asset, string $path): ?Asset {
     return NULL;
