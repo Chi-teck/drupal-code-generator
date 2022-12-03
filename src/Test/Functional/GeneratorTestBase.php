@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Test\Functional;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
@@ -28,6 +29,8 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
       ->getContainer()
       ->get('class_resolver')
       ->getInstanceFromDefinition($command_class);
+
+    \assert($command instanceof Command);
     $application->add($command);
 
     $command_tester = new CommandTester($command);

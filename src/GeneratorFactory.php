@@ -39,10 +39,12 @@ final class GeneratorFactory {
       $directory_iterator = $iterator->getInnerIterator();
       $sub_path = $directory_iterator->getSubPath();
       $sub_namespace = $sub_path ? \str_replace(\DIRECTORY_SEPARATOR, '\\', $sub_path) . '\\' : '';
+      /** @psalm-var class-string $class */
       $class = self::NAMESPACE . '\\' . $sub_namespace . $file->getBasename('.php');
 
       $reflected_class = new \ReflectionClass($class);
 
+      // @todo Is it needed?
       if ($reflected_class->isInterface() || $reflected_class->isAbstract() || $reflected_class->isTrait()) {
         continue;
       }

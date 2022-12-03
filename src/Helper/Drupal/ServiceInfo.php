@@ -79,9 +79,10 @@ final class ServiceInfo extends Helper {
    * Returns array of serialized service definitions.
    */
   private function getSerializedDefinitions(): array {
-    $serialized_definitions = $this->container
+    $cache_definitions = $this->container
       ->get('kernel')
-      ->getCachedContainerDefinition()['services'];
+      ->getCachedContainerDefinition();
+    $serialized_definitions = $cache_definitions['services'] ?? [];
     \ksort($serialized_definitions);
     return $serialized_definitions;
   }

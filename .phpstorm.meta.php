@@ -42,4 +42,12 @@ namespace PHPSTORM_META {
     ])
   );
 
+  override(
+    \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
+    map([
+      'class_resolver' => \Drupal\Core\DependencyInjection\ClassResolverInterface::class,
+      'kernel' => \Drupal\Core\DrupalKernelInterface::class,
+      'entity_type.manager' => \Drupal\Core\Entity\EntityTypeManager::class,
+    ])
+  );
 }

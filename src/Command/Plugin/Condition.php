@@ -2,15 +2,11 @@
 
 namespace DrupalCodeGenerator\Command\Plugin;
 
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\Core\Plugin\Context\ContextRepositoryInterface;
-use Drupal\Core\TypedData\TypedDataManagerInterface;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 #[Generator(
   name: 'plugin:condition',
@@ -19,27 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   templatePath: Application::TEMPLATE_PATH . '/Plugin/_condition',
   type: GeneratorType::MODULE_COMPONENT,
 )]
-final class Condition extends BaseGenerator implements ContainerInjectionInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct(
-    private readonly ContextRepositoryInterface $contextRepository,
-    private readonly TypedDataManagerInterface $typedDataManager,
-  ) {
-    parent::__construct();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container): self {
-    return new self(
-      $container->get('context.repository'),
-      $container->get('typed_data_manager'),
-    );
-  }
+final class Condition extends BaseGenerator {
 
   /**
    * {@inheritdoc}
