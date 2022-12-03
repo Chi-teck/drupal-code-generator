@@ -4,4 +4,4 @@ views.style.example_foo:
   mapping:
     wrapper_class:
       type: string
-      label: Wrapper class
+      label: 'Wrapper class'

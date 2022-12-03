@@ -44,7 +44,6 @@ final class Style extends BaseGenerator {
     if ($vars['configurable']) {
       $assets->addSchemaFile()->template('schema.twig');
     }
-
   }
 
 }

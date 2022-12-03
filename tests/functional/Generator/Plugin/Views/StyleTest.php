@@ -12,6 +12,9 @@ final class StyleTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_style';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
     $input = [
       'example',

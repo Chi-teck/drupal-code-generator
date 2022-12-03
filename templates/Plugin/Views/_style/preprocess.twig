@@ -10,8 +10,7 @@ use Drupal\Core\Template\Attribute;
 /**
  * Prepares variables for views-style-{{ plugin_id|u2h }}.html.twig template.
  */
-function template_preprocess_views_style_{{ plugin_id }}(&$variables) {
-
+function template_preprocess_views_style_{{ plugin_id }}(array &$variables): void {
   $view = $variables['view'];
   $options = $view->style_plugin->options;
 
@@ -24,9 +23,10 @@ function template_preprocess_views_style_{{ plugin_id }}(&$variables) {
 {% endif %}
   $variables['default_row_class'] = $options['default_row_class'];
   foreach ($variables['rows'] as $id => $row) {
-    $variables['rows'][$id] = [];
-    $variables['rows'][$id]['content'] = $row;
-    $variables['rows'][$id]['attributes'] = new Attribute();
+    $variables['rows'][$id] = [
+      'content' => $row,
+      'attributes' => new Attribute(),
+    ];
     if ($row_class = $view->style_plugin->getRowClass($id)) {
       $variables['rows'][$id]['attributes']->addClass($row_class);
     }

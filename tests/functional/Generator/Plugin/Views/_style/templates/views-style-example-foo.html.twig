@@ -14,11 +14,7 @@
  */
 #}
 <div{{ attributes }}>
-  {%
-    set row_classes = [
-    default_row_class ? 'views-row',
-  ]
-  %}
+  {% set row_classes = [default_row_class ? 'views-row'] %}
   {% for row in rows %}
     <div{{ row.attributes.addClass(row_classes) }}>
       {{ row.content }}

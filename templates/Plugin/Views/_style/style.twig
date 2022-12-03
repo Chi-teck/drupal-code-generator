@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\views\style;
 
@@ -13,12 +13,12 @@ use Drupal\views\Plugin\views\style\StylePluginBase;
  * @ViewsStyle(
  *   id = "{{ plugin_id }}",
  *   title = @Translation("{{ plugin_label }}"),
- *   help = @Translation("Foo style plugin help."),
+ *   help = @Translation("@todo Add help text here."),
  *   theme = "views_style_{{ plugin_id }}",
- *   display_types = {"normal"}
+ *   display_types = {"normal"},
  * )
  */
-class {{ class }} extends StylePluginBase {
+final class {{ class }} extends StylePluginBase {
 
   /**
    * {@inheritdoc}
@@ -34,7 +34,7 @@ class {{ class }} extends StylePluginBase {
   /**
    * {@inheritdoc}
    */
-  protected function defineOptions() {
+  protected function defineOptions(): array {
     $options = parent::defineOptions();
     $options['wrapper_class'] = ['default' => 'item-list'];
     return $options;
@@ -43,12 +43,12 @@ class {{ class }} extends StylePluginBase {
   /**
    * {@inheritdoc}
    */
-  public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+  public function buildOptionsForm(&$form, FormStateInterface $form_state): void {
     parent::buildOptionsForm($form, $form_state);
     $form['wrapper_class'] = [
+      '#type' => 'textfield',
       '#title' => $this->t('Wrapper class'),
       '#description' => $this->t('The class to provide on the wrapper, outside rows.'),
-      '#type' => 'textfield',
       '#default_value' => $this->options['wrapper_class'],
     ];
   }
