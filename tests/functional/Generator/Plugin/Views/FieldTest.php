@@ -12,7 +12,10 @@ final class FieldTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_field';
 
-  public function testGenerator(): void {
+  /**
+   * Test callback.
+   */
+  public function testWithDependenciesAndWithConfig(): void {
     $input = [
       'foo',
       'Example',
@@ -62,7 +65,56 @@ final class FieldTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
+    $this->fixtureDir .= '/_w_deps/_w_config';
     $this->assertGeneratedFile('config/schema/foo.views.schema.yml');
+    $this->assertGeneratedFile('src/Plugin/views/field/Example.php');
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testWithoutDepsAndWithoutConfig(): void {
+    $input = [
+      'foo',
+      'Example',
+      'foo_example',
+      'Example',
+      'No',
+      'No',
+    ];
+    $this->execute(Field::class, $input);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to views-field generator!
+    –––––––––––––––––––––––––––––––––––
+
+     Module machine name:
+     ➤ 
+
+     Plugin label:
+     ➤ 
+
+     Plugin ID [foo_example]:
+     ➤ 
+
+     Plugin class [Example]:
+     ➤ 
+
+     Make the plugin configurable? [No]:
+     ➤ 
+
+     Would you like to inject dependencies? [No]:
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • src/Plugin/views/field/Example.php
+
+    TXT;
+    $this->assertDisplay($expected_display);
+
+    $this->fixtureDir .= '/_n_deps/_n_config';
     $this->assertGeneratedFile('src/Plugin/views/field/Example.php');
   }
 

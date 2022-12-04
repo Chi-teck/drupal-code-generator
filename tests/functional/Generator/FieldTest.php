@@ -12,8 +12,10 @@ final class FieldTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_field';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
-
     $input = [
       // General questions.
       'example',

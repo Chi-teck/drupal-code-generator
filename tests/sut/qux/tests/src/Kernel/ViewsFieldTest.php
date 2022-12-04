@@ -21,13 +21,16 @@ final class ViewsFieldTest extends KernelTestBase {
    * Test callback.
    */
   public function testPlugin(): void {
-    $plugin = \Drupal::service('plugin.manager.views.field')
+    $plugin = $this->container
+      ->get('plugin.manager.views.field')
       ->createInstance('qux_example');
 
-    // The option isn't used anywhere.
-    $plugin->options['example'] = 'bar';
+    self::assertInstanceOf('Drupal\qux\Plugin\views\field\Example', $plugin);
 
-    $output = $plugin->render(new ResultRow(['unknown' => 'foo']));
+    $output = $plugin->render(
+      // 'unknown' is a default field alias.
+      new ResultRow(['unknown' => 'foo']),
+    );
     self::assertEquals('foo', $output);
   }
 

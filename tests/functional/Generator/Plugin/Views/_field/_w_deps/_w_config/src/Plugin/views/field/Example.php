@@ -1,30 +1,23 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\views\field;
+namespace Drupal\foo\Plugin\views\field;
 
-{% sort %}
 use Drupal\Component\Render\MarkupInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
-  {% if configurable %}
-use Drupal\Core\Form\FormStateInterface;
-  {% endif %}
-  {% if services %}
-{{ di.use(services) }}
 use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
- * Provides {{ plugin_label }} field handler.
+ * Provides Example field handler.
  *
- * @ViewsField("{{ plugin_id }}")
+ * @ViewsField("foo_example")
  *
  * @DCG
  * The plugin needs to be assigned to a specific table column through
  * hook_views_data() or hook_views_data_alter().
- * Put the following code to {{ machine_name }}.views.inc file.
+ * Put the following code to foo.views.inc file.
  * @code
  * function foo_views_data_alter(array &$data): void {
  *   $data['node']['foo_example']['field'] = [
@@ -35,17 +28,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * }
  * @endcode
  */
-final class {{ class }} extends FieldPluginBase {
+final class Example extends FieldPluginBase {
 
-{% if services %}
   /**
-   * Constructs a new {{ class }} instance.
+   * Constructs a new Example instance.
    */
   public function __construct(
     array $configuration,
     $plugin_id,
     $plugin_definition,
-{{ di.signature(services) }}
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -58,12 +50,10 @@ final class {{ class }} extends FieldPluginBase {
       $configuration,
       $plugin_id,
       $plugin_definition,
-{{ di.container(services) }}
+      $container->get('entity_type.manager'),
     );
   }
 
-{% endif %}
-{% if configurable %}
   /**
    * {@inheritdoc}
    */
@@ -85,7 +75,6 @@ final class {{ class }} extends FieldPluginBase {
     ];
   }
 
-{% endif %}
   /**
    * {@inheritdoc}
    */

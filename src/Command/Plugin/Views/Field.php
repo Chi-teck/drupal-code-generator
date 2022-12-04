@@ -38,7 +38,6 @@ final class Field extends BaseGenerator {
       $assets->addSchemaFile('config/schema/{machine_name}.views.schema.yml')
         ->template('schema.twig');
     }
-
   }
 
 }
