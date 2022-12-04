@@ -23,7 +23,9 @@ final class Module extends BaseGenerator implements ContainerInjectionInterface 
   /**
    * {@inheritdoc}
    */
-  public function __construct(private ModuleExtensionList $moduleList) {
+  public function __construct(
+    private readonly ModuleExtensionList $moduleList,
+  ) {
     parent::__construct();
   }
 
@@ -31,7 +33,7 @@ final class Module extends BaseGenerator implements ContainerInjectionInterface 
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container): self {
-    return new self($container->get('extension.list.module'));
+    return new self($container->get(ModuleExtensionList::class));
   }
 
   /**

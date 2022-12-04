@@ -48,7 +48,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
   /**
    * {@inheritdoc}
    */
-  protected function configure() {
+  protected function configure(): void {
     parent::configure();
     $definition = $this->getGeneratorDefinition();
     $this->setName($definition->name)
@@ -60,6 +60,8 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
 
   /**
    * {@inheritdoc}
+   *
+   * @psalm-suppress PossiblyNullReference
    */
   protected function initialize(InputInterface $input, OutputInterface $output): void {
     parent::initialize($input, $output);
@@ -85,6 +87,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     }
 
     $this->logger->debug('PHP binary: {binary}', ['binary' => \PHP_BINARY]);
+    /** @psalm-var array{PHP_SELF: string} $_SERVER */
     $this->logger->debug('DCG executable: {dcg}', ['dcg' => \realpath($_SERVER['PHP_SELF'])]);
     $this->logger->debug('Working directory: {directory}', ['directory' => $io->getWorkingDirectory()]);
   }
@@ -93,6 +96,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    * {@inheritdoc}
    *
    * @noinspection PhpMissingParentCallCommonInspection
+   * @psalm-suppress PossiblyNullReference
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
 
@@ -210,7 +214,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    * Prints header.
    */
   protected function printHeader(): void {
-    $this->io->title(\sprintf('Welcome to %s generator!', $this->getAliases()[0] ?? $this->getName()));
+    $this->io()->title(\sprintf('Welcome to %s generator!', $this->getAliases()[0] ?? $this->getName()));
   }
 
   /**

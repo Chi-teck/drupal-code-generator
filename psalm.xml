@@ -1,7 +1,13 @@
 <?xml version="1.0"?>
 <psalm
+    checkForThrowsInGlobalScope="true"
+    ensureArrayStringOffsetsExist="true"
+    findUnusedPsalmSuppress="true"
+    sealAllMethods="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
-    errorLevel="4"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorLevel="2"
     autoloader="psalm-autoloader.php"
 >
     <projectFiles>
@@ -17,5 +23,8 @@
                 <referencedFunction name="/__construct/"/>
             </errorLevel>
         </PossiblyNullArgument>
+        <!-- @see https://github.com/vimeo/psalm/issues/8765 -->
+        <PossiblyUndefinedVariable errorLevel="suppress"/>
+        <PropertyNotSetInConstructor errorLevel="suppress"/>
     </issueHandlers>
 </psalm>

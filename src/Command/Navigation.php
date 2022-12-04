@@ -44,7 +44,7 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
   /**
    * {@inheritdoc}
    */
-  protected function configure() {
+  protected function configure(): void {
 
     // As the navigation is default command the help should be relevant to the
     // entire DCG application.
@@ -78,7 +78,10 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
 
     // Build the menu structure.
     $this->menuTree = [];
-    foreach ($this->getApplication()->all() as $command) {
+    if (!$application = $this->getApplication()) {
+      throw new \LogicException('Navigation command cannot work without application');
+    }
+    foreach ($application->all() as $command) {
       if ($command instanceof LabelInterface && !$command->isHidden()) {
         /** @var string $command_name */
         $command_name = $command->getName();
@@ -100,7 +103,10 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
     if ($command_name = $this->selectGenerator($input, $output)) {
-      return $this->getApplication()
+      if (!$application = $this->getApplication()) {
+        throw new \LogicException('Navigation command cannot work without application');
+      }
+      return $application
         ->find($command_name)
         ->run($input, $output);
     }
@@ -189,9 +195,7 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
   /**
    * Sets the property to true in nested array.
    *
-   * @param array $array
-   *   A reference to the array to modify.
-   * @param array $parents
+   * @psalm-param list<string> $parents
    *   An array of parent keys, starting with the outermost key.
    *
    * @see https://api.drupal.org/api/drupal/includes!common.inc/function/drupal_array_set_nested_value/7
@@ -202,6 +206,8 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
       if (isset($ref) && !\is_array($ref)) {
         $ref = [];
       }
+      // @todo Fix this.
+      /** @psalm-suppress PossiblyNullArrayAccess */
       $ref = &$ref[$parent];
     }
     $ref ??= TRUE;

@@ -26,6 +26,7 @@ final class Plugins {
 
     $plugins = [];
     foreach ($this->serviceInfo->getServiceClasses() as $manager_id => $class) {
+      /** @var class-string $class */
       if (!\is_subclass_of($class, DefaultPluginManager::class)) {
         continue;
       }

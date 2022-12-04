@@ -65,6 +65,7 @@ abstract class FunctionalTestBase extends TestCase {
    */
   final protected static function bootstrap(): ContainerInterface {
     $root_package = InstalledVersions::getRootPackage();
+    /** @psalm-suppress UnresolvableInclude */
     $class_loader = require $root_package['install_path'] . 'vendor/autoload.php';
     $bootstrap_handler = new BootstrapHandler($class_loader);
     return $bootstrap_handler->bootstrap();

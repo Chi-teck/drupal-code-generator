@@ -7,6 +7,9 @@ namespace DrupalCodeGenerator\Validator;
  */
 final class ClassName {
 
+  /**
+   * @throws \UnexpectedValueException
+   */
   public function __invoke(mixed $value): string {
     if (!\is_string($value) || !\preg_match('/^[A-Z][a-zA-Z0-9]+$/', $value)) {
       throw new \UnexpectedValueException('The value is not correct class name.');

@@ -33,6 +33,7 @@ final class ConfigEntityIds {
 
     $definitions = [];
     foreach ($entity_definitions as $type => $entity_definition) {
+      /** @psalm-var array<string, string> $ids */
       $ids = $this->entityTypeManager
         ->getStorage($type)
         ->getQuery()

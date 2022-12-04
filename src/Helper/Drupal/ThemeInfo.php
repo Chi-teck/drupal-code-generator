@@ -15,6 +15,9 @@ final class ThemeInfo extends Helper implements ExtensionInfoInterface {
 
   public function __construct(private readonly ThemeHandlerInterface $themeHandler) {}
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName(): string {
     return 'theme_info';
   }
@@ -25,6 +28,9 @@ final class ThemeInfo extends Helper implements ExtensionInfoInterface {
   public function getExtensions(): array {
     $themes = [];
     foreach ($this->themeHandler->listInfo() as $machine_name => $theme) {
+      if (!isset($theme->info['name'])) {
+        throw new \RuntimeException('Missing theme name');
+      }
       $themes[$machine_name] = $theme->info['name'];
     }
     return $themes;

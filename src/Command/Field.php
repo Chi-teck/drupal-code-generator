@@ -125,11 +125,11 @@ final class Field extends BaseGenerator {
     $vars['field_label'] = $ir->ask('Field label', 'Example', new Required());
     $vars['field_id'] = $ir->ask('Field ID', '{machine_name}_{field_label|h2m}', new RequiredMachineName());
 
-    $subfield_count_validator = static function ($value) {
+    $subfield_count_validator = static function (mixed $value): int {
       if (!\is_numeric($value) || \intval($value) != $value || $value <= 0) {
         throw new \UnexpectedValueException('The value should be greater than zero.');
       }
-      return $value;
+      return (int) $value;
     };
 
     $vars['subfield_count'] = $ir->ask('How many sub-fields would you like to create?', '3', $subfield_count_validator);

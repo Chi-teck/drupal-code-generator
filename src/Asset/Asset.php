@@ -99,6 +99,7 @@ abstract class Asset implements \Stringable {
    * @psalm-param int<0, 511> $mode
    */
   final public function mode(int $mode): Asset {
+    /** @psalm-suppress DocblockTypeContradiction */
     if ($mode < 0000 || $mode > 0777) {
       throw new \InvalidArgumentException('Incorrect mode value.');
     }
@@ -111,7 +112,7 @@ abstract class Asset implements \Stringable {
    *
    * @psalm-param array<string, mixed> $vars
    */
-  final public function vars(array $vars): self {
+  final public function vars(array $vars): static {
     $this->vars = $vars;
     return $this;
   }

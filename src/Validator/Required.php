@@ -7,6 +7,9 @@ namespace DrupalCodeGenerator\Validator;
  */
 final class Required {
 
+  /**
+   * @throws \UnexpectedValueException
+   */
   public function __invoke(mixed $value): mixed {
     // FALSE is not considered as empty value because question helper uses
     // it as negative answer on confirmation questions.

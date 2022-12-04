@@ -41,6 +41,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
    * {@inheritdoc}
    *
    * @noinspection PhpParamsInspection
+   * @psalm-suppress ArgumentTypeCoercion
    */
   protected function generate(array &$vars, Assets $assets): void {
     /** @psalm-suppress NullableReturnStatement, InvalidNullableReturnType */

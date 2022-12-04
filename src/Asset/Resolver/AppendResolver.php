@@ -14,6 +14,7 @@ final class AppendResolver implements ResolverInterface, ResolverFactoryInterfac
    * @psalm-param int<0, max> $headerSize
    */
   public function __construct(private readonly int $headerSize = 0) {
+    /** @psalm-suppress DocblockTypeContradiction */
     if ($headerSize < 0) {
       throw new \InvalidArgumentException('Header size must be greater than or equal to 0.');
     }

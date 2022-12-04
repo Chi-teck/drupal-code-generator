@@ -22,7 +22,7 @@ final class GeneratorFactory {
   /**
    * Finds and instantiates DCG core generators.
    *
-   * @return \Symfony\Component\Console\Command\Command[]
+   * @psalm-return list<\DrupalCodeGenerator\Command\BaseGenerator>
    *   Array of generators.
    */
   public function getGenerators(): array {
@@ -39,9 +39,9 @@ final class GeneratorFactory {
       $directory_iterator = $iterator->getInnerIterator();
       $sub_path = $directory_iterator->getSubPath();
       $sub_namespace = $sub_path ? \str_replace(\DIRECTORY_SEPARATOR, '\\', $sub_path) . '\\' : '';
+
       /** @psalm-var class-string $class */
       $class = self::NAMESPACE . '\\' . $sub_namespace . $file->getBasename('.php');
-
       $reflected_class = new \ReflectionClass($class);
 
       // @todo Is it needed?
@@ -52,10 +52,11 @@ final class GeneratorFactory {
       if (!$reflected_class->isSubclassOf(BaseGenerator::class)) {
         continue;
       }
-
       $commands[] = $this->classResolver->getInstanceFromDefinition($class);
     }
 
+    /** @psalm-suppress LessSpecificReturnStatement */
+    /** @psalm-var list<\DrupalCodeGenerator\Command\BaseGenerator> */
     return $commands;
   }
 

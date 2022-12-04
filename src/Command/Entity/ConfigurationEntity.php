@@ -68,6 +68,7 @@ final class ConfigurationEntity extends BaseGenerator {
         $resolved = clone $asset;
         $existing_content = \file_get_contents($path);
         if (!\preg_match('/^configure: /m', $existing_content)) {
+          /** @psalm-suppress PossiblyUndefinedStringArrayOffset */
           $content = "{$existing_content}configure: entity.{$this->vars['entity_type_id']}.collection\n";
           return $resolved->content($content);
         }

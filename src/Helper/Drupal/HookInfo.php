@@ -119,6 +119,7 @@ final class HookInfo extends Helper {
       $matches,
     );
 
+    /** @psalm-var array{0: array, 1: array, name: array} $matches */
     $results = [];
     foreach ($matches[0] as $index => $hook_code) {
       $hook_name = $matches['name'][$index];

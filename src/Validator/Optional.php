@@ -14,6 +14,9 @@ final class Optional {
     $this->validator = $validator(...);
   }
 
+  /**
+   * @throws \UnexpectedValueException
+   */
   public function __invoke(mixed $value): mixed {
     return $value === NULL || $value === '' || $value === [] ? $value : ($this->validator)($value);
   }

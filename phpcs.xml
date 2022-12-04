@@ -14,6 +14,7 @@
     <exclude name="Drupal.Commenting.FileComment.Missing"/>
     <!-- False positives when class have PHP attributes. -->
     <exclude name="Drupal.Commenting.ClassComment.Missing"/>
+    <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
   </rule>
   <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
@@ -24,7 +25,6 @@
     <exclude name="Drupal.Commenting.TodoComment.TodoFormat"/>
     <exclude name="Drupal.WhiteSpace.OpenTagNewline.BlankLine"/>
     <exclude name="Drupal.Commenting.VariableComment.MissingVar"/>
-    <exclude name="Drupal.Commenting.ClassComment.Short"/>
   </rule>
   <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended74">
     <exclude-pattern>./tests/sut</exclude-pattern>

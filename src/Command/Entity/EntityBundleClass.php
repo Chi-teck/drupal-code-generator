@@ -40,12 +40,17 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
   public static function create(ContainerInterface $container): self {
     return new self(
       $container->get('entity_type.manager'),
-      $container->get('entity_type.bundle.info'),
+      $container->get(EntityTypeBundleInfoInterface::class),
     );
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @todo Fix this.
+   * @psalm-suppress PossiblyInvalidArgument
+   * @psalm-suppress PossiblyUndefinedStringArrayOffset
+   * @psalm-suppress PossiblyInvalidArrayOffset
    */
   protected function generate(array &$vars, AssetCollection $assets): void {
 
@@ -55,6 +60,7 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
     $vars['name'] = $ir->askName();
     $vars['namespace'] = 'Drupal\\\{machine_name}\Entity\Bundle';
 
+    /** @psalm-var array<string, \Drupal\Core\Entity\ContentEntityTypeInterface> $definitions */
     $definitions = \array_filter(
       $this->entityTypeManager->getDefinitions(),
       static fn (EntityTypeInterface $definition): bool => $definition->getGroup() === 'content',
@@ -82,6 +88,7 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
     else {
       // Prepend an 'All' choice for user's convenience.
       $bundle_choices = ['' => 'All'] + $bundles;
+
       $vars['bundle_ids'] = $ir->choice('Bundles, comma separated', $bundle_choices, NULL, TRUE);
       if (\in_array('', $vars['bundle_ids'])) {
         // @todo create a test for this.
@@ -95,6 +102,7 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
 
     $vars['classes'] = [];
     $vars['classes_fqn'] = [];
+    /** @psalm-var array{bundle_ids: list<string>} $vars */
     foreach ($vars['bundle_ids'] as $bundle_id) {
       $vars['bundle_id'] = $bundle_id;
       $vars['class'] = $ir->ask(
