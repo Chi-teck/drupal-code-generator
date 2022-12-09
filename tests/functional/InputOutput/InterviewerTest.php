@@ -24,6 +24,8 @@ use Symfony\Component\Console\Output\BufferedOutput;
  */
 final class InterviewerTest extends FunctionalTestBase {
 
+  private IO $io;
+
   /**
    * {@inheritdoc}
    */

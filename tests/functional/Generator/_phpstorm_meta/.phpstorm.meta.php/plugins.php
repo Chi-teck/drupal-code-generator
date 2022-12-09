@@ -78,6 +78,7 @@ namespace PHPSTORM_META {
     'comment.settings',
     'comment.type.*',
     'condition.plugin',
+    'condition.plugin.current_theme',
     'condition.plugin.entity_bundle:*',
     'condition.plugin.request_path',
     'condition.plugin.user_role',
