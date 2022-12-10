@@ -127,6 +127,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
    *
    * @todo Remove this once Symfony drops support for event-dispatcher-contracts v2.
    * @see \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch()
+   * @psalm-suppress UnusedPsalmSuppress
    * @psalm-suppress InvalidReturnType
    * @psalm-suppress InvalidReturnStatement
    */
