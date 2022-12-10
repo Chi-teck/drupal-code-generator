@@ -48,10 +48,9 @@ namespace PHPSTORM_META {
       'class_resolver' => \Drupal\Core\DependencyInjection\ClassResolverInterface::class,
       'kernel' => \Drupal\Core\DrupalKernelInterface::class,
       'entity_type.manager' => \Drupal\Core\Entity\EntityTypeManagerInterface::class,
-      'Drupal\Core\Entity\EntityTypeManagerInterface' => \Drupal\Core\Entity\EntityTypeManagerInterface::class,
-      'Drupal\Core\Extension\ModuleExtensionList' => \Drupal\Core\Extension\ModuleExtensionList::class,
-      'Drupal\Core\Entity\EntityTypeBundleInfoInterface' => \Drupal\Core\Entity\EntityTypeBundleInfoInterface::class,
-      'Symfony\Contracts\EventDispatcher\EventDispatcherInterface' => \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class,
+      'extension.list.module' => \Drupal\Core\Extension\ModuleExtensionList::class,
+      'entity_type.bundle.info' => \Drupal\Core\Entity\EntityTypeBundleInfoInterface::class,
+      'event_dispatcher' => \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class,
     ])
   );
 }
