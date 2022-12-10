@@ -20,20 +20,32 @@ final class DryDumper extends BaseDumper {
     return 'dry_dumper';
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function dumpDirectory(Directory $directory, string $path): void {
     $this->io()->title($this->getPath($directory, $path) . ' (empty directory)');
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function dumpFile(File $file, string $path): void {
     $this->io()->title($this->getPath($file, $path));
     $this->io()->writeln($file->getContent(), OutputInterface::OUTPUT_RAW);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function dumpSymlink(Symlink $symlink, string $path): void {
     $this->io()->title($this->getPath($symlink, $path));
     $this->io()->writeln('Symlink to ' . $symlink->getTarget(), OutputInterface::OUTPUT_RAW);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   private function getPath(Asset $asset, string $path): string {
     return $this->io()->getInput()->getOption('full-path') ? $path : $asset->getPath();
   }

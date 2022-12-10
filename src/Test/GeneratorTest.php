@@ -38,9 +38,9 @@ abstract class GeneratorTest extends TestCase {
   /**
    * Executes the command.
    *
-   * @param \Symfony\Component\Console\Command\Command $command
+   * @psalm-param \Symfony\Component\Console\Command\Command $command
    *   A command to execute.
-   * @param array $user_input
+   * @psalm-param list<string> $user_input
    *   An array of strings representing each input passed to the command input
    *   stream.
    */
@@ -49,7 +49,7 @@ abstract class GeneratorTest extends TestCase {
 
     $command_tester = new CommandTester($command);
     $result = $command_tester
-      ->setInputs(\array_values($user_input))
+      ->setInputs($user_input)
       ->execute(['--destination' => $this->directory, '--working-dir' => $this->directory]);
 
     $this->display = $command_tester->getDisplay();

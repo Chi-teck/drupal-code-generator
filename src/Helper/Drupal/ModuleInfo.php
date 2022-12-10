@@ -25,6 +25,8 @@ final class ModuleInfo extends Helper implements ExtensionInfoInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @psalm-return array<string, string>
    */
   public function getExtensions(): array {
     $modules = [];

@@ -64,13 +64,8 @@ final class Utils {
   /**
    * Replaces all tokens in a given string with appropriate values.
    *
-   * @param string $text
-   *   A string potentially containing replaceable tokens.
-   * @param array $data
+   * @psalm-param array<string, scalar> $data
    *   An array where keys are token names and values are replacements.
-   *
-   * @return string
-   *   Text with tokens replaced.
    *
    * @todo Use double braces for escaping.
    */

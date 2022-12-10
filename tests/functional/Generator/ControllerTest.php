@@ -14,8 +14,10 @@ final class ControllerTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_controller';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
-
     $input = [
       'foo',
       'Foo',

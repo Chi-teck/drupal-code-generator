@@ -40,6 +40,8 @@ final class Interviewer {
 
   /**
    * Asks a question.
+   *
+   * @psalm-param callable(mixed $value): mixed $validator
    */
   public function ask(string $question, ?string $default = NULL, ?callable $validator = NULL): mixed {
     $question = $this->processText($question);
@@ -59,6 +61,8 @@ final class Interviewer {
 
   /**
    * Asks a choice question.
+   *
+   * @psalm-param array<array-key, string> $choices
    */
   public function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE): array|string|int {
     $question = $this->processText($question);
@@ -159,6 +163,10 @@ final class Interviewer {
 
   /**
    * Collects services.
+   *
+   * @psalm-param list<string> $forced_services
+   *
+   * @psalm-return array<string, array{name: string, type?: string, description: string, short_type: string}>
    */
   public function askServices(bool $default = TRUE, array $forced_services = []): array {
     $services = $forced_services;
@@ -199,6 +207,8 @@ final class Interviewer {
 
   /**
    * Gets service definition.
+   *
+   * @psalm-return array{name: string, type?: string, description: string, short_type: string}
    */
   protected function getServiceDefinition(string $service_id): array {
     // @todo Fetch service information runtime.

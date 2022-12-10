@@ -98,7 +98,7 @@ abstract class Asset implements \Stringable {
    *
    * @psalm-param int<0, 511> $mode
    */
-  final public function mode(int $mode): Asset {
+  final public function mode(int $mode): static {
     /** @psalm-suppress DocblockTypeContradiction */
     if ($mode < 0000 || $mode > 0777) {
       throw new \InvalidArgumentException('Incorrect mode value.');
@@ -120,7 +120,7 @@ abstract class Asset implements \Stringable {
   /**
    * Makes the asset "virtual".
    */
-  final public function setVirtual(bool $virtual): self {
+  final public function setVirtual(bool $virtual): static {
     $this->virtual = $virtual;
     return $this;
   }
@@ -128,7 +128,7 @@ abstract class Asset implements \Stringable {
   /**
    * Indicates that existing asset should be replaced.
    */
-  final public function replaceIfExists(): self {
+  final public function replaceIfExists(): static {
     $this->resolverDefinition = new ResolverDefinition(ReplaceResolver::class);
     return $this;
   }
@@ -136,7 +136,7 @@ abstract class Asset implements \Stringable {
   /**
    * Indicates that existing asset should be preserved.
    */
-  final public function preserveIfExists(): self {
+  final public function preserveIfExists(): static {
     $this->resolverDefinition = new ResolverDefinition(PreserveResolver::class);
     return $this;
   }
@@ -144,7 +144,7 @@ abstract class Asset implements \Stringable {
   /**
    * Setter for asset resolver.
    */
-  final public function resolver(ResolverInterface $resolver): self {
+  final public function resolver(ResolverInterface $resolver): static {
     $this->resolver = $resolver;
     return $this;
   }

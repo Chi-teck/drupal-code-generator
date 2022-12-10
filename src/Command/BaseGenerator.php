@@ -97,6 +97,8 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
    *
    * @noinspection PhpMissingParentCallCommonInspection
    * @psalm-suppress PossiblyNullReference
+   *
+   * @psalm-return int<0, 1>
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
 

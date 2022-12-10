@@ -10,6 +10,9 @@ use Symfony\Component\Console\Helper\Helper;
  */
 final class ConfigInfo extends Helper {
 
+  /**
+   * Constructs the object.
+   */
   public function __construct(
     private readonly ConfigFactoryInterface $configFactory
   ) {}
@@ -23,6 +26,8 @@ final class ConfigInfo extends Helper {
 
   /**
    * Gets configuration object names.
+   *
+   * @psalm-return list<string>
    */
   public function getConfigNames(): array {
     return $this->configFactory->listAll();

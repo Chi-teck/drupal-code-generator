@@ -13,6 +13,9 @@ use Symfony\Component\Console\Helper\Helper;
  */
 final class ThemeInfo extends Helper implements ExtensionInfoInterface {
 
+  /**
+   * Constructs the object.
+   */
   public function __construct(private readonly ThemeHandlerInterface $themeHandler) {}
 
   /**

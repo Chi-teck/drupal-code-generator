@@ -26,6 +26,8 @@ final class RouteInfo extends Helper {
 
   /**
    * Returns names of all routes on the system.
+   *
+   * @psalm-return list<string>
    */
   public function getRouteNames(): array {
     /** @var  \Traversable $routes */

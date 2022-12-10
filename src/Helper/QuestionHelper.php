@@ -21,6 +21,8 @@ class QuestionHelper extends BaseQuestionHelper {
 
   /**
    * Counter to match questions and answers.
+   *
+   * @psalm-var int<0, max>
    */
   private int $counter = 0;
 

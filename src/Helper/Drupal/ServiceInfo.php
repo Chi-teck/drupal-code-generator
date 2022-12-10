@@ -32,6 +32,8 @@ final class ServiceInfo extends Helper {
 
   /**
    * Gets all defined service IDs.
+   *
+   * @psalm-return list<string>
    */
   public function getServicesIds(): array {
     // $this->container->getServiceIds() cannot be used here because it is not
@@ -43,6 +45,8 @@ final class ServiceInfo extends Helper {
 
   /**
    * Gets all service definitions.
+   *
+   * @psalm-return array<string, array>
    */
   public function getServiceDefinitions(): array {
     return \array_map('unserialize', $this->getSerializedDefinitions());
@@ -50,12 +54,15 @@ final class ServiceInfo extends Helper {
 
   /**
    * Gets all service definitions.
+   *
+   * @psalm-return array<string, string>
    */
   public function getServiceClasses(): array {
     $service_definitions = \array_filter(
       $this->getServiceDefinitions(),
       static fn ($definition): bool => \array_key_exists('class', $definition),
     );
+    /** @psalm-var array<string, class-string> $classes */
     $classes = \array_combine(
       \array_keys($service_definitions),
       \array_column($service_definitions, 'class'),
@@ -65,6 +72,8 @@ final class ServiceInfo extends Helper {
 
   /**
    * Gets service definition.
+   *
+   * @psalm-return array<string, string>|null
    */
   public function getServiceDefinition(string $service_id): ?array {
     $serialized_definitions = $this->getSerializedDefinitions();
@@ -77,6 +86,8 @@ final class ServiceInfo extends Helper {
 
   /**
    * Returns array of serialized service definitions.
+   *
+   * @psalm-return array<string, string>
    */
   private function getSerializedDefinitions(): array {
     $cache_definitions = $this->container

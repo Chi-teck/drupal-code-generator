@@ -65,6 +65,8 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
 
   /**
    * {@inheritdoc}
+   *
+   * @psalm-param non-empty-list<non-empty-list<string>> $headers
    */
   public function buildTable(array $headers, array $rows): Table {
     $style = clone Table::getStyleDefinition('symfony-style-guide');

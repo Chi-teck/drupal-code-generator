@@ -23,7 +23,6 @@ final class Plugins {
    * Generator callback.
    */
   public function __invoke(): File {
-
     $plugins = [];
     foreach ($this->serviceInfo->getServiceClasses() as $manager_id => $class) {
       /** @var class-string $class */

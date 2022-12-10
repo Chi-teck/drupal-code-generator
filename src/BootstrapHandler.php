@@ -13,8 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class BootstrapHandler {
 
+  /**
+   * Constructs the object.
+   */
   public function __construct(private readonly ClassLoader $classLoader) {}
 
+  /**
+   * Bootstraps Drupal.
+   */
   public function bootstrap(): ContainerInterface {
     self::assertInstallation();
 
@@ -30,6 +36,11 @@ final class BootstrapHandler {
     return $kernel->getContainer();
   }
 
+  /**
+   * Asserts Drupal instance.
+   *
+   * @throws \RuntimeException
+   */
   private static function assertInstallation(): void {
     $preflight = \defined('Drupal::VERSION') &&
       \version_compare(\Drupal::VERSION, '10.0.0-dev', '>=') &&

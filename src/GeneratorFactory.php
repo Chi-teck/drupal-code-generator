@@ -15,6 +15,9 @@ final class GeneratorFactory {
   private const DIRECTORY = Application::ROOT . '/src/Command';
   private const NAMESPACE = '\DrupalCodeGenerator\Command';
 
+  /**
+   * Constructs the object.
+   */
   public function __construct(
     private readonly ClassResolverInterface $classResolver,
   ) {}

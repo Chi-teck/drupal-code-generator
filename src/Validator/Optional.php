@@ -9,6 +9,9 @@ final class Optional {
 
   private readonly \Closure $validator;
 
+  /**
+   * @psalm-param callable(mixed): mixed $validator
+   */
   public function __construct(callable $validator) {
     // Convert into closure as typed properties cannot be callable.
     $this->validator = $validator(...);

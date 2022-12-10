@@ -18,6 +18,9 @@ abstract class BaseDumper extends Helper implements DumperInterface, IOAwareInte
 
   use IOAwareTrait;
 
+  /**
+   * Constructs the object.
+   */
   public function __construct(protected readonly Filesystem $filesystem) {}
 
   /**
@@ -52,10 +55,19 @@ abstract class BaseDumper extends Helper implements DumperInterface, IOAwareInte
     return $dumped_assets;
   }
 
+  /**
+   * Creates a directory.
+   */
   abstract protected function dumpDirectory(Directory $directory, string $path): void;
 
+  /**
+   * Dumps a file.
+   */
   abstract protected function dumpFile(File $file, string $path): void;
 
+  /**
+   * Dumps a symlink.
+   */
   abstract protected function dumpSymlink(Symlink $symlink, string $path): void;
 
 }

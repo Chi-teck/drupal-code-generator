@@ -16,11 +16,13 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
   /**
    * Executes the command.
    *
-   * @param string $command_class
+   * @psalm-param class-string $command_class
    *   A command class to instantiate generator.
-   * @param array $user_input
+   * @psalm-param list<string> $user_input
    *   An array of strings representing each input passed to the command input
    *   stream.
+   *
+   * @psalm-return int<0, 1>
    */
   protected function execute(string $command_class, array $user_input): int {
 
@@ -34,8 +36,9 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
     $application->add($command);
 
     $command_tester = new CommandTester($command);
+    /** @psalm-var int<0, 1> $result */
     $result = $command_tester
-      ->setInputs(\array_values($user_input))
+      ->setInputs($user_input)
       ->execute(['--destination' => $this->directory]);
 
     $this->display = $command_tester->getDisplay();

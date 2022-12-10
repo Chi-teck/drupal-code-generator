@@ -10,7 +10,7 @@ final class PrependResolver implements ResolverInterface {
   /**
    * {@inheritdoc}
    */
-  public function resolve(Asset $asset, string $path): Asset {
+  public function resolve(Asset $asset, string $path): File {
     if (!$asset instanceof File) {
       throw new \InvalidArgumentException('Wrong asset type.');
     }

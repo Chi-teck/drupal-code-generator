@@ -18,6 +18,8 @@ final class GeneratorInfo {
    *
    * The generators are passed by reference as there are no getters for them.
    * That isolates data from listeners.
+   *
+   * @psalm-param list<\Symfony\Component\Console\Command\Command> $generators
    */
   public function __construct(array &$generators) {
     $this->generators = &$generators;

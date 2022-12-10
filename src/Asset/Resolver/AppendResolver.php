@@ -30,7 +30,7 @@ final class AppendResolver implements ResolverInterface, ResolverFactoryInterfac
   /**
    * {@inheritdoc}
    */
-  public function resolve(Asset $asset, string $path): Asset {
+  public function resolve(Asset $asset, string $path): File {
     if (!$asset instanceof File) {
       throw new \InvalidArgumentException('Wrong asset type.');
     }

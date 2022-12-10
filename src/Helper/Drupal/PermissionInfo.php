@@ -28,6 +28,8 @@ final class PermissionInfo extends Helper {
 
   /**
    * Gets names of all available permissions.
+   *
+   * @psalm-return list<string>
    */
   public function getPermissionNames(): array {
     return \array_keys($this->permissionHandler->getPermissions());

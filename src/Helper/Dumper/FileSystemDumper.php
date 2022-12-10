@@ -18,15 +18,24 @@ final class FileSystemDumper extends BaseDumper {
     return 'filesystem_dumper';
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function dumpDirectory(Directory $directory, string $path): void {
     $this->filesystem->mkdir($path, $directory->getMode());
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function dumpFile(File $file, string $path): void {
     $this->filesystem->dumpFile($path, $file->getContent());
     $this->filesystem->chmod($path, $file->getMode());
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function dumpSymlink(Symlink $symlink, string $path): void {
     $file_exists = $this->filesystem->exists($path);
     if ($file_exists) {

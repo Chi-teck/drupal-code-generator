@@ -24,6 +24,8 @@ final class HookInfo extends Helper {
 
   /**
    * Gets templates for all available hooks.
+   *
+   * @psalm-return array<string, string>
    */
   public function getHookTemplates(): array {
     static $hooks;
@@ -110,6 +112,8 @@ final class HookInfo extends Helper {
 
   /**
    * Creates hook templates from PHP file.
+   *
+   * @psalm-return array<string, string>
    */
   private static function parseHooks(string $file): array {
 

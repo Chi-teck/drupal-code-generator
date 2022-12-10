@@ -122,6 +122,10 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
 
   /**
    * {@inheritdoc}
+   *
+   * @template T as object
+   * @psalm-param T $event
+   * @psalm-return T
    */
   public function dispatch(object $event): object {
     return $this->getContainer()->get('event_dispatcher')->dispatch($event);
