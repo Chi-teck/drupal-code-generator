@@ -1,5 +1,5 @@
 {% import '@lib/di.twig' as di %}
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\views\argument_default;
 
@@ -17,42 +17,33 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 {% endsort %}
 
 /**
- * {{ plugin_label }} argument default plugin.
+ * @todo Add plugin description here.
  *
  * @ViewsArgumentDefault(
  *   id = "{{ plugin_id }}",
- *   title = @Translation("{{ plugin_label }}")
+ *   title = @Translation("{{ plugin_label }}"),
  * )
  */
-class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
+final class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
 
 {% if services %}
-{{ di.properties(services) }}
-
   /**
    * Constructs a new {{ class }} instance.
-   *
-   * @param array $configuration
-   *   The plugin configuration, i.e. an array with configuration values keyed
-   *   by configuration option name. The special key 'context' may be used to
-   *   initialize the defined contexts by setting it to an array of context
-   *   values keyed by context names.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-{{ di.annotation(services) }}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, {{ di.signature(services, false) }}) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+{{ di.signature(services) }}
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-{{ di.assignment(services) }}
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    return new self(
       $configuration,
       $plugin_id,
       $plugin_definition,
@@ -65,7 +56,7 @@ class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependen
   /**
    * {@inheritdoc}
    */
-  protected function defineOptions() {
+  protected function defineOptions(): array {
     $options = parent::defineOptions();
     $options['example'] = ['default' => ''];
     return $options;
@@ -74,7 +65,7 @@ class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependen
   /**
    * {@inheritdoc}
    */
-  public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+  public function buildOptionsForm(&$form, FormStateInterface $form_state): void {
     $form['example'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Example'),
@@ -85,14 +76,16 @@ class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependen
 {% endif %}
   /**
    * {@inheritdoc}
+   *
+   * @todo Make sure the return type-hint matches the argument type.
    */
-  public function getArgument() {
+  public function getArgument(): int {
 
     // @DCG
     // Here is the place where you should create a default argument for the
     // contextual filter. The source of this argument depends on your needs.
-    // For example, you can extract the value from the URL or fetch it from
-    // some fields of the current viewed entity.
+    // For example, the argument can be extracted from the URL or fetched from
+    // some fields of the currently viewed entity.
     $argument = 123;
 
     return $argument;
@@ -101,15 +94,16 @@ class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependen
   /**
    * {@inheritdoc}
    */
-  public function getCacheMaxAge() {
+  public function getCacheMaxAge(): int {
     return Cache::PERMANENT;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getCacheContexts() {
-    // @DCG Use 'url' context if the argument comes from URL.
+  public function getCacheContexts(): array {
+    // @todo Use 'url.path' or 'url.query_args:%key' contexts if the argument
+    // comes from URL.
     return [];
   }
 

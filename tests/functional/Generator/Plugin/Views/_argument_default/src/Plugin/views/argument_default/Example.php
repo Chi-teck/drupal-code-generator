@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Plugin\views\argument_default;
 
@@ -10,47 +10,32 @@ use Drupal\views\Plugin\views\argument_default\ArgumentDefaultPluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Example argument default plugin.
+ * @todo Add plugin description here.
  *
  * @ViewsArgumentDefault(
  *   id = "foo_example",
- *   title = @Translation("Example")
+ *   title = @Translation("Example"),
  * )
  */
-class Example extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
-
-  /**
-   * The current route match.
-   *
-   * @var \Drupal\Core\Routing\RouteMatchInterface
-   */
-  protected $routeMatch;
+final class Example extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
 
   /**
    * Constructs a new Example instance.
-   *
-   * @param array $configuration
-   *   The plugin configuration, i.e. an array with configuration values keyed
-   *   by configuration option name. The special key 'context' may be used to
-   *   initialize the defined contexts by setting it to an array of context
-   *   values keyed by context names.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
-   *   The current route match.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, RouteMatchInterface $route_match) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    private readonly RouteMatchInterface $routeMatch,
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->routeMatch = $route_match;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    return new self(
       $configuration,
       $plugin_id,
       $plugin_definition,
@@ -61,7 +46,7 @@ class Example extends ArgumentDefaultPluginBase implements CacheableDependencyIn
   /**
    * {@inheritdoc}
    */
-  protected function defineOptions() {
+  protected function defineOptions(): array {
     $options = parent::defineOptions();
     $options['example'] = ['default' => ''];
     return $options;
@@ -70,7 +55,7 @@ class Example extends ArgumentDefaultPluginBase implements CacheableDependencyIn
   /**
    * {@inheritdoc}
    */
-  public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+  public function buildOptionsForm(&$form, FormStateInterface $form_state): void {
     $form['example'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Example'),
@@ -80,14 +65,16 @@ class Example extends ArgumentDefaultPluginBase implements CacheableDependencyIn
 
   /**
    * {@inheritdoc}
+   *
+   * @todo Make sure the return type-hint matches the argument type.
    */
-  public function getArgument() {
+  public function getArgument(): int {
 
     // @DCG
     // Here is the place where you should create a default argument for the
     // contextual filter. The source of this argument depends on your needs.
-    // For example, you can extract the value from the URL or fetch it from
-    // some fields of the current viewed entity.
+    // For example, the argument can be extracted from the URL or fetched from
+    // some fields of the currently viewed entity.
     $argument = 123;
 
     return $argument;
@@ -96,15 +83,16 @@ class Example extends ArgumentDefaultPluginBase implements CacheableDependencyIn
   /**
    * {@inheritdoc}
    */
-  public function getCacheMaxAge() {
+  public function getCacheMaxAge(): int {
     return Cache::PERMANENT;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getCacheContexts() {
-    // @DCG Use 'url' context if the argument comes from URL.
+  public function getCacheContexts(): array {
+    // @todo Use 'url.path' or 'url.query_args:%key' contexts if the argument
+    // comes from URL.
     return [];
   }
 

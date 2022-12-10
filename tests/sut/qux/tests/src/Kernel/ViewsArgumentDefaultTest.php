@@ -23,7 +23,7 @@ final class ViewsArgumentDefaultTest extends KernelTestBase {
    */
   public function testPlugin(): void {
 
-    $plugin_manager = \Drupal::service('plugin.manager.views.argument_default');
+    $plugin_manager = $this->container->get('plugin.manager.views.argument_default');
 
     $plugin = $plugin_manager->createInstance('qux_example');
     $plugin->options['example'] = 'abc';
