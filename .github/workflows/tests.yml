@@ -20,8 +20,8 @@ jobs:
                     - "8.1"
                     - "8.2"
                 drupal:
-                  - "10.0"
-                  - "10.1"
+                  - "10.0.x"
+                  - "10.1.x"
                 dependency-mode:
                   - prefer-stable
                   - prefer-lowest
