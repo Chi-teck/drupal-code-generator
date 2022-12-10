@@ -124,6 +124,11 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
    * @template T as object
    * @psalm-param T $event
    * @psalm-return T
+   *
+   * @todo Remove this once Symfony drops support for event-dispatcher-contracts v2.
+   * @see \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch()
+   * @psalm-suppress InvalidReturnType
+   * @psalm-suppress InvalidReturnStatement
    */
   public function dispatch(object $event): object {
     return $this->getContainer()->get('event_dispatcher')->dispatch($event);
