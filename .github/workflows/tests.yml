@@ -1,61 +1,61 @@
 name: Tests
 
 on:
-    push:
-        branches: [ 3.x ]
-    pull_request:
-        branches: [ 3.x ]
+  push:
+    branches: [ 3.x ]
+  pull_request:
+    branches: [ 3.x ]
 
-    workflow_dispatch:
+  workflow_dispatch:
 
 env:
   DCG_TMP_DIR: /dev/shm
 
 jobs:
-    tests :
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                php:
-                    - "8.1"
-                    - "8.2"
-                drupal:
-                  - "10.0.x"
-                  - "10.1.x"
-                dependency-mode:
-                  - prefer-stable
-                  - prefer-lowest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php:
+          - "8.1"
+          - "8.2"
+        drupal:
+          - "10.0.x"
+          - "10.1.x"
+        dependency-mode:
+          - prefer-stable
+          - prefer-lowest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-            - name: Install PHP with extensions
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php }}
-                  tools: composer:v2
+      - name: Install PHP with extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
 
-            - name: Install Symfony CLI
-              run: |
-                echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' | sudo tee /etc/apt/sources.list.d/symfony-cli.list
-                sudo apt update && sudo apt install symfony-cli
+      - name: Install Symfony CLI
+        run: |
+          echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' | sudo tee /etc/apt/sources.list.d/symfony-cli.list
+          sudo apt update && sudo apt install symfony-cli
 
-            - name: Install dependencies
-              run: composer install --ansi
+      - name: Install dependencies
+        run: composer install --ansi
 
-            - name: Update  dependencies
-              run: composer update --${{ matrix.dependency-mode }} --ansi
+      - name: Update  dependencies
+        run: composer update --${{ matrix.dependency-mode }} --ansi
 
-            - name: Run lint
-              run: ./scripts/lint.sh
+      - name: Run lint
+        run: ./scripts/lint.sh
 
-            - name: Run unit tests
-              run: ./scripts/unit-tests.sh
+      - name: Run unit tests
+        run: ./scripts/unit-tests.sh
 
-            - name: Run functional tests
-              env:
-                DCG_DRUPAL_VERSION: -${{ matrix.drupal }}
-              run: ./scripts/functional-tests.sh
+      - name: Run functional tests
+        env:
+          DCG_DRUPAL_VERSION: ${{ matrix.drupal }}
+        run: ./scripts/functional-tests.sh
 
-            - name: Run SUT tests
-              run: ./scripts/sut-tests.sh
+      - name: Run SUT tests
+        run: ./scripts/sut-tests.sh
