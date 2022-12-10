@@ -2,7 +2,7 @@
 
 namespace DrupalCodeGenerator\Tests\Unit\Asset;
 
-use DrupalCodeGenerator\Asset\Asset;
+use DrupalCodeGenerator\Asset\File;
 use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
 use DrupalCodeGenerator\Asset\Resolver\ReplaceResolver;
 use DrupalCodeGenerator\Helper\QuestionHelper;
@@ -21,12 +21,12 @@ final class AssetTest extends BaseTestCase {
    * Test callback.
    */
   public function testGettersAndSetters(): void {
-    $asset = self::createAsset('foo.txt');
+    $asset = File::create('foo.txt');
 
     self::assertSame('foo.txt', $asset->getPath());
     self::assertSame('foo.txt', (string) $asset);
 
-    self::assertSame(0444, $asset->getMode());
+    self::assertSame(0644, $asset->getMode());
     self::assertSame(0777, $asset->mode(0777)->getMode());
 
     self::assertFalse($asset->isVirtual());
@@ -41,7 +41,7 @@ final class AssetTest extends BaseTestCase {
    * Test callback.
    */
   public function testResolvers(): void {
-    $asset = self::createAsset('foo.txt');
+    $asset = File::create('foo.txt');
 
     $io = self::createIO();
     self::assertInstanceOf(ReplaceResolver::class, $asset->getResolver($io));
@@ -57,27 +57,10 @@ final class AssetTest extends BaseTestCase {
    * Test callback.
    */
   public function testReplaceTokens(): void {
-    $asset = self::createAsset('src/{class}.php');
+    $asset = File::create('src/{class}.php');
     self::assertSame('src/{class}.php', $asset->getPath());
     $asset->vars(['class' => 'Example']);
     self::assertSame('src/Example.php', $asset->getPath());
-
-    $asset->vars(['foo' => 'bar']);
-    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-    self::assertSame('-=bar=-', $asset->doReplaceTokens('-={foo}=-'));
-  }
-
-  /**
-   * Creates an asset.
-   */
-  private static function createAsset(string $path): Asset {
-    return new class ($path) extends Asset {
-
-      public function doReplaceTokens(string $text): ?string {
-        return $this->replaceTokens($text);
-      }
-
-    };
   }
 
   /**

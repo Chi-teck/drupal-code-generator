@@ -47,6 +47,13 @@ abstract class Asset implements \Stringable {
    * Asset constructor.
    */
   public function __construct(protected readonly string $path) {
+    // @todo Test this.
+    match (TRUE) {
+      $this instanceof Directory,
+      $this instanceof File,
+      $this instanceof Symlink => NULL,
+      default => throw new \LogicException(\sprintf('%s class is internal for extension.', self::class)),
+    };
     $this->resolverDefinition = new ResolverDefinition(ReplaceResolver::class);
   }
 
