@@ -7,8 +7,9 @@ namespace DrupalCodeGenerator\Event;
  */
 final class GeneratorInfoAlter {
 
-  use StoppableEventTrait;
-
+  /**
+   * @psalm-param list<\Symfony\Component\Console\Command\Command> $generators
+   */
   public array $generators = [];
 
   /**

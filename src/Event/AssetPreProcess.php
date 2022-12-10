@@ -9,8 +9,6 @@ use DrupalCodeGenerator\Asset\AssetCollection;
  */
 final class AssetPreProcess {
 
-  use StoppableEventTrait;
-
   /**
    * Constructs the event object.
    */

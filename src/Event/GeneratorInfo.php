@@ -9,8 +9,9 @@ use Symfony\Component\Console\Command\Command;
  */
 final class GeneratorInfo {
 
-  use StoppableEventTrait;
-
+  /**
+   * @psalm-param list<\Symfony\Component\Console\Command\Command> $generators
+   */
   private array $generators = [];
 
   /**

@@ -6,7 +6,6 @@ use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\Event\GeneratorInfo;
 use DrupalCodeGenerator\Event\GeneratorInfoAlter;
-use DrupalCodeGenerator\Event\StoppableEventTrait;
 use DrupalCodeGenerator\Helper\Drupal\ConfigInfo;
 use DrupalCodeGenerator\Helper\Drupal\HookInfo;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
@@ -36,7 +35,6 @@ use Twig\Loader\FilesystemLoader as TemplateLoader;
 final class Application extends BaseApplication implements ContainerAwareInterface, EventDispatcherInterface {
 
   use ContainerAwareTrait;
-  use StoppableEventTrait;
 
   /**
    * Path to DCG root directory.
