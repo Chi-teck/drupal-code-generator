@@ -33,7 +33,7 @@ final class Module extends BaseGenerator implements ContainerInjectionInterface 
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container): self {
-    return new self($container->get(ModuleExtensionList::class));
+    return new self($container->get('extension.list.module'));
   }
 
   /**

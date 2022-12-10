@@ -37,7 +37,7 @@ final class Action extends BaseGenerator implements ContainerInjectionInterface 
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container): self {
-    return new self($container->get(EntityTypeManagerInterface::class));
+    return new self($container->get('entity_type.manager'));
   }
 
   /**

@@ -40,7 +40,7 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
   public static function create(ContainerInterface $container): self {
     return new self(
       $container->get('entity_type.manager'),
-      $container->get(EntityTypeBundleInfoInterface::class),
+      $container->get('entity_type.bundle.info'),
     );
   }
 

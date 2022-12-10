@@ -28,7 +28,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFileSystem;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface as SymfonyEventDispatcherInterface;
 use Twig\Loader\FilesystemLoader as TemplateLoader;
 
 /**
@@ -125,7 +124,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
    * {@inheritdoc}
    */
   public function dispatch(object $event): object {
-    return $this->getContainer()->get(SymfonyEventDispatcherInterface::class)->dispatch($event);
+    return $this->getContainer()->get('event_dispatcher')->dispatch($event);
   }
 
 }
