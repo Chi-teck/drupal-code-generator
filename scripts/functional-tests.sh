@@ -11,7 +11,6 @@ DRUPAL_DIR=$WORKSPACE_DIR/drupal
 CACHE_DIR=$WORKSPACE_DIR/cache
 DCG_DIR=$DRUPAL_DIR/vendor/chi-teck/drupal-code-generator
 DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
-
 DCG_DRUPAL_VERSION=${DCG_DRUPAL_VERSION:-'10.1.x'}
 
 echo -----------------------------------------------

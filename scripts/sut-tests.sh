@@ -18,10 +18,7 @@ DCG=$DRUPAL_DIR/vendor/bin/dcg
 DCG_WD_URL=${DCG_WD_URL:-'http://localhost:4444/wd/hub'}
 DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
 DCG_TEST_FILTER=${1:-'all'}
-
-if [[ -z ${DCG_DRUPAL_VERSION:-} ]]; then
-  DCG_DRUPAL_VERSION=$(git ls-remote -h $DRUPAL_REPO | grep -o '10\.1\.x' | tail -n1)
-fi
+DCG_DRUPAL_VERSION=${DCG_DRUPAL_VERSION:-'10.1.x'}
 
 echo -----------------------------------------------
 echo ' DRUPAL VERSION:' $DCG_DRUPAL_VERSION
