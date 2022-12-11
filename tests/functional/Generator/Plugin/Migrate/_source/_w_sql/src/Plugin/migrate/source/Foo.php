@@ -1,7 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example\Plugin\migrate\source;
 
+use Drupal\Core\Database\Query\SelectInterface;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
 
@@ -10,24 +11,23 @@ use Drupal\migrate\Row;
  *
  * @MigrateSource(
  *   id = "example_foo",
- *   source_module = "example"
+ *   source_module = "example",
  * )
  */
-class Foo extends SqlBase {
+final class Foo extends SqlBase {
 
   /**
    * {@inheritdoc}
    */
-  public function query() {
-    $query = $this->select('example', 'e')
+  public function query(): SelectInterface {
+    return $this->select('example', 'e')
       ->fields('e', ['id', 'name', 'status']);
-    return $query;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function fields() {
+  public function fields(): array {
     return [
       'id' => $this->t('The record ID.'),
       'name' => $this->t('The record name.'),
@@ -38,7 +38,7 @@ class Foo extends SqlBase {
   /**
    * {@inheritdoc}
    */
-  public function getIds() {
+  public function getIds(): array {
     $ids['id'] = [
       'type' => 'integer',
       'unsigned' => TRUE,
@@ -50,15 +50,13 @@ class Foo extends SqlBase {
   /**
    * {@inheritdoc}
    */
-  public function prepareRow(Row $row) {
-
+  public function prepareRow(Row $row): bool {
     // @DCG
-    // Extend/modify the row here if needed.
-    //
+    // Modify the row here if needed.
     // Example:
     // @code
-    // $name = $row->getSourceProperty('name');
-    // $row->setSourceProperty('name', Html::escape('$name');
+    //   $name = $row->getSourceProperty('name');
+    //   $row->setSourceProperty('name', Html::escape('$name'));
     // @endcode
     return parent::prepareRow($row);
   }

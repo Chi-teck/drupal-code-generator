@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example\Plugin\migrate\source;
 
@@ -10,15 +10,15 @@ use Drupal\migrate\Row;
  *
  * @MigrateSource(
  *   id = "example_bar",
- *   source_module = "example"
+ *   source_module = "example",
  * )
  */
-class Bar extends SourcePluginBase {
+final class Bar extends SourcePluginBase {
 
   /**
    * {@inheritdoc}
    */
-  public function __toString() {
+  public function __toString(): string {
     // @DCG You may return something meaningful here.
     return '';
   }
@@ -26,8 +26,7 @@ class Bar extends SourcePluginBase {
   /**
    * {@inheritdoc}
    */
-  protected function initializeIterator() {
-
+  protected function initializeIterator(): \ArrayIterator {
     // @DCG
     // In this example we return a hardcoded set of records.
     //
@@ -61,7 +60,7 @@ class Bar extends SourcePluginBase {
   /**
    * {@inheritdoc}
    */
-  public function fields() {
+  public function fields(): array {
     return [
       'id' => $this->t('The record ID.'),
       'name' => $this->t('The record name.'),
@@ -72,7 +71,7 @@ class Bar extends SourcePluginBase {
   /**
    * {@inheritdoc}
    */
-  public function getIds() {
+  public function getIds(): array {
     $ids['id'] = [
       'type' => 'integer',
       'unsigned' => TRUE,
@@ -84,15 +83,13 @@ class Bar extends SourcePluginBase {
   /**
    * {@inheritdoc}
    */
-  public function prepareRow(Row $row) {
-
+  public function prepareRow(Row $row): bool {
     // @DCG
-    // Extend/modify the row here if needed.
-    //
+    // Modify the row here if needed.
     // Example:
     // @code
-    // $name = $row->getSourceProperty('name');
-    // $row->setSourceProperty('name', Html::escape('$name');
+    //   $name = $row->getSourceProperty('name');
+    //   $row->setSourceProperty('name', Html::escape('$name'));
     // @endcode
     return parent::prepareRow($row);
   }

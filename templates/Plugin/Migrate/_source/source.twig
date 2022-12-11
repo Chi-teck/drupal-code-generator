@@ -1,7 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\migrate\source;
 
+{% if source_type == 'sql' %}
+use Drupal\Core\Database\Query\SelectInterface;
+{% endif %}
 use Drupal\migrate\Plugin\migrate\source\{{ base_class }};
 use Drupal\migrate\Row;
 
@@ -10,26 +13,25 @@ use Drupal\migrate\Row;
  *
  * @MigrateSource(
  *   id = "{{ plugin_id }}",
- *   source_module = "{{ machine_name }}"
+ *   source_module = "{{ machine_name }}",
  * )
  */
-class {{ class }} extends {{ base_class }} {
+final class {{ class }} extends {{ base_class }} {
 
 {% if source_type == 'sql' %}
   /**
    * {@inheritdoc}
    */
-  public function query() {
-    $query = $this->select('example', 'e')
+  public function query(): SelectInterface {
+    return $this->select('example', 'e')
       ->fields('e', ['id', 'name', 'status']);
-    return $query;
   }
 
 {% else %}
   /**
    * {@inheritdoc}
    */
-  public function __toString() {
+  public function __toString(): string {
     // @DCG You may return something meaningful here.
     return '';
   }
@@ -37,8 +39,7 @@ class {{ class }} extends {{ base_class }} {
   /**
    * {@inheritdoc}
    */
-  protected function initializeIterator() {
-
+  protected function initializeIterator(): \ArrayIterator {
     // @DCG
     // In this example we return a hardcoded set of records.
     //
@@ -73,7 +74,7 @@ class {{ class }} extends {{ base_class }} {
   /**
    * {@inheritdoc}
    */
-  public function fields() {
+  public function fields(): array {
     return [
       'id' => $this->t('The record ID.'),
       'name' => $this->t('The record name.'),
@@ -84,7 +85,7 @@ class {{ class }} extends {{ base_class }} {
   /**
    * {@inheritdoc}
    */
-  public function getIds() {
+  public function getIds(): array {
     $ids['id'] = [
       'type' => 'integer',
       'unsigned' => TRUE,
@@ -96,15 +97,13 @@ class {{ class }} extends {{ base_class }} {
   /**
    * {@inheritdoc}
    */
-  public function prepareRow(Row $row) {
-
+  public function prepareRow(Row $row): bool {
     // @DCG
-    // Extend/modify the row here if needed.
-    //
+    // Modify the row here if needed.
     // Example:
     // @code
-    // $name = $row->getSourceProperty('name');
-    // $row->setSourceProperty('name', Html::escape('$name');
+    //   $name = $row->getSourceProperty('name');
+    //   $row->setSourceProperty('name', Html::escape('$name'));
     // @endcode
     return parent::prepareRow($row);
   }

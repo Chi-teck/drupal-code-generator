@@ -14,6 +14,9 @@ final class SourceTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_source';
 
+  /**
+   * Test callback.
+   */
   public function testSqlSourceGenerator(): void {
     $input = [
       'example',
@@ -49,9 +52,13 @@ final class SourceTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
+    $this->fixtureDir .= '/_w_sql';
     $this->assertGeneratedFile('src/Plugin/migrate/source/Foo.php');
   }
 
+  /**
+   * Test callback.
+   */
   public function testOtherSourceGenerator(): void {
     $input = [
       'example',
@@ -87,6 +94,7 @@ final class SourceTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
+    $this->fixtureDir .= '/_n_sql';
     $this->assertGeneratedFile('src/Plugin/migrate/source/Bar.php');
   }
 

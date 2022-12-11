@@ -12,6 +12,8 @@
     <!-- Allow placeholders for doc comments. -->
     <exclude name="Drupal.Commenting.DocComment.ShortNotCapital"/>
     <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
+    <!-- Some generated classes may have empty methods.  -->
+    <exclude name="Generic.CodeAnalysis.UselessOverridingMethod.Found"/>
   </rule>
   <rule ref="./vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <!-- Conflicts with strict types. -->
