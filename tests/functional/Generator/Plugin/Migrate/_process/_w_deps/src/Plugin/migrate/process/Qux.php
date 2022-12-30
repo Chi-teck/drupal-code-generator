@@ -1,36 +1,30 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\migrate\process;
+namespace Drupal\example\Plugin\migrate\process;
 
-{% sort %}
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-  {% if services %}
-{{ di.use(services) }}
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
- * Provides {{ plugin_id|article }} plugin.
+ * Provides an example_qux plugin.
  *
  * Usage:
  *
  * @code
  * process:
  *   bar:
- *     plugin: {{ plugin_id }}
+ *     plugin: example_qux
  *     source: foo
  * @endcode
  *
- * @MigrateProcessPlugin(id = "{{ plugin_id }}")
+ * @MigrateProcessPlugin(id = "example_qux")
  */
-final class {{ class }} extends ProcessPluginBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class Qux extends ProcessPluginBase implements ContainerFactoryPluginInterface {
 
-{% if services %}
   /**
    * Constructs the plugin instance.
    */
@@ -38,7 +32,7 @@ final class {{ class }} extends ProcessPluginBase {% if services %}implements Co
     array $configuration,
     $plugin_id,
     $plugin_definition,
-{{ di.signature(services) }}
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -51,11 +45,10 @@ final class {{ class }} extends ProcessPluginBase {% if services %}implements Co
       $configuration,
       $plugin_id,
       $plugin_definition,
-{{ di.container(services) }}
+      $container->get('entity_type.manager'),
     );
   }
 
-{% endif %}
   /**
    * {@inheritdoc}
    */

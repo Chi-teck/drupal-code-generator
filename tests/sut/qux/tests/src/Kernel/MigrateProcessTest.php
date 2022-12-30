@@ -3,6 +3,8 @@
 namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\migrate\MigrateExecutable;
+use Drupal\migrate\Row;
 
 /**
  * Test for MigrateProcess plugin.
@@ -20,19 +22,16 @@ final class MigrateProcessTest extends KernelTestBase {
    * Test callback.
    */
   public function testBlockRendering(): void {
-
-    $row = $this->getMockBuilder('Drupal\migrate\Row')
-      ->getMock();
-
-    $migrate_executable = $this->getMockBuilder('Drupal\migrate\MigrateExecutable')
+    $migrate_executable = $this->getMockBuilder(MigrateExecutable::class)
       ->disableOriginalConstructor()
       ->getMock();
 
-    $result = \Drupal::service('plugin.manager.migrate.process')
+    $row = new Row(['example']);
+    $result = $this->container->get('plugin.manager.migrate.process')
       ->createInstance('example')
-      ->transform('бумеранг', $migrate_executable, $row, NULL);
+      ->transform('example', $migrate_executable, $row, NULL);
 
-    self::assertEquals('bumerang', $result);
+    self::assertSame('example', $result);
   }
 
 }

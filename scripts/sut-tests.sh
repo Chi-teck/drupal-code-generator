@@ -208,7 +208,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
 
   $DCG plugin:migrate:source -a qux -a foo -a Foo -a 'SQL'
   $DCG plugin:migrate:source -a qux -a bar -a Bar -a 'Other'
-  $DCG plugin:migrate:process -a qux -a example -a Example
+  $DCG plugin:migrate:process -a qux -a example -a Example -a No
 
   $DCG plugin:views:argument-default -a qux -a Example -a qux_example -a Example -a Yes -a No
   $DCG plugin:views:field -a qux -a Example -a qux_example -a Example -a Yes -a No
