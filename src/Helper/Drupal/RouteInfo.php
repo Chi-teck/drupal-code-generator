@@ -30,7 +30,7 @@ final class RouteInfo extends Helper {
    * @psalm-return list<string>
    */
   public function getRouteNames(): array {
-    /** @var  \Traversable $routes */
+    /** @var \Traversable<string,\Symfony\Component\Routing\Route> $routes */
     $routes = $this->routeProvider->getAllRoutes();
     $route_names = \array_keys(\iterator_to_array($routes));
     // Sort names to ease testing.

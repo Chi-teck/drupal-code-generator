@@ -28,8 +28,10 @@ final class ConfigInfo extends Helper {
    * Gets configuration object names.
    *
    * @psalm-return list<string>
+   * @psalm-suppress MoreSpecificReturnType
    */
   public function getConfigNames(): array {
+    /** @psalm-suppress LessSpecificReturnStatement */
     return $this->configFactory->listAll();
   }
 

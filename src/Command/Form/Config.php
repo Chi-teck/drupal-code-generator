@@ -47,9 +47,7 @@ final class Config extends BaseGenerator {
       $assets->addFile('{machine_name}.routing.yml')
         ->template('routing.twig')
         ->appendIfExists();
-    }
 
-    if ($vars['route']) {
       if ($vars['link'] = $ir->confirm('Would you like to create a menu link for this route?')) {
 
         $vars['link_title'] = $ir->ask('Link title', $vars['route_title']);

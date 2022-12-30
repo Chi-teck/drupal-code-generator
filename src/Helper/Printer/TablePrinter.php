@@ -34,6 +34,7 @@ final class TablePrinter extends Helper implements PrinterInterface, IOAwareInte
 
     $this->io()->title('The following directories and files have been created or updated:');
 
+    /** @psalm-var non-empty-list<non-empty-list<string>> $headers */
     $headers[] = ['Type', 'Path', 'Lines', 'Size'];
 
     $rows = [];
