@@ -43,13 +43,14 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
     // Check if the services are sorted alphabetically.
     $expected_service_ids = [
+      'Drupal\Component\DependencyInjection\ReverseContainer',
       'Drupal\Core\Access\CheckProviderInterface',
       'Drupal\Core\Config\StorageManagerInterface',
       'Drupal\Core\Form\FormCacheInterface',
       'Drupal\Core\Http\HandlerStackConfigurator',
       'Drupal\Core\Menu\MenuTreeStorageInterface',
     ];
-    self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 5));
+    self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 6));
   }
 
   /**
@@ -67,13 +68,14 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertLessThan(550, \count($definitions));
 
     $expected_service_ids = [
+      'Drupal\Component\DependencyInjection\ReverseContainer',
       'Drupal\Core\Access\CheckProviderInterface',
       'Drupal\Core\Config\StorageManagerInterface',
       'Drupal\Core\Form\FormCacheInterface',
       'Drupal\Core\Http\HandlerStackConfigurator',
       'Drupal\Core\Menu\MenuTreeStorageInterface',
     ];
-    self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 5));
+    self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 6));
 
     $expected_definition = [
       'class' => 'Drupal\\Core\\Routing\\AdminContext',
@@ -111,13 +113,14 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertLessThan(550, \count($classes));
 
     $expected_service_ids = [
+      'Drupal\Component\DependencyInjection\ReverseContainer' => '\Drupal\Component\DependencyInjection\ReverseContainer',
       'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
       'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
       'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
       'Drupal\Core\Http\HandlerStackConfigurator' => '\Drupal\Core\Http\HandlerStackConfigurator',
       'Drupal\Core\Menu\MenuTreeStorageInterface' => '\Drupal\Core\Menu\MenuTreeStorage',
     ];
-    self::assertSame($expected_service_ids, \array_slice($classes, 0, 5));
+    self::assertSame($expected_service_ids, \array_slice($classes, 0, 6));
   }
 
   /**

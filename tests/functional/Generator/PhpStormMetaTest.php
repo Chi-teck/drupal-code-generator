@@ -180,6 +180,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Drupal::service(0),
         map([
+          'Drupal\Component\DependencyInjection\ReverseContainer' => '\Drupal\Component\DependencyInjection\ReverseContainer',
           'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
           'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
           'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
@@ -190,6 +191,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
         map([
+          'Drupal\Component\DependencyInjection\ReverseContainer' => '\Drupal\Component\DependencyInjection\ReverseContainer',
           'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
           'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
           'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
