@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\Tests\qux\Kernel;
+namespace Drupal\Tests\qux\Kernel\Migrate;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\migrate\MigrateExecutable;

@@ -7,6 +7,10 @@ use Drupal\Tests\migrate\Kernel\MigrateSourceTestBase;
 /**
  * Tests no-SQL source migrate plugin.
  *
+ * 'Covers' annotation is required for this test.
+ *
+ * @see \Drupal\Tests\migrate\Kernel\MigrateSourceTestBase::getPluginClass
+ *
  * @covers \Drupal\qux\Plugin\migrate\source\Bar
  */
 final class BarTest extends MigrateSourceTestBase {

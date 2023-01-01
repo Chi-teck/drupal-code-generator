@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\Tests\qux\Kernel;
+namespace Drupal\Tests\qux\Kernel\Migrate;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\migrate\Plugin\Migration;
@@ -44,7 +44,7 @@ final class DestinationTest extends KernelTestBase {
     $row->setDestinationProperty('id', 123);
     self::assertSame([123], $plugin->import($row));
 
-    $plugin->rollback([123]);
+    $plugin->rollback([]);
   }
 
 }
