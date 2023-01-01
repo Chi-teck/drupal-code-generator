@@ -1,27 +1,21 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\migrate\destination;
+namespace Drupal\example\Plugin\migrate\destination;
 
-{% sort %}
-use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
-use Drupal\migrate\Plugin\MigrationInterface;
-use Drupal\migrate\Row;
-  {% if services %}
-{{ di.use(services) }}
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
+use Drupal\migrate\Row;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
- * The '{{ plugin_id }}' destination plugin.
+ * The 'example_bar' destination plugin.
  *
- * @MigrateDestination(id = "{{ plugin_id }}")
+ * @MigrateDestination(id = "example_bar")
  */
-final class {{ class }} extends DestinationBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class Bar extends DestinationBase implements ContainerFactoryPluginInterface {
 
-{% if services %}
   /**
    * Constructs the plugin instance.
    */
@@ -30,7 +24,7 @@ final class {{ class }} extends DestinationBase {% if services %}implements Cont
     $plugin_id,
     $plugin_definition,
     MigrationInterface $migration,
-{{ di.signature(services) }}
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $migration);
   }
@@ -50,11 +44,10 @@ final class {{ class }} extends DestinationBase {% if services %}implements Cont
       $plugin_id,
       $plugin_definition,
       $migration,
-{{ di.container(services) }}
+      $container->get('entity_type.manager'),
     );
   }
 
-{% endif %}
   /**
    * {@inheritdoc}
    */
