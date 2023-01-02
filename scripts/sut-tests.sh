@@ -204,7 +204,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
 
   $DCG plugin:field:formatter -a qux -a Example -a qux_example -a ExampleFormatter -a Yes
   $DCG plugin:field:type -a qux -a Example -a qux_example -a ExampleItem -a Yes -a Yes
-  $DCG plugin:field:widget -a qux -a Example -a qux_example -a ExampleWidget -a Yes
+  $DCG plugin:field:widget -a qux -a Example -a qux_example -a ExampleWidget -a Yes -a No
 
   $DCG plugin:migrate:source -a qux -a foo -a Foo -a 'SQL'
   $DCG plugin:migrate:source -a qux -a bar -a Bar -a 'Other'

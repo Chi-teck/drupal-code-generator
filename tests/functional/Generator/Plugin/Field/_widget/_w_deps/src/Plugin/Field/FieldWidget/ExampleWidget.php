@@ -1,31 +1,26 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\Field\FieldWidget;
+namespace Drupal\foo\Plugin\Field\FieldWidget;
 
-{% sort %}
+use Drupal\Core\CronInterface;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
-  {% if services %}
-{{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-  {% endif %}
-{% endsort %}
 
 /**
- * Defines the '{{ plugin_id }}' field widget.
+ * Defines the 'foo_example' field widget.
  *
  * @FieldWidget(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
+ *   id = "foo_example",
+ *   label = @Translation("Example"),
  *   field_types = {"string"},
  * )
  */
-final class {{ class }} extends WidgetBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class ExampleWidget extends WidgetBase implements ContainerFactoryPluginInterface {
 
-{% if services %}
   /**
    * Constructs the plugin instance.
    */
@@ -33,7 +28,8 @@ final class {{ class }} extends WidgetBase {% if services %}implements Container
     array $configuration,
     $plugin_id,
     $plugin_definition,
-{{ di.signature(services) }}
+    private readonly CronInterface $cron,
+    private readonly Connection $connection,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -46,12 +42,11 @@ final class {{ class }} extends WidgetBase {% if services %}implements Container
       $configuration,
       $plugin_id,
       $plugin_definition,
-{{ di.container(services) }}
+      $container->get('cron'),
+      $container->get('database'),
     );
   }
 
-{% endif %}
-{% if configurable %}
   /**
    * {@inheritdoc}
    */
@@ -80,7 +75,6 @@ final class {{ class }} extends WidgetBase {% if services %}implements Container
     return $summary;
   }
 
-{% endif %}
   /**
    * {@inheritdoc}
    */

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Plugin\Field\FieldWidget;
 
@@ -15,35 +15,32 @@ use Drupal\Core\Form\FormStateInterface;
  *   field_types = {"string"},
  * )
  */
-class ExampleWidget extends WidgetBase {
+final class ExampleWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
-    return [
-      'foo' => 'bar',
-    ] + parent::defaultSettings();
+  public static function defaultSettings(): array {
+    $setting = ['foo' => 'bar'];
+    return $setting + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
-
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
     $element['foo'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Foo'),
       '#default_value' => $this->getSetting('foo'),
     ];
-
     return $element;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsSummary() {
+  public function settingsSummary(): array {
     $summary[] = $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]);
     return $summary;
   }
@@ -51,13 +48,11 @@ class ExampleWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
     $element['value'] = $element + [
       '#type' => 'textfield',
       '#default_value' => $items[$delta]->value ?? NULL,
     ];
-
     return $element;
   }
 
