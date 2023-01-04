@@ -41,8 +41,9 @@ final class ExampleWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function settingsSummary(): array {
-    $summary[] = $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]);
-    return $summary;
+    return [
+      $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]),
+    ];
   }
 
   /**

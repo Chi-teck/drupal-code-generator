@@ -71,8 +71,9 @@ final class ExampleWidget extends WidgetBase implements ContainerFactoryPluginIn
    * {@inheritdoc}
    */
   public function settingsSummary(): array {
-    $summary[] = $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]);
-    return $summary;
+    return [
+      $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]),
+    ];
   }
 
   /**

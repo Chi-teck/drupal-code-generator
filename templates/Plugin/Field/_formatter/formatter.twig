@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
@@ -14,58 +14,52 @@ use Drupal\Core\Form\FormStateInterface;
  * @FieldFormatter(
  *   id = "{{ plugin_id }}",
  *   label = @Translation("{{ plugin_label }}"),
- *   field_types = {
- *     "string"
- *   }
+ *   field_types = {"string"},
  * )
  */
-class {{ class }} extends FormatterBase {
+final class {{ class }} extends FormatterBase {
 
 {% if configurable %}
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
-    return [
-      'foo' => 'bar',
-    ] + parent::defaultSettings();
+  public static function defaultSettings(): array {
+    $setting = ['foo' => 'bar'];
+    return $setting + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
-
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
     $elements['foo'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Foo'),
       '#default_value' => $this->getSetting('foo'),
     ];
-
     return $elements;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsSummary() {
-    $summary[] = $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]);
-    return $summary;
+  public function settingsSummary(): array {
+    return [
+      $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]),
+    ];
   }
 
 {% endif %}
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode) {
+  public function viewElements(FieldItemListInterface $items, $langcode): array {
     $element = [];
-
     foreach ($items as $delta => $item) {
       $element[$delta] = [
         '#markup' => $item->value,
       ];
     }
-
     return $element;
   }
 
