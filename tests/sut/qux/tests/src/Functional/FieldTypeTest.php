@@ -52,14 +52,14 @@ final class FieldTypeTest extends BrowserTestBase {
     $this->submitForm($edit, 'Save and continue');
 
     // Update storage settings.
-    $this->assertXpath('//input[@name = "settings[foo]" and @value = "wine"]');
+    $this->assertXpath('//input[@name = "settings[foo]" and @value = ""]');
     $edit = [
       'settings[foo]' => 'Hi!',
     ];
     $this->submitForm($edit, 'Save field settings');
 
     // Update instance settings.
-    $this->assertXpath('//input[@name = "settings[bar]" and @value = "beer"]');
+    $this->assertXpath('//input[@name = "settings[bar]" and @value = ""]');
     $edit = [
       'settings[bar]' => 'Yo!',
     ];

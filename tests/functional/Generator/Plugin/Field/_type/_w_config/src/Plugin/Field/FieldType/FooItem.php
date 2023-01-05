@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\example\Plugin\Field\FieldType;
 
@@ -17,74 +17,66 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("Foo"),
  *   category = @Translation("General"),
  *   default_widget = "string_textfield",
- *   default_formatter = "string"
+ *   default_formatter = "string",
  * )
- *
- * @DCG
- * If you are implementing a single value field type you may want to inherit
- * this class form some of the field type classes provided by Drupal core.
- * Check out /core/lib/Drupal/Core/Field/Plugin/Field/FieldType directory for a
- * list of available field type implementations.
  */
-class FooItem extends FieldItemBase {
+final class FooItem extends FieldItemBase {
 
   /**
    * {@inheritdoc}
    */
-  public static function defaultStorageSettings() {
-    $settings = ['foo' => 'wine'];
+  public static function defaultStorageSettings(): array {
+    $settings = ['foo' => ''];
     return $settings + parent::defaultStorageSettings();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
-
+  public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data): array {
     $element['foo'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Foo'),
       '#default_value' => $this->getSetting('foo'),
       '#disabled' => $has_data,
     ];
-
     return $element;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function defaultFieldSettings() {
-    $settings = ['bar' => 'beer'];
+  public static function defaultFieldSettings(): array {
+    $settings = ['bar' => ''];
     return $settings + parent::defaultFieldSettings();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
-
+  public function fieldSettingsForm(array $form, FormStateInterface $form_state): array {
     $element['bar'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Bar'),
       '#default_value' => $this->getSetting('bar'),
     ];
-
     return $element;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function isEmpty() {
-    $value = $this->get('value')->getValue();
-    return $value === NULL || $value === '';
+  public function isEmpty(): bool {
+    return match ($this->get('value')->getValue()) {
+      NULL, '' => TRUE,
+      default => FALSE,
+    };
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
+  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
 
     // @DCG
     // See /core/lib/Drupal/Core/TypedData/Plugin/DataType directory for
@@ -99,10 +91,10 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function getConstraints() {
+  public function getConstraints(): array {
     $constraints = parent::getConstraints();
 
-    $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
+    $constraint_manager = $this->getTypedDataManager()->getValidationConstraintManager();
 
     // @DCG Suppose our value must not be longer than 10 characters.
     $options['value']['Length']['max'] = 10;
@@ -117,7 +109,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function schema(FieldStorageDefinitionInterface $field_definition) {
+  public static function schema(FieldStorageDefinitionInterface $field_definition): array {
 
     $columns = [
       'value' => [
@@ -130,7 +122,7 @@ class FooItem extends FieldItemBase {
 
     $schema = [
       'columns' => $columns,
-      // @DCG Add indexes here if necessary.
+      // @todo Add indexes here if necessary.
     ];
 
     return $schema;
@@ -139,7 +131,7 @@ class FooItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
+  public static function generateSampleValue(FieldDefinitionInterface $field_definition): array {
     $random = new Random();
     $values['value'] = $random->word(mt_rand(1, 50));
     return $values;

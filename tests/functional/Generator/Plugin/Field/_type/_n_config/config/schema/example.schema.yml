@@ -1,0 +1,7 @@
+field.value.foo:
+  type: mapping
+  label: Default value
+  mapping:
+    value:
+      type: label
+      label: Value

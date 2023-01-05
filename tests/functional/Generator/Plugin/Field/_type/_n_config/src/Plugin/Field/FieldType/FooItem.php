@@ -1,74 +1,26 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Plugin\Field\FieldType;
+namespace Drupal\example\Plugin\Field\FieldType;
 
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
-{% if configurable_storage or configurable_instance %}
-use Drupal\Core\Form\FormStateInterface;
-{% endif %}
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
- * Defines the '{{ plugin_id }}' field type.
+ * Defines the 'foo' field type.
  *
  * @FieldType(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
+ *   id = "foo",
+ *   label = @Translation("Foo"),
  *   category = @Translation("General"),
  *   default_widget = "string_textfield",
  *   default_formatter = "string",
  * )
  */
-final class {{ class }} extends FieldItemBase {
+final class FooItem extends FieldItemBase {
 
-{% if configurable_storage %}
-  /**
-   * {@inheritdoc}
-   */
-  public static function defaultStorageSettings(): array {
-    $settings = ['foo' => ''];
-    return $settings + parent::defaultStorageSettings();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data): array {
-    $element['foo'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Foo'),
-      '#default_value' => $this->getSetting('foo'),
-      '#disabled' => $has_data,
-    ];
-    return $element;
-  }
-
-{% endif %}
-{% if configurable_instance %}
-  /**
-   * {@inheritdoc}
-   */
-  public static function defaultFieldSettings(): array {
-    $settings = ['bar' => ''];
-    return $settings + parent::defaultFieldSettings();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function fieldSettingsForm(array $form, FormStateInterface $form_state): array {
-    $element['bar'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Bar'),
-      '#default_value' => $this->getSetting('bar'),
-    ];
-    return $element;
-  }
-
-{% endif %}
   /**
    * {@inheritdoc}
    */
