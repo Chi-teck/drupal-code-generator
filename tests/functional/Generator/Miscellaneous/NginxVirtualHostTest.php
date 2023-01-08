@@ -12,11 +12,14 @@ final class NginxVirtualHostTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_nginx_virtual_host';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
 
     $user_input = [
-      'example.local',
-      '/var/www/example.local/docroot',
+      'example.my',
+      '/var/www/example.my/docroot',
       'files',
       'files/private',
       'unix:/run/php/php8.2-fpm.sock',
@@ -28,10 +31,10 @@ final class NginxVirtualHostTest extends GeneratorTestBase {
      Welcome to nginx-virtual-host generator!
     ––––––––––––––––––––––––––––––––––––––––––
 
-     Server name [example.com]:
+     Host name [example.local]:
      ➤ 
 
-     Document root [/var/www/example.local/docroot]:
+     Document root [{docroot}]:
      ➤ 
 
      Public file system path [sites/default/files]:
@@ -40,22 +43,29 @@ final class NginxVirtualHostTest extends GeneratorTestBase {
      Private file system path:
      ➤ 
 
-     Address of a FastCGI server [unix:%socket%]:
+     Address of a FastCGI server [unix:{socket}]:
      ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • example.local
+     • example.my
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('example.local');
+    $this->assertGeneratedFile('example.my');
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function assertDisplay(string $expected_display): void {
     $socket = \sprintf('/run/php/php%s.%s-fpm.sock', \PHP_MAJOR_VERSION, \PHP_MINOR_VERSION);
-    $expected_display = \str_replace('%socket%', $socket, $expected_display);
+    $expected_display = \str_replace(
+      ['{socket}', '{docroot}'],
+      [$socket, \DRUPAL_ROOT],
+      $expected_display,
+    );
     parent::assertDisplay($expected_display);
   }
 

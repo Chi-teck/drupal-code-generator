@@ -12,6 +12,9 @@ final class ApacheVirtualHostTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_apache_virtual_host';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
 
     $user_input = [
@@ -28,7 +31,7 @@ final class ApacheVirtualHostTest extends GeneratorTestBase {
      Host name [example.local]:
      ➤ 
 
-     Document root [%s]:
+     Document root [{docroot}]:
      ➤ 
 
      The following directories and files have been created or updated:
@@ -37,11 +40,19 @@ final class ApacheVirtualHostTest extends GeneratorTestBase {
      • site.com.conf
 
     TXT;
-    $expected_display = \sprintf($expected_display, \DRUPAL_ROOT);
     $this->assertDisplay($expected_display);
 
     $this->assertGeneratedFile('site.com-ssl.conf');
     $this->assertGeneratedFile('site.com.conf');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function assertDisplay(string $expected_display): void {
+    parent::assertDisplay(
+      \str_replace('{docroot}', \DRUPAL_ROOT, $expected_display),
+    );
   }
 
 }

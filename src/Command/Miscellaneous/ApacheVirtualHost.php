@@ -29,6 +29,9 @@ final class ApacheVirtualHost extends BaseGenerator {
     $assets->addFile('{hostname}-ssl.conf', 'host-ssl.twig');
   }
 
+  /**
+   * Builds domain validator.
+   */
   private static function getDomainValidator(): callable {
     return new Chained(
       new Required(),

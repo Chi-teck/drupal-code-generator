@@ -6,8 +6,8 @@
 # See https://github.com/perusio/drupal-with-nginx
 #
 server {
-    server_name example.local;
-    root /var/www/example.local/docroot;
+    server_name example.my;
+    root /var/www/example.my/docroot;
 
     client_max_body_size 16m;
 
@@ -74,9 +74,6 @@ server {
     # release.
     location ~ '\.php$|^/update.php' {
         fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
-        # Security note: If you're running a version of PHP older than the
-        # latest 5.3, you should have "cgi.fix_pathinfo = 0;" in php.ini.
-        # See http://serverfault.com/q/627903/94922 for details.
         include fastcgi_params;
         # Block httpoxy attacks. See https://httpoxy.org/.
         fastcgi_param HTTP_PROXY "";
