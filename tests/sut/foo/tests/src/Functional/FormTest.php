@@ -43,11 +43,9 @@ final class FormTest extends BrowserTestBase {
     $this->assertXpath($prefix . '//textarea[@name = "message"]');
     $this->assertXpath($prefix . '//input[@type = "submit" and @value = "Send"]');
 
-    $this->submitForm(['message' => 123456789], 'Send');
-    $this->assertErrorMessage('Message should be at least 10 characters.');
-
-    $this->submitForm(['message' => 1234567890], 'Send');
+    $this->submitForm(['message' => 'Hello!'], 'Send');
     $this->assertStatusMessage('The message has been sent.');
+    $this->assertSession()->addressEquals('/user/' . $this->container->get('current_user')->id());
   }
 
   /**

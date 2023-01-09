@@ -12,6 +12,9 @@ final class SimpleTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_simple';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
     $input = [
       'foo',

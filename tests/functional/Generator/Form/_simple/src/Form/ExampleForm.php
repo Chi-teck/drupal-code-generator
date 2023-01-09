@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Form;
 
@@ -8,19 +8,19 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Provides a Foo form.
  */
-class ExampleForm extends FormBase {
+final class ExampleForm extends FormBase {
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'foo_example';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
 
     $form['message'] = [
       '#type' => 'textarea',
@@ -30,10 +30,10 @@ class ExampleForm extends FormBase {
 
     $form['actions'] = [
       '#type' => 'actions',
-    ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Send'),
+      'submit' => [
+        '#type' => 'submit',
+        '#value' => $this->t('Send'),
+      ],
     ];
 
     return $form;
@@ -42,16 +42,23 @@ class ExampleForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    if (mb_strlen($form_state->getValue('message')) < 10) {
-      $form_state->setErrorByName('message', $this->t('Message should be at least 10 characters.'));
-    }
+  public function validateForm(array &$form, FormStateInterface $form_state): void {
+    // @todo Validate the form here.
+    // Example:
+    // @code
+    //   if (mb_strlen($form_state->getValue('message')) < 10) {
+    //     $form_state->setErrorByName(
+    //       'message',
+    //       $this->t('Message should be at least 10 characters.'),
+    //     );
+    //   }
+    // @endcode
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->messenger()->addStatus($this->t('The message has been sent.'));
     $form_state->setRedirect('<front>');
   }
