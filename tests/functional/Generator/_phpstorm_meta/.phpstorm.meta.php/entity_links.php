@@ -23,6 +23,9 @@ namespace PHPSTORM_META {
     'edit-form',
     'collection',
     'create',
+    'revision-delete-form',
+    'revision-revert-form',
+    'version-history',
   );
   expectedArguments(\Drupal\block_content\Entity\BlockContent::toUrl(), 0, argumentsSet('block_content__links'));
   expectedArguments(\Drupal\block_content\Entity\BlockContent::toLink(), 1, argumentsSet('block_content__links'));
