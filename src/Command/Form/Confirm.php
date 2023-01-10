@@ -40,7 +40,7 @@ final class Confirm extends BaseGenerator {
       $default_route_path = \str_replace('_', '-', '/' . $vars['machine_name'] . '/' . $vars['raw_form_id']);
       $vars['route_name'] = $ir->ask('Route name', '{machine_name}.' . $vars['raw_form_id']);
       $vars['route_path'] = $ir->ask('Route path', $default_route_path);
-      $vars['route_title'] = $ir->ask('Route title', '{raw_form_id|m2h}');
+      $vars['route_title'] = $ir->ask('Route title', '{raw_form_id|m2t}');
       $vars['route_permission'] = $ir->askPermission('Route permission', 'administer site configuration');
 
       $assets->addFile('{machine_name}.routing.yml')

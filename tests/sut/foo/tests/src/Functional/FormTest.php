@@ -51,6 +51,21 @@ final class FormTest extends BrowserTestBase {
   /**
    * Test callback.
    */
+  public function testConfirmForm(): void {
+    $this->drupalGet('admin/config/foo/confirm');
+    $this->assertPageTitle('Are you sure you want to do this?');
+    $this->assertXpath('//form[@id="foo-confirm" and contains(., "This action cannot be undone.")]');
+    $this->clickLink('Cancel');
+    $this->assertSession()->addressEquals('/admin/config');
+    $this->drupalGet('admin/config/foo/confirm');
+    $this->submitForm([], 'Confirm');
+    $this->assertStatusMessage('Done!');
+    $this->assertSession()->addressEquals('/admin/config');
+  }
+
+  /**
+   * Test callback.
+   */
   public function testConfigForm(): void {
     $this->drupalGet('admin/config/foo/settings');
     $prefix = '//form[@id="foo-settings"]';
@@ -63,20 +78,6 @@ final class FormTest extends BrowserTestBase {
     $this->submitForm(['example' => 'example'], 'Save configuration');
     $this->assertStatusMessage('The configuration options have been saved.');
     $this->assertXpath($prefix . '//input[@name = "example" and @value="example"]');
-  }
-
-  /**
-   * Test callback.
-   */
-  public function testConfirmForm(): void {
-    $this->drupalGet('admin/config/foo/confirm');
-    $this->assertPageTitle('Are you sure you want to do this?');
-    $this->assertXpath('//form[@id="foo-confirm" and contains(., "This action cannot be undone.")]');
-    $this->clickLink('Cancel');
-    $this->assertSession()->addressEquals('/admin/config');
-    $this->drupalGet('admin/config/foo/confirm');
-    $this->submitForm([], 'Confirm');
-    $this->assertStatusMessage('Done!');
   }
 
 }

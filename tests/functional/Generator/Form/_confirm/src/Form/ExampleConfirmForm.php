@@ -1,42 +1,43 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Form;
 
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 
 /**
- * Provides a confirmation form before clearing out the examples.
+ * @todo Add a description for the form.
  */
-class ExampleConfirmForm extends ConfirmFormBase {
+final class ExampleConfirmForm extends ConfirmFormBase {
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'foo_example_confirm';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getQuestion() {
+  public function getQuestion(): TranslatableMarkup {
     return $this->t('Are you sure you want to do this?');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getCancelUrl() {
+  public function getCancelUrl(): Url {
     return new Url('system.admin_config');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    // @DCG Place your code here.
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
+    // @todo Place your code here.
     $this->messenger()->addStatus($this->t('Done!'));
     $form_state->setRedirectUrl(new Url('system.admin_config'));
   }

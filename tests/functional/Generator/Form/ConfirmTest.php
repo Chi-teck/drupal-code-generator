@@ -12,6 +12,9 @@ final class ConfirmTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_confirm';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
     $input = [
       'foo',
@@ -48,7 +51,7 @@ final class ConfirmTest extends GeneratorTestBase {
      Route path [/foo/example-confirm]:
      ➤ 
 
-     Route title [Example confirm]:
+     Route title [Example Confirm]:
      ➤ 
 
      Route permission [administer site configuration]:
