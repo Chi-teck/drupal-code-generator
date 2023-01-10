@@ -2170,6 +2170,7 @@ namespace PHPSTORM_META {
     'NotNull',
     'Null',
     'PathAlias',
+    'PluginExists',
     'PrimitiveType',
     'ProtectedUserField',
     'Range',
