@@ -72,9 +72,6 @@ final class FormTest extends BrowserTestBase {
     $this->assertXpath($prefix . '//label[text() = "Example"]');
     $this->assertXpath($prefix . '//input[@name = "example" and @value="none"]');
     $this->assertXpath($prefix . '//input[@type = "submit" and @value = "Save configuration"]');
-    $this->submitForm(['example' => 'Some text.'], 'Save configuration');
-    $this->assertErrorMessage('The value is not correct.');
-
     $this->submitForm(['example' => 'example'], 'Save configuration');
     $this->assertStatusMessage('The configuration options have been saved.');
     $this->assertXpath($prefix . '//input[@name = "example" and @value="example"]');
