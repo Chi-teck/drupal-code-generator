@@ -1,0 +1,20 @@
+<?php declare(strict_types = 1);
+
+/**
+ * @file
+ * Primary module hooks for Foo module.
+ */
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function foo_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['node']['article'])) {
+    // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
+    $bundles['node']['article']['class'] = \Drupal\foo\Entity\Node\Article::class;
+  }
+  if (isset($bundles['node']['page'])) {
+    // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
+    $bundles['node']['page']['class'] = \Drupal\foo\Entity\Node\Page::class;
+  }
+}

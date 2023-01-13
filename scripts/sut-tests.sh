@@ -435,13 +435,11 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = bundle_class ]]; then
   cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
   cd $MODULE_DIR
 
-  $DCG entity:bundle-class -a acme -a Acme -a Content -a All -a No
-
-  # @todo fix tests.
-  # dcg_phpcs $MODULE_DIR
-  # dcg_module_install $MODULE_MACHINE_NAME
-  # dcg_phpunit tests
-  # dcg_module_uninstall $MODULE_MACHINE_NAME
+  $DCG entity:bundle-class -a acme -a Acme -a User -a UserBundle -a Yes -a UserBase
+  dcg_phpcs $MODULE_DIR
+  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpunit tests
+  dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
 
 # --- Test module --- #

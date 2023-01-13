@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * @file
@@ -11,6 +11,7 @@
 function {{ machine_name }}_entity_bundle_info_alter(array &$bundles): void {
   {% for bundle_id, class_fqn in classes_fqn %}
   if (isset($bundles['{{ entity_type_id }}']['{{ bundle_id }}'])) {
+    // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
     $bundles['{{ entity_type_id }}']['{{ bundle_id }}']['class'] = {{ class_fqn }}::class;
   }
   {% endfor %}

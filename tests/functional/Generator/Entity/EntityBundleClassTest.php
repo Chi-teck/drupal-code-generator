@@ -10,8 +10,11 @@ use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
  */
 final class EntityBundleClassTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__;
+  protected string $fixtureDir = __DIR__ . '/_entity_bundle_class';
 
+  /**
+   * Test callback.
+   */
   public function testSingleBundleWithoutBaseClass(): void {
 
     $input = [
@@ -49,12 +52,11 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      ➤ 
 
      Bundles, comma separated:
-      [1] All
-      [2] Article
-      [3] Basic page
+      [1] Article
+      [2] Basic page
      ➤ 
 
-     Class for "Article" bundle [ArticleBundle]:
+     Class for "Article" bundle [Article]:
      ➤ 
 
      Use a base class? [No]:
@@ -63,26 +65,29 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo.module
-     • src/Entity/Bundle/ArticleBundle.php
+     • src/Entity/Node/ArticleBundle.php
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->fixtureDir .= '/_entity_bundle_class_without_base_class';
+    $this->fixtureDir .= '/_n_base_class';
     $this->assertGeneratedFile('foo.module');
-    $this->assertGeneratedFile('src/Entity/Bundle/ArticleBundle.php');
+    $this->assertGeneratedFile('src/Entity/Node/ArticleBundle.php');
   }
 
+  /**
+   * Test callback.
+   */
   public function testAllBundlesWithBaseClass(): void {
 
     $input = [
       'foo',
       'Foo',
       'Content',
-      'All',
-      'ArticleBundle',
-      'PageBundle',
-      'yes',
+      '1, 2',
+      'Article',
+      'Page',
+      'Yes',
     ];
     $this->execute(EntityBundleClass::class, $input);
 
@@ -111,37 +116,37 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      ➤ 
 
      Bundles, comma separated:
-      [1] All
-      [2] Article
-      [3] Basic page
+      [1] Article
+      [2] Basic page
      ➤ 
 
-     Class for "Article" bundle [ArticleBundle]:
+     Class for "Article" bundle [Article]:
      ➤ 
 
-     Class for "Basic page" bundle [PageBundle]:
+     Class for "Basic page" bundle [Page]:
      ➤ 
 
      Use a base class? [No]:
      ➤ 
 
-     Base class [NodeBundle]:
+     Base class [NodeBase]:
      ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo.module
-     • src/Entity/Bundle/ArticleBundle.php
-     • src/Entity/Bundle/NodeBundle.php
-     • src/Entity/Bundle/PageBundle.php
+     • src/Entity/Node/Article.php
+     • src/Entity/Node/NodeBase.php
+     • src/Entity/Node/Page.php
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->fixtureDir .= '/_entity_bundle_class_all_bundles_with_base_class';
+    $this->fixtureDir .= '/_w_base_class';
     $this->assertGeneratedFile('foo.module');
-    $this->assertGeneratedFile('src/Entity/Bundle/ArticleBundle.php');
-    $this->assertGeneratedFile('src/Entity/Bundle/PageBundle.php');
+    $this->assertGeneratedFile('src/Entity/Node/NodeBase.php');
+    $this->assertGeneratedFile('src/Entity/Node/Article.php');
+    $this->assertGeneratedFile('src/Entity/Node/Page.php');
   }
 
 }

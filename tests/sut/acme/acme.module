@@ -4,15 +4,3 @@
  * @file
  * Primary module hooks for Acme module.
  */
-
-/**
- * Implements hook_entity_bundle_info_alter().
- */
-function acme_entity_bundle_info_alter(array &$bundles): void {
-  if (isset($bundles['node']['article'])) {
-    $bundles['node']['article']['class'] = \Drupal\acme\Entity\Bundle\ArticleBundle::class;
-  }
-  if (isset($bundles['node']['page'])) {
-    $bundles['node']['page']['class'] = \Drupal\acme\Entity\Bundle\PageBundle::class;
-  }
-}

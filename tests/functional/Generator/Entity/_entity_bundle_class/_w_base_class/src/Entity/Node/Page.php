@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\acme\Entity\Bundle;
+namespace Drupal\foo\Entity\Node;
 
 /**
  * A bundle class for node entities.
  */
-final class PageBundle extends NodeBundle {
+final class Page extends NodeBase {
 
 }

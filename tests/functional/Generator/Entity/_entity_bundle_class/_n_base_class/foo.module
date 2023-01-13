@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * @file
@@ -10,6 +10,7 @@
  */
 function foo_entity_bundle_info_alter(array &$bundles): void {
   if (isset($bundles['node']['article'])) {
-    $bundles['node']['article']['class'] = \Drupal\foo\Entity\Bundle\ArticleBundle::class;
+    // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
+    $bundles['node']['article']['class'] = \Drupal\foo\Entity\Node\ArticleBundle::class;
   }
 }
