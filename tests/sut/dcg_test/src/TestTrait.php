@@ -2,6 +2,8 @@
 
 namespace Drupal\dcg_test;
 
+use Behat\Mink\Element\NodeElement;
+
 /**
  * Helper methods for browser tests.
  */
@@ -40,7 +42,7 @@ trait TestTrait {
    */
   protected function getMessages(string $type): array {
     $messages = [];
-    $get_message = static function ($element): string {
+    $get_message = static function (NodeElement $element): string {
       // Remove hidden heading.
       $message = \preg_replace('#<h2[^>]*>.*</h2>#', '', $element->getHtml());
       $message = \strip_tags($message, '<em>');
@@ -49,21 +51,15 @@ trait TestTrait {
     $xpath = '//div[@aria-label="' . \ucfirst($type) . ' message"]';
     // Error messages have one more wrapper.
     if ($type == 'error') {
-      $xpath .= '/div[@role="alert"]';
+      $xpath .= '/div[@role = "alert"]';
     }
     $wrapper = $this->xpath($xpath);
     if (!empty($wrapper[0])) {
       unset($wrapper[0]->h2);
       $items = $wrapper[0]->findAll('xpath', '/ul/li');
       // Multiple messages are rendered with an HTML list.
-      if ($items) {
-        foreach ($items as $item) {
-          $messages[] = $get_message($item);
-        }
-      }
-      else {
-        $messages[] = $get_message($wrapper[0]);
-      }
+      $messages = \count($items) > 0 ?
+        \array_map($get_message, $items) : [$get_message($wrapper[0])];
     }
     return $messages;
   }
@@ -97,12 +93,10 @@ trait TestTrait {
    */
   protected function assertPageTitle(string|\Stringable $title): void {
     $title_element = $this->xpath('//h1');
-    if (isset($title_element[0])) {
-      self::assertSame((string) $title, \trim(\strip_tags($title_element[0]->getHtml(), '<em>')));
-    }
-    else {
+    if (\count($title_element) === 0) {
       self::fail('Page title was not found.');
     }
+    self::assertSame((string) $title, \trim(\strip_tags($title_element[0]->getHtml(), '<em>')));
   }
 
 }

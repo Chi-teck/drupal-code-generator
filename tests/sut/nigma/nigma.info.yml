@@ -1,6 +1,6 @@
 name: Nigma
 type: module
-description: Helper module for testing generated conent entity.
+description: Helper module for testing generated content entity.
 package: DCG
 core_version_requirement: ^10
 dependencies:

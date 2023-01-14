@@ -70,6 +70,16 @@ final class ConfigurationEntityTest extends BrowserTestBase {
     $this->submitForm($edit, 'Save');
     $this->assertStatusMessage(new FormattableMarkup('Updated example %label.', ['%label' => 'Updated test']));
 
+    // Test 'exists' validation.
+    $this->drupalGet('admin/structure/example/add');
+    $edit = [
+      'label' => 'Test',
+      'name' => 'test',
+    ];
+    $this->submitForm($edit, 'Save');
+    $this->assertErrorMessage('The machine-readable name is already in use. It must be unique.');
+
+    $this->drupalGet('admin/structure/example');
     $this->getSession()->getDriver()->click('//ul[@class = "dropbutton"]//a[text() = "Delete"]');
     $this->assertPageTitle(new FormattableMarkup('Are you sure you want to delete the example %label?', ['%label' => 'Updated test']));
 

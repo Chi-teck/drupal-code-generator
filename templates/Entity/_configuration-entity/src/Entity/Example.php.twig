@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Entity;
 
@@ -25,8 +25,8 @@ use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
  *     "form" = {
  *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
  *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
- *       "delete" = "Drupal\Core\Entity\EntityDeleteForm"
- *     }
+ *       "delete" = "Drupal\Core\Entity\EntityDeleteForm",
+ *     },
  *   },
  *   config_prefix = "{{ entity_type_id }}",
  *   admin_permission = "administer {{ entity_type_id }}",
@@ -34,48 +34,35 @@ use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
  *     "collection" = "/admin/structure/{{ entity_type_id|u2h }}",
  *     "add-form" = "/admin/structure/{{ entity_type_id|u2h }}/add",
  *     "edit-form" = "/admin/structure/{{ entity_type_id|u2h }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
- *     "delete-form" = "/admin/structure/{{ entity_type_id|u2h }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete"
+ *     "delete-form" = "/admin/structure/{{ entity_type_id|u2h }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
  *   },
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "label",
- *     "uuid" = "uuid"
+ *     "uuid" = "uuid",
  *   },
  *   config_export = {
  *     "id",
  *     "label",
- *     "description"
- *   }
+ *     "description",
+ *   },
  * )
  */
-class {{ class_prefix }} extends ConfigEntityBase implements {{ class_prefix }}Interface {
+final class {{ class_prefix }} extends ConfigEntityBase implements {{ class_prefix }}Interface {
 
   /**
-   * The {{ entity_type_label|lower }} ID.
-   *
-   * @var string
+   * The example ID.
    */
-  protected $id;
+  protected string $id;
 
   /**
-   * The {{ entity_type_label|lower }} label.
-   *
-   * @var string
+   * The example label.
    */
-  protected $label;
+  protected string $label;
 
   /**
-   * The {{ entity_type_label|lower }} status.
-   *
-   * @var bool
+   * The example description.
    */
-  protected $status;
-
-  /**
-   * The {{ entity_type_id|lower }} description.
-   *
-   * @var string
-   */
-  protected $description;
+  protected string $description;
 
 }

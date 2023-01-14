@@ -1,21 +1,20 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\foo\Entity\Example;
 
 /**
  * Example form.
- *
- * @property \Drupal\foo\ExampleInterface $entity
  */
-class ExampleForm extends EntityForm {
+final class ExampleForm extends EntityForm {
 
   /**
    * {@inheritdoc}
    */
-  public function form(array $form, FormStateInterface $form_state) {
+  public function form(array $form, FormStateInterface $form_state): array {
 
     $form = parent::form($form, $form_state);
 
@@ -24,7 +23,6 @@ class ExampleForm extends EntityForm {
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
       '#default_value' => $this->entity->label(),
-      '#description' => $this->t('Label for the example.'),
       '#required' => TRUE,
     ];
 
@@ -32,7 +30,7 @@ class ExampleForm extends EntityForm {
       '#type' => 'machine_name',
       '#default_value' => $this->entity->id(),
       '#machine_name' => [
-        'exists' => '\Drupal\foo\Entity\Example::load',
+        'exists' => [Example::class, 'load'],
       ],
       '#disabled' => !$this->entity->isNew(),
     ];
@@ -47,7 +45,6 @@ class ExampleForm extends EntityForm {
       '#type' => 'textarea',
       '#title' => $this->t('Description'),
       '#default_value' => $this->entity->get('description'),
-      '#description' => $this->t('Description of the example.'),
     ];
 
     return $form;
@@ -56,13 +53,15 @@ class ExampleForm extends EntityForm {
   /**
    * {@inheritdoc}
    */
-  public function save(array $form, FormStateInterface $form_state) {
+  public function save(array $form, FormStateInterface $form_state): int {
     $result = parent::save($form, $form_state);
     $message_args = ['%label' => $this->entity->label()];
-    $message = $result == SAVED_NEW
-      ? $this->t('Created new example %label.', $message_args)
-      : $this->t('Updated example %label.', $message_args);
-    $this->messenger()->addStatus($message);
+    $this->messenger()->addStatus(
+      match($result) {
+        \SAVED_NEW => $this->t('Created new example %label.', $message_args),
+        \SAVED_UPDATED => $this->t('Updated example %label.', $message_args),
+      }
+    );
     $form_state->setRedirectUrl($this->entity->toUrl('collection'));
     return $result;
   }

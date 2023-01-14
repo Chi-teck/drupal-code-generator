@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Entity;
 
@@ -23,8 +23,8 @@ use Drupal\foo\ExampleInterface;
  *     "form" = {
  *       "add" = "Drupal\foo\Form\ExampleForm",
  *       "edit" = "Drupal\foo\Form\ExampleForm",
- *       "delete" = "Drupal\Core\Entity\EntityDeleteForm"
- *     }
+ *       "delete" = "Drupal\Core\Entity\EntityDeleteForm",
+ *     },
  *   },
  *   config_prefix = "example",
  *   admin_permission = "administer example",
@@ -32,48 +32,35 @@ use Drupal\foo\ExampleInterface;
  *     "collection" = "/admin/structure/example",
  *     "add-form" = "/admin/structure/example/add",
  *     "edit-form" = "/admin/structure/example/{example}",
- *     "delete-form" = "/admin/structure/example/{example}/delete"
+ *     "delete-form" = "/admin/structure/example/{example}/delete",
  *   },
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "label",
- *     "uuid" = "uuid"
+ *     "uuid" = "uuid",
  *   },
  *   config_export = {
  *     "id",
  *     "label",
- *     "description"
- *   }
+ *     "description",
+ *   },
  * )
  */
-class Example extends ConfigEntityBase implements ExampleInterface {
+final class Example extends ConfigEntityBase implements ExampleInterface {
 
   /**
    * The example ID.
-   *
-   * @var string
    */
-  protected $id;
+  protected string $id;
 
   /**
    * The example label.
-   *
-   * @var string
    */
-  protected $label;
-
-  /**
-   * The example status.
-   *
-   * @var bool
-   */
-  protected $status;
+  protected string $label;
 
   /**
    * The example description.
-   *
-   * @var string
    */
-  protected $description;
+  protected string $description;
 
 }
