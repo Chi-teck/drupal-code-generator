@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Form;
 
@@ -8,19 +8,19 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configuration form for {{ entity_type_label|article|lower }} entity type.
  */
-class {{ class_prefix }}SettingsForm extends FormBase {
+final class {{ class_prefix }}SettingsForm extends FormBase {
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return '{{ entity_type_id }}_settings';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
 
     $form['settings'] = [
       '#markup' => $this->t('Settings form for {{ entity_type_label|article|lower }} entity type.'),
@@ -28,11 +28,10 @@ class {{ class_prefix }}SettingsForm extends FormBase {
 
     $form['actions'] = [
       '#type' => 'actions',
-    ];
-
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Save'),
+      'submit' => [
+        '#type' => 'submit',
+        '#value' => $this->t('Save'),
+      ],
     ];
 
     return $form;
@@ -41,7 +40,7 @@ class {{ class_prefix }}SettingsForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->messenger()->addStatus($this->t('The configuration has been updated.'));
   }
 

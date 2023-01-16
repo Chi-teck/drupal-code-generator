@@ -29,7 +29,7 @@ final class ContentEntityTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testEntityTypeUi(): void {
+  public function testEntityType(): void {
 
     $permissions = [
       'administer example',
@@ -58,7 +58,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     /** @var \Drupal\Core\Entity\ContentEntityTypeInterface $entity_type */
-    $entity_type = \Drupal::entityTypeManager()->getDefinition('example');
+    $entity_type = $this->container->get('entity_type.manager')->getDefinition('example');
 
     // -- Test bundle properties.
     self::assertSame('example', $entity_type->getBaseTable());
@@ -161,8 +161,6 @@ final class ContentEntityTest extends BrowserTestBase {
     $xpath .= '/next::td[a[text() = "Wine"]]';
     $this->assertXpath($xpath);
 
-    $this->assertSession()->pageTextContains('Total examples: 1');
-
     // -- Test entity deletion.
     $this->getSession()->getDriver()->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
     $this->assertPageTitle(new FM('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
@@ -171,7 +169,6 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->submitForm([], 'Delete');
     $this->assertStatusMessage(new FM('The example %label has been deleted.', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('There are no examples yet.');
-    $this->assertSession()->pageTextContains('Total examples: 0');
   }
 
 }

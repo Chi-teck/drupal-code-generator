@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Routing;
+namespace Drupal\foo\Routing;
 
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Routing\AdminHtmlRouteProvider;
@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Route;
 /**
  * Provides HTML routes for entities with administrative pages.
  */
-final class {{ class_prefix }}HtmlRouteProvider extends AdminHtmlRouteProvider {
+final class FooExampleHtmlRouteProvider extends AdminHtmlRouteProvider {
 
   /**
    * {@inheritdoc}

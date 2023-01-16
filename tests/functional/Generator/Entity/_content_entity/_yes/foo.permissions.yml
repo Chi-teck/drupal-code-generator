@@ -1,0 +1,12 @@
+administer example types:
+  title: 'Administer example types'
+  description: 'Maintain the types of example entity.'
+  restrict access: true
+delete example:
+  title: 'Delete example'
+create example:
+  title: 'Create example'
+view example:
+  title: 'View example'
+edit example:
+  title: 'Edit example'

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Form;
 
@@ -8,36 +8,37 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Form controller for the {{ entity_type_label|lower }} entity edit forms.
  */
-class {{ class_prefix }}Form extends ContentEntityForm {
+final class {{ class_prefix }}Form extends ContentEntityForm {
 
   /**
    * {@inheritdoc}
    */
-  public function save(array $form, FormStateInterface $form_state) {
+  public function save(array $form, FormStateInterface $form_state): int {
     $result = parent::save($form, $form_state);
 
-    $entity = $this->getEntity();
-
-    $message_arguments = ['%label' => $entity->toLink()->toString()];
-    $logger_arguments = [
-      '%label' => $entity->label(),
-      'link' => $entity->toLink($this->t('View'))->toString(),
+    $message_args = ['%label' => $this->entity->toLink()->toString()];
+    $logger_args = [
+      '%label' => $this->entity->label(),
+      'link' => $this->entity->toLink($this->t('View'))->toString(),
     ];
 
     switch ($result) {
       case SAVED_NEW:
-        $this->messenger()->addStatus($this->t('New {{ entity_type_label|lower }} %label has been created.', $message_arguments));
-        $this->logger('{{ machine_name }}')->notice('Created new {{ entity_type_label|lower }} %label', $logger_arguments);
+        $this->messenger()->addStatus($this->t('New {{ entity_type_label|lower }} %label has been created.', $message_args));
+        $this->logger('{{ machine_name }}')->notice('New {{ entity_type_label|lower }} %label has been created.', $logger_args);
         break;
 
       case SAVED_UPDATED:
-        $this->messenger()->addStatus($this->t('The {{ entity_type_label|lower }} %label has been updated.', $message_arguments));
-        $this->logger('{{ machine_name }}')->notice('Updated {{ entity_type_label|lower }} %label.', $logger_arguments);
+        $this->messenger()->addStatus($this->t('The {{ entity_type_label|lower }} %label has been updated.', $message_args));
+        $this->logger('{{ machine_name }}')->notice('The {{ entity_type_label|lower }} %label has been updated.', $logger_args);
         break;
+
+      default:
+        throw new \LogicException('Could not save the entity.');
     }
 
 {% if canonical %}
-    $form_state->setRedirect('entity.{{ entity_type_id }}.canonical', ['{{ entity_type_id }}' => $entity->id()]);
+    $form_state->setRedirect('entity.{{ entity_type_id }}.canonical', ['{{ entity_type_id }}' => $this->entity->id()]);
 {% else %}
     $form_state->setRedirect('entity.{{ entity_type_id }}.collection');
 {% endif %}

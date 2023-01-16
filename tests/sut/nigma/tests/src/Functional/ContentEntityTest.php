@@ -29,7 +29,7 @@ final class ContentEntityTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testEntityTypeUi(): void {
+  public function testEntityType(): void {
 
     $permissions = [
       'administer example types',
@@ -48,7 +48,6 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->assertXpath('//td[@colspan = "2" and contains(text(), "No example types available.")]');
 
     $this->clickLink('Add example type');
-
     $this->assertPageTitle('Add example type');
 
     $edit = [
@@ -74,7 +73,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->assertPageTitle('Manage fields');
 
     /** @var \Drupal\Core\Entity\ContentEntityTypeInterface $entity_type */
-    $entity_type = \Drupal::entityTypeManager()->getDefinition('example');
+    $entity_type = $this->container->get('entity_type.manager')->getDefinition('example');
 
     // -- Test bundle properties.
     self::assertSame('example', $entity_type->getBaseTable());
@@ -127,6 +126,15 @@ final class ContentEntityTest extends BrowserTestBase {
       'revision_translation_affected' => 'revision_translation_affected',
     ];
     self::assertSame($keys, $entity_type->getKeys());
+
+    // -- Try to create a bundle with the same name.
+    $this->drupalGet('admin/structure/example_types/add');
+    $edit = [
+      'label' => 'Foo',
+      'id' => 'foo',
+    ];
+    $this->submitForm($edit, 'Save example type');
+    $this->assertErrorMessage('The machine-readable name is already in use. It must be unique.');
 
     // -- Create a new entity.
     $this->drupalGet('/admin/content/example/add');
@@ -192,10 +200,8 @@ final class ContentEntityTest extends BrowserTestBase {
     $xpath .= '//td[text() = "1"]';
     $xpath .= '/next::td[a[text() = "Wine"]]';
     $xpath .= '/next::td[text() = "Enabled"]';
-    $xpath .= '/next::td[a[text() = "example_admin"]]';
+    $xpath .= '/next::td[div/a[text() = "example_admin"]]';
     $this->assertXpath($xpath);
-
-    $this->assertSession()->pageTextContains('Total examples: 1');
 
     // -- Test entity deletion.
     $this->getSession()->getDriver()->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
@@ -205,7 +211,6 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->submitForm([], 'Delete');
     $this->assertStatusMessage(new FM('The example %label has been deleted.', ['%label' => 'Wine']));
     $this->assertSession()->pageTextContains('There are no examples yet.');
-    $this->assertSession()->pageTextContains('Total examples: 0');
   }
 
 }

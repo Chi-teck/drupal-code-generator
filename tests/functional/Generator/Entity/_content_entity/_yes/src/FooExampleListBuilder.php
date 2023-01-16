@@ -1,35 +1,25 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }};
+namespace Drupal\foo;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 
 /**
- * Provides a list controller for the {{ entity_type_label|lower }} entity type.
+ * Provides a list controller for the example entity type.
  */
-final class {{ class_prefix }}ListBuilder extends EntityListBuilder {
+final class FooExampleListBuilder extends EntityListBuilder {
 
   /**
    * {@inheritdoc}
    */
   public function buildHeader(): array {
     $header['id'] = $this->t('ID');
-{% if label_base_field %}
     $header['label'] = $this->t('Label');
-{% endif %}
-{% if status_base_field %}
     $header['status'] = $this->t('Status');
-{% endif %}
-{% if author_base_field %}
     $header['uid'] = $this->t('Author');
-{% endif %}
-{% if created_base_field %}
     $header['created'] = $this->t('Created');
-{% endif %}
-{% if changed_base_field %}
     $header['changed'] = $this->t('Updated');
-{% endif %}
     return $header + parent::buildHeader();
   }
 
@@ -37,27 +27,17 @@ final class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity): array {
-    /** @var \Drupal\{{ machine_name }}\{{ class_prefix }}Interface $entity */
-    $row['id'] = $entity->{{ label_base_field or not canonical ? 'id' : 'toLink' }}();
-{% if label_base_field %}
-    $row['label'] = $entity->{{ canonical ? 'toLink' : 'label' }}();
-{% endif %}
-{% if status_base_field %}
+    /** @var \Drupal\foo\FooExampleInterface $entity */
+    $row['id'] = $entity->id();
+    $row['label'] = $entity->toLink();
     $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
-{% endif %}
-{% if author_base_field %}
     $username_options = [
       'label' => 'hidden',
       'settings' => ['link' => $entity->get('uid')->entity->isAuthenticated()],
     ];
     $row['uid']['data'] = $entity->get('uid')->view($username_options);
-{% endif %}
-{% if created_base_field %}
     $row['created']['data'] = $entity->get('created')->view(['label' => 'hidden']);
-{% endif %}
-{% if changed_base_field %}
     $row['changed']['data'] = $entity->get('changed')->view(['label' => 'hidden']);
-{% endif %}
     return $row + parent::buildRow($entity);
   }
 

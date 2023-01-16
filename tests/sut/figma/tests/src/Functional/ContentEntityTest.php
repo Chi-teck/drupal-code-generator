@@ -29,7 +29,7 @@ final class ContentEntityTest extends BrowserTestBase {
   /**
    * Test callback.
    */
-  public function testEntityTypeUi(): void {
+  public function testEntityType(): void {
 
     $permissions = [
       'administer example',
@@ -38,7 +38,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->drupalLogin($admin_user);
 
     /** @var \Drupal\Core\Entity\ContentEntityTypeInterface $entity_type */
-    $entity_type = \Drupal::entityTypeManager()->getDefinition('example');
+    $entity_type = $this->container->get('entity_type.manager')->getDefinition('example');
 
     // -- Test bundle properties.
     self::assertSame('example', $entity_type->getBaseTable());
@@ -97,7 +97,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $edit = [
       'status[value]' => TRUE,
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertStatusMessage(new FM('New example %label has been created.', ['%label' => '1']));
     $this->assertSession()->addressEquals('/admin/content/example');
 
@@ -118,7 +118,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $edit = [
       'status[value]' => FALSE,
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
     $this->assertStatusMessage(new FM('The example %label has been updated.', ['%label' => '1']));
     $this->assertPageTitle('Examples');
 
@@ -139,17 +139,14 @@ final class ContentEntityTest extends BrowserTestBase {
     XPATH;
     $this->assertXpath($xpath);
 
-    $this->assertSession()->pageTextContains('Total examples: 1');
-
     // -- Test entity deletion.
     $this->getSession()->getDriver()->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
     $this->assertPageTitle(new FM('Are you sure you want to delete the example %label?', ['%label' => '1']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 
-    $this->drupalPostForm(NULL, [], 'Delete');
+    $this->submitForm([], 'Delete');
     $this->assertStatusMessage(new FM('The example %label has been deleted.', ['%label' => '1']));
-    $this->assertSession()->pageTextContains('There are no example entities yet.');
-    $this->assertSession()->pageTextContains('Total examples: 0');
+    $this->assertSession()->pageTextContains('There are no examples yet.');
   }
 
 }

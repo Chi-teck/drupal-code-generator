@@ -1,0 +1,5 @@
+entity.foo_example.collection:
+  title: 'Examples'
+  route_name: entity.foo_example.collection
+  base_route: system.admin_content
+  weight: 10

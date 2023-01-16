@@ -1,8 +1,9 @@
-entity.foo_example.settings:
-  title: 'Example'
-  description: 'Configure an Example entity type.'
-  route_name:  entity.foo_example.settings
+entity.foo_example_type.collection:
+  title: 'Example types'
+  description: 'Manage and CRUD actions on Example type.'
   parent: system.admin_structure
+  route_name: entity.foo_example_type.collection
+
 entity.foo_example.collection:
   title: 'Examples'
   description: 'List of examples.'

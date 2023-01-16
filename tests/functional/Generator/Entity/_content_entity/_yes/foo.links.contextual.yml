@@ -1,10 +1,10 @@
 entity.foo_example.edit_form:
   route_name: entity.foo_example.edit_form
   group: foo_example
-  title: Edit
+  title: 'Edit'
 
 entity.foo_example.delete_form:
   route_name: entity.foo_example.delete_form
   group: foo_example
-  title: Delete
+  title: 'Delete'
   weight: 10

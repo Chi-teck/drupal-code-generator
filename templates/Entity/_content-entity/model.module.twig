@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * @file
@@ -15,11 +15,9 @@ use Drupal\user\UserInterface;
 /**
  * Implements hook_theme().
  */
-function {{ machine_name }}_theme() {
+function {{ machine_name }}_theme(): array {
   return [
-    '{{ entity_type_id }}' => [
-      'render element' => 'elements',
-    ],
+    '{{ entity_type_id }}' => ['render element' => 'elements'],
   ];
 }
 
@@ -34,7 +32,7 @@ function {{ machine_name }}_theme() {
  *     fields attached to the entity.
  *   - attributes: HTML attributes for the containing element.
  */
-function template_preprocess_{{ entity_type_id }}(array &$variables) {
+function template_preprocess_{{ entity_type_id }}(array &$variables): void {
   $variables['view_mode'] = $variables['elements']['#view_mode'];
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
@@ -45,7 +43,7 @@ function template_preprocess_{{ entity_type_id }}(array &$variables) {
 /**
  * Implements hook_user_cancel().
  */
-function {{ machine_name }}_user_cancel($edit, UserInterface $account, $method) {
+function {{ machine_name }}_user_cancel($edit, UserInterface $account, $method): void {
   switch ($method) {
   {% if status_base_field %}
     case 'user_cancel_block_unpublish':
@@ -54,10 +52,10 @@ function {{ machine_name }}_user_cancel($edit, UserInterface $account, $method) 
       ${{ entity_type_id }}_ids = $storage->getQuery()
         ->condition('uid', $account->id())
         ->condition('status', 1)
+        ->accessCheck(FALSE)
         ->execute();
       foreach ($storage->loadMultiple(${{ entity_type_id }}_ids) as ${{ entity_type_id }}) {
-        ${{ entity_type_id }}->set('status', FALSE);
-        ${{ entity_type_id }}->save();
+        ${{ entity_type_id }}->set('status', FALSE)->save();
       }
       break;
 
@@ -67,10 +65,10 @@ function {{ machine_name }}_user_cancel($edit, UserInterface $account, $method) 
       $storage = \Drupal::entityTypeManager()->getStorage('{{ entity_type_id }}');
       ${{ entity_type_id }}_ids = $storage->getQuery()
         ->condition('uid', $account->id())
+        ->accessCheck(FALSE)
         ->execute();
       foreach ($storage->loadMultiple(${{ entity_type_id }}_ids) as ${{ entity_type_id }}) {
-        ${{ entity_type_id }}->setOwnerId(0);
-        ${{ entity_type_id }}->save();
+        ${{ entity_type_id }}->setOwnerId(0)->save();
       }
       break;
   }
@@ -79,19 +77,22 @@ function {{ machine_name }}_user_cancel($edit, UserInterface $account, $method) 
 /**
  * Implements hook_ENTITY_TYPE_predelete() for user entities.
  */
-function {{ machine_name }}_user_predelete(UserInterface $account) {
-  // Delete {{ entity_type_label|lower|pluralize }}.
+function {{ machine_name }}_user_predelete(UserInterface $account): void {
+  // Delete {{ entity_type_label|lower|pluralize }} that belong to this account.
   $storage = \Drupal::entityTypeManager()->getStorage('{{ entity_type_id }}');
   ${{ entity_type_id }}_ids = $storage->getQuery()
     ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
     ->execute();
-  ${{ entity_type_id|pluralize }} = $storage->loadMultiple(${{ entity_type_id }}_ids);
-  $storage->delete(${{ entity_type_id|pluralize }});
+  $storage->delete(
+    $storage->loadMultiple(${{ entity_type_id }}_ids)
+  );
   {% if revisionable %}
   // Delete old revisions.
   ${{ entity_type_id }}_ids = $storage->getQuery()
     ->allRevisions()
     ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
     ->execute();
   foreach (array_keys(${{ entity_type_id }}_ids) as $revision_id) {
     $storage->deleteRevision($revision_id);

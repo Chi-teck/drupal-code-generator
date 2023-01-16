@@ -422,7 +422,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = content_entity ]]; then
 
   dcg_phpcs .
   dcg_module_install $MODULE_MACHINE_NAME
-  # dcg_phpunit tests
+  dcg_phpunit tests
   dcg_module_uninstall $MODULE_MACHINE_NAME
 fi
 

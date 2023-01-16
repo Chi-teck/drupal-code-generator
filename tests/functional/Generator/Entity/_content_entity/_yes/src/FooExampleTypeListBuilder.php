@@ -1,17 +1,17 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }};
+namespace Drupal\foo;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
 
 /**
- * Defines a class to build a listing of {{ entity_type_label|lower }} type entities.
+ * Defines a class to build a listing of example type entities.
  *
- * @see \Drupal\{{ machine_name }}\Entity\{{ class_prefix }}Type
+ * @see \Drupal\foo\Entity\FooExampleType
  */
-final class {{ class_prefix }}TypeListBuilder extends ConfigEntityListBuilder {
+final class FooExampleTypeListBuilder extends ConfigEntityListBuilder {
 
   /**
    * {@inheritdoc}
@@ -36,8 +36,8 @@ final class {{ class_prefix }}TypeListBuilder extends ConfigEntityListBuilder {
     $build = parent::render();
 
     $build['table']['#empty'] = $this->t(
-      'No {{ entity_type_label|lower }} types available. <a href=":link">Add {{ entity_type_label|lower }} type</a>.',
-      [':link' => Url::fromRoute('entity.{{ entity_type_id }}_type.add_form')->toString()],
+      'No example types available. <a href=":link">Add example type</a>.',
+      [':link' => Url::fromRoute('entity.foo_example_type.add_form')->toString()],
     );
 
     return $build;

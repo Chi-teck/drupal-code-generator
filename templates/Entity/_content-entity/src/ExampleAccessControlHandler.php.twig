@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }};
 
@@ -9,48 +9,30 @@ use Drupal\Core\Session\AccountInterface;
 
 /**
  * Defines the access control handler for the {{ entity_type_label|lower }} entity type.
+ *
+ * phpcs:disable Drupal.Arrays.Array.LongLineDeclaration
+ *
+ * @see https://www.drupal.org/project/coder/issues/3185082
  */
-class {{ class_prefix }}AccessControlHandler extends EntityAccessControlHandler {
+final class {{ class_prefix }}AccessControlHandler extends EntityAccessControlHandler {
 
   /**
    * {@inheritdoc}
    */
-  protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-
-    switch ($operation) {
-      case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view {{ entity_type_label|lower }}');
-
-      case 'update':
-        return AccessResult::allowedIfHasPermissions(
-          $account,
-          ['edit {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }}'],
-          'OR',
-        );
-
-      case 'delete':
-        return AccessResult::allowedIfHasPermissions(
-          $account,
-          ['delete {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }}'],
-          'OR',
-        );
-
-      default:
-        // No opinion.
-        return AccessResult::neutral();
-    }
-
+  protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
+    return match($operation) {
+      'view' => AccessResult::allowedIfHasPermissions($account, ['view {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }} types'], 'OR'),
+      'update' => AccessResult::allowedIfHasPermissions($account, ['edit {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }} types'], 'OR'),
+      'delete' => AccessResult::allowedIfHasPermissions($account, ['delete {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }} types'], 'OR'),
+      default => AccessResult::neutral(),
+    };
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    return AccessResult::allowedIfHasPermissions(
-      $account,
-      ['create {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }}'],
-      'OR',
-    );
+  protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL): AccessResult {
+    return AccessResult::allowedIfHasPermissions($account, ['create {{ entity_type_label|lower }}', 'administer {{ entity_type_label|lower }} types'], 'OR');
   }
 
 }

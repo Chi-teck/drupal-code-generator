@@ -1,0 +1,11 @@
+foo_example.type_add:
+  title: 'Add example type'
+  route_name: entity.foo_example_type.add_form
+  appears_on:
+    - entity.foo_example_type.collection
+
+foo_example.add_page:
+  title: 'Add example'
+  route_name: entity.foo_example.add_page
+  appears_on:
+    - entity.foo_example.collection

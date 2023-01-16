@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\{{ machine_name }}\Entity;
 
@@ -58,7 +58,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% else %}
  *       "html" = "Drupal\{{ machine_name }}\Routing\{{ class_prefix }}HtmlRouteProvider",
 {% endif %}
- *     }
+ *     },
  *   },
  *   base_table = "{{ entity_type_id }}",
 {% if translatable %}
@@ -135,7 +135,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% endif %}
  * )
  */
-class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}ContentEntityBase implements {{ class_prefix }}Interface {
+final class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}ContentEntityBase implements {{ class_prefix }}Interface {
 
 {% if changed_base_field or author_base_field %}
   {% if changed_base_field %}
@@ -152,7 +152,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   /**
    * {@inheritdoc}
    */
-  public function preSave(EntityStorageInterface $storage) {
+  public function preSave(EntityStorageInterface $storage): void {
     parent::preSave($storage);
     if (!$this->getOwnerId()) {
       // If no owner has been set explicitly, make the anonymous user the owner.
@@ -165,7 +165,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
   /**
    * {@inheritdoc}
    */
-  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
 
     $fields = parent::baseFieldDefinitions($entity_type);
 
@@ -252,7 +252,7 @@ class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}Con
     {% endif %}
       ->setLabel(t('Author'))
       ->setSetting('target_type', 'user')
-      ->setDefaultValueCallback(static::class . '::getDefaultEntityOwner')
+      ->setDefaultValueCallback(self::class . '::getDefaultEntityOwner')
       ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
         'settings' => [

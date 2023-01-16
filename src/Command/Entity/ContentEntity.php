@@ -112,7 +112,6 @@ final class ContentEntity extends BaseGenerator {
       $assets->addFile('src/Entity/{class_prefix}Type.php', 'src/Entity/ExampleType.php.twig');
       $assets->addFile('src/Form/{class_prefix}TypeForm.php', 'src/Form/ExampleTypeForm.php.twig');
     }
-
   }
 
 }

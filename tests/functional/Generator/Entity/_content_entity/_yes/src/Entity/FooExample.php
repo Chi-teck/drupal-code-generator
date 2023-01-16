@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Drupal\foo\Entity;
 
@@ -23,9 +23,11 @@ use Drupal\user\EntityOwnerTrait;
  *     singular = "@count examples",
  *     plural = "@count examples",
  *   ),
+ *   bundle_label = @Translation("Example type"),
  *   handlers = {
  *     "list_builder" = "Drupal\foo\FooExampleListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "access" = "Drupal\foo\FooExampleAccessControlHandler",
  *     "form" = {
  *       "add" = "Drupal\foo\Form\FooExampleForm",
  *       "edit" = "Drupal\foo\Form\FooExampleForm",
@@ -33,15 +35,20 @@ use Drupal\user\EntityOwnerTrait;
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
- *     }
+ *     },
  *   },
  *   base_table = "foo_example",
+ *   data_table = "foo_example_field_data",
  *   revision_table = "foo_example_revision",
+ *   revision_data_table = "foo_example_field_revision",
  *   show_revision_ui = TRUE,
- *   admin_permission = "administer foo example",
+ *   translatable = TRUE,
+ *   admin_permission = "administer foo example types",
  *   entity_keys = {
  *     "id" = "id",
  *     "revision" = "revision_id",
+ *     "langcode" = "langcode",
+ *     "bundle" = "bundle",
  *     "label" = "label",
  *     "uuid" = "uuid",
  *     "owner" = "uid",
@@ -53,15 +60,17 @@ use Drupal\user\EntityOwnerTrait;
  *   },
  *   links = {
  *     "collection" = "/admin/content/foo-example",
- *     "add-form" = "/example/add",
+ *     "add-form" = "/example/add/{foo_example_type}",
+ *     "add-page" = "/example/add",
  *     "canonical" = "/example/{foo_example}",
  *     "edit-form" = "/example/{foo_example}/edit",
  *     "delete-form" = "/example/{foo_example}/delete",
  *   },
- *   field_ui_base_route = "entity.foo_example.settings",
+ *   bundle_entity_type = "foo_example_type",
+ *   field_ui_base_route = "entity.foo_example_type.edit_form",
  * )
  */
-class FooExample extends RevisionableContentEntityBase implements FooExampleInterface {
+final class FooExample extends RevisionableContentEntityBase implements FooExampleInterface {
 
   use EntityChangedTrait;
   use EntityOwnerTrait;
@@ -69,7 +78,7 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
   /**
    * {@inheritdoc}
    */
-  public function preSave(EntityStorageInterface $storage) {
+  public function preSave(EntityStorageInterface $storage): void {
     parent::preSave($storage);
     if (!$this->getOwnerId()) {
       // If no owner has been set explicitly, make the anonymous user the owner.
@@ -80,12 +89,13 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
   /**
    * {@inheritdoc}
    */
-  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
 
     $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['label'] = BaseFieldDefinition::create('string')
       ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
       ->setLabel(t('Label'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
@@ -126,6 +136,7 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
 
     $fields['description'] = BaseFieldDefinition::create('text_long')
       ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
       ->setLabel(t('Description'))
       ->setDisplayOptions('form', [
         'type' => 'text_textarea',
@@ -141,9 +152,10 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
 
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
       ->setLabel(t('Author'))
       ->setSetting('target_type', 'user')
-      ->setDefaultValueCallback(static::class . '::getDefaultEntityOwner')
+      ->setDefaultValueCallback(self::class . '::getDefaultEntityOwner')
       ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
         'settings' => [
@@ -163,6 +175,7 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
+      ->setTranslatable(TRUE)
       ->setDescription(t('The time that the example was created.'))
       ->setDisplayOptions('view', [
         'label' => 'above',
@@ -178,6 +191,7 @@ class FooExample extends RevisionableContentEntityBase implements FooExampleInte
 
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
+      ->setTranslatable(TRUE)
       ->setDescription(t('The time that the example was last edited.'));
 
     return $fields;

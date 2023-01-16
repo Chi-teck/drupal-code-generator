@@ -4,15 +4,17 @@ entity.{{ entity_type_id }}.settings:
   description: 'Configure {{ entity_type_label|article }} entity type.'
   route_name:  entity.{{ entity_type_id }}.settings
   parent: system.admin_structure
-entity.{{ entity_type_id }}.collection:
-  title: '{{ entity_type_label|pluralize }}'
-  description: 'List of {{ entity_type_label|pluralize|lower }}.'
-  route_name: entity.{{ entity_type_id }}.collection
-  parent: system.admin_content
+
 {% elseif bundle %}
 entity.{{ entity_type_id }}_type.collection:
   title: '{{ entity_type_label }} types'
   description: 'Manage and CRUD actions on {{ entity_type_label }} type.'
   parent: system.admin_structure
   route_name: entity.{{ entity_type_id }}_type.collection
+
 {% endif %}
+entity.{{ entity_type_id }}.collection:
+  title: '{{ entity_type_label|pluralize }}'
+  description: 'List of {{ entity_type_label|pluralize|lower }}.'
+  route_name: entity.{{ entity_type_id }}.collection
+  parent: system.admin_content
