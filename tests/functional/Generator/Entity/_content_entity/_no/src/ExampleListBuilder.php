@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityListBuilder;
 /**
  * Provides a list controller for the example entity type.
  */
-final class FooExampleListBuilder extends EntityListBuilder {
+final class ExampleListBuilder extends EntityListBuilder {
 
   /**
    * {@inheritdoc}
@@ -22,7 +22,7 @@ final class FooExampleListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity): array {
-    /** @var \Drupal\foo\FooExampleInterface $entity */
+    /** @var \Drupal\foo\ExampleInterface $entity */
     $row['id'] = $entity->id();
     return $row + parent::buildRow($entity);
   }

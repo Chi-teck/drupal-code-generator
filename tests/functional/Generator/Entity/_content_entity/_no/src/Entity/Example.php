@@ -3,7 +3,7 @@
 namespace Drupal\foo\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\foo\FooExampleInterface;
+use Drupal\foo\ExampleInterface;
 
 /**
  * Defines the example entity class.
@@ -19,15 +19,15 @@ use Drupal\foo\FooExampleInterface;
  *     plural = "@count examples",
  *   ),
  *   handlers = {
- *     "list_builder" = "Drupal\foo\FooExampleListBuilder",
+ *     "list_builder" = "Drupal\foo\ExampleListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {
- *       "add" = "Drupal\foo\Form\FooExampleForm",
- *       "edit" = "Drupal\foo\Form\FooExampleForm",
+ *       "add" = "Drupal\foo\Form\ExampleForm",
+ *       "edit" = "Drupal\foo\Form\ExampleForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
- *       "html" = "Drupal\foo\Routing\FooExampleHtmlRouteProvider",
+ *       "html" = "Drupal\foo\Routing\ExampleHtmlRouteProvider",
  *     },
  *   },
  *   base_table = "foo_example",
@@ -46,6 +46,6 @@ use Drupal\foo\FooExampleInterface;
  *   },
  * )
  */
-final class FooExample extends ContentEntityBase implements FooExampleInterface {
+final class Example extends ContentEntityBase implements ExampleInterface {
 
 }

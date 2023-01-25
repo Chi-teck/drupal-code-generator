@@ -16,7 +16,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
   {% if revisionable %}
 use Drupal\Core\Entity\RevisionableContentEntityBase;
   {% endif %}
-use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
+use Drupal\{{ machine_name }}\{{ class }}Interface;
   {% if author_base_field %}
 use Drupal\user\EntityOwnerTrait;
   {% endif %}
@@ -42,21 +42,21 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   bundle_label = @Translation("{{ entity_type_label }} type"),
 {% endif %}
  *   handlers = {
- *     "list_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}ListBuilder",
+ *     "list_builder" = "Drupal\{{ machine_name }}\{{ class }}ListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
 {% if access_controller %}
- *     "access" = "Drupal\{{ machine_name }}\{{ class_prefix }}AccessControlHandler",
+ *     "access" = "Drupal\{{ machine_name }}\{{ class }}AccessControlHandler",
 {% endif %}
  *     "form" = {
- *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
- *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}Form",
+ *       "add" = "Drupal\{{ machine_name }}\Form\{{ class }}Form",
+ *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class }}Form",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
 {% if canonical %}
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
 {% else %}
- *       "html" = "Drupal\{{ machine_name }}\Routing\{{ class_prefix }}HtmlRouteProvider",
+ *       "html" = "Drupal\{{ machine_name }}\Routing\{{ class }}HtmlRouteProvider",
 {% endif %}
  *     },
  *   },
@@ -135,7 +135,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% endif %}
  * )
  */
-final class {{ class_prefix }} extends {% if revisionable %}Revisionable{% endif %}ContentEntityBase implements {{ class_prefix }}Interface {
+final class {{ class }} extends {% if revisionable %}Revisionable{% endif %}ContentEntityBase implements {{ class }}Interface {
 
 {% if changed_base_field or author_base_field %}
   {% if changed_base_field %}

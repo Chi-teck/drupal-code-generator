@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Route;
 /**
  * Provides HTML routes for entities with administrative pages.
  */
-final class FooExampleHtmlRouteProvider extends AdminHtmlRouteProvider {
+final class ExampleHtmlRouteProvider extends AdminHtmlRouteProvider {
 
   /**
    * {@inheritdoc}

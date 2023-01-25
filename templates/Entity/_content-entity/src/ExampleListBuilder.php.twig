@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityListBuilder;
 /**
  * Provides a list controller for the {{ entity_type_label|lower }} entity type.
  */
-final class {{ class_prefix }}ListBuilder extends EntityListBuilder {
+final class {{ class }}ListBuilder extends EntityListBuilder {
 
   /**
    * {@inheritdoc}
@@ -37,7 +37,7 @@ final class {{ class_prefix }}ListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity): array {
-    /** @var \Drupal\{{ machine_name }}\{{ class_prefix }}Interface $entity */
+    /** @var \Drupal\{{ machine_name }}\{{ class }}Interface $entity */
     $row['id'] = $entity->{{ label_base_field or not canonical ? 'id' : 'toLink' }}();
 {% if label_base_field %}
     $row['label'] = $entity->{{ canonical ? 'toLink' : 'label' }}();

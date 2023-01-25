@@ -2,7 +2,7 @@
 entity.{{ entity_type_id }}.settings:
   path: 'admin/structure/{{ entity_type_id|u2h }}'
   defaults:
-    _form: '\Drupal\{{ machine_name }}\Form\{{ class_prefix }}SettingsForm'
+    _form: '\Drupal\{{ machine_name }}\Form\{{ class }}SettingsForm'
     _title: '{{ entity_type_label }}'
   requirements:
     _permission: 'administer {{ entity_type_label|lower }}'

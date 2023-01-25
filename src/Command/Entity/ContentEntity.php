@@ -26,7 +26,8 @@ final class ContentEntity extends BaseGenerator {
     $vars['name'] = $ir->askName();
 
     $vars['entity_type_label'] = $ir->ask('Entity type label', '{name}');
-    $vars['entity_type_id'] = $ir->ask('Entity type ID', '{entity_type_label|h2m}');
+    $vars['entity_type_id'] = $ir->ask('Entity type ID', '{machine_name}_{entity_type_label|h2m}');
+    $vars['class'] = $ir->ask('Entity class', '{entity_type_label|camelize}');
     $vars['entity_base_path'] = $ir->ask('Entity base path', '/{entity_type_id|u2h}');
     $vars['fieldable'] = $ir->confirm('Make the entity type fieldable?');
     $vars['revisionable'] = $ir->confirm('Make the entity type revisionable?', FALSE);
@@ -59,7 +60,6 @@ final class ContentEntity extends BaseGenerator {
       $vars['configure'] = 'entity.{entity_type_id}_type.collection';
     }
 
-    $vars['class_prefix'] = '{entity_type_id|camelize}';
     $vars['template_name'] = '{entity_type_id|u2h}.html.twig';
 
     // Contextual links need title suffix to be added to entity template.
@@ -75,20 +75,20 @@ final class ContentEntity extends BaseGenerator {
       ->appendIfExists();
     $assets->addFile('{machine_name}.permissions.yml', 'model.permissions.yml.twig')
       ->appendIfExists();
-    $assets->addFile('src/Entity/{class_prefix}.php', 'src/Entity/Example.php.twig');
-    $assets->addFile('src/{class_prefix}Interface.php', 'src/ExampleInterface.php.twig');
+    $assets->addFile('src/Entity/{class}.php', 'src/Entity/Example.php.twig');
+    $assets->addFile('src/{class}Interface.php', 'src/ExampleInterface.php.twig');
 
     if (!$vars['canonical']) {
-      $assets->addFile('src/Routing/{class_prefix}HtmlRouteProvider.php', 'src/Routing/ExampleHtmlRouteProvider.php.twig');
+      $assets->addFile('src/Routing/{class}HtmlRouteProvider.php', 'src/Routing/ExampleHtmlRouteProvider.php.twig');
     }
 
-    $assets->addFile('src/{class_prefix}ListBuilder.php', 'src/ExampleListBuilder.php.twig');
-    $assets->addFile('src/Form/{class_prefix}Form.php', 'src/Form/ExampleForm.php.twig');
+    $assets->addFile('src/{class}ListBuilder.php', 'src/ExampleListBuilder.php.twig');
+    $assets->addFile('src/Form/{class}Form.php', 'src/Form/ExampleForm.php.twig');
 
     if ($vars['fieldable_no_bundle']) {
       $assets->addFile('{machine_name}.routing.yml', 'model.routing.yml.twig')
         ->appendIfExists();
-      $assets->addFile('src/Form/{class_prefix}SettingsForm.php', 'src/Form/ExampleSettingsForm.php.twig');
+      $assets->addFile('src/Form/{class}SettingsForm.php', 'src/Form/ExampleSettingsForm.php.twig');
     }
 
     if ($vars['template']) {
@@ -98,7 +98,7 @@ final class ContentEntity extends BaseGenerator {
     }
 
     if ($vars['access_controller']) {
-      $assets->addFile('src/{class_prefix}AccessControlHandler.php', 'src/ExampleAccessControlHandler.php.twig');
+      $assets->addFile('src/{class}AccessControlHandler.php', 'src/ExampleAccessControlHandler.php.twig');
     }
 
     if ($vars['rest_configuration']) {
@@ -108,9 +108,9 @@ final class ContentEntity extends BaseGenerator {
     if ($vars['bundle']) {
       $assets->addFile('config/schema/{machine_name}.entity_type.schema.yml', 'config/schema/model.entity_type.schema.yml.twig')
         ->appendIfExists();
-      $assets->addFile('src/{class_prefix}TypeListBuilder.php', 'src/ExampleTypeListBuilder.php.twig');
-      $assets->addFile('src/Entity/{class_prefix}Type.php', 'src/Entity/ExampleType.php.twig');
-      $assets->addFile('src/Form/{class_prefix}TypeForm.php', 'src/Form/ExampleTypeForm.php.twig');
+      $assets->addFile('src/{class}TypeListBuilder.php', 'src/ExampleTypeListBuilder.php.twig');
+      $assets->addFile('src/Entity/{class}Type.php', 'src/Entity/ExampleType.php.twig');
+      $assets->addFile('src/Form/{class}TypeForm.php', 'src/Form/ExampleTypeForm.php.twig');
     }
   }
 

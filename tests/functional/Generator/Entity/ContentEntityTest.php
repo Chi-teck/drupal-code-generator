@@ -22,6 +22,7 @@ final class ContentEntityTest extends GeneratorTestBase {
       'Foo',
       'Example',
       'foo_example',
+      'FooExample',
       '/example',
       'Yes',
       'Yes',
@@ -54,7 +55,10 @@ final class ContentEntityTest extends GeneratorTestBase {
      Entity type label [Foo]:
      ➤ 
 
-     Entity type ID [example]:
+     Entity type ID [foo_example]:
+     ➤ 
+
+     Entity class [Example]:
      ➤ 
 
      Entity base path [/foo-example]:
@@ -155,6 +159,7 @@ final class ContentEntityTest extends GeneratorTestBase {
       'Foo',
       'Example',
       'foo_example',
+      'Example',
       '/example',
       'No',
       'No',
@@ -187,7 +192,10 @@ final class ContentEntityTest extends GeneratorTestBase {
      Entity type label [Foo]:
      ➤ 
 
-     Entity type ID [example]:
+     Entity type ID [foo_example]:
+     ➤ 
+
+     Entity class [Example]:
      ➤ 
 
      Entity base path [/foo-example]:
@@ -238,11 +246,11 @@ final class ContentEntityTest extends GeneratorTestBase {
      • foo.links.menu.yml
      • foo.links.task.yml
      • foo.permissions.yml
-     • src/FooExampleInterface.php
-     • src/FooExampleListBuilder.php
-     • src/Entity/FooExample.php
-     • src/Form/FooExampleForm.php
-     • src/Routing/FooExampleHtmlRouteProvider.php
+     • src/ExampleInterface.php
+     • src/ExampleListBuilder.php
+     • src/Entity/Example.php
+     • src/Form/ExampleForm.php
+     • src/Routing/ExampleHtmlRouteProvider.php
 
     TXT;
     $this->assertDisplay($expected_display);
@@ -252,11 +260,11 @@ final class ContentEntityTest extends GeneratorTestBase {
     $this->assertGeneratedFile('foo.links.menu.yml');
     $this->assertGeneratedFile('foo.links.task.yml');
     $this->assertGeneratedFile('foo.permissions.yml');
-    $this->assertGeneratedFile('src/FooExampleInterface.php');
-    $this->assertGeneratedFile('src/FooExampleListBuilder.php');
-    $this->assertGeneratedFile('src/Entity/FooExample.php');
-    $this->assertGeneratedFile('src/Form/FooExampleForm.php');
-    $this->assertGeneratedFile('src/Routing/FooExampleHtmlRouteProvider.php');
+    $this->assertGeneratedFile('src/ExampleInterface.php');
+    $this->assertGeneratedFile('src/ExampleListBuilder.php');
+    $this->assertGeneratedFile('src/Entity/Example.php');
+    $this->assertGeneratedFile('src/Form/ExampleForm.php');
+    $this->assertGeneratedFile('src/Routing/ExampleHtmlRouteProvider.php');
   }
 
 }

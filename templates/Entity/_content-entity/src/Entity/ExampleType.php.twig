@@ -19,11 +19,11 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *   ),
  *   handlers = {
  *     "form" = {
- *       "add" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}TypeForm",
- *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class_prefix }}TypeForm",
+ *       "add" = "Drupal\{{ machine_name }}\Form\{{ class }}TypeForm",
+ *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class }}TypeForm",
  *       "delete" = "Drupal\Core\Entity\EntityDeleteForm",
  *     },
- *     "list_builder" = "Drupal\{{ machine_name }}\{{ class_prefix }}TypeListBuilder",
+ *     "list_builder" = "Drupal\{{ machine_name }}\{{ class }}TypeListBuilder",
  *     "route_provider" = {
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
  *     },
@@ -49,7 +49,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *   },
  * )
  */
-final class {{ class_prefix }}Type extends ConfigEntityBundleBase {
+final class {{ class }}Type extends ConfigEntityBundleBase {
 
   /**
    * The machine name of this {{ entity_type_label|lower }} type.

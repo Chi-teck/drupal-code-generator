@@ -6,13 +6,13 @@ namespace Drupal\{{ machine_name }}\Form;
 use Drupal\Core\Entity\BundleEntityFormBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\{{ machine_name }}\Entity\{{ class_prefix }}Type;
+use Drupal\{{ machine_name }}\Entity\{{ class }}Type;
 {% endsort %}
 
 /**
  * Form handler for {{ entity_type_label|lower }} type forms.
  */
-final class {{ class_prefix }}TypeForm extends BundleEntityFormBase {
+final class {{ class }}TypeForm extends BundleEntityFormBase {
 
   /**
    * {@inheritdoc}
@@ -37,7 +37,7 @@ final class {{ class_prefix }}TypeForm extends BundleEntityFormBase {
       '#default_value' => $this->entity->id(),
       '#maxlength' => EntityTypeInterface::BUNDLE_MAX_LENGTH,
       '#machine_name' => [
-        'exists' => [{{ class_prefix }}Type::class, 'load'],
+        'exists' => [{{ class }}Type::class, 'load'],
         'source' => ['label'],
       ],
       '#description' => $this->t('A unique machine-readable name for this {{ entity_type_label|lower }} type. It must only contain lowercase letters, numbers, and underscores.'),
