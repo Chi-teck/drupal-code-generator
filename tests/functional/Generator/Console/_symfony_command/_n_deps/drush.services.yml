@@ -1,0 +1,5 @@
+services:
+  foo.bar:
+    class: Drupal\foo\Command\BarCommand
+    tags:
+      - { name: console.command }

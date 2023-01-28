@@ -1,5 +1,6 @@
 services:
-  foo.foo_bar:
+  foo.bar:
     class: Drupal\foo\Command\BarCommand
+    arguments: ['@entity_type.manager']
     tags:
       - { name: console.command }

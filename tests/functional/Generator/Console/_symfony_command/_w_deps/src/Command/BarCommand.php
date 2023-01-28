@@ -1,37 +1,29 @@
-{% import '@lib/di.twig' as di %}
 <?php declare(strict_types = 1);
 
-namespace Drupal\{{ machine_name }}\Command;
+namespace Drupal\foo\Command;
 
-{% sort %}
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-  {% if services %}
-{{ di.use(services) }}
-  {% endif %}
-{% endsort %}
 
 // phpcs:disable Drupal.Commenting.ClassComment.Missing
 #[AsCommand(
-  name: '{{ command.name }}',
-  description: '{{ command.description }}',
-  aliases: ['{{ command.alias }}'],
+  name: 'foo:bar',
+  description: 'Example command.',
+  aliases: ['bar'],
 )]
-final class {{ class }} extends Command {
-{% if services %}
+final class BarCommand extends Command {
 
   /**
-   * Constructs {{ class|article }} object.
+   * Constructs a BarCommand object.
    */
   public function __construct(
-{{ di.signature(services) }}
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
-{# Parent constructor configures the command. #}
     parent::__construct();
   }
-{% endif %}
 
   /**
    * {@inheritdoc}

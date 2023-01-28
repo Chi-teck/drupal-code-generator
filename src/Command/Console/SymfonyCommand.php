@@ -10,7 +10,6 @@ use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\RegExp;
 
-// @todo Create SUT test for this.
 #[Generator(
   name: 'console:symfony-command',
   description: 'Generates Symfony console command',
@@ -40,9 +39,19 @@ final class SymfonyCommand extends BaseGenerator {
     $alias_validator = new RegExp('/^[a-z0-9][a-z0-9_]+$/', 'The value is not correct alias name.');
     $vars['command']['alias'] = $ir->ask('Command alias', $short_name, $alias_validator);
 
-    $vars['class'] = $ir->ask('Class', Utils::camelize($short_name) . 'Command');
+    $vars['class'] = $ir->askClass('Class', Utils::camelize($short_name) . 'Command');
 
     if ($ir->confirm('Would you like to run the command with Drush')) {
+      // Make service name using the following guides.
+      // `foo:example` -> `foo.example` (not `foo:foo_example`)
+      // `foo` -> `foo.foo` (not `foo`)
+      $service_name = Utils::removePrefix($vars['command']['name'], $vars['machine_name'] . ':');
+      if (!$service_name) {
+        $service_name = $vars['command']['name'];
+      }
+      $vars['service_name'] = $vars['machine_name'] . '.' . \str_replace(':', '_', $service_name);
+
+      $vars['services'] = $ir->askServices(FALSE);
       $assets->addServicesFile('drush.services.yml')->template('services.twig');
     }
     $assets->addFile('src/Command/{class}.php', 'command.twig');
