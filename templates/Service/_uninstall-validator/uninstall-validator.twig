@@ -12,23 +12,21 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 {% endsort %}
 
 /**
- * Prevents uninstalling of modules providing used block plugins.
+ * @todo Add validator description here.
  */
 final class {{ class }} implements ModuleUninstallValidatorInterface {
 
   use StringTranslationTrait;
-
 {% if services %}
-{{ di.properties(services) }}
 
   /**
-   * Constructs a new {{ class }} object.
+   * Constructs the object.
    */
-  public function __construct({{ di.signature(services, false) }}) {
-{{ di.assignment(services) }}
-  }
-
+  public function __construct(
+{{ di.signature(services) }}
+  ) {}
 {% endif %}
+
   /**
    * {@inheritdoc}
    */

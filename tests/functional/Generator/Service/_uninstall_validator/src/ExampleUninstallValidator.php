@@ -7,25 +7,18 @@ use Drupal\Core\Extension\ModuleUninstallValidatorInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Prevents uninstalling of modules providing used block plugins.
+ * @todo Add validator description here.
  */
 final class ExampleUninstallValidator implements ModuleUninstallValidatorInterface {
 
   use StringTranslationTrait;
 
   /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * Constructs the object.
    */
-  protected $entityTypeManager;
-
-  /**
-   * Constructs a new ExampleUninstallValidator object.
-   */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
-    $this->entityTypeManager = $entity_type_manager;
-  }
+  public function __construct(
+    private readonly EntityTypeManagerInterface $entityTypeManager,
+  ) {}
 
   /**
    * {@inheritdoc}
