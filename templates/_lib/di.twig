@@ -10,47 +10,15 @@ use {{ service.type }};
   {% endsort %}
 {% endmacro %}
 
-{# @deprecated #}
-{% macro properties(services) %}
+{% macro signature(services) %}
   {% for service in services %}
-  /**
-   * {{ service.description }}
-   *
-   * @var \{{ service.type }}
-   */
-  protected ${{ service.name|camelize(false) }};{{ loop.last ? '' : "\n\n" }}
-  {%- endfor %}
-{% endmacro %}
-
-{# @deprecated #}
-{% macro annotation(services) %}
-  {% for service in services %}
-   * @param \{{ service.type }} ${{ service.name }}
-   *   {{ service.description }}{{ loop.last ? '' : "\n" }}
-   {%- endfor %}
-{% endmacro %}
-
-{# @todo Remove the multiline option. #}
-{% macro signature(services, multiline=true) %}
-  {% if multiline %}
-    {% for service in services %}
-    private readonly {{ service.short_type }} ${{ service.name|camelize(false) }},{{ loop.last ? '' : "\n" }}
-    {%- endfor %}
-  {%- else %}
-    {%- for service in services %}{{ service.short_type }} ${{ service.name }}{{ loop.last ? '' : ', ' }}{% endfor %}
-  {% endif %}
-{% endmacro %}
-
-{# @deprecated #}
-{% macro assignment(services) %}
-  {% for service in services %}
-    $this->{{ service.name|camelize(false) }} = ${{ service.name }};{{ loop.last ? '' : "\n" }}
+    private readonly {{ service.short_type }} ${{ service.name|camelize(false) }},{{ loop.last ? '' : constant('PHP_EOL') }}
   {%- endfor %}
 {% endmacro %}
 
 {% macro container(services) %}
   {% for service_id, service in services %}
-      $container->get('{{ service_id }}'),{{ loop.last ? '' : "\n" }}
+      $container->get('{{ service_id }}'),{{ loop.last ? '' : constant('PHP_EOL') }}
   {%- endfor %}
 {% endmacro %}
 
