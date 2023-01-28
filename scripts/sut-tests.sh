@@ -4,36 +4,36 @@
 # === Configuration. === #
 set -Eeuo pipefail
 
-SCRIPTS_DIR=$(dirname "$(readlink -f "$0")");
-SELF_DIR=$(realpath $SCRIPTS_DIR/..)
-SOURCE_DIR=$SELF_DIR/tests/sut
+scripts_dir=$(dirname "$(readlink -f "$0")");
+self_dir=$(realpath $scripts_dir/..)
+source_dir=$self_dir/tests/sut
 
-WORKSPACE_DIR=${DCG_TMP_DIR:-/tmp}/dcg_sut
-DRUPAL_DIR=$WORKSPACE_DIR/drupal
-CACHE_DIR=$WORKSPACE_DIR/cache
+workspace_dir=${DCG_TMP_DIR:-/tmp}/dcg_sut
+drupal_dir=$workspace_dir/drupal
+cache_dir=$workspace_dir/cache
+test_filter=${1:-'all'}
 
-DCG_DRUPAL_HOST=${DCG_DRUPAL_HOST:-'127.0.0.1'}
-DCG_DRUPAL_PORT=${DCG_DRUPAL_PORT:-'8085'}
-DCG=$DRUPAL_DIR/vendor/bin/dcg
-DCG_WD_URL=${DCG_WD_URL:-'http://localhost:4444/wd/hub'}
-DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
-DCG_TEST_FILTER=${1:-'all'}
-DCG_DRUPAL_VERSION=${DCG_DRUPAL_VERSION:-'10.1.x'}
+dcg_drupal_host=${DCG_DRUPAL_HOST:-'127.0.0.1'}
+dcg_drupal_port=${DCG_DRUPAL_PORT:-'8085'}
+dcg=$drupal_dir/vendor/bin/dcg
+dcg_wd_url=${DCG_WD_URL:-'http://localhost:4444/wd/hub'}
+dcg_drupal_version=${DCG_DRUPAL_VERSION:-'10.1.x'}
+drupal_repo='https://git.drupalcode.org/project/drupal.git'
 
 echo -----------------------------------------------
-echo ' DRUPAL VERSION:' $DCG_DRUPAL_VERSION
-echo ' DRUPAL DIR:    ' $DRUPAL_DIR
-echo ' DCG:           ' $DCG
-echo ' SOURCE_DIR:    ' $SOURCE_DIR
-echo ' SITE URL:      ' http://$DCG_DRUPAL_HOST:$DCG_DRUPAL_PORT
-echo ' WD_URL:        ' $DCG_WD_URL
+echo ' DRUPAL VERSION:' $dcg_drupal_version
+echo ' DRUPAL DIR:    ' $drupal_dir
+echo ' DCG:           ' $dcg
+echo ' SOURCE_DIR:    ' $source_dir
+echo ' SITE URL:      ' http://$dcg_drupal_host:$dcg_drupal_port
+echo ' WD_URL:        ' $dcg_wd_url
 echo -----------------------------------------------
 
 function dcg_on_exit {
-  local STATUS=$?
+  local status=$?
   echo '🚩 Shutdown server'
-  symfony server:stop --dir=$DRUPAL_DIR
-  if [[ $STATUS == 0 ]] ; then
+  symfony server:stop --dir=$drupal_dir
+  if [[ $status == 0 ]] ; then
     echo -e "\n\e[0;42m SUCCESS \e[0m"
   else
     echo -e "\n\e[0;41m FAIL \e[0m"
@@ -44,22 +44,22 @@ trap dcg_on_exit EXIT
 # === Helper functions. === #
 
 function dcg_module_install {
-  $DRUPAL_DIR/drupal.php module:install "$@"
+  $drupal_dir/drupal.php module:install "$@"
 }
 
 function dcg_module_uninstall {
-  $DRUPAL_DIR/drupal.php module:uninstall "$@"
+  $drupal_dir/drupal.php module:uninstall "$@"
 }
 
 function dcg_phpcs {
-  $DRUPAL_DIR/vendor/bin/phpcs -sp "$@"
+  $drupal_dir/vendor/bin/phpcs -sp "$@"
 }
 
 function dcg_phpunit {
-  SIMPLETEST_BASE_URL=http://$DCG_DRUPAL_HOST:$DCG_DRUPAL_PORT \
-  SIMPLETEST_DB=sqlite://localhost//$DRUPAL_DIR/sites/default/files/dcg_test.sqlite \
-  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chromeOptions": {"w3c": false, "args": ["--headless"]}}, "'$DCG_WD_URL'"]' \
-  $DRUPAL_DIR/vendor/bin/phpunit -c $DRUPAL_DIR/core "$@"
+  SIMPLETEST_BASE_URL=http://$dcg_drupal_host:$dcg_drupal_port \
+  SIMPLETEST_DB=sqlite://localhost//$drupal_dir/sites/default/files/dcg_test.sqlite \
+  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chromeOptions": {"w3c": false, "args": ["--headless"]}}, "'$dcg_wd_url'"]' \
+  $drupal_dir/vendor/bin/phpunit -c $drupal_dir/core "$@"
 }
 
 function dcg_label {
@@ -68,88 +68,88 @@ function dcg_label {
 
 # === Create a site under testing. === #
 
-if [[ -d $DRUPAL_DIR ]]; then
-  chmod -R 777 $DRUPAL_DIR
-  rm -rf $DRUPAL_DIR
+if [[ -d $drupal_dir ]]; then
+  chmod -R 777 $drupal_dir
+  rm -rf $drupal_dir
 fi
 
-if [[ -d $CACHE_DIR/$DCG_DRUPAL_VERSION ]]; then
+if [[ -d $cache_dir/$dcg_drupal_version ]]; then
   echo '🚩 Install Drupal from cache'
-  cp -r $CACHE_DIR/$DCG_DRUPAL_VERSION $DRUPAL_DIR
+  cp -r $cache_dir/$dcg_drupal_version $drupal_dir
 else
   echo '🚩 Clone Drupal core'
-  git clone --depth 1 --branch $DCG_DRUPAL_VERSION $DRUPAL_REPO $DRUPAL_DIR
+  git clone --depth 1 --branch $dcg_drupal_version $drupal_repo $drupal_dir
   echo '🚩 Install Composer dependencies'
-  composer -d$DRUPAL_DIR install
-  echo '🚩 Add DCG scripts and configuration'
-  cp $SCRIPTS_DIR/drupal.php $DRUPAL_DIR/
-  cp -R $SOURCE_DIR/example $DRUPAL_DIR/modules
-  cp -R $SOURCE_DIR/phpcs.xml $DRUPAL_DIR
+  composer -d$drupal_dir install
+  echo '🚩 Add dcg scripts and configuration'
+  cp $scripts_dir/drupal.php $drupal_dir/
+  cp -R $source_dir/example $drupal_dir/modules
+  cp -R $source_dir/phpcs.xml $drupal_dir
   echo '🚩 Install Drupal'
-  mkdir -m 777 $DRUPAL_DIR/sites/default/files
-  php $DRUPAL_DIR/core/scripts/drupal install minimal
-  cp -R $SOURCE_DIR/dcg_test $DRUPAL_DIR/modules
+  mkdir -m 777 $drupal_dir/sites/default/files
+  php $drupal_dir/core/scripts/drupal install minimal
+  cp -R $source_dir/dcg_test $drupal_dir/modules
   dcg_module_install dcg_test
   echo '🚩 Update cache'
-  if [[ ! -d $CACHE_DIR ]]; then
-    mkdir -p $CACHE_DIR
+  if [[ ! -d $cache_dir ]]; then
+    mkdir -p $cache_dir
   fi
-  cp -r $DRUPAL_DIR $CACHE_DIR/$DCG_DRUPAL_VERSION
+  cp -r $drupal_dir $cache_dir/$dcg_drupal_version
 fi
 
 echo '🚩 Install local DCG'
-composer -d"$DRUPAL_DIR" config repositories.dcg "$(printf '{"type": "path", "url": "%s", "options": {"symlink": false}}' $SELF_DIR)"
-composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator --with-all-dependencies
+composer -d"$drupal_dir" config repositories.dcg "$(printf '{"type": "path", "url": "%s", "options": {"symlink": false}}' $self_dir)"
+composer -d$drupal_dir require chi-teck/drupal-code-generator --with-all-dependencies
 echo '————————————————————————————————————————————'
-composer -d$DRUPAL_DIR show --ansi chi-teck/drupal-code-generator | head -n 10
+composer -d$drupal_dir show --ansi chi-teck/drupal-code-generator | head -n 10
 echo '————————————————————————————————————————————'
 
 echo '🚩 Start server'
-symfony server:start --daemon --dir=$DRUPAL_DIR --port=$DCG_DRUPAL_PORT --no-tls
+symfony server:start --daemon --dir=$drupal_dir --port=$dcg_drupal_port --no-tls
 export SUT_TEST=1
 
 # === Tests === #
 echo '🚩 Run tests'
 # --- Test forms --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = form ]]; then
+if [[ $test_filter = all || $test_filter = form ]]; then
   dcg_label Form
 
-  MODULE_MACHINE_NAME=foo
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  module_machine_name=foo
+  module_dir=$drupal_dir/modules/$module_machine_name
 
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG form:simple -a foo -a Foo -a SimpleForm -a Yes -a foo.simple_form -a /admin/config/foo/simple -a Example -a 'access administration pages'
-  $DCG form:config -a foo -a Foo -a SettingsForm -a Yes -a foo.config_form -a /admin/config/foo/settings -a Example -a 'access administration pages' -a No
-  $DCG form:confirm -a foo -a Foo -a ConfirmForm -a Yes -a foo.confirm_form -a /admin/config/foo/confirm -a Example -a 'access administration pages'
+  $dcg form:simple -a foo -a Foo -a SimpleForm -a Yes -a foo.simple_form -a /admin/config/foo/simple -a Example -a 'access administration pages'
+  $dcg form:config -a foo -a Foo -a SettingsForm -a Yes -a foo.config_form -a /admin/config/foo/settings -a Example -a 'access administration pages' -a No
+  $dcg form:confirm -a foo -a Foo -a ConfirmForm -a Yes -a foo.confirm_form -a /admin/config/foo/confirm -a Example -a 'access administration pages'
 
   dcg_phpcs --exclude=DrupalPractice.Yaml.RoutingAccess .
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test module components --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
+if [[ $test_filter = all || $test_filter = module_component ]]; then
   dcg_label Module component
 
-  MODULE_MACHINE_NAME=bar
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  module_machine_name=bar
+  module_dir=$drupal_dir/modules/$module_machine_name
 
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG controller -a bar -a Bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
-  $DCG install-file -a bar -a Bar
-  $DCG javascript -a bar -a Bar -a heavy-metal.js -a Yes -a heavy_metal
-  $DCG service-provider -a bar -a Bar -a Yes -a Yes
-  $DCG template -a bar -a Bar -a example -a Yes -a Yes
-  $DCG layout -a bar -a Foo -a foo -a my -a Yes -a Yes
-  $DCG render-element -a bar -a example -a Example
-  $DCG hook -a bar -a Bar -a countries_alter
+  $dcg controller -a bar -a Bar -a BarController -a No -a Yes -a bar.example -a /bar/example -a Example -a 'access content'
+  $dcg install-file -a bar -a Bar
+  $dcg javascript -a bar -a Bar -a heavy-metal.js -a Yes -a heavy_metal
+  $dcg service-provider -a bar -a Bar -a Yes -a Yes
+  $dcg template -a bar -a Bar -a example -a Yes -a Yes
+  $dcg layout -a bar -a Foo -a foo -a my -a Yes -a Yes
+  $dcg render-element -a bar -a example -a Example
+  $dcg hook -a bar -a Bar -a countries_alter
 
-  $DCG field \
+  $dcg field \
     -a bar -a Bar -a 'Example 1' -a bar_example_1 -a 10 \
     -a 'Value 1' -a value_1 -a Boolean -a No \
     -a 'Value 2' -a value_2 -a Text -a No -a No \
@@ -163,7 +163,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
     -a 'Value 10' -a value_10 -a Date -a 'Date only' -a No -a No \
     -a No -a No -a No -a No -a No -a No
 
-  $DCG field \
+  $dcg field \
     -a bar -a Bar -a 'Example 2' -a bar_example_2 -a 10 \
     -a 'Value 1' -a value_1 -a Boolean -a Yes \
     -a 'Value 2' -a value_2 -a Text -a Yes -a Yes \
@@ -177,7 +177,7 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
     -a 'Value 10' -a value_10 -a Date -a 'Date and time' -a Yes -a No \
     -a No -a No -a No -a No -a No -a No
 
-  $DCG field \
+  $dcg field \
     -a bar -a Bar -a 'Example 3' -a bar_example_3 -a 5 \
     -a 'Value 1' -a value_1 -a Boolean -a No \
     -a 'Value 2' -a value_2 -a Text -a No -a No \
@@ -187,316 +187,316 @@ if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module_component ]]; then
     -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
   dcg_phpcs .
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test plugins --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin ]]; then
+if [[ $test_filter = all || $test_filter = plugin ]]; then
   dcg_label Plugin
 
-  MODULE_MACHINE_NAME=qux
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  module_machine_name=qux
+  module_dir=$drupal_dir/modules/$module_machine_name
 
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG plugin:field:formatter -a qux -a Example -a qux_example -a ExampleFormatter -a Yes
-  $DCG plugin:field:type -a qux -a Example -a qux_example -a ExampleItem -a Yes -a Yes
-  $DCG plugin:field:widget -a qux -a Example -a qux_example -a ExampleWidget -a Yes -a No
+  $dcg plugin:field:formatter -a qux -a Example -a qux_example -a ExampleFormatter -a Yes
+  $dcg plugin:field:type -a qux -a Example -a qux_example -a ExampleItem -a Yes -a Yes
+  $dcg plugin:field:widget -a qux -a Example -a qux_example -a ExampleWidget -a Yes -a No
 
-  $DCG plugin:migrate:source -a qux -a foo -a Foo -a 'SQL'
-  $DCG plugin:migrate:source -a qux -a bar -a Bar -a 'Other'
-  $DCG plugin:migrate:process -a qux -a example -a Example -a No
-  $DCG plugin:migrate:destination -a qux -a example -a Example -a No
+  $dcg plugin:migrate:source -a qux -a foo -a Foo -a 'SQL'
+  $dcg plugin:migrate:source -a qux -a bar -a Bar -a 'Other'
+  $dcg plugin:migrate:process -a qux -a example -a Example -a No
+  $dcg plugin:migrate:destination -a qux -a example -a Example -a No
 
-  $DCG plugin:views:argument-default -a qux -a Example -a qux_example -a Example -a Yes -a No
-  $DCG plugin:views:field -a qux -a Example -a qux_example -a Example -a Yes -a No
-  $DCG plugin:views:style -a qux -a Qux -a Example -a qux_example -a Example -a Yes -a No
+  $dcg plugin:views:argument-default -a qux -a Example -a qux_example -a Example -a Yes -a No
+  $dcg plugin:views:field -a qux -a Example -a qux_example -a Example -a Yes -a No
+  $dcg plugin:views:style -a qux -a Qux -a Example -a qux_example -a Example -a Yes -a No
 
-  $DCG plugin:action -a qux -a 'Update node field' -a qux_update_node_field -a UpdateNodeField -a DCG -a node -a Yes -a No
-  $DCG plugin:block -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
-  $DCG plugin:ckeditor -a qux -a 'Pooh Bear' -a qux_pooh_bear
-  $DCG plugin:condition -a qux -a Example -a example -a Example -a No
-  $DCG plugin:entity-reference-selection -a qux -a Qux -a node -a Example -a qux_example -a Example -a Yes
-  $DCG plugin:filter -a qux -a Qux -a Example -a example -a Example -a 'HTML restrictor' -a Yes -a No
-  $DCG plugin:menu-link -a qux -a FooExampleLink -a No
-  $DCG plugin:queue-worker -a qux -a Example -a qux_example -a Example -a No
-  $DCG plugin:rest-resource -a qux -a Example -a qux_example -a ExampleResource
-  $DCG plugin:cons traint -a qux -a Qux -a Example -a QuxConstraint -a ExampleConstraint -a 'Raw value' -a No
+  $dcg plugin:action -a qux -a 'Update node field' -a qux_update_node_field -a UpdateNodeField -a DCG -a node -a Yes -a No
+  $dcg plugin:block -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
+  $dcg plugin:ckeditor -a qux -a 'Pooh Bear' -a qux_pooh_bear
+  $dcg plugin:condition -a qux -a Example -a example -a Example -a No
+  $dcg plugin:entity-reference-selection -a qux -a Qux -a node -a Example -a qux_example -a Example -a Yes
+  $dcg plugin:filter -a qux -a Qux -a Example -a example -a Example -a 'HTML restrictor' -a Yes -a No
+  $dcg plugin:menu-link -a qux -a FooExampleLink -a No
+  $dcg plugin:queue-worker -a qux -a Example -a qux_example -a Example -a No
+  $dcg plugin:rest-resource -a qux -a Example -a qux_example -a ExampleResource
+  $dcg plugin:constraint -a qux -a Qux -a Example -a QuxConstraint -a ExampleConstraint -a 'Raw value' -a No
 
   dcg_phpcs .
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_module_install $module_machine_name
   echo 'Build CKEditor plugin...'
   npm install && npm run build
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test services --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = service ]]; then
+if [[ $test_filter = all || $test_filter = service ]]; then
   dcg_label Service
 
-  MODULE_MACHINE_NAME=zippo
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  module_machine_name=zippo
+  module_dir=$drupal_dir/modules/$module_machine_name
 
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG service:access-checker -a zippo -a _zippo -a ZippoAccessChecker -a No
-  $DCG service:breadcrumb-builder -a zippo -a ZippoBreadcrumbBuilder -a No
-  $DCG service:custom -a zippo -a zippo.foo -a Foo -a Yes -a Yes -a entity_type.manager -a
-  $DCG service:event-subscriber -a zippo -a Zippo -a FooSubscriber -a Yes -a messenger -a
-  $DCG service:logger -a zippo -a FileLog -a No
-  $DCG service:middleware -a zippo -a BarMiddelware -a No
-  $DCG service:param-converter -a zippo -a example -a ExampleParamConverter -a No
-  $DCG service:route-subscriber -a zippo -a ZippoRouterSubscibrer -a No
-  $DCG service:theme-negotiator -a zippo -a ZippoThemeNegotiator -a No
-  $DCG service:twig-extension -a zippo -a ZippoTwigExtension -a No
-  $DCG service:path-processor -a zippo -a PathProcessorZippo -a No
-  $DCG service:request-policy -a zippo -a Example -a Yes -a 'entity_type.manager' -a
-  $DCG service:response-policy -a zippo -a ExampleResponsePolicy -a No
-  $DCG service:uninstall-validator -a zippo -a Zippo -a ExampleUninstallValidator -a No
-  $DCG service:cache-context -a zippo -a example -a ExampleCacheContext -a UserCacheContextBase -a Yes
+  $dcg service:access-checker -a zippo -a _zippo -a ZippoAccessChecker -a No
+  $dcg service:breadcrumb-builder -a zippo -a ZippoBreadcrumbBuilder -a No
+  $dcg service:custom -a zippo -a zippo.foo -a Foo -a Yes -a Yes -a entity_type.manager -a
+  $dcg service:event-subscriber -a zippo -a Zippo -a FooSubscriber -a Yes -a messenger -a
+  $dcg service:logger -a zippo -a FileLog -a No
+  $dcg service:middleware -a zippo -a BarMiddelware -a No
+  $dcg service:param-converter -a zippo -a example -a ExampleParamConverter -a No
+  $dcg service:route-subscriber -a zippo -a ZippoRouterSubscibrer -a No
+  $dcg service:theme-negotiator -a zippo -a ZippoThemeNegotiator -a No
+  $dcg service:twig-extension -a zippo -a ZippoTwigExtension -a No
+  $dcg service:path-processor -a zippo -a PathProcessorZippo -a No
+  $dcg service:request-policy -a zippo -a Example -a Yes -a 'entity_type.manager' -a
+  $dcg service:response-policy -a zippo -a ExampleResponsePolicy -a No
+  $dcg service:uninstall-validator -a zippo -a Zippo -a ExampleUninstallValidator -a No
+  $dcg service:cache-context -a zippo -a example -a ExampleCacheContext -a UserCacheContextBase -a Yes
 
-  dcg_phpcs $MODULE_DIR
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpcs $module_dir
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
   # Do not uninstall this module as the uninstall validator prevents it.
 fi
 
 # --- Test YML --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = yml ]]; then
+if [[ $test_filter = all || $test_filter = yml ]]; then
   dcg_label YML
 
-  MODULE_MACHINE_NAME=yety
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  module_machine_name=yety
+  module_dir=$drupal_dir/modules/$module_machine_name
 
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG yml:links:action -a yety
-  $DCG yml:links:contextual -a yety
-  $DCG yml:links:menu -a yety
-  $DCG yml:links:task -a yety
-  $DCG yml:module-libraries -a yety
-  $DCG yml:permissions -a yety
-  $DCG yml:routing -a yety -a Yety
-  $DCG yml:services -a yety -a Yety
+  $dcg yml:links:action -a yety
+  $dcg yml:links:contextual -a yety
+  $dcg yml:links:menu -a yety
+  $dcg yml:links:task -a yety
+  $dcg yml:module-libraries -a yety
+  $dcg yml:permissions -a yety
+  $dcg yml:routing -a yety -a Yety
+  $dcg yml:services -a yety -a Yety
 
-  dcg_phpcs $MODULE_DIR
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpcs $module_dir
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test tests --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = test ]]; then
+if [[ $test_filter = all || $test_filter = test ]]; then
   dcg_label Test
 
-  MODULE_MACHINE_NAME=xerox
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  module_machine_name=xerox
+  module_dir=$drupal_dir/modules/$module_machine_name
 
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG test:browser -a xerox -a Xerox -a ExampleTest
-  $DCG test:kernel -a xerox -a Xerox -a ExampleTest
-  $DCG test:nightwatch -a xerox -a Xerox -a example
-  $DCG test:unit -a xerox -a Xerox -a ExampleTest
-  $DCG test:webdriver -a xerox -a Xerox -a ExampleTest
+  $dcg test:browser -a xerox -a Xerox -a ExampleTest
+  $dcg test:kernel -a xerox -a Xerox -a ExampleTest
+  $dcg test:nightwatch -a xerox -a Xerox -a example
+  $dcg test:unit -a xerox -a Xerox -a ExampleTest
+  $dcg test:webdriver -a xerox -a Xerox -a ExampleTest
 
-  dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $module_dir
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test theme components --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme_component ]]; then
+if [[ $test_filter = all || $test_filter = theme_component ]]; then
   dcg_label Theme component
 
-  MODULE_MACHINE_NAME=plantain
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  module_machine_name=plantain
+  module_dir=$drupal_dir/modules/$module_machine_name
 
-  THEME_MACHINE_NAME=shreya
-  THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
-  cp -R $SOURCE_DIR/$THEME_MACHINE_NAME $THEME_DIR
+  theme_machine_name=shreya
+  theme_dir=$drupal_dir/themes/$theme_machine_name
+  cp -R $source_dir/$theme_machine_name $theme_dir
 
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG yml:breakpoints -a shreya
-  $DCG theme-settings -a shreya -a Shreya
-  $DCG yml:theme-libraries -a shreya
+  $dcg yml:breakpoints -a shreya
+  $dcg theme-settings -a shreya -a Shreya
+  $dcg yml:theme-libraries -a shreya
 
-  dcg_phpcs $THEME_DIR
+  dcg_phpcs $theme_dir
 
-  dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $MODULE_DIR
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $module_dir
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test plugin manager --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = plugin_manager ]]; then
+if [[ $test_filter = all || $test_filter = plugin_manager ]]; then
   dcg_label Plugin manager
 
-  MODULE_MACHINE_NAME=lamda
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  module_machine_name=lamda
+  module_dir=$drupal_dir/modules/$module_machine_name
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG plugin-manager -a lamda -a Lamda -a alpha -a Annotation
-  $DCG plugin-manager -a lamda -a Lamda -a beta -a YAML
-  $DCG plugin-manager -a lamda -a Lamda -a gamma -a Hook
+  $dcg plugin-manager -a lamda -a Lamda -a alpha -a Annotation
+  $dcg plugin-manager -a lamda -a Lamda -a beta -a YAML
+  $dcg plugin-manager -a lamda -a Lamda -a gamma -a Hook
 
   dcg_phpcs .
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test configuration entity --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = configuration_entity ]]; then
+if [[ $test_filter = all || $test_filter = configuration_entity ]]; then
   dcg_label Configuration entity
 
-  MODULE_MACHINE_NAME=wine
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  module_machine_name=wine
+  module_dir=$drupal_dir/modules/$module_machine_name
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG entity:configuration -a wine -a Wine -a Example -a example
+  $dcg entity:configuration -a wine -a Wine -a Example -a example
 
   dcg_phpcs .
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test content entity --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = content_entity ]]; then
+if [[ $test_filter = all || $test_filter = content_entity ]]; then
   dcg_label 'Content entity (with bundles and fields)'
 
-  MODULE_MACHINE_NAME=nigma
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  module_machine_name=nigma
+  module_dir=$drupal_dir/modules/$module_machine_name
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG entity:content \
+  $dcg entity:content \
     -a nigma -a Nigma -a Example -a example -a Example -a /admin/content/example \
     -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
   dcg_phpcs .
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 
   dcg_label 'Content entity (with fields)'
 
-  MODULE_MACHINE_NAME=sigma
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  module_machine_name=sigma
+  module_dir=$drupal_dir/modules/$module_machine_name
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG entity:content \
+  $dcg entity:content \
     -a sigma -a Sigma -a Example -a example -a Example -a /example \
     -a Yes -a No -a No -a No -a Yes -a No -a No -a Yes -a No -a No -a No -a No -a No -a No
 
   dcg_phpcs .
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 
   dcg_label 'Content entity (without bundles, fields and canonical page)'
 
-  MODULE_MACHINE_NAME=figma
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  module_machine_name=figma
+  module_dir=$drupal_dir/modules/$module_machine_name
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG entity:content \
+  $dcg entity:content \
     -a figma -a Figma -a Example -a example -a Example -a /example \
     -a No -a No -a No -a No -a No -a No -a No -a Yes -a No -a No -a No -a No -a No
 
   dcg_phpcs .
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test bundle class --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = bundle_class ]]; then
+if [[ $test_filter = all || $test_filter = bundle_class ]]; then
   dcg_label 'Bundle classes'
 
-  MODULE_MACHINE_NAME=acme
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  module_machine_name=acme
+  module_dir=$drupal_dir/modules/$module_machine_name
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG entity:bundle-class -a acme -a Acme -a User -a UserBundle -a Yes -a UserBase
-  dcg_phpcs $MODULE_DIR
-  dcg_module_install $MODULE_MACHINE_NAME
+  $dcg entity:bundle-class -a acme -a Acme -a User -a UserBundle -a Yes -a UserBase
+  dcg_phpcs $module_dir
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test module --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = module ]]; then
+if [[ $test_filter = all || $test_filter = module ]]; then
   dcg_label Module
 
-  MODULE_MACHINE_NAME=peach
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  module_machine_name=peach
+  module_dir=$drupal_dir/modules/$module_machine_name
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG module -d $DRUPAL_DIR/modules -a Peach -a peach -a 'Simple module generated by DCG.' \
+  $dcg module -d $drupal_dir/modules -a Peach -a peach -a 'Simple module generated by DCG.' \
     -a DCG -a 'drupal:views, drupal:node, drupal:action' -a Yes -a Yes -a Yes
 
-  dcg_phpcs $MODULE_DIR
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpcs $module_dir
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test theme --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = theme ]]; then
+if [[ $test_filter = all || $test_filter = theme ]]; then
   dcg_label Theme
 
-  MODULE_MACHINE_NAME=tandoor
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
+  module_machine_name=tandoor
+  module_dir=$drupal_dir/modules/$module_machine_name
 
-  cp -r $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  cp -r $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  THEME_MACHINE_NAME=azalea
-  THEME_DIR=$DRUPAL_DIR/themes/$THEME_MACHINE_NAME
+  theme_machine_name=azalea
+  theme_dir=$drupal_dir/themes/$theme_machine_name
 
-  $DCG theme -d $DRUPAL_DIR/themes -a Azalea -a azalea -a claro -a 'Simple responsive theme generated by DCG.' \
+  $dcg theme -d $drupal_dir/themes -a Azalea -a azalea -a claro -a 'Simple responsive theme generated by DCG.' \
     -a DCG -a Yes -a Yes
 
-  dcg_phpcs $THEME_DIR
-  dcg_phpcs $MODULE_DIR
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpcs $theme_dir
+  dcg_phpcs $module_dir
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi
 
 # --- Test module --- #
-if [[ $DCG_TEST_FILTER = all || $DCG_TEST_FILTER = console ]]; then
+if [[ $test_filter = all || $test_filter = console ]]; then
   dcg_label 'Console Commands'
 
-  MODULE_MACHINE_NAME=sonata
-  MODULE_DIR=$DRUPAL_DIR/modules/$MODULE_MACHINE_NAME
-  cp -R $SOURCE_DIR/$MODULE_MACHINE_NAME $MODULE_DIR
-  cd $MODULE_DIR
+  module_machine_name=sonata
+  module_dir=$drupal_dir/modules/$module_machine_name
+  cp -R $source_dir/$module_machine_name $module_dir
+  cd $module_dir
 
-  $DCG console:symfony-command -d $DRUPAL_DIR/modules -a sonata -a Sonata -a 'sonata:example' \
+  $dcg console:symfony-command -d $drupal_dir/modules -a sonata -a Sonata -a 'sonata:example' \
        -a 'Simple command generated by DCG.' -a example -a ExampleCommand -a Yes -a No
 
-  dcg_phpcs $MODULE_DIR
-  dcg_module_install $MODULE_MACHINE_NAME
+  dcg_phpcs $module_dir
+  dcg_module_install $module_machine_name
   dcg_phpunit tests
-  dcg_module_uninstall $MODULE_MACHINE_NAME
+  dcg_module_uninstall $module_machine_name
 fi

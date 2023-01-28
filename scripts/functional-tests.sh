@@ -4,51 +4,51 @@
 # === Configuration. === #
 set -Eeuo pipefail
 
-ROOT_DIR=$(realpath "$(dirname $0)")/..
+root_dir=$(realpath "$(dirname $0)")/..
 
-WORKSPACE_DIR=${DCG_TMP_DIR:-/tmp}/dcg_functional
-DRUPAL_DIR=$WORKSPACE_DIR/drupal
-CACHE_DIR=$WORKSPACE_DIR/cache
-DCG_DIR=$DRUPAL_DIR/vendor/chi-teck/drupal-code-generator
-DRUPAL_REPO='https://git.drupalcode.org/project/drupal.git'
-DCG_DRUPAL_VERSION=${DCG_DRUPAL_VERSION:-'10.1.x'}
+workspace_dir=${DCG_TMP_DIR:-/tmp}/dcg_functional
+drupal_dir=$workspace_dir/drupal
+cache_dir=$workspace_dir/cache
+dcg_dir=$drupal_dir/vendor/chi-teck/drupal-code-generator
+drupal_repo='https://git.drupalcode.org/project/drupal.git'
+dcg_drupal_version=${DCG_DRUPAL_VERSION:-'10.1.x'}
 
 echo -----------------------------------------------
-echo ' DRUPAL PATH:   ' $DRUPAL_DIR
-echo ' DRUPAL VERSION:' $DCG_DRUPAL_VERSION
-echo ' DCG DIR:       ' $DCG_DIR
-echo ' ROOT DIR:      ' $ROOT_DIR
+echo ' DRUPAL PATH:   ' $drupal_dir
+echo ' DRUPAL VERSION:' $dcg_drupal_version
+echo ' DCG DIR:       ' $dcg_dir
+echo ' ROOT DIR:      ' $root_dir
 echo -----------------------------------------------
 
-if [[ -d $DRUPAL_DIR ]]; then
-  chmod -R 777 $DRUPAL_DIR
-  rm -rf $DRUPAL_DIR
+if [[ -d $drupal_dir ]]; then
+  chmod -R 777 $drupal_dir
+  rm -rf $drupal_dir
 fi
 
-if [[ -d $CACHE_DIR/$DCG_DRUPAL_VERSION ]]; then
+if [[ -d $cache_dir/$dcg_drupal_version ]]; then
   echo '🚩 Install Drupal from cache'
-  cp -r $CACHE_DIR/$DCG_DRUPAL_VERSION $DRUPAL_DIR
+  cp -r $cache_dir/$dcg_drupal_version $drupal_dir
 else
   echo '🚩 Clone Drupal core'
-  git clone --depth 1 --branch $DCG_DRUPAL_VERSION $DRUPAL_REPO $DRUPAL_DIR
+  git clone --depth 1 --branch $dcg_drupal_version $drupal_repo $drupal_dir
   echo '🚩 Install Composer dependencies'
-  composer -d$DRUPAL_DIR install
+  composer -d$drupal_dir install
   echo '🚩 Install Drupal'
-  mkdir -m 777 $DRUPAL_DIR/sites/default/files
-  php $DRUPAL_DIR/core/scripts/drupal install standard
+  mkdir -m 777 $drupal_dir/sites/default/files
+  php $drupal_dir/core/scripts/drupal install standard
   echo '🚩 Update cache'
-  if [[ ! -d $CACHE_DIR ]]; then
-    mkdir -p $CACHE_DIR
+  if [[ ! -d $cache_dir ]]; then
+    mkdir -p $cache_dir
   fi
-  cp -r $DRUPAL_DIR $CACHE_DIR/$DCG_DRUPAL_VERSION
+  cp -r $drupal_dir $cache_dir/$dcg_drupal_version
 fi
 
 echo '🚩 Install local DCG'
-composer -d$DRUPAL_DIR config repositories.dcg path "$ROOT_DIR"
-composer -d$DRUPAL_DIR require chi-teck/drupal-code-generator --with-all-dependencies
+composer -d$drupal_dir config repositories.dcg path "$root_dir"
+composer -d$drupal_dir require chi-teck/drupal-code-generator --with-all-dependencies
 echo '————————————————————————————————————————————'
-composer -d$DRUPAL_DIR show --ansi chi-teck/drupal-code-generator | head -n 10
+composer -d$drupal_dir show --ansi chi-teck/drupal-code-generator | head -n 10
 echo '————————————————————————————————————————————'
 
 echo '🚩 Run tests'
-$DRUPAL_DIR/vendor/bin/phpunit -c $DCG_DIR --testsuite=functional ${1:-}
+$drupal_dir/vendor/bin/phpunit -c $dcg_dir --testsuite=functional ${1:-}
