@@ -12,7 +12,7 @@ use {{ service.type }};
 
 {% macro signature(services) %}
   {% for service in services %}
-    private readonly {{ service.short_type }} ${{ service.name|camelize(false) }},{{ loop.last ? '' : constant('PHP_EOL') }}
+    private readonly {{ service.short_type }} ${{ service.name }},{{ loop.last ? '' : constant('PHP_EOL') }}
   {%- endfor %}
 {% endmacro %}
 

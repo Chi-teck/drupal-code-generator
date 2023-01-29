@@ -14,6 +14,7 @@ use DrupalCodeGenerator\Validator\Optional;
 use DrupalCodeGenerator\Validator\Required;
 use DrupalCodeGenerator\Validator\RequiredClassName;
 use DrupalCodeGenerator\Validator\RequiredMachineName;
+use DrupalCodeGenerator\Validator\ServiceExists;
 use DrupalCodeGenerator\Validator\ServiceName;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
@@ -173,9 +174,13 @@ final class Interviewer {
 
     if ($this->io->confirm('Would you like to inject dependencies?', $default)) {
       $service_ids = $this->serviceInfo->getServicesIds();
+      $validator = new Chained(
+        new Optional(new ServiceName()),
+        new Optional(new ServiceExists($this->serviceInfo)),
+      );
       while (TRUE) {
         $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
-        $question->setValidator(new Optional(new ServiceName()));
+        $question->setValidator($validator);
         $question->setAutocompleterValues($service_ids);
         $service = $this->io->askQuestion($question);
         if (!$service) {
@@ -187,7 +192,7 @@ final class Interviewer {
 
     $definitions = [];
     foreach (\array_unique($services) as $service_id) {
-      $definitions[$service_id] = $this->getServiceDefinition($service_id);
+      $definitions[$service_id] = $this->serviceInfo->getServiceMeta($service_id);
     }
     return $definitions;
   }

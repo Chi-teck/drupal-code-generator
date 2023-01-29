@@ -169,8 +169,8 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
     $expected = [
       'name' => $name,
-      'type' => $type,
       'short_type' => $short_type,
+      'type' => $type,
     ];
     self::assertSame($expected, $meta);
   }
@@ -189,10 +189,10 @@ final class ServiceInfoTest extends FunctionalTestBase {
     ];
 
     $data[] = [
-      'logger.channel.user',
-      'loggerChannelUser',
-      'Drupal\Core\Logger\LoggerChannelInterface',
-      'LoggerChannelInterface',
+      'views.views_data_helper',
+      'viewsViewsDataHelper',
+      'Drupal\views\ViewsDataHelper',
+      'ViewsDataHelper',
       NULL,
     ];
 
@@ -201,7 +201,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
       'render_placeholder_generator',
       'Drupal\Core\EventSubscriber\AuthenticationSubscriber',
       'AuthenticationSubscriber',
-      new \LogicException('Service "not.exists" does not exist.')
+      new \LogicException('Service "not.exists" does not exist.'),
     ];
 
     return $data;

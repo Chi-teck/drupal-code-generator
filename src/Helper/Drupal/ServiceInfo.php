@@ -74,7 +74,7 @@ final class ServiceInfo extends Helper {
   /**
    * Gets service definition.
    *
-   * @psalm-return array<string, string>|null
+   * @psalm-return array{class: class-string}|null
    */
   public function getServiceDefinition(string $service_id): ?array {
     $serialized_definitions = $this->getSerializedDefinitions();
@@ -91,6 +91,7 @@ final class ServiceInfo extends Helper {
    * @todo Add extended description.
    */
   public function getServiceMeta(string $service_id): array {
+    /** @psalm-suppress UnresolvableInclude */
     $dumped_meta = require Application::ROOT . '/resources/service-meta.php';
     // Most used core services are described statically.
     if (\array_key_exists($service_id, $dumped_meta)) {
@@ -99,10 +100,11 @@ final class ServiceInfo extends Helper {
     // For services from contrib and custom modules we build meta on demand.
     elseif ($definition = $this->getServiceDefinition($service_id)) {
       $class = $definition['class'];
+      /** @psalm-var class-string $interface */
       $interface = $class . 'Interface';
       $meta = [
         'name' => Utils::camelize($service_id, FALSE),
-        'type' => \is_subclass_of($class, $interface) ? $interface : $class
+        'type' => \is_subclass_of($class, $interface) ? $interface : $class,
       ];
     }
     else {
@@ -115,6 +117,7 @@ final class ServiceInfo extends Helper {
     $type_parts = \explode('\\', $meta['type']);
     $meta['short_type'] = \end($type_parts);
 
+    \ksort($meta);
     return $meta;
   }
 

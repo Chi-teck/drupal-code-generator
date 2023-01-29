@@ -504,10 +504,9 @@ final class InterviewerTest extends FunctionalTestBase {
     $answer = $interviewer->askServices();
     $expected_answer = [
       'entity_type.manager' => [
-        'type' => 'Drupal\Core\Entity\EntityTypeManagerInterface',
-        'name' => 'entity_type_manager',
-        'description' => 'The entity type manager.',
+        'name' => 'entityTypeManager',
         'short_type' => 'EntityTypeManagerInterface',
+        'type' => 'Drupal\Core\Entity\EntityTypeManagerInterface',
       ],
     ];
     self::assertSame($expected_answer, $answer);
@@ -538,14 +537,7 @@ final class InterviewerTest extends FunctionalTestBase {
     // -- Non-existing service..
     $this->setStream("\nmissing\n\n");
     $answer = $interviewer->askServices();
-    $expected_answer = [
-      'missing' => [
-        'name' => 'missing',
-        'type' => 'Drupal\example\ExampleInterface',
-        'description' => 'The missing service.',
-        'short_type' => 'ExampleInterface',
-      ],
-    ];
+    $expected_answer = [];
     self::assertSame($expected_answer, $answer);
 
     $expected_output = <<< 'TXT'
@@ -553,7 +545,8 @@ final class InterviewerTest extends FunctionalTestBase {
        Would you like to inject dependencies? [Yes]:
        ➤ 
        Type the service name or use arrows up/down. Press enter to continue:
-       ➤ 
+       ➤  Service does not exists.
+
        Type the service name or use arrows up/down. Press enter to continue:
        ➤ 
       TXT;
