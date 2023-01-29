@@ -4,7 +4,7 @@
 # === Configuration. === #
 set -Eeuo pipefail
 
-scripts_dir=$(dirname "$(readlink -f "$0")");
+scripts_dir=$(dirname "$(readlink -f "$0")")
 self_dir=$(realpath $scripts_dir/..)
 source_dir=$self_dir/tests/sut
 
@@ -81,7 +81,7 @@ else
   git clone --depth 1 --branch $dcg_drupal_version $drupal_repo $drupal_dir
   echo '🚩 Install Composer dependencies'
   composer -d$drupal_dir install
-  echo '🚩 Add dcg scripts and configuration'
+  echo '🚩 Add DCG scripts and configuration'
   cp $scripts_dir/drupal.php $drupal_dir/
   cp -R $source_dir/example $drupal_dir/modules
   cp -R $source_dir/phpcs.xml $drupal_dir
