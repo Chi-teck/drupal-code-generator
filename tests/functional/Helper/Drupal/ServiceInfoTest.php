@@ -159,7 +159,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
    *
    * @dataProvider serviceMetaProvider
    */
-  public function testGetServiceMeta(string $id, string $name, string $type, string $short_type, ?\Exception $exception): void {
+  public function testGetServiceMeta(string $id, string $name, string $type_fqn, string $type, ?\Exception $exception): void {
     $service_info = new ServiceInfo(self::bootstrap());
 
     if ($exception) {
@@ -169,8 +169,8 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
     $expected = [
       'name' => $name,
-      'short_type' => $short_type,
       'type' => $type,
+      'type_fqn' => $type_fqn,
     ];
     self::assertSame($expected, $meta);
   }

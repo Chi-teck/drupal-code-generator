@@ -5,14 +5,14 @@
 {% macro use(services) %}
   {% sort %}
     {% for service in services %}
-use {{ service.type }};
+use {{ service.type_fqn }};
     {% endfor %}
   {% endsort %}
 {% endmacro %}
 
 {% macro signature(services) %}
   {% for service in services %}
-    private readonly {{ service.short_type }} ${{ service.name }},{{ loop.last ? '' : constant('PHP_EOL') }}
+    private readonly {{ service.type }} ${{ service.name }},{{ loop.last ? '' : constant('PHP_EOL') }}
   {%- endfor %}
 {% endmacro %}
 

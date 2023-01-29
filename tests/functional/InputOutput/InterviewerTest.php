@@ -505,8 +505,8 @@ final class InterviewerTest extends FunctionalTestBase {
     $expected_answer = [
       'entity_type.manager' => [
         'name' => 'entityTypeManager',
-        'short_type' => 'EntityTypeManagerInterface',
-        'type' => 'Drupal\Core\Entity\EntityTypeManagerInterface',
+        'type' => 'EntityTypeManagerInterface',
+        'type_fqn' => 'Drupal\Core\Entity\EntityTypeManagerInterface',
       ],
     ];
     self::assertSame($expected_answer, $answer);

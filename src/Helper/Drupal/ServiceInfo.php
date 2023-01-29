@@ -91,8 +91,10 @@ final class ServiceInfo extends Helper {
    * @todo Add extended description.
    */
   public function getServiceMeta(string $service_id): array {
-    /** @psalm-suppress UnresolvableInclude */
-    $dumped_meta = require Application::ROOT . '/resources/service-meta.php';
+    $dumped_meta = \json_decode(
+      \file_get_contents(Application::ROOT . '/resources/service-meta.json'),
+      TRUE,
+    );
     // Most used core services are described statically.
     if (\array_key_exists($service_id, $dumped_meta)) {
       $meta = $dumped_meta[$service_id];
@@ -104,7 +106,7 @@ final class ServiceInfo extends Helper {
       $interface = $class . 'Interface';
       $meta = [
         'name' => Utils::camelize($service_id, FALSE),
-        'type' => \is_subclass_of($class, $interface) ? $interface : $class,
+        'type_fqn' => \is_subclass_of($class, $interface) ? $interface : $class,
       ];
     }
     else {
@@ -114,8 +116,8 @@ final class ServiceInfo extends Helper {
       );
     }
 
-    $type_parts = \explode('\\', $meta['type']);
-    $meta['short_type'] = \end($type_parts);
+    $type_parts = \explode('\\', $meta['type_fqn']);
+    $meta['type'] = \end($type_parts);
 
     \ksort($meta);
     return $meta;
