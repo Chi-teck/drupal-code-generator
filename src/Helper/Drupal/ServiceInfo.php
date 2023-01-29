@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Helper\Drupal;
 
+use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -82,6 +83,39 @@ final class ServiceInfo extends Helper {
     }
     // @phpcs:ignore DrupalPractice.FunctionCalls.InsecureUnserialize.InsecureUnserialize
     return \unserialize($serialized_definitions[$service_id]);
+  }
+
+  /**
+   * Gets metadata for a given service.
+   *
+   * @todo Add extended description.
+   */
+  public function getServiceMeta(string $service_id): array {
+    $dumped_meta = require Application::ROOT . '/resources/service-meta.php';
+    // Most used core services are described statically.
+    if (\array_key_exists($service_id, $dumped_meta)) {
+      $meta = $dumped_meta[$service_id];
+    }
+    // For services from contrib and custom modules we build meta on demand.
+    elseif ($definition = $this->getServiceDefinition($service_id)) {
+      $class = $definition['class'];
+      $interface = $class . 'Interface';
+      $meta = [
+        'name' => Utils::camelize($service_id, FALSE),
+        'type' => \is_subclass_of($class, $interface) ? $interface : $class
+      ];
+    }
+    else {
+      // @todo Move this exception to ServiceInfo::getServiceDefinition()?
+      throw new \LogicException(
+        \sprintf('Service "%s" does not exist.', $service_id),
+      );
+    }
+
+    $type_parts = \explode('\\', $meta['type']);
+    $meta['short_type'] = \end($type_parts);
+
+    return $meta;
   }
 
   /**

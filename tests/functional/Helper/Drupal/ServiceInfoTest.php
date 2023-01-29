@@ -154,4 +154,57 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertNull($definition);
   }
 
+  /**
+   * Test callback.
+   *
+   * @dataProvider serviceMetaProvider
+   */
+  public function testGetServiceMeta(string $id, string $name, string $type, string $short_type, ?\Exception $exception): void {
+    $service_info = new ServiceInfo(self::bootstrap());
+
+    if ($exception) {
+      self::expectExceptionObject($exception);
+    }
+    $meta = $service_info->getServiceMeta($id);
+
+    $expected = [
+      'name' => $name,
+      'type' => $type,
+      'short_type' => $short_type,
+    ];
+    self::assertSame($expected, $meta);
+  }
+
+  /**
+   * Data provider for testGetServiceMeta().
+   */
+  public function serviceMetaProvider(): array {
+
+    $data[] = [
+      'entity_type.manager',
+      'entityTypeManager',
+      'Drupal\Core\Entity\EntityTypeManagerInterface',
+      'EntityTypeManagerInterface',
+      NULL,
+    ];
+
+    $data[] = [
+      'logger.channel.user',
+      'loggerChannelUser',
+      'Drupal\Core\Logger\LoggerChannelInterface',
+      'LoggerChannelInterface',
+      NULL,
+    ];
+
+    $data[] = [
+      'not.exists',
+      'render_placeholder_generator',
+      'Drupal\Core\EventSubscriber\AuthenticationSubscriber',
+      'AuthenticationSubscriber',
+      new \LogicException('Service "not.exists" does not exist.')
+    ];
+
+    return $data;
+  }
+
 }
