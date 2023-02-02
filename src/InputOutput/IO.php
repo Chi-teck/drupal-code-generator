@@ -112,6 +112,7 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
   public function getWorkingDirectory(): string {
     // $_SERVER['PWD'] takes precedence over getcwd() as it does not mutate
     // during bootstrap process.
+    // @todo Make the working dir absolute.
     return $this->getInput()->getOption('working-dir') ?? $_SERVER['PWD'] ?? \getcwd();
   }
 

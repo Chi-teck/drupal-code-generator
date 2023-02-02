@@ -4,6 +4,7 @@
 namespace Drupal\{{ machine_name }}\Plugin\Action;
 
 {% sort %}
+use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
   {% if configurable %}
 use Drupal\Core\Action\ConfigurableActionBase;
@@ -103,7 +104,7 @@ final class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'Ac
   /**
    * {@inheritdoc}
    */
-  public function access($entity, AccountInterface $account = NULL, $return_as_object = FALSE): AccountInterface|bool {
+  public function access($entity, AccountInterface $account = NULL, $return_as_object = FALSE): AccessResultInterface|bool {
     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
     $access = $entity->access('update', $account, TRUE)
       ->andIf($entity->get('field_example')->access('edit', $account, TRUE));

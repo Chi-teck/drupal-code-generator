@@ -2,6 +2,7 @@
 
 namespace Drupal\example\Plugin\Action;
 
+use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Action\ConfigurableActionBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -62,7 +63,7 @@ final class Foo extends ConfigurableActionBase {
   /**
    * {@inheritdoc}
    */
-  public function access($entity, AccountInterface $account = NULL, $return_as_object = FALSE): AccountInterface|bool {
+  public function access($entity, AccountInterface $account = NULL, $return_as_object = FALSE): AccessResultInterface|bool {
     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
     $access = $entity->access('update', $account, TRUE)
       ->andIf($entity->get('field_example')->access('edit', $account, TRUE));
