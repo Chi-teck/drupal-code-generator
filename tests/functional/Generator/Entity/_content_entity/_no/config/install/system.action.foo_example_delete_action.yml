@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - foo
+id: foo_example_delete_action
+label: 'Delete examples'
+type: foo_example
+plugin: entity:delete_action:foo_example
+configuration: {  }

@@ -76,6 +76,7 @@ final class ContentEntityTest extends BrowserTestBase {
         'add' => 'Drupal\sigma\Form\ExampleForm',
         'edit' => 'Drupal\sigma\Form\ExampleForm',
         'delete' => 'Drupal\Core\Entity\ContentEntityDeleteForm',
+        'delete-multiple-confirm' => 'Drupal\Core\Entity\Form\DeleteMultipleForm',
       ],
       'route_provider' => [
         'html' => 'Drupal\Core\Entity\Routing\AdminHtmlRouteProvider',
@@ -95,6 +96,7 @@ final class ContentEntityTest extends BrowserTestBase {
       'canonical' => '/example/{example}',
       'edit-form' => '/example/{example}/edit',
       'delete-form' => '/example/{example}/delete',
+      'delete-multiple-form' => '/admin/content/example/delete-multiple',
     ];
     self::assertSame($link_templates, $entity_type->getLinkTemplates());
 

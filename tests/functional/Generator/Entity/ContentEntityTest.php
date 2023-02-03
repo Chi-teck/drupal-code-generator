@@ -114,6 +114,8 @@ final class ContentEntityTest extends GeneratorTestBase {
      • foo.links.task.yml
      • foo.module
      • foo.permissions.yml
+     • config/install/system.action.foo_example_delete_action.yml
+     • config/install/system.action.foo_example_save_action.yml
      • config/optional/rest.resource.entity.foo_example.yml
      • config/schema/foo.entity_type.schema.yml
      • src/FooExampleAccessControlHandler.php
@@ -136,6 +138,8 @@ final class ContentEntityTest extends GeneratorTestBase {
     $this->assertGeneratedFile('foo.links.task.yml');
     $this->assertGeneratedFile('foo.module');
     $this->assertGeneratedFile('foo.permissions.yml');
+    $this->assertGeneratedFile('config/install/system.action.foo_example_delete_action.yml');
+    $this->assertGeneratedFile('config/install/system.action.foo_example_save_action.yml');
     $this->assertGeneratedFile('config/optional/rest.resource.entity.foo_example.yml');
     $this->assertGeneratedFile('config/schema/foo.entity_type.schema.yml');
     $this->assertGeneratedFile('src/FooExampleAccessControlHandler.php');
@@ -246,6 +250,7 @@ final class ContentEntityTest extends GeneratorTestBase {
      • foo.links.menu.yml
      • foo.links.task.yml
      • foo.permissions.yml
+     • config/install/system.action.foo_example_delete_action.yml
      • src/ExampleInterface.php
      • src/ExampleListBuilder.php
      • src/Entity/Example.php
@@ -260,6 +265,7 @@ final class ContentEntityTest extends GeneratorTestBase {
     $this->assertGeneratedFile('foo.links.menu.yml');
     $this->assertGeneratedFile('foo.links.task.yml');
     $this->assertGeneratedFile('foo.permissions.yml');
+    $this->assertGeneratedFile('config/install/system.action.foo_example_delete_action.yml');
     $this->assertGeneratedFile('src/ExampleInterface.php');
     $this->assertGeneratedFile('src/ExampleListBuilder.php');
     $this->assertGeneratedFile('src/Entity/Example.php');

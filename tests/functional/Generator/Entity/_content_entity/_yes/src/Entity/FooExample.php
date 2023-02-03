@@ -32,6 +32,7 @@ use Drupal\user\EntityOwnerTrait;
  *       "add" = "Drupal\foo\Form\FooExampleForm",
  *       "edit" = "Drupal\foo\Form\FooExampleForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
+ *       "delete-multiple-confirm" = "Drupal\Core\Entity\Form\DeleteMultipleForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
@@ -65,6 +66,7 @@ use Drupal\user\EntityOwnerTrait;
  *     "canonical" = "/example/{foo_example}",
  *     "edit-form" = "/example/{foo_example}/edit",
  *     "delete-form" = "/example/{foo_example}/delete",
+ *     "delete-multiple-form" = "/admin/content/foo-example/delete-multiple",
  *   },
  *   bundle_entity_type = "foo_example_type",
  *   field_ui_base_route = "entity.foo_example_type.edit_form",

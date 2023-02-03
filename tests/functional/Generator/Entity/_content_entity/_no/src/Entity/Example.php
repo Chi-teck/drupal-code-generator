@@ -25,6 +25,7 @@ use Drupal\foo\ExampleInterface;
  *       "add" = "Drupal\foo\Form\ExampleForm",
  *       "edit" = "Drupal\foo\Form\ExampleForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
+ *       "delete-multiple-confirm" = "Drupal\Core\Entity\Form\DeleteMultipleForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\foo\Routing\ExampleHtmlRouteProvider",
@@ -43,6 +44,7 @@ use Drupal\foo\ExampleInterface;
  *     "canonical" = "/example/{foo_example}",
  *     "edit-form" = "/example/{foo_example}",
  *     "delete-form" = "/example/{foo_example}/delete",
+ *     "delete-multiple-form" = "/admin/content/foo-example/delete-multiple",
  *   },
  * )
  */

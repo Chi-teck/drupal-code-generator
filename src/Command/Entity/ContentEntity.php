@@ -75,6 +75,26 @@ final class ContentEntity extends BaseGenerator {
       ->appendIfExists();
     $assets->addFile('{machine_name}.permissions.yml', 'model.permissions.yml.twig')
       ->appendIfExists();
+
+    // Delete action plugins only registered for entity types that have
+    // 'delete-multiple-confirm' form handler and 'delete-multiple-form' link
+    // template.
+    // @see \Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider::getDeleteMultipleFormRoute
+    // @see \Drupal\Core\Action\Plugin\Action\Derivative\EntityDeleteActionDeriver
+    $assets->addFile(
+      'config/install/system.action.{entity_type_id}_delete_action.yml',
+      'config/install/system.action.example_delete_action.yml.twig',
+    );
+    // Save action plugins only registered for entity types that implement
+    // Drupal\Core\Entity\EntityChangedInterface.
+    // @see \Drupal\Core\Action\Plugin\Action\Derivative\EntityChangedActionDeriver
+    if ($vars['changed_base_field']) {
+      $assets->addFile(
+        'config/install/system.action.{entity_type_id}_save_action.yml',
+        'config/install/system.action.example_save_action.yml.twig',
+      );
+    }
+
     $assets->addFile('src/Entity/{class}.php', 'src/Entity/Example.php.twig');
     $assets->addFile('src/{class}Interface.php', 'src/ExampleInterface.php.twig');
 

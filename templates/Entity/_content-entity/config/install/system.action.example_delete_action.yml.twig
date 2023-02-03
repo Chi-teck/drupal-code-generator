@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - {{ machine_name }}
+id: {{ entity_type_id }}_delete_action
+label: 'Delete {{ entity_type_label|pluralize|lower }}'
+type: {{ entity_type_id }}
+plugin: entity:delete_action:{{ entity_type_id }}
+configuration: {  }

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - {{ machine_name }}
+id: {{ entity_type_id }}_save_action
+label: 'Save {{ entity_type_label|pluralize|lower }}'
+type: {{ entity_type_id }}
+plugin: entity:save_action:{{ entity_type_id }}
+configuration: {  }

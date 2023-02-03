@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - foo
+id: foo_example_save_action
+label: 'Save examples'
+type: foo_example
+plugin: entity:save_action:foo_example
+configuration: {  }
