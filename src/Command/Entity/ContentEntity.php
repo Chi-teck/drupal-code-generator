@@ -50,6 +50,11 @@ final class ContentEntity extends BaseGenerator {
                                $vars['created_base_field'] || $vars['changed_base_field'] ||
                                $vars['author_base_field'] || $vars['description_base_field'];
 
+    $vars['admin_permission'] = match ($vars['bundle']) {
+      TRUE => 'administer ' . \strtolower($vars['entity_type_label']) . ' types',
+      FALSE => 'administer ' . \strtolower(Utils::pluralize($vars['entity_type_label'])),
+    };
+
     $vars['rest_configuration'] = $ir->confirm('Create REST configuration for the entity?', FALSE);
 
     if ($vars['entity_base_path'][0] != '/') {

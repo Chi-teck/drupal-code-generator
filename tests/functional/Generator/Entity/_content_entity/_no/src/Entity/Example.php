@@ -32,7 +32,7 @@ use Drupal\foo\ExampleInterface;
  *     },
  *   },
  *   base_table = "foo_example",
- *   admin_permission = "administer foo example",
+ *   admin_permission = "administer examples",
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "id",

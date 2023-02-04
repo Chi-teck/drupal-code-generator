@@ -32,7 +32,7 @@ final class ContentEntityTest extends BrowserTestBase {
   public function testEntityType(): void {
 
     $permissions = [
-      'administer example',
+      'administer examples',
     ];
     $admin_user = $this->drupalCreateUser($permissions);
     $this->drupalLogin($admin_user);
@@ -44,7 +44,7 @@ final class ContentEntityTest extends BrowserTestBase {
     self::assertSame('example', $entity_type->getBaseTable());
     self::assertSame('Drupal\figma\Entity\Example', $entity_type->getClass());
     self::assertSame('Drupal\Core\Entity\EntityAccessControlHandler', $entity_type->getAccessControlClass());
-    self::assertSame('administer example', $entity_type->getAdminPermission());
+    self::assertSame('administer examples', $entity_type->getAdminPermission());
     self::assertNull($entity_type->getBundleEntityType());
     self::assertSame('Example bundle', $entity_type->getBundleLabel());
     self::assertNull($entity_type->getDataTable());
