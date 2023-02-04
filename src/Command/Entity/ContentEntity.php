@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
+use DrupalCodeGenerator\Utils;
 
 #[Generator(
   name: 'entity:content',
@@ -27,8 +28,10 @@ final class ContentEntity extends BaseGenerator {
 
     $vars['entity_type_label'] = $ir->ask('Entity type label', '{name}');
     $vars['entity_type_id'] = $ir->ask('Entity type ID', '{machine_name}_{entity_type_label|h2m}');
+    $vars['entity_type_id_short'] = $vars['machine_name'] === $vars['entity_type_id'] ?
+      $vars['entity_type_id'] : Utils::removePrefix($vars['entity_type_id'], $vars['machine_name'] . '_');
     $vars['class'] = $ir->ask('Entity class', '{entity_type_label|camelize}');
-    $vars['entity_base_path'] = $ir->ask('Entity base path', '/{entity_type_id|u2h}');
+    $vars['entity_base_path'] = $ir->ask('Entity base path', '/{entity_type_id_short|u2h}');
     $vars['fieldable'] = $ir->confirm('Make the entity type fieldable?');
     $vars['revisionable'] = $ir->confirm('Make the entity type revisionable?', FALSE);
     $vars['translatable'] = $ir->confirm('Make the entity type translatable?', FALSE);

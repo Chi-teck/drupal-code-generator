@@ -61,7 +61,7 @@ final class ContentEntityTest extends GeneratorTestBase {
      Entity class [Example]:
      ➤ 
 
-     Entity base path [/foo-example]:
+     Entity base path [/example]:
      ➤ 
 
      Make the entity type fieldable? [Yes]:
@@ -202,7 +202,7 @@ final class ContentEntityTest extends GeneratorTestBase {
      Entity class [Example]:
      ➤ 
 
-     Entity base path [/foo-example]:
+     Entity base path [/example]:
      ➤ 
 
      Make the entity type fieldable? [Yes]:

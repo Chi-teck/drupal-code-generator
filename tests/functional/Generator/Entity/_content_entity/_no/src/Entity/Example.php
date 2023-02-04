@@ -39,12 +39,12 @@ use Drupal\foo\ExampleInterface;
  *     "uuid" = "uuid",
  *   },
  *   links = {
- *     "collection" = "/admin/content/foo-example",
+ *     "collection" = "/admin/content/example",
  *     "add-form" = "/example/add",
  *     "canonical" = "/example/{foo_example}",
  *     "edit-form" = "/example/{foo_example}",
  *     "delete-form" = "/example/{foo_example}/delete",
- *     "delete-multiple-form" = "/admin/content/foo-example/delete-multiple",
+ *     "delete-multiple-form" = "/admin/content/example/delete-multiple",
  *   },
  * )
  */

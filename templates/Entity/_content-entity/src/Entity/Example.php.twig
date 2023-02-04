@@ -113,7 +113,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   },
 {% endif %}
  *   links = {
- *     "collection" = "/admin/content/{{ entity_type_id|u2h }}",
+ *     "collection" = "/admin/content/{{ entity_type_id_short|u2h }}",
 {% if bundle %}
  *     "add-form" = "{{ entity_base_path }}/add/{{ '{' }}{{ entity_type_id }}{{ '_type}' }}",
  *     "add-page" = "{{ entity_base_path }}/add",
@@ -127,7 +127,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "edit-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}",
 {% endif %}
  *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
- *     "delete-multiple-form" = "/admin/content/{{ entity_type_id|u2h }}/delete-multiple",
+ *     "delete-multiple-form" = "/admin/content/{{ entity_type_id_short|u2h }}/delete-multiple",
  *   },
 {% if bundle %}
  *   bundle_entity_type = "{{ entity_type_id }}_type",
