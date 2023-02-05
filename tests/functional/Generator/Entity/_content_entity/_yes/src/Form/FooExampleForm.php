@@ -37,7 +37,7 @@ final class FooExampleForm extends ContentEntityForm {
         throw new \LogicException('Could not save the entity.');
     }
 
-    $form_state->setRedirect('entity.foo_example.canonical', ['foo_example' => $this->entity->id()]);
+    $form_state->setRedirectUrl($this->entity->toUrl());
 
     return $result;
   }

@@ -38,9 +38,9 @@ final class {{ class }}Form extends ContentEntityForm {
     }
 
 {% if canonical %}
-    $form_state->setRedirect('entity.{{ entity_type_id }}.canonical', ['{{ entity_type_id }}' => $this->entity->id()]);
+    $form_state->setRedirectUrl($this->entity->toUrl());
 {% else %}
-    $form_state->setRedirect('entity.{{ entity_type_id }}.collection');
+    $form_state->setRedirectUrl($this->entity->toUrl('collection'));
 {% endif %}
 
     return $result;
