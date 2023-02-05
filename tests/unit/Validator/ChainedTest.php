@@ -28,6 +28,26 @@ final class ChainedTest extends TestCase {
     self::assertSame($machine_name, $validator($machine_name));
   }
 
+  /**
+   * Test callback.
+   *
+   * @dataProvider dataProvider()
+   */
+  public function testWith(mixed $machine_name, ?\Exception $exception): void {
+    if ($exception) {
+      $this->expectExceptionObject($exception);
+    }
+    $validator = new Chained(new RegExp('/111/', 'v1'));
+    $validator = $validator->with(
+      new RegExp('/222/', 'v2'),
+      new RegExp('/333/', 'v3'),
+    );
+    self::assertSame($machine_name, $validator($machine_name));
+  }
+
+  /**
+   * Test data provider.
+   */
   public function dataProvider(): array {
     return [
       ['', new \UnexpectedValueException('v1')],

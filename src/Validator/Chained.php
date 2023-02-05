@@ -3,7 +3,7 @@
 namespace DrupalCodeGenerator\Validator;
 
 /**
- * Validates PHP class name.
+ * Validates using a chain of validators.
  */
 final class Chained {
 
@@ -24,6 +24,13 @@ final class Chained {
       $value = $validator($value);
     }
     return $value;
+  }
+
+  /**
+   * Appends validators to the chain.
+   */
+  public function with(callable ...$validators): self {
+    return new self(...$this->validators, ...$validators);
   }
 
 }
