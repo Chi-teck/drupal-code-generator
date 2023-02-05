@@ -67,6 +67,7 @@ final class BlockTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • config/schema/foo.schema.yml
      • src/Plugin/Block/ExampleBlock.php
 
@@ -125,6 +126,7 @@ final class BlockTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Plugin/Block/ExampleBlock.php
 
     TXT;

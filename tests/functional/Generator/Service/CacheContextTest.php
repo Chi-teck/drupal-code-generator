@@ -50,6 +50,7 @@ final class CacheContextTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.services.yml
      • src/Cache/Context/ExampleCacheContext.php
 
@@ -99,6 +100,7 @@ final class CacheContextTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.services.yml
      • src/Cache/Context/ExampleCacheContext.php
 

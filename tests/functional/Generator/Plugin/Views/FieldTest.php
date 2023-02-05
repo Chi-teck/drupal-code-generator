@@ -59,6 +59,7 @@ final class FieldTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • config/schema/foo.views.schema.yml
      • src/Plugin/views/field/Example.php
 
@@ -109,6 +110,7 @@ final class FieldTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Plugin/views/field/Example.php
 
     TXT;

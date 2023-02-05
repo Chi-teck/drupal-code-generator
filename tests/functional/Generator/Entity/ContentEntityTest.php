@@ -108,6 +108,7 @@ final class ContentEntityTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.links.action.yml
      • foo.links.contextual.yml
      • foo.links.menu.yml
@@ -246,6 +247,7 @@ final class ContentEntityTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.links.action.yml
      • foo.links.menu.yml
      • foo.links.task.yml

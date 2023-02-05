@@ -43,6 +43,7 @@ final class EventSubscriberTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.services.yml
      • src/EventSubscriber/BarSubscriber.php
 
@@ -92,6 +93,7 @@ final class EventSubscriberTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.services.yml
      • src/EventSubscriber/BarSubscriber.php
 

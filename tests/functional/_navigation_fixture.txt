@@ -310,11 +310,12 @@
 ––––––––––––––––––––––––––––––––––––
 
  Module machine name:
- ➤ action⏎
+ ➤ example⏎
 
- Module name [Action]:
- ➤ Action⏎
+ Module name [Example]:
+ ➤ Example⏎
 
  The following directories and files have been created or updated:
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
- • action.install
+ • example.info.yml
+ • example.install

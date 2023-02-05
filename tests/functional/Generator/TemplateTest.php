@@ -42,6 +42,7 @@ final class TemplateTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.module
      • templates/section.html.twig
 

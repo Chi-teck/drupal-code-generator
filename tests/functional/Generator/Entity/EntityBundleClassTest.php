@@ -64,6 +64,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.module
      • src/Entity/Node/ArticleBundle.php
 
@@ -134,6 +135,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.module
      • src/Entity/Node/Article.php
      • src/Entity/Node/NodeBase.php

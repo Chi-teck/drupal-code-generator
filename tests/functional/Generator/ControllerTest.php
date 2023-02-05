@@ -73,6 +73,7 @@ final class ControllerTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.routing.yml
      • src/Controller/FooController.php
 

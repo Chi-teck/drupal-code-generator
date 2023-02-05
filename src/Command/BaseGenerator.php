@@ -110,6 +110,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
       $vars = [];
       $assets = new AssetCollection();
       $this->generate($vars, $assets);
+      $this->generateInfoFile($vars, $assets);
 
       $vars = Utils::processVars($vars);
       $collected_vars = \preg_replace('/^Array/', '', \print_r($vars, TRUE));
@@ -260,6 +261,35 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
         $this->getHelper('theme_info')->getDestination($vars['machine_name'], $is_new),
       default => $this->io()->getWorkingDirectory(),
     };
+  }
+
+  /**
+   * Generates info file.
+   *
+   * @todo Test this.
+   * @todo Generate info file for theme components.
+   */
+  protected function generateInfoFile(array &$vars, AssetCollection $assets): void {
+    if (\count($assets) === 0) {
+      return;
+    }
+    if ($this->getGeneratorDefinition()->type !== GeneratorType::MODULE_COMPONENT) {
+      return;
+    }
+    // @todo Throw an exception if machine name was not provided.
+    /** @psalm-suppress PossiblyUndefinedStringArrayOffset */
+    $vars['name'] ??= Utils::machine2human($vars['machine_name']);
+    $info_template = <<< 'TWIG'
+      name: '{{ name }}'
+      type: module
+      description: '@todo Add description.'
+      package: '@todo Add package'
+      core_version_requirement: ^10
+
+      TWIG;
+    $assets->addFile('{machine_name}.info.yml')
+      ->inlineTemplate($info_template)
+      ->preserveIfExists();
   }
 
 }

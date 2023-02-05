@@ -47,6 +47,7 @@ final class SourceTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/migrate/source/Foo.php
 
     TXT;
@@ -89,6 +90,7 @@ final class SourceTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/migrate/source/Bar.php
 
     TXT;

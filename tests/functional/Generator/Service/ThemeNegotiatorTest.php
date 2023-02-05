@@ -45,6 +45,7 @@ final class ThemeNegotiatorTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.services.yml
      • src/Theme/FooNegotiator.php
 

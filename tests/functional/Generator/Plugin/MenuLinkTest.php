@@ -39,6 +39,7 @@ final class MenuLinkTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/Menu/FooMenuLink.php
 
     TXT;
@@ -82,6 +83,7 @@ final class MenuLinkTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/Menu/FooMenuLink.php
 
     TXT;

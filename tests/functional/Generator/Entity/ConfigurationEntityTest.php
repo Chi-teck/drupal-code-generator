@@ -36,6 +36,7 @@ final class ConfigurationEntityTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.links.action.yml
      • foo.links.menu.yml
      • foo.permissions.yml

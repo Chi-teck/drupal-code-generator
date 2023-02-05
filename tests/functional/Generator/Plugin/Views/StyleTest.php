@@ -51,6 +51,7 @@ final class StyleTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.module
      • config/schema/example.schema.yml
      • src/Plugin/views/style/Foo.php

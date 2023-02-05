@@ -51,6 +51,7 @@ final class TypeTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • config/schema/example.schema.yml
      • src/Plugin/Field/FieldType/FooItem.php
 
@@ -101,6 +102,7 @@ final class TypeTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • config/schema/example.schema.yml
      • src/Plugin/Field/FieldType/FooItem.php
 

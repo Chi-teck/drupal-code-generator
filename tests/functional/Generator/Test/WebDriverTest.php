@@ -36,6 +36,7 @@ final class WebDriverTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • tests/src/FunctionalJavascript/ExampleTest.php
 
     TXT;

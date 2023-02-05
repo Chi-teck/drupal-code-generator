@@ -26,6 +26,7 @@ class TaskTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.links.task.yml
 
     TXT;

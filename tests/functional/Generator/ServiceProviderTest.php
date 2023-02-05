@@ -37,6 +37,7 @@ final class ServiceProviderTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/FooServiceProvider.php
 
     TXT;

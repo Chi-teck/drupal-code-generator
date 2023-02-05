@@ -69,6 +69,7 @@ final class SymfonyCommandTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • drush.services.yml
+     • foo.info.yml
      • src/Command/BarCommand.php
 
     TXT;
@@ -128,6 +129,7 @@ final class SymfonyCommandTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • drush.services.yml
+     • foo.info.yml
      • src/Command/BarCommand.php
 
     TXT;

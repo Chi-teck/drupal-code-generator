@@ -59,6 +59,7 @@ final class ConstraintTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Plugin/Validation/Constraint/AlphaConstraint.php
      • src/Plugin/Validation/Constraint/AlphaConstraintValidator.php
 
@@ -117,6 +118,7 @@ final class ConstraintTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Plugin/Validation/Constraint/BetaConstraint.php
      • src/Plugin/Validation/Constraint/BetaConstraintValidator.php
 
@@ -175,6 +177,7 @@ final class ConstraintTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Plugin/Validation/Constraint/GammaConstraint.php
      • src/Plugin/Validation/Constraint/GammaConstraintValidator.php
 
@@ -233,6 +236,7 @@ final class ConstraintTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Plugin/Validation/Constraint/DeltaConstraint.php
      • src/Plugin/Validation/Constraint/DeltaConstraintValidator.php
 
@@ -299,6 +303,7 @@ final class ConstraintTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Plugin/Validation/Constraint/AlphaConstraint.php
      • src/Plugin/Validation/Constraint/AlphaConstraintValidator.php
 

@@ -48,6 +48,7 @@ final class RequestPolicyTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/PageCache/Foo.php
 
@@ -86,6 +87,7 @@ final class RequestPolicyTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/PageCache/MonteCarlo.php
 

@@ -46,6 +46,7 @@ final class PluginManagerTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.services.yml
      • src/BarInterface.php
      • src/BarPluginBase.php
@@ -100,6 +101,7 @@ final class PluginManagerTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo.bars.yml
+     • foo.info.yml
      • foo.services.yml
      • src/BarDefault.php
      • src/BarInterface.php
@@ -150,6 +152,7 @@ final class PluginManagerTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.module
      • foo.services.yml
      • src/BarDefault.php

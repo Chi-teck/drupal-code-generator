@@ -41,6 +41,7 @@ final class RenderElementTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Element/Example.php
 
     TXT;

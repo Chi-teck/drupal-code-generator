@@ -36,6 +36,7 @@ final class PathProcessorTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/PathProcessor/PathProcessorExample.php
 
@@ -82,6 +83,7 @@ final class PathProcessorTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/PathProcessor/PathProcessorExample.php
 

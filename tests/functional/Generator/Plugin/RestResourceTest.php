@@ -43,6 +43,7 @@ final class RestResourceTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/rest/resource/FooResource.php
 
     TXT;

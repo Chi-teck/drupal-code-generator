@@ -447,6 +447,7 @@ final class FieldTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.libraries.yml
      • config/schema/example.schema.yml
      • css/example-foo-widget.css

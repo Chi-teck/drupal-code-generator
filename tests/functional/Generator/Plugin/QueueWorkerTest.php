@@ -47,6 +47,7 @@ final class QueueWorkerTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/QueueWorker/FooBar.php
 
     TXT;
@@ -98,6 +99,7 @@ final class QueueWorkerTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/QueueWorker/FooBar.php
 
     TXT;

@@ -45,6 +45,7 @@ final class RouteSubscriberTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.services.yml
      • src/EventSubscriber/FooRouteSubscriber.php
 
@@ -80,6 +81,7 @@ final class RouteSubscriberTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • bar.info.yml
      • bar.services.yml
      • src/EventSubscriber/BarRouteSubscriber.php
 

@@ -43,6 +43,7 @@ final class ProcessTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/migrate/process/Qux.php
 
     TXT;
@@ -91,6 +92,7 @@ final class ProcessTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/migrate/process/Qux.php
 
     TXT;

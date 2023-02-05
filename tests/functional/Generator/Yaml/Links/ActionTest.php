@@ -26,6 +26,7 @@ class ActionTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.links.action.yml
 
     TXT;

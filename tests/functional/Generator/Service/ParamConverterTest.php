@@ -43,6 +43,7 @@ final class ParamConverterTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/FooParamConverter.php
 
@@ -92,6 +93,7 @@ final class ParamConverterTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/FooParamConverter.php
 
@@ -137,6 +139,7 @@ final class ParamConverterTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/FooParamConverter.php
 

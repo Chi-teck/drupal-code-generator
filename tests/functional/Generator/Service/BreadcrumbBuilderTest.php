@@ -39,6 +39,7 @@ final class BreadcrumbBuilderTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/ExampleBreadcrumbBuilder.php
 
@@ -84,6 +85,7 @@ final class BreadcrumbBuilderTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/ExampleBreadcrumbBuilder.php
 

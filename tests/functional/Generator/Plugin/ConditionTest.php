@@ -47,6 +47,7 @@ final class ConditionTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • config/schema/foo.schema.yml
      • src/Plugin/Condition/Example.php
 
@@ -100,6 +101,7 @@ final class ConditionTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • config/schema/foo.schema.yml
      • src/Plugin/Condition/Example.php
 

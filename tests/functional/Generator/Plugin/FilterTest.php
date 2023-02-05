@@ -71,6 +71,7 @@ final class FilterTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • config/schema/foo.schema.yml
      • src/Plugin/Filter/Example.php
 
@@ -132,6 +133,7 @@ final class FilterTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • src/Plugin/Filter/Example.php
 
     TXT;

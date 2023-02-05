@@ -36,6 +36,7 @@ final class KernelTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • tests/src/Kernel/ExampleTest.php
 
     TXT;

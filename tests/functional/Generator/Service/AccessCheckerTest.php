@@ -44,6 +44,7 @@ final class AccessCheckerTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/Access/FooAccessChecker.php
 
@@ -94,6 +95,7 @@ final class AccessCheckerTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/Access/FooAccessChecker.php
 
@@ -140,6 +142,7 @@ final class AccessCheckerTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.services.yml
      • src/Access/FooAccessChecker.php
 

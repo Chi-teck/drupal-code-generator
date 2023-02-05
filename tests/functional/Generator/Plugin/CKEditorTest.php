@@ -39,6 +39,7 @@ final class CKEditorTest extends GeneratorTestBase {
      • js/build
      • .gitignore
      • foo.ckeditor5.yml
+     • foo.info.yml
      • foo.libraries.yml
      • package.json
      • webpack.config.js

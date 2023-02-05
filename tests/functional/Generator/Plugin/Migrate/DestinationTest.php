@@ -43,6 +43,7 @@ final class DestinationTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/migrate/destination/Foo.php
 
     TXT;
@@ -91,6 +92,7 @@ final class DestinationTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • src/Plugin/migrate/destination/Bar.php
 
     TXT;

@@ -51,6 +51,7 @@ final class WidgetTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • config/schema/foo.schema.yml
      • src/Plugin/Field/FieldWidget/ExampleWidget.php
 
@@ -113,6 +114,7 @@ final class WidgetTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • config/schema/foo.schema.yml
      • src/Plugin/Field/FieldWidget/ExampleWidget.php
 

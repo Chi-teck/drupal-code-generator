@@ -48,6 +48,7 @@ final class LayoutTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • example.info.yml
      • example.layouts.yml
      • example.libraries.yml
      • layouts/foo_bar/foo-bar.css

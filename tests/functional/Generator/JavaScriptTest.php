@@ -36,6 +36,7 @@ final class JavaScriptTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo_bar.info.yml
      • foo_bar.libraries.yml
      • js/coca-cola.js
 

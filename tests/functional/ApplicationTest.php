@@ -16,7 +16,7 @@ final class ApplicationTest extends FunctionalTestBase {
    */
   public function testApplication(): void {
     $cmd = \sprintf(
-      '%s/vendor/bin/dcg install --working-dir %s --destination %s -a action -a Action 2>&1',
+      '%s/vendor/bin/dcg install --working-dir %s --destination %s -a example -a Example 2>&1',
       \DRUPAL_ROOT,
       $this->directory,
       $this->directory,
@@ -29,20 +29,21 @@ final class ApplicationTest extends FunctionalTestBase {
     ––––––––––––––––––––––––––––––––––––
 
      Module machine name:
-     ➤ action
+     ➤ example
 
-     Module name [Action]:
-     ➤ Action
+     Module name [Example]:
+     ➤ Example
     
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • action.install
+     • example.info.yml
+     • example.install
 
     TEXT;
 
     self::assertSame($expected_output, \implode("\n", $output));
     self::assertSame(0, $return);
-    self::assertFileExists($this->directory . '/action.install');
+    self::assertFileExists($this->directory . '/example.install');
   }
 
 }

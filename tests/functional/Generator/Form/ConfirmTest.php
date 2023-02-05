@@ -59,6 +59,7 @@ final class ConfirmTest extends GeneratorTestBase {
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
      • foo.routing.yml
      • src/Form/ExampleConfirmForm.php
 
