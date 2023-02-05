@@ -27,9 +27,15 @@ final class ContentEntity extends BaseGenerator {
     $vars['name'] = $ir->askName();
 
     $vars['entity_type_label'] = $ir->ask('Entity type label', '{name}');
-    $vars['entity_type_id'] = $ir->ask('Entity type ID', '{machine_name}_{entity_type_label|h2m}');
+    // Make sure the default entity type ID is not like 'example_example'.
+    // @todo Create a test for this.
+    $default_entity_type_id = Utils::human2machine($vars['entity_type_label']) === $vars['machine_name'] ?
+      $vars['machine_name'] : $vars['machine_name'] . '_' . Utils::human2machine($vars['entity_type_label']);
+    $vars['entity_type_id'] = $ir->ask('Entity type ID', $default_entity_type_id);
+
     $vars['entity_type_id_short'] = $vars['machine_name'] === $vars['entity_type_id'] ?
       $vars['entity_type_id'] : Utils::removePrefix($vars['entity_type_id'], $vars['machine_name'] . '_');
+
     $vars['class'] = $ir->ask('Entity class', '{entity_type_label|camelize}');
     $vars['entity_base_path'] = $ir->ask('Entity base path', '/{entity_type_id_short|u2h}');
     $vars['fieldable'] = $ir->confirm('Make the entity type fieldable?');

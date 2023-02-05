@@ -276,6 +276,7 @@ abstract class BaseGenerator extends Command implements LabelInterface, IOAwareI
     if ($this->getGeneratorDefinition()->type !== GeneratorType::MODULE_COMPONENT) {
       return;
     }
+
     // @todo Throw an exception if machine name was not provided.
     /** @psalm-suppress PossiblyUndefinedStringArrayOffset */
     $vars['name'] ??= Utils::machine2human($vars['machine_name']);
