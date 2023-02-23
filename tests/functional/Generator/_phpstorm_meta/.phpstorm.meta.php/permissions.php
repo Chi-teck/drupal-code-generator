@@ -41,6 +41,8 @@ namespace PHPSTORM_META {
     'administer user form display',
     'administer display modes',
     'access files overview',
+    'delete any file',
+    'delete own files',
     'administer filters',
     'use text format basic_html',
     'use text format full_html',

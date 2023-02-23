@@ -21,9 +21,9 @@ final class TemplateTest extends KernelTestBase {
    */
   public function testTemplateRendering(): void {
     $build = ['#theme' => 'example'];
-    self::assertEquals(
+    self::assertSame(
       "<div class=\"wrapper-class\">\n  bar\n</div>\n",
-      $this->container->get('renderer')->renderRoot($build),
+      (string) $this->container->get('renderer')->renderRoot($build),
     );
   }
 

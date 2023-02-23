@@ -145,6 +145,17 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\field\FieldStorageConfigInterface::toLink(), 1, argumentsSet('field_storage_config__links'));
   expectedArguments(\Drupal\field\FieldStorageConfigInterface::hasLinkTemplate(), 0, argumentsSet('field_storage_config__links'));
 
+  // File.
+  registerArgumentsSet('file__links',
+    'delete-form',
+  );
+  expectedArguments(\Drupal\file\Entity\File::toUrl(), 0, argumentsSet('file__links'));
+  expectedArguments(\Drupal\file\Entity\File::toLink(), 1, argumentsSet('file__links'));
+  expectedArguments(\Drupal\file\Entity\File::hasLinkTemplate(), 0, argumentsSet('file__links'));
+  expectedArguments(\Drupal\file\FileInterface::toUrl(), 0, argumentsSet('file__links'));
+  expectedArguments(\Drupal\file\FileInterface::toLink(), 1, argumentsSet('file__links'));
+  expectedArguments(\Drupal\file\FileInterface::hasLinkTemplate(), 0, argumentsSet('file__links'));
+
   // Text format.
   registerArgumentsSet('filter_format__links',
     'edit-form',
