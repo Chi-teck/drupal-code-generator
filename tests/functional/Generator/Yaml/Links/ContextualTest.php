@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 /**
  * Tests yml:links:contextual generator.
  */
-class ContextualTest extends GeneratorTestBase {
+final class ContextualTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_contextual';
 

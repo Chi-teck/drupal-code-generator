@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 $start = \microtime(TRUE);
 
-if (empty($argv[1])) {
+if (!isset($argv[1])) {
   \fwrite(\STDERR, "Usage: {$argv[0]} path/to/drupal\n");
   exit(1);
 }

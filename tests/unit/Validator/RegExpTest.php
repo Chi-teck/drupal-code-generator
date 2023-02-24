@@ -15,7 +15,7 @@ final class RegExpTest extends TestCase {
    *
    * @dataProvider dataProvider()
    */
-  public function test(mixed $machine_name, string $pattern, ?string $message, ?\Exception $exception): void {
+  public function test(mixed $machine_name, string $pattern, ?string $message, ?\UnexpectedValueException $exception): void {
     $validator = new RegExp($pattern, $message);
     if ($exception) {
       $this->expectExceptionObject($exception);

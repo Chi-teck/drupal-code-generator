@@ -83,7 +83,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
         new RouteInfo($container->get('router.route_provider')),
         new ConfigInfo($container->get('config.factory')),
         new PermissionInfo($container->get('user.permissions')),
-      ])
+      ]),
     );
 
     $generator_factory = new GeneratorFactory(

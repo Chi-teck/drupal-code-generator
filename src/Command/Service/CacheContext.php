@@ -34,7 +34,7 @@ final class CacheContext extends BaseGenerator {
       'UserCacheContextBase',
     ];
     $vars['base_class'] = $this->io()->choice('Base class', $base_class_choices);
-    if ($vars['base_class'] == '-') {
+    if ($vars['base_class'] === '-') {
       $vars['base_class'] = FALSE;
     }
 

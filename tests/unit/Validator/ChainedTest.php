@@ -16,7 +16,7 @@ final class ChainedTest extends TestCase {
    *
    * @dataProvider dataProvider()
    */
-  public function test(mixed $machine_name, ?\Exception $exception): void {
+  public function test(mixed $machine_name, ?\UnexpectedValueException $exception): void {
     if ($exception) {
       $this->expectExceptionObject($exception);
     }
@@ -33,7 +33,7 @@ final class ChainedTest extends TestCase {
    *
    * @dataProvider dataProvider()
    */
-  public function testWith(mixed $machine_name, ?\Exception $exception): void {
+  public function testWith(mixed $machine_name, ?\UnexpectedValueException $exception): void {
     if ($exception) {
       $this->expectExceptionObject($exception);
     }

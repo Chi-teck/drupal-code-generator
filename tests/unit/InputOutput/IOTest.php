@@ -124,7 +124,7 @@ final class IOTest extends TestCase {
    */
   public function testGetWorkingDirectory(): void {
     self::assertSame(\getcwd(), $this->io->getWorkingDirectory());
-
+    // @phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
     $pwd = $_SERVER['PWD'];
     $_SERVER['PWD'] = '/tmp/foo';
     self::assertSame('/tmp/foo', $this->io->getWorkingDirectory());

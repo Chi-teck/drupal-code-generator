@@ -2,21 +2,7 @@
 <ruleset name="DCG (generated code)">
   <description>PHP CodeSniffer configuration for generated code.</description>
   <arg name="extensions" value="inc,install,module,php,profile,test,theme,yml"/>
-  <rule ref="./vendor/drupal/coder/coder_sniffer/Drupal">
-    <!-- Conflicts with strict types. -->
-    <exclude name="Drupal.Commenting.FileComment.Missing"/>
-    <!-- Typed class properties do not need @var annotation.  -->
-    <!-- @todo Remove this once https://www.drupal.org/project/coder/issues/3123282 is resolved.    -->
-    <exclude name="Drupal.Commenting.VariableComment.MissingVar"/>
-    <exclude name="Drupal.Commenting.VariableComment.Missing"/>
-    <!-- Allow placeholders for doc comments. -->
-    <exclude name="Drupal.Commenting.DocComment.ShortNotCapital"/>
-    <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
-    <!-- Some generated classes may have empty methods.  -->
-    <exclude name="Generic.CodeAnalysis.UselessOverridingMethod.Found"/>
-  </rule>
-  <rule ref="./vendor/drupal/coder/coder_sniffer/DrupalPractice">
-    <!-- Conflicts with strict types. -->
-    <exclude name="Drupal.WhiteSpace.OpenTagNewline.BlankLine"/>
-  </rule>
+  <arg name="colors"/>
+  <rule ref="./vendor/drupal/coder/coder_sniffer/Drupal"/>
+  <rule ref="./vendor/drupal/coder/coder_sniffer/DrupalPractice"/>
 </ruleset>

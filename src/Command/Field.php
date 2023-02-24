@@ -126,7 +126,7 @@ final class Field extends BaseGenerator {
     $vars['field_id'] = $ir->ask('Field ID', '{machine_name}_{field_label|h2m}', new RequiredMachineName());
 
     $subfield_count_validator = static function (mixed $value): int {
-      if (!\is_numeric($value) || \intval($value) != $value || $value <= 0) {
+      if (!(\is_int($value) || \ctype_digit($value)) || (int) $value <= 0) {
         throw new \UnexpectedValueException('The value should be greater than zero.');
       }
       return (int) $value;
@@ -193,7 +193,7 @@ final class Field extends BaseGenerator {
         'machine_name' => $subfield->machineName,
         'type' => $type,
         'data_type' => $definition['data_type'],
-        'list' => !empty($subfield->list),
+        'list' => $subfield->list ?? FALSE,
         'allowed_values_method' => 'allowed' . Utils::camelize($subfield->name, TRUE) . 'Values',
         'required' => $subfield->required,
         'link' => $definition['link'],
@@ -201,7 +201,7 @@ final class Field extends BaseGenerator {
       if ($subfield->dateType) {
         $vars['subfields'][$i]['date_type'] = $subfield->dateType;
         // Back to date type ID.
-        $vars['subfields'][$i]['date_storage_format'] = $subfield->dateType == 'date' ? 'Y-m-d' : 'Y-m-d\TH:i:s';
+        $vars['subfields'][$i]['date_storage_format'] = $subfield->dateType === 'date' ? 'Y-m-d' : 'Y-m-d\TH:i:s';
       }
 
       if ($definition['random']) {
@@ -220,7 +220,7 @@ final class Field extends BaseGenerator {
         $vars['required'] = TRUE;
       }
 
-      if ($type == 'email') {
+      if ($type === 'email') {
         $vars['email'] = TRUE;
       }
 
@@ -228,7 +228,7 @@ final class Field extends BaseGenerator {
         $vars['link'] = TRUE;
       }
 
-      if ($type == 'datetime') {
+      if ($type === 'datetime') {
         $vars['datetime'] = TRUE;
       }
 

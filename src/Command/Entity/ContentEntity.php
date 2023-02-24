@@ -63,7 +63,7 @@ final class ContentEntity extends BaseGenerator {
 
     $vars['rest_configuration'] = $ir->confirm('Create REST configuration for the entity?', FALSE);
 
-    if ($vars['entity_base_path'][0] != '/') {
+    if (!\str_starts_with($vars['entity_base_path'], '/')) {
       $vars['entity_base_path'] = '/' . $vars['entity_base_path'];
     }
 

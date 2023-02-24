@@ -6,38 +6,26 @@
   <file>./scripts</file>
   <file>./src</file>
   <file>./tests</file>
-  <rule ref="vendor/drupal/coder/coder_sniffer/Drupal">
+
+  <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended">
+    <!-- @todo Fix this. -->
+    <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion"/>
+    <exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator.MultiLineTernaryOperatorNotUsed"/>
     <!-- Conflicts with PHP attributes. -->
     <exclude name="Drupal.Commenting.InlineComment.DocBlock"/>
     <exclude name="Drupal.Commenting.FunctionComment.Missing"/>
-    <!-- Conflicts with BC layer. -->
-    <exclude name="Drupal.Commenting.FileComment.Missing"/>
+    <exclude name="Drupal.Commenting.ClassComment.Short"/>
     <!-- False positives when class have PHP attributes. -->
     <exclude name="Drupal.Commenting.ClassComment.Missing"/>
     <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
-  </rule>
-  <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice">
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
     <exclude name="Drupal.Arrays.Array.LongLineDeclaration"/>
-    <!-- The package does not provide change records. -->
-    <exclude name="Drupal.Commenting.Deprecated.IncorrectTextLayout"/>
-    <exclude name="Drupal.Commenting.Deprecated.DeprecatedMissingSeeTag"/>
-    <exclude name="Drupal.Commenting.TodoComment.TodoFormat"/>
-    <exclude name="Drupal.WhiteSpace.OpenTagNewline.BlankLine"/>
-    <exclude name="Drupal.Commenting.VariableComment.MissingVar"/>
   </rule>
-  <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended74">
-    <exclude-pattern>./tests/sut</exclude-pattern>
-    <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint"/>
-    <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint"/>
+
+  <rule ref="SlevomatCodingStandard.Classes.RequireAbstractOrFinal.ClassNeitherAbstractNorFinal">
+    <exclude-pattern>./src/Exception</exclude-pattern>
   </rule>
-  <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
-    <properties>
-      <property name="declareOnFirstLine" value="true"/>
-      <property name="spacesCountAroundEqualsSign" value="1"/>
-    </properties>
-    <exclude-pattern>./tests/sut</exclude-pattern>
-  </rule>
+
   <!-- Exclude fixtures. -->
   <exclude-pattern>*/_*</exclude-pattern>
 </ruleset>

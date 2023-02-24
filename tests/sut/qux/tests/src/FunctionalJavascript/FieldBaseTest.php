@@ -58,7 +58,7 @@ abstract class FieldBaseTest extends WebDriverTestBase {
     $page = $this->getSession()->getPage();
     $page->waitFor(10, static function () use ($page): bool {
       $element = $page->find('css', '.throbber');
-      return empty($element);
+      return $element === NULL || \count($element) === 0;
     });
   }
 

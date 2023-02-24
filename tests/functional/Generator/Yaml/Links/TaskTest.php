@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 /**
  * Tests yml:links:task generator.
  */
-class TaskTest extends GeneratorTestBase {
+final class TaskTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_task';
 

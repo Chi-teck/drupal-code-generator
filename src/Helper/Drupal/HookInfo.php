@@ -46,10 +46,10 @@ final class HookInfo extends Helper {
 
     $api_files = \array_merge($core_api_files, $module_api_files);
 
-    $reducer = static fn (array $collected, string $api_file): array =>
-      \array_merge($collected, self::parseHooks($api_file));
+    $reducer = static fn (array $collected, string $api_file): array => \array_merge($collected, self::parseHooks($api_file));
 
     return \array_reduce($api_files, $reducer, []);
+
   }
 
   /**

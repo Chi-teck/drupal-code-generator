@@ -388,7 +388,7 @@ final class FileSystemDumperTest extends BaseTestCase {
   private function readAssets(string $directory): array {
     $results = [];
     foreach (\scandir($directory) as $file) {
-      if ($file != '.' && $file != '..') {
+      if ($file !== '.' && $file !== '..') {
         $path = $directory . \DIRECTORY_SEPARATOR . $file;
         $relative_path = \rtrim($this->filesystem->makePathRelative($path, $this->directory), '/');
         if (\is_link($path)) {

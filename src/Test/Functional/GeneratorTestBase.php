@@ -10,7 +10,14 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 abstract class GeneratorTestBase extends FunctionalTestBase {
 
+  /**
+   * Display returned by the last execution of the command.
+   */
   protected string $display;
+
+  /**
+   * A directory to look up for fixtures.
+   */
   protected string $fixtureDir;
 
   /**

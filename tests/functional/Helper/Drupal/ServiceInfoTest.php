@@ -159,7 +159,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
    *
    * @dataProvider serviceMetaProvider
    */
-  public function testGetServiceMeta(string $id, string $name, string $type_fqn, string $type, ?\Exception $exception): void {
+  public function testGetServiceMeta(string $id, string $name, string $type_fqn, string $type, ?\LogicException $exception): void {
     $service_info = new ServiceInfo(self::bootstrap());
 
     if ($exception) {

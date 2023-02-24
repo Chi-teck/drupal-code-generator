@@ -417,9 +417,9 @@ final class FieldTest extends BrowserTestBase {
    * Builds options xpath.
    */
   private static function buildOptionsXpath(array $options, int $selected_option): string {
-    $xpath = \sprintf('/option[text() = "%s"%s]', \array_shift($options), $selected_option == 0 ? ' and @selected' : '');
+    $xpath = \sprintf('/option[text() = "%s"%s]', \array_shift($options), $selected_option === 0 ? ' and @selected' : '');
     foreach ($options as $index => $option) {
-      $xpath .= \sprintf('/following::option[text() = "%s"%s][1]', $option, $selected_option == $index + 1 ? ' and @selected' : '');
+      $xpath .= \sprintf('/following::option[text() = "%s"%s][1]', $option, $selected_option === $index + 1 ? ' and @selected' : '');
     }
     return $xpath;
   }

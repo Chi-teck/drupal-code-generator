@@ -50,11 +50,11 @@ trait TestTrait {
     };
     $xpath = '//div[@aria-label="' . \ucfirst($type) . ' message"]';
     // Error messages have one more wrapper.
-    if ($type == 'error') {
+    if ($type === 'error') {
       $xpath .= '/div[@role = "alert"]';
     }
     $wrapper = $this->xpath($xpath);
-    if (!empty($wrapper[0])) {
+    if (isset($wrapper[0])) {
       unset($wrapper[0]->h2);
       $items = $wrapper[0]->findAll('xpath', '/ul/li');
       // Multiple messages are rendered with an HTML list.

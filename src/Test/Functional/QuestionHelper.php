@@ -1,5 +1,7 @@
 <?php declare(strict_types = 1);
 
+// phpcs:disable
+
 namespace DrupalCodeGenerator\Test\Functional;
 
 use DrupalCodeGenerator\Helper\QuestionHelper as BaseHelper;

@@ -113,6 +113,7 @@ final class IO extends SymfonyStyle implements SymfonyStyleInterface, OutputInte
     // $_SERVER['PWD'] takes precedence over getcwd() as it does not mutate
     // during bootstrap process.
     // @todo Make the working dir absolute.
+    // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
     return $this->getInput()->getOption('working-dir') ?? $_SERVER['PWD'] ?? \getcwd();
   }
 

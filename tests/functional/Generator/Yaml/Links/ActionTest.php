@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 /**
  * Tests yml:links:action generator.
  */
-class ActionTest extends GeneratorTestBase {
+final class ActionTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_action';
 

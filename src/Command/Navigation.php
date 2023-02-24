@@ -161,9 +161,9 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
     $answer_label = $this->getHelper('question')->ask($input, $output, $question);
     $answer = \array_search($answer_label, $choices);
 
-    if ($answer == '..') {
+    if ($answer === '..') {
       // Exit the application if a user selected zero on the top menu level.
-      if (\count($menu_trail) == 0) {
+      if (\count($menu_trail) === 0) {
         return NULL;
       }
       // Level up.

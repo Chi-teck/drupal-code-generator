@@ -14,7 +14,7 @@ final class ConfigInfo extends Helper {
    * Constructs the object.
    */
   public function __construct(
-    private readonly ConfigFactoryInterface $configFactory
+    private readonly ConfigFactoryInterface $configFactory,
   ) {}
 
   /**

@@ -17,8 +17,19 @@ use Twig\Loader\FilesystemLoader;
  */
 abstract class GeneratorTest extends TestCase {
 
+  /**
+   * Display returned by the last execution of the command.
+   */
   protected string $display;
+
+  /**
+   * A directory to look up for fixtures.
+   */
   protected string $fixtureDir;
+
+  /**
+   * Working directory.
+   */
   private string $directory;
 
   /**

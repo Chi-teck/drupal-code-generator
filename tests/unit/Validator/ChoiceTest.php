@@ -15,7 +15,7 @@ final class ChoiceTest extends TestCase {
    *
    * @dataProvider dataProvider()
    */
-  public function test(mixed $value, array $choices, ?string $message, ?\Exception $exception): void {
+  public function test(mixed $value, array $choices, ?string $message, ?\UnexpectedValueException $exception): void {
     $validator = $message ? new Choice($choices, $message) : new Choice($choices);
     if ($exception) {
       $this->expectExceptionObject($exception);

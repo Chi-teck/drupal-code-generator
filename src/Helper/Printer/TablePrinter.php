@@ -62,7 +62,7 @@ final class TablePrinter extends Helper implements PrinterInterface, IOAwareInte
     $total_assets = \count($assets);
     $rows[] = [
       '',
-      \sprintf('Total: %d %s', $total_assets, $total_assets == 1 ? 'asset' : 'assets'),
+      \sprintf('Total: %d %s', $total_assets, $total_assets === 1 ? 'asset' : 'assets'),
       $total_lines,
       self::formatMemory($total_size),
     ];

@@ -10,56 +10,48 @@
  * provides a very simple replacing for some common Drush commands.
  *
  * This script must be executed from the Drupal root directory.
+ *
+ * @internal
  */
 
-use Composer\Autoload\ClassLoader;
 use Composer\InstalledVersions;
 use Drupal\Core\DrupalKernel;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 $class_loader = require_once __DIR__ . '/autoload.php';
 
-function dcg_bootstrap_drupal(ClassLoader $class_loader): ContainerInterface {
-  $root_package = InstalledVersions::getRootPackage();
-  \chdir($root_package['install_path']);
-  $request = Request::createFromGlobals();
-  $kernel = DrupalKernel::createFromRequest($request, $class_loader, 'prod');
-  $kernel->boot();
-  $kernel->preHandle($request);
-  // Cancel Drupal error handler and send the errors to STDOUT immediately.
-  \restore_error_handler();
-  \error_reporting(\E_ALL);
-  return $kernel->getContainer();
-}
+$root_package = InstalledVersions::getRootPackage();
+\chdir($root_package['install_path']);
+$request = Request::createFromGlobals();
+$kernel = DrupalKernel::createFromRequest($request, $class_loader, 'prod');
+$kernel->boot();
+$kernel->preHandle($request);
+// Cancel Drupal error handler and send the errors to STDOUT immediately.
+\restore_error_handler();
+\error_reporting(\E_ALL);
 
-function dcg_module_install(InputInterface $input): int {
-  $module = $input->getArgument('module');
-  return $GLOBALS['module_installer']->install([$module]) ? Command::SUCCESS : Command::FAILURE;
-}
+$module_installer = $kernel->getContainer()->get('module_installer');
 
-function dcg_module_uninstall(InputInterface $input): int {
-  $module = $input->getArgument('module');
-  return $GLOBALS['module_installer']->uninstall([$module]) ? Command::SUCCESS : Command::FAILURE;
-}
+$module_install = static fn (InputInterface $input): int =>
+$module_installer->install([$input->getArgument('module')]) ? Command::SUCCESS : Command::FAILURE;
 
-$container = dcg_bootstrap_drupal($class_loader);
-$GLOBALS['module_installer'] = $container->get('module_installer');
+$module_uninstall = static fn (InputInterface $input): int =>
+$module_installer->uninstall([$input->getArgument('module')]) ? Command::SUCCESS : Command::FAILURE;
 
 (new Application('Drupal CLI'))
 
   ->register('module:install')
   ->addArgument('module', InputArgument::REQUIRED)
-  ->setCode('dcg_module_install')
+  ->setCode($module_install)
   ->getApplication()
 
   ->register('module:uninstall')
   ->addArgument('module', InputArgument::REQUIRED)
-  ->setCode('dcg_module_uninstall')
+  ->setCode($module_uninstall)
   ->getApplication()
 
   ->register('cache:flush')

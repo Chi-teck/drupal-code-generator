@@ -1,5 +1,7 @@
 <?php declare(strict_types = 1);
 
+// phpcs:disable SlevomatCodingStandard.Classes.RequireAbstractOrFinal.ClassNeitherAbstractNorFinal
+
 namespace DrupalCodeGenerator\Helper;
 
 use DrupalCodeGenerator\Exception\SilentException;
@@ -53,7 +55,7 @@ class QuestionHelper extends BaseQuestionHelper {
       try {
         $answer = $validator($answer);
       }
-      catch (\Exception $exception) {
+      catch (\UnexpectedValueException $exception) {
         // The exception is a result of wrong user input. So no need to render
         // it in details as Application::renderException() does.
         $this->writeError($output, $exception);
@@ -124,7 +126,7 @@ class QuestionHelper extends BaseQuestionHelper {
   /**
    * {@inheritdoc}
    */
-  final protected function writeError(OutputInterface $output, \Exception $error): void {
+  final protected function writeError(OutputInterface $output, \Throwable $error): void {
     // Add one-space indentation to comply with DCG output style.
     $output->writeln(' <error>' . $error->getMessage() . '</error>');
   }

@@ -16,7 +16,7 @@ final class OptionalTest extends TestCase {
    *
    * @dataProvider dataProvider()
    */
-  public function test(mixed $machine_name, ?\Exception $exception): void {
+  public function test(mixed $machine_name, ?\UnexpectedValueException $exception): void {
     if ($exception) {
       $this->expectExceptionObject($exception);
     }

@@ -8,7 +8,7 @@ use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 /**
  * Tests yml:menu:links generator.
  */
-class MenuTest extends GeneratorTestBase {
+final class MenuTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_menu';
 
