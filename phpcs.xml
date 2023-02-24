@@ -8,7 +8,6 @@
   <file>./tests</file>
 
   <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended">
-    <!-- @todo Fix this. -->
     <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion"/>
     <exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator.MultiLineTernaryOperatorNotUsed"/>
     <!-- Conflicts with PHP attributes. -->
