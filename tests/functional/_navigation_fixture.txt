@@ -275,9 +275,10 @@
   [2] Breakpoints
   [3] Libraries (module)
   [4] Libraries (theme)
-  [5] Permissions
-  [6] Routing
-  [7] Services
+  [5] Migration
+  [6] Permissions
+  [7] Routing
+  [8] Services
  ➤ 0⏎
  Select generator 
   [ 0] ..

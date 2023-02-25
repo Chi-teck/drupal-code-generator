@@ -46,11 +46,12 @@ namespace PHPSTORM_META {
     \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
     map([
       'class_resolver' => \Drupal\Core\DependencyInjection\ClassResolverInterface::class,
-      'kernel' => \Drupal\Core\DrupalKernelInterface::class,
-      'entity_type.manager' => \Drupal\Core\Entity\EntityTypeManagerInterface::class,
-      'extension.list.module' => \Drupal\Core\Extension\ModuleExtensionList::class,
+      'entity_field.manager' => \Drupal\Core\Entity\EntityFieldManagerInterface::class,
       'entity_type.bundle.info' => \Drupal\Core\Entity\EntityTypeBundleInfoInterface::class,
+      'entity_type.manager' => \Drupal\Core\Entity\EntityTypeManagerInterface::class,
       'event_dispatcher' => \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class,
+      'extension.list.module' => \Drupal\Core\Extension\ModuleExtensionList::class,
+      'kernel' => \Drupal\Core\DrupalKernelInterface::class,
     ])
   );
 
