@@ -393,4 +393,58 @@ namespace PHPSTORM_META {
   expectedReturnValues(\Drupal\Core\Menu\MenuLinkInterface::getRouteName(), argumentsSet('routes'));
   expectedReturnValues(\Drupal\Core\Form\FormStateInterface::setRedirect(), argumentsSet('routes'));
 
+  registerArgumentsSet('routes.route_options',
+    '_access_checks',
+    '_admin_route',
+    '_field_ui',
+    '_maintenance_access',
+    '_no_big_pipe',
+    '_no_path',
+    '_node_operation_route',
+    '_view_argument_map',
+    '_view_display_plugin_class',
+    '_view_display_plugin_id',
+    '_view_display_show_admin_links',
+  );
+  expectedArguments(\Symfony\Component\Routing\Route::getOption(), 0, argumentsSet('routes.route_options'));
+  expectedArguments(\Symfony\Component\Routing\Route::setOption(), 0, argumentsSet('routes.route_options'));
+  registerArgumentsSet('routes.route_requirements',
+    '_access',
+    '_access_contact_personal_tab',
+    '_access_system_cron',
+    '_access_system_update',
+    '_access_theme',
+    '_access_update_manager',
+    '_access_user_register',
+    '_csrf_token',
+    '_custom_access',
+    '_entity_access',
+    '_entity_create_access',
+    '_entity_create_any_access',
+    '_entity_delete_multiple_access',
+    '_field_ui_form_mode_access',
+    '_field_ui_view_mode_access',
+    '_format',
+    '_module_dependencies',
+    '_node_preview_access',
+    '_permission',
+    '_user_is_logged_in',
+  );
+  expectedArguments(\Symfony\Component\Routing\Route::getRequirement(), 0, argumentsSet('routes.route_requirements'));
+  expectedArguments(\Symfony\Component\Routing\Route::setRequirement(), 0, argumentsSet('routes.route_requirements'));
+  registerArgumentsSet('routes.route_defaults',
+    '_controller',
+    '_entity_form',
+    '_entity_list',
+    '_entity_view',
+    '_form',
+    '_title',
+    '_title_arguments',
+    '_title_callback',
+    '_title_context',
+    '_view_display_show_admin_links',
+  );
+  expectedArguments(\Symfony\Component\Routing\Route::getDefault(), 0, argumentsSet('routes.route_defaults'));
+  expectedArguments(\Symfony\Component\Routing\Route::setDefault(), 0, argumentsSet('routes.route_defaults'));
+
 }

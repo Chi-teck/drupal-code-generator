@@ -21,4 +21,26 @@ namespace PHPSTORM_META {
   expectedReturnValues(\Drupal\Core\Menu\MenuLinkInterface::getRouteName(), argumentsSet('routes'));
   expectedReturnValues(\Drupal\Core\Form\FormStateInterface::setRedirect(), argumentsSet('routes'));
 
+  registerArgumentsSet('routes.route_options',
+{% for option in route_attributes.options %}
+    '{{ option }}',
+{% endfor %}
+  );
+  expectedArguments(\Symfony\Component\Routing\Route::getOption(), 0, argumentsSet('routes.route_options'));
+  expectedArguments(\Symfony\Component\Routing\Route::setOption(), 0, argumentsSet('routes.route_options'));
+  registerArgumentsSet('routes.route_requirements',
+{% for requirement in route_attributes.requirements %}
+    '{{ requirement }}',
+{% endfor %}
+  );
+  expectedArguments(\Symfony\Component\Routing\Route::getRequirement(), 0, argumentsSet('routes.route_requirements'));
+  expectedArguments(\Symfony\Component\Routing\Route::setRequirement(), 0, argumentsSet('routes.route_requirements'));
+  registerArgumentsSet('routes.route_defaults',
+{% for default in route_attributes.defaults %}
+    '{{ default }}',
+{% endfor %}
+  );
+  expectedArguments(\Symfony\Component\Routing\Route::getDefault(), 0, argumentsSet('routes.route_defaults'));
+  expectedArguments(\Symfony\Component\Routing\Route::setDefault(), 0, argumentsSet('routes.route_defaults'));
+
 }

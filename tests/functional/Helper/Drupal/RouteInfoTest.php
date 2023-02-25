@@ -32,4 +32,16 @@ final class RouteInfoTest extends FunctionalTestBase {
     self::assertContains('system.modules_list', $route_names);
   }
 
+  /**
+   * Test callback.
+   */
+  public function testGetRoutes(): void {
+    $route_info = new RouteInfo(self::bootstrap()->get('router.route_provider'));
+    $routes = $route_info->getRoutes();
+    self::assertGreaterThan(300, \count($routes));
+    self::assertSame('/filter/tips/{filter_format}', $routes['filter.tips']->getPath());
+    self::assertSame('Add image style', $routes['image.style_add']->getDefault('_title'));
+    self::assertSame('administer modules', $routes['system.modules_list']->getRequirement('_permission'));
+  }
+
 }

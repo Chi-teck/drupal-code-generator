@@ -38,4 +38,14 @@ final class RouteInfo extends Helper {
     return $route_names;
   }
 
+  /**
+   * Returns all routes on the system.
+   *
+   * @psalm-suppress InvalidReturnType
+   * @psalm-suppress InvalidReturnStatement
+   */
+  public function getRoutes(): \ArrayIterator {
+    return $this->routeProvider->getAllRoutes();
+  }
+
 }

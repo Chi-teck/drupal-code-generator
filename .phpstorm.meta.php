@@ -53,4 +53,7 @@ namespace PHPSTORM_META {
       'event_dispatcher' => \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class,
     ])
   );
+
+  override(\Drupal\Core\Routing\RouteProviderInterface::getAllRoutes(), map(['' => \ArrayIterator::class]));
+
 }
