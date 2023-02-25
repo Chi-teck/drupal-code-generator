@@ -1,0 +1,19 @@
+id: {{ plugin_id }}
+label: {{ plugin_label }}
+migration_tags:
+  - Drupal 7
+source:
+  plugin: {{ source_plugin }}
+process:
+  # See https://www.drupal.org/node/2129651 on how to define
+  # process map for the migration.
+{% for field in fields %}
+  {{ field }}: {{ field }}
+{% endfor %}
+destination:
+  plugin: {{ destination_plugin }}
+# The general rule of thumb is that any migrations referenced by migration
+# process plugins should be required here.
+#migration_dependencies:
+#  required:
+#    - example
