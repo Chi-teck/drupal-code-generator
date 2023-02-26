@@ -21,7 +21,6 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::machine2human
    * @dataProvider machineToHumanProvider
    */
   public function testMachineToHuman(string $machine_name, string $expected_human_name, bool $title_case): void {
@@ -42,7 +41,6 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::human2machine
    * @dataProvider human2machineProvider
    */
   public function testHumanToMachine(string $human_name, string $expected_machine_name): void {
@@ -65,7 +63,6 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::camel2machine
    * @dataProvider camel2machineProvider
    */
   public function testCamelToMachine(string $camel_input, string $expected_machine_name): void {
@@ -86,7 +83,6 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::camelize
    * @dataProvider camelizeProvider
    */
   public function testCamelize(string $text, bool $upper_camel, string $expected): void {
@@ -112,7 +108,6 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::getExtensionRoot
    * @dataProvider getExtensionRootProvider
    */
   public function testGetExtensionRoot(string $target_directory, ?string $expected_extension_root): void {
@@ -137,7 +132,6 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Test callback.
    *
-   * @covers \DrupalCodeGenerator\Utils::replaceTokens()
    * @dataProvider replaceTokensProvider
    */
   public function testReplaceTokens(string $input, array $vars, string $expected_output, bool $exception = FALSE): void {
@@ -184,8 +178,6 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::testAddSlashes()
    */
   public function testAddSlashes(): void {
     self::assertSame('foo \{node\} bar', Utils::addSlashes('foo {node} bar'));
@@ -193,8 +185,6 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::testAddSlashes()
    */
   public function testStripSlashes(): void {
     self::assertSame('foo {node} bar', Utils::stripSlashes('foo \{node\} bar'));
@@ -202,8 +192,6 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::pluralize()
    */
   public function testPluralize(): void {
     self::assertSame('cats', Utils::pluralize('cat'));
@@ -214,8 +202,6 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::removePrefix()
    */
   public function testRemovePrefix(): void {
     self::assertSame('bar', Utils::removePrefix('foo_bar', 'foo_'));
@@ -228,8 +214,6 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::removeSuffix()
    */
   public function testRemoveSuffix(): void {
     self::assertSame('foo', Utils::removeSuffix('foo_bar', '_bar'));
@@ -242,8 +226,6 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @covers \DrupalCodeGenerator\Utils::processVars()
    */
   public function testProcessVars(): void {
     $vars = [
