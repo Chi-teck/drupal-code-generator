@@ -59,7 +59,7 @@ final class BlockTest extends BrowserTestBase {
     $this->assertSession()->responseContains('The block configuration has been saved.');
 
     // Make sure the configuration has been persisted.
-    $this->drupalGet('admin/structure/block/manage/example');
+    $this->drupalGet('admin/structure/block/manage/stark_example');
     $this->assertXpath('//input[@name = "settings[label]" and @value = "Beer"]');
     $this->assertXpath('//textarea[@name = "settings[example]" and text() = "Wine"]');
 
