@@ -27,4 +27,7 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Field\BaseFieldDefinition::create(), 0, argumentsSet('field_types'));
   expectedReturnValues(\Drupal\Core\Field\FieldDefinitionInterface::getType(), argumentsSet('field_types'));
 
+  expectedArguments(\Drupal\Core\Field\BaseFieldDefinition::setCardinality(), 0,  \Drupal\Core\Field\FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+  expectedReturnValues(\Drupal\Core\Field\BaseFieldDefinition::getCardinality(), \Drupal\Core\Field\FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+
 }
