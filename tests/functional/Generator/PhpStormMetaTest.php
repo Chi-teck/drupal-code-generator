@@ -32,6 +32,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • .phpstorm.meta.php/config_entity_ids.php
      • .phpstorm.meta.php/configuration.php
+     • .phpstorm.meta.php/database.php
      • .phpstorm.meta.php/date_formats.php
      • .phpstorm.meta.php/entity_bundles.php
      • .phpstorm.meta.php/entity_links.php
@@ -54,6 +55,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
 
     $this->assertGeneratedFile('.phpstorm.meta.php/config_entity_ids.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/configuration.php');
+    $this->assertGeneratedFile('.phpstorm.meta.php/database.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/date_formats.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_bundles.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/entity_links.php');

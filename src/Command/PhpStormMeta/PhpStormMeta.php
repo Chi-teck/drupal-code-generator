@@ -49,7 +49,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
 
     $entity_interface = static function (EntityTypeInterface $definition): ?string {
       $class = Utils::addLeadingSlash($definition->getClass());
-      // Most of content entity types implement an interface which name follows
+      // Most content entity types implement an interface which name follows
       // this pattern.
       $interface = \str_replace('\Entity\\', '\\', $class) . 'Interface';
       return $definition->entityClassImplements($interface) ? $interface : NULL;
@@ -57,6 +57,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
 
     $assets[] = (new ConfigEntityIds($service('entity_type.manager'), $entity_interface))();
     $assets[] = (new Configuration($this->getHelper('config_info')))();
+    $assets[] = (new Database($service('database')))();
     $assets[] = (new DateFormats($service('entity_type.manager')))();
     $assets[] = (new EntityBundles($service('entity_type.manager'), $service('entity_type.bundle.info'), $entity_interface))();
     $assets[] = (new EntityLinks($service('entity_type.manager'), $entity_interface))();

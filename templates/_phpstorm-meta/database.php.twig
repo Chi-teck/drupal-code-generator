@@ -1,0 +1,17 @@
+<?php declare(strict_types = 1);
+
+namespace PHPSTORM_META {
+
+  registerArgumentsSet('database.tables',
+{% for table in tables %}
+    '{{ table }}',
+{% endfor %}
+  );
+  expectedArguments(\Drupal\Core\Database\Connection::select(), 0, argumentsSet('database.tables'));
+  expectedArguments(\Drupal\Core\Database\Query\SelectInterface::join(), 0, argumentsSet('database.tables'));
+  expectedArguments(\Drupal\Core\Database\Query\SelectInterface::leftJoin(), 0, argumentsSet('database.tables'));
+  expectedArguments(\Drupal\Core\Database\Query\SelectInterface::innerJoin(), 0, argumentsSet('database.tables'));
+  expectedArguments(\Drupal\Core\Database\Query\SelectInterface::addJoin(), 1, argumentsSet('database.tables'));
+  expectedArguments(\Drupal\Core\Database\Query\SelectInterface::orderBy(), 1, 'ASC', 'DESC');
+
+}
