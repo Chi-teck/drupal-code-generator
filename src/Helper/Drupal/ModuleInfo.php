@@ -5,6 +5,7 @@ namespace DrupalCodeGenerator\Helper\Drupal;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Symfony\Component\Console\Helper\Helper;
+use Symfony\Component\Filesystem\Path;
 
 /**
  * A helper that provides information about installed Drupal modules.
@@ -73,7 +74,7 @@ final class ModuleInfo extends Helper implements ExtensionInfoInterface {
    * Gets module info for a given absolute path.
    */
   public function getExtensionFromPath(string $path): ?Extension {
-    if (!\str_starts_with($path, '/')) {
+    if (!Path::isAbsolute($path)) {
       throw new \InvalidArgumentException('The path must be absolute.');
     }
     foreach ($this->moduleHandler->getModuleList() as $module) {
