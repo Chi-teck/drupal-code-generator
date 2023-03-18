@@ -46,9 +46,9 @@ final class ServiceInfoTest extends FunctionalTestBase {
       'Drupal\Component\DependencyInjection\ReverseContainer',
       'Drupal\Core\Access\CheckProviderInterface',
       'Drupal\Core\Config\StorageManagerInterface',
+      'Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber',
       'Drupal\Core\Form\FormCacheInterface',
       'Drupal\Core\Http\HandlerStackConfigurator',
-      'Drupal\Core\Menu\MenuTreeStorageInterface',
     ];
     self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 6));
   }
@@ -71,9 +71,9 @@ final class ServiceInfoTest extends FunctionalTestBase {
       'Drupal\Component\DependencyInjection\ReverseContainer',
       'Drupal\Core\Access\CheckProviderInterface',
       'Drupal\Core\Config\StorageManagerInterface',
+      'Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber',
       'Drupal\Core\Form\FormCacheInterface',
       'Drupal\Core\Http\HandlerStackConfigurator',
-      'Drupal\Core\Menu\MenuTreeStorageInterface',
     ];
     self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 6));
 
@@ -116,9 +116,9 @@ final class ServiceInfoTest extends FunctionalTestBase {
       'Drupal\Component\DependencyInjection\ReverseContainer' => '\Drupal\Component\DependencyInjection\ReverseContainer',
       'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
       'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
+      'Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber' => '\Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber',
       'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
       'Drupal\Core\Http\HandlerStackConfigurator' => '\Drupal\Core\Http\HandlerStackConfigurator',
-      'Drupal\Core\Menu\MenuTreeStorageInterface' => '\Drupal\Core\Menu\MenuTreeStorage',
     ];
     self::assertSame($expected_service_ids, \array_slice($classes, 0, 6));
   }

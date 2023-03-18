@@ -185,7 +185,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
           'Drupal\Component\DependencyInjection\ReverseContainer' => '\Drupal\Component\DependencyInjection\ReverseContainer',
           'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
           'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
-          'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
+          'Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber' => '\Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber',
     PHP;
     self::assertStringContainsString($services_1, $generated_content);
 
@@ -196,7 +196,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
           'Drupal\Component\DependencyInjection\ReverseContainer' => '\Drupal\Component\DependencyInjection\ReverseContainer',
           'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
           'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
-          'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
+          'Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber' => '\Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber',
     PHP;
     self::assertStringContainsString($services_2, $generated_content);
   }
