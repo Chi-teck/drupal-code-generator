@@ -1,0 +1,5 @@
+services:
+  example.foo_bar:
+    class: Drupal\example\Generator\FooBarGenerator
+    tags:
+      -  { name: drush.generator.v3 }

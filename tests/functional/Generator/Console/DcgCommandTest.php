@@ -12,13 +12,18 @@ final class DcgCommandTest extends GeneratorTestBase {
 
   protected string $fixtureDir = __DIR__ . '/_dcg_command';
 
+  /**
+   * Test callback.
+   */
   public function testGenerator(): void {
 
-    $this->markTestSkipped();
-
     $input = [
-      'custom:example',
-      'Some description',
+      'example',
+      'Example',
+      'example:foo-bar',
+      'Example generator.',
+      'FooBarGenerator',
+      'example',
       'example',
     ];
     $this->execute(DcgCommand::class, $input);
@@ -28,25 +33,35 @@ final class DcgCommandTest extends GeneratorTestBase {
      Welcome to dcg-command generator!
     –––––––––––––––––––––––––––––––––––
 
-     Command name [custom:example]:
+     Module machine name:
      ➤ 
 
-     Command description:
+     Module name [Example]:
      ➤ 
 
-     Command alias [example]:
+     Generator name [example:example]:
+     ➤ 
+
+     Generator description:
+     ➤ 
+
+     Class [FooBar]:
      ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-     • custom/Example.php
-     • custom/example.twig
+     • drush.services.yml
+     • example.info.yml
+     • src/Generator/FooBarGenerator.php
+     • templates/generator/foo-bar.twig
 
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('custom/Example.php');
-    $this->assertGeneratedFile('custom/example.twig');
+    $this->assertGeneratedFile('drush.services.yml');
+    $this->assertGeneratedFile('example.info.yml');
+    $this->assertGeneratedFile('src/Generator/FooBarGenerator.php');
+    $this->assertGeneratedFile('templates/generator/foo-bar.twig');
   }
 
 }

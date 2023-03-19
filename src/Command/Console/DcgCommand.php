@@ -9,18 +9,12 @@ use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\RegExp;
+use DrupalCodeGenerator\Validator\Required;
 
-/**
- * Generates DCG command.
- *
- * @todo Clean-up.
- */
 #[Generator(
   name: 'console:dcg-command',
   description: 'Generates DCG command',
   aliases: ['dcg-command'],
-  // @todo Enable the generator once it is updated.
-  hidden: TRUE,
   templatePath: Application::TEMPLATE_PATH . '/Console/_dcg-command',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'DCG command',
@@ -33,31 +27,30 @@ final class DcgCommand extends BaseGenerator {
   protected function generate(array &$vars, Assets $assets): void {
     $ir = $this->createInterviewer($vars);
 
-    $command_name_validator = new RegExp('/^[a-z][a-z0-9-_:]*[a-z0-9]$/', 'The value is not correct command name.');
-    $vars['command_name'] = $ir->ask('Command name', 'custom:example', $command_name_validator);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
+    $generator_name_validator = new RegExp('/^[a-z][a-z0-9-_:]*[a-z0-9]$/', 'The value is not correct generator name.');
+    $vars['generator']['name'] = $ir->ask('Generator name', '{machine_name}:example', $generator_name_validator);
+    $vars['generator']['description'] = $ir->ask('Generator description', validator: new Required());
 
-    $vars['description'] = $ir->ask('Command description');
-
-    $sub_names = \explode(':', $vars['command_name']);
+    $sub_names = \explode(':', $vars['generator']['name']);
     $short_name = \array_pop($sub_names);
 
-    $alias_validator = new RegExp('/^[a-z0-9][a-z0-9_]+$/', 'The value is not correct alias name.');
-    $vars['alias'] = $ir->ask('Command alias', $short_name, $alias_validator);
-
-    $vars['class'] = Utils::camelize($short_name);
-    $vars['namespace'] = 'DrupalCodeGenerator';
+    $vars['class'] = $ir->askClass(default: Utils::camelize($short_name));
     $vars['template_name'] = $short_name;
 
-    $vars['path'] = '';
-    $file_path = '';
-    if ($sub_names) {
-      $vars['namespace'] .= '\\' . \implode('\\', $sub_names);
-      $file_path = \implode(\DIRECTORY_SEPARATOR, $sub_names);
-      $vars['path'] = '/' . $file_path;
+    // Make service name using the following guides.
+    // `foo:example` -> `foo.example` (not `foo:foo_example`)
+    // `foo` -> `foo.foo` (not `foo`)
+    $service_name = Utils::removePrefix($vars['generator']['name'], $vars['machine_name'] . ':');
+    if (!$service_name) {
+      $service_name = $vars['generator']['name'];
     }
+    $vars['service_name'] = $vars['machine_name'] . '.' . \str_replace([':', '-'], '_', $service_name);
 
-    $assets->addFile($file_path . '/{class}.php', 'command.twig');
-    $assets->addFile($file_path . '/{template_name}.twig', 'template.twig');
+    $assets->addServicesFile('drush.services.yml')->template('drush.services.twig');
+    $assets->addFile('src/Generator/{class}.php', 'generator.twig');
+    $assets->addFile('templates/generator/{template_name}.twig', 'template.twig');
   }
 
 }
