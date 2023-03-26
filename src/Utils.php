@@ -157,7 +157,7 @@ final class Utils {
     $data ??= $vars;
     foreach ($vars as $key => $value) {
       $vars[$key] = match (TRUE) {
-        \is_string($value) => Utils::stripSlashes(Utils::replaceTokens($value, $data)),
+        \is_string($value) => self::stripSlashes(self::replaceTokens($value, $data)),
         \is_array($value) => self::processVars($value, $data),
         default => $value,
       };

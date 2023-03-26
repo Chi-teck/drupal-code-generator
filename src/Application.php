@@ -54,7 +54,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
   /**
    * Path to templates directory.
    */
-  public const TEMPLATE_PATH = Application::ROOT . '/templates';
+  public const TEMPLATE_PATH = self::ROOT . '/templates';
 
   /**
    * Creates the application.
