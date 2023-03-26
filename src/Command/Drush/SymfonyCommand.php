@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Command\Console;
+namespace DrupalCodeGenerator\Command\Drush;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
@@ -11,10 +11,10 @@ use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\RegExp;
 
 #[Generator(
-  name: 'console:symfony-command',
+  name: 'drush:symfony-command',
   description: 'Generates Symfony console command',
   aliases: ['symfony-command'],
-  templatePath: Application::TEMPLATE_PATH . '/Console/_symfony-command',
+  templatePath: Application::TEMPLATE_PATH . '/Drush/_symfony-command',
   type: GeneratorType::MODULE_COMPONENT,
 )]
 final class SymfonyCommand extends BaseGenerator {

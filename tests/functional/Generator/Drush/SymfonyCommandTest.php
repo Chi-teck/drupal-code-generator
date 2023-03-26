@@ -1,12 +1,12 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Functional\Generator;
+namespace DrupalCodeGenerator\Tests\Functional\Drush;
 
-use DrupalCodeGenerator\Command\Console\SymfonyCommand;
+use DrupalCodeGenerator\Command\Drush\SymfonyCommand;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Tests console:symfony-command generator.
+ * Tests drush:symfony-command generator.
  */
 final class SymfonyCommandTest extends GeneratorTestBase {
 

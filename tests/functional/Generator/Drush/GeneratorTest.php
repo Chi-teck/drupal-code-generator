@@ -1,16 +1,16 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Generator\Console;
+namespace DrupalCodeGenerator\Tests\Generator\Drush;
 
-use DrupalCodeGenerator\Command\Console\DcgCommand;
+use DrupalCodeGenerator\Command\Drush\Generator;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
 /**
- * Tests console:dcg-command generator.
+ * Tests drush:generator generator.
  */
-final class DcgCommandTest extends GeneratorTestBase {
+final class GeneratorTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__ . '/_dcg_command';
+  protected string $fixtureDir = __DIR__ . '/_generator';
 
   /**
    * Test callback.
@@ -26,12 +26,12 @@ final class DcgCommandTest extends GeneratorTestBase {
       'example',
       'example',
     ];
-    $this->execute(DcgCommand::class, $input);
+    $this->execute(Generator::class, $input);
 
     $expected_display = <<< 'TXT'
 
-     Welcome to dcg-command generator!
-    –––––––––––––––––––––––––––––––––––
+     Welcome to generator generator!
+    –––––––––––––––––––––––––––––––––
 
      Module machine name:
      ➤ 

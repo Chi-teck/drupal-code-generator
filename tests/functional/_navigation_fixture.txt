@@ -1,6 +1,6 @@
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous
@@ -31,7 +31,7 @@
  ➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous
@@ -63,7 +63,7 @@
  ➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous
@@ -95,7 +95,7 @@
  ➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous
@@ -126,7 +126,7 @@
  ➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous
@@ -168,7 +168,7 @@
  ➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous
@@ -212,7 +212,7 @@
  ➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous
@@ -246,7 +246,7 @@
  ➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous
@@ -283,7 +283,7 @@
  ➤ 0⏎
  Select generator 
   [ 0] ..
-  [ 1] Console
+  [ 1] Drush
   [ 2] Entity
   [ 3] Form
   [ 4] Miscellaneous

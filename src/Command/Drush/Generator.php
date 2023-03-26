@@ -1,25 +1,25 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Command\Console;
+namespace DrupalCodeGenerator\Command\Drush;
 
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\Assets;
-use DrupalCodeGenerator\Attribute\Generator;
+use DrupalCodeGenerator\Attribute\Generator as GeneratorDefinition;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Utils;
 use DrupalCodeGenerator\Validator\RegExp;
 use DrupalCodeGenerator\Validator\Required;
 
-#[Generator(
-  name: 'console:dcg-command',
-  description: 'Generates DCG command',
-  aliases: ['dcg-command'],
-  templatePath: Application::TEMPLATE_PATH . '/Console/_dcg-command',
+#[GeneratorDefinition(
+  name: 'drush:generator',
+  description: 'Generates Drush generator',
+  aliases: ['generator'],
+  templatePath: Application::TEMPLATE_PATH . '/Drush/_generator',
   type: GeneratorType::MODULE_COMPONENT,
   label: 'DCG command',
 )]
-final class DcgCommand extends BaseGenerator {
+final class Generator extends BaseGenerator {
 
   /**
    * {@inheritdoc}
