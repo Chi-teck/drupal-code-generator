@@ -33,8 +33,10 @@ final class PermissionInfo extends Helper {
    * @psalm-suppress MoreSpecificReturnType
    */
   public function getPermissionNames(): array {
+    $permissions = \array_keys($this->permissionHandler->getPermissions());
+    \sort($permissions);
     /** @psalm-suppress LessSpecificReturnStatement */
-    return \array_keys($this->permissionHandler->getPermissions());
+    return $permissions;
   }
 
 }
