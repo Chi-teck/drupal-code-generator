@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Functional;
+namespace DrupalCodeGenerator\Tests\Functional\Helper\Drupal;
 
 use DrupalCodeGenerator\Helper\Drupal\ConfigInfo;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;

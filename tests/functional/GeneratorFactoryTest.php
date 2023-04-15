@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Unit;
+namespace DrupalCodeGenerator\Tests\Functional;
 
 use Drupal\Core\DependencyInjection\ClassResolver;
 use DrupalCodeGenerator\Command\BaseGenerator;

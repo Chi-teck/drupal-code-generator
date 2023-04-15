@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Validator;
+namespace DrupalCodeGenerator\Tests\Functional\Validator;
 
 use DrupalCodeGenerator\GeneratorType;
 use DrupalCodeGenerator\Helper\Drupal\ModuleInfo;
