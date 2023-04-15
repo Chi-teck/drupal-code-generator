@@ -2,9 +2,12 @@
 
 namespace Drupal\{{ machine_name }};
 
+{% sort %}
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
+use Drupal\{{ machine_name }}\Annotation\{{ class_prefix }};
+{% endsort %}
 
 /**
  * {{ class_prefix }} plugin manager.
@@ -12,16 +15,10 @@ use Drupal\Core\Plugin\DefaultPluginManager;
 final class {{ class_prefix }}PluginManager extends DefaultPluginManager {
 
   /**
-   * Constructs {{ class_prefix }}PluginManager object.
+   * Constructs the object.
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
-    parent::__construct(
-      'Plugin/{{ class_prefix }}',
-      $namespaces,
-      $module_handler,
-      'Drupal\{{ machine_name }}\{{ class_prefix }}Interface',
-      'Drupal\{{ machine_name }}\Annotation\{{ class_prefix }}'
-    );
+    parent::__construct('Plugin/{{ class_prefix }}', $namespaces, $module_handler, {{ class_prefix }}Interface::class, {{ class_prefix }}::class);
     $this->alterInfo('{{ plugin_type }}_info');
     $this->setCacheBackend($cache_backend, '{{ plugin_type }}_plugins');
   }
