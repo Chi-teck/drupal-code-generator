@@ -50,7 +50,10 @@ final class ServiceInfo extends Helper {
    * @psalm-return array<string, array>
    */
   public function getServiceDefinitions(): array {
-    return \array_map('unserialize', $this->getSerializedDefinitions());
+    return \array_filter(
+      \array_map('unserialize', $this->getSerializedDefinitions()),
+      static fn ($definition): bool => !\str_starts_with(\ltrim($definition['class'] ?? '', '\\'), 'Drush'),
+    );
   }
 
   /**
