@@ -36,7 +36,7 @@ final class SymfonyCommand extends BaseGenerator {
     $sub_names = \explode(':', $vars['command']['name']);
     $short_name = \array_pop($sub_names);
 
-    $alias_validator = new RegExp('/^[a-z0-9][a-z0-9_]+$/', 'The value is not correct alias name.');
+    $alias_validator = new RegExp('/^[a-z0-9_-]+$/', 'The value is not correct alias name.');
     $vars['command']['alias'] = $ir->ask('Command alias', $short_name, $alias_validator);
 
     $vars['class'] = $ir->askClass('Class', Utils::camelize($short_name) . 'Command');
