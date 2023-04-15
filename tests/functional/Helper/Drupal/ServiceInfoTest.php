@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DrupalCodeGenerator\Tests\Functional;
+namespace DrupalCodeGenerator\Tests\Functional\Helper\Drupal;
 
 use Drupal\Core\CronInterface;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
@@ -43,12 +43,12 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
     // Check if the services are sorted alphabetically.
     $expected_service_ids = [
-      'Drupal\Component\DependencyInjection\ReverseContainer',
-      'Drupal\Core\Access\CheckProviderInterface',
-      'Drupal\Core\Config\StorageManagerInterface',
-      'Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber',
-      'Drupal\Core\Form\FormCacheInterface',
-      'Drupal\Core\Http\HandlerStackConfigurator',
+      'access_arguments_resolver_factory',
+      'access_check.contact_personal',
+      'access_check.cron',
+      'access_check.csrf',
+      'access_check.custom',
+      'access_check.db_update',
     ];
     self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 6));
   }
@@ -68,12 +68,12 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertLessThan(550, \count($definitions));
 
     $expected_service_ids = [
-      'Drupal\Component\DependencyInjection\ReverseContainer',
-      'Drupal\Core\Access\CheckProviderInterface',
-      'Drupal\Core\Config\StorageManagerInterface',
-      'Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber',
-      'Drupal\Core\Form\FormCacheInterface',
-      'Drupal\Core\Http\HandlerStackConfigurator',
+      'access_arguments_resolver_factory',
+      'access_check.contact_personal',
+      'access_check.cron',
+      'access_check.csrf',
+      'access_check.custom',
+      'access_check.db_update',
     ];
     self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 6));
 
@@ -112,15 +112,15 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertGreaterThan(500, \count($classes));
     self::assertLessThan(550, \count($classes));
 
-    $expected_service_ids = [
-      'Drupal\Component\DependencyInjection\ReverseContainer' => '\Drupal\Component\DependencyInjection\ReverseContainer',
-      'Drupal\Core\Access\CheckProviderInterface' => '\Drupal\Core\Access\CheckProvider',
-      'Drupal\Core\Config\StorageManagerInterface' => '\Drupal\Core\Config\ExportStorageManager',
-      'Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber' => '\Drupal\Core\Database\EventSubscriber\StatementExecutionSubscriber',
-      'Drupal\Core\Form\FormCacheInterface' => '\Drupal\Core\Form\FormCache',
-      'Drupal\Core\Http\HandlerStackConfigurator' => '\Drupal\Core\Http\HandlerStackConfigurator',
+    $expected_service_classes = [
+      'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
+      'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
+      'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
+      'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',
+      'access_check.custom' => '\Drupal\Core\Access\CustomAccessCheck',
+      'access_check.db_update' => '\Drupal\system\Access\DbUpdateAccessCheck',
     ];
-    self::assertSame($expected_service_ids, \array_slice($classes, 0, 6));
+    self::assertSame($expected_service_classes, \array_slice($classes, 0, 6));
   }
 
   /**
