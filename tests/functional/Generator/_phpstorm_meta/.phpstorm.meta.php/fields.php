@@ -2,7 +2,7 @@
 
 namespace PHPSTORM_META {
 
-  // Custom block.
+  // Content block.
   registerArgumentsSet('fields_block_content',
     'id',
     'uuid',

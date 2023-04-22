@@ -39,7 +39,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      ➤ 
 
      Entity type:
-      [ 1] Custom block
+      [ 1] Content block
       [ 2] Comment
       [ 3] Contact message
       [ 4] File
@@ -104,7 +104,7 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      ➤ 
 
      Entity type:
-      [ 1] Custom block
+      [ 1] Content block
       [ 2] Comment
       [ 3] Contact message
       [ 4] File

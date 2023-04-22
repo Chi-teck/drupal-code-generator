@@ -67,7 +67,7 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\block\BlockInterface::load(), 0, argumentsSet('block__ids'));
   expectedReturnValues(\Drupal\block\BlockInterface::id(), argumentsSet('block__ids'));
 
-  // -- Custom block type.
+  // -- Block type.
   registerArgumentsSet('block_content_type__ids',
     'basic',
   );

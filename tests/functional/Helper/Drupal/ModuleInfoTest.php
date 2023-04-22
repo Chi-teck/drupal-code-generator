@@ -28,7 +28,7 @@ final class ModuleInfoTest extends FunctionalTestBase {
     $modules = $module_info->getExtensions();
     // Full list of modules is rather long and may vary depending on`
     // environment.
-    self::assertSame('Custom Block', $modules['block_content']);
+    self::assertSame('Block Content', $modules['block_content']);
     self::assertSame('Database Logging', $modules['dblog']);
     self::assertSame('Options', $modules['options']);
     self::assertSame('Views', $modules['views']);

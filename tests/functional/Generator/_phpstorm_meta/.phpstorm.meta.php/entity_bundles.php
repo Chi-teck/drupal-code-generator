@@ -21,14 +21,14 @@ namespace PHPSTORM_META {
   expectedReturnValues(\Drupal\block\Entity\Block::bundle(), argumentsSet('block__bundles'));
   expectedReturnValues(\Drupal\block\BlockInterface::bundle(), argumentsSet('block__bundles'));
 
-  // Custom block.
+  // Content block.
   registerArgumentsSet('block_content__bundles',
     'basic',
   );
   expectedReturnValues(\Drupal\block_content\Entity\BlockContent::bundle(), argumentsSet('block_content__bundles'));
   expectedReturnValues(\Drupal\block_content\BlockContentInterface::bundle(), argumentsSet('block_content__bundles'));
 
-  // Custom block type.
+  // Block type.
   registerArgumentsSet('block_content_type__bundles',
     'block_content_type',
   );

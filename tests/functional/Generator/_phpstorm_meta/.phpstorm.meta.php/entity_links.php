@@ -16,7 +16,7 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\block\BlockInterface::toLink(), 1, argumentsSet('block__links'));
   expectedArguments(\Drupal\block\BlockInterface::hasLinkTemplate(), 0, argumentsSet('block__links'));
 
-  // Custom block.
+  // Content block.
   registerArgumentsSet('block_content__links',
     'canonical',
     'delete-form',
@@ -34,7 +34,7 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\block_content\BlockContentInterface::toLink(), 1, argumentsSet('block_content__links'));
   expectedArguments(\Drupal\block_content\BlockContentInterface::hasLinkTemplate(), 0, argumentsSet('block_content__links'));
 
-  // Custom block type.
+  // Block type.
   registerArgumentsSet('block_content_type__links',
     'delete-form',
     'edit-form',
