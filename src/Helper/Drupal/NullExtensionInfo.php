@@ -40,7 +40,7 @@ final class NullExtensionInfo implements ExtensionInfoInterface {
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function getExtensionFromPath(string $path): ?Extension {
     return NULL;
