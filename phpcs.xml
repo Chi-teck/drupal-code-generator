@@ -20,7 +20,6 @@
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
     <exclude name="Drupal.Arrays.Array.LongLineDeclaration"/>
 
-    <exclude name="SlevomatCodingStandard.Arrays.AlphabeticallySortedByKeys.IncorrectKeyOrder"/>
     <exclude name="SlevomatCodingStandard.ControlStructures.DisallowTrailingMultiLineTernaryOperator.TrailingMultiLineTernaryOperatorUsed"/>
   </rule>
 
