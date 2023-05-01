@@ -64,6 +64,7 @@ namespace PHPSTORM_META {
     'boolean',
     'ckeditor5.element',
     'ckeditor5.plugin.ckeditor5_alignment',
+    'ckeditor5.plugin.ckeditor5_codeBlock',
     'ckeditor5.plugin.ckeditor5_heading',
     'ckeditor5.plugin.ckeditor5_imageResize',
     'ckeditor5.plugin.ckeditor5_language',
