@@ -5,7 +5,7 @@ namespace PHPSTORM_META {
   expectedArguments(
     \Drupal\Core\File\FileSystemInterface::prepareDirectory(),
     1,
-    \Drupal\Core\File\FileSystemInterface::CREATE_DIRECTORY,
+    \Drupal\Core\File\FileSystemInterface::CREATE_DIRECTORY |
     \Drupal\Core\File\FileSystemInterface::MODIFY_PERMISSIONS
   );
 
