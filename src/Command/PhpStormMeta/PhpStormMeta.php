@@ -44,7 +44,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
    * @psalm-suppress ArgumentTypeCoercion
    */
   protected function generate(array &$vars, Assets $assets): void {
-    /** @psalm-suppress NullableReturnStatement, InvalidNullableReturnType */
+
     $service = fn (string $name): object => $this->container->get($name);
 
     $entity_interface = static function (EntityTypeInterface $definition): ?string {
