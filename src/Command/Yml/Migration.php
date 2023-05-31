@@ -72,7 +72,6 @@ final class Migration extends BaseGenerator implements ContainerInjectionInterfa
     $question->setValidator(new Required());
     try {
       $destination_manager = $this->container->get('plugin.manager.migrate.destination');
-      /** @psalm-suppress PossiblyNullReference */
       $destination_plugins = \array_keys($destination_manager->getDefinitions());
       $question->setAutocompleterValues($destination_plugins);
     }
