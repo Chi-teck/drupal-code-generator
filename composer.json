@@ -47,6 +47,6 @@
     },
     "conflict": {
         "squizlabs/php_codesniffer": "<3.6",
-        "slevomat/coding-standard": "<8.12.1"
+        "slevomat/coding-standard": "<8.6.4"
     }
 }
