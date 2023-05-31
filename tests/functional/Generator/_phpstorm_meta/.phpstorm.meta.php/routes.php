@@ -294,6 +294,7 @@ namespace PHPSTORM_META {
     'system.css_asset',
     'system.date_format_add',
     'system.db_update',
+    'system.development_settings',
     'system.entity_autocomplete',
     'system.file_system_settings',
     'system.files',

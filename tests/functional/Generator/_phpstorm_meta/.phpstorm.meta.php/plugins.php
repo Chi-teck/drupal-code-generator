@@ -791,6 +791,7 @@ namespace PHPSTORM_META {
   registerArgumentsSet('plugin.manager.ckeditor5.plugin__plugin_ids',
     'ckeditor5_alignment',
     'ckeditor5_arbitraryHtmlSupport',
+    'ckeditor5_autoformat',
     'ckeditor5_blockquote',
     'ckeditor5_bold',
     'ckeditor5_code',
