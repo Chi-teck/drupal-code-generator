@@ -98,6 +98,7 @@ else
 fi
 
 echo '🚩 Install local DCG'
+composer -d$drupal_dir update slevomat/coding-standard
 composer -d"$drupal_dir" config repositories.dcg "$(printf '{"type": "path", "url": "%s", "options": {"symlink": false}}' $self_dir)"
 composer -d$drupal_dir require chi-teck/drupal-code-generator --with-all-dependencies
 echo '————————————————————————————————————————————'
