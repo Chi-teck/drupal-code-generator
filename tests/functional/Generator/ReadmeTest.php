@@ -2,7 +2,6 @@
 
 namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
-use DrupalCodeGenerator\Command\JavaScript;
 use DrupalCodeGenerator\Command\Readme;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
 
