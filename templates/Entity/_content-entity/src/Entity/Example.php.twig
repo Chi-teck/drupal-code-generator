@@ -77,7 +77,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% if translatable %}
  *   translatable = TRUE,
 {% endif %}
- *   admin_permission = "{{ admin_permission }}",
+ *   admin_permission = "{{ permissions.administer }}",
  *   entity_keys = {
  *     "id" = "id",
 {% if revisionable %}

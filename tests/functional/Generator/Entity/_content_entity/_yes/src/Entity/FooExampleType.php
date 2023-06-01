@@ -28,7 +28,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
  *     },
  *   },
- *   admin_permission = "administer example types",
+ *   admin_permission = "administer foo_example types",
  *   bundle_of = "foo_example",
  *   config_prefix = "foo_example_type",
  *   entity_keys = {

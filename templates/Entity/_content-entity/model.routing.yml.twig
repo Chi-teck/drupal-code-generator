@@ -5,5 +5,5 @@ entity.{{ entity_type_id }}.settings:
     _form: '\Drupal\{{ machine_name }}\Form\{{ class }}SettingsForm'
     _title: '{{ entity_type_label }}'
   requirements:
-    _permission: '{{ admin_permission }}'
+    _permission: '{{ permissions.administer }}'
 {% endif %}

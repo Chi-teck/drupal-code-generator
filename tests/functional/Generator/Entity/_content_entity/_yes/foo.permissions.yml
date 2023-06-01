@@ -1,12 +1,12 @@
-administer example types:
+administer foo_example types:
   title: 'Administer example types'
   description: 'Maintain the types of example entity.'
   restrict access: true
-delete example:
-  title: 'Delete example'
-create example:
-  title: 'Create example'
-view example:
+view foo_example:
   title: 'View example'
-edit example:
+edit foo_example:
   title: 'Edit example'
+delete foo_example:
+  title: 'Delete example'
+create foo_example:
+  title: 'Create example'

@@ -28,7 +28,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
  *     },
  *   },
- *   admin_permission = "administer {{ entity_type_label|lower }} types",
+ *   admin_permission = "{{ permissions.administer }}",
  *   bundle_of = "{{ entity_type_id }}",
  *   config_prefix = "{{ entity_type_id }}_type",
  *   entity_keys = {

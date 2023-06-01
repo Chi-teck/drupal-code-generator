@@ -21,9 +21,9 @@ final class FooExampleAccessControlHandler extends EntityAccessControlHandler {
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
     return match($operation) {
-      'view' => AccessResult::allowedIfHasPermissions($account, ['view example', 'administer example types'], 'OR'),
-      'update' => AccessResult::allowedIfHasPermissions($account, ['edit example', 'administer example types'], 'OR'),
-      'delete' => AccessResult::allowedIfHasPermissions($account, ['delete example', 'administer example types'], 'OR'),
+      'view' => AccessResult::allowedIfHasPermissions($account, ['view foo_example', 'administer foo_example types'], 'OR'),
+      'update' => AccessResult::allowedIfHasPermissions($account, ['edit foo_example', 'administer foo_example types'], 'OR'),
+      'delete' => AccessResult::allowedIfHasPermissions($account, ['delete foo_example', 'administer foo_example types'], 'OR'),
       default => AccessResult::neutral(),
     };
   }
@@ -32,7 +32,7 @@ final class FooExampleAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL): AccessResult {
-    return AccessResult::allowedIfHasPermissions($account, ['create example', 'administer example types'], 'OR');
+    return AccessResult::allowedIfHasPermissions($account, ['create foo_example', 'administer foo_example types'], 'OR');
   }
 
 }

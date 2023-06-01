@@ -44,7 +44,7 @@ use Drupal\user\EntityOwnerTrait;
  *   revision_data_table = "foo_example_field_revision",
  *   show_revision_ui = TRUE,
  *   translatable = TRUE,
- *   admin_permission = "administer example types",
+ *   admin_permission = "administer foo_example types",
  *   entity_keys = {
  *     "id" = "id",
  *     "revision" = "revision_id",
