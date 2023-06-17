@@ -1463,6 +1463,7 @@ namespace PHPSTORM_META {
     'entity.user.edit_form',
     'entity.user_role.collection',
     'entity.user_role.edit_form',
+    'entity.user_role.edit_permissions_form',
     'entity.version_history:block_content.version_history',
     'entity.view.edit_form',
     'field_ui.fields:display_overview_block_content',

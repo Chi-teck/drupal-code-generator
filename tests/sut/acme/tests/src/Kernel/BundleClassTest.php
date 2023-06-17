@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\acme\Kernel;
 
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\acme\Entity\User\UserBase;
 use Drupal\acme\Entity\User\UserBundle;
+use Drupal\KernelTests\KernelTestBase;
 
 /**
  * A test for generated bundle classes.
