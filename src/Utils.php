@@ -28,6 +28,15 @@ final class Utils {
   }
 
   /**
+   * Transforms a human name to permission name.
+   */
+  public static function human2permission(string $human_name): string {
+    $output = \strtolower($human_name);
+    $output = \preg_replace(['/^[0-9]+/', '/[^a-z0-9_ ]+/'], ' ', $output);
+    return \trim($output, '_ ');
+  }
+
+  /**
    * Transforms a camelized sting to machine name.
    */
   public static function camel2machine(string $input): string {
@@ -87,6 +96,7 @@ final class Utils {
         'u2h' => \str_replace('_', '-', $result),
         'h2u' => \str_replace('-', '_', $result),
         'h2m' => self::human2machine($result),
+        'h2p' => self::human2permission($result),
         'm2h' => self::machine2human($result),
         // @todo Test this.
         'm2t' => self::machine2human($result, TRUE),

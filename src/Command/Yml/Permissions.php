@@ -7,6 +7,7 @@ use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
+use DrupalCodeGenerator\Validator\Required;
 
 #[Generator(
   name: 'yml:permissions',
@@ -21,7 +22,16 @@ final class Permissions extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate(array &$vars, Assets $assets): void {
-    $vars['machine_name'] = $this->createInterviewer($vars)->askMachineName();
+    $ir = $this->createInterviewer($vars);
+
+    $vars['machine_name'] = $ir->askMachineName();
+
+    $default_title = 'Administer {machine_name} configuration';
+    $vars['permission_title'] = $ir->ask('Permission Title', $default_title, new Required());
+    $vars['permission_id'] = $ir->askPermissionId();
+    $vars['permission_description'] = $ir->ask('Permission description');
+    $vars['restrict_access'] = $ir->confirm('Display warning about site security won the Permissions page?', $default = FALSE);
+
     $assets->addFile('{machine_name}.permissions.yml', 'permissions.twig');
   }
 
