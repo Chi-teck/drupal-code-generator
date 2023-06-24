@@ -32,20 +32,30 @@ final class EntityTypes {
     \ksort($definitions);
     foreach ($definitions as $type => $definition) {
       $entity_types[] = $type;
-      $handlers['classes'][] = Utils::addLeadingSlash($definition->getClass());
-      $handlers['storages'][$type] = Utils::addLeadingSlash($definition->getStorageClass());
-      $handlers['access_controls'][$type] = Utils::addLeadingSlash($definition->getAccessControlClass());
+      $handlers['classes'][] = self::normalizeType($definition->getClass());
+      $handlers['storages'][$type] = self::normalizeType($definition->getStorageClass());
+      $handlers['access_controls'][$type] = self::normalizeType($definition->getAccessControlClass());
       if ($definition->hasViewBuilderClass()) {
-        $handlers['view_builders'][$type] = Utils::addLeadingSlash($definition->getViewBuilderClass());
+        $handlers['view_builders'][$type] = self::normalizeType($definition->getViewBuilderClass());
       }
       if ($definition->hasListBuilderClass()) {
-        $handlers['list_builders'][$type] = Utils::addLeadingSlash($definition->getListBuilderClass());
+        $handlers['list_builders'][$type] = self::normalizeType($definition->getListBuilderClass());
       }
     }
 
     return File::create('.phpstorm.meta.php/entity_types.php')
       ->template('entity_types.php.twig')
       ->vars(['handlers' => $handlers, 'entity_types' => $entity_types]);
+  }
+
+  /**
+   * Normalizes handler type.
+   */
+  private static function normalizeType(string $class): string {
+    $class = Utils::addLeadingSlash($class);
+    /** @psalm-var class-string $interface */
+    $interface = $class . 'Interface';
+    return \is_a($class, $interface, TRUE) ? $interface : $class;
   }
 
 }
