@@ -32,7 +32,7 @@ final class Permissions extends BaseGenerator {
     $vars['title'] = $ir->ask('Permission title', $default_title, new Required());
     $vars['id'] = $ir->ask(
       question: 'Permission ID',
-      default:  self::getDefaultId($vars['title']),
+      default: self::getDefaultId($vars['title']),
       validator: new Chained(new Required(), new PermissionId()),
     );
     $vars['description'] = $ir->ask('Permission description');

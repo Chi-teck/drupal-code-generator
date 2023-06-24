@@ -282,7 +282,7 @@ if [[ $test_filter = all || $test_filter = yml ]]; then
   $dcg yml:links:menu -a yety
   $dcg yml:links:task -a yety
   $dcg yml:module-libraries -a yety
-  $dcg yml:permissions -a yety
+  $dcg yml:permissions -a yety -a 'Administer yety configuration' -a 'administer yety configuration' -a 'Optional description.' -a 'Yes'
   $dcg yml:routing -a yety -a Yety
   $dcg yml:services -a yety -a Yety
 
