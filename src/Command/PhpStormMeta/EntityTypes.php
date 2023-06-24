@@ -22,36 +22,27 @@ final class EntityTypes {
    * Generator callback.
    */
   public function __invoke(): File {
-    $entity_types = [];
-    $handlers['storages'] = [];
-    $handlers['view_builders'] = [];
-    $handlers['list_builders'] = [];
-    $handlers['access_controls'] = [];
-    $handlers['classes'] = [];
-    $definitions = $this->entityTypeManager->getDefinitions();
-    \ksort($definitions);
-    foreach ($definitions as $type => $definition) {
-      $entity_types[] = $type;
-      $handlers['classes'][] = self::normalizeType($definition->getClass());
-      $handlers['storages'][$type] = self::normalizeType($definition->getStorageClass());
-      $handlers['access_controls'][$type] = self::normalizeType($definition->getAccessControlClass());
-      if ($definition->hasViewBuilderClass()) {
-        $handlers['view_builders'][$type] = self::normalizeType($definition->getViewBuilderClass());
-      }
-      if ($definition->hasListBuilderClass()) {
-        $handlers['list_builders'][$type] = self::normalizeType($definition->getListBuilderClass());
-      }
+    $normalized_definitions = [];
+    foreach ($this->entityTypeManager->getDefinitions() as $type => $definition) {
+      $normalized_definitions[$type]['class'] = self::normalizeType($definition->getClass());
+      $normalized_definitions[$type]['storage'] = self::normalizeType($definition->getStorageClass());
+      $normalized_definitions[$type]['access_control'] = self::normalizeType($definition->getAccessControlClass());
+      $normalized_definitions[$type]['list_builder'] = self::normalizeType($definition->getListBuilderClass());
+      $normalized_definitions[$type]['view_builder'] = self::normalizeType($definition->getViewBuilderClass());
     }
-
+    \ksort($normalized_definitions);
     return File::create('.phpstorm.meta.php/entity_types.php')
       ->template('entity_types.php.twig')
-      ->vars(['handlers' => $handlers, 'entity_types' => $entity_types]);
+      ->vars(['definitions' => $normalized_definitions]);
   }
 
   /**
    * Normalizes handler type.
    */
-  private static function normalizeType(string $class): string {
+  private static function normalizeType(?string $class): ?string {
+    if ($class === NULL) {
+      return NULL;
+    }
     $class = Utils::addLeadingSlash($class);
     /** @psalm-var class-string $interface */
     $interface = $class . 'Interface';

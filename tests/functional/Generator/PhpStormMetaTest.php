@@ -124,18 +124,18 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
         map([
-         'action' => '\Drupal\Core\Entity\EntityAccessControlHandlerInterface',
-         'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideAccessControlHandler',
-         'block' => '\Drupal\block\BlockAccessControlHandler',
+          'action' => '\Drupal\Core\Entity\EntityAccessControlHandlerInterface',
+          'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideAccessControlHandler',
+          'block' => '\Drupal\block\BlockAccessControlHandler',
     PHP;
     self::assertStringContainsString($access_control_handlers, $generated_content);
 
-    $entity_static_methods = <<< 'PHP'
+    $entity_storage_methods = <<< 'PHP'
       override(\Drupal\block\Entity\Block::loadMultiple(), map(['' => '\Drupal\block\Entity\Block[]']));
       override(\Drupal\block\Entity\Block::load(), map(['' => '\Drupal\block\Entity\Block']));
       override(\Drupal\block\Entity\Block::create(), map(['' => '\Drupal\block\Entity\Block']));
     PHP;
-    self::assertStringContainsString($entity_static_methods, $generated_content);
+    self::assertStringContainsString($entity_storage_methods, $generated_content);
   }
 
   private function assertExtensions(): void {

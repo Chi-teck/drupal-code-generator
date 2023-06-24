@@ -5,8 +5,8 @@ namespace PHPSTORM_META {
   // Entity types.
   expectedReturnValues(
     \Drupal\Core\Entity\EntityInterface::getEntityTypeId(),
-{% for entity_type_id in entity_types %}
-    '{{ entity_type_id }}',
+{% for type, definition in definitions %}
+    '{{ type }}',
 {% endfor %}
   );
 
@@ -14,49 +14,56 @@ namespace PHPSTORM_META {
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
     map([
-{% for entity_type_id, class in handlers.storages %}
-      '{{ entity_type_id }}' => '{{ class }}',
+{% for type, definition in definitions %}
+      '{{ type }}' => '{{ definition.storage }}',
 {% endfor %}
-    ])
+    ]),
   );
 
   // View builders.
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getViewBuilder(0),
     map([
-{% for entity_type_id, class in handlers.view_builders %}
-      '{{ entity_type_id }}' => '{{ class }}',
+{% for type, definition in definitions %}
+  {% if definition.view_builder %}
+      '{{ type }}' => '{{ definition.view_builder }}',
+  {% endif %}
 {% endfor %}
-    ])
+    ]),
   );
 
   // List builders.
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
     map([
-{% for entity_type_id, class in handlers.list_builders %}
-      '{{ entity_type_id }}' => '{{ class }}',
+{% for type, definition in definitions %}
+  {% if definition.list_builder %}
+      '{{ type }}' => '{{ definition.list_builder }}',
+  {% endif %}
 {% endfor %}
-    ])
+    ]),
   );
 
   // Access control handlers.
   override(
     \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
     map([
-{% for entity_type_id, class in handlers.access_controls %}
-     '{{ entity_type_id }}' => '{{ class }}',
+{% for type, definition in definitions %}
+      '{{ type }}' => '{{ definition.access_control }}',
 {% endfor %}
-    ])
+    ]),
   );
 
-  // Class methods.
-{% for class in handlers.classes %}
+  // Storage methods.
+{% for definition in definitions %}
 {# Using map() to work around PhpStorm bug. #}
 {# @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001516519 #}
-  override({{ class }}::loadMultiple(), map(['' => '{{ class }}[]']));
-  override({{ class }}::load(), map(['' => '{{ class }}']));
-  override({{ class }}::create(), map(['' => '{{ class }}']));
+  override({{ definition.storage }}::loadMultiple(), map(['' => '{{ definition.class }}[]']));
+  override({{ definition.storage }}::load(), map(['' => '{{ definition.class }}']));
+  override({{ definition.storage }}::create(), map(['' => '{{ definition.class }}']));
+  override({{ definition.class }}::loadMultiple(), map(['' => '{{ definition.class }}[]']));
+  override({{ definition.class }}::load(), map(['' => '{{ definition.class }}']));
+  override({{ definition.class }}::create(), map(['' => '{{ definition.class }}']));
 
 {% endfor %}
 }
