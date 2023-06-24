@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator;
 
+use Composer\InstalledVersions;
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\Event\GeneratorInfo;
@@ -43,8 +44,10 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
 
   /**
    * DCG version.
+   *
+   * @deprecated Use \DrupalCodeGenerator\Application->getVersion() instead.
    */
-  public const VERSION = '3.1.0';
+  public const VERSION = '3.2.0-dev';
 
   /**
    * DCG API version.
@@ -62,7 +65,10 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
    * @psalm-suppress ArgumentTypeCoercion
    */
   public static function create(ContainerInterface $container): self {
-    $application = new self('Drupal Code Generator', self::VERSION);
+    $application = new self(
+      'Drupal Code Generator',
+      InstalledVersions::getVersion('chi-teck/drupal-code-generator'),
+    );
     $application->setContainer($container);
 
     $file_system = new SymfonyFileSystem();
