@@ -5,13 +5,16 @@ namespace DrupalCodeGenerator\Validator;
 /**
  * Validates required permission name.
  */
-final class RequiredPermissionName {
+final class PermissionId {
 
   /**
    * @throws \UnexpectedValueException
    */
   public function __invoke(mixed $value): string {
-    return (new Chained(new Required(), new PermissionName()))($value);
+    if (!\is_string($value) || !\preg_match('/^[a-z][a-z0-9_ ]*[a-z0-9]$/', $value)) {
+      throw new \UnexpectedValueException('The value is not correct permission name.');
+    }
+    return $value;
   }
 
 }

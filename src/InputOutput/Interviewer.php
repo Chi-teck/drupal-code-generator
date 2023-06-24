@@ -14,7 +14,6 @@ use DrupalCodeGenerator\Validator\Optional;
 use DrupalCodeGenerator\Validator\Required;
 use DrupalCodeGenerator\Validator\RequiredClassName;
 use DrupalCodeGenerator\Validator\RequiredMachineName;
-use DrupalCodeGenerator\Validator\RequiredPermissionName;
 use DrupalCodeGenerator\Validator\ServiceExists;
 use DrupalCodeGenerator\Validator\ServiceName;
 use Symfony\Component\Console\Question\ChoiceQuestion;
@@ -161,13 +160,6 @@ final class Interviewer {
       $default = Utils::camelize($unprefixed_plugin_id) . $suffix;
     }
     return $this->askClass($question, $default);
-  }
-
-  /**
-   * Asks permission ID question.
-   */
-  public function askPermissionId(string $question = 'Permission ID', ?string $default = '{permission_title|h2p}'): string {
-    return $this->ask($question, $default, new RequiredPermissionName());
   }
 
   /**

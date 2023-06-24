@@ -7,6 +7,8 @@ use DrupalCodeGenerator\Asset\AssetCollection as Assets;
 use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
 use DrupalCodeGenerator\GeneratorType;
+use DrupalCodeGenerator\Validator\Chained;
+use DrupalCodeGenerator\Validator\PermissionId;
 use DrupalCodeGenerator\Validator\Required;
 
 #[Generator(
@@ -27,12 +29,26 @@ final class Permissions extends BaseGenerator {
     $vars['machine_name'] = $ir->askMachineName();
 
     $default_title = 'Administer {machine_name} configuration';
-    $vars['permission_title'] = $ir->ask('Permission Title', $default_title, new Required());
-    $vars['permission_id'] = $ir->askPermissionId();
-    $vars['permission_description'] = $ir->ask('Permission description');
-    $vars['restrict_access'] = $ir->confirm('Display warning about site security won the Permissions page?', $default = FALSE);
+    $vars['title'] = $ir->ask('Permission title', $default_title, new Required());
+    $vars['id'] = $ir->ask(
+      question: 'Permission ID',
+      default:  self::getDefaultId($vars['title']),
+      validator: new Chained(new Required(), new PermissionId()),
+    );
+    $vars['description'] = $ir->ask('Permission description');
+    $vars['restrict_access'] = $ir->confirm('Display warning about site security on the Permissions page?', FALSE);
 
-    $assets->addFile('{machine_name}.permissions.yml', 'permissions.twig');
+    $assets->addFile('{machine_name}.permissions.yml', 'permissions.twig')
+      ->appendIfExists();
+  }
+
+  /**
+   * Builds default permission ID.
+   */
+  private static function getDefaultId(string $title): string {
+    $id = \strtolower($title);
+    $id = \preg_replace(['/^[0-9]+/', '/[^a-z0-9_ ]+/', '/ +/'], ' ', $id);
+    return \trim($id, '_ ');
   }
 
 }
