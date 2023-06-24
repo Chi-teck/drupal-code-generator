@@ -87,6 +87,7 @@ final class Utils {
         'u2h' => \str_replace('_', '-', $result),
         'h2u' => \str_replace('-', '_', $result),
         'h2m' => self::human2machine($result),
+        'h2p' => self::human2permission($result),
         'm2h' => self::machine2human($result),
         // @todo Test this.
         'm2t' => self::machine2human($result, TRUE),

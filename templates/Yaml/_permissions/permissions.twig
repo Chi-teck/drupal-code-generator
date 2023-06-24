@@ -1,4 +1,8 @@
-administer {{ machine_name }} configuration:
-  title: 'Administer {{ machine_name }} configuration'
-  description: 'Optional description.'
+{{ id }}:
+  title: '{{ title }}'
+{% if description %}
+  description: '{{ description }}'
+{% endif %}
+{% if restrict_access %}
   restrict access: true
+{% endif %}

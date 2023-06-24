@@ -14,7 +14,14 @@ final class PermissionsTest extends GeneratorTestBase {
 
   public function testGenerator(): void {
 
-    $this->execute(Permissions::class, ['example']);
+    $values = [
+      'example',
+      'Administer example_id types!',
+      'administer example_id types',
+      'Optional description.',
+      'yes',
+    ];
+    $this->execute(Permissions::class, $values);
 
     $expected_display = <<< 'TXT'
 
@@ -22,6 +29,18 @@ final class PermissionsTest extends GeneratorTestBase {
     –––––––––––––––––––––––––––––––––––
 
      Module machine name:
+     ➤ 
+
+     Permission title [Administer example configuration]:
+     ➤ 
+
+     Permission ID [administer example_id types]:
+     ➤ 
+
+     Permission description:
+     ➤ 
+
+     Display warning about site security on the Permissions page? [No]:
      ➤ 
 
      The following directories and files have been created or updated:

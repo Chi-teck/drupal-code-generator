@@ -1,4 +1,4 @@
-administer example configuration:
-  title: 'Administer example configuration'
+administer example_id types:
+  title: 'Administer example_id types!'
   description: 'Optional description.'
   restrict access: true
