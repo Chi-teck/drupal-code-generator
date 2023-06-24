@@ -16,13 +16,7 @@ interface ResolverInterface {
   /**
    * Resolves an asset.
    *
-   * @param \DrupalCodeGenerator\Asset\Asset $asset
-   *   A generated asset.
-   * @param string $path
-   *   Path to existing asset that caused the resolving process.
-   *
-   * @return \DrupalCodeGenerator\Asset\Asset|null
-   *   The resolved asset or NULL if existing asset is up-to-date.
+   * Returns the resolved asset or NULL if existing asset is up-to-date.
    *
    * @throw \InvalidArgumentException
    */

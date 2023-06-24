@@ -114,17 +114,10 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
   }
 
   /**
-   * Returns a generator selected by the user from a multilevel console menu.
+   * Selects a generator.
    *
-   * @param \Symfony\Component\Console\Input\InputInterface $input
-   *   Input instance.
-   * @param \Symfony\Component\Console\Output\OutputInterface $output
-   *   Output instance.
-   * @param array $menu_trail
-   *   (Optional) Menu trail.
-   *
-   * @return string|null
-   *   Generator name or null if user decided to exit the navigation.
+   * Returns a generator selected by the user from a multilevel console menu or
+   * null if user decided to exit the navigation.
    */
   private function selectGenerator(InputInterface $input, OutputInterface $output, array $menu_trail = []): ?string {
 
