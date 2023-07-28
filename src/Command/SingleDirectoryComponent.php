@@ -22,22 +22,22 @@ use DrupalCodeGenerator\Validator\RequiredMachineName;
 use Symfony\Component\Console\Question\Question;
 
 #[Generator(
-  name: 'sdc',
+  name: 'single-directory-component',
   description: 'Generates Drupal SDC theme component',
-  aliases: ['singledirectorycomponent'],
-  templatePath: Application::TEMPLATE_PATH . '/_singledirectorycomponent',
+  aliases: ['sdc'],
+  templatePath: Application::TEMPLATE_PATH . '/_sdc',
   type: GeneratorType::THEME,
 )]
 final class SingleDirectoryComponent extends BaseGenerator implements ContainerInjectionInterface {
-  protected const COMPONENT_PATH_TOKEN = '{machine_name}' . \DIRECTORY_SEPARATOR . '{directory}' . \DIRECTORY_SEPARATOR . '{component_machine_name}' . \DIRECTORY_SEPARATOR;
+  private const COMPONENT_PATH_TOKEN = '{machine_name}' . \DIRECTORY_SEPARATOR . '{directory}' . \DIRECTORY_SEPARATOR . '{component_machine_name}' . \DIRECTORY_SEPARATOR;
 
   /**
    * {@inheritdoc}
    */
   public function __construct(
-    protected readonly ModuleHandlerInterface $moduleHandler,
-    protected readonly ThemeHandlerInterface $themeHandler,
-    protected readonly LibraryDiscovery $libraryDiscovery,
+    private readonly ModuleHandlerInterface $moduleHandler,
+    private readonly ThemeHandlerInterface $themeHandler,
+    private readonly LibraryDiscovery $libraryDiscovery,
   ) {
     parent::__construct();
   }

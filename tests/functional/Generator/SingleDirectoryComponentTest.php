@@ -10,7 +10,7 @@ use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
  */
 final class SingleDirectoryComponentTest extends GeneratorTestBase {
 
-  protected string $fixtureDir = __DIR__ . '/_singledirectorycomponent';
+  protected string $fixtureDir = __DIR__ . '/_sdc';
 
   /**
    * Test callback.
@@ -34,8 +34,8 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
 
     $expected_display = <<< 'TXT'
     
-     Welcome to singledirectorycomponent generator!
-    ––––––––––––––––––––––––––––––––––––––––––––––––
+     Welcome to sdc generator!
+    –––––––––––––––––––––––––––
     
      Theme name:
      ➤ 
@@ -77,6 +77,8 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo/components/bar/bar.component.yml
+     • foo/components/bar/bar.css
+     • foo/components/bar/bar.js
      • foo/components/bar/bar.twig
      • foo/components/bar/README.md
      • foo/components/bar/thumbnail.png
