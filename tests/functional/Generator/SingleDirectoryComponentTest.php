@@ -84,9 +84,9 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    // $this->assertGeneratedFile('foo/foo.info.yml');
-    // $this->assertGeneratedFile('foo/foo.install');
-    // $this->assertGeneratedFile('foo/foo.module');
-    // $this->assertGeneratedFile('foo/README.md');
+    $this->assertGeneratedFile('foo/components/bar/bar.component.yml');
+    $this->assertGeneratedFile('foo/components/bar/bar.twig');
+    $this->assertGeneratedFile('foo/components/bar/README.md');
+    $this->assertGeneratedFile('foo/components/bar/thumbnail.png');
   }
 }
