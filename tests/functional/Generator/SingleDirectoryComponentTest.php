@@ -89,4 +89,5 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
     $this->assertGeneratedFile('foo/components/bar/README.md');
     $this->assertGeneratedFile('foo/components/bar/thumbnail.png');
   }
+
 }

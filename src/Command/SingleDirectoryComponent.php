@@ -116,15 +116,17 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
    *
    * @param array $vars
    *   The answers to the CLI questions.
+   * @param \DrupalCodeGenerator\Asset\AssetCollection $assets
+   *   List of all the files to generate.
    */
   private function generateAssets(array $vars, AssetCollection $assets): void {
-    if ($vars['component_has_css']) {
+    if (isset($vars['component_has_css'])) {
       $assets->addFile(
         self::COMPONENT_PATH_TOKEN . '{component_machine_name}.css',
         'main-css--template.twig',
       );
     }
-    if ($vars['component_has_js']) {
+    if (isset($vars['component_has_js'])) {
       $assets->addFile(
         self::COMPONENT_PATH_TOKEN . '{component_machine_name}.js',
         'main-js--template.twig',
@@ -155,8 +157,8 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
   private function askLibrary(): ?string {
     $extensions = [
       'core',
-    ...\array_keys($this->moduleHandler->getModuleList()),
-    ...\array_keys($this->themeHandler->listInfo()),
+      ...\array_keys($this->moduleHandler->getModuleList()),
+      ...\array_keys($this->themeHandler->listInfo()),
     ];
     $library_ids = \array_reduce(
       $extensions,
