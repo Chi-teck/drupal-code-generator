@@ -29,7 +29,7 @@ use Symfony\Component\Console\Question\Question;
   type: GeneratorType::THEME_COMPONENT,
 )]
 final class SingleDirectoryComponent extends BaseGenerator implements ContainerInjectionInterface {
-  private const COMPONENT_PATH_TOKEN = '{machine_name}' . \DIRECTORY_SEPARATOR . '{directory}' . \DIRECTORY_SEPARATOR . '{component_machine_name}' . \DIRECTORY_SEPARATOR;
+  private const COMPONENT_PATH_TOKEN = '{directory}' . \DIRECTORY_SEPARATOR . '{component_machine_name}' . \DIRECTORY_SEPARATOR;
 
   /**
    * {@inheritdoc}
