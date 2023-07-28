@@ -20,8 +20,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings
@@ -53,8 +53,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings
@@ -87,8 +87,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings
@@ -121,8 +121,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings
@@ -154,8 +154,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings
@@ -198,8 +198,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings
@@ -244,8 +244,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings
@@ -280,8 +280,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings
@@ -319,8 +319,8 @@
   [18] Plugin manager
   [19] Readme
   [20] Render element
-  [21] Single directory component
-  [22] Service provider
+  [21] Service provider
+  [22] Single directory component
   [23] Template
   [24] Theme
   [25] Theme settings

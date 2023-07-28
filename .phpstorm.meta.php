@@ -52,6 +52,9 @@ namespace PHPSTORM_META {
       'event_dispatcher' => \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class,
       'extension.list.module' => \Drupal\Core\Extension\ModuleExtensionList::class,
       'kernel' => \Drupal\Core\DrupalKernelInterface::class,
+      'library.discovery' =>  \Drupal\Core\Asset\LibraryDiscovery::class,
+      'module_handler' => \Drupal\Core\Extension\ModuleHandlerInterface::class,
+      'theme_handler' => \Drupal\Core\Extension\ThemeHandlerInterface::class,
     ])
   );
 
