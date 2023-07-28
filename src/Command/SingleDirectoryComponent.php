@@ -26,7 +26,7 @@ use Symfony\Component\Console\Question\Question;
   description: 'Generates Drupal SDC theme component',
   aliases: ['sdc'],
   templatePath: Application::TEMPLATE_PATH . '/_sdc',
-  type: GeneratorType::THEME,
+  type: GeneratorType::THEME_COMPONENT,
 )]
 final class SingleDirectoryComponent extends BaseGenerator implements ContainerInjectionInterface {
   private const COMPONENT_PATH_TOKEN = '{machine_name}' . \DIRECTORY_SEPARATOR . '{directory}' . \DIRECTORY_SEPARATOR . '{component_machine_name}' . \DIRECTORY_SEPARATOR;
@@ -63,8 +63,8 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
 
   private function askQuestions(array &$vars): array {
     $ir = $this->createInterviewer($vars);
-    $vars['name'] = $ir->askName();
     $vars['machine_name'] = $ir->askMachineName();
+    $vars['name'] = $ir->askName();
     $vars['directory'] = $ir->ask('Components directory', 'components');
 
     $vars['component_name'] = $ir->ask('Component name', NULL, new Required());

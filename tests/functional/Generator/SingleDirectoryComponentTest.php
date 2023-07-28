@@ -37,10 +37,10 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
      Welcome to sdc generator!
     –––––––––––––––––––––––––––
     
-     Theme name:
+     Theme machine name:
      ➤ 
     
-     Theme machine name [foo]:
+     Theme name [Foo]:
      ➤ 
     
      Components directory [components]:
