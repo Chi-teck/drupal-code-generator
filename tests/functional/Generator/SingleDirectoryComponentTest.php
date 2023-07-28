@@ -77,8 +77,6 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • foo/components/bar/bar.component.yml
-     • foo/components/bar/bar.css
-     • foo/components/bar/bar.js
      • foo/components/bar/bar.twig
      • foo/components/bar/README.md
      • foo/components/bar/thumbnail.png

@@ -120,13 +120,13 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
    *   List of all the files to generate.
    */
   private function generateAssets(array $vars, AssetCollection $assets): void {
-    if (isset($vars['component_has_css'])) {
+    if (isset($vars['component_has_css']) && $vars['component_has_css'] !== FALSE) {
       $assets->addFile(
         self::COMPONENT_PATH_TOKEN . '{component_machine_name}.css',
         'main-css--template.twig',
       );
     }
-    if (isset($vars['component_has_js'])) {
+    if (isset($vars['component_has_js']) && $vars['component_has_js'] !== FALSE) {
       $assets->addFile(
         self::COMPONENT_PATH_TOKEN . '{component_machine_name}.js',
         'main-js--template.twig',
