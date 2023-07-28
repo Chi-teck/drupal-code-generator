@@ -79,7 +79,7 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
      • components/bar/bar.component.yml
      • components/bar/bar.twig
      • components/bar/README.md
-     • components/bar/thumbnail.png
+     • components/bar/thumbnail.jpg
 
     TXT;
     $this->assertDisplay($expected_display);
@@ -87,7 +87,7 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
     $this->assertGeneratedFile('components/bar/bar.component.yml');
     $this->assertGeneratedFile('components/bar/bar.twig');
     $this->assertGeneratedFile('components/bar/README.md');
-    $this->assertGeneratedFile('components/bar/thumbnail.png');
+    $this->assertGeneratedFile('components/bar/thumbnail.jpg');
   }
 
 }
