@@ -162,8 +162,8 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     ];
     $library_ids = \array_reduce(
       $extensions,
-      fn (array $libs, string $extension) => \array_merge(
-        $libs,
+      fn (iterable $libs, $extension) => \array_merge(
+        (array) $libs,
         \array_map(static fn (string $l) => \sprintf('%s/%s', $extension, $l),
           \array_keys($this->libraryDiscovery->getLibrariesByExtension($extension))),
       ),
