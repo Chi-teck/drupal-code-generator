@@ -34,8 +34,8 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
 
     $expected_display = <<< 'TXT'
     
-     Welcome to sdc:theme generator!
-    –––––––––––––––––––––––––––––––––
+     Welcome to singledirectorycomponent generator!
+    ––––––––––––––––––––––––––––––––––––––––––––––––
     
      Theme name:
      ➤ 

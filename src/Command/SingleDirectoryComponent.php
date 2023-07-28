@@ -2,12 +2,12 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Extension\ThemeHandlerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Asset\LibraryDiscovery;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Extension\ExtensionLifecycle;
-use Drupal\Core\Extension\ModuleExtensionList;
-use Drupal\Core\Extension\ThemeExtensionList;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\File;
@@ -24,7 +24,7 @@ use Symfony\Component\Console\Question\Question;
 #[Generator(
   name: 'sdc',
   description: 'Generates Drupal SDC theme component',
-  aliases: ['sdc:theme'],
+  aliases: ['singledirectorycomponent'],
   templatePath: Application::TEMPLATE_PATH . '/_singledirectorycomponent',
   type: GeneratorType::THEME,
 )]
@@ -35,8 +35,8 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
    * {@inheritdoc}
    */
   public function __construct(
-    protected readonly ModuleExtensionList $moduleList,
-    protected readonly ThemeExtensionList $themeList,
+    protected readonly ModuleHandlerInterface $moduleHandler,
+    protected readonly ThemeHandlerInterface $themeHandler,
     protected readonly LibraryDiscovery $libraryDiscovery,
   ) {
     parent::__construct();
@@ -47,8 +47,8 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
    */
   public static function create(ContainerInterface $container): self {
     return new self(
-      $container->get('extension.list.module'),
-      $container->get('extension.list.theme'),
+      $container->get('module_handler'),
+      $container->get('theme_handler'),
       $container->get('library.discovery'),
     );
   }
@@ -155,19 +155,18 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
   private function askLibrary(): ?string {
     $extensions = [
       'core',
-      ...\array_keys($this->moduleList->getList()),
-      ...\array_keys($this->themeList->getList()),
+    ...\array_keys($this->moduleHandler->getModuleList()),
+    ...\array_keys($this->themeHandler->listInfo()),
     ];
-    $library_ids = [];
-    # $library_ids = \array_reduce(
-    #   $extensions,
-    #   fn (array $libs, string $extension) => \array_merge(
-    #     $libs,
-    #     \array_map(static fn (string $l) => \sprintf('%s/%s', $extension, $l),
-    #       \array_keys($this->libraryDiscovery->getLibrariesByExtension($extension))),
-    #   ),
-    #   [],
-    # );
+    $library_ids = \array_reduce(
+      $extensions,
+      fn (array $libs, string $extension) => \array_merge(
+        $libs,
+        \array_map(static fn (string $l) => \sprintf('%s/%s', $extension, $l),
+          \array_keys($this->libraryDiscovery->getLibrariesByExtension($extension))),
+      ),
+      [],
+    );
 
     $question = new Question("Library dependencies (optional). [Example: core/once]");
     $question->setAutocompleterValues($library_ids);
