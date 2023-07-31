@@ -7,6 +7,9 @@ namespace DrupalCodeGenerator\Validator;
  */
 final class RegExp {
 
+  /**
+   * @psalm-param non-empty-string $pattern
+   */
   public function __construct(
     private readonly string $pattern,
     private readonly ?string $message = NULL,
