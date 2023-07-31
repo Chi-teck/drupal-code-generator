@@ -20,7 +20,6 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
     $input = [
       'foo',
       '',
-      '',
       'foo',
       'bar',
       'bar',
@@ -41,9 +40,6 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
      ➤ 
     
      Theme name [Foo]:
-     ➤ 
-    
-     Components directory [components]:
      ➤ 
     
      Component name:
