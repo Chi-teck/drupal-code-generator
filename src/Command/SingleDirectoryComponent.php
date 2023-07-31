@@ -29,7 +29,7 @@ use Symfony\Component\Console\Question\Question;
   type: GeneratorType::THEME_COMPONENT,
 )]
 final class SingleDirectoryComponent extends BaseGenerator implements ContainerInjectionInterface {
-  private const COMPONENT_PATH_TOKEN = '{directory}/{component_machine_name}/';
+  private const COMPONENT_PATH_TOKEN = 'components/{component_machine_name}/';
 
   /**
    * {@inheritdoc}
@@ -65,7 +65,6 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
-    $vars['directory'] = $ir->ask('Components directory', 'components');
 
     $vars['component_name'] = $ir->ask('Component name', NULL, new Required());
     $vars['component_machine_name'] = $ir->ask(
@@ -114,19 +113,19 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
   /**
    * Create the assets that the framework will write to disk later on.
    *
-   * @param array $vars
+   * @param array{component_has_css: bool, component_has_js: bool} $vars
    *   The answers to the CLI questions.
    * @param \DrupalCodeGenerator\Asset\AssetCollection $assets
    *   List of all the files to generate.
    */
   private function generateAssets(array $vars, AssetCollection $assets): void {
-    if (isset($vars['component_has_css']) && $vars['component_has_css'] !== FALSE) {
+    if ($vars['component_has_css']) {
       $assets->addFile(
         self::COMPONENT_PATH_TOKEN . '{component_machine_name}.css',
         'main-css--template.twig',
       );
     }
-    if (isset($vars['component_has_js']) && $vars['component_has_js'] !== FALSE) {
+    if ($vars['component_has_js']) {
       $assets->addFile(
         self::COMPONENT_PATH_TOKEN . '{component_machine_name}.js',
         'main-js--template.twig',
