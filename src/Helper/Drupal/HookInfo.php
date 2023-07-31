@@ -33,7 +33,6 @@ final class HookInfo extends Helper {
       return $hooks;
     }
 
-    /** @psalm-suppress ArgumentTypeCoercion */
     $core_api_files = \glob(\DRUPAL_ROOT . '/core/lib/Drupal/Core/*/*.api.php');
     $core_api_files[] = \DRUPAL_ROOT . '/core/core.api.php';
 
