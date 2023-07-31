@@ -28,7 +28,7 @@
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^3.0",
         "symfony/console": "^6.3",
-        "symfony/dependency-injection": "^6.3",
+        "symfony/dependency-injection": "^6.3.2",
         "symfony/filesystem": "^6.3",
         "symfony/string": "^6.3",
         "twig/twig": "^3.4"
