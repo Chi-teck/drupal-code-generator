@@ -117,7 +117,6 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
    * Returns Drupal container.
    */
   public function getContainer(): ContainerInterface {
-    /** @psalm-suppress RedundantPropertyInitializationCheck */
     if (!isset($this->container)) {
       throw new ContainerNotInitializedException('Application::$container is not initialized yet.');
     }
