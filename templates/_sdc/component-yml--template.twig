@@ -1,0 +1,32 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: "{{ component_name }}"
+status: "{{ component_status }}"
+{% if component_description is not empty %}
+description: "{{ component_description }}"
+{% endif %}
+{% if component_libraries is not empty %}
+libraryOverrides:
+  dependencies:
+    {% for library in component_libraries %}
+    - "{{ library }}"
+    {% endfor %}
+{% endif %}
+{% if component_props is not empty %}
+props:
+  type: object
+  properties:
+    {% for prop in component_props %}
+    "{{ prop.name }}":
+      type: "{{ prop.type }}"
+      title: "{{ prop.title }}"
+      {% if prop.description %}
+      description: "{{ prop.description }}"
+      {% endif %}
+      {% if prop.examples is not empty %}
+      examples:
+        {% for example in prop.examples %}
+        - "{{ example }}"
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+{% endif %}
