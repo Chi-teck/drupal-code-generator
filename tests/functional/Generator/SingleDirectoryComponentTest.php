@@ -25,8 +25,8 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
       'bar',
       '1',
       '',
-      'no',
-      'no',
+      'yes',
+      'yes',
       'no',
     ];
     $this->execute(SingleDirectoryComponent::class, $input);
@@ -73,6 +73,8 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • components/bar/bar.component.yml
+     • components/bar/bar.css
+     • components/bar/bar.js
      • components/bar/bar.twig
      • components/bar/README.md
      • components/bar/thumbnail.jpg
@@ -81,6 +83,8 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
     $this->assertDisplay($expected_display);
 
     $this->assertGeneratedFile('components/bar/bar.component.yml');
+    $this->assertGeneratedFile('components/bar/bar.css');
+    $this->assertGeneratedFile('components/bar/bar.js');
     $this->assertGeneratedFile('components/bar/bar.twig');
     $this->assertGeneratedFile('components/bar/README.md');
     $this->assertGeneratedFile('components/bar/thumbnail.jpg');

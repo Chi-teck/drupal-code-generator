@@ -1,6 +1,6 @@
 (function(Drupal) {
 
-  Drupal.behaviors.{{ component_machine_name|camelize(false) }} = {
+  Drupal.behaviors.bar = {
     attach(context) {
       console.log('@todo Replace me with the real JS behavior.');
     },
