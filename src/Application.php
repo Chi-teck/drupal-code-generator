@@ -47,7 +47,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
    *
    * @deprecated Use \DrupalCodeGenerator\Application->getVersion() instead.
    */
-  public const VERSION = '3.2.0-dev';
+  public const VERSION = 'unknown';
 
   /**
    * DCG API version.
