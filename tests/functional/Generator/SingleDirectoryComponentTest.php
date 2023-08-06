@@ -19,10 +19,11 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
 
     $input = [
       'foo',
-      '',
-      'foo',
+      'Foo',
+      'Bar',
       'bar',
-      'bar',
+      'Some description.',
+      'core/drupal',
       '',
       'yes',
       'yes',
@@ -44,12 +45,15 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
      Component name:
      ➤ 
     
-     Component machine name [foo]:
+     Component machine name [bar]:
      ➤ 
     
      Component description (optional):
      ➤ 
     
+     Library dependencies (optional). [Example: core/once]:
+     ➤ 
+
      Library dependencies (optional). [Example: core/once]:
      ➤ 
     
