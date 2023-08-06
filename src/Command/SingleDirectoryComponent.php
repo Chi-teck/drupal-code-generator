@@ -61,7 +61,10 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     $this->generateAssets($vars, $assets);
   }
 
-  private function askQuestions(array &$vars): array {
+  /**
+   * Collects user answers.
+   */
+  private function askQuestions(array &$vars): void {
     $ir = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
@@ -76,19 +79,8 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     $vars['component_description'] = $ir->ask(
       'Component description (optional)',
     );
-    $choices = [
-      ExtensionLifecycle::STABLE,
-      ExtensionLifecycle::EXPERIMENTAL,
-      ExtensionLifecycle::DEPRECATED,
-      ExtensionLifecycle::OBSOLETE,
-    ];
-    $vars['component_status'] = $ir->choice(
-      'Project type',
-      \array_combine($choices, $choices),
-      ExtensionLifecycle::STABLE,
-    );
-    $vars['component_libraries'] = [];
 
+    $vars['component_libraries'] = [];
     do {
       $library = $this->askLibrary();
       $vars['component_libraries'][] = $library;
@@ -104,19 +96,14 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
         $vars['component_props'][] = $prop;
       } while ($ir->confirm('Add another prop?'));
     }
-    $vars['component_props'] = \array_filter(
-      $vars['component_props'] ?? [],
-    );
-    return $vars;
+    $vars['component_props'] = \array_filter($vars['component_props'] ?? []);
   }
 
   /**
    * Create the assets that the framework will write to disk later on.
    *
-   * @param array{component_has_css: bool, component_has_js: bool} $vars
+   * @psalm-param array{component_has_css: bool, component_has_js: bool} $vars
    *   The answers to the CLI questions.
-   * @param \DrupalCodeGenerator\Asset\AssetCollection $assets
-   *   List of all the files to generate.
    */
   private function generateAssets(array $vars, AssetCollection $assets): void {
     if ($vars['component_has_css']) {

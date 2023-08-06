@@ -23,7 +23,6 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
       'foo',
       'bar',
       'bar',
-      '1',
       '',
       'yes',
       'yes',
@@ -49,13 +48,6 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
      ➤ 
     
      Component description (optional):
-     ➤ 
-    
-     Project type [stable]:
-      [1] stable
-      [2] experimental
-      [3] deprecated
-      [4] obsolete
      ➤ 
     
      Library dependencies (optional). [Example: core/once]:
