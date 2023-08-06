@@ -22,11 +22,7 @@ props:
       {% if prop.description %}
       description: {{ prop.description }}
       {% endif %}
-      {% if prop.examples|length > 0 %}
-      examples:
-        {% for example in prop.examples %}
-        - {{ example }}
-        {% endfor %}
-      {% endif %}
+      # @todo Add examples here.
+      examples: []
     {% endfor %}
 {% endif %}

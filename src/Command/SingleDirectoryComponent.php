@@ -7,7 +7,6 @@ use Drupal\Core\Extension\ThemeHandlerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Asset\LibraryDiscovery;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\Core\Extension\ExtensionLifecycle;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
 use DrupalCodeGenerator\Asset\File;
@@ -148,18 +147,18 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     ];
     $library_ids = \array_reduce(
       $extensions,
-      fn (iterable $libs, $extension) => \array_merge(
+      fn (iterable $libs, $extension): array => \array_merge(
         (array) $libs,
         \array_map(static fn (string $l) => \sprintf('%s/%s', $extension, $l),
-          \array_keys($this->libraryDiscovery->getLibrariesByExtension($extension))),
+        \array_keys($this->libraryDiscovery->getLibrariesByExtension($extension))),
       ),
       [],
     );
 
-    $question = new Question("Library dependencies (optional). [Example: core/once]");
+    $question = new Question('Library dependencies (optional). [Example: core/once]');
     $question->setAutocompleterValues($library_ids);
     $question->setValidator(
-      new Optional(new Choice($library_ids, "Invalid library selected.")),
+      new Optional(new Choice($library_ids, 'Invalid library selected.')),
     );
 
     return $this->io()->askQuestion($question);
@@ -173,30 +172,21 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
    */
   protected function askProp(Interviewer $ir): array {
     $prop = [];
-    $prop['title'] = $ir->ask('Prop human name', NULL, new Required());
+    $prop['title'] = $ir->ask('Prop title', NULL, new Required());
     $default = Utils::human2machine($prop['title']);
     $prop['name'] = $ir->ask('Prop machine name', $default, new RequiredMachineName());
     $prop['description'] = $ir->ask('Prop description (optional)');
-    $prop['type'] = $ir->choice('Prop type', [
+    $choices = [
       'string' => 'String',
       'number' => 'Number',
       'boolean' => 'Boolean',
       'array' => 'Array',
       'object' => 'Object',
       'null' => 'Always null',
-    ]);
+    ];
+    $prop['type'] = $ir->choice('Prop type', $choices, 'String');
     if (!\in_array($prop['type'], ['string', 'number', 'boolean'])) {
       $this->io()->warning('Unable to generate full schema for ' . $prop['type'] . '. Please edit metadata.json after generation.');
-      return $prop;
-    }
-    $prop['examples'] = [];
-    if ($prop['type'] === 'string') {
-      // Gather examples.
-      do {
-        $example = $ir->ask('Give a prop example (optional)');
-        $prop['examples'][] = $example;
-      } while (!\is_null($example));
-      $prop['examples'] = \array_filter($prop['examples']);
     }
     return $prop;
   }

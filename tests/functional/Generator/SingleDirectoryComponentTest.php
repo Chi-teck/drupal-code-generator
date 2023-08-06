@@ -25,9 +25,14 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
       'Some description.',
       'core/drupal',
       '',
-      'yes',
-      'yes',
-      'no',
+      'Yes',
+      'Yes',
+      'Yes',
+      'CTA text',
+      'cta_text',
+      'A text for CTA button.',
+      'String',
+      'No',
     ];
     $this->execute(SingleDirectoryComponent::class, $input);
 
@@ -65,7 +70,28 @@ final class SingleDirectoryComponentTest extends GeneratorTestBase {
     
      Needs component props? [Yes]:
      ➤ 
-    
+
+     Prop title:
+     ➤ 
+
+     Prop machine name [cta_text]:
+     ➤ 
+
+     Prop description (optional):
+     ➤ 
+
+     Prop type [String]:
+      [1] String
+      [2] Number
+      [3] Boolean
+      [4] Array
+      [5] Object
+      [6] Always null
+     ➤ 
+
+     Add another prop? [Yes]:
+     ➤ 
+
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      • components/bar/bar.component.yml

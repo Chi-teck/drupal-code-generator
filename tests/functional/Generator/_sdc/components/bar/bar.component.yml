@@ -5,3 +5,12 @@ description: Some description.
 libraryOverrides:
   dependencies:
     - core/drupal
+props:
+  type: object
+  properties:
+    cta_text:
+      type: string
+      title: CTA text
+      description: A text for CTA button.
+      # @todo Add examples here.
+      examples: []

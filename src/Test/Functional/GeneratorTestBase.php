@@ -44,15 +44,9 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
 
     $command_tester = new CommandTester($command);
     /** @psalm-var int<0, 1> $result */
-    try {
-      $result = $command_tester
-        ->setInputs($user_input)
-        ->execute(['--destination' => $this->directory]);
-    }
-    catch (\Exception $e) {
-      var_dump($command_tester->getDisplay());
-    }
-
+    $result = $command_tester
+      ->setInputs($user_input)
+      ->execute(['--destination' => $this->directory]);
 
     $this->display = $command_tester->getDisplay();
 
