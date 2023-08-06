@@ -108,23 +108,23 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     if ($vars['component_has_css']) {
       $assets->addFile(
         self::COMPONENT_PATH_TOKEN . '{component_machine_name}.css',
-        'main-css--template.twig',
+        'styles.twig',
       );
     }
     if ($vars['component_has_js']) {
       $assets->addFile(
         self::COMPONENT_PATH_TOKEN . '{component_machine_name}.js',
-        'main-js--template.twig',
+        'javascript.twig',
       );
     }
     $assets->addFile(
       self::COMPONENT_PATH_TOKEN . '{component_machine_name}.twig',
-      'component-twig--template.twig',
+      'template.twig',
     );
-    $assets->addFile(self::COMPONENT_PATH_TOKEN . '{component_machine_name}.component.yml', 'component-yml--template.twig');
-    $assets->addFile(self::COMPONENT_PATH_TOKEN . 'README.md', 'readme-md--template.twig');
+    $assets->addFile(self::COMPONENT_PATH_TOKEN . '{component_machine_name}.component.yml', 'component.twig');
+    $assets->addFile(self::COMPONENT_PATH_TOKEN . 'README.md', 'readme.twig');
 
-    $contents = \file_get_contents($this->getTemplatePath() . \DIRECTORY_SEPARATOR . 'thumbnail-placeholder.jpg');
+    $contents = \file_get_contents($this->getTemplatePath() . \DIRECTORY_SEPARATOR . 'thumbnail.jpg');
     $thumbnail = new File(self::COMPONENT_PATH_TOKEN . 'thumbnail.jpg');
     $thumbnail->content($contents);
     $assets[] = $thumbnail;
