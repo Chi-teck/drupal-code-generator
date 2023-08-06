@@ -28,7 +28,6 @@ use Symfony\Component\Console\Question\Question;
   type: GeneratorType::THEME_COMPONENT,
 )]
 final class SingleDirectoryComponent extends BaseGenerator implements ContainerInjectionInterface {
-  private const COMPONENT_PATH_TOKEN = 'components/{component_machine_name}/';
 
   /**
    * {@inheritdoc}
@@ -68,16 +67,14 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name'] = $ir->askName();
 
-    $vars['component_name'] = $ir->ask('Component name', NULL, new Required());
+    $vars['component_name'] = $ir->ask('Component name', validator: new Required());
     $vars['component_machine_name'] = $ir->ask(
       'Component machine name',
       Utils::human2machine($vars['component_name']),
       new RequiredMachineName(),
     );
 
-    $vars['component_description'] = $ir->ask(
-      'Component description (optional)',
-    );
+    $vars['component_description'] = $ir->ask('Component description (optional)');
 
     $vars['component_libraries'] = [];
     do {
@@ -105,27 +102,20 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
    *   The answers to the CLI questions.
    */
   private function generateAssets(array $vars, AssetCollection $assets): void {
+    $component_path = 'components/{component_machine_name}/';
+
     if ($vars['component_has_css']) {
-      $assets->addFile(
-        self::COMPONENT_PATH_TOKEN . '{component_machine_name}.css',
-        'styles.twig',
-      );
+      $assets->addFile($component_path . '{component_machine_name}.css', 'styles.twig');
     }
     if ($vars['component_has_js']) {
-      $assets->addFile(
-        self::COMPONENT_PATH_TOKEN . '{component_machine_name}.js',
-        'javascript.twig',
-      );
+      $assets->addFile($component_path . '{component_machine_name}.js', 'javascript.twig');
     }
-    $assets->addFile(
-      self::COMPONENT_PATH_TOKEN . '{component_machine_name}.twig',
-      'template.twig',
-    );
-    $assets->addFile(self::COMPONENT_PATH_TOKEN . '{component_machine_name}.component.yml', 'component.twig');
-    $assets->addFile(self::COMPONENT_PATH_TOKEN . 'README.md', 'readme.twig');
+    $assets->addFile($component_path . '{component_machine_name}.twig', 'template.twig');
+    $assets->addFile($component_path . '{component_machine_name}.component.yml', 'component.twig');
+    $assets->addFile($component_path . 'README.md', 'readme.twig');
 
     $contents = \file_get_contents($this->getTemplatePath() . \DIRECTORY_SEPARATOR . 'thumbnail.jpg');
-    $thumbnail = new File(self::COMPONENT_PATH_TOKEN . 'thumbnail.jpg');
+    $thumbnail = new File($component_path . 'thumbnail.jpg');
     $thumbnail->content($contents);
     $assets[] = $thumbnail;
   }
@@ -138,6 +128,8 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
    *
    * @return string|null
    *   The library ID, if any.
+   *
+   * @todo Move this to interviewer.
    */
   private function askLibrary(): ?string {
     $extensions = [
@@ -149,7 +141,7 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
       $extensions,
       fn (iterable $libs, $extension): array => \array_merge(
         (array) $libs,
-        \array_map(static fn (string $l) => \sprintf('%s/%s', $extension, $l),
+        \array_map(static fn (string $lib): string => \sprintf('%s/%s', $extension, $lib),
         \array_keys($this->libraryDiscovery->getLibrariesByExtension($extension))),
       ),
       [],
@@ -172,7 +164,7 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
    */
   protected function askProp(Interviewer $ir): array {
     $prop = [];
-    $prop['title'] = $ir->ask('Prop title', NULL, new Required());
+    $prop['title'] = $ir->ask('Prop title', '', new Required());
     $default = Utils::human2machine($prop['title']);
     $prop['name'] = $ir->ask('Prop machine name', $default, new RequiredMachineName());
     $prop['description'] = $ir->ask('Prop description (optional)');
