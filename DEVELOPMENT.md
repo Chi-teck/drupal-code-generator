@@ -15,7 +15,6 @@ composer install
 
 ## Testing
 
-### 
 ```sh
 # Run unit tests.
 /path/to/drupal-code-generator/scripts/unit-tests.sh
@@ -26,3 +25,9 @@ composer install
 # Run tests for generated code.
 /path/to/drupal-code-generator/scripts/sut-tests.sh
 ```
+
+### SUT testing
+
+In order to run this type of tests you have to [install Symfony CLI][Symfony CLI download].
+
+[Symfony CLI download]: https://symfony.com/download

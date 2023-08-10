@@ -31,6 +31,11 @@ echo -----------------------------------------------
 
 function dcg_on_exit {
   local status=$?
+
+  if [[ $status == 1 ]] ; then
+    exit
+  fi
+
   echo '🚩 Shutdown server'
   symfony server:stop --dir=$drupal_dir
   if [[ $status == 0 ]] ; then
@@ -67,6 +72,12 @@ function dcg_label {
 }
 
 # === Create a site under testing. === #
+
+if ! [[ -x "$(command -v symfony)" ]]; then
+  echo -e '\n⚠️ \e[0;41mSymfony CLI is required to run these tests.\e[0m'
+  echo -e '\n🌐 \e[0;43mInstall it by following the instructions from: https://symfony.com/download\e[0m'
+  exit 1
+fi
 
 if [[ -d $drupal_dir ]]; then
   chmod -R 777 $drupal_dir
