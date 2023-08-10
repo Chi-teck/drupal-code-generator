@@ -73,9 +73,9 @@ function dcg_label {
 
 # === Create a site under testing. === #
 
-if ! [[ -x "$(command -v symfony)" ]]; then
-  echo -e '\n⚠️ \e[0;41mSymfony CLI is required to run these tests.\e[0m'
-  echo -e '\n🌐 \e[0;43mInstall it by following the instructions from: https://symfony.com/download\e[0m'
+if ! [[ -x "$(command -v sdymfony)" ]]; then
+  echo -e '\e[1;91m Symfony CLI is required to run these tests.\e[0m' >&2
+  echo -e '\e[1;91m Check out https://symfony.com/download for instructions.\e[0m' >&2
   exit 1
 fi
 

@@ -28,6 +28,6 @@ composer install
 
 ### SUT testing
 
-In order to run this type of tests you have to [install Symfony CLI][Symfony CLI download].
+In order to run this type of tests you need to install [Symfony CLI][Symfony CLI download].
 
 [Symfony CLI download]: https://symfony.com/download
