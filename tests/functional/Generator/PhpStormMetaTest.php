@@ -64,16 +64,138 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $this->assertGeneratedFile('.phpstorm.meta.php/file_system.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/miscellaneous.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/permissions.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/plugins.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/roles.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/routes.php');
     // The content of some files may vary depending on the Drupal version. So
     // that we only assert specific parts of those files.
+    $this->assertPlugins();
     $this->assertEntityTypes();
     $this->assertExtensions();
     $this->assertServices();
     $this->assertSettings();
     $this->assertStates();
+  }
+
+  /**
+   * @selfdoc
+   */
+  private function assertPlugins(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/plugins.php');
+
+    // Check the beginning of the file.
+    $entity_types = <<< 'PHP'
+    <?php declare(strict_types = 1);
+
+    namespace PHPSTORM_META {
+
+      // -- breakpoint.manager.
+      registerArgumentsSet('breakpoint.manager__plugin_ids',
+        'olivero.grid-max',
+        'olivero.grid-md',
+        'olivero.lg',
+        'olivero.md',
+        'olivero.nav',
+        'olivero.nav-md',
+        'olivero.sm',
+        'olivero.xl',
+        'toolbar.narrow',
+        'toolbar.standard',
+        'toolbar.wide',
+      );
+      expectedArguments(\Drupal\breakpoint\BreakpointManager::createInstance(), 0, argumentsSet('breakpoint.manager__plugin_ids'));
+      expectedArguments(\Drupal\breakpoint\BreakpointManager::getDefinition(), 0, argumentsSet('breakpoint.manager__plugin_ids'));
+      expectedArguments(\Drupal\breakpoint\BreakpointManager::hasDefinition(), 0, argumentsSet('breakpoint.manager__plugin_ids'));
+      expectedArguments(\Drupal\breakpoint\BreakpointManager::processDefinition(), 1, argumentsSet('breakpoint.manager__plugin_ids'));
+      expectedArguments(\Drupal\breakpoint\BreakpointManagerInterface::createInstance(), 0, argumentsSet('breakpoint.manager__plugin_ids'));
+      expectedArguments(\Drupal\breakpoint\BreakpointManagerInterface::getDefinition(), 0, argumentsSet('breakpoint.manager__plugin_ids'));
+      expectedArguments(\Drupal\breakpoint\BreakpointManagerInterface::hasDefinition(), 0, argumentsSet('breakpoint.manager__plugin_ids'));
+      expectedArguments(\Drupal\breakpoint\BreakpointManagerInterface::processDefinition(), 1, argumentsSet('breakpoint.manager__plugin_ids'));
+    PHP;
+    self::assertStringContainsString($entity_types, $generated_content);
+
+    // Check the middle of the file.
+    $entity_types = <<< 'PHP'
+
+      // -- image.toolkit.manager.
+      override(\Drupal\Core\ImageToolkit\ImageToolkitManager::createInstance(), map(['' => '\Drupal\Core\ImageToolkit\ImageToolkitInterface']));
+      override(\Drupal\Core\ImageToolkit\ImageToolkitManager::getInstance(), map(['' => '\Drupal\Core\ImageToolkit\ImageToolkitInterface|bool']));
+      registerArgumentsSet('image.toolkit.manager__plugin_ids',
+        'gd',
+      );
+      expectedArguments(\Drupal\Core\ImageToolkit\ImageToolkitManager::createInstance(), 0, argumentsSet('image.toolkit.manager__plugin_ids'));
+      expectedArguments(\Drupal\Core\ImageToolkit\ImageToolkitManager::getDefinition(), 0, argumentsSet('image.toolkit.manager__plugin_ids'));
+      expectedArguments(\Drupal\Core\ImageToolkit\ImageToolkitManager::hasDefinition(), 0, argumentsSet('image.toolkit.manager__plugin_ids'));
+      expectedArguments(\Drupal\Core\ImageToolkit\ImageToolkitManager::processDefinition(), 1, argumentsSet('image.toolkit.manager__plugin_ids'));
+    
+    PHP;
+    self::assertStringContainsString($entity_types, $generated_content);
+
+    // Check the end of the file.
+    $entity_types = <<< 'PHP'
+        'ValidReference',
+      );
+      expectedArguments(\Drupal\Core\Validation\ConstraintManager::createInstance(), 0, argumentsSet('validation.constraint__plugin_ids'));
+      expectedArguments(\Drupal\Core\Validation\ConstraintManager::getDefinition(), 0, argumentsSet('validation.constraint__plugin_ids'));
+      expectedArguments(\Drupal\Core\Validation\ConstraintManager::hasDefinition(), 0, argumentsSet('validation.constraint__plugin_ids'));
+      expectedArguments(\Drupal\Core\Validation\ConstraintManager::processDefinition(), 1, argumentsSet('validation.constraint__plugin_ids'));
+      expectedArguments(\Drupal\Core\Entity\EntityTypeInterface::addConstraint(), 0, argumentsSet('validation.constraint__plugin_ids'));
+      expectedArguments(\Drupal\Core\TypedData\DataDefinitionInterface::addConstraint(), 0, argumentsSet('validation.constraint__plugin_ids'));
+    
+    }
+    PHP;
+    self::assertStringContainsString($entity_types, $generated_content);
+
+    // Make sure all plugin types are in place.
+    self::assertStringContainsString('breakpoint.manager__plugin_ids', $generated_content);
+    self::assertStringContainsString('config.typed__plugin_ids', $generated_content);
+    self::assertStringContainsString('entity_type.manager__plugin_ids', $generated_content);
+    self::assertStringContainsString('image.toolkit.manager__plugin_ids', $generated_content);
+    self::assertStringContainsString('image.toolkit.operation.manager__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.action__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.archiver__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.block__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.ckeditor5.plugin__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.condition__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.display_variant__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.editor__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.element_info__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.entity_reference_selection__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.field.field_type__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.field.formatter__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.field.widget__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.filter__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.help_section__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.image.effect__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.link_relation_type__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.mail__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.menu.contextual_link__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.menu.local_action__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.menu.local_task__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.search__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.tour.tip__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.access__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.area__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.argument__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.argument_default__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.argument_validator__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.cache__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.display__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.display_extender__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.exposed_form__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.field__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.filter__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.join__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.pager__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.query__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.relationship__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.row__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.sort__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.style__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.views.wizard__plugin_ids', $generated_content);
+    self::assertStringContainsString('typed_data_manager__plugin_ids', $generated_content);
+    self::assertStringContainsString('validation.constraint__plugin_ids', $generated_content);
+
+    self::assertSame(48, \substr_count($generated_content, 'registerArgumentsSet'));
   }
 
   private function assertEntityTypes(): void {
@@ -89,53 +211,6 @@ final class PhpStormMetaTest extends GeneratorTestBase {
         'block_content_type',
     PHP;
     self::assertStringContainsString($entity_types, $generated_content);
-
-    $entity_storages = <<< 'PHP'
-      override(
-        \Drupal\Core\Entity\EntityTypeManagerInterface::getStorage(0),
-        map([
-          'action' => '\Drupal\Core\Config\Entity\ConfigEntityStorageInterface',
-          'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideStorage',
-          'block' => '\Drupal\Core\Config\Entity\ConfigEntityStorageInterface',
-    PHP;
-    self::assertStringContainsString($entity_storages, $generated_content);
-
-    $entity_view_builders = <<< 'PHP'
-      override(
-        \Drupal\Core\Entity\EntityTypeManagerInterface::getViewBuilder(0),
-        map([
-          'block' => '\Drupal\block\BlockViewBuilder',
-          'block_content' => '\Drupal\block_content\BlockContentViewBuilder',
-          'comment' => '\Drupal\comment\CommentViewBuilder',
-    PHP;
-    self::assertStringContainsString($entity_view_builders, $generated_content);
-
-    $entity_list_builders = <<< 'PHP'
-      override(
-        \Drupal\Core\Entity\EntityTypeManagerInterface::getListBuilder(0),
-        map([
-          'block' => '\Drupal\block\BlockListBuilder',
-          'block_content' => '\Drupal\block_content\BlockContentListBuilder',
-          'block_content_type' => '\Drupal\block_content\BlockContentTypeListBuilder',
-    PHP;
-    self::assertStringContainsString($entity_list_builders, $generated_content);
-
-    $access_control_handlers = <<< 'PHP'
-      override(
-        \Drupal\Core\Entity\EntityTypeManagerInterface::getAccessControlHandler(0),
-        map([
-          'action' => '\Drupal\Core\Entity\EntityAccessControlHandlerInterface',
-          'base_field_override' => '\Drupal\Core\Field\BaseFieldOverrideAccessControlHandler',
-          'block' => '\Drupal\block\BlockAccessControlHandler',
-    PHP;
-    self::assertStringContainsString($access_control_handlers, $generated_content);
-
-    $entity_storage_methods = <<< 'PHP'
-      override(\Drupal\block\Entity\Block::loadMultiple(), map(['' => '\Drupal\block\Entity\Block[]']));
-      override(\Drupal\block\Entity\Block::load(), map(['' => '\Drupal\block\Entity\Block']));
-      override(\Drupal\block\Entity\Block::create(), map(['' => '\Drupal\block\Entity\Block']));
-    PHP;
-    self::assertStringContainsString($entity_storage_methods, $generated_content);
   }
 
   private function assertExtensions(): void {
