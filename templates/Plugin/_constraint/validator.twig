@@ -15,7 +15,7 @@ use Drupal\Core\Entity\EntityInterface;
   {% endif %}
   {% if services %}
 {{ di.use(services) }}
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
 {% endsort %}
@@ -23,29 +23,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Validates the {{ plugin_label }} constraint.
  */
-final class {{ class }}Validator extends ConstraintValidator {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
+final class {{ class }}Validator extends ConstraintValidator {% if services %}implements ContainerInjectionInterface {% endif %}{
 
 {% if services %}
   /**
    * Constructs the object.
    */
   public function __construct(
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
 {{ di.signature(services) }}
-  ) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-  }
+  ) {}
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+  public static function create(ContainerInterface $container): self {
     return new self(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
 {{ di.container(services) }}
     );
   }
