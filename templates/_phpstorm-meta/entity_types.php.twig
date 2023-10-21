@@ -8,7 +8,6 @@ namespace PHPSTORM_META {
     '{{ type }}',
 {% endfor %}
   );
-
   expectedArguments(\Drupal\KernelTests\KernelTestBase::installEntitySchema(), 0, argumentsSet('entity_type_ids'));
   expectedReturnValues(\Drupal\Core\Entity\EntityInterface::getEntityTypeId(), argumentsSet('entity_type_ids'));
 

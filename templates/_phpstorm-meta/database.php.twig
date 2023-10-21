@@ -13,5 +13,6 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Database\Query\SelectInterface::innerJoin(), 0, argumentsSet('database.tables'));
   expectedArguments(\Drupal\Core\Database\Query\SelectInterface::addJoin(), 1, argumentsSet('database.tables'));
   expectedArguments(\Drupal\Core\Database\Query\SelectInterface::orderBy(), 1, 'ASC', 'DESC');
+  expectedArguments(\Drupal\KernelTests\KernelTestBase::installSchema(), 1, argumentsSet('database.tables'));
 
 }
