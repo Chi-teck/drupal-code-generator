@@ -19,4 +19,11 @@ namespace PHPSTORM_META {
     ])
   );
 
+  expectedArguments(
+    \Symfony\Component\DependencyInjection\ContainerInterface::set(),
+    0,
+{% for service_id, class in services %}
+    '{{ service_id }}',
+{% endfor %}
+  );
 }
