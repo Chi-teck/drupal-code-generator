@@ -3,12 +3,14 @@
 namespace PHPSTORM_META {
 
   // Entity types.
-  expectedReturnValues(
-    \Drupal\Core\Entity\EntityInterface::getEntityTypeId(),
+  registerArgumentsSet('entity_type_ids',
 {% for type, definition in definitions %}
     '{{ type }}',
 {% endfor %}
   );
+
+  expectedArguments(\Drupal\KernelTests\KernelTestBase::installEntitySchema(), 0, argumentsSet('entity_type_ids'));
+  expectedReturnValues(\Drupal\Core\Entity\EntityInterface::getEntityTypeId(), argumentsSet('entity_type_ids'));
 
   // Storages.
   override(

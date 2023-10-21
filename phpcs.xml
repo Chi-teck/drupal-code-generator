@@ -19,6 +19,9 @@
     <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
     <exclude name="Drupal.Commenting.VariableComment.Missing"/>
     <exclude name="Drupal.Arrays.Array.LongLineDeclaration"/>
+    <!-- Conflicts with {@selfdoc} -->
+    <exclude name="Drupal.Commenting.DocComment.ShortNotCapital"/>
+    <exclude name="Drupal.Commenting.DocComment.ShortFullStop"/>
 
     <exclude name="SlevomatCodingStandard.ControlStructures.DisallowTrailingMultiLineTernaryOperator.TrailingMultiLineTernaryOperatorUsed"/>
   </rule>

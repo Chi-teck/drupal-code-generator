@@ -198,18 +198,26 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     self::assertSame(48, \substr_count($generated_content, 'registerArgumentsSet'));
   }
 
+  /**
+   * {@selfdoc}
+   */
   private function assertEntityTypes(): void {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
 
     $entity_types = <<< 'PHP'
-      expectedReturnValues(
-        \Drupal\Core\Entity\EntityInterface::getEntityTypeId(),
-        'action',
-        'base_field_override',
-        'block',
-        'block_content',
-        'block_content_type',
-    PHP;
+      <?php declare(strict_types = 1);
+
+      namespace PHPSTORM_META {
+
+        // Entity types.
+        registerArgumentsSet('entity_type_ids',
+          'action',
+          'base_field_override',
+          'block',
+          'block_content',
+          'block_content_type',
+          'comment',
+      PHP;
     self::assertStringContainsString($entity_types, $generated_content);
   }
 
