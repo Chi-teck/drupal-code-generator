@@ -18,6 +18,7 @@ namespace PHPSTORM_META {
   expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::invokeDeprecated(), 1, argumentsSet('modules'));
   expectedArguments(\Drupal\Core\Extension\ModuleHandlerInterface::getName(), 0, argumentsSet('modules'));
   expectedArguments(\Drupal\KernelTests\KernelTestBase::installSchema(), 0, argumentsSet('modules'));
+  expectedArguments(\Drupal\KernelTests\KernelTestBase::installConfig(), 0, argumentsSet('modules'));
 
   registerArgumentsSet('themes',
 {% for theme in themes %}
