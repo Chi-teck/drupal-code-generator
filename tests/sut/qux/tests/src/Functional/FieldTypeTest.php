@@ -49,28 +49,21 @@ final class FieldTypeTest extends BrowserTestBase {
       'field_name' => 'foo',
       'new_storage_type' => 'qux_example',
     ];
-    $this->submitForm($edit, 'Save and continue');
+    $this->submitForm($edit, 'Continue');
 
     // Update storage settings.
-    $this->assertXpath('//input[@name = "settings[foo]" and @value = ""]');
-    $edit = [
-      'settings[foo]' => 'Hi!',
-    ];
-    $this->submitForm($edit, 'Save field settings');
-
-    // Update instance settings.
+    $this->assertXpath('//input[@name = "field_storage[subform][settings][foo]" and @value = ""]');
     $this->assertXpath('//input[@name = "settings[bar]" and @value = ""]');
     $edit = [
+      'field_storage[subform][settings][foo]' => 'Hi!',
       'settings[bar]' => 'Yo!',
     ];
     $this->submitForm($edit, 'Save settings');
 
     // Make sure field settings have been persisted correctly.
-    $field_settings_url = 'admin/structure/types/manage/test/fields/node.test.field_foo';
-    $this->drupalGet($field_settings_url);
+    $this->drupalGet('/admin/structure/types/manage/test/fields/node.test.field_foo');
     $this->assertXpath('//input[@name = "settings[bar]" and @value = "Yo!"]');
-    $this->drupalGet($field_settings_url . '/storage');
-    $this->assertXpath('//input[@name = "settings[foo]" and @value = "Hi!"]');
+    $this->assertXpath('//input[@name = "field_storage[subform][settings][foo]" and @value = "Hi!"]');
 
     // Check the field length constraint.
     $this->drupalGet('node/add/test');

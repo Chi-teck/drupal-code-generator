@@ -35,8 +35,8 @@ final class {{ class }} extends BrowserTestBase {
   public function testSomething(): void {
     $admin_user = $this->drupalCreateUser(['access administration pages']);
     $this->drupalLogin($admin_user);
-    $this->drupalGet('admin');
-    $this->assertSession()->elementExists('xpath', '//h1[text() = "Administration"]');
+    $this->drupalGet('/admin/config');
+    $this->assertSession()->elementExists('xpath', '//h1[text() = "Configuration"]');
   }
 
 }
