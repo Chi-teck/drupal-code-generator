@@ -44,11 +44,11 @@ final class ServiceInfoTest extends FunctionalTestBase {
     // Check if the services are sorted alphabetically.
     $expected_service_ids = [
       'access_arguments_resolver_factory',
+      'access_check.admin_menu_block_page',
       'access_check.contact_personal',
       'access_check.cron',
       'access_check.csrf',
       'access_check.custom',
-      'access_check.db_update',
     ];
     self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 6));
   }
@@ -69,11 +69,11 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
     $expected_service_ids = [
       'access_arguments_resolver_factory',
+      'access_check.admin_menu_block_page',
       'access_check.contact_personal',
       'access_check.cron',
       'access_check.csrf',
       'access_check.custom',
-      'access_check.db_update',
     ];
     self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 6));
 
@@ -114,11 +114,11 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
     $expected_service_classes = [
       'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
+      'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
       'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
       'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
       'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',
       'access_check.custom' => '\Drupal\Core\Access\CustomAccessCheck',
-      'access_check.db_update' => '\Drupal\system\Access\DbUpdateAccessCheck',
     ];
     self::assertSame($expected_service_classes, \array_slice($classes, 0, 6));
   }

@@ -23,6 +23,7 @@ namespace PHPSTORM_META {
     'config',
     'file_managed',
     'file_usage',
+    'help_search_items',
     'history',
     'key_value',
     'key_value_expire',

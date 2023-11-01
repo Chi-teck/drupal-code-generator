@@ -41,6 +41,7 @@ namespace PHPSTORM_META {
     'claro_breadcrumbs',
     'claro_content',
     'claro_help',
+    'claro_help_search',
     'claro_local_actions',
     'claro_messages',
     'claro_page_title',
@@ -259,6 +260,7 @@ namespace PHPSTORM_META {
 
   // -- Search page.
   registerArgumentsSet('search_page__ids',
+    'help_search',
     'node_search',
     'user_search',
   );
@@ -284,16 +286,6 @@ namespace PHPSTORM_META {
   expectedReturnValues(\Drupal\taxonomy\Entity\Vocabulary::id(), argumentsSet('taxonomy_vocabulary__ids'));
   expectedArguments(\Drupal\taxonomy\VocabularyInterface::load(), 0, argumentsSet('taxonomy_vocabulary__ids'));
   expectedReturnValues(\Drupal\taxonomy\VocabularyInterface::id(), argumentsSet('taxonomy_vocabulary__ids'));
-
-  // -- Tour.
-  registerArgumentsSet('tour__ids',
-    'block-layout',
-    'views-ui',
-  );
-  expectedArguments(\Drupal\tour\Entity\Tour::load(), 0, argumentsSet('tour__ids'));
-  expectedReturnValues(\Drupal\tour\Entity\Tour::id(), argumentsSet('tour__ids'));
-  expectedArguments(\Drupal\tour\TourInterface::load(), 0, argumentsSet('tour__ids'));
-  expectedReturnValues(\Drupal\tour\TourInterface::id(), argumentsSet('tour__ids'));
 
   // -- Role.
   registerArgumentsSet('user_role__ids',
