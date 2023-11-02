@@ -48,12 +48,18 @@ final class ContentEntityTest extends BrowserTestBase {
     // -- Add a new field to make sure the entity type is truly fieldable.
     $this->drupalGet('admin/structure/example/fields/add-field');
     $edit = [
-      'new_storage_type' => 'string',
+      'new_storage_type' => 'plain_text',
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
-    $this->submitForm($edit, 'Save');
-    $this->submitForm([], 'Save field settings');
+    $this->submitForm($edit, 'Continue');
+    $edit = [
+      'new_storage_type' => 'plain_text',
+      'label' => 'Foo',
+      'field_name' => 'foo',
+      'group_field_options_wrapper' => 'string',
+    ];
+    $this->submitForm($edit, 'Continue');
     $this->submitForm([], 'Save settings');
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
