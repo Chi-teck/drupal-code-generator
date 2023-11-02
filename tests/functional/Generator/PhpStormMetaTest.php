@@ -16,8 +16,8 @@ final class PhpStormMetaTest extends GeneratorTestBase {
    * Test callback.
    */
   public function testGenerator(): void {
-    // @todo Remove this once we drop support form Drupal 10.0.
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.0')) {
+    // @todo Remove this once we drop support form Drupal 10.1`.
+    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
       self::markTestSkipped();
     }
 

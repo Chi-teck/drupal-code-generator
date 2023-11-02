@@ -37,7 +37,7 @@
         "ext-simplexml": "*",
         "chi-teck/drupal-coder-extension": "^2.0.0-alpha4",
         "drupal/coder": "8.3.22",
-        "drupal/core": "10.1.x-dev",
+        "drupal/core": "10.2.x-dev",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.7",
