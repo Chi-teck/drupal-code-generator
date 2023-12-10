@@ -4,6 +4,7 @@ namespace PHPSTORM_META {
 
   registerArgumentsSet('permissions',
     'access administration pages',
+    'access announcements',
     'access block library',
     'access comments',
     'access content',

@@ -229,6 +229,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     namespace PHPSTORM_META {
     
       registerArgumentsSet('modules',
+        'announcements_feed',
         'automated_cron',
         'big_pipe',
         'block',
@@ -307,12 +308,12 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     namespace PHPSTORM_META {
 
       registerArgumentsSet('states',
+        'announcements_feed.last_fetch',
         'asset.css_js_query_string',
         'comment.maintain_entity_statistics',
         'comment.node_comment_statistics_scale',
         'help_search_unindexed_count',
         'install_task',
-        'install_time',
     PHP;
     self::assertStringContainsString($states, $generated_content);
 

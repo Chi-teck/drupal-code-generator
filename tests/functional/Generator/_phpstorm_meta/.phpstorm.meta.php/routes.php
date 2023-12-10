@@ -8,6 +8,7 @@ namespace PHPSTORM_META {
     '<front>',
     '<nolink>',
     '<none>',
+    'announcements_feed.announcement',
     'big_pipe.nojs',
     'block.admin_add',
     'block.admin_demo',

@@ -3,6 +3,7 @@
 namespace PHPSTORM_META {
 
   registerArgumentsSet('configs',
+    'announcements_feed.settings',
     'automated_cron.settings',
     'block.block.claro_breadcrumbs',
     'block.block.claro_content',
