@@ -67,7 +67,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
   public static function create(ContainerInterface $container): self {
     $application = new self(
       'Drupal Code Generator',
-      InstalledVersions::getVersion('chi-teck/drupal-code-generator'),
+      InstalledVersions::getPrettyVersion('chi-teck/drupal-code-generator'),
     );
     $application->setContainer($container);
 
