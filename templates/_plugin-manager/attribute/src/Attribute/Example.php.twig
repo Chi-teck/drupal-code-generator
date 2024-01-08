@@ -2,13 +2,14 @@
 
 namespace Drupal\{{ machine_name }}\Attribute;
 
+use Drupal\Component\Plugin\Attribute\AttributeBase;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * The {{ plugin_type }} attribute.
  */
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final class {{ class_prefix }} {
+final class {{ class_prefix }} extends AttributeBase {
 
   /**
    * Constructs a new {{ class_prefix }} instance.
