@@ -30,19 +30,20 @@ final class PluginManagerTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
-     ➤
+     ➤ 
 
      Module name [Foo]:
-     ➤
+     ➤ 
 
      Plugin type [foo]:
-     ➤
+     ➤ 
 
      Discovery type [Annotation]:
       [1] Annotation
-      [2] YAML
-      [3] Hook
-     ➤
+      [2] Attribute
+      [3] YAML
+      [4] Hook
+     ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -84,20 +85,20 @@ final class PluginManagerTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
-     ➤
+     ➤ 
 
      Module name [Foo]:
-     ➤
+     ➤ 
 
      Plugin type [foo]:
-     ➤
+     ➤ 
 
      Discovery type [Annotation]:
       [1] Annotation
       [2] Attribute
       [3] YAML
       [4] Hook
-     ➤
+     ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -139,19 +140,20 @@ final class PluginManagerTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
-     ➤
+     ➤ 
 
      Module name [Foo]:
-     ➤
+     ➤ 
 
      Plugin type [foo]:
-     ➤
+     ➤ 
 
      Discovery type [Annotation]:
       [1] Annotation
-      [2] YAML
-      [3] Hook
-     ➤
+      [2] Attribute
+      [3] YAML
+      [4] Hook
+     ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -191,19 +193,20 @@ final class PluginManagerTest extends GeneratorTestBase {
     ––––––––––––––––––––––––––––––––––––––
 
      Module machine name:
-     ➤
+     ➤ 
 
      Module name [Foo]:
-     ➤
+     ➤ 
 
      Plugin type [foo]:
-     ➤
+     ➤ 
 
      Discovery type [Annotation]:
       [1] Annotation
-      [2] YAML
-      [3] Hook
-     ➤
+      [2] Attribute
+      [3] YAML
+      [4] Hook
+     ➤ 
 
      The following directories and files have been created or updated:
     –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
