@@ -1,0 +1,21 @@
+<?php declare(strict_types = 1);
+
+namespace Drupal\{{ machine_name }}\Plugin\{{ class_prefix }};
+
+{% sort %}
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\{{ machine_name }}\Attribute\{{ class_prefix }};
+use Drupal\{{ machine_name }}\{{ class_prefix }}PluginBase;
+{% endsort %}
+
+/**
+ * Plugin implementation of the {{ plugin_type }}.
+ */
+#[{{ class_prefix }}(
+  id: "foo",
+  label: new TranslatableMarkup("Foo"),
+  description: new TranslatableMarkup("Foo description."),
+)]
+final class Foo extends {{ class_prefix }}PluginBase {
+
+}

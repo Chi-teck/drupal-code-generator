@@ -1,0 +1,4 @@
+services:
+  plugin.manager.{{ plugin_type }}:
+    class: Drupal\{{ machine_name }}\{{ class_prefix }}PluginManager
+    parent: default_plugin_manager
