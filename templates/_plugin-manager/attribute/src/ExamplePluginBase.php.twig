@@ -1,0 +1,20 @@
+<?php declare(strict_types = 1);
+
+namespace Drupal\{{ machine_name }};
+
+use Drupal\Component\Plugin\PluginBase;
+
+/**
+ * Base class for {{ plugin_type }} plugins.
+ */
+abstract class {{ class_prefix }}PluginBase extends PluginBase implements {{ class_prefix }}Interface {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function label(): string {
+    // Cast the label to a string since it is a TranslatableMarkup object.
+    return (string) $this->pluginDefinition['label'];
+  }
+
+}

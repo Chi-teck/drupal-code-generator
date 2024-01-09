@@ -40,8 +40,9 @@ final class PluginManagerTest extends GeneratorTestBase {
 
      Discovery type [Annotation]:
       [1] Annotation
-      [2] YAML
-      [3] Hook
+      [2] Attribute
+      [3] YAML
+      [4] Hook
      ➤ 
 
      The following directories and files have been created or updated:
@@ -63,6 +64,61 @@ final class PluginManagerTest extends GeneratorTestBase {
     $this->assertGeneratedFile('src/BarPluginBase.php');
     $this->assertGeneratedFile('src/BarPluginManager.php');
     $this->assertGeneratedFile('src/Annotation/Bar.php');
+    $this->assertGeneratedFile('src/Plugin/Bar/Foo.php');
+  }
+
+  /**
+   * Test callback.
+   */
+  public function testAttributeDiscovery(): void {
+    $input = [
+      'foo',
+      'Foo',
+      'bar',
+      'Attribute',
+    ];
+    $this->execute(PluginManager::class, $input);
+
+    $expected_display = <<< 'TXT'
+
+     Welcome to plugin-manager generator!
+    ––––––––––––––––––––––––––––––––––––––
+
+     Module machine name:
+     ➤ 
+
+     Module name [Foo]:
+     ➤ 
+
+     Plugin type [foo]:
+     ➤ 
+
+     Discovery type [Annotation]:
+      [1] Annotation
+      [2] Attribute
+      [3] YAML
+      [4] Hook
+     ➤ 
+
+     The following directories and files have been created or updated:
+    –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     • foo.info.yml
+     • foo.services.yml
+     • src/BarInterface.php
+     • src/BarPluginBase.php
+     • src/BarPluginManager.php
+     • src/Attribute/Bar.php
+     • src/Plugin/Bar/Foo.php
+
+    TXT;
+    $this->assertDisplay($expected_display);
+
+    $this->fixtureDir .= '/_attribute';
+    $this->assertGeneratedFile('foo.services.yml');
+    $this->assertGeneratedFile('src/BarInterface.php');
+    $this->assertGeneratedFile('src/BarPluginBase.php');
+    $this->assertGeneratedFile('src/BarPluginManager.php');
+    $this->assertGeneratedFile('src/Attribute/Bar.php');
     $this->assertGeneratedFile('src/Plugin/Bar/Foo.php');
   }
 
@@ -94,8 +150,9 @@ final class PluginManagerTest extends GeneratorTestBase {
 
      Discovery type [Annotation]:
       [1] Annotation
-      [2] YAML
-      [3] Hook
+      [2] Attribute
+      [3] YAML
+      [4] Hook
      ➤ 
 
      The following directories and files have been created or updated:
@@ -146,8 +203,9 @@ final class PluginManagerTest extends GeneratorTestBase {
 
      Discovery type [Annotation]:
       [1] Annotation
-      [2] YAML
-      [3] Hook
+      [2] Attribute
+      [3] YAML
+      [4] Hook
      ➤ 
 
      The following directories and files have been created or updated:
