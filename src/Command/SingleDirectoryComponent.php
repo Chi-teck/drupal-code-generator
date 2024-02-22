@@ -2,10 +2,10 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use Drupal\Core\Asset\LibraryDiscoveryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Asset\LibraryDiscovery;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use DrupalCodeGenerator\Application;
 use DrupalCodeGenerator\Asset\AssetCollection;
@@ -35,7 +35,7 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
   public function __construct(
     private readonly ModuleHandlerInterface $moduleHandler,
     private readonly ThemeHandlerInterface $themeHandler,
-    private readonly LibraryDiscovery $libraryDiscovery,
+    private readonly LibraryDiscoveryInterface $libraryDiscovery,
   ) {
     parent::__construct();
   }
