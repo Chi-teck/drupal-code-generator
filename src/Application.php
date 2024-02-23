@@ -34,6 +34,12 @@ use Twig\Loader\FilesystemLoader as TemplateLoader;
 
 /**
  * DCG console application.
+ *
+ * @psalm-suppress DeprecatedInterface
+ * @psalm-suppress DeprecatedTrait
+ *
+ * @todo Use Drupal replacement for ContainerAwareInterface when it's available.
+ * @see https://www.drupal.org/project/drupal/issues/3397522
  */
 final class Application extends BaseApplication implements ContainerAwareInterface, EventDispatcherInterface {
 

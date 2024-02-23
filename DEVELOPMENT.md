@@ -15,7 +15,7 @@ composer install
 
 ## Testing
 
-```sh
+```shell
 # Run unit tests.
 /path/to/drupal-code-generator/scripts/unit-tests.sh
 
