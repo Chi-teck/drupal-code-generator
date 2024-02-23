@@ -149,18 +149,20 @@ final class HookInfo extends Helper {
 
     $file_description = self::getFileDescription(self::getFileType($hook_name));
     return <<< TWIG
-        <?php declare(strict_types = 1);
+      <?php
 
-        /**
-         * @file
-         * $file_description
-         */
+      declare(strict_types=1);
 
-        /**
-         * Implements hook_$hook_name().
-         */
-        $hook_template
-        TWIG;
+      /**
+       * @file
+       * $file_description
+       */
+
+      /**
+       * Implements hook_$hook_name().
+       */
+      $hook_template
+      TWIG;
   }
 
   /**

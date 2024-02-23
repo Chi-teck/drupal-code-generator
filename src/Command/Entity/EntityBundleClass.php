@@ -114,7 +114,7 @@ final class EntityBundleClass extends BaseGenerator implements ContainerInjectio
 
     // @todo Handle duplicated hooks.
     $assets->addFile('{machine_name}.module', 'module.twig')
-      ->appendIfExists(7);
+      ->appendIfExists(9);
   }
 
 }

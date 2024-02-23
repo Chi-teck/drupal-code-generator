@@ -86,7 +86,9 @@ final class PhpStormMetaTest extends GeneratorTestBase {
 
     // Check the beginning of the file.
     $entity_types = <<< 'PHP'
-    <?php declare(strict_types = 1);
+    <?php
+
+    declare(strict_types=1);
 
     namespace PHPSTORM_META {
 
@@ -206,7 +208,9 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_types.php');
 
     $entity_types = <<< 'PHP'
-      <?php declare(strict_types = 1);
+      <?php
+
+      declare(strict_types=1);
 
       namespace PHPSTORM_META {
 
@@ -226,7 +230,9 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/extensions.php');
     // Testing environments may have different database drivers.
     $modules = <<< 'PHP'
-    <?php declare(strict_types = 1);
+    <?php
+
+    declare(strict_types=1);
     
     namespace PHPSTORM_META {
     
@@ -260,7 +266,9 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/services.php');
 
     $services_1 = <<< 'PHP'
-    <?php declare(strict_types = 1);
+    <?php
+
+    declare(strict_types=1);
 
     namespace PHPSTORM_META {
 
@@ -305,7 +313,9 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/states.php');
     // The full list of states depends on environment.
     $states = <<< 'PHP'
-    <?php declare(strict_types = 1);
+    <?php
+    
+    declare(strict_types=1);
     
     namespace PHPSTORM_META {
 

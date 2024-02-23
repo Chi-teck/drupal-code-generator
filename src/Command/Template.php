@@ -45,7 +45,7 @@ final class Template extends BaseGenerator {
     if ($vars['create_theme'] || $vars['create_preprocess']) {
       $assets->addFile('{machine_name}.module')
         ->template('module.twig')
-        ->appendIfExists(7);
+        ->appendIfExists(9);
     }
   }
 
