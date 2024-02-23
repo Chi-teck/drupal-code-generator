@@ -16,8 +16,8 @@ final class PhpStormMetaTest extends GeneratorTestBase {
    * Test callback.
    */
   public function testGenerator(): void {
-    // @todo Remove this once we drop support form Drupal 10.0.
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.0')) {
+    // @todo Remove this once we drop support form Drupal 10.1`.
+    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
       self::markTestSkipped();
     }
 
@@ -172,7 +172,6 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     self::assertStringContainsString('plugin.manager.menu.local_action__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.menu.local_task__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.search__plugin_ids', $generated_content);
-    self::assertStringContainsString('plugin.manager.tour.tip__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.views.access__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.views.area__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.views.argument__plugin_ids', $generated_content);
@@ -195,7 +194,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     self::assertStringContainsString('typed_data_manager__plugin_ids', $generated_content);
     self::assertStringContainsString('validation.constraint__plugin_ids', $generated_content);
 
-    self::assertSame(48, \substr_count($generated_content, 'registerArgumentsSet'));
+    self::assertSame(49, \substr_count($generated_content, 'registerArgumentsSet'));
   }
 
   /**
@@ -230,6 +229,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     namespace PHPSTORM_META {
     
       registerArgumentsSet('modules',
+        'announcements_feed',
         'automated_cron',
         'big_pipe',
         'block',
@@ -266,6 +266,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
         \Drupal::service(0),
         map([
           'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
+          'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
           'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
           'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
           'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',
@@ -277,6 +278,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
         \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
         map([
           'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
+          'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
           'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
           'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
           'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',
@@ -306,10 +308,12 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     namespace PHPSTORM_META {
 
       registerArgumentsSet('states',
+        'announcements_feed.last_fetch',
+        'asset.css_js_query_string',
         'comment.maintain_entity_statistics',
         'comment.node_comment_statistics_scale',
+        'help_search_unindexed_count',
         'install_task',
-        'install_time',
     PHP;
     self::assertStringContainsString($states, $generated_content);
 

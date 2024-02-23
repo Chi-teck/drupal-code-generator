@@ -43,7 +43,6 @@ namespace PHPSTORM_META {
     'shortcut_set',
     'taxonomy_term',
     'taxonomy_vocabulary',
-    'tour',
     'user',
     'user_role',
     'view',

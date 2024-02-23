@@ -24,9 +24,13 @@ final class HookInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testHookInfoTemplates(): void {
+    // @todo Remove this once we drop support for Drupal 10.1`.
+    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
+      self::markTestSkipped();
+    }
     $hook_info = new HookInfo(self::bootstrap()->get('module_handler'));
     $hook_templates = $hook_info->getHookTemplates();
-    self::assertCount(260, $hook_templates);
+    self::assertCount(261, $hook_templates);
 
     // A hook from core.api.php file.
     self::assertHookTemplate('data_type_info_alter', $hook_templates);

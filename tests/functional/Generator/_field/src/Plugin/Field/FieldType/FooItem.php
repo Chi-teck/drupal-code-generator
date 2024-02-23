@@ -16,7 +16,7 @@ use Drupal\Core\TypedData\DataDefinition;
  * @FieldType(
  *   id = "example_foo",
  *   label = @Translation("Foo"),
- *   category = @Translation("General"),
+ *   description = @Translation("Some description."),
  *   default_widget = "example_foo",
  *   default_formatter = "example_foo_default",
  * )

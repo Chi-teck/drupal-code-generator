@@ -15,7 +15,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 final class ExampleCommandTest extends UnitTestCase {
 
   /**
-   * Tests callback..
+   * Tests callback.
    */
   public function testCommand(): void {
     $application = new Application();

@@ -214,13 +214,6 @@ namespace PHPSTORM_META {
   expectedReturnValues(\Drupal\taxonomy\Entity\Vocabulary::bundle(), argumentsSet('taxonomy_vocabulary__bundles'));
   expectedReturnValues(\Drupal\taxonomy\VocabularyInterface::bundle(), argumentsSet('taxonomy_vocabulary__bundles'));
 
-  // Tour.
-  registerArgumentsSet('tour__bundles',
-    'tour',
-  );
-  expectedReturnValues(\Drupal\tour\Entity\Tour::bundle(), argumentsSet('tour__bundles'));
-  expectedReturnValues(\Drupal\tour\TourInterface::bundle(), argumentsSet('tour__bundles'));
-
   // User.
   registerArgumentsSet('user__bundles',
     'user',

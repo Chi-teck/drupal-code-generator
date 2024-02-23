@@ -55,8 +55,7 @@ final class FieldTest extends BrowserTestBase {
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
-    $this->submitForm($edit, 'Save and continue');
-    $this->submitForm([], 'Save field settings');
+    $this->submitForm($edit, 'Continue');
     $this->submitForm([], 'Save settings');
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
@@ -116,7 +115,7 @@ final class FieldTest extends BrowserTestBase {
     $message = new FM('%label must be a number.', ['%label' => 'Value 6']);
     $this->assertErrorMessage($message);
 
-    $message = new FM('The email address %value is not valid.', ['%value' => 'wrong email']);
+    $message = new FM('The email address %value is not valid. Use the format user@example.com.', ['%value' => 'wrong email']);
     $this->assertErrorMessage($message);
 
     $arguments = [
@@ -134,7 +133,7 @@ final class FieldTest extends BrowserTestBase {
       '%label' => 'Value 10',
       '%format' => (new DrupalDateTime())->format('Y-m-d'),
     ];
-    $message = new FM('The %label date is invalid. Please enter a date in the format %format.', $arguments);
+    $message = new FM('The %label date is invalid. Enter a date in the correct format.', $arguments);
     $this->assertErrorMessage($message);
 
     // Submit the form with correct values and test formatter output.
@@ -177,8 +176,7 @@ final class FieldTest extends BrowserTestBase {
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
-    $this->submitForm($edit, 'Save and continue');
-    $this->submitForm([], 'Save field settings');
+    $this->submitForm($edit, 'Continue');
     $this->submitForm([], 'Save settings');
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
@@ -330,16 +328,13 @@ final class FieldTest extends BrowserTestBase {
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
-    $this->submitForm($edit, 'Save and continue');
+    $this->submitForm($edit, 'Continue');
 
-    $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "settings[foo]" and @value = "example"][1]');
-    $edit = [
-      'settings[foo]' => 'test 1',
-    ];
-    $this->submitForm($edit, 'Save field settings');
-
+    $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "field_storage[subform][settings][foo]" and @value = "example"][1]');
     $this->assertXpath('//label[text() = "Bar"]/following::input[@name = "settings[bar]" and @value = "example"][1]');
+
     $edit = [
+      'field_storage[subform][settings][foo]' => 'test 1',
       'settings[bar]' => 'test 2',
     ];
     $this->submitForm($edit, 'Save settings');
@@ -347,8 +342,8 @@ final class FieldTest extends BrowserTestBase {
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     // Make sure the settings are saved.
-    $this->drupalGet('admin/structure/types/manage/page/fields/node.page.field_foo/storage');
-    $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "settings[foo]" and @value = "test 1"][1]');
+    $this->drupalGet('admin/structure/types/manage/page/fields/node.page.field_foo');
+    $this->assertXpath('//label[text() = "Foo"]/following::input[@name = "field_storage[subform][settings][foo]" and @value = "test 1"][1]');
     $this->drupalGet('admin/structure/types/manage/page/fields/node.page.field_foo');
     $this->assertXpath('//label[text() = "Bar"]/following::input[@name = "settings[bar]" and @value = "test 2"][1]');
 

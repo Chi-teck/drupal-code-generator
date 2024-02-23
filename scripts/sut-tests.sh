@@ -17,7 +17,7 @@ dcg_drupal_host=${DCG_DRUPAL_HOST:-'127.0.0.1'}
 dcg_drupal_port=${DCG_DRUPAL_PORT:-'8085'}
 dcg=$drupal_dir/vendor/bin/dcg
 dcg_wd_url=${DCG_WD_URL:-'http://localhost:4444/wd/hub'}
-dcg_drupal_version=${DCG_DRUPAL_VERSION:-'10.1.x'}
+dcg_drupal_version=${DCG_DRUPAL_VERSION:-'10.2.x'}
 drupal_repo='https://git.drupalcode.org/project/drupal.git'
 
 echo -----------------------------------------------
