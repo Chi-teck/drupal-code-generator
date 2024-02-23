@@ -24,7 +24,7 @@ abstract class FunctionalTestBase extends TestCase {
    */
   protected function setUp(): void {
     parent::setUp();
-    \assert_options(\ASSERT_ACTIVE, TRUE);
+    \ini_set('zend.assertions', 1);
     $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
   }
 
