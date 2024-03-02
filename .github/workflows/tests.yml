@@ -36,6 +36,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          ini-values: zend.assertions=1
           tools: composer:v2
 
       - name: Install Symfony CLI
