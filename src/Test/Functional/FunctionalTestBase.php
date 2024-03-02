@@ -26,7 +26,7 @@ abstract class FunctionalTestBase extends TestCase {
    */
   protected function setUp(): void {
     parent::setUp();
-    \var_dump(\ini_get('zend.assertions'));
+    echo 'zend.assertions: ', (\ini_get('zend.assertions')), \PHP_EOL;
     \ini_set('zend.assertions', 1);
     $this->directory = \sys_get_temp_dir() . '/dcg_sandbox';
   }
