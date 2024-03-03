@@ -22,7 +22,6 @@ jobs:
           - "8.2"
           - "8.3"
         drupal:
-          - "10.1.x"
           - "10.2.x"
           - "10.3.x"
         dependency-mode:
