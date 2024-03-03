@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\qux\Kernel\Plugin\migrate\source;
 
-use Drupal\Tests\migrate\Kernel\MigrateSqlSourceTestBase;
-
 /**
  * Tests SQL source migrate plugin.
  *
@@ -14,8 +12,11 @@ use Drupal\Tests\migrate\Kernel\MigrateSqlSourceTestBase;
  * @see \Drupal\Tests\migrate\Kernel\MigrateSourceTestBase::getPluginClass
  *
  * @covers \Drupal\qux\Plugin\migrate\source\Foo
+ *
+ * @todo Enable this test by adding 'extends MigrateSourceTestBase' once we drop
+ * support for Drupal 10.2
  */
-final class FooTest extends MigrateSqlSourceTestBase {
+final class FooTest {
 
   /**
    * {@inheritdoc}

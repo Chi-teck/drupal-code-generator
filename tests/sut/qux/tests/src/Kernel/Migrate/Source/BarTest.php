@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\qux\Kernel\Plugin\migrate\source;
 
-use Drupal\Tests\migrate\Kernel\MigrateSourceTestBase;
-
 /**
  * Tests no-SQL source migrate plugin.
  *
@@ -14,8 +12,11 @@ use Drupal\Tests\migrate\Kernel\MigrateSourceTestBase;
  * @see \Drupal\Tests\migrate\Kernel\MigrateSourceTestBase::getPluginClass
  *
  * @covers \Drupal\qux\Plugin\migrate\source\Bar
+ *
+ * @todo Enable this test by adding 'extends MigrateSourceTestBase' once we drop
+ * support for Drupal 10.2
  */
-final class BarTest extends MigrateSourceTestBase {
+final class BarTest {
 
   /**
    * {@inheritdoc}
