@@ -15,7 +15,8 @@ final class HookTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_hook';
 
   public function testGenerator(): void {
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
       self::markTestSkipped();
     }
     $this->execute(Hook::class, ['example', 'Example', 'theme']);
