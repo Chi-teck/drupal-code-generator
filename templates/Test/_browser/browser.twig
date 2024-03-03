@@ -35,10 +35,10 @@ final class {{ class }} extends BrowserTestBase {
    * Test callback.
    */
   public function testSomething(): void {
-    $admin_user = $this->drupalCreateUser(['access administration pages']);
+    $admin_user = $this->drupalCreateUser(['administer site configuration']);
     $this->drupalLogin($admin_user);
-    $this->drupalGet('/admin/config');
-    $this->assertSession()->elementExists('xpath', '//h1[text() = "Configuration"]');
+    $this->drupalGet('/admin/config/system/site-information');
+    $this->assertSession()->elementExists('xpath', '//h1[text() = "Basic site settings"]');
   }
 
 }

@@ -51,9 +51,17 @@ final class FieldTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldExample1(): void {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
+
     $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
     $edit = [
       'new_storage_type' => 'bar_example_1',
+    ];
+    $this->submitForm($edit, 'Continue');
+    $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
@@ -172,9 +180,17 @@ final class FieldTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldExample2(): void {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
+
     $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
     $edit = [
       'new_storage_type' => 'bar_example_2',
+    ];
+    $this->submitForm($edit, 'Continue');
+    $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
@@ -324,9 +340,17 @@ final class FieldTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldExample3(): void {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
+
     $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
     $edit = [
       'new_storage_type' => 'bar_example_3',
+    ];
+    $this->submitForm($edit, 'Continue');
+    $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
     ];

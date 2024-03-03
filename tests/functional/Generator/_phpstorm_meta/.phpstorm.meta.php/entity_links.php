@@ -306,6 +306,10 @@ namespace PHPSTORM_META {
     'delete-form',
     'edit-form',
     'create',
+    'revision',
+    'revision-delete-form',
+    'revision-revert-form',
+    'version-history',
   );
   expectedArguments(\Drupal\taxonomy\Entity\Term::toUrl(), 0, argumentsSet('taxonomy_term__links'));
   expectedArguments(\Drupal\taxonomy\Entity\Term::toLink(), 1, argumentsSet('taxonomy_term__links'));

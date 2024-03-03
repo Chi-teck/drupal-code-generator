@@ -18,8 +18,8 @@ final class PhpStormMetaTest extends GeneratorTestBase {
    * Test callback.
    */
   public function testGenerator(): void {
-    // @todo Remove this once we drop support form Drupal 10.1`.
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
       self::markTestSkipped();
     }
 
@@ -275,11 +275,12 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Drupal::service(0),
         map([
+          '.service_locator.8a319vC' => '\Symfony\Component\DependencyInjection\ServiceLocator',
           'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
           'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
+          'access_check.admin_overview_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
           'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
           'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
-          'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',
     PHP;
     self::assertStringContainsString($services_1, $generated_content);
 
@@ -287,8 +288,10 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
         map([
+          '.service_locator.8a319vC' => '\Symfony\Component\DependencyInjection\ServiceLocator',
           'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
           'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
+          'access_check.admin_overview_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
           'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
           'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
           'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',

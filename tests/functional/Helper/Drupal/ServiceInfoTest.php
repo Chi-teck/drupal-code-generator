@@ -33,24 +33,24 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServicesIds(): void {
-    // @todo Remove this once we drop support form Drupal 10.1
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
       self::markTestSkipped();
     }
     $service_info = new ServiceInfo(self::bootstrap());
 
     $service_ids = $service_info->getServicesIds();
-    self::assertGreaterThan(500, \count($service_ids));
-    self::assertLessThan(550, \count($service_ids));
+    self::assertGreaterThan(545, \count($service_ids));
+    self::assertLessThan(575, \count($service_ids));
 
     // Check if the services are sorted alphabetically.
     $expected_service_ids = [
+      '.service_locator.8a319vC',
       'access_arguments_resolver_factory',
       'access_check.admin_menu_block_page',
+      'access_check.admin_overview_page',
       'access_check.contact_personal',
       'access_check.cron',
-      'access_check.csrf',
-      'access_check.custom',
     ];
     self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 6));
   }
@@ -59,23 +59,24 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServiceDefinitions(): void {
-    // @todo Remove this once we drop support form Drupal 10.1.
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
       self::markTestSkipped();
     }
+
     $service_info = new ServiceInfo(self::bootstrap());
 
     $definitions = $service_info->getServiceDefinitions();
-    self::assertGreaterThan(500, \count($definitions));
-    self::assertLessThan(550, \count($definitions));
+    self::assertGreaterThan(545, \count($definitions));
+    self::assertLessThan(575, \count($definitions));
 
     $expected_service_ids = [
+      '.service_locator.8a319vC',
       'access_arguments_resolver_factory',
       'access_check.admin_menu_block_page',
+      'access_check.admin_overview_page',
       'access_check.contact_personal',
       'access_check.cron',
-      'access_check.csrf',
-      'access_check.custom',
     ];
     self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 6));
 
@@ -104,23 +105,23 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServiceClasses(): void {
-    // @todo Remove this once we drop support form Drupal 10.1.
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
       self::markTestSkipped();
     }
     $service_info = new ServiceInfo(self::bootstrap());
 
     $classes = $service_info->getServiceClasses();
-    self::assertGreaterThan(500, \count($classes));
-    self::assertLessThan(550, \count($classes));
+    self::assertGreaterThan(545, \count($classes));
+    self::assertLessThan(575, \count($classes));
 
     $expected_service_classes = [
+      '.service_locator.8a319vC' => '\Symfony\Component\DependencyInjection\ServiceLocator',
       'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
       'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
+      'access_check.admin_overview_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
       'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
       'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
-      'access_check.csrf' => '\Drupal\Core\Access\CsrfAccessCheck',
-      'access_check.custom' => '\Drupal\Core\Access\CustomAccessCheck',
     ];
     self::assertSame($expected_service_classes, \array_slice($classes, 0, 6));
   }

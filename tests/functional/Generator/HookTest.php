@@ -15,6 +15,9 @@ final class HookTest extends GeneratorTestBase {
   protected string $fixtureDir = __DIR__ . '/_hook';
 
   public function testGenerator(): void {
+    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.1')) {
+      self::markTestSkipped();
+    }
     $this->execute(Hook::class, ['example', 'Example', 'theme']);
 
     $expected_display = <<< 'TXT'

@@ -25,7 +25,7 @@ final class FooTest extends MigrateSqlSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public function providerSource(): array {
+  public static function providerSource(): array {
     $tests = [];
 
     $tests[0]['source_data']['example'] = [

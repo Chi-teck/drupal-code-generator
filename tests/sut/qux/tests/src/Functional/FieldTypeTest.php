@@ -31,6 +31,10 @@ final class FieldTypeTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldType(): void {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
 
     $this->drupalCreateContentType(['type' => 'test']);
 
@@ -47,13 +51,18 @@ final class FieldTypeTest extends BrowserTestBase {
     // Create new field.
     $this->drupalGet('admin/structure/types/manage/test/fields/add-field');
     $edit = [
-      'label' => 'Foo',
-      'field_name' => 'foo',
       'new_storage_type' => 'qux_example',
     ];
     $this->submitForm($edit, 'Continue');
+    $edit = [
+      'label' => 'Foo',
+      'field_name' => 'foo',
+    ];
+    $this->submitForm($edit, 'Continue');
+    $this->submitForm([], 'Save settings');
 
     // Update storage settings.
+    $this->drupalGet('/admin/structure/types/manage/test/fields/node.test.field_foo');
     $this->assertXpath('//input[@name = "field_storage[subform][settings][foo]" and @value = ""]');
     $this->assertXpath('//input[@name = "settings[bar]" and @value = ""]');
     $edit = [

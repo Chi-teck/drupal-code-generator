@@ -32,6 +32,10 @@ final class ContentEntityTest extends BrowserTestBase {
    * Test callback.
    */
   public function testEntityType(): void {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
 
     $permissions = [
       'administer example',
@@ -51,18 +55,16 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->drupalGet('admin/structure/example/fields/add-field');
     $edit = [
       'new_storage_type' => 'plain_text',
-      'label' => 'Foo',
-      'field_name' => 'foo',
     ];
     $this->submitForm($edit, 'Continue');
     $edit = [
-      'new_storage_type' => 'plain_text',
       'label' => 'Foo',
       'field_name' => 'foo',
       'group_field_options_wrapper' => 'string',
     ];
     $this->submitForm($edit, 'Continue');
     $this->submitForm([], 'Save settings');
+
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     /** @var \Drupal\Core\Entity\ContentEntityTypeInterface $entity_type */
