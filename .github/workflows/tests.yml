@@ -62,4 +62,6 @@ jobs:
         run: ./scripts/functional-tests.sh
 
       - name: Run SUT tests
+        env:
+          DCG_DRUPAL_VERSION: ${{ matrix.drupal }}
         run: ./scripts/sut-tests.sh
