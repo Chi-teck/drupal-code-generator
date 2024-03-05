@@ -17,17 +17,14 @@ final class ModuleInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetName(): void {
-    $module_info = new ModuleInfo(self::bootstrap()->get('module_handler'));
-    self::assertSame('module_info', $module_info->getName());
+    self::assertSame('module_info', self::getModuleInfo()->getName());
   }
 
   /**
    * Test callback.
    */
   public function testGetModules(): void {
-    $module_info = new ModuleInfo(self::bootstrap()->get('module_handler'));
-
-    $modules = $module_info->getExtensions();
+    $modules = self::getModuleInfo()->getExtensions();
     // Full list of modules is rather long and may vary depending on`
     // environment.
     self::assertSame('Database Logging', $modules['dblog']);
@@ -39,8 +36,7 @@ final class ModuleInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetDestination(): void {
-    $module_info = new ModuleInfo(self::bootstrap()->get('module_handler'));
-
+    $module_info = self::getModuleInfo();
     self::assertDestination('modules', $module_info->getDestination('node', TRUE));
     self::assertDestination('core/modules/node', $module_info->getDestination('node', FALSE));
     self::assertDestination('modules', $module_info->getDestination('foo', TRUE));
@@ -51,8 +47,7 @@ final class ModuleInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetModuleName(): void {
-    $module_info = new ModuleInfo(self::bootstrap()->get('module_handler'));
-
+    $module_info = self::getModuleInfo();
     self::assertSame('Database Logging', $module_info->getExtensionName('dblog'));
     self::assertNull($module_info->getExtensionName('unknown_module'));
   }
@@ -61,8 +56,7 @@ final class ModuleInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetModuleMachineName(): void {
-    $module_info = new ModuleInfo(self::bootstrap()->get('module_handler'));
-
+    $module_info = self::getModuleInfo();
     self::assertSame('dblog', $module_info->getExtensionMachineName('Database Logging'));
     self::assertNull($module_info->getExtensionName('Unknown Module'));
   }
@@ -71,7 +65,7 @@ final class ModuleInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetExtensionFromPath(): void {
-    $module_info = new ModuleInfo(self::bootstrap()->get('module_handler'));
+    $module_info = self::getModuleInfo();
 
     $module = $module_info->getExtensionFromPath(\DRUPAL_ROOT . '/core/modules/node');
     self::assertSame('node', $module->getName());
@@ -91,6 +85,14 @@ final class ModuleInfoTest extends FunctionalTestBase {
    */
   private static function assertDestination(string $expected, string $actual): void {
     self::assertSame($expected, Utils::removePrefix($actual, \DRUPAL_ROOT . '/'));
+  }
+
+  /**
+   * {@selfdoc}
+   */
+  private static function getModuleInfo(): ModuleInfo {
+    $container = self::bootstrap();
+    return new ModuleInfo($container->get('module_handler'), $container->get('extension.list.module'));
   }
 
 }

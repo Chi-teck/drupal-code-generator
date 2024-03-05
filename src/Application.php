@@ -90,7 +90,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
         new TwigRenderer(new TwigEnvironment($template_loader)),
         new ListPrinter(),
         new TablePrinter(),
-        new ModuleInfo($container->get('module_handler')),
+        new ModuleInfo($container->get('module_handler'), $container->get('extension.list.module')),
         new ThemeInfo($container->get('theme_handler')),
         new ServiceInfo($container),
         new HookInfo($container->get('module_handler')),

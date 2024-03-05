@@ -19,8 +19,11 @@ final class ExtensionExistsTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testModuleExists(): void {
-    $module_handler = self::bootstrap()->get('module_handler');
-    $validator = new ExtensionExists(new ModuleInfo($module_handler), GeneratorType::MODULE_COMPONENT);
+    $module_info = new ModuleInfo(
+      self::bootstrap()->get('module_handler'),
+      self::bootstrap()->get('extension.list.module'),
+    );
+    $validator = new ExtensionExists($module_info, GeneratorType::MODULE_COMPONENT);
     self::assertSame('node', $validator('node'));
     self::assertSame('filter', $validator('filter'));
     self::expectExceptionObject(new \UnexpectedValueException('Module "ban" does not exists.'));
@@ -43,8 +46,11 @@ final class ExtensionExistsTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testExtensionExists(): void {
-    $module_handler = self::bootstrap()->get('module_handler');
-    $validator = new ExtensionExists(new ModuleInfo($module_handler), GeneratorType::OTHER);
+    $module_info = new ModuleInfo(
+      self::bootstrap()->get('module_handler'),
+      self::bootstrap()->get('extension.list.module'),
+    );
+    $validator = new ExtensionExists($module_info, GeneratorType::OTHER);
     self::assertSame('system', $validator('system'));
     self::assertSame('node', $validator('node'));
     self::expectExceptionObject(new \UnexpectedValueException('Extension "forum" does not exists.'));

@@ -605,7 +605,7 @@ final class InterviewerTest extends FunctionalTestBase {
       $definition,
       new ServiceInfo($container),
       match ($definition->type) {
-        GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => new ModuleInfo($container->get('module_handler')),
+        GeneratorType::MODULE, GeneratorType::MODULE_COMPONENT => new ModuleInfo($container->get('module_handler'), $container->get('extension.list.module')),
         GeneratorType::THEME, GeneratorType::THEME_COMPONENT => new ThemeInfo($container->get('theme_handler')),
         default => new NullExtensionInfo(),
       },
