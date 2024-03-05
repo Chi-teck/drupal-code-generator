@@ -2,7 +2,7 @@ name: 'Bar'
 type: module
 description: 'Some description.'
 package: Custom
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:node
   - drupal:system
