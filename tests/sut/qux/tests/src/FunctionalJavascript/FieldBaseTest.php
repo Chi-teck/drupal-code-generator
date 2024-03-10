@@ -24,7 +24,7 @@ abstract class FieldBaseTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['qux', 'node', 'field_ui'];
+  protected static $modules = ['qux', 'node', 'field_ui', 'block'];
 
   /**
    * {@inheritdoc}
@@ -46,11 +46,15 @@ abstract class FieldBaseTest extends WebDriverTestBase {
 
     // Create text field.
     $this->drupalGet('admin/structure/types/manage/test/fields/add-field');
-    $page = $this->getSession()->getPage();
-    $page->selectFieldOption('new_storage_type', 'string');
-    $page->fillField('label', 'Wine');
+
+    $driver = $this->getSession()->getDriver();
+    $driver->click('//input[@name = "new_storage_type" and @value = "plain_text"]');
+    $driver->click('//input[@value = "Continue"]');
+    $driver->setValue('//input[@name = "label"]', 'Wine');
+    $driver->setValue('//input[@name = "group_field_options_wrapper"]', 'string');
     $this->assertSession()->waitForElementVisible('css', '#edit-label-machine-name-suffix');
-    $page->pressButton('Save and continue');
+    $driver->click('//input[@value = "Continue"]');
+    $driver->click('//input[@value = "Save settings"]');
   }
 
   /**

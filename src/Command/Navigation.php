@@ -27,15 +27,11 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
 
   /**
    * Menu tree.
-   *
-   * @var array
    */
   private array $menuTree = [];
 
   /**
    * Menu labels.
-   *
-   * @var array
    */
   private array $labels = [
     'misc:d7' => 'Drupal 7',
@@ -173,7 +169,7 @@ final class Navigation extends Command implements IOAwareInterface, LoggerAwareI
   }
 
   /**
-   * Sort multi-dimensional array by keys.
+   * Sort multidimensional array by keys.
    *
    * @param array $array
    *   An array being sorted.

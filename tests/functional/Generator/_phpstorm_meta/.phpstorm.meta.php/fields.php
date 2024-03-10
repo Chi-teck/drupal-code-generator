@@ -15,7 +15,6 @@ namespace PHPSTORM_META {
     'revision_user',
     'revision_log',
     'status',
-    'uid',
     'info',
     'changed',
     'reusable',

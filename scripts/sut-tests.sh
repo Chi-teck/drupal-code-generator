@@ -63,7 +63,7 @@ function dcg_phpcs {
 function dcg_phpunit {
   SIMPLETEST_BASE_URL=http://$dcg_drupal_host:$dcg_drupal_port \
   SIMPLETEST_DB=sqlite://localhost//$drupal_dir/sites/default/files/dcg_test.sqlite \
-  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chromeOptions": {"w3c": false, "args": ["--headless"]}}, "'$dcg_wd_url'"]' \
+  MINK_DRIVER_ARGS='["chrome", {"goog": {"w3c": false, "args": ["--headless"]}}, "'$dcg_wd_url'"]' \
   $drupal_dir/vendor/bin/phpunit -c $drupal_dir/core "$@"
 }
 
