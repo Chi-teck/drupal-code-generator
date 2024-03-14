@@ -1,0 +1,49 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\views\sort;
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\Plugin\views\sort\SortPluginBase;
+
+/**
+ * {{ plugin_label }} sort plugin.
+ *
+ * @ViewsSort("{{ plugin_id }}")
+ */
+class {{ class }} extends SortPluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $usesRowPlugin = TRUE;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $usesRowClass = TRUE;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function defineOptions() {
+    $options = parent::defineOptions();
+    return $options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+    parent::buildOptionsForm($form, $form_state);
+    if ($this->canExpose()) {
+      $this->showExposeButton($form, $form_state);
+    }
+    $form['op_val_start'] = ['#value' => '<div class="clearfix">'];
+    $this->showSortForm($form, $form_state);
+    $form['op_val_end'] = ['#value' => '</div>'];
+    if ($this->canExpose()) {
+      $this->showExposeForm($form, $form_state);
+    }
+  }
+
+}
