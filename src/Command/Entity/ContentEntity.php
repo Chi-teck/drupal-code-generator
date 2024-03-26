@@ -42,6 +42,11 @@ final class ContentEntity extends BaseGenerator {
     $vars['entity_base_path'] = $ir->ask('Entity base path', '/{entity_type_id_short|u2h}');
     $vars['fieldable'] = $ir->confirm('Make the entity type fieldable?');
     $vars['revisionable'] = $ir->confirm('Make the entity type revisionable?', FALSE);
+
+    if ($vars['revisionable']) {
+      $vars['show_revision_ui'] = $ir->confirm('Show revision UI?');
+    }
+
     $vars['translatable'] = $ir->confirm('Make the entity type translatable?', FALSE);
     $vars['bundle'] = $ir->confirm('The entity type has bundle?', FALSE);
     $vars['canonical'] = $ir->confirm('Create canonical page?');
