@@ -94,7 +94,6 @@ final class ServiceInfoTest extends FunctionalTestBase {
                 'invalidBehavior' => 1,
               ],
             ],
-          'resolve' => TRUE,
         ],
       'arguments_count' => 1,
     ];
@@ -147,7 +146,6 @@ final class ServiceInfoTest extends FunctionalTestBase {
                 'invalidBehavior' => 1,
               ],
             ],
-          'resolve' => TRUE,
         ],
       'arguments_count' => 1,
     ];
