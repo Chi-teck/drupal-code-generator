@@ -39,6 +39,7 @@ final class ContentEntityTest extends GeneratorTestBase {
       'Yes',
       'Yes',
       'Yes',
+      'Yes',
       'Yes  ',
     ];
     $this->execute(ContentEntity::class, $input);
@@ -70,6 +71,9 @@ final class ContentEntityTest extends GeneratorTestBase {
      ➤ 
 
      Make the entity type revisionable? [No]:
+     ➤ 
+
+     Show revision UI? [Yes]:
      ➤ 
 
      Make the entity type translatable? [No]:
@@ -168,6 +172,7 @@ final class ContentEntityTest extends GeneratorTestBase {
       'foo_example',
       'Example',
       '/example',
+      'No',
       'No',
       'No',
       'No',
