@@ -55,7 +55,6 @@ namespace PHPSTORM_META {
     'search_index',
     'search_total',
     'sequences',
-    'sessions',
     'shortcut',
     'shortcut_field_data',
     'shortcut_set_users',
