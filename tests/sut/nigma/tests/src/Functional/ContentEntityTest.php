@@ -95,9 +95,12 @@ final class ContentEntityTest extends BrowserTestBase {
         'edit' => 'Drupal\nigma\Form\ExampleForm',
         'delete' => 'Drupal\Core\Entity\ContentEntityDeleteForm',
         'delete-multiple-confirm' => 'Drupal\Core\Entity\Form\DeleteMultipleForm',
+        'revision-delete' => '\Drupal\Core\Entity\Form\RevisionDeleteForm',
+        'revision-revert' => '\Drupal\Core\Entity\Form\RevisionRevertForm',
       ],
       'route_provider' => [
         'html' => 'Drupal\Core\Entity\Routing\AdminHtmlRouteProvider',
+        'revision' => '\Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider',
       ],
       'storage' => 'Drupal\Core\Entity\Sql\SqlContentEntityStorage',
       'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',
@@ -115,6 +118,10 @@ final class ContentEntityTest extends BrowserTestBase {
       'edit-form' => '/admin/content/example/{example}/edit',
       'delete-form' => '/admin/content/example/{example}/delete',
       'delete-multiple-form' => '/admin/content/example/delete-multiple',
+      'revision' => '/admin/content/example/{example}/revision/{example_revision}/view',
+      'revision-delete-form' => '/admin/content/example/{example}/revision/{example_revision}/delete',
+      'revision-revert-form' => '/admin/content/example/{example}/revision/{example_revision}/revert',
+      'version-history' => '/admin/content/example/{example}/revisions',
     ];
     self::assertSame($link_templates, $entity_type->getLinkTemplates());
 

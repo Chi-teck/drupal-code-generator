@@ -123,6 +123,7 @@ namespace PHPSTORM_META {
     'view the administration theme',
     'view update notifications',
     'view user email addresses',
+    'view vocabulary labels',
   );
   expectedArguments(\Drupal\Core\Session\AccountInterface::hasPermission(), 0, argumentsSet('permissions'));
   expectedArguments(\Drupal\Core\Access\AccessResult::allowedIfHasPermission(), 1, argumentsSet('permissions'));
