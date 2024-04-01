@@ -26,6 +26,9 @@ final class FooExampleAccessControlHandler extends EntityAccessControlHandler {
       'view' => AccessResult::allowedIfHasPermissions($account, ['view foo_example', 'administer foo_example types'], 'OR'),
       'update' => AccessResult::allowedIfHasPermissions($account, ['edit foo_example', 'administer foo_example types'], 'OR'),
       'delete' => AccessResult::allowedIfHasPermissions($account, ['delete foo_example', 'administer foo_example types'], 'OR'),
+      'view all revisions', 'view revision' => AccessResult::allowedIfHasPermissions($account, ['view foo_example revision', 'administer foo_example types'], 'OR'),
+      'revert' => AccessResult::allowedIfHasPermissions($account, ['revert foo_example revision', 'administer foo_example types'], 'OR'),
+      'delete revision' => AccessResult::allowedIfHasPermissions($account, ['delete foo_example revision', 'administer foo_example types'], 'OR'),
       default => AccessResult::neutral(),
     };
   }

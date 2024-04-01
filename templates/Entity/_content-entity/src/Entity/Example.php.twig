@@ -54,12 +54,19 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *       "edit" = "Drupal\{{ machine_name }}\Form\{{ class }}Form",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *       "delete-multiple-confirm" = "Drupal\Core\Entity\Form\DeleteMultipleForm",
+{% if revision_ui %}
+ *       "revision-delete" = \Drupal\Core\Entity\Form\RevisionDeleteForm::class,
+ *       "revision-revert" = \Drupal\Core\Entity\Form\RevisionRevertForm::class,
+{% endif %}
  *     },
  *     "route_provider" = {
 {% if canonical %}
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
 {% else %}
  *       "html" = "Drupal\{{ machine_name }}\Routing\{{ class }}HtmlRouteProvider",
+{% endif %}
+{% if revision_ui %}
+ *       "revision" = \Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider::class,
 {% endif %}
  *     },
  *   },
@@ -73,7 +80,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% if revisionable and translatable %}
  *   revision_data_table = "{{ entity_type_id }}_field_revision",
 {% endif %}
-{% if revisionable %}
+{% if revision_ui %}
  *   show_revision_ui = TRUE,
 {% endif %}
 {% if translatable %}
@@ -126,6 +133,12 @@ use Drupal\Core\Entity\EntityChangedTrait;
 {% endif %}
  *     "delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/delete",
  *     "delete-multiple-form" = "/admin/content/{{ entity_type_id_short|u2h }}/delete-multiple",
+{% if revision_ui %}
+ *     "revision" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/revision/{{ '{' }}{{ entity_type_id ~ '_revision' }}{{ '}' }}/view",
+ *     "revision-delete-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/revision/{{ '{' }}{{ entity_type_id ~ '_revision' }}{{ '}' }}/delete",
+ *     "revision-revert-form" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/revision/{{ '{' }}{{ entity_type_id ~ '_revision' }}{{ '}' }}/revert",
+ *     "version-history" = "{{ entity_base_path }}/{{ '{' }}{{ entity_type_id }}{{ '}' }}/revisions",
+{% endif %}
  *   },
 {% if bundle %}
  *   bundle_entity_type = "{{ entity_type_id }}_type",

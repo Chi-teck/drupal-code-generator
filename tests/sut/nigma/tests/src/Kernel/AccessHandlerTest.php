@@ -70,8 +70,29 @@ final class AccessHandlerTest extends KernelTestBase {
       ['create'],
     ];
     $data[] = [
+      ['view example revision'],
+      ['view all revisions', 'view revision'],
+    ];
+    $data[] = [
+      ['revert example revision'],
+      ['revert'],
+    ];
+    $data[] = [
+      ['delete example revision'],
+      ['delete revision'],
+    ];
+    $data[] = [
       ['administer example types'],
-      ['view', 'update', 'delete', 'create'],
+      [
+        'view',
+        'update',
+        'delete',
+        'create',
+        'view all revisions',
+        'view revision',
+        'revert',
+        'delete revision',
+      ],
     ];
     return $data;
   }
