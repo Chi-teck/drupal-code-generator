@@ -303,11 +303,15 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/settings.php');
     // The full list of settings depends on environment.
     $settings = <<< 'PHP'
+        'hash_salt',
+        'update_free_access',
         'container_yamls',
         'file_scan_ignore_directories',
         'entity_update_batch_size',
         'entity_update_backup',
+        'state_cache',
         'migrate_node_migrate_type_classic',
+        'config_sync_directory',
     PHP;
     self::assertStringContainsString($settings, $generated_content);
   }
