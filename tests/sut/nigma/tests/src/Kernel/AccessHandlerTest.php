@@ -41,7 +41,19 @@ final class AccessHandlerTest extends KernelTestBase {
   public function testAccessHandler(array $permissions, array $expected_access): void {
     $account = $this->createUser($permissions);
     $entity = Example::create(['bundle' => 'example']);
-    foreach (['create', 'view', 'update', 'delete'] as $operation) {
+
+    $operations = [
+      'create',
+      'view',
+      'update',
+      'delete',
+      'view all revisions',
+      'view revision',
+      'revert',
+      'delete revision',
+    ];
+
+    foreach ($operations as $operation) {
       self::assertSame(
         \in_array($operation, $expected_access),
         $entity->access($operation, $account),
@@ -70,12 +82,12 @@ final class AccessHandlerTest extends KernelTestBase {
       ['create'],
     ];
     $data[] = [
-      ['view example revision'],
-      ['view all revisions', 'view revision'],
+      ['view example', 'view example revision'],
+      ['view', 'view all revisions', 'view revision'],
     ];
     $data[] = [
-      ['revert example revision'],
-      ['revert'],
+      ['edit example', 'revert example revision'],
+      ['update', 'revert'],
     ];
     $data[] = [
       ['delete example revision'],
