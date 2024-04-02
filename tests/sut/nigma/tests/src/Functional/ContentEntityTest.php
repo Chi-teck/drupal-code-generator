@@ -220,15 +220,49 @@ final class ContentEntityTest extends BrowserTestBase {
     $xpath .= '//td[p[text() = "First version"]]';
     $this->assertXpath($xpath);
 
-    // -- Test entity revert revision.
+    // -- Test view revision.
+    $date_formatter = $this->container->get('date.formatter');
     $entity_revision = $example_storage->loadRevision(1);
     $date = $this->container->get('date.formatter')->format($entity_revision->getRevisionCreationTime());
+    $short_date = $this->container->get('date.formatter')->format($entity_revision->getRevisionCreationTime(), 'short');
 
+    $this->getSession()->getDriver()->click('//td[p[text() = "First version"]]/a[text() = "' . $short_date . '"]');
+    $this->assertPageTitle(new FM('Revision of %label from %date', ['%label' => 'Beer', '%date' => $date]));
+
+    $this->getSession()->back();
+
+    // -- Test entity revert revision.
     $this->getSession()->getDriver()->click('//td[p[text() = "First version"]]/following-sibling::td//a[text() = "Revert"]');
     $this->assertPageTitle(new FM('Are you sure you want to revert to the revision from %date?', ['%date' => $date]));
     $this->submitForm([], 'Revert');
 
-    // @todo Add revision deletion test.
+    $this->assertStatusMessage(new FM('@type %label has been reverted to the revision from %date.', [
+      '@type' => 'Bar',
+      '%label' => 'Beer',
+      '%date' => $date,
+    ]));
+
+    $xpath = '//table/tbody/tr[1]/td';
+    $xpath .= '/p[text() = "Copy of the revision from "]';
+    $xpath .= '/em[text() = "' . $date . '"]';
+    $this->assertXpath($xpath);
+
+    // -- Test delete revision.
+    $entity_revision = $example_storage->loadRevision(2);
+    $date = $date_formatter->format($entity_revision->getRevisionCreationTime());
+
+    $this->getSession()->getDriver()->click('//td[p[text() = "Second version"]]/following-sibling::td//a[text() = "Delete"]');
+    $this->assertPageTitle(new FM('Are you sure you want to delete the revision from %date?', ['%date' => $date]));
+    $this->submitForm([], 'Delete');
+
+    $this->assertStatusMessage(new FM('Revision from %date of @type %label has been deleted.', [
+      '@type' => 'Bar',
+      '%label' => 'Wine',
+      '%date' => $date,
+    ]));
+
+    $this->assertNoXpath('//td[p[text() = "Second version"]]');
+
     // -- Test entity list builder.
     $this->drupalGet('/admin/content/example');
     $this->assertPageTitle('Examples');
