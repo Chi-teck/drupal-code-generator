@@ -24,6 +24,7 @@ jobs:
         drupal:
           - "10.2.x"
           - "10.3.x"
+          - "11.x"
         dependency-mode:
           - prefer-stable
           - prefer-lowest
