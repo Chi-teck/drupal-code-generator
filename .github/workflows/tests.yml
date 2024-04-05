@@ -28,6 +28,11 @@ jobs:
         dependency-mode:
           - prefer-stable
           - prefer-lowest
+        exclude:
+          - php: "8.1"
+            drupal: "11.x"
+          - php: "8.2"
+            drupal: "11.x"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
