@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
 <ruleset name="Drupal Code Generator">
   <description>Drupal Code Generator coding standard</description>
-  <config name="installed_paths" value="vendor/slevomat/coding-standard" />
   <arg name="colors"/>
   <file>./scripts</file>
   <file>./src</file>
   <file>./tests</file>
 
-  <rule ref="vendor/chi-teck/drupal-coder-extension/DrupalExtended">
+  <rule ref="DrupalExtended">
     <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion"/>
     <exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator.MultiLineTernaryOperatorNotUsed"/>
     <!-- Conflicts with PHP attributes. -->
