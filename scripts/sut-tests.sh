@@ -398,7 +398,7 @@ if [[ $test_filter = all || $test_filter = content_entity ]]; then
 
   $dcg entity:content \
     -a nigma -a Nigma -a Example -a example -a Example -a /admin/content/example \
-    -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
+    -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes -a Yes
 
   dcg_phpcs .
   dcg_module_install $module_machine_name

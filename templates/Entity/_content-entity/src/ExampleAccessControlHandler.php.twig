@@ -30,7 +30,7 @@ final class {{ class }}AccessControlHandler extends EntityAccessControlHandler {
       'view' => AccessResult::allowedIfHasPermission($account, '{{ permissions.view }}'),
       'update' => AccessResult::allowedIfHasPermission($account, '{{ permissions.edit }}'),
       'delete' => AccessResult::allowedIfHasPermission($account, '{{ permissions.delete }}'),
-{% if revision_ui %}
+{% if revisionable %}
       'delete revision' => AccessResult::allowedIfHasPermission($account, '{{ permissions.delete_revision }}'),
       'view all revisions', 'view revision' => AccessResult::allowedIfHasPermissions($account, ['{{ permissions.view_revision }}', '{{ permissions.view }}']),
       'revert' => AccessResult::allowedIfHasPermissions($account, ['{{ permissions.revert_revision }}', '{{ permissions.edit }}']),

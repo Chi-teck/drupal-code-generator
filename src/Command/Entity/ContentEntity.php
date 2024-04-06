@@ -42,7 +42,6 @@ final class ContentEntity extends BaseGenerator {
     $vars['entity_base_path'] = $ir->ask('Entity base path', '/{entity_type_id_short|u2h}');
     $vars['fieldable'] = $ir->confirm('Make the entity type fieldable?');
     $vars['revisionable'] = $ir->confirm('Make the entity type revisionable?', FALSE);
-    $vars['revision_ui'] = $vars['revisionable'] && $ir->confirm('Show revision UI?');
     $vars['translatable'] = $ir->confirm('Make the entity type translatable?', FALSE);
     $vars['bundle'] = $ir->confirm('The entity type has bundle?', FALSE);
     $vars['canonical'] = $ir->confirm('Create canonical page?');
@@ -72,7 +71,7 @@ final class ContentEntity extends BaseGenerator {
       $vars['permissions']['create'] = 'create {entity_type_id}';
     }
 
-    if ($vars['access_controller'] && $vars['revision_ui']) {
+    if ($vars['access_controller'] && $vars['revisionable']) {
       $vars['permissions']['view_revision'] = 'view {entity_type_id} revision';
       $vars['permissions']['revert_revision'] = 'revert {entity_type_id} revision';
       $vars['permissions']['delete_revision'] = 'delete {entity_type_id} revision';

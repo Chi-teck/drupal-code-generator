@@ -73,9 +73,6 @@ final class ContentEntityTest extends GeneratorTestBase {
      Make the entity type revisionable? [No]:
      ➤ 
 
-     Show revision UI? [Yes]:
-     ➤ 
-
      Make the entity type translatable? [No]:
      ➤ 
 
