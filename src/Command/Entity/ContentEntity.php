@@ -71,6 +71,12 @@ final class ContentEntity extends BaseGenerator {
       $vars['permissions']['create'] = 'create {entity_type_id}';
     }
 
+    if ($vars['access_controller'] && $vars['revisionable']) {
+      $vars['permissions']['view_revision'] = 'view {entity_type_id} revision';
+      $vars['permissions']['revert_revision'] = 'revert {entity_type_id} revision';
+      $vars['permissions']['delete_revision'] = 'delete {entity_type_id} revision';
+    }
+
     $vars['rest_configuration'] = $ir->confirm('Create REST configuration for the entity?', FALSE);
 
     if (!\str_starts_with($vars['entity_base_path'], '/')) {

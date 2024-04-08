@@ -22,10 +22,17 @@ final class FooExampleAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
+    if ($account->hasPermission($this->entityType->getAdminPermission())) {
+      return AccessResult::allowed()->cachePerPermissions();
+    }
+
     return match($operation) {
-      'view' => AccessResult::allowedIfHasPermissions($account, ['view foo_example', 'administer foo_example types'], 'OR'),
-      'update' => AccessResult::allowedIfHasPermissions($account, ['edit foo_example', 'administer foo_example types'], 'OR'),
-      'delete' => AccessResult::allowedIfHasPermissions($account, ['delete foo_example', 'administer foo_example types'], 'OR'),
+      'view' => AccessResult::allowedIfHasPermission($account, 'view foo_example'),
+      'update' => AccessResult::allowedIfHasPermission($account, 'edit foo_example'),
+      'delete' => AccessResult::allowedIfHasPermission($account, 'delete foo_example'),
+      'delete revision' => AccessResult::allowedIfHasPermission($account, 'delete foo_example revision'),
+      'view all revisions', 'view revision' => AccessResult::allowedIfHasPermissions($account, ['view foo_example revision', 'view foo_example']),
+      'revert' => AccessResult::allowedIfHasPermissions($account, ['revert foo_example revision', 'edit foo_example']),
       default => AccessResult::neutral(),
     };
   }

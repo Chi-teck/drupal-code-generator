@@ -6,7 +6,6 @@ namespace Drupal\Tests\nigma\Functional;
 
 use Drupal\Component\Render\FormattableMarkup as FM;
 use Drupal\dcg_test\TestTrait;
-use Drupal\nigma\Entity\Example;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -40,6 +39,9 @@ final class ContentEntityTest extends BrowserTestBase {
       'create example',
       'edit example',
       'delete example',
+      'view example revision',
+      'revert example revision',
+      'delete example revision',
     ];
     $admin_user = $this->drupalCreateUser($permissions, 'example_admin');
     $this->drupalLogin($admin_user);
@@ -95,9 +97,12 @@ final class ContentEntityTest extends BrowserTestBase {
         'edit' => 'Drupal\nigma\Form\ExampleForm',
         'delete' => 'Drupal\Core\Entity\ContentEntityDeleteForm',
         'delete-multiple-confirm' => 'Drupal\Core\Entity\Form\DeleteMultipleForm',
+        'revision-delete' => '\Drupal\Core\Entity\Form\RevisionDeleteForm',
+        'revision-revert' => '\Drupal\Core\Entity\Form\RevisionRevertForm',
       ],
       'route_provider' => [
         'html' => 'Drupal\Core\Entity\Routing\AdminHtmlRouteProvider',
+        'revision' => '\Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider',
       ],
       'storage' => 'Drupal\Core\Entity\Sql\SqlContentEntityStorage',
       'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',
@@ -115,6 +120,10 @@ final class ContentEntityTest extends BrowserTestBase {
       'edit-form' => '/admin/content/example/{example}/edit',
       'delete-form' => '/admin/content/example/{example}/delete',
       'delete-multiple-form' => '/admin/content/example/delete-multiple',
+      'revision' => '/admin/content/example/{example}/revision/{example_revision}/view',
+      'revision-delete-form' => '/admin/content/example/{example}/revision/{example_revision}/delete',
+      'revision-revert-form' => '/admin/content/example/{example}/revision/{example_revision}/revert',
+      'version-history' => '/admin/content/example/{example}/revisions',
     ];
     self::assertSame($link_templates, $entity_type->getLinkTemplates());
 
@@ -147,7 +156,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $edit = [
       'label[0][value]' => 'Beer',
       'description[0][value]' => 'Dark',
-      'revision_log[0][value]' => 'New revision',
+      'revision_log[0][value]' => 'First version',
     ];
     $this->submitForm($edit, 'Save');
 
@@ -171,20 +180,88 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->assertXpath('//label[text() = "Revision log message"]/following-sibling::div/textarea[@name = "revision_log[0][value]"]');
 
     // -- Test entity values.
-    $entity = Example::load(1);
+    $example_storage = $this
+      ->container
+      ->get('entity_type.manager')
+      ->getStorage('example');
+
+    $entity = $example_storage->load(1);
     self::assertSame('1', $entity->id());
     self::assertSame('Beer', $entity->label());
     self::assertSame('foo', $entity->bundle());
     self::assertSame('Dark, plain_text', $entity->get('description')->getString());
-    self::assertSame('New revision', $entity->getRevisionLogMessage());
+    self::assertSame('First version', $entity->getRevisionLogMessage());
 
     $edit = [
       'label[0][value]' => 'Wine',
       'description[0][value]' => 'White',
+      'revision' => '1',
+      'revision_log[0][value]' => 'Second version',
     ];
     $this->submitForm($edit, 'Save');
     $this->assertStatusMessage(new FM('The example %label has been updated.', ['%label' => 'Wine']));
     $this->assertPageTitle('Wine');
+
+    // -- Test entity revisions list.
+    $this->drupalGet('/admin/content/example/1/revisions');
+    $this->assertPageTitle('Revisions');
+
+    $xpath = '//table/thead/tr[1]';
+    $xpath .= '//th[text() = "Revision"]';
+    $xpath .= '/next::th[text() = "Operations"]';
+    $this->assertXpath($xpath);
+
+    $xpath = '//table/tbody/tr[1]';
+    $xpath .= '//td[p[text() = "Second version"]]';
+    $xpath .= '/next::td[em[text() = "Current revision"]]';
+    $this->assertXpath($xpath);
+
+    $xpath = '//table/tbody/tr[2]';
+    $xpath .= '//td[p[text() = "First version"]]';
+    $this->assertXpath($xpath);
+
+    // -- Test view revision.
+    $date_formatter = $this->container->get('date.formatter');
+    $entity_revision = $example_storage->loadRevision(1);
+    $date = $this->container->get('date.formatter')->format($entity_revision->getRevisionCreationTime());
+    $short_date = $this->container->get('date.formatter')->format($entity_revision->getRevisionCreationTime(), 'short');
+
+    $this->getSession()->getDriver()->click('//td[p[text() = "First version"]]/a[text() = "' . $short_date . '"]');
+    $this->assertPageTitle(new FM('Revision of %label from %date', ['%label' => 'Beer', '%date' => $date]));
+
+    $this->getSession()->back();
+
+    // -- Test entity revert revision.
+    $this->getSession()->getDriver()->click('//td[p[text() = "First version"]]/following-sibling::td//a[text() = "Revert"]');
+    $this->assertPageTitle(new FM('Are you sure you want to revert to the revision from %date?', ['%date' => $date]));
+    $this->submitForm([], 'Revert');
+
+    $this->assertStatusMessage(new FM('@type %label has been reverted to the revision from %date.', [
+      '@type' => 'Bar',
+      '%label' => 'Beer',
+      '%date' => $date,
+    ]));
+
+    $xpath = '//table/tbody/tr[1]/td';
+    $xpath .= '/p[text() = "Copy of the revision from "]';
+    $xpath .= '/em[text() = "' . $date . '"]';
+    $this->assertXpath($xpath);
+
+    // -- Test delete revision.
+    $entity_revision = $example_storage->loadRevision(2);
+    $date = $date_formatter->format($entity_revision->getRevisionCreationTime());
+
+    $this->getSession()->getDriver()->click('//td[p[text() = "Second version"]]/following-sibling::td//a[text() = "Delete"]');
+    $this->assertPageTitle(new FM('Are you sure you want to delete the revision from %date?', ['%date' => $date]));
+    $this->submitForm([], 'Delete');
+
+    $this->assertStatusMessage(new FM('Revision from %date of @type %label has been deleted.', [
+      '@type' => 'Bar',
+      '%label' => 'Wine',
+      '%date' => $date,
+    ]));
+
+    $this->assertNoXpath('//td[p[text() = "Second version"]]');
 
     // -- Test entity list builder.
     $this->drupalGet('/admin/content/example');
@@ -202,18 +279,18 @@ final class ContentEntityTest extends BrowserTestBase {
 
     $xpath = '//table/tbody/tr[1]';
     $xpath .= '//td[text() = "1"]';
-    $xpath .= '/next::td[a[text() = "Wine"]]';
+    $xpath .= '/next::td[a[text() = "Beer"]]';
     $xpath .= '/next::td[text() = "Enabled"]';
     $xpath .= '/next::td[div/a[text() = "example_admin"]]';
     $this->assertXpath($xpath);
 
     // -- Test entity deletion.
     $this->getSession()->getDriver()->click('//td[text() = "1"]/following-sibling::td//a[text() = "Delete"]');
-    $this->assertPageTitle(new FM('Are you sure you want to delete the example %label?', ['%label' => 'Wine']));
+    $this->assertPageTitle(new FM('Are you sure you want to delete the example %label?', ['%label' => 'Beer']));
     $this->assertSession()->pageTextContains('This action cannot be undone');
 
     $this->submitForm([], 'Delete');
-    $this->assertStatusMessage(new FM('The example %label has been deleted.', ['%label' => 'Wine']));
+    $this->assertStatusMessage(new FM('The example %label has been deleted.', ['%label' => 'Beer']));
     $this->assertSession()->pageTextContains('There are no examples yet.');
   }
 

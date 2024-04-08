@@ -10,3 +10,9 @@ delete foo_example:
   title: 'Delete example'
 create foo_example:
   title: 'Create example'
+view foo_example revision:
+  title: 'View example revision'
+revert foo_example revision:
+  title: 'Revert example revision'
+delete foo_example revision:
+  title: 'Delete example revision'
