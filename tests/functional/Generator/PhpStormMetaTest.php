@@ -65,17 +65,54 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $this->assertGeneratedFile('.phpstorm.meta.php/fields.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/file_system.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/miscellaneous.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/permissions.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/roles.php');
     $this->assertGeneratedFile('.phpstorm.meta.php/routes.php');
     // The content of some files may vary depending on the Drupal version. So
     // that we only assert specific parts of those files.
+    $this->assertPermissions();
     $this->assertPlugins();
     $this->assertEntityTypes();
     $this->assertExtensions();
     $this->assertServices();
     $this->assertSettings();
     $this->assertStates();
+  }
+
+  /**
+   * @selfdoc
+   */
+  private function assertPermissions(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/permissions.php');
+
+    $permissions = <<< 'PHP'
+    <?php
+
+    declare(strict_types=1);
+
+    namespace PHPSTORM_META {
+
+      registerArgumentsSet('permissions',
+        'access administration pages',
+        'access announcements',
+        'access block library',
+        'access comments',
+        'access content',
+        'access content overview',
+        'access contextual links',
+        'access files overview',
+        'access help pages',
+        'access shortcuts',
+    PHP;
+    self::assertStringContainsString($permissions, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\Core\Session\AccountInterface::hasPermission(), 0, argumentsSet('permissions'));
+      expectedArguments(\Drupal\Core\Access\AccessResult::allowedIfHasPermission(), 1, argumentsSet('permissions'));
+      expectedArguments(\Drupal\user\RoleInterface::allowedIfHasPermission(), 0, argumentsSet('permissions'));
+      expectedArguments(\Drupal\user\RoleInterface::grantPermission(), 0, argumentsSet('permissions'));
+      expectedArguments(\Drupal\user\RoleInterface::revokePermission(), 0, argumentsSet('permissions'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
   }
 
   /**
