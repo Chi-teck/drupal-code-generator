@@ -22,10 +22,19 @@ final class {{ class }}AccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
+    if ($account->hasPermission($this->entityType->getAdminPermission())) {
+      return AccessResult::allowed()->cachePerPermissions();
+    }
+
     return match($operation) {
-      'view' => AccessResult::allowedIfHasPermissions($account, ['{{ permissions.view }}', '{{ permissions.administer }}'], 'OR'),
-      'update' => AccessResult::allowedIfHasPermissions($account, ['{{ permissions.edit }}', '{{ permissions.administer }}'], 'OR'),
-      'delete' => AccessResult::allowedIfHasPermissions($account, ['{{ permissions.delete }}', '{{ permissions.administer }}'], 'OR'),
+      'view' => AccessResult::allowedIfHasPermission($account, '{{ permissions.view }}'),
+      'update' => AccessResult::allowedIfHasPermission($account, '{{ permissions.edit }}'),
+      'delete' => AccessResult::allowedIfHasPermission($account, '{{ permissions.delete }}'),
+{% if revisionable %}
+      'delete revision' => AccessResult::allowedIfHasPermission($account, '{{ permissions.delete_revision }}'),
+      'view all revisions', 'view revision' => AccessResult::allowedIfHasPermissions($account, ['{{ permissions.view_revision }}', '{{ permissions.view }}']),
+      'revert' => AccessResult::allowedIfHasPermissions($account, ['{{ permissions.revert_revision }}', '{{ permissions.edit }}']),
+{% endif %}
       default => AccessResult::neutral(),
     };
   }

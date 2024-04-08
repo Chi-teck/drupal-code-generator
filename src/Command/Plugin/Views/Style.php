@@ -41,7 +41,7 @@ final class Style extends BaseGenerator {
 
     $assets->addFile('{machine_name}.module')
       ->template('preprocess.twig')
-      ->appendIfExists(7);
+      ->appendIfExists(9);
 
     if ($vars['configurable']) {
       $assets->addSchemaFile()->template('schema.twig');
