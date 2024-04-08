@@ -144,7 +144,7 @@ final class ContentEntity extends BaseGenerator {
     if ($vars['template']) {
       $assets->addFile('templates/{entity_type_id|u2h}.html.twig', 'templates/model-example.html.twig.twig');
       $assets->addFile('{machine_name}.module', 'model.module.twig')
-        ->appendIfExists(7);
+        ->appendIfExists(9);
     }
 
     if ($vars['access_controller']) {
