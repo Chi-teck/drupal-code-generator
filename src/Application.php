@@ -26,8 +26,6 @@ use DrupalCodeGenerator\Twig\TwigEnvironment;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFileSystem;
 use Twig\Loader\FilesystemLoader as TemplateLoader;
@@ -41,9 +39,7 @@ use Twig\Loader\FilesystemLoader as TemplateLoader;
  * @todo Use Drupal replacement for ContainerAwareInterface when it's available.
  * @see https://www.drupal.org/project/drupal/issues/3397522
  */
-final class Application extends BaseApplication implements ContainerAwareInterface, EventDispatcherInterface {
-
-  use ContainerAwareTrait;
+final class Application extends BaseApplication implements EventDispatcherInterface {
 
   /**
    * Path to DCG root directory.
@@ -68,6 +64,11 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
   public const TEMPLATE_PATH = self::ROOT . '/templates';
 
   /**
+   * {@selfdoc}
+   */
+  private ContainerInterface $container;
+
+  /**
    * Creates the application.
    *
    * @psalm-suppress ArgumentTypeCoercion
@@ -77,7 +78,7 @@ final class Application extends BaseApplication implements ContainerAwareInterfa
       'Drupal Code Generator',
       InstalledVersions::getPrettyVersion('chi-teck/drupal-code-generator'),
     );
-    $application->setContainer($container);
+    $application->container = $container;
 
     $file_system = new SymfonyFileSystem();
     $template_loader = new TemplateLoader();
