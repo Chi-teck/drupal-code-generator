@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DrupalCodeGenerator;
 
 use Composer\InstalledVersions;
-use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\Event\GeneratorInfo;
 use DrupalCodeGenerator\Event\GeneratorInfoAlter;
@@ -102,7 +101,7 @@ final class Application extends BaseApplication implements EventDispatcherInterf
     );
 
     $generator_factory = new GeneratorFactory(
-      $application->getContainer()->get('class_resolver'),
+      $container->get('class_resolver'),
     );
 
     $core_generators = $generator_factory->getGenerators();
@@ -126,9 +125,6 @@ final class Application extends BaseApplication implements EventDispatcherInterf
    * Returns Drupal container.
    */
   public function getContainer(): ContainerInterface {
-    if (!isset($this->container)) {
-      throw new ContainerNotInitializedException('Application::$container is not initialized yet.');
-    }
     return $this->container;
   }
 
@@ -146,7 +142,7 @@ final class Application extends BaseApplication implements EventDispatcherInterf
    * @psalm-suppress InvalidReturnStatement
    */
   public function dispatch(object $event): object {
-    return $this->getContainer()->get('event_dispatcher')->dispatch($event);
+    return $this->container->get('event_dispatcher')->dispatch($event);
   }
 
 }
