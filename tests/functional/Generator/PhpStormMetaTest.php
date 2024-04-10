@@ -55,18 +55,6 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     TXT;
     $this->assertDisplay($expected_display);
 
-    $this->assertGeneratedFile('.phpstorm.meta.php/config_entity_ids.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/configuration.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/database.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/date_formats.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/entity_bundles.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/entity_links.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/field_definitions.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/fields.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/file_system.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/miscellaneous.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/roles.php');
-    $this->assertGeneratedFile('.phpstorm.meta.php/routes.php');
     // The content of some files may vary depending on the Drupal version. So
     // that we only assert specific parts of those files.
     $this->assertPermissions();
@@ -76,6 +64,18 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     $this->assertServices();
     $this->assertSettings();
     $this->assertStates();
+    $this->assertConfigEntityIds();
+    $this->assertConfiguration();
+    $this->assertDatabase();
+    $this->assertDateFormats();
+    $this->assertEntityBundles();
+    $this->assertEntityLinks();
+    $this->assertFieldDefinitions();
+    $this->assertFields();
+    $this->assertFileSystem();
+    $this->assertMiscellaneous();
+    $this->assertRoles();
+    $this->assertRoutes();
   }
 
   /**
@@ -99,9 +99,6 @@ final class PhpStormMetaTest extends GeneratorTestBase {
         'access content',
         'access content overview',
         'access contextual links',
-        'access files overview',
-        'access help pages',
-        'access shortcuts',
     PHP;
     self::assertStringContainsString($permissions, $generated_content);
 
@@ -377,6 +374,350 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       expectedArguments(\Drupal\Core\State\StateInterface::get(), 0, argumentsSet('states'));
       expectedArguments(\Drupal\Core\State\StateInterface::set(), 0, argumentsSet('states'));
       expectedArguments(\Drupal\Core\State\StateInterface::delete(), 0, argumentsSet('states'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertConfigEntityIds(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/config_entity_ids.php');
+
+    $config_entity_ids = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      // -- Action.
+      registerArgumentsSet('action__ids',
+        'comment_delete_action',
+        'comment_publish_action',
+        'comment_save_action',
+        'comment_unpublish_action',
+        'node_delete_action',
+        'node_make_sticky_action',
+    PHP;
+    self::assertStringContainsString($config_entity_ids, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\views\Entity\View::load(), 0, argumentsSet('view__ids'));
+      expectedReturnValues(\Drupal\views\Entity\View::id(), argumentsSet('view__ids'));
+      expectedArguments(\views_embed_view(), 0, argumentsSet('view__ids'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertConfiguration(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/configuration.php');
+
+    $configuration = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      registerArgumentsSet('configs',
+        'announcements_feed.settings',
+        'automated_cron.settings',
+        'block.block.claro_breadcrumbs',
+        'block.block.claro_content',
+        'block.block.claro_help',
+        'block.block.claro_help_search',
+        'block.block.claro_local_actions',
+    PHP;
+    self::assertStringContainsString($configuration, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::getEditable(), 0, argumentsSet('configs'));
+      expectedArguments(\Drupal\Core\Config\ConfigFactoryInterface::reset(), 0, argumentsSet('configs'));
+      expectedArguments(\Drupal::config(), 0, argumentsSet('configs'));
+      expectedArguments(\Drupal\Core\Form\ConfigFormBaseTrait::config(), 0, argumentsSet('configs'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertDatabase(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/database.php');
+
+    $database = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      registerArgumentsSet('database.tables',
+        'block_content',
+        'block_content__body',
+        'block_content_field_data',
+        'block_content_field_revision',
+        'block_content_revision',
+        'block_content_revision__body',
+        'cache_bootstrap',
+    PHP;
+    self::assertStringContainsString($database, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\Core\Database\Query\SelectInterface::innerJoin(), 0, argumentsSet('database.tables'));
+      expectedArguments(\Drupal\Core\Database\Query\SelectInterface::addJoin(), 1, argumentsSet('database.tables'));
+      expectedArguments(\Drupal\Core\Database\Query\SelectInterface::orderBy(), 1, 'ASC', 'DESC');
+      expectedArguments(\Drupal\KernelTests\KernelTestBase::installSchema(), 1, argumentsSet('database.tables'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertDateFormats(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/date_formats.php');
+
+    $date_formats = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      registerArgumentsSet('date_formats',
+        'fallback',
+        'html_date',
+        'html_datetime',
+        'html_month',
+        'html_time',
+        'html_week',
+        'html_year',
+    PHP;
+    self::assertStringContainsString($date_formats, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\Core\Datetime\DateFormatter::format(), 2, argumentsSet('date_formats_custom'));
+      expectedArguments(\DateTimeInterface::format(), 0, argumentsSet('date_formats_custom'));
+      expectedArguments(\DateTime::createFromFormat(), 0, argumentsSet('date_formats_custom'));
+      expectedArguments(\DateTimeImmutable::createFromFormat(), 0, argumentsSet('date_formats_custom'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertEntityBundles(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_bundles.php');
+
+    $entity_bundles = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      // Action.
+      registerArgumentsSet('action__bundles',
+        'action',
+      );
+      expectedReturnValues(\Drupal\system\Entity\Action::bundle(), argumentsSet('action__bundles'));
+    
+      // Base field override.
+      registerArgumentsSet('base_field_override__bundles',
+        'base_field_override',
+      );
+      expectedReturnValues(\Drupal\Core\Field\Entity\BaseFieldOverride::bundle(), argumentsSet('base_field_override__bundles'));
+    PHP;
+    self::assertStringContainsString($entity_bundles, $generated_content);
+  }
+
+  private function assertEntityLinks(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/entity_links.php');
+
+    $entity_links = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      // Block.
+      registerArgumentsSet('block__links',
+        'delete-form',
+        'edit-form',
+        'enable',
+        'disable',
+      );
+    PHP;
+    self::assertStringContainsString($entity_links, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\views\Entity\View::toUrl(), 0, argumentsSet('view__links'));
+      expectedArguments(\Drupal\views\Entity\View::toLink(), 1, argumentsSet('view__links'));
+      expectedArguments(\Drupal\views\Entity\View::hasLinkTemplate(), 0, argumentsSet('view__links'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertFieldDefinitions(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/field_definitions.php');
+
+    $field_definitions = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      registerArgumentsSet('display_context',
+        'view',
+        'form',
+      );
+    PHP;
+    self::assertStringContainsString($field_definitions, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\Core\Field\BaseFieldDefinition::setCardinality(), 0,  \Drupal\Core\Field\FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+      expectedReturnValues(\Drupal\Core\Field\BaseFieldDefinition::getCardinality(), \Drupal\Core\Field\FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertFields(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/fields.php');
+
+    $fields = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      // Content block.
+      registerArgumentsSet('fields_block_content',
+        'id',
+        'uuid',
+        'revision_id',
+        'langcode',
+        'type',
+        'revision_created',
+        'revision_user',
+    PHP;
+    self::assertStringContainsString($fields, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\user\Entity\User::hasField(), 0, argumentsSet('fields_user'));
+      expectedArguments(\Drupal\user\UserInterface::set(), 0, argumentsSet('fields_user'));
+      expectedArguments(\Drupal\user\UserInterface::get(), 0, argumentsSet('fields_user'));
+      expectedArguments(\Drupal\user\UserInterface::hasField(), 0, argumentsSet('fields_user'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertFileSystem(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/file_system.php');
+
+    $file_system = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      expectedArguments(
+        \Drupal\Core\File\FileSystemInterface::prepareDirectory(),
+        1,
+        \Drupal\Core\File\FileSystemInterface::CREATE_DIRECTORY |
+        \Drupal\Core\File\FileSystemInterface::MODIFY_PERMISSIONS
+      );
+    PHP;
+    self::assertStringContainsString($file_system, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\file\FileRepositoryInterface::file_move(), 2, argumentsSet('file_system_exists_behaviour'));
+      expectedArguments(\Drupal\file\FileRepositoryInterface::file_save_data(), 2, argumentsSet('file_system_exists_behaviour'));
+      expectedArguments(\file_save_upload(), 4, argumentsSet('file_system_exists_behaviour'));
+      expectedArguments(\system_retrieve_file(), 3, argumentsSet('file_system_exists_behaviour'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertMiscellaneous(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/miscellaneous.php');
+
+    $miscellaneous = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      registerArgumentsSet('miscellaneous.lang_codes',
+        \Drupal\Core\Language\LanguageInterface::LANGCODE_NOT_SPECIFIED,
+        \Drupal\Core\Language\LanguageInterface::LANGCODE_NOT_APPLICABLE,
+        \Drupal\Core\Language\LanguageInterface::LANGCODE_DEFAULT,
+        \Drupal\Core\Language\LanguageInterface::LANGCODE_SITE_DEFAULT
+      );
+    PHP;
+    self::assertStringContainsString($miscellaneous, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(
+        \Drupal\Core\Entity\Query\QueryInterface::exists(),
+        1,
+        argumentsSet('miscellaneous.lang_codes')
+      );
+    
+      expectedArguments(
+        \Drupal\Core\Entity\Query\QueryInterface::notExists(),
+        1,
+        argumentsSet('miscellaneous.lang_codes')
+      );
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertRoles(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/roles.php');
+
+    $roles = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      registerArgumentsSet('roles',
+        'anonymous',
+        'authenticated',
+        'content_editor',
+        'administrator',
+    PHP;
+    self::assertStringContainsString($roles, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Drupal\user\UserInterface::hasRole(), 0, argumentsSet('roles'));
+      expectedArguments(\Drupal\user\UserInterface::addRole(), 0, argumentsSet('roles'));
+      expectedArguments(\Drupal\user\UserInterface::removeRole(), 0, argumentsSet('roles'));
+    PHP;
+    self::assertStringContainsString($arguments, $generated_content);
+  }
+
+  private function assertRoutes(): void {
+    $generated_content = $this->getGeneratedContent('.phpstorm.meta.php/routes.php');
+
+    $routes = <<< 'PHP'
+    <?php
+    
+    declare(strict_types=1);
+    
+    namespace PHPSTORM_META {
+    
+      registerArgumentsSet('routes',
+        '<button>',
+        '<current>',
+        '<front>',
+        '<nolink>',
+        '<none>',
+        'announcements_feed.announcement',
+        'big_pipe.nojs',
+    PHP;
+    self::assertStringContainsString($routes, $generated_content);
+
+    $arguments = <<< 'PHP'
+      expectedArguments(\Symfony\Component\Routing\Route::getDefault(), 0, argumentsSet('routes.route_defaults'));
+      expectedArguments(\Symfony\Component\Routing\Route::setDefault(), 0, argumentsSet('routes.route_defaults'));
     PHP;
     self::assertStringContainsString($arguments, $generated_content);
   }
