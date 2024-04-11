@@ -90,7 +90,7 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     if ($ir->confirm('Needs component props?')) {
       $vars['component_props'] = [];
       do {
-        $prop = $this->askProp($ir);
+        $prop = $this->askProp($vars, $ir);
         $vars['component_props'][] = $prop;
       } while ($ir->confirm('Add another prop?'));
     }
@@ -161,10 +161,13 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
   /**
    * Asks for multiple questions to define a prop and its schema.
    *
+   * @psalm-param array{component_machine_name: mixed, ...<array-key, mixed>} $vars
+   *   The answers to the CLI questions.
+   *
    * @return array
    *   The prop data, if any.
    */
-  protected function askProp(Interviewer $ir): array {
+  protected function askProp(array $vars, Interviewer $ir): array {
     $prop = [];
     $prop['title'] = $ir->ask('Prop title', '', new Required());
     $default = Utils::human2machine($prop['title']);
@@ -180,7 +183,10 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     ];
     $prop['type'] = $ir->choice('Prop type', $choices, 'String');
     if (!\in_array($prop['type'], ['string', 'number', 'boolean'])) {
-      $this->io()->warning('Unable to generate full schema for ' . $prop['type'] . '. Please edit metadata.json after generation.');
+      /** @psalm-var string $type */
+      $type = $prop['type'];
+      $component_schema_name = $vars['component_machine_name'] . '.component.yml';
+      $this->io()->warning(\sprintf('Unable to generate full schema for %s. Please edit %s after generation.', $type, $component_schema_name));
     }
     return $prop;
   }
