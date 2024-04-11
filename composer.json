@@ -23,7 +23,7 @@
         }
     },
     "require": {
-        "php": ">=8.1.0",
+        "php": ">=8.3.0",
         "ext-json": "*",
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^3.0",
@@ -37,7 +37,7 @@
         "ext-simplexml": "*",
         "chi-teck/drupal-coder-extension": "^2.0.0-beta3",
         "drupal/coder": "8.3.23",
-        "drupal/core": "10.3.x-dev || 11.x-dev",
+        "drupal/core": "11.x-dev",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^9.6",
         "squizlabs/php_codesniffer": "^3.9",
