@@ -57,8 +57,6 @@ jobs:
 
       - name: Run lint
         run: ./scripts/lint.sh
-        # @todo Remove this once we drop support for Drupal 10.
-        if: ${{ matrix.drupal != '10.2.x' && matrix.drupal != '10.3.x' }}
 
       - name: Run unit tests
         run: ./scripts/unit-tests.sh
