@@ -108,12 +108,8 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   },
 {% if revisionable %}
  *   revision_metadata_keys = {
-  {% if author_base_field %}
  *     "revision_user" = "revision_uid",
-  {% endif %}
-  {% if created_base_field %}
  *     "revision_created" = "revision_timestamp",
-  {% endif %}
  *     "revision_log_message" = "revision_log",
  *   },
 {% endif %}
