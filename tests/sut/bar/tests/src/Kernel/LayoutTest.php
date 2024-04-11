@@ -77,7 +77,7 @@ final class LayoutTest extends KernelTestBase {
       ],
       'dependencies' => [],
       'license' => [
-        'name' => 'GNU-GPL-2.0-or-later',
+        'name' => 'GPL-2.0-or-later',
         'url' => 'https://www.drupal.org/licensing/faq',
         'gpl-compatible' => TRUE,
       ],
