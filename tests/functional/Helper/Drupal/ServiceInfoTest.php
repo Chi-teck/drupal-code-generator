@@ -45,14 +45,13 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
     // Check if the services are sorted alphabetically.
     $expected_service_ids = [
-      '.service_locator.8a319vC',
       'access_arguments_resolver_factory',
       'access_check.admin_menu_block_page',
       'access_check.admin_overview_page',
       'access_check.contact_personal',
       'access_check.cron',
     ];
-    self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 6));
+    self::assertSame($expected_service_ids, \array_slice($service_ids, 0, 5));
   }
 
   /**
@@ -71,14 +70,13 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertLessThan(575, \count($definitions));
 
     $expected_service_ids = [
-      '.service_locator.8a319vC',
       'access_arguments_resolver_factory',
       'access_check.admin_menu_block_page',
       'access_check.admin_overview_page',
       'access_check.contact_personal',
       'access_check.cron',
     ];
-    self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 6));
+    self::assertSame($expected_service_ids, \array_slice(\array_keys($definitions), 0, 5));
 
     $expected_definition = [
       'class' => 'Drupal\\Core\\Routing\\AdminContext',
@@ -115,14 +113,13 @@ final class ServiceInfoTest extends FunctionalTestBase {
     self::assertLessThan(575, \count($classes));
 
     $expected_service_classes = [
-      '.service_locator.8a319vC' => '\Symfony\Component\DependencyInjection\ServiceLocator',
       'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
       'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
       'access_check.admin_overview_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
       'access_check.contact_personal' => '\Drupal\contact\Access\ContactPageAccess',
       'access_check.cron' => '\Drupal\system\Access\CronAccessCheck',
     ];
-    self::assertSame($expected_service_classes, \array_slice($classes, 0, 6));
+    self::assertSame($expected_service_classes, \array_slice($classes, 0, 5));
   }
 
   /**
