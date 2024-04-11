@@ -2,7 +2,7 @@ name: Example
 type: module
 description: Example description.
 package: Custom
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 dependencies:
   - views
   - node

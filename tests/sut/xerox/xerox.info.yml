@@ -2,4 +2,4 @@ name: Xerox
 type: module
 description: Helper module for testing generated tests.
 package: DCG
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11

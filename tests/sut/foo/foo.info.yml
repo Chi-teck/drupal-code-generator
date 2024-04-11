@@ -2,4 +2,4 @@ name: DCG foo
 type: module
 description: Helper module for testing generated forms.
 package: DCG
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
