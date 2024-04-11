@@ -33,8 +33,8 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServicesIds(): void {
-    // @todo Remove this once we drop support for Drupal 10.2.
-    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+    // @todo Remove this once we drop support for Drupal 10.
+    if (\version_compare(\Drupal::VERSION, '11', '<')) {
       self::markTestSkipped();
     }
     $service_info = new ServiceInfo(self::bootstrap());
@@ -58,8 +58,8 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServiceDefinitions(): void {
-    // @todo Remove this once we drop support for Drupal 10.2.
-    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+    // @todo Remove this once we drop support for Drupal 10.
+    if (\version_compare(\Drupal::VERSION, '11', '<')) {
       self::markTestSkipped();
     }
 
@@ -102,8 +102,8 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServiceClasses(): void {
-    // @todo Remove this once we drop support for Drupal 10.2.
-    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+    // @todo Remove this once we drop support for Drupal 10.
+    if (\version_compare(\Drupal::VERSION, '11', '<')) {
       self::markTestSkipped();
     }
     $service_info = new ServiceInfo(self::bootstrap());
@@ -126,8 +126,8 @@ final class ServiceInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testGetServiceDefinition(): void {
-    // @todo Remove this once we drop support for Drupal 10.2.
-    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+    // @todo Remove this once we drop support for Drupal 10.
+    if (\version_compare(\Drupal::VERSION, '11.0', '<')) {
       self::markTestSkipped();
     }
     $service_info = new ServiceInfo(self::bootstrap());
