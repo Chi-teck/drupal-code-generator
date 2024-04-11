@@ -30,6 +30,10 @@ final class LibrariesTest extends KernelTestBase {
    * Test callback.
    */
   public function testLibraries(): void {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
     $libraries = $this->container->get('library.discovery')
       ->getLibrariesByExtension('shreya');
     self::assertSame(self::getExpectedLibraries(), $libraries);
@@ -164,7 +168,7 @@ final class LibrariesTest extends KernelTestBase {
           'dependencies' => [],
           'license' =>
             [
-              'name' => 'GNU-GPL-2.0-or-later',
+              'name' => 'GPL-2.0-or-later',
               'url' => 'https://www.drupal.org/licensing/faq',
               'gpl-compatible' => TRUE,
             ],

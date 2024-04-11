@@ -6,7 +6,7 @@ namespace Drupal\{{ machine_name }}\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\{{ machine_name }}\Entity\Example;
+use Drupal\{{ machine_name }}\Entity\{{ class_prefix }};
 
 /**
  * {{ entity_type_label }} form.
@@ -32,7 +32,7 @@ final class {{ class_prefix }}Form extends EntityForm {
       '#type' => 'machine_name',
       '#default_value' => $this->entity->id(),
       '#machine_name' => [
-        'exists' => [Example::class, 'load'],
+        'exists' => [{{ class_prefix }}::class, 'load'],
       ],
       '#disabled' => !$this->entity->isNew(),
     ];
