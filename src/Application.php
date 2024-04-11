@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DrupalCodeGenerator;
 
 use Composer\InstalledVersions;
+use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use DrupalCodeGenerator\Command\Navigation;
 use DrupalCodeGenerator\Event\GeneratorInfo;
 use DrupalCodeGenerator\Event\GeneratorInfoAlter;
@@ -31,14 +32,22 @@ use Twig\Loader\FilesystemLoader as TemplateLoader;
 
 /**
  * DCG console application.
- *
- * @psalm-suppress DeprecatedInterface
- * @psalm-suppress DeprecatedTrait
- *
- * @todo Use Drupal replacement for ContainerAwareInterface when it's available.
- * @see https://www.drupal.org/project/drupal/issues/3397522
  */
 final class Application extends BaseApplication implements EventDispatcherInterface {
+
+  /**
+   * Defines dispatcher for events.
+   *
+   * @var \Psr\EventDispatcher\EventDispatcherInterface
+   */
+  protected $eventDispatcher;
+
+  /**
+   * Provides interface to get an instance of a class with dependency injection.
+   *
+   * @var \Drupal\Core\DependencyInjection\ClassResolverInterface
+   */
+  protected $classResolver;
 
   /**
    * Path to DCG root directory.
@@ -63,9 +72,14 @@ final class Application extends BaseApplication implements EventDispatcherInterf
   public const TEMPLATE_PATH = self::ROOT . '/templates';
 
   /**
-   * {@selfdoc}
+   * Application constructor.
    */
-  private ContainerInterface $container;
+  public function __construct(EventDispatcherInterface $eventDispatcher, ClassResolverInterface $classResolver, string $name = 'UNKNOWN', string $version = 'UNKNOWN') {
+    parent::__construct($name, $version);
+
+    $this->eventDispatcher = $eventDispatcher;
+    $this->classResolver = $classResolver;
+  }
 
   /**
    * Creates the application.
@@ -74,10 +88,11 @@ final class Application extends BaseApplication implements EventDispatcherInterf
    */
   public static function create(ContainerInterface $container): self {
     $application = new self(
+      $container->get('event_dispatcher'),
+      $container->get('class_resolver'),
       'Drupal Code Generator',
       InstalledVersions::getPrettyVersion('chi-teck/drupal-code-generator'),
     );
-    $application->container = $container;
 
     $file_system = new SymfonyFileSystem();
     $template_loader = new TemplateLoader();
@@ -101,7 +116,7 @@ final class Application extends BaseApplication implements EventDispatcherInterf
     );
 
     $generator_factory = new GeneratorFactory(
-      $container->get('class_resolver'),
+      $application->classResolver,
     );
 
     $core_generators = $generator_factory->getGenerators();
@@ -122,13 +137,6 @@ final class Application extends BaseApplication implements EventDispatcherInterf
   }
 
   /**
-   * Returns Drupal container.
-   */
-  public function getContainer(): ContainerInterface {
-    return $this->container;
-  }
-
-  /**
    * {@inheritdoc}
    *
    * @template T as object
@@ -142,7 +150,7 @@ final class Application extends BaseApplication implements EventDispatcherInterf
    * @psalm-suppress InvalidReturnStatement
    */
   public function dispatch(object $event): object {
-    return $this->container->get('event_dispatcher')->dispatch($event);
+    return $this->eventDispatcher->dispatch($event);
   }
 
 }
