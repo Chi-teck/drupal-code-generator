@@ -22,6 +22,10 @@ final class LibrariesTest extends KernelTestBase {
    * Test callback.
    */
   public function testLibraries(): void {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
     $libraries = $this->container->get('library.discovery')
       ->getLibrariesByExtension('yety');
     self::assertSame(self::getExpectedLibraries(), $libraries);
