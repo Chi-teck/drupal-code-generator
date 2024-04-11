@@ -51,7 +51,7 @@ final class ModuleTest extends KernelTestBase {
       'core_incompatible' => FALSE,
       'lifecycle' => 'stable',
       'version' => NULL,
-      'php' => '8.1.0',
+      'php' => '8.3.0',
     ];
     unset($info['mtime']);
     self::assertSame($expected_info, $info);

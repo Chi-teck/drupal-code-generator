@@ -3,7 +3,7 @@ type: theme
 base theme: claro
 description: Helper theme for testing DCG components.
 package: DCG
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 libraries:
   - shreya/global
 regions:

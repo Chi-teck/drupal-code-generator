@@ -309,7 +309,6 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Drupal::service(0),
         map([
-          '.service_locator.8a319vC' => '\Symfony\Component\DependencyInjection\ServiceLocator',
           'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
           'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
           'access_check.admin_overview_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
@@ -322,7 +321,6 @@ final class PhpStormMetaTest extends GeneratorTestBase {
       override(
         \Symfony\Component\DependencyInjection\ContainerInterface::get(0),
         map([
-          '.service_locator.8a319vC' => '\Symfony\Component\DependencyInjection\ServiceLocator',
           'access_arguments_resolver_factory' => '\Drupal\Core\Access\AccessArgumentsResolverFactory',
           'access_check.admin_menu_block_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',
           'access_check.admin_overview_page' => '\Drupal\system\Access\SystemAdminMenuBlockAccessCheck',

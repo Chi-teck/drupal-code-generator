@@ -2,4 +2,4 @@ name: Example
 type: module
 description: The helper module for SUT tests.
 package: DCG
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
