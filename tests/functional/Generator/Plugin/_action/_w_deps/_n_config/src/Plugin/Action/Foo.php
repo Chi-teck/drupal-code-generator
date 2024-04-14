@@ -6,21 +6,16 @@ namespace Drupal\example\Plugin\Action;
 
 use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Action\ActionBase;
+use Drupal\Core\Action\Attribute\Action;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Flood\FloodInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a Foo action.
- *
- * @Action(
- *   id = "example_foo",
- *   label = @Translation("Foo"),
- *   type = "user",
- *   category = @Translation("My Actions"),
- * )
  *
  * @DCG
  * For updating entity fields consider extending FieldUpdateActionBase.
@@ -36,6 +31,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * The whole action API is subject of change.
  * @see https://www.drupal.org/project/drupal/issues/2011038
  */
+#[Action(
+  id: 'example_foo',
+  label: new TranslatableMarkup('Foo'),
+  category: new TranslatableMarkup('My Actions'),
+  type: 'user',
+)]
 final class Foo extends ActionBase implements ContainerFactoryPluginInterface {
 
   /**

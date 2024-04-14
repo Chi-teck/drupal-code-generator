@@ -7,7 +7,9 @@ namespace Drupal\{{ machine_name }}\Plugin\Action;
 
 {% sort %}
 use Drupal\Core\Access\AccessResultInterface;
+use Drupal\Core\Action\Attribute\Action;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
   {% if configurable %}
 use Drupal\Core\Action\ConfigurableActionBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -26,13 +28,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides {{ plugin_label|article }} action.
  *
- * @Action(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
- *   type = "{{ entity_type }}",
- *   category = @Translation("{{ category }}"),
- * )
- *
  * @DCG
  * For updating entity fields consider extending FieldUpdateActionBase.
  * @see \Drupal\Core\Field\FieldUpdateActionBase
@@ -47,6 +42,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * The whole action API is subject of change.
  * @see https://www.drupal.org/project/drupal/issues/2011038
  */
+#[Action(
+  id: '{{ plugin_id }}',
+  label: new TranslatableMarkup('{{ plugin_label }}'),
+  category: new TranslatableMarkup('{{ category }}'),
+  type: '{{ entity_type }}',
+)]
 final class {{ class }} extends {{ configurable ? 'ConfigurableActionBase' : 'ActionBase' }} {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
 
 {% if services %}
