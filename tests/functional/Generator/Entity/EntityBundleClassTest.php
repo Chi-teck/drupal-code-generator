@@ -18,12 +18,6 @@ final class EntityBundleClassTest extends GeneratorTestBase {
    * Test callback.
    */
   public function testSingleBundleWithoutBaseClass(): void {
-
-    // @todo Remove this once we drop support form Drupal 10.0.
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.0')) {
-      self::markTestSkipped();
-    }
-
     $input = [
       'foo',
       'Foo',
@@ -87,12 +81,6 @@ final class EntityBundleClassTest extends GeneratorTestBase {
    * Test callback.
    */
   public function testAllBundlesWithBaseClass(): void {
-
-    // @todo Remove this once we drop support form Drupal 10.0.
-    if (\str_starts_with(\getenv('DCG_DRUPAL_VERSION') ?: '', '10.0')) {
-      self::markTestSkipped();
-    }
-
     $input = [
       'foo',
       'Foo',

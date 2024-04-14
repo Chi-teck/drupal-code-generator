@@ -11,7 +11,7 @@ drupal_dir=$workspace_dir/drupal
 cache_dir=$workspace_dir/cache
 dcg_dir=$drupal_dir/vendor/chi-teck/drupal-code-generator
 drupal_repo='https://git.drupalcode.org/project/drupal.git'
-dcg_drupal_version=${DCG_DRUPAL_VERSION:-'10.3.x'}
+dcg_drupal_version=${DCG_DRUPAL_VERSION:-'11.x'}
 
 echo -----------------------------------------------
 echo ' DRUPAL PATH:   ' $drupal_dir

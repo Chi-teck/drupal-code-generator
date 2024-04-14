@@ -26,10 +26,6 @@ final class HookInfoTest extends FunctionalTestBase {
    * Test callback.
    */
   public function testHookInfoTemplates(): void {
-    // @todo Remove this once we drop support for Drupal 10.2.
-    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
-      self::markTestSkipped();
-    }
     $hook_info = new HookInfo(self::bootstrap()->get('module_handler'));
     $hook_templates = $hook_info->getHookTemplates();
     self::assertGreaterThan(260, \count($hook_templates));
