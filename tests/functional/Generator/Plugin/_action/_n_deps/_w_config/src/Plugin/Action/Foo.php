@@ -5,20 +5,15 @@ declare(strict_types=1);
 namespace Drupal\example\Plugin\Action;
 
 use Drupal\Core\Access\AccessResultInterface;
+use Drupal\Core\Action\Attribute\Action;
 use Drupal\Core\Action\ConfigurableActionBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Provides a Foo action.
- *
- * @Action(
- *   id = "example_foo",
- *   label = @Translation("Foo"),
- *   type = "node",
- *   category = @Translation("Custom"),
- * )
  *
  * @DCG
  * For updating entity fields consider extending FieldUpdateActionBase.
@@ -34,6 +29,12 @@ use Drupal\Core\Session\AccountInterface;
  * The whole action API is subject of change.
  * @see https://www.drupal.org/project/drupal/issues/2011038
  */
+#[Action(
+  id: 'example_foo',
+  label: new TranslatableMarkup('Foo'),
+  category: new TranslatableMarkup('Custom'),
+  type: 'node',
+)]
 final class Foo extends ConfigurableActionBase {
 
   /**
