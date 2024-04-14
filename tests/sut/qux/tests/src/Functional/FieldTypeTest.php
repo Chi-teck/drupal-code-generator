@@ -31,11 +31,6 @@ final class FieldTypeTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldType(): void {
-    // @todo Remove this once we drop support for Drupal 10.2.
-    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
-      self::markTestSkipped();
-    }
-
     $this->drupalCreateContentType(['type' => 'test']);
 
     $permissions = [
