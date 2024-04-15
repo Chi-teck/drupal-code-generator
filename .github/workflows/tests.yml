@@ -30,8 +30,10 @@ jobs:
 
       - name: Install last version SQLite
         run: |
-          sudo apt-get update
-          sudo apt-get install -y sqlite3
+          download_link="https://www.sqlite.org/2023/sqlite-tools-linux-x64-3440200.zip"
+          wget "$download_link" -P /tmp
+          unzip "/tmp/$(basename "$download_link")" -d /tmp
+          sudo install /tmp/sqlite3 /usr/local/bin/
 
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
