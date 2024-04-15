@@ -28,6 +28,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install last version SQLite
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sqlite3
+
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
         with:
