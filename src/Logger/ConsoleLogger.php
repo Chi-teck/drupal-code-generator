@@ -18,7 +18,7 @@ final class ConsoleLogger extends AbstractLogger {
   /**
    * Verbosity level map.
    */
-  private const VERBOSITY_LEVEL_MAP = [
+  private const array VERBOSITY_LEVEL_MAP = [
     LogLevel::EMERGENCY => OutputInterface::VERBOSITY_NORMAL,
     LogLevel::ALERT => OutputInterface::VERBOSITY_NORMAL,
     LogLevel::CRITICAL => OutputInterface::VERBOSITY_NORMAL,
