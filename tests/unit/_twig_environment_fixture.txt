@@ -15,6 +15,7 @@ three_two_one
 -= Camelize filter =-
 ThisShouldBeInCamelCase
 -= Sort tag =-
+Gamma
 Alpha
 Beta
-Gamma
+
