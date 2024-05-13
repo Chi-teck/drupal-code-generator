@@ -22,7 +22,7 @@ final class TwigSortSetNode extends Node {
       ->addDebugInfo($this)
       ->write('$getData = static fn () => ')
       ->subcompile($this->getNode('body'))
-      ->write('$data = implode("", iterator_to_array(\$getData()));' . "\n")
+      ->write('$data = implode("", iterator_to_array($getData()));' . "\n")
       ->write('$data = explode("\n", $data);' . "\n")
       ->write('$data = array_unique($data);' . "\n")
       ->write('sort($data, SORT_FLAG_CASE|SORT_NATURAL);' . "\n")
