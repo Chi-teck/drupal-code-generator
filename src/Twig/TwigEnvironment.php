@@ -27,6 +27,13 @@ final class TwigEnvironment extends Environment {
     $this->addFilter(new TwigFilter('pluralize', [Utils::class, 'pluralize']));
     $this->addFilter(new TwigFilter('camelize', [Utils::class, 'camelize']));
 
+    $sort_namespaces = static function (string $input): string {
+      $lines = \explode(\PHP_EOL, $input);
+      \sort($lines);
+      return \trim(\implode(\PHP_EOL, $lines)) . \PHP_EOL;
+    };
+    $this->addFilter(new TwigFilter('sort_namespaces', $sort_namespaces));
+
     $article = static function (string $input): string {
       $first_char = \strtolower($input[0]);
       $article = \in_array($first_char, ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
