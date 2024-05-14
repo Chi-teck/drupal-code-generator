@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldWidget;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -14,7 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Defines the '{{ plugin_id }}' field widget.

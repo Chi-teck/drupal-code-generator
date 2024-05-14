@@ -5,13 +5,13 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\PageCache;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\PageCache\RequestPolicyInterface;
 use Symfony\Component\HttpFoundation\Request;
   {% if services %}
 {{ di.use(services) }}
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * @todo Add policy description here.

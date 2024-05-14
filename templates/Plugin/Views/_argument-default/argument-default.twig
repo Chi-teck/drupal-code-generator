@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\views\argument_default;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
   {% if configurable %}
@@ -16,7 +16,7 @@ use Drupal\views\Plugin\views\argument_default\ArgumentDefaultPluginBase;
 {{ di.use(services) }}
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * @todo Add plugin description here.

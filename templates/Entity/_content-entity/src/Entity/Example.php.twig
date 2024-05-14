@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Entity;
 
-{% sort %}
+{% apply sort_namespaces %}
   {% if not revisionable %}
 use Drupal\Core\Entity\ContentEntityBase;
   {% endif %}
@@ -25,7 +25,7 @@ use Drupal\user\EntityOwnerTrait;
   {% if changed_base_field %}
 use Drupal\Core\Entity\EntityChangedTrait;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Defines the {{ entity_type_label|lower }} entity class.

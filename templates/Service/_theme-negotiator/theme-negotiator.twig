@@ -5,13 +5,13 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Theme;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Theme\ThemeNegotiatorInterface;
   {% if services %}
 {{ di.use(services) }}
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Defines a theme negotiator that deals with the active theme on example page.

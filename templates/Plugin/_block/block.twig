@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Block;
 
-{% sort %}
+{% apply sort_namespaces %}
   {% if access %}
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
@@ -19,7 +19,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Provides {{ plugin_label|article|lower }} block.

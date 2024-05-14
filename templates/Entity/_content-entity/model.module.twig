@@ -7,12 +7,12 @@ declare(strict_types=1);
  * Provides {{ entity_type_label|article|lower }} entity type.
  */
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Render\Element;
   {% if author_base_field %}
 use Drupal\user\UserInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Implements hook_theme().

@@ -5,13 +5,13 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\EventSubscriber;
 
-{% sort %}
+{% apply sort_namespaces %}
   {% if services %}
 {{ di.use(services) }}
   {% endif %}
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Symfony\Component\Routing\RouteCollection;
-{% endsort %}
+{% endapply %}
 
 /**
  * Route subscriber.
