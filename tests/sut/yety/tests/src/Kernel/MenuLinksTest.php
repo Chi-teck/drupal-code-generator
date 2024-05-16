@@ -7,12 +7,12 @@ namespace Drupal\Tests\yety\Kernel;
 use Drupal\Core\Menu\MenuLinkDefault;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\user\Plugin\Menu\LoginLogoutMenuLink;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests menu links.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class MenuLinksTest extends KernelTestBase {
 
   /**

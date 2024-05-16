@@ -6,15 +6,15 @@ namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * A test for constraint plugin.
  *
- * @group DCG
- *
  * @todo Add tests for entity and field constraints.
  */
+#[Group('DCG')]
 final class ConstraintTest extends KernelTestBase {
 
   /**

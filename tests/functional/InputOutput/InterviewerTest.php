@@ -15,6 +15,7 @@ use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\InputOutput\Interviewer;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
@@ -106,9 +107,8 @@ final class InterviewerTest extends FunctionalTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider askNameProvider()
    */
+  #[DataProvider('askNameProvider')]
   public function testAskName(GeneratorType $type, ?string $machine_name, string $expected_answer, string $expected_output): void {
     $definition = new GeneratorDefinition('test', type: $type);
     $vars = $machine_name ? ['machine_name' => $machine_name] : [];
@@ -125,8 +125,6 @@ final class InterviewerTest extends FunctionalTestBase {
 
   /**
    * Data provider for testAskName.
-   *
-   * @dataProvider
    */
   public static function askNameProvider(): array {
     return [
@@ -166,9 +164,8 @@ final class InterviewerTest extends FunctionalTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider askMachineNameProvider()
    */
+  #[DataProvider('askMachineNameProvider')]
   public function testAskMachineName(GeneratorType $type, ?string $name, string $expected_output): void {
     $definition = new GeneratorDefinition('test', type: $type);
     $vars = $name ? ['name' => $name] : [];
@@ -185,8 +182,6 @@ final class InterviewerTest extends FunctionalTestBase {
 
   /**
    * Data provider for testAskMachineName.
-   *
-   * @dataProvider
    */
   public static function askMachineNameProvider(): array {
     return [

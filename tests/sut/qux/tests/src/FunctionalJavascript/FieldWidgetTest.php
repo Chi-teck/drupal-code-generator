@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\qux\FunctionalJavascript;
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * Tests the field widget.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class FieldWidgetTest extends FieldBaseTest {
 
   /**

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\tandoor\Functional;
 
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests generated theme.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ThemeTest extends BrowserTestBase {
 
   /**

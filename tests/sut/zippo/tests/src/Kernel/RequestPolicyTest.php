@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Drupal\Tests\zippo\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Request policy test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class RequestPolicyTest extends KernelTestBase {
 
   /**

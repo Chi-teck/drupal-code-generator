@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DrupalCodeGenerator\Tests\Unit\Validator;
 
 use DrupalCodeGenerator\Validator\Required;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -14,9 +15,8 @@ final class RequiredTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider dataProvider()
    */
+  #[DataProvider('dataProvider')]
   public function test(mixed $machine_name, ?\UnexpectedValueException $exception): void {
     if ($exception) {
       $this->expectExceptionObject($exception);
@@ -24,7 +24,7 @@ final class RequiredTest extends TestCase {
     self::assertSame($machine_name, (new Required())($machine_name));
   }
 
-  public function dataProvider(): array {
+  public static function dataProvider(): array {
     $exception = new \UnexpectedValueException('The value is required.');
     return [
       ['yes', NULL],

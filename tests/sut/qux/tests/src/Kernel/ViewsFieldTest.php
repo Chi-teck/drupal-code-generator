@@ -6,12 +6,12 @@ namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\views\ResultRow;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests views field plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ViewsFieldTest extends KernelTestBase {
 
   /**

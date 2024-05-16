@@ -7,12 +7,12 @@ namespace Drupal\Tests\acme\Kernel;
 use Drupal\acme\Entity\User\UserBase;
 use Drupal\acme\Entity\User\UserBundle;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * A test for generated bundle classes.
- *
- * @group acme
  */
+#[Group('acme')]
 final class BundleClassTest extends KernelTestBase {
 
   /**

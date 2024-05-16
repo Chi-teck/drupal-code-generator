@@ -7,12 +7,12 @@ namespace Drupal\Tests\nigma\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\nigma\Entity\Example;
 use Drupal\Tests\user\Traits\UserCreationTrait;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests access handler for example entity type.
- *
- * @group nigma
  */
+#[Group('nigma')]
 final class AccessHandlerTest extends KernelTestBase {
 
   use UserCreationTrait;

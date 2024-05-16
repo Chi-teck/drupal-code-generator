@@ -7,12 +7,12 @@ namespace Drupal\Tests\qux\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\views\Entity\View;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests views style plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ViewStyleTest extends KernelTestBase {
 
   use NodeCreationTrait;

@@ -6,12 +6,12 @@ namespace Drupal\Tests\zippo\Functional;
 
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Event subscriber test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class EventSubscriberTest extends BrowserTestBase {
 
   use TestTrait;

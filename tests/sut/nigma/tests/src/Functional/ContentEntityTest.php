@@ -7,12 +7,12 @@ namespace Drupal\Tests\nigma\Functional;
 use Drupal\Component\Render\FormattableMarkup as FM;
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test example entity type.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ContentEntityTest extends BrowserTestBase {
 
   use TestTrait;

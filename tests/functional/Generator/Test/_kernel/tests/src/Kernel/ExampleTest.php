@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\foo\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test description.
- *
- * @group foo
  */
+#[Group('foo')]
 final class ExampleTest extends KernelTestBase {
 
   /**

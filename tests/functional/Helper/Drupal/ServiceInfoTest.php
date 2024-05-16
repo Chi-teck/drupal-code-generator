@@ -7,6 +7,7 @@ namespace DrupalCodeGenerator\Tests\Functional\Helper\Drupal;
 use Drupal\Core\CronInterface;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests 'service info' helper.
@@ -141,9 +142,8 @@ final class ServiceInfoTest extends FunctionalTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider serviceMetaProvider
    */
+  #[DataProvider('serviceMetaProvider')]
   public function testGetServiceMeta(string $id, string $name, string $type_fqn, string $type, ?\LogicException $exception): void {
     $service_info = new ServiceInfo(self::bootstrap());
 

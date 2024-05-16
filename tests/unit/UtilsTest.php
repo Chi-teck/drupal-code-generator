@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DrupalCodeGenerator\Tests\Unit;
 
 use DrupalCodeGenerator\Utils;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -22,9 +23,8 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider machineToHumanProvider
    */
+  #[DataProvider('machineToHumanProvider')]
   public function testMachineToHuman(string $machine_name, string $expected_human_name, bool $title_case): void {
     self::assertSame($expected_human_name, Utils::machine2human($machine_name, $title_case));
   }
@@ -32,7 +32,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testMachineToHuman().
    */
-  public function machineToHumanProvider(): array {
+  public static function machineToHumanProvider(): array {
     return [
       ['hello_world', 'Hello world', FALSE],
       ['_hello_world_', 'Hello World', TRUE],
@@ -42,9 +42,8 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider human2machineProvider
    */
+  #[DataProvider('human2machineProvider')]
   public function testHumanToMachine(string $human_name, string $expected_machine_name): void {
     self::assertSame($expected_machine_name, Utils::human2machine($human_name));
   }
@@ -52,7 +51,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testMachineToHuman().
    */
-  public function human2machineProvider(): array {
+  public static function human2machineProvider(): array {
     return [
       ['Hello world!', 'hello_world'],
       ['Camel Case Here', 'camel_case_here'],
@@ -64,9 +63,8 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider camel2machineProvider
    */
+  #[DataProvider('camel2machineProvider')]
   public function testCamelToMachine(string $camel_input, string $expected_machine_name): void {
     self::assertSame($expected_machine_name, Utils::camel2machine($camel_input));
   }
@@ -74,7 +72,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testCamelToMachine().
    */
-  public function camel2machineProvider(): array {
+  public static function camel2machineProvider(): array {
     return [
       ['HelloWorld!', 'hello_world'],
       ['lowerCamel', 'lower_camel'],
@@ -84,9 +82,8 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider camelizeProvider
    */
+  #[DataProvider('camelizeProvider')]
   public function testCamelize(string $text, bool $upper_camel, string $expected): void {
     self::assertSame($expected, Utils::camelize($text, $upper_camel));
   }
@@ -94,7 +91,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testHuman2class().
    */
-  public function camelizeProvider(): array {
+  public static function camelizeProvider(): array {
     return [
       ['Hello world!', TRUE, 'HelloWorld'],
       ['snake_case_here', TRUE, 'SnakeCaseHere'],
@@ -109,9 +106,8 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider getExtensionRootProvider
    */
+  #[DataProvider('getExtensionRootProvider')]
   public function testGetExtensionRoot(string $target_directory, ?string $expected_extension_root): void {
     $extension_root = Utils::getExtensionRoot($target_directory);
     self::assertSame($expected_extension_root, $extension_root);
@@ -120,7 +116,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testGetExtensionRoot().
    */
-  public function getExtensionRootProvider(): array {
+  public static function getExtensionRootProvider(): array {
     $extension_root = \sys_get_temp_dir() . '/dcg_sandbox/foo';
     return [
       ['/tmp', NULL],
@@ -133,9 +129,8 @@ final class UtilsTest extends BaseTestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider replaceTokensProvider
    */
+  #[DataProvider('replaceTokensProvider')]
   public function testReplaceTokens(string $input, array $vars, string $expected_output, bool $exception = FALSE): void {
     if ($exception) {
       self::expectException(\UnexpectedValueException::class);
@@ -150,7 +145,7 @@ final class UtilsTest extends BaseTestCase {
   /**
    * Data provider callback for testReplaceTokens().
    */
-  public function replaceTokensProvider(): array {
+  public static function replaceTokensProvider(): array {
     return [
       ['\Drupal\\\{foo}\Example', ['foo' => 'bar'], '\Drupal\bar\Example'],
       ['\Drupal\foo\Example', ['foo' => 'bar'], '\Drupal\foo\Example'],

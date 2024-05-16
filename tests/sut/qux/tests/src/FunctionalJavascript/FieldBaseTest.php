@@ -6,12 +6,12 @@ namespace Drupal\Tests\qux\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests the field plugins.
- *
- * @group DCG
  */
+#[Group('DCG')]
 abstract class FieldBaseTest extends WebDriverTestBase {
 
   use NodeCreationTrait;

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\yety\Functional;
 
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Routing test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class RoutingTest extends BrowserTestBase {
 
   /**

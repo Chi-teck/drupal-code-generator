@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\yety\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests local tasks.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class LocalTasksTest extends KernelTestBase {
 
   /**

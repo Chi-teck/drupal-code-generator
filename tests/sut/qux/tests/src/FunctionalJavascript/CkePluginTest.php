@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\qux\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests the CKEditor plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class CkePluginTest extends WebDriverTestBase {
 
   /**

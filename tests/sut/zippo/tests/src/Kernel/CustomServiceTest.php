@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\zippo\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * A test form custom service generator.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class CustomServiceTest extends KernelTestBase {
 
   /**

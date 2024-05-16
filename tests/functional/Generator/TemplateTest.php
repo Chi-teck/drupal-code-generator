@@ -6,6 +6,7 @@ namespace DrupalCodeGenerator\Tests\Functional\Generator;
 
 use DrupalCodeGenerator\Command\Template;
 use DrupalCodeGenerator\Test\Functional\GeneratorTestBase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests template generator.
@@ -57,9 +58,8 @@ final class TemplateTest extends GeneratorTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider templateNameValidatorProvider()
    */
+  #[DataProvider('templateNameValidatorProvider')]
   public function testTemplateNameValidator(mixed $value, bool $exception): void {
     if ($exception) {
       self::expectExceptionObject(new \UnexpectedValueException('The value is not correct template name'));

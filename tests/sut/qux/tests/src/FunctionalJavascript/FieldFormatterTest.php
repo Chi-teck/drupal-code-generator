@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\qux\FunctionalJavascript;
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * Tests the field formatter.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class FieldFormatterTest extends FieldBaseTest {
 
   /**

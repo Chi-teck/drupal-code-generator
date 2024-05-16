@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DrupalCodeGenerator\Tests\Unit\Validator;
 
 use DrupalCodeGenerator\Validator\RegExp;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -14,9 +15,8 @@ final class RegExpTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider dataProvider()
    */
+  #[DataProvider('dataProvider')]
   public function test(mixed $machine_name, string $pattern, ?string $message, ?\UnexpectedValueException $exception): void {
     $validator = new RegExp($pattern, $message);
     if ($exception) {
@@ -25,7 +25,7 @@ final class RegExpTest extends TestCase {
     self::assertSame($machine_name, $validator($machine_name));
   }
 
-  public function dataProvider(): array {
+  public static function dataProvider(): array {
     return [
       ['wrong', '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
       ['wrong', '/abc/', 'Custom message', new \UnexpectedValueException('Custom message')],

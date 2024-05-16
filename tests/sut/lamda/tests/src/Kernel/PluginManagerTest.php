@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\lamda\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Plugin manager test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class PluginManagerTest extends KernelTestBase {
 
   /**

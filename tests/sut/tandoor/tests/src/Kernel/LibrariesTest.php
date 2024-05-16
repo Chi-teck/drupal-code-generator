@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\tandoor\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests library definitions.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class LibrariesTest extends KernelTestBase {
 
   /**

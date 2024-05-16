@@ -6,14 +6,14 @@ namespace Drupal\Tests\zippo\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\zippo\PageCache\ExampleResponsePolicy;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Response policy test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ResponsePolicyTest extends KernelTestBase {
 
   /**

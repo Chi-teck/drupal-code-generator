@@ -11,12 +11,12 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\NodeTypeInterface;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * A test for action plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ActionTest extends KernelTestBase {
 
   use ContentTypeCreationTrait;

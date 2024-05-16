@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\{{ machine_name }}\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests the JavaScript functionality of the {{ name }} module.
- *
- * @group {{ machine_name }}
  */
+#[Group('{{ machine_name }}')]
 final class {{ class }} extends WebDriverTestBase {
 
   /**

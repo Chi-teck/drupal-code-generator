@@ -6,12 +6,12 @@ namespace Drupal\Tests\qux\Functional;
 
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Block plugin test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class BlockTest extends BrowserTestBase {
 
   use TestTrait;
