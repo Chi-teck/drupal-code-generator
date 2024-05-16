@@ -38,7 +38,7 @@ final class HookInfoTest extends FunctionalTestBase {
     // A hook from entity.api.php file.
     self::assertHookTemplate('entity_field_values_init', $hook_templates);
     // A hook from file.api file.
-    self::assertHookTemplate('file_validate', $hook_templates);
+    self::assertHookTemplate('file_download', $hook_templates);
     // A hook from system.api file.
     self::assertHookTemplate('system_themes_page_alter', $hook_templates);
     // A hook from user.api.php file.

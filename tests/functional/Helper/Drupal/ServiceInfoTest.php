@@ -163,7 +163,7 @@ final class ServiceInfoTest extends FunctionalTestBase {
   /**
    * Data provider for testGetServiceMeta().
    */
-  public function serviceMetaProvider(): array {
+  public static function serviceMetaProvider(): array {
 
     $data[] = [
       'entity_type.manager',

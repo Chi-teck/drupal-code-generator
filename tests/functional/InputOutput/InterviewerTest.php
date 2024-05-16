@@ -128,7 +128,7 @@ final class InterviewerTest extends FunctionalTestBase {
    *
    * @dataProvider
    */
-  public function askNameProvider(): array {
+  public static function askNameProvider(): array {
     return [
       [GeneratorType::MODULE, 'dblog', 'Example', 'Module name [Dblog]'],
       [GeneratorType::MODULE_COMPONENT, 'dblog', 'Database Logging', ''],
@@ -188,7 +188,7 @@ final class InterviewerTest extends FunctionalTestBase {
    *
    * @dataProvider
    */
-  public function askMachineNameProvider(): array {
+  public static function askMachineNameProvider(): array {
     return [
       [GeneratorType::MODULE, 'Foo', 'Module machine name [foo]'],
       [GeneratorType::MODULE, NULL, 'Module machine name'],

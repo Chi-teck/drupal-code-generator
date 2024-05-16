@@ -72,7 +72,7 @@ final class TemplateTest extends GeneratorTestBase {
   /**
    * Data provider callback for testTemplateNameValidator().
    */
-  public function templateNameValidatorProvider(): array {
+  public static function templateNameValidatorProvider(): array {
     return [
       ['aaa', FALSE],
       ['aaa.bbb', FALSE],
