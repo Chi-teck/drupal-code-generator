@@ -11,7 +11,7 @@ use DrupalCodeGenerator\Asset\Resolver\PrependResolver;
 /**
  * Tests PrependResolver.
  */
-final class PrependResolverTest extends BaseResolverTest {
+final class PrependResolverTest extends BaseResolver {
 
   /**
    * Test callback.

@@ -12,7 +12,7 @@ use DrupalCodeGenerator\Asset\Symlink;
 /**
  * Tests ReplaceResolver.
  */
-final class ReplaceResolverTest extends BaseResolverTest {
+final class ReplaceResolverTest extends BaseResolver {
 
   /**
    * Test callback.
