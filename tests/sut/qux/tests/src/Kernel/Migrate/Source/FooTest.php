@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\qux\Kernel\Plugin\migrate\source;
 
-use Drupal\Tests\migrate\Kernel\MigrateSourceTestBase;
+use Drupal\Tests\migrate\Kernel\MigrateSqlSourceTestBase;
 
 /**
  * Tests SQL source migrate plugin.
@@ -15,7 +15,7 @@ use Drupal\Tests\migrate\Kernel\MigrateSourceTestBase;
  *
  * @covers \Drupal\qux\Plugin\migrate\source\Foo
  */
-final class FooTest extends MigrateSourceTestBase {
+final class FooTest extends MigrateSqlSourceTestBase {
 
   /**
    * {@inheritdoc}
