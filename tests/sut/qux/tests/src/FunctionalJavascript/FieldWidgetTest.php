@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests the field widget.
  */
 #[Group('DCG')]
-final class FieldWidgetTest extends FieldBaseTest {
+final class FieldWidgetTest extends FieldBase {
 
   /**
    * Test callback.

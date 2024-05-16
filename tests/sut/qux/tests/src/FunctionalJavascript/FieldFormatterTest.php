@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests the field formatter.
  */
 #[Group('DCG')]
-final class FieldFormatterTest extends FieldBaseTest {
+final class FieldFormatterTest extends FieldBase {
 
   /**
    * Test callback.

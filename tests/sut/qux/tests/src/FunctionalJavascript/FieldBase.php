@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests the field plugins.
  */
 #[Group('DCG')]
-abstract class FieldBaseTest extends WebDriverTestBase {
+abstract class FieldBase extends WebDriverTestBase {
 
   use NodeCreationTrait;
 
