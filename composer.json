@@ -48,5 +48,6 @@
     "conflict": {
         "squizlabs/php_codesniffer": "<3.6",
         "nikic/php-parser": "<4.17"
-    }
+    },
+    "minimum-stability": "dev"
 }
