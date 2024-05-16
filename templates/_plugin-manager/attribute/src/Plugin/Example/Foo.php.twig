@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\{{ class_prefix }};
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\{{ machine_name }}\Attribute\{{ class_prefix }};
 use Drupal\{{ machine_name }}\{{ class_prefix }}PluginBase;
-{% endsort %}
+{% endapply %}
 
 /**
  * Plugin implementation of the {{ plugin_type }}.

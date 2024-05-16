@@ -3,11 +3,11 @@
 {% endmacro %}
 
 {% macro use(services) %}
-  {% sort %}
+  {% apply sort_namespaces %}
     {% for service in services %}
 use {{ service.type_fqn }};
     {% endfor %}
-  {% endsort %}
+  {% endapply %}
 {% endmacro %}
 
 {% macro signature(services) %}

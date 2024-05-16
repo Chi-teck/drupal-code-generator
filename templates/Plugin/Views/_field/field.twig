@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\views\field;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
@@ -16,7 +16,7 @@ use Drupal\Core\Form\FormStateInterface;
 {{ di.use(services) }}
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Provides {{ plugin_label }} field handler.

@@ -5,13 +5,13 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Controller;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Controller\ControllerBase;
   {% if services %}
 use Symfony\Component\DependencyInjection\ContainerInterface;
 {{ di.use(services) }}
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Returns responses for {{ name }} routes.

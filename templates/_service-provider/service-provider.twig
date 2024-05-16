@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Drupal\{{ machine_name }};
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-{% sort %}
+{% apply sort_namespaces %}
 {% for interface in interfaces %}
 use Drupal\Core\DependencyInjection\{{ interface }};
 {% endfor %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Defines a service provider for the {{ name }} module.
