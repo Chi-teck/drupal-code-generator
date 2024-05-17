@@ -14,10 +14,6 @@ one-two-three
 three_two_one
 -= Camelize filter =-
 ThisShouldBeInCamelCase
--= Sort tag =-
-Alpha
-Beta
-Gamma
 -= Sort namespaces filter =-
 Alpha
 Beta
