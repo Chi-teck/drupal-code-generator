@@ -44,7 +44,6 @@ final class ModuleTest extends KernelTestBase {
       'package' => 'DCG',
       'core_version_requirement' => '^10 || ^11',
       'dependencies' => [
-        'drupal:action',
         'drupal:node',
         'drupal:views',
       ],
