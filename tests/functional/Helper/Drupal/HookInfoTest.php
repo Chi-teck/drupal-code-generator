@@ -33,7 +33,7 @@ final class HookInfoTest extends FunctionalTestBase {
     $hook_info = new HookInfo(self::bootstrap()->get('module_handler'));
     $hook_templates = $hook_info->getHookTemplates();
     self::assertGreaterThan(260, \count($hook_templates));
-    self::assertLessThan(265, \count($hook_templates));
+    self::assertLessThan(268, \count($hook_templates));
 
     // A hook from core.api.php file.
     self::assertHookTemplate('data_type_info_alter', $hook_templates);

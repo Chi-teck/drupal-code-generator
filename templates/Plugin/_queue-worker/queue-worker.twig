@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\QueueWorker;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Queue\QueueWorkerBase;
   {% if services %}
 {{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Defines '{{ plugin_id }}' queue worker.

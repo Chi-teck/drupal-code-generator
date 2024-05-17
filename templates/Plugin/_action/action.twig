@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Action;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
   {% if configurable %}
@@ -21,7 +21,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Provides {{ plugin_label|article }} action.

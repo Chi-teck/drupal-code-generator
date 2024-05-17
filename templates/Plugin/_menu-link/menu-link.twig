@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Menu;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Menu\MenuLinkDefault;
   {% if services %}
 {{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * @todo Provide description for this class.

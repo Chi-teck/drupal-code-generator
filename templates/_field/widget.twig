@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldWidget;
 
-{% sort %}
+{% apply sort_namespaces %}
   {% if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
   {% endif %}
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
   {% if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Defines the '{{ field_id }}' field widget.

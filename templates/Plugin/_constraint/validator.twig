@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Validation\Constraint;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
   {% if input_type == 'item' %}
@@ -20,7 +20,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Validates the {{ plugin_label }} constraint.
