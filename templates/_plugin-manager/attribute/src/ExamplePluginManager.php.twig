@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }};
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\{{ machine_name }}\Attribute\{{ class_prefix }};
-{% endsort %}
+{% endapply %}
 
 /**
  * {{ class_prefix }} plugin manager.

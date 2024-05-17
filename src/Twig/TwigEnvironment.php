@@ -26,13 +26,8 @@ final class TwigEnvironment extends Environment {
 
     $this->addFilter(new TwigFilter('pluralize', [Utils::class, 'pluralize']));
     $this->addFilter(new TwigFilter('camelize', [Utils::class, 'camelize']));
-
-    $article = static function (string $input): string {
-      $first_char = \strtolower($input[0]);
-      $article = \in_array($first_char, ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
-      return $article . ' ' . $input;
-    };
-    $this->addFilter(new TwigFilter('article', $article));
+    $this->addFilter(new TwigFilter('sort_namespaces', [self::class, 'sortNamespaces']));
+    $this->addFilter(new TwigFilter('article', [self::class, 'article']));
 
     $u2h = static fn (string $input): string => \str_replace('_', '-', $input);
     $this->addFilter(new TwigFilter('u2h', $u2h));
@@ -62,6 +57,25 @@ final class TwigEnvironment extends Environment {
     // Twig source has no setters.
     $source = new Source($code, $source->getName(), $source->getPath());
     return parent::tokenize($source);
+  }
+
+  /**
+   * {@selfdoc}
+   */
+  public static function sortNamespaces(string $input): string {
+    $lines = \explode(\PHP_EOL, $input);
+    $lines = \array_unique($lines);
+    \sort($lines, \SORT_FLAG_CASE | \SORT_NATURAL);
+    return \trim(\implode(\PHP_EOL, $lines)) . \PHP_EOL;
+  }
+
+  /**
+   * {@selfdoc}
+   */
+  public static function article(string $input): string {
+    $first_char = \strtolower($input[0]);
+    $article = \in_array($first_char, ['a', 'e', 'i', 'o', 'u']) ? 'an' : 'a';
+    return $article . ' ' . $input;
   }
 
 }

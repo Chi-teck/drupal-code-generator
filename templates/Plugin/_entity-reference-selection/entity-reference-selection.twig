@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\EntityReferenceSelection;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Entity\Query\QueryInterface;
 {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
 {% endif %}
 use {{ base_class_full }}{% if base_class == class %} as Base{{ base_class }}{% endif %};
-{% endsort %}
+{% endapply %}
 
 /**
  * @todo Add plugin description here.

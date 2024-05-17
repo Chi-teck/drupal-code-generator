@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
-{% sort %}
+{% apply sort_namespaces %}
   {% if datetime %}
 use Drupal\Core\Datetime\DrupalDateTime;
   {% endif %}
@@ -13,7 +13,7 @@ use Drupal\Core\Field\FormatterBase;
   {% if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Plugin implementation of the '{{ field_id }}_table' formatter.

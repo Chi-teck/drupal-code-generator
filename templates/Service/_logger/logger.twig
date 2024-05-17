@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Logger;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Logger\LogMessageParserInterface;
 use Drupal\Core\Logger\RfcLoggerTrait;
 use Psr\Log\LoggerInterface;
   {% if services %}
 {{ di.use(services) }}
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * @todo Add a description for the logger.
