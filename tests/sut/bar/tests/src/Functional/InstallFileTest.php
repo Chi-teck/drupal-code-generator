@@ -25,6 +25,10 @@ final class InstallFileTest extends BrowserTestBase {
    * Test callback.
    */
   public function testInstall(): void {
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
+
     $permissions = ['administer modules', 'administer site configuration'];
     $user = $this->drupalCreateUser($permissions);
     $this->drupalLogin($user);
