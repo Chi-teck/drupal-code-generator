@@ -12,7 +12,7 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
  *
  * @group DCG
  */
-abstract class FieldBaseTest extends WebDriverTestBase {
+abstract class FieldBase extends WebDriverTestBase {
 
   use NodeCreationTrait;
 

@@ -48,6 +48,11 @@ final class ViewStyleTest extends KernelTestBase {
    * Test callback.
    */
   public function testPlugin(): void {
+    // @todo Remove this once we drop support for Drupal 10.2.
+    if (\version_compare(\Drupal::VERSION, '10.3', '<')) {
+      self::markTestSkipped();
+    }
+
     $this->assertWrapperClass('item-list');
 
     // Change wrapper class.
