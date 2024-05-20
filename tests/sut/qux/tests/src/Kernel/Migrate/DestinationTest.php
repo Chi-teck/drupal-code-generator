@@ -7,12 +7,12 @@ namespace Drupal\Tests\qux\Kernel\Migrate;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\migrate\Plugin\Migration;
 use Drupal\migrate\Row;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * A test for migrate destination plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class DestinationTest extends KernelTestBase {
 
   /**

@@ -6,12 +6,12 @@ namespace Drupal\Tests\yety\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\yety\Example;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests services.yml.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ServicesTest extends KernelTestBase {
 
   /**

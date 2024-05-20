@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DrupalCodeGenerator\Tests\Unit\Validator;
 
 use DrupalCodeGenerator\Validator\Choice;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -14,9 +15,8 @@ final class ChoiceTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider dataProvider()
    */
+  #[DataProvider('dataProvider')]
   public function test(mixed $value, array $choices, ?string $message, ?\UnexpectedValueException $exception): void {
     $validator = $message ? new Choice($choices, $message) : new Choice($choices);
     if ($exception) {
@@ -25,7 +25,7 @@ final class ChoiceTest extends TestCase {
     self::assertSame($value, $validator($value));
   }
 
-  public function dataProvider(): array {
+  public static function dataProvider(): array {
     $default_exception = new \UnexpectedValueException('The value you selected is not a valid choice.');
     return [
       ['wrong', ['aaa', 'bbb'], NULL, $default_exception],

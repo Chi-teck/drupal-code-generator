@@ -10,12 +10,12 @@ use Drupal\Tests\rest\Functional\ResourceTestBase;
 use Drupal\user\Entity\Role;
 use Drupal\user\RoleInterface;
 use GuzzleHttp\RequestOptions;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test REST resource.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class RestResourceTest extends ResourceTestBase {
 
   use CookieResourceTestTrait;

@@ -7,12 +7,12 @@ namespace Drupal\Tests\qux\Kernel;
 use Drupal\Core\Form\FormState;
 use Drupal\filter\FilterPluginCollection;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Filter plugin test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class FilterTest extends KernelTestBase {
 
   /**

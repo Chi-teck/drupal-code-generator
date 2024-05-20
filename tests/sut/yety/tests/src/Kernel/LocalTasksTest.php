@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Drupal\Tests\yety\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests local tasks.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class LocalTasksTest extends KernelTestBase {
 
   /**
@@ -20,9 +21,8 @@ final class LocalTasksTest extends KernelTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider localTasksProvider
    */
+  #[DataProvider('localTasksProvider')]
   public function testLocalTasks(
     string $id,
     string $title,
@@ -43,7 +43,7 @@ final class LocalTasksTest extends KernelTestBase {
   /**
    * Data provider for testLocalTasks().
    */
-  private static function localTasksProvider(): array {
+  public static function localTasksProvider(): array {
     $definitions[] = [
       'yety.foo',
       'Foo',

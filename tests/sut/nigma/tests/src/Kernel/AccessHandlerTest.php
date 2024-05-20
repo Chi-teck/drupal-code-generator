@@ -7,12 +7,13 @@ namespace Drupal\Tests\nigma\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\nigma\Entity\Example;
 use Drupal\Tests\user\Traits\UserCreationTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests access handler for example entity type.
- *
- * @group nigma
  */
+#[Group('nigma')]
 final class AccessHandlerTest extends KernelTestBase {
 
   use UserCreationTrait;
@@ -59,9 +60,8 @@ final class AccessHandlerTest extends KernelTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider testAccessHandlerProvider().
    */
+  #[DataProvider('testAccessHandlerProvider')]
   public function testAccessHandler(array $permissions, array $expected_access): void {
     $account = $this->createUser($permissions);
 
@@ -87,7 +87,7 @@ final class AccessHandlerTest extends KernelTestBase {
   /**
    * Data provider callback.
    */
-  public function testAccessHandlerProvider(): array {
+  public static function testAccessHandlerProvider(): array {
     $data[] = [
       ['view example'],
       ['view'],

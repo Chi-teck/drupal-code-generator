@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\bar\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Hook test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class HookTest extends KernelTestBase {
 
   /**

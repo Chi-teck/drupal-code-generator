@@ -6,12 +6,12 @@ namespace Drupal\Tests\foo\Functional;
 
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Form test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class FormTest extends BrowserTestBase {
 
   use TestTrait;

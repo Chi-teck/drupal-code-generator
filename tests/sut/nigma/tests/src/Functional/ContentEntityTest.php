@@ -7,12 +7,12 @@ namespace Drupal\Tests\nigma\Functional;
 use Drupal\Component\Render\FormattableMarkup as FM;
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test example entity type.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ContentEntityTest extends BrowserTestBase {
 
   use TestTrait;
@@ -97,12 +97,12 @@ final class ContentEntityTest extends BrowserTestBase {
         'edit' => 'Drupal\nigma\Form\ExampleForm',
         'delete' => 'Drupal\Core\Entity\ContentEntityDeleteForm',
         'delete-multiple-confirm' => 'Drupal\Core\Entity\Form\DeleteMultipleForm',
-        'revision-delete' => '\Drupal\Core\Entity\Form\RevisionDeleteForm',
-        'revision-revert' => '\Drupal\Core\Entity\Form\RevisionRevertForm',
+        'revision-delete' => 'Drupal\Core\Entity\Form\RevisionDeleteForm',
+        'revision-revert' => 'Drupal\Core\Entity\Form\RevisionRevertForm',
       ],
       'route_provider' => [
         'html' => 'Drupal\Core\Entity\Routing\AdminHtmlRouteProvider',
-        'revision' => '\Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider',
+        'revision' => 'Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider',
       ],
       'storage' => 'Drupal\Core\Entity\Sql\SqlContentEntityStorage',
       'view_builder' => 'Drupal\Core\Entity\EntityViewBuilder',

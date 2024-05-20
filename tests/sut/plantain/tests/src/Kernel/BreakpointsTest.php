@@ -6,12 +6,12 @@ namespace Drupal\Tests\plantain\Kernel;
 
 use Drupal\breakpoint\Breakpoint;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests breakpoints.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class BreakpointsTest extends KernelTestBase {
 
   /**

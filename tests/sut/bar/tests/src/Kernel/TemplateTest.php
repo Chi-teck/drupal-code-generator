@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\bar\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Template test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class TemplateTest extends KernelTestBase {
 
   /**

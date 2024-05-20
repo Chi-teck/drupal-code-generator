@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\bar\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests the generate JavaScript file..
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class JavaScriptTest extends WebDriverTestBase {
 
   /**

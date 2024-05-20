@@ -8,12 +8,12 @@ use Drupal\Core\Routing\RouteSubscriberBase;
 use Drupal\Core\Routing\RoutingEvents;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\zippo\EventSubscriber\ZippoRouterSubscibrer;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Route subscriber test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class RouteSubscriberTest extends KernelTestBase {
 
   /**

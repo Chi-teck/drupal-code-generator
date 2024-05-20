@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\nigma\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests actions for example entity type.
- *
- * @group nigma
  */
+#[Group('nigma')]
 final class ActionsTest extends KernelTestBase {
 
   /**

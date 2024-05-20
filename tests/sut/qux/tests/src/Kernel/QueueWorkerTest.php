@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests queue worker plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class QueueWorkerTest extends KernelTestBase {
 
   /**

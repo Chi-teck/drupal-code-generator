@@ -10,7 +10,7 @@ use DrupalCodeGenerator\Asset\Resolver\PreserveResolver;
 /**
  * Tests PreserveResolver.
  */
-final class PreserveResolverTest extends BaseResolverTest {
+final class PreserveResolverTest extends BaseResolver {
 
   /**
    * Test callback.

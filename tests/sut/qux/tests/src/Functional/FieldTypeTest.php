@@ -7,12 +7,12 @@ namespace Drupal\Tests\qux\Functional;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test field type.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class FieldTypeTest extends BrowserTestBase {
 
   use TestTrait;

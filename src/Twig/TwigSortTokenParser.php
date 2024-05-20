@@ -19,6 +19,7 @@ final class TwigSortTokenParser extends AbstractTokenParser {
    * {@inheritdoc}
    */
   public function parse(Token $token): Node {
+    \trigger_deprecation('chi-teck/drupal-code-generator', '3.6.0', 'The sort twig tag is deprecated and will be removed in 5.x, use the sort_namespaces twig filter.');
     $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
     $body = $this->parser->subparse(
       static fn (Token $token): bool => $token->test('endsort'),

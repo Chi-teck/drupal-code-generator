@@ -6,12 +6,12 @@ namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\qux\Plugin\Menu\FooExampleLink;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test for menu link plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class MenuLinkTest extends KernelTestBase {
 
   /**

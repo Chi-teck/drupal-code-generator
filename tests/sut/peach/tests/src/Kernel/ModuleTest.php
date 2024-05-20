@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\peach\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests generated module.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ModuleTest extends KernelTestBase {
 
   /**
@@ -44,7 +44,6 @@ final class ModuleTest extends KernelTestBase {
       'package' => 'DCG',
       'core_version_requirement' => '^10 || ^11',
       'dependencies' => [
-        'drupal:action',
         'drupal:node',
         'drupal:views',
       ],

@@ -15,6 +15,7 @@ use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\InputOutput\Interviewer;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
@@ -106,9 +107,8 @@ final class InterviewerTest extends FunctionalTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider askNameProvider()
    */
+  #[DataProvider('askNameProvider')]
   public function testAskName(GeneratorType $type, ?string $machine_name, string $expected_answer, string $expected_output): void {
     $definition = new GeneratorDefinition('test', type: $type);
     $vars = $machine_name ? ['machine_name' => $machine_name] : [];
@@ -125,10 +125,8 @@ final class InterviewerTest extends FunctionalTestBase {
 
   /**
    * Data provider for testAskName.
-   *
-   * @dataProvider
    */
-  public function askNameProvider(): array {
+  public static function askNameProvider(): array {
     return [
       [GeneratorType::MODULE, 'dblog', 'Example', 'Module name [Dblog]'],
       [GeneratorType::MODULE_COMPONENT, 'dblog', 'Database Logging', ''],
@@ -166,9 +164,8 @@ final class InterviewerTest extends FunctionalTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider askMachineNameProvider()
    */
+  #[DataProvider('askMachineNameProvider')]
   public function testAskMachineName(GeneratorType $type, ?string $name, string $expected_output): void {
     $definition = new GeneratorDefinition('test', type: $type);
     $vars = $name ? ['name' => $name] : [];
@@ -185,10 +182,8 @@ final class InterviewerTest extends FunctionalTestBase {
 
   /**
    * Data provider for testAskMachineName.
-   *
-   * @dataProvider
    */
-  public function askMachineNameProvider(): array {
+  public static function askMachineNameProvider(): array {
     return [
       [GeneratorType::MODULE, 'Foo', 'Module machine name [foo]'],
       [GeneratorType::MODULE, NULL, 'Module machine name'],
