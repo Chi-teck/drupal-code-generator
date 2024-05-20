@@ -17,7 +17,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Base class for resolver tests.
  */
-abstract class BaseResolverTest extends BaseTestCase {
+abstract class BaseResolver extends BaseTestCase {
 
   /**
    * Console input.

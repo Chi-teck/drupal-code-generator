@@ -8,12 +8,12 @@ use Drupal\bar\BarServiceProvider;
 use Drupal\Core\DependencyInjection\ServiceModifierInterface;
 use Drupal\Core\DependencyInjection\ServiceProviderInterface;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * A test for service provider.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ServiceProviderTest extends KernelTestBase {
 
   /**

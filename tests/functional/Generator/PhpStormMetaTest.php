@@ -189,6 +189,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     self::assertStringContainsString('plugin.manager.block__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.ckeditor5.plugin__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.condition__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.config_action__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.display_variant__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.editor__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.element_info__plugin_ids', $generated_content);
@@ -198,6 +199,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     self::assertStringContainsString('plugin.manager.field.widget__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.filter__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.help_section__plugin_ids', $generated_content);
+    self::assertStringContainsString('plugin.manager.help_topic__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.image.effect__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.link_relation_type__plugin_ids', $generated_content);
     self::assertStringContainsString('plugin.manager.mail__plugin_ids', $generated_content);
@@ -227,7 +229,7 @@ final class PhpStormMetaTest extends GeneratorTestBase {
     self::assertStringContainsString('typed_data_manager__plugin_ids', $generated_content);
     self::assertStringContainsString('validation.constraint__plugin_ids', $generated_content);
 
-    self::assertSame(49, \substr_count($generated_content, 'registerArgumentsSet'));
+    self::assertSame(51, \substr_count($generated_content, 'registerArgumentsSet'));
   }
 
   /**
@@ -336,7 +338,6 @@ final class PhpStormMetaTest extends GeneratorTestBase {
         'file_scan_ignore_directories',
         'entity_update_batch_size',
         'entity_update_backup',
-        'state_cache',
         'migrate_node_migrate_type_classic',
         'config_sync_directory',
     PHP;

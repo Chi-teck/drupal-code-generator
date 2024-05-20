@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\zippo\Functional;
 
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test theme negotiator.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ThemeNegotiatorTest extends BrowserTestBase {
 
   /**

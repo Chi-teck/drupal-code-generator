@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Form;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Entity\BundleEntityFormBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\{{ machine_name }}\Entity\{{ class }}Type;
-{% endsort %}
+{% endapply %}
 
 /**
  * Form handler for {{ entity_type_label|lower }} type forms.

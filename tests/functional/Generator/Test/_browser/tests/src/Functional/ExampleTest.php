@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\foo\Functional;
 
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test description.
- *
- * @group foo
  */
+#[Group('foo')]
 final class ExampleTest extends BrowserTestBase {
 
   /**

@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Access;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Routing\Access\AccessInterface;
 use Symfony\Component\Routing\Route;
   {% if services %}
 {{ di.use(services) }}
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * Checks if passed parameter matches the route configuration.

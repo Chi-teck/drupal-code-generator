@@ -43,24 +43,24 @@ final class Application extends BaseApplication implements EventDispatcherInterf
   /**
    * Path to DCG root directory.
    */
-  public const ROOT = __DIR__ . '/..';
+  public const string ROOT = __DIR__ . '/..';
 
   /**
    * DCG version.
    *
    * @deprecated Use \DrupalCodeGenerator\Application->getVersion() instead.
    */
-  public const VERSION = 'unknown';
+  public const string VERSION = 'unknown';
 
   /**
    * DCG API version.
    */
-  public const API = 3;
+  public const int API = 3;
 
   /**
    * Path to templates directory.
    */
-  public const TEMPLATE_PATH = self::ROOT . '/templates';
+  public const string TEMPLATE_PATH = self::ROOT . '/templates';
 
   /**
    * {@selfdoc}

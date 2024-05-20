@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\plantain\Functional;
 
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests theme settings.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ThemeSettingsTest extends BrowserTestBase {
 
   /**

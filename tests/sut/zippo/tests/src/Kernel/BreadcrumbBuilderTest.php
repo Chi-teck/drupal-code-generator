@@ -8,13 +8,13 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatch;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\Routing\Route;
 
 /**
  * A test for breadcrumb builder.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class BreadcrumbBuilderTest extends KernelTestBase {
 
   private const EMPTY_CACHE = [

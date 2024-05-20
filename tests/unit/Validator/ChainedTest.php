@@ -6,6 +6,7 @@ namespace DrupalCodeGenerator\Tests\Unit\Validator;
 
 use DrupalCodeGenerator\Validator\Chained;
 use DrupalCodeGenerator\Validator\RegExp;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,9 +16,8 @@ final class ChainedTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider dataProvider()
    */
+  #[DataProvider('dataProvider')]
   public function test(mixed $machine_name, ?\UnexpectedValueException $exception): void {
     if ($exception) {
       $this->expectExceptionObject($exception);
@@ -32,9 +32,8 @@ final class ChainedTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider dataProvider()
    */
+  #[DataProvider('dataProvider')]
   public function testWith(mixed $machine_name, ?\UnexpectedValueException $exception): void {
     if ($exception) {
       $this->expectExceptionObject($exception);
@@ -50,7 +49,7 @@ final class ChainedTest extends TestCase {
   /**
    * Test data provider.
    */
-  public function dataProvider(): array {
+  public static function dataProvider(): array {
     return [
       ['', new \UnexpectedValueException('v1')],
       ['111', new \UnexpectedValueException('v2')],

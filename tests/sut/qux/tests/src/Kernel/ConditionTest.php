@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * A test for condition plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ConditionTest extends KernelTestBase {
 
   /**

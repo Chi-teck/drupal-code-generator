@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\zippo\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test uninstall validator.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class UninstallValidatorTest extends KernelTestBase {
 
   /**

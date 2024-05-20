@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\zippo\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Logger test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class LoggerTest extends KernelTestBase {
 
   /**

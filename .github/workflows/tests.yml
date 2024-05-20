@@ -28,6 +28,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Upgrade sqlite3
+        run: |
+          wget https://www.sqlite.org/2024/sqlite-autoconf-3450300.tar.gz -O /tmp/sqlite.tar.gz
+          tar -xzf /tmp/sqlite.tar.gz -C /tmp
+          cd /tmp/sqlite-autoconf-3450300
+          ./configure CFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1" --prefix=/usr/local
+          make && sudo make install
+          sudo ldconfig
+
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
         with:

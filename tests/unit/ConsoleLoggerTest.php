@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DrupalCodeGenerator\Tests\Unit;
 
 use DrupalCodeGenerator\Logger\ConsoleLogger;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel as LL;
@@ -18,9 +19,8 @@ final class ConsoleLoggerTest extends TestCase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider outputMappingProvider()
    */
+  #[DataProvider('outputMappingProvider')]
   public function testOutputMapping(string $log_level, int $verbosity, string $expected_output): void {
     $output = new BufferedOutput($verbosity, TRUE);
     $logger = new ConsoleLogger($output);

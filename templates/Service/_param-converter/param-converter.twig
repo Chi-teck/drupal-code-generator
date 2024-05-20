@@ -5,13 +5,13 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }};
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\ParamConverter\ParamConverterInterface;
 use Symfony\Component\Routing\Route;
   {% if services %}
 {{ di.use(services) }}
   {% endif %}
-{% endsort %}
+{% endapply %}
 
 /**
  * @todo Add description for the converter.

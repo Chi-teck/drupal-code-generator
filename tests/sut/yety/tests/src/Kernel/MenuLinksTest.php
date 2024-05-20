@@ -7,12 +7,13 @@ namespace Drupal\Tests\yety\Kernel;
 use Drupal\Core\Menu\MenuLinkDefault;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\user\Plugin\Menu\LoginLogoutMenuLink;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests menu links.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class MenuLinksTest extends KernelTestBase {
 
   /**
@@ -22,9 +23,8 @@ final class MenuLinksTest extends KernelTestBase {
 
   /**
    * Test callback.
-   *
-   * @dataProvider menuLinksProvider
    */
+  #[DataProvider('menuLinksProvider')]
   public function testMenuLinks(
     string $id,
     string $class,
@@ -54,7 +54,7 @@ final class MenuLinksTest extends KernelTestBase {
   /**
    * Data provider for testMenuLinks().
    */
-  private static function menuLinksProvider(): array {
+  public static function menuLinksProvider(): array {
     $definitions[] = [
       'yety.node_add',
       MenuLinkDefault::class,

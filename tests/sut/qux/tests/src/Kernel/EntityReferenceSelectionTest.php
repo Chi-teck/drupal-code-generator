@@ -8,12 +8,12 @@ use Drupal\Core\Form\FormState;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test for EntityReferenceSelection plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class EntityReferenceSelectionTest extends KernelTestBase {
 
   use ContentTypeCreationTrait;

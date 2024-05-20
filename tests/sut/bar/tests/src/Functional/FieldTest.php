@@ -9,12 +9,12 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Field test.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class FieldTest extends BrowserTestBase {
 
   use NodeCreationTrait;

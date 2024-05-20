@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\foo\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests the JavaScript functionality of the Foo module.
- *
- * @group foo
  */
+#[Group('foo')]
 final class ExampleTest extends WebDriverTestBase {
 
   /**

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\tandoor\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests theme file.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ThemeFileTest extends KernelTestBase {
 
   /**

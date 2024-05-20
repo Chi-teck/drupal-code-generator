@@ -7,12 +7,12 @@ namespace Drupal\Tests\qux\Kernel;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormState;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * A test for view argument default plugin.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class ViewsArgumentDefaultTest extends KernelTestBase {
 
   /**

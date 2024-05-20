@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Entity;
 
-{% sort %}
+{% apply sort_namespaces %}
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\{{ machine_name }}\{{ class_prefix }}Interface;
-{% endsort %}
+{% endapply %}
 
 /**
  * Defines the {{ entity_type_label|lower }} entity type.

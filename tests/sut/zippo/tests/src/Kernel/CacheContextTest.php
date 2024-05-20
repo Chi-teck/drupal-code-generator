@@ -6,12 +6,12 @@ namespace Drupal\Tests\zippo\Kernel;
 
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test cache context service.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class CacheContextTest extends KernelTestBase {
 
   /**

@@ -18,3 +18,7 @@ ThisShouldBeInCamelCase
 Alpha
 Beta
 Gamma
+-= Sort namespaces filter =-
+Alpha
+Beta
+Gamma

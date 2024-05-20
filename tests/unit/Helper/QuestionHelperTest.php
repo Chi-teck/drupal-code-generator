@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DrupalCodeGenerator\Tests\Unit\Helper;
 
 use DrupalCodeGenerator\Helper\QuestionHelper;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -158,9 +159,9 @@ final class QuestionHelperTest extends TestCase {
   /**
    * Test callback.
    *
-   * @dataProvider confirmationQuestionProvider
    * @todo Remove this as it actually tests default question helper.
    */
+  #[DataProvider('confirmationQuestionProvider')]
   public function testConfirmationQuestionAnswers(string $input, bool $expected_answer): void {
     $this->setStream("$input\n");
 
@@ -172,7 +173,7 @@ final class QuestionHelperTest extends TestCase {
   /**
    * Data provider for testConfirmationQuestionAnswers().
    */
-  public function confirmationQuestionProvider(): array {
+  public static function confirmationQuestionProvider(): array {
     return [
       ['Yes', TRUE],
       ['yes', TRUE],

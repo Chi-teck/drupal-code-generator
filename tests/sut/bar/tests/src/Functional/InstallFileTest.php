@@ -6,12 +6,12 @@ namespace Drupal\Tests\bar\Functional;
 
 use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test install file.
- *
- * @group DCG
  */
+#[Group('DCG')]
 final class InstallFileTest extends BrowserTestBase {
 
   use TestTrait;
