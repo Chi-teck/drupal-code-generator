@@ -5,22 +5,23 @@ declare(strict_types=1);
 namespace Drupal\foo\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\CronInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides an example block.
- *
- * @Block(
- *   id = "foo_example",
- *   admin_label = @Translation("Example"),
- *   category = @Translation("Custom"),
- * )
  */
+#[Block(
+  id: 'foo_example',
+  admin_label: new TranslatableMarkup('Example'),
+  category: new TranslatableMarkup('Custom'),
+)]
 final class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**

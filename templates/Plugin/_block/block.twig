@@ -10,7 +10,9 @@ namespace Drupal\{{ machine_name }}\Plugin\Block;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
   {% endif %}
+use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
   {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
   {% endif %}
@@ -23,13 +25,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides {{ plugin_label|article|lower }} block.
- *
- * @Block(
- *   id = "{{ plugin_id }}",
- *   admin_label = @Translation("{{ plugin_label }}"),
- *   category = @Translation("{{ category }}"),
- * )
  */
+#[Block(
+  id: '{{ plugin_id }}',
+  admin_label: new TranslatableMarkup('{{ plugin_label }}'),
+  category: new TranslatableMarkup('{{ category }}'),
+)]
 final class {{ class }} extends BlockBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
 
 {% if services %}
