@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace Drupal\foo\Plugin\Filter;
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\filter\Attribute\Filter;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
+use Drupal\filter\Plugin\FilterInterface;
 
 /**
  * @todo Add filter description here.
- *
- * @Filter(
- *   id = "foo_example",
- *   title = @Translation("Example"),
- *   type = Drupal\filter\Plugin\FilterInterface::TYPE_MARKUP_LANGUAGE,
- * )
  */
+#[Filter(
+  id: 'foo_example',
+  title: new TranslatableMarkup('Example'),
+  type: FilterInterface::TYPE_MARKUP_LANGUAGE,
+)]
 final class Example extends FilterBase {
 
   /**
