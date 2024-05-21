@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace Drupal\foo\Plugin\Condition;
 
+use Drupal\Core\Condition\Attribute\Condition;
 use Drupal\Core\Condition\ConditionPluginBase;
 use Drupal\Core\CronInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a 'Example' condition.
- *
- * @Condition(
- *   id = "foo_example",
- *   label = @Translation("Example"),
- * )
  */
+#[Condition(
+  id: 'foo_example',
+  label: new TranslatableMarkup('Example'),
+)]
 final class Example extends ConditionPluginBase implements ContainerFactoryPluginInterface {
 
   /**
