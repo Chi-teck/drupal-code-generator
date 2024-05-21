@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace Drupal\example\Plugin\EntityReferenceSelection;
 
+use Drupal\Core\Entity\Attribute\EntityReferenceSelection;
 use Drupal\Core\Entity\Plugin\EntityReferenceSelection\DefaultSelection;
 use Drupal\Core\Entity\Query\QueryInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * @todo Add plugin description here.
- *
- * @EntityReferenceSelection(
- *   id = "contact_message_selection",
- *   label = @Translation("Contact message selection"),
- *   group = "contact_message_selection",
- *   entity_types = {"contact_message"},
- * )
  */
+#[EntityReferenceSelection(
+  id: 'contact_message_selection',
+  label: new TranslatableMarkup('Contact message selection'),
+  group: 'contact_message_selection',
+  weight: 1,
+  entity_types: ['contact_message'],
+)]
 final class ContactMessageSelection extends DefaultSelection {
 
   /**

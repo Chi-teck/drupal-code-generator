@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Drupal\{{ machine_name }}\Plugin\EntityReferenceSelection;
 
 {% apply sort_namespaces %}
+use Drupal\Core\Entity\Attribute\EntityReferenceSelection;
 use Drupal\Core\Entity\Query\QueryInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
 {% endif %}
@@ -14,14 +16,14 @@ use {{ base_class_full }}{% if base_class == class %} as Base{{ base_class }}{% 
 
 /**
  * @todo Add plugin description here.
- *
- * @EntityReferenceSelection(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
- *   group = "{{ plugin_id }}",
- *   entity_types = {"{{ entity_type }}"},
- * )
  */
+#[EntityReferenceSelection(
+  id: '{{ plugin_id }}',
+  label: new TranslatableMarkup('{{ plugin_label }}'),
+  group: '{{ plugin_id }}',
+  weight: 1,
+  entity_types: ['{{ entity_type }}'],
+)]
 final class {{ class }} extends {{  base_class == class ? 'Base' ~ base_class : base_class }} {
 
 {% if configurable %}
