@@ -9,8 +9,11 @@ namespace Drupal\{{ machine_name }}\Plugin\Filter;
   {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
   {% endif %}
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\filter\Attribute\Filter;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
+use Drupal\filter\Plugin\FilterInterface;
   {% if services %}
 {{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -20,18 +23,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @todo Add filter description here.
- *
- * @Filter(
- *   id = "{{ plugin_id }}",
- *   title = @Translation("{{ plugin_label }}"),
- *   type = Drupal\filter\Plugin\FilterInterface::{{ filter_type }},
-{% if configurable %}
- *   settings = {
- *     "example" = "foo",
- *   },
-{% endif %}
- * )
  */
+#[Filter(
+  id: '{{ plugin_id }}',
+  title: new TranslatableMarkup('{{ plugin_label }}'),
+  type: FilterInterface::{{ filter_type }},
+{% if configurable %}
+  settings: ['example' => 'foo'],
+{% endif %}
+)]
 final class {{ class }} extends FilterBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
 
 {% if services %}

@@ -7,22 +7,22 @@ namespace Drupal\foo\Plugin\Filter;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\filter\Attribute\Filter;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
+use Drupal\filter\Plugin\FilterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @todo Add filter description here.
- *
- * @Filter(
- *   id = "foo_example",
- *   title = @Translation("Example"),
- *   type = Drupal\filter\Plugin\FilterInterface::TYPE_HTML_RESTRICTOR,
- *   settings = {
- *     "example" = "foo",
- *   },
- * )
  */
+#[Filter(
+  id: 'foo_example',
+  title: new TranslatableMarkup('Example'),
+  type: FilterInterface::TYPE_HTML_RESTRICTOR,
+  settings: ['example' => 'foo'],
+)]
 final class Example extends FilterBase implements ContainerFactoryPluginInterface {
 
   /**
