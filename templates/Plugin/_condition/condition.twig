@@ -6,6 +6,8 @@ declare(strict_types=1);
 namespace Drupal\{{ machine_name }}\Plugin\Condition;
 
 {% apply sort_namespaces %}
+use Drupal\Core\Condition\Attribute\Condition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Condition\ConditionPluginBase;
 use Drupal\Core\Form\FormStateInterface;
   {% if services %}
@@ -17,12 +19,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a '{{ plugin_label }}' condition.
- *
- * @Condition(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
- * )
  */
+#[Condition(
+  id: '{{ plugin_id }}',
+  label: new TranslatableMarkup('{{ plugin_label }}'),
+)]
 final class {{ class }} extends ConditionPluginBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
 
 {% if services %}
