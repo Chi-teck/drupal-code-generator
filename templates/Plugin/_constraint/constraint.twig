@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Validation\Constraint;
 
-use Symfony\Component\Validator\Constraint;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Validation\Attribute\Constraint;
+use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 
 /**
  * Provides {{ plugin_label|article }} constraint.
- *
- * @Constraint(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}", context = "Validation"),
- * )
 {% if input_type == 'entity' %}
  *
  * @see https://www.drupal.org/node/2015723.
@@ -37,7 +34,11 @@ use Symfony\Component\Validator\Constraint;
  * @see https://www.drupal.org/node/2015723
 {% endif %}
  */
-final class {{ class }} extends Constraint {
+#[Constraint(
+  id: '{{ plugin_id }}',
+  label: new TranslatableMarkup('{{ plugin_label }}', options: ['context' => 'Validation'])
+)]
+final class {{ class }} extends SymfonyConstraint {
 
   public string $message = '@todo Specify error message here.';
 

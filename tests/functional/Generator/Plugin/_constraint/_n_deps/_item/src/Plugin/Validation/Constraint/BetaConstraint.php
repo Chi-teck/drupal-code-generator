@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\foo\Plugin\Validation\Constraint;
 
-use Symfony\Component\Validator\Constraint;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Validation\Attribute\Constraint;
+use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 
 /**
  * Provides a Beta constraint.
- *
- * @Constraint(
- *   id = "FooBeta",
- *   label = @Translation("Beta", context = "Validation"),
- * )
  *
  * @DCG
  * To apply this constraint on third party field types. Implement
@@ -25,7 +22,11 @@ use Symfony\Component\Validator\Constraint;
  *
  * @see https://www.drupal.org/node/2015723
  */
-final class BetaConstraint extends Constraint {
+#[Constraint(
+  id: 'FooBeta',
+  label: new TranslatableMarkup('Beta', options: ['context' => 'Validation'])
+)]
+final class BetaConstraint extends SymfonyConstraint {
 
   public string $message = '@todo Specify error message here.';
 
