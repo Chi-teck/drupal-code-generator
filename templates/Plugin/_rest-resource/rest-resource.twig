@@ -6,6 +6,8 @@ namespace Drupal\{{ machine_name }}\Plugin\rest\resource;
 
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\KeyValueStore\KeyValueStoreInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\rest\Attribute\RestResource;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ResourceResponse;
@@ -16,15 +18,6 @@ use Symfony\Component\Routing\Route;
 
 /**
  * Represents {{ plugin_label }} records as resources.
- *
- * @RestResource (
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
- *   uri_paths = {
- *     "canonical" = "/api/{{ plugin_id|u2h }}/{id}",
- *     "create" = "/api/{{ plugin_id|u2h }}"
- *   }
- * )
  *
  * @DCG
  * The plugin exposes key-value records as REST resources. In order to enable it
@@ -48,6 +41,14 @@ use Symfony\Component\Routing\Route;
  * Drupal core.
  * @see \Drupal\rest\Plugin\rest\resource\EntityResource
  */
+#[RestResource(
+  id: '{{ plugin_id }}',
+  label: new TranslatableMarkup('{{ plugin_label }}'),
+  uri_paths: [
+    'canonical' => '/api/{{ plugin_id|u2h }}/{id}',
+    'create' => '/api/{{ plugin_id|u2h }}',
+  ],
+)]
 final class {{ class }} extends ResourceBase {
 
   /**
