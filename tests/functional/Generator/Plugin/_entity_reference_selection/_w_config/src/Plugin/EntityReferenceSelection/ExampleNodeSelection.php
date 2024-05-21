@@ -4,20 +4,22 @@ declare(strict_types=1);
 
 namespace Drupal\example\Plugin\EntityReferenceSelection;
 
+use Drupal\Core\Entity\Attribute\EntityReferenceSelection;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\node\Plugin\EntityReferenceSelection\NodeSelection;
 
 /**
  * @todo Add plugin description here.
- *
- * @EntityReferenceSelection(
- *   id = "example_node_selection",
- *   label = @Translation("Advanced node selection"),
- *   group = "example_node_selection",
- *   entity_types = {"node"},
- * )
  */
+#[EntityReferenceSelection(
+  id: 'example_node_selection',
+  label: new TranslatableMarkup('Advanced node selection'),
+  group: 'example_node_selection',
+  weight: 1,
+  entity_types: ['node'],
+)]
 final class ExampleNodeSelection extends NodeSelection {
 
   /**
