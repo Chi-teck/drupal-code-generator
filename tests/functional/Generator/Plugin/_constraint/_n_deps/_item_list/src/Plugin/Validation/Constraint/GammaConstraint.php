@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\foo\Plugin\Validation\Constraint;
 
-use Symfony\Component\Validator\Constraint;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Validation\Attribute\Constraint;
+use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 
 /**
  * Provides a Gamma constraint.
- *
- * @Constraint(
- *   id = "FooGamma",
- *   label = @Translation("Gamma", context = "Validation"),
- * )
  *
  * @DCG
  * To apply this constraint on third party entity types implement either
@@ -20,7 +17,11 @@ use Symfony\Component\Validator\Constraint;
  *
  * @see https://www.drupal.org/node/2015723
  */
-final class GammaConstraint extends Constraint {
+#[Constraint(
+  id: 'FooGamma',
+  label: new TranslatableMarkup('Gamma', options: ['context' => 'Validation'])
+)]
+final class GammaConstraint extends SymfonyConstraint {
 
   public string $message = '@todo Specify error message here.';
 
