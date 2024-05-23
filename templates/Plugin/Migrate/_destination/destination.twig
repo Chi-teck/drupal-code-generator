@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Drupal\{{ machine_name }}\Plugin\migrate\destination;
 
 {% apply sort_namespaces %}
+use Drupal\migrate\Attribute\MigrateDestination;
 use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
@@ -18,9 +19,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * The '{{ plugin_id }}' destination plugin.
- *
- * @MigrateDestination(id = "{{ plugin_id }}")
  */
+#[MigrateDestination('{{ plugin_id }}')]
 final class {{ class }} extends DestinationBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
 
 {% if services %}
