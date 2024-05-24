@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Drupal\foo\Plugin\views\field;
 
 use Drupal\Component\Render\MarkupInterface;
+use Drupal\views\Attribute\ViewsField;
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
 
 /**
  * Provides Example field handler.
- *
- * @ViewsField("foo_example")
  *
  * @DCG
  * The plugin needs to be assigned to a specific table column through
@@ -27,6 +26,7 @@ use Drupal\views\ResultRow;
  * }
  * @endcode
  */
+#[ViewsField('foo_example')]
 final class Example extends FieldPluginBase {
 
   /**
