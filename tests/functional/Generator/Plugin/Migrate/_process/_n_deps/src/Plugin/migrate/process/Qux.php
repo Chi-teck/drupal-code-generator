@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\example\Plugin\migrate\process;
 
+use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -19,9 +20,8 @@ use Drupal\migrate\Row;
  *     plugin: example_qux
  *     source: foo
  * @endcode
- *
- * @MigrateProcessPlugin(id = "example_qux")
  */
+#[MigrateProcess('example_qux')]
 final class Qux extends ProcessPluginBase {
 
   /**
