@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace Drupal\example\Plugin\views\style;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\views\Attribute\ViewsStyle;
 use Drupal\views\Plugin\views\style\StylePluginBase;
 
 /**
  * Foo style plugin.
- *
- * @ViewsStyle(
- *   id = "example_foo",
- *   title = @Translation("Foo"),
- *   help = @Translation("@todo Add help text here."),
- *   theme = "views_style_example_foo",
- *   display_types = {"normal"},
- * )
  */
+#[ViewsStyle(
+  id: 'example_foo',
+  title: new TranslatableMarkup('Foo'),
+  help: new TranslatableMarkup('@todo Add help text here.'),
+  theme: 'views_style_example_foo',
+  display_types: ['normal'],
+)]
 final class Foo extends StylePluginBase {
 
   /**
