@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 
+{% apply sort_namespaces %}
+use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-{% if configurable %}
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+  {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
-{% endif %}
+  {% endif %}
+{% endapply %}
 
 /**
  * Plugin implementation of the '{{ plugin_label }}' formatter.
- *
- * @FieldFormatter(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
- *   field_types = {"string"},
- * )
  */
+#[FieldFormatter(
+  id: '{{ plugin_id }}',
+  label: new TranslatableMarkup('{{ plugin_label }}'),
+  field_types: ['string'],
+)]
 final class {{ class }} extends FormatterBase {
 
 {% if configurable %}
