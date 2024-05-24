@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\views\style;
 
-{% if configurable %}
+{% apply sort_namespaces %}
+  {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
-{% endif %}
+  {% endif %}
 use Drupal\views\Plugin\views\style\StylePluginBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\views\Attribute\ViewsStyle;
+{% endapply %}
 
 /**
  * {{ plugin_label }} style plugin.
- *
- * @ViewsStyle(
- *   id = "{{ plugin_id }}",
- *   title = @Translation("{{ plugin_label }}"),
- *   help = @Translation("@todo Add help text here."),
- *   theme = "views_style_{{ plugin_id }}",
- *   display_types = {"normal"},
- * )
  */
+#[ViewsStyle(
+  id: '{{ plugin_id }}',
+  title: new TranslatableMarkup('{{ plugin_label }}'),
+  help: new TranslatableMarkup('@todo Add help text here.'),
+  theme: 'views_style_{{ plugin_id }}',
+  display_types: ['normal'],
+)]
 final class {{ class }} extends StylePluginBase {
 
   /**
