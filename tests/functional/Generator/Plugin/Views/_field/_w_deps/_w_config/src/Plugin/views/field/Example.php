@@ -7,14 +7,13 @@ namespace Drupal\foo\Plugin\views\field;
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\Attribute\ViewsField;
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides Example field handler.
- *
- * @ViewsField("foo_example")
  *
  * @DCG
  * The plugin needs to be assigned to a specific table column through
@@ -30,6 +29,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * }
  * @endcode
  */
+#[ViewsField('foo_example')]
 final class Example extends FieldPluginBase {
 
   /**
