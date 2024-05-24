@@ -8,17 +8,18 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\views\Attribute\ViewsArgumentDefault;
 use Drupal\views\Plugin\views\argument_default\ArgumentDefaultPluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @todo Add plugin description here.
- *
- * @ViewsArgumentDefault(
- *   id = "foo_example",
- *   title = @Translation("Example"),
- * )
  */
+#[ViewsArgumentDefault(
+  id: 'foo_example',
+  title: new TranslatableMarkup('Example'),
+)]
 final class Example extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
 
   /**

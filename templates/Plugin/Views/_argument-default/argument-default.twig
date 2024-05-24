@@ -8,6 +8,8 @@ namespace Drupal\{{ machine_name }}\Plugin\views\argument_default;
 {% apply sort_namespaces %}
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\views\Attribute\ViewsArgumentDefault;
   {% if configurable %}
 use Drupal\Core\Form\FormStateInterface;
   {% endif %}
@@ -20,12 +22,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @todo Add plugin description here.
- *
- * @ViewsArgumentDefault(
- *   id = "{{ plugin_id }}",
- *   title = @Translation("{{ plugin_label }}"),
- * )
  */
+#[ViewsArgumentDefault(
+  id: '{{ plugin_id }}',
+  title: new TranslatableMarkup('{{ plugin_label }}'),
+)]
 final class {{ class }} extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
 
 {% if services %}
