@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Drupal\foo\Plugin\Field\FieldWidget;
 
+use Drupal\Core\Field\Attribute\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines the 'foo_example' field widget.
- *
- * @FieldWidget(
- *   id = "foo_example",
- *   label = @Translation("Example"),
- *   field_types = {"string"},
- * )
  */
+#[FieldWidget(
+  id: 'foo_example',
+  label: new TranslatableMarkup('Example'),
+  field_types: ['string'],
+)]
 final class ExampleWidget extends WidgetBase {
 
   /**

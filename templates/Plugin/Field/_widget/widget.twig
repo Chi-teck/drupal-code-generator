@@ -6,9 +6,11 @@ declare(strict_types=1);
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldWidget;
 
 {% apply sort_namespaces %}
+use Drupal\Core\Field\Attribute\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
   {% if services %}
 {{ di.use(services) }}
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -18,13 +20,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines the '{{ plugin_id }}' field widget.
- *
- * @FieldWidget(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
- *   field_types = {"string"},
- * )
  */
+#[FieldWidget(
+  id: '{{ plugin_id }}',
+  label: new TranslatableMarkup('{{ plugin_label }}'),
+  field_types: ['string'],
+)]
 final class {{ class }} extends WidgetBase {% if services %}implements ContainerFactoryPluginInterface {% endif %}{
 
 {% if services %}

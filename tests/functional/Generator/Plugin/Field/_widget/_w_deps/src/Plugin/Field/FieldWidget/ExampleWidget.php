@@ -6,21 +6,22 @@ namespace Drupal\foo\Plugin\Field\FieldWidget;
 
 use Drupal\Core\CronInterface;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Field\Attribute\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines the 'foo_example' field widget.
- *
- * @FieldWidget(
- *   id = "foo_example",
- *   label = @Translation("Example"),
- *   field_types = {"string"},
- * )
  */
+#[FieldWidget(
+  id: 'foo_example',
+  label: new TranslatableMarkup('Example'),
+  field_types: ['string'],
+)]
 final class ExampleWidget extends WidgetBase implements ContainerFactoryPluginInterface {
 
   /**
