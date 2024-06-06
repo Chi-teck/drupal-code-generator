@@ -12,9 +12,9 @@ use Drupal\foo\BarPluginBase;
  * Plugin implementation of the bar.
  */
 #[Bar(
-  id: "foo",
-  label: new TranslatableMarkup("Foo"),
-  description: new TranslatableMarkup("Foo description."),
+  id: 'foo',
+  label: new TranslatableMarkup('Foo'),
+  description: new TranslatableMarkup('Foo description.'),
 )]
 final class Foo extends BarPluginBase {
 
