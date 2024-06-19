@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace Drupal\example\Plugin\Field\FieldType;
 
 use Drupal\Component\Utility\Random;
+use Drupal\Core\Field\Attribute\FieldType;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
  * Defines the 'foo' field type.
- *
- * @FieldType(
- *   id = "foo",
- *   label = @Translation("Foo"),
- *   description = @Translation("Some description."),
- *   default_widget = "string_textfield",
- *   default_formatter = "string",
- * )
  */
+#[FieldType(
+  id: 'foo',
+  label: new TranslatableMarkup('Foo'),
+  description: new TranslatableMarkup('Some description'),
+  default_widget: 'string_textfield',
+  default_formatter: 'string',
+)]
 final class FooItem extends FieldItemBase {
 
   /**
