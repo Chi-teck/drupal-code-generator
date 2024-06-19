@@ -4,26 +4,29 @@ declare(strict_types=1);
 
 namespace Drupal\{{ machine_name }}\Plugin\Field\FieldType;
 
+{% apply sort_namespaces %}
 use Drupal\Component\Utility\Random;
+use Drupal\Core\Field\Attribute\FieldType;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
-{% if configurable_storage or configurable_instance %}
+  {% if configurable_storage or configurable_instance %}
 use Drupal\Core\Form\FormStateInterface;
-{% endif %}
+  {% endif %}
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
+{% endapply %}
 
 /**
  * Defines the '{{ plugin_id }}' field type.
- *
- * @FieldType(
- *   id = "{{ plugin_id }}",
- *   label = @Translation("{{ plugin_label }}"),
- *   description = @Translation("Some description."),
- *   default_widget = "string_textfield",
- *   default_formatter = "string",
- * )
  */
+#[FieldType(
+  id: '{{ plugin_id }}',
+  label: new TranslatableMarkup('{{ plugin_label }}'),
+  description: new TranslatableMarkup('Some description'),
+  default_widget: 'string_textfield',
+  default_formatter: 'string',
+)]
 final class {{ class }} extends FieldItemBase {
 
 {% if configurable_storage %}
