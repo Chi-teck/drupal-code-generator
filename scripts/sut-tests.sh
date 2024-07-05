@@ -229,7 +229,6 @@ if [[ $test_filter = all || $test_filter = plugin ]]; then
 
   $dcg plugin:action -a qux -a 'Update node field' -a qux_update_node_field -a UpdateNodeField -a DCG -a node -a Yes -a No
   $dcg plugin:block -a qux -a Example -a example -a ExampleBlock -a DCG -a Yes -a No -a No
-  $dcg plugin:ckeditor -a qux -a 'Pooh Bear' -a qux_pooh_bear
   $dcg plugin:condition -a qux -a Example -a example -a Example -a No
   $dcg plugin:entity-reference-selection -a qux -a Qux -a node -a Example -a qux_example -a Example -a Yes
   $dcg plugin:filter -a qux -a Qux -a Example -a example -a Example -a 'HTML restrictor' -a Yes -a No
@@ -240,8 +239,6 @@ if [[ $test_filter = all || $test_filter = plugin ]]; then
 
   dcg_phpcs .
   dcg_module_install $module_machine_name
-  echo 'Build CKEditor plugin...'
-  npm install && npm run build
   dcg_phpunit $drupal_dir/modules/$module_machine_name/tests
   dcg_module_uninstall $module_machine_name
 fi
