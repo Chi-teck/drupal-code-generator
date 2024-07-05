@@ -3,28 +3,27 @@
   [ 1] Drush
   [ 2] Entity
   [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Controller
+  [10] Field
+  [11] Hook
+  [12] Install file
+  [13] Javascript
+  [14] Layout
+  [15] Module
+  [16] PhpStorm metadata
+  [17] Plugin manager
+  [18] Readme
+  [19] Render element
+  [20] Service provider
+  [21] Single directory component
+  [22] Template
+  [23] Theme
+  [24] Theme settings
  ➤ 1⏎
  Select generator 
   [0] ..
@@ -35,28 +34,27 @@
   [ 1] Drush
   [ 2] Entity
   [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Controller
+  [10] Field
+  [11] Hook
+  [12] Install file
+  [13] Javascript
+  [14] Layout
+  [15] Module
+  [16] PhpStorm metadata
+  [17] Plugin manager
+  [18] Readme
+  [19] Render element
+  [20] Service provider
+  [21] Single directory component
+  [22] Template
+  [23] Theme
+  [24] Theme settings
  ➤ 2⏎
  Select generator 
   [0] ..
@@ -69,28 +67,27 @@
   [ 1] Drush
   [ 2] Entity
   [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Controller
+  [10] Field
+  [11] Hook
+  [12] Install file
+  [13] Javascript
+  [14] Layout
+  [15] Module
+  [16] PhpStorm metadata
+  [17] Plugin manager
+  [18] Readme
+  [19] Render element
+  [20] Service provider
+  [21] Single directory component
+  [22] Template
+  [23] Theme
+  [24] Theme settings
  ➤ 3⏎
  Select generator 
   [0] ..
@@ -103,62 +100,28 @@
   [ 1] Drush
   [ 2] Entity
   [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Controller
+  [10] Field
+  [11] Hook
+  [12] Install file
+  [13] Javascript
+  [14] Layout
+  [15] Module
+  [16] PhpStorm metadata
+  [17] Plugin manager
+  [18] Readme
+  [19] Render element
+  [20] Service provider
+  [21] Single directory component
+  [22] Template
+  [23] Theme
+  [24] Theme settings
  ➤ 4⏎
- Select generator 
-  [0] ..
-  [1] Apache virtual host
-  [2] Nginx virtual host
- ➤ 0⏎
- Select generator 
-  [ 0] ..
-  [ 1] Drush
-  [ 2] Entity
-  [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
- ➤ 5⏎
  Select generator 
   [ 0] ..
   [ 1] Field
@@ -166,43 +129,41 @@
   [ 3] Views
   [ 4] Action
   [ 5] Block
-  [ 6] CKEditor
-  [ 7] Condition
-  [ 8] Constraint
-  [ 9] Entity reference selection
-  [10] Filter
-  [11] Menu link
-  [12] Queue worker
-  [13] REST resource
+  [ 6] Condition
+  [ 7] Constraint
+  [ 8] Entity reference selection
+  [ 9] Filter
+  [10] Menu link
+  [11] Queue worker
+  [12] REST resource
  ➤ 0⏎
  Select generator 
   [ 0] ..
   [ 1] Drush
   [ 2] Entity
   [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
- ➤ 6⏎
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Controller
+  [10] Field
+  [11] Hook
+  [12] Install file
+  [13] Javascript
+  [14] Layout
+  [15] Module
+  [16] PhpStorm metadata
+  [17] Plugin manager
+  [18] Readme
+  [19] Render element
+  [20] Service provider
+  [21] Single directory component
+  [22] Template
+  [23] Theme
+  [24] Theme settings
+ ➤ 5⏎
  Select generator 
   [ 0] ..
   [ 1] Access checker
@@ -226,29 +187,28 @@
   [ 1] Drush
   [ 2] Entity
   [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
- ➤ 7⏎
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Controller
+  [10] Field
+  [11] Hook
+  [12] Install file
+  [13] Javascript
+  [14] Layout
+  [15] Module
+  [16] PhpStorm metadata
+  [17] Plugin manager
+  [18] Readme
+  [19] Render element
+  [20] Service provider
+  [21] Single directory component
+  [22] Template
+  [23] Theme
+  [24] Theme settings
+ ➤ 6⏎
  Select generator 
   [0] ..
   [1] Browser
@@ -262,29 +222,28 @@
   [ 1] Drush
   [ 2] Entity
   [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
- ➤ 8⏎
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Controller
+  [10] Field
+  [11] Hook
+  [12] Install file
+  [13] Javascript
+  [14] Layout
+  [15] Module
+  [16] PhpStorm metadata
+  [17] Plugin manager
+  [18] Readme
+  [19] Render element
+  [20] Service provider
+  [21] Single directory component
+  [22] Template
+  [23] Theme
+  [24] Theme settings
+ ➤ 7⏎
  Select generator 
   [0] ..
   [1] Links
@@ -301,29 +260,28 @@
   [ 1] Drush
   [ 2] Entity
   [ 3] Form
-  [ 4] Miscellaneous
-  [ 5] Plugin
-  [ 6] Service
-  [ 7] Test
-  [ 8] Yaml
-  [ 9] composer.json
-  [10] Controller
-  [11] Field
-  [12] Hook
-  [13] Install file
-  [14] Javascript
-  [15] Layout
-  [16] Module
-  [17] PhpStorm metadata
-  [18] Plugin manager
-  [19] Readme
-  [20] Render element
-  [21] Service provider
-  [22] Single directory component
-  [23] Template
-  [24] Theme
-  [25] Theme settings
- ➤ 13⏎
+  [ 4] Plugin
+  [ 5] Service
+  [ 6] Test
+  [ 7] Yaml
+  [ 8] composer.json
+  [ 9] Controller
+  [10] Field
+  [11] Hook
+  [12] Install file
+  [13] Javascript
+  [14] Layout
+  [15] Module
+  [16] PhpStorm metadata
+  [17] Plugin manager
+  [18] Readme
+  [19] Render element
+  [20] Service provider
+  [21] Single directory component
+  [22] Template
+  [23] Theme
+  [24] Theme settings
+ ➤ 12⏎
 
  Welcome to install-file generator!
 ––––––––––––––––––––––––––––––––––––

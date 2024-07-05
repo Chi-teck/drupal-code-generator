@@ -4,6 +4,5 @@ description: Helper module for testing generated plugins.
 package: DCG
 dependencies:
   - drupal:filter
-  - drupal:ckeditor5
   - example:example
 core_version_requirement: ^10 || ^11
