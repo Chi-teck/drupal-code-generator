@@ -27,6 +27,8 @@ final class ViewStyleTest extends KernelTestBase {
     'views',
     'node',
     'filter',
+    'editor',
+    'ckeditor5',
   ];
 
   /**
