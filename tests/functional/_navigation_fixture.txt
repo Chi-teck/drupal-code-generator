@@ -166,7 +166,6 @@
   [ 3] Views
   [ 4] Action
   [ 5] Block
-  [ 6] CKEditor
   [ 7] Condition
   [ 8] Constraint
   [ 9] Entity reference selection
