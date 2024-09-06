@@ -116,8 +116,8 @@ final class SingleDirectoryComponent extends BaseGenerator implements ContainerI
     $assets->addFile($component_path . '{component_machine_name}.component.yml', 'component.twig');
     $assets->addFile($component_path . 'README.md', 'readme.twig');
 
-    $contents = \file_get_contents($this->getTemplatePath() . \DIRECTORY_SEPARATOR . 'thumbnail.jpg');
-    $thumbnail = new File($component_path . 'thumbnail.jpg');
+    $contents = \file_get_contents($this->getTemplatePath() . \DIRECTORY_SEPARATOR . 'thumbnail.png');
+    $thumbnail = new File($component_path . 'thumbnail.png');
     $thumbnail->content($contents);
     $assets[] = $thumbnail;
   }
