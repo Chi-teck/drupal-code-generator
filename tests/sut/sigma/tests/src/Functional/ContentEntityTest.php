@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Drupal\Tests\sigma\Functional;
 
 use Drupal\Component\Render\FormattableMarkup as FM;
+use Drupal\Tests\BrowserTestBase;
 use Drupal\dcg_test\TestTrait;
 use Drupal\sigma\Entity\Example;
-use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
