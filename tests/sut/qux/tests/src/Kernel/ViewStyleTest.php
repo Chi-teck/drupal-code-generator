@@ -66,7 +66,7 @@ final class ViewStyleTest extends KernelTestBase {
     $build = \views_embed_view('qux_example');
     $output = $this->container->get('renderer')->renderRoot($build);
     $xml = new \SimpleXMLElement((string) $output);
-    $xpath = \sprintf('//div/div[@class = "%s"]/div//a[text() = "Hello world!"]', $wrapper_class);
+    $xpath = \sprintf('//div/div[@class = "%s"]/div//span[text() = "Hello world!"]', $wrapper_class);
     self::assertCount(1, $xml->xpath($xpath));
   }
 
