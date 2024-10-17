@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Drupal\example\Plugin\migrate\destination;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\migrate\Attribute\MigrateDestination;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
+use Drupal\migrate\Attribute\MigrateDestination;
 use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
 use Drupal\migrate\Row;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -65,7 +65,7 @@ final class Bar extends DestinationBase implements ContainerFactoryPluginInterfa
   /**
    * {@inheritdoc}
    */
-  public function fields(MigrationInterface $migration = NULL): array {
+  public function fields(?MigrationInterface $migration = NULL): array {
     return [
       'id' => $this->t('The row ID.'),
       // @todo Describe row fields here.

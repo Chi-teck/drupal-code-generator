@@ -30,7 +30,7 @@ final class Foo extends DestinationBase {
   /**
    * {@inheritdoc}
    */
-  public function fields(MigrationInterface $migration = NULL): array {
+  public function fields(?MigrationInterface $migration = NULL): array {
     return [
       'id' => $this->t('The row ID.'),
       // @todo Describe row fields here.
