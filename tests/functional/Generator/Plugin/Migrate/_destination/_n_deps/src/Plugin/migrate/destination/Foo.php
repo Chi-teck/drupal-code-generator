@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Drupal\example\Plugin\migrate\destination;
 
 use Drupal\migrate\Attribute\MigrateDestination;
-use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
 use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
 use Drupal\migrate\Row;
 
 /**
@@ -30,7 +30,7 @@ final class Foo extends DestinationBase {
   /**
    * {@inheritdoc}
    */
-  public function fields(MigrationInterface $migration = NULL): array {
+  public function fields(?MigrationInterface $migration = NULL): array {
     return [
       'id' => $this->t('The row ID.'),
       // @todo Describe row fields here.

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\zippo\Functional;
 
-use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
 use PHPUnit\Framework\Attributes\Group;
 
 /**

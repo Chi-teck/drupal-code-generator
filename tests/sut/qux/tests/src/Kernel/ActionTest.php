@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\Core\Access\AccessResultInterface;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\node\NodeTypeInterface;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\node\NodeTypeInterface;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
