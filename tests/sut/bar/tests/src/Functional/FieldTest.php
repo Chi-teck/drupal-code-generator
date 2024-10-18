@@ -6,9 +6,9 @@ namespace Drupal\Tests\bar\Functional;
 
 use Drupal\Component\Render\FormattableMarkup as FM;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Drupal\dcg_test\TestTrait;
 use PHPUnit\Framework\Attributes\Group;
 
 /**

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Drupal\Tests\nigma\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\nigma\Entity\Example;
 use Drupal\Tests\user\Traits\UserCreationTrait;
+use Drupal\nigma\Entity\Example;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 

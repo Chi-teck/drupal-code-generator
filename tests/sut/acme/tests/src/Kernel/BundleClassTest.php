@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\acme\Kernel;
 
+use Drupal\KernelTests\KernelTestBase;
 use Drupal\acme\Entity\User\UserBase;
 use Drupal\acme\Entity\User\UserBundle;
-use Drupal\KernelTests\KernelTestBase;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
