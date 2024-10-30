@@ -25,7 +25,7 @@ final class TwigSortSetNode extends Node {
       ->raw(";\n")
       ->write('$data = explode("\n", $data);' . "\n")
       ->write('$data = array_unique($data);' . "\n")
-      ->write('sort($data, SORT_FLAG_CASE|SORT_NATURAL);' . "\n")
+      ->write('usort($data, "strcmp");' . "\n")
       ->write('yield ltrim(implode("\n", $data)) . "\n";' . "\n");
   }
 

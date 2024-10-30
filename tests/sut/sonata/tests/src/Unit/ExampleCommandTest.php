@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Drupal\Tests\sonata\Unit;
 
 use Composer\Console\Application;
-use Drupal\sonata\Command\ExampleCommand;
 use Drupal\Tests\UnitTestCase;
+use Drupal\sonata\Command\ExampleCommand;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\Console\Tester\CommandTester;
 

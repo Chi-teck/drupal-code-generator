@@ -30,6 +30,7 @@ final class ExampleLog implements LoggerInterface {
    * {@inheritdoc}
    */
   public function log($level, string|\Stringable $message, array $context = []): void {
+    $message = (string) $message;
     // Convert PSR3-style messages to \Drupal\Component\Render\FormattableMarkup
     // style, so they can be translated too.
     $placeholders = $this->parser->parseMessagePlaceholders($message, $context);

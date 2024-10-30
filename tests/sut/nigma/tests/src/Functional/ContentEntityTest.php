@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Drupal\Tests\nigma\Functional;
 
 use Drupal\Component\Render\FormattableMarkup as FM;
-use Drupal\dcg_test\TestTrait;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\dcg_test\TestTrait;
 use PHPUnit\Framework\Attributes\Group;
 
 /**

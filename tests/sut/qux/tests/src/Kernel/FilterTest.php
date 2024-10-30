@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Drupal\Tests\qux\Kernel;
 
 use Drupal\Core\Form\FormState;
-use Drupal\filter\FilterPluginCollection;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\filter\FilterPluginCollection;
 use PHPUnit\Framework\Attributes\Group;
 
 /**

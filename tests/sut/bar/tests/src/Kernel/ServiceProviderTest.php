@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\bar\Kernel;
 
-use Drupal\bar\BarServiceProvider;
 use Drupal\Core\DependencyInjection\ServiceModifierInterface;
 use Drupal\Core\DependencyInjection\ServiceProviderInterface;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\bar\BarServiceProvider;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
