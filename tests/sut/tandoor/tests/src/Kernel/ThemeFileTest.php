@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\Tests\tandoor\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -25,6 +26,7 @@ final class ThemeFileTest extends KernelTestBase {
   /**
    * Test callback.
    */
+  #[DoesNotPerformAssertions]
   public function testThemeFile(): void {
     // There is not a lot we can test here. Just call the preprocess functions
     // to make sure they are loaded.

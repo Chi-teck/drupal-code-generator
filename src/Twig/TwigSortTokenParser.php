@@ -34,8 +34,8 @@ final class TwigSortTokenParser extends AbstractTokenParser {
     $ref->setAttribute('always_defined', TRUE);
 
     return new Node([
-      new SetNode(TRUE, $ref, $body, $lineno, $this->getTag()),
-      new TwigSortSetNode(['ref' => $ref], [], $lineno, $this->getTag()),
+      new SetNode(TRUE, $ref, $body, $lineno),
+      new TwigSortSetNode(['ref' => $ref], [], $lineno),
     ]);
   }
 

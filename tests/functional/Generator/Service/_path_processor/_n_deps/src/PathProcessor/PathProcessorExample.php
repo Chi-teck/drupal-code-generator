@@ -27,7 +27,7 @@ final class PathProcessorExample implements InboundPathProcessorInterface, Outbo
   /**
    * {@inheritdoc}
    */
-  public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL): string {
+  public function processOutbound($path, &$options = [], ?Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL): string {
     return preg_replace('#^/node/#i', '/content/', $path);
   }
 

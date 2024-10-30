@@ -66,7 +66,7 @@ final class Foo extends ActionBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public function access($entity, AccountInterface $account = NULL, $return_as_object = FALSE): AccessResultInterface|bool {
+  public function access($entity, ?AccountInterface $account = NULL, $return_as_object = FALSE): AccessResultInterface|bool {
     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
     $access = $entity->access('update', $account, TRUE)
       ->andIf($entity->get('field_example')->access('edit', $account, TRUE));
@@ -76,7 +76,7 @@ final class Foo extends ActionBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public function execute(ContentEntityInterface $entity = NULL): void {
+  public function execute(?ContentEntityInterface $entity = NULL): void {
     $entity->set('field_example', 'New value')->save();
   }
 

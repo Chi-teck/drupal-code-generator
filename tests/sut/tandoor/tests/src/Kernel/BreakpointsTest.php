@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\tandoor\Kernel;
 
-use Drupal\breakpoint\Breakpoint;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\breakpoint\Breakpoint;
 use PHPUnit\Framework\Attributes\Group;
 
 /**

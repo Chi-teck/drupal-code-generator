@@ -448,7 +448,6 @@ final class PhpStormMetaTest extends GeneratorTestBase {
         'block_content_field_revision',
         'block_content_revision',
         'block_content_revision__body',
-        'cache_bootstrap',
     PHP;
     self::assertStringContainsString($database, $generated_content);
 
