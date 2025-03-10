@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Route;
 #[Group('DCG')]
 final class BreadcrumbBuilderTest extends KernelTestBase {
 
-  private const EMPTY_CACHE = [
+  private const array EMPTY_CACHE = [
     'contexts' => [],
     'tags' => [],
     'max-age' => Cache::PERMANENT,

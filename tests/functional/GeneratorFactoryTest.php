@@ -16,7 +16,7 @@ use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
  */
 final class GeneratorFactoryTest extends FunctionalTestBase {
 
-  private const TOTAL_GENERATORS = 2;
+  private const int TOTAL_GENERATORS = 2;
 
   /**
    * Test callback.
