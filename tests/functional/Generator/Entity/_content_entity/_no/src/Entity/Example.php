@@ -57,6 +57,6 @@ use Drupal\views\EntityViewsData;
     'plural' => '@count examples',
   ],
 )]
-final class Example extends ContentEntityBase implements ExampleInterface {
+class Example extends ContentEntityBase implements ExampleInterface {
 
 }
