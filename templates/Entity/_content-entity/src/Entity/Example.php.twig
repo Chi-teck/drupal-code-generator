@@ -23,7 +23,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
   {% endif %}
   {% if revisionable %}
-use Drupal\Core\Entity\RevisionableContentEntityBase;
+use Drupal\Core\Entity\EditorialContentEntityBase;
 use Drupal\Core\Entity\Form\RevisionDeleteForm;
 use Drupal\Core\Entity\Form\RevisionRevertForm;
 use Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider;
@@ -68,6 +68,9 @@ use Drupal\{{ machine_name }}\{{ class }}AccessControlHandler;
     'label' => '{{ label_base_field ? 'label' : 'id' }}',
 {% if author_base_field %}
     'owner' => 'uid',
+{% endif %}
+{% if status_base_field %}
+    'published' => 'status',
 {% endif %}
     'uuid' => 'uuid',
   ],
@@ -159,7 +162,7 @@ use Drupal\{{ machine_name }}\{{ class }}AccessControlHandler;
   ],
 {% endif %}
 )]
-final class {{ class }} extends {% if revisionable %}Revisionable{% endif %}ContentEntityBase implements {{ class }}Interface {
+class {{ class }} extends {% if revisionable %}Editorial{% endif %}ContentEntityBase implements {{ class }}Interface {
 
 {% if changed_base_field or author_base_field %}
   {% if changed_base_field %}

@@ -12,7 +12,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Form\DeleteMultipleForm;
 use Drupal\Core\Entity\Form\RevisionDeleteForm;
 use Drupal\Core\Entity\Form\RevisionRevertForm;
-use Drupal\Core\Entity\RevisionableContentEntityBase;
+use Drupal\Core\Entity\EditorialContentEntityBase;
 use Drupal\Core\Entity\Routing\AdminHtmlRouteProvider;
 use Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -40,6 +40,7 @@ use Drupal\views\EntityViewsData;
     'bundle' => 'bundle',
     'label' => 'label',
     'owner' => 'uid',
+    'published' => 'status',
     'uuid' => 'uuid',
   ],
   handlers: [
@@ -92,7 +93,7 @@ use Drupal\views\EntityViewsData;
     'revision_log_message' => 'revision_log',
   ],
 )]
-final class FooExample extends RevisionableContentEntityBase implements FooExampleInterface {
+class FooExample extends EditorialContentEntityBase implements FooExampleInterface {
 
   use EntityChangedTrait;
   use EntityOwnerTrait;
