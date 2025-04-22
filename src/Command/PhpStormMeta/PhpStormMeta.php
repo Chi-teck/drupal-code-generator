@@ -76,7 +76,7 @@ final class PhpStormMeta extends BaseGenerator implements ContainerInjectionInte
     $assets[] = (new Routes($this->getHelper('route_info')))();
     $assets[] = (new Services($this->getHelper('service_info')))();
     $assets[] = (new Settings())();
-    $assets[] = (new States($service('keyvalue')))();
+    $assets[] = (new States($service('keyvalue'), $service('cron')))();
   }
 
   /**
