@@ -10,7 +10,7 @@ declare(strict_types=1);
 /**
  * Implements hook_file_download().
  */
-function {{ machine_name }}_file_download($uri) {
+function {{ machine_name }}_file_download($uri): array|int|null {
   // Check to see if this is a config download.
   $scheme = StreamWrapperManager::getScheme($uri);
   $target = StreamWrapperManager::getTarget($uri);
@@ -19,4 +19,5 @@ function {{ machine_name }}_file_download($uri) {
       'Content-disposition' => 'attachment; filename="config.tar.gz"',
     ];
   }
+  return NULL;
 }
