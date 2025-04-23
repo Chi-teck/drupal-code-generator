@@ -21,6 +21,7 @@ function example_theme($existing, $type, $theme, $path): array {
         'sortby' => NULL,
         'my_module_per_page' => NULL,
       ],
+      'initial preprocess' => 'PreprocessClass::preprocessDisplay',
     ],
     'my_module_list' => [
       'variables' => [
@@ -28,6 +29,7 @@ function example_theme($existing, $type, $theme, $path): array {
         'parents' => NULL,
         'tid' => NULL,
       ],
+      'initial preprocess' => 'service.name:preprocessList',
     ],
     'my_module_icon' => [
       'variables' => [
