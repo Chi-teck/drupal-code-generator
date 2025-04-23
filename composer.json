@@ -35,7 +35,7 @@
     },
     "require-dev": {
         "ext-simplexml": "*",
-        "chi-teck/drupal-coder-extension": "^2.0.0-beta3",
+        "chi-teck/drupal-coder-extension": "^2.0.0-rc1",
         "drupal/coder": "8.3.24",
         "drupal/core": "11.x-dev",
         "phpspec/prophecy-phpunit": "^2.2",
