@@ -16,7 +16,7 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
 #[FieldFormatter(
   id: "example_foo_key_value",
   label: new TranslatableMarkup("Key-value"),
-  field_types: {"example_foo"},
+  field_types: ["example_foo"],
 )]
 class FooKeyValueFormatter extends FormatterBase {
 

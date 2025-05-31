@@ -18,7 +18,7 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
 #[FieldFormatter(
   id: "example_foo_default",
   label: new TranslatableMarkup("Default"),
-  field_types: {"example_foo"},
+  field_types: ["example_foo"],
 )]
 class FooDefaultFormatter extends FormatterBase {
 

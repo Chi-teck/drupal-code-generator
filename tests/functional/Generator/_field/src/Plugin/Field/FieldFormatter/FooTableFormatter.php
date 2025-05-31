@@ -16,7 +16,7 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
 #[FieldFormatter(
   id: "example_foo_table",
   label: new TranslatableMarkup("Table"),
-  field_types: {"example_foo"},
+  field_types: ["example_foo"],
 )]
 class FooTableFormatter extends FormatterBase {
 

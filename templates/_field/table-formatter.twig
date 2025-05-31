@@ -22,7 +22,7 @@ use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
 #[FieldFormatter(
   id: "{{ field_id }}_table",
   label: new TranslatableMarkup("Table"),
-  field_types: {"{{ field_id }}"},
+  field_types: ["{{ field_id }}"],
 )]
 class {{ table_formatter_class }} extends FormatterBase {
 
