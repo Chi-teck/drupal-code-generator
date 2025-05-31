@@ -57,7 +57,7 @@ final class FieldTest extends BrowserTestBase {
       'field_name' => 'foo',
     ];
     $this->submitForm($edit, 'Continue');
-    $this->submitForm([], 'Save settings');
+    $this->submitForm([], 'Save');
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     // -- Test widget form elements.
@@ -178,7 +178,7 @@ final class FieldTest extends BrowserTestBase {
       'field_name' => 'foo',
     ];
     $this->submitForm($edit, 'Continue');
-    $this->submitForm([], 'Save settings');
+    $this->submitForm([], 'Save');
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
     // -- Test widget form elements.
@@ -337,7 +337,7 @@ final class FieldTest extends BrowserTestBase {
       'field_storage[subform][settings][foo]' => 'test 1',
       'settings[bar]' => 'test 2',
     ];
-    $this->submitForm($edit, 'Save settings');
+    $this->submitForm($edit, 'Save');
 
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
