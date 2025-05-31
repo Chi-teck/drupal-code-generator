@@ -30,7 +30,7 @@ use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
  *   field_types = {"{{ field_id }}"},
  * )
  */
-final class {{ formatter_class }} extends FormatterBase {
+class {{ formatter_class }} extends FormatterBase {
 
 {% if formatter_settings %}
   /**
