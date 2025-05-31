@@ -51,11 +51,7 @@ final class FieldTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldExample1(): void {
-    $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
-    $edit = [
-      'new_storage_type' => 'bar_example_1',
-    ];
-    $this->submitForm($edit, 'Continue');
+    $this->drupalGet('admin/structure/types/manage/page/fields/add-field/bar_example_1/false');
     $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
@@ -176,11 +172,7 @@ final class FieldTest extends BrowserTestBase {
    */
   public function testFieldExample2(): void {
 
-    $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
-    $edit = [
-      'new_storage_type' => 'bar_example_2',
-    ];
-    $this->submitForm($edit, 'Continue');
+    $this->drupalGet('admin/structure/types/manage/page/fields/add-field/bar_example_2/false');
     $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
@@ -331,11 +323,7 @@ final class FieldTest extends BrowserTestBase {
    * Test callback.
    */
   public function testFieldExample3(): void {
-    $this->drupalGet('admin/structure/types/manage/page/fields/add-field');
-    $edit = [
-      'new_storage_type' => 'bar_example_3',
-    ];
-    $this->submitForm($edit, 'Continue');
+    $this->drupalGet('admin/structure/types/manage/page/fields/add-field/bar_example_3/false');
     $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
