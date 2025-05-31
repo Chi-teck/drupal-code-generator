@@ -13,7 +13,6 @@ use Drupal\example\Plugin\Field\FieldType\FooItem;
 /**
  * Plugin implementation of the 'example_foo_key_value' formatter.
  */
-
 #[FieldFormatter(
   id: "example_foo_key_value",
   label: new TranslatableMarkup("Key-value"),
