@@ -8,18 +8,18 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\example\Plugin\Field\FieldType\FooItem;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 
 /**
  * Defines the 'example_foo' field widget.
- *
- * @FieldWidget(
- *   id = "example_foo",
- *   label = @Translation("Foo"),
- *   field_types = {"example_foo"},
- * )
  */
+#[FieldWidget(
+  id = "example_foo",
+  label = new TranslatableMarkup("Foo"),
+  field_types = {"example_foo"},
+)]
 final class FooWidget extends WidgetBase {
 
   /**

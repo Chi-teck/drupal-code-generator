@@ -11,6 +11,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\Validator\ConstraintViolationInterface;
   {% if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
@@ -19,14 +20,13 @@ use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
 
 /**
  * Defines the '{{ field_id }}' field widget.
- *
- * @FieldWidget(
- *   id = "{{ field_id }}",
- *   label = @Translation("{{ field_label }}"),
- *   field_types = {"{{ field_id }}"},
- * )
  */
-final class {{ widget_class }} extends WidgetBase {
+#[FieldWidget(
+  id = "{{ field_id }}",
+  label = new TranslatableMarkup("{{ field_label }}"),
+  field_types = {"{{ field_id }}"},
+)]
+class {{ widget_class }} extends WidgetBase {
 
 {% if widget_settings %}
   /**
