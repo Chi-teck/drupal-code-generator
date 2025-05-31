@@ -16,9 +16,9 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
  * Defines the 'example_foo' field widget.
  */
 #[FieldWidget(
-  id = "example_foo",
-  label = new TranslatableMarkup("Foo"),
-  field_types = {"example_foo"},
+  id: "example_foo",
+  label: new TranslatableMarkup("Foo"),
+  field_types: ["example_foo"],
 )]
 class FooWidget extends WidgetBase {
 

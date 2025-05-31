@@ -22,9 +22,9 @@ use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
  * Defines the '{{ field_id }}' field widget.
  */
 #[FieldWidget(
-  id = "{{ field_id }}",
-  label = new TranslatableMarkup("{{ field_label }}"),
-  field_types = {"{{ field_id }}"},
+  id: "{{ field_id }}",
+  label: new TranslatableMarkup("{{ field_label }}"),
+  field_types: ["{{ field_id }}"],
 )]
 class {{ widget_class }} extends WidgetBase {
 
