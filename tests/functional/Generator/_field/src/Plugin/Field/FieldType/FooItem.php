@@ -10,20 +10,20 @@ use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\Email;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
  * Defines the 'example_foo' field type.
- *
- * @FieldType(
- *   id = "example_foo",
- *   label = @Translation("Foo"),
- *   description = @Translation("Some description."),
- *   default_widget = "example_foo",
- *   default_formatter = "example_foo_default",
- * )
  */
-final class FooItem extends FieldItemBase {
+#[FieldType(
+  id: "example_foo",
+  label: new TranslatableMarkup("Foo"),
+  description: new TranslatableMarkup("Some description."),
+  default_widget: "example_foo",
+  default_formatter: "example_foo_default",
+)]
+class FooItem extends FieldItemBase {
 
   /**
    * {@inheritdoc}

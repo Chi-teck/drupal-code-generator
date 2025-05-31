@@ -16,20 +16,20 @@ use Drupal\Core\Form\FormStateInterface;
 {% if email %}
 use Drupal\Core\Render\Element\Email;
 {% endif %}
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
  * Defines the '{{ field_id }}' field type.
- *
- * @FieldType(
- *   id = "{{ field_id }}",
- *   label = @Translation("{{ field_label }}"),
- *   description = @Translation("Some description."),
- *   default_widget = "{{ field_id }}",
- *   default_formatter = "{{ field_id }}_default",
- * )
  */
-final class {{ type_class }} extends FieldItemBase {
+#[FieldType(
+  id: "{{ field_id }}",
+  label: new TranslatableMarkup("{{ field_label }}"),
+  description: new TranslatableMarkup("Some description."),
+  default_widget: "{{ field_id }}",
+  default_formatter: "{{ field_id }}_default",
+)]
+class {{ type_class }} extends FieldItemBase {
 
 {% if storage_settings %}
   /**
