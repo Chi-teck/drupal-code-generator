@@ -25,11 +25,9 @@ jobs:
           - prefer-stable
           - prefer-lowest
     steps:
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1.7.3
-
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: browser-actions/setup-chrome@v1.7.3
+      - run: chrome --version
+      - uses: actions/checkout@v3
 
       - name: Upgrade sqlite3
         run: |
