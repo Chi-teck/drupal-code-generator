@@ -9,6 +9,7 @@ namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 use Drupal\Core\Datetime\DrupalDateTime;
   {% endif %}
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Field\FormatterBase;
   {% if list %}
 use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
@@ -17,14 +18,13 @@ use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
 
 /**
  * Plugin implementation of the '{{ field_id }}_key_value' formatter.
- *
- * @FieldFormatter(
- *   id = "{{ field_id }}_key_value",
- *   label = @Translation("Key-value"),
- *   field_types = {"{{ field_id }}"},
- * )
  */
-final class {{ key_value_formatter_class }} extends FormatterBase {
+#[FieldFormatter(
+  id: "{{ field_id }}_key_value",
+  label: new TranslatableMarkup("Key-value"),
+  field_types: {"{{ field_id }}"},
+)]
+class {{ key_value_formatter_class }} extends FormatterBase {
 
   /**
    * {@inheritdoc}

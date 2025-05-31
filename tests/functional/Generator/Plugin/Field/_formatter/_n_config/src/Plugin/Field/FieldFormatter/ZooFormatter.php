@@ -17,7 +17,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
   label: new TranslatableMarkup('Zoo'),
   field_types: ['string'],
 )]
-final class ZooFormatter extends FormatterBase {
+class ZooFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}

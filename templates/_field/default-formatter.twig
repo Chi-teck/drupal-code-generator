@@ -9,6 +9,7 @@ namespace Drupal\{{ machine_name }}\Plugin\Field\FieldFormatter;
 use Drupal\Core\Datetime\DrupalDateTime;
   {% endif %}
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Field\FormatterBase;
   {% if formatter_settings %}
 use Drupal\Core\Form\FormStateInterface;
@@ -23,13 +24,12 @@ use Drupal\{{ machine_name }}\Plugin\Field\FieldType\{{ type_class }};
 
 /**
  * Plugin implementation of the '{{ field_id }}_default' formatter.
- *
- * @FieldFormatter(
- *   id = "{{ field_id }}_default",
- *   label = @Translation("Default"),
- *   field_types = {"{{ field_id }}"},
- * )
  */
+#[FieldFormatter(
+  id: "{{ field_id }}_default",
+  label: new TranslatableMarkup("Default"),
+  field_types: {"{{ field_id }}"},
+)]
 class {{ formatter_class }} extends FormatterBase {
 
 {% if formatter_settings %}

@@ -7,18 +7,19 @@ namespace Drupal\example\Plugin\Field\FieldFormatter;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\example\Plugin\Field\FieldType\FooItem;
 
 /**
  * Plugin implementation of the 'example_foo_key_value' formatter.
- *
- * @FieldFormatter(
- *   id = "example_foo_key_value",
- *   label = @Translation("Key-value"),
- *   field_types = {"example_foo"},
- * )
  */
-final class FooKeyValueFormatter extends FormatterBase {
+
+#[FieldFormatter(
+  id: "example_foo_key_value",
+  label: new TranslatableMarkup("Key-value"),
+  field_types: {"example_foo"},
+)]
+class FooKeyValueFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
