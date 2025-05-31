@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
   label = new TranslatableMarkup("Foo"),
   field_types = {"example_foo"},
 )]
-final class FooWidget extends WidgetBase {
+class FooWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
