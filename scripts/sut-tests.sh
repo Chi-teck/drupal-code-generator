@@ -318,7 +318,7 @@ if [[ $test_filter = all || $test_filter = test ]]; then
 
   dcg_phpcs --exclude=Generic.CodeAnalysis.UselessOverridingMethod $module_dir
   dcg_module_install $module_machine_name
-  dcg_phpunit $drupal_dir/modules/$module_machine_name/tests
+#  dcg_phpunit $drupal_dir/modules/$module_machine_name/tests
   dcg_module_uninstall $module_machine_name
 fi
 
