@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PHPSTORM_META {
 
 {% for definition in definitions %}
-  // {{ definition.label }}.
+  // {{ definition.label|replace({"\n": " ", "\r": " "}) }}.
   {% set field_argument_set = 'fields_' ~ definition.type %}
   registerArgumentsSet('{{ field_argument_set }}',
   {% for field in definition.fields %}

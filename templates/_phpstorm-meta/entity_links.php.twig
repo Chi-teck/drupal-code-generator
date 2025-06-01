@@ -6,7 +6,7 @@ namespace PHPSTORM_META {
 
 {% for definition in definitions %}
   {% if definition.links|length > 0 %}
-  // {{ definition.label }}.
+  // {{ definition.label|replace({"\n": " ", "\r": " "}) }}.
   registerArgumentsSet('{{ definition.type ~ '__links' }}',
   {% for link in definition.links %}
     '{{ link }}',
