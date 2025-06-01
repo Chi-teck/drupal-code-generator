@@ -85,6 +85,7 @@ final class ContentEntityTest extends BrowserTestBase {
     $keys = [
       'id' => 'id',
       'label' => 'id',
+      'published' => 'status',
       'uuid' => 'uuid',
       'revision' => '',
       'bundle' => '',
