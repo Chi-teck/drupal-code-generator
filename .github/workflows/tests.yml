@@ -14,6 +14,12 @@ env:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+        options: --shm-size=2g
     strategy:
       fail-fast: false
       matrix:
@@ -25,8 +31,6 @@ jobs:
           - prefer-stable
           - prefer-lowest
     steps:
-      - uses: browser-actions/setup-chrome@v1.7.3
-      - run: chrome --version
       - uses: actions/checkout@v3
 
       - name: Upgrade sqlite3
