@@ -44,17 +44,13 @@ final class FieldTypeTest extends BrowserTestBase {
     $this->drupalLogin($admin_user);
 
     // Create new field.
-    $this->drupalGet('admin/structure/types/manage/test/fields/add-field');
-    $edit = [
-      'new_storage_type' => 'qux_example',
-    ];
-    $this->submitForm($edit, 'Continue');
+    $this->drupalGet('admin/structure/types/manage/test/fields/add-field/qux_example/false');
     $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
     ];
     $this->submitForm($edit, 'Continue');
-    $this->submitForm([], 'Save settings');
+    $this->submitForm([], 'Save');
 
     // Update storage settings.
     $this->drupalGet('/admin/structure/types/manage/test/fields/node.test.field_foo');
@@ -64,7 +60,7 @@ final class FieldTypeTest extends BrowserTestBase {
       'field_storage[subform][settings][foo]' => 'Hi!',
       'settings[bar]' => 'Yo!',
     ];
-    $this->submitForm($edit, 'Save settings');
+    $this->submitForm($edit, 'Save');
 
     // Make sure field settings have been persisted correctly.
     $this->drupalGet('/admin/structure/types/manage/test/fields/node.test.field_foo');
