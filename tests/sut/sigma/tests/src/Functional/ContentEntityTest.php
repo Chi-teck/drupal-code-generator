@@ -47,18 +47,14 @@ final class ContentEntityTest extends BrowserTestBase {
     $this->assertStatusMessage('The configuration has been updated.');
 
     // -- Add a new field to make sure the entity type is truly fieldable.
-    $this->drupalGet('admin/structure/example/fields/add-field');
-    $edit = [
-      'new_storage_type' => 'plain_text',
-    ];
-    $this->submitForm($edit, 'Continue');
+    $this->drupalGet('admin/structure/example/fields/add-field/plain_text/false');
     $edit = [
       'label' => 'Foo',
       'field_name' => 'foo',
       'group_field_options_wrapper' => 'string',
     ];
     $this->submitForm($edit, 'Continue');
-    $this->submitForm([], 'Save settings');
+    $this->submitForm([], 'Save');
 
     $this->assertStatusMessage(new FM('Saved %label configuration.', ['%label' => 'Foo']));
 
