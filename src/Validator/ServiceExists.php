@@ -21,11 +21,11 @@ final class ServiceExists {
   /**
    * @throws \UnexpectedValueException
    */
-  public function __invoke(string $value): string {
+  public function __invoke(string $value): ?string {
     if (!$this->serviceInfo->getServiceDefinition($value)) {
-      throw new \UnexpectedValueException('Service does not exists.');
+      return 'Service does not exists.';
     }
-    return $value;
+    return NULL;
   }
 
 }

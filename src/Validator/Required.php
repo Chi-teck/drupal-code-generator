@@ -16,9 +16,9 @@ final class Required {
     // FALSE is not considered as empty value because question helper uses
     // it as negative answer on confirmation questions.
     if ($value === NULL || $value === '' || $value === []) {
-      throw new \UnexpectedValueException('The value is required.');
+      return 'The value is required.';
     }
-    return $value;
+    return NULL;
   }
 
 }

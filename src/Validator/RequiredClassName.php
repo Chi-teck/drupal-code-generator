@@ -9,10 +9,7 @@ namespace DrupalCodeGenerator\Validator;
  */
 final class RequiredClassName {
 
-  /**
-   * @throws \UnexpectedValueException
-   */
-  public function __invoke(mixed $value): string {
+  public function __invoke(mixed $value): ?string {
     return (new Chained(new Required(), new ClassName()))($value);
   }
 

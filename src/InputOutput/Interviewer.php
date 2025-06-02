@@ -10,16 +10,8 @@ use DrupalCodeGenerator\Helper\Drupal\ExtensionInfoInterface;
 use DrupalCodeGenerator\Helper\Drupal\PermissionInfo;
 use DrupalCodeGenerator\Helper\Drupal\ServiceInfo;
 use DrupalCodeGenerator\Utils;
-use DrupalCodeGenerator\Validator\Chained;
-use DrupalCodeGenerator\Validator\MachineName;
-use DrupalCodeGenerator\Validator\Optional;
-use DrupalCodeGenerator\Validator\Required;
-use DrupalCodeGenerator\Validator\RequiredClassName;
-use DrupalCodeGenerator\Validator\RequiredMachineName;
-use DrupalCodeGenerator\Validator\ServiceExists;
-use DrupalCodeGenerator\Validator\ServiceName;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\Question;
+use DrupalCodeGenerator\Validator\{Chained, MachineName, Optional, Required, RequiredClassName, RequiredMachineName, ServiceExists, ServiceName};
+use function Laravel\Prompts\{confirm, multiselect, select, suggest, text};
 
 /**
  * Defines a helper to interact with a user.
@@ -51,7 +43,11 @@ final class Interviewer {
     if ($default !== NULL) {
       $default = $this->processText($default);
     }
-    return $this->io->ask($question, $default, $validator);
+    return text(
+      label: $question,
+      default: (string) $default,
+      validate: $validator,
+    );
   }
 
   /**
@@ -59,7 +55,7 @@ final class Interviewer {
    */
   public function confirm(string $question, bool $default = TRUE): bool {
     $question = $this->processText($question);
-    return $this->io->confirm($question, $default);
+    return confirm($question, $default);
   }
 
   /**
@@ -69,23 +65,9 @@ final class Interviewer {
    */
   public function choice(string $question, array $choices, ?string $default = NULL, bool $multiselect = FALSE): array|string|int {
     $question = $this->processText($question);
-
-    // The choices can be an associative array.
-    $choice_labels = \array_values($choices);
-    // Start choices list form '1'.
-    \array_unshift($choice_labels, NULL);
-    unset($choice_labels[0]);
-
-    $question = new ChoiceQuestion($question, $choice_labels, $default);
-    $question->setMultiselect($multiselect);
-
-    // Do not use IO choice here as it prints choice key as default value.
-    // @see \Symfony\Component\Console\Style\SymfonyStyle::choice().
-    $answer = $this->io->askQuestion($question);
-
-    /** @psalm-suppress FalsableReturnStatement, InvalidFalsableReturnType */
-    $get_key = static fn (string $answer): string|int => \array_search($answer, $choices);
-    return \is_array($answer) ? \array_map($get_key, $answer) : $get_key($answer);
+    return $multiselect ?
+      multiselect(label: $question, options: $choices, default: (array) $default) :
+      select(label: $question, options: $choices, default: $default);
   }
 
   /**
@@ -104,10 +86,11 @@ final class Interviewer {
       }
     }
 
-    $default = $machine_name ? Utils::machine2human($machine_name) : NULL;
-    $question = new Question($type->getNameLabel(), $default);
-    $question->setValidator(new Required());
-    return $this->io->askQuestion($question);
+    return text(
+      label: $type->getNameLabel(),
+      default: $machine_name ? Utils::machine2human($machine_name) : '',
+      required: TRUE,
+    );
   }
 
   /**
@@ -120,16 +103,19 @@ final class Interviewer {
       $default = $type->isNewExtension() ?
         Utils::human2machine($this->vars['name']) : $this->extensionInfo->getExtensionMachineName($this->vars['name']);
     }
-    $default ??= $this->extensionInfo->getExtensionFromPath($this->io->getWorkingDirectory())?->getName();
-
-    $question = new Question($type->getMachineNameLabel(), $default);
-    $question->setValidator(new Chained(new Required(), new MachineName()));
-
+    $args = [
+      'label' => $type->getMachineNameLabel(),
+      'default' => $default ?? $this->extensionInfo->getExtensionFromPath($this->io->getWorkingDirectory())?->getName() ?? '',
+      'required' => TRUE,
+      'validate' => new MachineName(),
+    ];
     if ($extensions = $this->extensionInfo->getExtensions()) {
-      $question->setAutocompleterValues(\array_keys($extensions));
+      $args['options'] = \array_keys($extensions);
+      return suggest(... $args);
     }
-
-    return $this->io->askQuestion($question);
+    else {
+      return text(... $args);
+    }
   }
 
   /**
@@ -174,17 +160,19 @@ final class Interviewer {
   public function askServices(bool $default = TRUE, array $forced_services = []): array {
     $services = $forced_services;
 
-    if ($this->io->confirm('Would you like to inject dependencies?', $default)) {
+    if (confirm('Would you like to inject dependencies?', $default)) {
       $service_ids = $this->serviceInfo->getServicesIds();
       $validator = new Chained(
         new Optional(new ServiceName()),
         new Optional(new ServiceExists($this->serviceInfo)),
       );
+
       while (TRUE) {
-        $question = new Question('Type the service name or use arrows up/down. Press enter to continue');
-        $question->setValidator($validator);
-        $question->setAutocompleterValues($service_ids);
-        $service = $this->io->askQuestion($question);
+        $service = suggest(
+          label: 'Select a service or press enter to continue',
+          options: $service_ids,
+          validate: $validator,
+        );
         if (!$service) {
           break;
         }
@@ -203,13 +191,18 @@ final class Interviewer {
    * Asks permission.
    */
   public function askPermission(string $question = 'Permission', ?string $default = NULL): string {
-    $question = new Question($question, $default);
-    $question->setValidator(new Required());
-    $permissions = $this->permissionInfo->getPermissionNames();
-    if (\count($permissions) > 0) {
-      $question->setAutocompleterValues($permissions);
+    $args = [
+      'label' => $question,
+      'default' => (string) $default,
+      'required' => TRUE,
+    ];
+    if ($permissions = $this->permissionInfo->getPermissionNames()) {
+      $args['options'] = $permissions;
+      return suggest(... $args);
     }
-    return $this->io->askQuestion($question);
+    else {
+      return text(... $args);
+    }
   }
 
   /**

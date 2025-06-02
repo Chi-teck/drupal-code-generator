@@ -23,7 +23,7 @@ final class Optional {
    * @throws \UnexpectedValueException
    */
   public function __invoke(mixed $value): mixed {
-    return $value === NULL || $value === '' || $value === [] ? $value : ($this->validator)($value);
+    return $value === NULL || $value === '' || $value === [] ? NULL : ($this->validator)($value);
   }
 
 }

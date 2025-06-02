@@ -23,9 +23,11 @@ final class Chained {
    */
   public function __invoke(mixed $value): mixed {
     foreach ($this->validators as $validator) {
-      $value = $validator($value);
+      if (($error = $validator($value)) !== NULL) {
+        return $error;
+      }
     }
-    return $value;
+    return NULL;
   }
 
   /**
