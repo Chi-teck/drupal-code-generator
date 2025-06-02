@@ -2,7 +2,7 @@ name: Tests
 
 on:
   push:
-    branches: [ 3.x, 4.x ]
+    branches: [ 3.x, 4.x, prompts ]
   pull_request:
     branches: [ 3.x, 4.x ]
 
