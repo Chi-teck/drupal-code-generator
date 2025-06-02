@@ -18,23 +18,20 @@ final class OptionalTest extends TestCase {
    * Test callback.
    */
   #[DataProvider('dataProvider')]
-  public function test(mixed $machine_name, ?\UnexpectedValueException $exception): void {
-    if ($exception) {
-      $this->expectExceptionObject($exception);
-    }
+  public function test(mixed $machine_name, ?string $expected): void {
     $validator = new Optional(new MachineName());
-    self::assertSame($machine_name, $validator($machine_name));
+    self::assertSame($expected, $validator($machine_name));
   }
 
   public static function dataProvider(): array {
-    $exception = new \UnexpectedValueException('The value is not correct machine name.');
+    $error = 'The value is not correct machine name.';
     return [
-      ['foo*&)(*&@#()*&@#bar', $exception],
-      [TRUE, $exception],
+      ['foo*&)(*&@#()*&@#bar', $error],
+      [TRUE, $error],
       [NULL, NULL],
       ['', NULL],
-      [' ', $exception],
-      [new \stdClass(), $exception],
+      [' ', $error],
+      [new \stdClass(), $error],
     ];
   }
 

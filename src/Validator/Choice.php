@@ -17,11 +17,11 @@ final class Choice {
   /**
    * @throws \UnexpectedValueException
    */
-  public function __invoke(mixed $value): string|int|float {
+  public function __invoke(mixed $value): ?string {
     return match(FALSE) {
       \is_string($value) || \is_int($value) || \is_float($value),
-      \in_array($value, $this->choices, TRUE) => throw new \UnexpectedValueException($this->message),
-      default => $value,
+      \in_array($value, $this->choices, TRUE) => $this->message,
+      default => NULL,
     };
   }
 
