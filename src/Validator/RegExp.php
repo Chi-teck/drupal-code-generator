@@ -20,12 +20,11 @@ final class RegExp {
   /**
    * @throws \UnexpectedValueException
    */
-  public function __invoke(mixed $value): string {
+  public function __invoke(mixed $value): ?string {
     if (!\is_string($value) || !\preg_match($this->pattern, $value)) {
-      $message = $this->message ?? \sprintf('The value does not match pattern "%s".', $this->pattern);
-      throw new \UnexpectedValueException($message);
+      return $this->message ?? \sprintf('The value does not match pattern "%s".', $this->pattern);
     }
-    return $value;
+    return NULL;
   }
 
 }

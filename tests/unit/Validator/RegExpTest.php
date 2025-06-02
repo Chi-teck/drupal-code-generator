@@ -17,22 +17,19 @@ final class RegExpTest extends TestCase {
    * Test callback.
    */
   #[DataProvider('dataProvider')]
-  public function test(mixed $machine_name, string $pattern, ?string $message, ?\UnexpectedValueException $exception): void {
+  public function test(mixed $machine_name, string $pattern, ?string $message, $expected): void {
     $validator = new RegExp($pattern, $message);
-    if ($exception) {
-      $this->expectExceptionObject($exception);
-    }
-    self::assertSame($machine_name, $validator($machine_name));
+    self::assertSame($expected, $validator($machine_name));
   }
 
   public static function dataProvider(): array {
     return [
-      ['wrong', '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
-      ['wrong', '/abc/', 'Custom message', new \UnexpectedValueException('Custom message')],
+      ['wrong', '/abc/', NULL, 'The value does not match pattern "/abc/".'],
+      ['wrong', '/abc/', 'Custom message', 'Custom message'],
       ['abc', '/abc/', NULL, NULL],
-      [NULL, '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
-      [FALSE, '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
-      [[], '/abc/', NULL, new \UnexpectedValueException('The value does not match pattern "/abc/".')],
+      [NULL, '/abc/', NULL, 'The value does not match pattern "/abc/".'],
+      [FALSE, '/abc/', NULL, 'The value does not match pattern "/abc/".'],
+      [[], '/abc/', NULL, 'The value does not match pattern "/abc/".'],
     ];
   }
 

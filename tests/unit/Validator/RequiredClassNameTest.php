@@ -17,26 +17,23 @@ final class RequiredClassNameTest extends TestCase {
    * Test callback.
    */
   #[DataProvider('dataProvider')]
-  public function test(mixed $machine_name, ?\UnexpectedValueException $exception): void {
-    if ($exception) {
-      $this->expectExceptionObject($exception);
-    }
-    self::assertSame($machine_name, (new RequiredClassName())($machine_name));
+  public function test(mixed $machine_name, $expected): void {
+    self::assertSame($expected, (new RequiredClassName())($machine_name));
   }
 
   public static function dataProvider(): array {
-    $cn_exception = new \UnexpectedValueException('The value is not correct class name.');
-    $rq_exception = new \UnexpectedValueException('The value is required.');
+    $cn_error = 'The value is not correct class name.';
+    $rq_error = 'The value is required.';
     return [
       ['Single', NULL],
       ['UpperCamelCase', NULL],
-      ['snake_case_here', $cn_exception],
-      ['With Space', $cn_exception],
-      ['0', $cn_exception],
-      ['', $rq_exception],
-      [NULL, $rq_exception],
-      [FALSE, $cn_exception],
-      [TRUE, $cn_exception],
+      ['snake_case_here', $cn_error],
+      ['With Space', $cn_error],
+      ['0', $cn_error],
+      ['', $rq_error],
+      [NULL, $rq_error],
+      [FALSE, $cn_error],
+      [TRUE, $cn_error],
     ];
   }
 

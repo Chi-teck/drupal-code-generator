@@ -18,32 +18,26 @@ final class ChainedTest extends TestCase {
    * Test callback.
    */
   #[DataProvider('dataProvider')]
-  public function test(mixed $machine_name, ?\UnexpectedValueException $exception): void {
-    if ($exception) {
-      $this->expectExceptionObject($exception);
-    }
+  public function test(mixed $machine_name, $expected): void {
     $validator = new Chained(
       new RegExp('/111/', 'v1'),
       new RegExp('/222/', 'v2'),
       new RegExp('/333/', 'v3'),
     );
-    self::assertSame($machine_name, $validator($machine_name));
+    self::assertSame($expected, $validator($machine_name));
   }
 
   /**
    * Test callback.
    */
   #[DataProvider('dataProvider')]
-  public function testWith(mixed $machine_name, ?\UnexpectedValueException $exception): void {
-    if ($exception) {
-      $this->expectExceptionObject($exception);
-    }
+  public function testWith(mixed $machine_name, $expected): void {
     $validator = new Chained(new RegExp('/111/', 'v1'));
     $validator = $validator->with(
       new RegExp('/222/', 'v2'),
       new RegExp('/333/', 'v3'),
     );
-    self::assertSame($machine_name, $validator($machine_name));
+    self::assertSame($expected, $validator($machine_name));
   }
 
   /**
@@ -51,9 +45,9 @@ final class ChainedTest extends TestCase {
    */
   public static function dataProvider(): array {
     return [
-      ['', new \UnexpectedValueException('v1')],
-      ['111', new \UnexpectedValueException('v2')],
-      ['111-222', new \UnexpectedValueException('v3')],
+      ['', 'v1'],
+      ['111', 'v2'],
+      ['111-222', 'v3'],
       ['111-222-333', NULL],
     ];
   }

@@ -17,28 +17,25 @@ final class ClassNameTest extends TestCase {
    * Test callback.
    */
   #[DataProvider('dataProvider')]
-  public function test(mixed $machine_name, ?\UnexpectedValueException $exception): void {
-    if ($exception) {
-      $this->expectExceptionObject($exception);
-    }
-    self::assertSame($machine_name, (new ClassName())($machine_name));
+  public function test(mixed $machine_name, $expected): void {
+    self::assertSame($expected, (new ClassName())($machine_name));
   }
 
   public static function dataProvider(): array {
-    $exception = new \UnexpectedValueException('The value is not correct class name.');
+    $error = 'The value is not correct class name.';
     return [
       ['Single', NULL],
       ['UpperCamelCase', NULL],
-      ['lowCamelCase', $exception],
-      ['snake_case_here', $exception],
-      ['With Space', $exception],
-      [' NotTrimmed ', $exception],
-      ['With_Underscore', $exception],
-      ['WrongSymbols@)@#&)', $exception],
-      [TRUE, $exception],
-      [NULL, $exception],
-      [[], $exception],
-      [new \stdClass(), $exception],
+      ['lowCamelCase', $error],
+      ['snake_case_here', $error],
+      ['With Space', $error],
+      [' NotTrimmed ', $error],
+      ['With_Underscore', $error],
+      ['WrongSymbols@)@#&)', $error],
+      [TRUE, $error],
+      [NULL, $error],
+      [[], $error],
+      [new \stdClass(), $error],
     ];
   }
 
