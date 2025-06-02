@@ -10,7 +10,7 @@ namespace DrupalCodeGenerator\Validator;
 final class RequiredMachineName {
 
   /**
-   * @throws \UnexpectedValueException
+   * Magic method.
    */
   public function __invoke(mixed $value): ?string {
     return (new Chained(new Required(), new MachineName()))($value);

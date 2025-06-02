@@ -10,7 +10,7 @@ namespace DrupalCodeGenerator\Validator;
 final class ServiceName {
 
   /**
-   * @throws \UnexpectedValueException
+   * Magic method.
    */
   public function __invoke(mixed $value): ?string {
     if (!\is_string($value) || !\preg_match('/^[a-z][a-z0-9_\.]*[a-z0-9]$/', $value)) {
