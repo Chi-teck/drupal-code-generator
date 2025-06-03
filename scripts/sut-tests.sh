@@ -16,7 +16,7 @@ test_filter=${1:-'all'}
 dcg_drupal_host=${DCG_DRUPAL_HOST:-'127.0.0.1'}
 dcg_drupal_port=${DCG_DRUPAL_PORT:-'8085'}
 dcg=$drupal_dir/vendor/bin/dcg
-dcg_wd_url=${DCG_WD_URL:-'http://localhost:4444/wd/hub'}
+dcg_wd_url=${DCG_WD_URL:-'http://localhost:4444'}
 dcg_drupal_version=${DCG_DRUPAL_VERSION:-'11.x'}
 drupal_repo='https://git.drupalcode.org/project/drupal.git'
 
@@ -63,7 +63,8 @@ function dcg_phpcs {
 function dcg_phpunit {
   SIMPLETEST_BASE_URL=http://$dcg_drupal_host:$dcg_drupal_port \
   SIMPLETEST_DB=sqlite://localhost//$drupal_dir/sites/default/files/dcg_test.sqlite \
-  MINK_DRIVER_ARGS='["chrome", {"goog": {"w3c": false, "args": ["--headless"]}}, "'$dcg_wd_url'"]' \
+  BROWSERTEST_SELENIUM_URL=$dcg_wd_url \
+  MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"goog": {"browserName": "chrome", "platformName": "LINUX", "goog:chromeOptions": {"args": ["--disable-gpu", "--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "'$dcg_wd_url'"]' \
   $drupal_dir/vendor/bin/phpunit -c $drupal_dir/core "$@"
 }
 

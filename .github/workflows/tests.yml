@@ -18,6 +18,8 @@ jobs:
       selenium:
         image: selenium/standalone-chrome:4.1.2-20220217
         options: --shm-size=2gb
+        ports:
+          - 4444:4444
     strategy:
       fail-fast: false
       matrix:
