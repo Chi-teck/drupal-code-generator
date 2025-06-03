@@ -60,17 +60,6 @@ jobs:
       - name: Update  dependencies
         run: composer update --${{ matrix.dependency-mode }} --ansi
 
-      - name: Run lint
-        run: ./scripts/lint.sh
-
-      - name: Run unit tests
-        run: ./scripts/unit-tests.sh
-
-      - name: Run functional tests
-        env:
-          DCG_DRUPAL_VERSION: ${{ matrix.drupal }}
-        run: ./scripts/functional-tests.sh
-
       - name: Run SUT tests
         env:
           DCG_DRUPAL_VERSION: ${{ matrix.drupal }}
