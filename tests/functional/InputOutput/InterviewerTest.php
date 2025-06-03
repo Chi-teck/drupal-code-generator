@@ -15,6 +15,9 @@ use DrupalCodeGenerator\Helper\QuestionHelper;
 use DrupalCodeGenerator\InputOutput\Interviewer;
 use DrupalCodeGenerator\InputOutput\IO;
 use DrupalCodeGenerator\Test\Functional\FunctionalTestBase;
+use Laravel\Prompts\Prompt;
+use Laravel\Prompts\Themes\Default\Concerns\DrawsBoxes;
+use Laravel\Prompts\Themes\Default\Renderer;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -29,6 +32,10 @@ final class InterviewerTest extends FunctionalTestBase {
 
   private IO $io;
 
+  protected FakeTerminal $terminal;
+
+  protected CapturingOutput $output;
+
   /**
    * {@inheritdoc}
    */
@@ -40,6 +47,14 @@ final class InterviewerTest extends FunctionalTestBase {
       new BufferedOutput(),
       new QuestionHelper(),
     );
+    include_once __DIR__ . '/FakeTerminal.php';
+    include_once __DIR__ . '/CapturingOutput.php';
+    $this->terminal = new FakeTerminal();
+    $this->output = new CapturingOutput();
+    $r = new \ReflectionClass(Prompt::class);
+    $r->setStaticPropertyValue('terminal', $this->terminal);
+    $r->setStaticPropertyValue('output', $this->output);
+    Prompt::interactive();
   }
 
   /**
@@ -52,15 +67,17 @@ final class InterviewerTest extends FunctionalTestBase {
     ];
     $interviewer = $this->createInterviewer($vars);
 
-    $this->setStream('example');
-    $answer = $interviewer->ask('-={foo}=-', '-={bar}=-');
-    self::assertSame('example', $answer);
+    $value = 'example';
+    $this->fakeInput($value);
+    $title = '-={foo}=-';
+    $answer = $interviewer->ask($title);
+    self::assertSame($value, $answer);
     $expected_output = <<< 'TXT'
 
        -=123=- [-=456=-]:
-       ➤ 
+       ➤
       TXT;
-    $this->assertOutput($expected_output);
+    $this->assertOutput($title, $value);
   }
 
   /**
@@ -69,13 +86,13 @@ final class InterviewerTest extends FunctionalTestBase {
   public function testConfirm(): void {
     $interviewer = $this->createInterviewer(['foo' => 123]);
 
-    $this->setStream('No');
+    $this->fakeInput('No');
     $answer = $interviewer->confirm('-={foo}=-');
     self::assertFalse($answer);
     $expected_output = <<< 'TXT'
 
        -=123=- [Yes]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -86,7 +103,7 @@ final class InterviewerTest extends FunctionalTestBase {
   public function testChoice(): void {
     $interviewer = $this->createInterviewer(['foo' => 123]);
 
-    $this->setStream('Beta');
+    $this->fakeInput('Beta');
     $choices = [
       'alpha' => 'Alpha',
       'beta' => 'Beta',
@@ -100,7 +117,7 @@ final class InterviewerTest extends FunctionalTestBase {
         [1] Alpha
         [2] Beta
         [3] Gamma
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -114,7 +131,7 @@ final class InterviewerTest extends FunctionalTestBase {
     $vars = $machine_name ? ['machine_name' => $machine_name] : [];
     $interviewer = $this->createInterviewer($vars, $definition);
 
-    $this->setStream('Example');
+    $this->fakeInput('Example');
     $answer = $interviewer->askName();
     self::assertSame($expected_answer, $answer);
 
@@ -147,7 +164,7 @@ final class InterviewerTest extends FunctionalTestBase {
   public function testAskNameValidation(): void {
     $interviewer = $this->createInterviewer();
 
-    $this->setStream("\nExample\n");
+    $this->fakeInput("\nExample\n");
     $answer = $interviewer->askName();
     self::assertSame('Example', $answer);
 
@@ -157,7 +174,7 @@ final class InterviewerTest extends FunctionalTestBase {
        ➤  The value is required.
 
        Name:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -171,7 +188,7 @@ final class InterviewerTest extends FunctionalTestBase {
     $vars = $name ? ['name' => $name] : [];
     $interviewer = $this->createInterviewer($vars, $definition);
 
-    $this->setStream('example');
+    $this->fakeInput('example');
     $answer = $interviewer->askMachineName();
     self::assertSame('example', $answer);
 
@@ -209,25 +226,25 @@ final class InterviewerTest extends FunctionalTestBase {
 
     // -- Inside extension directory.
     $this->io->getInput()->setOption('working-dir', \DRUPAL_ROOT . '/core/modules/user/src');
-    $this->setStream('example');
+    $this->fakeInput('example');
     $answer = $interviewer->askMachineName();
     self::assertSame('example', $answer);
     $expected_output = <<< 'TXT'
 
        Module machine name [user]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Outside extension directory.
     $this->io->getInput()->setOption('working-dir', \DRUPAL_ROOT . '/core/modules');
-    $this->setStream('example');
+    $this->fakeInput('example');
     $answer = $interviewer->askMachineName();
     self::assertSame('example', $answer);
     $expected_output = <<< 'TXT'
 
        Module machine name:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -245,7 +262,7 @@ final class InterviewerTest extends FunctionalTestBase {
   public function testAskMachineNameValidation(): void {
     $interviewer = $this->createInterviewer();
 
-    $this->setStream("\nWrong\nexample");
+    $this->fakeInput("\nWrong\nexample");
     $answer = $interviewer->askMachineName();
     self::assertSame('example', $answer);
 
@@ -258,7 +275,7 @@ final class InterviewerTest extends FunctionalTestBase {
        ➤  The value is not correct machine name.
 
        Machine name:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -270,31 +287,31 @@ final class InterviewerTest extends FunctionalTestBase {
     $interviewer = $this->createInterviewer();
 
     // -- Default question.
-    $this->setStream('Foo');
+    $this->fakeInput('Foo');
     $answer = $interviewer->askClass();
     self::assertSame('Foo', $answer);
 
     $expected_output = <<< 'TXT'
 
        Class:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Custom question.
-    $this->setStream('Foo');
+    $this->fakeInput('Foo');
     $answer = $interviewer->askClass('Service class');
     self::assertSame('Foo', $answer);
 
     $expected_output = <<< 'TXT'
 
        Service class:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Validation.
-    $this->setStream("\nwrong\nFoo");
+    $this->fakeInput("\nwrong\nFoo");
     $answer = $interviewer->askClass();
     self::assertSame('Foo', $answer);
 
@@ -307,7 +324,7 @@ final class InterviewerTest extends FunctionalTestBase {
        ➤  The value is not correct class name.
 
        Class:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -319,31 +336,31 @@ final class InterviewerTest extends FunctionalTestBase {
     $interviewer = $this->createInterviewer();
 
     // -- Default question.
-    $this->setStream('Foo');
+    $this->fakeInput('Foo');
     $answer = $interviewer->askPluginLabel();
     self::assertSame('Foo', $answer);
 
     $expected_output = <<< 'TXT'
 
        Plugin label:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Custom question.
-    $this->setStream('Foo');
+    $this->fakeInput('Foo');
     $answer = $interviewer->askPluginLabel('Label');
     self::assertSame('Foo', $answer);
 
     $expected_output = <<< 'TXT'
 
        Label:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Validation.
-    $this->setStream("\nExample");
+    $this->fakeInput("\nExample");
 
     $answer = $interviewer->askPluginLabel();
     self::assertSame('Example', $answer);
@@ -354,7 +371,7 @@ final class InterviewerTest extends FunctionalTestBase {
        ➤  The value is required.
 
        Plugin label:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -370,31 +387,31 @@ final class InterviewerTest extends FunctionalTestBase {
     $interviewer = $this->createInterviewer($vars);
 
     // -- Default question.
-    $this->setStream('example');
+    $this->fakeInput('example');
     $answer = $interviewer->askPluginId();
     self::assertSame('example', $answer);
 
     $expected_output = <<< 'TXT'
 
        Plugin ID [foo_bar]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Custom question.
-    $this->setStream('example');
+    $this->fakeInput('example');
     $answer = $interviewer->askPluginId('ID');
     self::assertSame('example', $answer);
 
     $expected_output = <<< 'TXT'
 
        ID [foo_bar]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Validation.
-    $this->setStream("\nWrOng\nfoo");
+    $this->fakeInput("\nWrOng\nfoo");
 
     $answer = $interviewer->askPluginId(default: NULL);
     self::assertSame('foo', $answer);
@@ -408,7 +425,7 @@ final class InterviewerTest extends FunctionalTestBase {
        ➤  The value is not correct machine name.
 
        Plugin ID:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -424,55 +441,55 @@ final class InterviewerTest extends FunctionalTestBase {
     $interviewer = $this->createInterviewer($vars);
 
     // -- Default question.
-    $this->setStream('Example');
+    $this->fakeInput('Example');
     $answer = $interviewer->askPluginClass();
     self::assertSame('Example', $answer);
 
     $expected_output = <<< 'TXT'
 
        Plugin class [Bar]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Custom question.
-    $this->setStream('Example');
+    $this->fakeInput('Example');
     $answer = $interviewer->askPluginClass('Provide plugin class');
     self::assertSame('Example', $answer);
 
     $expected_output = <<< 'TXT'
 
        Provide plugin class [Bar]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Custom default value.
-    $this->setStream('Example');
+    $this->fakeInput('Example');
     $answer = $interviewer->askPluginClass(default: 'Example');
     self::assertSame('Example', $answer);
 
     $expected_output = <<< 'TXT'
 
        Plugin class [Example]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Class suffix.
-    $this->setStream('Example');
+    $this->fakeInput('Example');
     $answer = $interviewer->askPluginClass(suffix: 'Formatter');
     self::assertSame('Example', $answer);
 
     $expected_output = <<< 'TXT'
 
        Plugin class [BarFormatter]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Validation.
-    $this->setStream("\nwrong\nFoo");
+    $this->fakeInput("\nwrong\nFoo");
     $answer = $interviewer->askPluginClass(default: '');
     self::assertSame('Foo', $answer);
 
@@ -485,7 +502,7 @@ final class InterviewerTest extends FunctionalTestBase {
        ➤  The value is not correct class name.
 
        Plugin class:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -497,7 +514,7 @@ final class InterviewerTest extends FunctionalTestBase {
     $interviewer = $this->createInterviewer([]);
 
     // -- Positive confirmation.
-    $this->setStream("\nentity_type.manager\n\n");
+    $this->fakeInput("\nentity_type.manager\n\n");
     $answer = $interviewer->askServices();
     $expected_answer = [
       'entity_type.manager' => [
@@ -511,28 +528,28 @@ final class InterviewerTest extends FunctionalTestBase {
     $expected_output = <<< 'TXT'
 
        Would you like to inject dependencies? [Yes]:
-       ➤ 
+       ➤
        Type the service name or use arrows up/down. Press enter to continue:
-       ➤ 
+       ➤
        Type the service name or use arrows up/down. Press enter to continue:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Negative confirmation.
-    $this->setStream('No');
+    $this->fakeInput('No');
     $answer = $interviewer->askServices();
     self::assertSame([], $answer);
 
     $expected_output = <<< 'TXT'
 
        Would you like to inject dependencies? [Yes]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // -- Non-existing service..
-    $this->setStream("\nmissing\n\n");
+    $this->fakeInput("\nmissing\n\n");
     $answer = $interviewer->askServices();
     $expected_answer = [];
     self::assertSame($expected_answer, $answer);
@@ -540,12 +557,12 @@ final class InterviewerTest extends FunctionalTestBase {
     $expected_output = <<< 'TXT'
 
        Would you like to inject dependencies? [Yes]:
-       ➤ 
+       ➤
        Type the service name or use arrows up/down. Press enter to continue:
        ➤  Service does not exists.
 
        Type the service name or use arrows up/down. Press enter to continue:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
@@ -562,26 +579,26 @@ final class InterviewerTest extends FunctionalTestBase {
     $interviewer = $this->createInterviewer();
 
     // Test default values.
-    $this->setStream('foo');
+    $this->fakeInput('foo');
     $answer = $interviewer->askPermission();
     self::assertSame('foo', $answer);
 
     $expected_output = <<< 'TXT'
 
        Permission:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
 
     // Custom values.
-    $this->setStream('bar');
+    $this->fakeInput('bar');
     $answer = $interviewer->askPermission('Route permission', 'access content');
     self::assertSame('bar', $answer);
 
     $expected_output = <<< 'TXT'
 
        Route permission [access content]:
-       ➤ 
+       ➤
       TXT;
     $this->assertOutput($expected_output);
   }
@@ -611,18 +628,26 @@ final class InterviewerTest extends FunctionalTestBase {
   /**
    * Sets the input stream to read from when interacting with the user.
    */
-  private function setStream(string $input): void {
-    $stream = \fopen('php://memory', 'r+', FALSE);
-    \fwrite($stream, $input);
-    \rewind($stream);
-    $this->io->getInput()->setStream($stream);
+  private function fakeInput(string $input): void {
+    $this->terminal->setInput(trim($input) . "\n");
   }
 
   /**
    * Asserts output.
    */
-  private function assertOutput(string $expected_output): void {
-    self::assertSame($expected_output, $this->io->getOutput()->fetch());
+  private function assertOutput(string $title, string $body): void {
+    $expected = (string) (new class ($title, $body) extends Renderer {
+      use DrawsBoxes;
+      public function __construct(string $title, string $body) {
+        $this->box($title, $body);
+      }
+    });
+    $actual = $this->output->getCaptured();
+    self::assertSame($expected, $actual);
+  }
+
+  protected function line() {
+
   }
 
 }
