@@ -6,6 +6,8 @@
   title: 'Administer {{ entity_type_label|lower|pluralize }}'
 {% endif %}
   restrict access: true
+access {{ entity_type_label|lower }} overview:
+  title: 'Access {{ entity_type_label|lower }} overview'
 {% if access_controller %}
 {{ permissions.view }}:
   title: 'View {{ entity_type_label|lower }}'

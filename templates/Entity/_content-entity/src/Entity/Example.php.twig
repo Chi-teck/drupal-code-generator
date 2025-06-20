@@ -101,6 +101,7 @@ use Drupal\{{ machine_name }}\{{ class }}AccessControlHandler;
 {% endif %}
     ],
   ],
+  collection_permission: 'access {{ entity_type_id }} overview',
   links: [
     'collection' => '/admin/content/{{ entity_type_id_short|u2h }}',
 {% if bundle %}
