@@ -113,6 +113,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "revision_log_message" = "revision_log",
  *   },
 {% endif %}
+ *   collection_permission = "access {{ entity_type_id }} overview",
  *   links = {
  *     "collection" = "/admin/content/{{ entity_type_id_short|u2h }}",
 {% if bundle %}
