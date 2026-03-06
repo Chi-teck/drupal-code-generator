@@ -2,7 +2,7 @@ name: '{{ name }}'
 type: module
 description: '{{ description }}'
 package: {{ package }}
-core_version_requirement: ^10 || ^11
+core_version_requirement: ^10 || ^11 || ^12
 {% if dependencies %}
 dependencies:
   {% for dependency in dependencies %}
