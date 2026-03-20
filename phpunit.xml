@@ -4,6 +4,9 @@
   xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
   colors="true"
   processIsolation="true">
+  <php>
+    <ini name="zend.exception_ignore_args" value="On"/>
+  </php>
   <testsuites>
     <testsuite name="unit">
       <directory>./tests/unit</directory>
