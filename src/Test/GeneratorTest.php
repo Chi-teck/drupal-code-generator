@@ -58,7 +58,7 @@ abstract class GeneratorTest extends TestCase {
    *   stream.
    */
   protected function execute(Command $command, array $user_input): int {
-    $this->createApplication()->add($command);
+    $this->createApplication()->addCommand($command);
 
     $command_tester = new CommandTester($command);
     $result = $command_tester
