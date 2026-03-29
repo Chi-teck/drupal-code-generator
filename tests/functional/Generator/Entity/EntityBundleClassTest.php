@@ -40,16 +40,14 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      ➤ 
 
      Entity type:
-      [ 1] Content block
-      [ 2] Comment
-      [ 3] Contact message
-      [ 4] File
-      [ 5] Custom menu link
-      [ 6] Content
-      [ 7] URL alias
-      [ 8] Shortcut link
-      [ 9] Taxonomy term
-      [10] User
+      [1] Content block
+      [2] Comment
+      [3] File
+      [4] Custom menu link
+      [5] Content
+      [6] URL alias
+      [7] Taxonomy term
+      [8] User
      ➤ 
 
      Bundles, comma separated:
@@ -104,16 +102,14 @@ final class EntityBundleClassTest extends GeneratorTestBase {
      ➤ 
 
      Entity type:
-      [ 1] Content block
-      [ 2] Comment
-      [ 3] Contact message
-      [ 4] File
-      [ 5] Custom menu link
-      [ 6] Content
-      [ 7] URL alias
-      [ 8] Shortcut link
-      [ 9] Taxonomy term
-      [10] User
+      [1] Content block
+      [2] Comment
+      [3] File
+      [4] Custom menu link
+      [5] Content
+      [6] URL alias
+      [7] Taxonomy term
+      [8] User
      ➤ 
 
      Bundles, comma separated:

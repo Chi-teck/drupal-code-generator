@@ -113,7 +113,7 @@ final class Application extends BaseApplication implements EventDispatcherInterf
       $application->dispatch(new GeneratorInfoAlter($all_generators))->generators,
     );
 
-    $application->add(new Navigation());
+    $application->addCommand(new Navigation());
     $application->setDefaultCommand('navigation');
 
     /** @var \DrupalCodeGenerator\Application $application */

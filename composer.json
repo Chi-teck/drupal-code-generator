@@ -19,7 +19,8 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/core-composer-scaffold": false
         }
     },
     "require": {
@@ -37,7 +38,7 @@
         "ext-simplexml": "*",
         "chi-teck/drupal-coder-extension": "^2.0.0-rc2",
         "drupal/coder": "8.3.24",
-        "drupal/core": "11.x-dev",
+        "drupal/core": "11.x-dev || 12.x-dev",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^10.5",
         "squizlabs/php_codesniffer": "^3.9",
@@ -49,6 +50,6 @@
         "squizlabs/php_codesniffer": "<3.6",
         "nikic/php-parser": "<4.17"
     },
-    "minimum-stability": "RC",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
