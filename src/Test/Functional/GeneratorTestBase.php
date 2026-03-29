@@ -42,7 +42,7 @@ abstract class GeneratorTestBase extends FunctionalTestBase {
       ->getInstanceFromDefinition($command_class);
 
     \assert($command instanceof Command);
-    $application->add($command);
+    $application->addCommand($command);
 
     $command_tester = new CommandTester($command);
     /** @psalm-var int<0, 1> $result */
