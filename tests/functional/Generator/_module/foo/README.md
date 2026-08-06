@@ -16,8 +16,9 @@ DESCRIBE_MODULE_DEPENDENCIES_HERE
 
 ## Installation
 
-Install as you would normally install a contributed Drupal module.
-See: https://www.drupal.org/node/895232 for further information.
+Install as you would normally install a contributed Drupal module. For further
+information, see
+[Installing Drupal Modules](https://www.drupal.org/docs/extending-drupal/installing-modules).
 
 
 ## Configuration
